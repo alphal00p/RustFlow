@@ -1,0 +1,46 @@
+{
+  "scope": "Unapplied isolated source draft; rustfmt and git apply --check only, not typechecked or built",
+  "files": {
+    "src/finite_density/guarded.rs": {
+      "base_sha256": "33d499807250e152d77badb9dbdd5a3c9ece530fb8d53923c5bd8e0493ba7a26",
+      "draft_sha256": "07f43708eea74aa130c7c96f8a84c7795c46f0926d73636fed272144ab648e11",
+      "bytes": 50040
+    },
+    "src/finite_density/interface.rs": {
+      "base_sha256": "5f57a4c348264a2be37614072fb0787dc008f27db748082118549691e0ecc355",
+      "draft_sha256": "cb6ab1ac9ccea754876f223beadc82cf87009bc3f6b267247580e5636ff588a3",
+      "bytes": 14609
+    },
+    "src/finite_density/reduction/active.rs": {
+      "base_sha256": "cfe753a1eac3032da87d9fd1905120150cadd6fc61310a509e99c9eefcdd57ca",
+      "draft_sha256": "a9f42ccfec590120f9f7707a7789c42ab1cfabe3063097a1a41da2c922621d7b",
+      "bytes": 48602
+    },
+    "src/finite_density/reduction.rs": {
+      "base_sha256": "e28e9fe7f76660240fd77e63f123f0d77b55ee1ebec5b26c08b487963b3d6c03",
+      "draft_sha256": "732f85379361e31965ab944a6bfd3cd1723b7b87815f9471cdf462f89ce54abd",
+      "bytes": 99051
+    },
+    "tests/finite_density_runtime_flow.rs": {
+      "base_sha256": "7e0a56ac65bab2273c652a1103c9ec0f8ee2d5694ac41e90aed6e45262e9730b",
+      "draft_sha256": "2eebfc888cabbf34cdd6d3c1e851ae79f80eb27bba67892599b84a1c227fae68",
+      "bytes": 18618
+    },
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs": {
+      "base_sha256": null,
+      "draft_sha256": "7fc54e295b905b68de6380be4ac17ecbdc1425982a4e46a0acb1eda017ebf69b",
+      "bytes": 19769
+    },
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs": {
+      "base_sha256": null,
+      "draft_sha256": "3c452f4b5684330b7502703eb37b446c4aecab57e898f67456c6b586f98ee6de",
+      "bytes": 15719
+    },
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": {
+      "base_sha256": "f67c4d071f6bd58ffa6a3b2f546f61a49c36bc7c9b383e0289d0be5f25b339e7",
+      "draft_sha256": "ac4d34e733eed3e9c393a28284606b128a7b7d027580984b107b3290c19aadd0",
+      "bytes": 68290
+    }
+  },
+  "patch_sha256": "6617d43ad37feb37074f4df729b3b56e5a2a191ef80ae853b22ed2cc0b8b9d7d"
+}

@@ -447,6 +447,19 @@ preserves exhaustive collection, and `Some(0)` skips that optional work. Skipped
 labels remain explicitly unassessed. See the
 [closure policy](finite-density-guard-refinement.md) for conditions and diagnostics.
 
+`WeightedClosureOptions::unit_reduction_memo` optionally retains complete native
+unit reductions during one active-closure round. It defaults to `None`. A cached
+result can survive the final terminal promotion only when every added terminal
+was an exact, conditionless `NoApplicableRule` stopping point. Full source replay
+and reconstruction of every original target and basis derivative remain
+mandatory. Other program changes clear the cache; work-limited results are never
+cached. Limits cover retained entries, output records, conditions, polynomial
+terms and encoded payload bytes, excluding temporary CAS work and allocator
+overhead. Diagnostics separate logical rule applications from applications served
+by the memo. The runtime validation harness exposes this through
+`RUSTFLOW_WEIGHTED_UNIT_MEMO=true`; cache entries are neither persisted nor used
+to resume checkpoints.
+
 The complete massless two-loop sunset passed all four native profiles at
 D=13/2 and D=15/4, and five Laurent profiles through order zero. All occupied
 sectors in those recorded runs used native weighted AMF, with closed bases 2, 2 and 3. The 110 independent

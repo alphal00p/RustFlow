@@ -1,0 +1,100 @@
+{
+  "scope": "New report-only coherent memo integration helpers; prior SZ2 files unchanged. No build or snapshot performed by preparation.",
+  "predecessor_manifest": {
+    "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/artifact-manifest.json",
+    "sha256": "9b30cacf8b57d35213833463d229375e32b4e9a9260cbd87de1c33d200c00b50"
+  },
+  "copied_helpers": {
+    "test_history_coverage.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/test_history_coverage.py",
+      "sha256": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9"
+    },
+    "run-root-gates.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/run-root-gates.py",
+      "sha256": "18a94b5c09f8936e5e972188be8b40a12645d5387b48ebb108721fe2adf21ba4"
+    },
+    "summarize-frozen-root-gates.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/summarize-frozen-root-gates.py",
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+    },
+    "capture-terminal-promotion-build.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/capture-singleton-physical-zero-build.py",
+      "sha256": "c820ecc9c74388778a64334ef327b6c1be1379a0d486777a03e4feeb142aa896"
+    },
+    "certificate_validation.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/certificate_validation.py",
+      "sha256": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e"
+    },
+    "test_certificate_validation.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/test_certificate_validation.py",
+      "sha256": "3f30ed7fd26c4155e4581686f4b32745a40a0660f1c84be61eb622d25426a95c"
+    },
+    "history_coverage.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/history_coverage.py",
+      "sha256": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1"
+    },
+    "run-massive-regression.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/run-massive-regression.py",
+      "sha256": "b1994c895c6cb5ee40960a445ea97864c0924597abd19ebb5758c14069da1b12"
+    },
+    "compare_three_loop_reference.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/compare_three_loop_reference.py",
+      "sha256": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226"
+    },
+    "compare-completed-predictions.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/compare-completed-predictions.py",
+      "sha256": "b896275dad1e3c0645eb64ff2d5df70fb9d66e4fd4a358caff83596e73f346e7"
+    },
+    "run-two-loop-gate.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/run-two-loop-gate.py",
+      "sha256": "268f790930b5b89a17a5a681d287406f926849d9344aceeaca800e87af958ff6"
+    },
+    "run-three-loop-gate.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/run-three-loop-gate.py",
+      "sha256": "fb55fac3faf63f99ea571716211790388a2c4a4ce6541533f627147584db31a5"
+    },
+    "frozen_sources.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/frozen_sources.py",
+      "sha256": "fb3e25cfa0c395d8fc0f3c5a517a1fc8845b1dff8f93c163c68d3e8a1814e911"
+    },
+    "launch-terminal-promotion-build.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/launch-singleton-physical-zero-build.py",
+      "sha256": "b6cf22027aa50fccfae39faa96869c51fa5479b4c4358376e29fb071f1d80029"
+    },
+    "compare_massless_reference.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/compare_massless_reference.py",
+      "sha256": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d"
+    },
+    "build-native-digest.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/build-native-digest.py",
+      "sha256": "8baa2c5e08f5df58913af9edaa1b69119e24c38745faf75e178edff599227c73"
+    },
+    "capture-frozen-build.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/capture-frozen-build.py",
+      "sha256": "1622138f73b3ec893b377bb084ecb4d9311b8cece68f8c5deae20a70582e80e9"
+    },
+    "capture-source-snapshot.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/capture-source-snapshot.py",
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b"
+    },
+    "run-singleton-gate.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/run-singleton-gate.py",
+      "sha256": "311dac39bc0d66ee0095bd496ffbd10798e3bff45338c54685aa1be104e3f5e4"
+    },
+    "run-frozen-root-gate.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/run-frozen-root-gate.py",
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8"
+    },
+    "run-resource-command.py": {
+      "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+    }
+  },
+  "expected_gate_counts": {
+    "native_passed": 101,
+    "root_passed": 130,
+    "total_passed": 231,
+    "native_ignored": 1
+  },
+  "source_ready_announced_by_parent": true
+}

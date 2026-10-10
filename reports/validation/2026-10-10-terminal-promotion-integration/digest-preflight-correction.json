@@ -1,0 +1,9 @@
+{
+  "scope": "Report-only helper packaging correction; no production or coherent-build change.",
+  "initial_attempt": "Failed before invoking rustc because the copied Python-only helper inventory omitted native-digest.rs. No executable or digest-build report was produced.",
+  "source": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/native-digest.rs",
+  "source_sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+  "copy": "reports/validation/2026-10-10-terminal-promotion-integration/native-digest.rs",
+  "copy_sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+  "corrected_before_any_native_prediction": true
+}

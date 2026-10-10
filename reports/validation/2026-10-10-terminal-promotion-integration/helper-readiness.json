@@ -1,0 +1,41 @@
+{
+  "status": "report helper static checks passed; coherent build/gates still pending",
+  "created_utc": "2026-10-10T08:22:27.268844+00:00",
+  "files_sha256": {
+    "reports/validation/2026-10-10-terminal-promotion-integration/test_certificate_validation.py": "3f30ed7fd26c4155e4581686f4b32745a40a0660f1c84be61eb622d25426a95c",
+    "reports/validation/2026-10-10-terminal-promotion-integration/run-three-loop-gate.py": "9c0d7ca760cc0e3c06af656d9be56786c69d97c9865cf41828359720f015773b",
+    "reports/validation/2026-10-10-terminal-promotion-integration/summarize-frozen-root-gates.py": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+    "reports/validation/2026-10-10-terminal-promotion-integration/compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "reports/validation/2026-10-10-terminal-promotion-integration/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-terminal-promotion-integration/run-singleton-gate.py": "401b3019ac03cbe6d90175867d866e722091be97ae0a8b3f1cf7ee74808395e7",
+    "reports/validation/2026-10-10-terminal-promotion-integration/launch-terminal-promotion-build.py": "9c691d42ef8590e3fae14b18f0cf57a624b6e7ba6a636aacd267fd7e64d599b5",
+    "reports/validation/2026-10-10-terminal-promotion-integration/capture-frozen-build.py": "1622138f73b3ec893b377bb084ecb4d9311b8cece68f8c5deae20a70582e80e9",
+    "reports/validation/2026-10-10-terminal-promotion-integration/certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "reports/validation/2026-10-10-terminal-promotion-integration/run-frozen-root-gate.py": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+    "reports/validation/2026-10-10-terminal-promotion-integration/run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+    "reports/validation/2026-10-10-terminal-promotion-integration/capture-terminal-promotion-build.py": "0b3975f8279fe128143a590b3ae5d05876f969c0ac2d31208815880684256f5b",
+    "reports/validation/2026-10-10-terminal-promotion-integration/run-massive-regression.py": "766938df713a873efaed8cb13de74fc23af2fb1f52b49114182fb2ecb089658e",
+    "reports/validation/2026-10-10-terminal-promotion-integration/test_history_coverage.py": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9",
+    "reports/validation/2026-10-10-terminal-promotion-integration/run-root-gates.py": "b36592d46f68a5ad98f1696e188a6260523f0be9c2c301cf13ab35e8458e639c",
+    "reports/validation/2026-10-10-terminal-promotion-integration/capture-source-snapshot.py": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+    "reports/validation/2026-10-10-terminal-promotion-integration/frozen_sources.py": "bf050ad90a625158ba568fd58a06c6cd6f852a79293614b334769ce94583e7ab",
+    "reports/validation/2026-10-10-terminal-promotion-integration/compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "reports/validation/2026-10-10-terminal-promotion-integration/run-two-loop-gate.py": "401bf9885bc02d47189bf2866e09fc909f8d674a20f2ea9c364f019d595a4f85",
+    "reports/validation/2026-10-10-terminal-promotion-integration/compare-completed-predictions.py": "96fe43afe0e9ca088fab63becfab053f6959ea48d146a04901808c2501560257",
+    "reports/validation/2026-10-10-terminal-promotion-integration/build-native-digest.py": "a669586b85cadcbf610c4ff11b26e71fca0448cac4133193808122c555752087",
+    "reports/validation/2026-10-10-terminal-promotion-integration/memo_validation.py": "c38141d270b870017f39ee6f9dc76ab4858b214cb9afc6ea5fd6706f36717e7a",
+    "reports/validation/2026-10-10-terminal-promotion-integration/comparison-plan.json": "2c5ac8c43e5ccaad2ec94244356e30021f65e2f96965d4fd6fe50ebed23eb19e",
+    "reports/validation/2026-10-10-terminal-promotion-integration/memo-validator-checks.json": "3b7732dc41b3a9f298acacaf3e5d07a0e02aa0479385feefbc7f897594f7578a"
+  },
+  "planned_primary_option": {
+    "massless_fixed_and_laurent": "explicit true with all five default caps",
+    "massive_regression": "unchanged default None"
+  },
+  "synthetic_memo_validator_checks": 10,
+  "numerical_definitions_or_tolerances_changed": false,
+  "peer_review": "guarded_dependency read memo validator against actual applied runtime: full closure list/cuts, counters, default caps and disabled misses agree; planned controls use full-flow shape. Occupied-only single-object shape is intentionally not normalized here.",
+  "expected_passing_tests": 231,
+  "expected_ignored_tests": 1,
+  "counts_are_planned_not_results": true,
+  "baseline_none_equivalence": "New root exact fixture compares full basis/matrix/weighted targets/conditions/program bytes/logical applications. Default massive path remains independently exercised. No extra numerical baseline run planned."
+}

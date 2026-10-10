@@ -1,0 +1,183 @@
+{
+  "status": "passed",
+  "scope": "One D12/5 28:80:12 massive profile, vacuum/all cuts/full amplitude for both targets; independent reference and historical comparison. No new precision refinement claim.",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py",
+    "--predictions",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression",
+    "--output",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression-comparison.json"
+  ],
+  "native_provenance": {
+    "executable_sha256": "a05671315c09ee1c196d5b43ac70eb10ce99f836b834302002877a432f220a95",
+    "source_snapshot_sha256": "29ebf37da9b07b7adce6b9431d5040c14a06243f81b361cb4163f431f8293893",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5",
+      "RUSTRED_SOURCE_DIGEST": "cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c",
+      "PORT_SOURCE_DIGEST": "82b28dddd4acaf0fc189a38f2d7e16f3ad1b88398036457eedc7058c08db12ad"
+    },
+    "configuration": {
+      "source_options": {
+        "free_virtual_zero_sectors": false,
+        "policy": "polynomial-closure-v1",
+        "positive_compact_energy_powers": false
+      },
+      "guard_digits": 40,
+      "native_closure": "WeightedClosureOptions { max_rounds: 12, max_frontier: 256, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 3, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: false, requested_index_rays: false, prioritize_requested_indices: false, max_reused_rules: 0, max_domains_per_residual: 0, requested_ray_point: None, active_target_closure: false, max_history_candidate_maps: None, unit_reduction_memo: None, max_direct_zero_attempts: 0, checkpoints: None }"
+    },
+    "closed_metadata": [
+      {
+        "cut_slots": [
+          0
+        ],
+        "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0/round-002-closed.json",
+        "sha256": "3d3c9aa1c3fb6312f94e1eb19b5e15518f87a84d4e2f2c39c74b68c00271fa91",
+        "proof_path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0/round-002-closed.bin",
+        "proof_sha256": "b1b795ac583cedee3ffa098998062200df062da0a71d8d5e0d690c1579f0d269",
+        "program_blake3_verified": "15b2c6c92caec2ca084830de6ed0792709f5abfff46eed6073a765151c82703b",
+        "program_bytes_verified": 267137,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      },
+      {
+        "cut_slots": [
+          1
+        ],
+        "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-1/round-002-closed.json",
+        "sha256": "1b3767507214b5fa9bcf2a47323608e7888184e9869c1e9f92addbeaa850bbcd",
+        "proof_path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-1/round-002-closed.bin",
+        "proof_sha256": "4808488e1c23c70a11a2ad89ffe07ef3dd4c89284a274a765d8ef4e95cf7ecca",
+        "program_blake3_verified": "bc48b63c9482478d94cce81584cf7d8124975d4383626aed8abd25505eea3205",
+        "program_bytes_verified": 520750,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      },
+      {
+        "cut_slots": [
+          0,
+          1
+        ],
+        "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-closed.json",
+        "sha256": "39f479a56b53d73d9260c5924f1ece0cbec98454fd7edf29e16688d4e311e0e5",
+        "proof_path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-closed.bin",
+        "proof_sha256": "7b913157c0f2fd2cd7447c5896350a4352806034d2b16d37fcad575ee08a81f0",
+        "program_blake3_verified": "24fe09eea4cf8e64604b84aa0d5c763528252bf8ead2c57e2f60ca226fa2065a",
+        "program_bytes_verified": 1352738,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      }
+    ],
+    "unit_reduction_memo": {
+      "enabled": false,
+      "configured_caps": null,
+      "cuts": [
+        {
+          "cut_slots": [
+            0
+          ],
+          "native_rule_applications": 3057,
+          "performed_native_rule_applications": 3057,
+          "memoized_rule_applications": 0,
+          "unit_memo_hits": 0,
+          "unit_memo_misses": 0,
+          "unit_memo_peak_entries": 0,
+          "unit_memo_peak_output_terms": 0,
+          "unit_memo_peak_conditions": 0,
+          "unit_memo_peak_polynomial_terms": 0,
+          "unit_memo_peak_owned_bytes": 0
+        },
+        {
+          "cut_slots": [
+            1
+          ],
+          "native_rule_applications": 7978,
+          "performed_native_rule_applications": 7978,
+          "memoized_rule_applications": 0,
+          "unit_memo_hits": 0,
+          "unit_memo_misses": 0,
+          "unit_memo_peak_entries": 0,
+          "unit_memo_peak_output_terms": 0,
+          "unit_memo_peak_conditions": 0,
+          "unit_memo_peak_polynomial_terms": 0,
+          "unit_memo_peak_owned_bytes": 0
+        },
+        {
+          "cut_slots": [
+            0,
+            1
+          ],
+          "native_rule_applications": 16362,
+          "performed_native_rule_applications": 16362,
+          "memoized_rule_applications": 0,
+          "unit_memo_hits": 0,
+          "unit_memo_misses": 0,
+          "unit_memo_peak_entries": 0,
+          "unit_memo_peak_output_terms": 0,
+          "unit_memo_peak_conditions": 0,
+          "unit_memo_peak_polynomial_terms": 0,
+          "unit_memo_peak_owned_bytes": 0
+        }
+      ],
+      "logical_equals_performed_plus_memoized": true,
+      "scope": "Native unit reduction applications only; full proof replay, terminal-admission checks, encoding, decoding and arithmetic scratch are not measured by these counters. Quotas bound retained payload, not total process memory or wall time."
+    },
+    "physical_zero_certificates": [],
+    "construction_scope": "massive native AMF throughout",
+    "native_digest_tool": {
+      "record_sha256": "71ab766e371cff3b4afe96f859921061c09b60484cfbe579fcada0b8a570e740",
+      "path": "/tmp/rustflow-terminal-promotion-digest",
+      "sha256": "1df406f8ae7e084ee6e3c1128b267f1da94bdbfc8162f8633129ec07a6de8704"
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-terminal-promotion-integration/native-digest-build.json": "71ab766e371cff3b4afe96f859921061c09b60484cfbe579fcada0b8a570e740",
+    "reports/validation/2026-10-10-terminal-promotion-integration/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "reports/validation/2026-10-10-terminal-promotion-integration/build-native-digest.py": "a669586b85cadcbf610c4ff11b26e71fca0448cac4133193808122c555752087",
+    "reports/validation/2026-10-10-terminal-promotion-integration/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-source-hashes.json": "29ebf37da9b07b7adce6b9431d5040c14a06243f81b361cb4163f431f8293893",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-build-provenance.json": "7a2bb0deafabb402d5d70bd6b2d776e1006c632b5f92ab9de30d55af33e8550d",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression-binding.json": "76ee7572ee9966701717f7cb521e4b72f8b9ec5d5eb1df79ec8998cd978e18c0",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression-resources.json": "385485f3fe566f5d48724e799438744b29223cc2915d380ff1c9043a7ae17ef8",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression-resources.provenance.json": "fc4a7e1b8e8e8fa61a3c5080d1087b3563e84669020addb5107a44e23424eab1",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/configuration.json": "94b532fca78538937023959ace11e55dc686d5f5fae631e360197786ece1093d",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/input.json": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/prediction-28-80-12.json": "c24cb540194be756180455a7aa116d5a11bec0acb02161298b15043cd65a215e",
+    "reports/validation/2026-10-10-terminal-promotion-integration/compare-completed-predictions.py": "96fe43afe0e9ca088fab63becfab053f6959ea48d146a04901808c2501560257",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/physical-zero-certificates.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "reports/validation/2026-10-10-terminal-promotion-integration/certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/closure.json": "8c73f0da32658a30aea10d1863e9f9097addb14a3c3b1b2a4e574c915748997f",
+    "reports/validation/2026-10-10-terminal-promotion-integration/memo_validation.py": "c38141d270b870017f39ee6f9dc76ab4858b214cb9afc6ea5fd6706f36717e7a",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0/round-002-closed.json": "3d3c9aa1c3fb6312f94e1eb19b5e15518f87a84d4e2f2c39c74b68c00271fa91",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0/round-002-closed.bin": "b1b795ac583cedee3ffa098998062200df062da0a71d8d5e0d690c1579f0d269",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-1/round-002-closed.json": "1b3767507214b5fa9bcf2a47323608e7888184e9869c1e9f92addbeaa850bbcd",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-1/round-002-closed.bin": "4808488e1c23c70a11a2ad89ffe07ef3dd4c89284a274a765d8ef4e95cf7ecca",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-closed.json": "39f479a56b53d73d9260c5924f1ece0cbec98454fd7edf29e16688d4e311e0e5",
+    "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-closed.bin": "7b913157c0f2fd2cd7447c5896350a4352806034d2b16d37fcad575ee08a81f0",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e",
+    "reports/validation/2026-10-10-terminal-promotion-integration/compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "reports/validation/2026-10-10-terminal-promotion-integration/compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "reports/validation/2026-10-10-terminal-promotion-integration/comparison-plan.json": "2c5ac8c43e5ccaad2ec94244356e30021f65e2f96965d4fd6fe50ebed23eb19e"
+  },
+  "definitions_and_tolerances_changed": false,
+  "production_modified": false,
+  "exit_code": 0,
+  "comparison_sha256": "7e8ad274430ff7c381ac74ee941960b89c2288c1fbf482e501d6a763a0f09f04"
+}

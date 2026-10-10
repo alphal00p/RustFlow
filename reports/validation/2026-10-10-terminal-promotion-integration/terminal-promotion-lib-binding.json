@@ -1,0 +1,16 @@
+{
+  "source_snapshot_sha256": "29ebf37da9b07b7adce6b9431d5040c14a06243f81b361cb4163f431f8293893",
+  "build_provenance_sha256": "7a2bb0deafabb402d5d70bd6b2d776e1006c632b5f92ab9de30d55af33e8550d",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "lib",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e",
+    "finite_density::",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false
+}

@@ -1,0 +1,629 @@
+{
+  "status": "all archived payloads restored byte-exactly",
+  "gzip_mtime": 0,
+  "files": [
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0/guard-refinements.json",
+      "raw_sha256": "6728ebdf3a90dbfa027937f972fd2b1fc0d59a70a5c53a7e6ad5012bd77192f7",
+      "raw_bytes": 6275,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0/guard-refinements.json.gz",
+      "gzip_sha256": "fa7ac0155eb30b03cd3c6bb5267994c99bbc327452f8b069706062fafe029cd5",
+      "gzip_bytes": 530,
+      "restored_sha256": "6728ebdf3a90dbfa027937f972fd2b1fc0d59a70a5c53a7e6ad5012bd77192f7"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-000-provisional.bin",
+      "raw_sha256": "3b88ca9c5675cc3c4e9e0df33015668d47c10710c970a8bf8508d2a39e3812c8",
+      "raw_bytes": 125481,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-000-provisional.bin.gz",
+      "gzip_sha256": "434921cd017b524d139f86f6e7b7dbcfb4a882bd9b1234ecf306d19a14196909",
+      "gzip_bytes": 15889,
+      "restored_sha256": "3b88ca9c5675cc3c4e9e0df33015668d47c10710c970a8bf8508d2a39e3812c8"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-000-provisional.json",
+      "raw_sha256": "6feba3c6b60f32338e4449cfaafc56a5f2125eeecae1f2142409dd5370664bf7",
+      "raw_bytes": 4422,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-000-provisional.json.gz",
+      "gzip_sha256": "452afbd33ce62c69150541a91b7b795e805af1554f080b2daf3c8a0f6ce7f50c",
+      "gzip_bytes": 1560,
+      "restored_sha256": "6feba3c6b60f32338e4449cfaafc56a5f2125eeecae1f2142409dd5370664bf7"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-001-provisional.bin",
+      "raw_sha256": "849395c0aeb57d950e5d2392163c887db9b4abcb6f5dcc1fa989757753ca7d1b",
+      "raw_bytes": 260693,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-001-provisional.bin.gz",
+      "gzip_sha256": "fd7afef9e6caa2cfc29dac428625b5f315f52e8a6aaf5f1a304740e0497f5943",
+      "gzip_bytes": 38205,
+      "restored_sha256": "849395c0aeb57d950e5d2392163c887db9b4abcb6f5dcc1fa989757753ca7d1b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-001-provisional.json",
+      "raw_sha256": "47fcc7abd0b936339207cfab10d8cb4467f8615b32f3782bebeb7a213deaf05e",
+      "raw_bytes": 6311,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-001-provisional.json.gz",
+      "gzip_sha256": "d0608154a3cdef3e28474d17e2b9437e527497db8318eacb5a0f56a5df212e49",
+      "gzip_bytes": 1658,
+      "restored_sha256": "47fcc7abd0b936339207cfab10d8cb4467f8615b32f3782bebeb7a213deaf05e"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-002-provisional.bin",
+      "raw_sha256": "ab9277ae6ccc824da6bf7f6e813a0af2cd84e4baa8967dbb7561eeaa1eab0465",
+      "raw_bytes": 267089,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-002-provisional.bin.gz",
+      "gzip_sha256": "fb69aa82e4c36b0f2fa9ed861e84d4c3af8eca40b9d65dc557425b58d3aa56b9",
+      "gzip_bytes": 39388,
+      "restored_sha256": "ab9277ae6ccc824da6bf7f6e813a0af2cd84e4baa8967dbb7561eeaa1eab0465"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-002-provisional.json",
+      "raw_sha256": "7af3e8dee2b8018c6a1b2dedabbfa5e5c69ff9a0c2384ba07940079e7ea95176",
+      "raw_bytes": 6311,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0/round-002-provisional.json.gz",
+      "gzip_sha256": "51de0bbfcad20683aa9367bb17eb49f15557d62c1386782c20bb08a7f99eb6bb",
+      "gzip_bytes": 1663,
+      "restored_sha256": "7af3e8dee2b8018c6a1b2dedabbfa5e5c69ff9a0c2384ba07940079e7ea95176"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/guard-refinements.json",
+      "raw_sha256": "6213808e355e162ada45e6371d780ec38e1c5fd1d09042ecbc862a3e954806e9",
+      "raw_bytes": 40343,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/guard-refinements.json.gz",
+      "gzip_sha256": "a0428c42c25e0a3fe92574f7e967e71bc41e525ad6f81599034378aa97eb2e6e",
+      "gzip_bytes": 1101,
+      "restored_sha256": "6213808e355e162ada45e6371d780ec38e1c5fd1d09042ecbc862a3e954806e9"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-000-provisional.bin",
+      "raw_sha256": "5ae60ca0bda2543470df0b58ebba7ddbc8c1b46fbe43f2595f4053554ba2fbfb",
+      "raw_bytes": 356165,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "20a7dc8712c31fa1cf351ce00cf0d9a5bbd418ab83d45a835121a719b3f0997d",
+      "gzip_bytes": 31338,
+      "restored_sha256": "5ae60ca0bda2543470df0b58ebba7ddbc8c1b46fbe43f2595f4053554ba2fbfb"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-000-provisional.json",
+      "raw_sha256": "039474c02a3863bc02f1d3e7bfdb978d7a1673e44aa8918d024c849535080c6c",
+      "raw_bytes": 8291,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "gzip_sha256": "de2dc3051aee10978c2556d39c3d8dc931d3139dbb86ee97165eebfbd6bf0e07",
+      "gzip_bytes": 1766,
+      "restored_sha256": "039474c02a3863bc02f1d3e7bfdb978d7a1673e44aa8918d024c849535080c6c"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-provisional.bin",
+      "raw_sha256": "22ece1a1e248b7b5baf60579d1a94f1fbf7a2c9a7c90aff57b6da7450073c9dd",
+      "raw_bytes": 1352658,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "1dc0f82e4a99ac9c864af8025c88b89f097ab82ec6dd01cf07bffc530abc0f4f",
+      "gzip_bytes": 170242,
+      "restored_sha256": "22ece1a1e248b7b5baf60579d1a94f1fbf7a2c9a7c90aff57b6da7450073c9dd"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-provisional.json",
+      "raw_sha256": "6a1d2bcaf1228ea1dc56ddbbd3e16a7eeef7cd527c8c0fe1aa3d10853868b9e0",
+      "raw_bytes": 10350,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "gzip_sha256": "0b4bdd0f20807dd0eb90edac2e61c02be146d9f4de980e00285c57de8c256f39",
+      "gzip_bytes": 1836,
+      "restored_sha256": "6a1d2bcaf1228ea1dc56ddbbd3e16a7eeef7cd527c8c0fe1aa3d10853868b9e0"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-1/guard-refinements.json",
+      "raw_sha256": "c96ed47ca1cc31e15afa5a9667300d328026e6b6d85a64276a75151ffb5c11db",
+      "raw_bytes": 6251,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-1/guard-refinements.json.gz",
+      "gzip_sha256": "a992f8e8a0c4777bfc3fb91f97a664fcfde70c362d5d9fedeca26759aab49546",
+      "gzip_bytes": 488,
+      "restored_sha256": "c96ed47ca1cc31e15afa5a9667300d328026e6b6d85a64276a75151ffb5c11db"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-000-provisional.bin",
+      "raw_sha256": "a2c26048ac89920e37d82ec2104e08fc6f04d9b08b92a629e60109049139bcf8",
+      "raw_bytes": 104584,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "cefcfa938a2796a665e9f18ceb777db6546e54ad555e1b1123f34449d21a07f7",
+      "gzip_bytes": 13105,
+      "restored_sha256": "a2c26048ac89920e37d82ec2104e08fc6f04d9b08b92a629e60109049139bcf8"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-000-provisional.json",
+      "raw_sha256": "c05c7aac2b261b5162eb1d71f0b1447304cac5c7fa54b087b40b82f76c5d092d",
+      "raw_bytes": 5488,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-000-provisional.json.gz",
+      "gzip_sha256": "1bf723e3f50e3e5f4469eaa2f985a93057b2ddabe68eb604a7076ca1efd40975",
+      "gzip_bytes": 1632,
+      "restored_sha256": "c05c7aac2b261b5162eb1d71f0b1447304cac5c7fa54b087b40b82f76c5d092d"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-001-provisional.bin",
+      "raw_sha256": "1699ff96b36d3833daeb2ed2377ce85ba833aaf75d424294fd53b16157e8f975",
+      "raw_bytes": 348849,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "e39c130a4b0a662e0b6b89706fb0ba7731fd2801e42e5335558eb4db4a2906bd",
+      "gzip_bytes": 47450,
+      "restored_sha256": "1699ff96b36d3833daeb2ed2377ce85ba833aaf75d424294fd53b16157e8f975"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-001-provisional.json",
+      "raw_sha256": "5d853647ccedfb3aa243f753206ea453cdb60ced460666006815fe614c12ebb4",
+      "raw_bytes": 9735,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-001-provisional.json.gz",
+      "gzip_sha256": "e0dd3f5ef1868ce8afd111bb6d36903946cb8ef438bbbfae34592cdbe5e4fbdc",
+      "gzip_bytes": 1876,
+      "restored_sha256": "5d853647ccedfb3aa243f753206ea453cdb60ced460666006815fe614c12ebb4"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-002-provisional.bin",
+      "raw_sha256": "6bb737efa2b7e1621464be7df6f078694b280c7f526562d3b0f1814b9e07a7c6",
+      "raw_bytes": 520702,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-002-provisional.bin.gz",
+      "gzip_sha256": "c9c86b7e623e56a0f6061a2d1560f7667839de44c5c468ac2c5b4780a0fa1dde",
+      "gzip_bytes": 76427,
+      "restored_sha256": "6bb737efa2b7e1621464be7df6f078694b280c7f526562d3b0f1814b9e07a7c6"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-002-provisional.json",
+      "raw_sha256": "0b42e78af348abcac4f5a8692043333902a0cdd0966fda4641c590dcf62c6f0b",
+      "raw_bytes": 10799,
+      "gzip_path": "terminal-promotion-massive-regression/native-closure/cut-1/round-002-provisional.json.gz",
+      "gzip_sha256": "7d6838e2c8264b5eb0f8a6fb443cc2d0860c05887b3e31997bd300b221f3159b",
+      "gzip_bytes": 1923,
+      "restored_sha256": "0b42e78af348abcac4f5a8692043333902a0cdd0966fda4641c590dcf62c6f0b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-massive-regression-resources.log",
+      "raw_sha256": "95b44597153b27de7e05038e6406af1211930e423c34a104e4092e5ac5f7407a",
+      "raw_bytes": 32514,
+      "gzip_path": "terminal-promotion-massive-regression-resources.log.gz",
+      "gzip_sha256": "f679e1f1e6a0103574133705447face6ce2c5b3801c16e98af257efac03a659b",
+      "gzip_bytes": 2157,
+      "restored_sha256": "95b44597153b27de7e05038e6406af1211930e423c34a104e4092e5ac5f7407a"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/active-request-history.json",
+      "raw_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9",
+      "raw_bytes": 4750,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/active-request-history.json.gz",
+      "gzip_sha256": "6dcbc2c5118239db78261c54620621768fe36ecba8a27d402761e61c1329597d",
+      "gzip_bytes": 328,
+      "restored_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json",
+      "raw_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "raw_bytes": 159,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json.gz",
+      "gzip_sha256": "28e6b1a106789d676a81ba5338d326b953724bfa5ecda1d37738b114f3cfd1ae",
+      "gzip_bytes": 143,
+      "restored_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json",
+      "raw_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3",
+      "raw_bytes": 1073621,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "gzip_sha256": "b0abfbc824aebb798913d1b2d2050829357e0265e2f00b926531909047f14fa3",
+      "gzip_bytes": 20048,
+      "restored_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json",
+      "raw_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d",
+      "raw_bytes": 2133818,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "gzip_sha256": "d71d68557b4a457f4358bee94c394210b9d2e42c7429a1c2e9d7698278106f16",
+      "gzip_bytes": 39776,
+      "restored_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json",
+      "raw_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806",
+      "raw_bytes": 6039744,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "gzip_sha256": "31471b595379fbf554986184199a85d41b3f83219be30cb46211a5e86dc90660",
+      "gzip_bytes": 111326,
+      "restored_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json",
+      "raw_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a",
+      "raw_bytes": 2827391,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "gzip_sha256": "b18bc78f42036f14a0542b06935229492ae3a15f718368447b9f81532377a5ab",
+      "gzip_bytes": 53179,
+      "restored_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json",
+      "raw_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78",
+      "raw_bytes": 1062477,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "gzip_sha256": "d4e66aada38e9662085d4d66941a9cd5871c71a1a6ce2d64d86de48ae2e9f66e",
+      "gzip_bytes": 20048,
+      "restored_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json",
+      "raw_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23",
+      "raw_bytes": 349058,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "gzip_sha256": "f5b54e20eceea502d0d98786ca07060a9d7bcbdc420c1a3860cdddf4d8afbf19",
+      "gzip_bytes": 7014,
+      "restored_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json",
+      "raw_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b",
+      "raw_bytes": 1676,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json.gz",
+      "gzip_sha256": "0addd17b2de8992dfbaeeff371054f2daf8b60a98a3fa51e741f88002ea7f56c",
+      "gzip_bytes": 325,
+      "restored_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "raw_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b",
+      "raw_bytes": 249057,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "gzip_sha256": "579ad725ce722b386a88dc63056dbecd2e64778e2416fe4eb1e450eafbeddc8f",
+      "gzip_bytes": 3851,
+      "restored_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "raw_sha256": "427d6be2f68051300f0afacf007205463e5c30b87cf99bd6b2786f571135937d",
+      "raw_bytes": 72749,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "abb9ad8ff43b4dce8714a2dc2d3cae6243284205db4a64b0664fc827b57d2a85",
+      "gzip_bytes": 6641,
+      "restored_sha256": "427d6be2f68051300f0afacf007205463e5c30b87cf99bd6b2786f571135937d"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "raw_sha256": "9bce9c8dc398a9beef52ed661198d906ae4c0002db5a6e934b19245bc8172843",
+      "raw_bytes": 11551,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "gzip_sha256": "33c64a5a52db2649de6b52d316d0cebf2c4a5687f3fd55f5986c11cb920379ef",
+      "gzip_bytes": 2453,
+      "restored_sha256": "9bce9c8dc398a9beef52ed661198d906ae4c0002db5a6e934b19245bc8172843"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "raw_sha256": "3919b4872be0fd57e45384174b5f5aa9053a21e1687cf66b24a181fd88553e3a",
+      "raw_bytes": 110930,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "2a9774b101b316360485e51457b6573da5b84b07b0e83846dfa8541cbb6c66b1",
+      "gzip_bytes": 10932,
+      "restored_sha256": "3919b4872be0fd57e45384174b5f5aa9053a21e1687cf66b24a181fd88553e3a"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "raw_sha256": "c88afbdbd61702b7670f5308cb7f0d8a232b8864225c8389f36454ab29ceabc5",
+      "raw_bytes": 17504,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "gzip_sha256": "c76c956a468715b98285624efb54aef1a3612d53830b01a6ed365f3f13672090",
+      "gzip_bytes": 2658,
+      "restored_sha256": "c88afbdbd61702b7670f5308cb7f0d8a232b8864225c8389f36454ab29ceabc5"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "raw_sha256": "a44dbd76afcedaa309f99c13e18c31a8a785d4eb69af74bcf724e21202c716b8",
+      "raw_bytes": 277396,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "gzip_sha256": "ba5c08fcc9a717974bcb971f9f9344d3b3479ed34005b9dc6dee14ed65883942",
+      "gzip_bytes": 32749,
+      "restored_sha256": "a44dbd76afcedaa309f99c13e18c31a8a785d4eb69af74bcf724e21202c716b8"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "raw_sha256": "578a152f7c2fb11d9d210a0efa918cf2adece3774e4491627ec478e1e8b9bfdc",
+      "raw_bytes": 20263,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "gzip_sha256": "6e8c8257aca58b7836a040c1225c5452b2d6a2f2072b74fc8e54625d1148eec0",
+      "gzip_bytes": 2705,
+      "restored_sha256": "578a152f7c2fb11d9d210a0efa918cf2adece3774e4491627ec478e1e8b9bfdc"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin",
+      "raw_sha256": "b6a4cbad1b874b447533d2aaf4cea89221d07d0656c71d6f208be4d1e8efc25d",
+      "raw_bytes": 343809,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "gzip_sha256": "50d44f38cc4176a2d9b5da741700c0fc0765ed82a70e5f6be9d114bff4be49d5",
+      "gzip_bytes": 41181,
+      "restored_sha256": "b6a4cbad1b874b447533d2aaf4cea89221d07d0656c71d6f208be4d1e8efc25d"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json",
+      "raw_sha256": "03171a4bf9b5662e98707ae43e2d3491fac12cb68bd46c533934ab0a0b6d4268",
+      "raw_bytes": 18647,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "gzip_sha256": "2962ca5f285badf78ffc079a4dbd3f9a4e8603b9f84802888c90a7348a0748d3",
+      "gzip_bytes": 2686,
+      "restored_sha256": "03171a4bf9b5662e98707ae43e2d3491fac12cb68bd46c533934ab0a0b6d4268"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin",
+      "raw_sha256": "cc7d3c378562f9f5498077366e59250520ef2aee0124099e7b51fe65909f3d20",
+      "raw_bytes": 368828,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "gzip_sha256": "d23f86c12ebbec306d5a6a52239fac6bdfe3d7e0c8322f79aa73aaac73e5edf2",
+      "gzip_bytes": 43268,
+      "restored_sha256": "cc7d3c378562f9f5498077366e59250520ef2aee0124099e7b51fe65909f3d20"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json",
+      "raw_sha256": "4b019f0ae01001986f6eb807623dc3db98b75b18bcd95fc6d18d5a7280c4717b",
+      "raw_bytes": 17901,
+      "gzip_path": "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "gzip_sha256": "7c3980527fce96f74de5755dac32a8040de47c0de41571abd5f95882f363a405",
+      "gzip_bytes": 2671,
+      "restored_sha256": "4b019f0ae01001986f6eb807623dc3db98b75b18bcd95fc6d18d5a7280c4717b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-fixed-resources.log",
+      "raw_sha256": "0716195da77b2cfbe49a8a7aec440b377f301e2ba035fb1bc91094df1534f33b",
+      "raw_bytes": 6029,
+      "gzip_path": "terminal-promotion-two-loop-fixed-resources.log.gz",
+      "gzip_sha256": "2f476435cf8cf3e76a74b8ab8d934d9c6f03d512233984378338950dfce715e3",
+      "gzip_bytes": 769,
+      "restored_sha256": "0716195da77b2cfbe49a8a7aec440b377f301e2ba035fb1bc91094df1534f33b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/active-request-history.json",
+      "raw_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9",
+      "raw_bytes": 4750,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/active-request-history.json.gz",
+      "gzip_sha256": "6dcbc2c5118239db78261c54620621768fe36ecba8a27d402761e61c1329597d",
+      "gzip_bytes": 328,
+      "restored_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json",
+      "raw_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "raw_bytes": 159,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json.gz",
+      "gzip_sha256": "28e6b1a106789d676a81ba5338d326b953724bfa5ecda1d37738b114f3cfd1ae",
+      "gzip_bytes": 143,
+      "restored_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json",
+      "raw_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3",
+      "raw_bytes": 1073621,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "gzip_sha256": "b0abfbc824aebb798913d1b2d2050829357e0265e2f00b926531909047f14fa3",
+      "gzip_bytes": 20048,
+      "restored_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json",
+      "raw_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d",
+      "raw_bytes": 2133818,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "gzip_sha256": "d71d68557b4a457f4358bee94c394210b9d2e42c7429a1c2e9d7698278106f16",
+      "gzip_bytes": 39776,
+      "restored_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json",
+      "raw_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806",
+      "raw_bytes": 6039744,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "gzip_sha256": "31471b595379fbf554986184199a85d41b3f83219be30cb46211a5e86dc90660",
+      "gzip_bytes": 111326,
+      "restored_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json",
+      "raw_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a",
+      "raw_bytes": 2827391,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "gzip_sha256": "b18bc78f42036f14a0542b06935229492ae3a15f718368447b9f81532377a5ab",
+      "gzip_bytes": 53179,
+      "restored_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json",
+      "raw_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78",
+      "raw_bytes": 1062477,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "gzip_sha256": "d4e66aada38e9662085d4d66941a9cd5871c71a1a6ce2d64d86de48ae2e9f66e",
+      "gzip_bytes": 20048,
+      "restored_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json",
+      "raw_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23",
+      "raw_bytes": 349058,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "gzip_sha256": "f5b54e20eceea502d0d98786ca07060a9d7bcbdc420c1a3860cdddf4d8afbf19",
+      "gzip_bytes": 7014,
+      "restored_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json",
+      "raw_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b",
+      "raw_bytes": 1676,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json.gz",
+      "gzip_sha256": "0addd17b2de8992dfbaeeff371054f2daf8b60a98a3fa51e741f88002ea7f56c",
+      "gzip_bytes": 325,
+      "restored_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "raw_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b",
+      "raw_bytes": 249057,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "gzip_sha256": "579ad725ce722b386a88dc63056dbecd2e64778e2416fe4eb1e450eafbeddc8f",
+      "gzip_bytes": 3851,
+      "restored_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "raw_sha256": "427d6be2f68051300f0afacf007205463e5c30b87cf99bd6b2786f571135937d",
+      "raw_bytes": 72749,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "abb9ad8ff43b4dce8714a2dc2d3cae6243284205db4a64b0664fc827b57d2a85",
+      "gzip_bytes": 6641,
+      "restored_sha256": "427d6be2f68051300f0afacf007205463e5c30b87cf99bd6b2786f571135937d"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "raw_sha256": "9bce9c8dc398a9beef52ed661198d906ae4c0002db5a6e934b19245bc8172843",
+      "raw_bytes": 11551,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "gzip_sha256": "33c64a5a52db2649de6b52d316d0cebf2c4a5687f3fd55f5986c11cb920379ef",
+      "gzip_bytes": 2453,
+      "restored_sha256": "9bce9c8dc398a9beef52ed661198d906ae4c0002db5a6e934b19245bc8172843"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "raw_sha256": "3919b4872be0fd57e45384174b5f5aa9053a21e1687cf66b24a181fd88553e3a",
+      "raw_bytes": 110930,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "2a9774b101b316360485e51457b6573da5b84b07b0e83846dfa8541cbb6c66b1",
+      "gzip_bytes": 10932,
+      "restored_sha256": "3919b4872be0fd57e45384174b5f5aa9053a21e1687cf66b24a181fd88553e3a"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "raw_sha256": "c88afbdbd61702b7670f5308cb7f0d8a232b8864225c8389f36454ab29ceabc5",
+      "raw_bytes": 17504,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "gzip_sha256": "c76c956a468715b98285624efb54aef1a3612d53830b01a6ed365f3f13672090",
+      "gzip_bytes": 2658,
+      "restored_sha256": "c88afbdbd61702b7670f5308cb7f0d8a232b8864225c8389f36454ab29ceabc5"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "raw_sha256": "a44dbd76afcedaa309f99c13e18c31a8a785d4eb69af74bcf724e21202c716b8",
+      "raw_bytes": 277396,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "gzip_sha256": "ba5c08fcc9a717974bcb971f9f9344d3b3479ed34005b9dc6dee14ed65883942",
+      "gzip_bytes": 32749,
+      "restored_sha256": "a44dbd76afcedaa309f99c13e18c31a8a785d4eb69af74bcf724e21202c716b8"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "raw_sha256": "578a152f7c2fb11d9d210a0efa918cf2adece3774e4491627ec478e1e8b9bfdc",
+      "raw_bytes": 20263,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "gzip_sha256": "6e8c8257aca58b7836a040c1225c5452b2d6a2f2072b74fc8e54625d1148eec0",
+      "gzip_bytes": 2705,
+      "restored_sha256": "578a152f7c2fb11d9d210a0efa918cf2adece3774e4491627ec478e1e8b9bfdc"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin",
+      "raw_sha256": "b6a4cbad1b874b447533d2aaf4cea89221d07d0656c71d6f208be4d1e8efc25d",
+      "raw_bytes": 343809,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "gzip_sha256": "50d44f38cc4176a2d9b5da741700c0fc0765ed82a70e5f6be9d114bff4be49d5",
+      "gzip_bytes": 41181,
+      "restored_sha256": "b6a4cbad1b874b447533d2aaf4cea89221d07d0656c71d6f208be4d1e8efc25d"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json",
+      "raw_sha256": "03171a4bf9b5662e98707ae43e2d3491fac12cb68bd46c533934ab0a0b6d4268",
+      "raw_bytes": 18647,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "gzip_sha256": "2962ca5f285badf78ffc079a4dbd3f9a4e8603b9f84802888c90a7348a0748d3",
+      "gzip_bytes": 2686,
+      "restored_sha256": "03171a4bf9b5662e98707ae43e2d3491fac12cb68bd46c533934ab0a0b6d4268"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin",
+      "raw_sha256": "cc7d3c378562f9f5498077366e59250520ef2aee0124099e7b51fe65909f3d20",
+      "raw_bytes": 368828,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "gzip_sha256": "d23f86c12ebbec306d5a6a52239fac6bdfe3d7e0c8322f79aa73aaac73e5edf2",
+      "gzip_bytes": 43268,
+      "restored_sha256": "cc7d3c378562f9f5498077366e59250520ef2aee0124099e7b51fe65909f3d20"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json",
+      "raw_sha256": "4b019f0ae01001986f6eb807623dc3db98b75b18bcd95fc6d18d5a7280c4717b",
+      "raw_bytes": 17901,
+      "gzip_path": "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "gzip_sha256": "7c3980527fce96f74de5755dac32a8040de47c0de41571abd5f95882f363a405",
+      "gzip_bytes": 2671,
+      "restored_sha256": "4b019f0ae01001986f6eb807623dc3db98b75b18bcd95fc6d18d5a7280c4717b"
+    },
+    {
+      "logical_raw_path": "terminal-promotion-two-loop-laurent-resources.log",
+      "raw_sha256": "f9620c5bd7bc757c62da69cd268dae06e9be984a7fa49217d445dfa104d32887",
+      "raw_bytes": 188416,
+      "gzip_path": "terminal-promotion-two-loop-laurent-resources.log.gz",
+      "gzip_sha256": "1ccf59a3e69f66d143d60a7d8b90296e2ccf7806163b4492d0b021573b95ee7c",
+      "gzip_bytes": 2247,
+      "restored_sha256": "f9620c5bd7bc757c62da69cd268dae06e9be984a7fa49217d445dfa104d32887"
+    }
+  ],
+  "raw_bytes": 33680414,
+  "gzip_bytes": 1261214,
+  "preserved_comparison_inputs": {
+    "build-native-digest.py": "a669586b85cadcbf610c4ff11b26e71fca0448cac4133193808122c555752087",
+    "certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "compare-completed-predictions.py": "96fe43afe0e9ca088fab63becfab053f6959ea48d146a04901808c2501560257",
+    "compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "comparison-plan.json": "2c5ac8c43e5ccaad2ec94244356e30021f65e2f96965d4fd6fe50ebed23eb19e",
+    "history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "memo_validation.py": "c38141d270b870017f39ee6f9dc76ab4858b214cb9afc6ea5fd6706f36717e7a",
+    "native-digest-build.json": "71ab766e371cff3b4afe96f859921061c09b60484cfbe579fcada0b8a570e740",
+    "native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "terminal-promotion-build-provenance.json": "7a2bb0deafabb402d5d70bd6b2d776e1006c632b5f92ab9de30d55af33e8550d",
+    "terminal-promotion-massive-regression/closure.json": "8c73f0da32658a30aea10d1863e9f9097addb14a3c3b1b2a4e574c915748997f",
+    "terminal-promotion-massive-regression/configuration.json": "94b532fca78538937023959ace11e55dc686d5f5fae631e360197786ece1093d",
+    "terminal-promotion-massive-regression/input.json": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+    "terminal-promotion-massive-regression/native-closure/cut-0/round-002-closed.bin": "b1b795ac583cedee3ffa098998062200df062da0a71d8d5e0d690c1579f0d269",
+    "terminal-promotion-massive-regression/native-closure/cut-0/round-002-closed.json": "3d3c9aa1c3fb6312f94e1eb19b5e15518f87a84d4e2f2c39c74b68c00271fa91",
+    "terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-closed.bin": "7b913157c0f2fd2cd7447c5896350a4352806034d2b16d37fcad575ee08a81f0",
+    "terminal-promotion-massive-regression/native-closure/cut-0-1/round-001-closed.json": "39f479a56b53d73d9260c5924f1ece0cbec98454fd7edf29e16688d4e311e0e5",
+    "terminal-promotion-massive-regression/native-closure/cut-1/round-002-closed.bin": "4808488e1c23c70a11a2ad89ffe07ef3dd4c89284a274a765d8ef4e95cf7ecca",
+    "terminal-promotion-massive-regression/native-closure/cut-1/round-002-closed.json": "1b3767507214b5fa9bcf2a47323608e7888184e9869c1e9f92addbeaa850bbcd",
+    "terminal-promotion-massive-regression/physical-zero-certificates.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "terminal-promotion-massive-regression/prediction-28-80-12.json": "c24cb540194be756180455a7aa116d5a11bec0acb02161298b15043cd65a215e",
+    "terminal-promotion-massive-regression-binding.json": "76ee7572ee9966701717f7cb521e4b72f8b9ec5d5eb1df79ec8998cd978e18c0",
+    "terminal-promotion-massive-regression-resources.json": "385485f3fe566f5d48724e799438744b29223cc2915d380ff1c9043a7ae17ef8",
+    "terminal-promotion-massive-regression-resources.provenance.json": "fc4a7e1b8e8e8fa61a3c5080d1087b3563e84669020addb5107a44e23424eab1",
+    "terminal-promotion-source-hashes.json": "29ebf37da9b07b7adce6b9431d5040c14a06243f81b361cb4163f431f8293893",
+    "terminal-promotion-two-loop-fixed/closure.json": "e0cd78c8f9f221ce9220f8c4cbf7db843508d8b320ca11e307f297f8337a6041",
+    "terminal-promotion-two-loop-fixed/configuration.json": "1a3c3a0bc543eac9f598089eb6234af5e07d738329ee7a6091748584aa49deb2",
+    "terminal-promotion-two-loop-fixed/input.json": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+    "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin": "a62c649cb158499184097f8f33bfc339a1db6db6573182acba9cd127cea98cf7",
+    "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json": "57b04f78ca87dc8ea945111e05187d59d9f0be5c71bb1e3e876a6ccf81fba387",
+    "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin": "c74b008e67c4ba4efb6369257eab9379b315cc6fbf4ab0674a90f87453c06934",
+    "terminal-promotion-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json": "ba6d9d2dfa61652bca52d70009a3953d25617e1de476419c3ed78044cf086832",
+    "terminal-promotion-two-loop-fixed/physical-zero-certificates.json": "970c9d9509244aa6d5cf90b50e85b518ec5a0ff4a2c81af797b403f44b7fda35",
+    "terminal-promotion-two-loop-fixed/prediction-18-60-8.json": "66193d679e0fc830bfadf3040df344aea1f49e1545d6da399475791f81071b4a",
+    "terminal-promotion-two-loop-fixed/prediction-28-60-8.json": "4b70b3c2209420b31a96f854a44992ba163de3564a996be19322167b4e659f2d",
+    "terminal-promotion-two-loop-fixed/prediction-28-80-12.json": "73144fd2d975c7552da7eb8835497f95e640fb685766365b47bad440b0496fca",
+    "terminal-promotion-two-loop-fixed/prediction-28-80-8.json": "cb5f3c277d729152efbcfcadae281d88d194a7106063e828de971be058ddff71",
+    "terminal-promotion-two-loop-fixed-binding.json": "7d97c2c5388a93d60d3a00b0af798325cb183d4bdd1b1e98550f0b512abd135a",
+    "terminal-promotion-two-loop-fixed-comparison-binding.json": "cbfbac2b63f51aeae3a57a2e2d5a1ac80de945452141eb4147eced31375592fc",
+    "terminal-promotion-two-loop-fixed-comparison.json": "811235cd5987718ef4469c34dbcb00f2ee0e19f7481e2202ee801651f9f9712e",
+    "terminal-promotion-two-loop-fixed-resources.json": "b5d64c7ce8a782ada4e08615c1e5d7a9f630bd55f5cbf78bf653c5cc50fe79f0",
+    "terminal-promotion-two-loop-fixed-resources.provenance.json": "9dcfb03c100c8adb9e3192042eb8ec0268c297fa96b51143a1f0ca49caad0bca",
+    "terminal-promotion-two-loop-laurent/closure.json": "e0cd78c8f9f221ce9220f8c4cbf7db843508d8b320ca11e307f297f8337a6041",
+    "terminal-promotion-two-loop-laurent/configuration.json": "3e95a448327adc2c1516b6c8123503c12b7f5822a40bf8847be0e6771375cdd7",
+    "terminal-promotion-two-loop-laurent/input.json": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+    "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": "a62c649cb158499184097f8f33bfc339a1db6db6573182acba9cd127cea98cf7",
+    "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": "57b04f78ca87dc8ea945111e05187d59d9f0be5c71bb1e3e876a6ccf81fba387",
+    "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin": "c74b008e67c4ba4efb6369257eab9379b315cc6fbf4ab0674a90f87453c06934",
+    "terminal-promotion-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json": "ba6d9d2dfa61652bca52d70009a3953d25617e1de476419c3ed78044cf086832",
+    "terminal-promotion-two-loop-laurent/physical-zero-certificates.json": "970c9d9509244aa6d5cf90b50e85b518ec5a0ff4a2c81af797b403f44b7fda35",
+    "terminal-promotion-two-loop-laurent/prediction-18-60-8-grid-1000.json": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+    "terminal-promotion-two-loop-laurent/prediction-28-60-8-grid-1000.json": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+    "terminal-promotion-two-loop-laurent/prediction-28-80-12-grid-1000.json": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+    "terminal-promotion-two-loop-laurent/prediction-28-80-12-grid-2000.json": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74",
+    "terminal-promotion-two-loop-laurent/prediction-28-80-8-grid-1000.json": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+    "terminal-promotion-two-loop-laurent-binding.json": "06ff4fae4421fe2ec3948fbf8cdbb006c366be56a4ba29d09a60cfc612662619",
+    "terminal-promotion-two-loop-laurent-resources.json": "6ee0fb37d4381aa8459185bda48a5cbe7cfa73ffcf2326ff46d1ff4124976a68",
+    "terminal-promotion-two-loop-laurent-resources.provenance.json": "f47c7612b3f4eb8c520320ef48b7f5c92b6b8297af179ff2acc06985b90fd2ee"
+  }
+}

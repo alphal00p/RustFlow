@@ -1,0 +1,1 @@
+Initial rustfmt invocation without skip_children failed because this minimal isolated source copy deliberately omits unchanged child modules requested.rs and verified_tests.rs. No compile was attempted. Corrected formatting supplies --config skip_children=true and lists every owned Rust source explicitly.

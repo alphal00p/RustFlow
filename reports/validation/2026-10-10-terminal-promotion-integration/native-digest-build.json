@@ -1,0 +1,61 @@
+{
+  "scope": "Tiny validation-only adapter linked to the cached native BLAKE3 dependency. No Cargo, RustFlow source mutation, native proof change or reference-value calculation.",
+  "exit_code": 0,
+  "wall_seconds": 1.0584888430312276,
+  "command": [
+    "nix",
+    "develop",
+    "--command",
+    "rustc",
+    "--edition=2024",
+    "-O",
+    "-L",
+    "dependency=target/release/deps",
+    "--extern",
+    "blake3=/common/dev/rustflow_fermi/target/release/deps/libblake3-7e7c54a1423310f4.rlib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/blake3-222d768860627915/out",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/blake3-9252326cebd21167/out",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-integration/native-digest.rs",
+    "-o",
+    "/tmp/rustflow-terminal-promotion-digest"
+  ],
+  "source_snapshot_sha256": "29ebf37da9b07b7adce6b9431d5040c14a06243f81b361cb4163f431f8293893",
+  "build_provenance_sha256": "7a2bb0deafabb402d5d70bd6b2d776e1006c632b5f92ab9de30d55af33e8550d",
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-integration/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "/common/dev/rustflow_fermi/target/release/deps/libblake3-7e7c54a1423310f4.rlib": "56bd027558287801746b55a81b904418d78ac1c9c6bc61b2ee06cc1078a58381"
+  },
+  "native_archives_sha256": {
+    "/common/dev/rustflow_fermi/target/release/build/blake3-222d768860627915/out/libblake3_sse2_sse41_avx2_assembly.a": "27b162c8d04584d072d78786a65952fb2725006d4e753c321417a362887ea2c8",
+    "/common/dev/rustflow_fermi/target/release/build/blake3-222d768860627915/out/libblake3_avx512_assembly.a": "ac7b50f9e6dede52a96b2f2436d2cccf110c88df45854f25841c2a9335eb5e12",
+    "/common/dev/rustflow_fermi/target/release/build/blake3-9252326cebd21167/out/libblake3_sse2_sse41_avx2_assembly.a": "c54fbd0e6fb3ac073020c8306420ebf959584b57f28af7c6a8751a53305494f4",
+    "/common/dev/rustflow_fermi/target/release/build/blake3-9252326cebd21167/out/libblake3_avx512_assembly.a": "136b1985fdb1e8ad83d8f1d7769c18a7ade8d568bddd9f05cc4d29c2e00a6a3a"
+  },
+  "builder_sha256": "a669586b85cadcbf610c4ff11b26e71fca0448cac4133193808122c555752087",
+  "executable": {
+    "path": "/tmp/rustflow-terminal-promotion-digest",
+    "sha256": "1df406f8ae7e084ee6e3c1128b267f1da94bdbfc8162f8633129ec07a6de8704"
+  },
+  "controls": [
+    {
+      "name": "empty",
+      "bytes": 0,
+      "blake3": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262",
+      "actual_output": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262 0",
+      "exit_code": 0,
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "abc",
+      "bytes": 3,
+      "blake3": "6437b3ac38465133ffb63b75273a8db548c558465d79db03fd359c6cd5bd9d85",
+      "actual_output": "6437b3ac38465133ffb63b75273a8db548c558465d79db03fd359c6cd5bd9d85 3",
+      "exit_code": 0,
+      "stderr": "",
+      "passed": true
+    }
+  ]
+}

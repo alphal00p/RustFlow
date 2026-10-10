@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-source-hashes.json",
+    "sha256": "29ebf37da9b07b7adce6b9431d5040c14a06243f81b361cb4163f431f8293893"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-build-provenance.json",
+    "sha256": "7a2bb0deafabb402d5d70bd6b2d776e1006c632b5f92ab9de30d55af33e8550d"
+  },
+  "unchanged_source_files": 2487,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5",
+    "RUSTRED_SOURCE_DIGEST": "cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c",
+    "PORT_SOURCE_DIGEST": "82b28dddd4acaf0fc189a38f2d7e16f3ad1b88398036457eedc7058c08db12ad"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "native",
+      "status": "passed",
+      "passed": 101,
+      "failed": 0,
+      "ignored": 1,
+      "measured": 0,
+      "filtered": 3041,
+      "harness_seconds": 0.12,
+      "wall_seconds": 0.1360240918584168,
+      "peak_child_rss_kib": 15476,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-native-resources.json",
+          "sha256": "658892a42910324f9636b754016e30ac40df895ca9657c925259708bc3493b0f"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-native-resources.log",
+          "sha256": "177507a198b86a29298cebe80324f5a3c97bec377169cbc70f70aca241b9dead"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-native-resources.provenance.json",
+          "sha256": "ed4fe15120f12bb18868cfe9e468344c8bddb92e7adcbc1b21a48bc370cb1918"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-native-binding.json",
+          "sha256": "9e29b88a3f3961e93f8e90f85296b46a825ba7c3c10726df185d1c100af5546a"
+        }
+      }
+    },
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 110,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.5,
+      "wall_seconds": 7.526288123335689,
+      "peak_child_rss_kib": 24576,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-lib-resources.json",
+          "sha256": "944b53e27f3b7ad567e8913183b6a5de51f34a6fc5fb44ca17b889c88a55a2da"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-lib-resources.log",
+          "sha256": "aa7c4857ba9de59b59b7cca25a875c4ea5273b37d32334c6b52c1b40fa14d842"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-lib-resources.provenance.json",
+          "sha256": "9e46a38dc399875aecb5457c3ab5f6e9b6248e4839189cc295d1c2e1fd9fa320"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-lib-binding.json",
+          "sha256": "00eca61f544967d316dbbb06c307dbb8cecdbdb2e33f591fff4802e2ffca6429"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.16597310500219464,
+      "peak_child_rss_kib": 15436,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-flow-boundary-resources.json",
+          "sha256": "0be6c8e20da39e521fc809fd5c2c6a053a2b9eb50bf0f7d45cba385094661cfa"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-flow-boundary-resources.provenance.json",
+          "sha256": "6d881b11dceb27317d2bfcd2b6774c7914e3cfd7611896e93f1c902b4e4c5a03"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-flow-boundary-binding.json",
+          "sha256": "c89842d8f9009b4f16fa37b7147bab9688217fdc9845cbe9fe5cfa9523fdcb5c"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.4,
+      "wall_seconds": 1.4183688946068287,
+      "peak_child_rss_kib": 15424,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massless-sources-resources.json",
+          "sha256": "e2e19bd4d3d32d9e92c1d98538fe70bfdfc69f7b8d01a0d989d397d0f9dfa34a"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massless-sources-resources.log",
+          "sha256": "84afe519e28cb368ffc1941ea7e66117ccaddbe49c3ba77d4a7e7fbd0538d39c"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massless-sources-resources.provenance.json",
+          "sha256": "f262249c031ef8c5af179d0c47674f5d5b8a3d459ab25c0d115e647f0b6b89a9"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-massless-sources-binding.json",
+          "sha256": "9b548002356bfa55ee738529d010a20d3e3ed0aad5446eaab59d874f273e59bc"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.012195297051221132,
+      "peak_child_rss_kib": 15420,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-source-fingerprint-resources.json",
+          "sha256": "f52e33258fcc9cd7d2d369d725aa988412750e74d533c70b08d106328c4bf928"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-source-fingerprint-resources.log",
+          "sha256": "ec450412ac130ec6849fbc1adf3f0bf1aa56c339e9813c3978fdf07154c138a1"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-source-fingerprint-resources.provenance.json",
+          "sha256": "4e7ce261a090e35bc0fad77f354138c1b341b23c79c810f77a63a9be2ec6b3c9"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-source-fingerprint-binding.json",
+          "sha256": "2c9c96ce20f4579f85b6564551c451c3ef8e32752453b7984a8989cc215cc47c"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.78,
+      "wall_seconds": 1.806664200965315,
+      "peak_child_rss_kib": 30724,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-python-resources.json",
+          "sha256": "bb79827cc2f664e05225b584270d4cf3ea696636a9b8ba1262f14ac8afe536a2"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-python-resources.log",
+          "sha256": "590fcb3c17ac42fa6e73e57a1aba75c8de9e2b88ac9cc73ed5273d2b43191cdd"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-python-resources.provenance.json",
+          "sha256": "782f3062dcf4384c4cb5fe3b5831918958d78eb3721beee1134a38bbc255d0f4"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-python-binding.json",
+          "sha256": "578413562c56a89f4b2329aefd116684f6256d8a770d7941fd22d8c205b8ef79"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.04,
+      "wall_seconds": 0.05435637990012765,
+      "peak_child_rss_kib": 15436,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-capacity-resources.json",
+          "sha256": "f811afa4e806a09cea0700b58f7b985592eb64829029d9008a8b07372cfcaea3"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-capacity-resources.log",
+          "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-capacity-resources.provenance.json",
+          "sha256": "0b26aeb0a1fd8eef48dc9e895e81df3f3ad818de36edd0a757f75bfc5935b58f"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-capacity-binding.json",
+          "sha256": "b02920cebdb7968e0b8f29a2330a145957ffe83fb6b561581c46e62492411dbd"
+        }
+      }
+    },
+    {
+      "gate": "polynomial-sources",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.06,
+      "wall_seconds": 0.07706885784864426,
+      "peak_child_rss_kib": 15396,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-polynomial-sources-resources.json",
+          "sha256": "68c229091290725fb57696522bbb255d1b57ad8a45f4f66f28ea2dd1aab8180b"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-polynomial-sources-resources.log",
+          "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-polynomial-sources-resources.provenance.json",
+          "sha256": "17e519bf9285e34fcfafc03c9586acedd4a98d9ca7018d67d7eca0152d637dc9"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-polynomial-sources-binding.json",
+          "sha256": "89a3053cb57ec43a726b4a360c9efa7123848fa4335d505346a935b7eb7cd78d"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 231,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+}

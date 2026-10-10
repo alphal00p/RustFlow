@@ -1,0 +1,1511 @@
+--- a/src/finite_density/guarded.rs
++++ b/src/finite_density/guarded.rs
+@@ -10,8 +10,8 @@
+ use rustred::algebra::{Coefficient, CoefficientPolynomial};
+ use rustred::persistence::BinaryIoLimits;
+ pub use rustred::solver::guarded::{
+-    GuardedApplicationFailure, GuardedReductionLimits, GuardedUnresolved, IndexBounds, IndexDomain,
+-    IndexRole,
++    GuardedApplicationFailure, GuardedReductionLimits, GuardedUnitMemoLimits, GuardedUnitMemoUsage,
++    GuardedUnresolved, IndexBounds, IndexDomain, IndexRole,
+ };
+ use rustred::solver::guarded::{GuardedProgram, GuardedSource, GuardedSourceSystem};
+ use rustred::solver::{Integral as NativeIntegral, SearchOptions, Term};
+@@ -623,6 +623,44 @@
+         })
+     }
+ 
++    pub(crate) fn with_unit_reduction_memo(
++        mut self,
++        limits: Option<GuardedUnitMemoLimits>,
++    ) -> Result<Self> {
++        self.native = self
++            .native
++            .with_unit_reduction_memo(limits)
++            .map_err(|e| Error::Reduction(e.to_string()))?;
++        Ok(self)
++    }
++
++    pub(crate) fn unit_reduction_memo_usage(&self) -> Result<Option<GuardedUnitMemoUsage>> {
++        self.native
++            .unit_reduction_memo_usage()
++            .map_err(|e| Error::Reduction(e.to_string()))
++    }
++
++    pub(crate) fn with_promoted_terminals_replayed(
++        self,
++        terminals: impl IntoIterator<Item = [i64; N]>,
++        max_rules: usize,
++    ) -> Result<Self> {
++        let terminals = terminals.into_iter().collect::<Vec<_>>();
++        for terminal in &terminals {
++            validate_storage_label(terminal, self.physical_arity)?;
++        }
++        let native = self
++            .native
++            .with_promoted_terminals_replayed(terminals, max_rules)
++            .map_err(|e| Error::Reduction(e.to_string()))?;
++        validate_storage_program(&native, self.physical_arity)?;
++        Ok(Self {
++            native,
++            physical_arity: self.physical_arity,
++            dummy_symbols: self.dummy_symbols,
++        })
++    }
++
+     pub fn reduce(
+         &self,
+         target: [i64; N],
+@@ -633,6 +671,29 @@
+             .native
+             .reduce(target, limits)
+             .map_err(|e| Error::Reduction(e.to_string()))?;
++        self.convert_reduction(reduced)
++    }
++
++    pub(crate) fn reduce_memoized(
++        &self,
++        target: [i64; N],
++        limits: GuardedReductionLimits,
++    ) -> Result<(GuardedAtomReduction<N>, bool)> {
++        validate_storage_label(&target, self.physical_arity)?;
++        let reduced = self
++            .native
++            .reduce_memoized(target, limits)
++            .map_err(|e| Error::Reduction(e.to_string()))?;
++        Ok((
++            self.convert_reduction(reduced.reduction)?,
++            reduced.cache_hit,
++        ))
++    }
++
++    fn convert_reduction(
++        &self,
++        reduced: rustred::solver::guarded::GuardedReduction<N>,
++    ) -> Result<GuardedAtomReduction<N>> {
+         let result = GuardedAtomReduction {
+             terms: reduced
+                 .terms
+--- a/src/finite_density/interface.rs
++++ b/src/finite_density/interface.rs
+@@ -201,6 +201,14 @@
+                 "residual_search_requests":diagnostics.residual_search_requests,
+                 "residual_allocated_domains":diagnostics.residual_allocated_domains,
+                 "native_rule_applications":diagnostics.native_rule_applications,
++                "performed_native_rule_applications":diagnostics.native_rule_applications-diagnostics.memoized_rule_applications,
++                "memoized_rule_applications":diagnostics.memoized_rule_applications,
++                "unit_memo_hits":diagnostics.unit_memo_hits,"unit_memo_misses":diagnostics.unit_memo_misses,
++                "unit_memo_peak_owned_bytes":diagnostics.unit_memo_peak_owned_bytes,
++                "unit_memo_peak_entries":diagnostics.unit_memo_peak_entries,
++                "unit_memo_peak_output_terms":diagnostics.unit_memo_peak_output_terms,
++                "unit_memo_peak_conditions":diagnostics.unit_memo_peak_conditions,
++                "unit_memo_peak_polynomial_terms":diagnostics.unit_memo_peak_polynomial_terms,
+                 "uncovered_discovery_domains":diagnostics.uncovered_discovery_domains,
+                 "historical_discovery_domains":diagnostics.historical_discovery_domains,
+                 "guard_refinement_passes":diagnostics.guard_refinement_passes,
+--- a/src/finite_density/reduction/active.rs
++++ b/src/finite_density/reduction/active.rs
+@@ -26,7 +26,26 @@
+             continue;
+         }
+         run.cancellation.check()?;
+-        let reduced = program.reduce(*indices, limits)?;
++        let (reduced, memoized) = program.reduce_memoized(*indices, limits)?;
++        let memo_usage = program.unit_reduction_memo_usage()?;
++        if memoized {
++            diagnostics.unit_memo_hits += 1;
++            diagnostics.memoized_rule_applications += reduced.rule_applications;
++        } else if memo_usage.is_some() {
++            diagnostics.unit_memo_misses += 1;
++        }
++        if let Some(u) = memo_usage {
++            diagnostics.unit_memo_peak_owned_bytes =
++                diagnostics.unit_memo_peak_owned_bytes.max(u.owned_bytes);
++            diagnostics.unit_memo_peak_entries = diagnostics.unit_memo_peak_entries.max(u.entries);
++            diagnostics.unit_memo_peak_output_terms =
++                diagnostics.unit_memo_peak_output_terms.max(u.output_terms);
++            diagnostics.unit_memo_peak_conditions =
++                diagnostics.unit_memo_peak_conditions.max(u.conditions);
++            diagnostics.unit_memo_peak_polynomial_terms = diagnostics
++                .unit_memo_peak_polynomial_terms
++                .max(u.polynomial_terms);
++        }
+         diagnostics.native_rule_applications += reduced.rule_applications;
+         retain_conditions(conditions, reduced.nonzero_conditions);
+         for (label, coefficient) in reduced.terms {
+@@ -119,7 +138,7 @@
+         .filter_map(|domain| domain.intersection(deformation.admitted_domain()))
+         .collect::<Vec<_>>();
+         // No earlier provisional stopping set is allowed to hide descendants.
+-        let (found, completed_requests, deferred_requests) =
++        let (mut found, completed_requests, deferred_requests) =
+             if options.requested_ray_point.is_some() {
+                 for label in &requested {
+                     deformation.validate_integral(label)?;
+@@ -163,6 +182,10 @@
+                 )?;
+                 (found, requested.clone(), BTreeSet::new())
+             };
++        // New immutable epoch after discovery; no memo survives a previous round.
++        found.program = found
++            .program
++            .with_unit_reduction_memo(options.unit_reduction_memo)?;
+         history.extend(&completed_requests);
+         diagnostics.rounds = round + 1;
+         diagnostics.requested = requested.len();
+@@ -332,9 +355,16 @@
+                 name: "active weighted final complete source replay".into(),
+             })?;
+             run.cancellation.check()?;
+-            let program = found
+-                .program
+-                .with_terminals_replayed(frontier.iter().copied(), options.max_reused_rules)?;
++            let program = if options.unit_reduction_memo.is_some() {
++                found.program.with_promoted_terminals_replayed(
++                    frontier.iter().copied(),
++                    options.max_reused_rules,
++                )?
++            } else {
++                found
++                    .program
++                    .with_terminals_replayed(frontier.iter().copied(), options.max_reused_rules)?
++            };
+             // Recompute every sum with this single final replayed program.
+             let mut failed = Vec::new();
+             let mut target_weights = Vec::new();
+@@ -466,6 +496,7 @@
+                 Some(&active_state),
+                 run,
+             )?;
++            let program = program.with_unit_reduction_memo(None)?;
+             return Ok(WeightedClosureOutcome::Closed(WeightedReducedSystem {
+                 reduced: ReducedSystem {
+                     basis: frontier
+@@ -489,7 +520,7 @@
+         last_frontier = frontier;
+         last_residuals = uncovered;
+         last_discovery = found.unresolved;
+-        retained = Some(found.program);
++        retained = Some(found.program.with_unit_reduction_memo(None)?);
+     }
+     Ok(unclosed(
+         "active weighted closure round budget exhausted",
+@@ -513,6 +544,77 @@
+             max_domains_per_residual: 32,
+             ..Default::default()
+         }
++    }
++
++    #[test]
++    fn optional_unit_memo_preserves_full_weighted_final_audit() {
++        let (context, deformation) = super::super::tests::compact_context();
++        let targets = [BTreeMap::from([([1, 0], Atom::num(1))])];
++        let make = |memo| {
++            let outcome = prepare_weighted_system(
++                &context,
++                &targets,
++                &deformation,
++                WeightedClosureOptions {
++                    unit_reduction_memo: memo,
++                    max_history_candidate_maps: Some(0),
++                    ..options()
++                },
++                &RunContext::default(),
++            )
++            .unwrap();
++            let WeightedClosureOutcome::Closed(closed) = outcome else {
++                panic!("{outcome:?}")
++            };
++            closed
++        };
++        let baseline = make(None);
++        let limits = super::super::super::guarded::GuardedUnitMemoLimits::default();
++        let memoized = make(Some(limits));
++        assert_eq!(baseline.reduced.basis, memoized.reduced.basis);
++        assert_eq!(baseline.reduced.matrix, memoized.reduced.matrix);
++        assert_eq!(baseline.reduced.targets, memoized.reduced.targets);
++        assert_eq!(
++            baseline.reduced.nonzero_conditions,
++            memoized.reduced.nonzero_conditions
++        );
++        assert_eq!(
++            baseline.program.encode(Default::default()).unwrap(),
++            memoized.program.encode(Default::default()).unwrap()
++        );
++        assert_eq!(
++            baseline.diagnostics.native_rule_applications,
++            memoized.diagnostics.native_rule_applications
++        );
++        assert!(memoized.diagnostics.unit_memo_hits > 0);
++        assert!(memoized.diagnostics.unit_memo_peak_owned_bytes <= limits.max_owned_bytes);
++        assert!(memoized.diagnostics.unit_memo_peak_conditions <= limits.max_conditions);
++        assert!(
++            memoized
++                .program
++                .unit_reduction_memo_usage()
++                .unwrap()
++                .is_none()
++        );
++    }
++
++    #[test]
++    fn unit_memo_requires_active_closure() {
++        let (context, deformation) = super::super::tests::compact_context();
++        let targets = [BTreeMap::from([([1, 0], Atom::num(1))])];
++        let result = prepare_weighted_system(
++            &context,
++            &targets,
++            &deformation,
++            WeightedClosureOptions {
++                unit_reduction_memo: Some(Default::default()),
++                ..Default::default()
++            },
++            &RunContext::default(),
++        );
++        assert!(
++            matches!(result, Err(Error::InvalidInput(message)) if message.contains("requires active closure"))
++        );
+     }
+ 
+     #[test]
+@@ -613,6 +715,43 @@
+     }
+ 
+     #[test]
++    fn memo_cancellation_before_final_replay_cannot_publish_a_closed_result() {
++        use std::sync::{Arc, Mutex};
++        let (context, deformation) = super::super::tests::compact_context();
++        let token = crate::CancellationToken::default();
++        let captured = token.clone();
++        let stages = Arc::new(Mutex::new(Vec::new()));
++        let logged = stages.clone();
++        let run = RunContext {
++            cancellation: token,
++            progress: Some(Arc::new(move |event| {
++                if let Progress::Stage { name } = event {
++                    logged.lock().unwrap().push(name.clone());
++                    if name == "active weighted final complete source replay" {
++                        captured.cancel();
++                    }
++                }
++            })),
++        };
++        let result = prepare_weighted_system(
++            &context,
++            &[BTreeMap::from([([1, 0], Atom::num(1))])],
++            &deformation,
++            WeightedClosureOptions {
++                max_history_candidate_maps: Some(0),
++                unit_reduction_memo: Some(Default::default()),
++                ..options()
++            },
++            &run,
++        );
++        assert!(matches!(result, Err(Error::Cancelled)));
++        assert_eq!(
++            *stages.lock().unwrap(),
++            vec!["active weighted final complete source replay"]
++        );
++    }
++
++    #[test]
+     fn cancellation_before_final_replay_cannot_publish_a_closed_result() {
+         use std::sync::{Arc, Mutex};
+         let (context, deformation) = super::super::tests::compact_context();
+--- a/src/finite_density/reduction.rs
++++ b/src/finite_density/reduction.rs
+@@ -269,6 +269,10 @@
+     /// to active closure. Unselected history remains explicitly unassessed.
+     /// This is a label-count bound, not a native work or wall-time bound.
+     pub max_history_candidate_maps: Option<usize>,
++    /// Optional whole-call memo for one immutable active-closure round. Only a
++    /// fully replayed promotion of exact NoRule leaves can carry entries into
++    /// the final audit. No entries survive a new discovery round.
++    pub unit_reduction_memo: Option<super::guarded::GuardedUnitMemoLimits>,
+     /// Native one-source zero proofs at requested concrete points before
+     /// ordinary discovery. A per-call attempt cap; zero disables the prepass.
+     /// Requires a retained discovery schedule. Completed point searches are memoized.
+@@ -300,6 +304,7 @@
+             requested_ray_point: None,
+             active_target_closure: false,
+             max_history_candidate_maps: None,
++            unit_reduction_memo: None,
+             max_direct_zero_attempts: 0,
+             checkpoints: None,
+         }
+@@ -347,7 +352,17 @@
+     /// Exact-point searches for native vanishing guards, separate from finite
+     /// axis subdivisions. Failed searches never install a terminal or zero.
+     pub conditional_point_refinements: Vec<ConditionalPointRefinement>,
++    /// Logical native applications, including exactly reused unit calls.
+     pub native_rule_applications: usize,
++    /// Portion of logical applications served from the bounded memo.
++    pub memoized_rule_applications: usize,
++    pub unit_memo_hits: usize,
++    pub unit_memo_misses: usize,
++    pub unit_memo_peak_owned_bytes: usize,
++    pub unit_memo_peak_entries: usize,
++    pub unit_memo_peak_output_terms: usize,
++    pub unit_memo_peak_conditions: usize,
++    pub unit_memo_peak_polynomial_terms: usize,
+     /// Discovery need not solve every native index domain to close the finite
+     /// requested target and derivative set. Under residual-focused scheduling,
+     /// this counts the deduplicated historical gaps, not just the final search.
+@@ -418,6 +433,11 @@
+     {
+         return Err(Error::InvalidInput(
+             "weighted closure needs targets and positive work limits".into(),
++        ));
++    }
++    if options.unit_reduction_memo.is_some() && !options.active_target_closure {
++        return Err(Error::InvalidInput(
++            "unit reduction memo requires active closure".into(),
+         ));
+     }
+     if options.max_history_candidate_maps.is_some() && !options.active_target_closure {
+@@ -1487,6 +1507,10 @@
+         "max_requested":options.max_requested,
+         "active_target_closure":options.active_target_closure,
+         "max_history_candidate_maps":options.max_history_candidate_maps,
++        "unit_reduction_memo":options.unit_reduction_memo.map(|m| serde_json::json!({
++            "max_entries":m.max_entries,"max_output_terms":m.max_output_terms,"max_conditions":m.max_conditions,
++            "max_polynomial_terms":m.max_polynomial_terms,"max_owned_bytes":m.max_owned_bytes,
++            "metric":"fixed boxed memo slots plus boxed output/condition records and encoded native state/coefficient bytes; excludes scratch and allocator overhead"})),
+         "max_direct_zero_attempts":options.max_direct_zero_attempts,
+         "rule_precedence":if options.max_direct_zero_attempts > 0 {
+             "new direct zeros, retained rules, ordinary fresh rules"
+--- a/tests/finite_density_runtime_flow.rs
++++ b/tests/finite_density_runtime_flow.rs
+@@ -7,8 +7,12 @@
+     DensityInput,
+     assembly::PreparedDensityFlow,
+     flow::{OccupiedFlowEvaluation, PreparedOccupiedFlow},
++    guarded::GuardedUnitMemoLimits,
+     preparation::WeightedSourceOptions,
+-    reduction::{GuardRefinementOptions, RequestedRayPointOptions, WeightedClosureOptions},
++    reduction::{
++        GuardRefinementOptions, RequestedRayPointOptions, WeightedClosureDiagnostics,
++        WeightedClosureOptions,
++    },
+ };
+ use symbolica_amflow::*;
+ 
+@@ -70,6 +74,31 @@
+                 },
+             ),
+             active_target_closure: setting("RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE", false),
++            unit_reduction_memo: setting("RUSTFLOW_WEIGHTED_UNIT_MEMO", false).then(|| {
++                let defaults = GuardedUnitMemoLimits::default();
++                GuardedUnitMemoLimits {
++                    max_entries: setting(
++                        "RUSTFLOW_WEIGHTED_UNIT_MEMO_ENTRIES",
++                        defaults.max_entries,
++                    ),
++                    max_output_terms: setting(
++                        "RUSTFLOW_WEIGHTED_UNIT_MEMO_TERMS",
++                        defaults.max_output_terms,
++                    ),
++                    max_conditions: setting(
++                        "RUSTFLOW_WEIGHTED_UNIT_MEMO_CONDITIONS",
++                        defaults.max_conditions,
++                    ),
++                    max_polynomial_terms: setting(
++                        "RUSTFLOW_WEIGHTED_UNIT_MEMO_POLYNOMIAL_TERMS",
++                        defaults.max_polynomial_terms,
++                    ),
++                    max_owned_bytes: setting(
++                        "RUSTFLOW_WEIGHTED_UNIT_MEMO_BYTES",
++                        defaults.max_owned_bytes,
++                    ),
++                }
++            }),
+             max_direct_zero_attempts: setting("RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS", 0),
+             max_history_candidate_maps: std::env::var(
+                 "RUSTFLOW_WEIGHTED_MAX_HISTORY_CANDIDATE_MAPS",
+@@ -100,6 +129,12 @@
+         run.save("configuration.json", json!({
+             "input_path":input_path,
+             "native_closure":format!("{:?}",run.closure),
++            "unit_reduction_memo":run.closure.unit_reduction_memo.map(|caps| json!({
++                "max_entries":caps.max_entries,"max_output_terms":caps.max_output_terms,
++                "max_conditions":caps.max_conditions,"max_polynomial_terms":caps.max_polynomial_terms,
++                "max_owned_bytes":caps.max_owned_bytes,
++                "owned_bytes_metric":"memo field + fixed boxed slots + boxed records/condition IDs + encoded coefficient/state bytes; excludes allocator overhead, program, encoder/decoder/CAS scratch and returned reductions",
++            })),
+             "guard_digits":run.options.guard_digits,
+             "profiles":run.profiles(),
+             "source_options":run.source_options(),
+@@ -177,6 +212,18 @@
+             ),
+         );
+         self.save(
++            "closure.json",
++            json!(
++                prepared
++                    .closure_diagnostics()
++                    .iter()
++                    .map(|(cuts, diagnostics)| {
++                        json!({"cut_slots":cuts,"diagnostics":closure(diagnostics)})
++                    })
++                    .collect::<Vec<_>>()
++            ),
++        );
++        self.save(
+             "physical-zero-certificates.json",
+             json!(
+                 prepared
+@@ -188,6 +235,21 @@
+         );
+         prepared
+     }
++}
++
++fn closure(diagnostics: &WeightedClosureDiagnostics) -> Value {
++    json!({
++        "all_diagnostics":format!("{diagnostics:?}"),
++        "native_rule_applications":diagnostics.native_rule_applications,
++        "performed_native_rule_applications":diagnostics.native_rule_applications-diagnostics.memoized_rule_applications,
++        "memoized_rule_applications":diagnostics.memoized_rule_applications,
++        "unit_memo_hits":diagnostics.unit_memo_hits,"unit_memo_misses":diagnostics.unit_memo_misses,
++        "unit_memo_peak_owned_bytes":diagnostics.unit_memo_peak_owned_bytes,
++        "unit_memo_peak_entries":diagnostics.unit_memo_peak_entries,
++        "unit_memo_peak_output_terms":diagnostics.unit_memo_peak_output_terms,
++        "unit_memo_peak_conditions":diagnostics.unit_memo_peak_conditions,
++        "unit_memo_peak_polynomial_terms":diagnostics.unit_memo_peak_polynomial_terms,
++    })
+ }
+ 
+ fn report(value: &OccupiedFlowEvaluation) -> Value {
+@@ -243,7 +305,7 @@
+         ),
+     );
+     run.save("closure.json",json!({
+-        "diagnostics":format!("{:?}",flow.closure_diagnostics()),
++        "diagnostics":closure(flow.closure_diagnostics()),
+         "basis":flow.reduced().basis.iter().map(|i|&i.0).collect::<Vec<_>>(),
+         "nonzero_conditions":flow.reduced().nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
+     }));
+--- /dev/null
++++ b/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs
+@@ -0,0 +1,548 @@
++use super::*;
++use crate::algebra::CoefficientContext;
++use crate::solver::guarded::{GuardedSource, IndexBounds, IndexDomain};
++use crate::solver::{Integral, SearchOptions, Term};
++fn discover(
++    sources: Arc<GuardedSourceSystem<1>>,
++    points: impl IntoIterator<Item = i64>,
++    terminals: impl IntoIterator<Item = [i64; 1]>,
++) -> GuardedProgram<1> {
++    let mut rules = Vec::new();
++    for point in points {
++        let found = sources
++            .solve_domains(
++                vec![IndexDomain::new([IndexBounds::fixed(point)]).unwrap()],
++                SearchOptions {
++                    max_depth: Some(0),
++                    sample_seed: 0,
++                    ..Default::default()
++                },
++                1,
++            )
++            .unwrap();
++        assert!(
++            !found.rules.is_empty(),
++            "missing direct row at {point}: {:?}",
++            found.unresolved
++        );
++        rules.extend(found.rules);
++    }
++    GuardedProgram::new(sources, rules, terminals).unwrap()
++}
++
++fn diamond_program(cancel: bool) -> GuardedProgram<1> {
++    let context = CoefficientContext::try_new(["guarded_diamond_n", "guarded_diamond_x"]).unwrap();
++    let x = context.parameter("guarded_diamond_x").unwrap();
++    let target = Integral::symbolic([0]).unwrap();
++    let branches = [
++        (4, vec![(-1, context.one()), (-2, context.one())]),
++        (2, vec![(-1, x.clone())]),
++        (3, vec![(-2, if cancel { -x.clone() } else { x.clone() })]),
++    ];
++    let sources = Arc::new(
++        GuardedSourceSystem::new(
++            "replayed-uncovered-diamond",
++            [IndexRole::Occupation],
++            [0],
++            branches
++                .iter()
++                .enumerate()
++                .map(|(ordinal, (point, rhs))| {
++                    let mut row = vec![Term {
++                        integral: target,
++                        coefficient: context.one().numerator,
++                    }];
++                    row.extend(rhs.iter().map(|(shift, coefficient)| Term {
++                        integral: Integral::symbolic([*shift]).unwrap(),
++                        coefficient: (-coefficient.clone()).numerator,
++                    }));
++                    GuardedSource::new(
++                        format!("diamond-{ordinal}"),
++                        row,
++                        IndexDomain::new([IndexBounds::fixed(*point)]).unwrap(),
++                    )
++                    .with_nonzero_conditions(vec![x.numerator.clone()])
++                })
++                .collect(),
++        )
++        .unwrap(),
++    );
++    discover(sources, branches.iter().map(|(point, ..)| *point), [])
++}
++
++fn guarded_pending_diamond(cancel: bool) -> GuardedProgram<1> {
++    let context = CoefficientContext::try_new(["pending_n", "pending_x", "pending_y"]).unwrap();
++    let x = context.parameter("pending_x").unwrap();
++    let y = context.parameter("pending_y").unwrap();
++    let target = Integral::symbolic([0]).unwrap();
++    let branches = [
++        (
++            6,
++            context.one(),
++            vec![(-1, context.one()), (-4, context.one())],
++        ),
++        (5, context.one(), vec![(-1, context.one())]),
++        (
++            4,
++            context.one(),
++            vec![(
++                -2,
++                if cancel {
++                    -context.one()
++                } else {
++                    context.one()
++                },
++            )],
++        ),
++        (2, y.clone(), vec![(-1, &context.one() / &y)]),
++    ];
++    let sources = Arc::new(
++        GuardedSourceSystem::new(
++            "pending-native-order-guarded-diamond",
++            [IndexRole::Occupation],
++            [0],
++            branches
++                .iter()
++                .enumerate()
++                .map(|(ordinal, (point, pivot, rhs))| {
++                    let mut row = vec![Term {
++                        integral: target,
++                        coefficient: pivot.numerator.clone(),
++                    }];
++                    row.extend(rhs.iter().map(|(shift, coefficient)| Term {
++                        integral: Integral::symbolic([*shift]).unwrap(),
++                        coefficient: (-(coefficient * pivot)).numerator,
++                    }));
++                    let source = GuardedSource::new(
++                        format!("pending-{ordinal}"),
++                        row,
++                        IndexDomain::new([IndexBounds::fixed(*point)]).unwrap(),
++                    );
++                    if *point == 5 {
++                        source.with_nonzero_conditions(vec![x.numerator.clone()])
++                    } else {
++                        source
++                    }
++                })
++                .collect(),
++        )
++        .unwrap(),
++    );
++    discover(sources, branches.iter().map(|(point, ..)| *point), [])
++}
++
++fn capacity_fixture() -> GuardedProgram<1> {
++    let context =
++        CoefficientContext::try_new(["balanced_capacity_n", "balanced_capacity_x"]).unwrap();
++    let target = Integral::symbolic([0]).unwrap();
++    let branches = [
++        (8, vec![(-1, 1), (-2, 1)]),
++        (7, vec![(-6, 1)]),
++        (6, vec![(-5, -1), (-4, 1), (-3, 1)]),
++    ];
++    let sources = Arc::new(
++        GuardedSourceSystem::new(
++            "balanced-budget-cancellation",
++            [IndexRole::Occupation],
++            [0],
++            branches
++                .iter()
++                .enumerate()
++                .map(|(ordinal, (point, rhs))| {
++                    let mut row = vec![Term {
++                        integral: target,
++                        coefficient: context.one().numerator,
++                    }];
++                    row.extend(rhs.iter().map(|(shift, c)| Term {
++                        integral: Integral::symbolic([*shift]).unwrap(),
++                        coefficient: context.integer(-i64::from(*c)).numerator,
++                    }));
++                    GuardedSource::new(
++                        format!("budget-{ordinal}"),
++                        row,
++                        IndexDomain::new([IndexBounds::fixed(*point)]).unwrap(),
++                    )
++                })
++                .collect(),
++        )
++        .unwrap(),
++    );
++    discover(sources, branches.iter().map(|(point, _)| *point), [])
++}
++fn assert_equal<const N: usize>(a: &GuardedReduction<N>, b: &GuardedReduction<N>) {
++    assert_eq!(a.terms, b.terms);
++    assert_eq!(a.rule_applications, b.rule_applications);
++    assert_eq!(a.nonzero_conditions, b.nonzero_conditions);
++    assert_eq!(a.unresolved.len(), b.unresolved.len());
++    for (x, y) in a.unresolved.iter().zip(&b.unresolved) {
++        assert_eq!(x.integral, y.integral);
++        assert_eq!(x.reason, y.reason);
++        assert_eq!(x.coefficient, y.coefficient);
++    }
++}
++fn enabled<const N: usize>(p: GuardedProgram<N>) -> GuardedProgram<N> {
++    p.with_unit_reduction_memo(Some(Default::default()))
++        .unwrap()
++}
++#[test]
++fn native_memo_terminal_promotion_preserves_ordered_guards_and_decode() {
++    for cancel in [true, false] {
++        let p = enabled(guarded_pending_diamond(cancel));
++        for t in [[5], [2], [6]] {
++            let got = p.reduce_memoized(t, Default::default()).unwrap();
++            assert!(!got.cache_hit);
++            assert_equal(&got.reduction, &p.reduce(t, Default::default()).unwrap());
++        }
++        let p = p
++            .with_promoted_terminals_replayed([[1]], usize::MAX)
++            .unwrap();
++        let got = p.reduce_memoized([6], Default::default()).unwrap();
++        assert!(got.cache_hit);
++        assert_equal(&got.reduction, &p.reduce([6], Default::default()).unwrap());
++        let c = CoefficientContext::try_new(["pending_n", "pending_x", "pending_y"]).unwrap();
++        assert!(
++            got.reduction
++                .nonzero_conditions
++                .contains(&c.parameter("pending_x").unwrap().numerator)
++        );
++        assert_eq!(
++            got.reduction
++                .nonzero_conditions
++                .contains(&c.parameter("pending_y").unwrap().numerator),
++            !cancel
++        );
++        let decoded = GuardedProgram::decode_generated(
++            &p.encode_native(Default::default()).unwrap(),
++            p.sources().clone(),
++            Default::default(),
++        )
++        .unwrap();
++        assert!(decoded.unit_reduction_memo_usage().unwrap().is_none());
++        assert_equal(
++            &got.reduction,
++            &decoded.reduce([6], Default::default()).unwrap(),
++        );
++    }
++}
++#[test]
++fn native_memo_budget_grid_matches_cold_reduction() {
++    for applications in 0..=5 {
++        for pending in 0..=4 {
++            for entries in [0, 1, 4] {
++                let p = capacity_fixture()
++                    .with_unit_reduction_memo(Some(GuardedUnitMemoLimits {
++                        max_entries: entries,
++                        ..Default::default()
++                    }))
++                    .unwrap();
++                let limits = GuardedReductionLimits {
++                    max_rule_applications: applications,
++                    max_pending_integrals: pending,
++                };
++                assert_equal(
++                    &p.reduce_memoized([8], limits).unwrap().reduction,
++                    &p.reduce([8], limits).unwrap(),
++                );
++                let p = p
++                    .with_promoted_terminals_replayed([[1], [2], [3]], usize::MAX)
++                    .unwrap();
++                for _ in 0..2 {
++                    assert_equal(
++                        &p.reduce_memoized([8], limits).unwrap().reduction,
++                        &p.reduce([8], limits).unwrap(),
++                    );
++                }
++            }
++        }
++    }
++}
++#[test]
++fn native_memo_work_limit_cannot_be_reclassified_as_complete() {
++    let p = enabled(diamond_program(false));
++    let limits = GuardedReductionLimits {
++        max_rule_applications: 3,
++        max_pending_integrals: 100,
++    };
++    let old = p.reduce_memoized([4], limits).unwrap();
++    assert!(
++        old.reduction
++            .unresolved
++            .iter()
++            .any(|r| r.reason == GuardedApplicationFailure::WorkLimit)
++    );
++    assert_eq!(p.unit_reduction_memo_usage().unwrap().unwrap().entries, 0);
++    let p = p
++        .with_promoted_terminals_replayed([[1]], usize::MAX)
++        .unwrap();
++    let new = p.reduce_memoized([4], limits).unwrap();
++    assert!(!new.cache_hit);
++    assert!(new.reduction.unresolved.is_empty());
++    assert_equal(&new.reduction, &p.reduce([4], limits).unwrap());
++}
++#[test]
++fn native_memo_rebind_union_reset_and_removal_invalidate() {
++    let p = enabled(diamond_program(false));
++    p.reduce_memoized([4], Default::default()).unwrap();
++    let fallback = GuardedProgram::new(p.sources().clone(), vec![], []).unwrap();
++    let p = p.union_verified(fallback, [], usize::MAX).unwrap();
++    assert!(p.unit_reduction_memo_usage().unwrap().is_none());
++    assert!(
++        !p.reduce_memoized([4], Default::default())
++            .unwrap()
++            .cache_hit
++    );
++    let p = enabled(p);
++    p.reduce_memoized([4], Default::default()).unwrap();
++    let p = p.with_terminals_verified([], usize::MAX).unwrap();
++    assert!(p.unit_reduction_memo_usage().unwrap().is_none());
++    assert!(
++        enabled(diamond_program(false))
++            .with_promoted_terminals_replayed([[3]], usize::MAX)
++            .is_err()
++    );
++    assert!(
++        enabled(diamond_program(false))
++            .with_promoted_terminals_replayed([[-1]], usize::MAX)
++            .is_err()
++    );
++    assert!(
++        enabled(diamond_program(false))
++            .with_promoted_terminals_replayed([[1]], 0)
++            .is_err()
++    );
++    let p = diamond_program(false)
++        .with_terminals_replayed([[1]], usize::MAX)
++        .unwrap();
++    assert!(
++        enabled(p)
++            .with_promoted_terminals_replayed([], usize::MAX)
++            .is_err()
++    );
++}
++#[test]
++fn native_memo_quotas_limits_eviction_and_owned_bytes_are_explicit() {
++    let caps = GuardedUnitMemoLimits {
++        max_entries: 1,
++        ..Default::default()
++    };
++    let p = capacity_fixture()
++        .with_unit_reduction_memo(Some(caps))
++        .unwrap();
++    p.reduce_memoized([8], Default::default()).unwrap();
++    p.reduce_memoized([7], Default::default()).unwrap();
++    assert!(
++        !p.reduce_memoized([8], Default::default())
++            .unwrap()
++            .cache_hit
++    );
++    let u = p.unit_reduction_memo_usage().unwrap().unwrap();
++    assert!(
++        u.entries <= 1
++            && u.output_terms <= caps.max_output_terms
++            && u.conditions <= caps.max_conditions
++            && u.polynomial_terms <= caps.max_polynomial_terms
++            && u.owned_bytes <= caps.max_owned_bytes
++    );
++    let limits = GuardedReductionLimits {
++        max_pending_integrals: 99999,
++        ..Default::default()
++    };
++    assert!(!p.reduce_memoized([8], limits).unwrap().cache_hit);
++    for c in [
++        GuardedUnitMemoLimits {
++            max_output_terms: 0,
++            ..Default::default()
++        },
++        GuardedUnitMemoLimits {
++            max_conditions: 0,
++            ..Default::default()
++        },
++        GuardedUnitMemoLimits {
++            max_polynomial_terms: 0,
++            ..Default::default()
++        },
++    ] {
++        let p = diamond_program(false)
++            .with_unit_reduction_memo(Some(c))
++            .unwrap();
++        for _ in 0..2 {
++            assert!(
++                !p.reduce_memoized([4], Default::default())
++                    .unwrap()
++                    .cache_hit
++            );
++        }
++    }
++    assert!(
++        capacity_fixture()
++            .with_unit_reduction_memo(Some(GuardedUnitMemoLimits {
++                max_owned_bytes: 0,
++                ..Default::default()
++            }))
++            .is_err()
++    );
++}
++#[test]
++fn native_memo_encoded_payload_cap_declines_without_changing_the_result() {
++    let caps = GuardedUnitMemoLimits {
++        max_entries: 1,
++        ..Default::default()
++    };
++    let baseline = diamond_program(false);
++    let expected = baseline.reduce([4], Default::default()).unwrap();
++    let empty = baseline.with_unit_reduction_memo(Some(caps)).unwrap();
++    let metadata_bytes = empty
++        .unit_reduction_memo_usage()
++        .unwrap()
++        .unwrap()
++        .owned_bytes;
++    // The metadata fits but even the smallest encoded nonzero entry does not.
++    let p = empty
++        .with_unit_reduction_memo(Some(GuardedUnitMemoLimits {
++            max_owned_bytes: metadata_bytes + 1,
++            ..caps
++        }))
++        .unwrap();
++    for _ in 0..2 {
++        let got = p.reduce_memoized([4], Default::default()).unwrap();
++        assert!(!got.cache_hit);
++        assert_equal(&got.reduction, &expected);
++        let usage = p.unit_reduction_memo_usage().unwrap().unwrap();
++        assert_eq!(usage.entries, 0);
++        assert_eq!(usage.owned_bytes, metadata_bytes);
++    }
++}
++#[test]
++fn native_memo_cannot_cross_source_context_or_survive_reset() {
++    let p = enabled(diamond_program(false));
++    p.reduce_memoized([4], Default::default()).unwrap();
++    // Same names/roles/measure, different exact source row: union must reject.
++    assert!(
++        p.union_verified(diamond_program(true), [], usize::MAX)
++            .is_err()
++    );
++    let p = enabled(diamond_program(false));
++    p.reduce_memoized([4], Default::default()).unwrap();
++    let p = p
++        .with_unit_reduction_memo(Some(Default::default()))
++        .unwrap();
++    assert_eq!(p.unit_reduction_memo_usage().unwrap().unwrap().entries, 0);
++    assert!(
++        !p.reduce_memoized([4], Default::default())
++            .unwrap()
++            .cache_hit
++    );
++    let p = p.with_terminals_replayed([], usize::MAX).unwrap();
++    assert!(p.unit_reduction_memo_usage().unwrap().is_none());
++    let p = enabled(p);
++    p.reduce_memoized([4], Default::default()).unwrap();
++    let fallback = GuardedProgram::new(p.sources().clone(), vec![], []).unwrap();
++    let p = p.union_replayed(fallback, [], usize::MAX).unwrap();
++    assert!(p.unit_reduction_memo_usage().unwrap().is_none());
++}
++#[test]
++fn native_memo_owned_decode_error_propagates() {
++    let p = enabled(diamond_program(false));
++    p.reduce_memoized([4], Default::default()).unwrap();
++    {
++        let mut memo = p.unit_memo.as_ref().unwrap().lock().unwrap();
++        let entry = memo.slots.iter_mut().flatten().next().unwrap();
++        let mut bytes = entry.atoms.to_vec();
++        bytes.push(0);
++        entry.atoms = bytes.into_boxed_slice();
++    }
++    // Only outer framing is corrupted. A hit must fail, not silently recompute.
++    assert!(p.reduce_memoized([4], Default::default()).is_err());
++    assert!(p.reduce([4], Default::default()).is_ok());
++}
++#[test]
++fn native_memo_mixed_promoted_and_uncovered_outputs_match() {
++    let p = enabled(capacity_fixture());
++    for t in [[8], [7], [6]] {
++        p.reduce_memoized(t, Default::default()).unwrap();
++    }
++    let p = p
++        .with_promoted_terminals_replayed([[1], [2]], usize::MAX)
++        .unwrap();
++    for t in [[8], [7], [6]] {
++        let r = p.reduce_memoized(t, Default::default()).unwrap();
++        assert!(r.cache_hit);
++        assert_equal(&r.reduction, &p.reduce(t, Default::default()).unwrap());
++    }
++    let p = enabled(diamond_program(true));
++    let before = p.reduce_memoized([4], Default::default()).unwrap();
++    assert!(before.reduction.terms.is_empty() && before.reduction.unresolved.is_empty());
++    let p = p
++        .with_promoted_terminals_replayed([[1]], usize::MAX)
++        .unwrap();
++    assert_equal(
++        &before.reduction,
++        &p.reduce_memoized([4], Default::default())
++            .unwrap()
++            .reduction,
++    );
++}
++#[test]
++fn native_memo_coupled_failure_and_corrupt_proof_cannot_be_promoted() {
++    let c = CoefficientContext::try_new(["memo_guard_n", "memo_guard_m"]).unwrap();
++    let n = c.parameter("memo_guard_n").unwrap();
++    let m = c.parameter("memo_guard_m").unwrap();
++    let domain = IndexDomain::new([
++        IndexBounds::new(Some(1), None).unwrap(),
++        IndexBounds::new(Some(1), None).unwrap(),
++    ])
++    .unwrap();
++    let sources = Arc::new(
++        GuardedSourceSystem::new(
++            "memo-coupled-guard",
++            [IndexRole::Occupation; 2],
++            [0, 1],
++            vec![GuardedSource::new(
++                "coupled",
++                vec![
++                    Term {
++                        integral: Integral::symbolic([0, 0]).unwrap(),
++                        coefficient: (&n - &m).numerator,
++                    },
++                    Term {
++                        integral: Integral::symbolic([-1, 0]).unwrap(),
++                        coefficient: (-c.one()).numerator,
++                    },
++                ],
++                domain.clone(),
++            )],
++        )
++        .unwrap(),
++    );
++    let found = sources
++        .solve_domains(
++            vec![domain],
++            SearchOptions {
++                max_depth: Some(1),
++                sample_seed: 0,
++                ..Default::default()
++            },
++            1,
++        )
++        .unwrap();
++    let p = enabled(GuardedProgram::new(sources, found.rules, []).unwrap());
++    for _ in 0..2 {
++        let r = p.reduce_memoized([2, 2], Default::default()).unwrap();
++        assert!(!r.cache_hit);
++        assert!(matches!(
++            r.reduction.unresolved[0].reason,
++            GuardedApplicationFailure::ConditionVanished { .. }
++        ));
++    }
++    assert!(
++        p.with_promoted_terminals_replayed([[2, 2]], usize::MAX)
++            .is_err()
++    );
++    let mut p = enabled(capacity_fixture());
++    p.reduce_memoized([8], Default::default()).unwrap();
++    p.rules[0].candidate.rhs[0].coefficient = -p.rules[0].candidate.rhs[0].coefficient.clone();
++    assert!(matches!(
++        p.with_promoted_terminals_replayed([[1], [2], [3]], usize::MAX),
++        Err(SolverError::Certification(_))
++    ));
++}
+--- /dev/null
++++ b/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs
+@@ -0,0 +1,426 @@
++//! Complete unit-call memoization. This never substitutes a descendant tail.
++use super::*;
++use crate::algebra::ExactAlgebraLimits;
++use crate::persistence::{
++    BinaryIoError, BinaryIoLimits, CoefficientId, CoefficientTableBuilder, DecodedCoefficientTable,
++};
++use std::mem::size_of;
++use std::sync::Mutex;
++
++/// Limits on aggregate retained memo data, separate from native reduction work.
++/// `max_owned_bytes` counts the optional memo/lock field, fixed boxed entry slots, boxed label/ID
++/// records and boxed native coefficient/state bytes. Allocator overhead, the
++/// immutable rule graph, serialization/decoding scratch and returned reductions
++/// are excluded. No decoded coefficient objects are retained in the memo.
++#[derive(Clone, Copy, Debug)]
++pub struct GuardedUnitMemoLimits {
++    pub max_entries: usize,
++    pub max_output_terms: usize,
++    pub max_conditions: usize,
++    pub max_polynomial_terms: usize,
++    pub max_owned_bytes: usize,
++}
++impl Default for GuardedUnitMemoLimits {
++    fn default() -> Self {
++        Self {
++            max_entries: 64,
++            max_output_terms: 4096,
++            max_conditions: 32768,
++            max_polynomial_terms: 262144,
++            max_owned_bytes: 64 * 1024 * 1024,
++        }
++    }
++}
++#[derive(Debug)]
++pub struct GuardedMemoizedReduction<const N: usize> {
++    pub reduction: GuardedReduction<N>,
++    /// Logical application counts remain in `reduction`; a hit performs none.
++    pub cache_hit: bool,
++}
++#[derive(Clone, Copy, Debug, Default)]
++pub struct GuardedUnitMemoUsage {
++    pub entries: usize,
++    pub output_terms: usize,
++    pub conditions: usize,
++    pub polynomial_terms: usize,
++    pub owned_bytes: usize,
++}
++#[derive(Debug)]
++struct Record<const N: usize> {
++    integral: [i64; N],
++    coefficient: CoefficientId,
++    terminal: bool,
++}
++#[derive(Debug)]
++struct Entry<const N: usize> {
++    target: [i64; N],
++    limits: GuardedReductionLimits,
++    records: Box<[Record<N>]>,
++    conditions: Box<[CoefficientId]>,
++    state: Box<[u8]>,
++    atoms: Box<[u8]>,
++    applications: usize,
++    polynomial_terms: usize,
++}
++impl<const N: usize> Entry<N> {
++    fn heap_bytes(&self) -> Option<usize> {
++        self.records
++            .len()
++            .checked_mul(size_of::<Record<N>>())?
++            .checked_add(
++                self.conditions
++                    .len()
++                    .checked_mul(size_of::<CoefficientId>())?,
++            )?
++            .checked_add(self.state.len())?
++            .checked_add(self.atoms.len())
++    }
++    fn decode(&self) -> Result<GuardedReduction<N>, SolverError> {
++        // The only producer is this immutable program's successful native result.
++        // Preserve its normalized coefficient representation; do not redo GCDs.
++        let table =
++            DecodedCoefficientTable::import_generated(&self.state, &self.atoms, transport_limits())
++                .map_err(io_error)?;
++        let mut result = GuardedReduction {
++            terms: BTreeMap::new(),
++            unresolved: Vec::new(),
++            nonzero_conditions: Vec::new(),
++            rule_applications: self.applications,
++        };
++        for record in &self.records {
++            let coefficient = table
++                .coefficient(record.coefficient)
++                .map_err(io_error)?
++                .clone();
++            if record.terminal {
++                if result.terms.insert(record.integral, coefficient).is_some() {
++                    return Err(invalid("duplicate terminal in owned unit memo"));
++                }
++            } else {
++                result.unresolved.push(GuardedUnresolvedTerm {
++                    integral: record.integral,
++                    coefficient,
++                    reason: GuardedApplicationFailure::NoApplicableRule,
++                });
++            }
++        }
++        for &id in &self.conditions {
++            let coefficient = table.coefficient(id).map_err(io_error)?;
++            if !coefficient.denominator.is_one() {
++                return Err(invalid("nonpolynomial condition in owned unit memo"));
++            }
++            result
++                .nonzero_conditions
++                .push(coefficient.numerator.clone());
++        }
++        Ok(result)
++    }
++}
++fn invalid(message: &str) -> SolverError {
++    SolverError::InvalidInput(message.into())
++}
++fn io_error(error: BinaryIoError) -> SolverError {
++    invalid(&format!("owned native unit memo: {error}"))
++}
++// These are trusted, ephemeral, internally generated records. Quotas below bound
++// retained bytes. They deliberately do not pretend to bound encoder/CAS scratch.
++fn transport_limits() -> BinaryIoLimits {
++    BinaryIoLimits {
++        max_program_bytes: usize::MAX,
++        max_sections: usize::MAX,
++        max_collection_entries: usize::MAX,
++        max_state_bytes: usize::MAX,
++        max_atom_bytes: usize::MAX,
++        max_total_atom_bytes: usize::MAX,
++        exact_algebra: ExactAlgebraLimits {
++            max_exponent: u16::MAX,
++            max_polynomial_terms: usize::MAX,
++            max_term_operations: usize::MAX,
++        },
++    }
++}
++fn same_limits(a: GuardedReductionLimits, b: GuardedReductionLimits) -> bool {
++    a.max_rule_applications == b.max_rule_applications
++        && a.max_pending_integrals == b.max_pending_integrals
++}
++#[derive(Debug)]
++pub(super) struct UnitMemo<const N: usize> {
++    limits: GuardedUnitMemoLimits,
++    slots: Box<[Option<Entry<N>>]>,
++}
++impl<const N: usize> UnitMemo<N> {
++    fn new(limits: GuardedUnitMemoLimits) -> Result<Self, SolverError> {
++        let base = size_of::<Option<Mutex<Self>>>()
++            .checked_add(
++                limits
++                    .max_entries
++                    .checked_mul(size_of::<Option<Entry<N>>>())
++                    .ok_or_else(|| invalid("unit memo metadata size overflow"))?,
++            )
++            .ok_or_else(|| invalid("unit memo metadata size overflow"))?;
++        if base > limits.max_owned_bytes {
++            return Err(invalid("unit memo metadata exceeds owned-byte limit"));
++        }
++        let mut slots = Vec::new();
++        slots
++            .try_reserve_exact(limits.max_entries)
++            .map_err(|_| invalid("cannot allocate bounded unit memo slots"))?;
++        slots.resize_with(limits.max_entries, || None);
++        Ok(Self {
++            limits,
++            slots: slots.into_boxed_slice(),
++        })
++    }
++    fn usage(&self) -> GuardedUnitMemoUsage {
++        let mut u = GuardedUnitMemoUsage {
++            owned_bytes: size_of::<Option<Mutex<Self>>>()
++                + self.slots.len() * size_of::<Option<Entry<N>>>(),
++            ..Default::default()
++        };
++        for e in self.slots.iter().flatten() {
++            u.entries += 1;
++            u.output_terms += e.records.len();
++            u.conditions += e.conditions.len();
++            u.polynomial_terms += e.polynomial_terms;
++            u.owned_bytes += e.heap_bytes().expect("admitted owned entry size");
++        }
++        u
++    }
++    fn hit(
++        &mut self,
++        target: [i64; N],
++        limits: GuardedReductionLimits,
++    ) -> Result<Option<GuardedReduction<N>>, SolverError> {
++        let Some(i) = self.slots.iter().position(|e| {
++            e.as_ref()
++                .is_some_and(|e| e.target == target && same_limits(e.limits, limits))
++        }) else {
++            return Ok(None);
++        };
++        let result = self.slots[i].as_ref().expect("found entry").decode()?;
++        self.slots[i..].rotate_left(1);
++        Ok(Some(result))
++    }
++    fn insert(
++        &mut self,
++        target: [i64; N],
++        limits: GuardedReductionLimits,
++        result: &GuardedReduction<N>,
++    ) -> Result<(), SolverError> {
++        if self.slots.is_empty()
++            || result
++                .unresolved
++                .iter()
++                .any(|r| r.reason != GuardedApplicationFailure::NoApplicableRule)
++        {
++            return Ok(());
++        }
++        let Some(outputs) = result.terms.len().checked_add(result.unresolved.len()) else {
++            return Ok(());
++        };
++        if outputs > self.limits.max_output_terms
++            || result.nonzero_conditions.len() > self.limits.max_conditions
++        {
++            return Ok(());
++        }
++        let mut polynomial_terms = 0usize;
++        let mut minimum_integer_bytes = 0usize;
++        let mut admit_poly = |p: &CoefficientPolynomial| -> bool {
++            let Some(t) = polynomial_terms.checked_add(p.nterms()) else {
++                return false;
++            };
++            polynomial_terms = t;
++            for c in &p.coefficients {
++                let Some(b) = c
++                    .significant_bits()
++                    .checked_add(7)
++                    .and_then(|v| usize::try_from(v / 8).ok())
++                    .and_then(|v| minimum_integer_bytes.checked_add(v))
++                else {
++                    return false;
++                };
++                minimum_integer_bytes = b;
++            }
++            polynomial_terms <= self.limits.max_polynomial_terms
++                && minimum_integer_bytes <= self.limits.max_owned_bytes
++        };
++        for c in result
++            .terms
++            .values()
++            .chain(result.unresolved.iter().map(|r| &r.coefficient))
++        {
++            if !admit_poly(&c.numerator) || !admit_poly(&c.denominator) {
++                return Ok(());
++            }
++        }
++        for p in &result.nonzero_conditions {
++            if !admit_poly(p) {
++                return Ok(());
++            }
++        }
++        let mut table = CoefficientTableBuilder::new(transport_limits());
++        let mut records = Vec::new();
++        for (integral, coefficient) in &result.terms {
++            records.push(Record {
++                integral: *integral,
++                coefficient: table.intern(coefficient).map_err(io_error)?,
++                terminal: true,
++            });
++        }
++        for r in &result.unresolved {
++            records.push(Record {
++                integral: r.integral,
++                coefficient: table.intern(&r.coefficient).map_err(io_error)?,
++                terminal: false,
++            });
++        }
++        let conditions = result
++            .nonzero_conditions
++            .iter()
++            .map(|p| table.intern(&p.clone().into()).map_err(io_error))
++            .collect::<Result<Vec<_>, _>>()?;
++        let encoded = table.finish().map_err(io_error)?;
++        let entry = Entry {
++            target,
++            limits,
++            records: records.into_boxed_slice(),
++            conditions: conditions.into_boxed_slice(),
++            state: encoded.state.into_boxed_slice(),
++            atoms: encoded.atoms.into_boxed_slice(),
++            applications: result.rule_applications,
++            polynomial_terms,
++        };
++        let Some(bytes) = entry.heap_bytes() else {
++            return Ok(());
++        };
++        let base =
++            size_of::<Option<Mutex<Self>>>() + self.slots.len() * size_of::<Option<Entry<N>>>();
++        if bytes > self.limits.max_owned_bytes - base {
++            return Ok(());
++        }
++        loop {
++            let u = self.usage();
++            if u.entries < self.slots.len()
++                && u.output_terms <= self.limits.max_output_terms - outputs
++                && u.conditions <= self.limits.max_conditions - entry.conditions.len()
++                && u.polynomial_terms <= self.limits.max_polynomial_terms - polynomial_terms
++                && u.owned_bytes <= self.limits.max_owned_bytes - bytes
++            {
++                break;
++            }
++            let i = self
++                .slots
++                .iter()
++                .position(Option::is_some)
++                .expect("one entry can fit after eviction");
++            self.slots[i] = None;
++        }
++        let i = self
++            .slots
++            .iter()
++            .position(Option::is_none)
++            .expect("admitted slot");
++        self.slots[i..].rotate_left(1);
++        *self.slots.last_mut().expect("nonempty slots") = Some(entry);
++        Ok(())
++    }
++}
++impl<const N: usize> GuardedProgram<N> {
++    /// Start a new serial whole-call memo scope. No entry survives this reset.
++    /// Rule/source/order data remain immutable; plain `reduce` never uses it.
++    pub fn with_unit_reduction_memo(
++        mut self,
++        limits: Option<GuardedUnitMemoLimits>,
++    ) -> Result<Self, SolverError> {
++        self.unit_memo = limits.map(UnitMemo::new).transpose()?.map(Mutex::new);
++        Ok(self)
++    }
++    pub fn unit_reduction_memo_usage(&self) -> Result<Option<GuardedUnitMemoUsage>, SolverError> {
++        self.unit_memo
++            .as_ref()
++            .map(|m| {
++                m.lock()
++                    .map(|m| m.usage())
++                    .map_err(|_| invalid("native unit memo lock poisoned"))
++            })
++            .transpose()
++    }
++    pub fn reduce_memoized(
++        &self,
++        target: [i64; N],
++        limits: GuardedReductionLimits,
++    ) -> Result<GuardedMemoizedReduction<N>, SolverError> {
++        let Some(memo) = &self.unit_memo else {
++            return Ok(GuardedMemoizedReduction {
++                reduction: self.reduce(target, limits)?,
++                cache_hit: false,
++            });
++        };
++        // Serialize cache calls; reductions never recurse through this method.
++        let mut memo = memo
++            .lock()
++            .map_err(|_| invalid("native unit memo lock poisoned"))?;
++        if let Some(reduction) = memo.hit(target, limits)? {
++            return Ok(GuardedMemoizedReduction {
++                reduction,
++                cache_hit: true,
++            });
++        }
++        let reduction = self.reduce(target, limits)?;
++        memo.insert(target, limits, &reduction)?;
++        Ok(GuardedMemoizedReduction {
++            reduction,
++            cache_hit: false,
++        })
++    }
++    /// Add only old NoRule stopping points, replay every source rule, and retain
++    /// complete unit-call maps by the exact NoRule-to-terminal equivalence.
++    /// Ordinary unions/rebindings reset memo state instead.
++    pub fn with_promoted_terminals_replayed(
++        mut self,
++        current_terminals: impl IntoIterator<Item = [i64; N]>,
++        max_rules: usize,
++    ) -> Result<Self, SolverError> {
++        let terminals = Self::validate_terminals(&self.sources, current_terminals)?;
++        if !self.terminals.is_subset(&terminals) {
++            return Err(invalid(
++                "unit memo terminal promotion cannot remove old terminals",
++            ));
++        }
++        let added = terminals
++            .difference(&self.terminals)
++            .copied()
++            .collect::<BTreeSet<_>>();
++        for label in &added {
++            let r = self.apply(label)?;
++            if !matches!(
++                r.status,
++                GuardedApplicationStatus::Unresolved(GuardedApplicationFailure::NoApplicableRule)
++            ) || !r.terms.is_empty()
++                || !r.nonzero_conditions.is_empty()
++            {
++                return Err(invalid(
++                    "unit memo promotion requires exact old NoApplicableRule labels",
++                ));
++            }
++        }
++        let memo = self.unit_memo.take();
++        let mut result = self.with_terminals_replayed(terminals, max_rules)?;
++        if let Some(memo) = memo {
++            let mut memo = memo
++                .into_inner()
++                .map_err(|_| invalid("native unit memo lock poisoned"))?;
++            for entry in memo.slots.iter_mut().flatten() {
++                for record in &mut entry.records {
++                    if !record.terminal && added.contains(&record.integral) {
++                        record.terminal = true;
++                    }
++                }
++            }
++            result.unit_memo = Some(Mutex::new(memo));
++        }
++        Ok(result)
++    }
++}
++#[cfg(test)]
++mod tests;
+--- a/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs
++++ b/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs
+@@ -6,6 +6,9 @@
+ use std::cmp::Ordering;
+ use std::collections::{BTreeMap, BTreeSet};
+ use std::sync::Arc;
++
++mod unit_memo;
++pub use unit_memo::{GuardedMemoizedReduction, GuardedUnitMemoLimits, GuardedUnitMemoUsage};
+ 
+ use crate::algebra::{Coefficient, CoefficientPolynomial};
+ use crate::solver::instantiate::instantiate_polynomial;
+@@ -82,6 +85,7 @@
+     sources: Arc<GuardedSourceSystem<N>>,
+     rules: Vec<GuardedRule<N>>,
+     terminals: BTreeSet<[i64; N]>,
++    unit_memo: Option<std::sync::Mutex<unit_memo::UnitMemo<N>>>,
+ }
+ 
+ /// Every key in one pending map borrows the same replay-validated coordinate
+@@ -160,6 +164,7 @@
+             sources,
+             rules,
+             terminals,
++            unit_memo: None,
+         })
+     }
+ 
+@@ -270,6 +275,7 @@
+             )));
+         }
+         self.terminals = Self::validate_terminals(&self.sources, current_terminals)?;
++        self.unit_memo = None;
+         Ok(self)
+     }
+ 
+@@ -317,6 +323,7 @@
+             }
+         }
+         self.terminals = Self::validate_terminals(&self.sources, current_terminals)?;
++        self.unit_memo = None;
+         self.rules.extend(fallback.rules);
+         Ok(self)
+     }

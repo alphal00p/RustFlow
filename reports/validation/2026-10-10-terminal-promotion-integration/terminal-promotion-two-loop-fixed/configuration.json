@@ -1,0 +1,43 @@
+{
+  "epsilon": "-5/4",
+  "guard_digits": 40,
+  "independent_reference_comparisons": 0,
+  "initial_epsilon_grid": 1000,
+  "input_path": "examples/finite_density/massless_two_loop_sunset.json",
+  "native_closure": "WeightedClosureOptions { max_rounds: 16, max_frontier: 1024, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 1, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: true, requested_index_rays: true, prioritize_requested_indices: false, max_reused_rules: 65536, max_domains_per_residual: 32, requested_ray_point: None, active_target_closure: true, max_history_candidate_maps: Some(0), unit_reduction_memo: Some(GuardedUnitMemoLimits { max_entries: 64, max_output_terms: 4096, max_conditions: 32768, max_polynomial_terms: 262144, max_owned_bytes: 67108864 }), max_direct_zero_attempts: 262144, checkpoints: Some(\"reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-two-loop-fixed/native-closure\") }",
+  "profiles": [
+    [
+      18,
+      60,
+      8
+    ],
+    [
+      28,
+      60,
+      8
+    ],
+    [
+      28,
+      80,
+      8
+    ],
+    [
+      28,
+      80,
+      12
+    ]
+  ],
+  "source_options": {
+    "free_virtual_zero_sectors": true,
+    "policy": "polynomial-closure-v1",
+    "positive_compact_energy_powers": false
+  },
+  "unit_reduction_memo": {
+    "max_conditions": 32768,
+    "max_entries": 64,
+    "max_output_terms": 4096,
+    "max_owned_bytes": 67108864,
+    "max_polynomial_terms": 262144,
+    "owned_bytes_metric": "memo field + fixed boxed slots + boxed records/condition IDs + encoded coefficient/state bytes; excludes allocator overhead, program, encoder/decoder/CAS scratch and returned reductions"
+  }
+}

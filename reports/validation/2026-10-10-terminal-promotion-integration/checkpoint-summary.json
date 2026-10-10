@@ -1,0 +1,177 @@
+{
+  "status": "passed coherent memo integration and all lower-loop comparisons",
+  "scope": "Optional bounded complete-unit reduction memo, default disabled; final complete source replay, original weighted-target audit and basis-derivative audit remain mandatory. No three-loop/four-loop numerical acceptance or speed claim.",
+  "root_gates": {
+    "path": "terminal-promotion-root-gates.json",
+    "sha256": "47c86beeb226aa7b03007142eee142abf9cfc2faa25b0b77686cb90a2a10d3c8",
+    "passed_tests": 231,
+    "native_passed": 101,
+    "root_passed": 130,
+    "ignored_native": 1
+  },
+  "comparisons": {
+    "two-loop-fixed": {
+      "comparison": "terminal-promotion-two-loop-fixed-comparison.json",
+      "comparison_sha256": "811235cd5987718ef4469c34dbcb00f2ee0e19f7481e2202ee801651f9f9712e",
+      "binding_sha256": "cbfbac2b63f51aeae3a57a2e2d5a1ac80de945452141eb4147eced31375592fc",
+      "reference_checks": 40,
+      "refinement_checks": 30,
+      "historical_checks": 0,
+      "assembly_checks": 8,
+      "wall_seconds": 4.357053217012435,
+      "peak_child_rss_kib": 39964,
+      "memo": {
+        "enabled": true,
+        "configured_caps": {
+          "max_entries": 64,
+          "max_output_terms": 4096,
+          "max_conditions": 32768,
+          "max_polynomial_terms": 262144,
+          "max_owned_bytes": 67108864
+        },
+        "cuts": [
+          {
+            "cut_slots": [
+              0,
+              1
+            ],
+            "native_rule_applications": 1337,
+            "performed_native_rule_applications": 1231,
+            "memoized_rule_applications": 106,
+            "unit_memo_hits": 14,
+            "unit_memo_misses": 30,
+            "unit_memo_peak_entries": 7,
+            "unit_memo_peak_output_terms": 21,
+            "unit_memo_peak_conditions": 98,
+            "unit_memo_peak_polynomial_terms": 285,
+            "unit_memo_peak_owned_bytes": 34161
+          }
+        ],
+        "logical_equals_performed_plus_memoized": true,
+        "scope": "Native unit reduction applications only; full proof replay, terminal-admission checks, encoding, decoding and arithmetic scratch are not measured by these counters. Quotas bound retained payload, not total process memory or wall time."
+      }
+    },
+    "two-loop-laurent": {
+      "comparison": "terminal-promotion-two-loop-laurent-comparison.json",
+      "comparison_sha256": "19380ee805e5a28806ceb65d88ee4ff25f3085771c9f43e950dea36748411f4c",
+      "binding_sha256": "8b4fa2b17e8aa5284312ca58558f6d590aa42d6b226c8a7fc2c8bfee27945d3d",
+      "reference_checks": 30,
+      "refinement_checks": 24,
+      "historical_checks": 0,
+      "assembly_checks": 0,
+      "wall_seconds": 97.49006840866059,
+      "peak_child_rss_kib": 46152,
+      "memo": {
+        "enabled": true,
+        "configured_caps": {
+          "max_entries": 64,
+          "max_output_terms": 4096,
+          "max_conditions": 32768,
+          "max_polynomial_terms": 262144,
+          "max_owned_bytes": 67108864
+        },
+        "cuts": [
+          {
+            "cut_slots": [
+              0,
+              1
+            ],
+            "native_rule_applications": 1337,
+            "performed_native_rule_applications": 1231,
+            "memoized_rule_applications": 106,
+            "unit_memo_hits": 14,
+            "unit_memo_misses": 30,
+            "unit_memo_peak_entries": 7,
+            "unit_memo_peak_output_terms": 21,
+            "unit_memo_peak_conditions": 98,
+            "unit_memo_peak_polynomial_terms": 285,
+            "unit_memo_peak_owned_bytes": 34161
+          }
+        ],
+        "logical_equals_performed_plus_memoized": true,
+        "scope": "Native unit reduction applications only; full proof replay, terminal-admission checks, encoding, decoding and arithmetic scratch are not measured by these counters. Quotas bound retained payload, not total process memory or wall time."
+      }
+    },
+    "massive-regression": {
+      "comparison": "terminal-promotion-massive-regression-comparison.json",
+      "comparison_sha256": "7e8ad274430ff7c381ac74ee941960b89c2288c1fbf482e501d6a763a0f09f04",
+      "binding_sha256": "93432a773b78582dbdcf4eaeafd725e5507009621720b8a8f31f0902793c54a0",
+      "reference_checks": 10,
+      "refinement_checks": 0,
+      "historical_checks": 10,
+      "assembly_checks": 2,
+      "wall_seconds": 48.17561987088993,
+      "peak_child_rss_kib": 70656,
+      "memo": {
+        "enabled": false,
+        "configured_caps": null,
+        "cuts": [
+          {
+            "cut_slots": [
+              0
+            ],
+            "native_rule_applications": 3057,
+            "performed_native_rule_applications": 3057,
+            "memoized_rule_applications": 0,
+            "unit_memo_hits": 0,
+            "unit_memo_misses": 0,
+            "unit_memo_peak_entries": 0,
+            "unit_memo_peak_output_terms": 0,
+            "unit_memo_peak_conditions": 0,
+            "unit_memo_peak_polynomial_terms": 0,
+            "unit_memo_peak_owned_bytes": 0
+          },
+          {
+            "cut_slots": [
+              1
+            ],
+            "native_rule_applications": 7978,
+            "performed_native_rule_applications": 7978,
+            "memoized_rule_applications": 0,
+            "unit_memo_hits": 0,
+            "unit_memo_misses": 0,
+            "unit_memo_peak_entries": 0,
+            "unit_memo_peak_output_terms": 0,
+            "unit_memo_peak_conditions": 0,
+            "unit_memo_peak_polynomial_terms": 0,
+            "unit_memo_peak_owned_bytes": 0
+          },
+          {
+            "cut_slots": [
+              0,
+              1
+            ],
+            "native_rule_applications": 16362,
+            "performed_native_rule_applications": 16362,
+            "memoized_rule_applications": 0,
+            "unit_memo_hits": 0,
+            "unit_memo_misses": 0,
+            "unit_memo_peak_entries": 0,
+            "unit_memo_peak_output_terms": 0,
+            "unit_memo_peak_conditions": 0,
+            "unit_memo_peak_polynomial_terms": 0,
+            "unit_memo_peak_owned_bytes": 0
+          }
+        ],
+        "logical_equals_performed_plus_memoized": true,
+        "scope": "Native unit reduction applications only; full proof replay, terminal-admission checks, encoding, decoding and arithmetic scratch are not measured by these counters. Quotas bound retained payload, not total process memory or wall time."
+      }
+    }
+  },
+  "source_snapshot_sha256": "29ebf37da9b07b7adce6b9431d5040c14a06243f81b361cb4163f431f8293893",
+  "build_provenance_sha256": "7a2bb0deafabb402d5d70bd6b2d776e1006c632b5f92ab9de30d55af33e8550d",
+  "predecessor": {
+    "report": "../2026-10-10-singleton-physical-zero-integration-v2",
+    "manifest_sha256": "9b30cacf8b57d35213833463d229375e32b4e9a9260cbd87de1c33d200c00b50"
+  },
+  "reviewed_draft": {
+    "path": "../2026-10-10-terminal-promotion-integration-draft/artifact-manifest.json",
+    "sha256": "3a0ac1d50c8ecf828950810e2c99bb114c58fd61a71d29cd91151e89c97a3eb8"
+  },
+  "shared_host_timing_is_not_a_speed_benchmark": true,
+  "archive": {
+    "files": 62,
+    "raw_bytes": 33680414,
+    "gzip_bytes": 1261214
+  }
+}

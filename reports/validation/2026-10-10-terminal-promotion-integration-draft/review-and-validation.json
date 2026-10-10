@@ -1,0 +1,41 @@
+{
+  "scope": "Frozen isolated draft; root integration may now be applied separately; this draft has not been compiled or executed",
+  "copied_base_files_verified": {
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": true,
+    "src/finite_density/guarded.rs": true,
+    "src/finite_density/reduction.rs": true,
+    "src/finite_density/reduction/active.rs": true,
+    "src/finite_density/interface.rs": true,
+    "tests/finite_density_runtime_flow.rs": true
+  },
+  "live_files_match_frozen_draft_at_capture": {
+    "src/finite_density/guarded.rs": true,
+    "src/finite_density/interface.rs": true,
+    "src/finite_density/reduction/active.rs": true,
+    "src/finite_density/reduction.rs": true,
+    "tests/finite_density_runtime_flow.rs": true,
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs": true,
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs": true,
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": true
+  },
+  "rustfmt": "passed using --config skip_children=true on all eight copied Rust files",
+  "git_apply_check_exit_before_parent_application": 0,
+  "new_native_tests": 10,
+  "new_root_tests": 3,
+  "earlier_standalone_semantic_tests": 8,
+  "earlier_semantic_manifest": "../2026-10-10-terminal-promotion-cache-experiment/artifact-manifest.json",
+  "peer_review": {
+    "reviewer": "boundary_owners",
+    "result": "No arithmetic, condition, promotion or retained-payload accounting blocker found by read-only review; encoded ownership and mandatory full replay retained."
+  },
+  "parent_review": {
+    "result": "No immediate semantic gap; runtime opt-in requested and added; disabled memo miss counters corrected."
+  },
+  "known_limits": [
+    "No typecheck or release test for this draft yet",
+    "Retained owned bytes exclude allocator and encoding/decoding/CAS scratch",
+    "No real slow-label or numerical speed claim",
+    "No cross-round cache reuse; no descendant tail substitution",
+    "No public CLI/Python option added; runtime test opt-in only"
+  ]
+}
