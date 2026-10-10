@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "frozen_source_assets": 2483,
+  "source_snapshot_sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+  "runtime_executable_sha256": "136eb66a829f3d96e20568b0c5444ed2104e996a96c61077ce65ef2f8bb357da",
+  "historical_bound_files_verified": 80,
+  "archives_restored": 38,
+  "scope": "Integrity and source/build verification after both timeout exits; no additional native or numerical computation."
+}

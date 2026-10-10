@@ -1,0 +1,1483 @@
+{
+  "scope": "Exact raw-C1 distribution moment and guard-counterexample checks only; no source policy, closure or numerical prediction",
+  "checks": 210,
+  "samples": [
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 0,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 1,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 2,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 3,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 4,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 5,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "energy_degree": 6,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 0,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 1,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 2,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 3,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 4,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 5,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "energy_degree": 6,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 0,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 1,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 2,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 3,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 4,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 5,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 0,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 0,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 1,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 1,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 2,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 2,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 3,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 3,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 4,
+      "factor_coefficient": "-3/2",
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "energy_degree": 6,
+      "upper": 4,
+      "factor_coefficient": "2/3",
+      "residual": "0"
+    }
+  ],
+  "old_diagonal_counterexample": "-1953125/1179648",
+  "C2_off_cone_gram_factor_counterexample": "-1953125/1179648",
+  "native_or_oracle_values_read": 0,
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-factorized-compact-ward-assessment/check.py": "4700008a8733a2895871fcae44c94f7c46b97a9b556aa415d28ab19158488dc7",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-assessment/check.py": "b25b1ee9058c6b8df272f7821bae8a51fd271fd93a70eb4e643a38ed3a596c89"
+  }
+}

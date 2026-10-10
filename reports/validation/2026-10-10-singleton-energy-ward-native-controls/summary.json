@@ -1,0 +1,716 @@
+{
+  "scope": "Validation-only polynomial C1 source extension; original source definitions and measure zeros retained, no reciprocal admission, no imported discovery rules, no numerical periods/closure claim.",
+  "corpus_rows": [
+    62,
+    64
+  ],
+  "selection": {
+    "rule": "first lexicographic points per explicit disjoint role/power stratum; no reference values",
+    "population": {
+      "C1-Edegree1-bulk": 62,
+      "C1-Edegree2plus-bulk": 20,
+      "C1-Edegree1-surface": 40,
+      "C1-Edegree2plus-surface": 19,
+      "outside-own-C1": 20,
+      "outside-energy-free-other-loops": 130
+    },
+    "selected": 16,
+    "origin": "completed round004 frontier; actual NoApplicableRule verified independently by native replay"
+  },
+  "geometry": {
+    "chemical_potential": "1",
+    "coordinates": [
+      "q_0",
+      "q_1",
+      "q_2",
+      "q_3",
+      "q_4",
+      "q_5",
+      "q_6",
+      "q_7",
+      "q_8"
+    ],
+    "factors": [
+      "q_0",
+      "-eta+q_3",
+      "-eta+q_5",
+      "-eta-(-q_0+2*q_2-q_5)",
+      "-eta-(-q_3+2*q_4-q_5)",
+      "q_1",
+      "q_6",
+      "q_7",
+      "q_8",
+      "1-q_6",
+      "q_6"
+    ],
+    "input_identity": "25914fa0b9ae45e09815f73fde4e9e31e20081e5a548bc9c6558a36f576775f3",
+    "medium_dependent_slots": [
+      6,
+      7,
+      8
+    ],
+    "occupied_energy": "q_6",
+    "pure_energy_slots": [
+      {
+        "coefficient": "1",
+        "slot": 6
+      }
+    ],
+    "retained_origin": "sealed singleton-UV-meromorphic-null-germ, pointwise finite polynomial index high-D cutoff removal",
+    "routing": [
+      [
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "shell_mass_squared": "0"
+  },
+  "old_row_and_guard_equivalence_at_zero_energy_index": true,
+  "retained_zero_domains": true,
+  "native_roundtrips": 32,
+  "all_rhs_admitted": true,
+  "rows": [
+    {
+      "ordinal": 0,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-bulk"
+      },
+      "baseline_rhs_terms": 3,
+      "extended_rhs_terms": 3,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [
+        "9-12*epsilon+4*epsilon^2",
+        "-3+2*epsilon",
+        "-6+4*epsilon",
+        "-48+32*epsilon",
+        "-12+8*epsilon"
+      ],
+      "extended_conditions": [
+        "9-12*epsilon+4*epsilon^2",
+        "-3+2*epsilon",
+        "-6+4*epsilon",
+        "-48+32*epsilon",
+        "-12+8*epsilon"
+      ],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-bulk"
+      },
+      "baseline_rhs_terms": 4,
+      "extended_rhs_terms": 4,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [
+        "2*eta",
+        "16*eta",
+        "eta"
+      ],
+      "extended_conditions": [
+        "2*eta",
+        "16*eta",
+        "eta"
+      ],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 2,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -2,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-bulk"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 3,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -2,
+          1,
+          2,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-bulk"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 4,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-bulk"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 5,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          3,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-bulk"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 6,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-surface"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 7,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-surface"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 8,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-surface"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 9,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-surface"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 10,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-surface"
+      },
+      "baseline_rhs_terms": 0,
+      "extended_rhs_terms": 0,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 11,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          2,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-surface"
+      },
+      "baseline_rhs_terms": 1,
+      "extended_rhs_terms": 1,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 12,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          2,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-own-C1"
+      },
+      "baseline_rhs_terms": 2,
+      "extended_rhs_terms": 2,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 13,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          2,
+          0,
+          -1,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-own-C1"
+      },
+      "baseline_rhs_terms": 3,
+      "extended_rhs_terms": 3,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [],
+      "extended_conditions": [],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 14,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-energy-free-other-loops"
+      },
+      "baseline_rhs_terms": 4,
+      "extended_rhs_terms": 4,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [
+        "-4+2*epsilon",
+        "-32+16*epsilon",
+        "-2+epsilon"
+      ],
+      "extended_conditions": [
+        "-4+2*epsilon",
+        "-32+16*epsilon",
+        "-2+epsilon"
+      ],
+      "extended_proof_uses_added_rows": false
+    },
+    {
+      "ordinal": 15,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-energy-free-other-loops"
+      },
+      "baseline_rhs_terms": 9,
+      "extended_rhs_terms": 9,
+      "exact_status_rhs_ordered_conditions_equal": true,
+      "baseline_fallback": true,
+      "extended_fallback": true,
+      "baseline_conditions": [
+        "12-14*epsilon+4*epsilon^2",
+        "6-7*epsilon+2*epsilon^2",
+        "-6+4*epsilon",
+        "-16+8*epsilon",
+        "-3+2*epsilon",
+        "-2+epsilon",
+        "96-112*epsilon+32*epsilon^2",
+        "-48+32*epsilon",
+        "24-28*epsilon+8*epsilon^2",
+        "-12+8*epsilon"
+      ],
+      "extended_conditions": [
+        "12-14*epsilon+4*epsilon^2",
+        "6-7*epsilon+2*epsilon^2",
+        "-6+4*epsilon",
+        "-16+8*epsilon",
+        "-3+2*epsilon",
+        "-2+epsilon",
+        "96-112*epsilon+32*epsilon^2",
+        "-48+32*epsilon",
+        "24-28*epsilon+8*epsilon^2",
+        "-12+8*epsilon"
+      ],
+      "extended_proof_uses_added_rows": false
+    }
+  ],
+  "rhs_totals": [
+    26,
+    26
+  ],
+  "exact_empty_rhs_count": [
+    9,
+    9
+  ],
+  "changed_outputs": 0,
+  "resources": [
+    {
+      "arm": "original",
+      "path": "original-resources.json",
+      "sha256": "6b7e933d2d4a5299b1c348b0340d26818e6c4b25648f40e19f632408943188c5",
+      "wall_seconds": 14.944947792682797,
+      "peak_child_rss_kib": 49152
+    },
+    {
+      "arm": "extended-energy-Ward",
+      "path": "extended-energy-Ward-resources.json",
+      "sha256": "22f70533c90e90b5c5ca670a799f2d7d20faca7049396dea9970fb9b5a7571f6",
+      "wall_seconds": 14.903536604717374,
+      "peak_child_rss_kib": 49200
+    }
+  ],
+  "theorem_artifact_bindings": [
+    {
+      "path": "reports/validation/2026-10-10-singleton-energy-ward-assessment/__pycache__/check.cpython-314.pyc",
+      "sha256": "9fb2821fb2be6115033c6a17f66b0909d2432335aca64feb7968f5a66847154f"
+    },
+    {
+      "path": "reports/validation/2026-10-10-singleton-energy-ward-assessment/artifact-manifest.json",
+      "sha256": "f2b90fca64b95790aa1efcdc6d1d155aa313b6802a1249a83d972df584a6b342"
+    },
+    {
+      "path": "reports/validation/2026-10-10-singleton-energy-ward-assessment/assessment.md",
+      "sha256": "99749c918d10a936083b51b50f5d9382e7a362c0490d01d1f08f2aaf3ee7b94f"
+    },
+    {
+      "path": "reports/validation/2026-10-10-singleton-energy-ward-assessment/check.py",
+      "sha256": "b25b1ee9058c6b8df272f7821bae8a51fd271fd93a70eb4e643a38ed3a596c89"
+    },
+    {
+      "path": "reports/validation/2026-10-10-singleton-energy-ward-assessment/checks.json",
+      "sha256": "6ceb8328ff12ef557db5ec8e36cd5e46cfcdb0e719255e20a9915c319045ea2a"
+    },
+    {
+      "path": "reports/validation/2026-10-10-singleton-energy-ward-assessment/independent-review.json",
+      "sha256": "276f6e2649692dbca0dd8f1bf5fe1267369f4c9b1f2eacf466bc5b70ea45b0c0"
+    }
+  ],
+  "conclusion": "No change in exact one-step coverage, RHS or ordered conditions for this sample with the added rows appended. This does not prove the identities redundant or rule out a different source order; it provides no practical reason to promote this extension or launch a full pilot.",
+  "performance_scope": "Shared-host paired runs include original-program replay selection validation; wall times are not a performance claim."
+}

@@ -1,0 +1,23 @@
+{
+  "scope": "32 deterministic actual downstream cut3 labels, original source corpora plus polynomial shifts. Fresh native ray cap1/point cap1 discovery only; original program proofs discarded. No period values.",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-mixed-energy-later-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/boost-only/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.json",
+    "original"
+  ],
+  "mode": "boost-only",
+  "inputs": {
+    "/tmp/rustflow-mixed-energy-later-probe": "e2c768fb45c2500a1f9dc5e263f2caaaa026213e1f6477f6791dda8474e53da5",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/boost-only/program.bin": "77a8334f3a5e8bb7278efdf12e49822ed6705ab5f8021d92edf24c2cde9db4de",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/points.json": "a8747cac46bc70fa327df02df53caed50e6e3ddb76565d98beb0aadd31e6a1e9"
+  },
+  "launcher_sha256": "7f1fd5b2ef54353f048835ea540fb954fc67cae7a6411a0b4d6b21d9b7d03178",
+  "selection_sha256": "e631948f213b750c4daa9c08da2a6d391d0502fb2688d778dc1b148045b228e5",
+  "build_binding_sha256": "bc9bd3bdd306c313a3bc044b7c3ae5bd9b55a1a42d6fa539ef7b34e1caf12345",
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

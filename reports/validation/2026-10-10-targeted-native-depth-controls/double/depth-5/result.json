@@ -1,0 +1,5347 @@
+{
+  "all_rhs_labels_admitted": true,
+  "depth": 5,
+  "point_domains": 1,
+  "probes": [
+    {
+      "application": {
+        "conditions": [
+          "192-224*epsilon+64*epsilon^2",
+          "12-14*epsilon+4*epsilon^2",
+          "96-112*epsilon+32*epsilon^2",
+          "6-7*epsilon+2*epsilon^2",
+          "-64+32*epsilon",
+          "-4+2*epsilon",
+          "-32+16*epsilon",
+          "-2+epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta/(-2+epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-2+epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3*epsilon*eta-5*eta)/(6-7*epsilon+2*epsilon^2)",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta^2/(6-7*epsilon+2*epsilon^2)",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-2+epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": {
+        "conditions": [
+          "192-224*epsilon+64*epsilon^2",
+          "12-14*epsilon+4*epsilon^2",
+          "96-112*epsilon+32*epsilon^2",
+          "6-7*epsilon+2*epsilon^2",
+          "-64+32*epsilon",
+          "-4+2*epsilon",
+          "-32+16*epsilon",
+          "-2+epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta/(-2+epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-2+epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3*epsilon*eta-5*eta)/(6-7*epsilon+2*epsilon^2)",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta^2/(6-7*epsilon+2*epsilon^2)",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-2+epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_fallback": true,
+      "proof_sources": [
+        [
+          {
+            "seed": [
+              2,
+              -1,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "multiplication/9/0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "multiplication/11/0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          }
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "roundtrip": true,
+      "rules": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "population": 298,
+        "stratum": "both-cut1-bulk"
+      }
+    },
+    {
+      "application": {
+        "conditions": [
+          "-160+64*epsilon",
+          "-10+4*epsilon",
+          "-5+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-6+2*epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-10+4*epsilon)",
+            "indices": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-10+4*epsilon)",
+            "indices": [
+              1,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-3+epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -3,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(12-4*epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              3,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(4*epsilon*eta-12*eta)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-6+2*epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-10+4*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -3,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(4-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-epsilon*eta+2*eta)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(epsilon*eta-2*eta)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": {
+        "conditions": [
+          "-160+64*epsilon",
+          "-10+4*epsilon",
+          "-5+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-6+2*epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-10+4*epsilon)",
+            "indices": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-10+4*epsilon)",
+            "indices": [
+              1,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-3+epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -3,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(12-4*epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              3,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(4*epsilon*eta-12*eta)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-6+2*epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-10+4*epsilon)",
+            "indices": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(3-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -3,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(4-epsilon)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-epsilon*eta+2*eta)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(epsilon*eta-2*eta)/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-5+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_fallback": true,
+      "proof_sources": [
+        [
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              -1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              2,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/3/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -2,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "multiplication/11/0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/3/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "multiplication/9/0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "multiplication/11/0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              -1,
+              2,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/3/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          }
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "roundtrip": true,
+      "rules": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          2,
+          1,
+          0,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "population": 143,
+        "stratum": "raised-cut-bulk"
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_fallback": true,
+      "proof_sources": [
+        [
+          {
+            "seed": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "multiplication/9/0"
+          }
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "roundtrip": true,
+      "rules": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "population": 1379,
+        "stratum": "surface"
+      }
+    }
+  ],
+  "ray_domains": 1,
+  "scope": "Bounded depth control on exact historical NoApplicableRule leaves, with separately verified successful root control. Historical program is replayed ONLY to verify selection status, then discarded before fresh discovery; no old rule union. Source definitions unchanged; no periods/closure inference.",
+  "selection_observations": [
+    {
+      "kind": "actual-frontier",
+      "point": [
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "Unresolved(NoApplicableRule)"
+    },
+    {
+      "kind": "actual-frontier",
+      "point": [
+        1,
+        -1,
+        0,
+        2,
+        1,
+        0,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "Unresolved(NoApplicableRule)"
+    },
+    {
+      "kind": "actual-frontier",
+      "point": [
+        1,
+        -1,
+        0,
+        1,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "Unresolved(NoApplicableRule)"
+    }
+  ],
+  "source_count": 232,
+  "source_identity": "rustflow-weighted-sources-v1:6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e:10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23:{\"measure\":\"independent occupied Cn and Hn; input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e; factors=[rustflow_occupied::q_0, rustflow_occupied::q_5, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1-rustflow_occupied::q_3), rustflow_occupied::q_3, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1+2*rustflow_occupied::q_2-rustflow_occupied::q_3-2*rustflow_occupied::q_4-rustflow_occupied::q_5), rustflow_occupied::q_2, rustflow_occupied::q_6, rustflow_occupied::q_8, rustflow_occupied::q_6-rustflow_occupied::q_7, 1-rustflow_occupied::q_6, rustflow_occupied::q_6, 1-rustflow_occupied::q_7, rustflow_occupied::q_7]; massless source origin evidence=joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-independent-rank-one-blocks;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[1, 2, 4];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_7+1\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"1\\\", \\\"-1\\\", \\\"0\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"shell=1:3:11:12:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 1, virtual_affine_shift: [\\\"0\\\"], denominator_rows: [(1, [\\\"1\\\"], \\\"0\\\"), (2, [\\\"0\\\"], \\\"1\\\"), (4, [\\\"1\\\"], \\\"-1\\\")], block_assignments: [(1, Some(0)), (2, None), (4, Some(0))], block_representatives: [[\\\"1\\\"]], block_a_lower_bounds: [\\\"1\\\"], block_q_upper_bounds: [\\\"1\\\"] }; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions=[PolynomialEnergyCompletion { loop_index: 0, slot: 6, coefficient: Fraction { numerator: 1, denominator: 1 } }]; raw Ward deliberately omitted: no bound singleton-germ theorem; source presentation=polynomial-closure-v1; positive compact energy completion powers=false\",\"support\":\"real compact shell coordinates; [OccupiedShell { loop_index: 0, physical_slot: 0, upper_slot: 9, lower_slot: 10, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }, OccupiedShell { loop_index: 1, physical_slot: 3, upper_slot: 11, lower_slot: 12, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }]; certified joint dimensional origin zero jets: occupied loop 0, cut slot 0>=1 and lower-energy slot 10>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified joint dimensional origin zero jets: occupied loop 1, cut slot 3>=1 and lower-energy slot 12>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=1;allowed=[2];nonpositive=[1, 4];virtual-null=[\\\"1\\\"]\",\"orientation\":\"future first 2 loops; q=(-i PE0,-PEvec); inverse routing=[[1, 0, 0], [0, 0, 1], [1, -1, 0]]; determinant=1\",\"normalization\":\"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included\",\"branch\":\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-independent-rank-one-blocks;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[1, 2, 4];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_7+1\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"1\\\", \\\"-1\\\", \\\"0\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"shell=1:3:11:12:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 1, virtual_affine_shift: [\\\"0\\\"], denominator_rows: [(1, [\\\"1\\\"], \\\"0\\\"), (2, [\\\"0\\\"], \\\"1\\\"), (4, [\\\"1\\\"], \\\"-1\\\")], block_assignments: [(1, Some(0)), (2, None), (4, Some(0))], block_representatives: [[\\\"1\\\"]], block_a_lower_bounds: [\\\"1\\\"], block_q_upper_bounds: [\\\"1\\\"] }; joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\",\"deformation\":\"native Di-eta on [1, 2, 4]; physical shells and upper/lower supports fixed; input indices and coefficients fixed\"}:zero-tail-storage-v1:physical=13:capacity=16",
+  "source_schema": "rustred.guarded-source-program.v2"
+}

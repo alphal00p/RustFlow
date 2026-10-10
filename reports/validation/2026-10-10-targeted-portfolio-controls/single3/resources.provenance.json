@@ -1,0 +1,36 @@
+{
+  "captured_utc": "2026-10-10T05:14:38.748958+00:00",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-targeted-portfolio-probe-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/proposal-depth-3",
+    "original",
+    "3"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/rustflow-targeted-portfolio-probe-20261010": {
+      "resolved_path": "/tmp/rustflow-targeted-portfolio-probe-20261010",
+      "sha256": "b0b21a70eacf2a3e38088c7d04522f3abfa60ba9181d93209811f9b11a669eb7",
+      "size_bytes": 289128328
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/input.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/input.bin",
+      "sha256": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+      "size_bytes": 4140754
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/points.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/points.json",
+      "sha256": "b9bf79b3f3dad341869ffeac43c4c8184033f506f122d5ee8a8649af307adb65",
+      "size_bytes": 1036
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

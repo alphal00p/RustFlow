@@ -1,0 +1,22 @@
+{
+  "scope": "Targeted depth control; historical replay ONLY verifies actual NoRule selection, then original source definitions alone drive new ray1/point1 searches. No periods or old-rule union.",
+  "inputs": {
+    "/tmp/rustflow-targeted-depth-probe": "2aa4a860bb43079c096556fc437b446c2f6a92d88602619f72f9c1ea71e47852",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.bin": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/points.json": "b9bf79b3f3dad341869ffeac43c4c8184033f506f122d5ee8a8649af307adb65"
+  },
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-targeted-depth-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/depth-3",
+    "original",
+    "3"
+  ],
+  "build_binding_sha256": "9a3a6f3a980d1d6c65708c369165f550b810cb1c7dba2fe2afd9bc35e5f9bd37",
+  "launcher_sha256": "265608a40f1d527d78f853339b83a84e7682332d9ddc7571fc14d315a5c25241",
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

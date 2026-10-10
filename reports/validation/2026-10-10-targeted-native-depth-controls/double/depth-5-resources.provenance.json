@@ -1,0 +1,36 @@
+{
+  "captured_utc": "2026-10-10T05:13:24.229112+00:00",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-targeted-depth-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/depth-5",
+    "original",
+    "5"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/rustflow-targeted-depth-probe": {
+      "resolved_path": "/tmp/rustflow-targeted-depth-probe",
+      "sha256": "2aa4a860bb43079c096556fc437b446c2f6a92d88602619f72f9c1ea71e47852",
+      "size_bytes": 442983544
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin",
+      "sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+      "size_bytes": 2684862
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/points.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/points.json",
+      "sha256": "7fadb9414f3949302bd44112a0de68339be343462fae9818274871b9f431afb0",
+      "size_bytes": 784
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

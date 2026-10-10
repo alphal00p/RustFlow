@@ -1,0 +1,4 @@
+
+thread 'main' (2799477) panicked at /common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/probe.rs:197:84:
+called `Result::unwrap()` on an `Err` value: Invalid("unsupported guarded proof schema")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

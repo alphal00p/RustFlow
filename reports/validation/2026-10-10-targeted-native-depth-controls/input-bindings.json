@@ -1,0 +1,29 @@
+{
+  "scope": "Completed round003 checkpoints copied byte-exact; three lexicographic frontier strata per sector plus original scalar covered control for single3, seven labels total; native applicability verification performed by probe before fresh search. Double original scalar root is itself a frontier leaf, not an eligible success control.",
+  "inputs": [
+    {
+      "original": "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-003-provisional.json",
+      "copy": "reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.json",
+      "bytes": 2007091,
+      "sha256": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8"
+    },
+    {
+      "original": "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-003-provisional.bin",
+      "copy": "reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.bin",
+      "bytes": 4140754,
+      "sha256": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c"
+    },
+    {
+      "original": "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-003-provisional.json",
+      "copy": "reports/validation/2026-10-10-targeted-native-depth-controls/double/input.json",
+      "bytes": 1466074,
+      "sha256": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f"
+    },
+    {
+      "original": "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-003-provisional.bin",
+      "copy": "reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin",
+      "bytes": 2684862,
+      "sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-targeted-depth-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/depth-5",
+    "original",
+    "5"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 60.520331368781626,
+  "user_seconds": 58.028165,
+  "system_seconds": 0.216496,
+  "peak_child_rss_kib": 58468,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

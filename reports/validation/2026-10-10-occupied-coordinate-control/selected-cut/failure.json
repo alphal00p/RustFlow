@@ -1,0 +1,5 @@
+{
+  "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: active weighted provisional-frontier budget exhausted; rounds=5, provisional=1025, unresolved_terms=1054; first residual indices/reasons=[([1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 2, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, -1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+  "numerical_acceptance": false,
+  "stage": "occupied preparation"
+}

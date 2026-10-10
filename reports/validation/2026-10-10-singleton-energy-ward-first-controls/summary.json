@@ -1,0 +1,1513 @@
+{
+  "scope": "Source order only: original62 versus two reviewed extended polynomial-energy C1 Ward rows followed by the exact original62. Historical rules only replay selection, never enter discovery. No production edits, reciprocal admission, zero-domain change, numerical periods or closure claim.",
+  "sources": [
+    62,
+    64
+  ],
+  "budgets": {
+    "depth": 3,
+    "ray_domains_per_label": 1,
+    "point_domains_per_label": 1,
+    "timeout_seconds_per_arm": 300
+  },
+  "selection": {
+    "rule": "Original16 preserved, plus four distinct actual frontier labels from ownC1/other-energy0/lower0, Hupper>=1,Edegree>=2. Select first lex point in each stated index stratum; no reference or reduction values used.",
+    "original_selected_new_leading_eligible": 3,
+    "population_new_leading_eligible": 19,
+    "added": [
+      [
+        1,
+        0,
+        -1,
+        2,
+        2,
+        0,
+        -2,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        -2,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        2,
+        -1,
+        -2,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        2,
+        0,
+        -2,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "total_selected": 20,
+    "selected_new_leading_eligible": 7,
+    "available_leading_strata": {
+      "upper1_energy2": 19,
+      "upper2_or_more": 0,
+      "energy3_or_more": 0
+    },
+    "added_selection_note": "All higher requested strata are empty; four additions are next distinct lexicographic H1/Edegree2 frontier labels."
+  },
+  "rows": [
+    {
+      "ordinal": 0,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-bulk"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 3,
+      "ward_first_rhs_terms": 3,
+      "exact_rhs_equal": false,
+      "ordered_conditions_equal": false,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/2/0/occupation-case-0",
+        "polynomial-closure-v1/common-boost/0/6/case-0",
+        "polynomial-closure-v1/temporal-U/0/6/case-0",
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/1/1/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/1/2/occupation-case-0",
+        "lorentz/0/1/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/2/1/occupation-case-0",
+        "lorentz/2/2/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/2/0/occupation-case-0",
+        "lorentz/2/0/occupation-case-0"
+      ],
+      "baseline_conditions": [
+        "9-12*epsilon+4*epsilon^2",
+        "-3+2*epsilon",
+        "-6+4*epsilon",
+        "-48+32*epsilon",
+        "-12+8*epsilon"
+      ],
+      "ward_first_conditions": [
+        "-3+2*epsilon",
+        "-6+4*epsilon"
+      ],
+      "baseline_application": {
+        "conditions": [
+          "9-12*epsilon+4*epsilon^2",
+          "-3+2*epsilon",
+          "-6+4*epsilon",
+          "-48+32*epsilon",
+          "-12+8*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(4*epsilon*eta-5*eta)/(-3+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta^2/(9-12*epsilon+4*epsilon^2)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(4*epsilon*eta^2-5*eta^2)/(9-12*epsilon+4*epsilon^2)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "ward_first_application": {
+        "conditions": [
+          "-3+2*epsilon",
+          "-6+4*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(4*epsilon*eta-5*eta)/(-3+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-3+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "eta^2/(-3+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      }
+    },
+    {
+      "ordinal": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-bulk"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 4,
+      "ward_first_rhs_terms": 3,
+      "exact_rhs_equal": false,
+      "ordered_conditions_equal": false,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/1/2/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/2/2/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/1/2/occupation-case-0",
+        "lorentz/2/2/occupation-case-0"
+      ],
+      "baseline_conditions": [
+        "2*eta",
+        "16*eta",
+        "eta"
+      ],
+      "ward_first_conditions": [
+        "2*eta",
+        "16*eta"
+      ],
+      "baseline_application": {
+        "conditions": [
+          "2*eta",
+          "16*eta",
+          "eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2/eta",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "ward_first_application": {
+        "conditions": [
+          "2*eta",
+          "16*eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              -1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2/eta",
+            "indices": [
+              1,
+              0,
+              -1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2",
+            "indices": [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      }
+    },
+    {
+      "ordinal": 2,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -2,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-bulk"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/2/0/occupation-case-0"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 3,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -2,
+          1,
+          2,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-bulk"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/2/0/occupation-case-0"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 4,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-bulk"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/2/0/occupation-case-0"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 5,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          3,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-bulk"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-zero",
+        "lorentz/2/0/occupation-case-0"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 6,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-surface"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 7,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-surface"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 8,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree1-surface"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 9,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-surface"
+      },
+      "new_leading_domain": true,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 10,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-surface"
+      },
+      "new_leading_domain": true,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 11,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          2,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "C1-Edegree2plus-surface"
+      },
+      "new_leading_domain": true,
+      "baseline_rhs_terms": 1,
+      "ward_first_rhs_terms": 1,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 12,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          2,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-own-C1"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 2,
+      "ward_first_rhs_terms": 2,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": false,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/2/0/occupation-case-0",
+        "polynomial-closure-v1/common-boost/0/6/case-0"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 13,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          2,
+          0,
+          -1,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-own-C1"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 3,
+      "ward_first_rhs_terms": 3,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 1 }",
+        "Applied { rule: 1 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": false,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/2/0/occupation-case-0",
+        "polynomial-closure-v1/common-boost/0/6/case-0"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 14,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-energy-free-other-loops"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 4,
+      "ward_first_rhs_terms": 4,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": false,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/2/0/occupation-case-0",
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "polynomial-closure-v1/common-boost/0/6/case-0",
+        "lorentz/2/0/occupation-case-0",
+        "multiplication/9/0"
+      ],
+      "baseline_conditions": [
+        "-4+2*epsilon",
+        "-32+16*epsilon",
+        "-2+epsilon"
+      ],
+      "ward_first_conditions": [
+        "-4+2*epsilon",
+        "-32+16*epsilon",
+        "-2+epsilon"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          -1,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "outside-energy-free-other-loops"
+      },
+      "new_leading_domain": false,
+      "baseline_rhs_terms": 9,
+      "ward_first_rhs_terms": 9,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": false,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/2/0/occupation-case-0",
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/2/0/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/1/2/occupation-case-0",
+        "lorentz/1/2/occupation-case-0",
+        "lorentz/2/0/occupation-case-0",
+        "lorentz/1/0/occupation-case-0",
+        "lorentz/1/1/occupation-case-0",
+        "lorentz/1/2/occupation-case-0",
+        "lorentz/2/1/occupation-case-0",
+        "lorentz/2/2/occupation-case-0",
+        "lorentz/2/1/occupation-case-0",
+        "lorentz/0/0/occupation-case-0",
+        "lorentz/2/2/occupation-case-0",
+        "polynomial-closure-v1/common-boost/0/6/case-0",
+        "lorentz/2/0/occupation-case-0",
+        "polynomial-closure-v1/common-boost/0/6/case-0",
+        "polynomial-closure-v1/common-boost/0/6/case-0",
+        "lorentz/2/3/occupation-case-0"
+      ],
+      "baseline_conditions": [
+        "12-14*epsilon+4*epsilon^2",
+        "6-7*epsilon+2*epsilon^2",
+        "-6+4*epsilon",
+        "-16+8*epsilon",
+        "-3+2*epsilon",
+        "-2+epsilon",
+        "96-112*epsilon+32*epsilon^2",
+        "-48+32*epsilon",
+        "24-28*epsilon+8*epsilon^2",
+        "-12+8*epsilon"
+      ],
+      "ward_first_conditions": [
+        "12-14*epsilon+4*epsilon^2",
+        "6-7*epsilon+2*epsilon^2",
+        "-6+4*epsilon",
+        "-16+8*epsilon",
+        "-3+2*epsilon",
+        "-2+epsilon",
+        "96-112*epsilon+32*epsilon^2",
+        "-48+32*epsilon",
+        "24-28*epsilon+8*epsilon^2",
+        "-12+8*epsilon"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          -1,
+          2,
+          2,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "new-leading-remaining"
+      },
+      "new_leading_domain": true,
+      "baseline_rhs_terms": 1,
+      "ward_first_rhs_terms": 1,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 17,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "new-leading-remaining"
+      },
+      "new_leading_domain": true,
+      "baseline_rhs_terms": 1,
+      "ward_first_rhs_terms": 1,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": false,
+      "selected_rule_source_ids": [
+        "multiplication/9/0"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 18,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          0,
+          1,
+          2,
+          -1,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "new-leading-remaining"
+      },
+      "new_leading_domain": true,
+      "baseline_rhs_terms": 0,
+      "ward_first_rhs_terms": 0,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": true,
+      "selected_rule_source_ids": [
+        "lorentz/1/0/occupation-case-1",
+        "lorentz/0/0/occupation-case-1",
+        "extended-polynomial-singleton-energy-Ward-v1/upper-positive",
+        "lorentz/2/0/occupation-case-1"
+      ],
+      "baseline_conditions": [],
+      "ward_first_conditions": []
+    },
+    {
+      "ordinal": 19,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          1,
+          0,
+          0,
+          1,
+          2,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "new-leading-remaining"
+      },
+      "new_leading_domain": true,
+      "baseline_rhs_terms": 1,
+      "ward_first_rhs_terms": 1,
+      "exact_rhs_equal": true,
+      "ordered_conditions_equal": true,
+      "statuses": [
+        "Applied { rule: 0 }",
+        "Applied { rule: 0 }"
+      ],
+      "point_fallback": [
+        true,
+        true
+      ],
+      "selected_rule_uses_added_sources": false,
+      "selected_rule_source_ids": [
+        "lorentz/1/1/occupation-case-1",
+        "lorentz/1/1/occupation-case-1",
+        "lorentz/1/1/occupation-case-1",
+        "lorentz/1/2/occupation-case-1",
+        "lorentz/1/2/occupation-case-1",
+        "lorentz/1/2/occupation-case-1",
+        "lorentz/1/1/occupation-case-1"
+      ],
+      "baseline_conditions": [
+        "4*epsilon*eta-4*eta",
+        "-4+4*epsilon",
+        "32*epsilon*eta-32*eta",
+        "-32+32*epsilon",
+        "eta"
+      ],
+      "ward_first_conditions": [
+        "4*epsilon*eta-4*eta",
+        "-4+4*epsilon",
+        "32*epsilon*eta-32*eta",
+        "-32+32*epsilon",
+        "eta"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "arm": "original",
+      "path": "original-resources.json",
+      "sha256": "1878eecd285864efa06bfbeac6510a533b964f6b684fcf25025c08c41fa2646d",
+      "wall_seconds": 14.977820564992726,
+      "peak_child_rss_kib": 49208
+    },
+    {
+      "arm": "ward-first",
+      "path": "ward-first-resources.json",
+      "sha256": "713d7910b75a212488e2f7f8a46c64322f2e8e648fbfd629a65976c9b800d15e",
+      "wall_seconds": 14.996713829692453,
+      "peak_child_rss_kib": 49152
+    }
+  ],
+  "rhs_terms": [
+    29,
+    28
+  ],
+  "exact_zero_outputs": [
+    10,
+    10
+  ],
+  "changed_rhs": 2,
+  "changed_ordered_conditions": 2,
+  "selected_rules_using_new_sources": 14,
+  "new_leading_rows_unchanged": true,
+  "native_roundtrips": 40,
+  "all_rhs_admitted": true,
+  "original16_baseline_reproduced": true,
+  "previous_manifest_verified_unchanged": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/manifest.json",
+    "sha256": "7ea49fa714b176c73f09ec64d324f5812807eec53abdb14c7f80f13c3ab5fb62",
+    "files": 56
+  },
+  "condition_analysis": {
+    "ordinal0": "Every old/new condition is a nonzero rational multiple of 2*epsilon-3 or its square: 9-12*epsilon+4*epsilon^2=(2*epsilon-3)^2. Both therefore require precisely 2*epsilon-3 !=0. All raw conditions are retained in rows/results.",
+    "ordinal1": "All old/new conditions are nonzero rational multiples of eta. Both require eta!=0. All raw conditions retained."
+  },
+  "conclusion": "Putting the extra identities first makes them enter14 selected native proofs, but only two bulk E-degree1 outputs change (3\u21923 and4\u21923 terms). All seven new-leading H1/E-degree2 points are unchanged. Coverage and exact-zero counts do not improve. This small presentation effect does not justify promotion or a full pilot.",
+  "performance_scope": "Shared host; timing includes historical-program selection replay. No speed comparison."
+}

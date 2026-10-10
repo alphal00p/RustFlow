@@ -1,0 +1,23 @@
+{
+  "scope": "Fresh native exact point discovery from complete original cut3 source metadata plus exact polynomial whole-row shifts; no historical rule imported, no numerical values.",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-mixed-energy-polynomial-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/boost-only",
+    "boost-only"
+  ],
+  "inputs": {
+    "/tmp/rustflow-mixed-energy-polynomial-probe": "64703d11a99021df6243a29b7bb2cb83c51774efa8059b0d2676fc2a46b414a2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.bin": "f39245eb74555b88a3118987798520277330eb60e6e423aa55b5c88a8cc2e0f2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/points.json": "c7e7bfcfb50bc9d565552d82ef6969deeb03c00bee2d55acda12358f3eb44ffb",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "launcher_sha256": "8c2af0c0ba68f1c092138be93cc741fc91a2cfcd2b9e0cc2495ddfc6eddc4ea2",
+  "build_binding_sha256": "3cf42c5b11a380e40e7dabbabf1018558dfdd0c64911b0eea94f20ff040a48df",
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

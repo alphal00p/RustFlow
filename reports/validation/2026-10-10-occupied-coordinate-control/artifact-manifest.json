@@ -1,0 +1,156 @@
+{
+  "scope": "Exact graph/input equivalence and a failed selected-cut native preparation. Routing, physical-edge order and completion coordinates change together. No isolated-completion, numerical-equivalence or speed conclusion.",
+  "status": "bounded_native_closure_failed",
+  "files": {
+    "README.md": {
+      "sha256": "4abaa1b88c84d93b5c61c74bf7259603cd5f69f6f49e736ac59a3d30a4e7f24e",
+      "bytes": 1789
+    },
+    "archive-map.json": {
+      "sha256": "9cee7ef146aec1a177d70e1867458d6e365b2879bc095a44e07d0d5c1e7f32ad",
+      "bytes": 8078
+    },
+    "check_routing.py": {
+      "sha256": "80b5f7385d3ff2607829bfc5a92930c5702eaff2fb7310f37d6a6689fb25042d",
+      "bytes": 4102
+    },
+    "finalize.py": {
+      "sha256": "7d8387a45493dcef058552a9dec88c7628fcb545446c065d6d6882c8dd1e1597",
+      "bytes": 6775
+    },
+    "rerouted-input.json": {
+      "sha256": "c1951957e387ebaddbce6a66427c11eed01fd0467508d599a650c1e80296ed67",
+      "bytes": 1610
+    },
+    "resources.json": {
+      "sha256": "3288d7c7a5458c61ae2e18dcee44a26d4b695f679c6468a2464814ee28f8aec8",
+      "bytes": 460
+    },
+    "resources.log.gz": {
+      "sha256": "526c2261ddc2cff4985b06b5d37280a662c37567965ccef5e0f857d1329886d1",
+      "bytes": 587
+    },
+    "resources.provenance.json": {
+      "sha256": "06cadf9b9b28550e2c8d508828aa88d7a85e080126145afbb729a7ab417bd8a4",
+      "bytes": 938
+    },
+    "routing-audit.json": {
+      "sha256": "5f4c8faa4f639c8e901a4de5da4d4e0d6f0b9aa60b2654c164c7c2e5233b32a7",
+      "bytes": 1562
+    },
+    "run-binding.json": {
+      "sha256": "931e4a9b625f12bd6f5e5481109df987f11f7939483d050a60b437374ce47f6a",
+      "bytes": 2977
+    },
+    "run.py": {
+      "sha256": "b5857a9d37196d568cc91af2d9bc7fe408b163b8cef0409bc3e9deba9794c7cd",
+      "bytes": 4967
+    },
+    "selected-cut/configuration.json": {
+      "sha256": "e1d92566d7831273996bac89f7987670116d14b465999677a7d24668320a2ec4",
+      "bytes": 1289
+    },
+    "selected-cut/failure.json": {
+      "sha256": "2a6cd69d3e210a8a51574cee9131efb4fb012d58da39d291aff87027bfd9a3df",
+      "bytes": 871
+    },
+    "selected-cut/input.json": {
+      "sha256": "4ab0d48654044e26b3df04a577ee0129eda4d009c621cbbd655d8886e6ed597c",
+      "bytes": 1609
+    },
+    "selected-cut/native-closure/active-request-history.json.gz": {
+      "sha256": "5bf99b8ff93b63ad6a18dc2ff873a793ef7517379b244014cc3968cb3b6d1594",
+      "bytes": 10165
+    },
+    "selected-cut/native-closure/direct-zero-0001.json.gz": {
+      "sha256": "af2aad072940226e0d6f641800d5323793b20114ad994c85e5c3d33e3b8ebccc",
+      "bytes": 33120
+    },
+    "selected-cut/native-closure/direct-zero-0002.json.gz": {
+      "sha256": "dad8efed7d7689c9b37cdcdb45c90e2e8babd0d2cd4b39bb4ae2f8027369d369",
+      "bytes": 33631
+    },
+    "selected-cut/native-closure/direct-zero-0003.json.gz": {
+      "sha256": "45f3f7a28c0d1a58266398c377424182177daa7a1a8a66585a60e403b8f4055b",
+      "bytes": 33607
+    },
+    "selected-cut/native-closure/direct-zero-0004.json.gz": {
+      "sha256": "b5000b07f55e715d5823532ac7cfd29e44ed9aabb625a2bb29e3b2b0dec3d6f6",
+      "bytes": 35441
+    },
+    "selected-cut/native-closure/direct-zero-0005.json.gz": {
+      "sha256": "2e49279d5a2087b8e7645125ebc885fb3f07a26c5e8a51210961f2c4f2a417c6",
+      "bytes": 37265
+    },
+    "selected-cut/native-closure/requested-discovery-0001.json": {
+      "sha256": "ec7d641a9266ec23c6da815592a3ac44eb40a4f10de090a5b06fa0d8078bee32",
+      "bytes": 190752
+    },
+    "selected-cut/native-closure/requested-discovery-0002.json.gz": {
+      "sha256": "4699f796ee7a266f2fc814ee6c26a8010aba94124579df4f499d72e86a80bc46",
+      "bytes": 6204
+    },
+    "selected-cut/native-closure/requested-discovery-0003.json.gz": {
+      "sha256": "f7edc6a218ccef847941f013c71b39ff37df97e8ed09f452ffa0e6a9c0e9c162",
+      "bytes": 25392
+    },
+    "selected-cut/native-closure/requested-discovery-0004.json.gz": {
+      "sha256": "54373f48d70224d73a34c2a23f3e102c46840b1191cd7ea726365c09f6e93648",
+      "bytes": 69251
+    },
+    "selected-cut/native-closure/requested-discovery-0005.json": {
+      "sha256": "be27f3c75492096701f1a92dc44cc60de65b7491c83d1b26cee9ed380c3db1e3",
+      "bytes": 4920167
+    },
+    "selected-cut/native-closure/round-000-provisional.bin": {
+      "sha256": "4c5f558deee0e5c278ac167df643263cf4cc0e4b892c670b1aa113dfb191f6ec",
+      "bytes": 64930
+    },
+    "selected-cut/native-closure/round-000-provisional.json": {
+      "sha256": "ede5c12e0cef317d4e5d8f99b2f2f300c33b75454ecd3d4442a30ba570d00878",
+      "bytes": 47838
+    },
+    "selected-cut/native-closure/round-001-provisional.bin.gz": {
+      "sha256": "431fb74f66a3cbdf75def7d3b82ed3a41242a2e29f9370f99da85099d38c7727",
+      "bytes": 9681
+    },
+    "selected-cut/native-closure/round-001-provisional.json.gz": {
+      "sha256": "4484822746287441e06633d07f74cbccdcb41ff8e457be1c570d0c5f0cb3284f",
+      "bytes": 4611
+    },
+    "selected-cut/native-closure/round-002-provisional.bin.gz": {
+      "sha256": "d2f4e75f1c636bb8c06c19978aa91c2fba48dde280fc20ab9b8ccd8c4819f4cb",
+      "bytes": 39347
+    },
+    "selected-cut/native-closure/round-002-provisional.json.gz": {
+      "sha256": "3aee410af017b1615e4abc9ee1fba32cf1304ae6e50543664c49a4cd2cab08a3",
+      "bytes": 11845
+    },
+    "selected-cut/native-closure/round-003-provisional.bin.gz": {
+      "sha256": "6beb3366a8e3d4c0e9ecce14637e6370cebe8b06ca87f1d7b39217e2679c554a",
+      "bytes": 114919
+    },
+    "selected-cut/native-closure/round-003-provisional.json.gz": {
+      "sha256": "af2b895f676d5acdb701780c4eeb90cf344e115f6f64ba92e3247d05b189f5c7",
+      "bytes": 22341
+    },
+    "selected-cut/native-closure/round-004-provisional.bin": {
+      "sha256": "7e8d362f0ae641c6df789cac1826f21eda4cabb084e7161782161fd7b1797096",
+      "bytes": 2655159
+    },
+    "selected-cut/native-closure/round-004-provisional.json": {
+      "sha256": "9461797f5bfe86caa80323bdf71c386734d88035da264d435f1dee350fade907",
+      "bytes": 1270645
+    },
+    "selected-cut/sector.json": {
+      "sha256": "c42c0b20bed47022f5ca7657cc85d0703c30fc3ff42eb04c6658816dc5929430",
+      "bytes": 232
+    },
+    "summary.json": {
+      "sha256": "f574615ed4d0fcd3acb3fc0c4f8ffa5501e6f23de032fd40ef42d218d95d8487",
+      "bytes": 5973
+    }
+  },
+  "file_count": 37,
+  "all_historical_bindings_and_archives_verified": true
+}

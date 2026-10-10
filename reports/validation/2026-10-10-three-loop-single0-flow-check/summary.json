@@ -1,0 +1,57 @@
+{
+  "status": "selected_sector_pipeline_passed",
+  "test_count": 1,
+  "cut_slots": [
+    0
+  ],
+  "full_amplitude": false,
+  "profile": {
+    "digits": 18,
+    "series_order": 60,
+    "start_scale": 8,
+    "epsilon": "-5/4",
+    "guard_digits": 40
+  },
+  "native_closed_basis": 7,
+  "native_closure_rounds": 16,
+  "native_rule_count": 3553,
+  "boundary_integrated_coefficients": 7,
+  "boundary_integrated_products": 7,
+  "verified_log_stages": [
+    "compiling the auxiliary-mass differential equation (7 basis integrals, 3 loops)",
+    "generating and matching native asymptotic boundary regions (7 basis integrals, 3 loops)",
+    "transporting the auxiliary-mass solution (7 basis integrals, 3 loops)",
+    "extracting the dimensionally regulated physical limit (7 basis integrals, 3 loops)"
+  ],
+  "construction": "weighted_amf",
+  "observed_values": [
+    "(0+0i)",
+    "(0+0i)"
+  ],
+  "harness_seconds": 152.86,
+  "wall_seconds": 152.87721208389848,
+  "peak_child_rss_kib": 112668,
+  "independent_reference_comparisons": 0,
+  "profile_refinements": 0,
+  "supplied_oracle_comparisons": 0,
+  "scope": "Fresh selected original cut-0 pipeline at one profile, including recursive ordinary hard children. Exact-zero outputs alone do not validate nonzero hard-boundary accuracy, a full three-loop amplitude, precision stability, Laurent coefficients or speed. No prior rules were imported.",
+  "bindings_sha256": {
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/run.py": "ca40fe1c3a1032aa67cefd8023844eaec0ca0af061f0a921aac1733d2a637810",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/run-binding.json": "188668005164924571fe1bd56153ddaa1ed541da41467711d2bc91d4d2ff4a52",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/resources.json": "3fa960e7f1502442279ffd28ba0a87fb29784aaac410335c91c4aa7fc4adf00e",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/resources.provenance.json": "c444db7b5395ae4fccf2a61716669ed486b1c4527e644e6bfe37df5a70d0b9bd",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/resources.log": "b5b3c72aa993ff9214812f24bb4d3d998798ccb412c22ea4c5a6331660919621",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/prediction-18-60-8.json": "85639674ba15c5657f8198bb8a365fab626a183c945f589d3417ad88b5d9af52",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/input.json": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/configuration.json": "046ba489bd4fe4cc26ec0e818b44c05d606072a234b3cd4d9c8520f0bc3fb008",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/sector.json": "c42c0b20bed47022f5ca7657cc85d0703c30fc3ff42eb04c6658816dc5929430",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-closed.json": "e7f1c50a4387cd8d0f86ce8f73d7331c01c1df642d441d1a1732156b8594f441",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-closed.bin": "56ebeb74d609dbb927cf497f5bb67464fb6899567e2d99834bcdbacd025a8602",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-provisional.json": "bd0915e57c75b137f8edd61c811d68b099cffbdef4e629748ff0eb1e7ac67314",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-provisional.bin": "1ea65112b7f9c867ee0680253d2f47fe85e2f4751788247ac6a5555e5567c148",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/requested-discovery-0016.json": "8967161f278c3e4f2ee019bd5c68b6002c852f43f5ed928687d46d7015a52c1c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/native-digest-build.json": "8715e13405335297d0c3c0bfbbc22a47a2adaa8408db8a99c86c9b417a528f10",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac"
+  }
+}

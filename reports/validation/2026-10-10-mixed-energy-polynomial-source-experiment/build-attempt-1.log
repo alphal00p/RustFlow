@@ -1,0 +1,22 @@
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/probe.rs:64:13
+   |
+64 |     let eta=symbol!("rustflow_occupied::eta");let epsilon=symbol!("rustflow_occupied::epsilon");assert!(parameters.contains(&eta)&&p...
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+   = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+   = note: this error originates in the macro `env` which comes from the expansion of the macro `symbol` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/probe.rs:64:59
+   |
+64 |     let eta=symbol!("rustflow_occupied::eta");let epsilon=symbol!("rustflow_occupied::epsilon");assert!(parameters.contains(&eta)&&p...
+   |                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+   = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+   = note: this error originates in the macro `env` which comes from the expansion of the macro `symbol` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: aborting due to 2 previous errors
+

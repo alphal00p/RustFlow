@@ -1,0 +1,17 @@
+{
+  "scope": "Exact K checkpoint bytes retained for diagnostic source metadata import only; old proofs are discarded.",
+  "copies": [
+    {
+      "original": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.bin",
+      "preserved": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/input-cut3-round000.bin",
+      "sha256": "f39245eb74555b88a3118987798520277330eb60e6e423aa55b5c88a8cc2e0f2",
+      "bytes": 77744
+    },
+    {
+      "original": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.json",
+      "preserved": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/input-cut3-round000.json",
+      "sha256": "5d3e40bbf4df2823a79b586c187823f6977b7d6456122dcc091740a226e3cb45",
+      "bytes": 42382
+    }
+  ]
+}

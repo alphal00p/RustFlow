@@ -1,0 +1,317 @@
+{
+  "status": "both_bounded_controls_timed_out",
+  "source_or_build_changes": false,
+  "changes_from_K": {
+    "frontier": [
+      1024,
+      4096
+    ],
+    "historical_requests": [
+      4096,
+      16384
+    ],
+    "per_round_domains": [
+      8192,
+      32768
+    ]
+  },
+  "other_control_changes": "Selected occupied-flow tests, one18:60:8 profile, separate report paths and1200s caps instead of the full-amplitude request. No isolated single-budget or speed inference.",
+  "cases": [
+    {
+      "arm": "single3",
+      "cut_slots": [
+        3
+      ],
+      "exit_code": 124,
+      "status": "timeout_without_prediction",
+      "wall_seconds": 1200.0507034179755,
+      "peak_child_rss_kib": 417044,
+      "timeout_seconds": 1200,
+      "published_provisional_rounds": 9,
+      "last_published_round": 8,
+      "frontier_progression": [
+        58,
+        458,
+        1469,
+        2023,
+        2510,
+        2357,
+        1851,
+        1301,
+        872
+      ],
+      "last_published_native_rules": 13850,
+      "published_round_integrity": [
+        {
+          "round": 0,
+          "frontier": 58,
+          "native_rules": 15,
+          "program_sha256": "126da85db1e7b4ae7810d0084f7053a18356055f73b56b0be69a6eebb1093166",
+          "metadata_sha256": "2a6713e3b94438c4750832122ccd8fba254492ae45bdba10e1ce01ded897c9ae",
+          "transaction_sha256": "0ef32446e33e7b388317d3c540df47ea455da011bd44a704a3f0df86452cbb6d",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 1,
+          "frontier": 458,
+          "native_rules": 73,
+          "program_sha256": "7535f39df848135eae2423f7f68dbf58f174e43923bafb018cc5d2546c9de8e0",
+          "metadata_sha256": "38f96e2a98cfe78b70329069bb80a9b1dfcee00fc9e11e25fdca730e01bb9b52",
+          "transaction_sha256": "afea114ac32d453023e637b339273047b7819bf3f6b35867ca6eef2ab34a6969",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 2,
+          "frontier": 1469,
+          "native_rules": 598,
+          "program_sha256": "2f27b778edd9e468df19c0af21c5c2e789b68ddb0b34d3cf7e651b4bf79498c5",
+          "metadata_sha256": "6c321160269ded4c6882619e3ebe6e0f35a139ed615ea44d18d2b667fa6a9d56",
+          "transaction_sha256": "27dff4ec4c90b079afaf7727d1742137a552a4d743b55bd8a4731dd4e3ff1982",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 3,
+          "frontier": 2023,
+          "native_rules": 2270,
+          "program_sha256": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+          "metadata_sha256": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8",
+          "transaction_sha256": "c879f6e176d9cf98362937b282665a9e238e997a4c48d9255c9cec879dc3306a",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 4,
+          "frontier": 2510,
+          "native_rules": 4517,
+          "program_sha256": "b67e9ce85243f73dcda6401bcd56fb507cf026533b8ffbc812216762a8a5ff2a",
+          "metadata_sha256": "46e0e091d72a9142f66b307247dbcf859cc7a0fd05c70972b27ceb2330537151",
+          "transaction_sha256": "08e92c19c5b98ebf39c9807b1caf872a3c8fc35e9e0c594e287a03bb96cf6eeb",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 5,
+          "frontier": 2357,
+          "native_rules": 7426,
+          "program_sha256": "138f642abe830b6662e29c8b6a045f553c47a5ca194d7c9e630ade74fb7be8c4",
+          "metadata_sha256": "fd12be7c6a9a68999d315235e7aea3f7ce83a06317ef834da726d832fba8c99b",
+          "transaction_sha256": "5144000d365d66f65af81bfafaef3788375fbd08aa34b34f2d15017fa2dd529c",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 6,
+          "frontier": 1851,
+          "native_rules": 10161,
+          "program_sha256": "1b31f38c3b77298f5d2456798b65488dfa70d2b21c22b460d175e73fe87be2ba",
+          "metadata_sha256": "5bbd5cf1e270fc8f2801a5839d42a53ed2733fb14d067a7d43a87e40474f25bb",
+          "transaction_sha256": "2caacabb0fddfbb17278018fd6bf99cf2a5eda27c408e4de05b9df989bff7839",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 7,
+          "frontier": 1301,
+          "native_rules": 12314,
+          "program_sha256": "7d0a6bab058b2b3a7fede41c3ac2a10b59dcf35a4c7c4b49087df339a0100053",
+          "metadata_sha256": "5c3d53f2827303b971d6867038f628cf7837f03f11722c6ed52e39f1a9c021c2",
+          "transaction_sha256": "d15baf7d606ad3cc7765bdc09bef21e79f67d0b6d0379324f855aa218d1f265b",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 8,
+          "frontier": 872,
+          "native_rules": 13850,
+          "program_sha256": "e3774e0c8c0273674886ab7fe244a535bbf9df36b18991f27889f07ab1b90479",
+          "metadata_sha256": "ae7d16de1221a2ed39c95252da1c83a8442f0cc5e444e33a98dedde06effc3c8",
+          "transaction_sha256": "19a3251078b40a9f4ac1f0b37ec5571b022a8c10e3fa3646dd6c8dc44ff278b2",
+          "program_and_transaction_internal_digests_verified": true
+        }
+      ],
+      "unpublished_discovery_records": [
+        {
+          "path": "single3/native-closure/requested-discovery-0010.json",
+          "status_in_record": "complete",
+          "native_program_descriptor": {
+            "blake3": "ebf20564ba5e9571c447847dd40a2e3b2b746ead45aac4f8cbd5b00988c6c6d5",
+            "bytes": 18201292,
+            "rules": 14908
+          },
+          "scope": "Completed discovery record, but no matching published active-round program or metadata. It is not a resumable or completed closure-round state."
+        }
+      ],
+      "direct_zero_records": 10,
+      "partial_files": [],
+      "complete_native_connection": false,
+      "resumable_state_proved": false,
+      "predictions_saved": 0
+    },
+    {
+      "arm": "double",
+      "cut_slots": [
+        0,
+        3
+      ],
+      "exit_code": 124,
+      "status": "timeout_without_prediction",
+      "wall_seconds": 1200.1267796638422,
+      "peak_child_rss_kib": 1091836,
+      "timeout_seconds": 1200,
+      "published_provisional_rounds": 5,
+      "last_published_round": 4,
+      "frontier_progression": [
+        27,
+        188,
+        822,
+        1820,
+        2758
+      ],
+      "last_published_native_rules": 3114,
+      "published_round_integrity": [
+        {
+          "round": 0,
+          "frontier": 27,
+          "native_rules": 11,
+          "program_sha256": "91ba465027e2da1de7f869223562683fc99dba873f8a18d5a6851b0cb32861c5",
+          "metadata_sha256": "2ad3f7542ef534b4ab79a63547e2a3002f50e7162750d48bfe5f23e572456fde",
+          "transaction_sha256": "fb443aa958afe9a7461a51671094bf6ebedbb592bb5fcc84d203fce6e8aff191",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 1,
+          "frontier": 188,
+          "native_rules": 34,
+          "program_sha256": "a2bfac8a2f87ccae4eb5e65897d4a211fb96d15ec8a73805134eb7b1af78f681",
+          "metadata_sha256": "74939f8482a9f2bd60a13fc95d43eba58deb99a48be1ea414405f5bebf436160",
+          "transaction_sha256": "9a692de693b1ae3517536992c991990099ab74efafb72aa4ac9837026460a08d",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 2,
+          "frontier": 822,
+          "native_rules": 221,
+          "program_sha256": "a0c3d0c40e0ea267bdffa7c9435131b2a688dd6e21b66bb026c1277c40510200",
+          "metadata_sha256": "2003734c754ebd1960f6b0c86422f206bffcfe496e03bfd5b23c679271d740a7",
+          "transaction_sha256": "b96f3cd3ad568fcc646f90f145bda64724fe5d4aa8fba60de8fd99528261a8fe",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 3,
+          "frontier": 1820,
+          "native_rules": 1083,
+          "program_sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+          "metadata_sha256": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f",
+          "transaction_sha256": "8b6d827ff4aa32df91e745a9c4c42d75af965530f5051c9998cc1e86938aae2e",
+          "program_and_transaction_internal_digests_verified": true
+        },
+        {
+          "round": 4,
+          "frontier": 2758,
+          "native_rules": 3114,
+          "program_sha256": "c37c0c36e492bc5c10a4b7371e79e1ed3db150fa1311a0b595f7c243a22b79bb",
+          "metadata_sha256": "4145254f73c5d7cec1fc3add23909b0ee44b5d16449ab9e9ef3d8eec04ff5aca",
+          "transaction_sha256": "428d12b56f65db64d8d0facf3925d0cc6707cb4a21f954f3f1031a15c795a4bb",
+          "program_and_transaction_internal_digests_verified": true
+        }
+      ],
+      "unpublished_discovery_records": [
+        {
+          "path": "double/native-closure/requested-discovery-0006.json",
+          "status_in_record": "complete",
+          "native_program_descriptor": {
+            "blake3": "4f3e71828dfafcb1241bdb499bf24cc7602d9cd64f441ecfc0624fca488e477c",
+            "bytes": 9851835,
+            "rules": 6283
+          },
+          "scope": "Completed discovery record, but no matching published active-round program or metadata. It is not a resumable or completed closure-round state."
+        }
+      ],
+      "direct_zero_records": 6,
+      "partial_files": [],
+      "complete_native_connection": false,
+      "resumable_state_proved": false,
+      "predictions_saved": 0
+    }
+  ],
+  "numerical_predictions": 0,
+  "full_amplitude_acceptance": false,
+  "resume_scope": "Diagnostic schema1 evidence only. See resume-assessment.md; no existing checkpoint is relabeled resumable.",
+  "bindings_sha256": {
+    "reports/validation/2026-10-10-larger-frontier-controls/double/configuration.json": "4b759f7aad2b92509d127a34a4952c824dda966d8bc2b6d0d1fbd102565d968b",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/input.json": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/direct-zero-0001.json": "20527a2ff2a52d380e1251f865c6c31629ef17c622c3a1acf9003661f0438b12",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/direct-zero-0002.json": "ad8a42851f1e31a880a4294a6e40fc6ae1700b95e6dbac46691375f6c22c8eef",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/direct-zero-0003.json": "0c7656933fc18ed0920fde6dc0fa6ecb758b59662ef9509f03f4b0d51a3e5be5",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/direct-zero-0004.json": "72d9697f7dc245cb88cac399b1826c37ab96816cf7df4705b9ab627de8f22ed5",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/direct-zero-0005.json": "ad9a1b10240abdf9ce06579da9cd74731bbb1fb78c4d3e6af02a1ba2373d3814",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/direct-zero-0006.json": "5e3b1ee1265e309b779c734e009158373713a90004def149e82ed5a4f7046a9a",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/requested-discovery-0001.json": "fb443aa958afe9a7461a51671094bf6ebedbb592bb5fcc84d203fce6e8aff191",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/requested-discovery-0002.json": "9a692de693b1ae3517536992c991990099ab74efafb72aa4ac9837026460a08d",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/requested-discovery-0003.json": "b96f3cd3ad568fcc646f90f145bda64724fe5d4aa8fba60de8fd99528261a8fe",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/requested-discovery-0004.json": "8b6d827ff4aa32df91e745a9c4c42d75af965530f5051c9998cc1e86938aae2e",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/requested-discovery-0005.json": "428d12b56f65db64d8d0facf3925d0cc6707cb4a21f954f3f1031a15c795a4bb",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/requested-discovery-0006.json": "84b71f04db5b20a56183950d6eef945ed13811bbb84e6569364ea50ce6fa0b55",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-000-provisional.bin": "91ba465027e2da1de7f869223562683fc99dba873f8a18d5a6851b0cb32861c5",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-000-provisional.json": "2ad3f7542ef534b4ab79a63547e2a3002f50e7162750d48bfe5f23e572456fde",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-001-provisional.bin": "a2bfac8a2f87ccae4eb5e65897d4a211fb96d15ec8a73805134eb7b1af78f681",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-001-provisional.json": "74939f8482a9f2bd60a13fc95d43eba58deb99a48be1ea414405f5bebf436160",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-002-provisional.bin": "a0c3d0c40e0ea267bdffa7c9435131b2a688dd6e21b66bb026c1277c40510200",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-002-provisional.json": "2003734c754ebd1960f6b0c86422f206bffcfe496e03bfd5b23c679271d740a7",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-003-provisional.bin": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-003-provisional.json": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-004-provisional.bin": "c37c0c36e492bc5c10a4b7371e79e1ed3db150fa1311a0b595f7c243a22b79bb",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-004-provisional.json": "4145254f73c5d7cec1fc3add23909b0ee44b5d16449ab9e9ef3d8eec04ff5aca",
+    "reports/validation/2026-10-10-larger-frontier-controls/double/sector.json": "56e1caf4e79b1713bf11b9a54c26946e9e3ea252239469fc627db01626da6912",
+    "reports/validation/2026-10-10-larger-frontier-controls/double-binding.json": "ca4d0494093cf9fbe65d3993788325659d7720ecbaa3a3c1a505af91b6a55e35",
+    "reports/validation/2026-10-10-larger-frontier-controls/double-resources.json": "ec0cf9692b53f41fc9cce07f839ffc03cdf9172d30ebaefcf8651f66f799fe82",
+    "reports/validation/2026-10-10-larger-frontier-controls/double-resources.log": "4908467bb2109f8b65d67a206c5f36b2adc8d74486fa575c6cec79a1040cb8c2",
+    "reports/validation/2026-10-10-larger-frontier-controls/double-resources.provenance.json": "adbbde9b2e0394d52d81bb91f43f100c120cc8b591103937945c7e360975ee93",
+    "reports/validation/2026-10-10-larger-frontier-controls/finalize.py": "ef40c4a535932c457ec40fde462c9a62e1b1d3687afbd1b984217bc932f0ee41",
+    "reports/validation/2026-10-10-larger-frontier-controls/resume-assessment.md": "8587dd162338e3ae1a0bde47a75dff4b731374236607039a97ebe7cc19f4ff9d",
+    "reports/validation/2026-10-10-larger-frontier-controls/run.py": "80d642793a0e4466a68906c750b153f59ce502cf7f034fbde8738d0b612b7bc4",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/configuration.json": "5789d915edf211e3e9e19c06409d8b7c184103244b01a85d66edf29ee39b742c",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/input.json": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0001.json": "db64f5089560b155c36cf2ed5dcd0c599a38d8e34410566a8f3033f9e0100e9c",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0002.json": "216ea4432e6cc077af98d9a368cbeb54f68f6d251d7f5c56bccb242f34c0626e",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0003.json": "2b8572c4da7e80550cdf6a797a43c6e893e6ddc3993ea8a28d5eff6d0074910b",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0004.json": "c15d51ad7b8c35062b075e8561b2c26d7d2b372f9787ea0c91674161ec6c3e48",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0005.json": "25a6fd12db2143763cf782dc262cd602a7ea5736e31ebd0548fce7f12909db1a",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0006.json": "ac63f16b4978dad26934135ba739467d8881cbca38dc1ab62534fd5e17338662",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0007.json": "dccbd07c25d1b13936940075fe7abef4301e92ae165e8188ea3a85152d7fab13",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0008.json": "378e06ed2bdc0ecb809fc1bf08644b0f05a4bc562b6e6298f4f6df6614870473",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0009.json": "8233a97e9c7ce2444c636fa254d5caa0b1a04ece28e9d3cd3dd5b30e4ca92dec",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/direct-zero-0010.json": "a7a13ebf7014fcaf9edd6c15e60ae5c8945c126cde22c3460328d28cb8da62ec",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0001.json": "0ef32446e33e7b388317d3c540df47ea455da011bd44a704a3f0df86452cbb6d",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0002.json": "afea114ac32d453023e637b339273047b7819bf3f6b35867ca6eef2ab34a6969",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0003.json": "27dff4ec4c90b079afaf7727d1742137a552a4d743b55bd8a4731dd4e3ff1982",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0004.json": "c879f6e176d9cf98362937b282665a9e238e997a4c48d9255c9cec879dc3306a",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0005.json": "08e92c19c5b98ebf39c9807b1caf872a3c8fc35e9e0c594e287a03bb96cf6eeb",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0006.json": "5144000d365d66f65af81bfafaef3788375fbd08aa34b34f2d15017fa2dd529c",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0007.json": "2caacabb0fddfbb17278018fd6bf99cf2a5eda27c408e4de05b9df989bff7839",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0008.json": "d15baf7d606ad3cc7765bdc09bef21e79f67d0b6d0379324f855aa218d1f265b",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0009.json": "19a3251078b40a9f4ac1f0b37ec5571b022a8c10e3fa3646dd6c8dc44ff278b2",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/requested-discovery-0010.json": "0e7638d1ab4f48472d1cab0b157ee872e8045aa08a6f5b484917d171b2fc05fe",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-000-provisional.bin": "126da85db1e7b4ae7810d0084f7053a18356055f73b56b0be69a6eebb1093166",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-000-provisional.json": "2a6713e3b94438c4750832122ccd8fba254492ae45bdba10e1ce01ded897c9ae",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-001-provisional.bin": "7535f39df848135eae2423f7f68dbf58f174e43923bafb018cc5d2546c9de8e0",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-001-provisional.json": "38f96e2a98cfe78b70329069bb80a9b1dfcee00fc9e11e25fdca730e01bb9b52",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-002-provisional.bin": "2f27b778edd9e468df19c0af21c5c2e789b68ddb0b34d3cf7e651b4bf79498c5",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-002-provisional.json": "6c321160269ded4c6882619e3ebe6e0f35a139ed615ea44d18d2b667fa6a9d56",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-003-provisional.bin": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-003-provisional.json": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-004-provisional.bin": "b67e9ce85243f73dcda6401bcd56fb507cf026533b8ffbc812216762a8a5ff2a",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-004-provisional.json": "46e0e091d72a9142f66b307247dbcf859cc7a0fd05c70972b27ceb2330537151",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-005-provisional.bin": "138f642abe830b6662e29c8b6a045f553c47a5ca194d7c9e630ade74fb7be8c4",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-005-provisional.json": "fd12be7c6a9a68999d315235e7aea3f7ce83a06317ef834da726d832fba8c99b",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-006-provisional.bin": "1b31f38c3b77298f5d2456798b65488dfa70d2b21c22b460d175e73fe87be2ba",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-006-provisional.json": "5bbd5cf1e270fc8f2801a5839d42a53ed2733fb14d067a7d43a87e40474f25bb",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-007-provisional.bin": "7d0a6bab058b2b3a7fede41c3ac2a10b59dcf35a4c7c4b49087df339a0100053",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-007-provisional.json": "5c3d53f2827303b971d6867038f628cf7837f03f11722c6ed52e39f1a9c021c2",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-008-provisional.bin": "e3774e0c8c0273674886ab7fe244a535bbf9df36b18991f27889f07ab1b90479",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-008-provisional.json": "ae7d16de1221a2ed39c95252da1c83a8442f0cc5e444e33a98dedde06effc3c8",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3/sector.json": "3b93195b838225014f4d07d08c4219d91b108098db7126c24987f80eae3836bb",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3-binding.json": "1295bd422c5e5335322e975675e3f88ddab1b82af4dd28b8c6650aa1cf6e62cb",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3-resources.json": "3669c22be81f58ea0200652db7dc56a5a2de221ed1da2471345316bed027a5b4",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3-resources.log": "ebb6ca3d90683806560c85c725e6ce1ab1270463de2240349148131528edcfa0",
+    "reports/validation/2026-10-10-larger-frontier-controls/single3-resources.provenance.json": "c372f1b80653e0dcee75969da69b07c94a8d17cbd177173236a7096f7da1694d",
+    "reports/validation/2026-10-10-requested-ray-point-integration/native-digest-build.json": "8715e13405335297d0c3c0bfbbc22a47a2adaa8408db8a99c86c9b417a528f10",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c"
+  }
+}

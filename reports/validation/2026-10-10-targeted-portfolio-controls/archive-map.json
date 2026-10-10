@@ -1,0 +1,98 @@
+{
+  "scope": "Completed copied inputs and native point proofs only; all failures, scripts, bindings, selected points and results remain readable. No original external baseline is changed.",
+  "gzip_mtime": 0,
+  "restore_checks_passed": true,
+  "entries": [
+    {
+      "original_path": "double/input.bin",
+      "archive_path": "double/input.bin.gz",
+      "original_sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+      "archive_sha256": "03c171b2492c8802c4ce0c40d03b192160bab7fd2aa793f1adf2642d3062b70d",
+      "original_bytes": 2684862,
+      "archive_bytes": 180822
+    },
+    {
+      "original_path": "single3/input.bin",
+      "archive_path": "single3/input.bin.gz",
+      "original_sha256": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+      "archive_sha256": "bb51f7bf42861433d5e894e3b48210619af1dc2e3e09e066ec48c39cea017ea7",
+      "original_bytes": 4140754,
+      "archive_bytes": 290704
+    },
+    {
+      "original_path": "source-only/double/input.bin",
+      "archive_path": "source-only/double/input.bin.gz",
+      "original_sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+      "archive_sha256": "03c171b2492c8802c4ce0c40d03b192160bab7fd2aa793f1adf2642d3062b70d",
+      "original_bytes": 2684862,
+      "archive_bytes": 180822
+    },
+    {
+      "original_path": "source-only/double/proposal-depth-3/point-00.bin",
+      "archive_path": "source-only/double/proposal-depth-3/point-00.bin.gz",
+      "original_sha256": "b481df42bc24bbff637f8935b282ec18c20b0641763d90fda50fc58e0d9156f9",
+      "archive_sha256": "7de8578781f899a53123ceccee02d6e31d7024f582f5c3752e3c5aad0aa3cf88",
+      "original_bytes": 142282,
+      "archive_bytes": 6494
+    },
+    {
+      "original_path": "source-only/double/proposal-depth-3/point-01.bin",
+      "archive_path": "source-only/double/proposal-depth-3/point-01.bin.gz",
+      "original_sha256": "4e75a4a6720263556ef527a4b1497d0901cde19cdf98984fc1ce0830e37a9f41",
+      "archive_sha256": "ac86b879c90f0ec2794f3c2840acc32f6bc152ea97d5cf59a6ab1f7d2cb8fcc4",
+      "original_bytes": 145731,
+      "archive_bytes": 6720
+    },
+    {
+      "original_path": "source-only/double/proposal-depth-3/point-02.bin",
+      "archive_path": "source-only/double/proposal-depth-3/point-02.bin.gz",
+      "original_sha256": "eaf40c6ea5b94fd26d46cd2c959cc203f87ca687d3f5d1ba0f8669f5fcd78b2f",
+      "archive_sha256": "b7d54907e3e3429b218441c3b7595eea4843a09e93883f39a2d0000d9d65c10d",
+      "original_bytes": 136470,
+      "archive_bytes": 6045
+    },
+    {
+      "original_path": "source-only/single3/input.bin",
+      "archive_path": "source-only/single3/input.bin.gz",
+      "original_sha256": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+      "archive_sha256": "bb51f7bf42861433d5e894e3b48210619af1dc2e3e09e066ec48c39cea017ea7",
+      "original_bytes": 4140754,
+      "archive_bytes": 290704
+    },
+    {
+      "original_path": "source-only/single3/proposal-depth-3/point-00.bin",
+      "archive_path": "source-only/single3/proposal-depth-3/point-00.bin.gz",
+      "original_sha256": "f7e498c7fd9e7656b647af936011956a4a4b78055324fdf8fd91b080cc34dc86",
+      "archive_sha256": "134860cb7425a5b8753227a9908b069cfd2316c1cddd25f702c68f7380c28558",
+      "original_bytes": 45390,
+      "archive_bytes": 3922
+    },
+    {
+      "original_path": "source-only/single3/proposal-depth-3/point-01.bin",
+      "archive_path": "source-only/single3/proposal-depth-3/point-01.bin.gz",
+      "original_sha256": "640b61f3d497ab5dd6cae561947c45634f9c25f2f1a0cc3e1df01757401e724d",
+      "archive_sha256": "cadbe5ab494bb6ca6acf46425c4f4bb1dddd1ddc940c6acf05807e0646da994d",
+      "original_bytes": 44670,
+      "archive_bytes": 3885
+    },
+    {
+      "original_path": "source-only/single3/proposal-depth-3/point-02.bin",
+      "archive_path": "source-only/single3/proposal-depth-3/point-02.bin.gz",
+      "original_sha256": "65e98b183de22e96a9f098dc22bee43aa31875c6d19c0a62f383f003c7109d17",
+      "archive_sha256": "d6bac867310ffb458fc780be3a70f988741e41d07c657d66bf6af48f5ae48c37",
+      "original_bytes": 50378,
+      "archive_bytes": 4297
+    },
+    {
+      "original_path": "source-only/single3/proposal-depth-3/point-03.bin",
+      "archive_path": "source-only/single3/proposal-depth-3/point-03.bin.gz",
+      "original_sha256": "7c8da935bab318255858dad90ce993bbcfc683f28707d887a4421331a3f83a38",
+      "archive_sha256": "d45724ecccf3809d5cb40f93ddba5139059155aa3e36b682562cff0838b49878",
+      "original_bytes": 44419,
+      "archive_bytes": 3839
+    }
+  ],
+  "file_count": 11,
+  "original_bytes": 14260572,
+  "archive_bytes": 978254
+}

@@ -1,0 +1,44 @@
+{
+  "status": "frozen_assessment_only",
+  "production_admission_changed": false,
+  "native_closure_claim": false,
+  "files": {
+    "assessment.md": {
+      "sha256": "2d10e8176072725b4c6ad3d8b4b1e77563ac352782832895569b9ff4a0e12784",
+      "bytes": 4837
+    },
+    "audit-and-freeze.py": {
+      "sha256": "a2718c6e6d995413eb3cc840a9e82b738fbc894c4861068f468242ca98c38e12",
+      "bytes": 6655
+    },
+    "check.py": {
+      "sha256": "4700008a8733a2895871fcae44c94f7c46b97a9b556aa415d28ab19158488dc7",
+      "bytes": 5259
+    },
+    "exact-checks.json": {
+      "sha256": "201b5dfd236c9200f137cf8bdd1cd6a54da6f19dac8eaa2c5236a276185d2a1d",
+      "bytes": 40756
+    },
+    "global-radial-and-rebase.md": {
+      "sha256": "8dd471ce33ebc32ab05b081d61f517e75a763f43381ea8cd1586f9764d37928c",
+      "bytes": 6049
+    },
+    "independent-review.json": {
+      "sha256": "1b6f67ee0a21f6a012a2fc1babd720333d400806061c96c0adc1312b8b006381",
+      "bytes": 5062
+    },
+    "redundancy-checks.json": {
+      "sha256": "56f078269cf6a25f0ffa75fcc5f1137aaa581e2ec636fb97f1137bb7554849c7",
+      "bytes": 642151
+    },
+    "redundancy.md": {
+      "sha256": "b28ba78c401bbd8f36475428b87ff3c45a20522b1eb4b5ba62a99db6d9984d0a",
+      "bytes": 2788
+    },
+    "redundancy_check.py": {
+      "sha256": "82d71fdc82f202f9e843b5ac9f4355c24634b3fd2725818d1af8df4857dbae95",
+      "bytes": 8168
+    }
+  },
+  "file_count": 9
+}

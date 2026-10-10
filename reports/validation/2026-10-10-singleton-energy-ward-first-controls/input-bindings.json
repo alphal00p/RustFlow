@@ -1,0 +1,21 @@
+{
+  "frozen_predecessor_manifest": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/manifest.json",
+    "sha256": "7ea49fa714b176c73f09ec64d324f5812807eec53abdb14c7f80f13c3ab5fb62"
+  },
+  "files": {
+    "input.bin": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/input.bin",
+      "sha256": "7e8d362f0ae641c6df789cac1826f21eda4cabb084e7161782161fd7b1797096"
+    },
+    "input.json": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/input.json",
+      "sha256": "9461797f5bfe86caa80323bdf71c386734d88035da264d435f1dee350fade907"
+    },
+    "density-input.json": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/density-input.json",
+      "sha256": "c1951957e387ebaddbce6a66427c11eed01fd0467508d599a650c1e80296ed67"
+    }
+  },
+  "old_points_sha256": "99819efd143a5b8a4a9945f64a8b7962fdfb915db34e660a56dc60aadb423704"
+}

@@ -1,0 +1,25 @@
+{
+  "scope": "Fresh source-only global Euler presentation control, historical exact replay solely checks actual NoRule selection; no old rules imported into discovery; no periods or closure claim",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-global-euler-source-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-euler-source-experiment/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-euler-source-experiment/global-euler",
+    "global-euler",
+    "3",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-euler-source-experiment/points.json": "f62050df0d7f6b2d738ad1462d18b9131402fa67cd834cb4b389cbd785ee6683",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "/tmp/rustflow-global-euler-source-probe": "03b7739c3f8f3ccd2358598e55a6a1d29cbdaa1e9642aa0048f0603c63b6b320",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-euler-source-experiment/probe.rs": "d2588c5947c8a203ea767e2ab9033059f3cfbd8436ef9a244451402266e9dbc1"
+  },
+  "build_binding_sha256": "d31c9b7d5610a0efabb005fcf75f34e10855eaf298505a02fa42dad06d866fba",
+  "launcher_sha256": "4116b109847a4965893678b9ff32c97e711b80ebc60a7f2f0f5d70a9e9a31a02",
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

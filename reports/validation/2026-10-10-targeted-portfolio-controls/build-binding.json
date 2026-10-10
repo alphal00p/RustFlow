@@ -1,0 +1,78 @@
+{
+  "scope": "Validation-only copied native search driver, using the frozen isolated source-portfolio RustRed library. Production sources, build and reducer unchanged; no speed comparison.",
+  "parent_probe_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/build-binding.json",
+    "sha256": "9a3a6f3a980d1d6c65708c369165f550b810cb1c7dba2fe2afd9bc35e5f9bd37"
+  },
+  "parent_probe_source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/probe.rs",
+    "sha256": "f195bb73af31e7e2b1510b6857cf0fc63d0993f7f28735c5bfc3cd189a7abdc0"
+  },
+  "parent_portfolio_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-generic-probe-build.json",
+    "sha256": "f7c580251237f54ac8fe5960860435d429b1fda12d7eea4793b007ed3731e6ab"
+  },
+  "source_change": "Only expose already-existing native portfolio statistics in per-point diagnostic output.",
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/probe.rs",
+    "sha256": "6b01fb6839f5ff7b5b381cb2cc1792db63107b80bcac69ea726d75f6e534dbcc"
+  },
+  "launcher": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/run.py",
+    "sha256": "7859b21824d53a971f11f3c7fe6c7c6f0b3033a932cb6afdee59011d7b04ec37"
+  },
+  "dependencies": {
+    "rustred": {
+      "path": "/tmp/librustred-source-portfolio-20261010.rlib",
+      "sha256": "4d9423cd6fca369f184b29013998f13180556d3f6cc6767d445ed8c8ebcf6e45"
+    },
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95"
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60"
+    }
+  },
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "targeted_portfolio_probe",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--cfg",
+    "source_portfolio",
+    "--extern",
+    "rustred=/tmp/librustred-source-portfolio-20261010.rlib",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/probe.rs",
+    "-o",
+    "/tmp/rustflow-targeted-portfolio-probe-20261010"
+  ],
+  "cargo_invoked": false,
+  "exit_code": 0,
+  "wall_seconds": 54.17275659786537,
+  "executable": {
+    "path": "/tmp/rustflow-targeted-portfolio-probe-20261010",
+    "sha256": "b0b21a70eacf2a3e38088c7d04522f3abfa60ba9181d93209811f9b11a669eb7"
+  }
+}

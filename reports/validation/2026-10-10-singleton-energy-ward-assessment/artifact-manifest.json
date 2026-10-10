@@ -1,0 +1,24 @@
+{
+  "status": "frozen_assessment_only",
+  "production_admission_changed": false,
+  "native_closure_claim": false,
+  "files": {
+    "assessment.md": {
+      "sha256": "99749c918d10a936083b51b50f5d9382e7a362c0490d01d1f08f2aaf3ee7b94f",
+      "bytes": 3445
+    },
+    "check.py": {
+      "sha256": "b25b1ee9058c6b8df272f7821bae8a51fd271fd93a70eb4e643a38ed3a596c89",
+      "bytes": 2280
+    },
+    "checks.json": {
+      "sha256": "6ceb8328ff12ef557db5ec8e36cd5e46cfcdb0e719255e20a9915c319045ea2a",
+      "bytes": 27758
+    },
+    "independent-review.json": {
+      "sha256": "276f6e2649692dbca0dd8f1bf5fe1267369f4c9b1f2eacf466bc5b70ea45b0c0",
+      "bytes": 5065
+    }
+  },
+  "file_count": 4
+}

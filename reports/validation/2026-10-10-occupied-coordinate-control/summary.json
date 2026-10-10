@@ -1,0 +1,81 @@
+{
+  "status": "bounded_native_closure_failed",
+  "exact_routing_audit": "passed",
+  "original_cut": [
+    3
+  ],
+  "rerouted_cut": [
+    0
+  ],
+  "original_raised_slot": 0,
+  "rerouted_raised_slot": 3,
+  "determinant": -1,
+  "absolute_jacobian": 1,
+  "additional_cut_or_wick_phase": false,
+  "frontier_progression": [
+    20,
+    124,
+    603,
+    984,
+    1025
+  ],
+  "completed_rounds": 5,
+  "unresolved_terms": 1054,
+  "failure": {
+    "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: active weighted provisional-frontier budget exhausted; rounds=5, provisional=1025, unresolved_terms=1054; first residual indices/reasons=[([1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 2, -1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, -1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+    "numerical_acceptance": false,
+    "stage": "occupied preparation"
+  },
+  "exit_code": 101,
+  "harness_seconds": 65.61,
+  "wall_seconds": 65.62549278698862,
+  "peak_child_rss_kib": 90832,
+  "settings_changes_from_full_K": {
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": {
+      "before": "18:60:8,28:60:8,28:80:8,28:80:12",
+      "after": "18:60:8"
+    },
+    "RUSTFLOW_DENSITY_FLOW_REPORT": {
+      "before": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed",
+      "after": "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut"
+    },
+    "RUSTFLOW_WEIGHTED_CUTS": {
+      "before": null,
+      "after": "0"
+    },
+    "RUSTFLOW_WEIGHTED_INPUT": {
+      "before": "examples/finite_density/massless_three_loop_chain.json",
+      "after": "reports/validation/2026-10-10-occupied-coordinate-control/rerouted-input.json"
+    }
+  },
+  "selected_test": "runtime_graph_occupied_flow",
+  "timeout_seconds": 600,
+  "original_full_timeout_seconds": 3600,
+  "source_or_reducer_changes": false,
+  "historical_rules_imported": false,
+  "numerical_predictions": 0,
+  "full_amplitude_acceptance": false,
+  "scope": "Exact graph/input equivalence and a failed selected-cut native preparation. Routing, physical-edge order and completion coordinates change together. No isolated-completion, numerical-equivalence or speed conclusion.",
+  "bindings_sha256": {
+    "reports/validation/2026-10-10-occupied-coordinate-control/run-binding.json": "931e4a9b625f12bd6f5e5481109df987f11f7939483d050a60b437374ce47f6a",
+    "reports/validation/2026-10-10-occupied-coordinate-control/resources.json": "3288d7c7a5458c61ae2e18dcee44a26d4b695f679c6468a2464814ee28f8aec8",
+    "reports/validation/2026-10-10-occupied-coordinate-control/resources.provenance.json": "06cadf9b9b28550e2c8d508828aa88d7a85e080126145afbb729a7ab417bd8a4",
+    "reports/validation/2026-10-10-occupied-coordinate-control/resources.log": "803238803180a929d6eacba2ac54adb5e4836c5c8c1dfc2a8e4100dd4342b049",
+    "reports/validation/2026-10-10-occupied-coordinate-control/routing-audit.json": "5f4c8faa4f639c8e901a4de5da4d4e0d6f0b9aa60b2654c164c7c2e5233b32a7",
+    "reports/validation/2026-10-10-occupied-coordinate-control/check_routing.py": "80b5f7385d3ff2607829bfc5a92930c5702eaff2fb7310f37d6a6689fb25042d",
+    "reports/validation/2026-10-10-occupied-coordinate-control/run.py": "b5857a9d37196d568cc91af2d9bc7fe408b163b8cef0409bc3e9deba9794c7cd",
+    "reports/validation/2026-10-10-occupied-coordinate-control/rerouted-input.json": "c1951957e387ebaddbce6a66427c11eed01fd0467508d599a650c1e80296ed67",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/input.json": "4ab0d48654044e26b3df04a577ee0129eda4d009c621cbbd655d8886e6ed597c",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/configuration.json": "e1d92566d7831273996bac89f7987670116d14b465999677a7d24668320a2ec4",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/sector.json": "c42c0b20bed47022f5ca7657cc85d0703c30fc3ff42eb04c6658816dc5929430",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/failure.json": "2a6cd69d3e210a8a51574cee9131efb4fb012d58da39d291aff87027bfd9a3df",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-000-provisional.json": "ede5c12e0cef317d4e5d8f99b2f2f300c33b75454ecd3d4442a30ba570d00878",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-001-provisional.json": "b71b743c962ab86d8df2f7d83c0c3875f5d96bb040d9845ac737634866161209",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-002-provisional.json": "650003fd309d0a356c0a83c44af7984b06a7bb3fd156dbb7212ed5db7648bc3f",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-003-provisional.json": "d57bbdb40e309f57bd1df8b87e41e4cc7de389e9fa3fbcd8e0581978739e51d3",
+    "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-004-provisional.json": "9461797f5bfe86caa80323bdf71c386734d88035da264d435f1dee350fade907",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed-binding.json": "d2a44c4a3aba343ae5cc8a9bb357bbb400308d57b0cd5a717a7c69d3aefc1570",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c"
+  }
+}

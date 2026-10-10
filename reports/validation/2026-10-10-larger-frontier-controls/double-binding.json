@@ -1,0 +1,62 @@
+{
+  "scope": "Original selected cut, unchanged sources/native search. Increase frontier and associated history/domain caps by four to test whether the earlier frontier truncates later contraction. No rule imports, full-amplitude acceptance or speed comparison.",
+  "predecessor_binding_sha256": "d2a44c4a3aba343ae5cc8a9bb357bbb400308d57b0cd5a717a7c69d3aefc1570",
+  "build_provenance_sha256": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+  "source_snapshot_sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+  "launcher_sha256": "80d642793a0e4466a68906c750b153f59ce502cf7f034fbde8738d0b612b7bc4",
+  "executable": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+  "executable_sha256": "136eb66a829f3d96e20568b0c5444ed2104e996a96c61077ce65ef2f8bb357da",
+  "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "changes": {
+    "RUSTFLOW_WEIGHTED_FRONTIER": {
+      "before": "1024",
+      "after": "4096"
+    },
+    "RUSTFLOW_WEIGHTED_REQUESTED": {
+      "before": "4096",
+      "after": "16384"
+    },
+    "RUSTFLOW_WEIGHTED_DOMAINS": {
+      "before": "8192",
+      "after": "32768"
+    }
+  },
+  "settings": {
+    "RUSTFLOW_WEIGHTED_INPUT": "examples/finite_density/massless_three_loop_chain.json",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS": "true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS": "true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES": "true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED": "false",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES": "65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": "0",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAY_POINT": "true",
+    "RUSTFLOW_WEIGHTED_RAY_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_POINT_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE": "true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS": "8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": "0",
+    "RUSTFLOW_WEIGHTED_DEPTH": "3",
+    "RUSTFLOW_WEIGHTED_DOMAINS": "32768",
+    "RUSTFLOW_WEIGHTED_ROUNDS": "16",
+    "RUSTFLOW_WEIGHTED_FRONTIER": "4096",
+    "RUSTFLOW_WEIGHTED_REQUESTED": "16384",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON": "-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": "18:60:8",
+    "RUSTFLOW_DENSITY_FLOW_REPORT": "reports/validation/2026-10-10-larger-frontier-controls/double",
+    "RUSTFLOW_WEIGHTED_CUTS": "0,3"
+  },
+  "command": [
+    "timeout",
+    "1200",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cleared_inherited_runtime_variable_names": [],
+  "exit_code": 124,
+  "post_run_source_and_executable_unchanged": true
+}

@@ -1,0 +1,3700 @@
+{
+  "all_rhs_labels_admitted": true,
+  "depth": 3,
+  "point_domains": 1,
+  "probes": [
+    {
+      "application": {
+        "conditions": [
+          "4*eta",
+          "64*eta",
+          "eta",
+          "2*eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/2*(1-epsilon)/eta",
+            "indices": [
+              -2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2/eta",
+            "indices": [
+              -1,
+              1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              -1,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              -1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              null,
+              -2
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              3,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              null,
+              -2
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              3,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "native_portfolio": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.013566365,
+          "baseline_exact_materialization": 0.000415901,
+          "baseline_exact_trace_rows": 4,
+          "baseline_independent_rows": 79,
+          "baseline_rhs_terms": 4,
+          "baseline_rows": 79,
+          "baseline_seeds": 7,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.04775749,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.002578829,
+          "selected_arm": 0,
+          "selected_rhs_terms": 4,
+          "total_elapsed": 0.061323855,
+          "trials": [
+            {
+              "accepted_rows": 308,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 30,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1740,
+              "independent_rows": 267,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.037236515,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 51,
+              "attempted_rows": 201,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.000304301,
+              "exact_trace_rows": 3,
+              "exact_trace_terms": 15,
+              "guard_rejected_rows": 150,
+              "independent_rows": 51,
+              "nonzero_conditions": 4,
+              "rhs_terms": 4,
+              "search_elapsed": 0.007722396,
+              "seeds": 7,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "point": {
+        "conditions": [
+          "4*eta",
+          "64*eta",
+          "eta",
+          "2*eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/2*(1-epsilon)/eta",
+            "indices": [
+              -2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2/eta",
+            "indices": [
+              -1,
+              1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              -1,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              -1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_fallback": true,
+      "proof_sources": [
+        [
+          {
+            "seed": [
+              -2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              -2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              -2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          }
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "roundtrip": true,
+      "rules": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          -2,
+          1,
+          0,
+          1,
+          3,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "population": 1818,
+        "stratum": "cut-power1"
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              -1,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              -1,
+              0,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "indices": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              -2,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2",
+            "indices": [
+              0,
+              0,
+              1,
+              1,
+              2,
+              -1,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2*eta",
+            "indices": [
+              0,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2*eta",
+            "indices": [
+              0,
+              0,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "native_portfolio": [
+        {
+          "baseline_direct_hit": true,
+          "baseline_elapsed": 0.050335999,
+          "baseline_exact_materialization": 0.0,
+          "baseline_exact_trace_rows": 1,
+          "baseline_independent_rows": 232,
+          "baseline_rhs_terms": 6,
+          "baseline_rows": 268,
+          "baseline_seeds": 30,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.097402707,
+          "preseal_calls": 1,
+          "preseal_elapsed": 0.000310411,
+          "selected_arm": 0,
+          "selected_rhs_terms": 6,
+          "total_elapsed": 0.147738706,
+          "trials": [
+            {
+              "accepted_rows": 325,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 25,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1723,
+              "independent_rows": 251,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.039745124,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 344,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 24,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1704,
+              "independent_rows": 278,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.057159122,
+              "seeds": 65,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "point": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              -1,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              -1,
+              0,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "indices": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              -2,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2",
+            "indices": [
+              0,
+              0,
+              1,
+              1,
+              2,
+              -1,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2*eta",
+            "indices": [
+              0,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2*eta",
+            "indices": [
+              0,
+              0,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_fallback": true,
+      "proof_sources": [
+        [
+          {
+            "seed": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          }
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "roundtrip": true,
+      "rules": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          -1,
+          0,
+          1,
+          2,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "population": 203,
+        "stratum": "cut-power2"
+      }
+    },
+    {
+      "application": {
+        "conditions": [
+          "-8+4*epsilon",
+          "-4+2*epsilon",
+          "-64+32*epsilon",
+          "-32+16*epsilon",
+          "-128+64*epsilon",
+          "-2+epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-8+4*epsilon)",
+            "indices": [
+              -1,
+              1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-8+4*epsilon)",
+            "indices": [
+              0,
+              1,
+              -1,
+              3,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(1-epsilon)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              1,
+              0,
+              2,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-4+2*epsilon)",
+            "indices": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+epsilon)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              2,
+              -1,
+              2,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/4",
+            "indices": [
+              0,
+              2,
+              0,
+              2,
+              1,
+              0,
+              -2,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(1-epsilon)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              2,
+              0,
+              2,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-epsilon*eta+eta)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              2,
+              0,
+              2,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "native_portfolio": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.116972412,
+          "baseline_exact_materialization": 0.013770936,
+          "baseline_exact_trace_rows": 76,
+          "baseline_independent_rows": 461,
+          "baseline_rhs_terms": 8,
+          "baseline_rows": 554,
+          "baseline_seeds": 67,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.125014459,
+          "preseal_calls": 1,
+          "preseal_elapsed": 0.037337005,
+          "selected_arm": 0,
+          "selected_rhs_terms": 8,
+          "total_elapsed": 0.241986871,
+          "trials": [
+            {
+              "accepted_rows": 299,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 30,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1749,
+              "independent_rows": 219,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.033049771,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 344,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 24,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1704,
+              "independent_rows": 277,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.054410112,
+              "seeds": 65,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "point": {
+        "conditions": [
+          "-8+4*epsilon",
+          "-4+2*epsilon",
+          "-64+32*epsilon",
+          "-32+16*epsilon",
+          "-128+64*epsilon",
+          "-2+epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-8+4*epsilon)",
+            "indices": [
+              -1,
+              1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-8+4*epsilon)",
+            "indices": [
+              0,
+              1,
+              -1,
+              3,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(1-epsilon)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              1,
+              0,
+              2,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-4+2*epsilon)",
+            "indices": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+epsilon)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              2,
+              -1,
+              2,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/4",
+            "indices": [
+              0,
+              2,
+              0,
+              2,
+              1,
+              0,
+              -2,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(1-epsilon)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              2,
+              0,
+              2,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-epsilon*eta+eta)/(-8+4*epsilon)",
+            "indices": [
+              0,
+              2,
+              0,
+              2,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_fallback": true,
+      "proof_sources": [
+        [
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              4,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              -1,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              -1,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/3/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              3,
+              1,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/3/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/2/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              0,
+              3,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "multiplication/9/0"
+          },
+          {
+            "seed": [
+              0,
+              2,
+              0,
+              2,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/2/occupation-case-0"
+          },
+          {
+            "seed": [
+              0,
+              1,
+              -1,
+              3,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/3/occupation-case-0"
+          }
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "roundtrip": true,
+      "rules": 1,
+      "selection": {
+        "kind": "actual-frontier",
+        "point": [
+          0,
+          1,
+          0,
+          3,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "population": 2,
+        "stratum": "cut-power-at-least3"
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "native_portfolio": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.002405278,
+          "baseline_exact_materialization": 0.000441631,
+          "baseline_exact_trace_rows": 4,
+          "baseline_independent_rows": 13,
+          "baseline_rhs_terms": 1,
+          "baseline_rows": 13,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.047309219,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.007146294,
+          "selected_arm": 0,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.049714497,
+          "trials": [
+            {
+              "accepted_rows": 273,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 35,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1775,
+              "independent_rows": 237,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.034764026,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 23,
+              "attempted_rows": 89,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.001994497,
+              "exact_trace_rows": 13,
+              "exact_trace_terms": 88,
+              "guard_rejected_rows": 66,
+              "independent_rows": 23,
+              "nonzero_conditions": 4,
+              "rhs_terms": 9,
+              "search_elapsed": 0.005225537,
+              "seeds": 3,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "point": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_fallback": true,
+      "proof_sources": [
+        [
+          {
+            "seed": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/0/1/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "lorentz/1/0/occupation-case-0"
+          },
+          {
+            "seed": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source_id": "raw-polynomial-singleton-Ward-v1/upper-zero"
+          }
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "roundtrip": true,
+      "rules": 1,
+      "selection": {
+        "kind": "already-covered-control",
+        "point": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stratum": "original-scalar-root"
+      }
+    }
+  ],
+  "ray_domains": 1,
+  "scope": "Bounded depth control on exact historical NoApplicableRule leaves, with separately verified successful root control. Historical selection was verified by the independently bound baseline run; no foreign proof is imported; no old rule union. Source definitions unchanged; no periods/closure inference.",
+  "selection_observations": [
+    {
+      "kind": "actual-frontier",
+      "point": [
+        -2,
+        1,
+        0,
+        1,
+        3,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "Unresolved(NoApplicableRule)"
+    },
+    {
+      "kind": "actual-frontier",
+      "point": [
+        -1,
+        0,
+        1,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "Unresolved(NoApplicableRule)"
+    },
+    {
+      "kind": "actual-frontier",
+      "point": [
+        0,
+        1,
+        0,
+        3,
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "Unresolved(NoApplicableRule)"
+    },
+    {
+      "kind": "already-covered-control",
+      "point": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "Applied { rule: 2 }"
+    }
+  ],
+  "source_count": 54,
+  "source_identity": "rustflow-weighted-sources-v1:6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e:10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23:{\"measure\":\"independent occupied Cn and Hn; input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e; factors=[rustflow_occupied::q_3, rustflow_occupied::q_5, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1-rustflow_occupied::q_3), rustflow_occupied::q_0, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1-2*rustflow_occupied::q_2-rustflow_occupied::q_3+2*rustflow_occupied::q_4-rustflow_occupied::q_5), rustflow_occupied::q_4, rustflow_occupied::q_7, rustflow_occupied::q_8, -(rustflow_occupied::q_6-rustflow_occupied::q_7), 1-rustflow_occupied::q_6, rustflow_occupied::q_6]; massless source origin evidence=joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=singleton-UV-meromorphic-null-germ;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[3];shifted=[0, 1, 2, 4];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=-1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_4)*-1\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"(-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6)*-1\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"0\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"-1\\\", \\\"1\\\", \\\"0\\\", \\\"shell=0:3:9:10:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 2, virtual_affine_shift: [], denominator_rows: [(0, [\\\"1\\\", \\\"0\\\"], \\\"0\\\"), (1, [\\\"0\\\", \\\"1\\\"], \\\"0\\\"), (2, [\\\"1\\\", \\\"0\\\"], \\\"-1\\\"), (4, [\\\"-1\\\", \\\"1\\\"], \\\"1\\\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\\\"1\\\"] }; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions=[]; raw Ward evidence=raw-polynomial-singleton-Ward-v1;C1;all-medium-dependent-base-indices-zero;lowerH0;upper0-or-positive;unrecentered;origin=joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=singleton-UV-meromorphic-null-germ;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[3];shifted=[0, 1, 2, 4];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=-1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_4)*-1\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"(-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6)*-1\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"0\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"-1\\\", \\\"1\\\", \\\"0\\\", \\\"shell=0:3:9:10:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 2, virtual_affine_shift: [], denominator_rows: [(0, [\\\"1\\\", \\\"0\\\"], \\\"0\\\"), (1, [\\\"0\\\", \\\"1\\\"], \\\"0\\\"), (2, [\\\"1\\\", \\\"0\\\"], \\\"-1\\\"), (4, [\\\"-1\\\", \\\"1\\\"], \\\"1\\\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\\\"1\\\"] };energy-dependent=[6, 7, 8];eta=rustflow_occupied::{}::eta; source presentation=polynomial-closure-v1; positive compact energy completion powers=false\",\"support\":\"real compact shell coordinates; [OccupiedShell { loop_index: 0, physical_slot: 3, upper_slot: 9, lower_slot: 10, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }]; certified joint dimensional origin zero jets: occupied loop 0, cut slot 3>=1 and lower-energy slot 10>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[0, 2];nonpositive=[1, 4];virtual-null=[\\\"0\\\", \\\"1\\\"]; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[1];nonpositive=[0, 2, 4];virtual-null=[\\\"1\\\", \\\"0\\\"]; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[4];nonpositive=[0, 1, 2];virtual-null=[\\\"1\\\", \\\"1\\\"]\",\"orientation\":\"future first 1 loops; q=(-i PE0,-PEvec); inverse routing=[[0, 1, 0], [0, 0, 1], [-1, 1, 0]]; determinant=-1\",\"normalization\":\"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included\",\"branch\":\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=singleton-UV-meromorphic-null-germ;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[3];shifted=[0, 1, 2, 4];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=-1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_4)*-1\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"(-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6)*-1\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"0\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"-1\\\", \\\"1\\\", \\\"0\\\", \\\"shell=0:3:9:10:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 2, virtual_affine_shift: [], denominator_rows: [(0, [\\\"1\\\", \\\"0\\\"], \\\"0\\\"), (1, [\\\"0\\\", \\\"1\\\"], \\\"0\\\"), (2, [\\\"1\\\", \\\"0\\\"], \\\"-1\\\"), (4, [\\\"-1\\\", \\\"1\\\"], \\\"1\\\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\\\"1\\\"] }; joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\",\"deformation\":\"native Di-eta on [0, 1, 2, 4]; physical shells and upper/lower supports fixed; input indices and coefficients fixed\"}:zero-tail-storage-v1:physical=11:capacity=16",
+  "source_schema": "rustred.guarded-source-program.v2"
+}

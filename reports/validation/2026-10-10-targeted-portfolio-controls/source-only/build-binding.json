@@ -1,0 +1,79 @@
+{
+  "scope": "Source-only isolated native portfolio, with independently bound production-native historical selection verification. Foreign proof schemas remain rejected.",
+  "prior_failed_attempts": {
+    "single3": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/single3/run-binding.json",
+      "sha256": "80c594672f600cd7fe92bf5da51635ec1cbb176bebe4651a01dc0e42cadf8448"
+    },
+    "double": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/double/run-binding.json",
+      "sha256": "193687b3b183438e586b21a4c8e1b6b12664bd93fc9cce1dfcb25cc7e9e6df95"
+    }
+  },
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/probe.rs",
+    "sha256": "95342ef195f6824b4ebe15c9772b34975a7cb008a08844458e8885be2bf22c5d"
+  },
+  "parent_source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/probe.rs",
+    "sha256": "6b01fb6839f5ff7b5b381cb2cc1792db63107b80bcac69ea726d75f6e534dbcc"
+  },
+  "launcher": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/run-source-only.py",
+    "sha256": "0742c97d3c50a6a89b7a96a98f83d050880d93e479369d7eb78daa8a54927976"
+  },
+  "dependencies": {
+    "rustred": {
+      "path": "/tmp/librustred-source-portfolio-20261010.rlib",
+      "sha256": "4d9423cd6fca369f184b29013998f13180556d3f6cc6767d445ed8c8ebcf6e45"
+    },
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95"
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60"
+    }
+  },
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "targeted_portfolio_probe",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--cfg",
+    "source_portfolio",
+    "--extern",
+    "rustred=/tmp/librustred-source-portfolio-20261010.rlib",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/probe.rs",
+    "-o",
+    "/tmp/rustflow-targeted-portfolio-source-only-20261010"
+  ],
+  "cargo_invoked": false,
+  "exit_code": 0,
+  "wall_seconds": 18.734066300094128,
+  "executable": {
+    "path": "/tmp/rustflow-targeted-portfolio-source-only-20261010",
+    "sha256": "ee8239dd406b25ba0700e575fba0be06561b7c528caba822461a6071eda2b80d"
+  }
+}

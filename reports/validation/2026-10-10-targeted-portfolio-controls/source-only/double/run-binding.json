@@ -1,0 +1,34 @@
+{
+  "engine": "isolated-source-portfolio",
+  "scope": "Source-only isolated native portfolio, with independently bound production-native historical selection verification. Foreign proof schemas remain rejected.",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-targeted-portfolio-source-only-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/proposal-depth-3",
+    "original",
+    "3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/baseline-result.json"
+  ],
+  "build_binding": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/build-binding.json",
+    "sha256": "08c98176d817adc2b11af495048c6818092ca41e53299b7913f3cfb83a9e412d"
+  },
+  "executable": {
+    "path": "/tmp/rustflow-targeted-portfolio-source-only-20261010",
+    "sha256": "ee8239dd406b25ba0700e575fba0be06561b7c528caba822461a6071eda2b80d"
+  },
+  "inputs": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/input.bin": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/input.json": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/points.json": "7fadb9414f3949302bd44112a0de68339be343462fae9818274871b9f431afb0",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/baseline-result.json": "a0d959d9212099713694f43d73b3c625b02cde269fb73659a0ff2a6b4538ea27",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/depth-3-binding.json": "fcbcad0f408aec0b327a59cb2ee2a1a1a1964cdb31d3d7277da4cc1a987d00ca",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/build-binding.json": "9a3a6f3a980d1d6c65708c369165f550b810cb1c7dba2fe2afd9bc35e5f9bd37",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/manifest.json": "0226e32f1e5275c2e462185142150ef1195a0646e27888f302374efd385b8bf7"
+  },
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

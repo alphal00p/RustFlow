@@ -1,0 +1,198 @@
+{
+  "scope": "Initial 15 cut3 actual requests; all seven native point controls are equivalent in RHS and retained condition multisets. Some condition sequences are reordered, never erased. No closure/numerical claim.",
+  "arms": [
+    {
+      "mode": "original",
+      "sources": 54,
+      "native_rules": 15,
+      "points": 15,
+      "rhs_terms": 174,
+      "rhs_changed_points": [],
+      "condition_multiset_changed_points": [],
+      "condition_order_only_points": [],
+      "encoded_decoded_replay": true
+    },
+    {
+      "mode": "slot6",
+      "sources": 62,
+      "native_rules": 15,
+      "points": 15,
+      "rhs_terms": 174,
+      "rhs_changed_points": [],
+      "condition_multiset_changed_points": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "encoded_decoded_replay": true
+    },
+    {
+      "mode": "slot8",
+      "sources": 62,
+      "native_rules": 15,
+      "points": 15,
+      "rhs_terms": 174,
+      "rhs_changed_points": [],
+      "condition_multiset_changed_points": [],
+      "condition_order_only_points": [],
+      "encoded_decoded_replay": true
+    },
+    {
+      "mode": "both",
+      "sources": 70,
+      "native_rules": 15,
+      "points": 15,
+      "rhs_terms": 174,
+      "rhs_changed_points": [],
+      "condition_multiset_changed_points": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "encoded_decoded_replay": true
+    },
+    {
+      "mode": "both-reverse",
+      "sources": 70,
+      "native_rules": 15,
+      "points": 15,
+      "rhs_terms": 174,
+      "rhs_changed_points": [],
+      "condition_multiset_changed_points": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "encoded_decoded_replay": true
+    },
+    {
+      "mode": "temporal-only",
+      "sources": 62,
+      "native_rules": 15,
+      "points": 15,
+      "rhs_terms": 174,
+      "rhs_changed_points": [],
+      "condition_multiset_changed_points": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "encoded_decoded_replay": true
+    },
+    {
+      "mode": "boost-only",
+      "sources": 62,
+      "native_rules": 15,
+      "points": 15,
+      "rhs_terms": 174,
+      "rhs_changed_points": [],
+      "condition_multiset_changed_points": [],
+      "condition_order_only_points": [],
+      "encoded_decoded_replay": true
+    }
+  ]
+}

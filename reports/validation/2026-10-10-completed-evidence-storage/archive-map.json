@@ -1,0 +1,272 @@
+{
+  "schema": "additive-completed-evidence-storage-v1",
+  "scope": "Storage only. Historical source, proof, numerical and report content is byte-exact after decompression. Historical manifests are unchanged.",
+  "reader_release": "Completed owners confirmed no readers. Active longer-singleton, partial-placement and native-program-work-profile roots are excluded. Native binary corpora and latest larger-frontier checkpoint pairs remain raw.",
+  "historical_manifests": {
+    "reports/validation/2026-10-10-targeted-native-depth-controls/manifest.json": "0226e32f1e5275c2e462185142150ef1195a0646e27888f302374efd385b8bf7",
+    "reports/validation/2026-10-10-targeted-portfolio-controls/artifact-manifest.json": "7b172e592cfc156e40cdec322fd00c59384e629fcd599f54bc7046319c560bec",
+    "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/manifest.json": "831a46da04079be3dce6c36c8fa8512cae0bd9b1f8fa77ca3cd50e73565906e1",
+    "reports/validation/2026-10-10-singleton-energy-ward-first-controls/manifest.json": "274dcec71407802cbeedc98fc265a29836f7b6bc6451c32aacb0ee02fec41a14",
+    "reports/validation/2026-10-10-singleton-energy-ward-native-controls/manifest.json": "7ea49fa714b176c73f09ec64d324f5812807eec53abdb14c7f80f13c3ab5fb62",
+    "reports/validation/2026-10-10-factorized-compact-ward-assessment/artifact-manifest.json": "326c6dc6e795672333138322536623f8f5ca9c8977782bae0bc138960b4be74c",
+    "reports/validation/2026-10-10-global-euler-source-experiment/artifact-manifest.json": "b70ca5218191f3086b01b1fcf178518b0dc8ae282d9b523f76819ec6c88f10d9",
+    "reports/validation/2026-10-10-occupied-coordinate-control/artifact-manifest.json": "7b5ac08147d8698655ac523b49efb3bd3e4242b3bef8769c457a190c09874b69",
+    "reports/validation/2026-10-10-three-loop-single0-flow-check/artifact-manifest.json": "a8d98d020f9b1f13ff6418c29c48c2ee3fffa0af738a1aac613e7359ac078cf7"
+  },
+  "entries": [
+    {
+      "logical_path": "reports/validation/2026-10-10-factorized-compact-ward-assessment/redundancy-checks.json",
+      "sha256": "56f078269cf6a25f0ffa75fcc5f1137aaa581e2ec636fb97f1137bb7554849c7",
+      "bytes": 642151,
+      "archive_path": "reports/validation/2026-10-10-factorized-compact-ward-assessment/redundancy-checks.json.gz",
+      "archive_sha256": "98033f81bd59cb1ebdfaa07289ab457cc72f4f52f0062d4115da87e5241bccb3",
+      "archive_bytes": 6971,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-global-euler-source-experiment/global-euler/result.json",
+      "sha256": "b7d61db220c43f17ef849efed92df2ae75a8cb660aa013ff9900c2821cbba7ff",
+      "bytes": 605380,
+      "archive_path": "reports/validation/2026-10-10-global-euler-source-experiment/global-euler/result.json.gz",
+      "archive_sha256": "7b05eb0cd3e65ff0a7d77910573ca555864f8febc7af761bb7a73af1c38a70b1",
+      "archive_bytes": 16427,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-global-euler-source-experiment/original/result.json",
+      "sha256": "fb5311411539a1573ec1963737f2a961eacb463f83b89d92849888ea2e381530",
+      "bytes": 605347,
+      "archive_path": "reports/validation/2026-10-10-global-euler-source-experiment/original/result.json.gz",
+      "archive_sha256": "4dbad1798e4b55a17818261438c152cae9b577bc682c5cae339eaa5337c9d639",
+      "archive_bytes": 16414,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/boost-only/result.json",
+      "sha256": "cfc0d2f3371a7076ce39f29a11c2a0761d591b560d96afc3a19e433ae443c1e7",
+      "bytes": 266593,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/boost-only/result.json.gz",
+      "archive_sha256": "7ed85f2fb625c7cca5cada2fa08f2179363d6ffaebbed7fb81721a9a8cd85cbd",
+      "archive_bytes": 5457,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/both/result.json",
+      "sha256": "0c1c3314b6c5ffc04db4ccc0c243b0267a39abe9e73ccd6b9a1970beed1da098",
+      "bytes": 309209,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/both/result.json.gz",
+      "archive_sha256": "afca222c64691343b3e0ce0e8c6559bb4f31a6e3142d864547a0ce1d7837cd5d",
+      "archive_bytes": 6049,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/both-reverse/result.json",
+      "sha256": "b7f8397a2c34fbc6c6129d69b99fdb28b320de63a1e101833b9dd06b218ee7c0",
+      "bytes": 309217,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/both-reverse/result.json.gz",
+      "archive_sha256": "040ea5000c23224029b82065703dde31313c48461a715db6d0b6b48a5655632c",
+      "archive_bytes": 6051,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.json",
+      "sha256": "8158330fae8e2ca57f3a62a1000d99840f09dd96352911ede8207a5c01745178",
+      "bytes": 400877,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.json.gz",
+      "archive_sha256": "1376019b64c152636c224c20dc357ea6a6f5c29fe7dd34bb663860f281f7f57d",
+      "archive_bytes": 10001,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.json",
+      "sha256": "2abadf9d20129fd5b1576c8e77aace86258d74a7deb6526a5bc347fdb98ac7eb",
+      "bytes": 380341,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.json.gz",
+      "archive_sha256": "9e3a180e04113fb3df4fb847ddfc23b9d6cba4420971c6db93be048f257cfcc7",
+      "archive_bytes": 9066,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.json",
+      "sha256": "df290996ff7e7a95088c10586d278ae1351ce8005362b522a364c526e9e81737",
+      "bytes": 380077,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.json.gz",
+      "archive_sha256": "8afba86b4fd51ee083092ddc7e1e17bdd802c720cedd6e3c0fc840ecff48151c",
+      "archive_bytes": 9058,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/input-round-002.json",
+      "sha256": "d77587a74e57450f8e5cd0c26f1d14bc0530774d715a1136dd2a15c09c9612f4",
+      "bytes": 634142,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/input-round-002.json.gz",
+      "archive_sha256": "ce954933249d70623e385f202f618f97f47cfe7cc460d783938a4212ee10b5fb",
+      "archive_bytes": 19683,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.json",
+      "sha256": "782c3ce73016c424db59491552c454f860835db982b9a8b5cdb7e747eb7fd873",
+      "bytes": 400384,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.json.gz",
+      "archive_sha256": "d12de8b6f72174e7dcf037ea60ebf847c99c3e76ab527755cc9af7b399e0b797",
+      "archive_bytes": 9969,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.json",
+      "sha256": "649ea5d2150f299c2feb0f2061f31e5fc47c28b5f2c015e7797d5cc84e7391ef",
+      "bytes": 377663,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.json.gz",
+      "archive_sha256": "78eba2dbd95294c33da6537df464ab76cc12dfeb4a0e4f4fa42679cb43fbca2a",
+      "archive_bytes": 9000,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.json",
+      "sha256": "81a05a1a2d1493fe871e9dac8dca6dbc6b5f29d737cce8df3d395d399d7ddb94",
+      "bytes": 402694,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.json.gz",
+      "archive_sha256": "d9ff5cd72d62da6892a367529fba4e6de1fb13d8426638937b748334c1c3a8ef",
+      "archive_bytes": 10034,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.json",
+      "sha256": "98b7a324305153c6c138a7f6a17729b081ffea96d1b9057b7aeb05998045d131",
+      "bytes": 379947,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.json.gz",
+      "archive_sha256": "90dfd7cb1c7bd95307e79981698de90241ac49f8847a960b0253e70552e687d7",
+      "archive_bytes": 9029,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/slot6/result.json",
+      "sha256": "50485396b1dd861eb3a7c26500ffe00aa708560e7e2e9803230219f74662803f",
+      "bytes": 271752,
+      "archive_path": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/slot6/result.json.gz",
+      "archive_sha256": "cfa67fea71ef8951f4530a2c6b8e8fc60005a249152cb5e627a4711d4329eae7",
+      "archive_bytes": 5557,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/requested-discovery-0005.json",
+      "sha256": "be27f3c75492096701f1a92dc44cc60de65b7491c83d1b26cee9ed380c3db1e3",
+      "bytes": 4920167,
+      "archive_path": "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/requested-discovery-0005.json.gz",
+      "archive_sha256": "bd682eb1c3d0705a1276e26e3f6aea7ddb7ccb073a3b21b25913d94c74e6f75d",
+      "archive_bytes": 83311,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-004-provisional.json",
+      "sha256": "9461797f5bfe86caa80323bdf71c386734d88035da264d435f1dee350fade907",
+      "bytes": 1270645,
+      "archive_path": "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-004-provisional.json.gz",
+      "archive_sha256": "f050d4436483245c2ba614c1cc945cec01fe575605d934af529a6fde9451a8b9",
+      "archive_bytes": 29460,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-singleton-energy-ward-first-controls/input.json",
+      "sha256": "9461797f5bfe86caa80323bdf71c386734d88035da264d435f1dee350fade907",
+      "bytes": 1270645,
+      "archive_path": "reports/validation/2026-10-10-singleton-energy-ward-first-controls/input.json.gz",
+      "archive_sha256": "f050d4436483245c2ba614c1cc945cec01fe575605d934af529a6fde9451a8b9",
+      "archive_bytes": 29460,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-singleton-energy-ward-native-controls/input.json",
+      "sha256": "9461797f5bfe86caa80323bdf71c386734d88035da264d435f1dee350fade907",
+      "bytes": 1270645,
+      "archive_path": "reports/validation/2026-10-10-singleton-energy-ward-native-controls/input.json.gz",
+      "archive_sha256": "f050d4436483245c2ba614c1cc945cec01fe575605d934af529a6fde9451a8b9",
+      "archive_bytes": 29460,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-targeted-native-depth-controls/double/input.json",
+      "sha256": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f",
+      "bytes": 1466074,
+      "archive_path": "reports/validation/2026-10-10-targeted-native-depth-controls/double/input.json.gz",
+      "archive_sha256": "2aa0941c754ae736f325671017edecbdee93014bbee7af930971aa0660b662e1",
+      "archive_bytes": 33888,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.json",
+      "sha256": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8",
+      "bytes": 2007091,
+      "archive_path": "reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.json.gz",
+      "archive_sha256": "9479433d29d4fd5818171dcc7edcf6110f821baf86197c3604702076d72e7aca",
+      "archive_bytes": 44331,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-targeted-portfolio-controls/double/input.json",
+      "sha256": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f",
+      "bytes": 1466074,
+      "archive_path": "reports/validation/2026-10-10-targeted-portfolio-controls/double/input.json.gz",
+      "archive_sha256": "2aa0941c754ae736f325671017edecbdee93014bbee7af930971aa0660b662e1",
+      "archive_bytes": 33888,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-targeted-portfolio-controls/single3/input.json",
+      "sha256": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8",
+      "bytes": 2007091,
+      "archive_path": "reports/validation/2026-10-10-targeted-portfolio-controls/single3/input.json.gz",
+      "archive_sha256": "9479433d29d4fd5818171dcc7edcf6110f821baf86197c3604702076d72e7aca",
+      "archive_bytes": 44331,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/input.json",
+      "sha256": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f",
+      "bytes": 1466074,
+      "archive_path": "reports/validation/2026-10-10-targeted-portfolio-controls/source-only/double/input.json.gz",
+      "archive_sha256": "2aa0941c754ae736f325671017edecbdee93014bbee7af930971aa0660b662e1",
+      "archive_bytes": 33888,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-targeted-portfolio-controls/source-only/single3/input.json",
+      "sha256": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8",
+      "bytes": 2007091,
+      "archive_path": "reports/validation/2026-10-10-targeted-portfolio-controls/source-only/single3/input.json.gz",
+      "archive_sha256": "9479433d29d4fd5818171dcc7edcf6110f821baf86197c3604702076d72e7aca",
+      "archive_bytes": 44331,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-closed.json",
+      "sha256": "e7f1c50a4387cd8d0f86ce8f73d7331c01c1df642d441d1a1732156b8594f441",
+      "bytes": 628530,
+      "archive_path": "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-closed.json.gz",
+      "archive_sha256": "0e1e1307425a5199f491ff5b95c84c04ad04a22d7b1878a38d42b3c3981c5a45",
+      "archive_bytes": 13958,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-provisional.json",
+      "sha256": "bd0915e57c75b137f8edd61c811d68b099cffbdef4e629748ff0eb1e7ac67314",
+      "bytes": 628535,
+      "archive_path": "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/native-closure/round-015-provisional.json.gz",
+      "archive_sha256": "aa3e0b96b903414c34be08efcbb5852ea22dca480132e2672dff893466bfdd6e",
+      "archive_bytes": 13961,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/prediction-18-60-8.json",
+      "sha256": "85639674ba15c5657f8198bb8a365fab626a183c945f589d3417ad88b5d9af52",
+      "bytes": 3227291,
+      "archive_path": "reports/validation/2026-10-10-three-loop-single0-flow-check/selected-cut/prediction-18-60-8.json.gz",
+      "archive_sha256": "a137261e014b939348c4d506ae0554295e832a94d13f1ceb65c8505650eed0de",
+      "archive_bytes": 35925,
+      "gzip_mtime": 0
+    }
+  ],
+  "raw_bytes": 30001727,
+  "archive_bytes": 618958
+}

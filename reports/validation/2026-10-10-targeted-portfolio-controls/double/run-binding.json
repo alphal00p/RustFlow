@@ -1,0 +1,38 @@
+{
+  "scope": "Matched depth3/ray1/point1 control with isolated source portfolio; original complete source corpus, domains and zero boxes preserved. Historical native program is replayed only to verify selected statuses and discarded before fresh discovery.",
+  "engine": "isolated-source-portfolio",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-targeted-portfolio-probe-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/double/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/double/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/double/proposal-depth-3",
+    "original",
+    "3"
+  ],
+  "build_binding": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/build-binding.json",
+    "sha256": "787d62731a9c65fd7a8f386f1c6173c2819def13af155c516baea28e254d9540"
+  },
+  "executable": {
+    "path": "/tmp/rustflow-targeted-portfolio-probe-20261010",
+    "sha256": "b0b21a70eacf2a3e38088c7d04522f3abfa60ba9181d93209811f9b11a669eb7"
+  },
+  "inputs": {
+    "input.bin": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/double/input.bin",
+      "sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548"
+    },
+    "input.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/double/input.json",
+      "sha256": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f"
+    },
+    "points.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/double/points.json",
+      "sha256": "7fadb9414f3949302bd44112a0de68339be343462fae9818274871b9f431afb0"
+    }
+  },
+  "exit_code": 101,
+  "inputs_unchanged": true
+}

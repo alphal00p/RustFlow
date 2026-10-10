@@ -1,0 +1,411 @@
+{
+  "scope": "Exact serialized RHS and condition-multiset comparison in one preserved Symbolica namespace. Rule-index-only status differences do not establish new coverage. No full closure/numerical inference.",
+  "arms": [
+    {
+      "mode": "original",
+      "sources": 54,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 141,
+      "fallbacks": 32,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "status_changes": []
+    },
+    {
+      "mode": "slot6",
+      "sources": 62,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "slot8",
+      "sources": 62,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 141,
+      "fallbacks": 32,
+      "rhs_changes": [],
+      "condition_multiset_changes": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "both",
+      "sources": 70,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "both-reverse",
+      "sources": 70,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "temporal-only",
+      "sources": 62,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "boost-only",
+      "sources": 62,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 141,
+      "fallbacks": 32,
+      "rhs_changes": [],
+      "condition_multiset_changes": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    }
+  ]
+}

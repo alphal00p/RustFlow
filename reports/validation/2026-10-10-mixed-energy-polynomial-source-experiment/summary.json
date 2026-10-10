@@ -1,0 +1,220 @@
+{
+  "scope": "Saved native source-only exact RHS/retained-condition comparison. Equality is literal expression equality in one imported Symbolica namespace; condition sequences are preserved, with order-only differences separately classified. No full closure or numerical inference.",
+  "all_round_trips_passed": true,
+  "arms": [
+    {
+      "mode": "original",
+      "sources": 54,
+      "points": 15,
+      "status_counts": {
+        "Applied": 15
+      },
+      "rhs_terms": 174,
+      "point_fallbacks": null,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "slot6",
+      "sources": 62,
+      "points": 15,
+      "status_counts": {
+        "Applied": 15
+      },
+      "rhs_terms": 174,
+      "point_fallbacks": null,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "slot8",
+      "sources": 62,
+      "points": 15,
+      "status_counts": {
+        "Applied": 15
+      },
+      "rhs_terms": 174,
+      "point_fallbacks": null,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "both",
+      "sources": 70,
+      "points": 15,
+      "status_counts": {
+        "Applied": 15
+      },
+      "rhs_terms": 174,
+      "point_fallbacks": null,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "both-reverse",
+      "sources": 70,
+      "points": 15,
+      "status_counts": {
+        "Applied": 15
+      },
+      "rhs_terms": 174,
+      "point_fallbacks": null,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "temporal-only",
+      "sources": 62,
+      "points": 15,
+      "status_counts": {
+        "Applied": 15
+      },
+      "rhs_terms": 174,
+      "point_fallbacks": null,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "status_changes": []
+    },
+    {
+      "mode": "boost-only",
+      "sources": 62,
+      "points": 15,
+      "status_counts": {
+        "Applied": 15
+      },
+      "rhs_terms": 174,
+      "point_fallbacks": null,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [],
+      "status_changes": []
+    }
+  ]
+}

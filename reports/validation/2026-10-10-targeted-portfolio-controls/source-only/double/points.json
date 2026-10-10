@@ -1,0 +1,71 @@
+[
+  {
+    "kind": "actual-frontier",
+    "stratum": "both-cut1-bulk",
+    "point": [
+      1,
+      -1,
+      -1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "population": 298
+  },
+  {
+    "kind": "actual-frontier",
+    "stratum": "raised-cut-bulk",
+    "point": [
+      1,
+      -1,
+      0,
+      2,
+      1,
+      0,
+      0,
+      -2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "population": 143
+  },
+  {
+    "kind": "actual-frontier",
+    "stratum": "surface",
+    "point": [
+      1,
+      -1,
+      0,
+      1,
+      1,
+      0,
+      -1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "population": 1379
+  }
+]

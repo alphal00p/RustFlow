@@ -1,0 +1,2021 @@
+{
+  "method": "gzip level9 mtime0; byte-for-byte decompression verification before raw deletion",
+  "files": [
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-00.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-00.bin.gz",
+      "raw_bytes": 46441,
+      "gzip_bytes": 4373,
+      "raw_sha256": "cf18b3e789a84292f4f530fbbfa2c7c168092847c1fd95bc36004ee0a2012851",
+      "gzip_sha256": "fb241b4a5890e7bf3e111ebbb3e6a21035e9e5c1fe2ba8165cb5e1eab1ba6efb",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-01.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-01.bin.gz",
+      "raw_bytes": 46441,
+      "gzip_bytes": 4368,
+      "raw_sha256": "c36c9f35ffd69ec538da7ae874f71ec985ec4df702f9e45819d49ddcccfe36c1",
+      "gzip_sha256": "eacf8832d39e795c1722aa2023a5b1f2b6e43e96fca4ec4d83dde45d478028f7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-02.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-02.bin.gz",
+      "raw_bytes": 52085,
+      "gzip_bytes": 4926,
+      "raw_sha256": "10f1bbbf2f9c7e3868118eea1416f6724e5b43ad61d2e8e7fa367cbf5886d9cd",
+      "gzip_sha256": "05ce349420448cbcfa05efa69a4b5f7df4b69bbee82ca841af723bef8739e5cd",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-03.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-03.bin.gz",
+      "raw_bytes": 46680,
+      "gzip_bytes": 4406,
+      "raw_sha256": "d9d258136b6d65cb7d562661f8846e537010d12aefb5bf8f525089db10c285bb",
+      "gzip_sha256": "3c8b9bfc09422bf95f334e530f955da9cea0c5f7c51a11d241a80e4a34c4773f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-04.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-04.bin.gz",
+      "raw_bytes": 47254,
+      "gzip_bytes": 4456,
+      "raw_sha256": "749fba6570640194907abb23e6692e1faf8b7ac640aeacf0979a012f0681d2a5",
+      "gzip_sha256": "ecec01d21b0bf2850306c5df7523ad86f3df004d42f8ccea9f2528675f08a5f9",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-05.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-05.bin.gz",
+      "raw_bytes": 46781,
+      "gzip_bytes": 4412,
+      "raw_sha256": "9eb1d2a242c776efb0ef4defe3cdf3a4f5846a7f0231828295e77600c68b6133",
+      "gzip_sha256": "5241433ada83ee8b254b677d770e19267fabbd1c4992eda1aa89a852b74b4e93",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-06.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-06.bin.gz",
+      "raw_bytes": 47254,
+      "gzip_bytes": 4452,
+      "raw_sha256": "6e0989b8c5d65d22b88671eb61077feb969a28f0a0cb822b84a3b603409868b1",
+      "gzip_sha256": "4576d312b8383845b427a371544693dda810849fe7c041c941b6aa9e827ed141",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-07.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-07.bin.gz",
+      "raw_bytes": 51992,
+      "gzip_bytes": 4884,
+      "raw_sha256": "e5dc7404debd651325b41c3bcaaaa8962f958d992e3f4243b42a84f3a1b386da",
+      "gzip_sha256": "56e7d706203b881f4a5f71a644ca3280ba638cd82be19bf572469114aaab1143",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-08.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-08.bin.gz",
+      "raw_bytes": 47672,
+      "gzip_bytes": 4478,
+      "raw_sha256": "fa58fbf8f37954eff21388132a4a35ea92a41cff9dba6e903e685f618a285268",
+      "gzip_sha256": "ab87829c16678add98b21b7248fcc1272319fd34c6bb97193749c4880a1b5301",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-09.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-09.bin.gz",
+      "raw_bytes": 47037,
+      "gzip_bytes": 4440,
+      "raw_sha256": "d3e6146623a8757139b34c6f05489fad9bdbf287970321605be0c6a3e00cb7f9",
+      "gzip_sha256": "12e75b94f17887db43f3df0e6c8de704a2eb5909a9d4da932afa23e2d2118db3",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-10.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-10.bin.gz",
+      "raw_bytes": 47596,
+      "gzip_bytes": 4474,
+      "raw_sha256": "2b587022e70b5a1e203fb6c6e21ae04228c10747eb423368c03ff327b32954ba",
+      "gzip_sha256": "98d429af4541c3b96f3695023e0af5dbb1176eca05fd51bf07c4e3a07dacb7df",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-11.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-11.bin.gz",
+      "raw_bytes": 46670,
+      "gzip_bytes": 4386,
+      "raw_sha256": "25f1fe73b69653cb6b761c17c75da4e0563be75ce3bee8f75b17bbe510d31774",
+      "gzip_sha256": "9465ba58b1cf323ac86ac31da214c681137f9ae7d729ef87bb70e98ee6c5ec4a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-12.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-12.bin.gz",
+      "raw_bytes": 46288,
+      "gzip_bytes": 4363,
+      "raw_sha256": "6e3b8c6135d0715728b69f16f4de23b26e044e2e2a46706b708630cf4bc75580",
+      "gzip_sha256": "d2be20580142c4f8533d8e531643c118ea4e7572361fbf592d8b4728d687eee9",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-13.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-13.bin.gz",
+      "raw_bytes": 46288,
+      "gzip_bytes": 4363,
+      "raw_sha256": "097731f8249306c574e8e588a21c0b8a76b21543bd777dbc443256817558bcf5",
+      "gzip_sha256": "51d3183a720242c5738d281b35eac434a690570dbf6a2b3c0dd80a3cd589289f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-14.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-14.bin.gz",
+      "raw_bytes": 48433,
+      "gzip_bytes": 4567,
+      "raw_sha256": "787ad8d395cc73abbbd5c19f4fc8ca8aa6a1aadc34e19bb5a0acc2116090eadc",
+      "gzip_sha256": "8e392ec452555b0d4de5c828e40ce0bc2b5d19e6d94a5b645ee3720eb791a342",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-15.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-15.bin.gz",
+      "raw_bytes": 47902,
+      "gzip_bytes": 4527,
+      "raw_sha256": "328410d24d3de3fb23e160e1dca57e1d41ad18ffba565f11d7b60ed959d0e391",
+      "gzip_sha256": "7559433331f91374d67f01149380efb062942f43e93e838db3f2c4e405a71a6e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-16.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-16.bin.gz",
+      "raw_bytes": 46846,
+      "gzip_bytes": 4444,
+      "raw_sha256": "59a7e0fb85dce635fb3d482da7af79a8e24624e5ed12d22a1d3f12a280400003",
+      "gzip_sha256": "e6c5681710b95a0ba72b32495367bee850910b1e331f15410b2787a8a6bd61c8",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-17.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-17.bin.gz",
+      "raw_bytes": 48064,
+      "gzip_bytes": 4517,
+      "raw_sha256": "e4b1c5a07e77d3a980ff43d7ea960197c594e6b2cc236ebd1fe81be246d44964",
+      "gzip_sha256": "5ea908671bd35264494b5a8d669e1ce31e269524ef990dfc058a926c22a06578",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-18.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-18.bin.gz",
+      "raw_bytes": 47152,
+      "gzip_bytes": 4447,
+      "raw_sha256": "c3dc3587e629c7d77c709b658b08429d40dc2a4c567da2e7da151edf16156ddc",
+      "gzip_sha256": "6a0786296ff3889ca24642d5bfe3eecaf6a7e40650cfe4e1e8acdce99db7fea7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-19.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-19.bin.gz",
+      "raw_bytes": 47152,
+      "gzip_bytes": 4450,
+      "raw_sha256": "73a66fba42773dc4bd5bc51cc51cf42a6908f5ef71c8799ad9e504d4d46a3fc1",
+      "gzip_sha256": "0b9a172b10d74db94a5dd7ada9265a8f0a20384df8c0d253c303df226dfd2a25",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-20.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-20.bin.gz",
+      "raw_bytes": 47217,
+      "gzip_bytes": 4443,
+      "raw_sha256": "3ec660032747d07b7d9ff49a4637828cb2de970080fd82a90aa07ac6b4c057c1",
+      "gzip_sha256": "d6e1db0655555378c6f188b0f8357f4f81e63a75de4b15fc8874db1116804930",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-21.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-21.bin.gz",
+      "raw_bytes": 46288,
+      "gzip_bytes": 4360,
+      "raw_sha256": "9a70410b114eccdff12b065bbb5ae46b89d0a9b65465d026e858c9923350e564",
+      "gzip_sha256": "010aedd631f9519e76ae223c7770217fccf6f5d5d12309fae5b102c63293061e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-22.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-22.bin.gz",
+      "raw_bytes": 46288,
+      "gzip_bytes": 4364,
+      "raw_sha256": "335774cd1b3981b3a508f374b11999f393b70ad9c6c7ae82a0ca1bd45d0ef33c",
+      "gzip_sha256": "67583902796335fe9e4ab44de130adc5c396c164aa95e64688666ec4d1f3ed8f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-23.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-23.bin.gz",
+      "raw_bytes": 46656,
+      "gzip_bytes": 4393,
+      "raw_sha256": "d745402737eca622d54153e20357e855743873165c453d8fdb20e05209870363",
+      "gzip_sha256": "247889d059408d440898d84a32d502d402831a0edc49d56afb07cc1ff1e3ae42",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-24.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-24.bin.gz",
+      "raw_bytes": 47042,
+      "gzip_bytes": 4432,
+      "raw_sha256": "eadff6a842fbc723fb75ddee87d6dad668c92dd7d1b6d518f32257017a148111",
+      "gzip_sha256": "f38df335ab301f720443781369cecd923b625d832d29bb3ec1e939e03f83377c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-25.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-25.bin.gz",
+      "raw_bytes": 46441,
+      "gzip_bytes": 4365,
+      "raw_sha256": "58b7072b20f41d092fddb12f901e9d9d674650b0164b5c95c577685aca7e8643",
+      "gzip_sha256": "4bd19c6462ceeb7cd6a26e67a643c66832621f8f4c3639fb77ff9fd2aa284866",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-26.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-26.bin.gz",
+      "raw_bytes": 48505,
+      "gzip_bytes": 4594,
+      "raw_sha256": "07d8c4af1284997d4cb190b3db62ed70416bb56af6cefceda12639a48e5bdf5c",
+      "gzip_sha256": "69c8fff2ec31177afbff9b747076c5d24207e69aeed3fa41512788a482ff76cb",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-27.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-27.bin.gz",
+      "raw_bytes": 47686,
+      "gzip_bytes": 4499,
+      "raw_sha256": "6a9c11ac8739824d5f279126c0da086e078a9cc6674a40b55b68597d6c644294",
+      "gzip_sha256": "efba6570e7240b8a3814ba67b44c00d62303481894f7c4e0cbaf83429fa400eb",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-28.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-28.bin.gz",
+      "raw_bytes": 47011,
+      "gzip_bytes": 4435,
+      "raw_sha256": "d4f5a45c3115d307e8c587e9411f5fb8aa405a99dea2f7d733e32cfa564b77c1",
+      "gzip_sha256": "50d89449e39def70a7c2c564cc48aba1c184f6fd54d85f17f641f5a002e61aab",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-29.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-29.bin.gz",
+      "raw_bytes": 46668,
+      "gzip_bytes": 4414,
+      "raw_sha256": "45f9ced7c6fc264e699efaabf80841847019d4a3ea2209abaeafab301d21b540",
+      "gzip_sha256": "82f932f07129364eab0fb1329c68d85ae4dbca51f408dab30934df2e390a5eb2",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-30.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-30.bin.gz",
+      "raw_bytes": 49100,
+      "gzip_bytes": 4619,
+      "raw_sha256": "142367ddc52bf51a60c9511299b4cd49e202e846a1a16d73df416359a9cd4758",
+      "gzip_sha256": "39aa459940fd1c164a6a857495430e38d8bb7108a9b6944e2e78f476aca26ed5",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-31.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.proofs/point-31.bin.gz",
+      "raw_bytes": 48872,
+      "gzip_bytes": 4618,
+      "raw_sha256": "ac8ffd4fe6a1f69cd575a4f65668da5dcf40b999b5498731e2eefd0c4ff1e0bc",
+      "gzip_sha256": "283028c60e6b505b6fe6981d7983e3c1424fb1060b08bd40dd5dbbff61320f72",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-00.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-00.bin.gz",
+      "raw_bytes": 49078,
+      "gzip_bytes": 4508,
+      "raw_sha256": "0711c20197f5d8a2dec451207169b7141b81d150b410704c51251b9b2bb9f6d3",
+      "gzip_sha256": "f6a6d14401608e4e6e25acd766f8b908b663864af21e7604810a1aaef42924ac",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-01.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-01.bin.gz",
+      "raw_bytes": 49078,
+      "gzip_bytes": 4506,
+      "raw_sha256": "7348645be5d6605572f263a2535444c23126a60b36254201832dc0a859499f15",
+      "gzip_sha256": "4b347534691a8aa3de783a92a4fe52bdd755266b07f311bdcb25a6f32d55820a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-02.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-02.bin.gz",
+      "raw_bytes": 53958,
+      "gzip_bytes": 4962,
+      "raw_sha256": "fa643b790018e00dc1bd5f946ca210e7053ae0c8538bcd5bee70135c443b2cb0",
+      "gzip_sha256": "73c181f7d78cb9bf80d03d285b618d04adb6b5a087f5c5f2aec4950591d04475",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-03.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-03.bin.gz",
+      "raw_bytes": 49317,
+      "gzip_bytes": 4539,
+      "raw_sha256": "37d67dd9cf4a8dfe4e2da2f7aedb9a53fba358d7d0d003448cd26578e5abd47e",
+      "gzip_sha256": "9b141471bc438e9e03744e18e191f869df9d6072b29ab0bc1909f480ae91a33b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-04.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-04.bin.gz",
+      "raw_bytes": 49891,
+      "gzip_bytes": 4591,
+      "raw_sha256": "9b742f63751b6dde6542e38185ca24bd868f2c1cf9658fe8f4b614b3a15a98a8",
+      "gzip_sha256": "2fe909cf51c807eeabe024e756df820c09fd0bef46612312306e14880829a4f7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-05.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-05.bin.gz",
+      "raw_bytes": 49418,
+      "gzip_bytes": 4552,
+      "raw_sha256": "43112183d31e82083b4ee56e2a52403c244c0a0dfc4802bbd40f751c9f81c348",
+      "gzip_sha256": "f35d71e3368858f97f0b9c1c067d80a44e9ecedb9bfd95097ad0a22814311c80",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-06.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-06.bin.gz",
+      "raw_bytes": 49891,
+      "gzip_bytes": 4589,
+      "raw_sha256": "3d27dc127b72ae82bd4b1a0128a38e9de298d46e33ea5d9408327c55f6c23b5b",
+      "gzip_sha256": "6caf3729541004f7614c7907301114e6d877a476a7c91eaf63b0fa9fa7aefb82",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-07.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-07.bin.gz",
+      "raw_bytes": 51530,
+      "gzip_bytes": 4757,
+      "raw_sha256": "9c1ad65f936e44d4c3643b62de98f312c2ac7d4be7533531a791f697f4bd116b",
+      "gzip_sha256": "5c78713b1bc97df6657731e735a5da900aa06fae09a572ca4c506628ef5cc082",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-08.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-08.bin.gz",
+      "raw_bytes": 50543,
+      "gzip_bytes": 4636,
+      "raw_sha256": "ad0cf05e89d98f055727f2790b382c4ef110a4569fc0e1c9478e2fccc24c7df8",
+      "gzip_sha256": "8dfc4faff9054667d616795ac5752f54334197af773f020c1b98f14e46b8f03f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-09.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-09.bin.gz",
+      "raw_bytes": 49674,
+      "gzip_bytes": 4574,
+      "raw_sha256": "0aec8d7a60cfee4ec82fe1e142217d67e4e55e90d4bedf9299f2e54dfd7a6da1",
+      "gzip_sha256": "901a3c8b7309982e41dcacbdd1b75f3e6f10163ae2c72eca8e83d6149962a836",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-10.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-10.bin.gz",
+      "raw_bytes": 50233,
+      "gzip_bytes": 4611,
+      "raw_sha256": "c8ce363cdfc36d28f21c56959f9003baaf37842a86182140694362b011697e8f",
+      "gzip_sha256": "c334a3fcacb1e5b44bbbe2d4725d7b5a9d8b5ecad134e1699e2946be1c89af11",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-11.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-11.bin.gz",
+      "raw_bytes": 49307,
+      "gzip_bytes": 4526,
+      "raw_sha256": "590e921c8e7462f1eed76e4f3fa400837736d93eb38f95dfddffe6329d78cc47",
+      "gzip_sha256": "e30bfb50ba9f32acd3b8a2dfb26fcddf9c150d0f1835bd166372224b015d732a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-12.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-12.bin.gz",
+      "raw_bytes": 48925,
+      "gzip_bytes": 4496,
+      "raw_sha256": "d4ad064889b73e51cdd0a3a0f2a71339fab02b5681473505aca490d6fde8bf31",
+      "gzip_sha256": "4b61a31e9fcc42fb19aadd9397d60030578acf1f19243a9369b90cdfc1b204d1",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-13.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-13.bin.gz",
+      "raw_bytes": 48925,
+      "gzip_bytes": 4495,
+      "raw_sha256": "b3989ae7a7a0c60ee53936a31bc156e9adae0f099daf4263c72d9949c1d586cb",
+      "gzip_sha256": "7a94cab4b1f74f715ddacc211654ae6f1054d693f6bfe7c5b4046f638fbc3a32",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-14.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-14.bin.gz",
+      "raw_bytes": 51070,
+      "gzip_bytes": 4698,
+      "raw_sha256": "fb305044ff5c624c9ed9c635ef065e0fa95577984b80931ce228c8489e331055",
+      "gzip_sha256": "e9ad89be0fdec1e6f24e1dc670cc76d3da6043032949a48171e94c4997bd2e52",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-15.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-15.bin.gz",
+      "raw_bytes": 50539,
+      "gzip_bytes": 4665,
+      "raw_sha256": "f24f15111fb97aa1cef8f99299c8cd07017195ef2ff36154d08db349cb728c3f",
+      "gzip_sha256": "8ac033fa2bbf0e9c5442068c6c1487050fb3332e451cc2b50ad330c4464c80a6",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-16.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-16.bin.gz",
+      "raw_bytes": 49483,
+      "gzip_bytes": 4580,
+      "raw_sha256": "9e0d0303e6b7b6e53d406f7b5a97077d796a4f2dd6158b48b2688ba5f136a490",
+      "gzip_sha256": "8b928b468dc58c39b86c820394c29c014ece313bbad09f118e72672a4acb228f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-17.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-17.bin.gz",
+      "raw_bytes": 50740,
+      "gzip_bytes": 4649,
+      "raw_sha256": "e415786ac98401f6cab1f5515f2b9dadd573c92c99da0a446340f6a03a9b0748",
+      "gzip_sha256": "5c3f06dbe849f436a94b1ee185fe731f94f2e3c6e00aee055990769faefa8061",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-18.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-18.bin.gz",
+      "raw_bytes": 49789,
+      "gzip_bytes": 4585,
+      "raw_sha256": "fed52b6cc487e80f059b6e62e6a2df200fafa0f622b2c70a6c72b5f91103e90f",
+      "gzip_sha256": "cffef3ef70ee52ec9601a6891d3b10b7ab69066fdf61701636b87e3c47a2788c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-19.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-19.bin.gz",
+      "raw_bytes": 49789,
+      "gzip_bytes": 4587,
+      "raw_sha256": "1d3f19ef932150938af85de15fd86732042a89488155d6cf63fdccf79cd0614e",
+      "gzip_sha256": "eb4a75a1518327602111e2595274b5380e565e2c6d3fdd8cd823baddf5408331",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-20.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-20.bin.gz",
+      "raw_bytes": 49854,
+      "gzip_bytes": 4580,
+      "raw_sha256": "785240978afefc50db3536c989bb1bf8cd449d185c47753039e3378d5e05cb63",
+      "gzip_sha256": "2a3cc1c59bea3c3e95e83e06a571187572d1c1c60a962015b6861b9bfaf85d9a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-21.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-21.bin.gz",
+      "raw_bytes": 48925,
+      "gzip_bytes": 4494,
+      "raw_sha256": "59bbbed53df6c7d94c84045fa0079482756829419a00b168c4e7da5a1bc9f0b0",
+      "gzip_sha256": "3d448c3ea7ba36911463ddec8e39c8adfff80d111295bb0a692a98f76102ed17",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-22.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-22.bin.gz",
+      "raw_bytes": 48925,
+      "gzip_bytes": 4499,
+      "raw_sha256": "9db2c2cc3226cf0d1039646e172088824dcdb32d6cbba09a6a9128b9563de022",
+      "gzip_sha256": "3bf29b45c8228217fc4feef245280e6b3dc72de398229a71dcc01d7cf422794a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-23.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-23.bin.gz",
+      "raw_bytes": 49293,
+      "gzip_bytes": 4534,
+      "raw_sha256": "2c7852baf7ecb9a58927673dc204f86aac380cec7a4688b598c678d0024224ac",
+      "gzip_sha256": "dfcf6b90c5b6226e5f21ac8bdcb8472657e12f9e445afb70d11e036c216ef07c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-24.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-24.bin.gz",
+      "raw_bytes": 49679,
+      "gzip_bytes": 4573,
+      "raw_sha256": "5ca3fc8fd2c97b0fbea91c0736326f97e20f69f68d0ce640d9906595de394cd4",
+      "gzip_sha256": "9c860db774502ab83e44573f63bd85bad3b53088c88ca4a4d9d6aba5ece39ca6",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-25.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-25.bin.gz",
+      "raw_bytes": 49078,
+      "gzip_bytes": 4504,
+      "raw_sha256": "086db00fe91e28328d4a3f9417a18632f6cce86a6608c533920c5da8fde67016",
+      "gzip_sha256": "83a56ff8eabf3d4688e15acf3a17835c547405608561bf7b9e013dd4e0a01e6e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-26.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-26.bin.gz",
+      "raw_bytes": 51142,
+      "gzip_bytes": 4727,
+      "raw_sha256": "2f7d646e971ec075f54f873cc36075965aed3edddb4678fb475a489ed6beb088",
+      "gzip_sha256": "78153d3df905aa38a30660e8d25ff67a1cb300d1b4893df01cb76d4cfb0bbbb3",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-27.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-27.bin.gz",
+      "raw_bytes": 50323,
+      "gzip_bytes": 4635,
+      "raw_sha256": "05a99a061b2887de1cafb25d215146236d2c1f21aba6789166d6d5c4b1add145",
+      "gzip_sha256": "75fb093e14747ca71022e89aadd4aa1adfdcc6cf2726ccfa3063bc9baaf7998f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-28.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-28.bin.gz",
+      "raw_bytes": 49648,
+      "gzip_bytes": 4576,
+      "raw_sha256": "d2a0b28a7916637333068b389a2d947a11ef4d8f1a19daed460c4908e6701309",
+      "gzip_sha256": "831e6f6acad34147f1fd599f1d18eba2498be63404899e3d408c62b087e1b8b2",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-29.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-29.bin.gz",
+      "raw_bytes": 49305,
+      "gzip_bytes": 4547,
+      "raw_sha256": "b9d87eddf7d00eac4bd97160f7532a39e5bd383954eb8c50d47241dad46c4334",
+      "gzip_sha256": "5026979686c9103734028b00c975e4e933c2ff3b46295ccbffe064821f3d2f48",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-30.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-30.bin.gz",
+      "raw_bytes": 51737,
+      "gzip_bytes": 4757,
+      "raw_sha256": "86daf6fa4ec4d22cf0de6ddda5dabbfd220c786c5a77ed9aeb05515fcc568f40",
+      "gzip_sha256": "8a01e3ed275affeb42494e5dfdce1a332d6a4577ca67608156ab54f504d3abfa",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-31.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both-reverse.proofs/point-31.bin.gz",
+      "raw_bytes": 51509,
+      "gzip_bytes": 4751,
+      "raw_sha256": "4d6778142fb6e649dbd25748de198a1347e4f03b62637ce85cf308417d17f6d5",
+      "gzip_sha256": "a4292ec0473bb609992a889f2904bcbda1af6d7c9149ba90e5bca9b8f0f4031a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-00.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-00.bin.gz",
+      "raw_bytes": 49070,
+      "gzip_bytes": 4516,
+      "raw_sha256": "42274ece3d97f9fd0f25520ceb456631e617a47cceab6d924726751bbcc2f7d6",
+      "gzip_sha256": "a1f455418ede0252848b97795a871a7a91c66ed5bee25029ce22d0c42d60df48",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-01.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-01.bin.gz",
+      "raw_bytes": 49070,
+      "gzip_bytes": 4515,
+      "raw_sha256": "73a3ae8211c2ddd834ed990dcab776d3d782e26a076f0f274c9a46f6c68b4038",
+      "gzip_sha256": "f32ca30d9c65175e8b0d82af331976b1792374b3c1843b67e233c94fee462c45",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-02.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-02.bin.gz",
+      "raw_bytes": 53950,
+      "gzip_bytes": 4971,
+      "raw_sha256": "513cfb3b2d0e64675bcb51dd752fdc39719244243b0dbeeafab13ff12e0e1542",
+      "gzip_sha256": "5965185831b14ef70db0b6d84d91e12048e3cb720f4113fa98a272432d4acecc",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-03.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-03.bin.gz",
+      "raw_bytes": 49309,
+      "gzip_bytes": 4544,
+      "raw_sha256": "13197b96d8cc37c8bbf15b4cb66ac63847eca4d14390740e3470307c624538c1",
+      "gzip_sha256": "d6666a1bbbfff1652d6a59a94d2afd30b276465ee580a056f3a2693d156056ee",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-04.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-04.bin.gz",
+      "raw_bytes": 49883,
+      "gzip_bytes": 4594,
+      "raw_sha256": "317a48fa56fee8ff798eb9ad67351f444acdb418a4426a14585acdcf907b61e2",
+      "gzip_sha256": "f985f57358014e2cd3f9854769c20de23a62e5d8cc6e12331941023b1942de62",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-05.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-05.bin.gz",
+      "raw_bytes": 49410,
+      "gzip_bytes": 4557,
+      "raw_sha256": "921e3f83fc99c5f7c76d4ec86c36ad968f1f3e9f9866898c04ebe69c2cbfaad2",
+      "gzip_sha256": "5c8cf4c879cab879866bdb9fec34eb4a50d421f0eeab7da473faeed6ff64aa6e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-06.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-06.bin.gz",
+      "raw_bytes": 49883,
+      "gzip_bytes": 4593,
+      "raw_sha256": "28d7bf3958e16bacd0250d577c6efefce7eb5a87edd9a0d74be5ab1cba57a0d7",
+      "gzip_sha256": "78113e36ce157e14f8c06e68b998ddff60e1755ce72231637d5ab4e7245634f9",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-07.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-07.bin.gz",
+      "raw_bytes": 51522,
+      "gzip_bytes": 4763,
+      "raw_sha256": "618fd6134242bccc1b1afba201a54f65022148bdd5465f4bb2d4aa1b2cef9505",
+      "gzip_sha256": "e007050bbe40d18651616bf019c0f01a51b3d39a9eb945e09229665f1b0a8f39",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-08.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-08.bin.gz",
+      "raw_bytes": 50535,
+      "gzip_bytes": 4649,
+      "raw_sha256": "691f9c2dd716fa2d8b4af5ba368eea1cf9f40ef85aa9809b9ba666d1d010bc43",
+      "gzip_sha256": "139aac166b54f3150bb5c4aee9d5fe59493148b6eb10b783917b08f37de2cfb5",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-09.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-09.bin.gz",
+      "raw_bytes": 49666,
+      "gzip_bytes": 4582,
+      "raw_sha256": "4ce6bf96223538f455c9516e7c3c9386aab0c52e3f4c8ed68e5ab7f1cf8a44dc",
+      "gzip_sha256": "2438271d7bdf219fd54be15d38de5e150141551032ecafbd5dd41ff315233733",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-10.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-10.bin.gz",
+      "raw_bytes": 50225,
+      "gzip_bytes": 4618,
+      "raw_sha256": "f7b0793aa66fd92afc3aea4ca9d155c1408f6440e255ff7da0e3a76496031b67",
+      "gzip_sha256": "5b584c08bf7717c470aee5f589d6b0b8d794093e64743f7bf8cc47675e7e4b84",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-11.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-11.bin.gz",
+      "raw_bytes": 49299,
+      "gzip_bytes": 4532,
+      "raw_sha256": "3d05ee7209a70cf8853afcd29fc619e4954e861067d6a43ada2d26126f2fe985",
+      "gzip_sha256": "394836ca34cd31051725a83242cb259fa1a0ca230706dcb8509f243e97c045fd",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-12.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-12.bin.gz",
+      "raw_bytes": 48917,
+      "gzip_bytes": 4505,
+      "raw_sha256": "9d7ee485ed08d5fd0cf110a39a34d02143a70a09ce2360ce8a4c26f1c2919748",
+      "gzip_sha256": "12c4b84e0be5a2396484cbad906f6cce8cce42874fe5f6897fea76c2e404454b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-13.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-13.bin.gz",
+      "raw_bytes": 48917,
+      "gzip_bytes": 4504,
+      "raw_sha256": "5f30cb1972727ab014d044b42a0ac2e966020dad9d85708796b792740b89e3b6",
+      "gzip_sha256": "574cf669531ddb11190df3034af209a5ff04e4ef8a0a5875f180274236588e59",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-14.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-14.bin.gz",
+      "raw_bytes": 51062,
+      "gzip_bytes": 4707,
+      "raw_sha256": "de8e2aa8e5f55825fe3105f4d709fb128289569ffb1e2b14b26f58fe4abb4991",
+      "gzip_sha256": "9a6ac13ec5818ca229bc468391c9a17780aec07bcddd02bdb9cd89db60f1fe06",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-15.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-15.bin.gz",
+      "raw_bytes": 50531,
+      "gzip_bytes": 4672,
+      "raw_sha256": "27e55fbba230d0333cd16bd8da2aad6aba3081410f69b8c84898bf4805a4c6af",
+      "gzip_sha256": "98ffbef3593124a3c522606cccece5b131a078610ce1da9c38dc4311e1379dc2",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-16.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-16.bin.gz",
+      "raw_bytes": 49475,
+      "gzip_bytes": 4586,
+      "raw_sha256": "76bfc5ea4dcc30886d74324ed53cc0c26dc5290b342bc55230e336d46600303d",
+      "gzip_sha256": "0012bb639ffbe24db44c7c4ed227c51a26f85d39e922c0ede803b2507fc5b5b4",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-17.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-17.bin.gz",
+      "raw_bytes": 50732,
+      "gzip_bytes": 4659,
+      "raw_sha256": "e268be835adb00120e7e80d8dd2f7eef139de056161136aa0b4ddf6e30eae795",
+      "gzip_sha256": "9e4072c03e8a6f7b489df1870f77c64128bc680ce8cf2be05816e431dcdf6592",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-18.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-18.bin.gz",
+      "raw_bytes": 49781,
+      "gzip_bytes": 4587,
+      "raw_sha256": "70aef2ae9ff1b2c12944bf9e77dcce5708503b493300a89ab3134e51470c7eed",
+      "gzip_sha256": "0eef43595d0f53a1f4197a6768a66170239fcaa4d38aed693a953a8b33c96d25",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-19.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-19.bin.gz",
+      "raw_bytes": 49781,
+      "gzip_bytes": 4590,
+      "raw_sha256": "69cf6b6b7b205b05166808317bfc5b56fb6104530b9f2c0ae66879857229bd61",
+      "gzip_sha256": "1f0c5be2c7f5774c34507dc471943845e1981986cc7d501475f0e63cbc736940",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-20.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-20.bin.gz",
+      "raw_bytes": 49846,
+      "gzip_bytes": 4583,
+      "raw_sha256": "6983c64f8f7adf782d4767a05cc69f4181e84276d94f08d251f999dfb2bb7a6c",
+      "gzip_sha256": "db931820739d105385d209b03512aba56e6b8157b570df63944069ea62ed7849",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-21.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-21.bin.gz",
+      "raw_bytes": 48917,
+      "gzip_bytes": 4501,
+      "raw_sha256": "c6bc94534aadb223ca292a1565d57d98021dae8fe5eef69c99e2962c3b03a796",
+      "gzip_sha256": "9b56662a7ef0dd9ca9f582eddc0c2820ac0977504b1b94ed54ffe84e79f5ce77",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-22.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-22.bin.gz",
+      "raw_bytes": 48917,
+      "gzip_bytes": 4505,
+      "raw_sha256": "8d986321c8f971718c22db48d1f06cbd5bf33dff1a4cde54ed697f5ebcece641",
+      "gzip_sha256": "69a952c353bc6cc3b39b3061cdb09de1b7e67bad8a771a1b160b1631719e4e63",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-23.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-23.bin.gz",
+      "raw_bytes": 49285,
+      "gzip_bytes": 4540,
+      "raw_sha256": "5b47edcb76cd66c336a49d267fb7634c3567760c37ff26d6c2697b020198cdb0",
+      "gzip_sha256": "4a9cf0aff01f515a438c9f3c6a1d61689142084604686e47f98d779d88261edd",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-24.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-24.bin.gz",
+      "raw_bytes": 49671,
+      "gzip_bytes": 4579,
+      "raw_sha256": "b4fc65e746286982903e2d15baee42d8b7cc636f23686dd786856ff73c6a9fb4",
+      "gzip_sha256": "89d7a217b3ba7c2305d57a86ff9b90ed153100786414649177e688e064a7d0c2",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-25.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-25.bin.gz",
+      "raw_bytes": 49070,
+      "gzip_bytes": 4512,
+      "raw_sha256": "502a2473557dd880cbc3ba5bd0b8ae71a4604a76c3e53c38050e6faa9ac4cba9",
+      "gzip_sha256": "d9979bdb394d0c23cd11f32235d06e50a373b53de42bff4db296f6945517c090",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-26.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-26.bin.gz",
+      "raw_bytes": 51134,
+      "gzip_bytes": 4733,
+      "raw_sha256": "b399205c2d01901329311b1d1d1498361ec1a2b8c4cea42cd9904965de81a38f",
+      "gzip_sha256": "ebf984a68335565046185d741af8bbd06778f9781a7372d3087c8658afbf0c94",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-27.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-27.bin.gz",
+      "raw_bytes": 50315,
+      "gzip_bytes": 4641,
+      "raw_sha256": "46714799ce6392061ddc6e1321a8f951f811be09d6e32ac6376e898edfca603b",
+      "gzip_sha256": "9d91b6914aa0e7418814bca436dddf5f784c7e11f1783b2843c9783ea3847f6c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-28.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-28.bin.gz",
+      "raw_bytes": 49640,
+      "gzip_bytes": 4582,
+      "raw_sha256": "f7c8e3edaf4e4aea1745295b9c30d69b9a84da6c664adab192db9af2653c9873",
+      "gzip_sha256": "10b4e7b029ff43d1e643e31aca32d84a6b3d67db6228381b44c362cb81c000ec",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-29.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-29.bin.gz",
+      "raw_bytes": 49297,
+      "gzip_bytes": 4558,
+      "raw_sha256": "10453fa93bd3cd6f2e579eb0673bb9e4cb7fdfe7b787b34cb085a0d184212e93",
+      "gzip_sha256": "02280722939192e46e1beb6682a12b7924bd430a5613286a2c5a0c65f740ce91",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-30.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-30.bin.gz",
+      "raw_bytes": 51729,
+      "gzip_bytes": 4764,
+      "raw_sha256": "154e459fe568a319f94e3d75b91035bfc6efb4613f632a6277dc12a6ee11d4ad",
+      "gzip_sha256": "5d7c6f321a5a2f4fb7f0081a562d313dbc97834b6e3cd2bab5dd99137aeb4302",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-31.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/both.proofs/point-31.bin.gz",
+      "raw_bytes": 51501,
+      "gzip_bytes": 4759,
+      "raw_sha256": "eaadc77fb59d5ce5abd7bae2bafc7214c748ed4a089448eb93b0bd0a56c0f38b",
+      "gzip_sha256": "34db5c0d198b992b812e2b2471248853de1b1c5f1b1915ea16adcd946ec86b8a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-00.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-00.bin.gz",
+      "raw_bytes": 38269,
+      "gzip_bytes": 3839,
+      "raw_sha256": "737af56453abe021a8212ce2264e05a6bbc1bd6ab942d38fe9d54f61acca58f8",
+      "gzip_sha256": "3660dfe6fcbdbb9d08c0fbd2be0cf70084253d982aae96bd471e94d1d1a28f33",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-01.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-01.bin.gz",
+      "raw_bytes": 38269,
+      "gzip_bytes": 3836,
+      "raw_sha256": "6bc8c076dec957b2afa7435c8107f5779db5dc42e9d957b23f8b6bec77e32f19",
+      "gzip_sha256": "4f15837c04b28bc78883a3bc08c859e1f77a12d99f93e161b8ec1460d00aaadc",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-02.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-02.bin.gz",
+      "raw_bytes": 43913,
+      "gzip_bytes": 4394,
+      "raw_sha256": "29b06b35c00db40ceafdcdbc2ee0c666eeda6a3ba22e87f5e905c3cb657591d4",
+      "gzip_sha256": "872c2c3ac0fa4dcf0a09ab2bed51333be3f2095147f64b61d16d3939246ad1dc",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-03.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-03.bin.gz",
+      "raw_bytes": 38508,
+      "gzip_bytes": 3870,
+      "raw_sha256": "3d8a351c9806d3dbcfa9c2d0b0d771e5d5e09c7cdc9bf6f002518cdf8b4a3c2d",
+      "gzip_sha256": "f180f9397a7ebfcc699208d53dce6d852544a4c97055d0aacf2529178c98ee51",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-04.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-04.bin.gz",
+      "raw_bytes": 39082,
+      "gzip_bytes": 3928,
+      "raw_sha256": "53d534baad3f13f5c9d8367f5f3d2cea7efa23cc34c57d6040702c19217d43ac",
+      "gzip_sha256": "91429742a7bf44532f6fec6d68e0185e71d602954387b45f7fdad71ffb10c92a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-05.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-05.bin.gz",
+      "raw_bytes": 38609,
+      "gzip_bytes": 3883,
+      "raw_sha256": "51ee22a8301389a1408449977eb47eff30301c10342404e3d184aa1a45fc3032",
+      "gzip_sha256": "ac3e54c7a1eefcbc3a6bf4842afe8880a44539f54251ee8aa3ec0b9162eedab2",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-06.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-06.bin.gz",
+      "raw_bytes": 39082,
+      "gzip_bytes": 3921,
+      "raw_sha256": "a21dcd000c2aea0d2337045b65260dd5bb62fdee5e54417b21e772ca73494d29",
+      "gzip_sha256": "7aafa45dd63f52577f51c9a74eec926be838df2f0d40612662a170a44969c34b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-07.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-07.bin.gz",
+      "raw_bytes": 43820,
+      "gzip_bytes": 4353,
+      "raw_sha256": "3930c016e9e99e4095390adaf04409f90139c7b5e835002eb9fb3ecdb20268c8",
+      "gzip_sha256": "dcc00d59367d1a3f8dfb47649c34d441ccbd89efa104b09cb9b15815ea156b08",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-08.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-08.bin.gz",
+      "raw_bytes": 39500,
+      "gzip_bytes": 3957,
+      "raw_sha256": "9736700fff96e47ec351553a5cfe17a964c45317c735110a9d5830cb5c438eb8",
+      "gzip_sha256": "1af8003803f6cb83e0a88771841f87367184c5b3b83a0bf474b304ae986a0b75",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-09.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-09.bin.gz",
+      "raw_bytes": 38865,
+      "gzip_bytes": 3910,
+      "raw_sha256": "0668b1efbf317bbfa8486a0acac33f53811239b0bf76a31dbaf014e907bd17c8",
+      "gzip_sha256": "11e188c11826aff6e850a78fb37fedd8c4a1682b8bf261d5b9e27ae73c223518",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-10.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-10.bin.gz",
+      "raw_bytes": 39424,
+      "gzip_bytes": 3941,
+      "raw_sha256": "0260598d3f1026b887830f5c2d8e0991c7082d85db63d3a5418d2552a3067e34",
+      "gzip_sha256": "0c5a04ad1282de3519fb012ce626d906b9365921bd63afb711242b7f5115962f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-11.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-11.bin.gz",
+      "raw_bytes": 38498,
+      "gzip_bytes": 3859,
+      "raw_sha256": "e412c452805bc8fbed734046fc00bedaf880df1e4c15da1ee1976e885f678035",
+      "gzip_sha256": "1d5106c8a6f63cd271cc9f4ba66d23a2a9896e0022a76146383f81215ecbdf14",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-12.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-12.bin.gz",
+      "raw_bytes": 38116,
+      "gzip_bytes": 3828,
+      "raw_sha256": "70365889da23bfe0bcbaeb8a1da02886dcf5b88fb28a8b72abbe306455e334af",
+      "gzip_sha256": "369c8b8a7f9a382c909b6f3397e48c17510a78776241610b642e2dfa2359c006",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-13.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-13.bin.gz",
+      "raw_bytes": 38116,
+      "gzip_bytes": 3828,
+      "raw_sha256": "2e0c50a590716f164f2b9a5fa6a745c91e59fd30726aab94cea0c9c6a7167304",
+      "gzip_sha256": "f760576b2ce28e796f6ede20611dc463443254fce861feb14861a72a5f7bc1db",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-14.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-14.bin.gz",
+      "raw_bytes": 40261,
+      "gzip_bytes": 4029,
+      "raw_sha256": "99d1e27f28989b2ffbfcbb09f5801d2624aec8a61f7473d36a5e9b437fbfa8ec",
+      "gzip_sha256": "25817283167e28d40c50eec9f119ff5a7a95055f0dc2efd8901ae8f778264da8",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-15.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-15.bin.gz",
+      "raw_bytes": 39730,
+      "gzip_bytes": 3995,
+      "raw_sha256": "2aea131414b4f905156f601df4d80514ac62ea72db170b7f518f0a38ef3828f5",
+      "gzip_sha256": "57ac4e6ad47d6ed59c602c1deb9280538797dd6b61084ac5055c9b8e2b806332",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-16.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-16.bin.gz",
+      "raw_bytes": 38674,
+      "gzip_bytes": 3914,
+      "raw_sha256": "b7a810c7b82d712c38d897bc93a1a87b732fabb65ebf15b8ba236b6e14bf8650",
+      "gzip_sha256": "0188af06686ee32fbdca24c12351c2595bb90210596183251122ccb265c56587",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-17.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-17.bin.gz",
+      "raw_bytes": 39713,
+      "gzip_bytes": 3968,
+      "raw_sha256": "e8864a1123b6ab1c0ed5ae15c27cfc0e784a99de5c754f1ebf3e23ce4515885b",
+      "gzip_sha256": "879dd89f3abbd62097261106fa4a2b6169462895fcb203516d299f5d2f22361f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-18.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-18.bin.gz",
+      "raw_bytes": 38980,
+      "gzip_bytes": 3920,
+      "raw_sha256": "a2cd7536644fbe980d6ca5c59a54849fbd6abea64e24526f76e3249d6a6622f5",
+      "gzip_sha256": "9f3798c8e314d6a8e2942e071813b8ccf2debdccf23b2d5bc7a0cbc437b1391b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-19.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-19.bin.gz",
+      "raw_bytes": 38980,
+      "gzip_bytes": 3926,
+      "raw_sha256": "f035123ec68977d515934a6783845f1685254b68b9c4cffc4929c0a84bdfc43c",
+      "gzip_sha256": "9444ab92bc63a9dd7ba3aadf7aeef0002db9bc065c4c0740dd07acc2b1b8534c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-20.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-20.bin.gz",
+      "raw_bytes": 39045,
+      "gzip_bytes": 3915,
+      "raw_sha256": "ddb40e9979e66e14d3001d0a8c84bf9c5ef08e27603ade344006824e228c5a4a",
+      "gzip_sha256": "1f9a1af20db4e20701ecdaa0df730398aff98a41e082b94de2d95ccf41f0aa9e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-21.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-21.bin.gz",
+      "raw_bytes": 38116,
+      "gzip_bytes": 3826,
+      "raw_sha256": "0e4722566b7bd14f2a4111ec6d405cf9a9886202480dbae3ed5d520296bbd9fe",
+      "gzip_sha256": "149ef665ff1f2e304b8b4b9d0628c5b06815975398c0c1b6d6ccc7eb5cc73b3e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-22.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-22.bin.gz",
+      "raw_bytes": 38116,
+      "gzip_bytes": 3829,
+      "raw_sha256": "20b5912fb2a6e3e8c4bc94ce1683f653241e0bd6a09e0155f28eb72b40caa413",
+      "gzip_sha256": "4de61de34b12d7f41a9b274d1147b00ca830f5f9b4ba946af2b926ad08e161d8",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-23.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-23.bin.gz",
+      "raw_bytes": 38484,
+      "gzip_bytes": 3866,
+      "raw_sha256": "13f5ef0c044c650da5e23b94efda6c9f5e860d1497b82a11bc98f363bb7a41f3",
+      "gzip_sha256": "956ad70156d02f1209bb4b3d1983208e4981bda132d4f53bb8898919c807e314",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-24.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-24.bin.gz",
+      "raw_bytes": 38870,
+      "gzip_bytes": 3899,
+      "raw_sha256": "c6a8713886886dad88946e6c2044d000dbeb28ae6da2ab55c9145ea2777bdd94",
+      "gzip_sha256": "b6c40d80aedcdcc373f383bf83ffacc7514af9fb821b566b0de55607e7a38a3d",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-25.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-25.bin.gz",
+      "raw_bytes": 38269,
+      "gzip_bytes": 3831,
+      "raw_sha256": "24483b682d58dd7833e600ccb0e6a29cfdb117c14877eaeee616cd2baf111463",
+      "gzip_sha256": "3a66450132068ead7f4f7b570f7719e4b3a6fd0421424531325d64ec46e38aec",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-26.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-26.bin.gz",
+      "raw_bytes": 40333,
+      "gzip_bytes": 4073,
+      "raw_sha256": "8fc6cf810cdf87922b79a94d36e468cd85764632fb95f0d8e02c5e578edaa515",
+      "gzip_sha256": "654fe30fc7cc0b18a1beb9eaf37f535d9f52080919d3b921e474f06ce90ba88e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-27.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-27.bin.gz",
+      "raw_bytes": 39514,
+      "gzip_bytes": 3978,
+      "raw_sha256": "c50b38dbc2eba8282e3dfab8887b2571a3d5ce2ef853494cdf391a223c68a574",
+      "gzip_sha256": "62c06cb82eeb573423fe3307b3065b4a788c78f51d5d1f4bf6e1d24946d97a8e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-28.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-28.bin.gz",
+      "raw_bytes": 38839,
+      "gzip_bytes": 3911,
+      "raw_sha256": "37118718e5f186ad75fb3248bf2cbb3f4d0f6a4a775e646af92752a9e229388d",
+      "gzip_sha256": "376d8e5602c2f96a1b20391c6db26d3945c4e19387fe28fdc0ee55e88e6e4fcf",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-29.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-29.bin.gz",
+      "raw_bytes": 38496,
+      "gzip_bytes": 3882,
+      "raw_sha256": "87fde22765e6d780d1a345652b02abd0a1c803aeb84d19a2f47d39ba6ae9d75a",
+      "gzip_sha256": "2a41a57038ac5ed84f35fc70b9670c3606b56f6efcf67e920d161174d69813f5",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-30.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-30.bin.gz",
+      "raw_bytes": 40928,
+      "gzip_bytes": 4093,
+      "raw_sha256": "9cedcfda193b98634697a569023c6ccac87c3cdf6076d408b75bd04433f8297c",
+      "gzip_sha256": "f7efe7c7a5ee3e9d906021a5263c595407e2a15759a6cb9fc36a2eedfbc7f4aa",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-31.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/original.proofs/point-31.bin.gz",
+      "raw_bytes": 40700,
+      "gzip_bytes": 4084,
+      "raw_sha256": "1aaa107f9fa4796fb43f2aa417adb9d551e541445624c877bec62fc19152a9a1",
+      "gzip_sha256": "6ff4f7f4860a0d532c98a110191f080f267e9982143a0c54666b541af18a84bd",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-00.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-00.bin.gz",
+      "raw_bytes": 44556,
+      "gzip_bytes": 4255,
+      "raw_sha256": "e255a885e4fe162839572bdf4a6d7aeaf41a23f8291153ae5378e2b67cde84df",
+      "gzip_sha256": "dbb733218b76ed726a277be570c1b4d84eb01bb681a70223277a8258f550c82c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-01.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-01.bin.gz",
+      "raw_bytes": 44556,
+      "gzip_bytes": 4255,
+      "raw_sha256": "80259066e0c11b985c5898482d798b55224d8558e577a7fad7fb9a1378da51c8",
+      "gzip_sha256": "0940e51331e4269de138d0952113a1ba758b8e92027f9bc85700afe39063aec4",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-02.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-02.bin.gz",
+      "raw_bytes": 49436,
+      "gzip_bytes": 4714,
+      "raw_sha256": "ebf1f89067491b1db2fb0aee5ee42e68a989a95490fb4a70ffeab6285c3dad95",
+      "gzip_sha256": "b6cf2626baab5c3b5b37df2966427e0efdf47859dfacbfc4fd40a0108a9b969c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-03.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-03.bin.gz",
+      "raw_bytes": 44795,
+      "gzip_bytes": 4286,
+      "raw_sha256": "976a37c79c25d37ba2f64099fd7530b97190d1a11be80a8a7361033a58612bce",
+      "gzip_sha256": "7e1b8bb55f142990eefb2c41bf48a065f633707250229a2fe49d570c4ab2754e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-04.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-04.bin.gz",
+      "raw_bytes": 45369,
+      "gzip_bytes": 4337,
+      "raw_sha256": "b87992df2b57dbddd7c34315835060a8c74fab5cd2767b326e8317c410cca198",
+      "gzip_sha256": "1736f4e2a0cac39b5405360ff7f5d85ec402affd727a8ef1185757e131969aea",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-05.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-05.bin.gz",
+      "raw_bytes": 44896,
+      "gzip_bytes": 4296,
+      "raw_sha256": "00f2639f2a2b97a20e9ab4f5e96549611b06d6741e8f4ad955a9dd3ad48ec2d5",
+      "gzip_sha256": "e557e95a94010eeed259ed6aaa0683ca2353a8c44b5f3b3f43062720c84b17c2",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-06.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-06.bin.gz",
+      "raw_bytes": 45369,
+      "gzip_bytes": 4334,
+      "raw_sha256": "1abff1a7652b2323cd7dc41299c5c2566ebf8d1beda2f9f6c72b022d2983ae35",
+      "gzip_sha256": "8eb2c754bc969efc5e2702e89acd56033673e8333faf404471fb22d9430ba79b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-07.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-07.bin.gz",
+      "raw_bytes": 47008,
+      "gzip_bytes": 4501,
+      "raw_sha256": "652379e0303ff35b7686fe93d5cacd821a6dca78dd4920d3ea0021266f6d5dcb",
+      "gzip_sha256": "bb1b6ce6332c7976be50ee83bb9ca2476121a91232765d7257196389c2e40b99",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-08.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-08.bin.gz",
+      "raw_bytes": 45787,
+      "gzip_bytes": 4364,
+      "raw_sha256": "ab7bc6a69d3a1286e9ce855273dcde111dfa3070edbf3b1070b7942ce70ef2e7",
+      "gzip_sha256": "0d6bd5d1561fcfef5be264d7d1f7e8262e20333b06986facdf01e0139b5aacff",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-09.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-09.bin.gz",
+      "raw_bytes": 45152,
+      "gzip_bytes": 4329,
+      "raw_sha256": "3f194f9d582f9a44ec97de6cce3bc460cd054397b895cef4a2b7e93957e526fb",
+      "gzip_sha256": "df2f30d49ac2e8c22ac286e66acc196d4d713a79e12a2c30b6dfc1c0370f5a1c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-10.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-10.bin.gz",
+      "raw_bytes": 45711,
+      "gzip_bytes": 4355,
+      "raw_sha256": "c24d6fb7e3aa382454dfbb82e3211c0fa50a6c5eee085c7ab864ac90a6315513",
+      "gzip_sha256": "f8abe4351247e453b2107c762689f8fd92b18d566fe89918bfc71f7cc9108d82",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-11.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-11.bin.gz",
+      "raw_bytes": 44785,
+      "gzip_bytes": 4271,
+      "raw_sha256": "b3ff7a9c2f5665f29171321fced85b3c9d4ea10ef83e03aa8b11bb96d8ff6963",
+      "gzip_sha256": "be3928aecfcfa3733cef5c1da402c1197236431031988e0c2037c943bd5c9370",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-12.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-12.bin.gz",
+      "raw_bytes": 44403,
+      "gzip_bytes": 4238,
+      "raw_sha256": "61d6f10b05d2c27409ff849e4ad9d5dbd98af29eff64f0e906283fbe01585008",
+      "gzip_sha256": "ed328d758d641d7a40c3719c719deab6e32ac45a6ffa860c1e62fec05a10f54b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-13.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-13.bin.gz",
+      "raw_bytes": 44403,
+      "gzip_bytes": 4239,
+      "raw_sha256": "6730234807f4e106d1ecc858f66b01cdba17ca10600cafb9548c4ae527c7968a",
+      "gzip_sha256": "ddb26c2d47f59f2edde5a9a65b79d8eda86c769a971a3a98384cb6e5372a6e76",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-14.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-14.bin.gz",
+      "raw_bytes": 46548,
+      "gzip_bytes": 4443,
+      "raw_sha256": "50c4a5194c5172f12a916d6dcbfd19dd424a6e431f37237c213b633e3cc5ac38",
+      "gzip_sha256": "5126a7c268d089306f7e63162a328388c0d3cd164318e1f31cd2a5d6961b8c3f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-15.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-15.bin.gz",
+      "raw_bytes": 46017,
+      "gzip_bytes": 4404,
+      "raw_sha256": "29a37a0c2e4739fd81ab0f4415b7076784f9035c434ab647adafdc9fbe466911",
+      "gzip_sha256": "94c82b98059aead9c108f65a2c875f76fc0a6c4053104b30a9ec550ef5e69df5",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-16.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-16.bin.gz",
+      "raw_bytes": 44961,
+      "gzip_bytes": 4323,
+      "raw_sha256": "efafef670e2a312298def79aebe410d382d5becd15f6e296855d955a9406a796",
+      "gzip_sha256": "21686d7f35777282b6dd42db8bc6b95a01af1900581141595c3cb32c4240fd47",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-17.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-17.bin.gz",
+      "raw_bytes": 46039,
+      "gzip_bytes": 4386,
+      "raw_sha256": "644ea04546124bddddc63586b8dc8a73273b9448981e9fe63147628d382ba9e3",
+      "gzip_sha256": "1c55eaac029edd5574de76b56732ddde8a8b035a4673a22953add37a78192093",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-18.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-18.bin.gz",
+      "raw_bytes": 45267,
+      "gzip_bytes": 4331,
+      "raw_sha256": "bec9830cad526b2c004a5e6917907813ab0dcfa16b77aa6b6b14859d6d934ca6",
+      "gzip_sha256": "1a35df96ebdd2134b34a1d0c1fb0fbfaf4120ebea6da280296d1a68e00b0ce2d",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-19.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-19.bin.gz",
+      "raw_bytes": 45267,
+      "gzip_bytes": 4336,
+      "raw_sha256": "bffa08ca36687059bae06b2f962132ec2d06052216998a0e11fa35e6a40a0bbc",
+      "gzip_sha256": "c036106db3a501f53bd447da23bf449871e377238f0b5fb8cf8a60bccdf04862",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-20.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-20.bin.gz",
+      "raw_bytes": 45332,
+      "gzip_bytes": 4325,
+      "raw_sha256": "15e675310390bd898d302743cec5241f35980f95076a5d4645292eae6713ac5e",
+      "gzip_sha256": "1be2a45c21f261633d4de4ef01fd4321b7f2b274438eb0aa571d5ddfadea6586",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-21.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-21.bin.gz",
+      "raw_bytes": 44403,
+      "gzip_bytes": 4237,
+      "raw_sha256": "b18b5c968817fadbed1f260cc241281a53575c82d914add526afb92fa22dadc1",
+      "gzip_sha256": "4a44230efe868adeb1f2ee66b8fbb2436db10a8e683b185dfe6d58309f74bac7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-22.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-22.bin.gz",
+      "raw_bytes": 44403,
+      "gzip_bytes": 4243,
+      "raw_sha256": "a8433cb56d8da182c7b0ffcbe6829a2d5483924063a25ddd826db7a48e852c8f",
+      "gzip_sha256": "d85bea29f3bf024f69ada3aa37214f4c4b013e39780a227889765a2d21b9ba66",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-23.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-23.bin.gz",
+      "raw_bytes": 44771,
+      "gzip_bytes": 4277,
+      "raw_sha256": "9b4cd55db1a2b3261350714a03eba416e0f241f7a5c08b74a0078c724ee58540",
+      "gzip_sha256": "06d9ea8ad06788b3ee69302b835bca8b177dc4a46b0265637b315516630977b0",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-24.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-24.bin.gz",
+      "raw_bytes": 45157,
+      "gzip_bytes": 4315,
+      "raw_sha256": "2eb7a9a034f6e4138899b2b3906b80fa20fdea0e8e424a09b0f28b75c33dc3fb",
+      "gzip_sha256": "ab0c4f187e8a6f5e5312eb144dc8c9588e202ecce849722cc82cb25ba5bba5db",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-25.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-25.bin.gz",
+      "raw_bytes": 44556,
+      "gzip_bytes": 4251,
+      "raw_sha256": "b04893387ab9ed98c3b7d9751c943e5b8da29877b54233c1ecb01d9a62643b02",
+      "gzip_sha256": "654df2ed6ebcdd6bec7390174a05eb65bb41b781f8832db1ea1c4d91f571c156",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-26.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-26.bin.gz",
+      "raw_bytes": 46620,
+      "gzip_bytes": 4471,
+      "raw_sha256": "a44e4c0e23dae3cfdedcabc05f78bea18266d33e35e5b52a413ec77b1a34d118",
+      "gzip_sha256": "169d1c623e4fb59466a11d04c2156c245d5016428b9ef8e9c963ad59ddcb3988",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-27.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-27.bin.gz",
+      "raw_bytes": 45801,
+      "gzip_bytes": 4384,
+      "raw_sha256": "52d08dfa42b5f90a307a1886bb49e95c8fff234625d1ee3f77bb4acabc1bf44c",
+      "gzip_sha256": "f66d261a38b5e01065a678a41c876acfbd2272b03f036d2e099ee140d3a22559",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-28.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-28.bin.gz",
+      "raw_bytes": 45126,
+      "gzip_bytes": 4327,
+      "raw_sha256": "350df87a983df118992c4d43401d10b598ab2e1a0d9e0d44b82ab6b3df8b91e5",
+      "gzip_sha256": "9512d3bad76c3c243f3295a5bb5774fb91b35461c3c8eed318bd73c05c85d04b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-29.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-29.bin.gz",
+      "raw_bytes": 44783,
+      "gzip_bytes": 4302,
+      "raw_sha256": "008c743af57737ee2c02ebca23402e8e9a1e94f30d31b3c85b0a090178050a0d",
+      "gzip_sha256": "1c63c9452ed7bcc98d215d26e57bceab94df489e1cdc110665229acf045eeea5",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-30.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-30.bin.gz",
+      "raw_bytes": 47215,
+      "gzip_bytes": 4502,
+      "raw_sha256": "86f50ba7c580882099dc5c553e6341511724229e4e11fca57d83cf9e081853c1",
+      "gzip_sha256": "aa61116597bf9fd605f30115efb20d59c44130632c18f07a57b3f4aba598b582",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-31.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot6.proofs/point-31.bin.gz",
+      "raw_bytes": 46987,
+      "gzip_bytes": 4503,
+      "raw_sha256": "76d8a68d828153b44fc7b56b25b4a0d5ae61e155d851914c514e8618d33db6c6",
+      "gzip_sha256": "4dc87a2e18529dca46065c5aa03353bca47172e6f30fa918a5e0ad87832d9ae0",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-00.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-00.bin.gz",
+      "raw_bytes": 44695,
+      "gzip_bytes": 4253,
+      "raw_sha256": "e236b6b6c15e51ac244b34aa0b574397a494a7dc6f77f24f5beefd6f56922d5d",
+      "gzip_sha256": "c4cb4e101bcbfbae88f7efba947a9a219b74f40ea2f85717e4e06922325abd1e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-01.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-01.bin.gz",
+      "raw_bytes": 44695,
+      "gzip_bytes": 4252,
+      "raw_sha256": "a4ab09ce193a8eb563dd14f3d70ba903282e781cbdce5e30a7c80d875207c556",
+      "gzip_sha256": "11ab3224ad5311f79bfe9e9a74e86306a40569307bb950b6393c6cec14d29a94",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-02.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-02.bin.gz",
+      "raw_bytes": 50339,
+      "gzip_bytes": 4808,
+      "raw_sha256": "e86e96387781f74c090db9d5af70fbfd5bc70c11d3a974433aab704454e39d61",
+      "gzip_sha256": "88cf3d3b4d54ea67b34850b0610b2152238eacec758f65d17cd2254244cf650a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-03.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-03.bin.gz",
+      "raw_bytes": 44934,
+      "gzip_bytes": 4283,
+      "raw_sha256": "5f0e1f6258bec3bff9e8873c9a5f5f4f66930cf4b839cc6001b292e6c25ee5e2",
+      "gzip_sha256": "af30c80a30b7f30735727a14123358111ebd5fc50e685588b6e49f8737c99d66",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-04.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-04.bin.gz",
+      "raw_bytes": 45508,
+      "gzip_bytes": 4337,
+      "raw_sha256": "423a1199f96142aa06be000b25d0232e86cf4f332a9a0ce79310c34dbd937ed6",
+      "gzip_sha256": "26aac977e382c546414f57cdf99d071041ca9119a25c6ef9cc3ac669e0a622d7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-05.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-05.bin.gz",
+      "raw_bytes": 45035,
+      "gzip_bytes": 4298,
+      "raw_sha256": "f5d555d600ae8c4359dec474b09e59aae26a0096c93929f684c31052faadd4ef",
+      "gzip_sha256": "8e4f097de177e25cc519d827350bb8f4bece26f1beddd8c73a82adb9cc41e829",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-06.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-06.bin.gz",
+      "raw_bytes": 45508,
+      "gzip_bytes": 4333,
+      "raw_sha256": "cdc61edea6410bec70c5331f78d510c51fafc4fd55425e246341b3cf1fef03ec",
+      "gzip_sha256": "2049bbc1523270a790ccd7f159db36f22cf948a90f5f814adfb498ea6c07d68b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-07.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-07.bin.gz",
+      "raw_bytes": 50246,
+      "gzip_bytes": 4762,
+      "raw_sha256": "174fab4ddfa7947d885c46212c358f0e248081763225ffc75f91030a81e0627f",
+      "gzip_sha256": "8800d136364a052d2433ed848cdf7de52ab6477348e7022a9e9c937f8dc3b7ff",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-08.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-08.bin.gz",
+      "raw_bytes": 46160,
+      "gzip_bytes": 4391,
+      "raw_sha256": "7a9d450443e48bcec914cbf1f48bb6767a81c432205cede4df5f1eb529ec4620",
+      "gzip_sha256": "71c1975efa6139081454df6161a998d4c60500973857f88f0fbbdbbd10c9a4a7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-09.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-09.bin.gz",
+      "raw_bytes": 45291,
+      "gzip_bytes": 4326,
+      "raw_sha256": "9d25a142a239ff70364665e2a25f381a9060336168af439a9a97b192a074cb99",
+      "gzip_sha256": "79d28b96aff247734398e7168f8d65391ffbf644895c4b3944997d47b3bf69f7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-10.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-10.bin.gz",
+      "raw_bytes": 45850,
+      "gzip_bytes": 4360,
+      "raw_sha256": "1b0804e42c62b3eb9ad677b67ed57c8a3036ec64fbea5bc1ba92b73f20dd9cd3",
+      "gzip_sha256": "5c4695f7c5f2779b25bb5a31a0e76ab295aff6999298a53cab43a4b8de47e22a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-11.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-11.bin.gz",
+      "raw_bytes": 44924,
+      "gzip_bytes": 4273,
+      "raw_sha256": "b8e522ea84eeac38c623d2044e617c9d503bdc5b8c557859ed1bfa6d13107432",
+      "gzip_sha256": "ad5ab33e7dc433989e126d3bda7b6ea318b7f82f80b7c6118cc1cfc72f2c6c60",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-12.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-12.bin.gz",
+      "raw_bytes": 44542,
+      "gzip_bytes": 4241,
+      "raw_sha256": "74aaa761c9cd851e39f8ee39c148f2816605a9aa98c8e45cf23e78ffb458df78",
+      "gzip_sha256": "181bd577e852c4fffba6ae9c3dcf81bd87c93eee8221d41a53c8e9015a478711",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-13.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-13.bin.gz",
+      "raw_bytes": 44542,
+      "gzip_bytes": 4241,
+      "raw_sha256": "00949b32d6921775b0dd70c52e87eae6c8fe101e2f7d70efc00b21afa2dd5908",
+      "gzip_sha256": "8eef58fda95a117de7cf5ca80e0ab0e76dab649bf68ef974d2a94ef580a948a6",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-14.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-14.bin.gz",
+      "raw_bytes": 46687,
+      "gzip_bytes": 4443,
+      "raw_sha256": "0b85a19aa700bddd20574dfe904612df9daa0cd374a6959f2e82cb29e882ddb4",
+      "gzip_sha256": "1a70d66a250c3a2c5be1b513b666e970c08517485751b1dc752bf9c5f0ba77dd",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-15.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-15.bin.gz",
+      "raw_bytes": 46156,
+      "gzip_bytes": 4408,
+      "raw_sha256": "7830df1bf70eee0871ab8bab4a36bb08844b2be5f25e5ecc14633844049c9581",
+      "gzip_sha256": "21ef4ea6758082abe6ff4b283c915fd685b522bec692175424b430e4831a7b36",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-16.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-16.bin.gz",
+      "raw_bytes": 45100,
+      "gzip_bytes": 4324,
+      "raw_sha256": "944428827de4ea9c05fa185df2f2ac976e8884a7cafcadef525082d266bde0d9",
+      "gzip_sha256": "bc5752c9b8f083b485cf4156465167fb3ce59eb27208b0c15e413afdf39fe306",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-17.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-17.bin.gz",
+      "raw_bytes": 46318,
+      "gzip_bytes": 4392,
+      "raw_sha256": "75b6c5d8fc3b99541a1779fac56098066a7fa99f802fef4c347256a516452eeb",
+      "gzip_sha256": "2a3142cc25c557fe016ee0ca750de7be0f5d1bd43d92cdab5ffaa50f2bb7d496",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-18.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-18.bin.gz",
+      "raw_bytes": 45406,
+      "gzip_bytes": 4336,
+      "raw_sha256": "625807cf2e730ac7cbd8d5706b4aad6e21a23ba24850e0fc138c8aed237bb082",
+      "gzip_sha256": "cee3d0eb708ce1e91d74529170cae094ec970f786587a882f46c7fc7f817407b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-19.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-19.bin.gz",
+      "raw_bytes": 45406,
+      "gzip_bytes": 4340,
+      "raw_sha256": "53fef7cf95fa47f4e31ab1627469963eda0d36a1dc196b0b0cda602ea8166247",
+      "gzip_sha256": "225e5169d77b5c6c16b515d5b635dbb9467f1fb37f534bbed2391f55eca289a9",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-20.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-20.bin.gz",
+      "raw_bytes": 45471,
+      "gzip_bytes": 4328,
+      "raw_sha256": "454daba055e78b5b4a7fc7d8d7f13e89a1b029ad18376acbfe22f846c4164bf8",
+      "gzip_sha256": "06bd2e9d8c75e6d48c8191d67d5ff44be8bf620fdf3c86b2bc331d42cd19287e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-21.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-21.bin.gz",
+      "raw_bytes": 44542,
+      "gzip_bytes": 4239,
+      "raw_sha256": "795ade5723a26863c82bb32233c63ed62263aa14a7b7d9145336b8250dcc24d5",
+      "gzip_sha256": "5c9eb11ba345aa72b234c72af4bda921af24db061ee5baacb6dba8b5575baf90",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-22.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-22.bin.gz",
+      "raw_bytes": 44542,
+      "gzip_bytes": 4245,
+      "raw_sha256": "8868f8ec3d1688f203cc0c878840e29b283f944d21a445dd197e9ab446a670f7",
+      "gzip_sha256": "1f5543fb147a55b411e2a4bbb1b04051958bd1b31f97075b77d73770f88f198b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-23.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-23.bin.gz",
+      "raw_bytes": 44910,
+      "gzip_bytes": 4283,
+      "raw_sha256": "0ad6abc333e3b5f93c721f7a7bc68dc8cb5ddf123ce85eada890a7c9ff537883",
+      "gzip_sha256": "4c2e8da23ccb4dc5440791835cea54e4bd31078e804746c006e3d9ffcdbee7e4",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-24.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-24.bin.gz",
+      "raw_bytes": 45296,
+      "gzip_bytes": 4319,
+      "raw_sha256": "6975589b9be17416f1d905b1ec283ed0adf2e06d71e1a54c5bc3163c99a43640",
+      "gzip_sha256": "08b05a967bcb90e99491d74e9e32028cc4e97ae387526815243f59d3cc50a613",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-25.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-25.bin.gz",
+      "raw_bytes": 44695,
+      "gzip_bytes": 4247,
+      "raw_sha256": "08d1ced00e8304801fb1cf0023de49a80b75e75d8c00b45ea768ff0edfbf1460",
+      "gzip_sha256": "641cf1e72a4ad8428666855f39dff85edfad64a759c383cf9b3866988779a0f7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-26.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-26.bin.gz",
+      "raw_bytes": 46759,
+      "gzip_bytes": 4470,
+      "raw_sha256": "e2b9f1bcac84d5cd29f2908b13183f0781bc2016793e5fa3201b980d3a300fb0",
+      "gzip_sha256": "1e3f1e588476eef2ce960b10a43697432f502d28432b04f6e0113f995046b9f9",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-27.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-27.bin.gz",
+      "raw_bytes": 45940,
+      "gzip_bytes": 4383,
+      "raw_sha256": "52b620d5216563fb4f7df670691dab819191ae174b5583de56f65af9887ceb74",
+      "gzip_sha256": "e0d296243b09bdb5c8b1e022a7c6bc63d5abdf6f0d2dbde07ec1aca8a8b8246a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-28.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-28.bin.gz",
+      "raw_bytes": 45265,
+      "gzip_bytes": 4322,
+      "raw_sha256": "454c163f0bee088f0b96982d63397747db631107ca480bc56c5e7d5175e61ae9",
+      "gzip_sha256": "828a9deab6b0db07f2da9bee392b905bfecfa081e13d0b69bb7354f682cf7c76",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-29.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-29.bin.gz",
+      "raw_bytes": 44922,
+      "gzip_bytes": 4301,
+      "raw_sha256": "0efcef118e2bf12bd910de1a0b53c7e09d54ca32cb35530955cd44b7abb6d341",
+      "gzip_sha256": "c19867e7b392edc8faf7b8e298a704da514376abce3b55d6be8724bc32298581",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-30.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-30.bin.gz",
+      "raw_bytes": 47354,
+      "gzip_bytes": 4505,
+      "raw_sha256": "591c03c74d3c2535f872de0d59371942890f3deffc33e844eabf498a704b53c1",
+      "gzip_sha256": "a30c3a87dd8455da15d5f5850ae17e497b1852a2801f13b9e7d6e42fcdb9eb6e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-31.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/slot8.proofs/point-31.bin.gz",
+      "raw_bytes": 47126,
+      "gzip_bytes": 4500,
+      "raw_sha256": "8b5b3c6611c6a353a7d301d3b5d854f579489eba019b58a5ca40353d00d7a37f",
+      "gzip_sha256": "5318a04f950cc3a4c4ee3572b99d34d448cfe8a0dc78005826af7518817547a6",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-00.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-00.bin.gz",
+      "raw_bytes": 40909,
+      "gzip_bytes": 4009,
+      "raw_sha256": "a2d1529877c8166382ebaad7b70c9e0d307ec505ace9b516132b8e22488301f1",
+      "gzip_sha256": "0bed9347f260ca28492ddafe9aa3de6d1cb6fdc1f83c9e050762af2ec253ee53",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-01.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-01.bin.gz",
+      "raw_bytes": 40909,
+      "gzip_bytes": 4007,
+      "raw_sha256": "ca7f01b426c4818fa9e762212962bab7df490addf6034e3046f1eb08b1bcb28a",
+      "gzip_sha256": "427f47d9a44840e5e6e98fa8cfd691c717306dd4d35ba04abd496b4ddba58ab8",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-02.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-02.bin.gz",
+      "raw_bytes": 45789,
+      "gzip_bytes": 4469,
+      "raw_sha256": "4f7928c47594361ae8295a19b79c86f38c50ff3cff7e0cad0d6b9e86bafe4d86",
+      "gzip_sha256": "32caa3030d12b3101ab16bee09d4122dc6c5f6c9f5117181ef799ad61354a5f5",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-03.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-03.bin.gz",
+      "raw_bytes": 41148,
+      "gzip_bytes": 4036,
+      "raw_sha256": "cb5c07efd51cfaff85605cfed867340cb98e2d8400a640fc2af41c69a776a488",
+      "gzip_sha256": "4843e9a95b643d78bec725625acf66fdbefdf2b08650df48453139d6e92a1762",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-04.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-04.bin.gz",
+      "raw_bytes": 41722,
+      "gzip_bytes": 4092,
+      "raw_sha256": "d7b7f034a7cfbf217277659c2d52c5b2fdd8c13bcf323c28fe00c94fb2e18aa4",
+      "gzip_sha256": "9b41e0244af30cd09b103747051a469d561b8008540aa5a1cda8ae9d29948eda",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-05.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-05.bin.gz",
+      "raw_bytes": 41249,
+      "gzip_bytes": 4048,
+      "raw_sha256": "268c6ca2b1a1f9287a9a31b28debacb709f077789099f302f46a717f5fca1174",
+      "gzip_sha256": "199a2034326b9bc974fc88152eda71cc9db9e897d4f9174dc4b2008df5da93fa",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-06.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-06.bin.gz",
+      "raw_bytes": 41722,
+      "gzip_bytes": 4086,
+      "raw_sha256": "89d89b924038d5e7f9386fa38dca0e6154467c77b2277e57df934284ea7cbc57",
+      "gzip_sha256": "374a763f656b373493d46a00214d6b72a93a8c09796e4fa19ee5d454047e1a44",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-07.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-07.bin.gz",
+      "raw_bytes": 43361,
+      "gzip_bytes": 4258,
+      "raw_sha256": "d893365a7435d76bd21904e02aa6e93b631070159ee96826df2ae0e8985c2b3f",
+      "gzip_sha256": "6b27d347aa2ae690ae8d23763d74cc2fd8a284f78a2cf05f93911cba122b338c",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-08.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-08.bin.gz",
+      "raw_bytes": 42374,
+      "gzip_bytes": 4149,
+      "raw_sha256": "136c4fd4b0c59c6de289d819d24de75e07b6ec57cbd45eab527725493512497f",
+      "gzip_sha256": "389e672def7c22bcb77e30ef15bf4773da40535904291926a183462b293bde96",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-09.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-09.bin.gz",
+      "raw_bytes": 41505,
+      "gzip_bytes": 4072,
+      "raw_sha256": "93e35e24171f36ad9f84425d2ca4891242f549c5f3b50d89db881936d8ab2f65",
+      "gzip_sha256": "3f9ded5cfc495bd9c93d39e4ec3f5c1c8af8f9a816e0f5420fa35b3623b8f49a",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-10.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-10.bin.gz",
+      "raw_bytes": 42064,
+      "gzip_bytes": 4106,
+      "raw_sha256": "309c3fcaf532b2c76b09e5a6f9009105700aa57a99299f3c48189cb582fbb138",
+      "gzip_sha256": "94b2906226c451dae8565f9b1d6b40c8a1401e5eecf0b63865dd603ecb1baa8b",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-11.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-11.bin.gz",
+      "raw_bytes": 41138,
+      "gzip_bytes": 4027,
+      "raw_sha256": "6fe80738f669a52747fbcbc18908fe9e49e8c48368d4b0151f0c7639ecd330f1",
+      "gzip_sha256": "1a4d10ed20fa1aae852675b25193de701879e9febfb6706a4f978c03d0383acf",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-12.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-12.bin.gz",
+      "raw_bytes": 40756,
+      "gzip_bytes": 3991,
+      "raw_sha256": "d3575a7126e9e04fb4fe84c277a71d8bdcda5149d178f4edc407f4d2c34d2c84",
+      "gzip_sha256": "cc80694724c738d3bebe6b082831081c8011ba1361ff33fff4dc80aaf19a2fca",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-13.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-13.bin.gz",
+      "raw_bytes": 40756,
+      "gzip_bytes": 3991,
+      "raw_sha256": "f7b7dd38a6acacb0323c8ea5c8eb61179b99318ecd1f40384398462fd9b6ff88",
+      "gzip_sha256": "7ddd1c4534538cb4312802baffb9ef782204cea4f7128d3b7e0858156e654e97",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-14.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-14.bin.gz",
+      "raw_bytes": 42901,
+      "gzip_bytes": 4204,
+      "raw_sha256": "dd2b74b9922875ae56f70fb12b596c6ab02801596b5318203913f4b8a47ce6b9",
+      "gzip_sha256": "b06db4551d893922b6d4fa87dfe6f6f442af7b57f553eab4bdd099ab248f9335",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-15.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-15.bin.gz",
+      "raw_bytes": 42370,
+      "gzip_bytes": 4163,
+      "raw_sha256": "de4425f4f706d6424ea0bbb38d5aa45cb5365c8b058aec532756e99588f58172",
+      "gzip_sha256": "3ea9238b7d3c16b146d56b09417124a70f97851368ff18088984ebf068c40528",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-16.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-16.bin.gz",
+      "raw_bytes": 41314,
+      "gzip_bytes": 4086,
+      "raw_sha256": "ce0989b5d3ff0c01a4100b7ce6a1176d27cd3c7b11b7bce20946d944d6feef36",
+      "gzip_sha256": "c41893f873487a16168ad6c6df4e77b4a543a2b98f480367a03233e66e0ee98f",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-17.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-17.bin.gz",
+      "raw_bytes": 42392,
+      "gzip_bytes": 4142,
+      "raw_sha256": "33c762f4121958577a657ea3c3632db29339b5303c7e55aaf3d75cbc9f9e4231",
+      "gzip_sha256": "1a9969c339ec2a1534f7881f6b1a509e65c0c3c1c3eaf7b1d7804bc41e097abf",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-18.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-18.bin.gz",
+      "raw_bytes": 41620,
+      "gzip_bytes": 4084,
+      "raw_sha256": "4888863aabb4dbb82829b8e3d05978d198807ce51c1df8679c5166e58bc07226",
+      "gzip_sha256": "71a811ff96888555d39a904d3760a80b7976d0c38ee05e79c5bfa7cd32114968",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-19.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-19.bin.gz",
+      "raw_bytes": 41620,
+      "gzip_bytes": 4089,
+      "raw_sha256": "40211f206777f3ca4226b1657c2c3b8ba30d4bccf55e9ac52fa47e1ce2fc008c",
+      "gzip_sha256": "1a1be248e043f4d7c23161fd3989a1b5f15e6bd6e4dc16996a4e86121ea95405",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-20.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-20.bin.gz",
+      "raw_bytes": 41685,
+      "gzip_bytes": 4079,
+      "raw_sha256": "80ea80e3e88a182615e1fa53dc55117e460698f364c89fa8b3b394167290afb7",
+      "gzip_sha256": "0f67d89725bf1ff242cdd6cc01af18f4f830ad8a072c091afe89fa34490c7287",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-21.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-21.bin.gz",
+      "raw_bytes": 40756,
+      "gzip_bytes": 3988,
+      "raw_sha256": "30517efee596bdfe9dc182137beb62a4850954d9c62f057eff9086f44f808ac3",
+      "gzip_sha256": "7b8dbd9b37ccbc8450028f9d5f05a86a2e4bafe9ac1ab5aa49d0f986dfbf6352",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-22.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-22.bin.gz",
+      "raw_bytes": 40756,
+      "gzip_bytes": 3994,
+      "raw_sha256": "30f5dac67111d513bb26e33f931cffa77694a37c3f5ae21ccd95fb7a899761af",
+      "gzip_sha256": "95b4cc0cd152c2f842ec2522d9e95112ebe8c2ac44a251120b66a1b9fc7a0ec5",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-23.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-23.bin.gz",
+      "raw_bytes": 41124,
+      "gzip_bytes": 4035,
+      "raw_sha256": "1c4ca301ccb371689f0f4d1e7329a4c89ed4425a63655591b8c174da395a3a6e",
+      "gzip_sha256": "8b485ee5c88122592f0342db82b448113be8a0ef15482fe762254b2a6f7482eb",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-24.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-24.bin.gz",
+      "raw_bytes": 41510,
+      "gzip_bytes": 4064,
+      "raw_sha256": "c030a4a42bab1cea89634936e66cbe3516546aeb7837d466ca0e7adafcdb63b0",
+      "gzip_sha256": "3a7629442235791e4910d9ab2c601fac82319fdc728708cf4e73d3f9e726e9a0",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-25.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-25.bin.gz",
+      "raw_bytes": 40909,
+      "gzip_bytes": 4002,
+      "raw_sha256": "e075d310d4c112510a31d2971b91366e412b44e63bcddac6d4105d397d8646af",
+      "gzip_sha256": "bb4c08680ed5fade6cdca36eeff83f8aec8908b62ca36151d47dc2c0cc4353b7",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-26.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-26.bin.gz",
+      "raw_bytes": 42973,
+      "gzip_bytes": 4246,
+      "raw_sha256": "d1f7d41cb0171e6d6f9c935d8ea23ab322ab944e87dc73a94efd9e476b0c6be6",
+      "gzip_sha256": "36080ab245a5b2ad2beb9cd65a8f7900a5c6e1b6e87f0fba536dd83d75a6f81e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-27.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-27.bin.gz",
+      "raw_bytes": 42154,
+      "gzip_bytes": 4151,
+      "raw_sha256": "5dbb1eeffc32b4df97d09e3f5dab562099a646ce81263d992e957e65363069ff",
+      "gzip_sha256": "a471404b8e530a066ab6938c86dde4d0b4cd298d01a8c98a1230de0976b9b85e",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-28.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-28.bin.gz",
+      "raw_bytes": 41479,
+      "gzip_bytes": 4074,
+      "raw_sha256": "d8c0e795be67acaacf35c6c108084a4c3faf26cd988402f5d624e5c5fc247825",
+      "gzip_sha256": "1f43bf5b9b730686decce410cc1c12477e91e309f94f29a5c25406f2a6c70ef9",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-29.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-29.bin.gz",
+      "raw_bytes": 41136,
+      "gzip_bytes": 4050,
+      "raw_sha256": "7134628cceb8d4eddd533e723a5db82209d582967b717af38e64b3028c6f483e",
+      "gzip_sha256": "0a9a85311bbf82260c73049f3cea100973c0caf46083a442906f9facc9167c18",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-30.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-30.bin.gz",
+      "raw_bytes": 43568,
+      "gzip_bytes": 4260,
+      "raw_sha256": "01f74ecde5a4bf66d4eb75e7583cc2ee30da2c3d83185333f2c98219413847bf",
+      "gzip_sha256": "75611b327ce50009663e3f32b19f94d60d797f76e836f5550776febacd15bb88",
+      "roundtrip_verified": true
+    },
+    {
+      "original": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-31.bin",
+      "archive": "reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/temporal-only.proofs/point-31.bin.gz",
+      "raw_bytes": 43340,
+      "gzip_bytes": 4253,
+      "raw_sha256": "4add198bfaf4b7d563dbf9402767c211b8b4400d062a5a4877c8b1cd423cf04b",
+      "gzip_sha256": "b04eedc0db6cb15946ac8cfa60733078107713ba9534de083425c08f0a03a987",
+      "roundtrip_verified": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-mixed-energy-later-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/boost-only/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/later/boost-only.json",
+    "original"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.9448574492707849,
+  "user_seconds": 1.911552,
+  "system_seconds": 0.019164,
+  "peak_child_rss_kib": 15456,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-global-euler-source-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-euler-source-experiment/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-euler-source-experiment/original",
+    "original",
+    "3",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 18.759370227809995,
+  "user_seconds": 18.543065,
+  "system_seconds": 0.075727,
+  "peak_child_rss_kib": 61440,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

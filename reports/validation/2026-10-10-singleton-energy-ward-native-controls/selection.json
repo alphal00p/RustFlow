@@ -1,0 +1,13 @@
+{
+  "rule": "first lexicographic points per explicit disjoint role/power stratum; no reference values",
+  "population": {
+    "C1-Edegree1-bulk": 62,
+    "C1-Edegree2plus-bulk": 20,
+    "C1-Edegree1-surface": 40,
+    "C1-Edegree2plus-surface": 19,
+    "outside-own-C1": 20,
+    "outside-energy-free-other-loops": 130
+  },
+  "selected": 16,
+  "origin": "completed round004 frontier; actual NoApplicableRule verified independently by native replay"
+}

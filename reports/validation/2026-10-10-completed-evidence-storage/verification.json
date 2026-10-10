@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "historical_manifests_unchanged": 9,
+  "historical_manifest_entries_verified": 747,
+  "archive_restorations_verified": 28,
+  "raw_bytes": 30001727,
+  "archive_bytes": 618958,
+  "archive_map_sha256": "eb58321351b986fd1a35e679f0ab931edb8dc3d920ca21eb76c26d261d9a198d"
+}

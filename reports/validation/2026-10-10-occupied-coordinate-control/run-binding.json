@@ -1,0 +1,82 @@
+{
+  "scope": "Exact input rerouting and physical-edge permutation of original cut [3], represented as new cut [0]. Both original targets retained. No full-amplitude claim or speed comparison; no source/reducer changes or imported rules.",
+  "original_input": "examples/finite_density/massless_three_loop_chain.json",
+  "original_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "rerouted_input_sha256": "c1951957e387ebaddbce6a66427c11eed01fd0467508d599a650c1e80296ed67",
+  "old_momenta_in_new": [
+    [
+      1,
+      0,
+      -1
+    ],
+    [
+      0,
+      1,
+      -1
+    ],
+    [
+      0,
+      0,
+      -1
+    ]
+  ],
+  "determinant": -1,
+  "absolute_jacobian": 1,
+  "old_physical_slot_for_new": [
+    3,
+    4,
+    2,
+    0,
+    1
+  ],
+  "numerator_substitution": {
+    "P1": "Q1-Q3",
+    "P2": "Q2-Q3",
+    "P3": "-Q3"
+  },
+  "graph_incidence_preserved_per_edge": true,
+  "chemical_assignments_preserved": true,
+  "build_provenance_sha256": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+  "source_snapshot_sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+  "launcher_sha256": "b5857a9d37196d568cc91af2d9bc7fe408b163b8cef0409bc3e9deba9794c7cd",
+  "executable": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+  "executable_sha256": "136eb66a829f3d96e20568b0c5444ed2104e996a96c61077ce65ef2f8bb357da",
+  "settings": {
+    "RUSTFLOW_WEIGHTED_INPUT": "reports/validation/2026-10-10-occupied-coordinate-control/rerouted-input.json",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS": "true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS": "true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES": "true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED": "false",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES": "65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": "0",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAY_POINT": "true",
+    "RUSTFLOW_WEIGHTED_RAY_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_POINT_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE": "true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS": "8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": "0",
+    "RUSTFLOW_WEIGHTED_DEPTH": "3",
+    "RUSTFLOW_WEIGHTED_DOMAINS": "8192",
+    "RUSTFLOW_WEIGHTED_ROUNDS": "16",
+    "RUSTFLOW_WEIGHTED_FRONTIER": "1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED": "4096",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON": "-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": "18:60:8",
+    "RUSTFLOW_DENSITY_FLOW_REPORT": "reports/validation/2026-10-10-occupied-coordinate-control/selected-cut",
+    "RUSTFLOW_WEIGHTED_CUTS": "0"
+  },
+  "command": [
+    "timeout",
+    "600",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cleared_inherited_runtime_variable_names": [],
+  "exit_code": 101,
+  "post_run_source_and_executable_unchanged": true
+}

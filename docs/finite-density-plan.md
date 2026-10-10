@@ -205,6 +205,23 @@ is a difference of completion factors, so the current exact-`c*E` source policy
 does not add its shifted temporal and boost presentations. General polynomial
 reindexing for that case is being assessed separately before changing the policy.
 
+A separate fresh [selected-cut flow check](../reports/validation/2026-10-10-three-loop-single0-flow-check/README.md)
+now carries cut `[0]` through recursive ordinary hard boundaries, boundary
+matching, transport and the physical endpoint at one `18:60:8` profile. Both
+targets are zero. This verifies execution of that sector's complete pipeline;
+it supplies neither a nonzero boundary accuracy test nor full three-loop
+acceptance. The independently checked connected hard boundary remains separate.
+
+The [mixed-energy source controls](../reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/README.md)
+preserve polynomial admission and give no additional coverage. Later sampled
+reductions contain 132 terms instead of 141, with one shorter and one longer
+row. An [exact loop-rerouting control](../reports/validation/2026-10-10-occupied-coordinate-control/README.md)
+preserves both physical targets and chemical assignments but still exceeds the
+frontier limit. Increasing native search depth from three to five leaves all
+seven [sampled reductions](../reports/validation/2026-10-10-targeted-native-depth-controls/README.md)
+unchanged. These controls remain validation evidence, without a source-policy,
+input-routing or native-search change.
+
 ## Remaining acceptance evidence
 
 Exact certificates and bounded algebraic pilots are useful gates, but do not

@@ -1,0 +1,213 @@
+{
+  "scope": "Frozen bounded source-only Euler presentation experiment; no production change or full closure claim",
+  "files": {
+    "README.md": {
+      "sha256": "c7013adf458f4d8b36dc239c94637bc3ddc36e7bd083d2665c0a0ea06a9ba430",
+      "bytes": 2342
+    },
+    "build-binding.json": {
+      "sha256": "d31c9b7d5610a0efabb005fcf75f34e10855eaf298505a02fa42dad06d866fba",
+      "bytes": 3081
+    },
+    "build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "build.py": {
+      "sha256": "e54d732a64bbfa1260a260ba4fc6b6668cdf522ce4727d883982b70111a757af",
+      "bytes": 1853
+    },
+    "compare.py": {
+      "sha256": "fbe30b51d61df50e5c66d6368128554db09984de6ca8af17cec36fe6b93b1095",
+      "bytes": 2590
+    },
+    "global-euler/point-00.bin": {
+      "sha256": "d0055bca65e631be156e0fa81fc68e7a212a76bb68803a9390bec08c48ff4c02",
+      "bytes": 149867
+    },
+    "global-euler/point-01.bin": {
+      "sha256": "5527c4736b892bbce3d36ca54fb91f2359a48fe2dbd4ae5997d478a47fc3d5e6",
+      "bytes": 145263
+    },
+    "global-euler/point-02.bin": {
+      "sha256": "efbecc28ddfcfeac68f47140d21796a2d073a9fb4b6fce6a663e58fc8d40f12e",
+      "bytes": 151226
+    },
+    "global-euler/point-03.bin": {
+      "sha256": "5ea8b9790340b4be58af48283611b80510687c9d0368c07a53daefb808c1b8a1",
+      "bytes": 145145
+    },
+    "global-euler/point-04.bin": {
+      "sha256": "b06d1c11731bf8eabcd0a4bcb0787b9db458ea7ed1085bd414d2eb19646e72cc",
+      "bytes": 153316
+    },
+    "global-euler/point-05.bin": {
+      "sha256": "3ff2a15d17b3b85024411722ebf4de31e8ac49e10693686ff29069ed37dd175d",
+      "bytes": 153306
+    },
+    "global-euler/point-06.bin": {
+      "sha256": "f3043be5f384c2281bf117244522f5d9cfe3b45ab8403b855c3a7d885c4fc758",
+      "bytes": 152801
+    },
+    "global-euler/point-07.bin": {
+      "sha256": "c2054094784133e0fb6162acf3e7b0d241fa17db77f52659e1283d989ef3a12b",
+      "bytes": 149930
+    },
+    "global-euler/point-08.bin": {
+      "sha256": "ee12304e5a431adbb07815cfd1d06f5458a035ddf675fac4cfdb6188c9a5e912",
+      "bytes": 144055
+    },
+    "global-euler/point-09.bin": {
+      "sha256": "2a5f7bf7f8ff8a089fe87d98a9ce49fc71beb64ca21d14659f46120296b12d06",
+      "bytes": 149788
+    },
+    "global-euler/point-10.bin": {
+      "sha256": "5f67220fd5725ea13ec01440d90562c1c4fc510355a890d271473267504f2394",
+      "bytes": 150337
+    },
+    "global-euler/point-11.bin": {
+      "sha256": "a112ec21720455d44ec797831da5bf051c1add755d1119b884cb6f5906101879",
+      "bytes": 145753
+    },
+    "global-euler/point-12.bin": {
+      "sha256": "a2dd7f8a8f6e74b7aabb2278f289b7da4e1310003dea2967f872e0db8217b571",
+      "bytes": 154382
+    },
+    "global-euler/point-13.bin": {
+      "sha256": "56e0603e0f5c0f9b5f1816d205af32c3238b0305a64e0680c634b842219c7aa9",
+      "bytes": 148553
+    },
+    "global-euler/point-14.bin": {
+      "sha256": "2cdd8bca49c0ec85f9d52ae32ef659df184f78f70b78e4b1ef0193c9e65cf9cd",
+      "bytes": 145515
+    },
+    "global-euler/point-15.bin": {
+      "sha256": "cbb15a6636c7f11fea7ffa0172cfefebbb538bdff95d1d77164cbaff3ad81507",
+      "bytes": 144325
+    },
+    "global-euler/result.json": {
+      "sha256": "b7d61db220c43f17ef849efed92df2ae75a8cb660aa013ff9900c2821cbba7ff",
+      "bytes": 605380
+    },
+    "global-euler-binding.json": {
+      "sha256": "47e97c86692e19d198b775257faddbb48a4944bdda6db50f12f287a135917070",
+      "bytes": 1789
+    },
+    "global-euler-resources.json": {
+      "sha256": "ba37a14e43b18de9511c553cbed43948ae1fd2aa8ea0fc9f66991fa30c723379",
+      "bytes": 769
+    },
+    "global-euler-resources.log": {
+      "sha256": "49b3d6a881b96015ff52315f0ad2fce43562d94d7d5c1fb01d731186a99f05ef",
+      "bytes": 63
+    },
+    "global-euler-resources.provenance.json": {
+      "sha256": "3be9c455187223fd23e9846142a4cfc057dce77abe9b39435fe2149e31ec68e0",
+      "bytes": 2206
+    },
+    "original/point-00.bin": {
+      "sha256": "a730eae7209cf6c7b5a32bd7f68c5693deb7f1cba8b2d54d4db3ba747f895f44",
+      "bytes": 142246
+    },
+    "original/point-01.bin": {
+      "sha256": "48065c7394b6a33efcc1465ed7239f4ebc2eb42fdab893d044a3f4b82216b725",
+      "bytes": 137642
+    },
+    "original/point-02.bin": {
+      "sha256": "b672e36dd95a372e46b13bfcf1f9a5220dd9c43a773e9ae58a3099feec5c1d70",
+      "bytes": 143605
+    },
+    "original/point-03.bin": {
+      "sha256": "c17ebdd17f993a498955a867096f1ae61b25773eadb6eee042bb6179f065232e",
+      "bytes": 137524
+    },
+    "original/point-04.bin": {
+      "sha256": "fe75b5325810d1475457095a0184819e98d9702b15e72920804816d822b54c85",
+      "bytes": 145695
+    },
+    "original/point-05.bin": {
+      "sha256": "88f767c44a567d5050a24e67c73b0fbf398fca59fda3e6ccbc3732fd8606fc8f",
+      "bytes": 145685
+    },
+    "original/point-06.bin": {
+      "sha256": "ebf0d6f3ae5d0ae1ebfeb53a119def5dd5743c8017e6d7688de0abac09f60913",
+      "bytes": 145180
+    },
+    "original/point-07.bin": {
+      "sha256": "940e3f235d7cf79820a08d293cc9c257a374a7c46eda3dd7b58443108a548bf6",
+      "bytes": 142309
+    },
+    "original/point-08.bin": {
+      "sha256": "54423622e3fb5d542b9fd17f0edd2cededf00ee624fbb093633a4ebec9b28697",
+      "bytes": 136434
+    },
+    "original/point-09.bin": {
+      "sha256": "f90366b1f247418844ef2c9c31483d1a637d2f35c3d51758abdff07e6be662c3",
+      "bytes": 142167
+    },
+    "original/point-10.bin": {
+      "sha256": "79c7181fed7d8834d033da5a1394b9901de7bac2696acd6bba92ae7a848b3dc3",
+      "bytes": 142716
+    },
+    "original/point-11.bin": {
+      "sha256": "e2c991f6a1d03333a46774cda43f79c875bbfe9f22504cab70215a8c3d20c3cf",
+      "bytes": 138132
+    },
+    "original/point-12.bin": {
+      "sha256": "b18c8431815d468856b2e0c292c62c2430e6266ee67d4e52634c7958d9769a16",
+      "bytes": 146761
+    },
+    "original/point-13.bin": {
+      "sha256": "4dd9b83ef0a7c26bb50ccdbe03015e4060ef4ce558b79ca6189d534709f3835a",
+      "bytes": 140932
+    },
+    "original/point-14.bin": {
+      "sha256": "b5bcec64543cd3e358c6a1cf7c85244fda63baadecdfc7845c57e029a3e1bfa2",
+      "bytes": 137894
+    },
+    "original/point-15.bin": {
+      "sha256": "3fbe096931e7ed111595b3416dd468c5161b7d33ef09611bcb54aac39ab4fb2b",
+      "bytes": 136704
+    },
+    "original/result.json": {
+      "sha256": "fb5311411539a1573ec1963737f2a961eacb463f83b89d92849888ea2e381530",
+      "bytes": 605347
+    },
+    "original-binding.json": {
+      "sha256": "dea09f2b6feed37f1db505935e76229384f3c0e038b032c0e4a8c51b943ad958",
+      "bytes": 1781
+    },
+    "original-resources.json": {
+      "sha256": "2fdf6b3ad3c45b4bc49281b58514fbc09f5c660c9dded6d13e6136f09663bc71",
+      "bytes": 762
+    },
+    "original-resources.log": {
+      "sha256": "49b3d6a881b96015ff52315f0ad2fce43562d94d7d5c1fb01d731186a99f05ef",
+      "bytes": 63
+    },
+    "original-resources.provenance.json": {
+      "sha256": "4cc18a9af03577e6adabbcb884a6c2e319bbefe9c9541efc02efeec7a1c13d1d",
+      "bytes": 2198
+    },
+    "points.json": {
+      "sha256": "f62050df0d7f6b2d738ad1462d18b9131402fa67cd834cb4b389cbd785ee6683",
+      "bytes": 4343
+    },
+    "probe.rs": {
+      "sha256": "d2588c5947c8a203ea767e2ab9033059f3cfbd8436ef9a244451402266e9dbc1",
+      "bytes": 19243
+    },
+    "run.py": {
+      "sha256": "4116b109847a4965893678b9ff32c97e711b80ebc60a7f2f0f5d70a9e9a31a02",
+      "bytes": 1812
+    },
+    "selection-binding.json": {
+      "sha256": "e51ba7f4988bd9dbaa3a91f3e513e7563f9a233dcfa0fc9a6b19690c532c12ba",
+      "bytes": 460
+    },
+    "summary.json": {
+      "sha256": "1160448901b76033c1facdebe1ead59523715ff345e98b55ead2e70eeb454088",
+      "bytes": 9127
+    }
+  }
+}

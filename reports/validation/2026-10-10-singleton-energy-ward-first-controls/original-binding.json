@@ -1,0 +1,24 @@
+{
+  "scope": "Fresh source-only polynomial energy Ward comparison; historical replay only validates actual NoRule selection. No numerical periods or imported rules.",
+  "inputs": {
+    "/tmp/rustflow-singleton-energy-ward-first-probe": "32c59127f5f51106042ea62cff947fe248ca1e110199fc146d5d373eefe4a1bc",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/input.bin": "7e8d362f0ae641c6df789cac1826f21eda4cabb084e7161782161fd7b1797096",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/points.json": "cf616f57798a13a5b0efc6716d8d2aa765e7a9cb7f5bce00ef39d3204ccd5de0",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/density-input.json": "c1951957e387ebaddbce6a66427c11eed01fd0467508d599a650c1e80296ed67",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/probe.rs": "7490f13810ab2993854a80066d8c9ee4a4263e35bce345316e5c70b6e2ff0189"
+  },
+  "build_binding_sha256": "1fdcf5cf83a60adcdc2a8d7b30ea246180fb6f847fe70be4aa4d57fa33031992",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-singleton-energy-ward-first-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/original",
+    "original",
+    "3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-first-controls/density-input.json"
+  ],
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

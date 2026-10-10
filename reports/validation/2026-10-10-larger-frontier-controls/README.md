@@ -1,0 +1,9 @@
+Both larger-budget selected-cut controls time out at 1,200 s without a closed connection or numerical prediction.
+
+The original cut `[3]` publishes nine provisional rounds with frontiers `58, 458, 1469, 2023, 2510, 2357, 1851, 1301, 872`. Its last published program has 13,850 rules. The double-cut control publishes five rounds with frontiers `27, 188, 822, 1820, 2758`, ending at 3,114 published rules. Process wall times are 1,200.05 s and 1,200.13 s; peak child RSS is 417,044 KiB and 1,091,836 KiB. Compilation and Nix setup are excluded, and overlapping work prevents a speed comparison.
+
+Relative to K's optional schedule, frontier capacity increases from 1,024 to 4,096, historical requests from 4,096 to 16,384, and per-round domains from 8,192 to 32,768. Sources, original targets, input and native executable are unchanged. These are selected occupied-flow tests with one 18:60:8 profile and separate 1,200 s caps, not complete-amplitude tests or an isolated frontier-budget experiment.
+
+Each directory also contains one later discovery transaction marked `complete` without a matching published active-round program/metadata pair. That records discovery work, not a completed closure round. `summary.json` preserves the exact distinction. Current checkpoints omit accumulated condition/memo state and are not supported resume points; `resume-assessment.md` describes those gaps and a future owner design. The separate longer singleton run starts fresh.
+
+`archive-map.json` records deterministic, lossless gzip archives of older proof payloads and logs. Latest published proof pairs, their linked transactions, all direct-zero records, unpublished later records and request histories remain raw. Native-program/transaction digests and source/executable identities are verified. `artifact-manifest.json` freezes this bounded evidence. There is no three-loop or four-loop numerical acceptance.

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-mixed-energy-polynomial-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-mixed-energy-polynomial-source-experiment/boost-only",
+    "boost-only"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.1248363479971886,
+  "user_seconds": 1.105698,
+  "system_seconds": 0.012086999999999999,
+  "peak_child_rss_kib": 21600,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

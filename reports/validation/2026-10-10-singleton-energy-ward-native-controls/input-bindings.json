@@ -1,0 +1,14 @@
+{
+  "input.bin": {
+    "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-004-provisional.bin",
+    "sha256": "7e8d362f0ae641c6df789cac1826f21eda4cabb084e7161782161fd7b1797096"
+  },
+  "input.json": {
+    "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupied-coordinate-control/selected-cut/native-closure/round-004-provisional.json",
+    "sha256": "9461797f5bfe86caa80323bdf71c386734d88035da264d435f1dee350fade907"
+  },
+  "density-input.json": {
+    "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupied-coordinate-control/rerouted-input.json",
+    "sha256": "c1951957e387ebaddbce6a66427c11eed01fd0467508d599a650c1e80296ed67"
+  }
+}

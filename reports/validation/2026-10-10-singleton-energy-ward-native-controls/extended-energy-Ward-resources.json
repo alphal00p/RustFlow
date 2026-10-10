@@ -1,0 +1,19 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-singleton-energy-ward-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/extended-energy-Ward",
+    "extended-energy-Ward",
+    "3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-energy-ward-native-controls/density-input.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 14.903536604717374,
+  "user_seconds": 14.683874,
+  "system_seconds": 0.074323,
+  "peak_child_rss_kib": 49200,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

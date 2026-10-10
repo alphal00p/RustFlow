@@ -1,0 +1,124 @@
+{
+  "name": "massless_three_loop_chain_exact_occupied_coordinate_control",
+  "loops": 3,
+  "vertices": 3,
+  "edges": [
+    {
+      "vertices": [
+        2,
+        0
+      ],
+      "routing": [
+        "1",
+        "0",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        1,
+        2
+      ],
+      "routing": [
+        "0",
+        "1",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        1,
+        0
+      ],
+      "routing": [
+        "0",
+        "0",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        0,
+        2
+      ],
+      "routing": [
+        "1",
+        "0",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        2,
+        1
+      ],
+      "routing": [
+        "0",
+        "1",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    }
+  ],
+  "loop_charges": [
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ]
+  ],
+  "chemical_potentials": [
+    "1"
+  ],
+  "numerator_convention": "shifted_euclidean",
+  "laurent_orders": [
+    -3,
+    0
+  ],
+  "digits": 12,
+  "targets": [
+    {
+      "powers": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "numerator": "1"
+    },
+    {
+      "powers": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "numerator": "g1_2-g1_3-g2_3+g3_3+(u1-u3)*(u2-u3)"
+    }
+  ]
+}

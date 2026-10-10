@@ -1,0 +1,19 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-targeted-portfolio-source-only-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/single3/proposal-depth-3",
+    "original",
+    "3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-portfolio-controls/source-only/single3/baseline-result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.8829881912097335,
+  "user_seconds": 0.8396349999999999,
+  "system_seconds": 0.037984,
+  "peak_child_rss_kib": 30776,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,5 @@
+This directory adds a lossless storage layer for completed evidence. Large JSON copies in nine completed reports use deterministic gzip with timestamp zero. The logical path, original SHA256 and size, compressed path, compressed SHA256 and size are recorded in `archive-map.json`.
+
+Historical manifests remain byte-for-byte unchanged. `verify.py` resolves missing logical paths through the new map and checks every entry in those manifests. `verify.py --restore` recreates missing originals without overwriting existing files, for older readers that require raw paths. Existing inner archive maps continue to describe their own earlier compression layers.
+
+This changes storage only. It does not change source code, proof content, numerical values, acceptance status or precision claims. Native binary corpora, physical input definitions and the latest larger-frontier checkpoints remain raw. Active longer-singleton, partial-placement and native-program-work-profile outputs are outside the allowlist.

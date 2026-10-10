@@ -1,0 +1,646 @@
+{
+  "scope": "Saved native source-only exact RHS/retained-condition comparison. Equality is literal expression equality in one imported Symbolica namespace; condition sequences are preserved, with order-only differences separately classified. No full closure or numerical inference.",
+  "all_round_trips_passed": true,
+  "arms": [
+    {
+      "mode": "original",
+      "sources": 54,
+      "points": 32,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 141,
+      "point_fallbacks": 32,
+      "rhs_changes": [],
+      "condition_multiset_changes": [],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "slot6",
+      "sources": 62,
+      "points": 32,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "point_fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "9-12*epsilon+4*epsilon^2",
+            "-3+2*epsilon",
+            "144-192*epsilon+64*epsilon^2",
+            "18-24*epsilon+8*epsilon^2",
+            "-6+4*epsilon",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ],
+          "after": [
+            "9-12*epsilon+4*epsilon^2",
+            "72-96*epsilon+32*epsilon^2",
+            "144-192*epsilon+64*epsilon^2",
+            "-6+4*epsilon",
+            "18-24*epsilon+8*epsilon^2",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ]
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "2*eta",
+            "eta",
+            "4*epsilon*eta-10*eta",
+            "2*epsilon*eta-5*eta",
+            "-24+16*epsilon",
+            "16*eta",
+            "-5+2*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ],
+          "after": [
+            "-24+16*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ]
+        }
+      ],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "slot8",
+      "sources": 62,
+      "points": 32,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 141,
+      "point_fallbacks": 32,
+      "rhs_changes": [],
+      "condition_multiset_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon"
+          ],
+          "after": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon",
+            "-6144+4096*epsilon"
+          ]
+        }
+      ],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "both",
+      "sources": 70,
+      "points": 32,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "point_fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "9-12*epsilon+4*epsilon^2",
+            "-3+2*epsilon",
+            "144-192*epsilon+64*epsilon^2",
+            "18-24*epsilon+8*epsilon^2",
+            "-6+4*epsilon",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ],
+          "after": [
+            "9-12*epsilon+4*epsilon^2",
+            "72-96*epsilon+32*epsilon^2",
+            "144-192*epsilon+64*epsilon^2",
+            "-6+4*epsilon",
+            "18-24*epsilon+8*epsilon^2",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ]
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "2*eta",
+            "eta",
+            "4*epsilon*eta-10*eta",
+            "2*epsilon*eta-5*eta",
+            "-24+16*epsilon",
+            "16*eta",
+            "-5+2*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ],
+          "after": [
+            "-24+16*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ]
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon"
+          ],
+          "after": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon",
+            "-6144+4096*epsilon"
+          ]
+        }
+      ],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "both-reverse",
+      "sources": 70,
+      "points": 32,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "point_fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "9-12*epsilon+4*epsilon^2",
+            "-3+2*epsilon",
+            "144-192*epsilon+64*epsilon^2",
+            "18-24*epsilon+8*epsilon^2",
+            "-6+4*epsilon",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ],
+          "after": [
+            "9-12*epsilon+4*epsilon^2",
+            "72-96*epsilon+32*epsilon^2",
+            "144-192*epsilon+64*epsilon^2",
+            "-6+4*epsilon",
+            "18-24*epsilon+8*epsilon^2",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ]
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "2*eta",
+            "eta",
+            "4*epsilon*eta-10*eta",
+            "2*epsilon*eta-5*eta",
+            "-24+16*epsilon",
+            "16*eta",
+            "-5+2*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ],
+          "after": [
+            "-24+16*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ]
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon"
+          ],
+          "after": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon",
+            "-6144+4096*epsilon"
+          ]
+        }
+      ],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "temporal-only",
+      "sources": 62,
+      "points": 32,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 132,
+      "point_fallbacks": 32,
+      "rhs_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 7,
+          "after": 10
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": 24,
+          "after": 12
+        }
+      ],
+      "condition_multiset_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "9-12*epsilon+4*epsilon^2",
+            "-3+2*epsilon",
+            "144-192*epsilon+64*epsilon^2",
+            "18-24*epsilon+8*epsilon^2",
+            "-6+4*epsilon",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ],
+          "after": [
+            "9-12*epsilon+4*epsilon^2",
+            "72-96*epsilon+32*epsilon^2",
+            "144-192*epsilon+64*epsilon^2",
+            "-6+4*epsilon",
+            "18-24*epsilon+8*epsilon^2",
+            "288-384*epsilon+128*epsilon^2",
+            "36-48*epsilon+16*epsilon^2"
+          ]
+        },
+        {
+          "point": [
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "2*eta",
+            "eta",
+            "4*epsilon*eta-10*eta",
+            "2*epsilon*eta-5*eta",
+            "-24+16*epsilon",
+            "16*eta",
+            "-5+2*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ],
+          "after": [
+            "-24+16*epsilon",
+            "-3+2*epsilon",
+            "-6+4*epsilon"
+          ]
+        }
+      ],
+      "condition_order_only_points": [],
+      "status_changes": []
+    },
+    {
+      "mode": "boost-only",
+      "sources": 62,
+      "points": 32,
+      "status_counts": {
+        "Applied": 32
+      },
+      "rhs_terms": 141,
+      "point_fallbacks": 32,
+      "rhs_changes": [],
+      "condition_multiset_changes": [
+        {
+          "point": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "before": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon"
+          ],
+          "after": [
+            "-3+2*epsilon",
+            "-24+16*epsilon",
+            "-48+32*epsilon",
+            "-6+4*epsilon",
+            "-96+64*epsilon",
+            "-6144+4096*epsilon"
+          ]
+        }
+      ],
+      "condition_order_only_points": [],
+      "status_changes": []
+    }
+  ]
+}

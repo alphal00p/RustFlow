@@ -1,0 +1,27 @@
+{
+  "status": "frozen",
+  "scope": "Additive byte-exact storage layer only; no numerical or source changes.",
+  "files": {
+    "README.md": {
+      "sha256": "30a0f47302b822155212aa22572e4d086706ec638baba7b3c647c292bc762448",
+      "bytes": 1003
+    },
+    "archive-map.json": {
+      "sha256": "eb58321351b986fd1a35e679f0ab931edb8dc3d920ca21eb76c26d261d9a198d",
+      "bytes": 15978
+    },
+    "archive.py": {
+      "sha256": "693c46308b0623ebeedde6daf97ee0eb4a8e658675155fbab1b0a7d6270e6a3a",
+      "bytes": 5487
+    },
+    "verification.json": {
+      "sha256": "4d831c61db994f9aaf49bdd6a7b817438b9c4233de3517160e77a991fd9ead82",
+      "bytes": 292
+    },
+    "verify.py": {
+      "sha256": "e5fb97a5198b00f7f7e5c084a7f33b2fd53421125fdb21fccbe68e900fc5f147",
+      "bytes": 2382
+    }
+  },
+  "file_count": 5
+}

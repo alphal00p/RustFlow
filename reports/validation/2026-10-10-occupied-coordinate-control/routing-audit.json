@@ -1,0 +1,43 @@
+{
+  "scope": "Exact rational routing/denominator/numerator/chemical/measure identity only; no production or numerical claim",
+  "old_momenta_in_new": [
+    [
+      "1",
+      "0",
+      "-1"
+    ],
+    [
+      "0",
+      "1",
+      "-1"
+    ],
+    [
+      "0",
+      "0",
+      "-1"
+    ]
+  ],
+  "old_edge_for_new": [
+    3,
+    4,
+    2,
+    0,
+    1
+  ],
+  "determinant": -1,
+  "absolute_jacobian": 1,
+  "all_five_edges_and_denominator_powers_match": true,
+  "incidence_mass_charge_per_edge_unchanged": true,
+  "loop_chemical_shifts_match": true,
+  "original_raised_numerator_polynomial_matches": true,
+  "raised_old_slot0_is_new_slot3": true,
+  "selected_new_cut0_is_old_cut3": true,
+  "normalization": "Unimodular change: absolute determinant one; cut orientation and chemical energy unchanged; no extra Wick or cut phase",
+  "comparison_limit": "Combined routing, physical-edge order and completion-coordinate diagnostic, not an isolated completion change",
+  "inputs_sha256": {
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "reports/validation/2026-10-10-occupied-coordinate-control/rerouted-input.json": "c1951957e387ebaddbce6a66427c11eed01fd0467508d599a650c1e80296ed67",
+    "reports/validation/2026-10-10-occupied-coordinate-control/run.py": "b5857a9d37196d568cc91af2d9bc7fe408b163b8cef0409bc3e9deba9794c7cd",
+    "reports/validation/2026-10-10-occupied-coordinate-control/check_routing.py": "80b5f7385d3ff2607829bfc5a92930c5702eaff2fb7310f37d6a6689fb25042d"
+  }
+}

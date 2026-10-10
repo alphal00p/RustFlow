@@ -1,0 +1,2026 @@
+{
+  "scope": "Exact source-identity assessment only; no native closure or numerical prediction",
+  "production_admission_changed": false,
+  "native_or_oracle_values_read": 0,
+  "checks": 216,
+  "samples": [
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "625/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "15625/24576",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "625/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "3125/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-125/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-3125/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-125/96",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-25/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-125/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-625/128",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "5",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "75/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "125/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "25/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "125/192",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "25/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "0",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-5/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "625/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "15625/24576",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "625/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "3125/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-125/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-3125/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-125/96",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-25/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-125/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-625/128",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "5",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "75/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "125/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "25/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "125/192",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "25/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "0",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-5/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "625/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "15625/24576",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "625/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "3125/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-125/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-3125/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-125/96",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-25/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-125/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-625/128",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "5",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "75/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "125/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "25/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "125/192",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "25/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "0",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-5/2",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "625/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "15625/24576",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "625/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "3125/1024",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-125/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-3125/256",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-125/96",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-625/512",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-25/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-125/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-625/128",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "5",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "75/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "125/8",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "25/32",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "125/192",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "5/4",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "25/16",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "0",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-1",
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-5/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "390625/524288",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1953125/2359296",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "78125/16384",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "390625/65536",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-109375/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-78125/2048",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-15625/8192",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-234375/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-9375/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-46875/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "375/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "9375/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "28125/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "125/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "75/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "375/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-15/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-225/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 0,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-375/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "390625/524288",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1953125/2359296",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "78125/16384",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "390625/65536",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-109375/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-78125/2048",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-15625/8192",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-234375/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-9375/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-46875/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "375/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "9375/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "28125/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "125/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "75/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "375/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-15/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-225/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 1,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-375/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "390625/524288",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1953125/2359296",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "78125/16384",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "390625/65536",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-109375/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-78125/2048",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-15625/8192",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-234375/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-9375/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-46875/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "375/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "9375/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "28125/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "125/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "75/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "375/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-15/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-225/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 2,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-375/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "78125/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "390625/524288",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1953125/2359296",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "15625/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "78125/16384",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "390625/65536",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-9375/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-109375/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 1,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-78125/2048",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "-1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "-15625/8192",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "-234375/114688",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "-1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "-9375/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "-46875/4096",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "375/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "9375/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 2,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "28125/512",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 0,
+      "other_moment": "125/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 1,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 0,
+      "other_energy_power": 2,
+      "other_moment": "1875/1024",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 0,
+      "other_moment": "75/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 1,
+      "other_moment": "375/64",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 1,
+      "other_energy_power": 2,
+      "other_moment": "1875/256",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 0,
+      "other_moment": "-15/2",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 1,
+      "other_moment": "-225/16",
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "own_upper": 3,
+      "other_cut": 3,
+      "other_upper": 2,
+      "other_energy_power": 2,
+      "other_moment": "-375/16",
+      "residual": "0"
+    }
+  ],
+  "forbidden_case_residuals": {
+    "own_raised_C2": "-32/81",
+    "own_energy_numerator": "-32/2187"
+  },
+  "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "script_sha256": "4700008a8733a2895871fcae44c94f7c46b97a9b556aa415d28ab19158488dc7",
+  "cuts": [
+    0,
+    3
+  ],
+  "routing": [
+    [
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "1",
+      "0",
+      "-1"
+    ],
+    [
+      "0",
+      "1",
+      "0"
+    ]
+  ],
+  "transformed_physical_routings": [
+    [
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "-1",
+      "0"
+    ],
+    [
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "-1",
+      "1",
+      "1"
+    ]
+  ],
+  "necessary_physical_guards": [
+    {
+      "compact_loop": 0,
+      "cut_slot": 0,
+      "ordinary_physical_base_indices_required_zero": [
+        2,
+        4
+      ],
+      "completion_guard": "also every actual completion with incident Gram/E dependence; not inferred here"
+    },
+    {
+      "compact_loop": 1,
+      "cut_slot": 3,
+      "ordinary_physical_base_indices_required_zero": [
+        2,
+        4
+      ],
+      "completion_guard": "also every actual completion with incident Gram/E dependence; not inferred here"
+    }
+  ]
+}
