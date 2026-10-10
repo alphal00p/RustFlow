@@ -1,0 +1,19 @@
+{
+  "scope": "Stable completed provisional checkpoint copied from active immutable baseline; not a resumable state or closed system.",
+  "files": [
+    {
+      "source": "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-018-provisional.json",
+      "sha256": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+      "copy": "input.json"
+    },
+    {
+      "source": "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-018-provisional.bin",
+      "sha256": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82",
+      "copy": "input.bin"
+    }
+  ],
+  "probe_origin": {
+    "path": "reports/validation/2026-10-10-native-program-work-profile/probe.rs",
+    "sha256": "65b1b31cd10a4b2ca63dd31e01006506c406df46883dd79620b96e3263a8664d"
+  }
+}

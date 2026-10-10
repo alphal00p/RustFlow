@@ -1,0 +1,26 @@
+{
+  "scope": "Independent read-only follow-up of revised isolated virtual-soft certificate; not a new native execution or production admission.",
+  "source": {
+    "path": "reports/validation/2026-10-10-partial-boundary-certificate-validation/source/src/finite_density/boundary/virtual_soft.rs",
+    "sha256": "6fde9da052ec4f646e4ea16e3fb9259d38911796dafbdb2079023f1e2a410aa6"
+  },
+  "validation_manifest": {
+    "path": "reports/validation/2026-10-10-partial-boundary-certificate-validation/artifact-manifest.json",
+    "sha256": "36c0efa13ca1ed0ed014d0be50a8cd061ee467c47a80318920a038617deb5398"
+  },
+  "findings": [],
+  "reviewed_repairs": [
+    "Certificate and ordinary proof fields private; immutable accessors expose exact expression, original region map, distributions and actual nonzero conditions.",
+    "Region source-coordinate map length and uniqueness now validated, in addition to loop and coordinate structure.",
+    "Explicit inherited preprojection conditions are canonically retained; integration-coordinate conditions rejected.",
+    "Regression exercises actual factor projection after collecting parent guards; compact-pole refusal remains explicit.",
+    "Noncontiguous mapping, multiple compact distributions, mixed free virtual direction, whole-versus-term distinction and limits covered by added isolated tests."
+  ],
+  "limitations": [
+    "No zero-return production consumer exists and no partial-placement/origin/endpoint permit is granted.",
+    "A future caller must bind exact expression, region and distributions and validate parameter conditions before using a zero.",
+    "Caller must collect inherited guards in the full parent coordinate scope before projection; projected coordinates alone cannot classify dropped/hard coordinate guards.",
+    "The peer reported 11 isolated tests and 51 generated region certificates; this review did not rerun them."
+  ],
+  "conclusion": "No new blocker found in the revised narrow ordinary virtual-factor certificate. Earlier caller/physical-admission obligations remain mandatory."
+}

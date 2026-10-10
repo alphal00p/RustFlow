@@ -1,0 +1,41 @@
+{
+  "scope": "Fresh isolated native derivative-closure pilot with reviewed partial-support origin/scaleless sources. No old rule import, no numerical flow or production admission. Verified immutable scheduling unions; independent final source replay and persisted decode audit.",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-partial-placement-closure-pilot",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/double-slots24",
+    "double-slots24",
+    "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+  ],
+  "environment": {
+    "PILOT_REQUESTS": "4096",
+    "PILOT_ROUNDS": "16",
+    "PILOT_FRONTIER": "1024",
+    "PILOT_RULES": "65536",
+    "PILOT_ZERO_ATTEMPTS": "8192",
+    "PILOT_RAY_DOMAINS": "1",
+    "PILOT_POINT_DOMAINS": "1",
+    "PILOT_DEPTH": "3"
+  },
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "/tmp/rustflow-partial-placement-closure-pilot": "427d6d621a902c9fefaac21175103c311085f98d0625a8e8a34651f3f6c83d4c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/pilot.rs": "c1bf8ddfc3a88b8195d8e80aa51fbe6c76327ce28bd18708b3dceb2af403f365",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/prepare.rs": "8428875a532138e37690ad513e486a4b0670b6fb8fd33b15193f8b4d993c0a90",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-support-proof/proof.md": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-support-proof/check.py": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-support-proof/support-checks.json": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633"
+  },
+  "proof_inputs_sha256": {
+    "reports/validation/2026-10-10-partial-placement-support-proof/proof.md": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77",
+    "reports/validation/2026-10-10-partial-placement-support-proof/check.py": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2",
+    "reports/validation/2026-10-10-partial-placement-support-proof/support-checks.json": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633"
+  },
+  "proof_binding_sha256": "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f",
+  "build_binding_sha256": "909ea8300888945e2db6ce1c814c437a0be32155784c6c57dc28d6900a647089",
+  "launcher_sha256": "e31dfbd56d72a9c4f959a3843c17649450d7f7cb9b65557bf183fa240fd8919b",
+  "exit_code": 124,
+  "inputs_unchanged": true
+}

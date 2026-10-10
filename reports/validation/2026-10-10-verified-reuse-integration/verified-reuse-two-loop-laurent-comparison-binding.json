@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "scope": "Complete two-loop massless laurent predictions; unchanged independent references and tolerances. No four-loop acceptance.",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/tools/finite_density/compare_massless_reference.py",
+    "laurent",
+    "--predictions",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent",
+    "--reference",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json",
+    "--output",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent-comparison.json"
+  ],
+  "native_provenance": {
+    "executable_sha256": "f5985baa7eca472e99854c8b67552e39fbe89a821edceb949237dce3defdff35",
+    "source_snapshot_sha256": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f",
+      "RUSTRED_SOURCE_DIGEST": "9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb",
+      "PORT_SOURCE_DIGEST": "db384717f500e9278bc773eb55d786d324e93e24a3eb23c592ffebc291581f7a"
+    },
+    "configuration": {
+      "source_options": {
+        "free_virtual_zero_sectors": true,
+        "policy": "polynomial-closure-v1",
+        "positive_compact_energy_powers": false
+      },
+      "guard_digits": 40,
+      "native_closure": "WeightedClosureOptions { max_rounds: 16, max_frontier: 1024, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 1, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: true, requested_index_rays: true, prioritize_requested_indices: false, max_reused_rules: 65536, max_domains_per_residual: 32, requested_ray_point: None, active_target_closure: true, max_direct_zero_attempts: 262144, checkpoints: None }"
+    },
+    "closed_metadata": [
+      {
+        "cut_slots": [
+          0
+        ],
+        "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0/round-007-closed.json",
+        "sha256": "60337349d564cc9ad21325de5fc99aec2d236ff86fa87d80f04135bf6b99e89a",
+        "proof_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0/round-007-closed.bin",
+        "proof_sha256": "9baff10ff2a74bdb2a593f11b3ed2893c15740464a6453385c0f67afd954ff29",
+        "program_blake3_verified": "cbf973aa5d5588ac48c8a8bdae10f7e79b7058c66444778198574eec0feae021",
+        "program_bytes_verified": 178855,
+        "requested_discovery": null
+      },
+      {
+        "cut_slots": [
+          1
+        ],
+        "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-1/round-003-closed.json",
+        "sha256": "178498bcc232d12d8473dac3ab5a623fbf4f3d01d086cbb6ec8c1b5858cfbebb",
+        "proof_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-1/round-003-closed.bin",
+        "proof_sha256": "7c5c466f93fe31eec1523692705373d531c10f8e9ac65fa89f8b721472b97857",
+        "program_blake3_verified": "45422dfad6c122a784c3c7648660d247861214df5b3b3ea198da5681db3ac8a9",
+        "program_bytes_verified": 111388,
+        "requested_discovery": null
+      },
+      {
+        "cut_slots": [
+          0,
+          1
+        ],
+        "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json",
+        "sha256": "e0df14e2eeb94ca6af9910cacbc2189e7fa83159dcb787b9fd26d59174c718a9",
+        "proof_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin",
+        "proof_sha256": "c938ba16d2d3c3c2b00b92937ad8adf17b4226809a8b541507bc3cbdffa9df99",
+        "program_blake3_verified": "c419d038d86222e47b0fe1768f0b51948dbaa5defb7401541913b017e829942c",
+        "program_bytes_verified": 391658,
+        "requested_discovery": null
+      }
+    ],
+    "native_digest_tool": {
+      "record_sha256": "8aa52c6325977dca78d39283278fdb34d82a764bb2e2a1e2a44ffce31209c76d",
+      "path": "/tmp/rustflow-verified-reuse-digest",
+      "sha256": "298700e47bfbb8203647110f7ebc51c5d5535ed562aa1d5634e9fbe8fd6b61c9"
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-verified-reuse-integration/native-digest-build.json": "8aa52c6325977dca78d39283278fdb34d82a764bb2e2a1e2a44ffce31209c76d",
+    "reports/validation/2026-10-10-verified-reuse-integration/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "reports/validation/2026-10-10-verified-reuse-integration/build-native-digest.py": "b816b93dbbc3ef3b2850dae923be80a958de86ff38c6ab8445f6262264182192",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-hashes.json": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-build-provenance.json": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent-binding.json": "dd9e38d7c3079ad4cbb726f562fac700ccf3c144ad531ec439e79aed764157df",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent-resources.json": "0ace8aa3ae6559fbaa7f73393eb93f6e7877c03e483e47e22095da46173c899e",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent-resources.provenance.json": "918a45b310f331e8d9a10c9d7aa60ebb6f9e71e058d9e41f14e3389a9ace7733",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/configuration.json": "89cfa6310ad6d292cd5617e6cbe9d9c313972a5eb23fd609399a8e2562fd478a",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/input.json": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/prediction-18-60-8-grid-1000.json": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/prediction-28-60-8-grid-1000.json": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/prediction-28-80-8-grid-1000.json": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/prediction-28-80-12-grid-1000.json": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/prediction-28-80-12-grid-2000.json": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74",
+    "reports/validation/2026-10-10-verified-reuse-integration/compare-completed-predictions.py": "c704b6de210c2e7b39adadb55a0f59763dea2d6c061efbd37d36ba6e2510631d",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0/round-007-closed.json": "60337349d564cc9ad21325de5fc99aec2d236ff86fa87d80f04135bf6b99e89a",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0/round-007-closed.bin": "9baff10ff2a74bdb2a593f11b3ed2893c15740464a6453385c0f67afd954ff29",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-1/round-003-closed.json": "178498bcc232d12d8473dac3ab5a623fbf4f3d01d086cbb6ec8c1b5858cfbebb",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-1/round-003-closed.bin": "7c5c466f93fe31eec1523692705373d531c10f8e9ac65fa89f8b721472b97857",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": "e0df14e2eeb94ca6af9910cacbc2189e7fa83159dcb787b9fd26d59174c718a9",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": "c938ba16d2d3c3c2b00b92937ad8adf17b4226809a8b541507bc3cbdffa9df99",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-fixed-comparison.json": "c5670b6c0b57eb05ea97ea13f4f3a83fae23317052bc859a8839abdd248805d9",
+    "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-two-loop-fixed-comparison-binding.json": "00fc180d7c68d7e710cd80676349554a8d5f50b3a51e1bd001246bc74a0406ce",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e",
+    "reports/validation/2026-10-10-verified-reuse-integration/comparison-plan.json": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c"
+  },
+  "definitions_and_tolerances_changed": false,
+  "production_modified": false,
+  "exit_code": 0,
+  "comparison_sha256": "ace7ec9803ec999b8e83d5586bd65e73738c0057cd84189055f31bdd3f61b09d"
+}

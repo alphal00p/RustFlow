@@ -1,0 +1,10 @@
+
+running 5 tests
+test finite_density::boundary::virtual_soft::tests::actual_partial_placement_regions_have_only_certified_virtual_soft_factors ... ok
+test finite_density::boundary::virtual_soft::tests::rank_deficient_positive_support_keeps_a_free_unrestricted_direction ... ok
+test finite_density::boundary::virtual_soft::tests::rejects_scales_incompatible_translations_and_compact_rational_factors ... ok
+test finite_density::boundary::virtual_soft::tests::translated_virtual_factor_preserves_polynomial_numerator_and_parameter_poles ... ok
+test finite_density::boundary::virtual_soft::tests::validates_distributions_before_any_virtual_zero ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.44s
+

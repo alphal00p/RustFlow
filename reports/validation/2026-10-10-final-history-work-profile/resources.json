@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-final-history-work-profile-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 431.69419805612415,
+  "user_seconds": 427.549813,
+  "system_seconds": 0.720812,
+  "peak_child_rss_kib": 304152,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

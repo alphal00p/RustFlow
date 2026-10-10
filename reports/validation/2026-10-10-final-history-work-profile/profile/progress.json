@@ -1,0 +1,551 @@
+{
+  "completed_timings": [
+    {
+      "phase": "read_program_bytes",
+      "system_cpu_ticks": 2,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.014057565
+    },
+    {
+      "phase": "inspect_envelope",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000037821
+    },
+    {
+      "phase": "decode_program_record",
+      "system_cpu_ticks": 4,
+      "user_cpu_ticks": 79,
+      "wall_seconds": 0.846818464
+    },
+    {
+      "phase": "import_symbolica_and_coefficient_table",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 2,
+      "wall_seconds": 0.035064333
+    },
+    {
+      "phase": "construct_exact_source_context",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.001576705
+    },
+    {
+      "phase": "decode_generated_and_replay_all_rules",
+      "system_cpu_ticks": 24,
+      "user_cpu_ticks": 10993,
+      "wall_seconds": 111.02809876
+    },
+    {
+      "phase": "bind_frontier_terminals_after_full_cold_replay",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000844072
+    },
+    {
+      "phase": "point-00-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000495352
+    },
+    {
+      "phase": "point-00-reduce-expression-json",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.010507953
+    },
+    {
+      "phase": "point-01-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.001314804
+    },
+    {
+      "phase": "point-01-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.003473551
+    },
+    {
+      "phase": "point-02-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000313231
+    },
+    {
+      "phase": "point-02-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000049481
+    },
+    {
+      "phase": "point-03-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001316
+    },
+    {
+      "phase": "point-03-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001852
+    },
+    {
+      "phase": "point-04-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000817793
+    },
+    {
+      "phase": "point-04-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000081581
+    },
+    {
+      "phase": "point-05-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001418
+    },
+    {
+      "phase": "point-05-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001831
+    },
+    {
+      "phase": "point-06-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001142
+    },
+    {
+      "phase": "point-06-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001654
+    },
+    {
+      "phase": "point-07-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.005761509
+    },
+    {
+      "phase": "point-07-reduce-expression-json",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.002218867
+    },
+    {
+      "phase": "point-08-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000569772
+    },
+    {
+      "phase": "point-08-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00004919
+    },
+    {
+      "phase": "point-09-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.005319787
+    },
+    {
+      "phase": "point-09-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000192571
+    },
+    {
+      "phase": "point-10-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000299271
+    },
+    {
+      "phase": "point-10-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000041521
+    },
+    {
+      "phase": "point-11-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000294901
+    },
+    {
+      "phase": "point-11-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00004206
+    },
+    {
+      "phase": "point-12-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00308276
+    },
+    {
+      "phase": "point-12-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00018988
+    },
+    {
+      "phase": "point-13-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.0000143
+    },
+    {
+      "phase": "point-13-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000019761
+    },
+    {
+      "phase": "point-14-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000338471
+    },
+    {
+      "phase": "point-14-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.0000686
+    },
+    {
+      "phase": "point-15-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001305
+    },
+    {
+      "phase": "point-15-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001989
+    },
+    {
+      "phase": "point-16-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000012331
+    },
+    {
+      "phase": "point-16-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000018029
+    },
+    {
+      "phase": "point-17-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.012798871
+    },
+    {
+      "phase": "point-17-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000510522
+    },
+    {
+      "phase": "point-18-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.007937205
+    },
+    {
+      "phase": "point-18-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000349591
+    },
+    {
+      "phase": "point-19-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000212341
+    },
+    {
+      "phase": "point-19-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00004448
+    },
+    {
+      "phase": "point-20-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.012168619
+    },
+    {
+      "phase": "point-20-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000439942
+    },
+    {
+      "phase": "point-21-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00011439
+    },
+    {
+      "phase": "point-21-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00004377
+    },
+    {
+      "phase": "point-22-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000120691
+    },
+    {
+      "phase": "point-22-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00004226
+    },
+    {
+      "phase": "point-23-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.007734875
+    },
+    {
+      "phase": "point-23-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000334761
+    },
+    {
+      "phase": "point-24-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 5,
+      "wall_seconds": 0.057110393
+    },
+    {
+      "phase": "point-24-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.001187173
+    },
+    {
+      "phase": "point-25-reduce-native",
+      "system_cpu_ticks": 30,
+      "user_cpu_ticks": 31100,
+      "wall_seconds": 313.80065236
+    },
+    {
+      "phase": "point-25-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 2,
+      "wall_seconds": 0.026436385
+    },
+    {
+      "phase": "point-26-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 10,
+      "wall_seconds": 0.100318302
+    },
+    {
+      "phase": "point-26-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000990364
+    },
+    {
+      "phase": "point-27-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 10,
+      "wall_seconds": 0.094666403
+    },
+    {
+      "phase": "point-27-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000728853
+    },
+    {
+      "phase": "point-28-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.001771806
+    },
+    {
+      "phase": "point-28-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000091811
+    },
+    {
+      "phase": "point-29-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.002317047
+    },
+    {
+      "phase": "point-29-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00009255
+    },
+    {
+      "phase": "point-30-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 82,
+      "wall_seconds": 0.825467534
+    },
+    {
+      "phase": "point-30-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.001274234
+    },
+    {
+      "phase": "point-31-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.019395362
+    },
+    {
+      "phase": "point-31-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000247401
+    },
+    {
+      "phase": "point-32-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 3,
+      "wall_seconds": 0.027142398
+    },
+    {
+      "phase": "point-32-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000450161
+    },
+    {
+      "phase": "point-33-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 14,
+      "wall_seconds": 0.142331346
+    },
+    {
+      "phase": "point-33-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000655972
+    },
+    {
+      "phase": "point-34-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.012756691
+    },
+    {
+      "phase": "point-34-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000245401
+    },
+    {
+      "phase": "point-35-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.017597167
+    },
+    {
+      "phase": "point-35-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000294121
+    },
+    {
+      "phase": "point-36-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 74,
+      "wall_seconds": 0.747804866
+    },
+    {
+      "phase": "point-36-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.001850577
+    },
+    {
+      "phase": "point-37-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.002436608
+    },
+    {
+      "phase": "point-37-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00010812
+    },
+    {
+      "phase": "point-38-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.007703205
+    },
+    {
+      "phase": "point-38-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00015043
+    },
+    {
+      "phase": "point-39-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 331,
+      "wall_seconds": 3.338751196
+    },
+    {
+      "phase": "point-39-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.005733618
+    },
+    {
+      "phase": "point-40-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 10,
+      "wall_seconds": 0.102554329
+    },
+    {
+      "phase": "point-40-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000710263
+    },
+    {
+      "phase": "point-41-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.005587658
+    },
+    {
+      "phase": "point-41-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000085641
+    }
+  ],
+  "phase": "complete"
+}

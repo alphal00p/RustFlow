@@ -1,0 +1,31 @@
+{
+  "scope": "Reviewed immutable verified-program reuse only. Existing sources, physical admission, discovery and final closure audit unchanged.",
+  "completed_baseline_sha256": "24a8065cbe51475011d13dc035db04508f8e288d5aa9552a1d1cd5fc7899f423",
+  "baseline_exit_code": 124,
+  "prototype_manifest_sha256": "555dbb80d3cfa7ab67aee14a0e07510b6c6e8ac0688bae16440cecb63c5cc6c6",
+  "native_patch_sha256": "791eaad85635e2814a7a101b0586e70178d0149418ac212b0cec9bf216512011",
+  "adapter_patch_sha256": "b12097523b3a8cc11971e7d4d4062e09fe3e0d22a3aba75aa11b4c4349efbeb4",
+  "before_format_sha256": {
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": "e7e299fa2dcf0cd4f594a0c10dc6a22f69452daf9e3a4d473dfc5194622a472e",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs": "52839133c970a5fabda241bea469f340d0f0ee07f03d10f682efc4a3e3c881d2",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/verified_tests.rs": "a92ac2920833943286eaa4f899c8970621de018ebfe05468a9ed6a26dc6aaf0b",
+    "src/finite_density/guarded.rs": "33d499807250e152d77badb9dbdd5a3c9ece530fb8d53923c5bd8e0493ba7a26",
+    "src/finite_density/reduction.rs": "595b834390876a80915f6d0b7094fe3a253c3e017f7fe39f9360ac4f4dc6219e",
+    "src/finite_density/reduction/requested.rs": "5f81f318025f8fbb92c2604d014314eb4aeea695aa708158672e1318ddb4a9fd"
+  },
+  "production_source_sha256": {
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": "f67c4d071f6bd58ffa6a3b2f546f61a49c36bc7c9b383e0289d0be5f25b339e7",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs": "cea642484881b7514f1186662db85993c234f0b51b0a03915737d7cd5a9574aa",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/verified_tests.rs": "996f3fab868aebbb564dd8e1d82e48784cca1e206ecca94422e7e1f0c44685cb",
+    "src/finite_density/guarded.rs": "33d499807250e152d77badb9dbdd5a3c9ece530fb8d53923c5bd8e0493ba7a26",
+    "src/finite_density/reduction.rs": "595b834390876a80915f6d0b7094fe3a253c3e017f7fe39f9360ac4f4dc6219e",
+    "src/finite_density/reduction/requested.rs": "5f81f318025f8fbb92c2604d014314eb4aeea695aa708158672e1318ddb4a9fd"
+  },
+  "unchanged_final_audit": {
+    "path": "src/finite_density/reduction/active.rs",
+    "sha256": "9ebcb53934499aed505d5b706028906c625e35801fcb54f3341d50a9c4084017",
+    "contract": "Final with_terminals_replayed plus exact original-target and every basis-derivative weighted-sum audits remain unchanged."
+  },
+  "coherent_build_pending": true,
+  "launcher_sha256": "8a4cbd7ae69647c5227f15c22b920a80d57ac8c0df42f41e534fdb6303c94b32"
+}

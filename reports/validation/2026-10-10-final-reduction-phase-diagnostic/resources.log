@@ -1,0 +1,14 @@
+begin read_program_bytes
+end read_program_bytes 0.020325s
+begin inspect_envelope
+end inspect_envelope 0.000032s
+begin decode_program_record
+end decode_program_record 0.795520s
+begin import_symbolica_and_coefficient_table
+end import_symbolica_and_coefficient_table 0.034486s
+begin construct_exact_source_context
+end construct_exact_source_context 0.001657s
+begin decode_generated_and_replay_all_rules
+end decode_generated_and_replay_all_rules 113.185181s
+begin bind_frontier_terminals
+end bind_frontier_terminals 0.001179s

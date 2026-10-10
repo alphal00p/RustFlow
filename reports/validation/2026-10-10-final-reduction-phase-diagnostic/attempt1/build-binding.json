@@ -1,0 +1,66 @@
+{
+  "scope": "Standalone diagnostic; no Cargo or shared-target outputs.",
+  "native_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/library-build.json",
+    "sha256": "90a3ea3135e4763fb005bfb10877802493124e06bd3e49bf856c55b8a342548e"
+  },
+  "dependencies": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "rustred": {
+      "path": "/tmp/librustred-verified-program-reuse-20261010.rlib",
+      "sha256": "91f0dc1e00677301daf9bb1146fb318f713f6a71a8598534c0d36ca947defd69",
+      "bytes": 227092024
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    }
+  },
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "final_reduction_phase_probe",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/probe.rs",
+    "-o",
+    "/tmp/rustflow-final-reduction-phase-probe-20261010"
+  ],
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/probe.rs",
+    "sha256": "ca6df6abd6480295b00e32bb63e3caf2cd08c027a7d2a708d73a50c8f39aec7e"
+  },
+  "compile_environment_override": {
+    "CARGO_CRATE_NAME": "final_reduction_phase_probe"
+  },
+  "exit_code": 1,
+  "wall_seconds": 0.3607281963340938,
+  "cargo_invoked": false
+}

@@ -1,0 +1,23 @@
+{
+  "scope": "lossless deterministic gzip of verbose certificate metadata; exact original restore paths",
+  "entries": [
+    {
+      "path": "certificate-reports/actual-cuts-[3]-shifted-[0].json",
+      "archive": "certificate-reports/actual-cuts-[3]-shifted-[0].json.gz",
+      "sha256": "18df25bdf7b764c0827c9ec870afd11c927cd91c127b9eaab2eb464ca275f1e4",
+      "archive_sha256": "d6d1852451cd74843f78c0c2ccd990059055914be16b5402c8481beceb98196e",
+      "bytes": 307032,
+      "archive_bytes": 6546,
+      "roundtrip_verified": true
+    },
+    {
+      "path": "history/attempt3/certificate-reports/actual-cuts-[3]-shifted-[0].json",
+      "archive": "history/attempt3/certificate-reports/actual-cuts-[3]-shifted-[0].json.gz",
+      "sha256": "1f4b457af04a6f1247d57b6a14163f2db00e778e8effbac90ebff9d54e408cfc",
+      "archive_sha256": "08f69288b6297d356d971490498449afb64901a7f8f84f3d2a27e9e8df1633d6",
+      "bytes": 297009,
+      "archive_bytes": 6258,
+      "roundtrip_verified": true
+    }
+  ]
+}

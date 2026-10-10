@@ -1,0 +1,52 @@
+{
+  "schema": "partial-singleton-endpoint-independent-review-v1",
+  "scope": "Read-only mathematical and exact-algorithm audit of repaired finite-label h<=2 proposal; no production admission or execution by this reviewer.",
+  "status": "No remaining mathematical blocker found in this narrow repaired proposal under its recorded hypotheses.",
+  "original_finding": "Ungrouped Hepp charts with the two largest rows parallel have U=t1*t2*unit; the original single-subtraction argument was insufficient.",
+  "repair": [
+    "Parallel grouping a=Xz,b=X(1-z) has absolute Jacobian X and positive-index beta weights.",
+    "The six full-rank shifted-positive supports and 20 complete direction-weight charts have U=t*positive unit, smooth Q,Q/S and Gaussian means.",
+    "Finite polynomial insertions and tensor covariances cost finite R; physical mass/surface jets cost J once.",
+    "The actual null-shell independent line regulators give ReF=eta*S>=0; finite derivatives of the un-factored F are O(rho).",
+    "On a sufficiently small nonpole high-D neighborhood, N<D/2+R+2 and D>2(P+R+J+2) give lambda-J-N>0, controlling Taylor counterterms and remainders uniformly in regulator ratios.",
+    "Compact origin bounds, fixed-T Fermi tails and ordered regulator removal remain separate explicit hypotheses."
+  ],
+  "limitations": [
+    "No arbitrary-rank nested-UV theorem.",
+    "No production sealed capability, boundary normalization adapter or three-loop numerical acceptance.",
+    "Native DE/homogeneity consistency is an independent check, not an inserted solution or boundary value.",
+    "Every consumed finite label/support, exact routing, placement and incoming coefficient condition still requires binding."
+  ],
+  "files": [
+    {
+      "path": "proposal.md",
+      "bytes": 7849,
+      "sha256": "99017c25d37f21e1bafb2f834acc371a83d30d4304c2938745cd4e6abd56c87d"
+    },
+    {
+      "path": "grouped_charts.py",
+      "bytes": 5767,
+      "sha256": "804ce163582e4e58a278c02521661d658d87f85db1636e4b268ca4254daaac6e"
+    },
+    {
+      "path": "grouped-chart-checks.json",
+      "bytes": 56264,
+      "sha256": "30b5a3a13ebcacf4ef2554c6ebc70a2e41e1ed6c0e20a70da4024909c1994bcc"
+    },
+    {
+      "path": "check.py",
+      "bytes": 6025,
+      "sha256": "70fe75802559aad65c0fdcc42c9c99be3ba5933bfa139ace91e4dbabe805a7d2"
+    },
+    {
+      "path": "consistency-checks.json",
+      "bytes": 4553,
+      "sha256": "4251ded955fe7613bacc921ece6e61e26e90fad0298d73d63b9c440697d8de20"
+    },
+    {
+      "path": "proposal-initial-one-axis-gap.md",
+      "bytes": 5956,
+      "sha256": "250acc36f3072e9f1580449305e4bae4951736743b41fbf4ad42deb330bca630"
+    }
+  ]
+}

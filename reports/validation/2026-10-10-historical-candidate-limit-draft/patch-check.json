@@ -1,0 +1,14 @@
+{
+  "command": [
+    "git",
+    "apply",
+    "--check",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-historical-candidate-limit-draft/candidate-history-limit.patch"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "production_sources_unchanged": true,
+  "compilation_performed": false,
+  "test_execution_performed": false
+}

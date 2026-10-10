@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-partial-placement-closure-pilot",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/single-slot0",
+    "single-slot0",
+    "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 49.207262944895774,
+  "user_seconds": 48.807938,
+  "system_seconds": 0.077246,
+  "peak_child_rss_kib": 30824,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

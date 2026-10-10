@@ -1,0 +1,107 @@
+{
+  "scope": "Fresh larger-bound algebraic closure controls only; no old rule import, boundary values, transport, references or physical admission.",
+  "bounds": {
+    "wall_seconds": 1200,
+    "rounds": 24,
+    "requests": 16384,
+    "frontier": 4096,
+    "rules": 65536,
+    "ray_domains": 1,
+    "point_domains": 1,
+    "depth": 3,
+    "zero_attempts_per_round": 8192
+  },
+  "unchanged_source_and_algorithm": true,
+  "arms": [
+    {
+      "mode": "double-slots12",
+      "status": "wall_timeout_unclosed",
+      "resources": {
+        "command": [
+          "timeout",
+          "1200",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/input.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/double-slots12",
+          "double-slots12",
+          "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 1200.0246956921183,
+        "user_seconds": 1191.00315,
+        "system_seconds": 0.28651899999999997,
+        "peak_child_rss_kib": 178172,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "completed_rounds": 7,
+      "frontier_history": [
+        14,
+        93,
+        222,
+        590,
+        835,
+        928,
+        937
+      ],
+      "last_completed_round": {
+        "frontier": 937,
+        "point_fallbacks": 928,
+        "requested": 944,
+        "retired": 916,
+        "round": 6,
+        "rules": 3086,
+        "seconds": 367.263724131,
+        "zero_rules": 0
+      },
+      "closed": null,
+      "binding_sha256": "93eb9461caf0f212b488454b3c44f0b749a1a874606ccab010bf2bf321ed76d4"
+    },
+    {
+      "mode": "double-slots24",
+      "status": "wall_timeout_unclosed",
+      "resources": {
+        "command": [
+          "timeout",
+          "1200",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/input.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/double-slots24",
+          "double-slots24",
+          "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 1200.022255789023,
+        "user_seconds": 1191.047003,
+        "system_seconds": 0.475639,
+        "peak_child_rss_kib": 150020,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "completed_rounds": 9,
+      "frontier_history": [
+        6,
+        34,
+        78,
+        218,
+        425,
+        663,
+        948,
+        991,
+        1008
+      ],
+      "last_completed_round": {
+        "frontier": 1008,
+        "point_fallbacks": 992,
+        "requested": 1007,
+        "retired": 980,
+        "round": 8,
+        "rules": 3860,
+        "seconds": 477.511048856,
+        "zero_rules": 0
+      },
+      "closed": null,
+      "binding_sha256": "a6d0d2486967d4f4f8e465db0b5f0c51fc74ed9073044182644e132a24f34d5b"
+    }
+  ],
+  "first_launcher_error": "One shell invocation used a mistyped Python path and exited127 before any native process or output directory. The successful launch used the recorded installed interpreter.",
+  "runtime_library_files_required": false
+}

@@ -1,0 +1,7 @@
+round=0 frontier=14 rules=9 requested=9 pending=14
+round=1 frontier=93 rules=23 requested=17 pending=93
+round=2 frontier=222 rules=114 requested=96 pending=219
+round=3 frontier=590 rules=341 requested=229 pending=582
+round=4 frontier=835 rules=1030 requested=600 pending=825
+round=5 frontier=928 rules=1986 requested=848 pending=917
+round=6 frontier=937 rules=3086 requested=944 pending=925

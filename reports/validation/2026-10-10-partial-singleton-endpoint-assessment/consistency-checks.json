@@ -1,0 +1,216 @@
+{
+  "scope": "Validation-only exact consistency of native closure, compact moment ratio and dimensional homogeneity. No boundary period or endpoint value installed/evaluated.",
+  "native_result_sha256": "d2f4eef4d08170219bbfa59ca87769c5eec9d53adf6003b3bdf846737c590bf1",
+  "script_sha256": "70fe75802559aad65c0fdcc42c9c99be3ba5933bfa139ace91e4dbabe805a7d2",
+  "basis": [
+    [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "conditions_retained": 376,
+  "exact_matrix_eigenvector_checks": 2,
+  "exact_characteristic_checks": 2,
+  "compact_ratio": "I1/I0=(D-2)/mu; actual input mu=1",
+  "selected_eta_exponent": "D-3=1-2 epsilon; two virtual loops and three positive hard powers",
+  "excluded_extra_DE_exponent": "2-3 epsilon; its boundary coefficient must vanish",
+  "scalar_reconstruction_over_I0": "-1/eta",
+  "raised_reconstruction_eta_terms": {
+    "-1": {
+      "numerator": [
+        {
+          "epsilon_power": 2,
+          "eta_power": 0,
+          "coefficient": "-240"
+        },
+        {
+          "epsilon_power": 3,
+          "eta_power": 0,
+          "coefficient": "896"
+        },
+        {
+          "epsilon_power": 4,
+          "eta_power": 0,
+          "coefficient": "-1100"
+        },
+        {
+          "epsilon_power": 5,
+          "eta_power": 0,
+          "coefficient": "612"
+        },
+        {
+          "epsilon_power": 6,
+          "eta_power": 0,
+          "coefficient": "-160"
+        },
+        {
+          "epsilon_power": 7,
+          "eta_power": 0,
+          "coefficient": "16"
+        }
+      ],
+      "denominator": [
+        {
+          "epsilon_power": 2,
+          "eta_power": 0,
+          "coefficient": "384"
+        },
+        {
+          "epsilon_power": 3,
+          "eta_power": 0,
+          "coefficient": "-704"
+        },
+        {
+          "epsilon_power": 4,
+          "eta_power": 0,
+          "coefficient": "480"
+        },
+        {
+          "epsilon_power": 5,
+          "eta_power": 0,
+          "coefficient": "-144"
+        },
+        {
+          "epsilon_power": 6,
+          "eta_power": 0,
+          "coefficient": "16"
+        }
+      ]
+    },
+    "-2": {
+      "numerator": [
+        {
+          "epsilon_power": 3,
+          "eta_power": 0,
+          "coefficient": "-32"
+        },
+        {
+          "epsilon_power": 4,
+          "eta_power": 0,
+          "coefficient": "80"
+        },
+        {
+          "epsilon_power": 6,
+          "eta_power": 0,
+          "coefficient": "-80"
+        },
+        {
+          "epsilon_power": 7,
+          "eta_power": 0,
+          "coefficient": "32"
+        }
+      ],
+      "denominator": [
+        {
+          "epsilon_power": 2,
+          "eta_power": 0,
+          "coefficient": "384"
+        },
+        {
+          "epsilon_power": 3,
+          "eta_power": 0,
+          "coefficient": "-704"
+        },
+        {
+          "epsilon_power": 4,
+          "eta_power": 0,
+          "coefficient": "480"
+        },
+        {
+          "epsilon_power": 5,
+          "eta_power": 0,
+          "coefficient": "-144"
+        },
+        {
+          "epsilon_power": 6,
+          "eta_power": 0,
+          "coefficient": "16"
+        }
+      ]
+    }
+  },
+  "target_eta_exponents": [
+    "D-4",
+    "D-5"
+  ],
+  "compact_moment_checks": [
+    {
+      "dimension": "13/2",
+      "mu": "1",
+      "surface_bulk_ratio": "9/2"
+    },
+    {
+      "dimension": "13/2",
+      "mu": "2/3",
+      "surface_bulk_ratio": "27/4"
+    },
+    {
+      "dimension": "13/2",
+      "mu": "3/2",
+      "surface_bulk_ratio": "3"
+    },
+    {
+      "dimension": "31/3",
+      "mu": "1",
+      "surface_bulk_ratio": "25/3"
+    },
+    {
+      "dimension": "31/3",
+      "mu": "2/3",
+      "surface_bulk_ratio": "25/2"
+    },
+    {
+      "dimension": "31/3",
+      "mu": "3/2",
+      "surface_bulk_ratio": "50/9"
+    },
+    {
+      "dimension": "39/2",
+      "mu": "1",
+      "surface_bulk_ratio": "35/2"
+    },
+    {
+      "dimension": "39/2",
+      "mu": "2/3",
+      "surface_bulk_ratio": "105/4"
+    },
+    {
+      "dimension": "39/2",
+      "mu": "3/2",
+      "surface_bulk_ratio": "35/3"
+    }
+  ],
+  "limitations": "The high-D endpoint proof and actual integrated boundary must supply the constants. Exceptional native conditions must still be checked; this algebra does not waive them."
+}

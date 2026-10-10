@@ -1,0 +1,45 @@
+{
+  "schema": "partial-placement-independent-proof-review-v1",
+  "status": "scoped mathematical and source-binding review; no new computation or production admission",
+  "reviewed_files": [
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/proof.md",
+      "bytes": 10979,
+      "sha256": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/check.py",
+      "bytes": 5490,
+      "sha256": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/support-checks.json",
+      "bytes": 67972,
+      "sha256": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-native-controls/chart_check.py",
+      "bytes": 2869,
+      "sha256": "88d6ebb85f277636dbb359fe52a7d6bbfe7cfeb1ec07cd23aff2640cf262e8de"
+    }
+  ],
+  "reviewed_claim": "Finite-positive-eta lower-origin continuation and separated virtual zero supports for the three explicitly enumerated placements, for each finite integer label with polynomial completions.",
+  "conclusion": "No remaining mathematical blocker found in this narrow finite-eta source-zero argument, subject to the recorded exact routing/support and ordered-regulator hypotheses. This is not a general placement theorem.",
+  "checks": [
+    "All actual positive virtual rows enter rank and support classification; nonpositive indices give finite polynomial insertions.",
+    "A missing shifted positive virtual factor is a separated massless vacuum only after exact affine routing; V=0 with a positive shifted factor is a massive germ and is not zero.",
+    "The six connected-vacuum primary charts have U=t1*U0, U0>=1; the fixed finite Taylor subtraction argument explicitly controls independent regulator ratios.",
+    "The bound ReD>2(P+R+J+2) supplies lambda-N>0 for that explicit vacuum family and all finite soft/mass jets; J is already counted in lambda.",
+    "Fixed positive eta and T, same-sign independent line regulators, Fermi strip control, regulator removal before T limit, and common dimensional continuation are retained.",
+    "Compact factors remain polynomial or fixed-eta gapped transfers; ordinary virtual scaleless statements are never applied to the occupied measure.",
+    "The source domain must still require positive cut indices, nonnegative occupation indices, nonpositive completion indices, and zero storage tails."
+  ],
+  "not_established": [
+    "Generic arbitrary-rank support/parameter-face theorem",
+    "Production sealed permit or source factory integration",
+    "Large-eta rational-soft boundary adapter",
+    "Eta-zero endpoint projection",
+    "Native closed connection or any three-/four-loop numerical acceptance"
+  ],
+  "execution": "Read-only audit of saved proof and exact checks; this review did not rerun checks or mutate the three bound proof files."
+}

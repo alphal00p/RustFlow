@@ -1,0 +1,326 @@
+{
+  "coordinate_substitutions": {
+    "partial_boundary_certificate_validation::{}::vfree_k2": "2*partial_boundary_certificate_validation::{}::vfree_kl+4*partial_boundary_certificate_validation::{}::vfree_kq+4*partial_boundary_certificate_validation::{}::vfree_lq+4*partial_boundary_certificate_validation::{}::vfree_q2+partial_boundary_certificate_validation::{}::vfree_k2+partial_boundary_certificate_validation::{}::vfree_l2",
+    "partial_boundary_certificate_validation::{}::vfree_kl": "2*partial_boundary_certificate_validation::{}::vfree_lq+partial_boundary_certificate_validation::{}::vfree_kl+partial_boundary_certificate_validation::{}::vfree_l2",
+    "partial_boundary_certificate_validation::{}::vfree_kq": "2*partial_boundary_certificate_validation::{}::vfree_q2+partial_boundary_certificate_validation::{}::vfree_kq+partial_boundary_certificate_validation::{}::vfree_lq",
+    "partial_boundary_certificate_validation::{}::vfree_ku": "2*partial_boundary_certificate_validation::{}::vfree_qu+partial_boundary_certificate_validation::{}::vfree_ku+partial_boundary_certificate_validation::{}::vfree_lu",
+    "partial_boundary_certificate_validation::{}::vfree_l2": "partial_boundary_certificate_validation::{}::vfree_l2",
+    "partial_boundary_certificate_validation::{}::vfree_lq": "partial_boundary_certificate_validation::{}::vfree_lq",
+    "partial_boundary_certificate_validation::{}::vfree_lu": "partial_boundary_certificate_validation::{}::vfree_lu",
+    "partial_boundary_certificate_validation::{}::vfree_q2": "partial_boundary_certificate_validation::{}::vfree_q2",
+    "partial_boundary_certificate_validation::{}::vfree_qu": "partial_boundary_certificate_validation::{}::vfree_qu"
+  },
+  "distributions": [
+    {
+      "chemical_potential": "1",
+      "cut_index": 2,
+      "lower_index": 0,
+      "mass_squared": "0",
+      "source_loop_index": 5,
+      "upper_index": 1
+    },
+    {
+      "chemical_potential": "1",
+      "cut_index": 1,
+      "lower_index": 1,
+      "mass_squared": "0",
+      "source_loop_index": 9,
+      "upper_index": 0
+    }
+  ],
+  "nonzero_conditions": [
+    "1"
+  ],
+  "null_directions": [],
+  "ordinary_proofs": [
+    {
+      "coefficient": "12*partial_boundary_certificate_validation::{}::vfree_lq*partial_boundary_certificate_validation::{}::vfree_q2+4*partial_boundary_certificate_validation::{}::vfree_l2*partial_boundary_certificate_validation::{}::vfree_q2+4*partial_boundary_certificate_validation::{}::vfree_q2^2+6*partial_boundary_certificate_validation::{}::vfree_l2*partial_boundary_certificate_validation::{}::vfree_lq+9*partial_boundary_certificate_validation::{}::vfree_lq^2+partial_boundary_certificate_validation::{}::vfree_l2^2",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "external_coefficient_vectors": [
+        "l",
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L1;1:k;E3;1:l;1:q;1:u;P6;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;18:amflow_parameter_3;18:amflow_parameter_4;18:amflow_parameter_5;Q1,3,4;M;RY6,2;I+4;X0,0,0,0,0,0;I-2;X1,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;D4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;G9;RY6,1;I+1;X0,1,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,1,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;U4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;",
+      "integral": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "coefficient": "2*partial_boundary_certificate_validation::{}::vfree_l2+4*partial_boundary_certificate_validation::{}::vfree_q2+6*partial_boundary_certificate_validation::{}::vfree_lq",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "external_coefficient_vectors": [
+        "l",
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L1;1:k;E3;1:l;1:q;1:u;P6;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;18:amflow_parameter_3;18:amflow_parameter_4;18:amflow_parameter_5;Q1,3,4;M;RY6,2;I+4;X0,0,0,0,0,0;I-2;X1,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;D4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;G9;RY6,1;I+1;X0,1,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,1,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;U4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;",
+      "integral": [
+        1,
+        0,
+        -1,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "coefficient": "1",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "external_coefficient_vectors": [
+        "l",
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L1;1:k;E3;1:l;1:q;1:u;P6;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;18:amflow_parameter_3;18:amflow_parameter_4;18:amflow_parameter_5;Q1,3,4;M;RY6,2;I+4;X0,0,0,0,0,0;I-2;X1,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;D4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;G9;RY6,1;I+1;X0,1,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,1,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;U4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;",
+      "integral": [
+        1,
+        0,
+        -2,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "coefficient": "2*partial_boundary_certificate_validation::{}::vfree_l2+4*partial_boundary_certificate_validation::{}::vfree_q2+6*partial_boundary_certificate_validation::{}::vfree_lq",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "external_coefficient_vectors": [
+        "l",
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L1;1:k;E3;1:l;1:q;1:u;P6;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;18:amflow_parameter_3;18:amflow_parameter_4;18:amflow_parameter_5;Q1,3,4;M;RY6,2;I+4;X0,0,0,0,0,0;I-2;X1,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;D4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;G9;RY6,1;I+1;X0,1,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,1,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;U4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;",
+      "integral": [
+        1,
+        -1,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "coefficient": "2",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "external_coefficient_vectors": [
+        "l",
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L1;1:k;E3;1:l;1:q;1:u;P6;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;18:amflow_parameter_3;18:amflow_parameter_4;18:amflow_parameter_5;Q1,3,4;M;RY6,2;I+4;X0,0,0,0,0,0;I-2;X1,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;D4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;G9;RY6,1;I+1;X0,1,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,1,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;U4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;",
+      "integral": [
+        1,
+        -1,
+        -1,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "coefficient": "1",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "external_coefficient_vectors": [
+        "l",
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L1;1:k;E3;1:l;1:q;1:u;P6;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;18:amflow_parameter_3;18:amflow_parameter_4;18:amflow_parameter_5;Q1,3,4;M;RY6,2;I+4;X0,0,0,0,0,0;I-2;X1,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;D4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;G9;RY6,1;I+1;X0,1,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,1,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,1,0,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,1,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,1;Y6,1;I+1;X0,0,0,0,0,0;RY6,1;I+1;X0,0,0,0,0,0;Y6,1;I+1;X0,0,0,0,0,0;U4;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;RY6,0;Y6,1;I+1;X0,0,0,0,0,0;",
+      "integral": [
+        1,
+        -2,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "original_expression": "(-2*partial_boundary_certificate_validation::{}::vfree_kl+-4*partial_boundary_certificate_validation::{}::vfree_kq+4*partial_boundary_certificate_validation::{}::vfree_lq+4*partial_boundary_certificate_validation::{}::vfree_q2+partial_boundary_certificate_validation::{}::vfree_k2+partial_boundary_certificate_validation::{}::vfree_l2)^(-1)*(partial_boundary_certificate_validation::{}::vfree_kl+partial_boundary_certificate_validation::{}::vfree_kq)^2",
+  "positive_denominator_momentum_rows": [
+    [
+      "1",
+      "-1",
+      "-2",
+      "0"
+    ]
+  ],
+  "scope": "ordinary unrestricted virtual factor only; requires caller-bound compact origin/endpoint permit",
+  "source_coordinate_indices": [
+    3,
+    7,
+    8,
+    11,
+    12,
+    15,
+    19,
+    20,
+    21
+  ],
+  "source_loop_indices": [
+    2,
+    5,
+    9
+  ],
+  "source_virtual_loops": [
+    2
+  ],
+  "translated_expression": "(12*partial_boundary_certificate_validation::{}::vfree_lq*partial_boundary_certificate_validation::{}::vfree_q2+2*partial_boundary_certificate_validation::{}::vfree_kl*partial_boundary_certificate_validation::{}::vfree_kq+2*partial_boundary_certificate_validation::{}::vfree_kl*partial_boundary_certificate_validation::{}::vfree_l2+2*partial_boundary_certificate_validation::{}::vfree_kq*partial_boundary_certificate_validation::{}::vfree_l2+4*partial_boundary_certificate_validation::{}::vfree_kl*partial_boundary_certificate_validation::{}::vfree_q2+4*partial_boundary_certificate_validation::{}::vfree_kq*partial_boundary_certificate_validation::{}::vfree_q2+4*partial_boundary_certificate_validation::{}::vfree_l2*partial_boundary_certificate_validation::{}::vfree_q2+4*partial_boundary_certificate_validation::{}::vfree_q2^2+6*partial_boundary_certificate_validation::{}::vfree_kl*partial_boundary_certificate_validation::{}::vfree_lq+6*partial_boundary_certificate_validation::{}::vfree_kq*partial_boundary_certificate_validation::{}::vfree_lq+6*partial_boundary_certificate_validation::{}::vfree_l2*partial_boundary_certificate_validation::{}::vfree_lq+9*partial_boundary_certificate_validation::{}::vfree_lq^2+partial_boundary_certificate_validation::{}::vfree_kl^2+partial_boundary_certificate_validation::{}::vfree_kq^2+partial_boundary_certificate_validation::{}::vfree_l2^2)*partial_boundary_certificate_validation::{}::vfree_k2^(-1)",
+  "translation": [
+    [
+      "-1",
+      "-2",
+      "0"
+    ]
+  ]
+}

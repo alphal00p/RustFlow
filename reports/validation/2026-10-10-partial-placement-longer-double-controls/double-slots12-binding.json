@@ -1,0 +1,29 @@
+{
+  "scope": "Fresh isolated algebraic closure pilot; no historical program import, no numerical admission.",
+  "command": [
+    "timeout",
+    "1200",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/input.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/double-slots12",
+    "double-slots12",
+    "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+  ],
+  "environment": {
+    "PILOT_REQUESTS": "16384",
+    "PILOT_ROUNDS": "24",
+    "PILOT_FRONTIER": "4096",
+    "PILOT_RULES": "65536",
+    "PILOT_ZERO_ATTEMPTS": "8192",
+    "PILOT_RAY_DOMAINS": "1",
+    "PILOT_POINT_DOMAINS": "1",
+    "PILOT_DEPTH": "3"
+  },
+  "capsule_manifest_sha256": "ac4a5d5ab70eaea9f9c4f90a9fdddc57a100664a7c4fcbbc47db6b019ff2bb5f",
+  "launcher_sha256": "1b74d205c42ae8c8fa90fe391ff30db9ff21422d750d62044001a6aed36812fc",
+  "build_binding_sha256": "909ea8300888945e2db6ce1c814c437a0be32155784c6c57dc28d6900a647089",
+  "unchanged_algorithm_and_sources": true,
+  "runtime_reads_shared_libraries": false,
+  "exit_code": 124,
+  "capsule_unchanged": true
+}

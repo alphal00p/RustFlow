@@ -1,0 +1,16 @@
+
+running 11 tests
+test finite_density::boundary::virtual_soft::tests::actual_partial_placement_regions_have_only_certified_virtual_soft_factors ... ok
+test finite_density::boundary::virtual_soft::tests::inherited_preprojection_conditions_survive_without_licensing_compact_poles ... ok
+test finite_density::boundary::virtual_soft::tests::noncontiguous_mapping_and_multiple_compact_distributions_are_preserved ... ok
+test finite_density::boundary::virtual_soft::tests::preprojection_guard_collection_survives_actual_factor_projection ... ok
+test finite_density::boundary::virtual_soft::tests::rank_deficient_positive_support_keeps_a_free_unrestricted_direction ... ok
+test finite_density::boundary::virtual_soft::tests::rank_deficient_support_can_leave_a_mixed_virtual_direction ... ok
+test finite_density::boundary::virtual_soft::tests::rejects_scales_incompatible_translations_and_compact_rational_factors ... ok
+test finite_density::boundary::virtual_soft::tests::translated_virtual_factor_preserves_polynomial_numerator_and_parameter_poles ... ok
+test finite_density::boundary::virtual_soft::tests::validates_coordinate_maps_limits_and_immutable_binding_accessors ... ok
+test finite_density::boundary::virtual_soft::tests::validates_distributions_before_any_virtual_zero ... ok
+test finite_density::boundary::virtual_soft::tests::whole_expression_certificate_is_stricter_than_separate_zero_terms ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.49s
+

@@ -1,0 +1,50 @@
+{
+  "scope": "isolated instrumentation of native recursive application; no production or proof semantics change",
+  "terminal_no_rule_checks": 7,
+  "fast_control_exact_native_equivalence": true,
+  "slow_saved_native_equivalence": true,
+  "point": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    0,
+    -1,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "rules": 16937,
+  "rule_applications": 15021,
+  "result_terms": 7,
+  "unresolved": 0,
+  "conditions": 3499,
+  "operation_seconds": {
+    "coefficient-multiply": 41.9692147670004,
+    "condition-retention": 0.8030920279999919,
+    "native-apply": 14.840388824999987,
+    "pending-coefficient-add": 262.7531303269987
+  },
+  "operation_calls": {
+    "coefficient-multiply": 80985,
+    "condition-retention": 44781,
+    "native-apply": 15028,
+    "pending-coefficient-add": 65639
+  },
+  "pending_addition_share_of_measured_operations": 0.8201659136092382,
+  "instrumented_reduction_wall_seconds": 365.475888588,
+  "unmeasured_instrumentation_scheduling_other_overhead_seconds": 45.110062641000866,
+  "scope_limits": [
+    "Timing instrumentation writes progress before each operation and adds overhead.",
+    "No claim that terminal binding or persisted-program decoding caused an algorithmic slowdown.",
+    "The native result is exact and finite; no period or final assembled amplitude is evaluated.",
+    "No source search or proof weakening."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "design-artifacts-v1",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-historical-candidate-collection-assessment/design.md",
+      "bytes": 6996,
+      "sha256": "9ec995137242ed8c2fa0734171ccc84fa4aaeda4ab024876928711f131cf6796"
+    },
+    {
+      "path": "reports/validation/2026-10-10-historical-candidate-collection-assessment/review.json",
+      "bytes": 1962,
+      "sha256": "ebc77924bafa0668fc4eb5b3bcad7d4eafee5a8eda7efbcc354a4bf59e837cb4"
+    }
+  ]
+}

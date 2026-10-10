@@ -1,0 +1,274 @@
+--- a/src/finite_density/guarded.rs
++++ b/src/finite_density/guarded.rs
+@@ -558,6 +558,62 @@
+         let native = self
+             .native
+             .union_replayed(fallback.native, terminals, max_rules)
++            .map_err(|e| Error::Reduction(e.to_string()))?;
++        validate_storage_program(&native, self.physical_arity)?;
++        Ok(Self {
++            native,
++            physical_arity: self.physical_arity,
++            dummy_symbols: self.dummy_symbols,
++        })
++    }
++
++    /// Rebind a scheduler-owned immutable verified program. Preserve storage
++    /// checks while avoiding replay of unchanged native rules. The public
++    /// replayed API and final closure audit remain independent replay boundaries.
++    pub(crate) fn with_terminals_verified(
++        self,
++        terminals: impl IntoIterator<Item = [i64; N]>,
++        max_rules: usize,
++    ) -> Result<Self> {
++        let terminals = terminals.into_iter().collect::<Vec<_>>();
++        for terminal in &terminals {
++            validate_storage_label(terminal, self.physical_arity)?;
++        }
++        let native = self
++            .native
++            .with_terminals_verified(terminals, max_rules)
++            .map_err(|e| Error::Reduction(e.to_string()))?;
++        validate_storage_program(&native, self.physical_arity)?;
++        Ok(Self {
++            native,
++            physical_arity: self.physical_arity,
++            dummy_symbols: self.dummy_symbols,
++        })
++    }
++
++    /// Compose scheduler-owned immutable verified programs under the exact
++    /// native source/order contract. Both wrappers retain their physical storage
++    /// mappings; no rule, condition or precedence is changed by composition.
++    pub(crate) fn union_verified(
++        self,
++        fallback: Self,
++        terminals: impl IntoIterator<Item = [i64; N]>,
++        max_rules: usize,
++    ) -> Result<Self> {
++        if self.physical_arity != fallback.physical_arity
++            || self.dummy_symbols != fallback.dummy_symbols
++        {
++            return Err(Error::InvalidInput(
++                "cannot reuse guarded rules with different physical storage mappings".into(),
++            ));
++        }
++        let terminals = terminals.into_iter().collect::<Vec<_>>();
++        for terminal in &terminals {
++            validate_storage_label(terminal, self.physical_arity)?;
++        }
++        let native = self
++            .native
++            .union_verified(fallback.native, terminals, max_rules)
+             .map_err(|e| Error::Reduction(e.to_string()))?;
+         validate_storage_program(&native, self.physical_arity)?;
+         Ok(Self {
+@@ -1068,4 +1124,132 @@
+             assert!((coefficient - expected).together().cancel().is_zero());
+         }
+     }
+-}
++
++    #[test]
++    fn verified_internal_composition_matches_public_replay_and_decode() {
++        let context = context(measure());
++        let make = || {
++            context
++                .discover(
++                    vec![
++                        IndexDomain::new([
++                            IndexBounds::new(Some(2), None).unwrap(),
++                            IndexBounds::fixed(0),
++                        ])
++                        .unwrap(),
++                    ],
++                    [[1, 1]],
++                    Default::default(),
++                )
++                .unwrap()
++                .program
++        };
++        let verified = make().union_verified(make(), [[1, 1]], 2).unwrap();
++        let replayed = make().union_replayed(make(), [[1, 1]], 2).unwrap();
++        assert_eq!(
++            verified.encode(Default::default()).unwrap(),
++            replayed.encode(Default::default()).unwrap()
++        );
++        let reduced = verified.reduce([2, 0], Default::default()).unwrap();
++        assert_eq!(reduced.terms, BTreeMap::from([([1, 1], Atom::one())]));
++        assert!(reduced.unresolved.is_empty());
++        assert!(
++            reduced
++                .nonzero_conditions
++                .contains(&Atom::var(symbol!("guarded_test_x")))
++        );
++        let verified = verified.with_terminals_verified([], 2).unwrap();
++        let replayed = replayed.with_terminals_replayed([], 2).unwrap();
++        let bytes = verified.encode(Default::default()).unwrap();
++        assert_eq!(bytes, replayed.encode(Default::default()).unwrap());
++        let restored = context.decode(&bytes, Default::default()).unwrap();
++        let uncovered = restored.reduce([2, 0], Default::default()).unwrap();
++        assert!(uncovered.terms.is_empty());
++        assert_eq!(uncovered.unresolved.len(), 1);
++        assert_eq!(uncovered.unresolved[0].integral, [1, 1]);
++        assert_eq!(uncovered.unresolved[0].coefficient, Atom::one());
++        assert_eq!(
++            uncovered.unresolved[0].reason,
++            GuardedApplicationFailure::NoApplicableRule
++        );
++        assert_eq!(uncovered.nonzero_conditions, reduced.nonzero_conditions);
++        assert!(make().union_verified(make(), [], 1).is_err());
++        assert!(make().with_terminals_verified([], 0).is_err());
++        let mut changed = measure();
++        changed.branch.push_str("-different-branch");
++        let foreign = self::context(changed)
++            .discover(Vec::new(), [], Default::default())
++            .unwrap()
++            .program;
++        assert!(make().union_verified(foreign, [], 2).is_err());
++    }
++
++    #[test]
++    fn verified_internal_composition_retains_physical_storage_checks() {
++        let domain = IndexDomain::new([
++            IndexBounds::new(Some(2), None).unwrap(),
++            IndexBounds::fixed(0),
++            IndexBounds::fixed(0),
++        ])
++        .unwrap();
++        let build = |physical_arity| {
++            GuardedContext::new_with_physical_arity(
++                measure(),
++                [
++                    IndexRole::RequiredCut,
++                    IndexRole::Occupation,
++                    IndexRole::Ordinary,
++                ],
++                [
++                    symbol!("verified_wrapper_cut"),
++                    symbol!("verified_wrapper_occupation"),
++                    symbol!("verified_wrapper_tail"),
++                ],
++                vec![],
++                vec![GuardedIdentity {
++                    id: "verified-wrapper-padded-source".into(),
++                    terms: vec![
++                        GuardedIdentityTerm {
++                            shift: [0, 0, 0],
++                            coefficient: Atom::one(),
++                        },
++                        GuardedIdentityTerm {
++                            shift: [-1, 1, 0],
++                            coefficient: -Atom::one(),
++                        },
++                    ],
++                    domain: domain.clone(),
++                    nonzero_conditions: vec![],
++                }],
++                physical_arity,
++            )
++            .unwrap()
++        };
++        let padded = build(2);
++        let empty = || {
++            padded
++                .discover(Vec::new(), [], Default::default())
++                .unwrap()
++                .program
++        };
++        let physical = build(3)
++            .discover(Vec::new(), [], Default::default())
++            .unwrap()
++            .program;
++        assert!(empty().union_verified(physical, [], 0).is_err());
++        for invalid in [[1, 1, 1], [0, 0, 0], [1, -1, 0]] {
++            assert!(empty().with_terminals_verified([invalid], 0).is_err());
++            assert!(empty().union_verified(empty(), [invalid], 0).is_err());
++        }
++        let valid = empty().with_terminals_verified([[1, 1, 0]], 0).unwrap();
++        let bytes = valid.encode(Default::default()).unwrap();
++        assert_eq!(
++            padded
++                .decode(&bytes, Default::default())
++                .unwrap()
++                .native()
++                .terminals(),
++            &BTreeSet::from([[1, 1, 0]])
++        );
++    }
++}
+--- a/src/finite_density/reduction.rs
++++ b/src/finite_density/reduction.rs
+@@ -844,7 +844,7 @@
+                 // A replayed zero can replace an expanding recurrence. All
+                 // subsequent ordinary rules retain this zero-first precedence.
+                 diagnostics.native_rule_unions += 1;
+-                zero.discovery.program.union_replayed(
++                zero.discovery.program.union_verified(
+                     previous,
+                     terminals.iter().copied(),
+                     options.max_reused_rules,
+@@ -928,7 +928,7 @@
+                 if previous.native().terminals() == &current_terminals {
+                     previous
+                 } else {
+-                    previous.with_terminals_replayed(
++                    previous.with_terminals_verified(
+                         terminals.iter().copied(),
+                         options.max_reused_rules,
+                     )?
+@@ -1056,13 +1056,13 @@
+                 found.program = if residual_policy {
+                     // Fill uncovered leaves, including exact conditional
+                     // faces, without diverting successful old reductions.
+-                    previous.union_replayed(
++                    previous.union_verified(
+                         found.program,
+                         terminals.iter().copied(),
+                         options.max_reused_rules,
+                     )?
+                 } else {
+-                    found.program.union_replayed(
++                    found.program.union_verified(
+                         previous,
+                         terminals.iter().copied(),
+                         options.max_reused_rules,
+--- a/src/finite_density/reduction/requested.rs
++++ b/src/finite_density/reduction/requested.rs
+@@ -121,7 +121,7 @@
+                 run.cancellation.check()?;
+                 add(&mut diagnostics.native_rule_unions, 1)?;
+                 let empty = context.discover(Vec::new(), [], options.discovery)?.program;
+-                program.union_replayed(empty, [], options.max_reused_rules)?
++                program.union_verified(empty, [], options.max_reused_rules)?
+             }
+             None => context.discover(Vec::new(), [], options.discovery)?.program,
+         };
+@@ -247,7 +247,8 @@
+             attempted?;
+         }
+         // Pairwise union preserves ray-before-point and request order while
+-        // avoiding a full replay of every earlier proof for each new point.
++        // keeping vector concatenation balanced. Leaf programs have already
++        // passed native source replay; verified composition retains that proof.
+         while fresh.len() > 1 {
+             let mut next = Vec::new();
+             let mut iter = fresh.into_iter();
+@@ -255,7 +256,7 @@
+                 next.push(if let Some(right) = iter.next() {
+                     run.cancellation.check()?;
+                     add(&mut diagnostics.native_rule_unions, 1)?;
+-                    left.union_replayed(right, [], options.max_reused_rules)?
++                    left.union_verified(right, [], options.max_reused_rules)?
+                 } else {
+                     left
+                 });
+@@ -265,7 +266,7 @@
+         run.cancellation.check()?;
+         let program = if let Some(fresh) = fresh.pop() {
+             add(&mut diagnostics.native_rule_unions, 1)?;
+-            frozen.union_replayed(fresh, [], options.max_reused_rules)?
++            frozen.union_verified(fresh, [], options.max_reused_rules)?
+         } else {
+             frozen
+         };

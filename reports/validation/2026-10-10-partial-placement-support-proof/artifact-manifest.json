@@ -1,0 +1,27 @@
+{
+  "scope": "Frozen mathematical/exact-algebra evidence only; no new production admission or numerical endpoint result.",
+  "files": {
+    "check.py": {
+      "sha256": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2",
+      "bytes": 5490
+    },
+    "independent-review.json": {
+      "sha256": "c68e1df70355eba4c39c8e1c4adad6908a73efe3f6187e7706c6ddcb6d39c6a0",
+      "bytes": 3055
+    },
+    "proof.md": {
+      "sha256": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77",
+      "bytes": 10979
+    },
+    "support-checks-pre-bytecode-guard.json": {
+      "sha256": "8a97b3351d0e2f21a65a527788d89bf377ed7bc96f12ea9541449887f912a3cc",
+      "bytes": 67972
+    },
+    "support-checks.json": {
+      "sha256": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633",
+      "bytes": 67972
+    }
+  },
+  "file_count": 5,
+  "total_bytes": 155468
+}

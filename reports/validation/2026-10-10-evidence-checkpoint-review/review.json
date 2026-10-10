@@ -1,0 +1,92 @@
+{
+  "scope": "Hash/byte verification of every local file listed by the14 completed report manifests. This does not rerun computations, restore relocated executables, assert historical root artifacts still exist, or change the explicitly limited mathematical/numerical claims.",
+  "status": "passed",
+  "reports": [
+    {
+      "report": "reports/validation/2026-10-10-final-history-work-profile",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "202bf911c5ffb862f064d0ef20b675400ff9f5d4cdc04de9c91269ee863ef6f5",
+      "files_verified": 19
+    },
+    {
+      "report": "reports/validation/2026-10-10-final-reduction-phase-diagnostic",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "9c767ea82768bb6f917a71b2d22a9807047a2cf2b2056e269c4905a270cf493f",
+      "files_verified": 26
+    },
+    {
+      "report": "reports/validation/2026-10-10-historical-candidate-collection-assessment",
+      "manifest": "manifest.json",
+      "manifest_sha256": "7ab782fe6f0f01c6bf21bc6398ae483b14dfc3a907908a02b5bfe1572eca0e37",
+      "files_verified": 2
+    },
+    {
+      "report": "reports/validation/2026-10-10-historical-candidate-limit-draft",
+      "manifest": "manifest.json",
+      "manifest_sha256": "c41676b6ea1799842148d01b7ac2b0bbc80dba38cba3bc31f51cc6e2b35e4e69",
+      "files_verified": 8
+    },
+    {
+      "report": "reports/validation/2026-10-10-longer-singleton-control",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "93a524e85f68e937a3ac0c1af139b9e63f343d48f08c22779bb79dcdae5e7956",
+      "files_verified": 92
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-boundary-certificate-final-review",
+      "manifest": "manifest.json",
+      "manifest_sha256": "98e5db11f027afea7f545c8023728ed80267f682593df7fc020ae2fdbfac0d5a",
+      "files_verified": 1
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-boundary-certificate-review",
+      "manifest": "manifest.json",
+      "manifest_sha256": "5ce22bff74d801147ab4f5618cf12815ec12b31c0d05631407a079f248de9e6b",
+      "files_verified": 2
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-boundary-certificate-validation",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "36c0efa13ca1ed0ed014d0be50a8cd061ee467c47a80318920a038617deb5398",
+      "files_verified": 76
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-placement-admission-design",
+      "manifest": "manifest.json",
+      "manifest_sha256": "07398bfb6542c261c865d125e7f9997e38c1f7bedd0c92e71139432d6c214146",
+      "files_verified": 3
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-placement-boundary-assessment",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "77fb4817a4fc7111aba8bc1efa3e038f17dd4d71c5e5d18e583b00e00bc505b9",
+      "files_verified": 17
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-placement-closure-pilot",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "701abe57bee0dd73010ceb59584a6c2ff332796f69a2f5e3116eb710ab85e669",
+      "files_verified": 83
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-placement-longer-double-controls",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "59a03861ffc6ad47eb7cbe25583040cf608212244a4c125e5f6b25e84e089b7f",
+      "files_verified": 63
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-placement-support-proof",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "aca6f023f89c97b1e417b0e08c96e62aab001063dfa32eea133a6bc9a22108c6",
+      "files_verified": 5
+    },
+    {
+      "report": "reports/validation/2026-10-10-partial-singleton-endpoint-assessment",
+      "manifest": "artifact-manifest.json",
+      "manifest_sha256": "d07bcbd52de7c8ae10e1cd3434a3823e12c399a35813fc4a7f7df4b3c8754751",
+      "files_verified": 8
+    }
+  ],
+  "total_files_verified": 405,
+  "script_sha256": "19a920890c6529c766963a5da88f76cd8586927a0caa9451337abaae1e1d94cf"
+}

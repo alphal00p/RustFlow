@@ -1,0 +1,78 @@
+{
+  "scope": "Standalone diagnostic linked to frozen production RustFlow/native dependencies; no Cargo or production modification.",
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "partial_placement_closure_pilot",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/pilot.rs",
+    "-o",
+    "/tmp/rustflow-partial-placement-closure-pilot"
+  ],
+  "dependencies": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "symbolica_amflow": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "1d8feeefd644716d0cedacf8748888e7954ad342910de19022fc84629232fa6a",
+      "bytes": 639688246
+    },
+    "rustred": {
+      "path": "/tmp/librustred-verified-program-reuse-20261010.rlib",
+      "sha256": "91f0dc1e00677301daf9bb1146fb318f713f6a71a8598534c0d36ca947defd69",
+      "bytes": 227092024
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    }
+  },
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/pilot.rs",
+    "sha256": "c1bf8ddfc3a88b8195d8e80aa51fbe6c76327ce28bd18708b3dceb2af403f365"
+  },
+  "exit_code": 1,
+  "wall_seconds": 0.6811534496955574,
+  "cargo_invoked": false,
+  "prepare_source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/prepare.rs",
+    "sha256": "78229524d3cc3f23ef4d6a42b67ab7dd7b31fbcb21534f42107d3277e64242eb"
+  },
+  "isolated_native_build_binding": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/library-build.json",
+    "sha256": "90a3ea3135e4763fb005bfb10877802493124e06bd3e49bf856c55b8a342548e"
+  },
+  "final_audit": "independent with_terminals_replayed plus encode/decode target and derivative replay",
+  "compile_environment_override": {
+    "CARGO_CRATE_NAME": "partial_placement_closure_pilot"
+  }
+}

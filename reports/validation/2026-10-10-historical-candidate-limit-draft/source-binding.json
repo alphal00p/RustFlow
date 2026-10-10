@@ -1,0 +1,25 @@
+{
+  "scope": "Uncompiled report-only draft against current verified-reuse production sources; no files applied.",
+  "base_commit": "e8aef57d064fd278e0f74e489728bd6696eac8a9",
+  "base_sources_sha256": {
+    "src/finite_density/reduction.rs": "595b834390876a80915f6d0b7094fe3a253c3e017f7fe39f9360ac4f4dc6219e",
+    "src/finite_density/reduction/active.rs": "9ebcb53934499aed505d5b706028906c625e35801fcb54f3341d50a9c4084017",
+    "src/finite_density/interface.rs": "a89e61febaca982fce863c472b1fc46da52d8e94886448cbf522979ea50aa6c4",
+    "tests/finite_density_runtime_flow.rs": "eda3f08875297f1f3f770f2cd1a6865b656e0387ab78c97117b55e247548c244"
+  },
+  "proposal_sources_sha256": {
+    "src/finite_density/reduction.rs": "e28e9fe7f76660240fd77e63f123f0d77b55ee1ebec5b26c08b487963b3d6c03",
+    "src/finite_density/reduction/active.rs": "cfe753a1eac3032da87d9fd1905120150cadd6fc61310a509e99c9eefcdd57ca",
+    "src/finite_density/interface.rs": "37c7f1d981b9dae28bd94fd9338b426a85a33de58edff65735fe9bc3a38f24f4",
+    "tests/finite_density_runtime_flow.rs": "b6cef89859d029dc47aa2c2f5e8ae7f8b546644bc7c7144707ea4e42eb49df32"
+  },
+  "patch_sha256": "a610edf9ffd604a993437e4293741309137bf64d52eeb599e559102b536bea58",
+  "tests": {
+    "drafted": 5,
+    "executed": 0
+  },
+  "semantics_review": {
+    "path": "reports/validation/2026-10-10-historical-candidate-collection-assessment/manifest.json",
+    "sha256": "7ab782fe6f0f01c6bf21bc6398ae483b14dfc3a907908a02b5bfe1572eca0e37"
+  }
+}

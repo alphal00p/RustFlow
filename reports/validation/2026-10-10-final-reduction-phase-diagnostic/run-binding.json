@@ -1,0 +1,28 @@
+{
+  "scope": "Native full cold replay, seven terminal applicability checks, instrumented native-apply recursive scheduling on point24 control and point25 raised-target component only; no source discovery or numerical period values",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-final-reduction-phase-probe-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/profile",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/probe.rs": "7ed99e9f4dc114731fc96cc7ef5586373b60c50d190dce96c62f3478bbcf4d96",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/build.py": "2807054dcdfaff95a42171b4ffd348948e9aaff1297786867a5ca3272427c47b",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/build-binding.json": "5584cdfdb5e168e3ea2547a9c22e2e94181244a84da0f4f4649db1026873a67d",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/run.py": "6bc0cc79c04f92ce296f65c7f6e8b6f41dc5d9e4187db22094df0a9e6d16efcb",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-reduction-phase-diagnostic/input-bindings.json": "4386ee2fc473e7c3ca0bca92c0e961e4528f37fb72e93fcc06ac6a613fc86aec",
+    "/tmp/rustflow-final-reduction-phase-probe-20261010": "3a49f2fe270ca4de60e3017498dd4bd6edf4f13fcf12de718d14b1b7d2e0b2d3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.json": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json": "2ab4f65df49278af5c7084c34fdb6a9b8fbaa873082c136283ef6c56a9830d25"
+  },
+  "budget": "600 wall seconds overall;480 seconds checked between native operations on one reduction; original100000 native applications/pending bounds retained",
+  "instrumentation": "Exact native apply API, current native harder-first pending comparator and coefficient operations; timing instrumentation adds I/O overhead; output checked against saved uninstrumented native result",
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

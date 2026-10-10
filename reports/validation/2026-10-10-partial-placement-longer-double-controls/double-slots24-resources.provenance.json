@@ -1,0 +1,30 @@
+{
+  "captured_utc": "2026-10-10T06:07:43.751015+00:00",
+  "command": [
+    "timeout",
+    "1200",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/input.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/double-slots24",
+    "double-slots24",
+    "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot",
+      "sha256": "427d6d621a902c9fefaac21175103c311085f98d0625a8e8a34651f3f6c83d4c",
+      "size_bytes": 1272493416
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/input.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/input.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "size_bytes": 1550
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

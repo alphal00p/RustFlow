@@ -1,0 +1,372 @@
+{
+  "scope": "Fresh isolated partial-placement native closure only; no boundary integration, transport, physical endpoint evaluation or production admission.",
+  "native_library": "isolated verified-program reuse; source-bound immutable scheduling unions, independent final source replay",
+  "old_rules_imported": false,
+  "bounds": {
+    "wall_seconds_per_arm": 300,
+    "rounds": 16,
+    "cumulative_requests": 4096,
+    "frontier": 1024,
+    "rules": 65536,
+    "direct_zero_attempts_per_round": 8192,
+    "ray_domains": 1,
+    "point_domains": 1,
+    "depth": 3
+  },
+  "arms": [
+    {
+      "mode": "single-slot0",
+      "status": "closed",
+      "resources": {
+        "command": [
+          "timeout",
+          "300",
+          "/tmp/rustflow-partial-placement-closure-pilot",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/single-slot0",
+          "single-slot0",
+          "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 49.207262944895774,
+        "user_seconds": 48.807938,
+        "system_seconds": 0.077246,
+        "peak_child_rss_kib": 30824,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "completed_rounds": 12,
+      "frontier_history": [
+        6,
+        18,
+        56,
+        103,
+        184,
+        107,
+        45,
+        27,
+        18,
+        13,
+        8,
+        2
+      ],
+      "last_completed_round": {
+        "frontier": 2,
+        "point_fallbacks": 8,
+        "requested": 13,
+        "retired": 6,
+        "round": 11,
+        "rules": 636,
+        "seconds": 2.781206784,
+        "zero_rules": 0
+      },
+      "binding_sha256": "e40ad8fc229f930c4a2594ac199a2c9cf0d3833940abc6f53adda9f7a2fa5f85",
+      "conditions_and_gaps": "Retained in original round checkpoints; no exceptional-locus coverage claim.",
+      "basis": [
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "retained_condition_count": 376,
+      "final_target_and_derivative_rows": [
+        [
+          {
+            "coefficient": "-(-2+3*epsilon)/(eta*epsilon)",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(eta*epsilon)",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": "1/4*(-10+39*epsilon-44*epsilon^2+12*epsilon^3)/(eta*epsilon*(-2+epsilon))",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/4*(30*eta-97*eta*epsilon+89*eta*epsilon^2-32*eta*epsilon^3+4*eta*epsilon^4+2*epsilon^2-2*epsilon^3-4*epsilon^4)/(eta^2*epsilon*(-3+epsilon)*(-2+epsilon)^2)",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": "-(-2+3*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2/eta",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        [
+          {
+            "coefficient": "-(-1+2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      ],
+      "independent_native_audit": "All original weighted target sums and every basis derivative replayed with with_terminals_replayed; encoded closed program decoded and rows/conditions rechecked.",
+      "closed_program_sha256": "62f25eb7f80416f2031860e967b364c9d36ede5be871401ad8b829e9e3fdab68",
+      "sample_condition_diagnostics_at_eta_1": [
+        {
+          "dimension": "12/5",
+          "epsilon": "4/5",
+          "vanished_conditions": [
+            "-32*eta+40*eta*epsilon",
+            "-32+40*epsilon",
+            "-4*eta+5*eta*epsilon",
+            "-4+5*epsilon",
+            "-8*eta+10*eta*epsilon",
+            "-8+10*epsilon"
+          ]
+        },
+        {
+          "dimension": "13/2",
+          "epsilon": "-5/4",
+          "vanished_conditions": []
+        },
+        {
+          "dimension": "31/3",
+          "epsilon": "-19/6",
+          "vanished_conditions": []
+        }
+      ]
+    },
+    {
+      "mode": "double-slots12",
+      "status": "timeout_unclosed",
+      "resources": {
+        "command": [
+          "timeout",
+          "300",
+          "/tmp/rustflow-partial-placement-closure-pilot",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/double-slots12",
+          "double-slots12",
+          "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 300.01195277506486,
+        "user_seconds": 297.718932,
+        "system_seconds": 0.160165,
+        "peak_child_rss_kib": 64652,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "completed_rounds": 5,
+      "frontier_history": [
+        14,
+        93,
+        222,
+        590,
+        835
+      ],
+      "last_completed_round": {
+        "frontier": 835,
+        "point_fallbacks": 590,
+        "requested": 600,
+        "retired": 580,
+        "round": 4,
+        "rules": 1030,
+        "seconds": 134.017681601,
+        "zero_rules": 0
+      },
+      "binding_sha256": "d970a5f1c4d5bce38efce7cca506a7f7bdad418e03300549c25f5efcf689072c",
+      "conditions_and_gaps": "Retained in original round checkpoints; no exceptional-locus coverage claim."
+    },
+    {
+      "mode": "double-slots24",
+      "status": "timeout_unclosed",
+      "resources": {
+        "command": [
+          "timeout",
+          "300",
+          "/tmp/rustflow-partial-placement-closure-pilot",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/double-slots24",
+          "double-slots24",
+          "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 300.010337036103,
+        "user_seconds": 297.710971,
+        "system_seconds": 0.15517999999999998,
+        "peak_child_rss_kib": 55296,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "completed_rounds": 6,
+      "frontier_history": [
+        6,
+        34,
+        78,
+        218,
+        425,
+        663
+      ],
+      "last_completed_round": {
+        "frontier": 663,
+        "point_fallbacks": 425,
+        "requested": 436,
+        "retired": 415,
+        "round": 5,
+        "rules": 849,
+        "seconds": 93.606583851,
+        "zero_rules": 0
+      },
+      "binding_sha256": "11281d55fad6ad3b8c6525badc0107825fa9772be200eb15b66c74511388b919",
+      "conditions_and_gaps": "Retained in original round checkpoints; no exceptional-locus coverage claim."
+    }
+  ],
+  "interpretation": "The singleton closes with two masters. Both double placements remain unclosed at the wall cap. Different placements define different finite-eta integrals; RHS sizes are not numerical equality tests."
+}

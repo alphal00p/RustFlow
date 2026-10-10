@@ -1,0 +1,72 @@
+{
+  "scope": "Fresh larger-bound trials, no resume or historical rules. Copied static binary needs no runtime shared rlibs. Original compile provenance remains in capsule/build-binding.json.",
+  "files": [
+    {
+      "original": "/tmp/rustflow-partial-placement-closure-pilot",
+      "capsule": "capsule/pilot",
+      "sha256": "427d6d621a902c9fefaac21175103c311085f98d0625a8e8a34651f3f6c83d4c",
+      "bytes": 1272493416
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+      "capsule": "capsule/input.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "bytes": 1550
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/pilot.rs",
+      "capsule": "capsule/pilot.rs",
+      "sha256": "c1bf8ddfc3a88b8195d8e80aa51fbe6c76327ce28bd18708b3dceb2af403f365",
+      "bytes": 19123
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/prepare.rs",
+      "capsule": "capsule/prepare.rs",
+      "sha256": "8428875a532138e37690ad513e486a4b0670b6fb8fd33b15193f8b4d993c0a90",
+      "bytes": 10563
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/build-binding.json",
+      "capsule": "capsule/build-binding.json",
+      "sha256": "909ea8300888945e2db6ce1c814c437a0be32155784c6c57dc28d6900a647089",
+      "bytes": 3617
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-closure-pilot/artifact-manifest.json",
+      "capsule": "capsule/artifact-manifest.json",
+      "sha256": "701abe57bee0dd73010ceb59584a6c2ff332796f69a2f5e3116eb710ab85e669",
+      "bytes": 12570
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-support-proof/proof.md",
+      "capsule": "capsule/proof.md",
+      "sha256": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77",
+      "bytes": 10979
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-support-proof/check.py",
+      "capsule": "capsule/check.py",
+      "sha256": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2",
+      "bytes": 5490
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-support-proof/support-checks.json",
+      "capsule": "capsule/support-checks.json",
+      "sha256": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633",
+      "bytes": 67972
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/run-resource-command.py",
+      "capsule": "capsule/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    }
+  ],
+  "proof_binding_sha256": "c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f",
+  "original_proof_input_hashes": {
+    "reports/validation/2026-10-10-partial-placement-support-proof/proof.md": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77",
+    "reports/validation/2026-10-10-partial-placement-support-proof/check.py": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2",
+    "reports/validation/2026-10-10-partial-placement-support-proof/support-checks.json": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633"
+  },
+  "original_artifact_manifest_sha256": "701abe57bee0dd73010ceb59584a6c2ff332796f69a2f5e3116eb710ab85e669"
+}

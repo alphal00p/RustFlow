@@ -1,0 +1,64 @@
+{
+  "internal_changed_calls": [
+    {
+      "path": "src/finite_density/reduction.rs",
+      "line": 847,
+      "expression": "zero.discovery.program.union_verified("
+    },
+    {
+      "path": "src/finite_density/reduction.rs",
+      "line": 931,
+      "expression": "previous.with_terminals_verified("
+    },
+    {
+      "path": "src/finite_density/reduction.rs",
+      "line": 1059,
+      "expression": "previous.union_verified("
+    },
+    {
+      "path": "src/finite_density/reduction.rs",
+      "line": 1065,
+      "expression": "found.program.union_verified("
+    },
+    {
+      "path": "src/finite_density/reduction/requested.rs",
+      "line": 124,
+      "expression": "program.union_verified(empty, [], options.max_reused_rules)?"
+    },
+    {
+      "path": "src/finite_density/reduction/requested.rs",
+      "line": 259,
+      "expression": "left.union_verified(right, [], options.max_reused_rules)?"
+    },
+    {
+      "path": "src/finite_density/reduction/requested.rs",
+      "line": 269,
+      "expression": "frozen.union_verified(fresh, [], options.max_reused_rules)?"
+    }
+  ],
+  "unchanged_replay_boundaries": [
+    {
+      "path": "src/finite_density/guarded.rs",
+      "owner": "GuardedContext::discover / discover_with_priority_points / discover_partitioned / direct_zero_rules_at_points, and decode"
+    },
+    {
+      "path": "src/finite_density/reduction/active.rs",
+      "owner": "Final explicit stopping-set full replay and subsequent exact weighted target/derivative audit"
+    },
+    {
+      "path": "src/finite_density/guarded.rs",
+      "owner": "Public union_replayed and with_terminals_replayed wrappers"
+    }
+  ],
+  "unchanged_semantics": [
+    "source context and coefficient-ring binding",
+    "source epoch and persistence schema",
+    "rule precedence and duplicate-inclusive budgets",
+    "terminals replace old stopping sets",
+    "tail and physical storage mapping validation",
+    "all nonzero conditions and failure statuses",
+    "native domain gaps and transaction accounting",
+    "cancellation boundaries",
+    "numerical precision and endpoint tolerances"
+  ]
+}

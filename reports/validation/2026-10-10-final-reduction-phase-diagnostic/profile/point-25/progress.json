@@ -1,0 +1,49 @@
+{
+  "applications": 15021,
+  "coefficient_sizes": {
+    "denominator_terms": 23,
+    "numerator_terms": 82
+  },
+  "completed_phase_totals": {
+    "coefficient-multiply": [
+      80985,
+      41.9692147670004
+    ],
+    "condition-retention": [
+      44781,
+      0.8030920279999919
+    ],
+    "native-apply": [
+      15027,
+      14.840378334999988
+    ],
+    "pending-coefficient-add": [
+      65639,
+      262.7531303269987
+    ]
+  },
+  "conditions": 3499,
+  "elapsed_seconds": 365.475678327,
+  "iterations": 15028,
+  "label": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "pending": 0,
+  "phase": "native-apply",
+  "sequence": 206433
+}

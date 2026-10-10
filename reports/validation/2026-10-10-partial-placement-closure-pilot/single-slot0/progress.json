@@ -1,0 +1,122 @@
+[
+  {
+    "frontier": 6,
+    "point_fallbacks": 6,
+    "requested": 6,
+    "retired": 3,
+    "round": 0,
+    "rules": 6,
+    "seconds": 0.054108202,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 18,
+    "point_fallbacks": 6,
+    "requested": 9,
+    "retired": 6,
+    "round": 1,
+    "rules": 12,
+    "seconds": 0.179546321,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 56,
+    "point_fallbacks": 18,
+    "requested": 21,
+    "retired": 17,
+    "round": 2,
+    "rules": 30,
+    "seconds": 1.859957072,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 103,
+    "point_fallbacks": 56,
+    "requested": 60,
+    "retired": 54,
+    "round": 3,
+    "rules": 91,
+    "seconds": 4.316259811,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 184,
+    "point_fallbacks": 104,
+    "requested": 108,
+    "retired": 101,
+    "round": 4,
+    "rules": 202,
+    "seconds": 8.807250879,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 107,
+    "point_fallbacks": 184,
+    "requested": 189,
+    "retired": 182,
+    "round": 5,
+    "rules": 410,
+    "seconds": 6.125844596,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 45,
+    "point_fallbacks": 107,
+    "requested": 112,
+    "retired": 105,
+    "round": 6,
+    "rules": 527,
+    "seconds": 4.797110882,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 27,
+    "point_fallbacks": 45,
+    "requested": 50,
+    "retired": 43,
+    "round": 7,
+    "rules": 572,
+    "seconds": 3.552081454,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 18,
+    "point_fallbacks": 27,
+    "requested": 32,
+    "retired": 25,
+    "round": 8,
+    "rules": 599,
+    "seconds": 3.260562427,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 13,
+    "point_fallbacks": 18,
+    "requested": 23,
+    "retired": 16,
+    "round": 9,
+    "rules": 616,
+    "seconds": 3.268019772,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 8,
+    "point_fallbacks": 11,
+    "requested": 18,
+    "retired": 11,
+    "round": 10,
+    "rules": 628,
+    "seconds": 2.995871377,
+    "zero_rules": 2
+  },
+  {
+    "frontier": 2,
+    "point_fallbacks": 8,
+    "requested": 13,
+    "retired": 6,
+    "round": 11,
+    "rules": 636,
+    "seconds": 2.781206784,
+    "zero_rules": 0
+  }
+]

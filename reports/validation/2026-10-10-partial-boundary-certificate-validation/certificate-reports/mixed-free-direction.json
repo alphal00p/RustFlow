@@ -1,0 +1,228 @@
+{
+  "coordinate_substitutions": {
+    "partial_boundary_certificate_validation::{}::vfree_k2": "partial_boundary_certificate_validation::{}::vfree_k2",
+    "partial_boundary_certificate_validation::{}::vfree_kl": "partial_boundary_certificate_validation::{}::vfree_kl",
+    "partial_boundary_certificate_validation::{}::vfree_kq": "partial_boundary_certificate_validation::{}::vfree_kq",
+    "partial_boundary_certificate_validation::{}::vfree_ku": "partial_boundary_certificate_validation::{}::vfree_ku",
+    "partial_boundary_certificate_validation::{}::vfree_l2": "partial_boundary_certificate_validation::{}::vfree_l2",
+    "partial_boundary_certificate_validation::{}::vfree_lq": "partial_boundary_certificate_validation::{}::vfree_lq",
+    "partial_boundary_certificate_validation::{}::vfree_lu": "partial_boundary_certificate_validation::{}::vfree_lu",
+    "partial_boundary_certificate_validation::{}::vfree_q2": "partial_boundary_certificate_validation::{}::vfree_q2",
+    "partial_boundary_certificate_validation::{}::vfree_qu": "partial_boundary_certificate_validation::{}::vfree_qu"
+  },
+  "distributions": [
+    {
+      "chemical_potential": "1",
+      "cut_index": 1,
+      "lower_index": 0,
+      "mass_squared": "0",
+      "source_loop_index": 2,
+      "upper_index": 0
+    }
+  ],
+  "nonzero_conditions": [
+    "1"
+  ],
+  "null_directions": [
+    [
+      "-1",
+      "1"
+    ]
+  ],
+  "ordinary_proofs": [
+    {
+      "coefficient": "1",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 0,
+      "external_coefficient_vectors": [
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L2;1:k;1:l;E2;1:q;1:u;P3;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;Q2,2,7;M;RY3,2;I+4;X0,0,0;I-2;X1,0,0;Y3,1;I+1;X0,0,0;D7;RY3,1;I-1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+2;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;G4;RY3,1;I+1;X0,1,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,1;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,1;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;U7;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;",
+      "integral": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        -2,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k",
+        "l"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "0"
+      ],
+      "rank": 0,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "coefficient": "-2",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 0,
+      "external_coefficient_vectors": [
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L2;1:k;1:l;E2;1:q;1:u;P3;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;Q2,2,7;M;RY3,2;I+4;X0,0,0;I-2;X1,0,0;Y3,1;I+1;X0,0,0;D7;RY3,1;I-1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+2;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;G4;RY3,1;I+1;X0,1,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,1;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,1;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;U7;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;",
+      "integral": [
+        1,
+        0,
+        0,
+        -1,
+        0,
+        -1,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k",
+        "l"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "0"
+      ],
+      "rank": 0,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "coefficient": "1",
+      "effective_sector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 0,
+      "external_coefficient_vectors": [
+        "q",
+        "u"
+      ],
+      "family_fingerprint": "rustred-integral-family-v2;N35:occupied_boundary_separated_virtual;L2;1:k;1:l;E2;1:q;1:u;P3;18:amflow_parameter_0;18:amflow_parameter_1;18:amflow_parameter_2;Q2,2,7;M;RY3,2;I+4;X0,0,0;I-2;X1,0,0;Y3,1;I+1;X0,0,0;D7;RY3,1;I-1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+2;X0,0,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;G4;RY3,1;I+1;X0,1,0;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,1;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,1;Y3,1;I+1;X0,0,0;RY3,1;I+1;X0,0,0;Y3,1;I+1;X0,0,0;U7;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;RY3,0;Y3,1;I+1;X0,0,0;",
+      "integral": [
+        1,
+        0,
+        0,
+        -2,
+        0,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "1"
+      ],
+      "ordinary_loops": [
+        "k",
+        "l"
+      ],
+      "parameter_order": [
+        0
+      ],
+      "primitive_kernel": [
+        "1",
+        "0"
+      ],
+      "rank": 0,
+      "raw_sector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "original_expression": "(-1*partial_boundary_certificate_validation::{}::vfree_lq+partial_boundary_certificate_validation::{}::vfree_kq)^2*(-1+2*partial_boundary_certificate_validation::{}::vfree_kl+partial_boundary_certificate_validation::{}::vfree_k2+partial_boundary_certificate_validation::{}::vfree_l2)^(-1)",
+  "positive_denominator_momentum_rows": [
+    [
+      "1",
+      "1",
+      "0",
+      "0"
+    ]
+  ],
+  "scope": "ordinary unrestricted virtual factor only; requires caller-bound compact origin/endpoint permit",
+  "source_coordinate_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "source_loop_indices": [
+    0,
+    1,
+    2
+  ],
+  "source_virtual_loops": [
+    0,
+    1
+  ],
+  "translated_expression": "(-1+2*partial_boundary_certificate_validation::{}::vfree_kl+partial_boundary_certificate_validation::{}::vfree_k2+partial_boundary_certificate_validation::{}::vfree_l2)^(-1)*(-2*partial_boundary_certificate_validation::{}::vfree_kq*partial_boundary_certificate_validation::{}::vfree_lq+partial_boundary_certificate_validation::{}::vfree_kq^2+partial_boundary_certificate_validation::{}::vfree_lq^2)",
+  "translation": [
+    [
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0"
+    ]
+  ]
+}

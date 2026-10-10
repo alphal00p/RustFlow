@@ -1,0 +1,43 @@
+{
+  "source_path": "reports/validation/2026-10-10-partial-placement-closure-pilot/single-slot0/result.json",
+  "source_sha256": "d2f4eef4d08170219bbfa59ca87769c5eec9d53adf6003b3bdf846737c590bf1",
+  "basis": [
+    [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "fixture_scope": "Only basis labels copied as boundary test inputs; no source/reduction proofs or numerical values imported."
+}

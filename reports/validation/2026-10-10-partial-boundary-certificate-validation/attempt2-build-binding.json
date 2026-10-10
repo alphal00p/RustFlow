@@ -1,0 +1,60 @@
+{
+  "scope": "Isolated source-copy unit executable against pinned K libraries; no Cargo or shared target/release writes",
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--test",
+    "--crate-name",
+    "partial_boundary_certificate_validation",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "-A",
+    "dead_code",
+    "-A",
+    "unused_imports",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "rustred=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/librustred-392075d0c6995fd1.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/libbincode-30fae4fd0bc9d1b5.rlib",
+    "--extern",
+    "ahash=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libahash-76fd751102bca1d4.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/main.rs",
+    "-o",
+    "/tmp/rustflow-partial-boundary-certificate-validation-attempt2"
+  ],
+  "environment": {
+    "CARGO_CRATE_NAME": "partial_boundary_certificate_validation",
+    "CARGO_MANIFEST_DIR": "/common/dev/rustflow_fermi"
+  },
+  "library_binding_sha256": "969356b9a8cb63512d9e22a45c5471ff7cdea7cfd9e6aaefb4b2e3a7e6735461",
+  "inputs_sha256": {
+    "harness/physical_conditions.rs": "20053f11ca8a66c6f000a72299db7db996c9c72282ca511ba6cebe9b58beea7e",
+    "harness/virtual_soft.rs": "2cca0890150dc7b6258b616517d1f31f654dd4be929bececefdd943333fea165",
+    "harness/boundary.rs": "2f31b83dd64c9c60da1b075cbefa3d317596daf798bd5fa10753961e7ecd6616",
+    "harness/algebra.rs": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597",
+    "harness/cut_regions.rs": "74de7376395b1ddcae4a1b9b35742fca57fb4b30156f9ba4486d815163e13f7c",
+    "harness/main.rs": "37c4c7b35f023aca0ddaa97219dda8d49744822373fc1918592be6da41c031df",
+    "harness/family.rs": "4a125d057b993d4d646d7cc7b6808c6553ea871625a0e1cfd47d25809f6519ba",
+    "harness/coefficient.rs": "cd295676eb3d50d715b001a74ed9376b53546ba4cf630a560d0a93a246569932"
+  },
+  "exit_code": 0,
+  "wall_seconds": 32.6888431282714,
+  "executable": {
+    "path": "/tmp/rustflow-partial-boundary-certificate-validation-attempt2",
+    "sha256": "3765eedf5a21be585250891be65a9d18086444284753f6ade96513e6e41a127c"
+  }
+}

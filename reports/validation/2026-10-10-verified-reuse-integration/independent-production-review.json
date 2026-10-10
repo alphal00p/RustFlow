@@ -1,0 +1,35 @@
+{
+  "scope": "Independent read-only review of actual applied VI production diff after coherent gates; no source changes or additional execution.",
+  "source_snapshot_sha256": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca",
+  "build_provenance_sha256": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569",
+  "root_gates_sha256": "2aee704f948913a1cfe69d677c7f803f47957c3f8c62a3a49709c68e0b38b86a",
+  "applied_source_binding_sha256": "e7cbe51193052c86c187dc677c673c1e532498bfdbc5e0067670e800af44b7ee",
+  "reviewed_sources_sha256": {
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": "f67c4d071f6bd58ffa6a3b2f546f61a49c36bc7c9b383e0289d0be5f25b339e7",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs": "cea642484881b7514f1186662db85993c234f0b51b0a03915737d7cd5a9574aa",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/verified_tests.rs": "996f3fab868aebbb564dd8e1d82e48784cca1e206ecca94422e7e1f0c44685cb",
+    "src/finite_density/guarded.rs": "33d499807250e152d77badb9dbdd5a3c9ece530fb8d53923c5bd8e0493ba7a26",
+    "src/finite_density/reduction.rs": "595b834390876a80915f6d0b7094fe3a253c3e017f7fe39f9360ac4f4dc6219e",
+    "src/finite_density/reduction/requested.rs": "5f81f318025f8fbb92c2604d014314eb4aeea695aa708158672e1318ddb4a9fd"
+  },
+  "active_source_sha256": "9ebcb53934499aed505d5b706028906c625e35801fcb54f3341d50a9c4084017",
+  "findings": [],
+  "invariants_checked": [
+    "GuardedProgram fields private to lifecycle; no mutable source/rule/terminal getter or deserialization constructor bypass. New and external decode still replay all proofs.",
+    "Verified union consumes valid immutable inputs and checks exact full source context or Arc identity; preserves source ordinals, left-before-right precedence, conditions and duplicate-inclusive checked rule cap.",
+    "Each verified input already has one legal order; union checks common permutation and validates replacement stopping set against roles and explicit zero domains.",
+    "Persistence changes only replace field reads with immutable getters; schema and external replay remain unchanged, including corruption rejection tests.",
+    "RustFlow wrappers remain crate-private and retain physical arity/dummy-symbol equality, terminal-tail validation and full storage-program validation.",
+    "Six scheduler union calls and one terminal-rebind call changed owner only; source generation, traversal, budgets, requested states and application semantics unchanged.",
+    "Final active.rs is byte-identical to the prior committed source: independent full source replay plus every original weighted target and every basis derivative remains mandatory."
+  ],
+  "validation_observed": {
+    "coherent_native_and_root_tests_passed": 208,
+    "new_test_execution_by_reviewer": false
+  },
+  "limits": [
+    "This trust-preserving change avoids repeated replay during construction; it does not guarantee total closure/application speed or new graph admission.",
+    "No complete three-loop/four-loop numerical acceptance inferred from the existing lower-loop gates or the separate running selected double control."
+  ],
+  "conclusion": "No correctness blocker found in the applied verified-program composition and its RustFlow integration."
+}

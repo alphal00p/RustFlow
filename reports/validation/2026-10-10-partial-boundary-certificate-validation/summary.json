@@ -1,0 +1,82 @@
+{
+  "scope": "Isolated certificate draft validation only, no root source edits, no Cargo/shared release build, no partial-placement admission or numerical period prediction",
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "actual_region_soft_factor_certificates": 51,
+  "actual_region_counts": {
+    "actual-cuts-[3]-shifted-[0].json": {
+      "cuts": [
+        3
+      ],
+      "shifted": [
+        0
+      ],
+      "count": 39
+    },
+    "actual-cuts-[0, 3]-shifted-[1, 2].json": {
+      "cuts": [
+        0,
+        3
+      ],
+      "shifted": [
+        1,
+        2
+      ],
+      "count": 6
+    },
+    "actual-cuts-[0, 3]-shifted-[2, 4].json": {
+      "cuts": [
+        0,
+        3
+      ],
+      "shifted": [
+        2,
+        4
+      ],
+      "count": 6
+    }
+  },
+  "resources": {
+    "command": [
+      "timeout",
+      "300",
+      "/tmp/rustflow-partial-boundary-certificate-validation-attempt4",
+      "virtual_soft::tests",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.5096589839085937,
+    "user_seconds": 0.450569,
+    "system_seconds": 0.058929999999999996,
+    "peak_child_rss_kib": 21504,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "source_module_sha256": "6fde9da052ec4f646e4ea16e3fb9259d38911796dafbdb2079023f1e2a410aa6",
+  "harness_module_sha256": "b0854f834e74620bab37e059f671ca78786b91e2a65471700a998d62dc27ee7d",
+  "source_copy_module_delta": "single extension-trait import only",
+  "fixture": {
+    "path": "examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "closed_basis_source": {
+    "path": "reports/validation/2026-10-10-partial-placement-closure-pilot/single-slot0/result.json",
+    "sha256": "d2f4eef4d08170219bbfa59ca87769c5eec9d53adf6003b3bdf846737c590bf1",
+    "scope": "two discovered singleton index labels only; no proof/value imported"
+  },
+  "library_binding_sha256": "969356b9a8cb63512d9e22a45c5471ff7cdea7cfd9e6aaefb4b2e3a7e6735461",
+  "final_build_binding_sha256": "d57e1c5f884ec6a4be69e367ab8a6a1fbe55dd8555f9e4106a96ea8adacb9da5",
+  "retained_history": {
+    "attempt1": "compile failed: missing ahash extern/BTreeMap import and three inherited-condition test-call args",
+    "attempt2": "compile pass and original five tests pass",
+    "attempt3": "compile pass and nine expanded tests pass",
+    "attempt4": "compile pass and eleven final tests pass"
+  },
+  "limitations": [
+    "No consuming zero-return hook or partial-placement permit exists in this draft.",
+    "Caller must bind full placement/origin/region/expression/distribution identity and evaluate all retained parameter guards before skipping a term.",
+    "Raw guards must be collected before projection in full parent coordinate scope; absent hard/dropped coordinates are not automatically scalar parameters.",
+    "Algebraic classifier deliberately refuses incompatible translations and compact rational denominators even if another independent proof might exist.",
+    "These fixtures exercise parameter conditions; no numerical period matching or downstream hard-boundary evaluation is claimed."
+  ]
+}

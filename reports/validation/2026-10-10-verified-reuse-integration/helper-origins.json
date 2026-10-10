@@ -1,0 +1,45 @@
+{
+  "scope": "Copied preparation scripts only; this record is not a source freeze, build or gate execution.",
+  "predecessor_helpers": {
+    "frozen_sources.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/frozen_sources.py",
+      "sha256": "217c38e656a12f54cbc4ae9b6b9492c47ecd3ab5b60bf0ea3645202634080dd6"
+    },
+    "capture-source-snapshot.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/capture-source-snapshot.py",
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b"
+    },
+    "capture-frozen-build.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/capture-frozen-build.py",
+      "sha256": "44fd15f950255fc3c64b98fac988683e82f2448931d5c420a7e9c4d361657f2d"
+    },
+    "run-resource-command.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+    },
+    "run-frozen-root-gate.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/run-frozen-root-gate.py",
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8"
+    },
+    "summarize-frozen-root-gates.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/summarize-frozen-root-gates.py",
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+    },
+    "run-two-loop-gate.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/run-two-loop-gate.py",
+      "sha256": "b1af76c7806e5d7e7b0193385ed325d930ea3230ac54b767d796b11df5342f10"
+    },
+    "run-massive-regression.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/run-massive-regression.py",
+      "sha256": "c0a2a62b9bdf3a3882e058e46a513ac837ed41db66b865ed2dfdb6b354ef220f"
+    },
+    "launch-verified-reuse-build.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/launch-requested-ray-point-build.py",
+      "sha256": "86ab49c5ec35ae51e4569bd18affe5bda994c9008085ae1641fcb02f9b8da381"
+    },
+    "capture-verified-reuse-build.py": {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/capture-requested-ray-point-build.py",
+      "sha256": "763d4ba06db817100b141e8b611912480a04a853dd609aadf8384fe6c48bfefe"
+    }
+  }
+}

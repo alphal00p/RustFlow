@@ -1,0 +1,339 @@
+{
+  "files": {
+    "README.md": {
+      "sha256": "98e5eeccd80e715add1dfc5b7274a07f2cdbdd1c894e72c050caa53e1d8cc82b",
+      "bytes": 3191
+    },
+    "build-attempt1-binding.json": {
+      "sha256": "1db2f4448443ea6daeb96b3eca19892cfea5e653d48072476885f53eaf7f7f58",
+      "bytes": 3453
+    },
+    "build-attempt1.log": {
+      "sha256": "3c7e5d2fd3a0f2d08dcfac49cfbd9d4a3924fc64191784bc6e93a06f4ecbf795",
+      "bytes": 10775
+    },
+    "build-binding.json": {
+      "sha256": "909ea8300888945e2db6ce1c814c437a0be32155784c6c57dc28d6900a647089",
+      "bytes": 3617
+    },
+    "build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "build.py": {
+      "sha256": "1ec626c9277d287aa0b66ca97e8ae56920715fbc4b8662a51ec7ddf4ad1a6d51",
+      "bytes": 2458
+    },
+    "double-slots12/configuration.json": {
+      "sha256": "c0cd481ef902204202595c9ceb1f647903a913ad88191fe9f9aeb0c07cf39bb5",
+      "bytes": 3042
+    },
+    "double-slots12/fresh-source-program.bin": {
+      "sha256": "fed751ccf5e560440c3c4a63ad68b810b17db33e85e242e6da222172e8c23f63",
+      "bytes": 130762
+    },
+    "double-slots12/progress.json": {
+      "sha256": "61691dce256e063c5a2101d8adf04a78a9e92ef28122c19baf3f87cb756d8c3f",
+      "bytes": 899
+    },
+    "double-slots12/round-000.bin": {
+      "sha256": "c9f85dbadbfa9ffc7beb99df9021b49854f2426c09de409b00c7a84d3c05bad9",
+      "bytes": 139680
+    },
+    "double-slots12/round-000.json": {
+      "sha256": "5d7c733615dbf197a8e829b7c048d630136458e3e4ea1e60a7634ae79c53212c",
+      "bytes": 51196
+    },
+    "double-slots12/round-001.bin": {
+      "sha256": "1f46261190562fd2b191d70fcc8082f51096e8a438ba26d2939b1a883af6b628",
+      "bytes": 170693
+    },
+    "double-slots12/round-001.json": {
+      "sha256": "2b6e54d891a2efa187ca0786895906d6d6696b1b15bc20a0d88088c8b2e3b13f",
+      "bytes": 153391
+    },
+    "double-slots12/round-002.bin": {
+      "sha256": "6ffd28221bb984cb72735723bcccaa9ffff29342b03d5702e3e3936e3ce0e0b6",
+      "bytes": 320327
+    },
+    "double-slots12/round-002.json": {
+      "sha256": "a9d5df6fe9657b4141fa82fdebe3e2b4c04fb3b3716720d6f44bcd10fbc40eac",
+      "bytes": 624283
+    },
+    "double-slots12/round-003.bin": {
+      "sha256": "1aad00da8470b0eafb90df24c1c1cb938b232ada189097c58b5439797f386c55",
+      "bytes": 1001206
+    },
+    "double-slots12/round-003.json": {
+      "sha256": "51cf85dbc0a06b49fda9d67919ba2d126d6c819807ae120f453973c063d42c3e",
+      "bytes": 2205165
+    },
+    "double-slots12/round-004.bin": {
+      "sha256": "2f173341c1de3b81e5c730c2970ac3f45cb000493bc99617aa3a885ba7e47192",
+      "bytes": 2162130
+    },
+    "double-slots12/round-004.json": {
+      "sha256": "f24772888c81f94f7f159ff33446e512d2c9dc835f559b7278f490bce4ec9ee8",
+      "bytes": 7824152
+    },
+    "double-slots12/source-system.json": {
+      "sha256": "0887deacea0918cd4255b589af1819a545a0611636c2c15f08657f014fcb5607",
+      "bytes": 3358699
+    },
+    "double-slots12-binding.json": {
+      "sha256": "d970a5f1c4d5bce38efce7cca506a7f7bdad418e03300549c25f5efcf689072c",
+      "bytes": 2917
+    },
+    "double-slots12-resources.json": {
+      "sha256": "4004f887aff1380e6e81f20c475d73dbae3ebf6221b138ebedf21b0c2f3720d9",
+      "bytes": 628
+    },
+    "double-slots12-resources.log": {
+      "sha256": "e5d2da8bd75567d6d79009bb1f2302bd8c6eb41e71e6a71ef08bf13b01a5c297",
+      "bytes": 275
+    },
+    "double-slots12-resources.provenance.json": {
+      "sha256": "e8d1da2b43b9706c95f91fcda8b33e190b28d86699b551ea89c3896228949b59",
+      "bytes": 1358
+    },
+    "double-slots24/configuration.json": {
+      "sha256": "f2948e22dae101e07a3ad087cb469e366de09eb5bfb71a40d6a35ce2388ec4f0",
+      "bytes": 3042
+    },
+    "double-slots24/fresh-source-program.bin": {
+      "sha256": "1d4dff568626bf29ca3f2b2374fd3b232017e9bfca592869dbf2e90aead41110",
+      "bytes": 126252
+    },
+    "double-slots24/progress.json": {
+      "sha256": "a322a31f1091102abd39de0727e3f15b1b5090789d95074b165a909bf9243cef",
+      "bytes": 1072
+    },
+    "double-slots24/round-000.bin": {
+      "sha256": "ab60e73dcb632383f5b01a32e7a208f4d4a126e3bece7f6029a06db613ff77a5",
+      "bytes": 133491
+    },
+    "double-slots24/round-000.json": {
+      "sha256": "799137805f7cd3d19e6afddbd000f5330ea2ce59a6eaab0aacf15eda328f419b",
+      "bytes": 43287
+    },
+    "double-slots24/round-001.bin": {
+      "sha256": "e13f829307e72ec0df9336ca0a99db3d8c4bb26398935470fa4196b418d3e3bb",
+      "bytes": 139397
+    },
+    "double-slots24/round-001.json": {
+      "sha256": "b1fd486481b54d98011274f8140ccd3849d0f67d40da83050ba22bd9667dc6c4",
+      "bytes": 63240
+    },
+    "double-slots24/round-002.bin": {
+      "sha256": "cccea4554f74f1ad1e6a60859939f07565f569adfe6a39dcfab7b763612d29fb",
+      "bytes": 191485
+    },
+    "double-slots24/round-002.json": {
+      "sha256": "beed496d24356ef0d181aabb3a34205a353411e48e43f34ced751ca7d5065acf",
+      "bytes": 225766
+    },
+    "double-slots24/round-003.bin": {
+      "sha256": "c96c477077d5db1a92977357fd3e2517b8615c0084244017239bbc31547d806e",
+      "bytes": 374690
+    },
+    "double-slots24/round-003.json": {
+      "sha256": "2d9df9d6926891b57c8067c2761fddb0180cfa5db5c43958c37732b1af518e88",
+      "bytes": 574345
+    },
+    "double-slots24/round-004.bin": {
+      "sha256": "5b282b390c58ca3ace879436e0cad7a7486e20b656355d2d9f2524bbf7d2a805",
+      "bytes": 924380
+    },
+    "double-slots24/round-004.json": {
+      "sha256": "6b4034b7bd2740b1557eccdc9e802a20a3631bb88576c3c3589fd42844a73c67",
+      "bytes": 1639496
+    },
+    "double-slots24/round-005.bin": {
+      "sha256": "8bb2906912e794c2e29b9fa0e8b12772c2dcad7f1d28b5e9cd150c4cdae340cc",
+      "bytes": 1853670
+    },
+    "double-slots24/round-005.json": {
+      "sha256": "a4871bdfe03f1694f2a0f81095c7857064553527f03996f13ee3a1f748697076",
+      "bytes": 4876815
+    },
+    "double-slots24/source-system.json": {
+      "sha256": "a99a8af7c93707809c4ae5e49c1d761da05ebf1dc8f895b72811a8f077f2f079",
+      "bytes": 3231787
+    },
+    "double-slots24-binding.json": {
+      "sha256": "11281d55fad6ad3b8c6525badc0107825fa9772be200eb15b66c74511388b919",
+      "bytes": 2917
+    },
+    "double-slots24-resources.json": {
+      "sha256": "e13a4827f8214a751627d1d52f9427f9be23585e23b097d21687369a28479ba5",
+      "bytes": 637
+    },
+    "double-slots24-resources.log": {
+      "sha256": "67d25994bf0996cdc132f4c5fe80f64475c8237a0263d60f9a2e974ede1b12cc",
+      "bytes": 324
+    },
+    "double-slots24-resources.provenance.json": {
+      "sha256": "00200f86bc1e71f43e0f4db9e78971257f9a9ace52c67e37e8426458abb9514e",
+      "bytes": 1358
+    },
+    "pilot.rs": {
+      "sha256": "c1bf8ddfc3a88b8195d8e80aa51fbe6c76327ce28bd18708b3dceb2af403f365",
+      "bytes": 19123
+    },
+    "prepare.rs": {
+      "sha256": "8428875a532138e37690ad513e486a4b0670b6fb8fd33b15193f8b4d993c0a90",
+      "bytes": 10563
+    },
+    "run.py": {
+      "sha256": "e31dfbd56d72a9c4f959a3843c17649450d7f7cb9b65557bf183fa240fd8919b",
+      "bytes": 2585
+    },
+    "single-slot0/closed.bin": {
+      "sha256": "62f25eb7f80416f2031860e967b364c9d36ede5be871401ad8b829e9e3fdab68",
+      "bytes": 773079
+    },
+    "single-slot0/configuration.json": {
+      "sha256": "2e1418c6dfe516121d80ad0d41bbfd07267f019fa5aac1e1adcc9122969c465a",
+      "bytes": 2916
+    },
+    "single-slot0/fresh-source-program.bin": {
+      "sha256": "ae40c52f10e1cc4b290a932bb4207b5dd214a927f1f3564a2e422baa20480a54",
+      "bytes": 33655
+    },
+    "single-slot0/progress.json": {
+      "sha256": "d9def5085250e2462e448ff5e13fb4ea9490a4790a534d6aec325815c4c9781b",
+      "bytes": 2136
+    },
+    "single-slot0/result.json": {
+      "sha256": "d2f4eef4d08170219bbfa59ca87769c5eec9d53adf6003b3bdf846737c590bf1",
+      "bytes": 31582
+    },
+    "single-slot0/round-000.bin": {
+      "sha256": "00e246aaae5449b8b23583896e584db3487889bb5918af0535ef88e9b2223bd6",
+      "bytes": 36651
+    },
+    "single-slot0/round-000.json": {
+      "sha256": "aa9081ceb7f4ad98499287ebc15d8bf58bf421e1a90f0eb39a5a8492f690d15a",
+      "bytes": 31946
+    },
+    "single-slot0/round-001.bin": {
+      "sha256": "b8c4e782281e8367d0bd6db9e83d34d183992391f7ccff841def1e33b7f925a6",
+      "bytes": 45074
+    },
+    "single-slot0/round-001.json": {
+      "sha256": "de8fee7365e1b5a5384b1150c30f007aaaa9ffc91e330cbe323f868a02eeb464",
+      "bytes": 49063
+    },
+    "single-slot0/round-002.bin": {
+      "sha256": "e998366044dfa9324128053f5faf0377b6dd975d50eb5815aff7650acea18f46",
+      "bytes": 84651
+    },
+    "single-slot0/round-002.json": {
+      "sha256": "323cfa3bc7a46f6aeae03eb5c4c42fb769181d7cb37cf7693fc5816b98ad4bef",
+      "bytes": 140552
+    },
+    "single-slot0/round-003.bin": {
+      "sha256": "70b3047de031b57bb1f08709176c7476ddc5d50df52120b59cf3f149241185fe",
+      "bytes": 182052
+    },
+    "single-slot0/round-003.json": {
+      "sha256": "b83592660d12b169270d9b72e4ae4f6ed64ec6d15a650984e013196701a48493",
+      "bytes": 346578
+    },
+    "single-slot0/round-004.bin": {
+      "sha256": "bafe8b0152ff74dcb579e7338b54b1e927c656410959cf5b1d37fe40d875a8d8",
+      "bytes": 424584
+    },
+    "single-slot0/round-004.json": {
+      "sha256": "88d716ca90ef923b26ea0eae2a6fc31b080d08911ba66da8c2fabe49784145aa",
+      "bytes": 678809
+    },
+    "single-slot0/round-005.bin": {
+      "sha256": "0ca15c42c419820287cbc9e92755cf4b68da42953ba41a7e707bf65e095faee1",
+      "bytes": 583481
+    },
+    "single-slot0/round-005.json": {
+      "sha256": "f4abab50bd46bf224e9fe045ef1e60813fc80ca296a57f62e88ba96ed88ee657",
+      "bytes": 923431
+    },
+    "single-slot0/round-006.bin": {
+      "sha256": "51bf2f55661b3e7d127b295b69cc7ccc73355bacb6efb7b90780d9985da6e1d1",
+      "bytes": 677172
+    },
+    "single-slot0/round-006.json": {
+      "sha256": "47b0cf8ab647a89a6f4b1ccc3c8820644f1428ae0c6608c6f69401bb850505ee",
+      "bytes": 558915
+    },
+    "single-slot0/round-007.bin": {
+      "sha256": "30e42c2638f19a9aba729f2941aeac9db14422cbd56098296aec0d9069c0a9cf",
+      "bytes": 714484
+    },
+    "single-slot0/round-007.json": {
+      "sha256": "a60f2f056d0660048488a7cb6ea97a13a0495f4e503c984a03da9951d51a55d5",
+      "bytes": 310981
+    },
+    "single-slot0/round-008.bin": {
+      "sha256": "2004ffc74f8f595c7d3d6610eca7673b6bc1b32420db06b47e90ec7933358deb",
+      "bytes": 739479
+    },
+    "single-slot0/round-008.json": {
+      "sha256": "eb98f0c51c452a4089a895d4bd837851d8f9fd5aee4b71d26c06bf22a6f0a562",
+      "bytes": 234220
+    },
+    "single-slot0/round-009.bin": {
+      "sha256": "3b294ec9fa6b377ee60405f86a194f62f4a88d4b75e9c234e3595df8735edc2e",
+      "bytes": 756417
+    },
+    "single-slot0/round-009.json": {
+      "sha256": "20170042af5e0da04544092532fed4ad20caafe15fd62cea6e7e21794cc4d142",
+      "bytes": 196213
+    },
+    "single-slot0/round-010.bin": {
+      "sha256": "f974e4a1ed2bf589e159dbafad6f6a385d4d889ece8f6d7673f7d00c48cb4535",
+      "bytes": 769344
+    },
+    "single-slot0/round-010.json": {
+      "sha256": "b2d3643d0b7905a080401f37ade83a33f17a4100bcec72bf30fe67107fb38061",
+      "bytes": 167090
+    },
+    "single-slot0/round-011.bin": {
+      "sha256": "b2c8d30060ee9e67d3d4a4a399ffe1e5acb4acb667abb728bee9e434ad4647c3",
+      "bytes": 773045
+    },
+    "single-slot0/round-011.json": {
+      "sha256": "48671dfab0d9020418ed9fe8b31189def8f5e529a02b31510b144011c42c0c49",
+      "bytes": 146441
+    },
+    "single-slot0/source-system.json": {
+      "sha256": "9ca516d9802a4963ca882b4a4361542f380073ed2018bad2ece17c18a6200ec6",
+      "bytes": 632861
+    },
+    "single-slot0-binding.json": {
+      "sha256": "e40ad8fc229f930c4a2594ac199a2c9cf0d3833940abc6f53adda9f7a2fa5f85",
+      "bytes": 2911
+    },
+    "single-slot0-resources.json": {
+      "sha256": "1cf16993e6a302338cc512960ee5be57ecc5110ef75375a3234c9e042c987bb6",
+      "bytes": 621
+    },
+    "single-slot0-resources.log": {
+      "sha256": "258d77f7b528846e33df87ccb450d0a160a54dcea2959a9d5bbb887e5e1e45d9",
+      "bytes": 670
+    },
+    "single-slot0-resources.provenance.json": {
+      "sha256": "e2ab2c8054a1f199150b75467d9b37d90bc7809c1341c6ad292f9718c6f958ea",
+      "bytes": 1354
+    },
+    "summarize.py": {
+      "sha256": "a000c37c9e1da3875d5b093799e2e71ffcfad14b7f0af23c11910b12c6691390",
+      "bytes": 4766
+    },
+    "summary.json": {
+      "sha256": "91e72412afa627b5f31020781cfcf56a28e07cb31b0a0a40b2f6c75551f7ff68",
+      "bytes": 9537
+    }
+  },
+  "file_count": 83,
+  "total_bytes": 43680780,
+  "scope": "Fresh isolated partial-placement native closure only; no boundary integration, transport, physical endpoint evaluation or production admission."
+}

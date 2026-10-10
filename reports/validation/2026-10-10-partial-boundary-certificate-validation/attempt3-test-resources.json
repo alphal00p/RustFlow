@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-partial-boundary-certificate-validation-attempt3",
+    "virtual_soft::tests",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.49978523328900337,
+  "user_seconds": 0.441445,
+  "system_seconds": 0.058616999999999995,
+  "peak_child_rss_kib": 21504,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

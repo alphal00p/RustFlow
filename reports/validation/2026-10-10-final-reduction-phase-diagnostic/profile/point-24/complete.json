@@ -1,0 +1,23 @@
+{
+  "iterations": 99,
+  "phase_totals": {
+    "coefficient-multiply": [
+      299,
+      0.009929907
+    ],
+    "condition-retention": [
+      276,
+      0.0007491760000000005
+    ],
+    "native-apply": [
+      99,
+      0.035328804000000005
+    ],
+    "pending-coefficient-add": [
+      193,
+      0.016359240000000004
+    ]
+  },
+  "rule_applications": 95,
+  "wall_seconds": 0.204060333
+}

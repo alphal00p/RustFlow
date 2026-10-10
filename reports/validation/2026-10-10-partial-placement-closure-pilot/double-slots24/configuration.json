@@ -1,0 +1,89 @@
+{
+  "depth": 3,
+  "max_frontier": 1024,
+  "max_requested": 4096,
+  "max_rounds": 16,
+  "max_rules": 65536,
+  "measure_id": "rustflow-weighted-sources-v1:6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e:10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23:{\"measure\":\"standalone-partial-placement-support-v1;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[2, 4]; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions=[PolynomialEnergyCompletion { loop_index: 0, slot: 6, coefficient: Fraction { numerator: 1, denominator: 1 } }]; raw Ward deliberately omitted: no bound singleton-germ theorem; source presentation=polynomial-closure-v1; positive compact energy completion powers=false\",\"support\":\"actual positive-support classification; polynomial completions; all valid occupation orders; required cuts positive; storage tails zero\",\"orientation\":\"exact future occupied geometry; ordinary virtual translation/rank witnesses in support certificate\",\"normalization\":\"native homogeneous identities, no value or endpoint shortcut\",\"branch\":\"support proof SHA256=c8cdab3e2579181c4b6cf55de667fe0d7541845bce2dc4beae529674bb70606f; fixed eta/T regulator-first; labelwise high-D finite jets; ordinary virtual vacuum zero only after uniform line-regulator proof\",\"deformation\":\"fixed shells/H; native physical factors minus eta in slots[2, 4]; origin masks cover every actual positive virtual support\"}:zero-tail-storage-v1:physical=13:capacity=16",
+  "old_proof_optional_replay": null,
+  "old_proofs_reused": false,
+  "original_targets": [
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ],
+  "physical_input": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+  "point_domains_per_fallback": 1,
+  "ray_domains_per_requested_point": 1,
+  "request_history_policy": "explicit requested labels only; basis and raw derivative labels deferred until requested; max_requested caps cumulative history",
+  "shifted_ordinary_slots": [
+    2,
+    4
+  ],
+  "source_count": 232,
+  "zero_attempts_per_round": 8192
+}

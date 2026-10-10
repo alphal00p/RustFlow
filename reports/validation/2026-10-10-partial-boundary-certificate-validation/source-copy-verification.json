@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "exact family scalar_symbols",
+    "exact family imaginary_parameter",
+    "exact family encode_complex",
+    "exact family convert",
+    "exact family convert_at_epsilon",
+    "exact boundary validate_distribution",
+    "exact boundary polynomial_terms",
+    "exact boundary laurent_terms",
+    "exact conditions rational_expression",
+    "exact conditions rational_parts",
+    "exact conditions canonical_conditions",
+    "exact conditions rational_denominator_conditions",
+    "exact algebra module prefix",
+    "exact coefficient module prefix",
+    "exact cut_regions module prefix",
+    "draft/test module identical except extension trait import",
+    "historical exact attempt1 inputs",
+    "historical exact attempt2 inputs",
+    "historical exact attempt3 inputs",
+    "lossless archive certificate-reports/actual-cuts-[3]-shifted-[0].json",
+    "lossless archive history/attempt3/certificate-reports/actual-cuts-[3]-shifted-[0].json",
+    "frozen original assessment remains byte-exact",
+    "unapplied production patch applies cleanly"
+  ],
+  "passed": 23,
+  "production_edits": false
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "partial-placement-admission-design-artifacts-v1",
+  "status": "design and read-only audit; no production edits or executed tests",
+  "files": [
+    {
+      "path": "design.md",
+      "bytes": 12446,
+      "sha256": "64964a4769a2a8f29ad9e4c8695256456b6710b1d2eb0f82146729ba7ddb206c"
+    },
+    {
+      "path": "greedy-chart-proposal.md",
+      "bytes": 4786,
+      "sha256": "bb885d5b30c18ead419b06530cc735c86233ce92cc749c88d011e0e1e7efe3c9"
+    },
+    {
+      "path": "review.json",
+      "bytes": 2811,
+      "sha256": "6a65c858132811b01e6f6c77957afa0dd182282845a6fd8d37a3a43c91774d0e"
+    }
+  ]
+}

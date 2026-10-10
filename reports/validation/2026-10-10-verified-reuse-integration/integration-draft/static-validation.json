@@ -1,0 +1,15 @@
+{
+  "rustfmt": {
+    "status": "passed",
+    "command": "nix develop --command rustfmt --config skip_children=true --edition 2024 <three isolated draft files>",
+    "initial_attempt": "Without skip_children, rustfmt stopped because unchanged child active.rs was not copied into isolated draft. No source or compiler failure."
+  },
+  "git_apply_check": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "root_sources_unchanged": true,
+  "compile": "NOT RUN: production/native source freeze active; draft requires parent isolated verified native APIs",
+  "tests": "NOT RUN: two new wrapper tests are planned for the coordinated release gate, alongside existing scheduler/final-audit and lower-loop numerical regressions"
+}

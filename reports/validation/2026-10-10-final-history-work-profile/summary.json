@@ -1,0 +1,1311 @@
+{
+  "scope": "Read-only bounded actual final-frontier and stratified historical-label reductions from the saved round18 provisional program. Complete cold source proof replay precedes terminal binding. This diagnostic neither establishes final closure nor changes production candidate collection. No source discovery or period values.",
+  "status": "bounded_profile_completed",
+  "source_replay_seconds": 111.02809876,
+  "final_frontier_labels": 7,
+  "next_needed_labels": 26,
+  "sampled_historical_labels": 16,
+  "complete_history_size": 14622,
+  "rules": 16937,
+  "limits": {
+    "max_pending_integrals": 100000,
+    "max_rule_applications": 100000
+  },
+  "slow_required_component": {
+    "selection": {
+      "point": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "selection": "final-next-needed"
+    },
+    "native_seconds": 313.80065236,
+    "conversion_seconds": 0.026436385,
+    "rule_applications": 15021,
+    "terms": 7,
+    "unresolved": 0,
+    "conditions": 3499
+  },
+  "other_required_native_seconds": {
+    "minimum": 1.142e-05,
+    "maximum": 0.057110393
+  },
+  "historical_sample_native_seconds": {
+    "minimum": 0.001771806,
+    "maximum": 3.338751196
+  },
+  "rows": [
+    {
+      "selection": {
+        "point": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000495352,
+      "conversion_seconds": 0.010507953,
+      "rule_applications": 0,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 0
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          0,
+          1,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.001314804,
+      "conversion_seconds": 0.003473551,
+      "rule_applications": 2,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 11
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          0,
+          2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000313231,
+      "conversion_seconds": 4.9481e-05,
+      "rule_applications": 1,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 3
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 1.316e-05,
+      "conversion_seconds": 1.852e-05,
+      "rule_applications": 0,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 0
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000817793,
+      "conversion_seconds": 8.1581e-05,
+      "rule_applications": 2,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 9
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 1.418e-05,
+      "conversion_seconds": 1.831e-05,
+      "rule_applications": 0,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 0
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 1.142e-05,
+      "conversion_seconds": 1.654e-05,
+      "rule_applications": 0,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 0
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.005761509,
+      "conversion_seconds": 0.002218867,
+      "rule_applications": 16,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 18
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          1,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000569772,
+      "conversion_seconds": 4.919e-05,
+      "rule_applications": 1,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 3
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          1,
+          2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.005319787,
+      "conversion_seconds": 0.000192571,
+      "rule_applications": 15,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 18
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          2,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000299271,
+      "conversion_seconds": 4.1521e-05,
+      "rule_applications": 1,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 2
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000294901,
+      "conversion_seconds": 4.206e-05,
+      "rule_applications": 1,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 2
+    },
+    {
+      "selection": {
+        "point": [
+          0,
+          2,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.00308276,
+      "conversion_seconds": 0.00018988,
+      "rule_applications": 10,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 17
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 1.43e-05,
+      "conversion_seconds": 1.9761e-05,
+      "rule_applications": 0,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 0
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000338471,
+      "conversion_seconds": 6.86e-05,
+      "rule_applications": 2,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 7
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 1.305e-05,
+      "conversion_seconds": 1.989e-05,
+      "rule_applications": 0,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 0
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 1.2331e-05,
+      "conversion_seconds": 1.8029e-05,
+      "rule_applications": 0,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 0
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.012798871,
+      "conversion_seconds": 0.000510522,
+      "rule_applications": 31,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 58
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.007937205,
+      "conversion_seconds": 0.000349591,
+      "rule_applications": 23,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 42
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000212341,
+      "conversion_seconds": 4.448e-05,
+      "rule_applications": 1,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 2
+    },
+    {
+      "selection": {
+        "point": [
+          1,
+          2,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.012168619,
+      "conversion_seconds": 0.000439942,
+      "rule_applications": 30,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 58
+    },
+    {
+      "selection": {
+        "point": [
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.00011439,
+      "conversion_seconds": 4.377e-05,
+      "rule_applications": 1,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 2
+    },
+    {
+      "selection": {
+        "point": [
+          2,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.000120691,
+      "conversion_seconds": 4.226e-05,
+      "rule_applications": 1,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 2
+    },
+    {
+      "selection": {
+        "point": [
+          2,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.007734875,
+      "conversion_seconds": 0.000334761,
+      "rule_applications": 22,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 42
+    },
+    {
+      "selection": {
+        "point": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 0.057110393,
+      "conversion_seconds": 0.001187173,
+      "rule_applications": 95,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 128
+    },
+    {
+      "selection": {
+        "point": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "final-next-needed"
+      },
+      "native_seconds": 313.80065236,
+      "conversion_seconds": 0.026436385,
+      "rule_applications": 15021,
+      "terms": 7,
+      "unresolved": 0,
+      "conditions": 3499
+    },
+    {
+      "selection": {
+        "history_index": 0,
+        "point": [
+          -5,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.100318302,
+      "conversion_seconds": 0.000990364,
+      "rule_applications": 55,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 156
+    },
+    {
+      "selection": {
+        "history_index": 974,
+        "point": [
+          -1,
+          1,
+          -1,
+          1,
+          3,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.094666403,
+      "conversion_seconds": 0.000728853,
+      "rule_applications": 57,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 127
+    },
+    {
+      "selection": {
+        "history_index": 1949,
+        "point": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.001771806,
+      "conversion_seconds": 9.1811e-05,
+      "rule_applications": 4,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 12
+    },
+    {
+      "selection": {
+        "history_index": 2924,
+        "point": [
+          0,
+          1,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.002317047,
+      "conversion_seconds": 9.255e-05,
+      "rule_applications": 5,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 10
+    },
+    {
+      "selection": {
+        "history_index": 3898,
+        "point": [
+          0,
+          1,
+          0,
+          1,
+          2,
+          -1,
+          -1,
+          0,
+          -1,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.825467534,
+      "conversion_seconds": 0.001274234,
+      "rule_applications": 400,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 210
+    },
+    {
+      "selection": {
+        "history_index": 4873,
+        "point": [
+          0,
+          2,
+          -1,
+          1,
+          1,
+          -3,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.019395362,
+      "conversion_seconds": 0.000247401,
+      "rule_applications": 23,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 36
+    },
+    {
+      "selection": {
+        "history_index": 5848,
+        "point": [
+          0,
+          3,
+          0,
+          1,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.027142398,
+      "conversion_seconds": 0.000450161,
+      "rule_applications": 36,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 60
+    },
+    {
+      "selection": {
+        "history_index": 6823,
+        "point": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          -1,
+          -2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.142331346,
+      "conversion_seconds": 0.000655972,
+      "rule_applications": 97,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 105
+    },
+    {
+      "selection": {
+        "history_index": 7797,
+        "point": [
+          1,
+          0,
+          0,
+          1,
+          2,
+          -2,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.012756691,
+      "conversion_seconds": 0.000245401,
+      "rule_applications": 28,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 31
+    },
+    {
+      "selection": {
+        "history_index": 8772,
+        "point": [
+          1,
+          0,
+          2,
+          1,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.017597167,
+      "conversion_seconds": 0.000294121,
+      "rule_applications": 47,
+      "terms": 2,
+      "unresolved": 0,
+      "conditions": 31
+    },
+    {
+      "selection": {
+        "history_index": 9747,
+        "point": [
+          1,
+          1,
+          0,
+          1,
+          3,
+          0,
+          -1,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.747804866,
+      "conversion_seconds": 0.001850577,
+      "rule_applications": 645,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 315
+    },
+    {
+      "selection": {
+        "history_index": 10722,
+        "point": [
+          1,
+          3,
+          0,
+          1,
+          0,
+          -2,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.002436608,
+      "conversion_seconds": 0.00010812,
+      "rule_applications": 6,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 6
+    },
+    {
+      "selection": {
+        "history_index": 11696,
+        "point": [
+          2,
+          0,
+          -1,
+          1,
+          5,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.007703205,
+      "conversion_seconds": 0.00015043,
+      "rule_applications": 22,
+      "terms": 1,
+      "unresolved": 0,
+      "conditions": 16
+    },
+    {
+      "selection": {
+        "history_index": 12671,
+        "point": [
+          2,
+          1,
+          -1,
+          1,
+          1,
+          -1,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 3.338751196,
+      "conversion_seconds": 0.005733618,
+      "rule_applications": 1332,
+      "terms": 4,
+      "unresolved": 0,
+      "conditions": 656
+    },
+    {
+      "selection": {
+        "history_index": 13646,
+        "point": [
+          3,
+          -1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.102554329,
+      "conversion_seconds": 0.000710263,
+      "rule_applications": 168,
+      "terms": 2,
+      "unresolved": 0,
+      "conditions": 110
+    },
+    {
+      "selection": {
+        "history_index": 14621,
+        "point": [
+          6,
+          2,
+          0,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selection": "history-equal-index-strata"
+      },
+      "native_seconds": 0.005587658,
+      "conversion_seconds": 8.5641e-05,
+      "rule_applications": 14,
+      "terms": 0,
+      "unresolved": 0,
+      "conditions": 9
+    }
+  ],
+  "resources": {
+    "command": [
+      "timeout",
+      "600",
+      "/tmp/rustflow-final-history-work-profile-20261010",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 431.69419805612415,
+    "user_seconds": 427.549813,
+    "system_seconds": 0.720812,
+    "peak_child_rss_kib": 304152,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "compiler_wall_seconds": 12.479165262077004,
+  "inference_limits": [
+    "The required raised-target component itself costs substantial time; optional historical-map collection is not the sole demonstrated issue.",
+    "No full-history extrapolation, native closure, final original weighted-sum audit, boundary or numerical acceptance follows from these individual applications.",
+    "Per-rule scan, substitution, rational accumulation and condition retention are combined inside native reduction; finer attribution remains pending.",
+    "Timing samples overlap other shared-host work and do not establish an end-to-end speed ratio."
+  ],
+  "source_and_input_checks": "passed"
+}

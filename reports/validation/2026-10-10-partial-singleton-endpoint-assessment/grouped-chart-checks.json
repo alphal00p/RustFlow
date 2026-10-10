@@ -1,0 +1,2767 @@
+{
+  "scope": "Independent exact rank-two parallel-row grouping and complete UV-chart algebra. No native/HEPKit replay, no period or endpoint value, no production admission.",
+  "source_sha256": "804ce163582e4e58a278c02521661d658d87f85db1636e4b268ca4254daaac6e",
+  "exact_gaussian_U": [
+    {
+      "powers": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "coefficient": "1"
+    },
+    {
+      "powers": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "coefficient": "1"
+    },
+    {
+      "powers": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "coefficient": "1"
+    }
+  ],
+  "exact_gaussian_V": [
+    {
+      "powers": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "coefficient": "1"
+    },
+    {
+      "powers": [
+        2,
+        0,
+        1,
+        1
+      ],
+      "coefficient": "1"
+    },
+    {
+      "powers": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "coefficient": "-1"
+    },
+    {
+      "powers": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "coefficient": "1"
+    },
+    {
+      "powers": [
+        2,
+        1,
+        0,
+        2
+      ],
+      "coefficient": "-1"
+    }
+  ],
+  "grouping_jacobian": [
+    {
+      "powers": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "coefficient": "-1"
+    }
+  ],
+  "grouped_variable_names": [
+    "X",
+    "c",
+    "d",
+    "z"
+  ],
+  "full_rank_shifted_supports": 6,
+  "complete_charts": 20,
+  "supports": [
+    {
+      "positive_parameters": [
+        "a",
+        "c"
+      ],
+      "grouping": "a=X,b absent,z=1",
+      "beta_coordinate_exponents": "no beta coordinate",
+      "charts": [
+        {
+          "group_order": [
+            "X",
+            "c"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [],
+          "Q_over_S_numerator_over_U_unit": [],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            []
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "c",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [],
+          "Q_over_S_numerator_over_U_unit": [],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            []
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "positive_parameters": [
+        "a",
+        "d"
+      ],
+      "grouping": "a=X,b absent,z=1",
+      "beta_coordinate_exponents": "no beta coordinate",
+      "charts": [
+        {
+          "group_order": [
+            "X",
+            "d"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [],
+          "Q_over_S_numerator_over_U_unit": [],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "d",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [],
+          "Q_over_S_numerator_over_U_unit": [],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "positive_parameters": [
+        "a",
+        "c",
+        "d"
+      ],
+      "grouping": "a=X,b absent,z=1",
+      "beta_coordinate_exponents": "no beta coordinate",
+      "charts": [
+        {
+          "group_order": [
+            "X",
+            "c",
+            "d"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "X",
+            "d",
+            "c"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "c",
+            "X",
+            "d"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "c",
+            "d",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "d",
+            "X",
+            "c"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "d",
+            "c",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "positive_parameters": [
+        "a",
+        "b",
+        "c"
+      ],
+      "grouping": "a=X*z,b=X*(1-z), absolute Jacobian X",
+      "beta_coordinate_exponents": "z^(n_a-1)*(1-z)^(n_b-1), both nonnegative integers",
+      "charts": [
+        {
+          "group_order": [
+            "X",
+            "c"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            []
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "c",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            []
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "positive_parameters": [
+        "a",
+        "b",
+        "d"
+      ],
+      "grouping": "a=X*z,b=X*(1-z), absolute Jacobian X",
+      "beta_coordinate_exponents": "z^(n_a-1)*(1-z)^(n_b-1), both nonnegative integers",
+      "charts": [
+        {
+          "group_order": [
+            "X",
+            "d"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "d",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "positive_parameters": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "grouping": "a=X*z,b=X*(1-z), absolute Jacobian X",
+      "beta_coordinate_exponents": "z^(n_a-1)*(1-z)^(n_b-1), both nonnegative integers",
+      "charts": [
+        {
+          "group_order": [
+            "X",
+            "c",
+            "d"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "X",
+            "d",
+            "c"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "c",
+            "X",
+            "d"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                2,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                2,
+                1,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "c",
+            "d",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                2,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                2,
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                2,
+                2,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "d",
+            "X",
+            "c"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                2,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                2,
+                1,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        },
+        {
+          "group_order": [
+            "d",
+            "c",
+            "X"
+          ],
+          "coordinate_names": [
+            "t",
+            "w",
+            "unused",
+            "z"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "S": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "Q_numerator_over_U_unit": [
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                2,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                2,
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                2,
+                2,
+                0,
+                2
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Q_over_S_numerator_over_U_unit": [
+            {
+              "powers": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                0,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "powers": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ],
+          "Gaussian_mean_numerators_over_U_unit": [
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              },
+              {
+                "powers": [
+                  1,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ],
+            [
+              {
+                "powers": [
+                  0,
+                  1,
+                  0,
+                  1
+                ],
+                "coefficient": "1"
+              }
+            ]
+          ],
+          "ordered_group_jacobian_powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "sole_D_dependent_U_axis": "t",
+          "unit_lower_bound": 1
+        }
+      ]
+    }
+  ],
+  "conclusion": "Every actual full-rank shifted-positive support has one D-dependent UV coordinate after grouping parallel directions; U=t times a positive unit. Q, Q/S and both Gaussian means are smooth on each closed chart cube, including beta-coordinate endpoints. Covariance inverse-U factors require the separate finite integer degree R in the subtraction bound."
+}

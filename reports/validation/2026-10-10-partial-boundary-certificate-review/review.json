@@ -1,0 +1,57 @@
+{
+  "schema": "virtual-soft-certificate-independent-review-v1",
+  "status": "read-only draft audit; no compilation or test execution",
+  "conclusion": "No additional zero-algebra blocker found; immutable exact binding, caller condition checks and upstream-domain preservation are required before integration.",
+  "inputs": [
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-boundary-assessment/implementation-draft/virtual-soft-certificate.patch",
+      "bytes": 29083,
+      "sha256": "8bb32cc18791c55b7578f264cc7d4d5ce0a2836133502e1e9db001e042762fb2"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-boundary-assessment/implementation-draft/source/src/finite_density/boundary/virtual_soft.rs",
+      "bytes": 27837,
+      "sha256": "df566f9db14f16a96d846172b3099644fb85427e0da7bbfeae92a802b7c93224"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-boundary-assessment/artifact-manifest.json",
+      "bytes": 2975,
+      "sha256": "77fb4817a4fc7111aba8bc1efa3e038f17dd4d71c5e5d18e583b00e00bc505b9"
+    },
+    {
+      "path": "src/integrand.rs",
+      "bytes": 22856,
+      "sha256": "c2efc6187855f32bb9a29baae3886f068d0e945742c2a18a93a38f7736d93115"
+    },
+    {
+      "path": "src/integrand/native.rs",
+      "bytes": 7369,
+      "sha256": "2d19466e191fcef7abcc1d1f7212068243e1bb610e5dc97399b0b7b5cc253e76"
+    },
+    {
+      "path": "src/finite_density/boundary.rs",
+      "bytes": 33660,
+      "sha256": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c"
+    },
+    {
+      "path": "src/physical_conditions.rs",
+      "bytes": 12954,
+      "sha256": "52af20b182eedbf0dc9a9885b450afacc88cb1db50fb83e13f2ddfd4edf993af"
+    },
+    {
+      "path": "src/cut_regions.rs",
+      "bytes": 9209,
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d"
+    },
+    {
+      "path": "src/algebra.rs",
+      "bytes": 5615,
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a"
+    }
+  ],
+  "review": {
+    "path": "reports/validation/2026-10-10-partial-boundary-certificate-review/review.md",
+    "bytes": 7261,
+    "sha256": "8296583bdc49fd66fc12d326abf9c5f5dfc331c98eb2e44cbb52b0328140b815"
+  }
+}

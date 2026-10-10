@@ -1,0 +1,123 @@
+error[E0433]: cannot find module or crate `ahash` in this scope
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/coefficient.rs:138:23
+    |
+138 |     let mut degrees = ahash::HashMap::<Atom, u64>::default();
+    |                       ^^^^^ use of unresolved module or unlinked crate `ahash`
+    |
+    = help: if you wanted to use a crate named `ahash`, use `cargo add ahash` to add it to your `Cargo.toml`
+help: consider importing this struct
+    |
+  7 + use std::collections::HashMap;
+    |
+help: if you import `HashMap`, refer to it directly
+    |
+138 -     let mut degrees = ahash::HashMap::<Atom, u64>::default();
+138 +     let mut degrees = HashMap::<Atom, u64>::default();
+    |
+
+error[E0433]: cannot find type `BTreeMap` in this scope
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/physical_conditions.rs:35:21
+   |
+35 |     let imaginary = BTreeMap::from([(
+   |                     ^^^^^^^^ use of undeclared type `BTreeMap`
+   |
+   = note: struct `crate::finite_density::boundary::virtual_soft::tests::BTreeMap` exists but is inaccessible
+help: consider importing this struct
+   |
+ 1 + use std::collections::BTreeMap;
+   |
+
+error[E0061]: this function takes 6 arguments but 5 arguments were supplied
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/virtual_soft.rs:628:13
+    |
+628 |               certify_virtual_soft_zero(
+    |  _____________^^^^^^^^^^^^^^^^^^^^^^^^^-
+629 | |                 &parse!("1/virtual_zero_k2"),
+630 | |                 &space(),
+631 | |                 &[d.clone()],
+632 | |                 Default::default(),
+633 | |                 &RunContext::default()
+634 | |             ),
+    | |_____________- argument #6 of type `&[symbolica::atom::Atom]` is missing
+    |
+note: function defined here
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/virtual_soft.rs:122:15
+    |
+122 | pub(super) fn certify_virtual_soft_zero(
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+128 |     inherited_conditions: &[Atom],
+    |     -----------------------------
+help: provide the argument
+    |
+628 |             certify_virtual_soft_zero(
+...
+632 |                 Default::default(),
+633 ~                 &RunContext::default(),
+634 +                 /* &[symbolica::atom::Atom] */,
+    |
+
+error[E0061]: this function takes 6 arguments but 5 arguments were supplied
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/virtual_soft.rs:639:13
+    |
+639 |               certify_virtual_soft_zero(
+    |  _____________^^^^^^^^^^^^^^^^^^^^^^^^^-
+640 | |                 &parse!("1/virtual_zero_k2"),
+641 | |                 &space(),
+642 | |                 &[d],
+643 | |                 Default::default(),
+644 | |                 &RunContext::default()
+645 | |             )
+    | |_____________- argument #6 of type `&[symbolica::atom::Atom]` is missing
+    |
+note: function defined here
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/virtual_soft.rs:122:15
+    |
+122 | pub(super) fn certify_virtual_soft_zero(
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+128 |     inherited_conditions: &[Atom],
+    |     -----------------------------
+help: provide the argument
+    |
+639 |             certify_virtual_soft_zero(
+...
+643 |                 Default::default(),
+644 ~                 &RunContext::default(),
+645 +                 /* &[symbolica::atom::Atom] */,
+    |
+
+error[E0061]: this function takes 6 arguments but 5 arguments were supplied
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/virtual_soft.rs:652:13
+    |
+652 |               certify_virtual_soft_zero(
+    |  _____________^^^^^^^^^^^^^^^^^^^^^^^^^-
+653 | |                 &parse!("1/virtual_zero_k2"),
+654 | |                 &space(),
+655 | |                 &[d],
+656 | |                 Default::default(),
+657 | |                 &RunContext::default()
+658 | |             ),
+    | |_____________- argument #6 of type `&[symbolica::atom::Atom]` is missing
+    |
+note: function defined here
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-boundary-certificate-validation/harness/virtual_soft.rs:122:15
+    |
+122 | pub(super) fn certify_virtual_soft_zero(
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+128 |     inherited_conditions: &[Atom],
+    |     -----------------------------
+help: provide the argument
+    |
+652 |             certify_virtual_soft_zero(
+...
+656 |                 Default::default(),
+657 ~                 &RunContext::default(),
+658 +                 /* &[symbolica::atom::Atom] */,
+    |
+
+error: aborting due to 5 previous errors
+
+Some errors have detailed explanations: E0061, E0433.
+For more information about an error, try `rustc --explain E0061`.

@@ -1,0 +1,15 @@
+{
+  "source_snapshot_sha256": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca",
+  "build_provenance_sha256": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "flow-boundary",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_flow_boundary-9423d5e4f8668f3b",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false
+}

@@ -1,0 +1,45 @@
+{
+  "scope": "Uncompiled isolated optional history-collection draft, no production application or performance claim.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3440,
+      "sha256": "6bed1316c8159112abdcb3ad526334484ec5944682ce9c125fb53a7c65e81b64"
+    },
+    {
+      "path": "candidate-history-limit.patch",
+      "bytes": 19556,
+      "sha256": "a610edf9ffd604a993437e4293741309137bf64d52eeb599e559102b536bea58"
+    },
+    {
+      "path": "patch-check.json",
+      "bytes": 349,
+      "sha256": "b26eb575ddcf15d997d43a15563d39b185285068d9a2fed8e579b2ebf7b88daf"
+    },
+    {
+      "path": "source/src/finite_density/interface.rs",
+      "bytes": 13597,
+      "sha256": "37c7f1d981b9dae28bd94fd9338b426a85a33de58edff65735fe9bc3a38f24f4"
+    },
+    {
+      "path": "source/src/finite_density/reduction/active.rs",
+      "bytes": 42901,
+      "sha256": "cfe753a1eac3032da87d9fd1905120150cadd6fc61310a509e99c9eefcdd57ca"
+    },
+    {
+      "path": "source/src/finite_density/reduction.rs",
+      "bytes": 97574,
+      "sha256": "e28e9fe7f76660240fd77e63f123f0d77b55ee1ebec5b26c08b487963b3d6c03"
+    },
+    {
+      "path": "source/tests/finite_density_runtime_flow.rs",
+      "bytes": 14971,
+      "sha256": "b6cef89859d029dc47aa2c2f5e8ae7f8b546644bc7c7144707ea4e42eb49df32"
+    },
+    {
+      "path": "source-binding.json",
+      "bytes": 1474,
+      "sha256": "f6e3910382261637f3bf08f95612038b018a6078910c09ae9d8aeeb5da577204"
+    }
+  ]
+}

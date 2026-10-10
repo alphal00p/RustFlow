@@ -1,0 +1,55 @@
+{
+  "scope": "Read-only inspection; production unchanged",
+  "inputs": [
+    {
+      "path": "src/finite_density/flow_boundary.rs",
+      "sha256": "f81722cfadc6a793da2a7352b16d1dfbf31290e55d941b376515842dc1d5636c"
+    },
+    {
+      "path": "src/finite_density/boundary.rs",
+      "sha256": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c"
+    },
+    {
+      "path": "src/integrand.rs",
+      "sha256": "c2efc6187855f32bb9a29baae3886f068d0e945742c2a18a93a38f7736d93115"
+    },
+    {
+      "path": "src/integrand/native.rs",
+      "sha256": "2d19466e191fcef7abcc1d1f7212068243e1bb610e5dc97399b0b7b5cc253e76"
+    },
+    {
+      "path": "src/cut_regions.rs",
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d"
+    },
+    {
+      "path": "src/regions.rs",
+      "sha256": "80774144c51cf3a72cad25d14c33cfae183fbae666db1178b31ae7163c0369ca"
+    },
+    {
+      "path": "src/recursive.rs",
+      "sha256": "55f23cdbf7bbec0b72e98caf8cde6ac29d4fe574034a2c2d76b12b8c88a260df"
+    },
+    {
+      "path": "src/finite_density/vacuum.rs",
+      "sha256": "2ed8299a56ceef9aaafdb1b6b594c8c60f9518cbb1aaeb26cb9220b9657e30c4"
+    },
+    {
+      "path": "src/physical_conditions.rs",
+      "sha256": "52af20b182eedbf0dc9a9885b450afacc88cb1db50fb83e13f2ddfd4edf993af"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/proof.md",
+      "sha256": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-closure-pilot/artifact-manifest.json",
+      "sha256": "701abe57bee0dd73010ceb59584a6c2ff332796f69a2f5e3116eb710ab85e669"
+    }
+  ],
+  "existing_owner_execution": {
+    "test_cases": 7,
+    "exit_code": 0,
+    "scope": "Existing conversion and ordinary zero helper, not the new certificate draft"
+  },
+  "new_draft_execution": "NOT RUN"
+}

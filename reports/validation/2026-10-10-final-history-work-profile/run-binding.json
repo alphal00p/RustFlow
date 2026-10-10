@@ -1,0 +1,25 @@
+{
+  "scope": "Bounded standalone profile of one copied round18 provisional program; full cold replay followed by42 selected actual frontier/history label reductions. All libraries are statically linked and runtime evidence is independent of later root rebuilds. No closure or whole-workflow claim.",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-final-history-work-profile-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/probe.rs": "c1d56d03000fa4d357af6aca23d44b267f48aab68bfa0a4de5f1a0aea888be24",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/build.py": "087b4065a4886994917d42f7548291afe57d2c6fe8d38dbd569d1d2055c3c1e3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/build-binding.json": "f3f8712f0e8d9ae811470034b9495af5340d12211c9ca4a537222b35edd93465",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input-bindings.json": "80c691f1f1eb7474abe4438377005c3c533b161a0915814aa70dfc87659926c5",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.json": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/run.py": "ffcaabbf9e62ad4aae70f141f1fe736dc63c6cb9e3a59be04ad7be85a6915eba",
+    "/tmp/rustflow-final-history-work-profile-20261010": "b469bf5163cf56cdf4a7b84e18d38b83f3fa347a7b0a2fecdb31b397418258f6"
+  },
+  "clock_ticks_per_second": 100,
+  "exit_code": 0,
+  "post_run_inputs_unchanged": true
+}

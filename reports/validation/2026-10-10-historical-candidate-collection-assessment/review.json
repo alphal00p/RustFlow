@@ -1,0 +1,53 @@
+{
+  "schema": "active-history-candidate-consumer-audit-v1",
+  "status": "Design only; no source edits, executed tests or timings",
+  "conclusion": "Optional bounded history-map collection is semantically feasible only after unchanged complete replay and all required target/derivative audits, with explicit unassessed history and retained conditions.",
+  "performance_attribution": "Not measured; current silent final phase is not attributed to this loop.",
+  "source_bindings": [
+    {
+      "path": "src/finite_density/reduction/active.rs",
+      "bytes": 31583,
+      "sha256": "9ebcb53934499aed505d5b706028906c625e35801fcb54f3341d50a9c4084017"
+    },
+    {
+      "path": "src/finite_density/flow.rs",
+      "bytes": 17867,
+      "sha256": "88bf2ba186593d6fcd035ea342e364a88bde09e3ac3cd302afc378dfd0431a44"
+    },
+    {
+      "path": "src/engine/connection.rs",
+      "bytes": 7356,
+      "sha256": "a811272984bfb8b085803367c01c09a180e6333b6399d0b7a134703eda8d3a67"
+    },
+    {
+      "path": "src/reduction.rs",
+      "bytes": 29521,
+      "sha256": "032ab5b43573f98f48237bff5852b56d62f076c0f9d86b8dca413bf46d01ed33"
+    },
+    {
+      "path": "src/physical_family.rs",
+      "bytes": 17380,
+      "sha256": "4c0e26104870f91b26afb9e7fa019e141f74985f18d9ba567e9c7ab67a0a240a"
+    },
+    {
+      "path": "src/refine.rs",
+      "bytes": 9562,
+      "sha256": "c84a057862f9a85cca05a1250883fb19b135e3cb4214e45ee66b3819daa1c22c"
+    },
+    {
+      "path": "src/cache.rs",
+      "bytes": 30891,
+      "sha256": "20196933dfb0ab9e379fd8e674d2b371f1de980aaa04b18f0258803e2331028c"
+    },
+    {
+      "path": "src/engine/supplied.rs",
+      "bytes": 14151,
+      "sha256": "79df6631a7baf5a90064be5cf88cf382879030d1360508089c881f91fa32f212"
+    }
+  ],
+  "design": {
+    "path": "reports/validation/2026-10-10-historical-candidate-collection-assessment/design.md",
+    "bytes": 6996,
+    "sha256": "9ec995137242ed8c2fa0734171ccc84fa4aaeda4ab024876928711f131cf6796"
+  }
+}

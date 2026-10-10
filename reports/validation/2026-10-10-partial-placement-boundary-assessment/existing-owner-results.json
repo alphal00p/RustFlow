@@ -1,0 +1,385 @@
+{
+  "passed": 7,
+  "scope": "Existing public native partial fractions and ordinary unrestricted zero owner only; no occupied measure admission or numerical period",
+  "tests": [
+    {
+      "exact_reconstruction": true,
+      "expression": "(-1+partial_boundary_owner_probe::{}::pb_x)^(-1)*(-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y)^(-1)*partial_boundary_owner_probe::{}::pb_x^(-1)*partial_boundary_owner_probe::{}::pb_y^(-1)",
+      "name": "hard_duplicate_momentum_unit_mass_gap",
+      "terms": [
+        {
+          "coefficient": "-1",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": "1",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": false,
+          "powers": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "exact_reconstruction": true,
+      "expression": "(-1+partial_boundary_owner_probe::{}::pb_x)^(-2)*(-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y)^(-1)*(partial_boundary_owner_probe::{}::pb_y+partial_boundary_owner_probe::{}::pb_z)*partial_boundary_owner_probe::{}::pb_x^(-3)*partial_boundary_owner_probe::{}::pb_y^(-1)",
+      "name": "hard_raised_duplicate_momentum_with_numerator",
+      "terms": [
+        {
+          "coefficient": "-1/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            3,
+            1,
+            0
+          ]
+        },
+        {
+          "coefficient": "3/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            3,
+            0,
+            1
+          ]
+        },
+        {
+          "coefficient": "1/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "coefficient": "3",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "coefficient": "1",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": "-3/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "coefficient": "9/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "coefficient": "3/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": "1/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": false,
+          "powers": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "coefficient": "-1/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "coefficient": "1/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": false,
+          "powers": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": "3/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "coefficient": "-3/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": false,
+          "powers": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "coefficient": "3/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "coefficient": "-3/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "coefficient": "-9/2",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-1+partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            0,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "exact_reconstruction": true,
+      "expression": "(-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y)^(-1)*partial_boundary_owner_probe::{}::pb_x^(-1)*partial_boundary_owner_probe::{}::pb_y^(-1)",
+      "name": "ordinary_massless_two_loop_vacuum",
+      "terms": [
+        {
+          "coefficient": "1",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_y",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_x+partial_boundary_owner_probe::{}::pb_y"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "exact_reconstruction": true,
+      "expression": "(-1+partial_boundary_owner_probe::{}::pb_y)^(-1)*partial_boundary_owner_probe::{}::pb_z^2",
+      "name": "ordinary_free_virtual_direction",
+      "terms": [
+        {
+          "coefficient": "1",
+          "denominators": [
+            "-1+partial_boundary_owner_probe::{}::pb_y",
+            "partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_z"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            0,
+            -2
+          ]
+        }
+      ]
+    },
+    {
+      "exact_reconstruction": true,
+      "expression": "(-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_s+partial_boundary_owner_probe::{}::pb_x)^(-1)",
+      "name": "translated_massless_tadpole",
+      "terms": [
+        {
+          "coefficient": "1",
+          "denominators": [
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_s+partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_x"
+          ],
+          "native_unrestricted_proved_zero": true,
+          "powers": [
+            1,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "exact_reconstruction": true,
+      "expression": "(-1+-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_s+partial_boundary_owner_probe::{}::pb_x)^(-1)",
+      "name": "translated_massive_tadpole_negative",
+      "terms": [
+        {
+          "coefficient": "1",
+          "denominators": [
+            "-1+-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_s+partial_boundary_owner_probe::{}::pb_x",
+            "partial_boundary_owner_probe::{}::pb_x"
+          ],
+          "native_unrestricted_proved_zero": false,
+          "powers": [
+            1,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "exact_reconstruction": true,
+      "expression": "(-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_s+partial_boundary_owner_probe::{}::pb_x)^(-1)*partial_boundary_owner_probe::{}::pb_x^(-1)",
+      "name": "incompatible_translations_external_scale_negative",
+      "terms": [
+        {
+          "coefficient": "1",
+          "denominators": [
+            "partial_boundary_owner_probe::{}::pb_x",
+            "-2*partial_boundary_owner_probe::{}::pb_z+partial_boundary_owner_probe::{}::pb_s+partial_boundary_owner_probe::{}::pb_x"
+          ],
+          "native_unrestricted_proved_zero": false,
+          "powers": [
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  ]
+}

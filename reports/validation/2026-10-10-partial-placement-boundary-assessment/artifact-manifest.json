@@ -1,0 +1,90 @@
+{
+  "scope": "Completed existing-owner capability checks plus uncompiled isolated certificate proposal",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "dcd3a2a10cf81ee4eb230d9406f61f685a1d5e03cdbeca78856a2a323bd865c0",
+      "bytes": 4365
+    },
+    {
+      "path": "build-binding.json",
+      "sha256": "b4302539c989b8766d78e8316b42830914b39b7bf7bbcfbe3379652cf14a81dc",
+      "bytes": 3138
+    },
+    {
+      "path": "build-existing-owner.py",
+      "sha256": "a50d59a52ac785d6acdc2cbc7a0ae6627834e0e5ab5617a36a161edff8d4d1ce",
+      "bytes": 1887
+    },
+    {
+      "path": "build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "existing-owner-probe.rs",
+      "sha256": "b9fe1a1b980178b884bf69018d77a78edb4c630d455b5d3a1fb07560ccf856a2",
+      "bytes": 4420
+    },
+    {
+      "path": "existing-owner-resources.json",
+      "sha256": "70759677e461ca8444794ccd5b6d2c6adc9a9420e5cbf1aee8cbbea30e98b078",
+      "bytes": 442
+    },
+    {
+      "path": "existing-owner-resources.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "existing-owner-resources.provenance.json",
+      "sha256": "aa8a7b2847df82a65aaa46dcdc8bb833fc363357b2b87da4e0dfe2803f67c56a",
+      "bytes": 837
+    },
+    {
+      "path": "existing-owner-results.json",
+      "sha256": "6626d731f58d615cfa7602df08b495a683b17b3f30afc687ababfe492ffe65e2",
+      "bytes": 13478
+    },
+    {
+      "path": "implementation-draft/README.md",
+      "sha256": "a4042028f2f24cd67b0eeb8c9c8b1bf1d96b1c77ab61def9f466fa857488ac29",
+      "bytes": 3759
+    },
+    {
+      "path": "implementation-draft/closed-basis-fixture-binding.json",
+      "sha256": "44a2b8bd5e2b85a7df73fdb640cf6f3f59aa0ac75a90f7798390648c4f589f99",
+      "bytes": 655
+    },
+    {
+      "path": "implementation-draft/manifest.json",
+      "sha256": "5442598c4d0234304dfd445c05a8edafc90571bc5c0da07e6f0ecc1f66d8192e",
+      "bytes": 1066
+    },
+    {
+      "path": "implementation-draft/source/src/finite_density/boundary/virtual_soft.rs",
+      "sha256": "df566f9db14f16a96d846172b3099644fb85427e0da7bbfeae92a802b7c93224",
+      "bytes": 27837
+    },
+    {
+      "path": "implementation-draft/source/src/finite_density/boundary.rs",
+      "sha256": "afe24a6f79a4cecdd366b8ec21d90246e59ebdc2bbfdfc45732b6bc2ff6eaf52",
+      "bytes": 33679
+    },
+    {
+      "path": "implementation-draft/source-map.json",
+      "sha256": "1091772c26145b7ea147ca8bdd0c1b63a18470c95b84f2b122b9fb67e9f87d24",
+      "bytes": 927
+    },
+    {
+      "path": "implementation-draft/virtual-soft-certificate.patch",
+      "sha256": "8bb32cc18791c55b7578f264cc7d4d5ce0a2836133502e1e9db001e042762fb2",
+      "bytes": 29083
+    },
+    {
+      "path": "inspection-binding.json",
+      "sha256": "681982f29d912887b8265f68e7163789e43e892b2927f2151811db8cfd678e48",
+      "bytes": 1897
+    }
+  ]
+}

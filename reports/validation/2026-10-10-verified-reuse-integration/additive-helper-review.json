@@ -1,0 +1,36 @@
+{
+  "schema": "verified-reuse-helper-independent-review-v1",
+  "status": "read-only structural and hash validation passed; no source application, build or run",
+  "checked_additional_helper_bindings": 5,
+  "checked_frozen_comparator_reference_bindings": 18,
+  "parsed_python_scripts": 15,
+  "findings": [],
+  "notes": [
+    "Comparator differs from K only in prefix.",
+    "Digest utility builder differs only in prefix and output path.",
+    "Three-loop runner changes only declared global caps/timeouts, output prefix and prerequisite for a passing full fixed-D comparison before Laurent.",
+    "Source policy remains polynomial-closure-v1; precision profiles, tolerance owners and reference hashes are unchanged.",
+    "Saved proof binaries and requested transaction records retain native BLAKE3/size checks.",
+    "Higher global budgets are not presented as a speed comparison."
+  ],
+  "checked_sha256": {
+    "additional-helper-origins.json": "eea635bb35f631c2d47b59a89e7ed792f4875e80555e2aaa4dbdca19c13204ef",
+    "apply-reviewed-integration.py": "8a4cbd7ae69647c5227f15c22b920a80d57ac8c0df42f41e534fdb6303c94b32",
+    "build-native-digest.py": "b816b93dbbc3ef3b2850dae923be80a958de86ff38c6ab8445f6262264182192",
+    "capture-frozen-build.py": "449c28690379df53b11a37ebc2a527715acda21aaeb339a161e6424d4f846742",
+    "capture-source-snapshot.py": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+    "capture-verified-reuse-build.py": "7e3c0b4ba8ef30ca21845fa4024b2dead91ea792b4b8963183b415877e18d715",
+    "compare-completed-predictions.py": "c704b6de210c2e7b39adadb55a0f59763dea2d6c061efbd37d36ba6e2510631d",
+    "comparison-plan.json": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+    "frozen_sources.py": "4e1ab142e57b4a96bc8a3904aebf95c29ca1c6444e42f9d9a9e25a14982ea27d",
+    "launch-verified-reuse-build.py": "fdb0766b0a79c79d6699bad47e14c47952c110bd4d9557725cf54600a6598e53",
+    "native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "run-frozen-root-gate.py": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+    "run-massive-regression.py": "98eae972e6d25ab3185acade1ccebbc7b16e8f3145a396bd71a2d52382b4f908",
+    "run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+    "run-root-gates.py": "4dd64b070f33429a00784047f0a81068009d1142ca01cb9548274cf6ba9b4a14",
+    "run-three-loop-gate.py": "ad4a9c5668016278e938cdf0ebc46228abc9f1127bcdbb9a7db15e1c885aa6f6",
+    "run-two-loop-gate.py": "380cf25f6482833b4e2b81e3529eaaedd301176d366d532a683c23d4729aaec6",
+    "summarize-frozen-root-gates.py": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+  }
+}

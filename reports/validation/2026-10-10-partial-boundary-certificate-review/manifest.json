@@ -1,0 +1,15 @@
+{
+  "schema": "review-artifacts-v1",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-partial-boundary-certificate-review/review.json",
+      "bytes": 2235,
+      "sha256": "c47eb774b0dd2d3e5a62f2e3546215ff91513ce09cebd0f19b59c41d39a7a3cc"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-boundary-certificate-review/review.md",
+      "bytes": 7261,
+      "sha256": "8296583bdc49fd66fc12d326abf9c5f5dfc331c98eb2e44cbb52b0328140b815"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "frontier": 6,
+    "point_fallbacks": 9,
+    "requested": 9,
+    "retired": 3,
+    "round": 0,
+    "rules": 9,
+    "seconds": 0.141994357,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 34,
+    "point_fallbacks": 6,
+    "requested": 9,
+    "retired": 6,
+    "round": 1,
+    "rules": 15,
+    "seconds": 0.352453496,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 78,
+    "point_fallbacks": 34,
+    "requested": 37,
+    "retired": 30,
+    "round": 2,
+    "rules": 47,
+    "seconds": 10.491130927,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 218,
+    "point_fallbacks": 80,
+    "requested": 85,
+    "retired": 73,
+    "round": 3,
+    "rules": 129,
+    "seconds": 17.968724478,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 425,
+    "point_fallbacks": 218,
+    "requested": 227,
+    "retired": 211,
+    "round": 4,
+    "rules": 366,
+    "seconds": 42.189204225,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 663,
+    "point_fallbacks": 425,
+    "requested": 436,
+    "retired": 415,
+    "round": 5,
+    "rules": 849,
+    "seconds": 93.121525014,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 948,
+    "point_fallbacks": 665,
+    "requested": 676,
+    "retired": 653,
+    "round": 6,
+    "rules": 1597,
+    "seconds": 173.164594243,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 991,
+    "point_fallbacks": 948,
+    "requested": 963,
+    "retired": 937,
+    "round": 7,
+    "rules": 2697,
+    "seconds": 247.672961794,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 1008,
+    "point_fallbacks": 992,
+    "requested": 1007,
+    "retired": 980,
+    "round": 8,
+    "rules": 3860,
+    "seconds": 477.511048856,
+    "zero_rules": 0
+  }
+]

@@ -1,0 +1,721 @@
+//! Isolated draft: certify only the unrestricted virtual factor of a region.
+//! This does not admit a partial placement or define its compact origin/endpoint.
+//! A future caller must retain the sealed placement-specific origin proof and
+//! validate this certificate's parameter conditions before returning a zero.
+use super::{
+    OccupiedBoundaryDistribution, OccupiedBoundaryLimits, polynomial_terms, validate_distribution,
+};
+use crate::coefficient::{exact_coefficient_list, factors};
+use crate::family::substitute;
+use crate::integrand::RegionFactorSpace;
+use crate::{Error, Integral, IntegralFamily, Result, RunContext};
+use rustred::sector::{
+    Mask,
+    zero::{Analyzer, Certificate, Decision},
+};
+use std::collections::{BTreeMap, BTreeSet};
+use symbolica::prelude::*;
+
+#[derive(Debug)]
+pub(super) struct OrdinaryVirtualZero {
+    pub family: IntegralFamily,
+    pub integral: Integral,
+    pub coefficient: Atom,
+    pub native: Certificate,
+    pub nonzero_conditions: Vec<Atom>,
+}
+#[derive(Debug)]
+pub(super) struct VirtualSoftZero {
+    pub source_virtual_loops: Vec<usize>,
+    pub source_region_space: RegionFactorSpace,
+    /// old_virtual = new_virtual - translation * compact/external vectors.
+    pub translation: Vec<Vec<Atom>>,
+    /// Nonempty only for the unrestricted-polynomial null-direction case.
+    pub null_directions: Vec<Vec<Atom>>,
+    pub denominator_rows: Vec<Vec<Atom>>,
+    pub original_expression: Atom,
+    pub translated_expression: Atom,
+    pub coordinate_substitutions: BTreeMap<Atom, Atom>,
+    pub ordinary_proofs: Vec<OrdinaryVirtualZero>,
+    pub nonzero_conditions: Vec<Atom>,
+}
+
+fn dependent(expression: &Atom, coordinates: &[Atom]) -> bool {
+    coordinates
+        .iter()
+        .any(|coordinate| expression.contains(coordinate.as_view()))
+}
+fn parameter_conditions(
+    expression: &Atom,
+    coordinates: &[Atom],
+    virtual_coordinates: &[Atom],
+) -> Result<Vec<Atom>> {
+    let mut symbols = BTreeSet::new();
+    crate::family::scalar_symbols(expression.as_view(), &mut symbols)?;
+    let symbols = symbols
+        .iter()
+        .map(|atom| match atom.as_view() {
+            AtomView::Var(v) => v.get_symbol(),
+            _ => unreachable!(),
+        })
+        .collect();
+    let raw = crate::physical_conditions::rational_denominator_conditions(
+        std::slice::from_ref(expression),
+        &symbols,
+    )?;
+    let mut retained = Vec::new();
+    for condition in raw {
+        if !dependent(&condition, coordinates) {
+            retained.push(condition);
+            continue;
+        }
+        // Inspect each original denominator before whole-expression cancellation.
+        // Ordinary virtual poles are the integrand. A compact-only pole is not
+        // licensed by an ordinary zero certificate, even when algebra cancels it.
+        for (factor, _) in factors(&condition.factor()) {
+            if !dependent(&factor, coordinates) {
+                if !matches!(factor.as_view(), AtomView::Num(_)) {
+                    retained.push(factor);
+                }
+            } else if !dependent(&factor, virtual_coordinates) {
+                return Err(Error::Unsupported("raw compact-coordinate pole is not licensed by an ordinary virtual zero certificate".into()));
+            }
+        }
+    }
+    Ok(retained)
+}
+
+/// Narrow algebraic certificate. Only positive denominator factors determine
+/// momentum rank and translation. All other coordinate dependence must remain
+/// polynomial. Refusal is Unsupported/None, never an assumed occupied zero.
+pub(super) fn certify_virtual_soft_zero(
+    expression: &Atom,
+    space: &RegionFactorSpace,
+    distributions: &[OccupiedBoundaryDistribution],
+    limits: OccupiedBoundaryLimits,
+    context: &RunContext,
+) -> Result<Option<VirtualSoftZero>> {
+    context.cancellation.check()?;
+    if limits.max_terms == 0 {
+        return Err(Error::Limit(
+            "zero virtual boundary certificate budget".into(),
+        ));
+    }
+    let n = space.template.loops.len();
+    let e = space.template.external.len();
+    if space.source_loop_indices.len() != n
+        || space.coordinates.len() != n * (n + 1) / 2 + n * e
+        || space.template.external_gram.len() != e
+        || space.template.external_gram.iter().any(|r| r.len() != e)
+        || space.coordinates.iter().collect::<BTreeSet<_>>().len() != space.coordinates.len()
+        || space
+            .coordinates
+            .iter()
+            .any(|a| !matches!(a.as_view(), AtomView::Var(_)))
+        || space
+            .source_loop_indices
+            .iter()
+            .collect::<BTreeSet<_>>()
+            .len()
+            != n
+    {
+        return Err(Error::InvalidInput(
+            "virtual boundary coordinate map".into(),
+        ));
+    }
+    let mut occupied = BTreeSet::new();
+    for d in distributions {
+        validate_distribution(d, limits)?;
+        if !space.source_loop_indices.contains(&d.source_loop_index)
+            || !occupied.insert(d.source_loop_index)
+        {
+            return Err(Error::InvalidInput(
+                "virtual boundary distribution mapping".into(),
+            ));
+        }
+    }
+    // Required-cut zeros belong to their distribution owner, not this native
+    // ordinary proof. All invalid H indices were checked before this branch.
+    if distributions.iter().any(|d| d.cut_index <= 0) {
+        return Ok(None);
+    }
+    let virtuals = (0..n)
+        .filter(|i| !occupied.contains(&space.source_loop_indices[*i]))
+        .collect::<Vec<_>>();
+    if virtuals.is_empty() {
+        return Ok(None);
+    }
+    let compact = (0..n)
+        .filter(|i| occupied.contains(&space.source_loop_indices[*i]))
+        .collect::<Vec<_>>();
+    let external = compact.iter().copied().chain(n..n + e).collect::<Vec<_>>();
+    let mut pairs = Vec::new();
+    for i in 0..n {
+        for j in i..n {
+            pairs.push((i, j));
+        }
+    }
+    for i in 0..n {
+        for j in n..n + e {
+            pairs.push((i, j));
+        }
+    }
+    let scalar = |i: usize, j: usize| -> Atom {
+        let (i, j) = if i <= j { (i, j) } else { (j, i) };
+        if i >= n {
+            space.template.external_gram[i - n][j - n].clone()
+        } else {
+            space.coordinates[pairs.iter().position(|p| *p == (i, j)).unwrap()].clone()
+        }
+    };
+    let virtual_coordinates = pairs
+        .iter()
+        .enumerate()
+        .filter(|(_, (i, j))| virtuals.contains(i) || virtuals.contains(j))
+        .map(|(k, _)| space.coordinates[k].clone())
+        .collect::<Vec<_>>();
+    let mut numerator = Atom::one();
+    let mut rows = Vec::new();
+    let mut residuals = Vec::new();
+    let mut denominator_bases = Vec::new();
+    let mut nonzero_conditions =
+        parameter_conditions(expression, &space.coordinates, &virtual_coordinates)?;
+    for (base, power) in factors(&expression.together().factor()) {
+        context.cancellation.check()?;
+        if power >= 0 || !dependent(&base, &space.coordinates) {
+            numerator *= base.pow(power);
+            continue;
+        }
+        if !dependent(&base, &virtual_coordinates) {
+            return Err(Error::Unsupported(
+                "compact rational factor is not an ordinary virtual zero certificate".into(),
+            ));
+        }
+        let mut constant = Atom::zero();
+        let mut coefficients = vec![Atom::zero(); pairs.len()];
+        for (monomial, coefficient) in exact_coefficient_list(&base, &space.coordinates)? {
+            if monomial.is_one() {
+                constant += coefficient;
+            } else if let Some(i) = space.coordinates.iter().position(|v| *v == monomial) {
+                coefficients[i] += coefficient;
+            } else {
+                return Err(Error::Unsupported(
+                    "virtual zero certificate needs affine quadratic denominators".into(),
+                ));
+            }
+        }
+        let pivot = virtuals
+            .iter()
+            .copied()
+            .find(|i| !coefficients[pairs.iter().position(|p| *p == (*i, *i)).unwrap()].is_zero())
+            .ok_or_else(|| {
+                Error::Unsupported("virtual denominator has no squared virtual direction".into())
+            })?;
+        let scale = coefficients[pairs.iter().position(|p| *p == (pivot, pivot)).unwrap()].clone();
+        Rational::try_from(scale.as_view()).map_err(|_| {
+            Error::Unsupported("virtual routing scale must be exact rational".into())
+        })?;
+        let mut row = Vec::new();
+        for j in 0..n + e {
+            let (i, k) = if pivot <= j { (pivot, j) } else { (j, pivot) };
+            let coefficient = &coefficients[pairs.iter().position(|p| *p == (i, k)).unwrap()];
+            let value = if j == pivot {
+                coefficient / &scale
+            } else {
+                coefficient / (&scale * Atom::num(2))
+            }
+            .together()
+            .cancel();
+            Rational::try_from(value.as_view())
+                .map_err(|_| Error::Unsupported("virtual routing must be exact rational".into()))?;
+            row.push(value);
+        }
+        let mut square = Atom::zero();
+        for i in 0..n + e {
+            for j in 0..n + e {
+                square += &row[i] * &row[j] * scalar(i, j);
+            }
+        }
+        let residual = (&base - &scale * &square).together().cancel();
+        if dependent(&residual, &space.coordinates) {
+            return Err(Error::Unsupported(
+                "virtual denominator is not one rank-one momentum square plus mass".into(),
+            ));
+        }
+        rows.push(row);
+        residuals.push(residual);
+        denominator_bases.push(base);
+        if rows.len() > limits.max_terms {
+            return Err(Error::Limit(
+                "virtual denominator certificate budget".into(),
+            ));
+        }
+    }
+    // Inactive propagators and completion powers were retained as polynomial
+    // numerator factors; no additional positive propagators are manufactured.
+    polynomial_terms(&numerator, &space.coordinates, limits.max_terms)?;
+    let a = rows
+        .iter()
+        .map(|r| virtuals.iter().map(|i| r[*i].clone()).collect::<Vec<_>>())
+        .collect::<Vec<_>>();
+    let rank = crate::algebra::rref(a.clone()).1.len();
+    let mut translation = vec![vec![Atom::zero(); external.len()]; virtuals.len()];
+    let null_directions;
+    if rank < virtuals.len() {
+        null_directions = if a.is_empty() {
+            (0..virtuals.len())
+                .map(|i| {
+                    (0..virtuals.len())
+                        .map(|j| Atom::num(i64::from(i == j)))
+                        .collect()
+                })
+                .collect()
+        } else {
+            crate::algebra::nullspace(a.clone())
+        };
+        assert!(!null_directions.is_empty());
+    } else {
+        null_directions = Vec::new();
+        let augmented = rows
+            .iter()
+            .map(|row| {
+                virtuals
+                    .iter()
+                    .chain(&external)
+                    .map(|i| row[*i].clone())
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
+        let (reduced, pivots) = crate::algebra::rref(augmented);
+        if pivots.iter().any(|p| *p >= virtuals.len()) || residuals.iter().any(|r| !r.is_zero()) {
+            return Err(Error::Unsupported("virtual factors retain an external invariant or a nonzero mass after common translation".into()));
+        }
+        for (i, pivot) in pivots.iter().enumerate() {
+            translation[*pivot] = reduced[i][virtuals.len()..].to_vec();
+        }
+    }
+    let mut vectors = (0..n + e)
+        .map(|i| {
+            (0..n + e)
+                .map(|j| Atom::num(i64::from(i == j)))
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+    for (i, &v) in virtuals.iter().enumerate() {
+        for (j, &external) in external.iter().enumerate() {
+            vectors[v][external] -= &translation[i][j];
+        }
+    }
+    let mut substitutions = BTreeMap::new();
+    for ((i, j), coordinate) in pairs.iter().zip(&space.coordinates) {
+        let mut value = Atom::zero();
+        for a in 0..n + e {
+            for b in 0..n + e {
+                value += &vectors[*i][a] * &vectors[*j][b] * scalar(a, b);
+            }
+        }
+        substitutions.insert(coordinate.clone(), value.expand());
+    }
+    let translated = substitute(expression, &substitutions).together().cancel();
+    if null_directions.is_empty() {
+        for base in &denominator_bases {
+            let shifted = substitute(base, &substitutions).expand();
+            let nonvirtual_coordinates = pairs
+                .iter()
+                .enumerate()
+                .filter(|(_, (i, j))| !virtuals.contains(i) || !virtuals.contains(j))
+                .map(|(k, _)| space.coordinates[k].clone())
+                .collect::<Vec<_>>();
+            if dependent(&shifted, &nonvirtual_coordinates) {
+                return Err(Error::Reduction(
+                    "certified virtual translation did not remove compact/medium dependence".into(),
+                ));
+            }
+        }
+    }
+    let ordinary_coordinates = virtuals
+        .iter()
+        .enumerate()
+        .flat_map(|(i, a)| virtuals[i..].iter().map(move |b| scalar(*a, *b)))
+        .chain(
+            virtuals
+                .iter()
+                .flat_map(|a| external.iter().map(move |b| scalar(*a, *b))),
+        )
+        .collect::<Vec<_>>();
+    let ordinary = IntegralFamily {
+        name: "occupied_boundary_separated_virtual".into(),
+        loops: virtuals
+            .iter()
+            .map(|i| space.template.loops[*i].clone())
+            .collect(),
+        external: external
+            .iter()
+            .map(|i| {
+                if *i < n {
+                    space.template.loops[*i].clone()
+                } else {
+                    space.template.external[*i - n].clone()
+                }
+            })
+            .collect(),
+        external_gram: external
+            .iter()
+            .map(|i| external.iter().map(|j| scalar(*i, *j)).collect())
+            .collect(),
+        propagators: vec![],
+        physical_propagators: 0,
+        epsilon: space.template.epsilon,
+        dimension: space.template.dimension,
+    };
+    let mut proofs = Vec::new();
+    for term in crate::integrand::to_integrals(
+        &translated,
+        &ordinary_coordinates,
+        &ordinary,
+        limits.max_terms,
+    )? {
+        context.cancellation.check()?;
+        let converted = term.family.convert()?;
+        let analyzer = Analyzer::try_unrestricted(&converted.family)
+            .map_err(|e| Error::Reduction(e.to_string()))?;
+        let mask = Mask::try_new(term.integral.0.iter().map(|n| *n > 0))
+            .map_err(|e| Error::InvalidInput(e.to_string()))?;
+        let Decision::ProvedZero(native) = analyzer
+            .analyze(&mask)
+            .map_err(|e| Error::Reduction(e.to_string()))?
+        else {
+            return Err(Error::Unsupported(
+                "native ordinary virtual factor has no ProvedZero certificate".into(),
+            ));
+        };
+        let mut conditions = parameter_conditions(&term.coefficient, &space.coordinates, &[])?;
+        for condition in native.domain().conditions() {
+            conditions.push(substitute(
+                &condition.polynomial().to_expression(),
+                &converted.reverse,
+            ));
+        }
+        if conditions
+            .iter()
+            .any(|condition| dependent(condition, &space.coordinates))
+        {
+            return Err(Error::Unsupported(
+                "ordinary zero certificate requires an unproved compact-coordinate condition"
+                    .into(),
+            ));
+        }
+        nonzero_conditions.extend(conditions.clone());
+        proofs.push(OrdinaryVirtualZero {
+            family: term.family,
+            integral: term.integral,
+            coefficient: term.coefficient,
+            native,
+            nonzero_conditions: conditions,
+        });
+    }
+    if proofs.is_empty() {
+        return Ok(None);
+    }
+    nonzero_conditions.sort_by_cached_key(AtomCore::to_canonical_string);
+    nonzero_conditions.dedup();
+    Ok(Some(VirtualSoftZero {
+        source_region_space: space.clone(),
+        source_virtual_loops: virtuals
+            .iter()
+            .map(|i| space.source_loop_indices[*i])
+            .collect(),
+        translation,
+        null_directions,
+        denominator_rows: rows,
+        original_expression: expression.clone(),
+        translated_expression: translated,
+        coordinate_substitutions: substitutions,
+        ordinary_proofs: proofs,
+        nonzero_conditions,
+    }))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::finite_density::{DensityInput, compact::CompactShell};
+    fn space() -> RegionFactorSpace {
+        RegionFactorSpace {
+            coordinates: vec![
+                parse!("virtual_zero_k2"),
+                parse!("virtual_zero_kq"),
+                parse!("virtual_zero_q2"),
+                parse!("virtual_zero_ku"),
+                parse!("virtual_zero_qu"),
+            ],
+            source_coordinate_indices: (0..5).collect(),
+            source_loop_indices: vec![0, 1],
+            template: IntegralFamily {
+                name: "virtual_zero_test".into(),
+                loops: vec!["k".into(), "q".into()],
+                external: vec!["u".into()],
+                external_gram: vec![vec![Atom::one()]],
+                propagators: vec![],
+                physical_propagators: 0,
+                epsilon: symbol!("virtual_zero_eps"),
+                dimension: 4,
+            },
+        }
+    }
+    fn distribution() -> OccupiedBoundaryDistribution {
+        OccupiedBoundaryDistribution {
+            source_loop_index: 1,
+            shell: CompactShell {
+                mass_squared: Rational::zero(),
+                chemical_potential: Rational::one(),
+            },
+            cut_index: 1,
+            upper_index: 0,
+            lower_index: 0,
+        }
+    }
+    fn prove(expression: Atom) -> Result<Option<VirtualSoftZero>> {
+        certify_virtual_soft_zero(
+            &expression,
+            &space(),
+            &[distribution()],
+            Default::default(),
+            &RunContext::default(),
+        )
+    }
+    #[test]
+    fn translated_virtual_factor_preserves_polynomial_numerator_and_parameter_poles() {
+        let expression = parse!(
+            "virtual_zero_kq^2*(virtual_zero_eps^2-1)/((virtual_zero_k2-2*virtual_zero_kq+virtual_zero_q2)*(virtual_zero_eps-1))"
+        );
+        let proof = prove(expression.clone()).unwrap().unwrap();
+        assert_eq!(proof.source_virtual_loops, [0]);
+        assert_eq!(proof.translation, vec![vec![Atom::num(-1), Atom::zero()]]);
+        assert!(proof.null_directions.is_empty());
+        assert!(!proof.ordinary_proofs.is_empty());
+        let expected =
+            parse!("(virtual_zero_kq+virtual_zero_q2)^2*(virtual_zero_eps+1)/virtual_zero_k2");
+        assert!(
+            (&proof.translated_expression - expected)
+                .together()
+                .cancel()
+                .is_zero()
+        );
+        assert!(
+            proof
+                .nonzero_conditions
+                .iter()
+                .any(|c| (c - parse!("virtual_zero_eps-1")).expand().is_zero())
+        );
+        assert!(
+            (substitute(&expression, &proof.coordinate_substitutions)
+                - &proof.translated_expression)
+                .together()
+                .cancel()
+                .is_zero()
+        );
+        for term in &proof.ordinary_proofs {
+            assert_eq!(
+                term.native.raw_sector().active_bits().len(),
+                term.integral.0.len()
+            );
+        }
+    }
+    #[test]
+    fn rejects_scales_incompatible_translations_and_compact_rational_factors() {
+        for expression in [
+            parse!("1/(virtual_zero_k2*(virtual_zero_k2-2*virtual_zero_kq+virtual_zero_q2))"),
+            parse!("1/(virtual_zero_k2-2*virtual_zero_kq+virtual_zero_q2-1)"),
+            parse!("1/(virtual_zero_k2*virtual_zero_q2)"),
+            parse!("1/(virtual_zero_k2*virtual_zero_qu)"),
+            parse!("1/(virtual_zero_k2+virtual_zero_q2)"),
+            parse!("(virtual_zero_q2^2-1)/(virtual_zero_k2*(virtual_zero_q2-1))"),
+        ] {
+            assert!(matches!(prove(expression), Err(Error::Unsupported(_))));
+        }
+    }
+    #[test]
+    fn rank_deficient_positive_support_keeps_a_free_unrestricted_direction() {
+        let mut s = space();
+        s.template.loops = vec!["k".into(), "l".into(), "q".into()];
+        s.coordinates = [
+            "vfree_k2", "vfree_kl", "vfree_kq", "vfree_l2", "vfree_lq", "vfree_q2", "vfree_ku",
+            "vfree_lu", "vfree_qu",
+        ]
+        .iter()
+        .map(|n| Atom::var(symbol!(*n)))
+        .collect();
+        s.source_coordinate_indices = (0..9).collect();
+        s.source_loop_indices = vec![0, 1, 2];
+        let mut d = distribution();
+        d.source_loop_index = 2;
+        let proof = certify_virtual_soft_zero(
+            &parse!("vfree_kq^2/(vfree_l2-1)"),
+            &s,
+            &[d],
+            Default::default(),
+            &RunContext::default(),
+        )
+        .unwrap()
+        .unwrap();
+        assert_eq!(proof.source_virtual_loops, [0, 1]);
+        assert_eq!(proof.null_directions, vec![vec![Atom::one(), Atom::zero()]]);
+        assert!(!proof.ordinary_proofs.is_empty());
+    }
+
+    #[test]
+    fn validates_distributions_before_any_virtual_zero() {
+        let mut d = distribution();
+        d.cut_index = 0;
+        d.upper_index = -1;
+        assert!(matches!(
+            certify_virtual_soft_zero(
+                &parse!("1/virtual_zero_k2"),
+                &space(),
+                &[d.clone()],
+                Default::default(),
+                &RunContext::default()
+            ),
+            Err(Error::InvalidInput(_))
+        ));
+        d.upper_index = 0;
+        assert!(
+            certify_virtual_soft_zero(
+                &parse!("1/virtual_zero_k2"),
+                &space(),
+                &[d],
+                Default::default(),
+                &RunContext::default()
+            )
+            .unwrap()
+            .is_none()
+        );
+        let mut d = distribution();
+        d.lower_index = -1;
+        assert!(matches!(
+            certify_virtual_soft_zero(
+                &parse!("1/virtual_zero_k2"),
+                &space(),
+                &[d],
+                Default::default(),
+                &RunContext::default()
+            ),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+    #[test]
+    fn actual_partial_placement_regions_have_only_certified_virtual_soft_factors() {
+        let input: DensityInput = serde_json::from_str(include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/examples/finite_density/massless_three_loop_chain.json"
+        )))
+        .unwrap();
+        let input = input.prepare().unwrap();
+        let context = RunContext::default();
+        for (cuts, shifted) in [
+            (vec![3], vec![0]),
+            (vec![0, 3], vec![1, 2]),
+            (vec![0, 3], vec![2, 4]),
+        ] {
+            let family = input
+                .occupied_cut(&cuts, 4096)
+                .unwrap()
+                .at_physical_masses();
+            let ordinary = family
+                .region_family(symbol!("partial_boundary_actual_eps"), 4)
+                .unwrap();
+            let compact = (0..family.loops())
+                .map(|i| family.shells().iter().any(|s| s.loop_index == i))
+                .collect::<Vec<_>>();
+            let regions =
+                crate::cut_regions::enumerate_compact(&ordinary, &compact, &context).unwrap();
+            let mask = (0..family.input_slots())
+                .map(|i| shifted.contains(&i))
+                .collect::<Vec<_>>();
+            let mut targets = family
+                .targets()
+                .iter()
+                .flat_map(|t| t.keys().cloned())
+                .collect::<BTreeSet<_>>();
+            // Two basis labels from the frozen native single-slot0 closure.
+            // These are regression inputs, not a basis selected by this owner.
+            if cuts == [3] && shifted == [0] {
+                for upper in [0, 1] {
+                    let mut indices = vec![0_i16; family.factors().len()];
+                    indices[..5].copy_from_slice(&[1, 1, 0, 1, 1]);
+                    indices[family.shells()[0].upper_slot] = upper;
+                    targets.insert(Integral(indices));
+                }
+            }
+            let mut certified = 0;
+            for master in targets {
+                let distributions = family
+                    .shells()
+                    .iter()
+                    .map(|s| OccupiedBoundaryDistribution {
+                        source_loop_index: s.loop_index,
+                        shell: CompactShell {
+                            mass_squared: Rational::try_from(s.mass_squared.as_view()).unwrap(),
+                            chemical_potential: s.chemical_potential.clone(),
+                        },
+                        cut_index: master.0[s.physical_slot],
+                        upper_index: master.0[s.upper_slot],
+                        lower_index: master.0[s.lower_slot],
+                    })
+                    .collect::<Vec<_>>();
+                let mut target = Integral(master.0[..family.input_slots()].to_vec());
+                for &cut in &cuts {
+                    target.0[cut] = 0;
+                }
+                for region in &regions {
+                    let transformed = ordinary.transform_loops(&region.transformation).unwrap();
+                    let expansion =
+                        crate::regions::expand_region(&ordinary, &target, &mask, region, 2)
+                            .unwrap();
+                    for coefficient in expansion.coefficients {
+                        let projected = crate::integrand::projected_factor_region(
+                            &coefficient,
+                            &expansion.coordinates,
+                            &transformed,
+                            &region.hard,
+                            10000,
+                        )
+                        .unwrap();
+                        for term in projected.terms {
+                            if term.soft.is_zero() {
+                                continue;
+                            }
+                            let has_virtual = projected
+                                .soft
+                                .source_loop_indices
+                                .iter()
+                                .any(|i| !compact[*i]);
+                            let proof = certify_virtual_soft_zero(
+                                &term.soft,
+                                &projected.soft,
+                                &distributions,
+                                Default::default(),
+                                &context,
+                            )
+                            .unwrap();
+                            if has_virtual {
+                                assert!(
+                                    proof.is_some(),
+                                    "missing factor certificate, cuts={cuts:?},shifted={shifted:?}"
+                                );
+                                certified += 1;
+                            } else {
+                                assert!(proof.is_none());
+                            }
+                        }
+                    }
+                }
+            }
+            assert!(
+                certified > 0,
+                "no virtual-soft region exercised for {cuts:?}/{shifted:?}"
+            );
+        }
+    }
+}

@@ -1,0 +1,13 @@
+round=0 frontier=6 rules=6 requested=6 pending=6
+round=1 frontier=18 rules=12 requested=9 pending=18
+round=2 frontier=56 rules=30 requested=21 pending=55
+round=3 frontier=103 rules=91 requested=60 pending=102
+round=4 frontier=184 rules=202 requested=108 pending=182
+round=5 frontier=107 rules=410 requested=189 pending=105
+round=6 frontier=45 rules=527 requested=112 pending=43
+round=7 frontier=27 rules=572 requested=50 pending=25
+round=8 frontier=18 rules=599 requested=32 pending=16
+round=9 frontier=13 rules=616 requested=23 pending=11
+round=10 frontier=8 rules=628 requested=18 pending=6
+round=11 frontier=2 rules=636 requested=13 pending=0
+status=closed rounds=12

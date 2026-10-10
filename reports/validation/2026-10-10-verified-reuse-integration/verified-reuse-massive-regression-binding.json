@@ -1,0 +1,55 @@
+{
+  "scope": "One existing massive two-loop profile with optional polynomial-closure-v1; predictions only. Independent/historical comparison follows saved outputs. This single profile is not a new precision-refinement gate.",
+  "source_snapshot_sha256": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca",
+  "build_provenance_sha256": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569",
+  "root_gates_sha256": "2aee704f948913a1cfe69d677c7f803f47957c3f8c62a3a49709c68e0b38b86a",
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f",
+    "RUSTRED_SOURCE_DIGEST": "9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb",
+    "PORT_SOURCE_DIGEST": "db384717f500e9278bc773eb55d786d324e93e24a3eb23c592ffebc291581f7a"
+  },
+  "input": {
+    "path": "examples/finite_density/massive_two_loop_sunset.json",
+    "sha256": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a"
+  },
+  "executable": {
+    "path": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "sha256": "f5985baa7eca472e99854c8b67552e39fbe89a821edceb949237dce3defdff35",
+    "size_bytes": 1312580400,
+    "mtime_utc": "2026-10-10T06:37:11.535933+00:00"
+  },
+  "baseline_command": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/requested-rays-massive-regression-resources.provenance.json",
+    "sha256": "f6494f012ce386310edf39b905a0d09649528d4f1d73686546f989173f9e4dca"
+  },
+  "settings": {
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_INPUT": "examples/finite_density/massive_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON": "4/5",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": "28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massive-regression"
+  },
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY=polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massive_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=4/5",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massive-regression",
+    "timeout",
+    "300",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture"
+  ],
+  "launcher_sha256": "98eae972e6d25ab3185acade1ccebbc7b16e8f3145a396bd71a2d52382b4f908",
+  "inherited_weighted_and_density_environment_removed": true,
+  "requested_ray_point_schedule_enabled": false,
+  "predictions_before_reference_access": true,
+  "experimental_native_portfolio_enabled": false,
+  "exit_code": 0,
+  "post_run_source_and_executable_unchanged": true,
+  "resources_sha256": "f45e2e228da48fd32602887249df78feac515a4a9fc5997afbcdfffa5f61d451"
+}

@@ -72,12 +72,16 @@ pub struct GuardedReduction<const N: usize> {
     pub rule_applications: usize,
 }
 
-/// Reusable rules bound to their exact supplied source corpus and measure.
+/// Immutable replay-verified rules bound to their exact source corpus and measure.
+///
+/// Construction and loading replay every rule. Fields stay private to this
+/// module so verified composition can retain that invariant without replaying
+/// unchanged proofs. No mutable source or rule access is exposed.
 #[derive(Debug)]
 pub struct GuardedProgram<const N: usize> {
-    pub(super) sources: Arc<GuardedSourceSystem<N>>,
-    pub(super) rules: Vec<GuardedRule<N>>,
-    pub(super) terminals: BTreeSet<[i64; N]>,
+    sources: Arc<GuardedSourceSystem<N>>,
+    rules: Vec<GuardedRule<N>>,
+    terminals: BTreeSet<[i64; N]>,
 }
 
 /// Every key in one pending map borrows the same replay-validated coordinate
@@ -151,6 +155,18 @@ impl<const N: usize> GuardedProgram<N> {
             }
             sources.replay_rule(rule)?;
         }
+        let terminals = Self::validate_terminals(&sources, terminals)?;
+        Ok(Self {
+            sources,
+            rules,
+            terminals,
+        })
+    }
+
+    fn validate_terminals(
+        sources: &GuardedSourceSystem<N>,
+        terminals: impl IntoIterator<Item = [i64; N]>,
+    ) -> Result<BTreeSet<[i64; N]>, SolverError> {
         let terminals: BTreeSet<_> = terminals.into_iter().collect();
         for terminal in &terminals {
             if sources.roles.iter().zip(terminal).any(|(role, power)| {
@@ -166,11 +182,7 @@ impl<const N: usize> GuardedProgram<N> {
                 ));
             }
         }
-        Ok(Self {
-            sources,
-            rules,
-            terminals,
-        })
+        Ok(terminals)
     }
 
     pub fn sources(&self) -> &Arc<GuardedSourceSystem<N>> {
@@ -240,6 +252,73 @@ impl<const N: usize> GuardedProgram<N> {
         let mut rules = self.rules;
         rules.extend(fallback.rules);
         Self::new(self.sources, rules, current_terminals)
+    }
+
+    /// Replace the explicit stopping set of this immutable verified program.
+    /// Rule proofs remain unchanged and retain their original replay guarantee;
+    /// only the new terminals and the rule budget require validation. Loading
+    /// serialized programs still replays every rule independently.
+    pub fn with_terminals_verified(
+        mut self,
+        current_terminals: impl IntoIterator<Item = [i64; N]>,
+        max_rules: usize,
+    ) -> Result<Self, SolverError> {
+        if self.rules.len() > max_rules {
+            return Err(SolverError::InvalidInput(format!(
+                "guarded terminal rebind has {} rules, exceeding rule budget {max_rules}",
+                self.rules.len()
+            )));
+        }
+        self.terminals = Self::validate_terminals(&self.sources, current_terminals)?;
+        Ok(self)
+    }
+
+    /// Compose two immutable replay-verified programs without replaying their
+    /// unchanged rules. This checks the complete source binding and common
+    /// coordinate order, counts duplicate rules against the budget, preserves
+    /// `self` before `fallback`, and replaces both prior stopping sets.
+    ///
+    /// This operation establishes no new coverage or closure. Every rule was
+    /// replayed at construction or loading; the private fields and immutable
+    /// accessors preserve that guarantee through composition. Use
+    /// `union_replayed` when independent replay of the union is desired.
+    pub fn union_verified(
+        mut self,
+        fallback: Self,
+        current_terminals: impl IntoIterator<Item = [i64; N]>,
+        max_rules: usize,
+    ) -> Result<Self, SolverError> {
+        if !Arc::ptr_eq(&self.sources, &fallback.sources)
+            && !same_source_context(&self.sources, &fallback.sources)
+        {
+            return Err(SolverError::InvalidInput(
+                "guarded program union requires the same exact source context".into(),
+            ));
+        }
+        let count = self
+            .rules
+            .len()
+            .checked_add(fallback.rules.len())
+            .ok_or_else(|| {
+                SolverError::InvalidInput("guarded program union rule count overflow".into())
+            })?;
+        if count > max_rules {
+            return Err(SolverError::InvalidInput(format!(
+                "guarded program union has {count} rules, exceeding rule budget {max_rules}"
+            )));
+        }
+        // Each input already has one valid coordinate order. Only their
+        // agreement needs checking; an empty input imposes no order.
+        if let (Some(left), Some(right)) = (self.rules.first(), fallback.rules.first()) {
+            if left.order.permutation() != right.order.permutation() {
+                return Err(SolverError::InvalidInput(
+                    "guarded program rules require one common coordinate order".into(),
+                ));
+            }
+        }
+        self.terminals = Self::validate_terminals(&self.sources, current_terminals)?;
+        self.rules.extend(fallback.rules);
+        Ok(self)
     }
 
     fn one(&self) -> Coefficient {
@@ -633,7 +712,7 @@ pub(super) mod tests {
         GuardedProgram::new(sources, vec![rule], [[0]]).unwrap()
     }
 
-    fn restricted_sample(bounds: IndexBounds, terminal: i64) -> GuardedProgram<1> {
+    pub(super) fn restricted_sample(bounds: IndexBounds, terminal: i64) -> GuardedProgram<1> {
         let mut program = sample("retained-source-recurrence");
         let domain = IndexDomain::new([bounds]).unwrap();
         program.rules[0].domain = domain.clone();
@@ -842,6 +921,106 @@ pub(super) mod tests {
     }
 
     #[test]
+    fn verified_union_rejects_every_original_source_binding_mismatch() {
+        for variant in [
+            "measure",
+            "roles",
+            "indices",
+            "variables",
+            "variable-order",
+            "source-id",
+            "source-domain",
+            "source-condition",
+            "source-row",
+            "row-order",
+            "zero-domains",
+        ] {
+            let names = match variant {
+                "variables" => ["guarded_lifecycle_n", "union_other_x"],
+                "variable-order" => ["guarded_lifecycle_x", "guarded_lifecycle_n"],
+                _ => ["guarded_lifecycle_n", "guarded_lifecycle_x"],
+            };
+            let context = CoefficientContext::new(names);
+            let x = context
+                .parameter(if variant == "variables" {
+                    "union_other_x"
+                } else {
+                    "guarded_lifecycle_x"
+                })
+                .unwrap();
+            let mut row = vec![
+                Term {
+                    integral: Integral::symbolic([0]).unwrap(),
+                    coefficient: context.one().numerator,
+                },
+                Term {
+                    integral: Integral::symbolic([-1]).unwrap(),
+                    coefficient: if variant == "source-row" {
+                        (-context.one()).numerator
+                    } else {
+                        (-x.clone()).numerator
+                    },
+                },
+            ];
+            if variant == "row-order" {
+                row.reverse();
+            }
+            let conditions = if variant == "source-condition" {
+                vec![
+                    x.numerator.clone(),
+                    context.parameter("guarded_lifecycle_n").unwrap().numerator,
+                ]
+            } else {
+                vec![x.numerator.clone()]
+            };
+            let sources = GuardedSourceSystem::new(
+                if variant == "measure" {
+                    "other-measure"
+                } else {
+                    "union-binding"
+                },
+                [if variant == "roles" {
+                    IndexRole::Ordinary
+                } else {
+                    IndexRole::Occupation
+                }],
+                [usize::from(variant == "indices")],
+                vec![
+                    GuardedSource::new(
+                        if variant == "source-id" {
+                            "different-source"
+                        } else {
+                            "surface-recurrence"
+                        },
+                        row,
+                        IndexDomain::new([IndexBounds::new(
+                            Some(if variant == "source-domain" { 2 } else { 1 }),
+                            None,
+                        )
+                        .unwrap()])
+                        .unwrap(),
+                    )
+                    .with_nonzero_conditions(conditions),
+                ],
+            )
+            .unwrap()
+            .with_zero_domains(if variant == "zero-domains" {
+                vec![IndexDomain::new([IndexBounds::fixed(0)]).unwrap()]
+            } else {
+                vec![]
+            })
+            .unwrap();
+            let other = GuardedProgram::new(Arc::new(sources), vec![], []).unwrap();
+            let result = sample("union-binding").union_verified(other, [[0]], 8);
+            assert!(
+                matches!(result, Err(SolverError::InvalidInput(ref message))
+                if message.contains("same exact source context")),
+                "variant {variant}: {result:?}"
+            );
+        }
+    }
+
+    #[test]
     fn replayed_union_counts_duplicate_rules_against_the_budget() {
         let result = sample("union-budget").union_replayed(sample("union-budget"), [[0]], 1);
         assert!(matches!(result, Err(SolverError::InvalidInput(message))
@@ -917,6 +1096,63 @@ pub(super) mod tests {
             GuardedProgram::new(sources.clone(), rules, [[0, 0]]).unwrap()
         };
         let result = make_program(false).union_replayed(make_program(true), [[0, 0]], 64);
+        assert!(matches!(result, Err(SolverError::InvalidInput(message))
+            if message.contains("common coordinate order")));
+    }
+
+    #[test]
+    fn verified_union_requires_one_native_coordinate_order() {
+        let context = CoefficientContext::new(["union_order_n", "union_order_b", "union_order_x"]);
+        let x = context.parameter("union_order_x").unwrap();
+        let domain = IndexDomain::new([
+            IndexBounds::new(Some(1), None).unwrap(),
+            IndexBounds::fixed(0),
+        ])
+        .unwrap();
+        let sources = Arc::new(
+            GuardedSourceSystem::new(
+                "union-order",
+                [IndexRole::Occupation; 2],
+                [0, 1],
+                vec![GuardedSource::new(
+                    "order-recurrence",
+                    vec![
+                        Term {
+                            integral: Integral::symbolic([0, 0]).unwrap(),
+                            coefficient: context.one().numerator,
+                        },
+                        Term {
+                            integral: Integral::symbolic([-1, 0]).unwrap(),
+                            coefficient: (-x).numerator,
+                        },
+                    ],
+                    domain.clone(),
+                )],
+            )
+            .unwrap(),
+        );
+        let make_program = |permuted: bool| {
+            let found = sources
+                .solve_domains(
+                    vec![domain.clone()],
+                    crate::solver::SearchOptions {
+                        max_depth: Some(2),
+                        sample_seed: 0,
+                        ..Default::default()
+                    },
+                    32,
+                )
+                .unwrap();
+            assert!(!found.rules.is_empty());
+            let mut rules = found.rules;
+            if permuted {
+                for rule in &mut rules {
+                    rule.order = rule.order.clone().with_permutation([1, 0]).unwrap();
+                }
+            }
+            GuardedProgram::new(sources.clone(), rules, [[0, 0]]).unwrap()
+        };
+        let result = make_program(false).union_verified(make_program(true), [[0, 0]], 64);
         assert!(matches!(result, Err(SolverError::InvalidInput(message))
             if message.contains("common coordinate order")));
     }
@@ -1488,3 +1724,7 @@ pub(super) mod tests {
         assert_eq!(zero_budget.unresolved[0].coefficient, context.one());
     }
 }
+
+#[cfg(test)]
+#[path = "verified_tests.rs"]
+mod verified_tests;

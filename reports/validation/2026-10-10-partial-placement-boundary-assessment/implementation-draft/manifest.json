@@ -1,0 +1,35 @@
+{
+  "scope": "Uncompiled isolated boundary certificate draft",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "a4042028f2f24cd67b0eeb8c9c8b1bf1d96b1c77ab61def9f466fa857488ac29",
+      "bytes": 3759
+    },
+    {
+      "path": "closed-basis-fixture-binding.json",
+      "sha256": "44a2b8bd5e2b85a7df73fdb640cf6f3f59aa0ac75a90f7798390648c4f589f99",
+      "bytes": 655
+    },
+    {
+      "path": "source/src/finite_density/boundary/virtual_soft.rs",
+      "sha256": "df566f9db14f16a96d846172b3099644fb85427e0da7bbfeae92a802b7c93224",
+      "bytes": 27837
+    },
+    {
+      "path": "source/src/finite_density/boundary.rs",
+      "sha256": "afe24a6f79a4cecdd366b8ec21d90246e59ebdc2bbfdfc45732b6bc2ff6eaf52",
+      "bytes": 33679
+    },
+    {
+      "path": "source-map.json",
+      "sha256": "1091772c26145b7ea147ca8bdd0c1b63a18470c95b84f2b122b9fb67e9f87d24",
+      "bytes": 927
+    },
+    {
+      "path": "virtual-soft-certificate.patch",
+      "sha256": "8bb32cc18791c55b7578f264cc7d4d5ce0a2836133502e1e9db001e042762fb2",
+      "bytes": 29083
+    }
+  ]
+}

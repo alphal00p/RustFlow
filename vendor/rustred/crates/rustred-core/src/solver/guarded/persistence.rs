@@ -80,7 +80,12 @@ impl<const N: usize> GuardedProgram<N> {
     pub fn encode_native(&self, limits: BinaryIoLimits) -> Result<Vec<u8>, BinaryIoError> {
         let mut table = CoefficientTableBuilder::new(limits);
         let mut sources = Vec::new();
-        for (info, row) in self.sources.sources.iter().zip(self.sources.system.rows()) {
+        for (info, row) in self
+            .sources()
+            .sources
+            .iter()
+            .zip(self.sources().system.rows())
+        {
             sources.push(SourceRecord {
                 id: info.id.clone(),
                 domain: domain_record(&info.domain),
@@ -97,11 +102,11 @@ impl<const N: usize> GuardedProgram<N> {
             });
         }
         let mut rules = Vec::new();
-        for rule in &self.rules {
+        for rule in self.rules() {
             if rule.candidate.case.coordinate().is_none()
                 || rule.order.program().is_some()
                 || rule.order.physical_arity() != N
-                || rule.order.roles() != Some(&self.sources.roles)
+                || rule.order.roles() != Some(&self.sources().roles)
             {
                 return Err(BinaryIoError::Invalid(
                     "unsupported guarded case or order transport",
@@ -143,24 +148,24 @@ impl<const N: usize> GuardedProgram<N> {
         }
         let record = Record {
             schema: SCHEMA.into(),
-            measure: self.sources.measure_id.clone(),
+            measure: self.sources().measure_id.clone(),
             roles: self
-                .sources
+                .sources()
                 .roles
                 .iter()
                 .map(|role| role_code(*role))
                 .collect(),
-            indices: self.sources.system.index_variables().to_vec(),
+            indices: self.sources().system.index_variables().to_vec(),
             sources,
             zero_domains: self
-                .sources
+                .sources()
                 .zero_domains
                 .iter()
                 .map(domain_record)
                 .collect(),
             rules,
             terminals: self
-                .terminals
+                .terminals()
                 .iter()
                 .map(|terminal| terminal.to_vec())
                 .collect(),
@@ -499,7 +504,7 @@ mod tests {
         let program = sample("native-roundtrip");
         let bytes = program.encode_native(Default::default()).unwrap();
         let restored =
-            GuardedProgram::decode_generated(&bytes, program.sources.clone(), Default::default())
+            GuardedProgram::decode_generated(&bytes, program.sources().clone(), Default::default())
                 .unwrap();
         let before = program.reduce([3], Default::default()).unwrap();
         let after = restored.reduce([3], Default::default()).unwrap();
@@ -537,9 +542,12 @@ mod tests {
             })
             .collect::<Vec<_>>();
         let legacy = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
-        let error =
-            GuardedProgram::decode_generated(&legacy, program.sources.clone(), Default::default())
-                .unwrap_err();
+        let error = GuardedProgram::decode_generated(
+            &legacy,
+            program.sources().clone(),
+            Default::default(),
+        )
+        .unwrap_err();
         assert!(
             error
                 .to_string()
@@ -553,9 +561,13 @@ mod tests {
         let bytes = program.encode_native(Default::default()).unwrap();
         let other = sample("measure-b");
         assert!(
-            GuardedProgram::decode_generated(&bytes, other.sources, Default::default()).is_err()
+            GuardedProgram::decode_generated(&bytes, other.sources().clone(), Default::default())
+                .is_err()
         );
-        let mut context = Arc::try_unwrap(sample("measure-a").sources).unwrap();
+        let sample = sample("measure-a");
+        let context = sample.sources().clone();
+        drop(sample);
+        let mut context = Arc::try_unwrap(context).unwrap();
         context.sources[0].domain =
             IndexDomain::new([IndexBounds::new(Some(2), None).unwrap()]).unwrap();
         assert!(
@@ -590,8 +602,12 @@ mod tests {
             .collect();
         let corrupt = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
         assert!(
-            GuardedProgram::decode_generated(&corrupt, program.sources.clone(), Default::default())
-                .is_err()
+            GuardedProgram::decode_generated(
+                &corrupt,
+                program.sources().clone(),
+                Default::default()
+            )
+            .is_err()
         );
         let (mut record, _): (Record, _) = bincode::decode_from_slice(
             envelope.section(SectionTag::PROGRAM).unwrap(),
@@ -614,8 +630,12 @@ mod tests {
             .collect();
         let corrupt = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
         assert!(
-            GuardedProgram::decode_generated(&corrupt, program.sources, Default::default())
-                .is_err()
+            GuardedProgram::decode_generated(
+                &corrupt,
+                program.sources().clone(),
+                Default::default()
+            )
+            .is_err()
         );
     }
 }

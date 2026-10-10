@@ -1,0 +1,266 @@
+{
+  "files": {
+    "README.md": {
+      "sha256": "0a6882e16d76c4fbb37ef4e2d892ddf7c5ea836f5f6e94d4b85a2bffca6799e6",
+      "bytes": 1873
+    },
+    "capsule/build-binding.json": {
+      "sha256": "909ea8300888945e2db6ce1c814c437a0be32155784c6c57dc28d6900a647089",
+      "bytes": 3617
+    },
+    "capsule/check.py": {
+      "sha256": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2",
+      "bytes": 5490
+    },
+    "capsule/input.json": {
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "bytes": 1550
+    },
+    "capsule/pilot.rs": {
+      "sha256": "c1bf8ddfc3a88b8195d8e80aa51fbe6c76327ce28bd18708b3dceb2af403f365",
+      "bytes": 19123
+    },
+    "capsule/prepare.rs": {
+      "sha256": "8428875a532138e37690ad513e486a4b0670b6fb8fd33b15193f8b4d993c0a90",
+      "bytes": 10563
+    },
+    "capsule/proof.md": {
+      "sha256": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77",
+      "bytes": 10979
+    },
+    "capsule/run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    "capsule/support-checks.json": {
+      "sha256": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633",
+      "bytes": 67972
+    },
+    "capsule-manifest.json": {
+      "sha256": "ac4a5d5ab70eaea9f9c4f90a9fdddc57a100664a7c4fcbbc47db6b019ff2bb5f",
+      "bytes": 3676
+    },
+    "double-slots12/configuration.json": {
+      "sha256": "2a4c07dc380aa0f31bb674c45186e772854443503e8ade9700e25da246e6ff02",
+      "bytes": 3078
+    },
+    "double-slots12/fresh-source-program.bin": {
+      "sha256": "fed751ccf5e560440c3c4a63ad68b810b17db33e85e242e6da222172e8c23f63",
+      "bytes": 130762
+    },
+    "double-slots12/progress.json": {
+      "sha256": "29af09a01a7280983b84aa68fb1aaf1d3118998d893de49861e0cbddf993ac58",
+      "bytes": 1269
+    },
+    "double-slots12/round-000.bin": {
+      "sha256": "c9f85dbadbfa9ffc7beb99df9021b49854f2426c09de409b00c7a84d3c05bad9",
+      "bytes": 139680
+    },
+    "double-slots12/round-000.json": {
+      "sha256": "b261a3763d8d94255ae5da5d16517fdf48afe3a2ec019d01ced6ea0aada3f54a",
+      "bytes": 51196
+    },
+    "double-slots12/round-001.bin": {
+      "sha256": "1f46261190562fd2b191d70fcc8082f51096e8a438ba26d2939b1a883af6b628",
+      "bytes": 170693
+    },
+    "double-slots12/round-001.json": {
+      "sha256": "e196e768b7cf1e4a056e6b45ddc9dee8a9ead0adfe41a791a1543125c9272570",
+      "bytes": 153391
+    },
+    "double-slots12/round-002.bin": {
+      "sha256": "6ffd28221bb984cb72735723bcccaa9ffff29342b03d5702e3e3936e3ce0e0b6",
+      "bytes": 320327
+    },
+    "double-slots12/round-002.json": {
+      "sha256": "819ed85d442fec59963016d59bf2c44b7d3424a519b6d44da25c676048e331bb",
+      "bytes": 624283
+    },
+    "double-slots12/round-003.bin": {
+      "sha256": "1aad00da8470b0eafb90df24c1c1cb938b232ada189097c58b5439797f386c55",
+      "bytes": 1001206
+    },
+    "double-slots12/round-003.json": {
+      "sha256": "ba1807bc7be82ecbb9b39c174f8aae76fa6d18a0d8d2a6304e1e65eda8395d94",
+      "bytes": 2205165
+    },
+    "double-slots12/round-004.bin": {
+      "sha256": "2f173341c1de3b81e5c730c2970ac3f45cb000493bc99617aa3a885ba7e47192",
+      "bytes": 2162130
+    },
+    "double-slots12/round-004.json": {
+      "sha256": "c3ac124fcf20a8dda3aa127675fc314763a54ae28985dceb7ef8093219683425",
+      "bytes": 7824153
+    },
+    "double-slots12/round-005.bin": {
+      "sha256": "9f2b769aa6888e454827b06086bbc6359b9981560650a6ffb987578bf7311e6c",
+      "bytes": 3491342
+    },
+    "double-slots12/round-005.json": {
+      "sha256": "bd681f9c95d3a2d5baf44371e135f0c1b75e232243ba988ec05a9be67d2d07b7",
+      "bytes": 13699160
+    },
+    "double-slots12/round-006.bin": {
+      "sha256": "8c61c4847bb2156fa24baf86bf399e1ae7495c68cd427695ffdf1da7e79a5730",
+      "bytes": 4816857
+    },
+    "double-slots12/round-006.json": {
+      "sha256": "a098b4b717842c31dc74ccc983877b6db8d9bca787afee08f5a294cecb7dae66",
+      "bytes": 16693801
+    },
+    "double-slots12/source-system.json": {
+      "sha256": "0887deacea0918cd4255b589af1819a545a0611636c2c15f08657f014fcb5607",
+      "bytes": 3358699
+    },
+    "double-slots12-binding.json": {
+      "sha256": "93eb9461caf0f212b488454b3c44f0b749a1a874606ccab010bf2bf321ed76d4",
+      "bytes": 1288
+    },
+    "double-slots12-resources.json": {
+      "sha256": "8e1fad7bf4e65a64be4a8f53d9b249bc8787e3ceac254bdcec4c88f4ac453500",
+      "bytes": 751
+    },
+    "double-slots12-resources.log": {
+      "sha256": "8b670b4dda3ba71245d947c8cacf20b484e9e4349a90651ea0da18c83e773281",
+      "bytes": 391
+    },
+    "double-slots12-resources.provenance.json": {
+      "sha256": "d9bc208bcba4b09c59a56f385ed1c5e9d970126e7a19288313e98461b7877873",
+      "bytes": 1671
+    },
+    "double-slots24/configuration.json": {
+      "sha256": "98887a6a77c5e8d795c99c343859beab2c6eec6036c3c7253ff9b788c1e16489",
+      "bytes": 3078
+    },
+    "double-slots24/fresh-source-program.bin": {
+      "sha256": "1d4dff568626bf29ca3f2b2374fd3b232017e9bfca592869dbf2e90aead41110",
+      "bytes": 126252
+    },
+    "double-slots24/progress.json": {
+      "sha256": "26a9e20ceb31955281655d4cce1cea470cc51c474079a99c70634116bb299300",
+      "bytes": 1629
+    },
+    "double-slots24/round-000.bin": {
+      "sha256": "ab60e73dcb632383f5b01a32e7a208f4d4a126e3bece7f6029a06db613ff77a5",
+      "bytes": 133491
+    },
+    "double-slots24/round-000.json": {
+      "sha256": "5b08be732e212bea58ce580609c49814c5db070ddda49b98d7acd7503bb8447b",
+      "bytes": 43289
+    },
+    "double-slots24/round-001.bin": {
+      "sha256": "e13f829307e72ec0df9336ca0a99db3d8c4bb26398935470fa4196b418d3e3bb",
+      "bytes": 139397
+    },
+    "double-slots24/round-001.json": {
+      "sha256": "ccdd82871876f5b38c6c769d2a0eb1fc37cff2453af9f9e3080a81916f996cc6",
+      "bytes": 63239
+    },
+    "double-slots24/round-002.bin": {
+      "sha256": "cccea4554f74f1ad1e6a60859939f07565f569adfe6a39dcfab7b763612d29fb",
+      "bytes": 191485
+    },
+    "double-slots24/round-002.json": {
+      "sha256": "c7abd6c22c3269bb1607ca5a3de0e4b671fc23543559cdbb7f5e96cf0c1f7cbf",
+      "bytes": 225763
+    },
+    "double-slots24/round-003.bin": {
+      "sha256": "c96c477077d5db1a92977357fd3e2517b8615c0084244017239bbc31547d806e",
+      "bytes": 374690
+    },
+    "double-slots24/round-003.json": {
+      "sha256": "9dc7d62bf97ea3a63b62601ec35e78787ff734e2f06f1f443d05946cf5deea2b",
+      "bytes": 574345
+    },
+    "double-slots24/round-004.bin": {
+      "sha256": "5b282b390c58ca3ace879436e0cad7a7486e20b656355d2d9f2524bbf7d2a805",
+      "bytes": 924380
+    },
+    "double-slots24/round-004.json": {
+      "sha256": "c094a8e21c952f02446f1a6143adf428b74303f1d7d05c0b1b10e4f734a83a84",
+      "bytes": 1639497
+    },
+    "double-slots24/round-005.bin": {
+      "sha256": "8bb2906912e794c2e29b9fa0e8b12772c2dcad7f1d28b5e9cd150c4cdae340cc",
+      "bytes": 1853670
+    },
+    "double-slots24/round-005.json": {
+      "sha256": "55b0443bf1b66b387487c50938580a0fbd52175dbc60cee5689cc170b3c006fb",
+      "bytes": 4876815
+    },
+    "double-slots24/round-006.bin": {
+      "sha256": "35327863854bd492ce16dc08c3c05ff8248b3df99fe606b40fe6ae2a49d072fe",
+      "bytes": 3003827
+    },
+    "double-slots24/round-006.json": {
+      "sha256": "568171c488639d2e857f0eaa43e40bf63a311dbbdd73d5d920876e1be3cef6e3",
+      "bytes": 8967960
+    },
+    "double-slots24/round-007.bin": {
+      "sha256": "991a8b0df33233edf03385a6b8b645ce30ec5dd6d2c199bccfbbd676d830dbd4",
+      "bytes": 4298108
+    },
+    "double-slots24/round-007.json": {
+      "sha256": "0ae9c9994ef8b8454ed64d6c0045f516ccdc2cbfcc2991bf1d48029f21c1283d",
+      "bytes": 12266795
+    },
+    "double-slots24/round-008.bin": {
+      "sha256": "0704af377cfd270a4bf1cbba89ee3462dfeb633d8211567e88601be81e2a8296",
+      "bytes": 6015358
+    },
+    "double-slots24/round-008.json": {
+      "sha256": "dc93c796b024ea2859297eb3ed5c0acb371b3de78d5a9ff5c156860d228cd57e",
+      "bytes": 12670446
+    },
+    "double-slots24/source-system.json": {
+      "sha256": "a99a8af7c93707809c4ae5e49c1d761da05ebf1dc8f895b72811a8f077f2f079",
+      "bytes": 3231787
+    },
+    "double-slots24-binding.json": {
+      "sha256": "a6d0d2486967d4f4f8e465db0b5f0c51fc74ed9073044182644e132a24f34d5b",
+      "bytes": 1288
+    },
+    "double-slots24-resources.json": {
+      "sha256": "969be217fadeec3bd346efd793aae873624826cc831fefc82178d2c98df858f8",
+      "bytes": 740
+    },
+    "double-slots24-resources.log": {
+      "sha256": "1dfaa016e948facc4aba1cc88eee4b99a4b08160ee099d1dd87f944160af9b7c",
+      "bytes": 500
+    },
+    "double-slots24-resources.provenance.json": {
+      "sha256": "379895eb10834438b8e46c9dc1ada0ab9ff17603cdf9ea82807715b9c300d061",
+      "bytes": 1671
+    },
+    "executable-relocation.json": {
+      "sha256": "9baed2d10423e4cb9e165e5c1a9643dcea54ad628837d950a9bf8986666f7406",
+      "bytes": 529
+    },
+    "finalize.py": {
+      "sha256": "a880939060775b07ce1852e6df2311ffb698b8a7b955c549c7575a2cdccb7d77",
+      "bytes": 3517
+    },
+    "run.py": {
+      "sha256": "1b74d205c42ae8c8fa90fe391ff30db9ff21422d750d62044001a6aed36812fc",
+      "bytes": 2023
+    },
+    "summary.json": {
+      "sha256": "8a2eb3b0545713945c6d617ea4ec6ecc3d025bd1d9d1ae17f07593bf5a5ec8a8",
+      "bytes": 3634
+    },
+    "verify.py": {
+      "sha256": "9e14ab941ab591132f8f23a7073afd9854227238713690324baf43af61d08e13",
+      "bytes": 920
+    }
+  },
+  "file_count": 63,
+  "total_bytes": 118618626,
+  "external_byte_identical_executable": {
+    "scope": "Byte-identical static executable relocated only after both process and post-run capsule checks completed. Original runtime manifests are unchanged.",
+    "original_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot",
+    "relative_original_path": "capsule/pilot",
+    "current_path": "/tmp/rustflow-partial-placement-longer-double-20261010/pilot",
+    "bytes": 1272493416,
+    "sha256": "427d6d621a902c9fefaac21175103c311085f98d0625a8e8a34651f3f6c83d4c"
+  }
+}

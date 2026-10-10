@@ -1,0 +1,59 @@
+{
+  "scope": "Exact selected helper source bodies; only visibility/extension-trait shim for private family conversion",
+  "originals": [
+    {
+      "path": "src/family.rs",
+      "sha256": "6b250939f7a1a223fd7e5dea877b2d29a474fab18a087db8078985bdd44fa5e6"
+    },
+    {
+      "path": "src/algebra.rs",
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a"
+    },
+    {
+      "path": "src/coefficient.rs",
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20"
+    },
+    {
+      "path": "src/physical_conditions.rs",
+      "sha256": "52af20b182eedbf0dc9a9885b450afacc88cb1db50fb83e13f2ddfd4edf993af"
+    },
+    {
+      "path": "src/cut_regions.rs",
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d"
+    },
+    {
+      "path": "src/finite_density/boundary.rs",
+      "sha256": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c"
+    }
+  ],
+  "copies": [
+    {
+      "path": "harness/algebra.rs",
+      "sha256": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597"
+    },
+    {
+      "path": "harness/boundary.rs",
+      "sha256": "2f31b83dd64c9c60da1b075cbefa3d317596daf798bd5fa10753961e7ecd6616"
+    },
+    {
+      "path": "harness/coefficient.rs",
+      "sha256": "cd295676eb3d50d715b001a74ed9376b53546ba4cf630a560d0a93a246569932"
+    },
+    {
+      "path": "harness/cut_regions.rs",
+      "sha256": "74de7376395b1ddcae4a1b9b35742fca57fb4b30156f9ba4486d815163e13f7c"
+    },
+    {
+      "path": "harness/family.rs",
+      "sha256": "4a125d057b993d4d646d7cc7b6808c6553ea871625a0e1cfd47d25809f6519ba"
+    },
+    {
+      "path": "harness/main.rs",
+      "sha256": "37c4c7b35f023aca0ddaa97219dda8d49744822373fc1918592be6da41c031df"
+    },
+    {
+      "path": "harness/physical_conditions.rs",
+      "sha256": "4d8e9cd993780c62276137f7c145f86b93ae0aebe01e9149474dc61334db700e"
+    }
+  ]
+}

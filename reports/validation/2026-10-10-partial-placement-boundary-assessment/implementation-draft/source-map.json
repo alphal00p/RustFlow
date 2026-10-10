@@ -1,0 +1,25 @@
+{
+  "scope": "Isolated uncompiled native virtual-factor certificate draft; caller integration/partial placement permit not added.",
+  "captured_utc": "2026-10-10T06:08:32.560573+00:00",
+  "files": [
+    {
+      "path": "src/finite_density/boundary.rs",
+      "base_sha256": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c",
+      "draft_sha256": "afe24a6f79a4cecdd366b8ec21d90246e59ebdc2bbfdfc45732b6bc2ff6eaf52"
+    },
+    {
+      "path": "src/finite_density/boundary/virtual_soft.rs",
+      "base_sha256": null,
+      "draft_sha256": "df566f9db14f16a96d846172b3099644fb85427e0da7bbfeae92a802b7c93224"
+    }
+  ],
+  "patch_sha256": "8bb32cc18791c55b7578f264cc7d4d5ce0a2836133502e1e9db001e042762fb2",
+  "git_apply_check": {
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "production_unchanged": true,
+  "rustfmt": "PASS, isolated copies only",
+  "typecheck": "NOT RUN",
+  "tests": "Five tests written, NOT RUN"
+}

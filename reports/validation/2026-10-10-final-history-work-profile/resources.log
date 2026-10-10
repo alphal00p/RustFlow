@@ -1,0 +1,183 @@
+begin read_program_bytes
+end read_program_bytes 0.014058s
+begin inspect_envelope
+end inspect_envelope 0.000038s
+begin decode_program_record
+end decode_program_record 0.846818s
+begin import_symbolica_and_coefficient_table
+end import_symbolica_and_coefficient_table 0.035064s
+begin construct_exact_source_context
+end construct_exact_source_context 0.001577s
+begin decode_generated_and_replay_all_rules
+end decode_generated_and_replay_all_rules 111.028099s
+begin bind_frontier_terminals_after_full_cold_replay
+end bind_frontier_terminals_after_full_cold_replay 0.000844s
+begin point-00-reduce-native
+end point-00-reduce-native 0.000495s
+begin point-00-reduce-expression-json
+end point-00-reduce-expression-json 0.010508s
+begin point-01-reduce-native
+end point-01-reduce-native 0.001315s
+begin point-01-reduce-expression-json
+end point-01-reduce-expression-json 0.003474s
+begin point-02-reduce-native
+end point-02-reduce-native 0.000313s
+begin point-02-reduce-expression-json
+end point-02-reduce-expression-json 0.000049s
+begin point-03-reduce-native
+end point-03-reduce-native 0.000013s
+begin point-03-reduce-expression-json
+end point-03-reduce-expression-json 0.000019s
+begin point-04-reduce-native
+end point-04-reduce-native 0.000818s
+begin point-04-reduce-expression-json
+end point-04-reduce-expression-json 0.000082s
+begin point-05-reduce-native
+end point-05-reduce-native 0.000014s
+begin point-05-reduce-expression-json
+end point-05-reduce-expression-json 0.000018s
+begin point-06-reduce-native
+end point-06-reduce-native 0.000011s
+begin point-06-reduce-expression-json
+end point-06-reduce-expression-json 0.000017s
+begin point-07-reduce-native
+end point-07-reduce-native 0.005762s
+begin point-07-reduce-expression-json
+end point-07-reduce-expression-json 0.002219s
+begin point-08-reduce-native
+end point-08-reduce-native 0.000570s
+begin point-08-reduce-expression-json
+end point-08-reduce-expression-json 0.000049s
+begin point-09-reduce-native
+end point-09-reduce-native 0.005320s
+begin point-09-reduce-expression-json
+end point-09-reduce-expression-json 0.000193s
+begin point-10-reduce-native
+end point-10-reduce-native 0.000299s
+begin point-10-reduce-expression-json
+end point-10-reduce-expression-json 0.000042s
+begin point-11-reduce-native
+end point-11-reduce-native 0.000295s
+begin point-11-reduce-expression-json
+end point-11-reduce-expression-json 0.000042s
+begin point-12-reduce-native
+end point-12-reduce-native 0.003083s
+begin point-12-reduce-expression-json
+end point-12-reduce-expression-json 0.000190s
+begin point-13-reduce-native
+end point-13-reduce-native 0.000014s
+begin point-13-reduce-expression-json
+end point-13-reduce-expression-json 0.000020s
+begin point-14-reduce-native
+end point-14-reduce-native 0.000338s
+begin point-14-reduce-expression-json
+end point-14-reduce-expression-json 0.000069s
+begin point-15-reduce-native
+end point-15-reduce-native 0.000013s
+begin point-15-reduce-expression-json
+end point-15-reduce-expression-json 0.000020s
+begin point-16-reduce-native
+end point-16-reduce-native 0.000012s
+begin point-16-reduce-expression-json
+end point-16-reduce-expression-json 0.000018s
+begin point-17-reduce-native
+end point-17-reduce-native 0.012799s
+begin point-17-reduce-expression-json
+end point-17-reduce-expression-json 0.000511s
+begin point-18-reduce-native
+end point-18-reduce-native 0.007937s
+begin point-18-reduce-expression-json
+end point-18-reduce-expression-json 0.000350s
+begin point-19-reduce-native
+end point-19-reduce-native 0.000212s
+begin point-19-reduce-expression-json
+end point-19-reduce-expression-json 0.000044s
+begin point-20-reduce-native
+end point-20-reduce-native 0.012169s
+begin point-20-reduce-expression-json
+end point-20-reduce-expression-json 0.000440s
+begin point-21-reduce-native
+end point-21-reduce-native 0.000114s
+begin point-21-reduce-expression-json
+end point-21-reduce-expression-json 0.000044s
+begin point-22-reduce-native
+end point-22-reduce-native 0.000121s
+begin point-22-reduce-expression-json
+end point-22-reduce-expression-json 0.000042s
+begin point-23-reduce-native
+end point-23-reduce-native 0.007735s
+begin point-23-reduce-expression-json
+end point-23-reduce-expression-json 0.000335s
+begin point-24-reduce-native
+end point-24-reduce-native 0.057110s
+begin point-24-reduce-expression-json
+end point-24-reduce-expression-json 0.001187s
+begin point-25-reduce-native
+end point-25-reduce-native 313.800652s
+begin point-25-reduce-expression-json
+end point-25-reduce-expression-json 0.026436s
+begin point-26-reduce-native
+end point-26-reduce-native 0.100318s
+begin point-26-reduce-expression-json
+end point-26-reduce-expression-json 0.000990s
+begin point-27-reduce-native
+end point-27-reduce-native 0.094666s
+begin point-27-reduce-expression-json
+end point-27-reduce-expression-json 0.000729s
+begin point-28-reduce-native
+end point-28-reduce-native 0.001772s
+begin point-28-reduce-expression-json
+end point-28-reduce-expression-json 0.000092s
+begin point-29-reduce-native
+end point-29-reduce-native 0.002317s
+begin point-29-reduce-expression-json
+end point-29-reduce-expression-json 0.000093s
+begin point-30-reduce-native
+end point-30-reduce-native 0.825468s
+begin point-30-reduce-expression-json
+end point-30-reduce-expression-json 0.001274s
+begin point-31-reduce-native
+end point-31-reduce-native 0.019395s
+begin point-31-reduce-expression-json
+end point-31-reduce-expression-json 0.000247s
+begin point-32-reduce-native
+end point-32-reduce-native 0.027142s
+begin point-32-reduce-expression-json
+end point-32-reduce-expression-json 0.000450s
+begin point-33-reduce-native
+end point-33-reduce-native 0.142331s
+begin point-33-reduce-expression-json
+end point-33-reduce-expression-json 0.000656s
+begin point-34-reduce-native
+end point-34-reduce-native 0.012757s
+begin point-34-reduce-expression-json
+end point-34-reduce-expression-json 0.000245s
+begin point-35-reduce-native
+end point-35-reduce-native 0.017597s
+begin point-35-reduce-expression-json
+end point-35-reduce-expression-json 0.000294s
+begin point-36-reduce-native
+end point-36-reduce-native 0.747805s
+begin point-36-reduce-expression-json
+end point-36-reduce-expression-json 0.001851s
+begin point-37-reduce-native
+end point-37-reduce-native 0.002437s
+begin point-37-reduce-expression-json
+end point-37-reduce-expression-json 0.000108s
+begin point-38-reduce-native
+end point-38-reduce-native 0.007703s
+begin point-38-reduce-expression-json
+end point-38-reduce-expression-json 0.000150s
+begin point-39-reduce-native
+end point-39-reduce-native 3.338751s
+begin point-39-reduce-expression-json
+end point-39-reduce-expression-json 0.005734s
+begin point-40-reduce-native
+end point-40-reduce-native 0.102554s
+begin point-40-reduce-expression-json
+end point-40-reduce-expression-json 0.000710s
+begin point-41-reduce-native
+end point-41-reduce-native 0.005588s
+begin point-41-reduce-expression-json
+end point-41-reduce-expression-json 0.000086s
+begin complete

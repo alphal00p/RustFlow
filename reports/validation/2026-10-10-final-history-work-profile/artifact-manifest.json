@@ -1,0 +1,82 @@
+{
+  "scope": "Read-only bounded actual final-frontier and stratified historical-label reductions from the saved round18 provisional program. Complete cold source proof replay precedes terminal binding. This diagnostic neither establishes final closure nor changes production candidate collection. No source discovery or period values.",
+  "files": {
+    "README.md": {
+      "sha256": "e89fd0cc26172cf3ffd84d2c1c3572ca4573754844d72106aed456ce558e7560",
+      "bytes": 1466
+    },
+    "build-binding.json": {
+      "sha256": "f3f8712f0e8d9ae811470034b9495af5340d12211c9ca4a537222b35edd93465",
+      "bytes": 2850
+    },
+    "build.log": {
+      "sha256": "39e16dbf48607afefa9ff9addffa678a4b0cf8e37f6fde8fe8c75c7bffe4cf76",
+      "bytes": 839
+    },
+    "build.py": {
+      "sha256": "087b4065a4886994917d42f7548291afe57d2c6fe8d38dbd569d1d2055c3c1e3",
+      "bytes": 2861
+    },
+    "finalize.py": {
+      "sha256": "71314750148b0ccef56cf5a77c8e3ff09a061fd1a9b71c9c3eac794cb9bf735f",
+      "bytes": 4642
+    },
+    "input-bindings.json": {
+      "sha256": "80c691f1f1eb7474abe4438377005c3c533b161a0915814aa70dfc87659926c5",
+      "bytes": 835
+    },
+    "input.bin": {
+      "sha256": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82",
+      "bytes": 20674743
+    },
+    "input.json": {
+      "sha256": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+      "bytes": 2870221
+    },
+    "points.json": {
+      "sha256": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21",
+      "bytes": 12430
+    },
+    "probe.rs": {
+      "sha256": "c1d56d03000fa4d357af6aca23d44b267f48aab68bfa0a4de5f1a0aea888be24",
+      "bytes": 9520
+    },
+    "profile/points-progress.json": {
+      "sha256": "b65800969d817d27de7b4291d77ac2f0f7207226ac5b802307173198c4fcc579",
+      "bytes": 271255
+    },
+    "profile/progress.json": {
+      "sha256": "1eda5886dfd33d5cb92b3ae96e431c685045f1244aaba805a066cd315225d4c3",
+      "bytes": 13586
+    },
+    "profile/result.json": {
+      "sha256": "2ab4f65df49278af5c7084c34fdb6a9b8fbaa873082c136283ef6c56a9830d25",
+      "bytes": 313670
+    },
+    "resources.json": {
+      "sha256": "dae6f920f477bc6c69db22a9a56bf4d98fafea1cfce42d3d7bb2e5f8646121bb",
+      "bytes": 640
+    },
+    "resources.log": {
+      "sha256": "279797f4ed111e39a81cd135d71208023bb499ec98c5954fc533324ce54139eb",
+      "bytes": 6885
+    },
+    "resources.provenance.json": {
+      "sha256": "3d950fca4781c9f4fd4a779317627532b7c7f53daf82b0291634484b1edf4b45",
+      "bytes": 1750
+    },
+    "run-binding.json": {
+      "sha256": "2595d17d6b883b6d93432e306e81bc6c94b95f438ec8f19f513a0ad43b797a4c",
+      "bytes": 2313
+    },
+    "run.py": {
+      "sha256": "ffcaabbf9e62ad4aae70f141f1fe736dc63c6cb9e3a59be04ad7be85a6915eba",
+      "bytes": 1596
+    },
+    "summary.json": {
+      "sha256": "85bb6066fc65aacaf03846ab977d6f70dedd784df877baa9cfed3f3ab7df99fd",
+      "bytes": 24065
+    }
+  },
+  "file_count": 19
+}

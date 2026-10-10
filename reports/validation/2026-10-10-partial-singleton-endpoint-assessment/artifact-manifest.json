@@ -1,0 +1,39 @@
+{
+  "scope": "Frozen mathematical/exact-algebra evidence only; no new production admission or numerical endpoint result.",
+  "files": {
+    "check.py": {
+      "sha256": "70fe75802559aad65c0fdcc42c9c99be3ba5933bfa139ace91e4dbabe805a7d2",
+      "bytes": 6025
+    },
+    "consistency-checks.json": {
+      "sha256": "4251ded955fe7613bacc921ece6e61e26e90fad0298d73d63b9c440697d8de20",
+      "bytes": 4553
+    },
+    "existing-singleton-owner-audit.md": {
+      "sha256": "812bd15c57289c5599af1c58fb8f8f42b3d8964d9e8d1272819102a58eb737ca",
+      "bytes": 3856
+    },
+    "grouped-chart-checks.json": {
+      "sha256": "30b5a3a13ebcacf4ef2554c6ebc70a2e41e1ed6c0e20a70da4024909c1994bcc",
+      "bytes": 56264
+    },
+    "grouped_charts.py": {
+      "sha256": "804ce163582e4e58a278c02521661d658d87f85db1636e4b268ca4254daaac6e",
+      "bytes": 5767
+    },
+    "independent-review.json": {
+      "sha256": "8e8108661e2e75ee57b65111ed9ae62a1d2509ac787312b5b974a21f61a9c31f",
+      "bytes": 2665
+    },
+    "proposal-initial-one-axis-gap.md": {
+      "sha256": "250acc36f3072e9f1580449305e4bae4951736743b41fbf4ad42deb330bca630",
+      "bytes": 5956
+    },
+    "proposal.md": {
+      "sha256": "99017c25d37f21e1bafb2f834acc371a83d30d4304c2938745cd4e6abd56c87d",
+      "bytes": 7849
+    }
+  },
+  "file_count": 8,
+  "total_bytes": 92935
+}

@@ -1,0 +1,7 @@
+A copied final provisional three-loop singleton program was cold-decoded with complete source replay, then bound to its exact seven candidate terminals. The profile covers all 26 next-needed labels and 16 deterministic index-stratified historical labels. It does not claim the original weighted target sums or final closure.
+
+Full proof replay took 111.028 seconds. Required raised-target component `[2,1,1,1,1,0,-1,-1,0,0,0,0,0,0,0,0]` took 313.801 seconds inside native reduction: 15,021 applications, seven returned terms, no unresolved remainder, and 3,499 conditions. Its expression/JSON conversion took 0.0264 seconds. The other required labels took at most 0.0572 seconds each; the 16 historical samples ranged from 0.0018 to 3.34 seconds. These samples do not estimate the full historical pass.
+
+The process finished in 431.694 seconds with 304,152 KiB peak child RSS, excluding compilation/Nix startup and prior native prototype compilation. This was shared-host work, not a controlled speed comparison. The tested immutable native prototype was linked statically; full cold decode and unchanged native reduction semantics were retained. No discovery, source-policy or production modification occurs in this report.
+
+The original one-hour baseline remains a timeout without a closed checkpoint. This separate profile demonstrates expensive required-label reduction and motivates finer attribution; it does not replace the missing closure or numerical gate.

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/rustflow-partial-boundary-owner-probe",
+    "reports/validation/2026-10-10-partial-placement-boundary-assessment/existing-owner-results.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.04663694789633155,
+  "user_seconds": 0.016274999999999998,
+  "system_seconds": 0.034256,
+  "peak_child_rss_kib": 15456,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

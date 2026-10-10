@@ -85,3 +85,13 @@ Local changes after the initial import:
   Conditions from every actually applied rule remain retained; unsupported
   labels and exhausted work budgets remain explicit. This changes scheduling,
   not rule selection, source identities, or exact replay.
+- Guarded programs keep their source, rule and terminal state private and expose
+  bounded `union_verified` and `with_terminals_verified` for immutable programs
+  whose proofs were already replayed. Composition checks the complete source
+  identity, common coordinate order, replacement terminals and duplicate-inclusive
+  rule budget; it retains exact rule precedence and conditions. New construction,
+  cold decoding, the existing replayed methods and RustFlow's final complete
+  closure audit still replay proofs. RustFlow uses the verified methods only for
+  internal scheduling, avoiding repeated replay of unchanged intermediate rules.
+  Native and wrapper regressions compare exact persisted bytes and reductions,
+  reject incompatible sources/storage/terminals, and exercise cold decoding.

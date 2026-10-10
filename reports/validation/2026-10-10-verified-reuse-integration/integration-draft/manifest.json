@@ -1,0 +1,45 @@
+{
+  "scope": "Isolated integration draft; no production or test execution claim",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "3e39af70d85efedde65ff691f7c6fabffdac67ed3a6e2529f1f86e39c336c433",
+      "bytes": 2731
+    },
+    {
+      "path": "call-sites.json",
+      "sha256": "80cafde6f8434d39b654ad0a35b557b2b1ed4643eeb854c864fdb89caa973c84",
+      "bytes": 2112
+    },
+    {
+      "path": "source/src/finite_density/guarded.rs",
+      "sha256": "33d499807250e152d77badb9dbdd5a3c9ece530fb8d53923c5bd8e0493ba7a26",
+      "bytes": 48027
+    },
+    {
+      "path": "source/src/finite_density/reduction/requested.rs",
+      "sha256": "5f81f318025f8fbb92c2604d014314eb4aeea695aa708158672e1318ddb4a9fd",
+      "bytes": 22464
+    },
+    {
+      "path": "source/src/finite_density/reduction.rs",
+      "sha256": "595b834390876a80915f6d0b7094fe3a253c3e017f7fe39f9360ac4f4dc6219e",
+      "bytes": 96196
+    },
+    {
+      "path": "source-map.json",
+      "sha256": "85b2d3d6c6f48e63cea31867145ddd401ddf1934cff660c7042a43555f18b997",
+      "bytes": 1352
+    },
+    {
+      "path": "static-validation.json",
+      "sha256": "4e8ebbd867641e68a219d7db9efec9d057b630d9037ce58e1dab6a21e695281f",
+      "bytes": 735
+    },
+    {
+      "path": "verified-reuse-integration.patch",
+      "sha256": "b12097523b3a8cc11971e7d4d4062e09fe3e0d22a3aba75aa11b4c4349efbeb4",
+      "bytes": 11533
+    }
+  ]
+}

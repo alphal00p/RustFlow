@@ -1,0 +1,21 @@
+{
+  "inputs": [
+    {
+      "path": "reports/validation/2026-10-10-final-history-work-profile/input.bin",
+      "sha256": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82"
+    },
+    {
+      "path": "reports/validation/2026-10-10-final-history-work-profile/input.json",
+      "sha256": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55"
+    },
+    {
+      "path": "reports/validation/2026-10-10-final-history-work-profile/points.json",
+      "sha256": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21"
+    }
+  ],
+  "source_probe": {
+    "path": "reports/validation/2026-10-10-final-history-work-profile/probe.rs",
+    "sha256": "c1d56d03000fa4d357af6aca23d44b267f48aab68bfa0a4de5f1a0aea888be24"
+  },
+  "scope": "No new discovery or custom elimination; native apply scheduling/coefficients copied for timing; no historical proof accepted without native decode replay; strict native equivalence on completed fast control"
+}

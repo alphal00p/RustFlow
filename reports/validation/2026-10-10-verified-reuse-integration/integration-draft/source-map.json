@@ -1,0 +1,28 @@
+{
+  "scope": "Isolated uncompiled RustFlow integration draft; no production files edited.",
+  "captured_utc": "2026-10-10T05:51:59.133756+00:00",
+  "source_root": "/tmp/rustflow-verified-integration-20261010",
+  "files": [
+    {
+      "path": "src/finite_density/guarded.rs",
+      "base_sha256": "4922e7e7e5ecd67f40452cbaab700cce8d50c3ba176f0b0e44cc437654b1244d",
+      "draft_sha256": "33d499807250e152d77badb9dbdd5a3c9ece530fb8d53923c5bd8e0493ba7a26"
+    },
+    {
+      "path": "src/finite_density/reduction.rs",
+      "base_sha256": "f0a347145209276a635951163bbbc4393047fe82a886f499cefa13142370e1c9",
+      "draft_sha256": "595b834390876a80915f6d0b7094fe3a253c3e017f7fe39f9360ac4f4dc6219e"
+    },
+    {
+      "path": "src/finite_density/reduction/requested.rs",
+      "base_sha256": "9d3ed40d0ee415cb36f7bc929f52f06725e07738443431db989d4fa989904e92",
+      "draft_sha256": "5f81f318025f8fbb92c2604d014314eb4aeea695aa708158672e1318ddb4a9fd"
+    }
+  ],
+  "unchanged_final_audit": {
+    "path": "src/finite_density/reduction/active.rs",
+    "sha256": "9ebcb53934499aed505d5b706028906c625e35801fcb54f3341d50a9c4084017",
+    "contract": "Final with_terminals_replayed plus exact original-target and every basis-derivative weighted-sum audits remain unchanged."
+  },
+  "patch_sha256": "b12097523b3a8cc11971e7d4d4062e09fe3e0d22a3aba75aa11b4c4349efbeb4"
+}

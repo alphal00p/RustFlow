@@ -1,0 +1,22 @@
+{
+  "captured_utc": "2026-10-10T05:58:47.768691+00:00",
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/rustflow-partial-boundary-owner-probe",
+    "reports/validation/2026-10-10-partial-placement-boundary-assessment/existing-owner-results.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/rustflow-partial-boundary-owner-probe": {
+      "resolved_path": "/tmp/rustflow-partial-boundary-owner-probe",
+      "sha256": "cfe74c3e8e781aa957abc653f9b943eb1686035fe0bf01c4007bdfe0eb2dcc95",
+      "size_bytes": 1232968712
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

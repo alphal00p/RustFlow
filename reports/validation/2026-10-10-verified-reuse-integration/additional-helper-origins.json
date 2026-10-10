@@ -1,0 +1,35 @@
+{
+  "scope": "Prepared scripts only; no build, prediction or comparison executed.",
+  "files": [
+    {
+      "source": "reports/validation/2026-10-10-requested-ray-point-integration/compare-completed-predictions.py",
+      "source_sha256": "32cff7c2785304d6372dba72dd2d5ac3b2d7e016db4e043b228b72ed55d32883",
+      "prepared": "reports/validation/2026-10-10-verified-reuse-integration/compare-completed-predictions.py",
+      "prepared_sha256": "c704b6de210c2e7b39adadb55a0f59763dea2d6c061efbd37d36ba6e2510631d"
+    },
+    {
+      "source": "reports/validation/2026-10-10-requested-ray-point-integration/comparison-plan.json",
+      "source_sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+      "prepared": "reports/validation/2026-10-10-verified-reuse-integration/comparison-plan.json",
+      "prepared_sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c"
+    },
+    {
+      "source": "reports/validation/2026-10-10-requested-ray-point-integration/build-native-digest.py",
+      "source_sha256": "3e06fb1ebcc2d10d25aa1bbce9fbe841e0f01645fd8f8e5be67b0edec7ba9124",
+      "prepared": "reports/validation/2026-10-10-verified-reuse-integration/build-native-digest.py",
+      "prepared_sha256": "b816b93dbbc3ef3b2850dae923be80a958de86ff38c6ab8445f6262264182192"
+    },
+    {
+      "source": "reports/validation/2026-10-10-requested-ray-point-integration/native-digest.rs",
+      "source_sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+      "prepared": "reports/validation/2026-10-10-verified-reuse-integration/native-digest.rs",
+      "prepared_sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd"
+    },
+    {
+      "source": "reports/validation/2026-10-10-requested-ray-point-integration/run-three-loop-gate.py",
+      "source_sha256": "d3a93b75230bc5156d0818ade6106742b1b248c5f09fa2f73a991c1ab498388f",
+      "prepared": "reports/validation/2026-10-10-verified-reuse-integration/run-three-loop-gate.py",
+      "prepared_sha256": "ad4a9c5668016278e938cdf0ebc46228abc9f1127bcdbb9a7db15e1c885aa6f6"
+    }
+  ]
+}

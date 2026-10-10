@@ -1,0 +1,5 @@
+{
+  "initial_script_sha256": "797e1c3910d29f30020514ee6aaa9eed45e617819cb90dad4138f4cefdf683ac",
+  "initial_error": "AssertionError: validator expected only bytes/blake3, but native_program also records rules. No summary, archive or manifest was written before failure.",
+  "correction": "Require exact bytes, blake3 and matching rule count. No input or recorded run result changed."
+}

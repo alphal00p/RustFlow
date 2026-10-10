@@ -1,0 +1,69 @@
+{
+  "schema": "partial-placement-admission-design-review-v1",
+  "status": "design only; source unchanged; no tests or numerical runs executed",
+  "current_public_api": "Every partial mask is rejected before construction by exact all-uncut channel guard. No current admission hole found.",
+  "future_blocker": "Do not relax channel equality without complete physical-row inventory, support-complete finite-eta origin evidence, separate endpoint proof and rational-soft region boundary evidence.",
+  "implementation_files": [],
+  "source_and_evidence": [
+    {
+      "path": "src/finite_density/massless_endpoint.rs",
+      "bytes": 117160,
+      "sha256": "3571cda14af8ae2e089ef97108fa9569a4b9af22a21b3ca18be569b11ad01696"
+    },
+    {
+      "path": "src/finite_density/massless_contour.rs",
+      "bytes": 12953,
+      "sha256": "05a5975255c322ced9ba18ff122d9284f4f9ad318ace97ace49e02b463640b4a"
+    },
+    {
+      "path": "src/finite_density/preparation.rs",
+      "bytes": 22859,
+      "sha256": "c9afb84aa43ef16c5a635aec5eae63918676b1b708d2fd2cdad5fd37135b136e"
+    },
+    {
+      "path": "src/finite_density/flow.rs",
+      "bytes": 17867,
+      "sha256": "88bf2ba186593d6fcd035ea342e364a88bde09e3ac3cd302afc378dfd0431a44"
+    },
+    {
+      "path": "src/finite_density/flow_boundary.rs",
+      "bytes": 18675,
+      "sha256": "f81722cfadc6a793da2a7352b16d1dfbf31290e55d941b376515842dc1d5636c"
+    },
+    {
+      "path": "src/finite_density/boundary.rs",
+      "bytes": 33660,
+      "sha256": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c"
+    },
+    {
+      "path": "src/finite_density/parametric_endpoint.rs",
+      "bytes": 85668,
+      "sha256": "b1deb82cae514010d9d3995d97921a1de20a0c152469760b93076d37dc95256d"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/proof.md",
+      "bytes": 10979,
+      "sha256": "a24b2f097a8cdded8c888f042795b4567f7f2fa467cb677a803c9ebcd7101a77"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/check.py",
+      "bytes": 5490,
+      "sha256": "a52108c96237883cd8ad6a9511d40d96e6a67005d1659c1243b00f6174cb72d2"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/support-checks.json",
+      "bytes": 67972,
+      "sha256": "f6be7af78079414a7bd3f2688b2ffa0900d6f4f3c2b341647ed56f6a7d6ac633"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-placement-support-proof/independent-review.json",
+      "bytes": 3055,
+      "sha256": "c68e1df70355eba4c39c8e1c4adad6908a73efe3f6187e7706c6ddcb6d39c6a0"
+    }
+  ],
+  "design": {
+    "path": "reports/validation/2026-10-10-partial-placement-admission-design/design.md",
+    "bytes": 12446,
+    "sha256": "64964a4769a2a8f29ad9e4c8695256456b6710b1d2eb0f82146729ba7ddb206c"
+  }
+}

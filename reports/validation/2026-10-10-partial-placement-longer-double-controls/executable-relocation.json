@@ -1,0 +1,8 @@
+{
+  "scope": "Byte-identical static executable relocated only after both process and post-run capsule checks completed. Original runtime manifests are unchanged.",
+  "original_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-longer-double-controls/capsule/pilot",
+  "relative_original_path": "capsule/pilot",
+  "current_path": "/tmp/rustflow-partial-placement-longer-double-20261010/pilot",
+  "bytes": 1272493416,
+  "sha256": "427d6d621a902c9fefaac21175103c311085f98d0625a8e8a34651f3f6c83d4c"
+}

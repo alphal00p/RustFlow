@@ -1,0 +1,135 @@
+{
+  "scope": "completed phase diagnostic excluding this manifest",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c89a157ea70bc1f2e0a44ff83deafcec8e3f02709edde61885f758ecdcddc704",
+      "bytes": 2730
+    },
+    {
+      "path": "archive-map.json",
+      "sha256": "364b37738032a28a72829f4d2192b70bd9353c9ee8dddfc5b70c2785f995d6ac",
+      "bytes": 20
+    },
+    {
+      "path": "attempt1/build-binding.json",
+      "sha256": "8fe3047f211ab51d420348f72c6de919a28c983ddb44a24d2fbb4829a4c39064",
+      "bytes": 2973
+    },
+    {
+      "path": "attempt1/build.log",
+      "sha256": "d128fc27e2c0941727b3c391d50d8bc03a107b70ca7c75f8368380b5a505593f",
+      "bytes": 1222
+    },
+    {
+      "path": "attempt1/build.py",
+      "sha256": "2807054dcdfaff95a42171b4ffd348948e9aaff1297786867a5ca3272427c47b",
+      "bytes": 3064
+    },
+    {
+      "path": "attempt1/probe.rs",
+      "sha256": "ca6df6abd6480295b00e32bb63e3caf2cd08c027a7d2a708d73a50c8f39aec7e",
+      "bytes": 15877
+    },
+    {
+      "path": "build-binding.json",
+      "sha256": "5584cdfdb5e168e3ea2547a9c22e2e94181244a84da0f4f4649db1026873a67d",
+      "bytes": 3167
+    },
+    {
+      "path": "build.log",
+      "sha256": "dea5799fee57c8adeaf077916d4c255569d79d5ba8efa429c9200c51e8068f1f",
+      "bytes": 911
+    },
+    {
+      "path": "build.py",
+      "sha256": "2807054dcdfaff95a42171b4ffd348948e9aaff1297786867a5ca3272427c47b",
+      "bytes": 3064
+    },
+    {
+      "path": "input-bindings.json",
+      "sha256": "4386ee2fc473e7c3ca0bca92c0e961e4528f37fb72e93fcc06ac6a613fc86aec",
+      "bytes": 972
+    },
+    {
+      "path": "probe.rs",
+      "sha256": "7ed99e9f4dc114731fc96cc7ef5586373b60c50d190dce96c62f3478bbcf4d96",
+      "bytes": 17030
+    },
+    {
+      "path": "profile/point-24/complete.json",
+      "sha256": "cacdd870b2374702a643d32f0d1251e5ee8767bff56d13c24e58014213606e16",
+      "bytes": 389
+    },
+    {
+      "path": "profile/point-24/native-equivalence.json",
+      "sha256": "844d3c5a7e23fdedbca9b0bd5b744a26d5e43c05daefc6df48bd666a8f0f0d07",
+      "bytes": 119
+    },
+    {
+      "path": "profile/point-24/progress.json",
+      "sha256": "05874467ff839bb78164c29117a51cccec022b84a99fd60c9f79fc9a5e427c77",
+      "bytes": 692
+    },
+    {
+      "path": "profile/point-25/complete.json",
+      "sha256": "6c37cc60d7dce68f66e31dcd9e71d36bc83ec5283a12584e3f86b85e060674ac",
+      "bytes": 403
+    },
+    {
+      "path": "profile/point-25/native-equivalence.json",
+      "sha256": "cf6d3b1448bc54687b1cfc9deab84d4f9a7a9b40e518fdde1e1d15d54b22f844",
+      "bytes": 145294
+    },
+    {
+      "path": "profile/point-25/progress.json",
+      "sha256": "dc5eebc5b2cbc828e331d1112dde6fbc944df4357f7ee60adcba3b56ed40c59c",
+      "bytes": 712
+    },
+    {
+      "path": "profile/progress.json",
+      "sha256": "b1f99c66af8d2dcf082e2cd7bf4f96870edf19d8e7ebdb770203b2cbc4e29ed2",
+      "bytes": 968
+    },
+    {
+      "path": "profile/terminal-observations.json",
+      "sha256": "0c972ca78619617d0049aea65c6cf9faebdce12e2b0b88f5861dca0211bd3695",
+      "bytes": 1647
+    },
+    {
+      "path": "resources.json",
+      "sha256": "16e8b34a2caf106a3ffeb7a770b7e20a75e07c4840680e0b7a3b24dd7b8699ce",
+      "bytes": 759
+    },
+    {
+      "path": "resources.log",
+      "sha256": "f5a2508169de5c88a57dc086f8545b8491ebe1f6b371b99f2872bc1dc529dbba",
+      "bytes": 522
+    },
+    {
+      "path": "resources.provenance.json",
+      "sha256": "429bbd6542a3a89e056d4b96a1b32cade49b8f8df3704ee0e39bc68c924b51c9",
+      "bytes": 2226
+    },
+    {
+      "path": "run-binding.json",
+      "sha256": "4364a20c70452796185980f95f32f753cb428cb9382f6d475d1b8cd2a3e39515",
+      "bytes": 2918
+    },
+    {
+      "path": "run.py",
+      "sha256": "6bc0cc79c04f92ce296f65c7f6e8b6f41dc5d9e4187db22094df0a9e6d16efcb",
+      "bytes": 1861
+    },
+    {
+      "path": "summary.json",
+      "sha256": "c8dd5b24176e536caa9065fa7f13a72cf8f8953365dd4738459ce26272a9c8f0",
+      "bytes": 1418
+    },
+    {
+      "path": "terminal-semantics-review.md",
+      "sha256": "98661f297d20c180af5b50c02a55ed1b6d2f12da385695ea01c4f6a9afa09ea9",
+      "bytes": 2832
+    }
+  ]
+}

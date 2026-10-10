@@ -245,6 +245,37 @@ passes a separate [ten-digit recursive boundary check](../reports/validation/202
 with bubble and sunset terminals disabled. Complete support, region and
 endpoint certificates must accompany any subsequent placement change.
 
+The [coherent proof-reuse integration](../reports/validation/2026-10-10-verified-reuse-integration/README.md)
+now passes 91 native and 117 RustFlow tests, plus all three complete lower-loop
+regressions with unchanged reference and refinement criteria. Construction,
+cold loading and the final complete closure audit still replay proofs. Only
+composition of already verified immutable programs avoids repeated replay.
+
+The [longer singleton control](../reports/validation/2026-10-10-longer-singleton-control/README.md)
+still times out at 3,600 seconds. Its provisional frontier contracts to seven,
+but it produces no closed connection or numerical prediction. A subsequent
+[required-label profile](../reports/validation/2026-10-10-final-history-work-profile/README.md)
+finds one mandatory reduction taking about 314 seconds and 15,021 native rule
+applications. An [exact operation diagnostic](../reports/validation/2026-10-10-final-reduction-phase-diagnostic/README.md)
+attributes 82% of measured operation time to coefficient addition; its complete
+answer agrees with native reduction. Balanced exact accumulation is being tested
+separately. Optional historical candidate maps are another bounded-work proposal,
+but skipping them cannot remove this mandatory reduction.
+
+A fresh [partial-placement closure pilot](../reports/validation/2026-10-10-partial-placement-closure-pilot/README.md)
+closes singleton cut `[3]`, shifting slot `[0]`, on two basis integrals in 12
+rounds and 636 native rules. All 376 parameter conditions remain explicit. Both
+[longer double-cut controls](../reports/validation/2026-10-10-partial-placement-longer-double-controls/README.md)
+still time out at 1,200 seconds without closure. Complete actual-support checks
+and a scoped singleton endpoint argument are recorded separately; they do not
+permit arbitrary partial placement. The revised private soft-boundary certificate
+passes 11 tests across 51 actual regions in an isolated harness. Production still
+rejects these placements pending sealed origin, endpoint and boundary admission.
+
+Full three-loop fixed-dimension and Laurent acceptance remains pending. A fresh
+control uses a copied source/executable capsule, so later builds cannot alter its
+identity. Four-loop numerical scale-up still follows the complete three-loop gate.
+
 ## Remaining acceptance evidence
 
 Exact certificates and bounded algebraic pilots are useful gates, but do not
