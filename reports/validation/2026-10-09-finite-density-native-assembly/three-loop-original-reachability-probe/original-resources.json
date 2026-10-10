@@ -1,0 +1,20 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "PROBE_PER_RAY=1",
+    "PROBE_TOTAL=1",
+    "PROBE_DEPTH=3",
+    "/tmp/three_loop_residual_batch_probe",
+    "/tmp/three-loop-union-double-latest.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/original-request-metadata.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/original"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 6.700452395249158,
+  "user_seconds": 6.382414,
+  "system_seconds": 0.262742,
+  "peak_child_rss_kib": 161832,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

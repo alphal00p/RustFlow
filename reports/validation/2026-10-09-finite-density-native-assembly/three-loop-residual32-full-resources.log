@@ -1,0 +1,12 @@
+
+running 1 test
+test runtime_graph_full_amplitude ... DifferentialClosure { round: 0, requested: 3, basis_size: 7, new_derivatives: 27 }
+Stage { name: "searching 5 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 1, requested: 34, basis_size: 72, new_derivatives: 168 }
+Stage { name: "searching 57 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 2, requested: 235, basis_size: 312, new_derivatives: 565 }
+Stage { name: "searching 265 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 3, requested: 896, basis_size: 604, new_derivatives: 797 }
+Stage { name: "searching 219 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 4, requested: 1788, basis_size: 998, new_derivatives: 988 }
+Stage { name: "searching 173 new native weighted frontier labels, including constant sectors" }

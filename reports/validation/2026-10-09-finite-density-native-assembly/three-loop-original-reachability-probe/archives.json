@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/original/combined.bin",
+      "original_bytes": 7725494,
+      "original_sha256": "6c731e43f833ce089af6dcb5054e8cee43dc7c7ae3862288ad540588fc495bff",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/original/combined.bin.gz",
+      "archive_bytes": 658264,
+      "archive_sha256": "c4f0307e26c3e545d18eb7f3aa83fee5b37f392b596c47b82c2aa60c8af5d07e",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/original/result.json",
+      "original_bytes": 100454,
+      "original_sha256": "99cb2c22bb22b41601c72977a6a8759d023d133624469d85b66b05e71e0ef70e",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/original/result.json.gz",
+      "archive_bytes": 4295,
+      "archive_sha256": "6e19a1676d3c285353890369988784fc8a7e2d1fe66f7aa79e0dfd38a934a385",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/historical/combined.bin",
+      "original_bytes": 7725494,
+      "original_sha256": "6c731e43f833ce089af6dcb5054e8cee43dc7c7ae3862288ad540588fc495bff",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/historical/combined.bin.gz",
+      "archive_bytes": 658264,
+      "archive_sha256": "c4f0307e26c3e545d18eb7f3aa83fee5b37f392b596c47b82c2aa60c8af5d07e",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/historical/result.json",
+      "original_bytes": 4260944,
+      "original_sha256": "1fb391fd41285a810f9cc47408e3d7fbb8652201ec1c61b0ded43d549d7c832f",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/historical/result.json.gz",
+      "archive_bytes": 161858,
+      "archive_sha256": "47f44869395da6a7ca57608cb6c7a71c3dcd887ac4802a8e5b95d34e5acd60e1",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/derivative/combined.bin",
+      "original_bytes": 7725494,
+      "original_sha256": "6c731e43f833ce089af6dcb5054e8cee43dc7c7ae3862288ad540588fc495bff",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/derivative/combined.bin.gz",
+      "archive_bytes": 658264,
+      "archive_sha256": "c4f0307e26c3e545d18eb7f3aa83fee5b37f392b596c47b82c2aa60c8af5d07e",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/derivative/result.json",
+      "original_bytes": 478143,
+      "original_sha256": "6927df5426814579e99193d7b2ed19d922810cb32df469e4f983402679dfe120",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-original-reachability-probe/derivative/result.json.gz",
+      "archive_bytes": 14969,
+      "archive_sha256": "83fdb02baf494ee17d13026e38a32a844f0146e4d107f9198256155b9c4581c1",
+      "verified_lossless": true
+    }
+  ],
+  "raw_bytes": 28016023,
+  "archive_bytes": 2155914
+}

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/source_fingerprint-3c52aa1b71e5ce60",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.007100521586835384,
+  "user_seconds": 0.00101,
+  "system_seconds": 0.012076,
+  "peak_child_rss_kib": 15488,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

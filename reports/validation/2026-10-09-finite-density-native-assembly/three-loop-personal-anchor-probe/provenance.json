@@ -1,0 +1,65 @@
+{
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/rule-union-three-loop-source-hashes.json",
+    "bytes": 270148,
+    "sha256": "c8efecbf47c5b6c87b0f962824ae924b5de1351c80dd331af8163dd5ccc338bd"
+  },
+  "sources": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/probe.rs",
+      "bytes": 7665,
+      "sha256": "74227bc8128c7ee163808a18317acde3812202cb7dcf4a9188e29703910ded9a"
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/probe-flexible.rs",
+      "bytes": 7783,
+      "sha256": "fd27f592981153fe14ceb8f75f6b5fdad7a2f527d99234b2a552117685ec44eb"
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch-probe.rs",
+      "bytes": 9996,
+      "sha256": "bbd749476a40137ae3767b081ab14369659845c153019c425dc15ba092fe38d3"
+    }
+  ],
+  "native_library": {
+    "path": "/tmp/librustred-union-probe-392075d0c6995fd1.rlib",
+    "bytes": 435909924,
+    "sha256": "5fba4da6fd300c0e4ac7bd65a4b29ac3a67d776b585ca27b8cb1e9373bc808c0"
+  },
+  "executables": [
+    {
+      "path": "/tmp/three_loop_personal_anchor_probe",
+      "bytes": 424442240,
+      "sha256": "e2f1160781bc47601ed212f06cc0360f7c7b8a6553e5ea6f8bd024652f7ca41e"
+    },
+    {
+      "path": "/tmp/three_loop_personal_anchor_flexible_probe",
+      "bytes": 442848712,
+      "sha256": "403523b8b86292aa70ee204137ed3dc7f8b6fb8cb013ed11036d8f6ad46fbadd"
+    },
+    {
+      "path": "/tmp/three_loop_personal_anchor_batch_probe",
+      "bytes": 424513432,
+      "sha256": "b8c21effc449eb2abf43b4a6d751db904ff9b76272538430c84d821af786c364"
+    }
+  ],
+  "program_inputs": [
+    {
+      "path": "/tmp/three-loop-double-bc3c6bd.bin",
+      "bytes": 1006986,
+      "sha256": "15e6eeb55e4969aa68d05b194952a82b451c03afd762367fedf5bee3fc4007e8"
+    },
+    {
+      "path": "/tmp/three-loop-union-double-latest.bin",
+      "bytes": 7725494,
+      "sha256": "0a92d2ba45167127bcc939d4f47dd6f18ee749feb91ca51a02f484e8344c0a12"
+    },
+    {
+      "path": "/tmp/three-loop-union-double-latest.json",
+      "bytes": 587640,
+      "sha256": "7c8ae0e4bc4696cd3f2911499dc2592a05b6e522bf4786e8828da5df391f26cd"
+    }
+  ],
+  "compiler": "nix develop rustc1.97.1 --edition2024; fixed first-residual and batch opt-level1; flexible odd-label opt-level0; all debuginfo0; no Cargo invoked",
+  "claim": "Every run reconstructs the saved complete source corpus then independently replays the historical program against that context; new rules are native sealed/replayed. No source/condition/order or physical support edits."
+}

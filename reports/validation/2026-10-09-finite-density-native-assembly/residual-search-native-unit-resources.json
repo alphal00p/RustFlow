@@ -1,0 +1,13 @@
+{
+  "command": [
+    "target/release/deps/rustred-258a1e04558e72f1",
+    "solver::guarded",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.11002913909032941,
+  "user_seconds": 0.07079099999999999,
+  "system_seconds": 0.04341,
+  "peak_child_rss_kib": 15456,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,2 @@
+Historical replay passed: 200 sources, 1761 rules; target Unresolved(NoApplicableRule)
+Result Applied { rule: 1 }: 3 rules, 6 gaps, 4 unresolved reductions in 0.718s

@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "checks": 5,
+  "scope": "exact original fixed-numerator mass jet, bulk Beta identity, upper-surface Beta identity, complete raised/scalar ratio, and exact epsilon remainder; no AMF prediction",
+  "source_and_artifact_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact_identities.rs": "6bb7181494076d3cc3dd47533862dfd882acb15c35c7381c9cadad8db12b8a57",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact-identities.json": "d77cdf96414a15dbd3c2babfe2754cf46ac7373634081852a0ca7a3a4e7c809d",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact-identities-resources.json": "0642a402d83ca76581bc75425ba537cd254e800f92b768bfff2812d290b06dd0",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact-identities-resources.provenance.json": "5b2e6e85e9dc88e48741e2b09a874aebe51b6a7f5cd2f09fcba2373b6b969717",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact-identities-resources.log": "85feeb5faea7f69a9088f3daf123cc00a40d4e33ac3507d7275fc1f385f75554"
+  },
+  "resources": {
+    "command": [
+      "timeout",
+      "30",
+      "/tmp/three_loop_exact_reference",
+      "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact-identities.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.027370723895728588,
+    "user_seconds": 0.002927,
+    "system_seconds": 0.024443,
+    "peak_child_rss_kib": 15452,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "reference_values_changed": false,
+  "oracle_values_read": 0,
+  "native_predictions_read": 0
+}

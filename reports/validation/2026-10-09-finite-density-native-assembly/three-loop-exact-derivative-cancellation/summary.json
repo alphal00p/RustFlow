@@ -1,0 +1,137 @@
+{
+  "scope": "Independent exact Symbolica coefficient summation of already emitted native NoApplicableRule leaves. No native discovery, production changes, or closure claim.",
+  "normalization": "Native Di-eta derivatives sum index weights in ordinary physical slots1,2,4. Original scalar has a minus Wick coefficient; both raised original terms also have a minus coefficient, so neither target uses cross-target cancellation.",
+  "missing_policy": "Only derivative rows for which every nonzero shifted term has a saved reduction (or is already a saved irreducible leaf) enter reachability. Missing rows remain explicit and prevent any closure claim.",
+  "matched_control": "Raw and summed controls share this incomplete-row policy. Earlier /tmp/three-loop-active-reachability.json retained known components of incomplete rows and is not the matched control.",
+  "conditions": "All428 conditions of the saved immutable native program remain required; the audit does not erase poles from cancelled rows.",
+  "finding": "Scalar first derivative78 raw leaves ->10 after exact sum; scalar reachable195 ->55, missing queries87 ->25. Joint scalar+raised reachable1180 in both controls because cancelled leaves are independently reached. Original raised target187 leaves has no cancellation between its two terms.",
+  "compile_command": "nix develop --command rustc --edition=2024 /tmp/three_loop_derivative_cancellation.rs -L dependency=target/release/deps -L native=target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib --extern symbolica=target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib --extern serde_json=target/release/deps/libserde_json-84255895f7dd0f90.rlib -C opt-level=1 -o /tmp/three_loop_derivative_cancellation",
+  "sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-exact-derivative-cancellation/audit.rs": "b6dd6e54abaeff6b69ebafe34f49a9aa7970eae6038e3184d94d60b403eed6b6",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/result.json.gz": "37d70e374188896375c4e5e5cb6fe0f34c56e1cd322f33ab06fa2a0a7dc390a4",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/combined.bin.gz": "84c71edac2e1fecc7a5d6668ca60d4ef0bd4de914a1b2053dcd8c64d25c334ba",
+    "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+    "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+    "/tmp/three_loop_derivative_cancellation": "a56a1aec31be8a9077fd190cfc3cb78f7d7ed18ec188bcd8418872b48bca6aa8"
+  },
+  "results": {
+    "all-roots-raw": {
+      "combined_original_targets": false,
+      "complete_derivative_rows": 735,
+      "conditions": "all original saved native conditions remain required; exact cancellation does not remove their admission obligations",
+      "derivative_leaf_occurrences_after_sum": 6079,
+      "derivative_leaf_occurrences_before_sum": 6296,
+      "derivatives_with_exact_cancellation": 23,
+      "historical_leaf_union": 1673,
+      "incomplete_unique_derivative_labels": 642,
+      "initial_active_leaves": 187,
+      "initial_separate_root_leaves": 187,
+      "known_reachable_basis": 1180,
+      "native_program_rules": 15940,
+      "original_labels": 3,
+      "saved_condition_count": 428,
+      "scope": "exact Symbolica together().cancel() within each actual native d_eta integral combination; no new native discovery; incomplete saved derivative rows are skipped, so reachable set is partial and no closure is claimed",
+      "seconds": 3.5477862399999998,
+      "summed_reachability": false,
+      "target_audits": []
+    },
+    "all-roots-summed": {
+      "combined_original_targets": false,
+      "complete_derivative_rows": 735,
+      "conditions": "all original saved native conditions remain required; exact cancellation does not remove their admission obligations",
+      "derivative_leaf_occurrences_after_sum": 6079,
+      "derivative_leaf_occurrences_before_sum": 6296,
+      "derivatives_with_exact_cancellation": 23,
+      "historical_leaf_union": 1673,
+      "incomplete_unique_derivative_labels": 642,
+      "initial_active_leaves": 187,
+      "initial_separate_root_leaves": 187,
+      "known_reachable_basis": 1180,
+      "native_program_rules": 15940,
+      "original_labels": 3,
+      "saved_condition_count": 428,
+      "scope": "exact Symbolica together().cancel() within each actual native d_eta integral combination; no new native discovery; incomplete saved derivative rows are skipped, so reachable set is partial and no closure is claimed",
+      "seconds": 1.174406154,
+      "summed_reachability": true,
+      "target_audits": []
+    },
+    "actual-targets-summed": {
+      "combined_original_targets": true,
+      "complete_derivative_rows": 735,
+      "conditions": "all original saved native conditions remain required; exact cancellation does not remove their admission obligations",
+      "derivative_leaf_occurrences_after_sum": 6079,
+      "derivative_leaf_occurrences_before_sum": 6296,
+      "derivatives_with_exact_cancellation": 23,
+      "historical_leaf_union": 1673,
+      "incomplete_unique_derivative_labels": 642,
+      "initial_active_leaves": 187,
+      "initial_separate_root_leaves": 187,
+      "known_reachable_basis": 1180,
+      "native_program_rules": 15940,
+      "original_labels": 3,
+      "saved_condition_count": 428,
+      "scope": "exact Symbolica together().cancel() within each actual native d_eta integral combination; no new native discovery; incomplete saved derivative rows are skipped, so reachable set is partial and no closure is claimed",
+      "seconds": 1.658814953,
+      "summed_reachability": true,
+      "target_audits": [
+        {
+          "after_sum": 1,
+          "before_sum": 1,
+          "cancelled": [],
+          "original_root_indices": [
+            0
+          ]
+        },
+        {
+          "after_sum": 187,
+          "before_sum": 187,
+          "cancelled": [],
+          "original_root_indices": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "scalar-raw": {
+      "combined_original_targets": false,
+      "complete_derivative_rows": 128,
+      "conditions": "all original saved native conditions remain required; exact cancellation does not remove their admission obligations",
+      "derivative_leaf_occurrences_after_sum": 621,
+      "derivative_leaf_occurrences_before_sum": 800,
+      "derivatives_with_exact_cancellation": 10,
+      "historical_leaf_union": 1673,
+      "incomplete_unique_derivative_labels": 87,
+      "initial_active_leaves": 1,
+      "initial_separate_root_leaves": 1,
+      "known_reachable_basis": 195,
+      "native_program_rules": 15940,
+      "original_labels": 1,
+      "saved_condition_count": 428,
+      "scope": "exact Symbolica together().cancel() within each actual native d_eta integral combination; no new native discovery; incomplete saved derivative rows are skipped, so reachable set is partial and no closure is claimed",
+      "seconds": 0.078336217,
+      "summed_reachability": false,
+      "target_audits": []
+    },
+    "scalar-summed": {
+      "combined_original_targets": false,
+      "complete_derivative_rows": 37,
+      "conditions": "all original saved native conditions remain required; exact cancellation does not remove their admission obligations",
+      "derivative_leaf_occurrences_after_sum": 107,
+      "derivative_leaf_occurrences_before_sum": 175,
+      "derivatives_with_exact_cancellation": 1,
+      "historical_leaf_union": 1673,
+      "incomplete_unique_derivative_labels": 25,
+      "initial_active_leaves": 1,
+      "initial_separate_root_leaves": 1,
+      "known_reachable_basis": 55,
+      "native_program_rules": 15940,
+      "original_labels": 1,
+      "saved_condition_count": 428,
+      "scope": "exact Symbolica together().cancel() within each actual native d_eta integral combination; no new native discovery; incomplete saved derivative rows are skipped, so reachable set is partial and no closure is claimed",
+      "seconds": 0.016268998,
+      "summed_reachability": true,
+      "target_audits": []
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "files": [
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/combined.bin",
+      "original_bytes": 11460846,
+      "original_sha256": "97d7293e190173661442acb5bea46c8361a325abfa2e71338258311da0198e4f",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/combined.bin.gz",
+      "archive_bytes": 981605,
+      "archive_sha256": "84c71edac2e1fecc7a5d6668ca60d4ef0bd4de914a1b2053dcd8c64d25c334ba",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/discovery.json",
+      "original_bytes": 6288976,
+      "original_sha256": "bda5752f284aebe15a7ecab5b2f7313b921bdc31616bb53ee244fe8fced0175f",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/discovery.json.gz",
+      "archive_bytes": 62821,
+      "archive_sha256": "8434c4119948aa5ae3ad20d71e6176347235607f44bd08bccddd132a88fbedb2",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/result.json",
+      "original_bytes": 6358122,
+      "original_sha256": "d8f6d09cb18d0cba3c282a8ad1d10903efa7a875e1b156c18318ebf9caabe1b7",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32/result.json.gz",
+      "archive_bytes": 282224,
+      "archive_sha256": "37d70e374188896375c4e5e5cb6fe0f34c56e1cd322f33ab06fa2a0a7dc390a4",
+      "verified_lossless": true
+    }
+  ],
+  "raw_bytes": 24107944,
+  "archive_bytes": 1326650
+}

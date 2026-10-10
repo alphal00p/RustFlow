@@ -63,3 +63,18 @@ Local changes after the initial import:
   affect traversal only: source guards, native search, sealing and exact replay
   are unchanged, and all unvisited boxes remain explicit `DomainBudget`
   results. Calling the existing solver without hints retains its FIFO order.
+- Guarded programs expose bounded `union_replayed` to keep earlier proved
+  rules as an ordered fallback to fresh rules. The complete original source
+  binding must agree; duplicate rules count against the supplied budget, and
+  only the caller's current terminal set is retained. Native replay and the
+  common coordinate order are checked again for the combined program. The
+  operation does not certify unresolved discovery domains or family closure.
+- Guarded programs also expose bounded `with_terminals_replayed` to replace
+  a provisional stopping set before residual discovery. It replays the existing
+  rules without reordering them, validates the supplied terminals, and leaves
+  any newly exposed uncovered integrals explicitly unresolved.
+- Guarded discovery also exposes `solve_domains_partitioned`: each requested
+  box receives a bounded allocation from one total budget. It concatenates
+  native rules and gaps without changing the search or replay contracts;
+  unsubmitted boxes remain explicit `DomainBudget` gaps. The caller replays
+  the combined rules when constructing its program.

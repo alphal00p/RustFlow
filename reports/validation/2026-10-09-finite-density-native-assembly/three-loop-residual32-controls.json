@@ -1,0 +1,622 @@
+{
+  "schema_version": 1,
+  "status": "incomplete native closure; all three bounded controls timed out before predictions",
+  "scope": "current native residual-focused discovery controls, not acceptance profiles",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-source-hashes.json",
+    "sha256": "19bfbbd28e9401c3feeaf005fe21bb9e70d3cf4529ef9fb28d04ad4d354513e1"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-build-provenance.json",
+    "sha256": "fe90b11aaa5dd762f40474e5a002c13f93c11636657590ea497831b93e5d4a1a"
+  },
+  "regression_gate_report": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-gates.json",
+    "sha256": "e1705f5ab9748db9e41aa5653e76049104489a1817a826c2a93dbe5459354287"
+  },
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "0aa8bc42bf173a7f3d9db9c8c8c7c826da480c3cd2764fe39153db2e09cb8349",
+    "RUSTRED_SOURCE_DIGEST": "6ce4bc9e2f908aa43d02883a31387115f5302b568c61e21fdee49e8072d573e3",
+    "PORT_SOURCE_DIGEST": "b1d69247bc5946646a31902ce4ed45de85598d094e56f6fced078b47a8222382"
+  },
+  "source_files_verified_unchanged": 1808,
+  "runs": [
+    {
+      "directory": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full",
+      "cut_slots": [
+        0
+      ],
+      "requested_profiles": [
+        [
+          18,
+          60,
+          8
+        ]
+      ],
+      "epsilon": "-5/4",
+      "termination": "external240second timeout during native preparation; no final closure verdict or numerical evaluation",
+      "last_complete_frontier": 998,
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 3,
+          "frontier": 7,
+          "native_rule_count": 20,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-000-provisional.json",
+            "sha256": "8aaac09cdd18da80c829224e058c58846f8a4441585a6d52a746da3e17a0a2f4",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-000-provisional.json",
+              "sha256_uncompressed": "8aaac09cdd18da80c829224e058c58846f8a4441585a6d52a746da3e17a0a2f4",
+              "uncompressed_bytes": 9003,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-000-provisional.json.gz",
+              "sha256_gzip": "43ac16435bbeb28352b0b8170211704fad3c8904fd7f03c5c6c293ec591414a7",
+              "compressed_bytes": 1885
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-000-provisional.bin",
+            "sha256": "77dcbd09a92689b3f511300a2f03a582c21de171909efc7dd46cea52325ab01f",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-000-provisional.bin",
+              "sha256_uncompressed": "77dcbd09a92689b3f511300a2f03a582c21de171909efc7dd46cea52325ab01f",
+              "uncompressed_bytes": 42675,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-000-provisional.bin.gz",
+              "sha256_gzip": "702c3987c93241e5ffb9f54220851a14b62eb76e197f0e0db0b956adbb93e09b",
+              "compressed_bytes": 4739
+            }
+          }
+        },
+        {
+          "round": 1,
+          "requested": 34,
+          "frontier": 72,
+          "native_rule_count": 479,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-001-provisional.json",
+            "sha256": "9b6c03dee482c2f20e106257fa720f50433f37aa29f78a35aafd2c2a54448485",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-001-provisional.json",
+              "sha256_uncompressed": "9b6c03dee482c2f20e106257fa720f50433f37aa29f78a35aafd2c2a54448485",
+              "uncompressed_bytes": 20680,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-001-provisional.json.gz",
+              "sha256_gzip": "19436cc78aab0768c028a64ce7f3fe52b60587ec30c5a7af5a6c83853d9a4b0a",
+              "compressed_bytes": 2295
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-001-provisional.bin",
+            "sha256": "4b3eb802cfe93d03043bcd92de725620f75c2b573e3ac4186ccf491f2a903733",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-001-provisional.bin",
+              "sha256_uncompressed": "4b3eb802cfe93d03043bcd92de725620f75c2b573e3ac4186ccf491f2a903733",
+              "uncompressed_bytes": 223306,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-001-provisional.bin.gz",
+              "sha256_gzip": "49bc0bb3384fc38e9c2bc86043f6e219b062862178193ce78024cf983d3c1412",
+              "compressed_bytes": 18680
+            }
+          }
+        },
+        {
+          "round": 2,
+          "requested": 235,
+          "frontier": 312,
+          "native_rule_count": 3728,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-002-provisional.json",
+            "sha256": "ad9bbc6f075ef19d79453ac7d746aa6ea1513d97f24ace4106ba82a4afb0782c",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-002-provisional.json",
+              "sha256_uncompressed": "ad9bbc6f075ef19d79453ac7d746aa6ea1513d97f24ace4106ba82a4afb0782c",
+              "uncompressed_bytes": 74270,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-002-provisional.json.gz",
+              "sha256_gzip": "d2d01eb70914a8e071144a7dee01cc7e351f62c5ad480231067c5e764833500e",
+              "compressed_bytes": 3955
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-002-provisional.bin",
+            "sha256": "a05fc00ba3ce14e035cd8d71f48def6f3840323fec3bb02c53dfaf3d3f36914b",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-002-provisional.bin",
+              "sha256_uncompressed": "a05fc00ba3ce14e035cd8d71f48def6f3840323fec3bb02c53dfaf3d3f36914b",
+              "uncompressed_bytes": 1664912,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-002-provisional.bin.gz",
+              "sha256_gzip": "c6df0560e15ed2bc520d3d71aa4bdf4af1e177dab881a12e401c689b60bee2fe",
+              "compressed_bytes": 147739
+            }
+          }
+        },
+        {
+          "round": 3,
+          "requested": 896,
+          "frontier": 604,
+          "native_rule_count": 7977,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-003-provisional.json",
+            "sha256": "614331ec7dc6c46d0364c46e326d94c47abef41324efbf478e805296a5e67b04",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-003-provisional.json",
+              "sha256_uncompressed": "614331ec7dc6c46d0364c46e326d94c47abef41324efbf478e805296a5e67b04",
+              "uncompressed_bytes": 190090,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-003-provisional.json.gz",
+              "sha256_gzip": "f541bcb6da78be0031c23fb21157999b453e0653ffd8ab2c9ca37a20a0ea4b67",
+              "compressed_bytes": 7238
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-003-provisional.bin",
+            "sha256": "3f473f63ae08844279efb57844898e8c396d6f6ed128a18b2b88823edf4ad516",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-003-provisional.bin",
+              "sha256_uncompressed": "3f473f63ae08844279efb57844898e8c396d6f6ed128a18b2b88823edf4ad516",
+              "uncompressed_bytes": 3616159,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-003-provisional.bin.gz",
+              "sha256_gzip": "c85907f504b614ea5abf2ddec45359f0cf7321b99f5c6adfb4f2ea9ec326154a",
+              "compressed_bytes": 339559
+            }
+          }
+        },
+        {
+          "round": 4,
+          "requested": 1788,
+          "frontier": 998,
+          "native_rule_count": 12666,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-004-provisional.json",
+            "sha256": "0fa636956f45f9740169dffcbffb0d2bb636bd871aa7f2b1f9c6908104b6ec99",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-004-provisional.json",
+              "sha256_uncompressed": "0fa636956f45f9740169dffcbffb0d2bb636bd871aa7f2b1f9c6908104b6ec99",
+              "uncompressed_bytes": 346313,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-004-provisional.json.gz",
+              "sha256_gzip": "06e04c02b0bc46464531f021714cea56a4cb4e3f9e4ccc5fd41c71ecf8ef5f2c",
+              "compressed_bytes": 11357
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-004-provisional.bin",
+            "sha256": "36b0c71a1ae2a1264bab44ba900e18279469071bba06173012044302c762e181",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-004-provisional.bin",
+              "sha256_uncompressed": "36b0c71a1ae2a1264bab44ba900e18279469071bba06173012044302c762e181",
+              "uncompressed_bytes": 5712399,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/round-004-provisional.bin.gz",
+              "sha256_gzip": "750de0aa942060c048888111cd113b1f733e90b32ecf6a87161258c91271fb91",
+              "compressed_bytes": 546075
+            }
+          }
+        }
+      ],
+      "captured_executable": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "sha256": "40c35e15b2f068d15a9e437fd67fc0dc3ac606aaa8d8f263d6d1792332f0b51d",
+        "size_bytes": 1294802296
+      },
+      "resources": {
+        "exit_code": 124,
+        "wall_seconds": 240.02397620119154,
+        "user_seconds": 235.735446,
+        "system_seconds": 0.425235,
+        "peak_child_rss_kib": 175932,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full-resources.json",
+          "sha256": "7932b9e338507de7faa124760bbdd88887c324811888594bbc66ecfe0a57e138"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full-resources.provenance.json",
+          "sha256": "5563e8ba48e2dd7cd1119e3b626c792e41a7ae6709b0c2c151b009620f48f046"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full-resources.log",
+          "sha256": "a9b2685c182757e6929d90957a68a7433c48cc9721fb3c37bc31ea7d821ee86f"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/configuration.json",
+          "sha256": "584ecf9f5ff336fadcea9149579e7c16970a178d9731e3250235dc2b07f59404"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/input.json",
+          "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+        }
+      ],
+      "unfinished_part_files_left_untouched": [],
+      "prioritize_requested_indices": false,
+      "historical_discovery_gap_archives": [
+        {
+          "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/historical-discovery-gaps.json",
+          "sha256_uncompressed": "51141ec5f1d67df62dbecf064fc34e82f2442a4da14e60340e1482719c0ef9ac",
+          "uncompressed_bytes": 5770967,
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-full/native-closure/cut-0/historical-discovery-gaps.json.gz",
+          "sha256_gzip": "ea64050561ba6cbff799acd0c0a484f636c488e3890365d77fc4d62c653d1fcf",
+          "compressed_bytes": 50198
+        }
+      ]
+    },
+    {
+      "directory": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double",
+      "cut_slots": [
+        0,
+        3
+      ],
+      "requested_profiles": [
+        [
+          18,
+          60,
+          8
+        ]
+      ],
+      "epsilon": "-5/4",
+      "termination": "external240second timeout during native preparation; no final closure verdict or numerical evaluation",
+      "last_complete_frontier": 697,
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 3,
+          "frontier": 19,
+          "native_rule_count": 16,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-000-provisional.json",
+            "sha256": "d00ceadf7673e9c94037167bd834a0d39e85a1b734900c663fc66f9b489a2c72",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-000-provisional.json",
+              "sha256_uncompressed": "d00ceadf7673e9c94037167bd834a0d39e85a1b734900c663fc66f9b489a2c72",
+              "uncompressed_bytes": 11856,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-000-provisional.json.gz",
+              "sha256_gzip": "8ff7a3001a5866a57f099cc444340d64eaab7c0a288b9cfe40f7cd1144fe135b",
+              "compressed_bytes": 2027
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-000-provisional.bin",
+            "sha256": "d142060158126b38a891fb6f6016653500c9f9d72c95ae19d526a70211eb7a1a",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-000-provisional.bin",
+              "sha256_uncompressed": "d142060158126b38a891fb6f6016653500c9f9d72c95ae19d526a70211eb7a1a",
+              "uncompressed_bytes": 130772,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-000-provisional.bin.gz",
+              "sha256_gzip": "155f32cf83b3a7e655e7a8e042823ac7739f2142c278aa688a2d29b2f8da245c",
+              "compressed_bytes": 6724
+            }
+          }
+        },
+        {
+          "round": 1,
+          "requested": 69,
+          "frontier": 144,
+          "native_rule_count": 670,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-001-provisional.json",
+            "sha256": "ff5168461668b94f8aa99c668f3f0bb01ce59537ec9b579a2192da3fd97f337e",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-001-provisional.json",
+              "sha256_uncompressed": "ff5168461668b94f8aa99c668f3f0bb01ce59537ec9b579a2192da3fd97f337e",
+              "uncompressed_bytes": 41917,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-001-provisional.json.gz",
+              "sha256_gzip": "151586fbbb7ba83ee8c0a1c9554c3c1345b27d649fecd58b1b8f2cda80dd6486",
+              "compressed_bytes": 2819
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-001-provisional.bin",
+            "sha256": "8a6b5666ab9210111c9e3146ce7d2787225887e84b2d1ec8bedc9c63cfc2b0ac",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-001-provisional.bin",
+              "sha256_uncompressed": "8a6b5666ab9210111c9e3146ce7d2787225887e84b2d1ec8bedc9c63cfc2b0ac",
+              "uncompressed_bytes": 766342,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-001-provisional.bin.gz",
+              "sha256_gzip": "a13185af70e8ee445dd5e3d2846b0afde2dee59f0ec0f202011d2d268a1a7ca1",
+              "compressed_bytes": 54928
+            }
+          }
+        },
+        {
+          "round": 2,
+          "requested": 359,
+          "frontier": 366,
+          "native_rule_count": 4046,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-002-provisional.json",
+            "sha256": "71e0b20820a3ecccd59bc778d7d2fa63cad99f4e7f57f3a14ef1a5019bbc813b",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-002-provisional.json",
+              "sha256_uncompressed": "71e0b20820a3ecccd59bc778d7d2fa63cad99f4e7f57f3a14ef1a5019bbc813b",
+              "uncompressed_bytes": 122553,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-002-provisional.json.gz",
+              "sha256_gzip": "cc06247eae9bf42a0bc34acc8e21dbc09f66bb11f4b0fe72564e0bed2c8813f3",
+              "compressed_bytes": 4857
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-002-provisional.bin",
+            "sha256": "bf1e9676e3ffff15d982b9d2e049cd6f182d681db01dfbe9871e4d8b50172183",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-002-provisional.bin",
+              "sha256_uncompressed": "bf1e9676e3ffff15d982b9d2e049cd6f182d681db01dfbe9871e4d8b50172183",
+              "uncompressed_bytes": 3482937,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-002-provisional.bin.gz",
+              "sha256_gzip": "5953a518bba054ce0fde4bd478dc51f68dc8f13f9d3f90024869c6b87ae41110",
+              "compressed_bytes": 287644
+            }
+          }
+        },
+        {
+          "round": 3,
+          "requested": 934,
+          "frontier": 697,
+          "native_rule_count": 8100,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-003-provisional.json",
+            "sha256": "a58a5ac5cd95533d61ad4f5bdd28e97e9683e1f5654b8259570f4b0310ef5df8",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-003-provisional.json",
+              "sha256_uncompressed": "a58a5ac5cd95533d61ad4f5bdd28e97e9683e1f5654b8259570f4b0310ef5df8",
+              "uncompressed_bytes": 265226,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-003-provisional.json.gz",
+              "sha256_gzip": "64493c09468fb68704830dfe418739e5709fe48904c504564b337a2b2737009e",
+              "compressed_bytes": 8094
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-003-provisional.bin",
+            "sha256": "8d9b479c1f923ddcd1a9a2d58957c02151e6854a580a65d7745557fdba4b74ed",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-003-provisional.bin",
+              "sha256_uncompressed": "8d9b479c1f923ddcd1a9a2d58957c02151e6854a580a65d7745557fdba4b74ed",
+              "uncompressed_bytes": 7990951,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/round-003-provisional.bin.gz",
+              "sha256_gzip": "a88d1de9dd5508e28dacb31eeb44545863ddb3c46f647d07d9917298596a70e6",
+              "compressed_bytes": 678838
+            }
+          }
+        }
+      ],
+      "captured_executable": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "sha256": "40c35e15b2f068d15a9e437fd67fc0dc3ac606aaa8d8f263d6d1792332f0b51d",
+        "size_bytes": 1294802296
+      },
+      "resources": {
+        "exit_code": 124,
+        "wall_seconds": 240.03369896113873,
+        "user_seconds": 235.727966,
+        "system_seconds": 0.6435099999999999,
+        "peak_child_rss_kib": 268416,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double-resources.json",
+          "sha256": "439fe24fa04e836e4a43e2b1392e508b7f813e10309ee0b08a09274c4bed4daa"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double-resources.provenance.json",
+          "sha256": "20af65ff05d1b1057c18120078fe3ce8c476163e701bdcea6e7271e0f1b0e942"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double-resources.log",
+          "sha256": "f07c8c5ba77e438c46a48cafe228ff4e37296efabd48246b368d2f4cbcfde279"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/configuration.json",
+          "sha256": "2326b2e4be89f1c4ea384dee0a00fd4349f1d3b1081395c338e3b46583b8671b"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/input.json",
+          "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+        }
+      ],
+      "unfinished_part_files_left_untouched": [],
+      "prioritize_requested_indices": false,
+      "historical_discovery_gap_archives": [
+        {
+          "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/historical-discovery-gaps.json",
+          "sha256_uncompressed": "4681d090cc63b9acd5adec71c5f976dceba8fe3c3e7ebbdedcb3efeff8612103",
+          "uncompressed_bytes": 10199688,
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-double/native-closure/historical-discovery-gaps.json.gz",
+          "sha256_gzip": "b479a11dbcb6b94466af806de7cabf41d158fb549d1ae49735765ec28c7394ac",
+          "compressed_bytes": 80378
+        }
+      ]
+    },
+    {
+      "directory": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double",
+      "cut_slots": [
+        0,
+        3
+      ],
+      "requested_profiles": [
+        [
+          18,
+          60,
+          8
+        ]
+      ],
+      "epsilon": "-5/4",
+      "prioritize_requested_indices": true,
+      "termination": "external 240 second timeout during native preparation; no final closure verdict or numerical evaluation",
+      "last_complete_frontier": 285,
+      "rounds": [
+        {
+          "round": 0,
+          "native_rule_count": 23,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "requested": 3,
+          "frontier": 19,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-000-provisional.json",
+            "sha256": "7406cc8ae935481caec7770bd6bc69afb903d127a52dc29cae152d9341e39b1a",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-000-provisional.json",
+              "sha256_uncompressed": "7406cc8ae935481caec7770bd6bc69afb903d127a52dc29cae152d9341e39b1a",
+              "uncompressed_bytes": 11855,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-000-provisional.json.gz",
+              "sha256_gzip": "c861363df976bc5d51a8eb1188fd8e679e2660136ebfee1ef798dbd3ba168a74",
+              "compressed_bytes": 2022
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-000-provisional.bin",
+            "sha256": "b77aa92729d2ad02e6a596f0ce36976f2cd9a6a49a1b211018aad95dab77062c",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-000-provisional.bin",
+              "sha256_uncompressed": "b77aa92729d2ad02e6a596f0ce36976f2cd9a6a49a1b211018aad95dab77062c",
+              "uncompressed_bytes": 140736,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-000-provisional.bin.gz",
+              "sha256_gzip": "7954780221b4d29d6a8fc2fd96cc99ac92c9a3f0749a453f89c142609812d556",
+              "compressed_bytes": 7587
+            }
+          }
+        },
+        {
+          "round": 1,
+          "native_rule_count": 899,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "max_domains_per_residual": 32,
+          "rule_precedence": "retained-first",
+          "requested": 69,
+          "frontier": 285,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-001-provisional.json",
+            "sha256": "9c6bd94f013552cc893b26a04ec4a43ce0ceb5601758746d5148c59050478fa0",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-001-provisional.json",
+              "sha256_uncompressed": "9c6bd94f013552cc893b26a04ec4a43ce0ceb5601758746d5148c59050478fa0",
+              "uncompressed_bytes": 64115,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-001-provisional.json.gz",
+              "sha256_gzip": "e90b8bbcc070e868fc9469ef4e837682ae905cf234cb6aae11fadc650dd34a5b",
+              "compressed_bytes": 3389
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-001-provisional.bin",
+            "sha256": "d58a4ba7775e079867eee82d3bb60c0f0d6ae2ad4ada51db5324d746c315e558",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-001-provisional.bin",
+              "sha256_uncompressed": "d58a4ba7775e079867eee82d3bb60c0f0d6ae2ad4ada51db5324d746c315e558",
+              "uncompressed_bytes": 1147213,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/round-001-provisional.bin.gz",
+              "sha256_gzip": "8572b678b56fe19a10080be3acab1e38f57c5fae917e39e1e95aaabc1a080953",
+              "compressed_bytes": 88805
+            }
+          }
+        }
+      ],
+      "captured_executable": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "sha256": "40c35e15b2f068d15a9e437fd67fc0dc3ac606aaa8d8f263d6d1792332f0b51d",
+        "size_bytes": 1294802296
+      },
+      "resources": {
+        "exit_code": 124,
+        "wall_seconds": 240.0195503537543,
+        "user_seconds": 237.948224,
+        "system_seconds": 0.233343,
+        "peak_child_rss_kib": 124888,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double-resources.json",
+          "sha256": "2b0296589357ce08fccec3cf0a91019b37ba5d4f72ad11eb758a1b46d4945056"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double-resources.provenance.json",
+          "sha256": "236935321d4d296268ac5a197632c164512de8af29cca81dab2339c403015848"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double-resources.log",
+          "sha256": "5b2dcc2db178141ff372510b4da0b10387555ef13cbb55352474223685aede56"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/configuration.json",
+          "sha256": "48055ac4da1b22af5d3ca84565f4777ffe2f3e4eeaff64f616aa7bf4da42b50f"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/input.json",
+          "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+        }
+      ],
+      "unfinished_part_files_left_untouched": [],
+      "historical_discovery_gap_archives": [
+        {
+          "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/historical-discovery-gaps.json",
+          "sha256_uncompressed": "ce7a3c90db57b5de3ee633b1f01173617236eb403b73219b5a1bd4c57cef9418",
+          "uncompressed_bytes": 4349111,
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-priority-double/native-closure/historical-discovery-gaps.json.gz",
+          "sha256_gzip": "f870aa0b0b7d60a942e28b706876704fdfd2004aa8a0ca2958d38ca54967ec7b",
+          "compressed_bytes": 35611
+        }
+      ]
+    }
+  ],
+  "predictions_written": 0,
+  "independent_reference_comparisons": 0,
+  "interpretation": "Personal residual-domain coverage and requested-index priority change the explored frontier, but none of these three controls finished closure within 240 seconds. Provisional frontiers are not closed master bases or numerical predictions.",
+  "archive_manifest": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-archives.json",
+    "sha256": "f22e1a273921aeba3fde8d3290771ab030ed4dcf69d9188cf271d7806a07ebbd"
+  },
+  "matched_priority_control": {
+    "same_input": true,
+    "same_executable_sha256": "40c35e15b2f068d15a9e437fd67fc0dc3ac606aaa8d8f263d6d1792332f0b51d",
+    "same_configuration_except": [
+      "prioritize_requested_indices",
+      "checkpoint directory"
+    ],
+    "priority_false_completed_frontiers": [
+      19,
+      144,
+      366,
+      697
+    ],
+    "priority_true_completed_frontiers": [
+      19,
+      285
+    ],
+    "outcome": "both timed out; differing completed round counts do not establish a closed system or numerical result"
+  }
+}

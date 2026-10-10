@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/three_loop_reference",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.13232302805408835,
+  "user_seconds": 0.055457,
+  "system_seconds": 0.077848,
+  "peak_child_rss_kib": 15428,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

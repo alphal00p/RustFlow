@@ -73,6 +73,48 @@ preserve the original FIFO traversal. The runtime graph harness accepts
 `RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=true`, and each round checkpoint records
 the policy. It defaults to false and can be combined with requested-index rays.
 
+`max_reused_rules` enables bounded reuse of native programs between refinement
+passes and closure rounds. Its default of zero disables reuse. With a positive
+limit, freshly discovered rules come first and older proved rules become
+fallbacks. RustRed checks the exact source corpus, measure, roles, coefficient
+variables, guards, conditions and zero domains, then replays the whole union
+under one coordinate order. The current stopping set replaces both previous
+terminal sets. Duplicate rules count toward the limit; exceeding it is an
+explicit error. The runtime harness accepts `RUSTFLOW_WEIGHTED_REUSED_RULES`.
+
+Reusing a rule does not certify an unresolved discovery box. The current
+discovery gaps remain reported, and closure still requires exact reconstruction
+of every requested target and derivative. Round checkpoints retain the union,
+its rule count and the configured limit. This policy supplies no new identities
+and performs no additional row elimination in RustFlow.
+
+The opt-in `max_domains_per_residual` policy first reduces every historical
+requested integral with the retained program, then searches only the exact
+`NoApplicableRule` leaves. It requires requested-index rays and a positive
+retained-rule limit. Each ray receives at most this many allocated domain
+visits; all rays and refinement passes share `discovery.max_domains` within
+one provisional or final-audit discovery call. Allocation is a conservative
+upper bound, not a measured visit count. Unvisited rays and unresolved pieces
+remain explicit native gaps. The runtime harness accepts
+`RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL`; zero disables this policy.
+
+In this mode the previous rules retain precedence over newly discovered rules,
+so new rules fill unresolved leaves without replacing existing rewrites. The
+program is rebound to the current terminal set before the residual prepass.
+All application conditions and failures are retained, and labels are checked
+against physical admission and zero storage tails before constructing rays.
+Residuals from distinct requested integrals are never cancelled against each
+other. The historical requested set, final target reconstruction and derivative
+audit remain unchanged. A bounded unsuccessful search never establishes a
+master or successful closure.
+
+This policy retains a deduplicated history of native discovery gaps across
+passes, rounds and the final terminal rebinding. An empty final residual search
+therefore does not erase earlier uncovered boxes. Returned gap counts are
+historical in this mode, and checkpoints save `historical-discovery-gaps.json`
+with the exact domains, reasons and details. Finite target/derivative closure
+still makes no claim of complete symbolic coverage of those boxes.
+
 The initial 2026-10-09 standalone validation used `legacy-lorentz` sources,
 polynomial completion powers, native depth 3/domain budget 8192, and refinement
 limits 3/256/2, without requesting constant frontier sectors:

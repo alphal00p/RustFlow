@@ -1,0 +1,19 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "PROBE_DEPTH=3",
+    "PROBE_DOMAINS=64",
+    "/tmp/three_loop_residual_native_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "target-rays",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-64.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.4864742769859731,
+  "user_seconds": 0.46471999999999997,
+  "system_seconds": 0.022219,
+  "peak_child_rss_kib": 24628,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

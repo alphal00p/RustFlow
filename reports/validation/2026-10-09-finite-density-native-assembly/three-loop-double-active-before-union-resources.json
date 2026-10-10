@@ -1,0 +1,31 @@
+{
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY=active-lorentz",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+    "RUSTFLOW_WEIGHTED_ROUNDS=8",
+    "RUSTFLOW_WEIGHTED_CUTS=0,3",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_three_loop_chain.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union",
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 37.66147229913622,
+  "user_seconds": 37.257434,
+  "system_seconds": 0.131058,
+  "peak_child_rss_kib": 88360,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

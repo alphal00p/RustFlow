@@ -1,0 +1,26 @@
+searched 32 residual rays, 1024 allocated domains, 543 new native rules
+searched 64 residual rays, 2048 allocated domains, 1133 new native rules
+searched 96 residual rays, 3072 allocated domains, 1562 new native rules
+searched 128 residual rays, 4096 allocated domains, 2047 new native rules
+searched 160 residual rays, 5120 allocated domains, 2674 new native rules
+searched 192 residual rays, 6144 allocated domains, 3318 new native rules
+searched 224 residual rays, 7168 allocated domains, 3964 new native rules
+searched 256 residual rays, 8192 allocated domains, 4455 new native rules
+native batch replay+old-first union: 11485+4455 rules; 215 searched targets now directly apply; auditing 2078 original requests
+audited 128/2078 requests, 73 unique residual labels
+audited 256/2078 requests, 204 unique residual labels
+audited 384/2078 requests, 317 unique residual labels
+audited 512/2078 requests, 512 unique residual labels
+audited 640/2078 requests, 668 unique residual labels
+audited 768/2078 requests, 794 unique residual labels
+audited 896/2078 requests, 920 unique residual labels
+audited 1024/2078 requests, 986 unique residual labels
+audited 1152/2078 requests, 1092 unique residual labels
+audited 1280/2078 requests, 1196 unique residual labels
+audited 1408/2078 requests, 1269 unique residual labels
+audited 1536/2078 requests, 1348 unique residual labels
+audited 1664/2078 requests, 1455 unique residual labels
+audited 1792/2078 requests, 1535 unique residual labels
+audited 1920/2078 requests, 1626 unique residual labels
+audited 2048/2078 requests, 1670 unique residual labels
+Result: 1598 -> 1673 unique residuals, 12125 unresolved terms, 0 other failures

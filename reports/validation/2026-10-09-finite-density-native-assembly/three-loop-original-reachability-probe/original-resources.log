@@ -1,0 +1,2 @@
+native batch replay+old-first union: 11485+0 rules; 0 searched targets now directly apply; auditing 3 original requests
+Result: 0 -> 150 unique residuals, 175 unresolved terms, 0 other failures

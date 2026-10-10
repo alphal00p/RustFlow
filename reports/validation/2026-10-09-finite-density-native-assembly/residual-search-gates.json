@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-09T23:49:51.915934+00:00",
+  "status": "passed",
+  "source_snapshot": "residual-search-source-hashes.json",
+  "build_provenance": "residual-search-build-provenance.json",
+  "total_passed": 154,
+  "total_ignored": 1,
+  "scope": "native guarded source/replay/application and finite-density unit, boundary, source, fingerprint and Python regression gates; no three-loop or four-loop numerical acceptance",
+  "suites": [
+    {
+      "suite": "native-unit",
+      "passed": 70,
+      "failed": 0,
+      "ignored": 1,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-native-unit-resources.json",
+      "provenance": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-native-unit-resources.provenance.json",
+      "log_sha256": "cd967d57a7f8d82b4f16d91eadf3ff80ac7136ef8b2d174b75da277824f8c53e"
+    },
+    {
+      "suite": "lib",
+      "passed": 68,
+      "failed": 0,
+      "ignored": 0,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-lib-resources.json",
+      "provenance": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-lib-resources.provenance.json",
+      "log_sha256": "c562660202202a413d0809b2900fdffd0a56688087a94a2f3e04f48c90f2b1eb"
+    },
+    {
+      "suite": "flow-boundary",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-flow-boundary-resources.json",
+      "provenance": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-flow-boundary-resources.provenance.json",
+      "log_sha256": "1a404194218839f8a515ba1737d9773cab54e84d07135f42b70e10576c85a501"
+    },
+    {
+      "suite": "massless-sources",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-massless-sources-resources.json",
+      "provenance": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-massless-sources-resources.provenance.json",
+      "log_sha256": "3a59bf863e8da494aa287e06781fcbd4325018d8d81deabd14f2179480835766"
+    },
+    {
+      "suite": "source-fingerprint",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-source-fingerprint-resources.json",
+      "provenance": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-source-fingerprint-resources.provenance.json",
+      "log_sha256": "54d271bacc69795ac836f82cfca53a7eaf93e217bf80a65e8450fe3ae246c619"
+    },
+    {
+      "suite": "python",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-python-resources.json",
+      "provenance": "reports/validation/2026-10-09-finite-density-native-assembly/residual-search-python-resources.provenance.json",
+      "log_sha256": "fd6c11b9a69c57149ce2729ab1318b25c954830256903be19b0d1bc01528831b"
+    }
+  ]
+}

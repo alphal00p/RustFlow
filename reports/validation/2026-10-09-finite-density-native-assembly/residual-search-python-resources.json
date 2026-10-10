@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/python_finite_density-86655a919328faf8",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.6742605809122324,
+  "user_seconds": 1.585547,
+  "system_seconds": 0.078221,
+  "peak_child_rss_kib": 30772,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

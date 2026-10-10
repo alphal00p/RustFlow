@@ -1,0 +1,10 @@
+
+running 1 test
+test runtime_graph_occupied_flow ... DifferentialClosure { round: 0, requested: 3, basis_size: 19, new_derivatives: 50 }
+Stage { name: "searching 18 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 1, requested: 69, basis_size: 144, new_derivatives: 218 }
+Stage { name: "searching 111 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 2, requested: 359, basis_size: 366, new_derivatives: 422 }
+Stage { name: "searching 244 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 3, requested: 934, basis_size: 697, new_derivatives: 633 }
+Stage { name: "searching 246 new native weighted frontier labels, including constant sectors" }

@@ -20,6 +20,7 @@ independent reference is explicitly marked; none may become a boundary value.
 | One complete small graph | `src/cut_flow.rs`, `src/cut_regions.rs`, `src/regions.rs`, `src/integrand.rs`, `src/tensor.rs` | Zero-, one- and two-cut massive sunset, raised charged line, original polynomial held fixed under independent mass differentiation, surface contribution |
 | Boundary extensions | `src/recursive.rs`, `src/boundary.rs`, `src/frobenius.rs` | Tadpole-only recursive policy propagated through children/cache identities; projected hard/soft expressions retained; weighted soft integration; logarithmic region matching; bounded recursion |
 | Generic flow | `src/reduction.rs`, `src/physical_family.rs`, `src/epsilon.rs`, `src/frobenius.rs` | Guarded target/derivative closure and conditions, rational target projection before the endpoint limit, independent precision refinements |
+| Three-loop intermediate acceptance | `examples/finite_density/massless_three_loop_chain.json`, native full-amplitude owners | Complete vacuum and occupied-cut sum, scalar and raised occupied-line mixed-medium targets, independently refined fixed-dimension and Laurent comparisons before further four-loop numerical scale-up |
 | Four-loop acceptance | `examples/finite_density`, supplied oracle and independently generated references | Three certified distinct nonfactorized families, raised and numerator targets, a massless endpoint, at least ten stable digits, saved predictions before comparison |
 
 Boundary changes necessary for the sunset belong before its evaluation gate. A
@@ -97,8 +98,23 @@ checks and 24 refinements across five profiles, including a separate epsilon
 grid change. Required four-loop numerical comparisons remain absent.
 Concrete reference-only kernels and the E8 shared-pole obstruction are recorded
 in [the remaining-reference investigation](finite-density-missing-references.md).
-No E8 or prism supplemental reference values have been generated, and their
-precision feasibility remains unestablished.
+The E8 supplemental reference remains unavailable. The prism supplemental
+reference has independent finite-epsilon values and preliminary Laurent grids;
+its final quadrature refinement and acceptance are still pending.
+
+At the user's request, complete three-loop numerical validation now precedes
+further four-loop numerical scale-up. The frozen intermediate input is a
+nonfactorized three-vertex, five-edge massless graph with cuts `[]`, `[0]`, `[3]`
+and `[0,3]`. It requests a scalar and a raised occupied line with the original
+numerator `g1_2+u1*u2`, including its nonzero upper Fermi-surface contribution.
+The [independent reference](finite-density-three-loop-reference.md) is available
+at D=13/2 and through Laurent orders [-3,0], with arithmetic, quadrature and
+exact-algebra checks. Native reduction has not yet closed this case, so no
+three-loop amplitude comparison is claimed. The saved
+[rule-reuse controls](../reports/validation/2026-10-09-finite-density-native-assembly/three-loop-rule-union-controls.json)
+and [residual-search diagnostic](../reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/summary.json)
+record this limitation. This intermediate gate does not replace any original
+four-loop family, raised target or mandatory oracle record.
 
 ## Remaining acceptance evidence
 

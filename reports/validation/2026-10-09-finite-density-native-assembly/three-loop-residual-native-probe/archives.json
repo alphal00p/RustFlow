@@ -1,0 +1,239 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth3.json",
+      "original_sha256": "716496ed4de2461d542b6240744128e447557b8d20a14b6c2de2fa6d88348820",
+      "original_bytes": 20393,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth3.json.gz",
+      "archive_sha256": "f45e3cfdfbcf441956d5ec440b922e33ad5ced5abd750f786e04e9cce556a9f2",
+      "archive_bytes": 2482,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth3.json.bin",
+      "original_sha256": "686212bcd37e90eae60abb19cb04b8f127bb6f984d81e48e226fe69590f178b6",
+      "original_bytes": 113041,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth3.json.bin.gz",
+      "archive_sha256": "6f74452bf64e2a6b51bb6d165ac7ace9c6936f4fb735a339d88cec20ff546c4a",
+      "archive_bytes": 5125,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth4.json",
+      "original_sha256": "5cd9f80bea14a7795be646ce094eedbce8c6dd13351081bf870da4b70c56b8dd",
+      "original_bytes": 20393,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth4.json.gz",
+      "archive_sha256": "374278eaa27e42037e8045146080776f2b3deb8893c2eb43f3b0d071879bc526",
+      "archive_bytes": 2481,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth4.json.bin",
+      "original_sha256": "686212bcd37e90eae60abb19cb04b8f127bb6f984d81e48e226fe69590f178b6",
+      "original_bytes": 113041,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/point-depth4.json.bin.gz",
+      "archive_sha256": "6f74452bf64e2a6b51bb6d165ac7ace9c6936f4fb735a339d88cec20ff546c4a",
+      "archive_bytes": 5125,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-1.json",
+      "original_sha256": "7394a582ea1c1acf4e40b492d4da4c50d5068658da2b1393995fb242a6d5bb4b",
+      "original_bytes": 11425,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-1.json.gz",
+      "archive_sha256": "ef8206ae3258d76f6988d8ecf8b642d6ae4f886ecfb4daab26dc3bddf1de592d",
+      "archive_bytes": 2235,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-1.json.bin",
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "original_bytes": 111683,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-1.json.bin.gz",
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "archive_bytes": 4989,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-16.json",
+      "original_sha256": "153345f4d3993ae0e87c138b11d2f68e59a4fb9198dc9d92c099451d27f81733",
+      "original_bytes": 68750,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-16.json.gz",
+      "archive_sha256": "fd791a81d72eb950a98e35b9d48e9a6748268a91f09e724583257eefa03fe44e",
+      "archive_bytes": 3090,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-16.json.bin",
+      "original_sha256": "67e218bf14684707158468f9951034ba7cf2f8c9e1181925d35ce959c4d80535",
+      "original_bytes": 117730,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-16.json.bin.gz",
+      "archive_sha256": "7486f3bd1f2ee706630b845b0e49269d93d84620a68c84eaa5a1db874aee6037",
+      "archive_bytes": 5543,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-2.json",
+      "original_sha256": "abc0671aa9ea4436f6da6c41c86d83ad6f391d297d8f0a3af073aec6e80b9b0a",
+      "original_bytes": 12295,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-2.json.gz",
+      "archive_sha256": "03304f5a25b6443d8c0429b9ae549bd80a5416fcc13ed3721b1564ee72897f7b",
+      "archive_bytes": 2248,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-2.json.bin",
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "original_bytes": 111683,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-2.json.bin.gz",
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "archive_bytes": 4989,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-32.json",
+      "original_sha256": "3eb8dae09740c92ecc5f1be3b1261378df70dbdcc747ce0309094028deab4f3e",
+      "original_bytes": 148871,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-32.json.gz",
+      "archive_sha256": "884d24211f13f5119e297413ea6de9a129ea23cac22a238a7073b46f265daf24",
+      "archive_bytes": 4146,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-32.json.bin",
+      "original_sha256": "3cca94f06de7356af13768010f9ba7fd8cf7ab4724b5863d0bba7fe44c22a69b",
+      "original_bytes": 133201,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-32.json.bin.gz",
+      "archive_sha256": "e8f9d0d2132c8c4d636b643067a06a7c696ccc52cb7320aaa17da4ad84efce04",
+      "archive_bytes": 6761,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-4.json",
+      "original_sha256": "ae7e80dde1d493f2508eeffc0bf1f14553dd4c4cb3dcb430eabb62efef1f85cb",
+      "original_bytes": 14036,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-4.json.gz",
+      "archive_sha256": "48ac9b8965b3abc5069fadbd0eeb1e36e66a3ea6779d03682b36d36d2cd4d681",
+      "archive_bytes": 2276,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-4.json.bin",
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "original_bytes": 111683,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-4.json.bin.gz",
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "archive_bytes": 4989,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-64.json",
+      "original_sha256": "02a5b36e69b71e7ce3350caa9eeb6fc0979e3805e3a73c4b0b80d495945aaa49",
+      "original_bytes": 342875,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-64.json.gz",
+      "archive_sha256": "c786d1e423431656cdfa4d2843567ad51f6bc2f0897e935ee001e3840b2d6778",
+      "archive_bytes": 6427,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-64.json.bin",
+      "original_sha256": "c2de9c61a038ec21064e1fbe5e1232b863df3ad724a95c4f95af63c5f7b9274d",
+      "original_bytes": 161513,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-64.json.bin.gz",
+      "archive_sha256": "703a8435204df01729c5dded972d522e9d3f6f8a1382aff57386950024ea7b33",
+      "archive_bytes": 9228,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-8.json",
+      "original_sha256": "ff4173a5903e42923ad5856297bec4f25eedaaea24dc8a4b409db847e80eeb36",
+      "original_bytes": 22038,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-8.json.gz",
+      "archive_sha256": "be0812cbc7cc4e722305482d016f3d1cb7bc0b26a81373b490934f0f6603c3c6",
+      "archive_bytes": 2503,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-8.json.bin",
+      "original_sha256": "7d8d71eaacd7820fdc77c9ea2741f17bcfd72ecdf046d57b68dca1a062f85530",
+      "original_bytes": 113444,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/ray-budget-8.json.bin.gz",
+      "archive_sha256": "711abdb82e8707e52883e0bb7c709146d8b4063f5dfb12b42b8265b390d0fb77",
+      "archive_bytes": 5192,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth3.json",
+      "original_sha256": "07e985b9473aa2480be4f97724ec67aa2052bd7475a8a17a3205a9d493a4ddc2",
+      "original_bytes": 78994266,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth3.json.gz",
+      "archive_sha256": "49dde62354cce6e82863aef6907e90ffebf8032c8a4a04887bfbddff1f9592f3",
+      "archive_bytes": 775198,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth3.json.bin",
+      "original_sha256": "26ea693ae1f09370fdb36783fa561a5c79299ffea61e78c28ea3b5b51ead946f",
+      "original_bytes": 6910896,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth3.json.bin.gz",
+      "archive_sha256": "c0d733c4257c74652b82a94dd7e0a6bfab02e00d3d8e2ce7103c82650023e6bc",
+      "archive_bytes": 585190,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth4.json",
+      "original_sha256": "f03eddf6456732d1c7ee1308f27138f3af16914d68c044209a4808c7db48215f",
+      "original_bytes": 78994266,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth4.json.gz",
+      "archive_sha256": "4a404e66b8d9d4291e82e0066eb5d2cde2a0aaca6bba75c5bb48a47a4b4219e4",
+      "archive_bytes": 775199,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth4.json.bin",
+      "original_sha256": "26ea693ae1f09370fdb36783fa561a5c79299ffea61e78c28ea3b5b51ead946f",
+      "original_bytes": 6910896,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth4.json.bin.gz",
+      "archive_sha256": "c0d733c4257c74652b82a94dd7e0a6bfab02e00d3d8e2ce7103c82650023e6bc",
+      "archive_bytes": 585190,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth3.json",
+      "original_sha256": "68b52e0c021f6ed2e055915234b963349d123fb6a4409ad4e399bacd0dadc27b",
+      "original_bytes": 730128,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth3.json.gz",
+      "archive_sha256": "9276889a3be9f023ec20dcce1594943ef0f2fddef9bd7c4bf61a3fc005c13524",
+      "archive_bytes": 10660,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth3.json.bin",
+      "original_sha256": "4bf22027055d324f7df36a5fdd0edd0c2bb265c5e3faf52c94240cd97c728db7",
+      "original_bytes": 232922,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth3.json.bin.gz",
+      "archive_sha256": "4aecffad53c711ce0f88474081cf215a63ccf359c8be2e97cf05834bc4b5e2cf",
+      "archive_bytes": 15704,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth4.json",
+      "original_sha256": "b9d4979c40c08da1a9c8d981c3db649017f2281b6c53d44a1157aea5ec91d331",
+      "original_bytes": 730128,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth4.json.gz",
+      "archive_sha256": "feb7db97668f17b1c3e578c4f2899cbba1949a193ca88d8865fadf9e7acf830a",
+      "archive_bytes": 10658,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth4.json.bin",
+      "original_sha256": "4bf22027055d324f7df36a5fdd0edd0c2bb265c5e3faf52c94240cd97c728db7",
+      "original_bytes": 232922,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/target-rays-depth4.json.bin.gz",
+      "archive_sha256": "4aecffad53c711ce0f88474081cf215a63ccf359c8be2e97cf05834bc4b5e2cf",
+      "archive_bytes": 15704,
+      "lossless_roundtrip_verified": true
+    }
+  ]
+}

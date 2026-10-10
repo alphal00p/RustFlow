@@ -1,0 +1,37 @@
+{
+  "captured_utc": "2026-10-09T23:19:48.361561+00:00",
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "PROBE_DEPTH=4",
+    "PROBE_DOMAINS=8192",
+    "/tmp/three_loop_residual_native_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "sector",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth4.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "env": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/three_loop_residual_native_probe": {
+      "resolved_path": "/tmp/three_loop_residual_native_probe",
+      "sha256": "4bdf94a5238b27dfa403db2c2cb2d121df4488cd7832ad8828c2f8162137c3e2",
+      "size_bytes": 424441824
+    },
+    "/tmp/three-loop-double-bc3c6bd.bin": {
+      "resolved_path": "/tmp/three-loop-double-bc3c6bd.bin",
+      "sha256": "15e6eeb55e4969aa68d05b194952a82b451c03afd762367fedf5bee3fc4007e8",
+      "size_bytes": 1006986
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

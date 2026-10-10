@@ -1,0 +1,861 @@
+{
+  "schema": 1,
+  "method": "lossless gzip mtime=0; original bytes preserved exactly",
+  "entries": [
+    {
+      "original": "residual32-massless-laurent-resources.log",
+      "original_bytes": 498253,
+      "original_sha256": "64081320b5ab84be179ba379c927a90a0381f24279bd00ea7ae1445bff88b16f",
+      "archive": "residual32-massless-laurent-resources.log.gz",
+      "archive_bytes": 4378,
+      "archive_sha256": "e5223fe096155c4c4ac69b69f8c2cb004cd88beb8d3f43f5660d4e8031d9b453",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/historical-discovery-gaps.json",
+      "original_bytes": 142835,
+      "original_sha256": "d265496f625f812a9dbcc6f8f02d163773f8632315b803fdab39706a4254e2a0",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1986,
+      "archive_sha256": "f6d2d408ce211a241929ebceb8913472cd41668f99d8555b27a4693bd03509cc",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "original_bytes": 28055,
+      "original_sha256": "0788a696a5dd022db00e5937aad4a2b037fba2a3a00423010553a54c9f8209ba",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_bytes": 4546,
+      "archive_sha256": "1b7467bce8539589ec7d224e6d7935f45fa59dc529f52902e38e7ccb29bbbe46",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-000-provisional.json",
+      "original_bytes": 7167,
+      "original_sha256": "4b9103c1058a0cee807bc34f566d17eb315ec2316264b74a3698ab250b2dc5f5",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_bytes": 1781,
+      "archive_sha256": "a6a5d964661b3c45d1bdd337ee74d38e7a06bd94c712410ae2eadbe796740891",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "original_bytes": 86558,
+      "original_sha256": "d588500b1d30e36dd4a80b74dec8a3c5c85466ea1c18a92682e3c2917fd459fd",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_bytes": 10448,
+      "archive_sha256": "7999cb4e4d93a759ed4275f00f26114a248f67d72ca8957b0a251e5621b8d580",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-001-provisional.json",
+      "original_bytes": 10065,
+      "original_sha256": "3cb068546b0546d437252d11bf17d64eab60508a0222027ad2135494cf230dae",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_bytes": 1938,
+      "archive_sha256": "9ad824b3cc7502e0ffdac6f5a1c3c9622abfe27b0d9f93a67c8b2239cb938909",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "original_bytes": 212561,
+      "original_sha256": "1b7d43d5b59cfdf79da525161943025c236dd6e2409025e490cc44a813b1d5d8",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_bytes": 23523,
+      "archive_sha256": "81e5cd10a043cfe0e160322fd93ed9973673607c1759da68f828fb1008d6189a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-002-provisional.json",
+      "original_bytes": 15105,
+      "original_sha256": "37c6046c69de404ed3a949aedbf74ed29bd05b698dad859ce6452d19abed2a97",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_bytes": 2186,
+      "archive_sha256": "eeca866636bc4093f1ca26e26cfabdc0414df53865830ae7525aee5af378533a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "original_bytes": 447972,
+      "original_sha256": "371e6e70b50a5a9dc509d6b35599dbb2490e6a493fde9744275f492fd82f462e",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "archive_bytes": 50067,
+      "archive_sha256": "78e99ea47bad45c71ab6b5ca530137dca80680435375b1304c8d3c3fc8be7a0e",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-003-provisional.json",
+      "original_bytes": 20896,
+      "original_sha256": "a69c9b79ac1f2cd27db01fada8d3b4463e9456624f3234d18e51e47545a7328e",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "archive_bytes": 2441,
+      "archive_sha256": "f13d79c0713afc8887ab89acc5eb2f6989beca77b4c9d797981261f192a59779",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "original_bytes": 632511,
+      "original_sha256": "8a29ca76e59a43eb5999d826e043d5cc34cccdf41b108b81a90cd8f84be7e3e5",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "archive_bytes": 69506,
+      "archive_sha256": "4b3a5326ea4de332be6beba6c97b048a31434dd993b51a5c18a15e174c14086d",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-004-provisional.json",
+      "original_bytes": 23403,
+      "original_sha256": "8c870ae8415e3f3231e6ff8baf37ad76303f2e7867f6331bdaf3c1b63e16ded1",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "archive_bytes": 2539,
+      "archive_sha256": "2a40c081fab0f01ebbd32f2b85f8988970c945ae9ddb809282d3097d97576509",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "original_bytes": 666728,
+      "original_sha256": "1c3027816794633d3734bb533d0dc660220fb946c1e40281b6752f65be5a85a5",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "archive_bytes": 74213,
+      "archive_sha256": "d4a0425b7443812440637d5decb36e51e81ff1de119888472e039e3d8da08bef",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-005-provisional.json",
+      "original_bytes": 23783,
+      "original_sha256": "9af465e8395ee36467f236921b1445a27708944cb6e45e17a3ee9718e2505df5",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-005-provisional.json.gz",
+      "archive_bytes": 2567,
+      "archive_sha256": "5942efe01d79eeb7f75910097a87f5b3dbe2b614cc639309eab65489230f7984",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "original_bytes": 683329,
+      "original_sha256": "9e1b0fa57a53d7565d61866ddec3c66ec4869aedd879981e331d38f737e6f16d",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "archive_bytes": 74817,
+      "archive_sha256": "7552e3b258099ee58f8806b6952f6c351e7aed15048646ad443cf704704bac69",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-006-provisional.json",
+      "original_bytes": 23935,
+      "original_sha256": "d7e819936ee74a6b72f5159274aae00c5604d4ade2a86edcdd6a04269943948f",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-006-provisional.json.gz",
+      "archive_bytes": 2566,
+      "archive_sha256": "3a64dc546cbba7235418490dd44c6644090e29fae4731300a7abd8f3a81d9743",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-007-closed.bin",
+      "original_bytes": 699203,
+      "original_sha256": "8ccaf6e90da6b00596d50d001e2967181e5c8c3543737981f848b6f01a0af630",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-007-closed.bin.gz",
+      "archive_bytes": 75258,
+      "archive_sha256": "d39d31c2364240ed58cbccfe967cf8e70651bc1be4270080a349823376bc66a4",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-007-closed.json",
+      "original_bytes": 23930,
+      "original_sha256": "978fde911ac4f71f1c0d6dcfb7de7c2860f86f60b75d942b18912dd4ebf1033c",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-007-closed.json.gz",
+      "archive_bytes": 2558,
+      "archive_sha256": "2380e2246691ac3171e76d51e4ea91384cff7900fa7a2d497bbcfdbdb648bcb7",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-007-provisional.bin",
+      "original_bytes": 699171,
+      "original_sha256": "a80f8cd2672801d284ea292b1e820fc75bef575bbe845258e23b8d777a259081",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-007-provisional.bin.gz",
+      "archive_bytes": 75242,
+      "archive_sha256": "7c84d90c2ed0211641648e9f8dc4208fe548cb2fd04349658f49d13abd405bf8",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0/round-007-provisional.json",
+      "original_bytes": 23935,
+      "original_sha256": "98455b4e7f90dfab7e72ce3ddd7aa59597bb51d7342ed6ea562330f8780563da",
+      "archive": "residual32-massless-fixed/native-closure/cut-0/round-007-provisional.json.gz",
+      "archive_bytes": 2561,
+      "archive_sha256": "0a7b1b99333274c07f9ffab3f1deddbdb9d4c5e6e2640e475a0e1ada45d7146b",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "original_bytes": 172707,
+      "original_sha256": "df1348d5e81593d01a9a3deb87b904686133c042b358aadd4a3a06f5428c12bc",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 2094,
+      "archive_sha256": "a6e1a3d00393607f9819a753e5cdfeca3da33e627db83c04dc3d8da4987b245b",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_bytes": 48655,
+      "original_sha256": "b6d8c4345ea98ea96ddd4e4044228b95edf49fd9ebe8a3dee1475e5e323254b6",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_bytes": 5346,
+      "archive_sha256": "5cc07f3ddeeaa18169b5869cbecb7055077b942e192664451d69cc822b30f476",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "original_bytes": 7274,
+      "original_sha256": "f8f7eb50dcd6919c60f5f2fff4c3104f6ff074058df302783d9b32bec372208f",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "archive_bytes": 1725,
+      "archive_sha256": "bd8185e3da5697b914d1944d02f505b3cdb1492d19bcd682d1d7a7ab3592ee5b",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_bytes": 109047,
+      "original_sha256": "f63e4d5cae9061830c2335e82353ca7da045a71831afbfd531506e1e085d8442",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_bytes": 11327,
+      "archive_sha256": "78a1027f03ba78483f51db4fe4ef12db109cb741c58b0fa7e5178fac84ab3b07",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "original_bytes": 8593,
+      "original_sha256": "384b1fbb7ab80664e3c962d4bd3672320bc0060ebf799f52ff0caeab69fac4b5",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_bytes": 1782,
+      "archive_sha256": "4e78d213fc43ab12b542f6851cc0187f0692d5e173a63e9be2a67aecfa29dc95",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_bytes": 223507,
+      "original_sha256": "72331d05ba31787abce0554a25a7dd15070fa5d053ff575937b5d419c9d93c9f",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_bytes": 22770,
+      "archive_sha256": "0b03a29ea1a608abd807c25f50734e730e70cb0320603b27f021b440528b6b39",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "original_bytes": 10937,
+      "original_sha256": "8d9f92806c1015e408e67d76b92750330b296a2e4adc9d4d37e0e6a66cf358bb",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_bytes": 1882,
+      "archive_sha256": "1f2374e1e5b091b10c71dfb9a0ca3ec95f3d5f6852c6827fa47fa279c5379545",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-003-provisional.bin",
+      "original_bytes": 330175,
+      "original_sha256": "1ed6198ea24e52371c7b484961ef2dd78c65eeecc697ea13ee13ae3eeb3293d3",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "archive_bytes": 33768,
+      "archive_sha256": "4efb41b6733d62594a5d8b629ff3c2e2e190c840a24924ce9f14a33f85a783cb",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-003-provisional.json",
+      "original_bytes": 12061,
+      "original_sha256": "7876c653be3c9e8b8efb1b7ee6290d50e40e17f194e2e514a991a887cc817501",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "archive_bytes": 1925,
+      "archive_sha256": "968bf2d0ef290bbe544e76d593ee4dbc2ade19644f99ec00552a75b8aacc2264",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-004-provisional.bin",
+      "original_bytes": 381019,
+      "original_sha256": "02dc583a94f0ece05b1d4df715d77e5e289870a5f4788d0b4c576161ed4df89a",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "archive_bytes": 39693,
+      "archive_sha256": "83b4f2ca72a3ffb67d95906cd37c14a077853d1eb59090bf5ce6172e2a2202a7",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-004-provisional.json",
+      "original_bytes": 12155,
+      "original_sha256": "c6e8f43ae6a159b9270274b54fd6983afd4386327ba8a8c53401daf0f728db06",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "archive_bytes": 1935,
+      "archive_sha256": "c43558f26b0bc61e8ffaca190d87baf83c4a07f6925e9f5c7cbab2fdb6b05cc7",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-005-closed.bin",
+      "original_bytes": 394625,
+      "original_sha256": "5cd0412404f41bc4bf51bd5c2da310f446adc496d6fde87d27fd6b87e727f46c",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-005-closed.bin.gz",
+      "archive_bytes": 39977,
+      "archive_sha256": "d23a3c78c47b58187c246092505befdb89612ec15755cf080a7a3dc29c6de29e",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-005-closed.json",
+      "original_bytes": 12151,
+      "original_sha256": "d230de6547741ba85a55136fa3899ad935a7854a946d425b15d96ccb72235f17",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-005-closed.json.gz",
+      "archive_bytes": 1933,
+      "archive_sha256": "ecacdb4a3f47707ad74f32cc0133382086c8d4758643f5d56ad94a68fc55d8e4",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-005-provisional.bin",
+      "original_bytes": 394595,
+      "original_sha256": "d15eb79a54357b438710187371b9c7b7df7b40fa500b8cb03de895820d51cb38",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "archive_bytes": 39967,
+      "archive_sha256": "85113dd8d77c74cbfc5a521cd9bb8bf13269ab09d8c9f8b18673b54446adacb8",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-0-1/round-005-provisional.json",
+      "original_bytes": 12156,
+      "original_sha256": "eb8ba24e78ce91d7156cd02cb2b529942357fa25bd4d2e41ec883fc7e6f070cb",
+      "archive": "residual32-massless-fixed/native-closure/cut-0-1/round-005-provisional.json.gz",
+      "archive_bytes": 1936,
+      "archive_sha256": "b55aa2657cd736ae8cbd8675f770204f019bdfd3293dc241e9d30322abd61574",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/historical-discovery-gaps.json",
+      "original_bytes": 55815,
+      "original_sha256": "5e60c6b4f2540ebe3446c64ae92937a75cf0d983dd4a804f4539046f4b34fa2e",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1018,
+      "archive_sha256": "e74c5dcd57d17b3bac33bf7dbe136d8e510e33f37090e8a5b0342a365f3d78ce",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "original_bytes": 29690,
+      "original_sha256": "2640424ec40d7a4f7cc7e465fb666650db3b65996dc15a94afe60534b6eb1e73",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_bytes": 4612,
+      "archive_sha256": "d385b6dc531a83efda1e96d9ffacfd012b3b163b938c8d3583996544a5e045a9",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-000-provisional.json",
+      "original_bytes": 6475,
+      "original_sha256": "9b4cc9006225b6ba82dda4ff7313e39bcb4689377a66c7006e0994eb25ea066b",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-000-provisional.json.gz",
+      "archive_bytes": 1730,
+      "archive_sha256": "7a38de95690ecb0e1a60442501fbce26d437d3e2844b1b6c2eb55a1acee0b330",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "original_bytes": 50645,
+      "original_sha256": "ff32aa1bbcb17220d4aa477058b0fa86051af7cc6c26bcf57cdc2785cbac0950",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_bytes": 6878,
+      "archive_sha256": "e8d922d686d51fa352176001cff4fa71b5f126951d2228e8fea8b9441b68b72e",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-001-provisional.json",
+      "original_bytes": 7086,
+      "original_sha256": "ae4738fd37b7d04cbdb0a6b994b38ba27af0eab11e7bee89d429428d641066d2",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-001-provisional.json.gz",
+      "archive_bytes": 1755,
+      "archive_sha256": "3b6ef28a6fd207a9bceccb8321fb3c09cc6ea26ddf634ab11b29800e51239d5a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "original_bytes": 84117,
+      "original_sha256": "a5c47b78800f5e96553b3ba305045571b64e7de300de84acacdb168a530d4463",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_bytes": 10011,
+      "archive_sha256": "8f10786ab0d668ac1b9d0812fe6540b2db276dc1a391a355c11f770344367ae8",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-002-provisional.json",
+      "original_bytes": 7620,
+      "original_sha256": "f566c916d727a500b01ac30482c971effb9d2f83b61ba64a06bbb2732808c6e2",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-002-provisional.json.gz",
+      "archive_bytes": 1792,
+      "archive_sha256": "21f995870a12601e2ef778521cdd2e820e846ab28f99dd6ae849f0f75d3f8e34",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-003-provisional.bin",
+      "original_bytes": 165756,
+      "original_sha256": "bf01aa32a009701f062aa204aaea5df8937ff7fed598ce18fdcbfdc9a9caca77",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-003-provisional.bin.gz",
+      "archive_bytes": 20252,
+      "archive_sha256": "973df4250fbdf8d5a58ded325cd13de4db5bf1982d1559ca184b84bdba89a618",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-003-provisional.json",
+      "original_bytes": 8379,
+      "original_sha256": "bdbad04a691199977ec631a2549074d8730c4110528108ca95803f0c7e982fa7",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-003-provisional.json.gz",
+      "archive_bytes": 1834,
+      "archive_sha256": "8bf400df25387000df17d8b40f3d9bc596c6d92155a3fbe3a4e88487a9218856",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-004-closed.bin",
+      "original_bytes": 184861,
+      "original_sha256": "fd78239e28a14ec5d11749d2e2437ac71622a46f77052c108600480c1f176f0a",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-004-closed.bin.gz",
+      "archive_bytes": 22125,
+      "archive_sha256": "ffbe17611b967bdb5f962a87d68d5a5efa036894c20e577492679b808881c088",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-004-closed.json",
+      "original_bytes": 8525,
+      "original_sha256": "d5b99335f4a023ec95d21fae6d99504faa1bbc8eeee1f76b6f62abbbb59ad04d",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-004-closed.json.gz",
+      "archive_bytes": 1842,
+      "archive_sha256": "f0178c62bf7f62f77ccd78246c4393761e456bedc75852eac66bd0ebc6dfd85a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-004-provisional.bin",
+      "original_bytes": 184837,
+      "original_sha256": "cc10ec3aeeb8ea3d0a15c46d0e947c273ceb890821c3b3b274a76f364c366248",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-004-provisional.bin.gz",
+      "archive_bytes": 22118,
+      "archive_sha256": "9d1c6ea1e5ca46339411f36ffb68a67c8aebde16ba303ce9c84c233d1cc8d9ef",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-fixed/native-closure/cut-1/round-004-provisional.json",
+      "original_bytes": 8530,
+      "original_sha256": "3088366f623bbaa402ce17984182e804d386b57efcf15fb43f06cb91d320f7d8",
+      "archive": "residual32-massless-fixed/native-closure/cut-1/round-004-provisional.json.gz",
+      "archive_bytes": 1845,
+      "archive_sha256": "98bcb3710f11424bbc4f92e788612e844810a4b90c1e4d2108d3edd7bdafdc7f",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/historical-discovery-gaps.json",
+      "original_bytes": 142835,
+      "original_sha256": "d265496f625f812a9dbcc6f8f02d163773f8632315b803fdab39706a4254e2a0",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1986,
+      "archive_sha256": "f6d2d408ce211a241929ebceb8913472cd41668f99d8555b27a4693bd03509cc",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "original_bytes": 28055,
+      "original_sha256": "0788a696a5dd022db00e5937aad4a2b037fba2a3a00423010553a54c9f8209ba",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_bytes": 4546,
+      "archive_sha256": "1b7467bce8539589ec7d224e6d7935f45fa59dc529f52902e38e7ccb29bbbe46",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-000-provisional.json",
+      "original_bytes": 7167,
+      "original_sha256": "4b9103c1058a0cee807bc34f566d17eb315ec2316264b74a3698ab250b2dc5f5",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_bytes": 1781,
+      "archive_sha256": "a6a5d964661b3c45d1bdd337ee74d38e7a06bd94c712410ae2eadbe796740891",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "original_bytes": 86558,
+      "original_sha256": "d588500b1d30e36dd4a80b74dec8a3c5c85466ea1c18a92682e3c2917fd459fd",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_bytes": 10448,
+      "archive_sha256": "7999cb4e4d93a759ed4275f00f26114a248f67d72ca8957b0a251e5621b8d580",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-001-provisional.json",
+      "original_bytes": 10065,
+      "original_sha256": "3cb068546b0546d437252d11bf17d64eab60508a0222027ad2135494cf230dae",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_bytes": 1938,
+      "archive_sha256": "9ad824b3cc7502e0ffdac6f5a1c3c9622abfe27b0d9f93a67c8b2239cb938909",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-002-provisional.bin",
+      "original_bytes": 212561,
+      "original_sha256": "1b7d43d5b59cfdf79da525161943025c236dd6e2409025e490cc44a813b1d5d8",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_bytes": 23523,
+      "archive_sha256": "81e5cd10a043cfe0e160322fd93ed9973673607c1759da68f828fb1008d6189a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-002-provisional.json",
+      "original_bytes": 15105,
+      "original_sha256": "37c6046c69de404ed3a949aedbf74ed29bd05b698dad859ce6452d19abed2a97",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_bytes": 2186,
+      "archive_sha256": "eeca866636bc4093f1ca26e26cfabdc0414df53865830ae7525aee5af378533a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-003-provisional.bin",
+      "original_bytes": 447972,
+      "original_sha256": "371e6e70b50a5a9dc509d6b35599dbb2490e6a493fde9744275f492fd82f462e",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-003-provisional.bin.gz",
+      "archive_bytes": 50067,
+      "archive_sha256": "78e99ea47bad45c71ab6b5ca530137dca80680435375b1304c8d3c3fc8be7a0e",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-003-provisional.json",
+      "original_bytes": 20896,
+      "original_sha256": "a69c9b79ac1f2cd27db01fada8d3b4463e9456624f3234d18e51e47545a7328e",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-003-provisional.json.gz",
+      "archive_bytes": 2441,
+      "archive_sha256": "f13d79c0713afc8887ab89acc5eb2f6989beca77b4c9d797981261f192a59779",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-004-provisional.bin",
+      "original_bytes": 632511,
+      "original_sha256": "8a29ca76e59a43eb5999d826e043d5cc34cccdf41b108b81a90cd8f84be7e3e5",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-004-provisional.bin.gz",
+      "archive_bytes": 69506,
+      "archive_sha256": "4b3a5326ea4de332be6beba6c97b048a31434dd993b51a5c18a15e174c14086d",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-004-provisional.json",
+      "original_bytes": 23403,
+      "original_sha256": "8c870ae8415e3f3231e6ff8baf37ad76303f2e7867f6331bdaf3c1b63e16ded1",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-004-provisional.json.gz",
+      "archive_bytes": 2539,
+      "archive_sha256": "2a40c081fab0f01ebbd32f2b85f8988970c945ae9ddb809282d3097d97576509",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-005-provisional.bin",
+      "original_bytes": 666728,
+      "original_sha256": "1c3027816794633d3734bb533d0dc660220fb946c1e40281b6752f65be5a85a5",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-005-provisional.bin.gz",
+      "archive_bytes": 74213,
+      "archive_sha256": "d4a0425b7443812440637d5decb36e51e81ff1de119888472e039e3d8da08bef",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-005-provisional.json",
+      "original_bytes": 23783,
+      "original_sha256": "9af465e8395ee36467f236921b1445a27708944cb6e45e17a3ee9718e2505df5",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-005-provisional.json.gz",
+      "archive_bytes": 2567,
+      "archive_sha256": "5942efe01d79eeb7f75910097a87f5b3dbe2b614cc639309eab65489230f7984",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-006-provisional.bin",
+      "original_bytes": 683329,
+      "original_sha256": "9e1b0fa57a53d7565d61866ddec3c66ec4869aedd879981e331d38f737e6f16d",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-006-provisional.bin.gz",
+      "archive_bytes": 74817,
+      "archive_sha256": "7552e3b258099ee58f8806b6952f6c351e7aed15048646ad443cf704704bac69",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-006-provisional.json",
+      "original_bytes": 23935,
+      "original_sha256": "d7e819936ee74a6b72f5159274aae00c5604d4ade2a86edcdd6a04269943948f",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-006-provisional.json.gz",
+      "archive_bytes": 2566,
+      "archive_sha256": "3a64dc546cbba7235418490dd44c6644090e29fae4731300a7abd8f3a81d9743",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-007-closed.bin",
+      "original_bytes": 699203,
+      "original_sha256": "8ccaf6e90da6b00596d50d001e2967181e5c8c3543737981f848b6f01a0af630",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-007-closed.bin.gz",
+      "archive_bytes": 75258,
+      "archive_sha256": "d39d31c2364240ed58cbccfe967cf8e70651bc1be4270080a349823376bc66a4",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-007-closed.json",
+      "original_bytes": 23930,
+      "original_sha256": "978fde911ac4f71f1c0d6dcfb7de7c2860f86f60b75d942b18912dd4ebf1033c",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-007-closed.json.gz",
+      "archive_bytes": 2558,
+      "archive_sha256": "2380e2246691ac3171e76d51e4ea91384cff7900fa7a2d497bbcfdbdb648bcb7",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-007-provisional.bin",
+      "original_bytes": 699171,
+      "original_sha256": "a80f8cd2672801d284ea292b1e820fc75bef575bbe845258e23b8d777a259081",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-007-provisional.bin.gz",
+      "archive_bytes": 75242,
+      "archive_sha256": "7c84d90c2ed0211641648e9f8dc4208fe548cb2fd04349658f49d13abd405bf8",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0/round-007-provisional.json",
+      "original_bytes": 23935,
+      "original_sha256": "98455b4e7f90dfab7e72ce3ddd7aa59597bb51d7342ed6ea562330f8780563da",
+      "archive": "residual32-massless-laurent/native-closure/cut-0/round-007-provisional.json.gz",
+      "archive_bytes": 2561,
+      "archive_sha256": "0a7b1b99333274c07f9ffab3f1deddbdb9d4c5e6e2640e475a0e1ada45d7146b",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "original_bytes": 172707,
+      "original_sha256": "df1348d5e81593d01a9a3deb87b904686133c042b358aadd4a3a06f5428c12bc",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 2094,
+      "archive_sha256": "a6e1a3d00393607f9819a753e5cdfeca3da33e627db83c04dc3d8da4987b245b",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_bytes": 48655,
+      "original_sha256": "b6d8c4345ea98ea96ddd4e4044228b95edf49fd9ebe8a3dee1475e5e323254b6",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_bytes": 5346,
+      "archive_sha256": "5cc07f3ddeeaa18169b5869cbecb7055077b942e192664451d69cc822b30f476",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "original_bytes": 7274,
+      "original_sha256": "f8f7eb50dcd6919c60f5f2fff4c3104f6ff074058df302783d9b32bec372208f",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "archive_bytes": 1725,
+      "archive_sha256": "bd8185e3da5697b914d1944d02f505b3cdb1492d19bcd682d1d7a7ab3592ee5b",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_bytes": 109047,
+      "original_sha256": "f63e4d5cae9061830c2335e82353ca7da045a71831afbfd531506e1e085d8442",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_bytes": 11327,
+      "archive_sha256": "78a1027f03ba78483f51db4fe4ef12db109cb741c58b0fa7e5178fac84ab3b07",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "original_bytes": 8593,
+      "original_sha256": "384b1fbb7ab80664e3c962d4bd3672320bc0060ebf799f52ff0caeab69fac4b5",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_bytes": 1782,
+      "archive_sha256": "4e78d213fc43ab12b542f6851cc0187f0692d5e173a63e9be2a67aecfa29dc95",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_bytes": 223507,
+      "original_sha256": "72331d05ba31787abce0554a25a7dd15070fa5d053ff575937b5d419c9d93c9f",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_bytes": 22770,
+      "archive_sha256": "0b03a29ea1a608abd807c25f50734e730e70cb0320603b27f021b440528b6b39",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "original_bytes": 10937,
+      "original_sha256": "8d9f92806c1015e408e67d76b92750330b296a2e4adc9d4d37e0e6a66cf358bb",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_bytes": 1882,
+      "archive_sha256": "1f2374e1e5b091b10c71dfb9a0ca3ec95f3d5f6852c6827fa47fa279c5379545",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-003-provisional.bin",
+      "original_bytes": 330175,
+      "original_sha256": "1ed6198ea24e52371c7b484961ef2dd78c65eeecc697ea13ee13ae3eeb3293d3",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "archive_bytes": 33768,
+      "archive_sha256": "4efb41b6733d62594a5d8b629ff3c2e2e190c840a24924ce9f14a33f85a783cb",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-003-provisional.json",
+      "original_bytes": 12061,
+      "original_sha256": "7876c653be3c9e8b8efb1b7ee6290d50e40e17f194e2e514a991a887cc817501",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "archive_bytes": 1925,
+      "archive_sha256": "968bf2d0ef290bbe544e76d593ee4dbc2ade19644f99ec00552a75b8aacc2264",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-004-provisional.bin",
+      "original_bytes": 381019,
+      "original_sha256": "02dc583a94f0ece05b1d4df715d77e5e289870a5f4788d0b4c576161ed4df89a",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "archive_bytes": 39693,
+      "archive_sha256": "83b4f2ca72a3ffb67d95906cd37c14a077853d1eb59090bf5ce6172e2a2202a7",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-004-provisional.json",
+      "original_bytes": 12155,
+      "original_sha256": "c6e8f43ae6a159b9270274b54fd6983afd4386327ba8a8c53401daf0f728db06",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "archive_bytes": 1935,
+      "archive_sha256": "c43558f26b0bc61e8ffaca190d87baf83c4a07f6925e9f5c7cbab2fdb6b05cc7",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-005-closed.bin",
+      "original_bytes": 394625,
+      "original_sha256": "5cd0412404f41bc4bf51bd5c2da310f446adc496d6fde87d27fd6b87e727f46c",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-005-closed.bin.gz",
+      "archive_bytes": 39977,
+      "archive_sha256": "d23a3c78c47b58187c246092505befdb89612ec15755cf080a7a3dc29c6de29e",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-005-closed.json",
+      "original_bytes": 12151,
+      "original_sha256": "d230de6547741ba85a55136fa3899ad935a7854a946d425b15d96ccb72235f17",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-005-closed.json.gz",
+      "archive_bytes": 1933,
+      "archive_sha256": "ecacdb4a3f47707ad74f32cc0133382086c8d4758643f5d56ad94a68fc55d8e4",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-005-provisional.bin",
+      "original_bytes": 394595,
+      "original_sha256": "d15eb79a54357b438710187371b9c7b7df7b40fa500b8cb03de895820d51cb38",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "archive_bytes": 39967,
+      "archive_sha256": "85113dd8d77c74cbfc5a521cd9bb8bf13269ab09d8c9f8b18673b54446adacb8",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-0-1/round-005-provisional.json",
+      "original_bytes": 12156,
+      "original_sha256": "eb8ba24e78ce91d7156cd02cb2b529942357fa25bd4d2e41ec883fc7e6f070cb",
+      "archive": "residual32-massless-laurent/native-closure/cut-0-1/round-005-provisional.json.gz",
+      "archive_bytes": 1936,
+      "archive_sha256": "b55aa2657cd736ae8cbd8675f770204f019bdfd3293dc241e9d30322abd61574",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/historical-discovery-gaps.json",
+      "original_bytes": 55815,
+      "original_sha256": "5e60c6b4f2540ebe3446c64ae92937a75cf0d983dd4a804f4539046f4b34fa2e",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1018,
+      "archive_sha256": "e74c5dcd57d17b3bac33bf7dbe136d8e510e33f37090e8a5b0342a365f3d78ce",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "original_bytes": 29690,
+      "original_sha256": "2640424ec40d7a4f7cc7e465fb666650db3b65996dc15a94afe60534b6eb1e73",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_bytes": 4612,
+      "archive_sha256": "d385b6dc531a83efda1e96d9ffacfd012b3b163b938c8d3583996544a5e045a9",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-000-provisional.json",
+      "original_bytes": 6475,
+      "original_sha256": "9b4cc9006225b6ba82dda4ff7313e39bcb4689377a66c7006e0994eb25ea066b",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-000-provisional.json.gz",
+      "archive_bytes": 1730,
+      "archive_sha256": "7a38de95690ecb0e1a60442501fbce26d437d3e2844b1b6c2eb55a1acee0b330",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "original_bytes": 50645,
+      "original_sha256": "ff32aa1bbcb17220d4aa477058b0fa86051af7cc6c26bcf57cdc2785cbac0950",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_bytes": 6878,
+      "archive_sha256": "e8d922d686d51fa352176001cff4fa71b5f126951d2228e8fea8b9441b68b72e",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-001-provisional.json",
+      "original_bytes": 7086,
+      "original_sha256": "ae4738fd37b7d04cbdb0a6b994b38ba27af0eab11e7bee89d429428d641066d2",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-001-provisional.json.gz",
+      "archive_bytes": 1755,
+      "archive_sha256": "3b6ef28a6fd207a9bceccb8321fb3c09cc6ea26ddf634ab11b29800e51239d5a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "original_bytes": 84117,
+      "original_sha256": "a5c47b78800f5e96553b3ba305045571b64e7de300de84acacdb168a530d4463",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_bytes": 10011,
+      "archive_sha256": "8f10786ab0d668ac1b9d0812fe6540b2db276dc1a391a355c11f770344367ae8",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-002-provisional.json",
+      "original_bytes": 7620,
+      "original_sha256": "f566c916d727a500b01ac30482c971effb9d2f83b61ba64a06bbb2732808c6e2",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-002-provisional.json.gz",
+      "archive_bytes": 1792,
+      "archive_sha256": "21f995870a12601e2ef778521cdd2e820e846ab28f99dd6ae849f0f75d3f8e34",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-003-provisional.bin",
+      "original_bytes": 165756,
+      "original_sha256": "bf01aa32a009701f062aa204aaea5df8937ff7fed598ce18fdcbfdc9a9caca77",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-003-provisional.bin.gz",
+      "archive_bytes": 20252,
+      "archive_sha256": "973df4250fbdf8d5a58ded325cd13de4db5bf1982d1559ca184b84bdba89a618",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-003-provisional.json",
+      "original_bytes": 8379,
+      "original_sha256": "bdbad04a691199977ec631a2549074d8730c4110528108ca95803f0c7e982fa7",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-003-provisional.json.gz",
+      "archive_bytes": 1834,
+      "archive_sha256": "8bf400df25387000df17d8b40f3d9bc596c6d92155a3fbe3a4e88487a9218856",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-004-closed.bin",
+      "original_bytes": 184861,
+      "original_sha256": "fd78239e28a14ec5d11749d2e2437ac71622a46f77052c108600480c1f176f0a",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-004-closed.bin.gz",
+      "archive_bytes": 22125,
+      "archive_sha256": "ffbe17611b967bdb5f962a87d68d5a5efa036894c20e577492679b808881c088",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-004-closed.json",
+      "original_bytes": 8525,
+      "original_sha256": "d5b99335f4a023ec95d21fae6d99504faa1bbc8eeee1f76b6f62abbbb59ad04d",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-004-closed.json.gz",
+      "archive_bytes": 1842,
+      "archive_sha256": "f0178c62bf7f62f77ccd78246c4393761e456bedc75852eac66bd0ebc6dfd85a",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-004-provisional.bin",
+      "original_bytes": 184837,
+      "original_sha256": "cc10ec3aeeb8ea3d0a15c46d0e947c273ceb890821c3b3b274a76f364c366248",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-004-provisional.bin.gz",
+      "archive_bytes": 22118,
+      "archive_sha256": "9d1c6ea1e5ca46339411f36ffb68a67c8aebde16ba303ce9c84c233d1cc8d9ef",
+      "decompression_verified": true
+    },
+    {
+      "original": "residual32-massless-laurent/native-closure/cut-1/round-004-provisional.json",
+      "original_bytes": 8530,
+      "original_sha256": "3088366f623bbaa402ce17984182e804d386b57efcf15fb43f06cb91d320f7d8",
+      "archive": "residual32-massless-laurent/native-closure/cut-1/round-004-provisional.json.gz",
+      "archive_bytes": 1845,
+      "archive_sha256": "98bcb3710f11424bbc4f92e788612e844810a4b90c1e4d2108d3edd7bdafdc7f",
+      "decompression_verified": true
+    }
+  ]
+}

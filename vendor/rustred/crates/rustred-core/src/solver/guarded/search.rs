@@ -163,6 +163,67 @@ impl<const N: usize> GuardedSourceSystem<N> {
         self.solve_domains_with_priority_points(domains, &[], options, max_domains)
     }
 
+    /// Allocate a separate bounded search to each input box, in input order.
+    /// Each allocation is charged in full even if that search visits fewer
+    /// domains. Thus the sum of actual visits cannot exceed `max_domains`.
+    /// No rule, guard, ordering or proof is changed by this scheduling policy.
+    /// All local gaps and every unsubmitted box remain explicit. A zero total
+    /// budget is allowed and returns all valid input boxes as budget gaps.
+    /// Callers must replay the combined rules with `GuardedProgram::new`.
+    pub fn solve_domains_partitioned(
+        &self,
+        domains: Vec<IndexDomain<N>>,
+        priority_points: &[[i64; N]],
+        options: SearchOptions,
+        max_domains_per_domain: usize,
+        max_domains: usize,
+    ) -> Result<GuardedSolution<N>, SolverError> {
+        if options.max_depth.is_none() || max_domains_per_domain == 0 {
+            return Err(SolverError::InvalidInput(
+                "partitioned guarded discovery requires finite depth and a positive per-domain allocation".into(),
+            ));
+        }
+        // Validate the complete request, including work beyond the budget.
+        let valid = IndexDomain::for_roles(&self.roles);
+        if domains.iter().any(|domain| !domain.is_subset_of(&valid)) {
+            return Err(SolverError::InvalidInput(
+                "requested domain includes a negative occupation index".into(),
+            ));
+        }
+        if priority_points.iter().any(|point| !valid.contains(point)) {
+            return Err(SolverError::InvalidInput(
+                "priority point includes a negative occupation index".into(),
+            ));
+        }
+        let mut remaining = max_domains;
+        let mut solution = GuardedSolution {
+            rules: Vec::new(),
+            unresolved: Vec::new(),
+        };
+        for domain in domains {
+            let allocation = max_domains_per_domain.min(remaining);
+            if allocation == 0 {
+                unresolved(
+                    &mut solution,
+                    domain,
+                    GuardedUnresolvedReason::DomainBudget,
+                    "partitioned domain allocation budget exhausted",
+                );
+                continue;
+            }
+            remaining -= allocation;
+            let local = self.solve_domains_with_priority_points(
+                vec![domain],
+                priority_points,
+                options,
+                allocation,
+            )?;
+            solution.rules.extend(local.rules);
+            solution.unresolved.extend(local.unresolved);
+        }
+        Ok(solution)
+    }
+
     /// Discover exactly the requested boxes, visiting pieces containing a
     /// priority point before other pieces. Points are scheduling hints, not
     /// terminal labels or coverage certificates; admissible points outside all
@@ -622,6 +683,94 @@ mod priority_tests {
         );
         assert!(
             matches!(result, Err(SolverError::InvalidInput(message)) if message.contains("priority point"))
+        );
+    }
+
+    #[test]
+    fn partitioned_search_preserves_rules_conditions_and_all_unvisited_boxes() {
+        let (context, source) = source();
+        let positive = IndexDomain::new([IndexBounds::new(Some(2), None).unwrap()]).unwrap();
+        let unsubmitted = IndexDomain::new([IndexBounds::fixed(9)]).unwrap();
+        let found = source
+            .solve_domains_partitioned(
+                vec![
+                    IndexDomain::unrestricted(),
+                    positive.clone(),
+                    unsubmitted.clone(),
+                ],
+                &[],
+                options(),
+                1,
+                2,
+            )
+            .unwrap();
+        assert!(
+            found.unresolved.iter().any(|gap| gap.domain == unsubmitted
+                && gap.reason == GuardedUnresolvedReason::DomainBudget)
+        );
+        for point in -8..=12 {
+            assert!(
+                found
+                    .rules
+                    .iter()
+                    .any(|rule| rule.domain().contains(&[point]))
+                    || found
+                        .unresolved
+                        .iter()
+                        .any(|gap| gap.domain.contains(&[point]))
+            );
+        }
+        let local = source.solve_domains(vec![positive], options(), 1).unwrap();
+        let program = GuardedProgram::new(source.clone(), found.rules, []).unwrap();
+        let local_program = GuardedProgram::new(source.clone(), local.rules, []).unwrap();
+        let applied = program.apply(&[2]).unwrap();
+        assert!(matches!(
+            applied.status,
+            GuardedApplicationStatus::Applied { .. }
+        ));
+        assert_eq!(applied.terms, local_program.apply(&[2]).unwrap().terms);
+        let x = context.parameter("priority_x").unwrap();
+        assert_eq!(applied.terms.get(&[1]), Some(&x));
+        assert!(applied.nonzero_conditions.contains(&x.numerator));
+        let decoded = GuardedProgram::decode_generated(
+            &program.encode_native(Default::default()).unwrap(),
+            source,
+            Default::default(),
+        )
+        .unwrap();
+        assert_eq!(decoded.apply(&[2]).unwrap().terms, applied.terms);
+    }
+
+    #[test]
+    fn partitioned_zero_budget_reports_gaps_but_still_validates_all_requests() {
+        let program = super::super::lifecycle::tests::sample("partitioned-role-validation");
+        let source = program.sources();
+        let valid = IndexDomain::for_roles(&[IndexRole::Occupation]);
+        let found = source
+            .solve_domains_partitioned(vec![valid.clone()], &[], options(), 1, 0)
+            .unwrap();
+        assert!(found.rules.is_empty());
+        assert_eq!(found.unresolved.len(), 1);
+        assert_eq!(found.unresolved[0].domain, valid);
+        assert_eq!(
+            found.unresolved[0].reason,
+            GuardedUnresolvedReason::DomainBudget
+        );
+        let invalid = IndexDomain::new([IndexBounds::fixed(-1)]).unwrap();
+        assert!(
+            source
+                .solve_domains_partitioned(vec![valid.clone(), invalid], &[], options(), 1, 0,)
+                .is_err()
+        );
+        assert!(
+            source
+                .solve_domains_partitioned(vec![valid.clone()], &[[-1]], options(), 1, 0,)
+                .is_err()
+        );
+        assert!(
+            source
+                .solve_domains_partitioned(vec![valid], &[], options(), 0, 1)
+                .is_err()
         );
     }
 }

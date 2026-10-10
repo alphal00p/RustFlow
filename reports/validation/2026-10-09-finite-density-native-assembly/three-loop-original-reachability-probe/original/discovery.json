@@ -1,0 +1,14 @@
+{
+  "allocated": 0,
+  "discovery_seconds": 2.9e-7,
+  "input_frontier": 0,
+  "new_rules": 0,
+  "non_no_rule_input_statuses": [],
+  "original_requested": 3,
+  "per_ray": 1,
+  "previous_rules": 11485,
+  "rays": [],
+  "scope": "bounded symbolic ray search; allocated visits are conservative upper bounds, not measured native work",
+  "total_allocated_cap": 1,
+  "unsubmitted": []
+}

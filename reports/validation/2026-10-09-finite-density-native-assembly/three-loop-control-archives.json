@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "status": "lossless byte-for-byte gzip verified before removing redundant originals",
+  "scope": "closed-process historical three-loop checkpoints; numerical predictions absent",
+  "reader_release": "guarded_dependency confirmed all predecessor and union roots released after copying the latest union-double program+metadata to /tmp; no active raw readers remain",
+  "archived_roots": [
+    "three-loop-before-union",
+    "three-loop-double-before-union",
+    "three-loop-double-active-before-union",
+    "three-loop-union-full",
+    "three-loop-union-double"
+  ],
+  "files": [
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-000-provisional.bin",
+      "sha256_uncompressed": "62f02a997efacd890008b6122cfe1041daf0ce30a039779fe11b19682eb46835",
+      "uncompressed_bytes": 335848,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-000-provisional.bin.gz",
+      "sha256_gzip": "04e9038d207114bf570c5b77087613e8cbc8ec86972136141ef9351a7ce9c713",
+      "compressed_bytes": 39079
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-000-provisional.json",
+      "sha256_uncompressed": "73c09194deffdd8ab46c49b93378ba49392a0ec917c9c09f1ea8cb7eca8c2c44",
+      "uncompressed_bytes": 13567,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-000-provisional.json.gz",
+      "sha256_gzip": "82c510d3ede3bb570d368235d0015e65e75c510b0e1fc5846778070f0a1f09cd",
+      "compressed_bytes": 1987
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-001-provisional.bin",
+      "sha256_uncompressed": "a84862e3e8a59704121fcd87c8dc3b491e38d07b5b5e28e2ea8ae250c7945d7f",
+      "uncompressed_bytes": 2046353,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-001-provisional.bin.gz",
+      "sha256_gzip": "2dd8988db492f8b628c21d0181efb78744c35127e983ec1ae4422d5d58143f7c",
+      "compressed_bytes": 227735
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-001-provisional.json",
+      "sha256_uncompressed": "99400ca6880dfb469939d00fd669de1a9019eecd780e5360d15a4744eb0ad14f",
+      "uncompressed_bytes": 73484,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-001-provisional.json.gz",
+      "sha256_gzip": "18b8bdfe2ce3842ef5319c81e8c4dd07102146eb05d7bde6fbf4b470273b9b8e",
+      "compressed_bytes": 3868
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-002-provisional.bin",
+      "sha256_uncompressed": "7606236e69f730a1f4029efdb84da0f054bdcb6f96d884bbebc97710eb4fc8f1",
+      "uncompressed_bytes": 1382898,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-002-provisional.bin.gz",
+      "sha256_gzip": "3431c1a226aaf84352da899f3ef5be097ce648274cecf87ef3eeee2a8b72a308",
+      "compressed_bytes": 102335
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-002-provisional.json",
+      "sha256_uncompressed": "5ca5414f30a8f981ce2455a42fedc9ed9757edba6d365153f9ccf6025a21f38d",
+      "uncompressed_bytes": 233928,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-002-provisional.json.gz",
+      "sha256_gzip": "d9bc989449718f5c1ad720adb5bb314a17f7dbdae94eba3d7ae9af369e56de1d",
+      "compressed_bytes": 8324
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-003-provisional.bin",
+      "sha256_uncompressed": "a92a3342016a40df2bb30862ffa5d9482a010a6fa7b8e1f8f6b415ce8086da26",
+      "uncompressed_bytes": 900726,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-003-provisional.bin.gz",
+      "sha256_gzip": "2fc61c1438215946b80725b52dec414861ad19b409111633f72a8a610c8c68e2",
+      "compressed_bytes": 51189
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-003-provisional.json",
+      "sha256_uncompressed": "8ce60e817009949caf3be2012b58db1a5654a5ad6ddb8107d1bf2c3477c1a580",
+      "uncompressed_bytes": 474588,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/native-closure/cut-0/round-003-provisional.json.gz",
+      "sha256_gzip": "435224367b7d9a977639e257a2a5e7d9a6ce3d10cc5534778c850fc8bd7633c2",
+      "compressed_bytes": 14572
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-000-provisional.bin",
+      "sha256_uncompressed": "1dc8f090657a19e5665f3f91d624519359b313023366d6ccbcaa79e7c167e96d",
+      "uncompressed_bytes": 688718,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-000-provisional.bin.gz",
+      "sha256_gzip": "78c1278faef45014768d89bab2e8f91f8c5630e404d8a540acc0c8b7b5cc3d76",
+      "compressed_bytes": 61736
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-000-provisional.json",
+      "sha256_uncompressed": "31400d614a5cf11938f5ee2556b35f488f0cd54035d22d4ace88f713ebb1431c",
+      "uncompressed_bytes": 11727,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-000-provisional.json.gz",
+      "sha256_gzip": "e5f768f15e3d409be5eade792e08a495a7c434176c60070f65be61d6752d0dd9",
+      "compressed_bytes": 1954
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-001-provisional.bin",
+      "sha256_uncompressed": "e25a77bfd73a9b56d6f7fae3489f50fd8dab7b2a2d0e6560c6bdd0112d48e667",
+      "uncompressed_bytes": 4081437,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-001-provisional.bin.gz",
+      "sha256_gzip": "4f036b3d1c4e81a43c1942aa91810e648e82bbbe52b56bf3beec6f6b44dd45f9",
+      "compressed_bytes": 393571
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-001-provisional.json",
+      "sha256_uncompressed": "cf71278879fd95f156e55780556cba804afb1bbd46f22c531be48a2e8c1a5ba4",
+      "uncompressed_bytes": 65088,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-001-provisional.json.gz",
+      "sha256_gzip": "83b4569300015460d8f7660057cd001ab17448b711b0264e4ab835d7d5b83309",
+      "compressed_bytes": 3340
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-002-provisional.bin",
+      "sha256_uncompressed": "af9387eb024ff4e1f29a3174db5efb93588770aa2e7d4308c389b84a254e51bb",
+      "uncompressed_bytes": 1729374,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-002-provisional.bin.gz",
+      "sha256_gzip": "d367c809b946dcb825ec6908468ee1b3a0666519260b7cbf136eeee4688f86be",
+      "compressed_bytes": 126448
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-002-provisional.json",
+      "sha256_uncompressed": "a4e7c35841ae691271505b80e8605dd1a60bee7acb7aa3466130d62307b58824",
+      "uncompressed_bytes": 215745,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-002-provisional.json.gz",
+      "sha256_gzip": "6a25040974902acf4f08d009f47b442b8b093078a2e4d7692275e0e0bb9820b0",
+      "compressed_bytes": 6789
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-003-provisional.bin",
+      "sha256_uncompressed": "15e6eeb55e4969aa68d05b194952a82b451c03afd762367fedf5bee3fc4007e8",
+      "uncompressed_bytes": 1006986,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-003-provisional.bin.gz",
+      "sha256_gzip": "8e77531106a1825dec08075a2f4d169189069574adfc6cc785d341c4260165ce",
+      "compressed_bytes": 59260
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-003-provisional.json",
+      "sha256_uncompressed": "922b338e7e3ab4e99098b593d1b8be0fd4876e1fedae1f299fdbb971041ddcb8",
+      "uncompressed_bytes": 423927,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-003-provisional.json.gz",
+      "sha256_gzip": "c356da36fff2848a8d7dd7bfd3a9aaebd2a65da96c0bc302e171b37abe49b493",
+      "compressed_bytes": 11281
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-000-provisional.bin",
+      "sha256_uncompressed": "d8659e23093e98cea356996913ecfd8dc6fa2f1e0a73cf47c77a6619205cfd18",
+      "uncompressed_bytes": 615376,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-000-provisional.bin.gz",
+      "sha256_gzip": "0c10e2296ad2a35a955727373e34151fea5e6ee3cd6b0b80892eb148c3117d42",
+      "compressed_bytes": 60279
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-000-provisional.json",
+      "sha256_uncompressed": "b7792230e701526bae29bcb5bd5fd14633c3e333cb74b310fba661b8e34652fc",
+      "uncompressed_bytes": 11727,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-000-provisional.json.gz",
+      "sha256_gzip": "e351744d6fbfa02730c96065f098abe69cfc2e263f26b7a3560faf45dda11d56",
+      "compressed_bytes": 1952
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-001-provisional.bin",
+      "sha256_uncompressed": "0af3ed90c3371af0c138ad51f7d8b392e56ea8aaea248d25299ae25dfbc67bf3",
+      "uncompressed_bytes": 4008095,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-001-provisional.bin.gz",
+      "sha256_gzip": "ede931b8aecafbde2a72a0b7c67d81cbd94262919c98a19bb305e68a07136dd8",
+      "compressed_bytes": 391522
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-001-provisional.json",
+      "sha256_uncompressed": "e494886e671f0cb5b54f651148d94ef59f2439f0f93116da746b381fa46454c1",
+      "uncompressed_bytes": 65088,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-001-provisional.json.gz",
+      "sha256_gzip": "c02e46e59956c832e7ce2a37c1ba11f38634ad46c76ad970a9b3a75abf744e65",
+      "compressed_bytes": 3338
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-002-provisional.bin",
+      "sha256_uncompressed": "09976a5e7aacd2e0089b15a3d0faeccf058c937d5e0b828f89a69af43d461f2c",
+      "uncompressed_bytes": 1656032,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-002-provisional.bin.gz",
+      "sha256_gzip": "fe33cd01f9a90cee2db1a6169c9dec566306eb54bc99c9289309664fcfd35adb",
+      "compressed_bytes": 124639
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-002-provisional.json",
+      "sha256_uncompressed": "c42d1d0a9e3e890152487d004bb6ca6d71db85491a4636efa93b750f1cfee36d",
+      "uncompressed_bytes": 215745,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-002-provisional.json.gz",
+      "sha256_gzip": "25cbf5a062a1222918c5ec43c8b71874a7495b3d712feb5520e398ca831d9bf0",
+      "compressed_bytes": 6788
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-003-provisional.bin",
+      "sha256_uncompressed": "e7fae0d7bfd49929159a2412bc018aead7edc4301c525ab32fe05344c5ced551",
+      "uncompressed_bytes": 933644,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-003-provisional.bin.gz",
+      "sha256_gzip": "4d039aacf6e4619ae9edbdc14c3322f9679041b25b24f494c365a95eacec3017",
+      "compressed_bytes": 57722
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-003-provisional.json",
+      "sha256_uncompressed": "dc32bc38e8cb318e2015200b467f0834173dc7d8d29f26fbe52bc16d2d5f1cd2",
+      "uncompressed_bytes": 423927,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/native-closure/round-003-provisional.json.gz",
+      "sha256_gzip": "6d488c70d1f593581f6c049b73374c63ca9dac20d854eaf2b89767fb95d45158",
+      "compressed_bytes": 11280
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.bin",
+      "sha256_uncompressed": "20dfcfcb0742b718cc59e7c2235aa2de75ecacd58aa592aa48d737223931d4b0",
+      "uncompressed_bytes": 335848,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.bin.gz",
+      "sha256_gzip": "83a5e95fa16a2d245384ff6484087c9fa87d21acfd54d2b27e4f2496be639668",
+      "compressed_bytes": 39082
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.json",
+      "sha256_uncompressed": "dc4f1614b2596950d3ac7f8a4a0102b168f3a21487016fdf9865ce42045cdbd9",
+      "uncompressed_bytes": 13624,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.json.gz",
+      "sha256_gzip": "a536222a6bfc148ff1b477351d3d86e3a0435f77a80a2066e040f945b5d57db0",
+      "compressed_bytes": 2020
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.bin",
+      "sha256_uncompressed": "c1f50d96dd4fbae6b0cc9ba8a59517f020e5fbc42192893e47858b2d0f222c10",
+      "uncompressed_bytes": 2315446,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.bin.gz",
+      "sha256_gzip": "04527181a254bb477c841df4d500221b2414851fe2c6fe0b1d28c9c745807e37",
+      "compressed_bytes": 261407
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.json",
+      "sha256_uncompressed": "f1996b02ca3c5b3618d5948d2b957c73ceb1e8ff13e45522107cb438f8688896",
+      "uncompressed_bytes": 73542,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.json.gz",
+      "sha256_gzip": "2c87becaf85babb23db74ec6871b29d24c114b92a9a786fb2bf0919963e20b7e",
+      "compressed_bytes": 3904
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.bin",
+      "sha256_uncompressed": "e2e4ce8b251563360b561227c15216089b1fce851b53edfdb1b188b9beea9600",
+      "uncompressed_bytes": 3631519,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.bin.gz",
+      "sha256_gzip": "7deadc627726da55a43e54355473495757ec04bfc3cd1420b5621d4c7847107b",
+      "compressed_bytes": 359207
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.json",
+      "sha256_uncompressed": "d31d50703487755caba62b448d68ebc07513bbd837307677fba7973b15db9335",
+      "uncompressed_bytes": 220190,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.json.gz",
+      "sha256_gzip": "5637f9d16b0ebd57dbaac3baf4d1afd63456bfe7bb5e242d323205ac0e2d3145",
+      "compressed_bytes": 8011
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.bin",
+      "sha256_uncompressed": "e1a6b731e529913cd07b1a2fb7ced9c793992af899838be4f5a15ebd2b0936f6",
+      "uncompressed_bytes": 4473600,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.bin.gz",
+      "sha256_gzip": "7ababe19e7c8ad24f4292861b1b9c6bb6bdc45834156f52e7ec02456bd022a6b",
+      "compressed_bytes": 407725
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.json",
+      "sha256_uncompressed": "c4ac0a8cc4ad5ff3132acc7cceb7b249c6476d510501a0409d80b27280ccfe70",
+      "uncompressed_bytes": 392761,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.json.gz",
+      "sha256_gzip": "c5bbd18a44e57bcceeb71491d57e58777164a2e9fc14468f4212c524df94d5d1",
+      "compressed_bytes": 12586
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.bin",
+      "sha256_uncompressed": "f3062e4b45e43460bbdd280a3fc2a225cbfefd927b2b4c1aa5b5cbf548163450",
+      "uncompressed_bytes": 688718,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.bin.gz",
+      "sha256_gzip": "019afcbf2f832163e6bad0cebb3f23ec72b5db9db6096cb7a44080bd4c9ee4de",
+      "compressed_bytes": 61737
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.json",
+      "sha256_uncompressed": "92f3d747852457c48f9d417805ec2297b8994bb6b23eba87a96e924c22ebbd91",
+      "uncompressed_bytes": 11784,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.json.gz",
+      "sha256_gzip": "abcd7c6af28ca8e139bd270969339cc2d36943fcb8c992b0bcbdc777524d9ca1",
+      "compressed_bytes": 1987
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.bin",
+      "sha256_uncompressed": "7b83ed525ef72e6371572f9fe9a0b573a4092291758c2fb9c5ffd717f4ea4aba",
+      "uncompressed_bytes": 4629144,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.bin.gz",
+      "sha256_gzip": "71f003bacd6fea66d0135db165a69937cb6487872b7dc19c716ccbfb639e6d5a",
+      "compressed_bytes": 448820
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.json",
+      "sha256_uncompressed": "4bc14bfc502821cebf86dd6a413318723ef407afb903a2542e03d7e915b7bc21",
+      "uncompressed_bytes": 65146,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.json.gz",
+      "sha256_gzip": "a128773a99e93672fca42952af41592c59f58e7d5976cd30fe86bb090b473328",
+      "compressed_bytes": 3376
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.bin",
+      "sha256_uncompressed": "805c4012274cadde9a0afa67f65b97a69999a773fa90ffcd8ec4cedc1ddf78a5",
+      "uncompressed_bytes": 6185629,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.bin.gz",
+      "sha256_gzip": "068d88d5f1ecafb4b402486666ebe207a180d423c7428685134a4418657c1d9b",
+      "compressed_bytes": 568180
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.json",
+      "sha256_uncompressed": "77a5f560245216710816f87f0a0fb7714e5a4be50fb393d77ef681e16849b048",
+      "uncompressed_bytes": 209177,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.json.gz",
+      "sha256_gzip": "af841331d6103314649cf164b95a2fbe4904b7d9ee17cfc11877cac31223785a",
+      "compressed_bytes": 6704
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.bin",
+      "sha256_uncompressed": "5ef54c0828cb67ecd42ff47f5b1d13c7027632f086207406228e193c460357b3",
+      "uncompressed_bytes": 7083523,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.bin.gz",
+      "sha256_gzip": "5142488532475e415da1dec53747aeb46cd47d910a9a7e87375b773ecf4b9a01",
+      "compressed_bytes": 625744
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.json",
+      "sha256_uncompressed": "c78da9e7bd9b2c0f48e3f0fae88435e6c229875b9b200dc8a2ce67e93c9c7219",
+      "uncompressed_bytes": 381441,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.json.gz",
+      "sha256_gzip": "ffb75e720b02b8fed949bede3e9e4814d9b2687bd80fae02ac81dccfac1a1547",
+      "compressed_bytes": 10432
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.bin",
+      "sha256_uncompressed": "0a92d2ba45167127bcc939d4f47dd6f18ee749feb91ca51a02f484e8344c0a12",
+      "uncompressed_bytes": 7725494,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.bin.gz",
+      "sha256_gzip": "0123f00791cd9ab184db98e6d465c26e5c4c3de5aac550103aacc199241bdcb4",
+      "compressed_bytes": 658262
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.json",
+      "sha256_uncompressed": "7c8ae0e4bc4696cd3f2911499dc2592a05b6e522bf4786e8828da5df391f26cd",
+      "uncompressed_bytes": 587640,
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.json.gz",
+      "sha256_gzip": "306e6a85b74566f68ac94c8b7b9e2386ab58ff349c7b6cc01ca7e1f19e9b08e0",
+      "compressed_bytes": 14793
+    }
+  ],
+  "uncompressed_bytes": 60638254,
+  "compressed_bytes": 5264965
+}

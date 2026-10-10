@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "scope": "standalone native-only algorithm reproducer of the exact captured three-loop source corpus; no fresh physical permit or numerical prediction",
+  "historical_source_code_checkpoint": "bc3c6bd",
+  "historical_input": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/input.json",
+    "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "bytes": 1549
+  },
+  "historical_program": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/native-closure/round-003-provisional.bin",
+    "sha256": "15e6eeb55e4969aa68d05b194952a82b451c03afd762367fedf5bee3fc4007e8",
+    "bytes": 1006986
+  },
+  "native_compiled_source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/rule-union-three-loop-source-hashes.json",
+    "sha256": "c8efecbf47c5b6c87b0f962824ae924b5de1351c80dd331af8163dd5ccc338bd",
+    "bytes": 270148
+  },
+  "files": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/probe.rs",
+      "sha256": "39760521badeb4e897aef60e61f5cee1f9ec8b91082e30d589d042fdf8d1e612",
+      "bytes": 7456
+    },
+    {
+      "path": "/tmp/three_loop_residual_native_probe",
+      "sha256": "4bdf94a5238b27dfa403db2c2cb2d121df4488cd7832ad8828c2f8162137c3e2",
+      "bytes": 424441824
+    },
+    {
+      "path": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "5fba4da6fd300c0e4ac7bd65a4b29ac3a67d776b585ca27b8cb1e9373bc808c0",
+      "bytes": 435909924
+    },
+    {
+      "path": "target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    },
+    {
+      "path": "target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    }
+  ],
+  "compiler": "nix develop rustc1.97.1 --edition=2024 -C opt-level=1 -C debuginfo=0",
+  "compile_scope": "standalone rustc, no Cargo invocation; compile wall time was not measured",
+  "native_cargo_fingerprint": {
+    "rustc": 125055456796404090,
+    "features": "[\"native\"]",
+    "declared_features": "[\"capacity-dispatch\", \"default\", \"native\", \"reconstruction\", \"runtime-arity-selection\", \"wasm\"]",
+    "target": 15524714038289382666,
+    "profile": 2195198361031172618,
+    "path": 10518762766304062630,
+    "deps": [
+      [
+        2442470269441587549,
+        "build_script_build",
+        false,
+        6449696353710696453
+      ],
+      [
+        6303744891922679093,
+        "rustred_order",
+        false,
+        5706981512261138891
+      ],
+      [
+        8841681343991089453,
+        "blake3",
+        false,
+        15059736767819716970
+      ],
+      [
+        11862723254873017773,
+        "bincode",
+        false,
+        3169496138083783616
+      ],
+      [
+        11910974697091955563,
+        "rayon",
+        false,
+        13129736754314153783
+      ],
+      [
+        14668903365372062426,
+        "rand",
+        false,
+        15313876221564166678
+      ],
+      [
+        17020882691900786901,
+        "symbolica",
+        false,
+        385543394876369414
+      ]
+    ],
+    "local": [
+      {
+        "CheckDepInfo": {
+          "dep_info": "release/.fingerprint/rustred-392075d0c6995fd1/dep-lib-rustred",
+          "checksum": false
+        }
+      }
+    ],
+    "rustflags": [],
+    "config": 9396254390672932401,
+    "compile_kind": 0
+  },
+  "source_replay": "Every run imports the complete original coefficient map, source rows, source guards/conditions, roles, index variables, measure identity and zero domains; decode_generated independently replays all1761 historical rules against that same reconstructed context before new discovery."
+}

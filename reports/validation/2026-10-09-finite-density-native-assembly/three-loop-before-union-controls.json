@@ -1,0 +1,129 @@
+{
+  "three-loop-before-union": {
+    "status": "unresolved",
+    "rounds": [
+      {
+        "round": 0,
+        "frontier": 46,
+        "requested": 3
+      },
+      {
+        "round": 1,
+        "frontier": 403,
+        "requested": 141
+      },
+      {
+        "round": 2,
+        "frontier": 808,
+        "requested": 1058
+      },
+      {
+        "round": 3,
+        "frontier": 1765,
+        "requested": 2083
+      }
+    ],
+    "resources": {
+      "command": [
+        "env",
+        "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+        "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+        "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+        "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false",
+        "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+        "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+        "RUSTFLOW_WEIGHTED_ROUNDS=8",
+        "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_three_loop_chain.json",
+        "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+        "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+        "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union",
+        "timeout",
+        "180",
+        "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "--ignored",
+        "--exact",
+        "runtime_graph_full_amplitude",
+        "--nocapture"
+      ],
+      "exit_code": 101,
+      "wall_seconds": 15.999475525226444,
+      "user_seconds": 15.755229,
+      "system_seconds": 0.11033699999999999,
+      "peak_child_rss_kib": 73300,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    "failure": {
+      "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=4, provisional=1765, unresolved_terms=2524; first residual indices/reasons=[([1, -1, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 4, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 5, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 6, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 2, 3, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 2, 3, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -2, 2, 2, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -1, 2, 2, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+      "numerical_acceptance": false,
+      "stage": "complete preparation"
+    }
+  },
+  "three-loop-double-before-union": {
+    "status": "unresolved",
+    "rounds": [
+      {
+        "round": 0,
+        "frontier": 19,
+        "requested": 3
+      },
+      {
+        "round": 1,
+        "frontier": 292,
+        "requested": 69
+      },
+      {
+        "round": 2,
+        "frontier": 614,
+        "requested": 703
+      },
+      {
+        "round": 3,
+        "frontier": 1253,
+        "requested": 1385
+      }
+    ],
+    "resources": {
+      "command": [
+        "env",
+        "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+        "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+        "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+        "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false",
+        "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+        "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+        "RUSTFLOW_WEIGHTED_ROUNDS=8",
+        "RUSTFLOW_WEIGHTED_CUTS=0,3",
+        "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_three_loop_chain.json",
+        "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+        "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+        "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union",
+        "timeout",
+        "180",
+        "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "--ignored",
+        "--exact",
+        "runtime_graph_occupied_flow",
+        "--nocapture"
+      ],
+      "exit_code": 101,
+      "wall_seconds": 59.406306760851294,
+      "user_seconds": 58.779106,
+      "system_seconds": 0.11163999999999999,
+      "peak_child_rss_kib": 95396,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    "failure": {
+      "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=4, provisional=1253, unresolved_terms=1481; first residual indices/reasons=[([1, -1, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -2, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 2, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+      "numerical_acceptance": false,
+      "stage": "occupied preparation"
+    }
+  },
+  "provenance": {
+    "binary_source_checkpoint": "bc3c6bd",
+    "binary_source_snapshot": "priority-full-kinematic-source-hashes.json",
+    "binary_build_provenance": "priority-full-kinematic-build-provenance.json",
+    "input": "examples/finite_density/massless_three_loop_chain.json",
+    "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "note": "previously validated executable accepts newly supplied runtime input; binary hash saved before build replacement; no union code or numerical predictions"
+  }
+}

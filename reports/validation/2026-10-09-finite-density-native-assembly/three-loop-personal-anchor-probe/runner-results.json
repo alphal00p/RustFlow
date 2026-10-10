@@ -1,0 +1,50 @@
+[
+  {
+    "case": "budget-01-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-01-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-02-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-02-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-04-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-04-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-08-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-08-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-16-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-16-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-32-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "budget-32-anchor-true",
+    "runner_exit": 0
+  }
+]

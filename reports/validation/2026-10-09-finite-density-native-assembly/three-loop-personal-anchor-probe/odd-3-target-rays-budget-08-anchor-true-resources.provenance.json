@@ -1,0 +1,39 @@
+{
+  "captured_utc": "2026-10-09T23:56:54.503693+00:00",
+  "command": [
+    "timeout",
+    "60s",
+    "env",
+    "PROBE_DOMAINS=8",
+    "PROBE_DEPTH=3",
+    "PROBE_PERSONAL_ANCHOR=true",
+    "PROBE_TARGET=[1, 3, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+    "/tmp/three_loop_personal_anchor_flexible_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "target-rays",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-true.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "env": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/three_loop_personal_anchor_flexible_probe": {
+      "resolved_path": "/tmp/three_loop_personal_anchor_flexible_probe",
+      "sha256": "403523b8b86292aa70ee204137ed3dc7f8b6fb8cb013ed11036d8f6ad46fbadd",
+      "size_bytes": 442848712
+    },
+    "/tmp/three-loop-double-bc3c6bd.bin": {
+      "resolved_path": "/tmp/three-loop-double-bc3c6bd.bin",
+      "sha256": "15e6eeb55e4969aa68d05b194952a82b451c03afd762367fedf5bee3fc4007e8",
+      "size_bytes": 1006986
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

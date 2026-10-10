@@ -315,6 +315,38 @@ impl<const N: usize> GuardedContext<N> {
         priority_points: &[[i64; N]],
         options: GuardedDiscoveryOptions,
     ) -> Result<GuardedDiscovery<N>> {
+        self.discover_scheduled(domains, terminals, priority_points, options, None)
+    }
+
+    /// Allocate a separate bounded native search to each supplied domain.
+    /// The total is a conservative allocation cap, not a measured visit count.
+    /// All rules are assembled and source-replayed once; unvisited domains
+    /// remain native discovery gaps, including when the total budget is zero.
+    pub fn discover_partitioned(
+        &self,
+        domains: Vec<IndexDomain<N>>,
+        terminals: impl IntoIterator<Item = [i64; N]>,
+        priority_points: &[[i64; N]],
+        options: GuardedDiscoveryOptions,
+        max_domains_per_domain: usize,
+    ) -> Result<GuardedDiscovery<N>> {
+        self.discover_scheduled(
+            domains,
+            terminals,
+            priority_points,
+            options,
+            Some(max_domains_per_domain),
+        )
+    }
+
+    fn discover_scheduled(
+        &self,
+        domains: Vec<IndexDomain<N>>,
+        terminals: impl IntoIterator<Item = [i64; N]>,
+        priority_points: &[[i64; N]],
+        options: GuardedDiscoveryOptions,
+        per_domain: Option<usize>,
+    ) -> Result<GuardedDiscovery<N>> {
         for domain in &domains {
             validate_storage_domain(domain, self.physical_arity)?;
         }
@@ -325,19 +357,28 @@ impl<const N: usize> GuardedContext<N> {
         for point in priority_points {
             validate_storage_label(point, self.physical_arity)?;
         }
-        let found = self
-            .sources
-            .solve_domains_with_priority_points(
+        let search = SearchOptions {
+            max_depth: Some(options.max_depth),
+            sample_seed: options.sample_seed,
+            ..Default::default()
+        };
+        let found = if let Some(per_domain) = per_domain {
+            self.sources.solve_domains_partitioned(
                 domains,
                 priority_points,
-                SearchOptions {
-                    max_depth: Some(options.max_depth),
-                    sample_seed: options.sample_seed,
-                    ..Default::default()
-                },
+                search,
+                per_domain,
                 options.max_domains,
             )
-            .map_err(|e| Error::Reduction(e.to_string()))?;
+        } else {
+            self.sources.solve_domains_with_priority_points(
+                domains,
+                priority_points,
+                search,
+                options.max_domains,
+            )
+        }
+        .map_err(|e| Error::Reduction(e.to_string()))?;
         let native = GuardedProgram::new(self.sources.clone(), found.rules, terminals)
             .map_err(|e| Error::Reduction(e.to_string()))?;
         validate_storage_program(&native, self.physical_arity)?;
@@ -382,6 +423,61 @@ impl<const N: usize> GuardedReductionProgram<N> {
         self.native
             .encode_native(limits)
             .map_err(|e| Error::Cache(e.to_string()))
+    }
+
+    /// Replace the stopping set and replay the unchanged native proof corpus.
+    /// Prior provisional terminals must not suppress residual search requests.
+    pub fn with_terminals_replayed(
+        self,
+        terminals: impl IntoIterator<Item = [i64; N]>,
+        max_rules: usize,
+    ) -> Result<Self> {
+        let terminals = terminals.into_iter().collect::<Vec<_>>();
+        for terminal in &terminals {
+            validate_storage_label(terminal, self.physical_arity)?;
+        }
+        let native = self
+            .native
+            .with_terminals_replayed(terminals, max_rules)
+            .map_err(|e| Error::Reduction(e.to_string()))?;
+        validate_storage_program(&native, self.physical_arity)?;
+        Ok(Self {
+            native,
+            physical_arity: self.physical_arity,
+            dummy_symbols: self.dummy_symbols,
+        })
+    }
+
+    /// Retain previously proved rules as fallbacks, replaying the complete
+    /// union natively against one exact source corpus. Only the supplied
+    /// stopping set survives; prior terminals never become implicit masters.
+    pub fn union_replayed(
+        self,
+        fallback: Self,
+        terminals: impl IntoIterator<Item = [i64; N]>,
+        max_rules: usize,
+    ) -> Result<Self> {
+        if self.physical_arity != fallback.physical_arity
+            || self.dummy_symbols != fallback.dummy_symbols
+        {
+            return Err(Error::InvalidInput(
+                "cannot reuse guarded rules with different physical storage mappings".into(),
+            ));
+        }
+        let terminals = terminals.into_iter().collect::<Vec<_>>();
+        for terminal in &terminals {
+            validate_storage_label(terminal, self.physical_arity)?;
+        }
+        let native = self
+            .native
+            .union_replayed(fallback.native, terminals, max_rules)
+            .map_err(|e| Error::Reduction(e.to_string()))?;
+        validate_storage_program(&native, self.physical_arity)?;
+        Ok(Self {
+            native,
+            physical_arity: self.physical_arity,
+            dummy_symbols: self.dummy_symbols,
+        })
     }
 
     pub fn reduce(

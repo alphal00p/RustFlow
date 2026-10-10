@@ -1,0 +1,20 @@
+{
+  "command": [
+    "timeout",
+    "60s",
+    "env",
+    "PROBE_DOMAINS=32",
+    "PROBE_DEPTH=3",
+    "PROBE_PERSONAL_ANCHOR=true",
+    "/tmp/three_loop_personal_anchor_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "target-rays",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-true.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.2992372107692063,
+  "user_seconds": 1.230617,
+  "system_seconds": 0.065436,
+  "peak_child_rss_kib": 21536,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

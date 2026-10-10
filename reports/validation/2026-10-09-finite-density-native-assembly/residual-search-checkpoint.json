@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T00:03:31.318040+00:00",
+  "base_commit": "bc3c6bd88f5f179bc45aa7e6b97516121b7ed576",
+  "status": "native_regressions_and_two_loop_values_passed_three_loop_closure_unresolved",
+  "changes": [
+    "native exact-replayed rule union and terminal rebinding",
+    "opt-in residual discovery with conservative per-ray allocations and retained historical gaps",
+    "frozen three-loop scalar and raised medium-numerator acceptance input and independent references"
+  ],
+  "source_files_verified_unchanged": 1808,
+  "nonignored_tests_passed": 154,
+  "ignored_tests": 1,
+  "two_loop_numerical_runs_passed": 2,
+  "two_loop_independent_reference_comparisons_passed": 70,
+  "two_loop_independent_refinement_comparisons_passed": 54,
+  "three_loop_native_numerical_acceptance": false,
+  "four_loop_native_numerical_acceptance": false,
+  "supplied_four_loop_oracle_records_numerically_compared": 0,
+  "physical_admission_expanded": false,
+  "three_loop_blocker": "Native guarded reduction has not closed; latest full and double occupied controls exhaust their declared 240-second limits before numerical prediction. Search coverage is not a numerical acceptance claim.",
+  "measurement_scope": "Prebuilt validation processes; compilation excluded; host may run concurrent independent work. Source/binary hashes and commands are recorded in each run provenance.",
+  "reports": {
+    "residual-search-gates.json": "e1705f5ab9748db9e41aa5653e76049104489a1817a826c2a93dbe5459354287",
+    "residual-search-source-hashes.json": "19bfbbd28e9401c3feeaf005fe21bb9e70d3cf4529ef9fb28d04ad4d354513e1",
+    "residual-search-build-provenance.json": "fe90b11aaa5dd762f40474e5a002c13f93c11636657590ea497831b93e5d4a1a",
+    "residual32-massless-fixed-comparison.json": "b22e1e9df21d15f9262f29d9044a321fbd14793d9b110be79e367b2ab261cffa",
+    "residual32-massless-laurent-comparison.json": "5d021a72d82910d95d2a253ac24d7d60d2380bc1d6233acf98e05dd26b5181f4",
+    "residual32-massless-fixed-resources.json": "1d256919665ed2a70dec4efaae687e71169fb16e5aada55f9a1fcef440305b73",
+    "residual32-massless-laurent-resources.json": "281fe59c3b6f89a38e985db86f20ca5f3c9127c7db52ef0c6c12decda3126d4c",
+    "residual32-massless-archives.json": "014587034bda8591dabb631a33e90dfdc5b96498a15072f528891cb91146437c",
+    "three-loop-before-union-controls.json": "c49404d7b0cc03627f4fa8e477d07eeea3675f8f5f3ba6ea47086cea2cd78d4d",
+    "three-loop-rule-union-controls.json": "76b65dee38451ec79e0713864288e481bcf392de354e514fc5e79664e7ea7b91",
+    "three-loop-residual32-controls.json": "b16e24fe45e91d1ae0b8489debe3f26e59272df38f7c9ea4a9a881cd432a2c5a",
+    "three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "three-loop-independent-reference/exact-identities-validation.json": "3ab3dd712ce744f801bf656bdd13eebe8ca0baeb3d0c55defd18fca097ad19f6",
+    "three-loop-residual32-archives.json": "f22e1a273921aeba3fde8d3290771ab030ed4dcf69d9188cf271d7806a07ebbd",
+    "three-loop-personal-anchor-probe/summary.json": "c8bc8ccee19c4bf4f02ae415aa5f045587f0d9a361cec982e437b3810b696270"
+  }
+}

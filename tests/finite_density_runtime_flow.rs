@@ -61,6 +61,8 @@ impl Run {
             split_ordinary_zero_faces: setting("RUSTFLOW_WEIGHTED_ZERO_FACES", false),
             requested_index_rays: setting("RUSTFLOW_WEIGHTED_REQUESTED_RAYS", false),
             prioritize_requested_indices: setting("RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED", false),
+            max_reused_rules: setting("RUSTFLOW_WEIGHTED_REUSED_RULES", 0),
+            max_domains_per_residual: setting("RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL", 0),
             checkpoints: Some(report.join("native-closure")),
             ..Default::default()
         };

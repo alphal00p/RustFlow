@@ -1,0 +1,96 @@
+{
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/rule-union-three-loop-source-hashes.json",
+    "size_bytes": 270148,
+    "sha256": "c8efecbf47c5b6c87b0f962824ae924b5de1351c80dd331af8163dd5ccc338bd"
+  },
+  "probe": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/probe.rs",
+    "size_bytes": 9918,
+    "sha256": "f82f54dc4c371c6d535ff24153f8bd5607ded7aa44ef45374047225eb19d63ae"
+  },
+  "executable": {
+    "path": "/tmp/three_loop_residual_batch_probe",
+    "size_bytes": 424478096,
+    "sha256": "348cfa7e07ee3bef464876ede0ad92fb6aa9438009f0d1b40bd6880b3786aa08"
+  },
+  "preserved_rustred_rlib": {
+    "path": "/tmp/librustred-union-probe-392075d0c6995fd1.rlib",
+    "size_bytes": 435909924,
+    "sha256": "5fba4da6fd300c0e4ac7bd65a4b29ac3a67d776b585ca27b8cb1e9373bc808c0"
+  },
+  "source_program": {
+    "path": "/tmp/three-loop-union-double-latest.bin",
+    "size_bytes": 7725494,
+    "sha256": "0a92d2ba45167127bcc939d4f47dd6f18ee749feb91ca51a02f484e8344c0a12"
+  },
+  "source_metadata": {
+    "path": "/tmp/three-loop-union-double-latest.json",
+    "size_bytes": 587640,
+    "sha256": "7c8ae0e4bc4696cd3f2911499dc2592a05b6e522bf4786e8828da5df391f26cd"
+  },
+  "native_feature_fingerprint": {
+    "rustc": 125055456796404090,
+    "features": "[\"native\"]",
+    "declared_features": "[\"capacity-dispatch\", \"default\", \"native\", \"reconstruction\", \"runtime-arity-selection\", \"wasm\"]",
+    "target": 15524714038289382666,
+    "profile": 15742760760299065947,
+    "path": 10518762766304062630,
+    "deps": [
+      [
+        2442470269441587549,
+        "build_script_build",
+        false,
+        6449696353710696453
+      ],
+      [
+        6303744891922679093,
+        "rustred_order",
+        false,
+        5706981512261138891
+      ],
+      [
+        8841681343991089453,
+        "blake3",
+        false,
+        15059736767819716970
+      ],
+      [
+        11862723254873017773,
+        "bincode",
+        false,
+        3169496138083783616
+      ],
+      [
+        11910974697091955563,
+        "rayon",
+        false,
+        13129736754314153783
+      ],
+      [
+        14668903365372062426,
+        "rand",
+        false,
+        15313876221564166678
+      ],
+      [
+        17020882691900786901,
+        "symbolica",
+        false,
+        385543394876369414
+      ]
+    ],
+    "local": [
+      {
+        "CheckDepInfo": {
+          "dep_info": "release/.fingerprint/rustred-258a1e04558e72f1/dep-test-lib-rustred",
+          "checksum": false
+        }
+      }
+    ],
+    "rustflags": [],
+    "config": 9396254390672932401,
+    "compile_kind": 0
+  },
+  "compile_scope": "standalone rustc --test-free diagnostic, edition2024 opt-level1 debuginfo0, normal root native-only RustRed library preserved before current terminal-rebind edits; compilation excluded from runtime"
+}

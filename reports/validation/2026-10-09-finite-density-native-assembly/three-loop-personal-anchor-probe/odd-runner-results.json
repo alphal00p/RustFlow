@@ -1,0 +1,106 @@
+[
+  {
+    "case": "odd-2-target-rays-budget-01-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-01-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-02-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-02-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-04-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-04-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-08-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-08-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-16-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-16-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-32-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-target-rays-budget-32-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-01-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-01-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-02-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-02-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-04-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-04-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-08-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-08-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-16-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-16-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-32-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-target-rays-budget-32-anchor-true",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-2-point-budget-32-anchor-false",
+    "runner_exit": 0
+  },
+  {
+    "case": "odd-3-point-budget-32-anchor-false",
+    "runner_exit": 0
+  }
+]

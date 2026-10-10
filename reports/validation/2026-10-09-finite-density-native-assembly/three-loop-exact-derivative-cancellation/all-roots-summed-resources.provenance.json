@@ -1,0 +1,33 @@
+{
+  "captured_utc": "2026-10-09T23:52:47.291909+00:00",
+  "command": [
+    "/tmp/three_loop_derivative_cancellation",
+    "/tmp/three-loop-combined-reductions.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-exact-derivative-cancellation/three-loop-original-roots.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-exact-derivative-cancellation/all-roots-summed.json",
+    "sum"
+  ],
+  "argument_files": {
+    "/tmp/three_loop_derivative_cancellation": {
+      "resolved_path": "/tmp/three_loop_derivative_cancellation",
+      "sha256": "a56a1aec31be8a9077fd190cfc3cb78f7d7ed18ec188bcd8418872b48bca6aa8",
+      "size_bytes": 251361920
+    },
+    "/tmp/three-loop-combined-reductions.json": {
+      "resolved_path": "/tmp/three-loop-combined-reductions.json",
+      "sha256": "d8f6d09cb18d0cba3c282a8ad1d10903efa7a875e1b156c18318ebf9caabe1b7",
+      "size_bytes": 6358122
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-exact-derivative-cancellation/three-loop-original-roots.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-exact-derivative-cancellation/three-loop-original-roots.json",
+      "sha256": "92f3d747852457c48f9d417805ec2297b8994bb6b23eba87a96e924c22ebbd91",
+      "size_bytes": 11784
+    },
+    "sum": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

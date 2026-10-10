@@ -1,0 +1,103 @@
+{
+  "status": "passed independent reference arithmetic/direct-original-kernel checks; native comparison pending",
+  "reference_file": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json",
+  "reference_sha256": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+  "checks": [
+    {
+      "kind": "fixed_dimension",
+      "epsilon": "-19/6",
+      "target": 0,
+      "relative_change": "4.515122318419959479053391863859832147166722478689720534182274655409359829152520811111400260448587638E-54"
+    },
+    {
+      "kind": "fixed_dimension",
+      "epsilon": "-19/6",
+      "target": 1,
+      "relative_change": "4.100325287969725206952002060714295357645567194064676926216592726613588657773012507096743921574559337E-54"
+    },
+    {
+      "kind": "fixed_dimension",
+      "epsilon": "-5/4",
+      "target": 0,
+      "relative_change": "3.897867236765402450222724807147044104949382303092702750032545823749150754351062250405595661567632439E-55"
+    },
+    {
+      "kind": "fixed_dimension",
+      "epsilon": "-5/4",
+      "target": 1,
+      "relative_change": "1.161742218630355048906872073798920372741098876187663200096160928399101304314917603371319274964830266E-55"
+    },
+    {
+      "kind": "fixed_dimension",
+      "epsilon": "1/8",
+      "target": 0,
+      "relative_change": "7.470949912523207326329431617977909459390637501874955598053920962138108501984735364469119351202157705E-55"
+    },
+    {
+      "kind": "fixed_dimension",
+      "epsilon": "1/8",
+      "target": 1,
+      "relative_change": "5.645139317242352772921906301231788661388429589131583913771455057600398394093399837705617757559388651E-55"
+    },
+    {
+      "kind": "laurent",
+      "order": -3,
+      "target": 0,
+      "relative_change": "0"
+    },
+    {
+      "kind": "laurent",
+      "order": -2,
+      "target": 0,
+      "relative_change": "6.996430510047047461315634953200178248699699030207527810570986328881292296654093220334511787242464077E-56"
+    },
+    {
+      "kind": "laurent",
+      "order": -1,
+      "target": 0,
+      "relative_change": "1.362880027445202019659556771854529215831206253492183048686719936919545874123482662188923191256329715E-55"
+    },
+    {
+      "kind": "laurent",
+      "order": 0,
+      "target": 0,
+      "relative_change": "4.888728162747248599923606177124787155631342032893260027454865811557570856046741586909335913331580225E-56"
+    },
+    {
+      "kind": "laurent",
+      "order": -3,
+      "target": 1,
+      "relative_change": "0"
+    },
+    {
+      "kind": "laurent",
+      "order": -2,
+      "target": 1,
+      "relative_change": "1.355951407152112575144193302160484141584094089030242078463294182198340959259710090495974753671314535E-55"
+    },
+    {
+      "kind": "laurent",
+      "order": -1,
+      "target": 1,
+      "relative_change": "9.411870749293689952539410973214020806590953284291914127272565999334204631789946049267603184298287838E-56"
+    },
+    {
+      "kind": "laurent",
+      "order": 0,
+      "target": 1,
+      "relative_change": "2.666426571853368447674097880022920707086921411409384931306812289207976966923953354071012080581270513E-55"
+    }
+  ],
+  "arithmetic_comparisons": 14,
+  "largest_relative_precision_change": "4.515122318419959479053391863859832147166722478689720534182274655409359829152520811111400260448587638E-54",
+  "direct_quadrature_orders": [
+    24,
+    40,
+    64,
+    96
+  ],
+  "largest_final_direct_quadrature_relative_error": 8.132611430182034e-15,
+  "upper_surface_nonzero_at_all_generated_dimensions": true,
+  "native_amf_comparisons": 0,
+  "accuracy": "Exact analytic reference formulas evaluated at50/80digits; observed arithmetic refinements, not rigorous interval enclosures. Independent binary64 quadrature validates the original high-D mass-jet/surface formula."
+}

@@ -1,0 +1,10 @@
+
+running 5 tests
+test embedded_fixture_and_cargo_home_override_changes_affect_the_digest ... ok
+test fingerprint_tracks_dirty_sources_and_additions_but_not_build_products ... ok
+test mismatched_python_features_fail_instead_of_hashing_the_default_host_graph ... ok
+test package_fingerprint_is_independent_of_checkout_location ... ok
+test source_graph_follows_resolved_dependency_ids_and_rejects_wrong_host ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

@@ -1,0 +1,52 @@
+{
+  "source_files_verified_unchanged": 1808,
+  "captured_utc": "2026-10-09T23:18:02.615711+00:00",
+  "source_snapshot": "rule-union-three-loop-source-hashes.json",
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "files": {
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e": {
+      "sha256": "017b11e07730c6cd66a22d902358578ae35c930982a126e4ae0275ced855ef39",
+      "size_bytes": 1256125000,
+      "mtime_utc": "2026-10-09T23:09:47.252914+00:00"
+    },
+    "target/release/deps/rustred-258a1e04558e72f1": {
+      "sha256": "bd4eef81b6158344c4ed1c3b9d8978a0cdbfd4c9457f7bc2819211361840e66f",
+      "size_bytes": 630799184,
+      "mtime_utc": "2026-10-09T23:07:28.167580+00:00"
+    },
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f": {
+      "sha256": "1aea08c846e257db388efc481fdcbfd8e36b8795c50b95ccb0741bb5bfc081f2",
+      "size_bytes": 1289666128,
+      "mtime_utc": "2026-10-09T23:16:31.206729+00:00"
+    },
+    "target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib": {
+      "sha256": "ef6300a205a285ac90bd779c409057d6c482473f407a9e0bd53bcdfdde654e47",
+      "size_bytes": 602341832,
+      "mtime_utc": "2026-10-09T23:13:32.121347+00:00"
+    },
+    "target/release/deps/librustred-392075d0c6995fd1.rlib": {
+      "sha256": "5fba4da6fd300c0e4ac7bd65a4b29ac3a67d776b585ca27b8cb1e9373bc808c0",
+      "size_bytes": 435909924,
+      "mtime_utc": "2026-10-09T23:05:17.402232+00:00"
+    },
+    "target/release/build/symbolica-amflow-5130bc8702e2f88e/output": {
+      "sha256": "2b787128bb6e84f0194d01d5a1ae07334a186adc0565cf8ee773d44146decbbf",
+      "size_bytes": 723764,
+      "mtime_utc": "2026-10-09T23:01:43.949667+00:00"
+    }
+  }
+}

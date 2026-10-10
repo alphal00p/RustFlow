@@ -1,0 +1,26 @@
+{
+  "identities": [
+    [
+      "bulk_beta_moments_to_rational",
+      "0"
+    ],
+    [
+      "upper_beta_moments_to_rational",
+      "0"
+    ],
+    [
+      "complete_raised_to_scalar_ratio",
+      "0"
+    ],
+    [
+      "epsilon_ratio_through_second_order",
+      "0"
+    ]
+  ],
+  "mass_jet_difference": "0",
+  "method": "native Symbolica rational cancellation of the original mass derivative and unsimplified Beta moments",
+  "native_predictions_read": 0,
+  "oracle_values_read": 0,
+  "scope": "independent exact reference algebra; no native AMF evaluation or oracle values",
+  "status": "passed"
+}

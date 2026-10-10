@@ -209,7 +209,7 @@ def artifacts():
             entries[-1]['targets'][1]['reference'].update({
                 'derivation_and_obstacles':'docs/finite-density-missing-references.md',
                 'definition_only_diagnostics':'reports/validation/2026-10-09-finite-density-native-assembly/missing-reference-diagnostics.json',
-                'next_gate':('Common thermal matching for shared interior pole/discontinuity loci across all 29 cut sectors, then local UV/IR subtraction; independently assigned denominator PVs are not established.' if record_id=='I91' else 'Complete all three two-cut Gaussian parameter kernels, regulated independent-mass differentiation, overlapping endpoint subtractions and refined Laurent quadrature; the triple-cut triangle kernel alone is not a reference.'),
+                'next_gate':('Common thermal matching for shared interior pole/discontinuity loci across all 29 cut sectors, then local UV/IR subtraction; independently assigned denominator PVs are not established.' if record_id=='I91' else 'Complete arithmetic, Barnes-quadrature and epsilon-grid refinements of the independent raised-target Laurent reference; the derived eight-sector finite-epsilon sum is already checked, but no full Laurent acceptance is claimed.'),
             })
     # A small massive nonfactorized graph requires complete 0/1/2-cut assembly.
     small_edges=[[0,1],[1,0],[1,0]]
@@ -238,6 +238,9 @@ def artifacts():
                  'targets':[{'powers':[1,1,1,1,1,1],'numerator':'g1_2+u1*u2'},
                             {'powers':[2,1,2,1,1,1],'numerator':'g1_2+u1*u2'}]}
     outputs['examples/finite_density/two_independent_chemical_cycles.json']=multi_input
+    three_input=json.loads((ROOT/'examples/finite_density/massless_three_loop_chain.json').read_text())
+    three_certificate=certificate([e['vertices'] for e in three_input['edges']],
+                                  [[int(x) for x in e['routing']] for e in three_input['edges']], [1,0,0])
     manifest={
         'schema_version':1,'status':'acceptance_plan_not_numerical_acceptance',
         'source_baseline':'b3a4843e8327835d1ec3ada5a6f32f1841bab2c2',
@@ -291,6 +294,33 @@ def artifacts():
                                'admitted_scope':'This numerically validated two-loop example lies inside the current sealed singleton-germ and independent-rank-one-block classes; polynomial completions, all uncut physical factors shifted, bound common thermal origin and finite-label endpoint proof.',
                                'binary_provenance_limitation':'Original native executable digest was not captured before relink; source277 snapshot and run/build evidence retained. Final-order executable digest captured and all10 matched-profile values are exact decimal-string equal.',
                                'four_loop_native_predictions':0,'supplied_oracle_numerical_records_compared':0},
+        'three_loop_intermediate':{
+            'definition':'examples/finite_density/massless_three_loop_chain.json',
+            'input_sha256':hashlib.sha256((ROOT/'examples/finite_density/massless_three_loop_chain.json').read_bytes()).hexdigest(),
+            'graph_certificate':three_certificate,
+            'purpose':'User-requested full three-loop validation checkpoint before further four-loop numerical scale-up; does not replace any four-loop mandatory target.',
+            'targets':three_input['targets'], 'required_cut_subsets':[[],[0],[3],[0,3]],
+            'reference_status':'independent_analytic_reference_generated_and_checked',
+            'reference':'reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json',
+            'reference_validation':'reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json',
+            'derivation':'docs/finite-density-three-loop-reference.md',
+            'reference_method':'Independent Gaussian first moment and compact Beta integrals, with fixed original mixed medium numerator, independent occupied mass jet and separate nonzero moving upper surface. No AMF predictions or supplied oracle answers read.',
+            'reference_dimensions':['31/3','13/2','15/4'], 'laurent_orders':[-3,0],
+            'reference_precision_digits':[50,80], 'arithmetic_refinement_checks':14,
+            'exact_symbolic_reference_identity_checks':5,
+            'exact_reference_validation':'reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact-identities-validation.json',
+            'largest_relative_arithmetic_change':'4.5151223184199595e-54',
+            'direct_original_kernel_quadrature_orders':[24,40,64,96],
+            'largest_final_direct_quadrature_relative_discrepancy':'8.132611430182034e-15',
+            'reference_uncertainty':'Exact analytic formula with empirical arithmetic/quadrature validation; no rigorous interval enclosure asserted.',
+            'native_status':'full_amplitude_not_yet_validated; bounded rule-union controls remained unclosed and three subsequent residual-focused controls, including the matched requested-index-priority control, timed out at 240 seconds before predictions',
+            'native_controls_report':'reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-controls.json',
+            'historical_rule_union_controls':'reports/validation/2026-10-09-finite-density-native-assembly/three-loop-rule-union-controls.json',
+            'native_prediction_comparisons':0,
+            'comparison_script':'tools/finite_density/compare_three_loop_reference.py',
+            'required_native_profiles':{'fixed_dimension':4,'laurent':5},
+            'relative_tolerance':'1e-12','small_magnitude_threshold':'1e-20','small_absolute_tolerance':'1e-25',
+            'production_requirement':'All occupied sectors use genuine native weighted AMF; the reference Gaussian/Beta expressions are validation-only.'},
         'small_graph':{'definition':'examples/finite_density/massive_two_loop_sunset.json',
                        'graph_certificate':small,'required_cut_components':[0,1,2],
                        'vacuum_contribution':'Nonzero for positive masses; must evaluate and compare, not omit as scaleless.',
@@ -365,7 +395,7 @@ def main():
             path.write_text(expected)
         elif not path.exists() or path.read_text()!=expected:
             raise SystemExit(f'Stale generated artifact: {relative}; run with --write')
-    print('Validated 3 distinct nonfactorized four-loop graph certificates, one two-loop graph, two independent charge cycles, and 108 definition-only targets. No numerical predictions or comparisons were performed.')
+    print('Validated 3 distinct nonfactorized four-loop graph certificates, one two-loop graph, the three-loop intermediate graph, two independent charge cycles, and 108 definition-only targets. No numerical predictions or comparisons were performed.')
 
 
 if __name__=='__main__':

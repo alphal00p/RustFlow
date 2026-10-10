@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "kind": "test-only assertion correction, production union behavior unchanged",
+  "file": "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs",
+  "before_sha256": "1724973415d4dbc03d6951a73a618b9660019d7d3fb9fc1a9405c5414f19910a",
+  "after": {
+    "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs",
+    "sha256": "96211e880035563100b22d79435271b65820bfc0104f4bef2ee840466febb60b",
+    "bytes": 46321
+  },
+  "old_expectation": "SolverError::ExactReplay",
+  "new_expectation": "SolverError::Certification(\"original-source replay does not recover the candidate equation\")",
+  "execution": "fresh native test execution pending; initial64pass/1assertionfailure/1ignored remains recorded"
+}

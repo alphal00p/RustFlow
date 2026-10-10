@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "status": "64 passed, one test assertion failed, one intentionally ignored",
+  "passed": 64,
+  "failed": 1,
+  "ignored": 1,
+  "union_subset_passed": 4,
+  "union_subset_failed": 1,
+  "harness_seconds": 0.04,
+  "production_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/rule-union-three-loop-source-hashes.json",
+    "sha256": "c8efecbf47c5b6c87b0f962824ae924b5de1351c80dd331af8163dd5ccc338bd",
+    "bytes": 270148
+  },
+  "native_unit_fingerprint": {
+    "rustc": 125055456796404090,
+    "features": "[\"native\"]",
+    "declared_features": "[\"capacity-dispatch\", \"default\", \"native\", \"reconstruction\", \"runtime-arity-selection\", \"wasm\"]",
+    "target": 15524714038289382666,
+    "profile": 15742760760299065947,
+    "path": 10518762766304062630,
+    "deps": [
+      [
+        2442470269441587549,
+        "build_script_build",
+        false,
+        6449696353710696453
+      ],
+      [
+        6303744891922679093,
+        "rustred_order",
+        false,
+        5706981512261138891
+      ],
+      [
+        8841681343991089453,
+        "blake3",
+        false,
+        15059736767819716970
+      ],
+      [
+        11862723254873017773,
+        "bincode",
+        false,
+        3169496138083783616
+      ],
+      [
+        11910974697091955563,
+        "rayon",
+        false,
+        13129736754314153783
+      ],
+      [
+        14668903365372062426,
+        "rand",
+        false,
+        15313876221564166678
+      ],
+      [
+        17020882691900786901,
+        "symbolica",
+        false,
+        385543394876369414
+      ]
+    ],
+    "local": [
+      {
+        "CheckDepInfo": {
+          "dep_info": "release/.fingerprint/rustred-258a1e04558e72f1/dep-test-lib-rustred",
+          "checksum": false
+        }
+      }
+    ],
+    "rustflags": [],
+    "config": 9396254390672932401,
+    "compile_kind": 0
+  },
+  "native_features": [
+    "native"
+  ],
+  "build_command": [
+    "nix",
+    "develop",
+    "--command",
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "--release",
+    "-p",
+    "symbolica-amflow",
+    "-p",
+    "rustred",
+    "--features",
+    "symbolica-amflow/python",
+    "--lib",
+    "--no-run"
+  ],
+  "failure": {
+    "test": "solver::guarded::lifecycle::tests::replayed_union_rechecks_rule_proofs",
+    "assertion_expected": "SolverError::ExactReplay",
+    "source_review": "guarded replay rejects a mismatched candidate via SolverError::Certification; narrower exact-message correction pending",
+    "actual_error_debug": "not printed by original assertion"
+  },
+  "resources": "native-rule-union-before-assertion-fix-resources.json",
+  "provenance": "native-rule-union-before-assertion-fix-resources.provenance.json",
+  "log": "native-rule-union-before-assertion-fix-resources.log"
+}

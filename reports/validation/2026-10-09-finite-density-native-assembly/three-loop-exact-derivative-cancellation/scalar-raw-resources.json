@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/tmp/three_loop_derivative_cancellation",
+    "/tmp/three-loop-combined-reductions.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-exact-derivative-cancellation/three-loop-scalar-root.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-exact-derivative-cancellation/scalar-raw.json",
+    "raw"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.8395674717612565,
+  "user_seconds": 0.659809,
+  "system_seconds": 0.17857399999999998,
+  "peak_child_rss_kib": 30760,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

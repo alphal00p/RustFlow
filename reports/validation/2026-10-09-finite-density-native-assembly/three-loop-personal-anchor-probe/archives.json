@@ -1,0 +1,807 @@
+{
+  "files": [
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-false.json",
+      "original_bytes": 11453,
+      "original_sha256": "38a423612c031765e3389271b3eee1ccb1f2f0afacbe58d27d4607b707fc68dc",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-false.json.gz",
+      "archive_bytes": 2250,
+      "archive_sha256": "281e30d7cfb3c119c97b2bf48ee968844c3157e823ee14c8a6e6e53c92637eb2",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-false.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-false.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-true.json",
+      "original_bytes": 11452,
+      "original_sha256": "3ecf948e47cd3189c3bd0c8cab9053160b329257c96632a57538ad314825a8b6",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-true.json.gz",
+      "archive_bytes": 2249,
+      "archive_sha256": "e979ed677299480a0a4ccbc7e24434e24a8762cca3d440c0350d9d0f960316d2",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-true.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-01-anchor-true.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-false.json",
+      "original_bytes": 12323,
+      "original_sha256": "5164950a9a459aa191a88956b41106935c837c3f9916be246a479a8e2c878514",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-false.json.gz",
+      "archive_bytes": 2263,
+      "archive_sha256": "0bba0e8ad9923e31a132da225de2d1a81ad6429b19684805cb81161bd561aa02",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-false.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-false.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-true.json",
+      "original_bytes": 12322,
+      "original_sha256": "e1f2608d63dbff46de7106d758eb92a00f14287d8da269d04e4def59d73908b3",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-true.json.gz",
+      "archive_bytes": 2268,
+      "archive_sha256": "1b719c7590b258501a267cf0c4e726090e5d7e715d0c20be89286aabc60bea81",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-true.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-02-anchor-true.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-false.json",
+      "original_bytes": 14064,
+      "original_sha256": "0e640011b29088bf11d445d2d6706304fbda914541e4189aacbe75201ae53ff8",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-false.json.gz",
+      "archive_bytes": 2291,
+      "archive_sha256": "29a41029925b120270c40356536d4ac5969c6b24030783b8fe848ac703e4094b",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-false.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-false.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-true.json",
+      "original_bytes": 22014,
+      "original_sha256": "2d54b534bbd837f7ef4226fb9357c6feb1397f48449bc3697d13ca7fb919aa9f",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-true.json.gz",
+      "archive_bytes": 2527,
+      "archive_sha256": "31e20cb81004ac40143475455462bcec88399057c39af99f8d4fbb20f6082199",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-true.json.bin",
+      "original_bytes": 113561,
+      "original_sha256": "134a93be839f32ef123b22361ab29cf583c6fd2e62492eb83a0619a1238b266b",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-04-anchor-true.json.bin.gz",
+      "archive_bytes": 5176,
+      "archive_sha256": "8212cb56169297aa5e3432e92beda88d213aa62d453dae48b52c1b54870b74bf",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-false.json",
+      "original_bytes": 22066,
+      "original_sha256": "4bf5e09448ada7ada4e906bb731e45620b4c65648c0e80c6b365902c28e80a57",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-false.json.gz",
+      "archive_bytes": 2517,
+      "archive_sha256": "b704ac1daeeba0976b4cd7e485f83ac5e370bce090f4af5fd736c6401850d554",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-false.json.bin",
+      "original_bytes": 113444,
+      "original_sha256": "7d8d71eaacd7820fdc77c9ea2741f17bcfd72ecdf046d57b68dca1a062f85530",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-false.json.bin.gz",
+      "archive_bytes": 5192,
+      "archive_sha256": "711abdb82e8707e52883e0bb7c709146d8b4063f5dfb12b42b8265b390d0fb77",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-true.json",
+      "original_bytes": 39000,
+      "original_sha256": "81420b4a848210f85f5633a240b5eb3878c23d451a0ba42644dfd656b403afc7",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-true.json.gz",
+      "archive_bytes": 2822,
+      "archive_sha256": "08c400e6edfbe5c95b105ed77a51696421f99e80219f16aa48e7f5c00369780b",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-true.json.bin",
+      "original_bytes": 116677,
+      "original_sha256": "06ff08313f54e6b2cb72b11c2f42156be45f9f1ed310ea94663c77394421f974",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-08-anchor-true.json.bin.gz",
+      "archive_bytes": 5457,
+      "archive_sha256": "d0e1dd728cb04b32e8fc135d57ba7d29e42dafea65c5dee13217b35dbe7810f9",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-false.json",
+      "original_bytes": 68778,
+      "original_sha256": "0f82ebb36852cb8e221671238c8cc31624ac4b848a04cb242001b9559c3af4b8",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-false.json.gz",
+      "archive_bytes": 3104,
+      "archive_sha256": "49841c586b7fe821d2f88c004f94390a5810ed678e8f3f105f0191092b74f888",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-false.json.bin",
+      "original_bytes": 117730,
+      "original_sha256": "67e218bf14684707158468f9951034ba7cf2f8c9e1181925d35ce959c4d80535",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-false.json.bin.gz",
+      "archive_bytes": 5543,
+      "archive_sha256": "7486f3bd1f2ee706630b845b0e49269d93d84620a68c84eaa5a1db874aee6037",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-true.json",
+      "original_bytes": 87813,
+      "original_sha256": "132268e3633bea766c9b743ff9a1e296bba4c8bdeb0cc558123bc16374605d57",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-true.json.gz",
+      "archive_bytes": 3409,
+      "archive_sha256": "5c9d84b2f0c950253cf80cece09b19cd48343293cf6011febb6a96e6c0a6bb8c",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-true.json.bin",
+      "original_bytes": 121891,
+      "original_sha256": "06d2f5414f2a61a7e5fe5c6a3eac9e68f6e273877f04491bf3c14788f36535c8",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-16-anchor-true.json.bin.gz",
+      "archive_bytes": 5896,
+      "archive_sha256": "aa21b55ef1b6d1aa15eac18392267d664d2e5b400012ea7cc1415aae55ea02c5",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-false.json",
+      "original_bytes": 148899,
+      "original_sha256": "4bfd964d8834e1c77c895844a33323d88c8cf6b52aec2f1a52d902701aa09683",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-false.json.gz",
+      "archive_bytes": 4162,
+      "archive_sha256": "62ab063441edf55a0cd5d78ad0dd930a266d4bc2d709a2d604f24bf21077433d",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-false.json.bin",
+      "original_bytes": 133201,
+      "original_sha256": "3cca94f06de7356af13768010f9ba7fd8cf7ab4724b5863d0bba7fe44c22a69b",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-false.json.bin.gz",
+      "archive_bytes": 6761,
+      "archive_sha256": "e8f9d0d2132c8c4d636b643067a06a7c696ccc52cb7320aaa17da4ad84efce04",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-true.json",
+      "original_bytes": 148898,
+      "original_sha256": "cc628f5a57f5e1605d7dec99a83bd5c5a72255b03596a05d5a9df05d3f6a7c72",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-true.json.gz",
+      "archive_bytes": 4192,
+      "archive_sha256": "b52ea9d96c510faacfad3f8910bcd2217119330f06942a50583298f55c25fe4e",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-true.json.bin",
+      "original_bytes": 133201,
+      "original_sha256": "8aeaa67d12fb43337ab336559a1f24f646eca0b31a6dc5eadb0d4b44519ab0b9",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/budget-32-anchor-true.json.bin.gz",
+      "archive_bytes": 6769,
+      "archive_sha256": "9586f3660281e3a1b41c882f786965806d4a4b3d36ee950cd9a590bcedde18eb",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/null-even-minimal-point.json",
+      "original_bytes": 13056,
+      "original_sha256": "39d2cfddb84f4c204ea9fa2c88b74d7f669acec9a65bd2997ef286d780fd5eab",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/null-even-minimal-point.json.gz",
+      "archive_bytes": 2376,
+      "archive_sha256": "39fdcac3c113969bd397a73b54c332b59c7fc8d7a24b8ac5e07aca93adabcefa",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/null-even-minimal-point.json.bin",
+      "original_bytes": 112384,
+      "original_sha256": "589051ef34627ca73c2e405286bae643c05b1baa281448710f39fa38f875ad4b",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/null-even-minimal-point.json.bin.gz",
+      "archive_bytes": 5072,
+      "archive_sha256": "eb9d0b7fac93df63420cdc7ae580818c19897cddb59d06f07c7201d908ba5cb2",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-point-budget-32-anchor-true.json",
+      "original_bytes": 18783,
+      "original_sha256": "1f2652add3a5e3dde1aece292ca9edcb2beffa46e22cf6b7a645bb071d155c7a",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-point-budget-32-anchor-true.json.gz",
+      "archive_bytes": 2432,
+      "archive_sha256": "0f28e98037b19eaa86e967d11c7800e82ad1f320b9a3602bf6a49ccbece15a05",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-point-budget-32-anchor-true.json.bin",
+      "original_bytes": 112542,
+      "original_sha256": "9e589fdb09b1cdff8260fa31ac40844baf436c43be6fa978ee4158f4c07df7e3",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-point-budget-32-anchor-true.json.bin.gz",
+      "archive_bytes": 5084,
+      "archive_sha256": "cbc32730b58fd3f093df5a529c6231b108402b82aad0c93eef2ead5f5bf1c4dd",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-target-rays-budget-32-anchor-true.json",
+      "original_bytes": 82574,
+      "original_sha256": "031b42b7f485411500ea07573b3b0bdb8dadc3c43f99cd057e98fd1f725dc19d",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-target-rays-budget-32-anchor-true.json.gz",
+      "archive_bytes": 3400,
+      "archive_sha256": "ed0f0c84a608f52c3881822fa1672827635a0c7d8560a8fb10afc6ecf94fa37a",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-target-rays-budget-32-anchor-true.json.bin",
+      "original_bytes": 127165,
+      "original_sha256": "5cea9984a5594e74bfe8f447b3022cb286ba8862fd264b5b5770f5a770aaee4c",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-1-target-rays-budget-32-anchor-true.json.bin.gz",
+      "archive_bytes": 6325,
+      "archive_sha256": "1afdecad8d58283655a6ede3a1344a0f48dc5a2845b6e0a67800f4791e3e6fa1",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-point-budget-32-anchor-false.json",
+      "original_bytes": 13058,
+      "original_sha256": "a5f68e6a9436b1b8180fc910ee8a6737b8286034f912e5712f353ff041da4f9c",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-point-budget-32-anchor-false.json.gz",
+      "archive_bytes": 2376,
+      "archive_sha256": "71d6192d8737efb9c8444a72caa6e007336ea56702a9c927fb0ddf5a96b45fb7",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-point-budget-32-anchor-false.json.bin",
+      "original_bytes": 112266,
+      "original_sha256": "798e79b5889aa57dd165d2e1fc3ffc6832657c2ebcb4710627e6751db40662bb",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-point-budget-32-anchor-false.json.bin.gz",
+      "archive_bytes": 5064,
+      "archive_sha256": "63a75ff121a8bd151b6f5e259dd8c49332437c9cd394f03a5cb8036ad5bd1110",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-false.json",
+      "original_bytes": 11448,
+      "original_sha256": "a1cee3b7287635e9c162e159912f8a6e22765275b92c9a363edabb0031941b26",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-false.json.gz",
+      "archive_bytes": 2258,
+      "archive_sha256": "717fdb6f2f2aebefaeb045ac367dc9ab65f0838a3a92ef756bd71ffe4b1902f1",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-false.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-false.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-true.json",
+      "original_bytes": 11447,
+      "original_sha256": "46ace944b6e684f866bdc51fabcc7e26740ff4be83d4a6d837f2dd24654343da",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-true.json.gz",
+      "archive_bytes": 2257,
+      "archive_sha256": "52950301cdcd183a03581dffa4d3a0d62eb42d17da40b2d3fce1ee5fc3175f3f",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-true.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-01-anchor-true.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-false.json",
+      "original_bytes": 12317,
+      "original_sha256": "333d9c85374ca72ca794f0d69cfc85b7eedf96120ab8e5b99dcfcc3903080f03",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-false.json.gz",
+      "archive_bytes": 2268,
+      "archive_sha256": "9d37bdb88a82c0e4aca9be0b5a8d4e524ce4a755e984c69651f0c3c052797809",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-false.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-false.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-true.json",
+      "original_bytes": 12316,
+      "original_sha256": "5750ff00a4ff84c8aa29e9dbb81a02d38ed4443e0c2176fc38d806e737cb75d0",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-true.json.gz",
+      "archive_bytes": 2274,
+      "archive_sha256": "6efc6b57bcc44a80147d53c6587432ffd62a8ed58d156e1049f713297de32934",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-true.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-02-anchor-true.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-false.json",
+      "original_bytes": 17141,
+      "original_sha256": "5db6637a6e6c126073212e161cff2652baaf8c2c10029e68f8b7b57c381cc69e",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-false.json.gz",
+      "archive_bytes": 2467,
+      "archive_sha256": "463a2076acce4afb2ca792f66c35af93f7d65ee8cab4eed872136b03e38488a6",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-false.json.bin",
+      "original_bytes": 112106,
+      "original_sha256": "cb9b6a6ee15faece4d8034e5d6ab7a4cfc8c33f915c49e259b978ab8462e0d78",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-false.json.bin.gz",
+      "archive_bytes": 5054,
+      "archive_sha256": "18bb7aa47c9e74af2cb52efcd736dd2fe3d2ca79f390d84e048e200659deada4",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-true.json",
+      "original_bytes": 19350,
+      "original_sha256": "5ad1e0917edbe17f7d70c8fda839e3d29df4b928a3ebaf25c74a7ea634f3b585",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-true.json.gz",
+      "archive_bytes": 2509,
+      "archive_sha256": "ea809c87d49df24127fb33301ec2b87a928c47c5ad3609cc569c877adae22f05",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-true.json.bin",
+      "original_bytes": 112368,
+      "original_sha256": "1b24c79c54a6f081e0bbed87c38e9e95b18fce2a7b94dddb7c98ee9c173d7ffe",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-04-anchor-true.json.bin.gz",
+      "archive_bytes": 5079,
+      "archive_sha256": "ad158b1f0456dac91fada8c9d351855714b8eaabe3502478184db43a09fa9349",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-false.json",
+      "original_bytes": 22834,
+      "original_sha256": "01faa3b40613d891c874fd78a89425fd71ca8629fb1098e101bf3e2d2dd20e81",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-false.json.gz",
+      "archive_bytes": 2543,
+      "archive_sha256": "fcace2cf0346b89736da31363ca41f100e07686f93ad6846c459b031db42fee9",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-false.json.bin",
+      "original_bytes": 112368,
+      "original_sha256": "1b24c79c54a6f081e0bbed87c38e9e95b18fce2a7b94dddb7c98ee9c173d7ffe",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-false.json.bin.gz",
+      "archive_bytes": 5079,
+      "archive_sha256": "ad158b1f0456dac91fada8c9d351855714b8eaabe3502478184db43a09fa9349",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-true.json",
+      "original_bytes": 26689,
+      "original_sha256": "155c17eac0d0e254a280752b861d88d98b45c55a1b117e648dbbdfd54e9253ee",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-true.json.gz",
+      "archive_bytes": 2652,
+      "archive_sha256": "a44f83af1ceef5dbe5810473e24da77abb7384a579b6ae0d3ec30fbfe13e2489",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-true.json.bin",
+      "original_bytes": 113661,
+      "original_sha256": "5ddfc3d19b5c1c5575ddf01c7a1c094e3c17cdd5fe9f21c4d0ebb400a70ca14c",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-08-anchor-true.json.bin.gz",
+      "archive_bytes": 5200,
+      "archive_sha256": "41744652ad51b6380dd26a6d0bb3358250f538ab0265c703551489493faffe7e",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-false.json",
+      "original_bytes": 43372,
+      "original_sha256": "ea2f9b917539c6ecba42cff2baf0020e081fd51d17d4943b8b3f43b84f07b9dc",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-false.json.gz",
+      "archive_bytes": 2893,
+      "archive_sha256": "b12fa951b0e2cb482f121701abfca4e380813250d74dab0609a97d313e82d641",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-false.json.bin",
+      "original_bytes": 119776,
+      "original_sha256": "35525edec480ba701df6d1a00fe00c825d0422f5e5787c1120737420a6719fe5",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-false.json.bin.gz",
+      "archive_bytes": 5694,
+      "archive_sha256": "3fce11802f76c58acecb0b139ac85158d1652aa671f0feef72774fbde698a128",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-true.json",
+      "original_bytes": 42508,
+      "original_sha256": "e866233f4bbb400755e0613e049b59d12f72e0d68ade89f53d9d9d830ab75e27",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-true.json.gz",
+      "archive_bytes": 2887,
+      "archive_sha256": "3f46fa65d62db6b16d2ba362ca920e74730c7d6761f8e43d75821b5f5f55e2dd",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-true.json.bin",
+      "original_bytes": 119342,
+      "original_sha256": "efb74aa3d6a65cea27c83d5c845bf93da728378fa21d4465df0dd431854ed41e",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-16-anchor-true.json.bin.gz",
+      "archive_bytes": 5633,
+      "archive_sha256": "3b61a8430ab250a21326c8c230739e0c5a9643cdcc4de8a434330fb59364aab1",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-false.json",
+      "original_bytes": 85231,
+      "original_sha256": "b7d5d072a7b2de92c4f4e644d3aad9b356875f177205fdbd9d06447a0ae7b80f",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-false.json.gz",
+      "archive_bytes": 3422,
+      "archive_sha256": "5fb803bed7ee13d5a848641fafcf7f1a8e164438e4889bd368ac33b3132288d9",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-false.json.bin",
+      "original_bytes": 126697,
+      "original_sha256": "e026ec348c915a71f72b09ff5c622224ca3f6b39e640e1dc9e77709c6c081db4",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-false.json.bin.gz",
+      "archive_bytes": 6269,
+      "archive_sha256": "5b080d384c6aa2af83f5916a0d2f9587a1a7f57174ade250f5103111ac99e105",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-true.json",
+      "original_bytes": 85230,
+      "original_sha256": "6ffff79a5f583f9b5c77a4c5fbce73d6c81ac2aea953558cb4339da8b081732e",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-true.json.gz",
+      "archive_bytes": 3423,
+      "archive_sha256": "16701f367c39757bc693112873e9d5e0d636070a5b7c7daec447d810dae7b3d2",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-true.json.bin",
+      "original_bytes": 126697,
+      "original_sha256": "e05951adcabdb6d113a0268f003a481caebd210ee1bb2791a6e92f712a629de6",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-2-target-rays-budget-32-anchor-true.json.bin.gz",
+      "archive_bytes": 6264,
+      "archive_sha256": "5e9eb0ec99155fc7c3b5bc567e792ad6634c26e5f786637ef271bd8f294cd9c4",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-point-budget-32-anchor-false.json",
+      "original_bytes": 13058,
+      "original_sha256": "f699f74d33f4fff1bc028c16dd808aaca7b98d3e364948b1fb6f4531833f3fff",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-point-budget-32-anchor-false.json.gz",
+      "archive_bytes": 2395,
+      "archive_sha256": "d023006b66223b7f6ca83b3a2314904911e18b6b9c8674e6b35b0386bd815996",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-point-budget-32-anchor-false.json.bin",
+      "original_bytes": 112266,
+      "original_sha256": "749372f05230e6d69f44845091fcda48ae8ed017827ff72f2238816e052e06cb",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-point-budget-32-anchor-false.json.bin.gz",
+      "archive_bytes": 5069,
+      "archive_sha256": "50d0c1be7ed7e99e981de27d50978cd4d5f69437538aea89e7e8aae9ad5c28ed",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-false.json",
+      "original_bytes": 11448,
+      "original_sha256": "cd0cf7b3ef9d5ea2974673fae80e06e53bac82c4b07a5d463cd6b024d68db3fb",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-false.json.gz",
+      "archive_bytes": 2267,
+      "archive_sha256": "4d87f625ccc5e3925ce84a674f191aa57c07a0335088fc614b291ec92bc9c600",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-false.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-false.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-true.json",
+      "original_bytes": 11447,
+      "original_sha256": "1c2a8d91081c18874020d391cec58a22c11ad6f37deb15f91f0ed78ecffbcebc",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-true.json.gz",
+      "archive_bytes": 2266,
+      "archive_sha256": "d4f39078dee6654c371310c9d4217de51fea564fe297a6274eac08d91dcbdd8e",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-true.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-01-anchor-true.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-false.json",
+      "original_bytes": 12317,
+      "original_sha256": "d8fff903522738b6d7d47967c89132876c46fb9c9fb448d60620c257ff3c90d9",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-false.json.gz",
+      "archive_bytes": 2278,
+      "archive_sha256": "8363a4883a98f00568ce3fcf910ea0508ce18d7e08a85895c7e1b595de74bfe1",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-false.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-false.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-true.json",
+      "original_bytes": 12316,
+      "original_sha256": "f544ddb9753d24a5ee91997af6521ff11ccaa32e444ce0c8c41aeada0b6aef52",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-true.json.gz",
+      "archive_bytes": 2285,
+      "archive_sha256": "0878c292478e5a043c48fdba2f8d52c782d823e84b3e1028ad0d5ba7bd760434",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-true.json.bin",
+      "original_bytes": 111683,
+      "original_sha256": "bec6dfdd60bc04442adf71c04415b5cb7f0bd8d2e2641600beaab6032da64e55",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-02-anchor-true.json.bin.gz",
+      "archive_bytes": 4989,
+      "archive_sha256": "bb4239451e0a3fded18578d8540b504f88e9710a6237170c50913350f9d9ec45",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-false.json",
+      "original_bytes": 17141,
+      "original_sha256": "62232c5a4f070a72fc723cb0d9fb17e293c6cc1e2781a5098c37bd0336054743",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-false.json.gz",
+      "archive_bytes": 2475,
+      "archive_sha256": "cb93cdcf2fb0169824f9c016d86ac4aba3496ce7fb285fe51310dc4610cbae61",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-false.json.bin",
+      "original_bytes": 112106,
+      "original_sha256": "3d6e9602fcb2575585a4f510eb816b8dbbdbc8d26d78e65a9046f974ee6184c8",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-false.json.bin.gz",
+      "archive_bytes": 5052,
+      "archive_sha256": "a03e3aa92acc605a3c4bc36ca5a998d7465f3981ee31c0371d6046f52e9de00e",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-true.json",
+      "original_bytes": 19351,
+      "original_sha256": "06d10afce91b6bbd10a6e3535abe51944e5b5826cb9d6cd34b0acb26c9708e5a",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-true.json.gz",
+      "archive_bytes": 2521,
+      "archive_sha256": "332b4c9eccd1ee07f5db66f664a314fc8861873a0f8ada0863aeecc7f050f8d8",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-true.json.bin",
+      "original_bytes": 112368,
+      "original_sha256": "6e798c332b74baef2fd2e2d7db3d0a4d36582ddf373c1b603065954d4b8b348b",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-04-anchor-true.json.bin.gz",
+      "archive_bytes": 5079,
+      "archive_sha256": "c781a446e44d07e0acf1f892a9a5abe0bdebfd0d83ac6d8138bf9a735bb844c6",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-false.json",
+      "original_bytes": 22834,
+      "original_sha256": "00098eda0388a8b92fb240266439eafb27bb2542b1630ac5e311b7dfef97f194",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-false.json.gz",
+      "archive_bytes": 2554,
+      "archive_sha256": "19486149ec6e39c6334951179e9a4aa89f3fd3a01cdbd9d26e195279872e575a",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-false.json.bin",
+      "original_bytes": 112368,
+      "original_sha256": "6e798c332b74baef2fd2e2d7db3d0a4d36582ddf373c1b603065954d4b8b348b",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-false.json.bin.gz",
+      "archive_bytes": 5079,
+      "archive_sha256": "c781a446e44d07e0acf1f892a9a5abe0bdebfd0d83ac6d8138bf9a735bb844c6",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-true.json",
+      "original_bytes": 26690,
+      "original_sha256": "2cfdc08800f537e0d40105c931793c3cee582f46d4c4ca2a9104f83f6f576781",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-true.json.gz",
+      "archive_bytes": 2661,
+      "archive_sha256": "430a2670105975611cc823699d6e2d12817fcfe8fe5279e8cfcbf2a0e896dda9",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-true.json.bin",
+      "original_bytes": 113661,
+      "original_sha256": "0d45b40991efff691555424b69c235397213d2195d2a98aa3bbd275de68faa80",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-08-anchor-true.json.bin.gz",
+      "archive_bytes": 5204,
+      "archive_sha256": "4a50c4159acfd6dd6b7069425602f3790fcfdff0c29d55615b6cf537c25d3539",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-false.json",
+      "original_bytes": 43372,
+      "original_sha256": "157132eef268e681711b972db0410452acedc75a60e8cf4cbe6a24ae63ac47f4",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-false.json.gz",
+      "archive_bytes": 2904,
+      "archive_sha256": "095b0de81a8660a278923e8565d475ba8df437fb185ad475b670365f08e83458",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-false.json.bin",
+      "original_bytes": 119776,
+      "original_sha256": "92d602662ac728f83909cf862b1e1eae7a4f392081032f9c44addb5423e1bb04",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-false.json.bin.gz",
+      "archive_bytes": 5694,
+      "archive_sha256": "92dd6c5ba1218e7e4d95d6b7e8218e38e43341686642cb7c484ef81e4a371c74",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-true.json",
+      "original_bytes": 42509,
+      "original_sha256": "e56320348bb6e4ca3a8434c454d898fad14908e97d561106789a2e0c23e27fe8",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-true.json.gz",
+      "archive_bytes": 2897,
+      "archive_sha256": "2d62a7dec3e681d858a4bb25870d4fd428f0722c358521ad90458f0ae214b670",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-true.json.bin",
+      "original_bytes": 119342,
+      "original_sha256": "0aca0f3f592370410ec3d1aaa8116743a358bfe91715387f990c933be86a1590",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-16-anchor-true.json.bin.gz",
+      "archive_bytes": 5636,
+      "archive_sha256": "c7b8a905a009be37ee02220f722f06daf9127c9a29d36f18114f997ac43b6a9f",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-false.json",
+      "original_bytes": 85230,
+      "original_sha256": "3725204f6cb39b79a4b5aa3b90756d6a9e850c78fd646bfc5634638ae2edbe63",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-false.json.gz",
+      "archive_bytes": 3428,
+      "archive_sha256": "b9825b33d8ab0c422453a72317226ea2acd7b63ff46e1316382cdd67fa4275e0",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-false.json.bin",
+      "original_bytes": 126814,
+      "original_sha256": "f27b640785fb212f59d4687c334c567f5ba654f7dd5dc4519fc84dcee63e829f",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-false.json.bin.gz",
+      "archive_bytes": 6269,
+      "archive_sha256": "52e747bc654fc808b8ea65968bb4dcf3baa5ce8ce9c510d4cec3f442472dd147",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-true.json",
+      "original_bytes": 85230,
+      "original_sha256": "5ca12006312b53d68c7bef081a36ed4bf6cc0bf4c5dc4ef4b4317150e9652ec2",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-true.json.gz",
+      "archive_bytes": 3430,
+      "archive_sha256": "903aa4958019b1a6c94a75b0137a41f0cd08ea6e477c5509be8c7d24330fa173",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-true.json.bin",
+      "original_bytes": 126814,
+      "original_sha256": "aaf045cd0405db8063540c1584aa1665ac9ef5e67184078906aee39821160f5a",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-3-target-rays-budget-32-anchor-true.json.bin.gz",
+      "archive_bytes": 6268,
+      "archive_sha256": "a1bdfb8d9536ec66fc8b61b3a7521a22995697ff374b574e044dea837196418a",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-0-point.json",
+      "original_bytes": 13935,
+      "original_sha256": "fbbe84d1803f5a5c2a0d661ea2347865b96589eead70378d03e7c99945250507",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-0-point.json.gz",
+      "archive_bytes": 2313,
+      "archive_sha256": "75a71047fbf0f5592484f2f6b5e75998c16f141d4db026e01b0f90670d687eb5",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-0-point.json.bin",
+      "original_bytes": 112166,
+      "original_sha256": "80bee7028828b9f304889127b7e7c74aa0f73bf391c9ecc288eb44135e875310",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-0-point.json.bin.gz",
+      "archive_bytes": 5055,
+      "archive_sha256": "29df7a953be1cb23bbec54d25d834dc73cbea4d3d78f7ac73fce0fae31693770",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-1-point.json",
+      "original_bytes": 17875,
+      "original_sha256": "447ec73b95f2e5428adb8c381183714da5e9b09cc70a2525965e7c5202726596",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-1-point.json.gz",
+      "archive_bytes": 2416,
+      "archive_sha256": "047836c902137841aa3e2156a16c870d7a3a37854035a2fb64dfed0721ce580f",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-1-point.json.bin",
+      "original_bytes": 112642,
+      "original_sha256": "0c89491855ca459b1013fd3d89ecf928149b18d5abb5f7f141e2e4a9262694fc",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-1-point.json.bin.gz",
+      "archive_bytes": 5087,
+      "archive_sha256": "8c5ef77ccbeb2802762c05973ab6b9f1b4328fb17895b2d22e2fdeae3460d5ee",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch32/combined.bin",
+      "original_bytes": 11787024,
+      "original_sha256": "b70e1e12355fda300086281947cc774d537776ccf545579241926e993b55ac35",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch32/combined.bin.gz",
+      "archive_bytes": 1009175,
+      "archive_sha256": "a1e7275c8667d6a1d84834e4161738e0374e2146ba95191a5392bf5c9bd01af3",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch32/discovery.json",
+      "original_bytes": 5692412,
+      "original_sha256": "48dd03610e47bfe4d445250da1f18549561619499f721f1e0b4fec2fe6b4d4db",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch32/discovery.json.gz",
+      "archive_bytes": 55758,
+      "archive_sha256": "9af108b27b08742ac3c8c796155ec7122da1c0a38250dd024d4b6bcd28dd97f4",
+      "verified_lossless": true
+    },
+    {
+      "original": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch32/result.json",
+      "original_bytes": 7656605,
+      "original_sha256": "d67bc0a3c63a5fb78af787555f03c9817b3cc1592466c30cc4a1c69f173e8d3a",
+      "archive": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch32/result.json.gz",
+      "archive_bytes": 353742,
+      "archive_sha256": "b447122c5817a477d3587f3a974e07be39cba704e10d508893f4b8f7f5b311de",
+      "verified_lossless": true
+    }
+  ],
+  "raw_bytes": 31676509,
+  "archive_bytes": 1765216
+}

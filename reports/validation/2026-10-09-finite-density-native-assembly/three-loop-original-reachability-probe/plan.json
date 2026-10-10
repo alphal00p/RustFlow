@@ -1,0 +1,75 @@
+{
+  "source_snapshot": "../rule-union-three-loop-source-hashes.json",
+  "source_program": {
+    "path": "/tmp/three-loop-union-double-latest.bin",
+    "sha256": "0a92d2ba45167127bcc939d4f47dd6f18ee749feb91ca51a02f484e8344c0a12"
+  },
+  "source_context": "exact saved source and original program replayed, no discovery, no new rules, no changed terminals",
+  "original_metadata": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.json.gz",
+    "archive_sha256": "abcd7c6af28ca8e139bd270969339cc2d36943fcb8c992b0bcbdc777524d9ca1"
+  },
+  "native_minus_eta_shifted_slots": [
+    1,
+    2,
+    4
+  ],
+  "shift_evidence": "saved measure identity explicitly records native Di-eta on [1,2,4]; physical cut slots0,3 and supports fixed",
+  "original_requested": [
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "historical_request_count": 2078
+}

@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-09T23:18:18.829648+00:00",
+  "command": [
+    "target/release/deps/source_fingerprint-3c52aa1b71e5ce60",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "target/release/deps/source_fingerprint-3c52aa1b71e5ce60": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/source_fingerprint-3c52aa1b71e5ce60",
+      "sha256": "e6b4eac4368dde090af6c7de33c480ead1a3ea435650fd4edb5fc16639232143",
+      "size_bytes": 3280600
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

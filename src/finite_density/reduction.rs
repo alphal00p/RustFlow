@@ -220,6 +220,16 @@ pub struct WeightedClosureOptions {
     /// Ask native RustRed to explore domains containing requested labels first.
     /// This only schedules bounded work; unvisited domains remain explicit gaps.
     pub prioritize_requested_indices: bool,
+    /// Retain replayed native rules across refinement passes and closure
+    /// rounds, with fresh rules before older fallbacks. Zero disables reuse;
+    /// otherwise this bounds the whole union, including duplicate rules.
+    pub max_reused_rules: usize,
+    /// Opt-in residual-focused discovery. Each actual NoApplicableRule leaf
+    /// receives this many allocated domain visits, sharing discovery.max_domains
+    /// across refinement passes. Requires requested rays and retained rules.
+    /// Existing rules take precedence so adding rules preserves old rewrites.
+    /// Zero keeps the original multi-domain search policy.
+    pub max_domains_per_residual: usize,
     /// A distinct directory per source/deformation context. Each round stores
     /// its exact native program plus explicitly provisional/closed metadata.
     pub checkpoints: Option<PathBuf>,
@@ -242,6 +252,8 @@ impl Default for WeightedClosureOptions {
             split_ordinary_zero_faces: false,
             requested_index_rays: false,
             prioritize_requested_indices: false,
+            max_reused_rules: 0,
+            max_domains_per_residual: 0,
             checkpoints: None,
         }
     }
@@ -256,10 +268,16 @@ pub struct WeightedClosureDiagnostics {
     pub native_frontier_requests: usize,
     pub provisional_sizes: Vec<usize>,
     pub native_rules: usize,
+    pub native_rule_unions: usize,
+    pub residual_search_requests: usize,
+    /// Conservative allocations, which can exceed actual native domain visits.
+    pub residual_allocated_domains: usize,
     pub native_rule_applications: usize,
     /// Discovery need not solve every native index domain to close the finite
-    /// requested target and derivative set. All such gaps stay inspectable.
+    /// requested target and derivative set. Under residual-focused scheduling,
+    /// this counts the deduplicated historical gaps, not just the final search.
     pub uncovered_discovery_domains: usize,
+    pub historical_discovery_domains: usize,
     pub guard_refinement_passes: usize,
     pub guard_refinement_added_domains: usize,
     pub guard_refinement_budget_exhausted: bool,
@@ -335,6 +353,13 @@ pub fn prepare_weighted_system<const N: usize>(
             "enabled weighted guard refinement needs at least two faces and positive interval width".into(),
         ));
     }
+    if options.max_domains_per_residual > 0
+        && (options.max_reused_rules == 0 || !options.requested_index_rays)
+    {
+        return Err(Error::InvalidInput(
+            "residual-focused discovery requires retained rules and requested index rays".into(),
+        ));
+    }
     if context.physical_arity() != deformation.physical_arity {
         return Err(Error::InvalidInput(
             "weighted source/deformation physical arities differ".into(),
@@ -405,6 +430,8 @@ pub fn prepare_weighted_system<const N: usize>(
     let mut last_unresolved = Vec::new();
     let mut last_discovery = Vec::new();
     let mut refined_domains = Vec::new();
+    let mut retained_program = None;
+    let mut historical_gaps = BTreeMap::new();
     for round in 0..options.max_rounds {
         run.cancellation.check()?;
         if requested.len() > options.max_requested {
@@ -434,6 +461,8 @@ pub fn prepare_weighted_system<const N: usize>(
             deformation,
             &options,
             &mut refined_domains,
+            &mut retained_program,
+            &mut historical_gaps,
             &mut diagnostics,
             &mut conditions,
             run,
@@ -526,6 +555,9 @@ pub fn prepare_weighted_system<const N: usize>(
             })?;
         }
         if new_derivatives.is_empty() && new_frontier.is_empty() {
+            if options.max_reused_rules > 0 {
+                retained_program = Some(found.program);
+            }
             // Rebuild one source-replayed program whose explicit stopping set
             // is now audited against every derivative and target. This is the
             // only point at which provisional candidates become a closed basis.
@@ -537,6 +569,8 @@ pub fn prepare_weighted_system<const N: usize>(
                 deformation,
                 &options,
                 &mut refined_domains,
+                &mut retained_program,
+                &mut historical_gaps,
                 &mut diagnostics,
                 &mut conditions,
                 run,
@@ -642,6 +676,9 @@ pub fn prepare_weighted_system<const N: usize>(
         last_frontier = frontier;
         last_unresolved = residuals;
         last_discovery = found.unresolved;
+        if options.max_reused_rules > 0 {
+            retained_program = Some(found.program);
+        }
     }
     Ok(unclosed(
         "weighted derivative closure round budget exhausted",
@@ -655,6 +692,9 @@ pub fn prepare_weighted_system<const N: usize>(
 
 /// Native discovery and application remain the sole proof and reduction owners.
 /// The frontend only changes which exact integer boxes are submitted to them.
+type HistoricalDiscoveryGaps<const N: usize> =
+    BTreeMap<([[Option<i64>; 2]; N], String), GuardedUnresolved<N>>;
+
 #[allow(clippy::too_many_arguments)]
 fn discover_with_refinement<const N: usize>(
     context: &GuardedContext<N>,
@@ -664,30 +704,163 @@ fn discover_with_refinement<const N: usize>(
     deformation: &FixedShellDeformation<N>,
     options: &WeightedClosureOptions,
     learned: &mut Vec<IndexDomain<N>>,
+    retained: &mut Option<GuardedReductionProgram<N>>,
+    historical_gaps: &mut HistoricalDiscoveryGaps<N>,
     diagnostics: &mut WeightedClosureDiagnostics,
     conditions: &mut BTreeMap<String, Atom>,
     run: &RunContext,
 ) -> Result<GuardedDiscovery<N>> {
-    let priority_points = if options.prioritize_requested_indices {
-        requested.iter().copied().collect::<Vec<_>>()
-    } else {
-        Vec::new()
-    };
+    let residual_policy = options.max_domains_per_residual > 0;
+    let mut remaining_domains = options.discovery.max_domains;
+    let current_terminals = terminals.iter().copied().collect::<BTreeSet<_>>();
     for pass in 0..=options.guard_refinement.max_passes {
         run.cancellation.check()?;
-        let mut submitted = domains.to_vec();
+        let search_requests = if residual_policy {
+            let program = if let Some(previous) = retained.take() {
+                if previous.native().terminals() == &current_terminals {
+                    previous
+                } else {
+                    previous.with_terminals_replayed(
+                        terminals.iter().copied(),
+                        options.max_reused_rules,
+                    )?
+                }
+            } else {
+                context
+                    .discover(Vec::new(), terminals.iter().copied(), options.discovery)?
+                    .program
+            };
+            let (residuals, failed) = residual_search_requests(
+                &program,
+                requested,
+                deformation,
+                options.application,
+                diagnostics,
+                conditions,
+                run,
+            )?;
+            if failed {
+                // The caller repeats native application and records the actual
+                // failure. No failed leaf is silently promoted to a terminal.
+                return Ok(GuardedDiscovery {
+                    program,
+                    unresolved: historical_gaps.values().cloned().collect(),
+                });
+            }
+            *retained = Some(program);
+            diagnostics.residual_search_requests += residuals.len();
+            residuals
+        } else {
+            requested.clone()
+        };
+        let priority_points = if options.prioritize_requested_indices {
+            search_requests.iter().copied().collect::<Vec<_>>()
+        } else {
+            Vec::new()
+        };
+        let mut submitted = if residual_policy {
+            discovery_domains(&search_requests, &deformation.roles, true, true)?
+                .into_iter()
+                .filter_map(|domain| domain.intersection(deformation.admitted_domain()))
+                .collect::<Vec<_>>()
+        } else {
+            domains.to_vec()
+        };
+        let initial_domains = submitted.clone();
         submitted.extend(
             learned
                 .iter()
-                .filter(|face| !domains.contains(face))
+                .filter(|face| {
+                    !initial_domains.contains(face)
+                        && (!residual_policy
+                            || search_requests.iter().any(|point| face.contains(point)))
+                })
                 .cloned(),
         );
-        let found = context.discover_with_priority_points(
-            submitted,
-            terminals.iter().copied(),
-            &priority_points,
-            options.discovery,
-        )?;
+        let mut found = if residual_policy {
+            let allocated = options
+                .max_domains_per_residual
+                .saturating_mul(submitted.len())
+                .min(remaining_domains);
+            let found = context.discover_partitioned(
+                submitted,
+                terminals.iter().copied(),
+                &priority_points,
+                GuardedDiscoveryOptions {
+                    max_domains: remaining_domains,
+                    ..options.discovery
+                },
+                options.max_domains_per_residual,
+            )?;
+            remaining_domains -= allocated;
+            diagnostics.residual_allocated_domains += allocated;
+            found
+        } else {
+            context.discover_with_priority_points(
+                submitted,
+                terminals.iter().copied(),
+                &priority_points,
+                options.discovery,
+            )?
+        };
+        if options.max_reused_rules > 0 {
+            if found.program.native().rules().len() > options.max_reused_rules {
+                return Err(Error::Limit(
+                    "fresh native rule program exceeds the retained-rule budget".into(),
+                ));
+            }
+            if let Some(previous) = retained.take() {
+                found.program = if residual_policy {
+                    // Fill old NoApplicableRule leaves without diverting old
+                    // reduction paths to a different first-applicable rule.
+                    previous.union_replayed(
+                        found.program,
+                        terminals.iter().copied(),
+                        options.max_reused_rules,
+                    )?
+                } else {
+                    found.program.union_replayed(
+                        previous,
+                        terminals.iter().copied(),
+                        options.max_reused_rules,
+                    )?
+                };
+                diagnostics.native_rule_unions += 1;
+            }
+        }
+        if residual_policy {
+            for gap in found.unresolved {
+                let bounds = std::array::from_fn(|axis| {
+                    let bound = gap.domain.bounds()[axis];
+                    [bound.lower(), bound.upper()]
+                });
+                historical_gaps.insert((bounds, format!("{:?}:{}", gap.reason, gap.detail)), gap);
+            }
+            found.unresolved = historical_gaps.values().cloned().collect();
+            diagnostics.historical_discovery_domains = found.unresolved.len();
+            if let Some(directory) = options.checkpoints.as_deref() {
+                std::fs::create_dir_all(directory)?;
+                let gaps = found
+                    .unresolved
+                    .iter()
+                    .map(|gap| {
+                        serde_json::json!({
+                            "bounds":gap.domain.bounds().iter().map(|bound|
+                                [bound.lower(),bound.upper()]).collect::<Vec<_>>(),
+                            "reason":format!("{:?}",gap.reason), "detail":gap.detail,
+                        })
+                    })
+                    .collect::<Vec<_>>();
+                std::fs::write(
+                    directory.join("historical-discovery-gaps.json"),
+                    serde_json::to_vec_pretty(&serde_json::json!({
+                        "schema":1, "scope":"historical native gaps, not current target coverage",
+                        "whole_domain_coverage_certified":false, "gaps":gaps,
+                    }))
+                    .map_err(|error| Error::Cache(error.to_string()))?,
+                )?;
+            }
+        }
         if options.guard_refinement.max_passes == 0 {
             return Ok(found);
         }
@@ -743,6 +916,7 @@ fn discover_with_refinement<const N: usize>(
             // A parent subdivision is atomic: never submit a partial partition
             // just because the remaining face budget is smaller than its width.
             if pass == options.guard_refinement.max_passes
+                || (residual_policy && remaining_domains == 0)
                 || new_faces
                     > options
                         .guard_refinement
@@ -780,6 +954,9 @@ fn discover_with_refinement<const N: usize>(
         }
         diagnostics.guard_refinement_passes += 1;
         diagnostics.guard_refinement_added_domains = learned.len();
+        if options.max_reused_rules > 0 {
+            *retained = Some(found.program);
+        }
         if let Some(directory) = options.checkpoints.as_deref() {
             std::fs::create_dir_all(directory)?;
             let metadata = serde_json::json!({
@@ -796,6 +973,43 @@ fn discover_with_refinement<const N: usize>(
         }
     }
     unreachable!("last bounded pass cannot add domains")
+}
+
+/// Native reduction aggregates each requested integral independently. In
+/// particular, coefficients belonging to different targets never cancel here.
+#[allow(clippy::too_many_arguments)]
+fn residual_search_requests<const N: usize>(
+    program: &GuardedReductionProgram<N>,
+    requested: &BTreeSet<[i64; N]>,
+    deformation: &FixedShellDeformation<N>,
+    limits: GuardedReductionLimits,
+    diagnostics: &mut WeightedClosureDiagnostics,
+    conditions: &mut BTreeMap<String, Atom>,
+    run: &RunContext,
+) -> Result<(BTreeSet<[i64; N]>, bool)> {
+    let mut residuals = BTreeSet::new();
+    let mut failed = false;
+    for target in requested {
+        run.cancellation.check()?;
+        deformation.validate_integral(target)?;
+        let reduced = program.reduce(*target, limits)?;
+        diagnostics.native_rule_applications += reduced.rule_applications;
+        retain_conditions(conditions, reduced.nonzero_conditions);
+        for integral in reduced.terms.keys() {
+            deformation.validate_integral(integral)?;
+        }
+        for residual in reduced.unresolved {
+            deformation.validate_integral(&residual.integral)?;
+            if residual.reason == GuardedApplicationFailure::NoApplicableRule {
+                if !residual.coefficient.is_zero() {
+                    residuals.insert(residual.integral);
+                }
+            } else {
+                failed = true;
+            }
+        }
+    }
+    Ok((residuals, failed))
 }
 
 /// Pick one narrowest finite axis whose singleton faces have not all already
@@ -950,6 +1164,10 @@ fn checkpoint<const N: usize>(
         "split_ordinary_zero_faces":options.split_ordinary_zero_faces,
         "requested_index_rays":options.requested_index_rays,
         "prioritize_requested_indices":options.prioritize_requested_indices,
+        "max_reused_rules":options.max_reused_rules,
+        "max_domains_per_residual":options.max_domains_per_residual,
+        "rule_precedence":if options.max_domains_per_residual > 0 { "retained-first" } else { "fresh-first" },
+        "native_rule_count":program.native().rules().len(),
         "requested": requested.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>(),
         "frontier": frontier.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>() });
     let path = directory.join(format!("{base}.json"));
@@ -1048,9 +1266,23 @@ mod tests {
     fn generated_compact_sources_close_and_replay_with_discovery_policies() {
         let (context, deformation) = compact_context();
         let target = [1, 0];
-        for (requested_index_rays, prioritize_requested_indices) in
-            [(false, false), (false, true), (true, false), (true, true)]
-        {
+        for (
+            requested_index_rays,
+            prioritize_requested_indices,
+            max_reused_rules,
+            max_domains_per_residual,
+        ) in [
+            (false, false, 0, 0),
+            (false, true, 0, 0),
+            (true, false, 0, 0),
+            (true, true, 0, 0),
+            (false, false, 4096, 0),
+            (false, true, 4096, 0),
+            (true, false, 4096, 0),
+            (true, true, 4096, 0),
+            (true, false, 4096, 32),
+            (true, true, 4096, 64),
+        ] {
             let outcome = prepare_weighted_system(
                 &context,
                 &[BTreeMap::from([(target, Atom::one())])],
@@ -1059,6 +1291,8 @@ mod tests {
                     split_ordinary_zero_faces: true,
                     requested_index_rays,
                     prioritize_requested_indices,
+                    max_reused_rules,
+                    max_domains_per_residual,
                     ..Default::default()
                 },
                 &RunContext::default(),
@@ -1068,6 +1302,25 @@ mod tests {
                 panic!("zero-face compact closure unresolved: {outcome:?}")
             };
             closed.differential_system().unwrap().validate().unwrap();
+            assert_eq!(
+                closed.diagnostics.native_rule_unions > 0,
+                max_reused_rules > 0
+            );
+            if max_reused_rules > 0 {
+                assert!(closed.program.native().rules().len() <= max_reused_rules);
+            }
+            if max_domains_per_residual > 0 {
+                assert!(closed.diagnostics.residual_search_requests > 0);
+                assert!(closed.diagnostics.residual_allocated_domains > 0);
+                assert_eq!(
+                    closed.diagnostics.historical_discovery_domains,
+                    closed.discovery_unresolved.len()
+                );
+                assert!(
+                    closed.diagnostics.residual_allocated_domains
+                        <= (closed.diagnostics.rounds + 1) * 8192
+                );
+            }
             let decoded = context
                 .decode(
                     &closed.program.encode(Default::default()).unwrap(),
@@ -1094,6 +1347,174 @@ mod tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn reused_native_rules_obey_the_explicit_union_budget() {
+        let (context, deformation) = compact_context();
+        let result = prepare_weighted_system(
+            &context,
+            &[BTreeMap::from([([1, 0], Atom::one())])],
+            &deformation,
+            WeightedClosureOptions {
+                max_reused_rules: 1,
+                ..Default::default()
+            },
+            &RunContext::default(),
+        );
+        assert!(matches!(result,
+            Err(Error::Limit(ref message) | Error::Reduction(ref message))
+                if message.contains("rule budget")
+        ));
+    }
+
+    #[test]
+    fn residual_policy_rebinds_old_terminals_before_native_discovery() {
+        let (context, deformation) = compact_context();
+        let target = [2, 0];
+        let mut retained = Some(
+            context
+                .discover(Vec::new(), [target], Default::default())
+                .unwrap()
+                .program,
+        );
+        let options = WeightedClosureOptions {
+            requested_index_rays: true,
+            max_reused_rules: 4096,
+            max_domains_per_residual: 32,
+            guard_refinement: GuardRefinementOptions {
+                max_passes: 0,
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let mut diagnostics = WeightedClosureDiagnostics::default();
+        let found = discover_with_refinement(
+            &context,
+            &[],
+            &[],
+            &BTreeSet::from([target]),
+            &deformation,
+            &options,
+            &mut Vec::new(),
+            &mut retained,
+            &mut BTreeMap::new(),
+            &mut diagnostics,
+            &mut BTreeMap::new(),
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert!(found.program.native().terminals().is_empty());
+        assert_eq!(diagnostics.residual_search_requests, 1);
+        assert_eq!(diagnostics.residual_allocated_domains, 32);
+        assert!(
+            found
+                .program
+                .reduce(target, options.application)
+                .unwrap()
+                .rule_applications
+                > 0
+        );
+    }
+
+    #[test]
+    fn residual_policy_preserves_native_application_failure_without_searching() {
+        let (context, deformation) = compact_context();
+        let outcome = prepare_weighted_system(
+            &context,
+            &[BTreeMap::from([([1, 0], Atom::one())])],
+            &deformation,
+            WeightedClosureOptions {
+                requested_index_rays: true,
+                max_reused_rules: 4096,
+                max_domains_per_residual: 32,
+                application: GuardedReductionLimits {
+                    max_rule_applications: 0,
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            &RunContext::default(),
+        )
+        .unwrap();
+        let WeightedClosureOutcome::Unresolved(failed) = outcome else {
+            panic!("native WorkLimit was not propagated");
+        };
+        assert_eq!(failed.diagnostics.residual_allocated_domains, 0);
+        assert!(
+            failed
+                .unresolved
+                .iter()
+                .any(|term| term.reason == GuardedApplicationFailure::WorkLimit)
+        );
+    }
+
+    #[test]
+    fn residual_policy_keeps_historical_gaps_when_final_search_is_empty() {
+        let (context, deformation) = compact_context();
+        let requested = BTreeSet::from([[2, 0]]);
+        let options = WeightedClosureOptions {
+            requested_index_rays: true,
+            max_reused_rules: 4096,
+            max_domains_per_residual: 1,
+            discovery: GuardedDiscoveryOptions {
+                max_domains: 1,
+                ..Default::default()
+            },
+            guard_refinement: GuardRefinementOptions {
+                max_passes: 0,
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let mut retained = None;
+        let mut history = BTreeMap::new();
+        let mut diagnostics = WeightedClosureDiagnostics::default();
+        let mut conditions = BTreeMap::new();
+        let initial = discover_with_refinement(
+            &context,
+            &[],
+            &[],
+            &requested,
+            &deformation,
+            &options,
+            &mut Vec::new(),
+            &mut retained,
+            &mut history,
+            &mut diagnostics,
+            &mut conditions,
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert!(
+            initial
+                .unresolved
+                .iter()
+                .any(|gap| gap.reason == GuardedUnresolvedReason::DomainBudget)
+        );
+        let initial_gaps = initial.unresolved.len();
+        let allocated = diagnostics.residual_allocated_domains;
+        retained = Some(initial.program);
+        // Explicit terminals are a low-level stopping set only. This check
+        // makes no claim that this chosen singleton is a derivative basis.
+        let final_found = discover_with_refinement(
+            &context,
+            &[],
+            &[[2, 0]],
+            &requested,
+            &deformation,
+            &options,
+            &mut Vec::new(),
+            &mut retained,
+            &mut history,
+            &mut diagnostics,
+            &mut conditions,
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert_eq!(diagnostics.residual_allocated_domains, allocated);
+        assert_eq!(final_found.unresolved.len(), initial_gaps);
+        assert_eq!(diagnostics.historical_discovery_domains, initial_gaps);
     }
 
     #[test]
@@ -1201,6 +1622,7 @@ mod tests {
             ..Default::default()
         };
         let mut learned = Vec::new();
+        let mut retained = None;
         let mut diagnostics = WeightedClosureDiagnostics::default();
         let mut conditions = BTreeMap::new();
         let requested = BTreeSet::from([target]);
@@ -1212,6 +1634,8 @@ mod tests {
             &prepared.deformation,
             &options,
             &mut learned,
+            &mut retained,
+            &mut BTreeMap::new(),
             &mut diagnostics,
             &mut conditions,
             &RunContext::default(),
@@ -1236,6 +1660,8 @@ mod tests {
             &prepared.deformation,
             &options,
             &mut learned,
+            &mut retained,
+            &mut BTreeMap::new(),
             &mut diagnostics,
             &mut conditions,
             &RunContext::default(),

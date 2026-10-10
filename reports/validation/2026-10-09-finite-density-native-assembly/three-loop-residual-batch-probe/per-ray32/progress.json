@@ -1,0 +1,9 @@
+{
+  "applications": 334958,
+  "audit_seconds": 69.741955911,
+  "audited": 2048,
+  "complete": false,
+  "other_failures": 0,
+  "requested": 2078,
+  "unique_no_rule_labels": 1670
+}

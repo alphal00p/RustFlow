@@ -127,6 +127,65 @@ impl<const N: usize> GuardedProgram<N> {
         &self.terminals
     }
 
+    /// Replace the explicit stopping set, retaining the existing rule order.
+    /// All rules are independently replayed and the new terminals pass the
+    /// same role and declared-zero checks as a newly constructed program.
+    /// Removing a former terminal may expose an unresolved integral; it does
+    /// not establish additional coverage or a master basis.
+    pub fn with_terminals_replayed(
+        self,
+        current_terminals: impl IntoIterator<Item = [i64; N]>,
+        max_rules: usize,
+    ) -> Result<Self, SolverError> {
+        if self.rules.len() > max_rules {
+            return Err(SolverError::InvalidInput(format!(
+                "guarded terminal rebind has {} rules, exceeding rule budget {max_rules}",
+                self.rules.len()
+            )));
+        }
+        Self::new(self.sources, self.rules, current_terminals)
+    }
+
+    /// Retain reusable rules from the same exact source context. Rules from
+    /// `self` take precedence over `fallback`; neither sequence is reordered
+    /// or deduplicated. The explicit current stopping set replaces both input
+    /// stopping sets, so a former provisional terminal cannot stop reduction
+    /// silently. All combined rules are independently replayed under the
+    /// existing common-coordinate-order contract.
+    ///
+    /// The count bound includes duplicate rules. This operation establishes no
+    /// new domain coverage or family closure; unvisited discovery domains must
+    /// still be reported by the caller.
+    pub fn union_replayed(
+        self,
+        fallback: Self,
+        current_terminals: impl IntoIterator<Item = [i64; N]>,
+        max_rules: usize,
+    ) -> Result<Self, SolverError> {
+        if !Arc::ptr_eq(&self.sources, &fallback.sources)
+            && !same_source_context(&self.sources, &fallback.sources)
+        {
+            return Err(SolverError::InvalidInput(
+                "guarded program union requires the same exact source context".into(),
+            ));
+        }
+        let count = self
+            .rules
+            .len()
+            .checked_add(fallback.rules.len())
+            .ok_or_else(|| {
+                SolverError::InvalidInput("guarded program union rule count overflow".into())
+            })?;
+        if count > max_rules {
+            return Err(SolverError::InvalidInput(format!(
+                "guarded program union has {count} rules, exceeding rule budget {max_rules}"
+            )));
+        }
+        let mut rules = self.rules;
+        rules.extend(fallback.rules);
+        Self::new(self.sources, rules, current_terminals)
+    }
+
     fn one(&self) -> Coefficient {
         self.sources
             .system
@@ -403,6 +462,36 @@ impl<const N: usize> GuardedProgram<N> {
     }
 }
 
+// Match the complete original-source binding used by generated-data decoding.
+// The integer ring and monomial representation are fixed by the native
+// CoefficientPolynomial type; the ordered variable map must also be identical.
+fn same_source_context<const N: usize>(
+    left: &GuardedSourceSystem<N>,
+    right: &GuardedSourceSystem<N>,
+) -> bool {
+    left.measure_id == right.measure_id
+        && left.roles == right.roles
+        && left.system.index_variables() == right.system.index_variables()
+        && left.system.coefficient_variables() == right.system.coefficient_variables()
+        && left.zero_domains == right.zero_domains
+        && left.sources.len() == right.sources.len()
+        && left.sources.iter().zip(&right.sources).all(|(a, b)| {
+            a.id == b.id && a.domain == b.domain && a.nonzero_conditions == b.nonzero_conditions
+        })
+        && left.system.rows().len() == right.system.rows().len()
+        && left
+            .system
+            .rows()
+            .iter()
+            .zip(right.system.rows())
+            .all(|(a, b)| {
+                a.len() == b.len()
+                    && a.iter()
+                        .zip(b)
+                        .all(|(a, b)| a.integral == b.integral && a.coefficient == b.coefficient)
+            })
+}
+
 fn retain_condition(conditions: &mut Vec<CoefficientPolynomial>, value: CoefficientPolynomial) {
     if !value.is_constant() && !conditions.contains(&value) {
         conditions.push(value);
@@ -488,6 +577,294 @@ pub(super) mod tests {
                 .unwrap(),
         };
         GuardedProgram::new(sources, vec![rule], [[0]]).unwrap()
+    }
+
+    fn restricted_sample(bounds: IndexBounds, terminal: i64) -> GuardedProgram<1> {
+        let mut program = sample("retained-source-recurrence");
+        let domain = IndexDomain::new([bounds]).unwrap();
+        program.rules[0].domain = domain.clone();
+        program.rules[0].discovery_domain = domain;
+        GuardedProgram::new(program.sources, program.rules, [[terminal]]).unwrap()
+    }
+
+    #[test]
+    fn replayed_terminal_rebind_replaces_stopping_set_and_retains_conditions() {
+        let program = sample("terminal-rebind")
+            .with_terminals_replayed([[1]], 1)
+            .unwrap();
+        assert_eq!(program.terminals(), &BTreeSet::from([[1]]));
+        assert_eq!(
+            program.apply(&[0]).unwrap().status,
+            GuardedApplicationStatus::Unresolved(GuardedApplicationFailure::NoApplicableRule)
+        );
+        let result = program.reduce([3], Default::default()).unwrap();
+        let x = &program.rules()[0].candidate.rhs[0].coefficient;
+        assert_eq!(result.terms, BTreeMap::from([([1], x * x)]));
+        assert!(result.unresolved.is_empty());
+        assert_eq!(result.rule_applications, 2);
+        assert!(result.nonzero_conditions.contains(&x.numerator));
+        let loaded = GuardedProgram::decode_generated(
+            &program.encode_native(Default::default()).unwrap(),
+            program.sources.clone(),
+            Default::default(),
+        )
+        .unwrap();
+        assert_eq!(loaded.terminals(), program.terminals());
+        let replayed = loaded.reduce([3], Default::default()).unwrap();
+        assert_eq!(replayed.terms, result.terms);
+        assert_eq!(replayed.nonzero_conditions, result.nonzero_conditions);
+    }
+
+    #[test]
+    fn replayed_terminal_rebind_checks_budget_and_terminal_admission() {
+        assert!(matches!(
+            sample("terminal-budget").with_terminals_replayed([[0]], 0),
+            Err(SolverError::InvalidInput(message)) if message.contains("rule budget")
+        ));
+        assert!(matches!(
+            sample("terminal-admission").with_terminals_replayed([[-1]], 1),
+            Err(SolverError::InvalidInput(message))
+                if message == "guarded terminal is undefined or declared zero"
+        ));
+        let program = sample("terminal-removed")
+            .with_terminals_replayed([], 1)
+            .unwrap();
+        let result = program.reduce([1], Default::default()).unwrap();
+        assert!(result.terms.is_empty());
+        assert_eq!(result.unresolved.len(), 1);
+        assert_eq!(result.unresolved[0].integral, [0]);
+        assert_eq!(
+            result.unresolved[0].reason,
+            GuardedApplicationFailure::NoApplicableRule
+        );
+        assert_eq!(
+            result.unresolved[0].coefficient,
+            program.rules()[0].candidate.rhs[0].coefficient
+        );
+        assert!(!result.nonzero_conditions.is_empty());
+    }
+
+    #[test]
+    fn replayed_terminal_rebind_rechecks_original_source_proof() {
+        let mut program = sample("terminal-proof");
+        program.rules[0].candidate.rhs[0].coefficient = program.one();
+        let result = program.with_terminals_replayed([[0]], 1);
+        assert!(
+            matches!(result, Err(SolverError::Certification(ref message))
+            if message == "original-source replay does not recover the candidate equation"),
+            "unexpected result: {result:?}"
+        );
+    }
+
+    #[test]
+    fn replayed_union_retains_complementary_rules_conditions_and_only_current_terminals() {
+        let fresh = restricted_sample(IndexBounds::fixed(1), 1);
+        let previous = restricted_sample(IndexBounds::new(Some(2), None).unwrap(), 2);
+        // These are separately constructed but exactly equal source contexts.
+        assert!(!Arc::ptr_eq(fresh.sources(), previous.sources()));
+        let program = fresh.union_replayed(previous, [[0]], 2).unwrap();
+        assert_eq!(program.terminals(), &BTreeSet::from([[0]]));
+        assert_eq!(
+            program.rules()[0].domain().bounds()[0],
+            IndexBounds::fixed(1)
+        );
+        assert_eq!(program.rules()[1].domain().bounds()[0].lower(), Some(2));
+        let result = program.reduce([3], Default::default()).unwrap();
+        assert!(result.unresolved.is_empty());
+        assert_eq!(result.rule_applications, 3);
+        let context = CoefficientContext::new(["guarded_lifecycle_n", "guarded_lifecycle_x"]);
+        let x = context.parameter("guarded_lifecycle_x").unwrap();
+        let square = &x * &x;
+        assert_eq!(result.terms.get(&[0]), Some(&(&square * &x)));
+        assert!(result.nonzero_conditions.contains(&x.numerator));
+        let bytes = program.encode_native(Default::default()).unwrap();
+        let loaded =
+            GuardedProgram::decode_generated(&bytes, program.sources.clone(), Default::default())
+                .unwrap();
+        let replayed = loaded.reduce([3], Default::default()).unwrap();
+        assert_eq!(replayed.terms, result.terms);
+        assert_eq!(replayed.nonzero_conditions, result.nonzero_conditions);
+        assert_eq!(loaded.terminals(), program.terminals());
+    }
+
+    #[test]
+    fn replayed_union_rejects_every_original_source_binding_mismatch() {
+        for variant in [
+            "measure",
+            "roles",
+            "indices",
+            "variables",
+            "variable-order",
+            "source-id",
+            "source-domain",
+            "source-condition",
+            "source-row",
+            "row-order",
+            "zero-domains",
+        ] {
+            let names = match variant {
+                "variables" => ["guarded_lifecycle_n", "union_other_x"],
+                "variable-order" => ["guarded_lifecycle_x", "guarded_lifecycle_n"],
+                _ => ["guarded_lifecycle_n", "guarded_lifecycle_x"],
+            };
+            let context = CoefficientContext::new(names);
+            let x = context
+                .parameter(if variant == "variables" {
+                    "union_other_x"
+                } else {
+                    "guarded_lifecycle_x"
+                })
+                .unwrap();
+            let mut row = vec![
+                Term {
+                    integral: Integral::symbolic([0]).unwrap(),
+                    coefficient: context.one().numerator,
+                },
+                Term {
+                    integral: Integral::symbolic([-1]).unwrap(),
+                    coefficient: if variant == "source-row" {
+                        (-context.one()).numerator
+                    } else {
+                        (-x.clone()).numerator
+                    },
+                },
+            ];
+            if variant == "row-order" {
+                row.reverse();
+            }
+            let conditions = if variant == "source-condition" {
+                vec![
+                    x.numerator.clone(),
+                    context.parameter("guarded_lifecycle_n").unwrap().numerator,
+                ]
+            } else {
+                vec![x.numerator.clone()]
+            };
+            let sources = GuardedSourceSystem::new(
+                if variant == "measure" {
+                    "other-measure"
+                } else {
+                    "union-binding"
+                },
+                [if variant == "roles" {
+                    IndexRole::Ordinary
+                } else {
+                    IndexRole::Occupation
+                }],
+                [usize::from(variant == "indices")],
+                vec![
+                    GuardedSource::new(
+                        if variant == "source-id" {
+                            "different-source"
+                        } else {
+                            "surface-recurrence"
+                        },
+                        row,
+                        IndexDomain::new([IndexBounds::new(
+                            Some(if variant == "source-domain" { 2 } else { 1 }),
+                            None,
+                        )
+                        .unwrap()])
+                        .unwrap(),
+                    )
+                    .with_nonzero_conditions(conditions),
+                ],
+            )
+            .unwrap()
+            .with_zero_domains(if variant == "zero-domains" {
+                vec![IndexDomain::new([IndexBounds::fixed(0)]).unwrap()]
+            } else {
+                vec![]
+            })
+            .unwrap();
+            let other = GuardedProgram::new(Arc::new(sources), vec![], []).unwrap();
+            let result = sample("union-binding").union_replayed(other, [[0]], 8);
+            assert!(
+                matches!(result, Err(SolverError::InvalidInput(ref message))
+                if message.contains("same exact source context")),
+                "variant {variant}: {result:?}"
+            );
+        }
+    }
+
+    #[test]
+    fn replayed_union_counts_duplicate_rules_against_the_budget() {
+        let result = sample("union-budget").union_replayed(sample("union-budget"), [[0]], 1);
+        assert!(matches!(result, Err(SolverError::InvalidInput(message))
+            if message.contains("rule budget")));
+        let program = sample("union-budget")
+            .union_replayed(sample("union-budget"), [[0]], 2)
+            .unwrap();
+        assert_eq!(program.rules().len(), 2);
+    }
+
+    #[test]
+    fn replayed_union_rechecks_rule_proofs() {
+        let mut corrupted = sample("union-proof");
+        corrupted.rules[0].candidate.rhs[0].coefficient = corrupted.one();
+        let result = sample("union-proof").union_replayed(corrupted, [[0]], 2);
+        assert!(
+            matches!(&result, Err(SolverError::Certification(message))
+                if message == "original-source replay does not recover the candidate equation"),
+            "unexpected union replay result: {result:?}"
+        );
+    }
+
+    #[test]
+    fn replayed_union_requires_one_native_coordinate_order() {
+        let context = CoefficientContext::new(["union_order_n", "union_order_b", "union_order_x"]);
+        let x = context.parameter("union_order_x").unwrap();
+        let domain = IndexDomain::new([
+            IndexBounds::new(Some(1), None).unwrap(),
+            IndexBounds::fixed(0),
+        ])
+        .unwrap();
+        let sources = Arc::new(
+            GuardedSourceSystem::new(
+                "union-order",
+                [IndexRole::Occupation; 2],
+                [0, 1],
+                vec![GuardedSource::new(
+                    "order-recurrence",
+                    vec![
+                        Term {
+                            integral: Integral::symbolic([0, 0]).unwrap(),
+                            coefficient: context.one().numerator,
+                        },
+                        Term {
+                            integral: Integral::symbolic([-1, 0]).unwrap(),
+                            coefficient: (-x).numerator,
+                        },
+                    ],
+                    domain.clone(),
+                )],
+            )
+            .unwrap(),
+        );
+        let make_program = |permuted: bool| {
+            let found = sources
+                .solve_domains(
+                    vec![domain.clone()],
+                    crate::solver::SearchOptions {
+                        max_depth: Some(2),
+                        sample_seed: 0,
+                        ..Default::default()
+                    },
+                    32,
+                )
+                .unwrap();
+            assert!(!found.rules.is_empty());
+            let mut rules = found.rules;
+            if permuted {
+                for rule in &mut rules {
+                    rule.order = rule.order.clone().with_permutation([1, 0]).unwrap();
+                }
+            }
+            GuardedProgram::new(sources.clone(), rules, [[0, 0]]).unwrap()
+        };
+        let result = make_program(false).union_replayed(make_program(true), [[0, 0]], 64);
+        assert!(matches!(result, Err(SolverError::InvalidInput(message))
+            if message.contains("common coordinate order")));
     }
 
     #[test]

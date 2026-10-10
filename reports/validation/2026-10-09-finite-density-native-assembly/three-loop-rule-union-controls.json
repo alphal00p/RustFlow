@@ -1,0 +1,560 @@
+{
+  "schema_version": 1,
+  "status": "native closure incomplete; no numerical predictions",
+  "scope": "bounded native three-loop rule-union controls; not a numerical acceptance run",
+  "input": {
+    "path": "examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/rule-union-three-loop-source-hashes.json",
+    "sha256": "c8efecbf47c5b6c87b0f962824ae924b5de1351c80dd331af8163dd5ccc338bd",
+    "base_commit": "bc3c6bd88f5f179bc45aa7e6b97516121b7ed576",
+    "captured_utc": "2026-10-09T23:00:32.609597+00:00",
+    "file_count": 1808
+  },
+  "runs": [
+    {
+      "directory": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full",
+      "command_scope": "complete amplitude preparation stops at first singleton",
+      "cut_slots": [
+        0
+      ],
+      "epsilon": "-5/4",
+      "requested_profiles": [
+        [
+          18,
+          60,
+          8
+        ]
+      ],
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=4, provisional=1209, unresolved_terms=10284; first residual indices/reasons=[([1, -1, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 4, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 5, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 6, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 2, 3, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 2, 3, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -2, 2, 2, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -1, 2, 2, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "complete preparation"
+      },
+      "rounds_completed": 4,
+      "final_frontier": 1209,
+      "unresolved_terms": 10284,
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 3,
+          "frontier": 46,
+          "native_rule_count": 609,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.json",
+            "sha256": "dc4f1614b2596950d3ac7f8a4a0102b168f3a21487016fdf9865ce42045cdbd9",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.json",
+              "sha256_uncompressed": "dc4f1614b2596950d3ac7f8a4a0102b168f3a21487016fdf9865ce42045cdbd9",
+              "uncompressed_bytes": 13624,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.json.gz",
+              "sha256_gzip": "a536222a6bfc148ff1b477351d3d86e3a0435f77a80a2066e040f945b5d57db0",
+              "compressed_bytes": 2020
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.bin",
+            "sha256": "20dfcfcb0742b718cc59e7c2235aa2de75ecacd58aa592aa48d737223931d4b0",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.bin",
+              "sha256_uncompressed": "20dfcfcb0742b718cc59e7c2235aa2de75ecacd58aa592aa48d737223931d4b0",
+              "uncompressed_bytes": 335848,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-000-provisional.bin.gz",
+              "sha256_gzip": "83a5e95fa16a2d245384ff6484087c9fa87d21acfd54d2b27e4f2496be639668",
+              "compressed_bytes": 39082
+            }
+          }
+        },
+        {
+          "round": 1,
+          "requested": 141,
+          "frontier": 403,
+          "native_rule_count": 4262,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.json",
+            "sha256": "f1996b02ca3c5b3618d5948d2b957c73ceb1e8ff13e45522107cb438f8688896",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.json",
+              "sha256_uncompressed": "f1996b02ca3c5b3618d5948d2b957c73ceb1e8ff13e45522107cb438f8688896",
+              "uncompressed_bytes": 73542,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.json.gz",
+              "sha256_gzip": "2c87becaf85babb23db74ec6871b29d24c114b92a9a786fb2bf0919963e20b7e",
+              "compressed_bytes": 3904
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.bin",
+            "sha256": "c1f50d96dd4fbae6b0cc9ba8a59517f020e5fbc42192893e47858b2d0f222c10",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.bin",
+              "sha256_uncompressed": "c1f50d96dd4fbae6b0cc9ba8a59517f020e5fbc42192893e47858b2d0f222c10",
+              "uncompressed_bytes": 2315446,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-001-provisional.bin.gz",
+              "sha256_gzip": "04527181a254bb477c841df4d500221b2414851fe2c6fe0b1d28c9c745807e37",
+              "compressed_bytes": 261407
+            }
+          }
+        },
+        {
+          "round": 2,
+          "requested": 1058,
+          "frontier": 694,
+          "native_rule_count": 7842,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.json",
+            "sha256": "d31d50703487755caba62b448d68ebc07513bbd837307677fba7973b15db9335",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.json",
+              "sha256_uncompressed": "d31d50703487755caba62b448d68ebc07513bbd837307677fba7973b15db9335",
+              "uncompressed_bytes": 220190,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.json.gz",
+              "sha256_gzip": "5637f9d16b0ebd57dbaac3baf4d1afd63456bfe7bb5e242d323205ac0e2d3145",
+              "compressed_bytes": 8011
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.bin",
+            "sha256": "e2e4ce8b251563360b561227c15216089b1fce851b53edfdb1b188b9beea9600",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.bin",
+              "sha256_uncompressed": "e2e4ce8b251563360b561227c15216089b1fce851b53edfdb1b188b9beea9600",
+              "uncompressed_bytes": 3631519,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-002-provisional.bin.gz",
+              "sha256_gzip": "7deadc627726da55a43e54355473495757ec04bfc3cd1420b5621d4c7847107b",
+              "compressed_bytes": 359207
+            }
+          }
+        },
+        {
+          "round": 3,
+          "requested": 1963,
+          "frontier": 1209,
+          "native_rule_count": 10581,
+          "physical_arity": 11,
+          "storage_capacity": 12,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.json",
+            "sha256": "c4ac0a8cc4ad5ff3132acc7cceb7b249c6476d510501a0409d80b27280ccfe70",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.json",
+              "sha256_uncompressed": "c4ac0a8cc4ad5ff3132acc7cceb7b249c6476d510501a0409d80b27280ccfe70",
+              "uncompressed_bytes": 392761,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.json.gz",
+              "sha256_gzip": "c5bbd18a44e57bcceeb71491d57e58777164a2e9fc14468f4212c524df94d5d1",
+              "compressed_bytes": 12586
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.bin",
+            "sha256": "e1a6b731e529913cd07b1a2fb7ced9c793992af899838be4f5a15ebd2b0936f6",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.bin",
+              "sha256_uncompressed": "e1a6b731e529913cd07b1a2fb7ced9c793992af899838be4f5a15ebd2b0936f6",
+              "uncompressed_bytes": 4473600,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/native-closure/cut-0/round-003-provisional.bin.gz",
+              "sha256_gzip": "7ababe19e7c8ad24f4292861b1b9c6bb6bdc45834156f52e7ec02456bd022a6b",
+              "compressed_bytes": 407725
+            }
+          }
+        }
+      ],
+      "resources": {
+        "exit_code": 101,
+        "wall_seconds": 55.03222774807364,
+        "user_seconds": 54.380884,
+        "system_seconds": 0.18723399999999998,
+        "peak_child_rss_kib": 123408,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "captured_executable": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "sha256": "1aea08c846e257db388efc481fdcbfd8e36b8795c50b95ccb0741bb5bfc081f2",
+        "size_bytes": 1289666128
+      },
+      "dependency_compile_ids": [
+        "8a8261d640cbbe602c15acbdf1f916159a50436312668181454bb8c4dcc838f1",
+        "2f58d7bf071b38fa4441f5ec96a6cca2ac79d684c32d01ef68f2a713fe63e113"
+      ],
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full-resources.json",
+          "sha256": "c320a2e52cc19533324998b2f8d95ded5d9e5e35c8726464f914019737b5ce37"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full-resources.provenance.json",
+          "sha256": "b621013259cd6427b3b89fdc711f23f9dacdb1a87c7dc143ef1de16275060eac"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/failure.json",
+          "sha256": "abc8d02926adfef177ef4a4501b1b885a3e017512d1dc79eb5eacc529ad0573a"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/configuration.json",
+          "sha256": "daaad25f395667b5ce8d18145f23deeb6ca9f4dacf4e655346a9a2ac9727874d"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full-resources.log",
+          "sha256": "469eb973a86852dbe5670180028dc8b79aebd26a4e74af81cd7e21d032bc924f"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-full/input.json",
+          "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+        }
+      ]
+    },
+    {
+      "directory": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double",
+      "command_scope": "isolated double-cut preparation",
+      "cut_slots": [
+        0,
+        3
+      ],
+      "epsilon": "-5/4",
+      "requested_profiles": [
+        [
+          18,
+          60,
+          8
+        ]
+      ],
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=5, provisional=1598, unresolved_terms=7847; first residual indices/reasons=[([1, -1, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -2, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 2, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 2, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 2, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "rounds_completed": 5,
+      "final_frontier": 1598,
+      "unresolved_terms": 7847,
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 3,
+          "frontier": 19,
+          "native_rule_count": 772,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.json",
+            "sha256": "92f3d747852457c48f9d417805ec2297b8994bb6b23eba87a96e924c22ebbd91",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.json",
+              "sha256_uncompressed": "92f3d747852457c48f9d417805ec2297b8994bb6b23eba87a96e924c22ebbd91",
+              "uncompressed_bytes": 11784,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.json.gz",
+              "sha256_gzip": "abcd7c6af28ca8e139bd270969339cc2d36943fcb8c992b0bcbdc777524d9ca1",
+              "compressed_bytes": 1987
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.bin",
+            "sha256": "f3062e4b45e43460bbdd280a3fc2a225cbfefd927b2b4c1aa5b5cbf548163450",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.bin",
+              "sha256_uncompressed": "f3062e4b45e43460bbdd280a3fc2a225cbfefd927b2b4c1aa5b5cbf548163450",
+              "uncompressed_bytes": 688718,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-000-provisional.bin.gz",
+              "sha256_gzip": "019afcbf2f832163e6bad0cebb3f23ec72b5db9db6096cb7a44080bd4c9ee4de",
+              "compressed_bytes": 61737
+            }
+          }
+        },
+        {
+          "round": 1,
+          "requested": 69,
+          "frontier": 292,
+          "native_rule_count": 5665,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.json",
+            "sha256": "4bc14bfc502821cebf86dd6a413318723ef407afb903a2542e03d7e915b7bc21",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.json",
+              "sha256_uncompressed": "4bc14bfc502821cebf86dd6a413318723ef407afb903a2542e03d7e915b7bc21",
+              "uncompressed_bytes": 65146,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.json.gz",
+              "sha256_gzip": "a128773a99e93672fca42952af41592c59f58e7d5976cd30fe86bb090b473328",
+              "compressed_bytes": 3376
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.bin",
+            "sha256": "7b83ed525ef72e6371572f9fe9a0b573a4092291758c2fb9c5ffd717f4ea4aba",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.bin",
+              "sha256_uncompressed": "7b83ed525ef72e6371572f9fe9a0b573a4092291758c2fb9c5ffd717f4ea4aba",
+              "uncompressed_bytes": 4629144,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-001-provisional.bin.gz",
+              "sha256_gzip": "71f003bacd6fea66d0135db165a69937cb6487872b7dc19c716ccbfb639e6d5a",
+              "compressed_bytes": 448820
+            }
+          }
+        },
+        {
+          "round": 2,
+          "requested": 703,
+          "frontier": 572,
+          "native_rule_count": 8286,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.json",
+            "sha256": "77a5f560245216710816f87f0a0fb7714e5a4be50fb393d77ef681e16849b048",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.json",
+              "sha256_uncompressed": "77a5f560245216710816f87f0a0fb7714e5a4be50fb393d77ef681e16849b048",
+              "uncompressed_bytes": 209177,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.json.gz",
+              "sha256_gzip": "af841331d6103314649cf164b95a2fbe4904b7d9ee17cfc11877cac31223785a",
+              "compressed_bytes": 6704
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.bin",
+            "sha256": "805c4012274cadde9a0afa67f65b97a69999a773fa90ffcd8ec4cedc1ddf78a5",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.bin",
+              "sha256_uncompressed": "805c4012274cadde9a0afa67f65b97a69999a773fa90ffcd8ec4cedc1ddf78a5",
+              "uncompressed_bytes": 6185629,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-002-provisional.bin.gz",
+              "sha256_gzip": "068d88d5f1ecafb4b402486666ebe207a180d423c7428685134a4418657c1d9b",
+              "compressed_bytes": 568180
+            }
+          }
+        },
+        {
+          "round": 3,
+          "requested": 1358,
+          "frontier": 1010,
+          "native_rule_count": 10175,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.json",
+            "sha256": "c78da9e7bd9b2c0f48e3f0fae88435e6c229875b9b200dc8a2ce67e93c9c7219",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.json",
+              "sha256_uncompressed": "c78da9e7bd9b2c0f48e3f0fae88435e6c229875b9b200dc8a2ce67e93c9c7219",
+              "uncompressed_bytes": 381441,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.json.gz",
+              "sha256_gzip": "ffb75e720b02b8fed949bede3e9e4814d9b2687bd80fae02ac81dccfac1a1547",
+              "compressed_bytes": 10432
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.bin",
+            "sha256": "5ef54c0828cb67ecd42ff47f5b1d13c7027632f086207406228e193c460357b3",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.bin",
+              "sha256_uncompressed": "5ef54c0828cb67ecd42ff47f5b1d13c7027632f086207406228e193c460357b3",
+              "uncompressed_bytes": 7083523,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-003-provisional.bin.gz",
+              "sha256_gzip": "5142488532475e415da1dec53747aeb46cd47d910a9a7e87375b773ecf4b9a01",
+              "compressed_bytes": 625744
+            }
+          }
+        },
+        {
+          "round": 4,
+          "requested": 2078,
+          "frontier": 1598,
+          "native_rule_count": 11485,
+          "physical_arity": 13,
+          "storage_capacity": 16,
+          "metadata": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.json",
+            "sha256": "7c8ae0e4bc4696cd3f2911499dc2592a05b6e522bf4786e8828da5df391f26cd",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.json",
+              "sha256_uncompressed": "7c8ae0e4bc4696cd3f2911499dc2592a05b6e522bf4786e8828da5df391f26cd",
+              "uncompressed_bytes": 587640,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.json.gz",
+              "sha256_gzip": "306e6a85b74566f68ac94c8b7b9e2386ab58ff349c7b6cc01ca7e1f19e9b08e0",
+              "compressed_bytes": 14793
+            }
+          },
+          "program": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.bin",
+            "sha256": "0a92d2ba45167127bcc939d4f47dd6f18ee749feb91ca51a02f484e8344c0a12",
+            "archive": {
+              "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.bin",
+              "sha256_uncompressed": "0a92d2ba45167127bcc939d4f47dd6f18ee749feb91ca51a02f484e8344c0a12",
+              "uncompressed_bytes": 7725494,
+              "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/native-closure/round-004-provisional.bin.gz",
+              "sha256_gzip": "0123f00791cd9ab184db98e6d465c26e5c4c3de5aac550103aacc199241bdcb4",
+              "compressed_bytes": 658262
+            }
+          }
+        }
+      ],
+      "resources": {
+        "exit_code": 101,
+        "wall_seconds": 102.77151637617499,
+        "user_seconds": 101.507553,
+        "system_seconds": 0.35866499999999996,
+        "peak_child_rss_kib": 170644,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "captured_executable": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "sha256": "1aea08c846e257db388efc481fdcbfd8e36b8795c50b95ccb0741bb5bfc081f2",
+        "size_bytes": 1289666128
+      },
+      "dependency_compile_ids": [
+        "8a8261d640cbbe602c15acbdf1f916159a50436312668181454bb8c4dcc838f1",
+        "2f58d7bf071b38fa4441f5ec96a6cca2ac79d684c32d01ef68f2a713fe63e113"
+      ],
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double-resources.json",
+          "sha256": "f8b6cb31d53b2c2babccc30e971e7d4d6032e6c1f3b8b4377e86dd45478c1df7"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double-resources.provenance.json",
+          "sha256": "c8ea12e9e08e250a3384d03d556c4e13a3c4b7979ae63ab3d1e7162fb25588cd"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/failure.json",
+          "sha256": "4fd4b4d3f16522b9b6a44f3a3932d30705c9791aa8858519b5199d845ab60d89"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/configuration.json",
+          "sha256": "67b21aab139f1c1950c24caa4a57856a75b381a91bf397509df251d338b2f692"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double-resources.log",
+          "sha256": "d8606a505576c23960289bdea4792b67a1789317996a2a463c94086c84804789"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-union-double/input.json",
+          "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+        }
+      ]
+    }
+  ],
+  "historical_controls": [
+    {
+      "name": "three-loop-before-union",
+      "rounds": 4,
+      "frontier": 1765,
+      "unresolved_terms": 2524,
+      "exit_code": 101,
+      "wall_seconds": 15.999475525226444,
+      "peak_child_rss_kib": 73300,
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union-resources.json",
+          "sha256": "4f053a6334ec31f27599c6df788f1bba072aec24ba4c08ac40e11b84c0fc08d8"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-before-union/failure.json",
+          "sha256": "963cbf98770e1521bda718be6ddb64cbdfd915ae0461ce94873435e5479ce72d"
+        }
+      ],
+      "scope": "historical bounded failure; not asserted to isolate one parameter or source change"
+    },
+    {
+      "name": "three-loop-double-before-union",
+      "rounds": 4,
+      "frontier": 1253,
+      "unresolved_terms": 1481,
+      "exit_code": 101,
+      "wall_seconds": 59.406306760851294,
+      "peak_child_rss_kib": 95396,
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union-resources.json",
+          "sha256": "8fc9f24bfca75201bb9bce79a58d608afa9ffa911658df17b8b31f85918072e5"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-before-union/failure.json",
+          "sha256": "2a1d23af44acedfdfd80c6a91d28828461890251731e193c373a77245ffb91f5"
+        }
+      ],
+      "scope": "historical bounded failure; not asserted to isolate one parameter or source change"
+    },
+    {
+      "name": "three-loop-double-active-before-union",
+      "rounds": 4,
+      "frontier": 1253,
+      "unresolved_terms": 1481,
+      "exit_code": 101,
+      "wall_seconds": 37.66147229913622,
+      "peak_child_rss_kib": 88360,
+      "artifacts": [
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union-resources.json",
+          "sha256": "460d436cf9fb079f5e0f8dc582c0df322c2388aae6dc7d090d2fd2696bb2286f"
+        },
+        {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-double-active-before-union/failure.json",
+          "sha256": "2a1d23af44acedfdfd80c6a91d28828461890251731e193c373a77245ffb91f5"
+        }
+      ],
+      "scope": "historical bounded failure; not asserted to isolate one parameter or source change"
+    }
+  ],
+  "native_predictions_written": 0,
+  "native_reference_comparisons": 0,
+  "four_loop_numerical_acceptance": false,
+  "interpretation": "Retaining exactly replayed native rules changes the explored frontier but neither tested sector closes. An isolated native ray search applies to a previously missing residual, motivating bounded residual-focused discovery; it does not prove the differential basis closes.",
+  "archive_status": "All completed predecessor and rule-union control checkpoints are losslessly archived after reader release.",
+  "isolated_residual_probe": {
+    "summary": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/summary.json",
+      "sha256": "6c21192ee9db4cbc28ad4c45126c91cde21c60cc1a22600c621b4242037707a4"
+    },
+    "scope": "bounded native discovery and exact source replay; lower residuals remain explicit; no master or family closure claim",
+    "physical_arity": 13,
+    "storage_capacity": 16,
+    "cut_slots": [
+      0,
+      3
+    ],
+    "target": [
+      1,
+      -1,
+      -1,
+      1,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "source_count": 200,
+    "replayed_historical_rules": 1761,
+    "historical_status": "NoApplicableRule",
+    "first_successful_tested_ray_budget": 32,
+    "successful_ray_rule_ordinal": 7,
+    "rules_at_first_success": 17,
+    "remaining_recursive_terms": 4,
+    "unresolved_domains": 20,
+    "nonzero_conditions": [
+      "64*eta",
+      "4*eta"
+    ],
+    "discovery_seconds": 0.069814099,
+    "application": "Applied { rule: 7 }",
+    "conclusion": "The native corpus supplies the missing recurrence immediately on the point and within32 tested ray-domain visits. Broad-sector discovery also applies but leaves more lower residuals and costs more. This isolates multi-domain coverage allocation/retention as plausible issues; it does not establish closure. The conditional fixed-negative-ray follow-up was not run because requested rays already apply."
+  },
+  "archive_manifest": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-control-archives.json",
+    "sha256": "b307ac52157a4ac88e796ca2b342bb88596eaf53103993b6fde28e53e2b9d65e"
+  }
+}

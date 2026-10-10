@@ -1,0 +1,20 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "PROBE_PER_RAY=32",
+    "PROBE_TOTAL=8192",
+    "PROBE_DEPTH=3",
+    "/tmp/three_loop_residual_batch_probe",
+    "/tmp/three-loop-union-double-latest.bin",
+    "/tmp/three-loop-union-double-latest.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/per-ray32"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 114.39202608400956,
+  "user_seconds": 113.188132,
+  "system_seconds": 0.275768,
+  "peak_child_rss_kib": 238892,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

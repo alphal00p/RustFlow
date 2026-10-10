@@ -1,0 +1,21 @@
+{
+  "command": [
+    "timeout",
+    "60s",
+    "env",
+    "PROBE_DOMAINS=32",
+    "PROBE_DEPTH=3",
+    "PROBE_PERSONAL_ANCHOR=true",
+    "PROBE_TARGET=[1, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+    "/tmp/three_loop_personal_anchor_flexible_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "point",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/odd-minimal-transfer-0-point.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.3182906028814614,
+  "user_seconds": 1.288096,
+  "system_seconds": 0.019999,
+  "peak_child_rss_kib": 24660,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

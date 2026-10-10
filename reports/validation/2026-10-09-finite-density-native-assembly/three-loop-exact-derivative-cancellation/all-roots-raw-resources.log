@@ -1,0 +1,76 @@
+{
+  "combined_original_targets": false,
+  "complete_derivative_rows": 735,
+  "conditions": "all original saved native conditions remain required; exact cancellation does not remove their admission obligations",
+  "derivative_leaf_occurrences_after_sum": 6079,
+  "derivative_leaf_occurrences_before_sum": 6296,
+  "derivatives_with_exact_cancellation": 23,
+  "historical_leaf_union": 1673,
+  "incomplete_unique_derivative_labels": 642,
+  "initial_active_leaves": 187,
+  "initial_separate_root_leaves": 187,
+  "known_reachable_basis": 1180,
+  "native_program_rules": 15940,
+  "original_labels": 3,
+  "saved_condition_count": 428,
+  "scope": "exact Symbolica together().cancel() within each actual native d_eta integral combination; no new native discovery; incomplete saved derivative rows are skipped, so reachable set is partial and no closure is claimed",
+  "seconds": 3.5477862399999998,
+  "stages": [
+    {
+      "basis": 357,
+      "generation": 0,
+      "incomplete_derivative_rows": 37,
+      "missing_derivative_reductions": 44,
+      "new_basis": 170,
+      "raw_derivative_leaf_union": 320,
+      "summed_derivative_leaf_union": 320
+    },
+    {
+      "basis": 622,
+      "generation": 1,
+      "incomplete_derivative_rows": 6,
+      "missing_derivative_reductions": 50,
+      "new_basis": 265,
+      "raw_derivative_leaf_union": 482,
+      "summed_derivative_leaf_union": 482
+    },
+    {
+      "basis": 951,
+      "generation": 2,
+      "incomplete_derivative_rows": 16,
+      "missing_derivative_reductions": 69,
+      "new_basis": 329,
+      "raw_derivative_leaf_union": 654,
+      "summed_derivative_leaf_union": 654
+    },
+    {
+      "basis": 1177,
+      "generation": 3,
+      "incomplete_derivative_rows": 168,
+      "missing_derivative_reductions": 316,
+      "new_basis": 226,
+      "raw_derivative_leaf_union": 581,
+      "summed_derivative_leaf_union": 581
+    },
+    {
+      "basis": 1180,
+      "generation": 4,
+      "incomplete_derivative_rows": 215,
+      "missing_derivative_reductions": 638,
+      "new_basis": 3,
+      "raw_derivative_leaf_union": 22,
+      "summed_derivative_leaf_union": 20
+    },
+    {
+      "basis": 1180,
+      "generation": 5,
+      "incomplete_derivative_rows": 3,
+      "missing_derivative_reductions": 642,
+      "new_basis": 0,
+      "raw_derivative_leaf_union": 0,
+      "summed_derivative_leaf_union": 0
+    }
+  ],
+  "summed_reachability": false,
+  "target_audits": []
+}

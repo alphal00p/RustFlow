@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/finite_density_massless_sources-6295c8431ae8f488",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.4063354940153658,
+  "user_seconds": 1.3488419999999999,
+  "system_seconds": 0.047689999999999996,
+  "peak_child_rss_kib": 18432,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

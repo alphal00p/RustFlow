@@ -1,0 +1,18 @@
+native batch replay+old-first union: 11485+0 rules; 0 searched targets now directly apply; auditing 2078 original requests
+audited 128/2078 requests, 71 unique residual labels
+audited 256/2078 requests, 149 unique residual labels
+audited 384/2078 requests, 241 unique residual labels
+audited 512/2078 requests, 401 unique residual labels
+audited 640/2078 requests, 558 unique residual labels
+audited 768/2078 requests, 684 unique residual labels
+audited 896/2078 requests, 840 unique residual labels
+audited 1024/2078 requests, 909 unique residual labels
+audited 1152/2078 requests, 1015 unique residual labels
+audited 1280/2078 requests, 1119 unique residual labels
+audited 1408/2078 requests, 1192 unique residual labels
+audited 1536/2078 requests, 1272 unique residual labels
+audited 1664/2078 requests, 1379 unique residual labels
+audited 1792/2078 requests, 1459 unique residual labels
+audited 1920/2078 requests, 1550 unique residual labels
+audited 2048/2078 requests, 1595 unique residual labels
+Result: 0 -> 1598 unique residuals, 7847 unresolved terms, 0 other failures

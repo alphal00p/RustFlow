@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/finite_density_flow_boundary-9423d5e4f8668f3b",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.17758617084473372,
+  "user_seconds": 0.124431,
+  "system_seconds": 0.052724,
+  "peak_child_rss_kib": 15456,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

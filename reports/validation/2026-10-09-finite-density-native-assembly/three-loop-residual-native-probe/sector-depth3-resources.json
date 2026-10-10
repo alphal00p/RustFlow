@@ -1,0 +1,19 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "PROBE_DEPTH=3",
+    "PROBE_DOMAINS=8192",
+    "/tmp/three_loop_residual_native_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "sector",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-native-probe/sector-depth3.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 89.1953226076439,
+  "user_seconds": 87.813785,
+  "system_seconds": 0.639039,
+  "peak_child_rss_kib": 519212,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

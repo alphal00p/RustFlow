@@ -1,0 +1,20 @@
+{
+  "command": [
+    "timeout",
+    "240s",
+    "env",
+    "PROBE_PER_RAY=32",
+    "PROBE_TOTAL=8192",
+    "PROBE_DEPTH=3",
+    "/tmp/three_loop_personal_anchor_batch_probe",
+    "/tmp/three-loop-union-double-latest.bin",
+    "/tmp/three-loop-union-double-latest.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-personal-anchor-probe/batch32"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 183.5767660937272,
+  "user_seconds": 181.630088,
+  "system_seconds": 0.419846,
+  "peak_child_rss_kib": 239596,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

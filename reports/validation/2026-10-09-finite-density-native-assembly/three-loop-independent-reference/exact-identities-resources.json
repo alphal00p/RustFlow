@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "30",
+    "/tmp/three_loop_exact_reference",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact-identities.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.027370723895728588,
+  "user_seconds": 0.002927,
+  "system_seconds": 0.024443,
+  "peak_child_rss_kib": 15452,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}
