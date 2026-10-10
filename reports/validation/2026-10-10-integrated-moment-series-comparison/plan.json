@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "scope": "Validation-only saved moment-prefix normalization and finite-eta partial sums; no coefficient or equation inference from references",
+  "producer_schema": "integrated-gaussian-rational-prefix.v1",
+  "dimension": "13/2",
+  "cut_slots": [
+    0,
+    3
+  ],
+  "original_targets": [
+    0,
+    1
+  ],
+  "profiles": {
+    "known_terms": [
+      32,
+      48,
+      64
+    ],
+    "digits": [
+      30,
+      50
+    ],
+    "eta": [
+      "8",
+      "2"
+    ]
+  },
+  "normalization": {
+    "master_owner": "symbolica_amflow::vacuum::tadpole for explicitly identified one-factor Gaussian channels only",
+    "measure_owner": "finite_density::normalization::native_measure_to_euclidean plus exact routing determinant",
+    "compact_owner": "producer-declared product mu^(D-2)/(sqrt(pi)*Gamma((D-1)/2)), evaluated with native Precision",
+    "target_signs": "preserved verbatim from producer; no extra Wick or per-cut phase"
+  },
+  "strictness": {
+    "coefficients": "saved exact rational strings only, complete indices 0..N-1 for every declared target, missing tail never filled",
+    "master_channels": "exact family/index identity, positive scale/mass, unsupported channel fails",
+    "input": "exact saved identity and actual prepared family",
+    "prediction_before_reference": "normalize and partial-sum processes do not open any numerical reference; comparison reads both only after predictions are written and hashed"
+  },
+  "numerical_checks": {
+    "relative_criterion": "1e-12",
+    "absolute_zero_criterion": "1e-25",
+    "eta8": "Report each term-count error, precision and truncation refinements; numerical consistency is empirical unless separate source-based convergent-germ coverage is supplied",
+    "eta2": "Raw-series values are outside the intended initial disk and diagnostic only; never accept endpoint or continuation from divergent sums",
+    "reference": "only frozen empirical-refinement-passing eta8 and eta2 node32/digits80 references",
+    "endpoint": "none",
+    "ode": "none"
+  },
+  "reference_manifest": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/artifact-manifest.json",
+    "sha256": "9a5c399d406cb7bbd0a9140d8e54bc87d6086db6dd15b026cc5971280a6b319e",
+    "bytes": 24729
+  },
+  "available_prefix_at_plan_freeze": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-24/coefficients.json",
+    "sha256": "abac2d75baeb7dd216efa0c8c8592d4875d9dd8fc8f4057be019f677a71b4a16",
+    "bytes": 52278
+  },
+  "no_24_term_substitution_for_planned_counts": true,
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/source/normalize.rs",
+    "sha256": "9f4946c22a73a6586b4058e4181c9e2c0eb95884fe47a182c60224d2f9271cf1",
+    "bytes": 6583
+  },
+  "successful_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/build-01/binding.json",
+    "sha256": "3b032cf0e369b6d17123b840961e4732424692ea8604c2fab9a2c4134bda3265",
+    "bytes": 3712
+  },
+  "historical_failure_source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/historical/normalize-build-00.rs",
+    "sha256": "6e7e582b2a36ed8c21211c84f760943543ff96caa6af39a1b9f7bdb8d853173b",
+    "bytes": 6581
+  }
+}

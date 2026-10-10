@@ -1,0 +1,225 @@
+{
+  "finished_utc": "2026-10-10T10:28:00.770456+00:00",
+  "status": "all_targets_heldout_pass_candidate_only",
+  "selected": [
+    {
+      "id": 0,
+      "family": "theta",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+      "candidate_sha256": "116d950a33f506721c4ae487cd5f125ad860d054714da23f46ef102a968cbcc3",
+      "candidate_blake3": "73ac7562106e9f9599171a0d8afaaea308ec4263dc1b7facb814a5ed1bd765dc",
+      "training_sha256": "be8ae3e403ddb3883b2ac8aee2e88c00e59e61494335b4c455bcfdb40fa6a89b",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    },
+    {
+      "id": 1,
+      "family": "theta",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json",
+      "candidate_sha256": "5a38929969f1b2ee2dd30d8fe688a83b9d971652c16d44b869469d600f688e56",
+      "candidate_blake3": "1d70cbedf38a32f9340a45f4a9e7ca5090a9a15de93230dbde948857b2299757",
+      "training_sha256": "10e4a91dd3ca506e83eaab07e6adf1659929b6928f6b28909976c54c1f95b55b",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    },
+    {
+      "id": 2,
+      "family": "recurrence",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/theta-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        },
+        {
+          "family": "recurrence",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+      "candidate_sha256": "530e59a9caefd273debb9c2ac1778e746ff61cf29ed8a162054e0dc7f8de686b",
+      "candidate_blake3": "8413227e3839edcd797891cd3afbcff70caff8bae6c11ed66feb3ee49adf698f",
+      "training_sha256": "3b307c1ab5afab3423d0d0692a574d61d4a8e9e544d8b31895450353dd66dc62",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    }
+  ],
+  "validation": [
+    {
+      "id": 0,
+      "status": "heldout_pass_candidate_only",
+      "heldout_access_started": true
+    },
+    {
+      "id": 1,
+      "status": "heldout_pass_candidate_only",
+      "heldout_access_started": true
+    },
+    {
+      "id": 2,
+      "status": "heldout_pass_candidate_only",
+      "heldout_access_started": true
+    }
+  ],
+  "aggregate_wall_seconds": 0.7799724391661584,
+  "holdout_access_started": true,
+  "runs": [
+    {
+      "stage": "fit-theta",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+        "theta"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003720032051205635,
+      "user_seconds": 0.001054,
+      "system_seconds": 0.002106,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "digest",
+      "args": [
+        "digest",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.002876048907637596,
+      "user_seconds": 0.001172,
+      "system_seconds": 0.001173,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "fit-theta",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/1-train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json",
+        "theta"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.0032752412371337414,
+      "user_seconds": 0.0,
+      "system_seconds": 0.002896,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "digest",
+      "args": [
+        "digest",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.0035013211891055107,
+      "user_seconds": 0.0010299999999999997,
+      "system_seconds": 0.0020610000000000003,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "fit-theta",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/theta-candidate.json",
+        "theta"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.04542658198624849,
+      "user_seconds": 0.04255199999999999,
+      "system_seconds": 0.0020229999999999988,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "fit-recurrence",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+        "recurrence"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.007742165122181177,
+      "user_seconds": 0.002709000000000003,
+      "system_seconds": 0.00451,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "digest",
+      "args": [
+        "digest",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.002990969456732273,
+      "user_seconds": 0.0012570000000000012,
+      "system_seconds": 0.0012709999999999996,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "validate",
+      "args": [
+        "validate",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+        "73ac7562106e9f9599171a0d8afaaea308ec4263dc1b7facb814a5ed1bd765dc",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-holdout.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/holdout-result.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.004060463048517704,
+      "user_seconds": 0.0009059999999999971,
+      "system_seconds": 0.002713,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "validate",
+      "args": [
+        "validate",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json",
+        "1d70cbedf38a32f9340a45f4a9e7ca5090a9a15de93230dbde948857b2299757",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/1-train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/1-holdout.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/holdout-result.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003290601074695587,
+      "user_seconds": 0.0009419999999999984,
+      "system_seconds": 0.0018899999999999993,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "validate",
+      "args": [
+        "validate",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+        "8413227e3839edcd797891cd3afbcff70caff8bae6c11ed66feb3ee49adf698f",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-holdout.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/holdout-result.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003066699020564556,
+      "user_seconds": 0.0,
+      "system_seconds": 0.002602,
+      "cumulative_child_peak_rss_kib": 15428
+    }
+  ],
+  "identity_certified": false,
+  "no_retry_or_family_change_after_holdout": true
+}

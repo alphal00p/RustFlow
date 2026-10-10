@@ -1,0 +1,73 @@
+{
+  "scope": "Isolated rustc compile; no Cargo/shared target mutation",
+  "command": [
+    "/nix/store/paaihvr59q1101200mabmk7y4yhw42g7-rustc-wrapper-1.97.1/bin/rustc",
+    "-C",
+    "linker=/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0/bin/cc",
+    "--edition=2024",
+    "--crate-name",
+    "integrated_wide_vacuum",
+    "-C",
+    "opt-level=1",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "rustred=/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/nix/store/rgnappqqc5vbq60gza5fflyk84sylwl6-python3-3.14.6/lib",
+    "-C",
+    "link-arg=-Wl,-rpath,/nix/store/rgnappqqc5vbq60gza5fflyk84sylwl6-python3-3.14.6/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/wide-vacuum/check.rs",
+    "-o",
+    "/tmp/rustflow-integrated-wide-vacuum-20261010"
+  ],
+  "dependencies": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "symbolica_amflow": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "b7b2beaf983314c86123d5cef173d93faa8b605f1648cce72c340ec9a6d80687",
+      "bytes": 656665206
+    },
+    "rustred": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "dc3c900d6fcf11c2996d0d599266eae8c7f3f71f925995b711bf8181e1a5c515",
+      "bytes": 436276538
+    }
+  },
+  "sources": {
+    "check.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/wide-vacuum/check.rs",
+      "sha256": "d56010dca54f5172f674a53a8dac04b2f725cb1af6270b5aec07013afcb6bb3a",
+      "bytes": 4344
+    }
+  },
+  "runtime_limit_seconds": 180,
+  "exit_code": 0,
+  "wall_seconds": 26.375185556244105,
+  "executable": {
+    "path": "/tmp/rustflow-integrated-wide-vacuum-20261010",
+    "sha256": "8c41d25c27b290bd59016f2b4e1761323746da7813cef9844f3b9c03de2bed9d",
+    "bytes": 1240877168
+  }
+}

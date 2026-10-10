@@ -1,0 +1,12 @@
+{
+  "stage": "digest",
+  "args": [
+    "digest",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/output/target-1/candidate.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.0030155088752508163,
+  "user_seconds": 0.001313,
+  "system_seconds": 0.0013,
+  "cumulative_child_peak_rss_kib": 15428
+}

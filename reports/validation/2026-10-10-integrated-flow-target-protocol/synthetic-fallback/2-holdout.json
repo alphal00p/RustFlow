@@ -1,0 +1,34 @@
+{
+  "schema": "integrated-rational-prefix.v1",
+  "dimension": "13/2",
+  "q": 1,
+  "grading_proof_identity": "synthetic-grading-only",
+  "series_identity": "synthetic-target-2",
+  "target_index": 2,
+  "first_index": 48,
+  "channels": [
+    {
+      "id": "formal-normalization",
+      "beta": "0",
+      "log_power": 0,
+      "coefficients": [
+        "1/6250000",
+        "1/6765201",
+        "1/7311616",
+        "1/7890481",
+        "1/8503056",
+        "1/9150625",
+        "1/9834496",
+        "1/10556001",
+        "1/11316496",
+        "1/12117361",
+        "1/12960000",
+        "1/13845841",
+        "1/14776336",
+        "1/15752961",
+        "1/16777216",
+        "1/17850625"
+      ]
+    }
+  ]
+}

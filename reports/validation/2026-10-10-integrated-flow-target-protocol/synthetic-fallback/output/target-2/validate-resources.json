@@ -1,0 +1,16 @@
+{
+  "stage": "validate",
+  "args": [
+    "validate",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+    "8413227e3839edcd797891cd3afbcff70caff8bae6c11ed66feb3ee49adf698f",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-train.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-holdout.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/holdout-result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.003066699020564556,
+  "user_seconds": 0.0,
+  "system_seconds": 0.002602,
+  "cumulative_child_peak_rss_kib": 15428
+}

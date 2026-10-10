@@ -1,0 +1,14 @@
+{
+  "stage": "fit-recurrence",
+  "args": [
+    "fit",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-train.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+    "recurrence"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.007742165122181177,
+  "user_seconds": 0.002709000000000003,
+  "system_seconds": 0.00451,
+  "cumulative_child_peak_rss_kib": 15428
+}

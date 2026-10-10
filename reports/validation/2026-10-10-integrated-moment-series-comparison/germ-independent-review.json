@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "status": "scoped mathematical review passed",
+  "reviewer": "independent validation agent",
+  "bindings": {
+    "gaussian-method.md": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-method.md",
+      "sha256": "76ead58df8bdbee9b4cc5b3cba5562136569fc2f17521e04b0641bba93f31ba6",
+      "bytes": 4682
+    },
+    "convergent-germ.md": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/convergent-germ.md",
+      "sha256": "758a006abf1b9d4205769741c46179d14c81052b430d844d0b60be38319aa543",
+      "bytes": 4252
+    },
+    "sharp-germ-bound.md": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/sharp-germ-bound.md",
+      "sha256": "025704dad6a0c43ad273390903e9b8dbbca026b8b1e2b2fdc09715e3ed85eda7",
+      "bytes": 2113
+    }
+  },
+  "checks": [
+    "actual h=1 projective U is exactly 1, so no parameter-face inverse U remains",
+    "off-null diagonal terms remain before finite C2 differentiation",
+    "finite original compact mass jets preserve the same base kernels and only add controlled origin powers",
+    "source-based absolute polynomial bound: virtual compact contribution <=1, pure compact factor <=4",
+    "|z|<1/4 covers eta8 with at least factor-two distance from kernel zero",
+    "initial analytic-index/Gaussian domain fixes meromorphic continuation; D13/2 avoids the displayed Gamma poles",
+    "all-soft finite Taylor coefficients are virtual polynomials under the all-uncut placement",
+    "native wide-index source generation and coefficients were frozen before this comparison"
+  ],
+  "limits": [
+    "The proof is scoped to the actual h=1 fixture and finite original jets, not general h>=2 face uniformity.",
+    "No numerical remainder constant or endpoint control follows from convergence alone.",
+    "No finite recurrence fit becomes an identity from these checks.",
+    "Eta2 and eta0.5 are outside the proven initial disk."
+  ],
+  "reference_values_used_to_bound_kernels": false
+}

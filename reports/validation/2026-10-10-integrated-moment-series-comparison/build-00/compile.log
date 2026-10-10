@@ -1,0 +1,29 @@
+error[E0308]: mismatched types
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/source/normalize.rs:32:44
+   |
+32 |   let gamma=p.gamma_real(&p.rational(&((&D-Rational::one())/&Rational::from(2))).re)?;
+   |                                            ^^^^^^^^^^^^^^^ expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+   |
+   = note: expected reference `&Fraction<_>`
+                 found struct `Fraction<_>`
+help: consider dereferencing the borrow
+   |
+32 |   let gamma=p.gamma_real(&p.rational(&((*&D-Rational::one())/&Rational::from(2))).re)?;
+   |                                         +
+
+error[E0308]: mismatched types
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/source/normalize.rs:36:62
+   |
+36 |    compact=p.mul(&compact,&p.div(&p.pow(&mu,&p.rational(&(&D-Rational::from(2)))),&p.mul(&sqrt_pi,&gamma)));
+   |                                                              ^^^^^^^^^^^^^^^^^ expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+   |
+   = note: expected reference `&Fraction<_>`
+                 found struct `Fraction<_>`
+help: consider dereferencing the borrow
+   |
+36 |    compact=p.mul(&compact,&p.div(&p.pow(&mu,&p.rational(&(*&D-Rational::from(2)))),&p.mul(&sqrt_pi,&gamma)));
+   |                                                           +
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0308`.

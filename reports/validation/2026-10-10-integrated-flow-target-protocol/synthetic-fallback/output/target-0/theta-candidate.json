@@ -1,0 +1,49 @@
+{
+  "audit": {
+    "attempts": [
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 1,
+        "rank": 2,
+        "rows": 48,
+        "unknowns": 2
+      },
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 2,
+        "rank": 3,
+        "rows": 48,
+        "unknowns": 3
+      },
+      {
+        "degree": 1,
+        "nullity": 1,
+        "order": 1,
+        "rank": 3,
+        "rows": 48,
+        "unknowns": 4
+      }
+    ],
+    "status": "training_candidate_only"
+  },
+  "candidate": {
+    "coefficient_order": "t_degree_major_theta_order_minor",
+    "coefficients": [
+      "1",
+      "4",
+      "-10",
+      "-8"
+    ],
+    "degree": 1,
+    "kind": "theta",
+    "order": 1,
+    "status": "finite_training_candidate_not_identity"
+  },
+  "holdout_read": false,
+  "identity_certified": false,
+  "schema": "integrated-fit-candidate.v1",
+  "series_identity": "synthetic-target-0",
+  "training_blake3": "9bfd13a0116234503925113ee211aa533b80e3c5fffbf3ffeb88b683ac619a87"
+}

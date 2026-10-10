@@ -1,0 +1,282 @@
+{
+  "schema": 1,
+  "scope": "Exact frozen producer run/source/proof identities; no oracle-derived coefficient or equation",
+  "run": {
+    "command": [
+      "/tmp/rustflow-integrated-moment-gaussian-wide-20261010",
+      "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-64",
+      "64"
+    ],
+    "timeout_seconds": 180,
+    "build_sha256": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+    "references_loaded": false,
+    "exit_code": 0,
+    "wall_seconds": 0.7657142062671483,
+    "output": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-64/coefficients.json",
+      "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+      "bytes": 204428
+    }
+  },
+  "build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-build.json",
+    "sha256": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+    "bytes": 6633
+  },
+  "native_normalizer_uses_same_dependency_graph": true,
+  "copies": [
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-build.json",
+        "sha256": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+        "bytes": 6633
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-wide-build.json",
+        "sha256": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+        "bytes": 6633
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-64/run.json",
+        "sha256": "4b2a4979fab1eafde73bc5a72f8046c691e31ee70925e6b029b575a9281b1946",
+        "bytes": 760
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-wide-prefix-64/run.json",
+        "sha256": "4b2a4979fab1eafde73bc5a72f8046c691e31ee70925e6b029b575a9281b1946",
+        "bytes": 760
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/series-contract.json",
+        "sha256": "d01cdaa604e457b8f533b3c357cfc8ae9cd6f463a651dadca8c28c47c33d2154",
+        "bytes": 1535
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/fit-data/series-contract.json",
+        "sha256": "d01cdaa604e457b8f533b3c357cfc8ae9cd6f463a651dadca8c28c47c33d2154",
+        "bytes": 1535
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-method.md",
+        "sha256": "76ead58df8bdbee9b4cc5b3cba5562136569fc2f17521e04b0641bba93f31ba6",
+        "bytes": 4682
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-method.md",
+        "sha256": "76ead58df8bdbee9b4cc5b3cba5562136569fc2f17521e04b0641bba93f31ba6",
+        "bytes": 4682
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/convergent-germ.md",
+        "sha256": "758a006abf1b9d4205769741c46179d14c81052b430d844d0b60be38319aa543",
+        "bytes": 4252
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/convergent-germ.md",
+        "sha256": "758a006abf1b9d4205769741c46179d14c81052b430d844d0b60be38319aa543",
+        "bytes": 4252
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/sharp-germ-bound.md",
+        "sha256": "025704dad6a0c43ad273390903e9b8dbbca026b8b1e2b2fdc09715e3ed85eda7",
+        "bytes": 2113
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/sharp-germ-bound.md",
+        "sha256": "025704dad6a0c43ad273390903e9b8dbbca026b8b1e2b2fdc09715e3ed85eda7",
+        "bytes": 2113
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-proof-bindings.json",
+        "sha256": "cf23889365a4e479935e88ff17d10b796f19cd1a88bbafdee576f873ba77a763",
+        "bytes": 1015
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-proof-bindings.json",
+        "sha256": "cf23889365a4e479935e88ff17d10b796f19cd1a88bbafdee576f873ba77a763",
+        "bytes": 1015
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-four-prefix-comparison.json",
+        "sha256": "f405e20922033efd1584d60c4c7dc88cbdd3fb2ca26fd68772ef7216a0471870",
+        "bytes": 1299
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-four-prefix-comparison.json",
+        "sha256": "f405e20922033efd1584d60c4c7dc88cbdd3fb2ca26fd68772ef7216a0471870",
+        "bytes": 1299
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/wide-24-comparison.json",
+        "sha256": "8592b1eba2d3990512c1e3a5214effabf6ae2cdc5f13286fa5412d36c0032351",
+        "bytes": 1381
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/wide-24-comparison.json",
+        "sha256": "8592b1eba2d3990512c1e3a5214effabf6ae2cdc5f13286fa5412d36c0032351",
+        "bytes": 1381
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/angular.rs",
+        "sha256": "4d04a5a83831b4492e2d6c8f0c152395b6a44241dbee1b943bf002c67d307891",
+        "bytes": 7527
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-wide-source/angular.rs",
+        "sha256": "4d04a5a83831b4492e2d6c8f0c152395b6a44241dbee1b943bf002c67d307891",
+        "bytes": 7527
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/compact_exact.rs",
+        "sha256": "ac64728926612cf7af9a5cd3db4d168d8896d1653b1781304f70bd8aacc5dcf2",
+        "bytes": 2619
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-wide-source/compact_exact.rs",
+        "sha256": "ac64728926612cf7af9a5cd3db4d168d8896d1653b1781304f70bd8aacc5dcf2",
+        "bytes": 2619
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/generate.rs",
+        "sha256": "241112d1f966ba107b576d6d1ec541fd7c7ef7693e48f3b18b20313e3f7a6292",
+        "bytes": 14081
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-wide-source/generate.rs",
+        "sha256": "241112d1f966ba107b576d6d1ec541fd7c7ef7693e48f3b18b20313e3f7a6292",
+        "bytes": 14081
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/wide_hard.rs",
+        "sha256": "d011a0d85bedd4190a775e6cd729f8403e9a707b4f8b248e507fb14807e81bd1",
+        "bytes": 4660
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/gaussian-wide-source/wide_hard.rs",
+        "sha256": "d011a0d85bedd4190a775e6cd729f8403e9a707b4f8b248e507fb14807e81bd1",
+        "bytes": 4660
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/algebra.rs",
+        "sha256": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597",
+        "bytes": 3344
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/source/algebra.rs",
+        "sha256": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597",
+        "bytes": 3344
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/census.rs",
+        "sha256": "69824e12d0d595b74fe94f02cf01f7d8467e4eb9ff722f8ce363ba22def220e3",
+        "bytes": 4773
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/source/census.rs",
+        "sha256": "69824e12d0d595b74fe94f02cf01f7d8467e4eb9ff722f8ce363ba22def220e3",
+        "bytes": 4773
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/coefficient.rs",
+        "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+        "bytes": 17725
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/source/coefficient.rs",
+        "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+        "bytes": 17725
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/cut_regions.rs",
+        "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d",
+        "bytes": 9209
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/source/cut_regions.rs",
+        "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d",
+        "bytes": 9209
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/generate.rs",
+        "sha256": "53e5a60bb5c824fd7fa763a7412a9bca0b92b10375c140bce2aeba04bcdb04a3",
+        "bytes": 9663
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/source/generate.rs",
+        "sha256": "53e5a60bb5c824fd7fa763a7412a9bca0b92b10375c140bce2aeba04bcdb04a3",
+        "bytes": 9663
+      },
+      "byte_exact": true
+    },
+    {
+      "original": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/moments.rs",
+        "sha256": "0a25cdc191127fa418718782fd33400725906508beaaf47d7b8b487bb2c6299f",
+        "bytes": 4502
+      },
+      "copy": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-freeze/source/moments.rs",
+        "sha256": "0a25cdc191127fa418718782fd33400725906508beaaf47d7b8b487bb2c6299f",
+        "bytes": 4502
+      },
+      "byte_exact": true
+    }
+  ],
+  "coefficient_copy": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/coefficients.json",
+    "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+    "bytes": 204428
+  }
+}

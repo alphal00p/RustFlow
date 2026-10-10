@@ -1,0 +1,65 @@
+{
+  "frozen_utc": "2026-10-10T10:28:00.757144+00:00",
+  "targets": [
+    {
+      "id": 0,
+      "family": "theta",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+      "candidate_sha256": "116d950a33f506721c4ae487cd5f125ad860d054714da23f46ef102a968cbcc3",
+      "candidate_blake3": "73ac7562106e9f9599171a0d8afaaea308ec4263dc1b7facb814a5ed1bd765dc",
+      "training_sha256": "be8ae3e403ddb3883b2ac8aee2e88c00e59e61494335b4c455bcfdb40fa6a89b",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    },
+    {
+      "id": 1,
+      "family": "theta",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json",
+      "candidate_sha256": "5a38929969f1b2ee2dd30d8fe688a83b9d971652c16d44b869469d600f688e56",
+      "candidate_blake3": "1d70cbedf38a32f9340a45f4a9e7ca5090a9a15de93230dbde948857b2299757",
+      "training_sha256": "10e4a91dd3ca506e83eaab07e6adf1659929b6928f6b28909976c54c1f95b55b",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    },
+    {
+      "id": 2,
+      "family": "recurrence",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/theta-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        },
+        {
+          "family": "recurrence",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json",
+      "candidate_sha256": "530e59a9caefd273debb9c2ac1778e746ff61cf29ed8a162054e0dc7f8de686b",
+      "candidate_blake3": "8413227e3839edcd797891cd3afbcff70caff8bae6c11ed66feb3ee49adf698f",
+      "training_sha256": "3b307c1ab5afab3423d0d0692a574d61d4a8e9e544d8b31895450353dd66dc62",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    }
+  ],
+  "heldout_access_started": false,
+  "structure": "separate operators/recurrences; no cross-target common annihilator; recurrence forcing/beta conjugation retained; future certified companion may be block diagonal",
+  "selection_from_training_only": true,
+  "identity_certified": false
+}

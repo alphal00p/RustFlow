@@ -1,0 +1,27 @@
+{
+  "frozen_utc": "2026-10-10T10:26:33.036237+00:00",
+  "targets": [
+    {
+      "id": 0,
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/output/target-0/candidate.json",
+      "candidate_sha256": "116d950a33f506721c4ae487cd5f125ad860d054714da23f46ef102a968cbcc3",
+      "candidate_blake3": "73ac7562106e9f9599171a0d8afaaea308ec4263dc1b7facb814a5ed1bd765dc",
+      "training_sha256": "be8ae3e403ddb3883b2ac8aee2e88c00e59e61494335b4c455bcfdb40fa6a89b",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    },
+    {
+      "id": 1,
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/output/target-1/candidate.json",
+      "candidate_sha256": "5a38929969f1b2ee2dd30d8fe688a83b9d971652c16d44b869469d600f688e56",
+      "candidate_blake3": "1d70cbedf38a32f9340a45f4a9e7ca5090a9a15de93230dbde948857b2299757",
+      "training_sha256": "10e4a91dd3ca506e83eaab07e6adf1659929b6928f6b28909976c54c1f95b55b",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    }
+  ],
+  "heldout_access_started": false,
+  "structure": "separate theta operators; no cross-target common annihilator; any future companion is block diagonal",
+  "selection_from_training_only": true,
+  "identity_certified": false
+}

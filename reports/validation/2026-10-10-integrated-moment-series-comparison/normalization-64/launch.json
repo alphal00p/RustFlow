@@ -1,0 +1,48 @@
+{
+  "scope": "Only saved master channels and source-bound native owners; no reference data read",
+  "inputs": {
+    "coefficients": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-64/coefficients.json",
+      "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+      "bytes": 204428
+    },
+    "input": {
+      "path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "bytes": 1550
+    },
+    "native_build": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/build-01/binding.json",
+      "sha256": "3b032cf0e369b6d17123b840961e4732424692ea8604c2fab9a2c4134bda3265",
+      "bytes": 3712
+    },
+    "normalizer_source": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/source/normalize.rs",
+      "sha256": "9f4946c22a73a6586b4058e4181c9e2c0eb95884fe47a182c60224d2f9271cf1",
+      "bytes": 6583
+    },
+    "plan": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/plan.json",
+      "sha256": "fc67d0e822a62e0302f4f346bf9f1d73b45ba804139ca30502fdffdfd0f3a525",
+      "bytes": 3410
+    },
+    "launcher": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/run-normalizer.py",
+      "sha256": "7a1476fab25525784ac8a2b70584ab8cbe28417ec521b5d0eb36d99b4e713c03",
+      "bytes": 2759
+    }
+  },
+  "executable": {
+    "path": "/tmp/rustflow-integrated-moment-normalize-20261010",
+    "sha256": "621fd02c5c75058cd45f40b0db46dd523353f0dec4647b05394f071f1b8af887",
+    "bytes": 1239994000
+  },
+  "command": [
+    "/tmp/rustflow-integrated-moment-normalize-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/coefficients.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/input.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/normalization.json"
+  ],
+  "timeout_seconds": 60,
+  "producer_known_terms": 64
+}

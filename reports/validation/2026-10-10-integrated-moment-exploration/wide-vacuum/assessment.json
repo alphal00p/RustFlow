@@ -1,0 +1,17 @@
+{
+  "problem": "The Gaussian dimension bridge produces ordinary vacuum powers through 129 for the 64-coefficient dataset. The compact search Power stores one symbolic bit and seven signed bits, so direct numeric search rejects powers above 63.",
+  "resolution": "Use RustRed's existing generic Reducer on a freshly generated, source-replayed ClosedArtifact. Its IntegralKey and authenticated root-domain bounds use wide integers. No Power layout, live source, or mathematical recurrence was replaced.",
+  "ordinary_vacuum_artifact": "derive_one_loop_unit_mass_tadpole generates the ordinary IBP source and derives, replays, and seals its indexed rule. This is an ordinary vacuum subintegral capability, independent of occupied kinematics and the number of physical invariants.",
+  "admission_requirement": "A production or exploratory adapter must exactly match the vacuum family, denominator normalization, dimension parameter map and master normalization; this test alone does not authorize arbitrary families or source classes.",
+  "checks": {
+    "native_wide_indices": "1..129 inclusive",
+    "exact_matches_to_compact_backend": "1..32 inclusive at D=13/2",
+    "gaussian_comparisons": "indices 64,80,128,129 at 50 and 80 digits, tolerance 1e-35 relative",
+    "native_rule_applications": 128,
+    "native_cache_coefficient_terms": 8514,
+    "native_cache_coefficient_bytes": 650340,
+    "runtime_seconds": 0.21479265158995986,
+    "passed": true
+  },
+  "remaining_scope": "Higher-loop vacuum families need their own exact family admission or the ordinary backend. The existence of a wide-index consumer does not prove every required family has an affordable closed artifact. No finite-density ODE or endpoint result follows from this check."
+}

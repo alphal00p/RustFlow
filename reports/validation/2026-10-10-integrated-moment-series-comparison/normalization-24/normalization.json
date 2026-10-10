@@ -1,0 +1,98 @@
+{
+  "cut_slots": [
+    0,
+    3
+  ],
+  "dimension": "13/2",
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "profiles": [
+    {
+      "bits": 116,
+      "checked_conditions": [
+        {
+          "condition": "1",
+          "value": {
+            "im": "0",
+            "re": "1.000000000000000000000000000000000"
+          }
+        },
+        {
+          "condition": "2",
+          "value": {
+            "im": "0",
+            "re": "2.000000000000000000000000000000000"
+          }
+        }
+      ],
+      "compact_normalization": {
+        "im": "0",
+        "re": "1.230506500091332367159262748141368e-1"
+      },
+      "digits": 30,
+      "masters": [
+        {
+          "channel": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+          "mass_squared": "1",
+          "owner": "symbolica_amflow::vacuum::tadpole",
+          "power": 1,
+          "quadratic_scale": "1",
+          "value": {
+            "im": "0",
+            "re": "1.742814865728252650850273142560555"
+          }
+        }
+      ],
+      "native_measure_to_euclidean": {
+        "im": "0",
+        "re": "7.569436717267120871321609939144213e-10"
+      },
+      "native_measure_to_euclidean_atom": "(4*𝜋)^(-39/4)*4*𝜋^2"
+    },
+    {
+      "bits": 183,
+      "checked_conditions": [
+        {
+          "condition": "1",
+          "value": {
+            "im": "0",
+            "re": "1.000000000000000000000000000000000000000000000000000000"
+          }
+        },
+        {
+          "condition": "2",
+          "value": {
+            "im": "0",
+            "re": "2.000000000000000000000000000000000000000000000000000000"
+          }
+        }
+      ],
+      "compact_normalization": {
+        "im": "0",
+        "re": "1.230506500091332367159262748141367712122801740673118845e-1"
+      },
+      "digits": 50,
+      "masters": [
+        {
+          "channel": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+          "mass_squared": "1",
+          "owner": "symbolica_amflow::vacuum::tadpole",
+          "power": 1,
+          "quadratic_scale": "1",
+          "value": {
+            "im": "0",
+            "re": "1.742814865728252650850273142560555415966206930642589314"
+          }
+        }
+      ],
+      "native_measure_to_euclidean": {
+        "im": "0",
+        "re": "7.569436717267120871321609939144210774128722922269980663e-10"
+      },
+      "native_measure_to_euclidean_atom": "(4*𝜋)^(-39/4)*4*𝜋^2"
+    }
+  ],
+  "routing_determinant": "1",
+  "schema": 1,
+  "scope": "Saved formal master channels evaluated only through existing native Gaussian and measure owners; no coefficient inference or reference read",
+  "target_phases": "already present in saved coefficients; no extra Wick or per-cut sign"
+}

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "scope": "Post-execution environment binding for report-only saved-prefix evaluation and comparison; numerical inputs already hashed in each output",
+  "python": {
+    "path": "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3.14",
+    "sha256": "9bfa54c39ad52bd64ea04e2b0c88599c0ddfcc2da5d3213a2f9fc1e833fa8e1c",
+    "bytes": 16528
+  },
+  "python_version": "3.14.6 (main, Jun 10 2026, 10:03:53) [GCC 15.3.0]",
+  "mpmath": {
+    "version": "1.3.0",
+    "module": {
+      "path": "/nix/store/vm12q3zvz6yp0wklj2b76smgdknnc7wz-python3.13-mpmath-1.3.0/lib/python3.13/site-packages/mpmath/__init__.py",
+      "sha256": "b241584d2c1fc0304b0a1015ea923749d7b0800411dd406dcab7c82bf25d9fe8",
+      "bytes": 8765
+    },
+    "implementation": {
+      "path": "/nix/store/vm12q3zvz6yp0wklj2b76smgdknnc7wz-python3.13-mpmath-1.3.0/lib/python3.13/site-packages/mpmath/ctx_mp.py",
+      "sha256": "777af8b7bc4736a485b66aac03d06dab5369cb759333ea5c336fe3782c840b16",
+      "bytes": 49452
+    }
+  },
+  "environment": {
+    "PYTHONPATH": "/nix/store/vm12q3zvz6yp0wklj2b76smgdknnc7wz-python3.13-mpmath-1.3.0/lib/python3.13/site-packages"
+  },
+  "executions": [
+    {
+      "script": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/sum-saved-prefix.py",
+        "sha256": "f54806ce23a9683fc062f5d0759367869ca133bb5fce4e15f29877a4abdcf399",
+        "bytes": 5353
+      },
+      "argv": [
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/series-predictions.json"
+      ],
+      "exit_code": 0,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/series-predictions.json",
+        "sha256": "354a4fea7a7ec8b1c39723110fdb09a610b37dbe5c134d6803833d116e93d971",
+        "bytes": 21821
+      },
+      "comparison_opened_references": false
+    },
+    {
+      "script": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/compare-saved.py",
+        "sha256": "541614afe64ac341aa8a42a68a0fcab61c42095cfca91f289a1c0da2c7a6b267",
+        "bytes": 5377
+      },
+      "argv": [],
+      "exit_code": 0,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/comparison.json",
+        "sha256": "02be9e26a550058397065a5488611b662a440753124487d6e4fd61b5bc0ff068",
+        "bytes": 19087
+      },
+      "comparison_opened_references": true
+    },
+    {
+      "script": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/adapter-controls.py",
+        "sha256": "ee59f964b4055b101f2f49a15298349476aeabc56f195f9fc115d4ec29b01ea3",
+        "bytes": 3668
+      },
+      "argv": [],
+      "exit_code": 0,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/adapter-controls.json",
+        "sha256": "76af501c91e1e9f41249e83a666ebecfc559e93b5cbc4d9dafb151250033b67e",
+        "bytes": 2473
+      }
+    }
+  ],
+  "timing_claim": "No speed or shared-host benchmark claim. Native normalization run wall times include only small evaluation, not compilation."
+}

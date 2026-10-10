@@ -1,0 +1,12 @@
+{
+  "stage": "digest",
+  "args": [
+    "digest",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-1/theta-candidate.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.0035013211891055107,
+  "user_seconds": 0.0010299999999999997,
+  "system_seconds": 0.0020610000000000003,
+  "cumulative_child_peak_rss_kib": 15428
+}

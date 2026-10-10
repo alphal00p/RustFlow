@@ -1,0 +1,14 @@
+{
+  "stage": "fit-theta",
+  "args": [
+    "fit",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-train.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+    "theta"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.003720032051205635,
+  "user_seconds": 0.001054,
+  "system_seconds": 0.002106,
+  "cumulative_child_peak_rss_kib": 15428
+}

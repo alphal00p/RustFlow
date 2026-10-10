@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "status": "completed validation-only finite-eta series comparison",
+  "scope": "actual three-loop graph, selected double cut[0,3], all-uncut deformation; original scalar and raised mixed-medium targets at D13/2",
+  "producer_predictions_saved_before_comparison": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/series-predictions.json",
+    "sha256": "354a4fea7a7ec8b1c39723110fdb09a610b37dbe5c134d6803833d116e93d971",
+    "bytes": 21821
+  },
+  "producer_coefficient_sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+  "eta8": {
+    "reference_checks_passed": 12,
+    "reference_checks": 12,
+    "truncation_checks_passed": 4,
+    "truncation_checks": 4,
+    "final_term_count": 64,
+    "final_digits": 50,
+    "final_errors": [
+      {
+        "target": 0,
+        "eta": "8",
+        "terms": 64,
+        "digits": 50,
+        "scope": "empirical finite-eta comparison",
+        "absolute_error": "3.090383601807641773198809033039109953237e-36",
+        "relative_error": "1.144377018352613332060261030656742080433e-25",
+        "criterion_limit": "2.700494288373948701550704813514686425595e-23",
+        "passed": true
+      },
+      {
+        "target": 1,
+        "eta": "8",
+        "terms": 64,
+        "digits": 50,
+        "scope": "empirical finite-eta comparison",
+        "absolute_error": "1.02659261603852964355578534002886756804e-34",
+        "relative_error": "2.680622648021132117961658567495674838708e-24",
+        "criterion_limit": "3.829679708169192186952473988451234894936e-23",
+        "passed": true
+      }
+    ],
+    "final_truncation": [
+      {
+        "target": 0,
+        "eta": "8",
+        "terms": [
+          48,
+          64
+        ],
+        "digits": 50,
+        "absolute_error": "6.41884108047420638365932833895e-31",
+        "relative_error": "2.376913407337435812894055426299235384695e-20",
+        "criterion_limit": "2.700494288373948701550704504476326244831e-23",
+        "passed": true
+      },
+      {
+        "target": 1,
+        "eta": "8",
+        "terms": [
+          48,
+          64
+        ],
+        "digits": 50,
+        "absolute_error": "1.6189700542461576018140508851035e-29",
+        "relative_error": "4.227429387352392132451209087594753980781e-19",
+        "criterion_limit": "3.82967970816919218695246372252507450964e-23",
+        "passed": true
+      }
+    ],
+    "source_based_germ_covers_sample": true,
+    "empirical_error_only": true
+  },
+  "eta2": {
+    "raw_reference_checks_passed": 0,
+    "raw_reference_checks": 12,
+    "status": "failed raw partial-sum agreement; outside the proven initial disk; continuation not attempted"
+  },
+  "precision": {
+    "checks": 12,
+    "passed": 12
+  },
+  "adapter_contract_controls": {
+    "checks": 13,
+    "passed": 13
+  },
+  "normalization": "Existing native one-factor vacuum master plus measure/determinant owners, producer-declared compact factor; signed target coefficients unchanged",
+  "independent_raised_validation": "Frozen earlier validation separately checks measure, original-numerator derivative, kernel derivative and moving upper surface. This series report compares only the complete raised total.",
+  "failed_attempts": [
+    "build-00: two borrow type mismatches, no executable evaluation; original source reproduced byte-exact in historical/normalize-build-00.rs",
+    "eta2 raw partial sums fail; preserved in comparison.json"
+  ],
+  "limits": [
+    "No rigorous truncation constant or certified endpoint error.",
+    "No ODE or recurrence identity asserted.",
+    "No eta0 continuation or Laurent result.",
+    "No complete three-loop/four-loop amplitude acceptance.",
+    "No production source changes, weighted closure runs, or comparison-dependent coefficient generation."
+  ],
+  "bindings": {
+    "plan.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/plan.json",
+      "sha256": "fc67d0e822a62e0302f4f346bf9f1d73b45ba804139ca30502fdffdfd0f3a525",
+      "bytes": 3410
+    },
+    "producer-binding.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/producer-binding.json",
+      "sha256": "92aca7f5f5e3431f6993bbc09dc5825f1cce0f1b9814807fb3ee70fab1cf5206",
+      "bytes": 12760
+    },
+    "execution-provenance.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/execution-provenance.json",
+      "sha256": "4957acef7d1319f5b0d660a6a6dbf11259d4e8f12302173bf8c83f49fb049f5b",
+      "bytes": 3437
+    },
+    "germ-independent-review.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/germ-independent-review.json",
+      "sha256": "baee94cadb10bda8a59cff15c619c65668dd839aae96e3835df8ec2bb17a71ed",
+      "bytes": 2166
+    },
+    "comparison.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/comparison.json",
+      "sha256": "02be9e26a550058397065a5488611b662a440753124487d6e4fd61b5bc0ff068",
+      "bytes": 19087
+    },
+    "adapter-controls.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/adapter-controls.json",
+      "sha256": "76af501c91e1e9f41249e83a666ebecfc559e93b5cbc4d9dafb151250033b67e",
+      "bytes": 2473
+    }
+  }
+}

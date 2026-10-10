@@ -1,0 +1,35 @@
+{
+  "captured_utc": "2026-10-10T10:27:59.991342+00:00",
+  "config_sha256": "e0899f5333b51472323c4261f22358bb52670d764f7bb976e8a6382c1fbac1a3",
+  "launcher_sha256": "29f85938f1853928f8e0633d0b3a1b6a4f19761096d0974797f1778b98405696",
+  "executable": {
+    "path": "/tmp/rustflow-integrated-fitter-20261010/fitter",
+    "sha256": "e4411e0815078478ef95be9c19005d559b04357b74bd175c6c9bfae10ac9dea5"
+  },
+  "targets": [
+    {
+      "id": 0,
+      "training_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-train.json",
+      "training_sha256": "be8ae3e403ddb3883b2ac8aee2e88c00e59e61494335b4c455bcfdb40fa6a89b",
+      "series_identity": "synthetic-target-0",
+      "holdout_path_not_opened": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-holdout.json"
+    },
+    {
+      "id": 1,
+      "training_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/1-train.json",
+      "training_sha256": "10e4a91dd3ca506e83eaab07e6adf1659929b6928f6b28909976c54c1f95b55b",
+      "series_identity": "synthetic-target-1",
+      "holdout_path_not_opened": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/1-holdout.json"
+    },
+    {
+      "id": 2,
+      "training_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-train.json",
+      "training_sha256": "3b307c1ab5afab3423d0d0692a574d61d4a8e9e544d8b31895450353dd66dc62",
+      "series_identity": "synthetic-target-2",
+      "holdout_path_not_opened": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/2-holdout.json"
+    }
+  ],
+  "primary_family": "theta per target; recurrence training-only fallback after no theta candidate; joint formal channels within target",
+  "aggregate_fit_seconds": 300,
+  "no_physical_identity_certified": true
+}

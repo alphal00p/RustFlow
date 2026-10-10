@@ -1,0 +1,16 @@
+{
+  "stage": "validate",
+  "args": [
+    "validate",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/theta-candidate.json",
+    "73ac7562106e9f9599171a0d8afaaea308ec4263dc1b7facb814a5ed1bd765dc",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-train.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/0-holdout.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-0/holdout-result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.004060463048517704,
+  "user_seconds": 0.0009059999999999971,
+  "system_seconds": 0.002713,
+  "cumulative_child_peak_rss_kib": 15428
+}

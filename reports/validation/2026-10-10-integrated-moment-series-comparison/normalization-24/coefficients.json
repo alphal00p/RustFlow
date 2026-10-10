@@ -1,0 +1,1194 @@
+{
+  "audit": [
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 24,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 0
+    },
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 48,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 1
+    },
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 94,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 1
+    }
+  ],
+  "coefficients": [
+    {
+      "coefficient": "1/9",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 0,
+      "target": 0
+    },
+    {
+      "coefficient": "-57/484",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 1,
+      "target": 0
+    },
+    {
+      "coefficient": "459/2288",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 2,
+      "target": 0
+    },
+    {
+      "coefficient": "-48569/123200",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 3,
+      "target": 0
+    },
+    {
+      "coefficient": "18701/21760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 4,
+      "target": 0
+    },
+    {
+      "coefficient": "-8228475/4066304",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 5,
+      "target": 0
+    },
+    {
+      "coefficient": "8272365275/1635938304",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 6,
+      "target": 0
+    },
+    {
+      "coefficient": "-198536785885/14985478144",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 7,
+      "target": 0
+    },
+    {
+      "coefficient": "199807424596971/5538111488000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 8,
+      "target": 0
+    },
+    {
+      "coefficient": "-2427290202186817/23924641628160",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 9,
+      "target": 0
+    },
+    {
+      "coefficient": "6026375677639719/20557469843456",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 10,
+      "target": 0
+    },
+    {
+      "coefficient": "-14672914694886483/16925019078656",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 11,
+      "target": 0
+    },
+    {
+      "coefficient": "79494591170772668667/30388598771548160",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 12,
+      "target": 0
+    },
+    {
+      "coefficient": "-2452975956136452372799/305339987656704000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 13,
+      "target": 0
+    },
+    {
+      "coefficient": "28431216815127793197369/1134648681404825600",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 14,
+      "target": 0
+    },
+    {
+      "coefficient": "-2501947079731660226599783/31573899523632660480",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 15,
+      "target": 0
+    },
+    {
+      "coefficient": "1464554388135656525964667/5772708497074421760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 16,
+      "target": 0
+    },
+    {
+      "coefficient": "-25918174626400897891812603/31555766477725368320",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 17,
+      "target": 0
+    },
+    {
+      "coefficient": "196909012028310059660787017371/73312117933134053376000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 18,
+      "target": 0
+    },
+    {
+      "coefficient": "-293326528262861979463212601533/33092509530379182407680",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 19,
+      "target": 0
+    },
+    {
+      "coefficient": "1992944240597388106698047909041437/67564550108865836414402560",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 20,
+      "target": 0
+    },
+    {
+      "coefficient": "-157664033256148928247253034297518941/1593971835221406263164272640",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 21,
+      "target": 0
+    },
+    {
+      "coefficient": "214185101781938167412723245166345739/641218271474265897136291840",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 22,
+      "target": 0
+    },
+    {
+      "coefficient": "-166207638982784018038555689467431875279/146391341223370138780172288000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 23,
+      "target": 0
+    },
+    {
+      "coefficient": "43/264",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 0,
+      "target": 1
+    },
+    {
+      "coefficient": "-34409/151008",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 1,
+      "target": 1
+    },
+    {
+      "coefficient": "577881/1189760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 2,
+      "target": 1
+    },
+    {
+      "coefficient": "-3848379/3351040",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 3,
+      "target": 1
+    },
+    {
+      "coefficient": "203410777/69457920",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 4,
+      "target": 1
+    },
+    {
+      "coefficient": "-1798744635/227713024",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 5,
+      "target": 1
+    },
+    {
+      "coefficient": "2232682862325/100337549312",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 6,
+      "target": 1
+    },
+    {
+      "coefficient": "-1283619735460879/19780831150080",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 7,
+      "target": 1
+    },
+    {
+      "coefficient": "3000111480435/15410397184",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 8,
+      "target": 1
+    },
+    {
+      "coefficient": "-38152755751614317/63799044341760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 9,
+      "target": 1
+    },
+    {
+      "coefficient": "1508602711302476323/804987240185856",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 10,
+      "target": 1
+    },
+    {
+      "coefficient": "-62290715141134516473/10425811752452096",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 11,
+      "target": 1
+    },
+    {
+      "coefficient": "23500615298751574073829/1215543950861926400",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 12,
+      "target": 1
+    },
+    {
+      "coefficient": "-1765015645411372203271021/27847006874291404800",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 13,
+      "target": 1
+    },
+    {
+      "coefficient": "24804605371873541412635751/118003462866101862400",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 14,
+      "target": 1
+    },
+    {
+      "coefficient": "-256968272018293200346626493/364853950050866298880",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 15,
+      "target": 1
+    },
+    {
+      "coefficient": "326333473318775122771973065607/137021008886558474895360",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 16,
+      "target": 1
+    },
+    {
+      "coefficient": "-10249987151680161486356154033/1262230659109014732800",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 17,
+      "target": 1
+    },
+    {
+      "coefficient": "563919280590218823717113905319491/20214594651429496317542400",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 18,
+      "target": 1
+    },
+    {
+      "coefficient": "-1609324357372594517706683271144077/16678624803311107933470720",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 19,
+      "target": 1
+    },
+    {
+      "coefficient": "52460271245245047132612715109697746151/156209239851697813790098718720",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 20,
+      "target": 1
+    },
+    {
+      "coefficient": "-14990650824482401733843281875159755643/12751774681771250105314181120",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 21,
+      "target": 1
+    },
+    {
+      "coefficient": "3289214646234705414149019636838339229491/795110656628089712449001881600",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 22,
+      "target": 1
+    },
+    {
+      "coefficient": "-65100276576009414405555116597279785953351/4450296773190452218917237555200",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 23,
+      "target": 1
+    }
+  ],
+  "compact_normalization": "prod_i mu_i^(D-2)/(sqrt(pi)*Gamma((D-1)/2))",
+  "conditions": [
+    "1",
+    "2"
+  ],
+  "convergent_germ_proved": false,
+  "dimension": "13/2",
+  "hard_reductions": [
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        2
+      ],
+      "terms": [
+        {
+          "coefficient": "9/4",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        4
+      ],
+      "terms": [
+        {
+          "coefficient": "15/128",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        3
+      ],
+      "terms": [
+        {
+          "coefficient": "45/32",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        6
+      ],
+      "terms": [
+        {
+          "coefficient": "63/8192",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        5
+      ],
+      "terms": [
+        {
+          "coefficient": "-45/2048",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        8
+      ],
+      "terms": [
+        {
+          "coefficient": "495/262144",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        7
+      ],
+      "terms": [
+        {
+          "coefficient": "-231/65536",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        10
+      ],
+      "terms": [
+        {
+          "coefficient": "24035/33554432",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        9
+      ],
+      "terms": [
+        {
+          "coefficient": "-9405/8388608",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        12
+      ],
+      "terms": [
+        {
+          "coefficient": "365769/1073741824",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        11
+      ],
+      "terms": [
+        {
+          "coefficient": "-129789/268435456",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        14
+      ],
+      "terms": [
+        {
+          "coefficient": "12801915/68719476736",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        13
+      ],
+      "terms": [
+        {
+          "coefficient": "-4267305/17179869184",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        16
+      ],
+      "terms": [
+        {
+          "coefficient": "246406383/2199023255552",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        15
+      ],
+      "terms": [
+        {
+          "coefficient": "-78640335/549755813888",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        18
+      ],
+      "terms": [
+        {
+          "coefficient": "40657053195/562949953421312",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        17
+      ],
+      "terms": [
+        {
+          "coefficient": "-12566725533/140737488355328",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        20
+      ],
+      "terms": [
+        {
+          "coefficient": "883755945765/18014398509481984",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        19
+      ],
+      "terms": [
+        {
+          "coefficient": "-266529570945/4503599627370496",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        22
+      ],
+      "terms": [
+        {
+          "coefficient": "40038352704801/1152921504606846976",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        21
+      ],
+      "terms": [
+        {
+          "coefficient": "-11842329673251/288230376151711744",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        24
+      ],
+      "terms": [
+        {
+          "coefficient": "937657074213225/36893488147419103232",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        23
+      ],
+      "terms": [
+        {
+          "coefficient": "-272988768441825/9223372036854775808",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        26
+      ],
+      "terms": [
+        {
+          "coefficient": "90277623105249303/4722366482869645213696",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        25
+      ],
+      "terms": [
+        {
+          "coefficient": "-25941845719899225/1180591620717411303424",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        28
+      ],
+      "terms": [
+        {
+          "coefficient": "2223504420925584685/151115727451828646838272",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        27
+      ],
+      "terms": [
+        {
+          "coefficient": "-631943361736745121/37778931862957161709568",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        30
+      ],
+      "terms": [
+        {
+          "coefficient": "111690022562454123315/9671406556917033397649408",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        29
+      ],
+      "terms": [
+        {
+          "coefficient": "-31446705381661840545/2417851639229258349412352",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        32
+      ],
+      "terms": [
+        {
+          "coefficient": "2852779350482295962607/309485009821345068724781056",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        31
+      ],
+      "terms": [
+        {
+          "coefficient": "-796722160945506079647/77371252455336267181195264",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        34
+      ],
+      "terms": [
+        {
+          "coefficient": "1183038951859097583281115/158456325028528675187087900672",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        33
+      ],
+      "terms": [
+        {
+          "coefficient": "-328069625305464035699805/39614081257132168796771975168",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        36
+      ],
+      "terms": [
+        {
+          "coefficient": "31059246163010022434343357/5070602400912917605986812821504",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        35
+      ],
+      "terms": [
+        {
+          "coefficient": "-8559634769333470749622185/1267650600228229401496703205376",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        38
+      ],
+      "terms": [
+        {
+          "coefficient": "1649497802981478218472559365/324518553658426726783156020576256",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        37
+      ],
+      "terms": [
+        {
+          "coefficient": "-452084583039368104322108863/81129638414606681695789005144064",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        40
+      ],
+      "terms": [
+        {
+          "coefficient": "44247055101029477123588478405/10384593717069655257060992658440192",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        39
+      ],
+      "terms": [
+        {
+          "coefficient": "-12067378663917130124615039565/2596148429267413814265248164610048",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        42
+      ],
+      "terms": [
+        {
+          "coefficient": "4790984790622201481523382708077/1329227995784915872903807060280344576",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        41
+      ],
+      "terms": [
+        {
+          "coefficient": "-1300863419970266627433501265107/332306998946228968225951765070086144",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        44
+      ],
+      "terms": [
+        {
+          "coefficient": "130757275930104269670148136036055/42535295865117307932921825928971026432",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        43
+      ],
+      "terms": [
+        {
+          "coefficient": "-35362030597449582363624967607235/10633823966279326983230456482242756608",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        46
+      ],
+      "terms": [
+        {
+          "coefficient": "7190593551703774393315358406136269/2722258935367507707706996859454145691648",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        45
+      ],
+      "terms": [
+        {
+          "coefficient": "-1937585088782454177839467833988815/680564733841876926926749214863536422912",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        48
+      ],
+      "terms": [
+        {
+          "coefficient": "199055052761087371618836355507518825/87112285931760246646623899502532662132736",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        47
+      ],
+      "terms": [
+        {
+          "coefficient": "-53460499884406322663344621193447913/21778071482940061661655974875633165533184",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        49
+      ],
+      "terms": [
+        {
+          "coefficient": "-11876951481411546506590569211948623225/5575186299632655785383929568162090376495104",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    }
+  ],
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "known_prefix_length": 24,
+  "native_backend": "rustred-exact:cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c:79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5:2:4096:false:true:512:false:18446744073709551615:false:bridge-arities=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]",
+  "q": 1,
+  "schema": "integrated-gaussian-rational-prefix.v1",
+  "scope": "Generic Gaussian rank<=1 numerator/ordinary vacuum moment coefficient prototype; no weighted closure/reference inputs",
+  "source_origin": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-independent-rank-one-blocks;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[1, 2, 4];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false, free_virtual_zero_sectors: false };family=[\"loops=3;physical=5;input=9\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_5\", \"rustflow_occupied::{}::q_6\", \"rustflow_occupied::{}::q_7\", \"rustflow_occupied::{}::q_8\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_5\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_6\", \"rustflow_occupied::{}::q_8\", \"-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6\", \"-1*rustflow_occupied::{}::q_6+1\", \"rustflow_occupied::{}::q_6\", \"-1*rustflow_occupied::{}::q_7+1\", \"rustflow_occupied::{}::q_7\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"0\", \"0\", \"1\", \"1\", \"-1\", \"0\", \"shell=0:0:9:10:0:1\", \"shell=1:3:11:12:0:1\", \"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 1, virtual_affine_shift: [\"0\"], denominator_rows: [(1, [\"1\"], \"0\"), (2, [\"0\"], \"1\"), (4, [\"1\"], \"-1\")], block_assignments: [(1, Some(0)), (2, None), (4, Some(0))], block_representatives: [[\"1\"]], block_a_lower_bounds: [\"1\"], block_q_upper_bounds: [\"1\"] }",
+  "tail": "unknown",
+  "variable": "z=1/eta"
+}

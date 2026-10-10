@@ -1,0 +1,11 @@
+{
+  "checks_passed": 4,
+  "checks": [
+    "per-target first-order operators",
+    "different operators remain separate",
+    "both candidates frozen before any holdout",
+    "all target holdouts pass only as candidates"
+  ],
+  "scope": "synthetic only",
+  "stdout": "{\"status\": \"all_targets_heldout_pass_candidate_only\", \"out\": \"/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/output\", \"identity_certified\": false}\n"
+}

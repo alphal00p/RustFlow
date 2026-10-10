@@ -1,0 +1,13 @@
+{
+  "recorded_utc": "2026-10-10T10:34:43.279573+00:00",
+  "before_physical_fit": true,
+  "fitter": "implemented, frozen and synthetic-tested",
+  "generic_telescoper": "not implemented",
+  "certificate_status": "unsupported_input",
+  "certificate_runtime_seconds": 0,
+  "producer_confirmation": "No machine-ready symbolic-n T/shift/logderivative/boundary contract; exact integer-n coefficient algorithm only",
+  "all_n_definition_absent_claim": false,
+  "source_bound_germ_implies_finite_fit_identity": false,
+  "conditional_transport": "feasible through existing ordinary rational ODE owner after explicit companion/forcing adapter; not yet implemented/run",
+  "production_or_weighted_changes": false
+}

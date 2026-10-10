@@ -1,0 +1,183 @@
+{
+  "genuine_heldout_rows": 16,
+  "identity_certified": false,
+  "rows": [
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        48
+      ],
+      "residual": "0",
+      "row": 48,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        48,
+        49
+      ],
+      "residual": "0",
+      "row": 49,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        49,
+        50
+      ],
+      "residual": "0",
+      "row": 50,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        50,
+        51
+      ],
+      "residual": "0",
+      "row": 51,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        51,
+        52
+      ],
+      "residual": "0",
+      "row": 52,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        52,
+        53
+      ],
+      "residual": "0",
+      "row": 53,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        53,
+        54
+      ],
+      "residual": "0",
+      "row": 54,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        54,
+        55
+      ],
+      "residual": "0",
+      "row": 55,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        55,
+        56
+      ],
+      "residual": "0",
+      "row": 56,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        56,
+        57
+      ],
+      "residual": "0",
+      "row": 57,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        57,
+        58
+      ],
+      "residual": "0",
+      "row": 58,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        58,
+        59
+      ],
+      "residual": "0",
+      "row": 59,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        59,
+        60
+      ],
+      "residual": "0",
+      "row": 60,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        60,
+        61
+      ],
+      "residual": "0",
+      "row": 61,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        61,
+        62
+      ],
+      "residual": "0",
+      "row": 62,
+      "zero": true
+    },
+    {
+      "channel": "formal-normalization",
+      "genuine_heldout_row": true,
+      "heldout_indices_with_nonzero_weight": [
+        62,
+        63
+      ],
+      "residual": "0",
+      "row": 63,
+      "zero": true
+    }
+  ],
+  "status": "heldout_pass_candidate_only",
+  "unconstrained_heldout_coefficients": []
+}

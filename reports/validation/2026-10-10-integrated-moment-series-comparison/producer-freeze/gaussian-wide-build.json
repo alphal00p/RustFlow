@@ -1,0 +1,139 @@
+{
+  "scope": "Isolated rustc compile; no Cargo/shared target mutation",
+  "command": [
+    "/nix/store/paaihvr59q1101200mabmk7y4yhw42g7-rustc-wrapper-1.97.1/bin/rustc",
+    "-C",
+    "linker=/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0/bin/cc",
+    "--edition=2024",
+    "--crate-name",
+    "integrated_moment_gaussian",
+    "-C",
+    "opt-level=1",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "rustred=/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+    "--extern",
+    "ahash=/common/dev/rustflow_fermi/target/release/deps/libahash-76fd751102bca1d4.rlib",
+    "--extern",
+    "feynkit_graph=/common/dev/rustflow_fermi/target/release/deps/libfeynkit_graph-b02c7dc553c9ebbf.rlib",
+    "--extern",
+    "feynkit_kinematics=/common/dev/rustflow_fermi/target/release/deps/libfeynkit_kinematics-a4a2b5fdb1a08284.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/nix/store/rgnappqqc5vbq60gza5fflyk84sylwl6-python3-3.14.6/lib",
+    "-C",
+    "link-arg=-Wl,-rpath,/nix/store/rgnappqqc5vbq60gza5fflyk84sylwl6-python3-3.14.6/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/generate.rs",
+    "-o",
+    "/tmp/rustflow-integrated-moment-gaussian-wide-20261010"
+  ],
+  "dependencies": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "symbolica_amflow": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "b7b2beaf983314c86123d5cef173d93faa8b605f1648cce72c340ec9a6d80687",
+      "bytes": 656665206
+    },
+    "rustred": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "dc3c900d6fcf11c2996d0d599266eae8c7f3f71f925995b711bf8181e1a5c515",
+      "bytes": 436276538
+    },
+    "ahash": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libahash-76fd751102bca1d4.rlib",
+      "sha256": "ab9d642561dfd1454547310cf19db76a0ee961b1988116e2c8cb38c0400f987f",
+      "bytes": 298226
+    },
+    "feynkit_graph": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libfeynkit_graph-b02c7dc553c9ebbf.rlib",
+      "sha256": "f17afc4a4357a8c4933cc65aa67934c05d7826751a6b6e4082eb7703a1c6b4c0",
+      "bytes": 99311452
+    },
+    "feynkit_kinematics": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libfeynkit_kinematics-a4a2b5fdb1a08284.rlib",
+      "sha256": "3ca6eb6e90d9dc45180fa8b76f8340958e033ad3b81a4813cba6f55412455c36",
+      "bytes": 9384614
+    }
+  },
+  "sources": {
+    "gaussian-wide-source/angular.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/angular.rs",
+      "sha256": "4d04a5a83831b4492e2d6c8f0c152395b6a44241dbee1b943bf002c67d307891",
+      "bytes": 7527
+    },
+    "gaussian-wide-source/compact_exact.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/compact_exact.rs",
+      "sha256": "ac64728926612cf7af9a5cd3db4d168d8896d1653b1781304f70bd8aacc5dcf2",
+      "bytes": 2619
+    },
+    "gaussian-wide-source/generate.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/generate.rs",
+      "sha256": "241112d1f966ba107b576d6d1ec541fd7c7ef7693e48f3b18b20313e3f7a6292",
+      "bytes": 14081
+    },
+    "gaussian-wide-source/wide_hard.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/wide_hard.rs",
+      "sha256": "d011a0d85bedd4190a775e6cd729f8403e9a707b4f8b248e507fb14807e81bd1",
+      "bytes": 4660
+    },
+    "source/algebra.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/algebra.rs",
+      "sha256": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597",
+      "bytes": 3344
+    },
+    "source/census.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/census.rs",
+      "sha256": "69824e12d0d595b74fe94f02cf01f7d8467e4eb9ff722f8ce363ba22def220e3",
+      "bytes": 4773
+    },
+    "source/coefficient.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/coefficient.rs",
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+      "bytes": 17725
+    },
+    "source/cut_regions.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/cut_regions.rs",
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d",
+      "bytes": 9209
+    },
+    "source/generate.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/generate.rs",
+      "sha256": "53e5a60bb5c824fd7fa763a7412a9bca0b92b10375c140bce2aeba04bcdb04a3",
+      "bytes": 9663
+    },
+    "source/moments.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/moments.rs",
+      "sha256": "0a25cdc191127fa418718782fd33400725906508beaaf47d7b8b487bb2c6299f",
+      "bytes": 4502
+    }
+  },
+  "runtime_limit_seconds": 180,
+  "exit_code": 0,
+  "wall_seconds": 28.96504327794537,
+  "executable": {
+    "path": "/tmp/rustflow-integrated-moment-gaussian-wide-20261010",
+    "sha256": "523d0592033cc66ab6c8d6ccc130756d042d73cb28a3480f2197be1a31a78e58",
+    "bytes": 1242495552
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "integrated-target-structure-protocol.v1",
+  "frozen_utc": "2026-10-10T10:29:04.156083+00:00",
+  "before_any_physical_fit": true,
+  "target_structure": "Separate scalar candidate per integrated target; all exact formal hard-master/Gamma/exponent channels belonging to that target fitted jointly. No cross-target common annihilator.",
+  "family_selection": [
+    "theta training-only first",
+    "only if no_candidate_within_fixed_shapes: recurrence training-only second"
+  ],
+  "ambiguity_or_zero_prefix": "Explicit stop/no candidate for that target; no forced nullspace choice or zero certificate",
+  "after_holdout": "No refit, shape expansion or family change for this dataset",
+  "freeze": "All target candidates and no-candidate outcomes, training bindings and SHA256/BLAKE3 frozen before any holdout opens",
+  "training_per_target": 48,
+  "heldout_per_target": 16,
+  "q": {
+    "initial": 2,
+    "proved_collapse": 1,
+    "proof_required": true,
+    "fractional_branch_retained": "beta=-q*alpha"
+  },
+  "theta_caps": {
+    "order": 4,
+    "polynomial_degree": 4,
+    "unknowns": 25,
+    "shape_attempts": 24
+  },
+  "recurrence_caps": {
+    "shift_order": 4,
+    "n_degree": 4,
+    "unknowns": 25,
+    "shape_attempts": 24
+  },
+  "combined_shape_attempts_per_target_max": 48,
+  "minimum_excess_training_equations": 8,
+  "aggregate_fit_wall_seconds_all_targets": 300,
+  "certificate_seconds_separate": 300,
+  "certificate_status": "not run",
+  "recurrence_conversion": "Keep exact startup forcing B(t); apply beta conjugation to restore each physical channel. No automatic homogeneous full-integral ODE assertion. A later certified block companion may preserve inhomogeneous startup states.",
+  "source_executable_sha256": "e4411e0815078478ef95be9c19005d559b04357b74bd175c6c9bfae10ac9dea5",
+  "fitter_manifest": "../2026-10-10-integrated-flow-reconstruction/implementation-manifest.json",
+  "physical_results": null
+}

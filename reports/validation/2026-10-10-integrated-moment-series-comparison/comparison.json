@@ -1,0 +1,585 @@
+{
+  "schema": 1,
+  "status": "eta8 final partial sums match empirical reference and final term refinement",
+  "reference_checks": [
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 32,
+      "digits": 30,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.000001398049808720927323952782405386167145525",
+      "relative_error": "92552.95329230642894215254316703524013565",
+      "criterion_limit": "1.510540462502066725290457616714552470827e-23",
+      "passed": false
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 32,
+      "digits": 50,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.000001398049808720927323952782405383359426602",
+      "relative_error": "92552.95329230642894215254316684936501399",
+      "criterion_limit": "1.510540462502066725290457616714552470827e-23",
+      "passed": false
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 48,
+      "digits": 30,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.01848466103014729210960069680540457616715",
+      "relative_error": "1223711743.512597323060137630223644154411",
+      "criterion_limit": "1.510540462502066725290457616714552470827e-23",
+      "passed": false
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 48,
+      "digits": 50,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.01848466103014729210960069680542238719054",
+      "relative_error": "1223711743.512597323060137630224823270352",
+      "criterion_limit": "1.510540462502066725290457616714552470827e-23",
+      "passed": false
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 64,
+      "digits": 30,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "379.7213392621268877817670493182529045762",
+      "relative_error": "25138111072718.60664127584383634281570028",
+      "criterion_limit": "1.510540462502066725290457616714552470827e-23",
+      "passed": false
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 64,
+      "digits": 50,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "379.7213392621268877817670493181158654376",
+      "relative_error": "25138111072718.60664127584383633374350778",
+      "criterion_limit": "1.510540462502066725290457616714552470827e-23",
+      "passed": false
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 32,
+      "digits": 30,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "2.05910212077197046864255950617364353033e-25",
+      "relative_error": "7.624908260819983686945209819055400391227e-15",
+      "criterion_limit": "2.700494288373948701550704813514686425595e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 32,
+      "digits": 50,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "2.05910212077197057379550430327801982033e-25",
+      "relative_error": "7.624908260819984076329276468647253470478e-15",
+      "criterion_limit": "2.700494288373948701550704813514686425595e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 48,
+      "digits": 30,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "6.4188719844686425595061736435303303911e-31",
+      "relative_error": "2.376924851166281969832087350451729242326e-20",
+      "criterion_limit": "2.700494288373948701550704813514686425595e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 48,
+      "digits": 50,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "6.4188719843102244600770603270403303911e-31",
+      "relative_error": "2.376924851107619339027375756901034154999e-20",
+      "criterion_limit": "2.700494288373948701550704813514686425595e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 64,
+      "digits": 30,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "3.090346864255950617364353033039109953237e-36",
+      "relative_error": "1.14436341434246996062109618557535350303e-25",
+      "criterion_limit": "2.700494288373948701550704813514686425595e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 64,
+      "digits": 50,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "3.090383601807641773198809033039109953237e-36",
+      "relative_error": "1.144377018352613332060261030656742080433e-25",
+      "criterion_limit": "2.700494288373948701550704813514686425595e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 32,
+      "digits": 30,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.00002385425557440281105767243643157469731834",
+      "relative_error": "1165616.134423023846553780623017491755921",
+      "criterion_limit": "2.046493255364090264845937469731833607839e-23",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 32,
+      "digits": 50,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.00002385425557440281105767243643159066137283",
+      "relative_error": "1165616.134423023846553780623018271824678",
+      "criterion_limit": "2.046493255364090264845937469731833607839e-23",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 48,
+      "digits": 30,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.4631504303104917001995792270314593746973",
+      "relative_error": "22631417381.73443980962609025487239822438",
+      "criterion_limit": "2.046493255364090264845937469731833607839e-23",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 48,
+      "digits": 50,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "0.4631504303104917001995792270319137242752",
+      "relative_error": "22631417381.73443980962609025489459959625",
+      "criterion_limit": "2.046493255364090264845937469731833607839e-23",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 64,
+      "digits": 30,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "12550.74239888986425491836719350264845937",
+      "relative_error": "613280418393412.6846336230674599787459882",
+      "criterion_limit": "2.046493255364090264845937469731833607839e-23",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 64,
+      "digits": 50,
+      "scope": "eta 2 raw sums are diagnostic outside the initial disk",
+      "absolute_error": "12550.74239888986425491836719353611378177",
+      "relative_error": "613280418393412.6846336230674616139980131",
+      "criterion_limit": "2.046493255364090264845937469731833607839e-23",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 32,
+      "digits": 30,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "3.547489448448697312348949361235691910003e-24",
+      "relative_error": "9.263149189425561395815700977532155896792e-14",
+      "criterion_limit": "3.829679708169192186952473988451234894936e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 32,
+      "digits": 50,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "3.547489448448697340082145791142448783003e-24",
+      "relative_error": "9.263149189425561468232191502179253702266e-14",
+      "criterion_limit": "3.829679708169192186952473988451234894936e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 48,
+      "digits": 30,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "1.618980320171234894936123569191000288676e-29",
+      "relative_error": "4.227456193576044190357739325706693356094e-19",
+      "criterion_limit": "3.829679708169192186952473988451234894936e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 48,
+      "digits": 50,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "1.618980320172317987110486442956900288676e-29",
+      "relative_error": "4.227456193578872343772377372037470290608e-19",
+      "criterion_limit": "3.829679708169192186952473988451234894936e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 64,
+      "digits": 30,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "1.02659312348949361235691910002886756804e-34",
+      "relative_error": "2.680623973069184795432084705383502096174e-24",
+      "criterion_limit": "3.829679708169192186952473988451234894936e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 64,
+      "digits": 50,
+      "scope": "empirical finite-eta comparison",
+      "absolute_error": "1.02659261603852964355578534002886756804e-34",
+      "relative_error": "2.680622648021132117961658567495674838708e-24",
+      "criterion_limit": "3.829679708169192186952473988451234894936e-23",
+      "passed": true
+    }
+  ],
+  "precision_checks": [
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 32,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "1.0515294479710437629e-41",
+      "relative_error": "3.893840666495948220970372384809126008836e-31",
+      "criterion_limit": "2.700494288373928110529497093808948470552e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 48,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "1.5841809942911331649e-41",
+      "relative_error": "5.866263080471159355208945397626760227351e-31",
+      "criterion_limit": "2.700494288373948701486516093671584180994e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": 64,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "3.6737551691155834456e-41",
+      "relative_error": "1.360401014337143916484508294538905982943e-30",
+      "criterion_limit": "2.700494288373948701550704504476326244831e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 32,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "2.8077189224321180623e-36",
+      "relative_error": "2.008332780131909056180593440946749707334e-30",
+      "criterion_limit": "1.398034703316302303285529500807192281078e-18",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 48,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "1.7811023392224606763e-32",
+      "relative_error": "9.635569393309886341219329492009324119879e-31",
+      "criterion_limit": "1.848466101504188748458002955251781102339e-14",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": 64,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "1.3703913852540294158e-28",
+      "relative_error": "3.608939618502935437880968314886829603313e-31",
+      "criterion_limit": "0.0000000003797213392621117823771420286508629608615",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 32,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "2.7733196429906756873e-41",
+      "relative_error": "7.241649052465380585302819312938945400553e-31",
+      "criterion_limit": "3.829679708168837438007629118717226680357e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 48,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "1.0830921743628737659e-41",
+      "relative_error": "2.828153414638046331972523980133104786257e-31",
+      "criterion_limit": "3.829679708169192185333493668278916907826e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": 64,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "5.0745096396880113376e-41",
+      "relative_error": "1.325048052677470426137891379211285759041e-30",
+      "criterion_limit": "3.82967970816919218695246372252507450964e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 32,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "1.5964054493324656359e-35",
+      "relative_error": "6.692335520323115432577761337181924897408e-31",
+      "criterion_limit": "2.385423510947025741676978797221596405449e-17",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 48,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "4.5434957787960131237e-31",
+      "relative_error": "9.809978533218368725328903003704901865033e-31",
+      "criterion_limit": "4.631504302900267676459383243834543495779e-13",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": 64,
+      "digits": [
+        30,
+        50
+      ],
+      "absolute_error": "3.3465322398563264006e-26",
+      "relative_error": "2.666401821897275697967667742689489714731e-30",
+      "criterion_limit": "0.0000000125507423988898437899858135526334653224",
+      "passed": true
+    }
+  ],
+  "truncation_checks": [
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": [
+        32,
+        48
+      ],
+      "digits": 50,
+      "absolute_error": "2.05909570189998626357104422621769278e-25",
+      "relative_error": "7.624884491571473000317123969238097652599e-15",
+      "criterion_limit": "2.700494288373948701486516093671584180994e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "8",
+      "terms": [
+        48,
+        64
+      ],
+      "digits": 50,
+      "absolute_error": "6.41884108047420638365932833895e-31",
+      "relative_error": "2.376913407337435812894055426299235384695e-20",
+      "criterion_limit": "2.700494288373948701550704504476326244831e-23",
+      "passed": true
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": [
+        32,
+        48
+      ],
+      "digits": 50,
+      "absolute_error": "0.01848326298033857118227674402301700383111",
+      "relative_error": "0.9999243678473638952873890054281211336539",
+      "criterion_limit": "1.848466101504188748458002955251781102339e-14",
+      "passed": false
+    },
+    {
+      "target": 0,
+      "eta": "2",
+      "terms": [
+        48,
+        64
+      ],
+      "digits": 50,
+      "absolute_error": "379.7028546010967404896574486213104430505",
+      "relative_error": "0.9999513204576520193776245815272306442661",
+      "criterion_limit": "0.0000000003797213392621117823771420286508629608615",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": [
+        32,
+        48
+      ],
+      "digits": 50,
+      "absolute_error": "3.547473258645495616902274686278019214e-24",
+      "relative_error": "9.263106914863625683424691648307884783188e-14",
+      "criterion_limit": "3.829679708169192185333493668278916907826e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "8",
+      "terms": [
+        48,
+        64
+      ],
+      "digits": 50,
+      "absolute_error": "1.6189700542461576018140508851035e-29",
+      "relative_error": "4.227429387352392132451209087594753980781e-19",
+      "criterion_limit": "3.82967970816919218695246372252507450964e-23",
+      "passed": true
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": [
+        32,
+        48
+      ],
+      "digits": 50,
+      "absolute_error": "0.4631265760549172973885215545954821336138",
+      "relative_error": "0.9999484957077670582449409409300783138467",
+      "criterion_limit": "4.631504302900267676459383243834543495779e-13",
+      "passed": false
+    },
+    {
+      "target": 1,
+      "eta": "2",
+      "terms": [
+        48,
+        64
+      ],
+      "digits": 50,
+      "absolute_error": "12550.27924845955376321816761430908186805",
+      "relative_error": "0.9999630977662061653012928096359890117339",
+      "criterion_limit": "0.0000000125507423988898437899858135526334653224",
+      "passed": false
+    }
+  ],
+  "inputs": {
+    "prediction": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/series-predictions.json",
+      "sha256": "354a4fea7a7ec8b1c39723110fdb09a610b37dbe5c134d6803833d116e93d971",
+      "bytes": 21821
+    },
+    "plan": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/plan.json",
+      "sha256": "fc67d0e822a62e0302f4f346bf9f1d73b45ba804139ca30502fdffdfd0f3a525",
+      "bytes": 3410
+    },
+    "comparator": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/compare-saved.py",
+      "sha256": "541614afe64ac341aa8a42a68a0fcab61c42095cfca91f289a1c0da2c7a6b267",
+      "bytes": 5377
+    },
+    "eta8-refinement.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/eta8-refinement.json",
+      "sha256": "e8e580a60b51f41f14c46ea4a2052013f501fbcbe54d64815e3520649b146582",
+      "bytes": 10299
+    },
+    "runs/eta8-n32-d80/reference.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta8-n32-d80/reference.json",
+      "sha256": "a25dba6ed3458ee8225d39c1132088f75bab738f62ef3584628409050a4db8a6",
+      "bytes": 2724
+    },
+    "eta2-refinement.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/eta2-refinement.json",
+      "sha256": "8324b8ade11032736c7d5633e4bffbc1e903610203f05a55e28bbadd50fc777c",
+      "bytes": 10394
+    },
+    "runs/eta2-n32-d80/reference.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta2-n32-d80/reference.json",
+      "sha256": "aa171bd44d4ac3ac0a45f453ed773da4ec2227cf8aef1f2174fb88a7583a786c",
+      "bytes": 2726
+    }
+  },
+  "reference_manifest": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/artifact-manifest.json",
+    "sha256": "9a5c399d406cb7bbd0a9140d8e54bc87d6086db6dd15b026cc5971280a6b319e",
+    "bytes": 24729
+  },
+  "numerical_acceptance": {
+    "scope": "finite eta8 empirical consistency of saved source-derived coefficients only",
+    "eta2": "diagnostic raw-series extrapolation, never continuation acceptance",
+    "rigorous_error_bound": false,
+    "endpoint": false,
+    "ode_identity": false,
+    "three_or_four_loop_full_amplitude_acceptance": false
+  },
+  "source_germ_coverage": "Separate producer proof required; this comparator does not infer analyticity from numeric agreement"
+}

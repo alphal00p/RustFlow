@@ -1,0 +1,10 @@
+warning: variable `D` should have a snake case name
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/source/normalize.rs:19:6
+   |
+19 |  let D=Rational::from((13,2));let mut channels=BTreeSet::new();
+   |      ^ help: convert the identifier to snake case: `d`
+   |
+   = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: 1 warning emitted
+

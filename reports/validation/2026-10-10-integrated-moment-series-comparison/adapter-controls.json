@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "checks": [
+    {
+      "name": "explicit zero coefficient admitted",
+      "passed": true
+    },
+    {
+      "name": "insufficient prefix rejected",
+      "passed": true
+    },
+    {
+      "name": "unknown tail cannot be filled",
+      "passed": true
+    },
+    {
+      "name": "duplicate channel rejected",
+      "passed": true
+    },
+    {
+      "name": "different physical input rejected",
+      "passed": true
+    },
+    {
+      "name": "different cut set rejected",
+      "passed": true
+    },
+    {
+      "name": "unbound master rejected",
+      "passed": true
+    },
+    {
+      "name": "missing retained condition rejected",
+      "passed": true
+    },
+    {
+      "name": "vanished retained condition rejected",
+      "passed": true
+    },
+    {
+      "name": "mismatched leading branches rejected",
+      "passed": true
+    },
+    {
+      "name": "unreplayed offshell factor rejected",
+      "passed": true
+    },
+    {
+      "name": "expression coefficient rejected",
+      "passed": true
+    },
+    {
+      "name": "actual frozen 24-prefix refuses planned 32/48/64",
+      "passed": true
+    }
+  ],
+  "physical_partial_sums_evaluated": false,
+  "inputs": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/sum-saved-prefix.py",
+      "sha256": "f54806ce23a9683fc062f5d0759367869ca133bb5fce4e15f29877a4abdcf399",
+      "bytes": 5353
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/adapter-controls.py",
+      "sha256": "ee59f964b4055b101f2f49a15298349476aeabc56f195f9fc115d4ec29b01ea3",
+      "bytes": 3668
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/plan.json",
+      "sha256": "fc67d0e822a62e0302f4f346bf9f1d73b45ba804139ca30502fdffdfd0f3a525",
+      "bytes": 3410
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-24/coefficients.json",
+      "sha256": "abac2d75baeb7dd216efa0c8c8592d4875d9dd8fc8f4057be019f677a71b4a16",
+      "bytes": 52278
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-24/normalization.json",
+      "sha256": "b4d992fd6c63f776740ed5186eb1ccf805357a73532b1ccad87bfdb26a7e207f",
+      "bytes": 3053
+    }
+  ]
+}

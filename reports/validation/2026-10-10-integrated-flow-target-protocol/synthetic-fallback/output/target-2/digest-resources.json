@@ -1,0 +1,12 @@
+{
+  "stage": "digest",
+  "args": [
+    "digest",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic-fallback/output/target-2/recurrence-candidate.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.002990969456732273,
+  "user_seconds": 0.0012570000000000012,
+  "system_seconds": 0.0012709999999999996,
+  "cumulative_child_peak_rss_kib": 15428
+}

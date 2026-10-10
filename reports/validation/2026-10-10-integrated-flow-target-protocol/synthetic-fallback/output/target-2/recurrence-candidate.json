@@ -1,0 +1,119 @@
+{
+  "audit": {
+    "attempts": [
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 1,
+        "rank": 2,
+        "rows": 47,
+        "unknowns": 2
+      },
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 2,
+        "rank": 3,
+        "rows": 46,
+        "unknowns": 3
+      },
+      {
+        "degree": 1,
+        "nullity": 0,
+        "order": 1,
+        "rank": 4,
+        "rows": 47,
+        "unknowns": 4
+      },
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 3,
+        "rank": 4,
+        "rows": 45,
+        "unknowns": 4
+      },
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 4,
+        "rank": 5,
+        "rows": 44,
+        "unknowns": 5
+      },
+      {
+        "degree": 2,
+        "nullity": 0,
+        "order": 1,
+        "rank": 6,
+        "rows": 47,
+        "unknowns": 6
+      },
+      {
+        "degree": 1,
+        "nullity": 0,
+        "order": 2,
+        "rank": 6,
+        "rows": 46,
+        "unknowns": 6
+      },
+      {
+        "degree": 3,
+        "nullity": 0,
+        "order": 1,
+        "rank": 8,
+        "rows": 47,
+        "unknowns": 8
+      },
+      {
+        "degree": 1,
+        "nullity": 0,
+        "order": 3,
+        "rank": 8,
+        "rows": 45,
+        "unknowns": 8
+      },
+      {
+        "degree": 2,
+        "nullity": 0,
+        "order": 2,
+        "rank": 9,
+        "rows": 46,
+        "unknowns": 9
+      },
+      {
+        "degree": 4,
+        "nullity": 1,
+        "order": 1,
+        "rank": 9,
+        "rows": 47,
+        "unknowns": 10
+      }
+    ],
+    "status": "training_candidate_only"
+  },
+  "candidate": {
+    "coefficient_order": "shift_major_n_degree_minor",
+    "coefficients": [
+      "1",
+      "2",
+      "3/2",
+      "1/2",
+      "1/16",
+      "-81/16",
+      "-27/4",
+      "-27/8",
+      "-3/4",
+      "-1/16"
+    ],
+    "degree": 4,
+    "kind": "recurrence",
+    "order": 1,
+    "status": "finite_training_candidate_not_identity"
+  },
+  "holdout_read": false,
+  "identity_certified": false,
+  "schema": "integrated-fit-candidate.v1",
+  "series_identity": "synthetic-target-2",
+  "training_blake3": "a8809dbe500e4da2117645a148e6841dfaf0d63bb6709e6736b77ef187a692e5"
+}

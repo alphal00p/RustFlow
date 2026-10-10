@@ -1,0 +1,15 @@
+{
+  "schema": "integrated-per-target-fit-plan.v1",
+  "targets": [
+    {
+      "id": 0,
+      "training": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/0-train.json",
+      "holdout": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/0-holdout.json"
+    },
+    {
+      "id": 1,
+      "training": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/1-train.json",
+      "holdout": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-target-protocol/synthetic/1-holdout.json"
+    }
+  ]
+}

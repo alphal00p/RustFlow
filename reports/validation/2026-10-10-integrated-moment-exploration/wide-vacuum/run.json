@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-wide-vacuum-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/wide-vacuum/result.json"
+  ],
+  "timeout_seconds": 180,
+  "scope": "Native wide-index verification, not physical coefficient generation",
+  "check_sha256": "d56010dca54f5172f674a53a8dac04b2f725cb1af6270b5aec07013afcb6bb3a",
+  "exit_code": 0,
+  "wall_seconds": 0.21479265158995986,
+  "result_sha256": "6ecd8a758ce8e0aeeba3cf5447b5caab54767d2506a720d7cd0f5624e8f0a810"
+}
