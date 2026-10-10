@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/tmp/rustflow-partial-continuation-draft-20261010/prototype-tests",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.5823057238012552,
+  "binary_sha256": "a47186d730155231cc35e114dc42be1c2e24110ed8348332028d71a4adceaafa",
+  "post_sha256": "a47186d730155231cc35e114dc42be1c2e24110ed8348332028d71a4adceaafa",
+  "source_snapshot_sha256": "45d5bb201577e07496f08783a59018aaeca74ffade871e7ff91e93eb488efbec",
+  "evidence_output_directories": [
+    "final-evidence/origin",
+    "final-evidence/endpoint",
+    "final-evidence/source-class"
+  ],
+  "no_numerical_admission": true
+}

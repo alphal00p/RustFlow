@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/tmp/rustflow-partial-continuation-draft-20261010/prototype-tests",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.5604763412848115,
+  "binary_sha256": "3f172312ead9fe569e9a4546a1532cc480b8910fd28e5b50d9268988945d9262",
+  "post_sha256": "3f172312ead9fe569e9a4546a1532cc480b8910fd28e5b50d9268988945d9262"
+}

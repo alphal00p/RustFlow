@@ -1,0 +1,30 @@
+{
+  "status": "isolated exact copied helper spans; no production changes",
+  "records": [
+    {
+      "original": "/common/dev/rustflow_fermi/src/algebra.rs",
+      "copy": "/tmp/rustflow-partial-continuation-draft-20261010/src/algebra.rs",
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/src/coefficient.rs",
+      "copy": "/tmp/rustflow-partial-continuation-draft-20261010/src/coefficient.rs",
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/src/physical_conditions.rs",
+      "original_sha256": "52af20b182eedbf0dc9a9885b450afacc88cb1db50fb83e13f2ddfd4edf993af",
+      "extracted_prefix_sha256": "cb59a50467cb586754097d5f748e703d0a7b9120b138d2134bdb9b8e6759e21f",
+      "through": "validate_conditions_at"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/src/family.rs",
+      "original_sha256": "6b250939f7a1a223fd7e5dea877b2d29a474fab18a087db8078985bdd44fa5e6",
+      "extracted_span_sha256": "8d0d1074abf0f80d65f821bbb1c29bf7bc7abc48882f5a67c6a849602b75d7ed",
+      "functions": [
+        "imaginary_parameter",
+        "encode_complex"
+      ]
+    }
+  ]
+}

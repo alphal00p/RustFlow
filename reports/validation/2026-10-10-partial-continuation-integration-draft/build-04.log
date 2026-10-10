@@ -1,0 +1,36 @@
+error[E0624]: associated function `new` is private
+    --> /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/source_class/tests.rs:384:38
+     |
+ 384 |               PartialOriginCapability::new(&input, &family, &shifted, options, Default::default())
+     |                                        ^^^ private associated function
+     |
+    ::: /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1353:5
+     |
+1353 | /     fn new(
+1354 | |         i: &PreparedDensityInput,
+1355 | |         f: &OccupiedCutFamily,
+1356 | |         s: &[usize],
+1357 | |         o: WeightedSourceOptions,
+1358 | |         b: PartialOriginBudget,
+1359 | |     ) -> Result<Self> {
+     | |_____________________- private associated function defined here
+
+error[E0624]: method `zero_domains` is private
+    --> /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/source_class/tests.rs:432:22
+     |
+ 432 |                       .zero_domains::<16>(&family, &shifted, options)
+     |                        ^^^^^^^^^^^^ private method
+     |
+    ::: /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1373:5
+     |
+1373 | /     fn zero_domains<const N: usize>(
+1374 | |         &self,
+1375 | |         f: &OccupiedCutFamily,
+1376 | |         s: &[usize],
+1377 | |         o: WeightedSourceOptions,
+1378 | |     ) -> Result<Vec<IndexDomain<N>>> {
+     | |____________________________________- private method defined here
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0624`.

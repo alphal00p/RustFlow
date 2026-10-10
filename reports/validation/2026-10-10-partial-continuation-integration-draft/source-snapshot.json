@@ -1,0 +1,52 @@
+{
+  "scope": "isolated integration source snapshot; no shared source change or numerical admission",
+  "owner_files": {
+    "src/finite_density/partial_origin.rs": {
+      "sha256": "5b1ff42491f1f61bf9c91824574de8a6d93f7419036196e97f9de8fdc3821a53",
+      "bytes": 67530
+    },
+    "src/finite_density/partial_resources.rs": {
+      "sha256": "7fa914dd447d3d2ddff31909d5b7134d26b90d363d6b9f79eacc77fe8874a791",
+      "bytes": 5710
+    },
+    "src/finite_density/partial_endpoint.rs": {
+      "sha256": "b8784fc9324b7cf4c3ea5d46a58e60a4d03bdcbadbb30714f0dab43af7538281",
+      "bytes": 29244
+    },
+    "src/finite_density/partial_continuation.rs": {
+      "sha256": "ea00fa6e1bb8f929048675edbab5629af8f0b5fa32e5d66b10e099092a2a53ce",
+      "bytes": 37689
+    },
+    "src/finite_density/boundary/virtual_soft.rs": {
+      "sha256": "31ce8b1b1041234db91dde80eae8a242fc059826b2eb3250d4279913ad31e602",
+      "bytes": 44913
+    },
+    "src/finite_density/source_class.rs": {
+      "sha256": "0ad1af5a765db863761d1ca2b56496c8fd4b8a569b782dbb58b5d3dc9ae5a783",
+      "bytes": 19925
+    },
+    "src/finite_density/source_class/tests.rs": {
+      "sha256": "6e6213807d6c66ec355f5bcff2830f839ee9891beaaacfa46f5e111e02174341",
+      "bytes": 17239
+    }
+  },
+  "proof_bindings": {
+    "2026-10-10-partial-origin-capability-prototype/independent-review.json": "1d64ed7677015a2b0b1ab2d2550317781822a70cd314e9bfc00d58885e501499",
+    "2026-10-10-partial-endpoint-capability-prototype/independent-review.json": "2e14443847efa335169adbcd8714a3c0a4cbddf2c05c73061e1b45c3bd019d4e",
+    "2026-10-10-rank-two-partial-endpoint-assessment/independent-review.json": "9207cec571a6684dcb143f69ea3f99deee7442d2d9f64c9337a8d040c6c63a8b",
+    "2026-10-10-rank-two-partial-endpoint-assessment/thermal-independent-review.json": "53080ee873d12066197c2e043ba2247763556c20d9455195229cd360c97b357f",
+    "2026-10-10-partial-flow-integration-assessment/independent-review.json": "9777d9e5f23d7e7e74a058136829a486835c31a20542a63385bb708fde75db54",
+    "2026-10-10-partial-boundary-certificate-final-review/review.json": "a4aa90e61739d2b7ec4dbc78bb33e9efd8aff0a34a29e478e343e648e56e6669",
+    "2026-10-10-partial-source-class-prototype/artifact-manifest.json": "c12356c400de86c66dd7915c6cb161714817390faba937845bd7e744e9037205"
+  },
+  "standalone_boundary_module_compiled": false,
+  "source_class_core_identical_to_frozen": true,
+  "consumer_requirements": [
+    "actual source class certificate before native discovery",
+    "full native weighted closure and derivative audit",
+    "every final basis/target/candidate/raw derivative label audited",
+    "all raw parameter conditions bound to the consumed reduced system",
+    "bound region/infinity and ordinary virtual-soft owners",
+    "actual complete symbolic Frobenius and combined rational target projection"
+  ]
+}

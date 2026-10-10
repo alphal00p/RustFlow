@@ -1,0 +1,54 @@
+
+running 36 tests
+test coefficient::tests::empty_markers_and_zero_have_explicit_results ... ok
+test coefficient::tests::exponent_preflight_preserves_atomic_coefficient_contents ... ok
+test coefficient::tests::invalid_or_remapped_markers_and_excessive_degrees_are_rejected ... ok
+test coefficient::tests::multiple_function_markers_keep_the_requested_order ... ok
+test coefficient::tests::native_complex_coefficients_are_preserved ... ok
+test coefficient::tests::native_polynomial_expansion_groups_powers ... ok
+test coefficient::tests::native_root_basis_keeps_large_common_denominators_safe ... ok
+test coefficient::tests::oversized_exponents_are_rejected_before_native_signed_conversion ... ok
+test coefficient::tests::polynomial_cancellation_remains_exact ... ok
+test coefficient::tests::preserves_huge_symbolic_coefficients ... ok
+test coefficient::tests::signed_powers_and_literal_hidden_dependence_are_retained ... ok
+test finite_density::partial_origin::continuation::tests::final_audit_includes_raw_derivatives_candidates_and_combined_pole_weights ... ok
+test finite_density::partial_origin::continuation::tests::invalid_roles_and_tail_reject_before_required_cut_zero ... ok
+test finite_density::partial_origin::continuation::tests::labels_expressions_and_raw_target_budgets_decline_without_partial_evidence ... ok
+test finite_density::partial_origin::continuation::tests::narrow_actual_masks_bind_distinct_authorities_and_no_lower_zero_duplicates ... ok
+test finite_density::partial_origin::continuation::tests::pre_cancelled_construction_and_consumers_publish_nothing ... ok
+test finite_density::partial_origin::continuation::tests::raw_removed_cut_poles_and_symbols_are_checked_before_zero_support ... ok
+test finite_density::partial_origin::endpoint::tests::actual_singleton_and_double_original_labels_replay_and_keep_authorities_separate ... ok
+test finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result ... FAILED
+test finite_density::partial_origin::endpoint::tests::every_finite_cut_upper_lower_and_transfer_jet_has_positive_recorded_margins ... ok
+test finite_density::partial_origin::endpoint::tests::missing_charts_full_off_null_or_support_data_never_authorize_endpoint ... ok
+test finite_density::partial_origin::endpoint::tests::nonpositive_or_tampered_witness_is_rejected ... ok
+test finite_density::partial_origin::endpoint::tests::role_inverse_and_storage_fail_even_for_cut_zero ... ok
+test finite_density::partial_origin::endpoint::tests::shifted_v_zero_endpoint_is_distinct_from_finite_eta_zero ... ok
+test finite_density::partial_origin::endpoint::tests::wrong_origin_family_placement_and_options_reject ... ok
+test finite_density::partial_origin::resources::tests::pre_cancelled_and_expansion_growth_decline_before_cas ... ok
+test finite_density::partial_origin::tests::actual_native_full_channel_rejects_timelike_sum ... ok
+test finite_density::partial_origin::tests::actual_singleton_and_both_double_masks_replay_all_native_supports ... ok
+test finite_density::partial_origin::tests::all_finite_jets_and_negative_polynomial_powers_have_explicit_open_witness ... ok
+test finite_density::partial_origin::tests::binding_options_roles_and_storage_fail_before_zero ... ok
+test finite_density::partial_origin::tests::every_global_budget_rejects_without_partial_capability ... ok
+test finite_density::partial_origin::tests::fresh_actual_sources_bind_origin_zero_guards_and_reject_foreign_context ... ok
+test finite_density::partial_origin::tests::full_off_null_regulator_gap_and_same_phase_hold_on_closed_support_faces ... ok
+test finite_density::partial_origin::tests::invalid_partial_placement_and_physical_mass_reject ... ok
+test finite_density::partial_origin::tests::omitted_support_chart_and_native_off_null_data_cannot_replay ... ok
+test finite_density::partial_origin::tests::shifted_only_rank_counterexample_and_v_zero_are_not_finite_eta_zeros ... ok
+
+failures:
+
+---- finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result' (742109) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:734:9:
+assertion failed: matches!(e.audit_labels(&f, &[huge], PartialEndpointBudget
+    { index_magnitude: u64::MAX, ..b }), Err(Error::Limit(_)))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result
+
+test result: FAILED. 35 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.02s
+

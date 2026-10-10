@@ -1,0 +1,9 @@
+{
+  "scope": "integration fixture API adaptation only; frozen checker report unchanged",
+  "old_sha256": "7ad61fefdc9c0aa58cad5bc1c9b89c12eec067df1dd25aa2d1106f056f569a98",
+  "overlay_sha256": "6e6213807d6c66ec355f5bcff2830f839ee9891beaaacfa46f5e111e02174341",
+  "changes": [
+    "new -> new_with_context with default budget and explicit context",
+    "zero_domains -> zero_domains_with_context with default budget and explicit context"
+  ]
+}

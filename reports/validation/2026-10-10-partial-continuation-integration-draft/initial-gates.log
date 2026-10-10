@@ -1,0 +1,187 @@
+
+running 36 tests
+test coefficient::tests::empty_markers_and_zero_have_explicit_results ... ok
+test coefficient::tests::exponent_preflight_preserves_atomic_coefficient_contents ... ok
+test coefficient::tests::invalid_or_remapped_markers_and_excessive_degrees_are_rejected ... ok
+test coefficient::tests::multiple_function_markers_keep_the_requested_order ... ok
+test coefficient::tests::native_complex_coefficients_are_preserved ... ok
+test coefficient::tests::native_polynomial_expansion_groups_powers ... ok
+test coefficient::tests::native_root_basis_keeps_large_common_denominators_safe ... ok
+test coefficient::tests::oversized_exponents_are_rejected_before_native_signed_conversion ... ok
+test coefficient::tests::polynomial_cancellation_remains_exact ... ok
+test coefficient::tests::preserves_huge_symbolic_coefficients ... ok
+test coefficient::tests::signed_powers_and_literal_hidden_dependence_are_retained ... ok
+test finite_density::partial_origin::continuation::tests::final_audit_includes_raw_derivatives_candidates_and_combined_pole_weights ... FAILED
+test finite_density::partial_origin::continuation::tests::invalid_roles_and_tail_reject_before_required_cut_zero ... FAILED
+test finite_density::partial_origin::continuation::tests::labels_expressions_and_raw_target_budgets_decline_without_partial_evidence ... FAILED
+test finite_density::partial_origin::continuation::tests::narrow_actual_masks_bind_distinct_authorities_and_no_lower_zero_duplicates ... FAILED
+test finite_density::partial_origin::continuation::tests::pre_cancelled_construction_and_consumers_publish_nothing ... FAILED
+test finite_density::partial_origin::continuation::tests::raw_removed_cut_poles_and_symbols_are_checked_before_zero_support ... FAILED
+test finite_density::partial_origin::endpoint::tests::actual_singleton_and_double_original_labels_replay_and_keep_authorities_separate ... FAILED
+test finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result ... FAILED
+test finite_density::partial_origin::endpoint::tests::every_finite_cut_upper_lower_and_transfer_jet_has_positive_recorded_margins ... FAILED
+test finite_density::partial_origin::endpoint::tests::missing_charts_full_off_null_or_support_data_never_authorize_endpoint ... FAILED
+test finite_density::partial_origin::endpoint::tests::nonpositive_or_tampered_witness_is_rejected ... FAILED
+test finite_density::partial_origin::endpoint::tests::role_inverse_and_storage_fail_even_for_cut_zero ... FAILED
+test finite_density::partial_origin::endpoint::tests::shifted_v_zero_endpoint_is_distinct_from_finite_eta_zero ... FAILED
+test finite_density::partial_origin::endpoint::tests::wrong_origin_family_placement_and_options_reject ... FAILED
+test finite_density::partial_origin::resources::tests::pre_cancelled_and_expansion_growth_decline_before_cas ... ok
+test finite_density::partial_origin::tests::actual_native_full_channel_rejects_timelike_sum ... FAILED
+test finite_density::partial_origin::tests::actual_singleton_and_both_double_masks_replay_all_native_supports ... FAILED
+test finite_density::partial_origin::tests::all_finite_jets_and_negative_polynomial_powers_have_explicit_open_witness ... FAILED
+test finite_density::partial_origin::tests::binding_options_roles_and_storage_fail_before_zero ... FAILED
+test finite_density::partial_origin::tests::every_global_budget_rejects_without_partial_capability ... FAILED
+test finite_density::partial_origin::tests::fresh_actual_sources_bind_origin_zero_guards_and_reject_foreign_context ... FAILED
+test finite_density::partial_origin::tests::full_off_null_regulator_gap_and_same_phase_hold_on_closed_support_faces ... FAILED
+test finite_density::partial_origin::tests::invalid_partial_placement_and_physical_mass_reject ... ok
+test finite_density::partial_origin::tests::omitted_support_chart_and_native_off_null_data_cannot_replay ... FAILED
+test finite_density::partial_origin::tests::shifted_only_rank_counterexample_and_v_zero_are_not_finite_eta_zeros ... FAILED
+
+failures:
+
+---- finite_density::partial_origin::continuation::tests::final_audit_includes_raw_derivatives_candidates_and_combined_pole_weights stdout ----
+
+thread 'finite_density::partial_origin::continuation::tests::final_audit_includes_raw_derivatives_candidates_and_combined_pole_weights' (674702) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_continuation.rs:564:10:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- finite_density::partial_origin::continuation::tests::invalid_roles_and_tail_reject_before_required_cut_zero stdout ----
+
+thread 'finite_density::partial_origin::continuation::tests::invalid_roles_and_tail_reject_before_required_cut_zero' (674703) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_continuation.rs:564:10:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::continuation::tests::labels_expressions_and_raw_target_budgets_decline_without_partial_evidence stdout ----
+
+thread 'finite_density::partial_origin::continuation::tests::labels_expressions_and_raw_target_budgets_decline_without_partial_evidence' (674704) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_continuation.rs:564:10:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::continuation::tests::narrow_actual_masks_bind_distinct_authorities_and_no_lower_zero_duplicates stdout ----
+
+thread 'finite_density::partial_origin::continuation::tests::narrow_actual_masks_bind_distinct_authorities_and_no_lower_zero_duplicates' (674705) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_continuation.rs:564:10:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::continuation::tests::pre_cancelled_construction_and_consumers_publish_nothing stdout ----
+
+thread 'finite_density::partial_origin::continuation::tests::pre_cancelled_construction_and_consumers_publish_nothing' (674706) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_continuation.rs:564:10:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::continuation::tests::raw_removed_cut_poles_and_symbols_are_checked_before_zero_support stdout ----
+
+thread 'finite_density::partial_origin::continuation::tests::raw_removed_cut_poles_and_symbols_are_checked_before_zero_support' (674707) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_continuation.rs:564:10:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::actual_singleton_and_double_original_labels_replay_and_keep_authorities_separate stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::actual_singleton_and_double_original_labels_replay_and_keep_authorities_separate' (674708) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:521:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result' (674709) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:521:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::every_finite_cut_upper_lower_and_transfer_jet_has_positive_recorded_margins stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::every_finite_cut_upper_lower_and_transfer_jet_has_positive_recorded_margins' (674710) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:521:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::missing_charts_full_off_null_or_support_data_never_authorize_endpoint stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::missing_charts_full_off_null_or_support_data_never_authorize_endpoint' (674711) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:521:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::nonpositive_or_tampered_witness_is_rejected stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::nonpositive_or_tampered_witness_is_rejected' (674712) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:521:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::role_inverse_and_storage_fail_even_for_cut_zero stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::role_inverse_and_storage_fail_even_for_cut_zero' (674713) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:521:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::shifted_v_zero_endpoint_is_distinct_from_finite_eta_zero stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::shifted_v_zero_endpoint_is_distinct_from_finite_eta_zero' (674714) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:767:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::endpoint::tests::wrong_origin_family_placement_and_options_reject stdout ----
+
+thread 'finite_density::partial_origin::endpoint::tests::wrong_origin_family_placement_and_options_reject' (674715) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_endpoint.rs:521:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::tests::actual_native_full_channel_rejects_timelike_sum stdout ----
+
+thread 'finite_density::partial_origin::tests::actual_native_full_channel_rejects_timelike_sum' (674717) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1636:9:
+assertion failed: matches!(gaussian(&rows,&[0,1],&BTreeSet::from([0,1]),2,1,&mut
+    m),Err(Error::Unsupported(ref s)) if s.contains("nonpositive"))
+
+---- finite_density::partial_origin::tests::actual_singleton_and_both_double_masks_replay_all_native_supports stdout ----
+
+thread 'finite_density::partial_origin::tests::actual_singleton_and_both_double_masks_replay_all_native_supports' (674718) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1415:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::tests::all_finite_jets_and_negative_polynomial_powers_have_explicit_open_witness stdout ----
+
+thread 'finite_density::partial_origin::tests::all_finite_jets_and_negative_polynomial_powers_have_explicit_open_witness' (674719) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1415:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::tests::binding_options_roles_and_storage_fail_before_zero stdout ----
+
+thread 'finite_density::partial_origin::tests::binding_options_roles_and_storage_fail_before_zero' (674720) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1415:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::tests::every_global_budget_rejects_without_partial_capability stdout ----
+
+thread 'finite_density::partial_origin::tests::every_global_budget_rejects_without_partial_capability' (674721) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1602:13:
+assertion failed: matches!(PartialOriginCapability::new(&i, &f, &[0], options(), bad),
+    Err(Error::Limit(_)))
+
+---- finite_density::partial_origin::tests::fresh_actual_sources_bind_origin_zero_guards_and_reject_foreign_context stdout ----
+
+thread 'finite_density::partial_origin::tests::fresh_actual_sources_bind_origin_zero_guards_and_reject_foreign_context' (674722) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1415:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::tests::full_off_null_regulator_gap_and_same_phase_hold_on_closed_support_faces stdout ----
+
+thread 'finite_density::partial_origin::tests::full_off_null_regulator_gap_and_same_phase_hold_on_closed_support_faces' (674723) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1415:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::tests::omitted_support_chart_and_native_off_null_data_cannot_replay stdout ----
+
+thread 'finite_density::partial_origin::tests::omitted_support_chart_and_native_off_null_data_cannot_replay' (674725) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1415:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+---- finite_density::partial_origin::tests::shifted_only_rank_counterexample_and_v_zero_are_not_finite_eta_zeros stdout ----
+
+thread 'finite_density::partial_origin::tests::shifted_only_rank_counterexample_and_v_zero_are_not_finite_eta_zeros' (674726) panicked at /tmp/rustflow-partial-continuation-draft-20261010/src/finite_density/partial_origin.rs:1415:90:
+called `Result::unwrap()` on an `Err` value: Unsupported("partial continuation rational-expression preflight")
+
+
+failures:
+    finite_density::partial_origin::continuation::tests::final_audit_includes_raw_derivatives_candidates_and_combined_pole_weights
+    finite_density::partial_origin::continuation::tests::invalid_roles_and_tail_reject_before_required_cut_zero
+    finite_density::partial_origin::continuation::tests::labels_expressions_and_raw_target_budgets_decline_without_partial_evidence
+    finite_density::partial_origin::continuation::tests::narrow_actual_masks_bind_distinct_authorities_and_no_lower_zero_duplicates
+    finite_density::partial_origin::continuation::tests::pre_cancelled_construction_and_consumers_publish_nothing
+    finite_density::partial_origin::continuation::tests::raw_removed_cut_poles_and_symbols_are_checked_before_zero_support
+    finite_density::partial_origin::endpoint::tests::actual_singleton_and_double_original_labels_replay_and_keep_authorities_separate
+    finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result
+    finite_density::partial_origin::endpoint::tests::every_finite_cut_upper_lower_and_transfer_jet_has_positive_recorded_margins
+    finite_density::partial_origin::endpoint::tests::missing_charts_full_off_null_or_support_data_never_authorize_endpoint
+    finite_density::partial_origin::endpoint::tests::nonpositive_or_tampered_witness_is_rejected
+    finite_density::partial_origin::endpoint::tests::role_inverse_and_storage_fail_even_for_cut_zero
+    finite_density::partial_origin::endpoint::tests::shifted_v_zero_endpoint_is_distinct_from_finite_eta_zero
+    finite_density::partial_origin::endpoint::tests::wrong_origin_family_placement_and_options_reject
+    finite_density::partial_origin::tests::actual_native_full_channel_rejects_timelike_sum
+    finite_density::partial_origin::tests::actual_singleton_and_both_double_masks_replay_all_native_supports
+    finite_density::partial_origin::tests::all_finite_jets_and_negative_polynomial_powers_have_explicit_open_witness
+    finite_density::partial_origin::tests::binding_options_roles_and_storage_fail_before_zero
+    finite_density::partial_origin::tests::every_global_budget_rejects_without_partial_capability
+    finite_density::partial_origin::tests::fresh_actual_sources_bind_origin_zero_guards_and_reject_foreign_context
+    finite_density::partial_origin::tests::full_off_null_regulator_gap_and_same_phase_hold_on_closed_support_faces
+    finite_density::partial_origin::tests::omitted_support_chart_and_native_off_null_data_cannot_replay
+    finite_density::partial_origin::tests::shifted_only_rank_counterexample_and_v_zero_are_not_finite_eta_zeros
+
+test result: FAILED. 13 passed; 23 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+

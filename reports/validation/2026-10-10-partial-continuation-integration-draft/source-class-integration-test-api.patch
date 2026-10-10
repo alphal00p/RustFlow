@@ -1,0 +1,36 @@
+--- frozen/source_class/tests.rs
++++ overlay/source_class/tests.rs
+@@ -381,9 +381,15 @@
+             .occupied_cut(&cuts, 1024)
+             .unwrap()
+             .at_physical_masses();
+-        let origin =
+-            PartialOriginCapability::new(&input, &family, &shifted, options, Default::default())
+-                .unwrap();
++        let origin = PartialOriginCapability::new_with_context(
++            &input,
++            &family,
++            &shifted,
++            options,
++            Default::default(),
++            &RunContext::default(),
++        )
++        .unwrap();
+         origin
+             .validate_binding(&input, &family, &shifted, options)
+             .unwrap();
+@@ -430,7 +436,13 @@
+             .unwrap()
+             .with_zero_domains(
+                 origin
+-                    .zero_domains::<16>(&family, &shifted, options)
++                    .zero_domains_with_context::<16>(
++                        &family,
++                        &shifted,
++                        options,
++                        Default::default(),
++                        &RunContext::default(),
++                    )
+                     .unwrap(),
+             )
+             .unwrap(),

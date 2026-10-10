@@ -1,0 +1,116 @@
+{
+  "command": [
+    "/nix/store/paaihvr59q1101200mabmk7y4yhw42g7-rustc-wrapper-1.97.1/bin/rustc",
+    "-C",
+    "linker=/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0/bin/cc",
+    "--edition=2024",
+    "--crate-name",
+    "partial_continuation_draft",
+    "--test",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "serde=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde-0ec22181e7005281.rlib",
+    "--extern",
+    "blake3=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libblake3-d00e8c4219217a2f.rlib",
+    "--extern",
+    "ahash=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libahash-76fd751102bca1d4.rlib",
+    "--extern",
+    "feynkit_graph=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libfeynkit_graph-b02c7dc553c9ebbf.rlib",
+    "--extern",
+    "feynkit_kinematics=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libfeynkit_kinematics-a4a2b5fdb1a08284.rlib",
+    "--extern",
+    "symbolica_amflow=/tmp/rustflow-partial-origin-20261010/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "rustred=/tmp/rustflow-partial-origin-20261010/deps/librustred-392075d0c6995fd1.rlib",
+    "-L",
+    "dependency=/tmp/rustflow-partial-origin-20261010/deps",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "-L",
+    "native=/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/lib",
+    "-C",
+    "link-arg=-Wl,-rpath,/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/lib",
+    "/tmp/rustflow-partial-continuation-draft-20261010/probe.rs",
+    "-o",
+    "/tmp/rustflow-partial-continuation-draft-20261010/prototype-tests"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 32.68403419200331,
+  "libraries": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "serde": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde-0ec22181e7005281.rlib",
+      "sha256": "c87d7ec6a7156af79a2c55380af4e9e4827d2bb74c6484566602a5c645e34c62",
+      "bytes": 1067804
+    },
+    "blake3": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libblake3-d00e8c4219217a2f.rlib",
+      "sha256": "96689a81fb034207b83e1107c759fa4365cb7e47364cf619db132bfc744ebd29",
+      "bytes": 827182
+    },
+    "ahash": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libahash-76fd751102bca1d4.rlib",
+      "sha256": "ab9d642561dfd1454547310cf19db76a0ee961b1988116e2c8cb38c0400f987f",
+      "bytes": 298226
+    },
+    "feynkit_graph": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libfeynkit_graph-b02c7dc553c9ebbf.rlib",
+      "sha256": "f17afc4a4357a8c4933cc65aa67934c05d7826751a6b6e4082eb7703a1c6b4c0",
+      "bytes": 99311452
+    },
+    "feynkit_kinematics": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libfeynkit_kinematics-a4a2b5fdb1a08284.rlib",
+      "sha256": "3ca6eb6e90d9dc45180fa8b76f8340958e033ad3b81a4813cba6f55412455c36",
+      "bytes": 9384614
+    },
+    "symbolica_amflow": {
+      "path": "/tmp/rustflow-partial-origin-20261010/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "62ef412df163cd5bef1292b45adab67d6e3937b9e311aefcaec52a2fc7262f49",
+      "bytes": 640335308
+    },
+    "rustred": {
+      "path": "/tmp/rustflow-partial-origin-20261010/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "5d762d4ed3dda9eb36ae301d90580ca73c57c4a1c666eb4584f106a62eabd615",
+      "bytes": 435855206
+    }
+  },
+  "source_files": {
+    "probe.rs": "278a91206446e628e865105b2d234c17ab02dfd2c5afb6e9632d87d013cff9b7",
+    "src/algebra.rs": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a",
+    "src/coefficient.rs": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+    "src/family_private.rs": "8d0d1074abf0f80d65f821bbb1c29bf7bc7abc48882f5a67c6a849602b75d7ed",
+    "src/finite_density/boundary/virtual_soft.rs": "31ce8b1b1041234db91dde80eae8a242fc059826b2eb3250d4279913ad31e602",
+    "src/finite_density/partial_continuation.rs": "ea00fa6e1bb8f929048675edbab5629af8f0b5fa32e5d66b10e099092a2a53ce",
+    "src/finite_density/partial_endpoint.rs": "b8784fc9324b7cf4c3ea5d46a58e60a4d03bdcbadbb30714f0dab43af7538281",
+    "src/finite_density/partial_origin.rs": "5b1ff42491f1f61bf9c91824574de8a6d93f7419036196e97f9de8fdc3821a53",
+    "src/finite_density/partial_resources.rs": "7fa914dd447d3d2ddff31909d5b7134d26b90d363d6b9f79eacc77fe8874a791",
+    "src/finite_density/source_class/tests.rs": "6e6213807d6c66ec355f5bcff2830f839ee9891beaaacfa46f5e111e02174341",
+    "src/finite_density/source_class.rs": "0ad1af5a765db863761d1ca2b56496c8fd4b8a569b782dbb58b5d3dc9ae5a783",
+    "src/physical_conditions.rs": "cb59a50467cb586754097d5f748e703d0a7b9120b138d2134bdb9b8e6759e21f"
+  },
+  "cargo_invoked": false,
+  "executable": {
+    "path": "/tmp/rustflow-partial-continuation-draft-20261010/prototype-tests",
+    "sha256": "a47186d730155231cc35e114dc42be1c2e24110ed8348332028d71a4adceaafa"
+  }
+}

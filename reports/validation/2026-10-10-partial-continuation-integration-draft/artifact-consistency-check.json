@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "source_snapshot_sha256": "45d5bb201577e07496f08783a59018aaeca74ffade871e7ff91e93eb488efbec",
+  "final_build": "build-06.json",
+  "final_build_sha256": "8321cd63e8f3d8eee9123c1caf4d79bdab4edf4e56ae19ef74a313c9280a12b4",
+  "final_gates_sha256": "5e44a37c70ffeb2b5116984a00b5d544803c4c0e22dcf8d12c673f25244ec78c",
+  "owner_module_count": 7,
+  "all_frozen_owner_sources_match_compiled_snapshot": true,
+  "proof_and_source_contract_tests": 35,
+  "copied_helper_tests": 11,
+  "boundary_wrapper_full_crate_check_pending_elsewhere": true,
+  "shared_sources_or_target_modified": false
+}

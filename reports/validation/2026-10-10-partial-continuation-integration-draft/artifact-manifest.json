@@ -1,0 +1,217 @@
+{
+  "scope": "frozen isolated source/bundle prototype; no numerical admission",
+  "files": {
+    "README.md": {
+      "sha256": "cb64a209f1a85b3edcdc4d8ad186ea8ae05521a82deb4dc87722c6658c7f7ec9",
+      "bytes": 3981
+    },
+    "artifact-consistency-check.json": {
+      "sha256": "bd65e3a0dfd23b8a877cbb0bb6f80f08a8f66db04fc374c3928b48e1d9ecd67d",
+      "bytes": 603
+    },
+    "build-00.json": {
+      "sha256": "55aae4fe0e903d9a06c5a0989a27529f02f64a829696bc6100e63953aa865ed4",
+      "bytes": 5372
+    },
+    "build-00.log": {
+      "sha256": "b62781d43e0292454cff39524fef16f1022466a839ef4035709a044e64f960e7",
+      "bytes": 407
+    },
+    "build-01.json": {
+      "sha256": "185091838bd585f451a17fbbeaf9a0ac31fbb89fc5bf56ec3af2561f6887420d",
+      "bytes": 5557
+    },
+    "build-01.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "build-02.json": {
+      "sha256": "ac6d8158733ba4d7b41a8bd89095b73a4bda3291bcfd33d70f6d823a28624c99",
+      "bytes": 5557
+    },
+    "build-02.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "build-03.json": {
+      "sha256": "fc49f539abddf11cd71185968900af502771bd4d5fb08a70cff0882414da798f",
+      "bytes": 5557
+    },
+    "build-03.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "build-04.json": {
+      "sha256": "3867f159600bbd3132da77967adb1ba771d8ee3884ac4bbf2a1b5c4a50e4f95e",
+      "bytes": 5597
+    },
+    "build-04.log": {
+      "sha256": "ea2838d693797c87d9b9269c1d70e0b4aae947ff73bd794e9497be315c259956",
+      "bytes": 1615
+    },
+    "build-05.json": {
+      "sha256": "5bc3d1659c9332ec6385cbb7077bde79daf37ca6d440656985006112374d6b72",
+      "bytes": 6427
+    },
+    "build-05.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "build-06.json": {
+      "sha256": "8321cd63e8f3d8eee9123c1caf4d79bdab4edf4e56ae19ef74a313c9280a12b4",
+      "bytes": 6427
+    },
+    "build-06.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "final-evidence/endpoint/cuts-[0, 3]-shift-[1, 2].json": {
+      "sha256": "364fc86046593896cd8011a69bedf5cf346d3822a17ef695d980c428df07b9c8",
+      "bytes": 24229
+    },
+    "final-evidence/endpoint/cuts-[0, 3]-shift-[2, 4].json": {
+      "sha256": "02d51fb97f084e14c568378594e242c65289745e280f5e2c60979042ee73e117",
+      "bytes": 24228
+    },
+    "final-evidence/endpoint/cuts-[3]-shift-[0].json": {
+      "sha256": "1e341f707066e16cdb0a304953cc000f830f680b004e59f6de7046ec711ca8e4",
+      "bytes": 122146
+    },
+    "final-evidence/endpoint/finite-label-audits.json": {
+      "sha256": "ed13c687474b18a279fb492b4a9d977a184270539b1f30f3faf3f84abb256ec4",
+      "bytes": 55070
+    },
+    "final-evidence/origin/cuts-[0, 3]-shift-[1, 2].json": {
+      "sha256": "bef4f1f02977cd50fcf5199a36ef7d9d6edeaad1e3329474fe9e6002acec9915",
+      "bytes": 13585
+    },
+    "final-evidence/origin/cuts-[0, 3]-shift-[2, 4].json": {
+      "sha256": "6d495c1d51c7fc0c821bac7a81fc6edfd6ec65e7018992f8d91013fb9a798289",
+      "bytes": 13584
+    },
+    "final-evidence/origin/cuts-[3]-shift-[0].json": {
+      "sha256": "5ed18152a97ca0d380c2968cfbe47b897592a6f8db6b20f1eac2687d87c5ded4",
+      "bytes": 97513
+    },
+    "final-evidence/origin/fresh-source-guard-binding.json": {
+      "sha256": "efd023097ebac85de0c2d0ea475f61b96640cf1a601a04fcd6e420ba27b64dd0",
+      "bytes": 1351
+    },
+    "final-evidence/origin/off-null-regulator-checks.json": {
+      "sha256": "76000a380b37493e3361e77b8473b3876651831d6ea1cef00586dc5a2763a2c4",
+      "bytes": 327
+    },
+    "final-evidence/source-class/shift-0.json": {
+      "sha256": "062afe7712353c91715f57fc95a8937d1177c22ad14fa5dac8b7401d5ff32833",
+      "bytes": 2304
+    },
+    "final-evidence/source-class/shift-1-2.json": {
+      "sha256": "738713058f13622ee052654bc0a9ad508bbc090c43f1e8711f32a9a297531074",
+      "bytes": 2315
+    },
+    "final-evidence/source-class/shift-2-4.json": {
+      "sha256": "3ff64f9149887957e6de68e0b1046243091cf06303be9f7968924188798e19da",
+      "bytes": 2315
+    },
+    "final-gates.json": {
+      "sha256": "5e44a37c70ffeb2b5116984a00b5d544803c4c0e22dcf8d12c673f25244ec78c",
+      "bytes": 611
+    },
+    "final-gates.log": {
+      "sha256": "232ed31599a9d99da35f1cdf98050b21dbbeb347cb615edc71633c9723873234",
+      "bytes": 5246
+    },
+    "harness-helper-binding.json": {
+      "sha256": "019ab84097765888ea92a1a4fc7595200118a8fedb51ef53bfc07b048b1addc1",
+      "bytes": 1261
+    },
+    "initial-gates.json": {
+      "sha256": "87de1d0c0a608ce7d3999a5b6324315ae284a3a11e42a5728f89d6eb8d82e132",
+      "bytes": 449
+    },
+    "initial-gates.log": {
+      "sha256": "5df7a7e20430790d7f0eedc744bbe74e20f6d781b306eaa9d7c6e08123f62adc",
+      "bytes": 17844
+    },
+    "resource-marker-gates.json": {
+      "sha256": "0e5ec33fdb5b4389359301ede700c956b6759f5b6f9afae9938d6a336fd479f9",
+      "bytes": 349
+    },
+    "resource-marker-gates.log": {
+      "sha256": "550c99f25cc54171f164768459d6c7153c660ec38db8ec7404f9e13498cb12f5",
+      "bytes": 4766
+    },
+    "source/src/finite_density/boundary/virtual_soft.rs": {
+      "sha256": "31ce8b1b1041234db91dde80eae8a242fc059826b2eb3250d4279913ad31e602",
+      "bytes": 44913
+    },
+    "source/src/finite_density/partial_continuation.rs": {
+      "sha256": "ea00fa6e1bb8f929048675edbab5629af8f0b5fa32e5d66b10e099092a2a53ce",
+      "bytes": 37689
+    },
+    "source/src/finite_density/partial_endpoint.rs": {
+      "sha256": "b8784fc9324b7cf4c3ea5d46a58e60a4d03bdcbadbb30714f0dab43af7538281",
+      "bytes": 29244
+    },
+    "source/src/finite_density/partial_origin.rs": {
+      "sha256": "5b1ff42491f1f61bf9c91824574de8a6d93f7419036196e97f9de8fdc3821a53",
+      "bytes": 67530
+    },
+    "source/src/finite_density/partial_resources.rs": {
+      "sha256": "7fa914dd447d3d2ddff31909d5b7134d26b90d363d6b9f79eacc77fe8874a791",
+      "bytes": 5710
+    },
+    "source/src/finite_density/source_class/tests.rs": {
+      "sha256": "6e6213807d6c66ec355f5bcff2830f839ee9891beaaacfa46f5e111e02174341",
+      "bytes": 17239
+    },
+    "source/src/finite_density/source_class.rs": {
+      "sha256": "0ad1af5a765db863761d1ca2b56496c8fd4b8a569b782dbb58b5d3dc9ae5a783",
+      "bytes": 19925
+    },
+    "source-bound-gates.json": {
+      "sha256": "7c2aa032aa0d7ea4d96281a49a8e2c885023bd548159e1d90ecea4508d8b41c7",
+      "bytes": 347
+    },
+    "source-bound-gates.log": {
+      "sha256": "33cdc2daa2d254ec75bc132ba2214ffb8079541b75ef69d011b0b76a92f1acf4",
+      "bytes": 5246
+    },
+    "source-class-integration-test-api.json": {
+      "sha256": "608c656842e6dd25dd9f7007e863460d4881c8822f4cc0f8ec99098dd6b92676",
+      "bytes": 443
+    },
+    "source-class-integration-test-api.patch": {
+      "sha256": "df597d95be0af909167787690b7bd189c949103e5e93a19509b208d9d7629571",
+      "bytes": 1212
+    },
+    "source-snapshot.json": {
+      "sha256": "45d5bb201577e07496f08783a59018aaeca74ffade871e7ff91e93eb488efbec",
+      "bytes": 2836
+    },
+    "standalone-harness/build.py": {
+      "sha256": "394019612568edc17f466fc461ed5588de64a6c041dc7e921e116828e909172e",
+      "bytes": 2621
+    },
+    "standalone-harness/probe.rs": {
+      "sha256": "278a91206446e628e865105b2d234c17ab02dfd2c5afb6e9632d87d013cff9b7",
+      "bytes": 1111
+    },
+    "standalone-harness/src/algebra.rs": {
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a",
+      "bytes": 5615
+    },
+    "standalone-harness/src/coefficient.rs": {
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+      "bytes": 17725
+    },
+    "standalone-harness/src/family_private.rs": {
+      "sha256": "8d0d1074abf0f80d65f821bbb1c29bf7bc7abc48882f5a67c6a849602b75d7ed",
+      "bytes": 472
+    },
+    "standalone-harness/src/physical_conditions.rs": {
+      "sha256": "cb59a50467cb586754097d5f748e703d0a7b9120b138d2134bdb9b8e6759e21f",
+      "bytes": 4596
+    }
+  }
+}

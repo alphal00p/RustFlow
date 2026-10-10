@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/tmp/rustflow-partial-continuation-draft-20261010/prototype-tests",
+    "--test-threads=1"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 0.1954867229796946,
+  "binary_sha256": "43e3535645cabb584eaca65016c0ea93093a721f783efd6a065aaba7760392ab",
+  "post_sha256": "43e3535645cabb584eaca65016c0ea93093a721f783efd6a065aaba7760392ab",
+  "scope": "isolated origin/endpoint/bundle contract tests; no live flow/source/boundary dispatch"
+}
