@@ -1,0 +1,100 @@
+{
+  "status": "binary64 independent diagnostic; not a Laurent reference",
+  "method": "direct three relative cosines with normalized Gegenbauer weights",
+  "results": [
+    {
+      "sphere_dimension": 9,
+      "powers": [
+        0.3333333333333333,
+        0.6666666666666666,
+        1.3333333333333333
+      ],
+      "gamma_formula": 0.19738860061959787,
+      "quadratures": [
+        {
+          "order": 24,
+          "value": 0.19738860058806165,
+          "relative_gamma_difference": 1.5976719947019546e-10
+        },
+        {
+          "order": 40,
+          "value": 0.1973886006192682,
+          "relative_gamma_difference": 1.6702195182460855e-12
+        },
+        {
+          "order": 64,
+          "value": 0.19738860061959132,
+          "relative_gamma_difference": 3.319566843629218e-14
+        },
+        {
+          "order": 96,
+          "value": 0.19738860061959618,
+          "relative_gamma_difference": 8.548717289613705e-15
+        }
+      ]
+    },
+    {
+      "sphere_dimension": 10,
+      "powers": [
+        -0.3333333333333333,
+        0.6666666666666666,
+        -0.6666666666666666
+      ],
+      "gamma_formula": 1.3572808911618153,
+      "quadratures": [
+        {
+          "order": 24,
+          "value": 1.357280891083526,
+          "relative_gamma_difference": 5.7681082132887695e-11
+        },
+        {
+          "order": 40,
+          "value": 1.3572808911595748,
+          "relative_gamma_difference": 1.6506795930126827e-12
+        },
+        {
+          "order": 64,
+          "value": 1.357280891161757,
+          "relative_gamma_difference": 4.285460875053104e-14
+        },
+        {
+          "order": 96,
+          "value": 1.3572808911618126,
+          "relative_gamma_difference": 1.9984014443252818e-15
+        }
+      ]
+    },
+    {
+      "sphere_dimension": 8,
+      "powers": [
+        1,
+        1,
+        1
+      ],
+      "gamma_formula": 0.12345679012345764,
+      "quadratures": [
+        {
+          "order": 24,
+          "value": 0.12345679062366108,
+          "relative_gamma_difference": 4.051647906067046e-09
+        },
+        {
+          "order": 40,
+          "value": 0.12345679013806626,
+          "relative_gamma_difference": 1.1832979041059843e-10
+        },
+        {
+          "order": 64,
+          "value": 0.123456790124016,
+          "relative_gamma_difference": 4.522604513113038e-12
+        },
+        {
+          "order": 96,
+          "value": 0.12345679012349003,
+          "relative_gamma_difference": 2.62456723021387e-13
+        }
+      ]
+    }
+  ],
+  "wall_seconds": 0.8396222880110145
+}

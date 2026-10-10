@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "scope": "Discarded intermediate linker artifact: mtime changed during hash capture; never executed. Superseded by active-zero-early-native-unit.json after completed Cargo fingerprint.",
+  "source_snapshot": "active-zero-source-hashes.json",
+  "source_snapshot_sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+  "artifact": "target/release/deps/rustred-258a1e04558e72f1",
+  "sha256": "bea3bc057c6374099798d2c310dd7e6b7bc87046ab9c77779f11bd773e111dc0",
+  "size_bytes": 610293233,
+  "mtime_utc": "2026-10-10T00:33:35.333835+00:00",
+  "previous_binary_sha256": "fdcbce82d0645fcb318a96c9753873684121036267e6e6c3a141bf2fd0e0128c",
+  "fingerprint": "target/release/.fingerprint/rustred-258a1e04558e72f1/test-lib-rustred.json",
+  "fingerprint_sha256": "b85b676aa329bd69637774a73713fd78868a30a598b305806ea55b008d469e55",
+  "features": "[\"native\"]"
+}

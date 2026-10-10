@@ -1,0 +1,1511 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Recheck saved exact pole/tail evidence against each archived numerical contour.\n\nNo quadrature, AMF, supplied oracle or production source is read or changed.",
+  "sample_count": 60,
+  "exact_reports_replayed": 120,
+  "script_sha256": "9097775a493153e4cd701af94a65fb59f6d5f96a8b5f5a4e73f30ee832188efd",
+  "wall_seconds": 149.88794480683282,
+  "records": [
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-01",
+      "epsilon": "1/10000",
+      "contour_archive": "laurent-baseline/sample-01-contours.json.gz",
+      "contour_sha256": "621e319e73200760936f05ad62876db00db1a969ddfdef3126e8cf2acdc8748b",
+      "contour_archive_sha256": "519d496cf6e4a1f24fb582614cd293604d582d7b7d7e8d1337fd34d369610615",
+      "numerical_command_input_sha256": "621e319e73200760936f05ad62876db00db1a969ddfdef3126e8cf2acdc8748b",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-01-regulator.json",
+          "saved_sha256": "942bed17d4995b6de88d0b90dcc1379b361b4cfd3fa24300b348b9f6e2264e84",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-01-tails.json",
+          "saved_sha256": "b08191c0537210c94b91712fd1f5a001d8b86d9ebf3ef10eff173b2dacde3023",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-02",
+      "epsilon": "1/5000",
+      "contour_archive": "laurent-baseline/sample-02-contours.json.gz",
+      "contour_sha256": "6a99eb6ecfe447b4d8963db04d7dfe5f786f4740349e69d51aa59ca33f170030",
+      "contour_archive_sha256": "965f95939a4768e856c60a7ccded8ea4d3de2c2fdf2807ba38e6b27276e2e70c",
+      "numerical_command_input_sha256": "6a99eb6ecfe447b4d8963db04d7dfe5f786f4740349e69d51aa59ca33f170030",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-02-regulator.json",
+          "saved_sha256": "b54a2cf408142ec168778178b1ba2b826f71fa44fbf24102295bafb7a504055a",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-02-tails.json",
+          "saved_sha256": "d7e54eac44a45589aab1c4ec5715d193f5772dca0b4b9af00861b5c6e94de88a",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-03",
+      "epsilon": "3/10000",
+      "contour_archive": "laurent-baseline/sample-03-contours.json.gz",
+      "contour_sha256": "56265364f7f2af07bb9056e8bfac5642acc3ee521ae0e3a7ae328527d8b38376",
+      "contour_archive_sha256": "434f90626f926e6594720ab51f3e46a2d15f66927d097e847ddd4bcae8deadcd",
+      "numerical_command_input_sha256": "56265364f7f2af07bb9056e8bfac5642acc3ee521ae0e3a7ae328527d8b38376",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-03-regulator.json",
+          "saved_sha256": "a8ec01cd8fc340ad118e8a43d917e8ee02d48d069f9766fca60c4a26bd33963c",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-03-tails.json",
+          "saved_sha256": "aae80218811de253980bb05419e1fdbdc2c22d0beba419fbd57d082f3fb20998",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-04",
+      "epsilon": "1/2500",
+      "contour_archive": "laurent-baseline/sample-04-contours.json.gz",
+      "contour_sha256": "9c55303f54236b9119a5dcfcbd1e33a94952effb3783a18b6cd7c3c1b1be4d38",
+      "contour_archive_sha256": "fa4192dbf35ac79af5863648a0f69aa494a4d444aaa3b70644ce905cd487f7c5",
+      "numerical_command_input_sha256": "9c55303f54236b9119a5dcfcbd1e33a94952effb3783a18b6cd7c3c1b1be4d38",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-04-regulator.json",
+          "saved_sha256": "3159e1c3e422b76d20ad81e22b25b56dbe82964ef29f394f99f7a71f34b97f31",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-04-tails.json",
+          "saved_sha256": "dc0224c7119ccc37c2304089d0fb1ffaaf50b6f72f0df72ece6067daa03c4f0d",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-05",
+      "epsilon": "1/2000",
+      "contour_archive": "laurent-baseline/sample-05-contours.json.gz",
+      "contour_sha256": "1ddbeafed0be1187542a3ec42d2f541387068d8ea56f48b2865b18aec5a0945b",
+      "contour_archive_sha256": "be2dab38d9cd7c9904a90e05487652064477e395f1e2389ab596c442b53db0f3",
+      "numerical_command_input_sha256": "1ddbeafed0be1187542a3ec42d2f541387068d8ea56f48b2865b18aec5a0945b",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-05-regulator.json",
+          "saved_sha256": "8f0398de9e4b3b35265b48ff71c54b12a8be58a7200c0f3859f2efab888b367e",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-05-tails.json",
+          "saved_sha256": "5264503efcabb726fe3c08b9e7bb7a6b67feecb9b80c770bfb3ece9d18d498f8",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-06",
+      "epsilon": "3/5000",
+      "contour_archive": "laurent-baseline/sample-06-contours.json.gz",
+      "contour_sha256": "9a797cd6493e3d57166c3145849eaee96b2b9609fe24a8defc796c825be813bb",
+      "contour_archive_sha256": "58a20154317c4d139b595f597fbfe9976088fa3fe8643cbc15bb2684e32d65ea",
+      "numerical_command_input_sha256": "9a797cd6493e3d57166c3145849eaee96b2b9609fe24a8defc796c825be813bb",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-06-regulator.json",
+          "saved_sha256": "f974c33727d9ff4be8ef92d75d0cb1e4f944e633ca3d52410049a1c1bf731719",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-06-tails.json",
+          "saved_sha256": "bf79b4e66463dd9923bfc9d3363d54552fb4cf67c3444774a19d8aff07168c52",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-07",
+      "epsilon": "7/10000",
+      "contour_archive": "laurent-baseline/sample-07-contours.json.gz",
+      "contour_sha256": "3c084bf307d369230f9bf191e7b461fa352a78ab1d2171d7a4c7feac5753c3a1",
+      "contour_archive_sha256": "c2473cff1008a3851db82271aa8b1fc4aa52753308c90c5d53ec981ad8bae4bf",
+      "numerical_command_input_sha256": "3c084bf307d369230f9bf191e7b461fa352a78ab1d2171d7a4c7feac5753c3a1",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-07-regulator.json",
+          "saved_sha256": "9e316749756ae4592009c106aa7cde6876231214b2f3e0c815edbaf00687233a",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-07-tails.json",
+          "saved_sha256": "3cdcafc92977da4f71c054cba9cf217dfea5eea4a990a1782bdc04c4abbd8d16",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-08",
+      "epsilon": "1/1250",
+      "contour_archive": "laurent-baseline/sample-08-contours.json.gz",
+      "contour_sha256": "a9bc90ba3d2941212e8c8699f289a0d3435efa7ccd8f9eac615f87ac9ea74527",
+      "contour_archive_sha256": "0502fe5993a95ba94fb92d6c81ca416c1610c6d0246a03ed4ee6852af5f710c2",
+      "numerical_command_input_sha256": "a9bc90ba3d2941212e8c8699f289a0d3435efa7ccd8f9eac615f87ac9ea74527",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-08-regulator.json",
+          "saved_sha256": "1b2bcb9374e1a61b3a8fccc26def2e82bd947d6943094d107e432b017e54ea05",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-08-tails.json",
+          "saved_sha256": "4d19e364a11a168ca71a6582ec3252f1a27db1bd26e77976332398981aca1634",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-09",
+      "epsilon": "9/10000",
+      "contour_archive": "laurent-baseline/sample-09-contours.json.gz",
+      "contour_sha256": "4a5e7d331d82810080d5f3239700c540e33a3d9fac8ee254c3c72d2f72d7df67",
+      "contour_archive_sha256": "0e1af76dcc6b7aaf1807052418b6c6760d73f5b3588d7e528a921edbcdaf4429",
+      "numerical_command_input_sha256": "4a5e7d331d82810080d5f3239700c540e33a3d9fac8ee254c3c72d2f72d7df67",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-09-regulator.json",
+          "saved_sha256": "36974e7ba292ccd01931bd3c06ee3676a03e6b50f2bf8719a8b40d3d8aca9b68",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-09-tails.json",
+          "saved_sha256": "3462dc97cabcc8d9e90f6a79ce21e060f0486c850b67f774c75fe55bc585a4be",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-10",
+      "epsilon": "1/1000",
+      "contour_archive": "laurent-baseline/sample-10-contours.json.gz",
+      "contour_sha256": "6a8d79c81219d20b68e1c26d6992b0f67f66fdbdfeddc81addf3cee445f97b12",
+      "contour_archive_sha256": "8019fb3e57d102e7044fb4819ab05a00fb11e1acf2933eb9544fc4e76ad8fcc6",
+      "numerical_command_input_sha256": "6a8d79c81219d20b68e1c26d6992b0f67f66fdbdfeddc81addf3cee445f97b12",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-10-regulator.json",
+          "saved_sha256": "b97f86e6c45014762c973a0970f94c27235aff866eb7ae3bc553e7c00a584267",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-10-tails.json",
+          "saved_sha256": "3e8dba3f5df7f0107eddd49535192ede0c3b68af2a3ac8d050b7c16f0eb18396",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-11",
+      "epsilon": "11/10000",
+      "contour_archive": "laurent-baseline/sample-11-contours.json.gz",
+      "contour_sha256": "e61b7e02f2fc15bf12e1badffcac7d341e90d687ee7712b57a733eb4b58666c6",
+      "contour_archive_sha256": "59b4ee88ec51e8edb24677bca5b5d45a83d9aa3f2e033f285c52c928424e258e",
+      "numerical_command_input_sha256": "e61b7e02f2fc15bf12e1badffcac7d341e90d687ee7712b57a733eb4b58666c6",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-11-regulator.json",
+          "saved_sha256": "fe0a7909d8cd8b90f2efa4cfa2da6c13cc40c64c96cf1ea53dbb64e9c292d778",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-11-tails.json",
+          "saved_sha256": "e0e40720211125d22329a0a07aad245493844c33f624d089326ff2371ffc1997",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-baseline",
+      "sample": "sample-12",
+      "epsilon": "3/2500",
+      "contour_archive": "laurent-baseline/sample-12-contours.json.gz",
+      "contour_sha256": "49af0b02379e0819082317bbcff3c83f890bd0f37e8082c1cfebcf4199912021",
+      "contour_archive_sha256": "644e5d3e424786883321c0c007147cfdd91d1cf592fd9e3b861839cf083bb270",
+      "numerical_command_input_sha256": "49af0b02379e0819082317bbcff3c83f890bd0f37e8082c1cfebcf4199912021",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-baseline/sample-12-regulator.json",
+          "saved_sha256": "15170f54fb4e132c7c48ac7e13c37dfcea263f242e094b4c4b926193f9830aaf",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-baseline/sample-12-tails.json",
+          "saved_sha256": "8211d014d1328b7f7112274caac608057578919c2ad538c0e60d58580028a7d2",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-01",
+      "epsilon": "1/500000",
+      "contour_archive": "laurent-nearby-grid/sample-01-contours.json.gz",
+      "contour_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "contour_archive_sha256": "218ce119bb11197fab054e9c0c988a5ed6278393b18f01e06f14f29a02fd7c63",
+      "numerical_command_input_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-01-regulator.json",
+          "saved_sha256": "107260e1a3f1b24e46250b3dc7e1e7126501795507051f22bf22f99437248538",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-01-tails.json",
+          "saved_sha256": "df87afc60c93519d3215a4da54741feb958681146ad845df17187bb463bd0391",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-02",
+      "epsilon": "1/250000",
+      "contour_archive": "laurent-nearby-grid/sample-02-contours.json.gz",
+      "contour_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "contour_archive_sha256": "2df65a77823d94e050c23958ce8d9627c595c5e8dfd52d3e84d8368d16bde879",
+      "numerical_command_input_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-02-regulator.json",
+          "saved_sha256": "e9c61585f2b0021b168fcce9ba5f2e7cad4422a156641ca5eea5111d593d7033",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-02-tails.json",
+          "saved_sha256": "6bb5869d0d75944332fd57d273f4562a6364247d207ed82afa7c7955e90fbca4",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-03",
+      "epsilon": "3/500000",
+      "contour_archive": "laurent-nearby-grid/sample-03-contours.json.gz",
+      "contour_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "contour_archive_sha256": "735020b059b279915aaea3f7639312d3cd5e4371fd6d439f4124493612a8a088",
+      "numerical_command_input_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-03-regulator.json",
+          "saved_sha256": "9ed410581f69f686848a4f62f817e36d7cc65a02cdfd0a359428c0b3071627ab",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-03-tails.json",
+          "saved_sha256": "a397f470e81a8a653d045aeb4864ac88cfcafb8ed6ab8515d56ae79d66455d55",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-04",
+      "epsilon": "1/125000",
+      "contour_archive": "laurent-nearby-grid/sample-04-contours.json.gz",
+      "contour_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "contour_archive_sha256": "edbcc106e546b5a3113912fe954fab6e2e9bf4bcddfd45516ffb6a16b7fa26dc",
+      "numerical_command_input_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-04-regulator.json",
+          "saved_sha256": "dc0127c78fd9a4db01674f0529cc65477254d01f1ade9c4729221eb83308e870",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-04-tails.json",
+          "saved_sha256": "a11196e65a01e664b501d269348162edfa3626caaedbb0280270345c1d64eb98",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-05",
+      "epsilon": "1/100000",
+      "contour_archive": "laurent-nearby-grid/sample-05-contours.json.gz",
+      "contour_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "contour_archive_sha256": "e752f6e15ec835f7c994453648adb9fdecc629f5f799596c483501e252d9d5ef",
+      "numerical_command_input_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-05-regulator.json",
+          "saved_sha256": "0bd5e41d2616dcc47a54d546bc5440d540f8498f02d38188d3c3d3e3e582d1c4",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-05-tails.json",
+          "saved_sha256": "1304d55de6628b44c04acba7954a1638833067417327b6b2bcdbef70442a131b",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-06",
+      "epsilon": "3/250000",
+      "contour_archive": "laurent-nearby-grid/sample-06-contours.json.gz",
+      "contour_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "contour_archive_sha256": "de4be8384600b26cd9636f56e51dbddfaa84ad0e6c3c2330e5805bab38331637",
+      "numerical_command_input_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-06-regulator.json",
+          "saved_sha256": "9c9020383fd85e864f6edb222006719f87aac0e939d2dfc0be0e822607eaaf9e",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-06-tails.json",
+          "saved_sha256": "f479da51119a2775d32435de30a45d0d735ba5050b971f9662a71c9dd0a450a9",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-07",
+      "epsilon": "7/500000",
+      "contour_archive": "laurent-nearby-grid/sample-07-contours.json.gz",
+      "contour_sha256": "e193202d09c170be878c15ab7efb36d9826bd20b7b5642479275682660e6d807",
+      "contour_archive_sha256": "65d323f57a9825013966d4419ef1b0d2b6cfb38192fd6872ca4d2a1f0ad3c756",
+      "numerical_command_input_sha256": "e193202d09c170be878c15ab7efb36d9826bd20b7b5642479275682660e6d807",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-07-regulator.json",
+          "saved_sha256": "a67a0057974a49acb087812239b2ce408d3f9779bf3f715bafc8a6f48fd434f0",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-07-tails.json",
+          "saved_sha256": "95f1306f4f2c4d1d8c26e2ce37f27253e2e713cd76601f0fcc2483878b4a74b6",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-08",
+      "epsilon": "1/62500",
+      "contour_archive": "laurent-nearby-grid/sample-08-contours.json.gz",
+      "contour_sha256": "61bae9ae7b95be09da91d23d8aa7d1b610b7786888b49bfbca233d60507af5ee",
+      "contour_archive_sha256": "182af52518aea30b55b12db41703dd769c1c3542490e7694d638658946a84264",
+      "numerical_command_input_sha256": "61bae9ae7b95be09da91d23d8aa7d1b610b7786888b49bfbca233d60507af5ee",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-08-regulator.json",
+          "saved_sha256": "213afeb243103aec5fc8b77b31ca0276cfeaa5ab7f1f01dd73b411f7ee3bd59b",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-08-tails.json",
+          "saved_sha256": "8faa571ca64f389d8d0e8732563894908af5c61bd934ae3bb2446282d0bed130",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-09",
+      "epsilon": "9/500000",
+      "contour_archive": "laurent-nearby-grid/sample-09-contours.json.gz",
+      "contour_sha256": "3950e44d721880651414203041ca3260660524e6f920312de1862ba775362e2a",
+      "contour_archive_sha256": "b57bf937df8206a0a9a86ff71944f0ca938c7c1280f19d4447344c76280b0fa8",
+      "numerical_command_input_sha256": "3950e44d721880651414203041ca3260660524e6f920312de1862ba775362e2a",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-09-regulator.json",
+          "saved_sha256": "8d171d9edc38d9130bdaaf023d84f79b30dbbfc055f49bf41f7a17b55e2943df",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-09-tails.json",
+          "saved_sha256": "27b11e2e3977a1819899910a402232fce4f7dfd162aaacdc52d57da322d2c397",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-10",
+      "epsilon": "1/50000",
+      "contour_archive": "laurent-nearby-grid/sample-10-contours.json.gz",
+      "contour_sha256": "ed732a6bab8fd64f1e2a35182315c4a70ec468cdf023ea504b94c38c880a3ad6",
+      "contour_archive_sha256": "577c7213e74775b67a920026690784519ce395a07935fdb0944c2b2a405b6b77",
+      "numerical_command_input_sha256": "ed732a6bab8fd64f1e2a35182315c4a70ec468cdf023ea504b94c38c880a3ad6",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-10-regulator.json",
+          "saved_sha256": "e34bb0a44a3a46fddce8ad694a909cb6fba8e9bedca177da7fab0ebc50a8bc18",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-10-tails.json",
+          "saved_sha256": "24028f28496594b4fabb3df2f267d040fd7b0fce1ee1af6ea0c49d720f438706",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-11",
+      "epsilon": "11/500000",
+      "contour_archive": "laurent-nearby-grid/sample-11-contours.json.gz",
+      "contour_sha256": "d40e4d473842103f478cdfd4cce451496be2322197bee26007cebaf2426e4670",
+      "contour_archive_sha256": "1d8683932f95ad53fd7301cc3dd8fc3f27457ebb5a369e3192a88f4d19dd1eff",
+      "numerical_command_input_sha256": "d40e4d473842103f478cdfd4cce451496be2322197bee26007cebaf2426e4670",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-11-regulator.json",
+          "saved_sha256": "32c2444c06bd67c43222fd50dd7f42c1b0f735b08c18de51cecc77a4a9f4be61",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-11-tails.json",
+          "saved_sha256": "0edf2e77fcea9593737a45860f6e7b88cae848e6c2df9632605b7e028188075a",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "sample": "sample-12",
+      "epsilon": "3/125000",
+      "contour_archive": "laurent-nearby-grid/sample-12-contours.json.gz",
+      "contour_sha256": "91ad9ebf50bee4e9ca9b900cd6d3477fc6afb416f4aa62ef3b0f4bf72a547956",
+      "contour_archive_sha256": "ecda455353c75ac1d25efd0d8a22e8bd2d903ac0b60c0b9563f52991d4e1eb41",
+      "numerical_command_input_sha256": "91ad9ebf50bee4e9ca9b900cd6d3477fc6afb416f4aa62ef3b0f4bf72a547956",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-nearby-grid/sample-12-regulator.json",
+          "saved_sha256": "65680d7c52395290dfd1412ebdacb6a915c73372deea814c9174010f6baf2ee6",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-nearby-grid/sample-12-tails.json",
+          "saved_sha256": "c8977d43a0df97a9e8f577e6577eb86188c347d417a38cb5e82d539ec4f24843",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-01",
+      "epsilon": "1/1000000",
+      "contour_archive": "laurent-fine-baseline/sample-01-contours.json.gz",
+      "contour_sha256": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "contour_archive_sha256": "cba5aa0697b2d5d000e82dd241b7e321facc694d17f0b91f769f10f81029f3fc",
+      "numerical_command_input_sha256": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-01-regulator.json",
+          "saved_sha256": "7ce6bcc9be9cf683ec7c0dd28a3eb716670250063d774da6ca9698c259a755f1",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-01-tails.json",
+          "saved_sha256": "ea8ec04a5710d011e0214574c45e73094f430f2ca1933ad4cbfad75f5850e3cd",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-02",
+      "epsilon": "1/500000",
+      "contour_archive": "laurent-fine-baseline/sample-02-contours.json.gz",
+      "contour_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "contour_archive_sha256": "f10d0e72e471b421ae0d5447a8a1035c496cbb74b5737d0f9a3a529d9cdf47af",
+      "numerical_command_input_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-02-regulator.json",
+          "saved_sha256": "107260e1a3f1b24e46250b3dc7e1e7126501795507051f22bf22f99437248538",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-02-tails.json",
+          "saved_sha256": "df87afc60c93519d3215a4da54741feb958681146ad845df17187bb463bd0391",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-03",
+      "epsilon": "3/1000000",
+      "contour_archive": "laurent-fine-baseline/sample-03-contours.json.gz",
+      "contour_sha256": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "contour_archive_sha256": "59341b6ea1f25954a64469886df52686cee13ff7221fab9910b7347ada4c7188",
+      "numerical_command_input_sha256": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-03-regulator.json",
+          "saved_sha256": "d02f0fb48973b9730f4ea778bb6c2b4270f8f85310f6a6c323e89d52201dba81",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-03-tails.json",
+          "saved_sha256": "e4e1458224c4f57e10b8d7e86bf315285513e73087adc6458e6a49cb43846eba",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-04",
+      "epsilon": "1/250000",
+      "contour_archive": "laurent-fine-baseline/sample-04-contours.json.gz",
+      "contour_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "contour_archive_sha256": "7896315825516626203a28d84f1326299009915b872a015b3d3e63a79c790582",
+      "numerical_command_input_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-04-regulator.json",
+          "saved_sha256": "e9c61585f2b0021b168fcce9ba5f2e7cad4422a156641ca5eea5111d593d7033",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-04-tails.json",
+          "saved_sha256": "6bb5869d0d75944332fd57d273f4562a6364247d207ed82afa7c7955e90fbca4",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-05",
+      "epsilon": "1/200000",
+      "contour_archive": "laurent-fine-baseline/sample-05-contours.json.gz",
+      "contour_sha256": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "contour_archive_sha256": "ca4e9487c3ffbbc7a8789f46c0e93d67de43477eab5443c9ee8b651059b91c5e",
+      "numerical_command_input_sha256": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-05-regulator.json",
+          "saved_sha256": "f8edc35b0d4e8e792c5a622f49bd1a0085d666723c223678a48d456cf7aab7eb",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-05-tails.json",
+          "saved_sha256": "2e964e4be9bdedc86b35a15e6783c306991261eb8e2a33702a2f9978ca391388",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-06",
+      "epsilon": "3/500000",
+      "contour_archive": "laurent-fine-baseline/sample-06-contours.json.gz",
+      "contour_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "contour_archive_sha256": "7ea6e3978e5c61534e4ce2ef70f034dda558d8b12191280527f33871b0b4308f",
+      "numerical_command_input_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-06-regulator.json",
+          "saved_sha256": "9ed410581f69f686848a4f62f817e36d7cc65a02cdfd0a359428c0b3071627ab",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-06-tails.json",
+          "saved_sha256": "a397f470e81a8a653d045aeb4864ac88cfcafb8ed6ab8515d56ae79d66455d55",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-07",
+      "epsilon": "7/1000000",
+      "contour_archive": "laurent-fine-baseline/sample-07-contours.json.gz",
+      "contour_sha256": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "contour_archive_sha256": "ceacebfe6d406764fdd09ea54304a6726f006b40e44553addf0297bc5a124bb5",
+      "numerical_command_input_sha256": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-07-regulator.json",
+          "saved_sha256": "763f70851efec9e3486c98e9ba6de82f2e034e7fc0837e8d654cac3830f783e4",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-07-tails.json",
+          "saved_sha256": "0a72c8ec9d2ddad2c140a87606ecf2f5adf37b12c87ac76f67b77abeeb4d7519",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-08",
+      "epsilon": "1/125000",
+      "contour_archive": "laurent-fine-baseline/sample-08-contours.json.gz",
+      "contour_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "contour_archive_sha256": "91fb4a17af5a53c1395bd0c4bcfbd24dc1b6e5ae69ed2916040394f5f7482d02",
+      "numerical_command_input_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-08-regulator.json",
+          "saved_sha256": "dc0127c78fd9a4db01674f0529cc65477254d01f1ade9c4729221eb83308e870",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-08-tails.json",
+          "saved_sha256": "a11196e65a01e664b501d269348162edfa3626caaedbb0280270345c1d64eb98",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-09",
+      "epsilon": "9/1000000",
+      "contour_archive": "laurent-fine-baseline/sample-09-contours.json.gz",
+      "contour_sha256": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "contour_archive_sha256": "882abd64dc0aababe01033f1a0813cc6f7d0a8195b470da436330a5a90e5bd08",
+      "numerical_command_input_sha256": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-09-regulator.json",
+          "saved_sha256": "c96c0c885708581a4ed8d8dfaf4641ffefedb86063a00ed9b807cdd5b2e9d061",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-09-tails.json",
+          "saved_sha256": "851fb9c05e0fd19d83d6c6c59875e63d9113061d1925efbbd5518177e94bab23",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-10",
+      "epsilon": "1/100000",
+      "contour_archive": "laurent-fine-baseline/sample-10-contours.json.gz",
+      "contour_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "contour_archive_sha256": "5f4391cc30aa78545028694614eab5c93c551a95598edb2f629b160fd76b01b9",
+      "numerical_command_input_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-10-regulator.json",
+          "saved_sha256": "0bd5e41d2616dcc47a54d546bc5440d540f8498f02d38188d3c3d3e3e582d1c4",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-10-tails.json",
+          "saved_sha256": "1304d55de6628b44c04acba7954a1638833067417327b6b2bcdbef70442a131b",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-11",
+      "epsilon": "11/1000000",
+      "contour_archive": "laurent-fine-baseline/sample-11-contours.json.gz",
+      "contour_sha256": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "contour_archive_sha256": "e7671bfb0acb06c0622a91520f4890613294cf2c41bf3538d2c2f753b6ce4fe8",
+      "numerical_command_input_sha256": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-11-regulator.json",
+          "saved_sha256": "0baa9291f3d10a6b297a57babf9b9c01e97f0be607fb58fb2f63fc19434d7d6f",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-11-tails.json",
+          "saved_sha256": "0c695a43480c59d3accf62baaaf111a75a905402d20e31081801276d5a49e811",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "sample": "sample-12",
+      "epsilon": "3/250000",
+      "contour_archive": "laurent-fine-baseline/sample-12-contours.json.gz",
+      "contour_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "contour_archive_sha256": "a4cc9befc345405365f26abe3a48e3afecc1ee5f235fb50e212b7ba6a00f9b31",
+      "numerical_command_input_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-baseline/sample-12-regulator.json",
+          "saved_sha256": "9c9020383fd85e864f6edb222006719f87aac0e939d2dfc0be0e822607eaaf9e",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-baseline/sample-12-tails.json",
+          "saved_sha256": "f479da51119a2775d32435de30a45d0d735ba5050b971f9662a71c9dd0a450a9",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-01",
+      "epsilon": "1/1000000",
+      "contour_archive": "laurent-fine-precision/sample-01-contours.json.gz",
+      "contour_sha256": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "contour_archive_sha256": "4a7089cd05cd50faa2da3d4ce3be26ccad84bad1d8698ef516b91324aef2ee2b",
+      "numerical_command_input_sha256": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-01-regulator.json",
+          "saved_sha256": "7ce6bcc9be9cf683ec7c0dd28a3eb716670250063d774da6ca9698c259a755f1",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-01-tails.json",
+          "saved_sha256": "ea8ec04a5710d011e0214574c45e73094f430f2ca1933ad4cbfad75f5850e3cd",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-02",
+      "epsilon": "1/500000",
+      "contour_archive": "laurent-fine-precision/sample-02-contours.json.gz",
+      "contour_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "contour_archive_sha256": "3150f968cc7ae7c3df89c676c3238768bfab7ed7de58976d0067082cd4e4a6a5",
+      "numerical_command_input_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-02-regulator.json",
+          "saved_sha256": "107260e1a3f1b24e46250b3dc7e1e7126501795507051f22bf22f99437248538",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-02-tails.json",
+          "saved_sha256": "df87afc60c93519d3215a4da54741feb958681146ad845df17187bb463bd0391",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-03",
+      "epsilon": "3/1000000",
+      "contour_archive": "laurent-fine-precision/sample-03-contours.json.gz",
+      "contour_sha256": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "contour_archive_sha256": "e4726831de309fba4897ccb418ae291f9acb6c102fc34c66e6dc68846a3cc6b5",
+      "numerical_command_input_sha256": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-03-regulator.json",
+          "saved_sha256": "d02f0fb48973b9730f4ea778bb6c2b4270f8f85310f6a6c323e89d52201dba81",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-03-tails.json",
+          "saved_sha256": "e4e1458224c4f57e10b8d7e86bf315285513e73087adc6458e6a49cb43846eba",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-04",
+      "epsilon": "1/250000",
+      "contour_archive": "laurent-fine-precision/sample-04-contours.json.gz",
+      "contour_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "contour_archive_sha256": "cb9b7814ee02c19cfc85cadb29326249be155d61aad3d0805ff84924f8fcd4ed",
+      "numerical_command_input_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-04-regulator.json",
+          "saved_sha256": "e9c61585f2b0021b168fcce9ba5f2e7cad4422a156641ca5eea5111d593d7033",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-04-tails.json",
+          "saved_sha256": "6bb5869d0d75944332fd57d273f4562a6364247d207ed82afa7c7955e90fbca4",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-05",
+      "epsilon": "1/200000",
+      "contour_archive": "laurent-fine-precision/sample-05-contours.json.gz",
+      "contour_sha256": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "contour_archive_sha256": "d2df00f2c9e7ddceb2ba6a4a6b2529c8ec7b0a6c737971a048eab004ba162fb7",
+      "numerical_command_input_sha256": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-05-regulator.json",
+          "saved_sha256": "f8edc35b0d4e8e792c5a622f49bd1a0085d666723c223678a48d456cf7aab7eb",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-05-tails.json",
+          "saved_sha256": "2e964e4be9bdedc86b35a15e6783c306991261eb8e2a33702a2f9978ca391388",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-06",
+      "epsilon": "3/500000",
+      "contour_archive": "laurent-fine-precision/sample-06-contours.json.gz",
+      "contour_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "contour_archive_sha256": "9099eca1a9aba20cf68329866bde2bd83203b2d2eccf4e6f0d5c87d7cd89c0b7",
+      "numerical_command_input_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-06-regulator.json",
+          "saved_sha256": "9ed410581f69f686848a4f62f817e36d7cc65a02cdfd0a359428c0b3071627ab",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-06-tails.json",
+          "saved_sha256": "a397f470e81a8a653d045aeb4864ac88cfcafb8ed6ab8515d56ae79d66455d55",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-07",
+      "epsilon": "7/1000000",
+      "contour_archive": "laurent-fine-precision/sample-07-contours.json.gz",
+      "contour_sha256": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "contour_archive_sha256": "dfefa141f03c50145693b5b7001613e373c1c788a953ac07fe7c8890bcf8cf49",
+      "numerical_command_input_sha256": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-07-regulator.json",
+          "saved_sha256": "763f70851efec9e3486c98e9ba6de82f2e034e7fc0837e8d654cac3830f783e4",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-07-tails.json",
+          "saved_sha256": "0a72c8ec9d2ddad2c140a87606ecf2f5adf37b12c87ac76f67b77abeeb4d7519",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-08",
+      "epsilon": "1/125000",
+      "contour_archive": "laurent-fine-precision/sample-08-contours.json.gz",
+      "contour_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "contour_archive_sha256": "447952707f43aae81b3f6b29f8ec78aaf9173e2ea3453b10c0c27f1be3fc652d",
+      "numerical_command_input_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-08-regulator.json",
+          "saved_sha256": "dc0127c78fd9a4db01674f0529cc65477254d01f1ade9c4729221eb83308e870",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-08-tails.json",
+          "saved_sha256": "a11196e65a01e664b501d269348162edfa3626caaedbb0280270345c1d64eb98",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-09",
+      "epsilon": "9/1000000",
+      "contour_archive": "laurent-fine-precision/sample-09-contours.json.gz",
+      "contour_sha256": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "contour_archive_sha256": "d9725b07b0cfee4d87182d09c3ba9676b29c468ae475b82d9f204d51b74b7160",
+      "numerical_command_input_sha256": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-09-regulator.json",
+          "saved_sha256": "c96c0c885708581a4ed8d8dfaf4641ffefedb86063a00ed9b807cdd5b2e9d061",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-09-tails.json",
+          "saved_sha256": "851fb9c05e0fd19d83d6c6c59875e63d9113061d1925efbbd5518177e94bab23",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-10",
+      "epsilon": "1/100000",
+      "contour_archive": "laurent-fine-precision/sample-10-contours.json.gz",
+      "contour_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "contour_archive_sha256": "6a652fea8b08a02fc3a517627526b59c56ba2af957794140c569da3b70326372",
+      "numerical_command_input_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-10-regulator.json",
+          "saved_sha256": "0bd5e41d2616dcc47a54d546bc5440d540f8498f02d38188d3c3d3e3e582d1c4",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-10-tails.json",
+          "saved_sha256": "1304d55de6628b44c04acba7954a1638833067417327b6b2bcdbef70442a131b",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-11",
+      "epsilon": "11/1000000",
+      "contour_archive": "laurent-fine-precision/sample-11-contours.json.gz",
+      "contour_sha256": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "contour_archive_sha256": "960c16ceec1f6cca8a8853a4f51f885c3072fb0165f1b0a413605560cf3ad832",
+      "numerical_command_input_sha256": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-11-regulator.json",
+          "saved_sha256": "0baa9291f3d10a6b297a57babf9b9c01e97f0be607fb58fb2f63fc19434d7d6f",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-11-tails.json",
+          "saved_sha256": "0c695a43480c59d3accf62baaaf111a75a905402d20e31081801276d5a49e811",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "sample": "sample-12",
+      "epsilon": "3/250000",
+      "contour_archive": "laurent-fine-precision/sample-12-contours.json.gz",
+      "contour_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "contour_archive_sha256": "89fbeefe5c3ff92b41ad2ffb72b12dbe23346e2b9d597ec36b5be84efe741864",
+      "numerical_command_input_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-precision/sample-12-regulator.json",
+          "saved_sha256": "9c9020383fd85e864f6edb222006719f87aac0e939d2dfc0be0e822607eaaf9e",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-precision/sample-12-tails.json",
+          "saved_sha256": "f479da51119a2775d32435de30a45d0d735ba5050b971f9662a71c9dd0a450a9",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-01",
+      "epsilon": "1/1000000",
+      "contour_archive": "laurent-fine-quadrature/sample-01-contours.json.gz",
+      "contour_sha256": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "contour_archive_sha256": "55e48804181a5121d1de95c914e774424174d1f40a67ee8feefe63751870bb4b",
+      "numerical_command_input_sha256": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-01-regulator.json",
+          "saved_sha256": "7ce6bcc9be9cf683ec7c0dd28a3eb716670250063d774da6ca9698c259a755f1",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-01-tails.json",
+          "saved_sha256": "ea8ec04a5710d011e0214574c45e73094f430f2ca1933ad4cbfad75f5850e3cd",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-02",
+      "epsilon": "1/500000",
+      "contour_archive": "laurent-fine-quadrature/sample-02-contours.json.gz",
+      "contour_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "contour_archive_sha256": "2c24ff760036b80f80d08cea29b7759b007de3c6918e1472119995d1ea1965f2",
+      "numerical_command_input_sha256": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-02-regulator.json",
+          "saved_sha256": "107260e1a3f1b24e46250b3dc7e1e7126501795507051f22bf22f99437248538",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-02-tails.json",
+          "saved_sha256": "df87afc60c93519d3215a4da54741feb958681146ad845df17187bb463bd0391",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-03",
+      "epsilon": "3/1000000",
+      "contour_archive": "laurent-fine-quadrature/sample-03-contours.json.gz",
+      "contour_sha256": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "contour_archive_sha256": "4218f14274dda4b7ebe6821d2bf0d3dd4385556465dcc256bfb1ca3c1058a216",
+      "numerical_command_input_sha256": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-03-regulator.json",
+          "saved_sha256": "d02f0fb48973b9730f4ea778bb6c2b4270f8f85310f6a6c323e89d52201dba81",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-03-tails.json",
+          "saved_sha256": "e4e1458224c4f57e10b8d7e86bf315285513e73087adc6458e6a49cb43846eba",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-04",
+      "epsilon": "1/250000",
+      "contour_archive": "laurent-fine-quadrature/sample-04-contours.json.gz",
+      "contour_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "contour_archive_sha256": "d4ad32ffcb9ed169ad987fae2a64cb47da94b41029a73cc6c77e819d2c7014a4",
+      "numerical_command_input_sha256": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-04-regulator.json",
+          "saved_sha256": "e9c61585f2b0021b168fcce9ba5f2e7cad4422a156641ca5eea5111d593d7033",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-04-tails.json",
+          "saved_sha256": "6bb5869d0d75944332fd57d273f4562a6364247d207ed82afa7c7955e90fbca4",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-05",
+      "epsilon": "1/200000",
+      "contour_archive": "laurent-fine-quadrature/sample-05-contours.json.gz",
+      "contour_sha256": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "contour_archive_sha256": "d47f6ca7ff8484b69e03ae5d27813dc9eef04fe180a6faef7151e66bcba43b5c",
+      "numerical_command_input_sha256": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-05-regulator.json",
+          "saved_sha256": "f8edc35b0d4e8e792c5a622f49bd1a0085d666723c223678a48d456cf7aab7eb",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-05-tails.json",
+          "saved_sha256": "2e964e4be9bdedc86b35a15e6783c306991261eb8e2a33702a2f9978ca391388",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-06",
+      "epsilon": "3/500000",
+      "contour_archive": "laurent-fine-quadrature/sample-06-contours.json.gz",
+      "contour_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "contour_archive_sha256": "62ffb01dcba65dba7ec63bcb78e499ee8bc053cc781fd1782ef320290064c208",
+      "numerical_command_input_sha256": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-06-regulator.json",
+          "saved_sha256": "9ed410581f69f686848a4f62f817e36d7cc65a02cdfd0a359428c0b3071627ab",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-06-tails.json",
+          "saved_sha256": "a397f470e81a8a653d045aeb4864ac88cfcafb8ed6ab8515d56ae79d66455d55",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-07",
+      "epsilon": "7/1000000",
+      "contour_archive": "laurent-fine-quadrature/sample-07-contours.json.gz",
+      "contour_sha256": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "contour_archive_sha256": "60b43a00f1f8e9d6858d055f4bc718309d4b45b74661558d4b1a6f2bb5e32497",
+      "numerical_command_input_sha256": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-07-regulator.json",
+          "saved_sha256": "763f70851efec9e3486c98e9ba6de82f2e034e7fc0837e8d654cac3830f783e4",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-07-tails.json",
+          "saved_sha256": "0a72c8ec9d2ddad2c140a87606ecf2f5adf37b12c87ac76f67b77abeeb4d7519",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-08",
+      "epsilon": "1/125000",
+      "contour_archive": "laurent-fine-quadrature/sample-08-contours.json.gz",
+      "contour_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "contour_archive_sha256": "92607db7ce30ec1297027ffe25bf5b70e648af542251d4a32f6bc8686bca3c43",
+      "numerical_command_input_sha256": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-08-regulator.json",
+          "saved_sha256": "dc0127c78fd9a4db01674f0529cc65477254d01f1ade9c4729221eb83308e870",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-08-tails.json",
+          "saved_sha256": "a11196e65a01e664b501d269348162edfa3626caaedbb0280270345c1d64eb98",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-09",
+      "epsilon": "9/1000000",
+      "contour_archive": "laurent-fine-quadrature/sample-09-contours.json.gz",
+      "contour_sha256": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "contour_archive_sha256": "277f0a8408dc71382dee5b9dddfb7e2531ca507126686780c2557149dc5d6758",
+      "numerical_command_input_sha256": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-09-regulator.json",
+          "saved_sha256": "c96c0c885708581a4ed8d8dfaf4641ffefedb86063a00ed9b807cdd5b2e9d061",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-09-tails.json",
+          "saved_sha256": "851fb9c05e0fd19d83d6c6c59875e63d9113061d1925efbbd5518177e94bab23",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-10",
+      "epsilon": "1/100000",
+      "contour_archive": "laurent-fine-quadrature/sample-10-contours.json.gz",
+      "contour_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "contour_archive_sha256": "9cd6689242bc7af89cd7091b58f2caf2f162af4b7dc458f240c4920a16caff55",
+      "numerical_command_input_sha256": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-10-regulator.json",
+          "saved_sha256": "0bd5e41d2616dcc47a54d546bc5440d540f8498f02d38188d3c3d3e3e582d1c4",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-10-tails.json",
+          "saved_sha256": "1304d55de6628b44c04acba7954a1638833067417327b6b2bcdbef70442a131b",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-11",
+      "epsilon": "11/1000000",
+      "contour_archive": "laurent-fine-quadrature/sample-11-contours.json.gz",
+      "contour_sha256": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "contour_archive_sha256": "3bbcb957bbd0060f2207ae873b93d3a5f5e052d08194ee32b2194337c01db62d",
+      "numerical_command_input_sha256": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-11-regulator.json",
+          "saved_sha256": "0baa9291f3d10a6b297a57babf9b9c01e97f0be607fb58fb2f63fc19434d7d6f",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-11-tails.json",
+          "saved_sha256": "0c695a43480c59d3accf62baaaf111a75a905402d20e31081801276d5a49e811",
+          "replayed_report_equal": true
+        }
+      }
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "sample": "sample-12",
+      "epsilon": "3/250000",
+      "contour_archive": "laurent-fine-quadrature/sample-12-contours.json.gz",
+      "contour_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "contour_archive_sha256": "cb5794e6ed978cd89e1a10cc4dd0237ecc18d0f7f4e6cda8ac3882cecac98b53",
+      "numerical_command_input_sha256": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "checks": {
+        "regulator": {
+          "script": "generator/prism_barnes_regulator_analysis.py",
+          "script_sha256": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+          "saved_report": "laurent-fine-quadrature/sample-12-regulator.json",
+          "saved_sha256": "9c9020383fd85e864f6edb222006719f87aac0e939d2dfc0be0e822607eaaf9e",
+          "replayed_report_equal": true
+        },
+        "tails": {
+          "script": "generator/prism_barnes_tail_check.py",
+          "script_sha256": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+          "saved_report": "laurent-fine-quadrature/sample-12-tails.json",
+          "saved_sha256": "f479da51119a2775d32435de30a45d0d735ba5050b971f9662a71c9dd0a450a9",
+          "replayed_report_equal": true
+        }
+      }
+    }
+  ]
+}

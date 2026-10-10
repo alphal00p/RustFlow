@@ -1,0 +1,1303 @@
+{
+  "schema_version": 1,
+  "status": "passed; lossless gzip mtime0, every payload verified before removing redundant original",
+  "scope": "Completed active-zero two-loop native-closure payloads and sibling raw resource logs only; inputs, configurations, predictions, comparison reports and all three-loop directories left uncompressed/untouched.",
+  "reader_release": "Root explicitly confirmed both exact native-closure directories and logs have no remaining readers after both comparisons passed.",
+  "gates": [
+    {
+      "directory": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed",
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed-resources.json",
+        "sha256": "f112b507b672a2cb44c30f402861199589bcbd4d04dfab97c7e5247e92ab1dce"
+      },
+      "comparison": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed-comparison.json",
+        "sha256": "f73fc74d65f7dacbcf81b52924ae9b35d28fe18bb90ce3d6ed7c4ecfc9f9851e"
+      },
+      "native_exit_code": 0,
+      "comparison_status": "passed"
+    },
+    {
+      "directory": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent",
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent-resources.json",
+        "sha256": "368acaa58a4b8a98638cb7029053a0ff8250e4bf8bef324b3327e4224aa74fed"
+      },
+      "comparison": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent-comparison.json",
+        "sha256": "21d65ca555646d5ec1505ea0249f2a64781d7ab8a28b6c93e09a75c7746cb51e"
+      },
+      "native_exit_code": 0,
+      "comparison_status": "passed"
+    }
+  ],
+  "files": [
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/active-request-history.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/active-request-history.json.gz",
+      "uncompressed_bytes": 5690,
+      "compressed_bytes": 392,
+      "sha256_uncompressed": "83b0c8aad99313c216bc06c8bdc79de744f7521f34522a27d9b538e887276bba",
+      "sha256_gzip": "875b861f59959b80e11031b9d26c697083deefc1a19dfe3514890dab1a9e4388"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz",
+      "uncompressed_bytes": 122812,
+      "compressed_bytes": 2592,
+      "sha256_uncompressed": "9e645fd784ec3c56090c6c78e8568cf5df6f97cbdbb42e9fc564ad733d44c1ab",
+      "sha256_gzip": "47de0442b3df92b4019265f0862d780f1b438fa551235b9a835b85313f13e71f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz",
+      "uncompressed_bytes": 312053,
+      "compressed_bytes": 6002,
+      "sha256_uncompressed": "6cc80d7f12f75f9789354ee8058349d6a4ca65811cb8f581f1f6ccc92f86bc6b",
+      "sha256_gzip": "d55a0d105231d4be07bb0d408538902ab8575cc74f83822f2627d00311153b45"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz",
+      "uncompressed_bytes": 352258,
+      "compressed_bytes": 6618,
+      "sha256_uncompressed": "432368cb629e74252e17d47c948084a254f71f2e93bc98ccd4b888970d3549b9",
+      "sha256_gzip": "9ec814a2be704293cb5cbc7346759a34520db9fcb8e3f07d2448a0b7a61db2e6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz",
+      "uncompressed_bytes": 401747,
+      "compressed_bytes": 7546,
+      "sha256_uncompressed": "fd6a83c0b0e698dd6a731eb8c1e7431d3ea0b8080dcb7dc8675e158ca20731ec",
+      "sha256_gzip": "22bbfe6cb823043457c4ddce65f1fd21c78cc4505af8345180586d7700c5da6c"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz",
+      "uncompressed_bytes": 404919,
+      "compressed_bytes": 7632,
+      "sha256_uncompressed": "19ca96e7be3d54a513e4c6d409f0b2160edc9fade8e9701e756e83fd5dd9d616",
+      "sha256_gzip": "b398237b4f4742090959886a16fcfdf6d0a0a42e328278d5447093b8c0f37315"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz",
+      "uncompressed_bytes": 168568,
+      "compressed_bytes": 3495,
+      "sha256_uncompressed": "b9cfd8255928edf5f96ca8ec27195bbbbc527a8068feab323d85800e0fd5eef3",
+      "sha256_gzip": "5c20a3b0428fbb851b2746b8dd89870ed07f90cbd32bdf0a0dceea0b6043d4d0"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz",
+      "uncompressed_bytes": 83940,
+      "compressed_bytes": 1924,
+      "sha256_uncompressed": "efafe787e8375216f0143d1e6fd0d783fe6a0c538105a45aaed8ddd1ff4f6d93",
+      "sha256_gzip": "50823983dfe21aa717388de04499ec040fc0292e677bb9e7ff775f22e62d0a19"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz",
+      "uncompressed_bytes": 27838,
+      "compressed_bytes": 879,
+      "sha256_uncompressed": "3b1e2118d22312de71a859ec59810bb30b11c84d886d24598380b967a7d4fffe",
+      "sha256_gzip": "b14325215a7a12b154e7a41925c6ca68c32f514201d6d3c12af5d6217d2d50f4"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "uncompressed_bytes": 75318,
+      "compressed_bytes": 1357,
+      "sha256_uncompressed": "fcbe42c1f368564b906fae11ec642fd4967eed812cf7a4ef654c643585a9f1af",
+      "sha256_gzip": "1f32a50c32368d40e8bc3831396bf27d198c51459a11c7cce0fff307038eb7e5"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/retired-unresolved.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/retired-unresolved.json.gz",
+      "uncompressed_bytes": 2,
+      "compressed_bytes": 22,
+      "sha256_uncompressed": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256_gzip": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "uncompressed_bytes": 28055,
+      "compressed_bytes": 4543,
+      "sha256_uncompressed": "1b8eb5bd556ac01f09a4d916b42b680f1922d6aab209f494ce0ad8a73d54f2ff",
+      "sha256_gzip": "49d224d572c64c6ab98fd691ea55740620dc59b48eac431e7f159124c651c672"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "uncompressed_bytes": 8114,
+      "compressed_bytes": 1850,
+      "sha256_uncompressed": "f5cf056304ad76ab2421185729a2f00b7fdabb4c42ba9bc1fc77caf7d93b3746",
+      "sha256_gzip": "dbc8bcd91cc1a2cefcfc671d31847d2bd6147758be46dda587a24118fe6b7198"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "uncompressed_bytes": 55831,
+      "compressed_bytes": 8286,
+      "sha256_uncompressed": "75f5cddeafc9af67fd3226aafe6f3a7e81ee1b2742db4598b0f0251bb7d343b1",
+      "sha256_gzip": "660982541454410533e77fa6e952ff54c963190eec49b50b4aaff82647db0176"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "uncompressed_bytes": 8267,
+      "compressed_bytes": 1849,
+      "sha256_uncompressed": "ec677d0fbe82dbc920efbc81d782fe79d44b26d5d9a2ddafa22b069df8592992",
+      "sha256_gzip": "3ef94417a516656b0203e15c594f00451aeede0b75be4ec24a1f595610385b56"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "uncompressed_bytes": 99843,
+      "compressed_bytes": 13256,
+      "sha256_uncompressed": "36ef80f7a15532e772649afc30807b68296592f580cb31af5568e0dd611fb28d",
+      "sha256_gzip": "4f1049bff9f1b034fede86aa289d1ee561b14c005dca1121786bb728d460d972"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "uncompressed_bytes": 8802,
+      "compressed_bytes": 1879,
+      "sha256_uncompressed": "308b257fc38495a9d9776bcc419f384d6048c7a08d1364f9fb532d598b674d0c",
+      "sha256_gzip": "e918978c2b4c62f2791a2b58cc4307f67fc7bdc80f4c6cb1a24f1aba460dca9f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "uncompressed_bytes": 136219,
+      "compressed_bytes": 17554,
+      "sha256_uncompressed": "471d8270487077009e8d0e488ca6b00c36b03aabc77c7d6ac861a59e3395512b",
+      "sha256_gzip": "d5b1975f04f4924d16e91dde9b315303d795755d11132246cbd1fb5ffb2f7c90"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "uncompressed_bytes": 8873,
+      "compressed_bytes": 1873,
+      "sha256_uncompressed": "644b189fe75489691be80f845eea86f7f1a2215510b10764c1dff5b889cbf6b0",
+      "sha256_gzip": "29d786340181319e5d0cfaaff75adf56277a760631ba94eca7c7478681b4a72b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "uncompressed_bytes": 176573,
+      "compressed_bytes": 22773,
+      "sha256_uncompressed": "dc039978d3012c6a27d60d76942be8fa9f95de74a3798fc564ac198bef18e8bb",
+      "sha256_gzip": "7fe62c75cb6f3c51f55f9028c32ecb2881c0646d28f1a74b180b86dab3ffb1d6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "uncompressed_bytes": 7807,
+      "compressed_bytes": 1838,
+      "sha256_uncompressed": "1edc5e852a2feb4d4472ab364bb867ab2447dda514d357cb0781e4719943cb4c",
+      "sha256_gzip": "c91046d7eee49186b38ef2db339d98f26cfbf8ab20e3b3c1cf3e970e92d733ce"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "uncompressed_bytes": 189513,
+      "compressed_bytes": 24217,
+      "sha256_uncompressed": "a3f7266f4458116b2833b8643fa68942d365d76d2a70710b06be93bcb11c5593",
+      "sha256_gzip": "0a290dd3e5890dd50c5fe29c7eb7b2cb9f46d47130cfdccf3580216d6795b2cb"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-005-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz",
+      "uncompressed_bytes": 7349,
+      "compressed_bytes": 1817,
+      "sha256_uncompressed": "7437496708e068bba8e24139d4d29028fd0b1069b972d2ddba11add1d54ac77e",
+      "sha256_gzip": "1b029a9fb3afd201ef640ada05d3ca77311ac035a266734a9aeb05031f162153"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "uncompressed_bytes": 195723,
+      "compressed_bytes": 24619,
+      "sha256_uncompressed": "7b5b08d03ccbfa5e2553bad3fbd83db91e6ec4b8c5d4fad826f8c98b23ee483c",
+      "sha256_gzip": "115cdbdcc795dc1444fe0391dca868be4acb272d63d3a2bf381a1a63ce24303d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-006-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz",
+      "uncompressed_bytes": 7045,
+      "compressed_bytes": 1797,
+      "sha256_uncompressed": "b694d0cd6fb190b30b48ee6d06bbba33195a3a8dd4a29d40435922e89cce2f4b",
+      "sha256_gzip": "65267df19d84826025f04bd41b1244e7ba12d949f8ef409beca18bc86ab00914"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-closed.bin.gz",
+      "uncompressed_bytes": 200209,
+      "compressed_bytes": 24827,
+      "sha256_uncompressed": "31b943143bfd2ad73ff3b55b6cc964aa36614ba260c41ecb3c1a9c04980bd81e",
+      "sha256_gzip": "5812a5386ce441d406b5f2db5cb3f2a83fc397dfe9352e931048e77c778c2b11"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-closed.json.gz",
+      "uncompressed_bytes": 6888,
+      "compressed_bytes": 1785,
+      "sha256_uncompressed": "8d128c8e73ef157a56a20df4e6aa0757a4ee53b5bfc37b06a43ead424b61a805",
+      "sha256_gzip": "2e581089d41b554451b9a921bca5bf46b184167a2510194fcc28989c5d6aff91"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz",
+      "uncompressed_bytes": 200193,
+      "compressed_bytes": 24821,
+      "sha256_uncompressed": "9ba59e34755addbeda3ceaac3b6ef08bf2b76688ec921b3188a82ae2ec5925f4",
+      "sha256_gzip": "a4870c8efbd32e7e914678473620f9d486294a82a680b26ff152ad7e1a713eac"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz",
+      "uncompressed_bytes": 6893,
+      "compressed_bytes": 1788,
+      "sha256_uncompressed": "9e30d0ef2434132d4f23c990a466f3bc2d3735bfcdd1fe0740b541004db2fb81",
+      "sha256_gzip": "9f2012143367bec4406918ef0c65832f0cfe1105980b76bb8c1801d041603e7c"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/active-request-history.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/active-request-history.json.gz",
+      "uncompressed_bytes": 4739,
+      "compressed_bytes": 315,
+      "sha256_uncompressed": "66513b2c91bc32133e8508825fe12175d94d04eff083f02e5f8e87f17c701a64",
+      "sha256_gzip": "2f4010305e919afebc60341fc7fd8e5eea36f156b759df84bfaac21fe5ba8e58"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "uncompressed_bytes": 498698,
+      "compressed_bytes": 7538,
+      "sha256_uncompressed": "d1660a0fa975d54793a61444f30a89bdf54d75e12e4c54a1fcfe3b5a55436942",
+      "sha256_gzip": "c58961273d1b7406fde5b55a48fe7d78ca1e08ad978543ce5ccc0e06a9ad2648"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "uncompressed_bytes": 987653,
+      "compressed_bytes": 14564,
+      "sha256_uncompressed": "824e7ad3b9f162845a93000c7e9d4e499fb6dfc016e51e54f567fd932d36e186",
+      "sha256_gzip": "f20ae26cdb72bb31a16d217cc53dbdd86e7297a6ec40d392e8a29521ca0e7db9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "uncompressed_bytes": 1331868,
+      "compressed_bytes": 19143,
+      "sha256_uncompressed": "b174c5877e536df064489be2196a3efe23cde91940703fd5b7717450f640a91a",
+      "sha256_gzip": "1a3cb4d64d8a735295a97270cdf8494f42f3b4a76364cf2dff81b152f5a366aa"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "uncompressed_bytes": 3097500,
+      "compressed_bytes": 44271,
+      "sha256_uncompressed": "6332ac9a853b2b6455fc6c173aa17a5e4c4d892994422b480abf3729db1a948f",
+      "sha256_gzip": "58b65e0260a8e6195b31965bc404d5525d49f32c4b71a9402ac82d5b03b7abbd"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "uncompressed_bytes": 812136,
+      "compressed_bytes": 12113,
+      "sha256_uncompressed": "d8e09524acbda14e0c700691b27e5ce1a995ad9aba0b2369ac83e5872db925bb",
+      "sha256_gzip": "798ab5f98f47869743c7b90b8f3184de017dbb3234274a89620996b417b76a58"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "uncompressed_bytes": 161529,
+      "compressed_bytes": 2784,
+      "sha256_uncompressed": "4ec133ab0542c6bca5636ef632c2f445f932f5974aefde448904eece1d4214ca",
+      "sha256_gzip": "fe6dca7ef93e026828a6ff8fcdc7798927165b6ba652d7110221f77f0b71f184"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "uncompressed_bytes": 149126,
+      "compressed_bytes": 1939,
+      "sha256_uncompressed": "5b6be73a38ce243c252edea4c4178d314a94561d0bc5577b2b09a4af9a83c0ae",
+      "sha256_gzip": "36d1843499e58b0be44815c22393930e71b91733897962b6c669f59116c66a37"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json.gz",
+      "uncompressed_bytes": 2,
+      "compressed_bytes": 22,
+      "sha256_uncompressed": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256_gzip": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "uncompressed_bytes": 48655,
+      "compressed_bytes": 5345,
+      "sha256_uncompressed": "55977a6845a6b7865515e84dfc8c108e6905c5e379d69949f4b7457947da8882",
+      "sha256_gzip": "55b36530566fafcc29423ef849255f314fc2e369b12609155420fdef2398cdc0"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "uncompressed_bytes": 7950,
+      "compressed_bytes": 1791,
+      "sha256_uncompressed": "6b63ce1baae66a946357ab7b55d3cc670c6d4f75d21b0bba10cc8cd339eb303e",
+      "sha256_gzip": "292db7b9e1b708b83db38fda53491de59a4f99b9fbf462fac71fb94141fbd6a0"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "uncompressed_bytes": 90566,
+      "compressed_bytes": 9963,
+      "sha256_uncompressed": "56f6d80cc4a38e9d645d0a7bba7c4d47cde1ec7ca615354038e176f829054cc1",
+      "sha256_gzip": "d8366ac67846b2c95f0f02f19252c5ddad7c011c0e4341d79204daf33809b922"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "uncompressed_bytes": 8511,
+      "compressed_bytes": 1802,
+      "sha256_uncompressed": "e4eafd29285f6bddfeeb2eab04af2e14b84a05952edb68305fd333d6bcc867dd",
+      "sha256_gzip": "b94506b51ab93faa1142fb510c0a60880c021c5e4f86d0db83084112cbf1fde7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "uncompressed_bytes": 155279,
+      "compressed_bytes": 17005,
+      "sha256_uncompressed": "2c89b8fed379e24a136913712a07c1fc8ff17f46be52a54c411c1fe8ed40ab91",
+      "sha256_gzip": "65c159344bfc0ef4b3c7077c4e5bdd76b9e27850fa6699383acc1e7cf8455345"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "uncompressed_bytes": 10660,
+      "compressed_bytes": 1870,
+      "sha256_uncompressed": "4afb811b5c3edbb549fceffbdcf22fb0832b9c7fa1531c5bc43aa62a236bc797",
+      "sha256_gzip": "8f276170d7e8e1ec1e4a00ac9444229333eb0e1d9300f2bdf654d2a84f2036ed"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "uncompressed_bytes": 232934,
+      "compressed_bytes": 27019,
+      "sha256_uncompressed": "3fed3e06bb3120f012af31941352bea6c76dce0764ebd84b3e04c74f84e2b654",
+      "sha256_gzip": "04584e091ad5605d6e8d8618dcfae85e8e9c29a55cbafa8313466515d5b83f8b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "uncompressed_bytes": 8410,
+      "compressed_bytes": 1799,
+      "sha256_uncompressed": "c597b86186a7187e414bf0379ea23f5d74629226ee3962aebddcaa2efe244a94",
+      "sha256_gzip": "922fc432a3385ff5aa22c97d38829d56e7597220266f45659b0041f08733c0e1"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "uncompressed_bytes": 283778,
+      "compressed_bytes": 32882,
+      "sha256_uncompressed": "66de3c444955df02e44924d37bfbd6573d462dd8088a8bf3399eb60e3bb985bd",
+      "sha256_gzip": "d4bc6e859ebcfe3e4ef69d798f7d7c5dbd3a48ec3cbe6a217e078391b5c7ebd3"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "uncompressed_bytes": 7660,
+      "compressed_bytes": 1778,
+      "sha256_uncompressed": "293b54c1ad717200bf82a337e9d233c1e122d611001e161b0cd8a0c8b4a7d34e",
+      "sha256_gzip": "b25c151a69b7caf8769175cf727fe3c34fdd095a5dc517592cf0da185675c2ff"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin.gz",
+      "uncompressed_bytes": 297384,
+      "compressed_bytes": 33173,
+      "sha256_uncompressed": "73c342f846722d1e302bfc4024b4f6f1f207b3fec6196cc0c7b21de9a9693c7b",
+      "sha256_gzip": "3b15b7ef92fe1d7504b433059f824b7e8621c4d05c0fa1f920e2e7aed8952096"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json.gz",
+      "uncompressed_bytes": 7467,
+      "compressed_bytes": 1763,
+      "sha256_uncompressed": "87426a7d6dfdbd5e51a1eeb4c9eda19de2526144f4ef55fc31dd123416c37338",
+      "sha256_gzip": "3b2c8140fe3570352c0f093b37a867f83b4fa3a33d1f2133d89325040ce57d9a"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "uncompressed_bytes": 297354,
+      "compressed_bytes": 33163,
+      "sha256_uncompressed": "65356523598a7e6a420c3c9256618c73ffa84116181b9e2d0c184f2ef2e9a4d8",
+      "sha256_gzip": "5f2ab73cd6e13254ee915d7544ea0046a47f44a73c2cba10dafeec5d0b5dd81d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json.gz",
+      "uncompressed_bytes": 7472,
+      "compressed_bytes": 1768,
+      "sha256_uncompressed": "93f43cff756c1e2de4ea767bd6397dbbb8e7ad7c8eac611562aef9c1acee2d11",
+      "sha256_gzip": "db58ec6a0618751871ded77ae268573e1d42b491dc56cf1b8c9bca95acc4dfa7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/active-request-history.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/active-request-history.json.gz",
+      "uncompressed_bytes": 2349,
+      "compressed_bytes": 238,
+      "sha256_uncompressed": "c781aa888ead3b1328b43cd3643034db59c4ade24249c88a2a8e2d6660f9fb90",
+      "sha256_gzip": "4e09d4b43fff0a9ee77befa55ca1529becba71e43a392c6cb2d53bef1bc64907"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json.gz",
+      "uncompressed_bytes": 91491,
+      "compressed_bytes": 2021,
+      "sha256_uncompressed": "f5fe41b878cf4fa3ddcef7c9fbfe46f148be46263c137a21c281f5d65fec5e97",
+      "sha256_gzip": "1ba41ad75f75bae50ef071a7765b945ea4d4f1cc89395854c634824dea930594"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json.gz",
+      "uncompressed_bytes": 117380,
+      "compressed_bytes": 2551,
+      "sha256_uncompressed": "2cc6823909cc1ad4f7571606635bf9dc415d37e6b954a0954ae47495c576bc35",
+      "sha256_gzip": "55f7cae895701f567eab12a01047ad5ddd98b75bda04f2e24c902f0c79e3fe34"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json.gz",
+      "uncompressed_bytes": 118879,
+      "compressed_bytes": 2537,
+      "sha256_uncompressed": "95f146b111abda673920b42f617de8872e890bba3f65ffeb1c4d650828b8bf6e",
+      "sha256_gzip": "8c96b4974d23c14b5a9e95676ecc409e94a653ac54caf98d28ad1cdd39a9f1f2"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json.gz",
+      "uncompressed_bytes": 183450,
+      "compressed_bytes": 3536,
+      "sha256_uncompressed": "383bab65bb568ead88e405e0f52d3b3391741bc3c695583b1a9151bd3344ea99",
+      "sha256_gzip": "de466bc48cc114dac6a017d69621b42fe802592d00b468a23a6787b3dfd83f2e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0005.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0005.json.gz",
+      "uncompressed_bytes": 60745,
+      "compressed_bytes": 1448,
+      "sha256_uncompressed": "70a1529cab737310799e4f7934e15254bc6ff1eaa9d0be0dd60f7724b2efc0a9",
+      "sha256_gzip": "92e5a582b738a5931ee2ddbe97a49871eb3a2d6236c3b003256219563ac6d720"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0006.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0006.json.gz",
+      "uncompressed_bytes": 30629,
+      "compressed_bytes": 890,
+      "sha256_uncompressed": "b5eea064cbebc5370e6ce49a9de8683a411b7fb6794592840f22a41ff3a93827",
+      "sha256_gzip": "8286616e635208512bae41071cfeb4b82db3d2df153c3a1eb2c1f657e06ae44e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0007.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/direct-zero-0007.json.gz",
+      "uncompressed_bytes": 29770,
+      "compressed_bytes": 908,
+      "sha256_uncompressed": "fb77d3df19632ec523ddfb04a5e8d5212125e8ca2e856fce417528d0ef373c8b",
+      "sha256_gzip": "8983f87f9ef289636f09bc4df7239472a861be1ba98b32af718461bd855a2c00"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "uncompressed_bytes": 59565,
+      "compressed_bytes": 1129,
+      "sha256_uncompressed": "645c353b0ea5054bb07533b3f5a67cb85540eb9b16e2ce6271f3d017e54bc7d5",
+      "sha256_gzip": "0ea1e376b315f487bfb4b22a87dd6d76b90a7fbae809e7796be622b5391908e9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/retired-unresolved.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/retired-unresolved.json.gz",
+      "uncompressed_bytes": 2,
+      "compressed_bytes": 22,
+      "sha256_uncompressed": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256_gzip": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "uncompressed_bytes": 29690,
+      "compressed_bytes": 4613,
+      "sha256_uncompressed": "2c5ed52eabd4de7da795b58bbbad4044472bdb2bd220af901b9901ca52b5d866",
+      "sha256_gzip": "2039bc067d76e06b4aea6387fb0c44c419fa929c38afd7e0e6bde82000a86413"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-000-provisional.json.gz",
+      "uncompressed_bytes": 6892,
+      "compressed_bytes": 1789,
+      "sha256_uncompressed": "f59b26fe5f2f43bdf724f0a94da464b1a32fd46c0bcc0ae86b9cc8524488422d",
+      "sha256_gzip": "751e16605fe279801774099198e1b275d2d18801e3bbad23edecdb99cd9f15b5"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "uncompressed_bytes": 42312,
+      "compressed_bytes": 5964,
+      "sha256_uncompressed": "c43249746bd3e08a390188b6c286b83b640b4e443d28d02cbfef267f1e8b8f0b",
+      "sha256_gzip": "179471539cccc8489e888a9141bbcc6d9639d3022622ba3df9ff85ea642542cb"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-001-provisional.json.gz",
+      "uncompressed_bytes": 7119,
+      "compressed_bytes": 1795,
+      "sha256_uncompressed": "12824d798d3b3272ac517df08420b4ffd32971851b87beea3a2ffa206c02e465",
+      "sha256_gzip": "7fc7af37a82fc1ca4178592ca01badfb93f1c931dc1e9b311bb2534d7cdcdc7f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "uncompressed_bytes": 73071,
+      "compressed_bytes": 8926,
+      "sha256_uncompressed": "d9e102cafa24b94795013f5321ad3c03e363de41928a10d5aaf1b0a2ef197d8c",
+      "sha256_gzip": "5d6465243fad939e171e2f2f100aff303346309b3baa5449a5f36c07624b7313"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-002-provisional.json.gz",
+      "uncompressed_bytes": 7576,
+      "compressed_bytes": 1817,
+      "sha256_uncompressed": "adf3c1f7d85155c860385dfd92b6068709a30b726292dda02254773cd5db62a6",
+      "sha256_gzip": "654089d50db63a196ab8ff792e43553436b00c00b979eb4f4fa24eca45e25705"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin.gz",
+      "uncompressed_bytes": 115109,
+      "compressed_bytes": 14416,
+      "sha256_uncompressed": "2d5c676b003b5474128ab78125a7ee66ed409d0cee68a2bc601d0d65df8306a3",
+      "sha256_gzip": "1b99b7867dd92d8ce07854697b712f1b5289f27bdcac00f4519b643afd35d1df"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-003-provisional.json.gz",
+      "uncompressed_bytes": 6966,
+      "compressed_bytes": 1798,
+      "sha256_uncompressed": "04a957a6fbfd4f62e1d2a928ddb645f2d14ce70bfd39200e36d5717264a5729e",
+      "sha256_gzip": "57c315848b4429659ef4e77704f3ddc7ab0be652865bb142fd77da22735c27fa"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-004-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-004-provisional.bin.gz",
+      "uncompressed_bytes": 139218,
+      "compressed_bytes": 17179,
+      "sha256_uncompressed": "b0802a6a72b9a3c6917371fc39f4b3f756309cdeff673221104889ca855a670f",
+      "sha256_gzip": "82c61698c30486c6eb6416a7131e3eac54eff759e9dfc7f7bacb666d05683c7b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-004-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-004-provisional.json.gz",
+      "uncompressed_bytes": 6812,
+      "compressed_bytes": 1785,
+      "sha256_uncompressed": "7479b4913e621c6411a1b5d6ff45c4bfc883ec1db7719139a3b751f4c327e8ed",
+      "sha256_gzip": "b86705a633dc38de30b725cf7f198e30d9ed062207115faa893bcbff9f4eb9fe"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-005-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-005-provisional.bin.gz",
+      "uncompressed_bytes": 144592,
+      "compressed_bytes": 17535,
+      "sha256_uncompressed": "39a3fed6c449c42b8b36f499cb24810ca2e604080de792332b452b61195e9911",
+      "sha256_gzip": "31776565cf6914152c16c496abe802a740a33f112681e58617cafd038a208abc"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-005-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-005-provisional.json.gz",
+      "uncompressed_bytes": 6887,
+      "compressed_bytes": 1791,
+      "sha256_uncompressed": "338446d857517cc3362142d173a8a90859d4b25d951769fe60e8c8b32515e95a",
+      "sha256_gzip": "b2b1f19d1dbc4486cc4b300d3b6db4bbf7437e1edd30c9d89e80aebdaea8e066"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-closed.bin.gz",
+      "uncompressed_bytes": 149667,
+      "compressed_bytes": 17610,
+      "sha256_uncompressed": "989b991e0ba27aae374cb55c7a4327918a0e0d7dc1f0d299556ec4768fbc7797",
+      "sha256_gzip": "ad928bd08e75e178f771eba6e3f885550462b6b4cb9b8d8e618f2cd050791b82"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-closed.json.gz",
+      "uncompressed_bytes": 6882,
+      "compressed_bytes": 1789,
+      "sha256_uncompressed": "3346e3db284ed9b48712024069e0a057a43c24feaddf813cffc08ebf9871b2e4",
+      "sha256_gzip": "966c0f1e52ce39aa0604d9c72e1b6d96fb99fd36dd2a6436bd620ffa474d5420"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-provisional.bin.gz",
+      "uncompressed_bytes": 149643,
+      "compressed_bytes": 17599,
+      "sha256_uncompressed": "ab4ff2e86f9572abcc2e12d7aeb30f806106e5e5a854c66af5a21a1fce41df0d",
+      "sha256_gzip": "e0af7992254fe2b0b9c6a288d1c9801651eeb6fbc71fc7b7ddb78f94345fb654"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed/native-closure/cut-1/round-006-provisional.json.gz",
+      "uncompressed_bytes": 6887,
+      "compressed_bytes": 1791,
+      "sha256_uncompressed": "1568d071ee89bbb238429f3e21619b2e160a243a90798551c433b10723c79eb3",
+      "sha256_gzip": "569df080e1de27dfdc5d7ad7e21c110a33d59da38ae7e74049fba51a4be6aeec"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed-resources.log",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed-resources.log.gz",
+      "uncompressed_bytes": 14335,
+      "compressed_bytes": 891,
+      "sha256_uncompressed": "22d09112f49a4001cf142c10c762fde8f4c22b5fbae8983cad19f9bacec27f15",
+      "sha256_gzip": "b775b71c1f243b2b9270c0b31e6e8c2f6c95b88d05fd1a68bbe3252aee0a21b5"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/active-request-history.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/active-request-history.json.gz",
+      "uncompressed_bytes": 5690,
+      "compressed_bytes": 392,
+      "sha256_uncompressed": "83b0c8aad99313c216bc06c8bdc79de744f7521f34522a27d9b538e887276bba",
+      "sha256_gzip": "875b861f59959b80e11031b9d26c697083deefc1a19dfe3514890dab1a9e4388"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json.gz",
+      "uncompressed_bytes": 122812,
+      "compressed_bytes": 2592,
+      "sha256_uncompressed": "9e645fd784ec3c56090c6c78e8568cf5df6f97cbdbb42e9fc564ad733d44c1ab",
+      "sha256_gzip": "47de0442b3df92b4019265f0862d780f1b438fa551235b9a835b85313f13e71f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json.gz",
+      "uncompressed_bytes": 312053,
+      "compressed_bytes": 6002,
+      "sha256_uncompressed": "6cc80d7f12f75f9789354ee8058349d6a4ca65811cb8f581f1f6ccc92f86bc6b",
+      "sha256_gzip": "d55a0d105231d4be07bb0d408538902ab8575cc74f83822f2627d00311153b45"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json.gz",
+      "uncompressed_bytes": 352258,
+      "compressed_bytes": 6618,
+      "sha256_uncompressed": "432368cb629e74252e17d47c948084a254f71f2e93bc98ccd4b888970d3549b9",
+      "sha256_gzip": "9ec814a2be704293cb5cbc7346759a34520db9fcb8e3f07d2448a0b7a61db2e6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json.gz",
+      "uncompressed_bytes": 401747,
+      "compressed_bytes": 7546,
+      "sha256_uncompressed": "fd6a83c0b0e698dd6a731eb8c1e7431d3ea0b8080dcb7dc8675e158ca20731ec",
+      "sha256_gzip": "22bbfe6cb823043457c4ddce65f1fd21c78cc4505af8345180586d7700c5da6c"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json.gz",
+      "uncompressed_bytes": 404919,
+      "compressed_bytes": 7632,
+      "sha256_uncompressed": "19ca96e7be3d54a513e4c6d409f0b2160edc9fade8e9701e756e83fd5dd9d616",
+      "sha256_gzip": "b398237b4f4742090959886a16fcfdf6d0a0a42e328278d5447093b8c0f37315"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json.gz",
+      "uncompressed_bytes": 168568,
+      "compressed_bytes": 3495,
+      "sha256_uncompressed": "b9cfd8255928edf5f96ca8ec27195bbbbc527a8068feab323d85800e0fd5eef3",
+      "sha256_gzip": "5c20a3b0428fbb851b2746b8dd89870ed07f90cbd32bdf0a0dceea0b6043d4d0"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json.gz",
+      "uncompressed_bytes": 83940,
+      "compressed_bytes": 1924,
+      "sha256_uncompressed": "efafe787e8375216f0143d1e6fd0d783fe6a0c538105a45aaed8ddd1ff4f6d93",
+      "sha256_gzip": "50823983dfe21aa717388de04499ec040fc0292e677bb9e7ff775f22e62d0a19"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json.gz",
+      "uncompressed_bytes": 27838,
+      "compressed_bytes": 879,
+      "sha256_uncompressed": "3b1e2118d22312de71a859ec59810bb30b11c84d886d24598380b967a7d4fffe",
+      "sha256_gzip": "b14325215a7a12b154e7a41925c6ca68c32f514201d6d3c12af5d6217d2d50f4"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "uncompressed_bytes": 75318,
+      "compressed_bytes": 1357,
+      "sha256_uncompressed": "fcbe42c1f368564b906fae11ec642fd4967eed812cf7a4ef654c643585a9f1af",
+      "sha256_gzip": "1f32a50c32368d40e8bc3831396bf27d198c51459a11c7cce0fff307038eb7e5"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/retired-unresolved.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/retired-unresolved.json.gz",
+      "uncompressed_bytes": 2,
+      "compressed_bytes": 22,
+      "sha256_uncompressed": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256_gzip": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "uncompressed_bytes": 28055,
+      "compressed_bytes": 4543,
+      "sha256_uncompressed": "1b8eb5bd556ac01f09a4d916b42b680f1922d6aab209f494ce0ad8a73d54f2ff",
+      "sha256_gzip": "49d224d572c64c6ab98fd691ea55740620dc59b48eac431e7f159124c651c672"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-000-provisional.json.gz",
+      "uncompressed_bytes": 8114,
+      "compressed_bytes": 1850,
+      "sha256_uncompressed": "f5cf056304ad76ab2421185729a2f00b7fdabb4c42ba9bc1fc77caf7d93b3746",
+      "sha256_gzip": "dbc8bcd91cc1a2cefcfc671d31847d2bd6147758be46dda587a24118fe6b7198"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "uncompressed_bytes": 55831,
+      "compressed_bytes": 8286,
+      "sha256_uncompressed": "75f5cddeafc9af67fd3226aafe6f3a7e81ee1b2742db4598b0f0251bb7d343b1",
+      "sha256_gzip": "660982541454410533e77fa6e952ff54c963190eec49b50b4aaff82647db0176"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "uncompressed_bytes": 8267,
+      "compressed_bytes": 1849,
+      "sha256_uncompressed": "ec677d0fbe82dbc920efbc81d782fe79d44b26d5d9a2ddafa22b069df8592992",
+      "sha256_gzip": "3ef94417a516656b0203e15c594f00451aeede0b75be4ec24a1f595610385b56"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin.gz",
+      "uncompressed_bytes": 99843,
+      "compressed_bytes": 13256,
+      "sha256_uncompressed": "36ef80f7a15532e772649afc30807b68296592f580cb31af5568e0dd611fb28d",
+      "sha256_gzip": "4f1049bff9f1b034fede86aa289d1ee561b14c005dca1121786bb728d460d972"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-002-provisional.json.gz",
+      "uncompressed_bytes": 8802,
+      "compressed_bytes": 1879,
+      "sha256_uncompressed": "308b257fc38495a9d9776bcc419f384d6048c7a08d1364f9fb532d598b674d0c",
+      "sha256_gzip": "e918978c2b4c62f2791a2b58cc4307f67fc7bdc80f4c6cb1a24f1aba460dca9f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin.gz",
+      "uncompressed_bytes": 136219,
+      "compressed_bytes": 17554,
+      "sha256_uncompressed": "471d8270487077009e8d0e488ca6b00c36b03aabc77c7d6ac861a59e3395512b",
+      "sha256_gzip": "d5b1975f04f4924d16e91dde9b315303d795755d11132246cbd1fb5ffb2f7c90"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-003-provisional.json.gz",
+      "uncompressed_bytes": 8873,
+      "compressed_bytes": 1873,
+      "sha256_uncompressed": "644b189fe75489691be80f845eea86f7f1a2215510b10764c1dff5b889cbf6b0",
+      "sha256_gzip": "29d786340181319e5d0cfaaff75adf56277a760631ba94eca7c7478681b4a72b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin.gz",
+      "uncompressed_bytes": 176573,
+      "compressed_bytes": 22773,
+      "sha256_uncompressed": "dc039978d3012c6a27d60d76942be8fa9f95de74a3798fc564ac198bef18e8bb",
+      "sha256_gzip": "7fe62c75cb6f3c51f55f9028c32ecb2881c0646d28f1a74b180b86dab3ffb1d6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-004-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-004-provisional.json.gz",
+      "uncompressed_bytes": 7807,
+      "compressed_bytes": 1838,
+      "sha256_uncompressed": "1edc5e852a2feb4d4472ab364bb867ab2447dda514d357cb0781e4719943cb4c",
+      "sha256_gzip": "c91046d7eee49186b38ef2db339d98f26cfbf8ab20e3b3c1cf3e970e92d733ce"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin.gz",
+      "uncompressed_bytes": 189513,
+      "compressed_bytes": 24217,
+      "sha256_uncompressed": "a3f7266f4458116b2833b8643fa68942d365d76d2a70710b06be93bcb11c5593",
+      "sha256_gzip": "0a290dd3e5890dd50c5fe29c7eb7b2cb9f46d47130cfdccf3580216d6795b2cb"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-005-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-005-provisional.json.gz",
+      "uncompressed_bytes": 7349,
+      "compressed_bytes": 1817,
+      "sha256_uncompressed": "7437496708e068bba8e24139d4d29028fd0b1069b972d2ddba11add1d54ac77e",
+      "sha256_gzip": "1b029a9fb3afd201ef640ada05d3ca77311ac035a266734a9aeb05031f162153"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin.gz",
+      "uncompressed_bytes": 195723,
+      "compressed_bytes": 24619,
+      "sha256_uncompressed": "7b5b08d03ccbfa5e2553bad3fbd83db91e6ec4b8c5d4fad826f8c98b23ee483c",
+      "sha256_gzip": "115cdbdcc795dc1444fe0391dca868be4acb272d63d3a2bf381a1a63ce24303d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-006-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-006-provisional.json.gz",
+      "uncompressed_bytes": 7045,
+      "compressed_bytes": 1797,
+      "sha256_uncompressed": "b694d0cd6fb190b30b48ee6d06bbba33195a3a8dd4a29d40435922e89cce2f4b",
+      "sha256_gzip": "65267df19d84826025f04bd41b1244e7ba12d949f8ef409beca18bc86ab00914"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-closed.bin.gz",
+      "uncompressed_bytes": 200209,
+      "compressed_bytes": 24827,
+      "sha256_uncompressed": "31b943143bfd2ad73ff3b55b6cc964aa36614ba260c41ecb3c1a9c04980bd81e",
+      "sha256_gzip": "5812a5386ce441d406b5f2db5cb3f2a83fc397dfe9352e931048e77c778c2b11"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-closed.json.gz",
+      "uncompressed_bytes": 6888,
+      "compressed_bytes": 1785,
+      "sha256_uncompressed": "8d128c8e73ef157a56a20df4e6aa0757a4ee53b5bfc37b06a43ead424b61a805",
+      "sha256_gzip": "2e581089d41b554451b9a921bca5bf46b184167a2510194fcc28989c5d6aff91"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin.gz",
+      "uncompressed_bytes": 200193,
+      "compressed_bytes": 24821,
+      "sha256_uncompressed": "9ba59e34755addbeda3ceaac3b6ef08bf2b76688ec921b3188a82ae2ec5925f4",
+      "sha256_gzip": "a4870c8efbd32e7e914678473620f9d486294a82a680b26ff152ad7e1a713eac"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0/round-007-provisional.json.gz",
+      "uncompressed_bytes": 6893,
+      "compressed_bytes": 1788,
+      "sha256_uncompressed": "9e30d0ef2434132d4f23c990a466f3bc2d3735bfcdd1fe0740b541004db2fb81",
+      "sha256_gzip": "9f2012143367bec4406918ef0c65832f0cfe1105980b76bb8c1801d041603e7c"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/active-request-history.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/active-request-history.json.gz",
+      "uncompressed_bytes": 4739,
+      "compressed_bytes": 315,
+      "sha256_uncompressed": "66513b2c91bc32133e8508825fe12175d94d04eff083f02e5f8e87f17c701a64",
+      "sha256_gzip": "2f4010305e919afebc60341fc7fd8e5eea36f156b759df84bfaac21fe5ba8e58"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "uncompressed_bytes": 498698,
+      "compressed_bytes": 7538,
+      "sha256_uncompressed": "d1660a0fa975d54793a61444f30a89bdf54d75e12e4c54a1fcfe3b5a55436942",
+      "sha256_gzip": "c58961273d1b7406fde5b55a48fe7d78ca1e08ad978543ce5ccc0e06a9ad2648"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "uncompressed_bytes": 987653,
+      "compressed_bytes": 14564,
+      "sha256_uncompressed": "824e7ad3b9f162845a93000c7e9d4e499fb6dfc016e51e54f567fd932d36e186",
+      "sha256_gzip": "f20ae26cdb72bb31a16d217cc53dbdd86e7297a6ec40d392e8a29521ca0e7db9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "uncompressed_bytes": 1331868,
+      "compressed_bytes": 19143,
+      "sha256_uncompressed": "b174c5877e536df064489be2196a3efe23cde91940703fd5b7717450f640a91a",
+      "sha256_gzip": "1a3cb4d64d8a735295a97270cdf8494f42f3b4a76364cf2dff81b152f5a366aa"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "uncompressed_bytes": 3097500,
+      "compressed_bytes": 44271,
+      "sha256_uncompressed": "6332ac9a853b2b6455fc6c173aa17a5e4c4d892994422b480abf3729db1a948f",
+      "sha256_gzip": "58b65e0260a8e6195b31965bc404d5525d49f32c4b71a9402ac82d5b03b7abbd"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "uncompressed_bytes": 812136,
+      "compressed_bytes": 12113,
+      "sha256_uncompressed": "d8e09524acbda14e0c700691b27e5ce1a995ad9aba0b2369ac83e5872db925bb",
+      "sha256_gzip": "798ab5f98f47869743c7b90b8f3184de017dbb3234274a89620996b417b76a58"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "uncompressed_bytes": 161529,
+      "compressed_bytes": 2784,
+      "sha256_uncompressed": "4ec133ab0542c6bca5636ef632c2f445f932f5974aefde448904eece1d4214ca",
+      "sha256_gzip": "fe6dca7ef93e026828a6ff8fcdc7798927165b6ba652d7110221f77f0b71f184"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "uncompressed_bytes": 149126,
+      "compressed_bytes": 1939,
+      "sha256_uncompressed": "5b6be73a38ce243c252edea4c4178d314a94561d0bc5577b2b09a4af9a83c0ae",
+      "sha256_gzip": "36d1843499e58b0be44815c22393930e71b91733897962b6c669f59116c66a37"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json.gz",
+      "uncompressed_bytes": 2,
+      "compressed_bytes": 22,
+      "sha256_uncompressed": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256_gzip": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "uncompressed_bytes": 48655,
+      "compressed_bytes": 5345,
+      "sha256_uncompressed": "55977a6845a6b7865515e84dfc8c108e6905c5e379d69949f4b7457947da8882",
+      "sha256_gzip": "55b36530566fafcc29423ef849255f314fc2e369b12609155420fdef2398cdc0"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "uncompressed_bytes": 7950,
+      "compressed_bytes": 1791,
+      "sha256_uncompressed": "6b63ce1baae66a946357ab7b55d3cc670c6d4f75d21b0bba10cc8cd339eb303e",
+      "sha256_gzip": "292db7b9e1b708b83db38fda53491de59a4f99b9fbf462fac71fb94141fbd6a0"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "uncompressed_bytes": 90566,
+      "compressed_bytes": 9963,
+      "sha256_uncompressed": "56f6d80cc4a38e9d645d0a7bba7c4d47cde1ec7ca615354038e176f829054cc1",
+      "sha256_gzip": "d8366ac67846b2c95f0f02f19252c5ddad7c011c0e4341d79204daf33809b922"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "uncompressed_bytes": 8511,
+      "compressed_bytes": 1802,
+      "sha256_uncompressed": "e4eafd29285f6bddfeeb2eab04af2e14b84a05952edb68305fd333d6bcc867dd",
+      "sha256_gzip": "b94506b51ab93faa1142fb510c0a60880c021c5e4f86d0db83084112cbf1fde7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "uncompressed_bytes": 155279,
+      "compressed_bytes": 17005,
+      "sha256_uncompressed": "2c89b8fed379e24a136913712a07c1fc8ff17f46be52a54c411c1fe8ed40ab91",
+      "sha256_gzip": "65c159344bfc0ef4b3c7077c4e5bdd76b9e27850fa6699383acc1e7cf8455345"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "uncompressed_bytes": 10660,
+      "compressed_bytes": 1870,
+      "sha256_uncompressed": "4afb811b5c3edbb549fceffbdcf22fb0832b9c7fa1531c5bc43aa62a236bc797",
+      "sha256_gzip": "8f276170d7e8e1ec1e4a00ac9444229333eb0e1d9300f2bdf654d2a84f2036ed"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "uncompressed_bytes": 232934,
+      "compressed_bytes": 27019,
+      "sha256_uncompressed": "3fed3e06bb3120f012af31941352bea6c76dce0764ebd84b3e04c74f84e2b654",
+      "sha256_gzip": "04584e091ad5605d6e8d8618dcfae85e8e9c29a55cbafa8313466515d5b83f8b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "uncompressed_bytes": 8410,
+      "compressed_bytes": 1799,
+      "sha256_uncompressed": "c597b86186a7187e414bf0379ea23f5d74629226ee3962aebddcaa2efe244a94",
+      "sha256_gzip": "922fc432a3385ff5aa22c97d38829d56e7597220266f45659b0041f08733c0e1"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "uncompressed_bytes": 283778,
+      "compressed_bytes": 32882,
+      "sha256_uncompressed": "66de3c444955df02e44924d37bfbd6573d462dd8088a8bf3399eb60e3bb985bd",
+      "sha256_gzip": "d4bc6e859ebcfe3e4ef69d798f7d7c5dbd3a48ec3cbe6a217e078391b5c7ebd3"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "uncompressed_bytes": 7660,
+      "compressed_bytes": 1778,
+      "sha256_uncompressed": "293b54c1ad717200bf82a337e9d233c1e122d611001e161b0cd8a0c8b4a7d34e",
+      "sha256_gzip": "b25c151a69b7caf8769175cf727fe3c34fdd095a5dc517592cf0da185675c2ff"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin.gz",
+      "uncompressed_bytes": 297384,
+      "compressed_bytes": 33173,
+      "sha256_uncompressed": "73c342f846722d1e302bfc4024b4f6f1f207b3fec6196cc0c7b21de9a9693c7b",
+      "sha256_gzip": "3b15b7ef92fe1d7504b433059f824b7e8621c4d05c0fa1f920e2e7aed8952096"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json.gz",
+      "uncompressed_bytes": 7467,
+      "compressed_bytes": 1763,
+      "sha256_uncompressed": "87426a7d6dfdbd5e51a1eeb4c9eda19de2526144f4ef55fc31dd123416c37338",
+      "sha256_gzip": "3b2c8140fe3570352c0f093b37a867f83b4fa3a33d1f2133d89325040ce57d9a"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "uncompressed_bytes": 297354,
+      "compressed_bytes": 33163,
+      "sha256_uncompressed": "65356523598a7e6a420c3c9256618c73ffa84116181b9e2d0c184f2ef2e9a4d8",
+      "sha256_gzip": "5f2ab73cd6e13254ee915d7544ea0046a47f44a73c2cba10dafeec5d0b5dd81d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json.gz",
+      "uncompressed_bytes": 7472,
+      "compressed_bytes": 1768,
+      "sha256_uncompressed": "93f43cff756c1e2de4ea767bd6397dbbb8e7ad7c8eac611562aef9c1acee2d11",
+      "sha256_gzip": "db58ec6a0618751871ded77ae268573e1d42b491dc56cf1b8c9bca95acc4dfa7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/active-request-history.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/active-request-history.json.gz",
+      "uncompressed_bytes": 2349,
+      "compressed_bytes": 238,
+      "sha256_uncompressed": "c781aa888ead3b1328b43cd3643034db59c4ade24249c88a2a8e2d6660f9fb90",
+      "sha256_gzip": "4e09d4b43fff0a9ee77befa55ca1529becba71e43a392c6cb2d53bef1bc64907"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json.gz",
+      "uncompressed_bytes": 91491,
+      "compressed_bytes": 2021,
+      "sha256_uncompressed": "f5fe41b878cf4fa3ddcef7c9fbfe46f148be46263c137a21c281f5d65fec5e97",
+      "sha256_gzip": "1ba41ad75f75bae50ef071a7765b945ea4d4f1cc89395854c634824dea930594"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json.gz",
+      "uncompressed_bytes": 117380,
+      "compressed_bytes": 2551,
+      "sha256_uncompressed": "2cc6823909cc1ad4f7571606635bf9dc415d37e6b954a0954ae47495c576bc35",
+      "sha256_gzip": "55f7cae895701f567eab12a01047ad5ddd98b75bda04f2e24c902f0c79e3fe34"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json.gz",
+      "uncompressed_bytes": 118879,
+      "compressed_bytes": 2537,
+      "sha256_uncompressed": "95f146b111abda673920b42f617de8872e890bba3f65ffeb1c4d650828b8bf6e",
+      "sha256_gzip": "8c96b4974d23c14b5a9e95676ecc409e94a653ac54caf98d28ad1cdd39a9f1f2"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json.gz",
+      "uncompressed_bytes": 183450,
+      "compressed_bytes": 3536,
+      "sha256_uncompressed": "383bab65bb568ead88e405e0f52d3b3391741bc3c695583b1a9151bd3344ea99",
+      "sha256_gzip": "de466bc48cc114dac6a017d69621b42fe802592d00b468a23a6787b3dfd83f2e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0005.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0005.json.gz",
+      "uncompressed_bytes": 60745,
+      "compressed_bytes": 1448,
+      "sha256_uncompressed": "70a1529cab737310799e4f7934e15254bc6ff1eaa9d0be0dd60f7724b2efc0a9",
+      "sha256_gzip": "92e5a582b738a5931ee2ddbe97a49871eb3a2d6236c3b003256219563ac6d720"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0006.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0006.json.gz",
+      "uncompressed_bytes": 30629,
+      "compressed_bytes": 890,
+      "sha256_uncompressed": "b5eea064cbebc5370e6ce49a9de8683a411b7fb6794592840f22a41ff3a93827",
+      "sha256_gzip": "8286616e635208512bae41071cfeb4b82db3d2df153c3a1eb2c1f657e06ae44e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0007.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/direct-zero-0007.json.gz",
+      "uncompressed_bytes": 29770,
+      "compressed_bytes": 908,
+      "sha256_uncompressed": "fb77d3df19632ec523ddfb04a5e8d5212125e8ca2e856fce417528d0ef373c8b",
+      "sha256_gzip": "8983f87f9ef289636f09bc4df7239472a861be1ba98b32af718461bd855a2c00"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "uncompressed_bytes": 59565,
+      "compressed_bytes": 1129,
+      "sha256_uncompressed": "645c353b0ea5054bb07533b3f5a67cb85540eb9b16e2ce6271f3d017e54bc7d5",
+      "sha256_gzip": "0ea1e376b315f487bfb4b22a87dd6d76b90a7fbae809e7796be622b5391908e9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/retired-unresolved.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/retired-unresolved.json.gz",
+      "uncompressed_bytes": 2,
+      "compressed_bytes": 22,
+      "sha256_uncompressed": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sha256_gzip": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "uncompressed_bytes": 29690,
+      "compressed_bytes": 4613,
+      "sha256_uncompressed": "2c5ed52eabd4de7da795b58bbbad4044472bdb2bd220af901b9901ca52b5d866",
+      "sha256_gzip": "2039bc067d76e06b4aea6387fb0c44c419fa929c38afd7e0e6bde82000a86413"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-000-provisional.json.gz",
+      "uncompressed_bytes": 6892,
+      "compressed_bytes": 1789,
+      "sha256_uncompressed": "f59b26fe5f2f43bdf724f0a94da464b1a32fd46c0bcc0ae86b9cc8524488422d",
+      "sha256_gzip": "751e16605fe279801774099198e1b275d2d18801e3bbad23edecdb99cd9f15b5"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "uncompressed_bytes": 42312,
+      "compressed_bytes": 5964,
+      "sha256_uncompressed": "c43249746bd3e08a390188b6c286b83b640b4e443d28d02cbfef267f1e8b8f0b",
+      "sha256_gzip": "179471539cccc8489e888a9141bbcc6d9639d3022622ba3df9ff85ea642542cb"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-001-provisional.json.gz",
+      "uncompressed_bytes": 7119,
+      "compressed_bytes": 1795,
+      "sha256_uncompressed": "12824d798d3b3272ac517df08420b4ffd32971851b87beea3a2ffa206c02e465",
+      "sha256_gzip": "7fc7af37a82fc1ca4178592ca01badfb93f1c931dc1e9b311bb2534d7cdcdc7f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "uncompressed_bytes": 73071,
+      "compressed_bytes": 8926,
+      "sha256_uncompressed": "d9e102cafa24b94795013f5321ad3c03e363de41928a10d5aaf1b0a2ef197d8c",
+      "sha256_gzip": "5d6465243fad939e171e2f2f100aff303346309b3baa5449a5f36c07624b7313"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-002-provisional.json.gz",
+      "uncompressed_bytes": 7576,
+      "compressed_bytes": 1817,
+      "sha256_uncompressed": "adf3c1f7d85155c860385dfd92b6068709a30b726292dda02254773cd5db62a6",
+      "sha256_gzip": "654089d50db63a196ab8ff792e43553436b00c00b979eb4f4fa24eca45e25705"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin.gz",
+      "uncompressed_bytes": 115109,
+      "compressed_bytes": 14416,
+      "sha256_uncompressed": "2d5c676b003b5474128ab78125a7ee66ed409d0cee68a2bc601d0d65df8306a3",
+      "sha256_gzip": "1b99b7867dd92d8ce07854697b712f1b5289f27bdcac00f4519b643afd35d1df"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-003-provisional.json.gz",
+      "uncompressed_bytes": 6966,
+      "compressed_bytes": 1798,
+      "sha256_uncompressed": "04a957a6fbfd4f62e1d2a928ddb645f2d14ce70bfd39200e36d5717264a5729e",
+      "sha256_gzip": "57c315848b4429659ef4e77704f3ddc7ab0be652865bb142fd77da22735c27fa"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-004-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-004-provisional.bin.gz",
+      "uncompressed_bytes": 139218,
+      "compressed_bytes": 17179,
+      "sha256_uncompressed": "b0802a6a72b9a3c6917371fc39f4b3f756309cdeff673221104889ca855a670f",
+      "sha256_gzip": "82c61698c30486c6eb6416a7131e3eac54eff759e9dfc7f7bacb666d05683c7b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-004-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-004-provisional.json.gz",
+      "uncompressed_bytes": 6812,
+      "compressed_bytes": 1785,
+      "sha256_uncompressed": "7479b4913e621c6411a1b5d6ff45c4bfc883ec1db7719139a3b751f4c327e8ed",
+      "sha256_gzip": "b86705a633dc38de30b725cf7f198e30d9ed062207115faa893bcbff9f4eb9fe"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-005-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-005-provisional.bin.gz",
+      "uncompressed_bytes": 144592,
+      "compressed_bytes": 17535,
+      "sha256_uncompressed": "39a3fed6c449c42b8b36f499cb24810ca2e604080de792332b452b61195e9911",
+      "sha256_gzip": "31776565cf6914152c16c496abe802a740a33f112681e58617cafd038a208abc"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-005-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-005-provisional.json.gz",
+      "uncompressed_bytes": 6887,
+      "compressed_bytes": 1791,
+      "sha256_uncompressed": "338446d857517cc3362142d173a8a90859d4b25d951769fe60e8c8b32515e95a",
+      "sha256_gzip": "b2b1f19d1dbc4486cc4b300d3b6db4bbf7437e1edd30c9d89e80aebdaea8e066"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-closed.bin.gz",
+      "uncompressed_bytes": 149667,
+      "compressed_bytes": 17610,
+      "sha256_uncompressed": "989b991e0ba27aae374cb55c7a4327918a0e0d7dc1f0d299556ec4768fbc7797",
+      "sha256_gzip": "ad928bd08e75e178f771eba6e3f885550462b6b4cb9b8d8e618f2cd050791b82"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-closed.json.gz",
+      "uncompressed_bytes": 6882,
+      "compressed_bytes": 1789,
+      "sha256_uncompressed": "3346e3db284ed9b48712024069e0a057a43c24feaddf813cffc08ebf9871b2e4",
+      "sha256_gzip": "966c0f1e52ce39aa0604d9c72e1b6d96fb99fd36dd2a6436bd620ffa474d5420"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-provisional.bin.gz",
+      "uncompressed_bytes": 149643,
+      "compressed_bytes": 17599,
+      "sha256_uncompressed": "ab4ff2e86f9572abcc2e12d7aeb30f806106e5e5a854c66af5a21a1fce41df0d",
+      "sha256_gzip": "e0af7992254fe2b0b9c6a288d1c9801651eeb6fbc71fc7b7ddb78f94345fb654"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent/native-closure/cut-1/round-006-provisional.json.gz",
+      "uncompressed_bytes": 6887,
+      "compressed_bytes": 1791,
+      "sha256_uncompressed": "1568d071ee89bbb238429f3e21619b2e160a243a90798551c433b10723c79eb3",
+      "sha256_gzip": "569df080e1de27dfdc5d7ad7e21c110a33d59da38ae7e74049fba51a4be6aeec"
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent-resources.log",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent-resources.log.gz",
+      "uncompressed_bytes": 496394,
+      "compressed_bytes": 4271,
+      "sha256_uncompressed": "76166c20c8cf1b4eeed1b2a579f3911e1aa7756b03543fa9fe579b93a8327f14",
+      "sha256_gzip": "b37515ac2568daf9c4018b57ab7d0c6c0f82e17c8603b6c1f4d86a09681db634"
+    }
+  ],
+  "file_count": 158,
+  "uncompressed_bytes": 27327241,
+  "compressed_bytes": 1259398
+}

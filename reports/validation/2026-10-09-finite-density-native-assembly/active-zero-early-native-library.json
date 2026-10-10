@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "scope": "normal native library linked during the ongoing frozen-source combined build; final combined build verification still required",
+  "source_snapshot": "active-zero-source-hashes.json",
+  "source_snapshot_sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+  "artifact": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+  "sha256": "931cde2c6e17835ee1104c56468c9a6f40950ba560b9dea9174b2b0bf48811e3",
+  "size_bytes": 436047258,
+  "mtime_utc": "2026-10-10T00:30:42.660381+00:00",
+  "fingerprint": "target/release/.fingerprint/rustred-392075d0c6995fd1/lib-rustred.json",
+  "fingerprint_sha256": "5e3609f12e7b3f8933aba3405bdcf2f25882fe858c7a5b4fa3cedde5d8d91c44",
+  "features": "[\"native\"]"
+}

@@ -18,6 +18,7 @@ pub use model::{
     GuardedRule, GuardedSolution, GuardedSource, GuardedSourceInfo, GuardedSourceSystem,
     GuardedUnresolved, GuardedUnresolvedReason,
 };
+pub use search::{GuardedDirectZeroSearch, GuardedDirectZeroSkip, GuardedDirectZeroSkipReason};
 
 pub(super) use search::GuardedSearchScope;
 

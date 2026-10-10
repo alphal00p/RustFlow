@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/three_loop_even_source_row_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-native-even-zero-probe/original.json",
+    "original"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.13985350541770458,
+  "user_seconds": 0.11024099999999999,
+  "system_seconds": 0.02498,
+  "peak_child_rss_kib": 18460,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

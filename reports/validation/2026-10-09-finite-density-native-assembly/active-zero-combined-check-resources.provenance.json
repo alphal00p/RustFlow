@@ -1,0 +1,26 @@
+{
+  "captured_utc": "2026-10-10T00:25:31.788094+00:00",
+  "command": [
+    "cargo",
+    "check",
+    "--locked",
+    "--offline",
+    "--release",
+    "-p",
+    "symbolica-amflow",
+    "-p",
+    "rustred",
+    "--features",
+    "symbolica-amflow/python",
+    "--lib",
+    "--tests"
+  ],
+  "argument_files": {
+    "cargo": {
+      "resolved_path": "/nix/store/cavxgwfb7l7akyvvqvnl39d6nw0wckgh-cargo-1.97.1/bin/cargo",
+      "sha256": "431bc749d662c3b5356b52559d3c312cd8b25bb45969d099ec85c1b9dd972e17",
+      "size_bytes": 432
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

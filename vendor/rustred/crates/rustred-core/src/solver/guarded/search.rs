@@ -9,6 +9,11 @@ use crate::solver::{
 };
 use std::collections::VecDeque;
 
+mod direct_zero;
+pub use direct_zero::{
+    GuardedDirectZeroSearch, GuardedDirectZeroSkip, GuardedDirectZeroSkipReason,
+};
+
 pub(in crate::solver) struct GuardedSearchScope<'a, const N: usize> {
     pub problem: &'a GuardedSourceSystem<N>,
     pub domain: IndexDomain<N>,

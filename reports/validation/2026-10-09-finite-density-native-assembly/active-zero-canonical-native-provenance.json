@@ -1,0 +1,12 @@
+{
+  "source_snapshot": "active-zero-canonical-source-hashes.json",
+  "source_snapshot_sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+  "artifact": "target/release/deps/rustred-258a1e04558e72f1",
+  "sha256": "ef8d8fb749dce98710f4a81f24e024dbbd0cd63101e4a624ea84657544a57533",
+  "size_bytes": 632140792,
+  "mtime_utc": "2026-10-10T00:47:30.240961+00:00",
+  "fingerprint": "target/release/.fingerprint/rustred-258a1e04558e72f1/test-lib-rustred.json",
+  "fingerprint_sha256": "b85b676aa329bd69637774a73713fd78868a30a598b305806ea55b008d469e55",
+  "features": "[\"native\"]",
+  "scope": "fresh native unit test artifact verified stable after completed Cargo fingerprint; root build may still link other targets"
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "status": "independent mathematical proof and exact support audit; unmerged production bridge",
+  "scope": "fixed-label two-virtual-loop UV continuation with finite mass jets and common regulated thermal limits; not a production-permit expansion or a four-loop numerical prediction",
+  "files": {
+    "parametric-two-virtual-thermal-proof.md": {
+      "source": "/tmp/parametric-two-virtual-thermal-proof.md",
+      "sha256": "67d34e9828670e512755f0354661fc82085f02e1d17d408ffbf7fef0546d276b",
+      "bytes": 5447
+    },
+    "check_two_virtual_uv_charts.py": {
+      "source": "/tmp/check_two_virtual_uv_charts.py",
+      "sha256": "485133058b48e89103487e81b7a4bba5948866029325e6a3c78f3f6e1a1b9e89",
+      "bytes": 2841
+    },
+    "two-virtual-uv-chart-audit.json": {
+      "source": "/tmp/two-virtual-uv-chart-audit.json",
+      "sha256": "2b97df3b3804810ae115b70c744ce64dee49f151f01b47c7c0d0deaead2d4ed0",
+      "bytes": 1929
+    }
+  },
+  "audit_summary": "All192 archived prism pair support queries checked; each pair has52 full-rank supports,175 primary UV charts and352 transverse subcharts. Routed Gram/Symanzik factors satisfy the exact transverse-divisibility and positive-unit identities.",
+  "reviewed_sufficient_bound": "Choose a small generic high-D neighborhood and fixed integer Taylor order N>D/2+R-P_S with D-P+c-J-N>0. D>2(P+R+J-P_S+1) suffices for c>=0, together with separate compact and pair-transfer bounds.",
+  "original_target_qualifications": [
+    "Exact full-kinematic and channel identity",
+    "Same-sign independent line-mass Feynman regulators at fixed real T within the Fermi pole strip",
+    "Line-regulator removal before the T limit",
+    "One-sided nonnegative physical mass jets at fixed positive eta",
+    "Finite UV Taylor continuation on a generic high-D neighborhood",
+    "Separate joint-eta Mellin remainder",
+    "Compact inverse-energy and angular Holder bounds",
+    "Singleton and vacuum zeros use their common meromorphic continuations"
+  ],
+  "native_production_admission_changed": false,
+  "native_amf_predictions_read": 0,
+  "oracle_answers_read": 0
+}

@@ -1,0 +1,45 @@
+{
+  "captured_utc": "2026-10-10T00:48:30.989310+00:00",
+  "command": [
+    "timeout",
+    "90s",
+    "env",
+    "PROBE_DEPTH=3",
+    "PROBE_DOMAINS=32",
+    "PROBE_HINTS=personal",
+    "PROBE_HINT_FILE=reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/global-hints.json",
+    "/tmp/active_zero_original_derivative_discovery",
+    "/tmp/active-zero-three-loop-single-round7.bin",
+    "target-rays",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target-rays-personal.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "env": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/active_zero_original_derivative_discovery": {
+      "resolved_path": "/tmp/active_zero_original_derivative_discovery",
+      "sha256": "a5b419455063d6dd34c6645354f350696437919d6262d434cb878922ac960a71",
+      "size_bytes": 424503472
+    },
+    "/tmp/active-zero-three-loop-single-round7.bin": {
+      "resolved_path": "/tmp/active-zero-three-loop-single-round7.bin",
+      "sha256": "2df229c54694d6887e5f26891aadc20be77988b4a98ab57ba74d2267476810da",
+      "size_bytes": 9325692
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json",
+      "sha256": "9e261317c0578c9ed89b5cfcf921e44f45e1ced3f9cbf82bcecc87872ad26585",
+      "size_bytes": 37
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

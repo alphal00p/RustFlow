@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "450",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/tmp/prism_regulator_direction_check.py"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 108.25596065307036,
+  "user_seconds": 104.542255,
+  "system_seconds": 2.7758979999999998,
+  "peak_child_rss_kib": 73800,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

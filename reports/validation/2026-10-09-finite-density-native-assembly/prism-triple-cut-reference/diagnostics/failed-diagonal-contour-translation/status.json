@@ -1,0 +1,84 @@
+{
+  "status": "failed diagnostic retained, not reference values",
+  "cause": "simultaneous/mixed-axis contour translation eliminated z while moving w and retained the wrong surviving contour",
+  "scope": "original continuation and angular identity unaffected; high-precision runs on the defective translated representation are invalid as references",
+  "artifacts": [
+    {
+      "source": "/tmp/prism_barnes_optimize_diagonal_failed.py",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism_barnes_optimize_diagonal_failed.py",
+      "source_sha256": "3318c283c6c45c20e10c69e6edca167d8188f65cf3c5993b747fa226e83b1aa3",
+      "artifact_sha256": "3318c283c6c45c20e10c69e6edca167d8188f65cf3c5993b747fa226e83b1aa3",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-barnes-high-d-optimized.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-high-d-optimized.json.gz",
+      "source_sha256": "37400f103373fc86e81a68174d9eaa7d35856f853c30a067666da6967fe0d197",
+      "artifact_sha256": "537c84ee1b2285e68cff5af8620a0b95912d2bd166bbd5c24c22c45393b431e5",
+      "lossless_gzip": true
+    },
+    {
+      "source": "/tmp/prism-barnes-high-d-numeric.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-high-d-numeric.json",
+      "source_sha256": "6671351850f529a21f32d049c9863a8f43f7f54bc4c37a16fa2ae297e328b9b4",
+      "artifact_sha256": "6671351850f529a21f32d049c9863a8f43f7f54bc4c37a16fa2ae297e328b9b4",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-barnes-native-regulated-35.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-native-regulated-35.json",
+      "source_sha256": "0b92429f0615a54f813463312046f81197acca8e687cca5a4f0f350b5629434a",
+      "artifact_sha256": "0b92429f0615a54f813463312046f81197acca8e687cca5a4f0f350b5629434a",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-barnes-native-regulated-45-fine.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-native-regulated-45-fine.json",
+      "source_sha256": "84e8e38698a5da78ba1749015f1c67fe02182b4472881cac38bfdd17e5444cc1",
+      "artifact_sha256": "84e8e38698a5da78ba1749015f1c67fe02182b4472881cac38bfdd17e5444cc1",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-barnes-native-regulated-resources.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-native-regulated-resources.json",
+      "source_sha256": "21d988dc4d645d40012af2dcff43aad126bcacddfd4b9328c809a21a7e9c4d5b",
+      "artifact_sha256": "21d988dc4d645d40012af2dcff43aad126bcacddfd4b9328c809a21a7e9c4d5b",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-barnes-native-regulated-resources.provenance.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-native-regulated-resources.provenance.json",
+      "source_sha256": "9076582ed1faabe9626b45759cc6900c7d033e6035c688d1e73a8d6efeedf11a",
+      "artifact_sha256": "9076582ed1faabe9626b45759cc6900c7d033e6035c688d1e73a8d6efeedf11a",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-barnes-native-regulated-fine-resources.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-native-regulated-fine-resources.json",
+      "source_sha256": "d2efeec6c7dfdeac13999d9512aeb95056f48ea125627117081fd038c6ee2b9d",
+      "artifact_sha256": "d2efeec6c7dfdeac13999d9512aeb95056f48ea125627117081fd038c6ee2b9d",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-barnes-native-regulated-fine-resources.provenance.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-native-regulated-fine-resources.provenance.json",
+      "source_sha256": "9033c1e29f2fff35e0a9fbec19603882cf8951d2e64edbd5d47ad400c7c6e9d4",
+      "artifact_sha256": "9033c1e29f2fff35e0a9fbec19603882cf8951d2e64edbd5d47ad400c7c6e9d4",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism-high-d-monomials-qmc.json",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-high-d-monomials-qmc.json",
+      "source_sha256": "05a3a5021fa71639134a5d7705f6f8ab616af7f684dfd52033a5408607363655",
+      "artifact_sha256": "05a3a5021fa71639134a5d7705f6f8ab616af7f684dfd52033a5408607363655",
+      "lossless_gzip": false
+    },
+    {
+      "source": "/tmp/prism_barnes_native.rs",
+      "artifact": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism_barnes_native.rs",
+      "source_sha256": "2fe920f5f20d2d1bbd88ed0c571e705f1f4e7d01f23584352bad0f296208589e",
+      "artifact_sha256": "2fe920f5f20d2d1bbd88ed0c571e705f1f4e7d01f23584352bad0f296208589e",
+      "lossless_gzip": false
+    }
+  ]
+}

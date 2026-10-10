@@ -1,0 +1,73 @@
+{
+  "scope": "Independent finite-epsilon reference for the supplemental raised prism target only; Laurent generation/refinements pending; no native AMF comparison",
+  "target": {
+    "powers": [
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "numerator": "g1_2^2+g1_3*g2_4",
+    "numerator_convention": "shifted_euclidean"
+  },
+  "epsilon": "1/101",
+  "mu": "1",
+  "double_cuts": [
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      5,
+      7
+    ]
+  ],
+  "triple_cut": [
+    1,
+    5,
+    7
+  ],
+  "zero_sectors": [
+    [],
+    [
+      1
+    ],
+    [
+      5
+    ],
+    [
+      7
+    ]
+  ],
+  "zero_prescription": "common analytically regulated massless dimensional continuation, not separate real PV",
+  "raised_rule": "original numerator fixed; complete independent mass derivative includes implicit on-shell energies, transfer invariants, virtual kernel, shell Jacobian and moving upper support",
+  "normalization": "raw times (4*pi)^8*(exp(EulerGamma)/pi)^(4*eps), mu=1",
+  "observed_absolute_change": "3.241672040347936950605499453711334821715474E-14",
+  "observed_relative_change": "7.10620610138258604751973246446903506676691781442477034246504069728983054678814758766032027E-17",
+  "uncertainty": "empirical refinement, not rigorous enclosure",
+  "native_prediction_comparisons": 0,
+  "per_original_monomial_regulator_residues_checked": 42,
+  "source_files": [
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-45-resources.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-55-refined.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-symbolic-regulator-analysis.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-symbolic-contours.json.gz",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-55-refined-resources.provenance.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-45.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-55-refined-resources.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-55-refined-resources.log",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-45-resources.log",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism_barnes_full_reference.rs",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-45-resources.provenance.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-symbolic-tails.json"
+  ]
+}

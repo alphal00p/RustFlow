@@ -1281,13 +1281,23 @@
           "kind": "raised occupied line and polynomial numerator",
           "raised_physical_slot_zero_based": 1,
           "reference": {
-            "status": "required_not_generated",
-            "method": "Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.",
-            "target_absolute_uncertainty": "1/10^12",
-            "attainable_precision": "Not established. Reference generation and error certification are blocking acceptance gates; no 12-digit availability is claimed.",
-            "derivation_and_obstacles": "docs/finite-density-missing-references.md",
-            "definition_only_diagnostics": "reports/validation/2026-10-09-finite-density-native-assembly/missing-reference-diagnostics.json",
-            "next_gate": "Complete arithmetic, Barnes-quadrature and epsilon-grid refinements of the independent raised-target Laurent reference; the derived eight-sector finite-epsilon sum is already checked, but no full Laurent acceptance is claimed."
+            "status": "available_independent_laurent_reference_not_native_acceptance",
+            "file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/reference.json",
+            "validation": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-reference-validation.json",
+            "derivation": "docs/finite-density-prism-barnes-reference.md",
+            "target_index": 1,
+            "laurent_orders": [
+              -4,
+              0
+            ],
+            "method": "Independent complete eight-sector reference: native exact verification of five ordinary virtual identities, analytic compact beta integrals, and original-integrand raised triple-cut mass jet with moving upper surface evaluated by analytically continued Barnes quadrature. No AMF predictions or oracle values used.",
+            "target_absolute_uncertainty": "1e-12 in raw*(4*pi)^8*(exp(EulerGamma)/pi)^(4*epsilon) normalization",
+            "largest_empirical_absolute_uncertainty": "5.029239542725361e-16 in that comparison normalization",
+            "precision_evidence": "Five independent profiles with 12 epsilon samples each; 70/80 digits, epsilon denominators10000/500000/1000000, quadrature step1/30 versus1/40 and cutoff14 versus18, plus ten/twelve-node interpolation. All20 raw coefficient refinements passed.",
+            "uncertainty_caution": "Empirical refinement estimate, not a rigorous error bound; fitted small coefficients are retained, not forced to zero.",
+            "required_external_solvers": [],
+            "native_prediction_comparisons": 0,
+            "next_gate": "A supported complete native weighted AMF evaluation and independently saved prediction/refinement comparison; production prism admission and native four-loop closure remain unverified."
           }
         }
       ],

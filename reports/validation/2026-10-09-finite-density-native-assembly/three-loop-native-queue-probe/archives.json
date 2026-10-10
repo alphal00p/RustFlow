@@ -1,0 +1,33 @@
+{
+  "entries": [
+    {
+      "original": "three-loop-native-queue-probe/all/result.json",
+      "original_sha256": "4633e802107cf9430cf20577583f0cc47db23d3da41279f0b6a51858bc226d32",
+      "original_size": 9233119,
+      "archive": "three-loop-native-queue-probe/all/result.json.gz",
+      "archive_sha256": "8cb53af9bf9ebbfe22278b27146b27e6037f3ba0193ffb1bebccdc5c2918a1d0",
+      "archive_size": 445908,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-queue-probe/all-targets.json",
+      "original_sha256": "a5f932aea9eeccbc6c8775a88fad05bc77033a5bc00d7d7e1f0bec19cd982d68",
+      "original_size": 252585,
+      "archive": "three-loop-native-queue-probe/all-targets.json.gz",
+      "archive_sha256": "3ff51dc6e245eb04b3faaa421c80bf05fecc0317b60ed466c20d9e0ceeba4540",
+      "archive_size": 6710,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-queue-probe/first/result.json",
+      "original_sha256": "4cd3f53a1f8e369976a7a95180e1bbb13886207bcb41083aca0b98a93ab097ec",
+      "original_size": 427823,
+      "archive": "three-loop-native-queue-probe/first/result.json.gz",
+      "archive_sha256": "acb3aad76bd210b36a125aeb7ffdd7c94378209d141be0f1e0430ed44753b3c7",
+      "archive_size": 22379,
+      "verified_lossless": true
+    }
+  ],
+  "raw_bytes": 9913527,
+  "archive_bytes": 474997
+}

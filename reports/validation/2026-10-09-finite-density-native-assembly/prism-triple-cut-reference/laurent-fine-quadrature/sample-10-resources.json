@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "500",
+    "/tmp/prism_barnes_full_reference_v2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10-contours.json",
+    "80",
+    "1/40",
+    "18",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 247.3862902452238,
+  "user_seconds": 244.617533,
+  "system_seconds": 0.234318,
+  "peak_child_rss_kib": 62180,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,112 @@
+{
+  "status": "independent mathematical diagnostics only; no full Laurent reference",
+  "corrected_contour_method": "translate one coordinate at a time, eliminate the coordinate being moved, then separately optimize each generated one-dimensional residue contour",
+  "high_D_check": {
+    "dimension": "19/2",
+    "rho": "1/7",
+    "Barnes_three_cut": -1.5052010372889993e-25,
+    "direct_points": 1048576,
+    "direct_three_cut": -1.505131530929795e-25,
+    "relative_difference": 4.6177459012031186e-05,
+    "uncertainty": "QMC refinement diagnostic only, not a rigorous integration error"
+  },
+  "regulator_removal": "symbolic rho retained; only simple poles in isolated residues; finite-part numerical implementation under validation",
+  "artifacts": [
+    {
+      "file": "prism_barnes_continuation.py",
+      "source_sha256": "56b6a45f312361d189bd2cded12d310e5324865e9464f543a450ad52c11f045e",
+      "artifact_sha256": "56b6a45f312361d189bd2cded12d310e5324865e9464f543a450ad52c11f045e",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_barnes_optimize.py",
+      "source_sha256": "d525cad09b94b29e8f3a6dd6e1127fd745300b3cf90da6bab5c9f929596a47aa",
+      "artifact_sha256": "d525cad09b94b29e8f3a6dd6e1127fd745300b3cf90da6bab5c9f929596a47aa",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_barnes_numeric.py",
+      "source_sha256": "6c76fdfd0590a446ff44284a90fc7deca17eba9e220090689deed8ba5c9e1e6a",
+      "artifact_sha256": "6c76fdfd0590a446ff44284a90fc7deca17eba9e220090689deed8ba5c9e1e6a",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_barnes_continuation_check.py",
+      "source_sha256": "57b505958003ffabfaa3a59a8666ded85a91a02abd4e0854abf157e911e690a1",
+      "artifact_sha256": "57b505958003ffabfaa3a59a8666ded85a91a02abd4e0854abf157e911e690a1",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_barnes_continuation_check_multiple.py",
+      "source_sha256": "9ae7ed271fd5f1abcff2416c2696fb23f3a1461165bebd39744dad06bd4faddd",
+      "artifact_sha256": "9ae7ed271fd5f1abcff2416c2696fb23f3a1461165bebd39744dad06bd4faddd",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_barnes_triangle_check.py",
+      "source_sha256": "a1131a77d125eab0d50108c4881bacc04495c4707f6739df00b4b60ea10580e9",
+      "artifact_sha256": "a1131a77d125eab0d50108c4881bacc04495c4707f6739df00b4b60ea10580e9",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism-barnes-continuation-check.json",
+      "source_sha256": "a6022bdef87f73382b0e1e4eb8cf68bcb3f901d4f80beb31ed8dd5a1801ed838",
+      "artifact_sha256": "a6022bdef87f73382b0e1e4eb8cf68bcb3f901d4f80beb31ed8dd5a1801ed838",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_triple_high_d_qmc.py",
+      "source_sha256": "04bb610f7b522e6486d9db237fe3c0bd8604a1c49bf013f18e3ea5eb12e32330",
+      "artifact_sha256": "04bb610f7b522e6486d9db237fe3c0bd8604a1c49bf013f18e3ea5eb12e32330",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_high_d_monomial_check.py",
+      "source_sha256": "d0c940d5def44018323cf5c538346c6fb52a96d96947aefcdc43e47d67ba4554",
+      "artifact_sha256": "d0c940d5def44018323cf5c538346c6fb52a96d96947aefcdc43e47d67ba4554",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism-high-d-qmc-refined.json",
+      "source_sha256": "48153be1d5c3c9706d13dad2edb6d0099d59f5def8ebb03791268c30fdefddc3",
+      "artifact_sha256": "48153be1d5c3c9706d13dad2edb6d0099d59f5def8ebb03791268c30fdefddc3",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism-barnes-high-d-final-numeric.json",
+      "source_sha256": "5e28a2460d7203ed229d6b70f7d9a1362a96172d658dd99dc3c5e8b798f91693",
+      "artifact_sha256": "5e28a2460d7203ed229d6b70f7d9a1362a96172d658dd99dc3c5e8b798f91693",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism-barnes-high-d-final-contours.json.gz",
+      "source_sha256": "5ffcf1e7012aeb7c637f93f2f31b56b96211847fb067eb6b776a084f61bfb2b0",
+      "artifact_sha256": "d817435b00736533cf8203e2ebeed9607521f8eafc4fe635e1a6fe82208b0e4c",
+      "lossless_gzip": true
+    },
+    {
+      "file": "prism_barnes_symbolic_regulator.py",
+      "source_sha256": "0e2fe0564fdc69aa1ed83a15018ee6b662aec9be2a2c5bebb8c696d7c5b372e9",
+      "artifact_sha256": "0e2fe0564fdc69aa1ed83a15018ee6b662aec9be2a2c5bebb8c696d7c5b372e9",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_barnes_symbolic_optimize.py",
+      "source_sha256": "5134169b0b21ade4392d37e5a61cad9102a16a06c9f046800d9cb4320607b3a5",
+      "artifact_sha256": "5134169b0b21ade4392d37e5a61cad9102a16a06c9f046800d9cb4320607b3a5",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism_barnes_regulator_analysis.py",
+      "source_sha256": "a6de83fcd4b539ac901816531e6d633b6717426e76e40ddf9be75f72c4b63bea",
+      "artifact_sha256": "a6de83fcd4b539ac901816531e6d633b6717426e76e40ddf9be75f72c4b63bea",
+      "lossless_gzip": false
+    },
+    {
+      "file": "prism-barnes-symbolic-regulator-analysis.json",
+      "source_sha256": "59274e5e68ddd2ebdb6876df832479c077cf38033ab9924dcca0c45d0f90da9c",
+      "artifact_sha256": "59274e5e68ddd2ebdb6876df832479c077cf38033ab9924dcca0c45d0f90da9c",
+      "lossless_gzip": false
+    }
+  ]
+}

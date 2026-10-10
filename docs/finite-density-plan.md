@@ -99,8 +99,9 @@ grid change. Required four-loop numerical comparisons remain absent.
 Concrete reference-only kernels and the E8 shared-pole obstruction are recorded
 in [the remaining-reference investigation](finite-density-missing-references.md).
 The E8 supplemental reference remains unavailable. The prism supplemental
-reference has independent finite-epsilon values and preliminary Laurent grids;
-its final quadrature refinement and acceptance are still pending.
+reference now has a complete independently refined Laurent[-4,0] result: all 20
+coefficient refinements pass, with largest empirical normalized absolute
+uncertainty 5.03e-16. This is reference availability, not native AMF acceptance.
 
 At the user's request, complete three-loop numerical validation now precedes
 further four-loop numerical scale-up. The frozen intermediate input is a

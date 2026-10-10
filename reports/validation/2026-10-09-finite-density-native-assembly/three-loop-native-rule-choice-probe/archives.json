@@ -1,0 +1,78 @@
+{
+  "entries": [
+    {
+      "original": "three-loop-native-rule-choice-probe/historical/result.json",
+      "original_sha256": "5961576f5a4aa89dd3a8c6356f0d6424e642702e490184b65be68ec008b0b861",
+      "original_size": 29798,
+      "archive": "three-loop-native-rule-choice-probe/historical/result.json.gz",
+      "archive_sha256": "2994a87b33f5ed0dd080a4c24b69d5cd41e0a129b79f6bd5203a0193bdf59b03",
+      "archive_size": 810,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-rule-choice-probe/historical/shortest-rhs.bin",
+      "original_sha256": "f4f2fdfdffc33cb89beb528c19a86b7b350eb241884eb0050ab65474b10f2ffe",
+      "original_size": 1006986,
+      "archive": "three-loop-native-rule-choice-probe/historical/shortest-rhs.bin.gz",
+      "archive_sha256": "7d0e6497b522844c946f776cd3f99164c80a829353a0caa966b89bd0a5079118",
+      "archive_size": 47812,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-rule-choice-probe/historical/source-rows.json",
+      "original_sha256": "254b7321383dcb151a96f5d9eeac03bbaec0e813abf7e4d96983108f303a7dd6",
+      "original_size": 458405,
+      "archive": "three-loop-native-rule-choice-probe/historical/source-rows.json.gz",
+      "archive_sha256": "800d1d69c27fe8438b691b73c8e8ae50e6ca76cb4f6b987abbb20d55e0cc63a1",
+      "archive_size": 6193,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-rule-choice-probe/historical/zero-first.bin",
+      "original_sha256": "491d5ea0217e3ed91355486020c966c33f0eb25e95ed5a924d332b25e4048a9c",
+      "original_size": 1006986,
+      "archive": "three-loop-native-rule-choice-probe/historical/zero-first.bin.gz",
+      "archive_sha256": "ce6c88ec2f5f2bb4f9e4c0c353dd8377472967975f840484b4ed903781f0b748",
+      "archive_size": 59139,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-rule-choice-probe/personal-combined/result.json",
+      "original_sha256": "0cb5d70be28daa714684709256c4261130fdd95373b274c65153a4f3f1fbd8ef",
+      "original_size": 440732,
+      "archive": "three-loop-native-rule-choice-probe/personal-combined/result.json.gz",
+      "archive_sha256": "f498161758a504ff0c79d25cdc64725e77658e124fc2cbdcb5afd695f4462abd",
+      "archive_size": 21524,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-rule-choice-probe/personal-combined/shortest-rhs.bin",
+      "original_sha256": "5706474c2e4ca0e3874df22f59f928487244ea28e66012a4042d91e634c02d53",
+      "original_size": 11787024,
+      "archive": "three-loop-native-rule-choice-probe/personal-combined/shortest-rhs.bin.gz",
+      "archive_sha256": "5fced00387bf1de1414dc111b0ce79210a491bdbd44d2db694470f3d8615cd0a",
+      "archive_size": 817069,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-rule-choice-probe/personal-combined/source-rows.json",
+      "original_sha256": "e2309891c640f93de206079bbccacbcaad35c8e0d0a68e0b8e526f171a018593",
+      "original_size": 458405,
+      "archive": "three-loop-native-rule-choice-probe/personal-combined/source-rows.json.gz",
+      "archive_sha256": "a835fe7bc512bd4f0fb4dbd44d5457f9b26c235ceb25e0997a732bdf75a87cc1",
+      "archive_size": 6193,
+      "verified_lossless": true
+    },
+    {
+      "original": "three-loop-native-rule-choice-probe/personal-combined/zero-first.bin",
+      "original_sha256": "73fac8a82448779160130d2cc9230f26f5ef35dd80ec1bbefbe95c1b450ee79e",
+      "original_size": 11787024,
+      "archive": "three-loop-native-rule-choice-probe/personal-combined/zero-first.bin.gz",
+      "archive_sha256": "8102e17cef82228e31dfb4788bb3ff47c60a98d35b4d58de6158ea4baff9b5f4",
+      "archive_size": 1008641,
+      "verified_lossless": true
+    }
+  ],
+  "raw_bytes": 26975360,
+  "archive_bytes": 1967381
+}

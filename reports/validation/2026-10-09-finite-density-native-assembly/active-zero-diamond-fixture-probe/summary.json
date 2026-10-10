@@ -1,0 +1,60 @@
+{
+  "scope": "Independent fixture diagnosis against the fresh native-only library. Unchanged polynomial source equations; public point-domain native discovery and exact replay construct the rules. Solver-private manual seal_candidate is not invoked by this standalone binary. No feature predictions or new physics.",
+  "source_snapshot": "active-zero-source-hashes.json",
+  "source_snapshot_sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+  "native_library": {
+    "schema": 1,
+    "scope": "normal native library linked during the ongoing frozen-source combined build; final combined build verification still required",
+    "source_snapshot": "active-zero-source-hashes.json",
+    "source_snapshot_sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+    "artifact": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+    "sha256": "931cde2c6e17835ee1104c56468c9a6f40950ba560b9dea9174b2b0bf48811e3",
+    "size_bytes": 436047258,
+    "mtime_utc": "2026-10-10T00:30:42.660381+00:00",
+    "fingerprint": "target/release/.fingerprint/rustred-392075d0c6995fd1/lib-rustred.json",
+    "fingerprint_sha256": "5e3609f12e7b3f8933aba3405bdcf2f25882fe858c7a5b4fa3cedde5d8d91c44",
+    "features": "[\"native\"]"
+  },
+  "probe_source_sha256": "ec419f570aa1bb31d3bfd7e11e8b6483c4f03f13649d01ad74eefef8513bae1e",
+  "result": "PASS both variants",
+  "canonical_first_rhs": "I[6] -> I[5]+I[2], relative shifts[-1,-4]; original unit fixture mistakenly supplied[-4,-1]",
+  "cancelled": {
+    "applications": 3,
+    "terms": 0,
+    "conditions": [
+      "pending_x"
+    ],
+    "unused_pole_not_acquired": "pending_y"
+  },
+  "noncancelled": {
+    "applications": 4,
+    "terminal": "I[1]",
+    "coefficient": "2/pending_y",
+    "conditions": [
+      "pending_x",
+      "pending_y"
+    ]
+  },
+  "failed_predecessors": [
+    {
+      "kind": "original unit gate",
+      "resources": "../active-zero-native-resources.json",
+      "result": "76pass2fail1ignored; both failures occur during exact replay of unordered fixture RHS before queue execution"
+    },
+    {
+      "kind": "standalone private helper compile",
+      "result": "test-only CoefficientContext::new and private seal_candidate unavailable; preserved draft and failure summary"
+    },
+    {
+      "kind": "standalone public API compilation",
+      "result": "corrected max_domains argument and Option<u32> max_depth; no execution of uncompilable drafts"
+    },
+    {
+      "kind": "standalone default unlimited discovery runtime",
+      "resources": "public-discovery-resources.json",
+      "result": "explicitly rejected: finite search depth required"
+    }
+  ],
+  "resources": "public-discovery-depth2-resources.json",
+  "unit_fixture_correction_status": "Not yet applied at report creation; held for coordinated source change and rebuild."
+}

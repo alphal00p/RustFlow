@@ -1,0 +1,104 @@
+{
+  "status": "sample grid complete; refinements and Laurent acceptance separate",
+  "configuration": {
+    "executable": "/tmp/prism_barnes_full_reference_v2",
+    "output": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision",
+    "denominator": 1000000,
+    "count": 12,
+    "digits": 80,
+    "step": "1/30",
+    "cutoff": "14",
+    "sample_timeout": 300,
+    "start": 1
+  },
+  "executable_sha256": "6f5b358cdc7dd853c10ba04c97b49c313455dfc01fde918bb64bf707f1041ab2",
+  "source_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_regulator_analysis.py": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/run_grid.py": "a93a639059c8814d73e1548619b612467123c74e1eb619af2a126d177e7cfae9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_tail_check.py": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_symbolic_regulator.py": "b0713d668511e0b50fc342cdd5cad843b416c10d85a9687b209125f6b82dc92d",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_symbolic_optimize.py": "5134169b0b21ade4392d37e5a61cad9102a16a06c9f046800d9cb4320607b3a5",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_full_reference.rs": "83c26b8d9e8965278a521e955287343ab4bb6e28b09c0d1a2c2c922fcd652d29",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/monomials.json": "cc5b2409fffb5cadb003405099b1f5192afe7a6c54315699402c59d624062da3",
+    "examples/finite_density/triangular_prism.json": "7b408e421ebef0a056c2005763f813dd8e60d7ebaf807fbddedde8114f3ceb0e",
+    "fixtures/finite_density/prism_virtual_candidate_relations.json": "0f57d536eb5e7296d4aceff6e75e22c08a0f847add18b12b98a76ef218869336"
+  },
+  "native_amf_predictions_read": 0,
+  "oracle_answers_read": 0,
+  "scope": "supplemental original raised numerator prism target only; empirical reference refinement pending",
+  "completed_samples": [
+    {
+      "epsilon": "1/1000000",
+      "file": "sample-01.json",
+      "sha256": "761a4037dd323466d34c32fd5ccb74fdee98538989b777f5eb8eb050890ce0d5",
+      "elapsed_seconds": 123.91721298499033
+    },
+    {
+      "epsilon": "1/500000",
+      "file": "sample-02.json",
+      "sha256": "672efb4a88a36952e9591340dffd202a8f5bb871590ada916c9bf8dc6176df85",
+      "elapsed_seconds": 121.73566493298858
+    },
+    {
+      "epsilon": "3/1000000",
+      "file": "sample-03.json",
+      "sha256": "43de227998cddcc1fbf2d79af441de75d8b03f54d2c23bd2cfeac616406a4a3e",
+      "elapsed_seconds": 117.48517450597137
+    },
+    {
+      "epsilon": "1/250000",
+      "file": "sample-04.json",
+      "sha256": "219462feecc715e4ffdffd15b910d06985056a6003f4b579653f31e38af036b3",
+      "elapsed_seconds": 114.72757265530527
+    },
+    {
+      "epsilon": "1/200000",
+      "file": "sample-05.json",
+      "sha256": "e5a5ad3d983b33dc8f17ec8dd86c7e59c6bb358fb8134b8498ca05983f6c2d20",
+      "elapsed_seconds": 116.44508352782577
+    },
+    {
+      "epsilon": "3/500000",
+      "file": "sample-06.json",
+      "sha256": "24bc2c7dffd3f39cc6393828c42c6e17ae45734f606a8ab41beacfcdf7f4f7de",
+      "elapsed_seconds": 118.29746891278774
+    },
+    {
+      "epsilon": "7/1000000",
+      "file": "sample-07.json",
+      "sha256": "5844ad55f1f2483c99109ecbf5a417734bb53e2b7269d447b50b3c58d81d57d4",
+      "elapsed_seconds": 117.52921266620979
+    },
+    {
+      "epsilon": "1/125000",
+      "file": "sample-08.json",
+      "sha256": "c99d3d2a0165aa45b88a3b4edcc916d5e08d3993388389cd4e70f0ec0b9b59ab",
+      "elapsed_seconds": 117.35147338872775
+    },
+    {
+      "epsilon": "9/1000000",
+      "file": "sample-09.json",
+      "sha256": "d12d2f0208819c829b74196fd206e3cdd26ba1649f2b727fc84bc20d5b254f93",
+      "elapsed_seconds": 118.1014840672724
+    },
+    {
+      "epsilon": "1/100000",
+      "file": "sample-10.json",
+      "sha256": "77d832442d320dd173ca2b69eb7b1c7203927ac09581b66cfeab6bcff458d6b8",
+      "elapsed_seconds": 117.11015121079981
+    },
+    {
+      "epsilon": "11/1000000",
+      "file": "sample-11.json",
+      "sha256": "67c30df9eef2644b5b4a0804dd5abfd6662006e93d70e1ddd704ddc88a742b2d",
+      "elapsed_seconds": 117.34368742909282
+    },
+    {
+      "epsilon": "3/250000",
+      "file": "sample-12.json",
+      "sha256": "0b4970b6b18f9bd51ce559c4c140e309dfa0b8bcb0693569115b7155d49de19b",
+      "elapsed_seconds": 117.90004423819482
+    }
+  ],
+  "wall_seconds": 1417.9470600099303
+}

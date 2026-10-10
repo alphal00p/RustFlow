@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "/tmp/active_zero_three_loop_recurrence_probe",
+    "/tmp/active-zero-three-loop-single-round7.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/results",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/targets.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 14.646254844032228,
+  "user_seconds": 14.314672999999999,
+  "system_seconds": 0.227543,
+  "peak_child_rss_kib": 245860,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

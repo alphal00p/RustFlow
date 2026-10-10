@@ -106,6 +106,13 @@ pub struct GuardedDiscovery<const N: usize> {
     pub unresolved: Vec<GuardedUnresolved<N>>,
 }
 
+pub(crate) struct DirectZeroDiscovery<const N: usize> {
+    pub discovery: GuardedDiscovery<N>,
+    pub attempted_rows: usize,
+    pub completed_points: Vec<[i64; N]>,
+    pub skipped_seeds: Vec<String>,
+}
+
 #[derive(Debug)]
 pub struct GuardedReductionProgram<const N: usize> {
     native: GuardedProgram<N>,
@@ -389,6 +396,47 @@ impl<const N: usize> GuardedContext<N> {
                 dummy_symbols: self.dummy_symbols.clone(),
             },
             unresolved: found.unresolved,
+        })
+    }
+
+    /// Bounded native one-source proofs at concrete points. No unsuccessful
+    /// search is interpreted as a zero, terminal or domain-coverage proof.
+    pub(crate) fn discover_direct_zeros(
+        &self,
+        points: &[[i64; N]],
+        terminals: impl IntoIterator<Item = [i64; N]>,
+        max_attempts: usize,
+    ) -> Result<DirectZeroDiscovery<N>> {
+        for point in points {
+            validate_storage_label(point, self.physical_arity)?;
+        }
+        let terminals = terminals.into_iter().collect::<Vec<_>>();
+        for terminal in &terminals {
+            validate_storage_label(terminal, self.physical_arity)?;
+        }
+        let found = self
+            .sources
+            .direct_zero_rules_at_points(points, max_attempts)
+            .map_err(|error| Error::Reduction(error.to_string()))?;
+        let native = GuardedProgram::new(self.sources.clone(), found.solution.rules, terminals)
+            .map_err(|error| Error::Reduction(error.to_string()))?;
+        validate_storage_program(&native, self.physical_arity)?;
+        Ok(DirectZeroDiscovery {
+            discovery: GuardedDiscovery {
+                program: GuardedReductionProgram {
+                    native,
+                    physical_arity: self.physical_arity,
+                    dummy_symbols: self.dummy_symbols.clone(),
+                },
+                unresolved: found.solution.unresolved,
+            },
+            attempted_rows: found.attempted_rows,
+            completed_points: found.completed_points,
+            skipped_seeds: found
+                .skipped_seeds
+                .iter()
+                .map(|skip| format!("{skip:?}"))
+                .collect(),
         })
     }
 

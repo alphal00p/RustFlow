@@ -1,0 +1,35 @@
+{
+  "status": "pass",
+  "scope": "two concrete native one-original-row zero proofs; no amplitude or family closure result",
+  "per_point_attempts": [
+    1740,
+    1740
+  ],
+  "combined_minimum_attempts": 3480,
+  "combined_search_seconds": 0.004092494,
+  "source_ids": [
+    "lorentz/2/0/occupation-case-0",
+    "lorentz/2/0/occupation-case-0"
+  ],
+  "source_ordinals": [
+    136,
+    136
+  ],
+  "original_source_replay": true,
+  "zero_program_persistence_replay": true,
+  "zero_first_union_overrides_old_recurrences": true,
+  "one_less_budget_remains_explicit": true,
+  "nonzero_conditions_after_zero": [
+    [],
+    []
+  ],
+  "production_files_modified": false,
+  "artifact_sha256": {
+    "resources.json": "d840b5f76590d6f77113715b3b509c707facdd6b4eaf4fb28e7fccc2ef273bc1",
+    "resources.log": "8cf483e48a888f1a8de59ae6e5b7d370be329429c1b76a26fb0b421334620058",
+    "probe.rs": "1cb7a445fe777796c3dadbfc2b4b708009b7a690663f2a4e63a1601a80871a85",
+    "result.json": "6b5b4c1fb98b513fb8620bd854101eb7cd2f83990a7da138aeee9c6f37c049b9",
+    "build-binding.json": "4b803846afdb8852296f1b4d6f945f17c23a1bb757bcd76f8456a6d632d988d2",
+    "resources.provenance.json": "ff37b6fd9777c5193b75dfb5174c32f24a526e3c51bcb561935feffc9d5c7788"
+  }
+}

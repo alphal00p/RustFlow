@@ -78,3 +78,10 @@ Local changes after the initial import:
   native rules and gaps without changing the search or replay contracts;
   unsubmitted boxes remain explicit `DomainBudget` gaps. The caller replays
   the combined rules when constructing its program.
+- Guarded recursive application visits pending numeric labels in the common
+  replay-validated integral order, hardest first. Descending paths therefore
+  combine before a shared child is expanded, avoiding repeated applications
+  and allowing exact cancellation before an unused rule acquires conditions.
+  Conditions from every actually applied rule remain retained; unsupported
+  labels and exhausted work budgets remain explicit. This changes scheduling,
+  not rule selection, source identities, or exact replay.

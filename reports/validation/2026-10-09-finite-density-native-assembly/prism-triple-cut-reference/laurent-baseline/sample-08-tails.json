@@ -1,0 +1,19 @@
+{
+  "status": "strict uniform Stirling exponential damping checked",
+  "epsilon": "1/1250",
+  "criterion": "sum sign*abs(linear imaginary Gamma arguments) >= gap*L1(imaginary coordinates); exp(-pi*gap*L1/2) dominates any bounded-rho power",
+  "minimum_gap": "2",
+  "counts": [
+    {
+      "dimension": 1,
+      "gap": "4",
+      "leaves": 549
+    },
+    {
+      "dimension": 2,
+      "gap": "2",
+      "leaves": 42
+    }
+  ],
+  "bad": []
+}

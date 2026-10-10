@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "/tmp/three_loop_native_rule_choice_probe",
+    "/tmp/three-loop-personal-anchor-combined.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-native-rule-choice-probe/personal-combined"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 149.60269389022142,
+  "user_seconds": 147.821359,
+  "system_seconds": 0.538966,
+  "peak_child_rss_kib": 310300,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

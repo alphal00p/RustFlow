@@ -1,0 +1,18 @@
+{
+  "program_original": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/round-007-provisional.bin",
+  "program_copy": "/tmp/active-zero-three-loop-single-round7.bin",
+  "program_sha256": "2df229c54694d6887e5f26891aadc20be77988b4a98ab57ba74d2267476810da",
+  "metadata_sha256": "86422d8aaa36dbac96c07288cfdb3e93a166e612ebaae90da8821014775436e5",
+  "source_snapshot": "active-zero-source-hashes.json",
+  "round": 7,
+  "rules": 20781,
+  "active_frontier": 1025,
+  "current_requests": 2216,
+  "tested_labels": "original3 labels, all12 shifted terms in their actual eta derivatives, plus first10 frontier labels",
+  "original_derivative_axes": [
+    1,
+    2,
+    3,
+    4
+  ]
+}

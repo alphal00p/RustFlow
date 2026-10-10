@@ -1,0 +1,14 @@
+{
+  "captured_utc": "2026-10-10T00:36:44.184522+00:00",
+  "command": [
+    "/tmp/active_zero_diamond_fixture_probe"
+  ],
+  "argument_files": {
+    "/tmp/active_zero_diamond_fixture_probe": {
+      "resolved_path": "/tmp/active_zero_diamond_fixture_probe",
+      "sha256": "e58e88fbf5a126b33265aa05d79d1fcecf2f313ebd1950b150aadd9e5597c28b",
+      "size_bytes": 441299776
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

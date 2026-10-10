@@ -1,0 +1,52 @@
+{
+  "status": "standalone validation executable linkage record; no AMF algorithms called",
+  "captured_utc": "2026-10-09T22:53:05.723691+00:00",
+  "git_head_observed": "bc3c6bd88f5f179bc45aa7e6b97516121b7ed576",
+  "production_tree_clean_claim": false,
+  "build": "nix develop --command rustc --edition=2024 -O (standalone source) --extern symbolica_amflow=(recorded rlib) --extern serde_json=(recorded rlib); native library paths in build command supplied by Nix",
+  "dependency_observation": "Linked library mtimes precede executable; hashes captured after linking. Each numerical run captures the executable and exact input hash before launch.",
+  "files": [
+    {
+      "path": "/tmp/prism_barnes_full_reference_v2",
+      "sha256": "6f5b358cdc7dd853c10ba04c97b49c313455dfc01fde918bb64bf707f1041ab2",
+      "bytes": 1215302136,
+      "mtime_utc": "2026-10-09T22:36:46.045835+00:00"
+    },
+    {
+      "path": "target/release/deps/libsymbolica_amflow-a79cbf02a0f42270.rlib",
+      "sha256": "f954c69fe7043ed40c5cd5c14f4f812e6d1da14e4d6fbe1fa01ceece71f84330",
+      "bytes": 597454770,
+      "mtime_utc": "2026-10-09T21:12:16.220298+00:00"
+    },
+    {
+      "path": "target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734,
+      "mtime_utc": "2026-10-09T15:48:43.701185+00:00"
+    },
+    {
+      "path": "src/numeric.rs",
+      "sha256": "7a7e16e33b299299cb3d59c8b96a4ac4bea61a5bcf7b8b0c67300a461d389790",
+      "bytes": 18718,
+      "mtime_utc": "2026-10-09T13:30:26.535333+00:00"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "4fb195df415a173129d148af0262f1e17b64fb98b0cda6fd26ef42f61eecb500",
+      "bytes": 136601,
+      "mtime_utc": "2026-10-09T21:32:25.243551+00:00"
+    },
+    {
+      "path": "flake.lock",
+      "sha256": "01d38f66c85385251cedc49d5fbebf52da6d46b937038b771619291c5177caa4",
+      "bytes": 567,
+      "mtime_utc": "2026-10-09T13:30:26.234332+00:00"
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_full_reference.rs",
+      "sha256": "83c26b8d9e8965278a521e955287343ab4bb6e28b09c0d1a2c2c922fcd652d29",
+      "bytes": 13965,
+      "mtime_utc": "2026-10-09T22:36:10.251751+00:00"
+    }
+  ]
+}

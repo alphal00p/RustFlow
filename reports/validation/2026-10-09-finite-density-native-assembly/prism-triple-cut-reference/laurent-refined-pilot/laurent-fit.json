@@ -1,0 +1,30 @@
+{
+  "status": "Laurent interpolation only; no acceptance until independent refinements",
+  "working_pole_floor": -6,
+  "requested_orders": [
+    -4,
+    0
+  ],
+  "normalization": "raw times (4*pi)^8*(exp(EulerGamma)/pi)^(4*eps), mu=1",
+  "coefficients": {
+    "-6": {
+      "re": "4.34095527152222308639417564872859801955832645818050542871093699491411677400991566379E-20",
+      "im": "1.14085306561072316596033316095568025400866658619547784733445883465748566221552991744E-99"
+    }
+  },
+  "configuration": {
+    "executable": "/tmp/prism_barnes_full_reference_v2",
+    "output": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-refined-pilot",
+    "denominator": 10000,
+    "count": 1,
+    "digits": 80,
+    "step": "1/40",
+    "cutoff": "18",
+    "sample_timeout": 500,
+    "start": 1
+  },
+  "sample_hashes": {
+    "sample-01.json": "76f010f8b3e89b1efbf64dc0c20550daabb25fcb024463ab30ce0af750598efb"
+  },
+  "arithmetic": "exact rational Lagrange weights and Decimal precision 120"
+}

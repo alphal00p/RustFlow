@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/prism_barnes_full_reference",
+    "/tmp/prism-barnes-symbolic-contours.json",
+    "45",
+    "1/20",
+    "12",
+    "/tmp/prism-barnes-full-45.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 40.456184026785195,
+  "user_seconds": 40.056624,
+  "system_seconds": 0.080664,
+  "peak_child_rss_kib": 61440,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

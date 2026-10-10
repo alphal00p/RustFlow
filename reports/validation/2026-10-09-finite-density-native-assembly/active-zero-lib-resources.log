@@ -1,0 +1,82 @@
+
+running 73 tests
+test finite_density::basis::tests::physical_mass_derivative_keeps_original_medium_numerator_fixed ... ok
+test finite_density::basis::tests::redundant_physical_slots_are_preserved ... ok
+test finite_density::boundary::massless_terminal_origin_tests::joint_massless_terminal_origin_retains_upper_contacts_and_zero_lower_jets ... ok
+test finite_density::compact::tests::continued_massless_seed_cancels_only_removable_dimensional_poles ... ok
+test finite_density::compact::tests::continued_massless_seed_matches_independent_raised_bulk_and_surfaces ... ok
+test finite_density::compact::tests::finite_jump_threshold_matches_independent_thermal_radial_integrals ... ok
+test finite_density::compact::tests::massless_and_medium_seeds_have_defined_domains ... ok
+test finite_density::compact::tests::support_raised_surface_and_threshold_limits ... ok
+test finite_density::contour::tests::four_loop_heavy_edge_certificate_checks_every_cut_and_strict_margin ... ok
+test finite_density::flow::endpoint_tests::native_occupied_endpoint_reconstructs_singular_weights_and_rejects_bad_limits ... ok
+test finite_density::geometry::tests::inverse_energy_completion_requires_one_massive_compact_energy ... ok
+test finite_density::geometry::tests::negative_potentials_reverse_future_coordinates_and_missing_cuts_vanish ... ok
+test finite_density::geometry::tests::occupied_routing_phases_support_and_fixed_shell_deformation ... ok
+test finite_density::guarded::tests::generated_ball_sources_reduce_surface_moments_to_volume ... ok
+test finite_density::guarded::tests::priority_hints_preserve_storage_and_occupation_domains ... ok
+test finite_density::guarded::tests::roles_exact_replay_conditions_and_measure_bound_persistence ... ok
+test finite_density::guarded::tests::uncancelled_source_and_condition_denominators_remain_required ... ok
+test finite_density::interface::tests::epsilon_is_exact_and_rejected_before_graph_preparation ... 2026-10-10T00:37:25.048232Z  WARN symbolica::coefficient: Created infinity by raising 0 to the power of -1
+ok
+test finite_density::interface::tests::laurent_json_retains_accuracy_evidence_and_signed_powers ... ok
+test finite_density::interface::tests::sample_json_preserves_target_order_and_native_decimal_precision ... ok
+test finite_density::massless_contour::tests::actual_sum_channel_is_reported_unproved_without_omitting_the_sector ... ok
+test finite_density::massless_contour::tests::generic_incidence_certifies_all_e7_and_prism_channels ... ok
+test finite_density::massless_contour::tests::orientation_reversal_preserves_future_channels_and_positive_cut_mass_is_rejected ... ok
+test finite_density::massless_contour::tests::strict_deformation_and_partition_limits_are_not_silently_relaxed ... ok
+test finite_density::massless_endpoint::cone_tests::extra_virtual_loops_cannot_inherit_the_one_loop_simplex_bound ... ok
+test finite_density::massless_endpoint::cone_tests::massless_small_graph_provides_a_uniform_null_cone ... ok
+test finite_density::massless_endpoint::cone_tests::nonpositive_ordinary_powers_only_enlarge_the_polynomial_insertions ... ok
+test finite_density::massless_endpoint::permit_tests::e7_sealed_germ_and_block_permits_audit_generated_rank_loss ... ok
+test finite_density::massless_endpoint::permit_tests::free_virtual_flat_boxes_equal_all_rank_deficient_e7_supports ... ok
+test finite_density::massless_endpoint::permit_tests::generic_witness_avoids_all_integer_shifted_loop_poles ... ok
+test finite_density::massless_endpoint::permit_tests::rank_one_permit_rejects_genuinely_coupled_quadratics_and_prism ... ok
+test finite_density::massless_endpoint::permit_tests::sealed_germ_and_blocks_survive_routing_shear_and_orientation ... ok
+test finite_density::massless_endpoint::permit_tests::sealed_permit_audits_generated_zero_and_surface_labels ... ok
+test finite_density::massless_endpoint::permit_tests::singleton_external_only_factors_remain_explicitly_unadmitted ... ok
+test finite_density::massless_endpoint::tests::independent_compact_directions_are_rejected_by_exact_rank ... ok
+test finite_density::massless_endpoint::tests::orientation_and_affine_routing_do_not_supply_a_topology_shortcut ... ok
+test finite_density::massless_endpoint::tests::pure_compact_transfer_needs_no_virtual_uv_continuation ... ok
+test finite_density::massless_endpoint::tests::supplied_definitions_generate_strict_e7_degrees_without_period_values ... ok
+test finite_density::measure::tests::inactive_occupations_are_unsplit_and_tangent_sources_do_not_raise_shells ... ok
+test finite_density::measure::tests::normalized_shell_sources_match_direct_distribution_product_rule ... ok
+test finite_density::measure::tests::physical_factor_constructor_rejects_invalid_capacity_and_roles ... ok
+test finite_density::measure::tests::raised_residue_has_nonzero_surface_with_correct_sign ... ok
+test finite_density::measure::tests::storage_capacity_preserves_every_physical_source_presentation ... ok
+test finite_density::measure::tests::tangent_gram_actions_and_divergences_match_independent_cartesian_fields ... ok
+test finite_density::measure::tests::theta_zero_is_not_a_cut_zero_and_lower_endpoint_is_retained ... ok
+test finite_density::parametric_endpoint::full_kinematic_tests::full_native_symanzik_retains_off_null_and_independent_mass_terms ... ok
+test finite_density::parametric_endpoint::full_kinematic_tests::generic_one_virtual_multipair_query_covers_every_prism_triple_cut_support ... ok
+test finite_density::parametric_endpoint::label_envelope_tests::actual_label_degree_distinguishes_energy_quadratic_and_inactive_transfer_powers ... ok
+test finite_density::parametric_endpoint::label_envelope_tests::multipair_finite_label_query_retains_each_transfer_and_original_energy_degree ... ok
+test finite_density::parametric_endpoint::tests::actual_prism_all_virtual_supports_have_replayable_positive_sector_evidence ... prism cuts [1, 5]: 64 supports, 12 rank-deficient, 23 full-rank V=0, 29 with regular eta branch
+prism cuts [1, 7]: 64 supports, 12 rank-deficient, 23 full-rank V=0, 29 with regular eta branch
+prism cuts [5, 7]: 64 supports, 12 rank-deficient, 23 full-rank V=0, 29 with regular eta branch
+ok
+test finite_density::parametric_endpoint::tests::native_sector_query_rejects_incomplete_trees_and_wrong_binding ... ok
+test finite_density::parametric_endpoint::tests::sector_query_budgets_fail_without_partial_support_coverage ... ok
+test finite_density::reduction::active::tests::active_compact_flow_replays_targets_and_final_basis_derivatives ... ok
+test finite_density::reduction::active::tests::active_work_caps_leave_an_explicit_unclosed_result ... ok
+test finite_density::reduction::active::tests::actual_sum_cancels_uncovered_leaves_but_never_work_failures ... ok
+test finite_density::reduction::active::tests::cancelled_target_retires_uncovered_individual_rows_without_masters ... ok
+test finite_density::reduction::active::tests::direct_zero_prepass_supersedes_a_retained_recurrence_and_memoizes_search ... ok
+test finite_density::reduction::tests::fixed_shell_placement_and_auxiliary_sign_are_explicit ... ok
+test finite_density::reduction::tests::generated_compact_sources_close_and_replay_with_discovery_policies ... ok
+test finite_density::reduction::tests::guard_faces_cover_only_one_finite_axis_and_preserve_symbolic_bounds ... ok
+test finite_density::reduction::tests::native_compact_flow_closes_without_a_caller_terminal_basis ... ok
+test finite_density::reduction::tests::ordinary_zero_faces_cover_requested_points_without_broadening_admission ... ok
+test finite_density::reduction::tests::physical_recenter_gap_refines_through_native_discovery_and_replay ... ok
+test finite_density::reduction::tests::requested_rays_retain_symbolic_indices_and_exact_zero_faces ... ok
+test finite_density::reduction::tests::residual_policy_keeps_historical_gaps_when_final_search_is_empty ... ok
+test finite_density::reduction::tests::residual_policy_preserves_native_application_failure_without_searching ... ok
+test finite_density::reduction::tests::residual_policy_rebinds_old_terminals_before_native_discovery ... ok
+test finite_density::reduction::tests::reused_native_rules_obey_the_explicit_union_budget ... ok
+test finite_density::reduction::tests::round_budget_keeps_provisional_frontier_unresolved ... ok
+test finite_density::vacuum::tests::massless_four_loop_vacuum_is_proved_zero_before_amf_and_keeps_poles ... ok
+test finite_density::vacuum::tests::mixed_vacuum_requests_retain_nonzero_flow_and_original_target_order ... ok
+test finite_density::vacuum::tests::native_zero_certificate_retains_symbolic_family_domain ... ok
+test finite_density::vacuum::tests::zero_vacuum_projection_retains_original_coefficient_poles ... ok
+
+test result: ok. 73 passed; 0 failed; 0 ignored; 0 measured; 213 filtered out; finished in 7.33s
+

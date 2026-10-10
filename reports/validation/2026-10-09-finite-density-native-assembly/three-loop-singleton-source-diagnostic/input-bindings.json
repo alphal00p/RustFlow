@@ -1,0 +1,8 @@
+{
+  "snapshot_round": 6,
+  "source_files": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/round-006-provisional.json": "b5abbdbd017cbad5e478aa54b2114b081679b152fd55e5c01cfef8b748c277c1",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9"
+  },
+  "scope": "read-only completed checkpoint; no active files"
+}

@@ -1,0 +1,46 @@
+{
+  "captured_utc": "2026-10-09T23:06:33.395120+00:00",
+  "command": [
+    "timeout",
+    "3300",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/run_grid.py",
+    "/tmp/prism_barnes_full_reference_v2",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature",
+    "--denominator",
+    "1000000",
+    "--count",
+    "12",
+    "--digits",
+    "80",
+    "--step",
+    "1/40",
+    "--cutoff",
+    "18",
+    "--sample-timeout",
+    "500"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3": {
+      "resolved_path": "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3.14",
+      "sha256": "9bfa54c39ad52bd64ea04e2b0c88599c0ddfcc2da5d3213a2f9fc1e833fa8e1c",
+      "size_bytes": 16528
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/run_grid.py": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/run_grid.py",
+      "sha256": "a93a639059c8814d73e1548619b612467123c74e1eb619af2a126d177e7cfae9",
+      "size_bytes": 5586
+    },
+    "/tmp/prism_barnes_full_reference_v2": {
+      "resolved_path": "/tmp/prism_barnes_full_reference_v2",
+      "sha256": "6f5b358cdc7dd853c10ba04c97b49c313455dfc01fde918bb64bf707f1041ab2",
+      "size_bytes": 1215302136
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

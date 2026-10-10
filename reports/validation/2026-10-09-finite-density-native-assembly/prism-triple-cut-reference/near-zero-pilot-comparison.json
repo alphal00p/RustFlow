@@ -1,0 +1,43 @@
+{
+  "status": "finite-epsilon quadrature/precision refinement only; no Laurent or native AMF acceptance",
+  "target": {
+    "numerator": "g1_2^2+g1_3*g2_4",
+    "numerator_convention": "shifted_euclidean",
+    "powers": [
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "epsilon": "1/10000",
+  "inputs": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-01.json",
+      "sha256": "8ca7ad2f68646ea1d509d0c065eac0af2f26441543133558a370ef335e5f4c46",
+      "digits": 70,
+      "step": "1/30",
+      "cutoff": 14.0
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-refined-pilot/sample-01.json",
+      "sha256": "76f010f8b3e89b1efbf64dc0c20550daabb25fcb024463ab30ce0af750598efb",
+      "digits": 80,
+      "step": "1/40",
+      "cutoff": 18.0
+    }
+  ],
+  "observed_absolute_difference": "1.2088765872530440404515391300669569994167192692540991566379E-21",
+  "observed_relative_difference": "2.784816962256173566420311494975134027614246882953314496418249878305459187109017876161144411547075764E-26",
+  "per_monomial_regulator_residue_checks": [
+    42,
+    42
+  ],
+  "uncertainty": "empirical difference, not rigorous enclosure",
+  "note": "The pilot has only one epsilon sample; its generic controller interpolation output is not a Laurent fit and is not used."
+}

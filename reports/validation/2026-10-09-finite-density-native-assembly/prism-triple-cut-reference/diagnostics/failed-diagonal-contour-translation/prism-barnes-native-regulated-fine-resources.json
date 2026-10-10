@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "420",
+    "/tmp/prism_barnes_native",
+    "/tmp/prism-barnes-regulated-optimized.json",
+    "45",
+    "1/20",
+    "12",
+    "/tmp/prism-barnes-native-regulated-45-fine.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 150.3074566181749,
+  "user_seconds": 148.934212,
+  "system_seconds": 0.156247,
+  "peak_child_rss_kib": 54088,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

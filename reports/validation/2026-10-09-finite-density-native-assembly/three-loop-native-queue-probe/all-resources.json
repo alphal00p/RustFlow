@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "240s",
+    "env",
+    "PROBE_COMPARE_LEX=false",
+    "/tmp/three_loop_native_queue_probe",
+    "/tmp/three-loop-personal-anchor-combined.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-native-queue-probe/all-targets.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-native-queue-probe/all"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 10.220159940887243,
+  "user_seconds": 9.706448,
+  "system_seconds": 0.43136599999999997,
+  "peak_child_rss_kib": 217804,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

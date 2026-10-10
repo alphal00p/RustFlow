@@ -1,0 +1,17 @@
+{
+  "scope": "test fixture only, production implementation unchanged",
+  "change": "point6 RHS reorder shifts [-4,-1] to canonical [-1,-4]; original-source seal_candidate compares canonical RHS order",
+  "previous_native_suite": {
+    "passed": 76,
+    "failed": 2,
+    "ignored": 1
+  },
+  "standalone_native_discovery_replay": "both variants passed",
+  "differences": [
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs",
+      "before": "5a78d46cf12c05e1889d3bbb52fbcbc5b1f518c35e39f3e9e875116cb1673b6b",
+      "after": "28a41a303d830f7918b7d72ec6398f4f6d07af69d85831d319f615adea4b2dff"
+    }
+  ]
+}

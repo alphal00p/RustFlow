@@ -1,0 +1,12 @@
+[
+  {
+    "file": "sample-05-initial.json.gz",
+    "sha256_uncompressed": "7dde5384a6848c1db1ddcc989a3f13c59d07a0d02b1ffcc4ae1e15d9cd72b320",
+    "sha256_gzip": "9898440bfb5f7edc99b8f16bd5df7aac1fbb329512ca85255fa46d003a987ec7"
+  },
+  {
+    "file": "sample-05-contours.json.gz",
+    "sha256_uncompressed": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+    "sha256_gzip": "d2df00f2c9e7ddceb2ba6a4a6b2529c8ec7b0a6c737971a048eab004ba162fb7"
+  }
+]

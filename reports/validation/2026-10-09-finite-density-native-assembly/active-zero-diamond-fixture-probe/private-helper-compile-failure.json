@@ -1,0 +1,1 @@
+{"status":"compile failure; not executed","cause":"Direct extraction depended on cfg(test) CoefficientContext::new and solver-private seal_candidate; switched follow-up to public try_new/solve_domains, preserving exact source rows."}

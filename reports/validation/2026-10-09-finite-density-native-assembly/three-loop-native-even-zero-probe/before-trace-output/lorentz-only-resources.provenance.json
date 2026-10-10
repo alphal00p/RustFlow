@@ -1,0 +1,22 @@
+{
+  "captured_utc": "2026-10-10T00:34:38.654267+00:00",
+  "command": [
+    "/tmp/three_loop_even_source_row_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-native-even-zero-probe/lorentz-only.json",
+    "lorentz-only"
+  ],
+  "argument_files": {
+    "/tmp/three_loop_even_source_row_probe": {
+      "resolved_path": "/tmp/three_loop_even_source_row_probe",
+      "sha256": "87966d0436495e604f2843ef74e34c83a35175c565c9785f924f86ce94edc833",
+      "size_bytes": 442982224
+    },
+    "/tmp/three-loop-double-bc3c6bd.bin": {
+      "resolved_path": "/tmp/three-loop-double-bc3c6bd.bin",
+      "sha256": "15e6eeb55e4969aa68d05b194952a82b451c03afd762367fedf5bee3fc4007e8",
+      "size_bytes": 1006986
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

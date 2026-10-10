@@ -1,0 +1,40 @@
+{
+  "entries": [
+    {
+      "original": "results/result.json",
+      "original_sha256": "e93f9b53205a3bd35c97ea5b61ff5b7837ed5a0055848e0a1fd483aa335ec320",
+      "original_bytes": 288034,
+      "archive": "results/result.json.gz",
+      "archive_sha256": "168bd5971c9d19ac3874eea823a24f82c3a2fb0f788013dbd87930b6c3ad82f3",
+      "archive_bytes": 12742,
+      "verified_lossless": true
+    },
+    {
+      "original": "results/shortest-rhs.bin",
+      "original_sha256": "54c43918eb2cbf23dec80057c4889c670f271c075d6c8113d440efed568ec625",
+      "original_bytes": 9325692,
+      "archive": "results/shortest-rhs.bin.gz",
+      "archive_sha256": "236904492945163df610b736ef7936b86a73b4b8baf6c4dd0238cedc26206cfa",
+      "archive_bytes": 674639,
+      "verified_lossless": true
+    },
+    {
+      "original": "results/source-rows.json",
+      "original_sha256": "dfabe8556bdfd6588c533c5d733b7a273e9508c6425c21a7a2ae6ed73f7c9bb2",
+      "original_bytes": 96172,
+      "archive": "results/source-rows.json.gz",
+      "archive_sha256": "1f3aa7f11c0ccc91ddbc9bea277999654bc4196bee439dd6ef913c1b01565956",
+      "archive_bytes": 2916,
+      "verified_lossless": true
+    },
+    {
+      "original": "results/zero-first.bin",
+      "original_sha256": "249936bb4eb64751cd6b266cdbba9ad944961ab6405297350ef10e65a26c1180",
+      "original_bytes": 9325692,
+      "archive": "results/zero-first.bin.gz",
+      "archive_sha256": "c55a8b81b1d7dc5380f1913dec80f80c68c94f750352b886ab7dc194af00d49d",
+      "archive_bytes": 888259,
+      "verified_lossless": true
+    }
+  ]
+}

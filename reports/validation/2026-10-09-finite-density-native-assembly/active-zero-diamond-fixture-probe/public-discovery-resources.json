@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/tmp/active_zero_diamond_fixture_probe"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 0.012505712918937206,
+  "user_seconds": 0.0009519999999999999,
+  "system_seconds": 0.015588,
+  "peak_child_rss_kib": 15460,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/three_loop_source_row_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-direct-lorentz-zero-probe/lorentz-first.json",
+    "lorentz-first"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.032825805712491274,
+  "user_seconds": 0.025505999999999997,
+  "system_seconds": 0.007155,
+  "peak_child_rss_kib": 15420,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

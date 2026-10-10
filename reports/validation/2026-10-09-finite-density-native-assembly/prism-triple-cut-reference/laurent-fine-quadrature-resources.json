@@ -1,0 +1,28 @@
+{
+  "command": [
+    "timeout",
+    "3300",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/run_grid.py",
+    "/tmp/prism_barnes_full_reference_v2",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature",
+    "--denominator",
+    "1000000",
+    "--count",
+    "12",
+    "--digits",
+    "80",
+    "--step",
+    "1/40",
+    "--cutoff",
+    "18",
+    "--sample-timeout",
+    "500"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 2634.1412717574276,
+  "user_seconds": 2583.645455,
+  "system_seconds": 33.711018,
+  "peak_child_rss_kib": 1204296,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

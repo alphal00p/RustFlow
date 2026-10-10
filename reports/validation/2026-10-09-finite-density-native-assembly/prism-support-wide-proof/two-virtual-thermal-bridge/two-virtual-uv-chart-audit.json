@@ -1,0 +1,46 @@
+{
+  "status": "pass",
+  "scope": "exact UV chart audit only; no new physical admission or period",
+  "theorem": "generic two-virtual-loop maximum-parameter UV radial charts",
+  "runs": [
+    {
+      "file": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-full-kinematic/prism-cuts-1-5-supports.json.gz",
+      "sha256": "d272575f7a26e6cbc54252085ba594d28912850341ecdcaa3ccb1cb82670e773",
+      "construction_phase_budget": 59840000,
+      "uv_operation_reservation": 20480000,
+      "supports": 64,
+      "full_rank": 52,
+      "rank_deficient": 12,
+      "primary_charts": 175,
+      "transverse_subcharts": 352,
+      "uv_operation_bound": 355968,
+      "native_operations": 52688778
+    },
+    {
+      "file": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-full-kinematic/prism-cuts-1-7-supports.json.gz",
+      "sha256": "5484aa7337d9e703870b2191bbfc7d4c3f5f9abf9c3a9cafeb3fe1c0158fdc22",
+      "construction_phase_budget": 59840000,
+      "uv_operation_reservation": 20480000,
+      "supports": 64,
+      "full_rank": 52,
+      "rank_deficient": 12,
+      "primary_charts": 175,
+      "transverse_subcharts": 352,
+      "uv_operation_bound": 355968,
+      "native_operations": 52688778
+    },
+    {
+      "file": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-full-kinematic/prism-cuts-5-7-supports.json.gz",
+      "sha256": "b267d053b0246a349f55282ec309c70a5cd9cdaa25b85f8cbd0d82467e99ab45",
+      "construction_phase_budget": 59840000,
+      "uv_operation_reservation": 20480000,
+      "supports": 64,
+      "full_rank": 52,
+      "rank_deficient": 12,
+      "primary_charts": 175,
+      "transverse_subcharts": 352,
+      "uv_operation_bound": 355968,
+      "native_operations": 52688778
+    }
+  ]
+}

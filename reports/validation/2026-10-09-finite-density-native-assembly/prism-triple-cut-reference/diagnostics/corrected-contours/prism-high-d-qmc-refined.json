@@ -1,0 +1,26 @@
+{
+  "status": "independent direct high-D QMC diagnostic, not an accuracy-certified reference",
+  "D": "19/2",
+  "regulator": "1/7",
+  "results": [
+    {
+      "points": 262144,
+      "bulk": -3.931757917749865e-26,
+      "surface": -1.112234840476921e-25,
+      "total": -1.5054106322519075e-25
+    },
+    {
+      "points": 524288,
+      "bulk": -3.93164328309791e-26,
+      "surface": -1.1119242467183669e-25,
+      "total": -1.5050885750281577e-25
+    },
+    {
+      "points": 1048576,
+      "bulk": -3.9317449404745825e-26,
+      "surface": -1.1119570368823368e-25,
+      "total": -1.505131530929795e-25
+    }
+  ],
+  "wall_seconds": 19.73628539731726
+}

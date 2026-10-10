@@ -1,0 +1,4 @@
+
+thread 'main' (3482314) panicked at reports/validation/2026-10-09-finite-density-native-assembly/active-zero-diamond-fixture-probe/probe.rs:64:98:
+called `Result::unwrap()` on an `Err` value: InvalidInput("guarded discovery requires a finite search depth and positive domain budget")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

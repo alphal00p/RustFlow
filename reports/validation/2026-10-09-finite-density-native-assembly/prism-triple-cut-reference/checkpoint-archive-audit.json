@@ -1,0 +1,1292 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Every gzip artifact in the completed prism reference tree, including preserved failed diagnostics, checked against original compressed and uncompressed digests; production source snapshot differences recorded separately. Archive integrity does not validate the failed numerical diagnostics.",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/corrected-contours/prism-barnes-high-d-final-contours.json.gz",
+      "compressed_bytes": 81863,
+      "uncompressed_bytes": 2262961,
+      "sha256_gzip": "d817435b00736533cf8203e2ebeed9607521f8eafc4fe635e1a6fe82208b0e4c",
+      "sha256_uncompressed": "5ffcf1e7012aeb7c637f93f2f31b56b96211847fb067eb6b776a084f61bfb2b0",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/corrected-contours/status.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/prism-barnes-high-d-optimized.json.gz",
+      "compressed_bytes": 89932,
+      "uncompressed_bytes": 2318876,
+      "sha256_gzip": "537c84ee1b2285e68cff5af8620a0b95912d2bd166bbd5c24c22c45393b431e5",
+      "sha256_uncompressed": "37400f103373fc86e81a68174d9eaa7d35856f853c30a067666da6967fe0d197",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/diagnostics/failed-diagonal-contour-translation/status.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-symbolic-contours.json.gz",
+      "compressed_bytes": 390235,
+      "uncompressed_bytes": 12663158,
+      "sha256_gzip": "5c6ddddcc2f3ed533730033b820dc6276350fbdfc26c7aa05d0d34de961074d2",
+      "sha256_uncompressed": "82dfee83879e3b06ca4971fbfa03e7faa36d52341d3e578907664af723a6b5d2",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/sha256.json",
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-55-refined-resources.provenance.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-01-contours.json.gz",
+      "compressed_bytes": 380711,
+      "uncompressed_bytes": 12515122,
+      "sha256_gzip": "519d496cf6e4a1f24fb582614cd293604d582d7b7d7e8d1337fd34d369610615",
+      "sha256_uncompressed": "621e319e73200760936f05ad62876db00db1a969ddfdef3126e8cf2acdc8748b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-01-initial.json.gz",
+      "compressed_bytes": 89434,
+      "uncompressed_bytes": 2734290,
+      "sha256_gzip": "091b55195b68ce30ae48d909a80770f4dee588724d5b75c7cf42241177bfc72f",
+      "sha256_uncompressed": "d0aea62c601b893105395c4635a6a47cd786a74c82498df8542f74363e8ae0cb",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-02-contours.json.gz",
+      "compressed_bytes": 379266,
+      "uncompressed_bytes": 12338569,
+      "sha256_gzip": "965f95939a4768e856c60a7ccded8ea4d3de2c2fdf2807ba38e6b27276e2e70c",
+      "sha256_uncompressed": "6a99eb6ecfe447b4d8963db04d7dfe5f786f4740349e69d51aa59ca33f170030",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-02-initial.json.gz",
+      "compressed_bytes": 89327,
+      "uncompressed_bytes": 2726648,
+      "sha256_gzip": "507a646d7f0f21351a92625efb0023e69f16affcbd8b298b1448c1e9f3b89e08",
+      "sha256_uncompressed": "37c4f776a6e5d1a5147edf31d1f15dc00bb375d9935bb4d2a3f387c7d84e5efe",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-03-contours.json.gz",
+      "compressed_bytes": 383595,
+      "uncompressed_bytes": 12614635,
+      "sha256_gzip": "434f90626f926e6594720ab51f3e46a2d15f66927d097e847ddd4bcae8deadcd",
+      "sha256_uncompressed": "56265364f7f2af07bb9056e8bfac5642acc3ee521ae0e3a7ae328527d8b38376",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-03-initial.json.gz",
+      "compressed_bytes": 89304,
+      "uncompressed_bytes": 2734418,
+      "sha256_gzip": "26674cbc0ebd576473dba325523f6888f8780c6f2ec4e195912bd0cb100604a0",
+      "sha256_uncompressed": "9700ff66c089bd8c4d772c94099a4bfee455da4441be442725f88423ac5f27f0",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-04-contours.json.gz",
+      "compressed_bytes": 384984,
+      "uncompressed_bytes": 12437731,
+      "sha256_gzip": "fa4192dbf35ac79af5863648a0f69aa494a4d444aaa3b70644ce905cd487f7c5",
+      "sha256_uncompressed": "9c55303f54236b9119a5dcfcbd1e33a94952effb3783a18b6cd7c3c1b1be4d38",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-04-initial.json.gz",
+      "compressed_bytes": 89623,
+      "uncompressed_bytes": 2718867,
+      "sha256_gzip": "8965be41d87b907bc083a084b6404d6453a2b1cbbfd724273b5438e640b5d621",
+      "sha256_uncompressed": "864896d84f31f59fd65b00c82d6031f51121e16b3f88a1a1188a1fa11178fc19",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-05-contours.json.gz",
+      "compressed_bytes": 377548,
+      "uncompressed_bytes": 12431266,
+      "sha256_gzip": "be2dab38d9cd7c9904a90e05487652064477e395f1e2389ab596c442b53db0f3",
+      "sha256_uncompressed": "1ddbeafed0be1187542a3ec42d2f541387068d8ea56f48b2865b18aec5a0945b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-05-initial.json.gz",
+      "compressed_bytes": 89050,
+      "uncompressed_bytes": 2713710,
+      "sha256_gzip": "28ea8fe48c1ee6bea8988f32f44e5c13ba3461056d78d70312ba62b65f57939d",
+      "sha256_uncompressed": "b9ea033813eb895facb568d3fd030875257d43c101f7cfb2af58ddcd17be861b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-06-contours.json.gz",
+      "compressed_bytes": 379795,
+      "uncompressed_bytes": 12345784,
+      "sha256_gzip": "58a20154317c4d139b595f597fbfe9976088fa3fe8643cbc15bb2684e32d65ea",
+      "sha256_uncompressed": "9a797cd6493e3d57166c3145849eaee96b2b9609fe24a8defc796c825be813bb",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-06-initial.json.gz",
+      "compressed_bytes": 89381,
+      "uncompressed_bytes": 2726758,
+      "sha256_gzip": "60ba48886155cb656de92805c7152fcc20925abea961fc88d595c40f39959c23",
+      "sha256_uncompressed": "effb694998524c485ec930ab71e0137a5113fd5871e59152f1185e840e3b23b1",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-07-contours.json.gz",
+      "compressed_bytes": 384093,
+      "uncompressed_bytes": 12601555,
+      "sha256_gzip": "c2473cff1008a3851db82271aa8b1fc4aa52753308c90c5d53ec981ad8bae4bf",
+      "sha256_uncompressed": "3c084bf307d369230f9bf191e7b461fa352a78ab1d2171d7a4c7feac5753c3a1",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-07-initial.json.gz",
+      "compressed_bytes": 89393,
+      "uncompressed_bytes": 2734334,
+      "sha256_gzip": "eea6436e8060b2fa2abc44bdcf16d55d3250b84eaee85ab34af4837fc6a487d8",
+      "sha256_uncompressed": "0f98071e179d1dbf45985fc00e625fd1d6ce214687910815a5b75e8c07122886",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-08-contours.json.gz",
+      "compressed_bytes": 385619,
+      "uncompressed_bytes": 12383098,
+      "sha256_gzip": "0502fe5993a95ba94fb92d6c81ca416c1610c6d0246a03ed4ee6852af5f710c2",
+      "sha256_uncompressed": "a9bc90ba3d2941212e8c8699f289a0d3435efa7ccd8f9eac615f87ac9ea74527",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-08-initial.json.gz",
+      "compressed_bytes": 89278,
+      "uncompressed_bytes": 2700810,
+      "sha256_gzip": "e4674672841ea14c7659823d4e123724b43805d59f5590c3161da87eee40fa57",
+      "sha256_uncompressed": "28d35548668488a35217e728faad5019e5073689d8ebe69764ab7bb4ca14f770",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-09-contours.json.gz",
+      "compressed_bytes": 381975,
+      "uncompressed_bytes": 12524422,
+      "sha256_gzip": "0e1af76dcc6b7aaf1807052418b6c6760d73f5b3588d7e528a921edbcdaf4429",
+      "sha256_uncompressed": "4a5e7d331d82810080d5f3239700c540e33a3d9fac8ee254c3c72d2f72d7df67",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-09-initial.json.gz",
+      "compressed_bytes": 89145,
+      "uncompressed_bytes": 2734454,
+      "sha256_gzip": "cbcb9d951e0a41fc09343a751e6407009f855b3f52616e468b04870601f69ffb",
+      "sha256_uncompressed": "5ed437b80989160a6dc53e1828263db090e9d728c37dc8a5acc124523dc3c3a6",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-10-contours.json.gz",
+      "compressed_bytes": 376042,
+      "uncompressed_bytes": 12366731,
+      "sha256_gzip": "8019fb3e57d102e7044fb4819ab05a00fb11e1acf2933eb9544fc4e76ad8fcc6",
+      "sha256_uncompressed": "6a8d79c81219d20b68e1c26d6992b0f67f66fdbdfeddc81addf3cee445f97b12",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-10-initial.json.gz",
+      "compressed_bytes": 88676,
+      "uncompressed_bytes": 2706749,
+      "sha256_gzip": "dfaacfa66c097eb68c8166ff98f732f305b560632215e276f4c3117729e5a2e7",
+      "sha256_uncompressed": "fca561d3db28f6fb9b2defb2ccf358fcb00e1f89e7b9d4479c642a0c6a5c1496",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-11-contours.json.gz",
+      "compressed_bytes": 384726,
+      "uncompressed_bytes": 12639519,
+      "sha256_gzip": "59b4ee88ec51e8edb24677bca5b5d45a83d9aa3f2e033f285c52c928424e258e",
+      "sha256_uncompressed": "e61b7e02f2fc15bf12e1badffcac7d341e90d687ee7712b57a733eb4b58666c6",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-11-initial.json.gz",
+      "compressed_bytes": 89250,
+      "uncompressed_bytes": 2734391,
+      "sha256_gzip": "e3ee51da1352c646c8f15b1a7d44c48f06db8e58d8ce5d4dd0298b3a22eeb4f8",
+      "sha256_uncompressed": "1c1f221cb64d28420f4e610f9fd9b7a078389c15387d5dbd29a01ce3242bd69a",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-12-contours.json.gz",
+      "compressed_bytes": 382082,
+      "uncompressed_bytes": 12329273,
+      "sha256_gzip": "644e5d3e424786883321c0c007147cfdd91d1cf592fd9e3b861839cf083bb270",
+      "sha256_uncompressed": "49af0b02379e0819082317bbcff3c83f890bd0f37e8082c1cfebcf4199912021",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-12-initial.json.gz",
+      "compressed_bytes": 89524,
+      "uncompressed_bytes": 2719092,
+      "sha256_gzip": "b13590a5b64f6ab2f331643c87e64485a6855880376a3cde0530c993f18e8e25",
+      "sha256_uncompressed": "67e3abcd29e9d4aa6df622a91c81a42b47fc0e9a4d3da0826415339b1c7c7568",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-01-contours.json.gz",
+      "compressed_bytes": 389171,
+      "uncompressed_bytes": 12879453,
+      "sha256_gzip": "cba5aa0697b2d5d000e82dd241b7e321facc694d17f0b91f769f10f81029f3fc",
+      "sha256_uncompressed": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-01-initial.json.gz",
+      "compressed_bytes": 90462,
+      "uncompressed_bytes": 2789878,
+      "sha256_gzip": "7a18ffd988a51d04dc4417d02dca807c3deb5b5a950ea0b146aad57e2a834cd6",
+      "sha256_uncompressed": "0f9e7580de521645ad412cbf7196aedce70830487810054830b98f813b19bbd5",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-02-contours.json.gz",
+      "compressed_bytes": 389174,
+      "uncompressed_bytes": 12701151,
+      "sha256_gzip": "f10d0e72e471b421ae0d5447a8a1035c496cbb74b5737d0f9a3a529d9cdf47af",
+      "sha256_uncompressed": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-02-initial.json.gz",
+      "compressed_bytes": 90491,
+      "uncompressed_bytes": 2782006,
+      "sha256_gzip": "15389227a70bcfff1f9662bb6248d47b13ff71d3b37de5208f0ad5a9ef8352fe",
+      "sha256_uncompressed": "f8f7a33155e4b67a22c645dbb1c138def0be4d68c13bb6a51c3ec2d371407bb9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-03-contours.json.gz",
+      "compressed_bytes": 382445,
+      "uncompressed_bytes": 12603733,
+      "sha256_gzip": "59341b6ea1f25954a64469886df52686cee13ff7221fab9910b7347ada4c7188",
+      "sha256_uncompressed": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-03-initial.json.gz",
+      "compressed_bytes": 90392,
+      "uncompressed_bytes": 2789898,
+      "sha256_gzip": "f84a4c627edca3f7b79fb0f40e7ff93cdaa539911366ced9835731dcc2233e8d",
+      "sha256_uncompressed": "17ef3d6cbdf1c05b91bc718b716ab60df65d556be76f487d54fbbe485b2c7694",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-04-contours.json.gz",
+      "compressed_bytes": 391361,
+      "uncompressed_bytes": 12683264,
+      "sha256_gzip": "7896315825516626203a28d84f1326299009915b872a015b3d3e63a79c790582",
+      "sha256_uncompressed": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-04-initial.json.gz",
+      "compressed_bytes": 90492,
+      "uncompressed_bytes": 2773784,
+      "sha256_gzip": "0cc24e66bb8830c78748a7a8ddc91a5cc4f6073b06edd715277677a1db09d25d",
+      "sha256_uncompressed": "668da28c451968f99c5f2b89978f68f00b3fd73b7dc177393e784088641e0107",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-05-contours.json.gz",
+      "compressed_bytes": 384634,
+      "uncompressed_bytes": 12750982,
+      "sha256_gzip": "ca4e9487c3ffbbc7a8789f46c0e93d67de43477eab5443c9ee8b651059b91c5e",
+      "sha256_uncompressed": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-05-initial.json.gz",
+      "compressed_bytes": 89711,
+      "uncompressed_bytes": 2769310,
+      "sha256_gzip": "b6c5a207d3662527089e555a5b4648819f512ec6efae1463c5744f7467fd7c4e",
+      "sha256_uncompressed": "7dde5384a6848c1db1ddcc989a3f13c59d07a0d02b1ffcc4ae1e15d9cd72b320",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-06-contours.json.gz",
+      "compressed_bytes": 385980,
+      "uncompressed_bytes": 12590137,
+      "sha256_gzip": "7ea6e3978e5c61534e4ce2ef70f034dda558d8b12191280527f33871b0b4308f",
+      "sha256_uncompressed": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-06-initial.json.gz",
+      "compressed_bytes": 90603,
+      "uncompressed_bytes": 2782101,
+      "sha256_gzip": "12827d5353a6cd44de4c771bc45731fcc4fa610c50bf35e0c230143bd12cccae",
+      "sha256_uncompressed": "f5add8fba0b284243d200f32aa98859eecf0253d9415347e5499d2371010e602",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-07-contours.json.gz",
+      "compressed_bytes": 389724,
+      "uncompressed_bytes": 12843784,
+      "sha256_gzip": "ceacebfe6d406764fdd09ea54304a6726f006b40e44553addf0297bc5a124bb5",
+      "sha256_uncompressed": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-07-initial.json.gz",
+      "compressed_bytes": 90553,
+      "uncompressed_bytes": 2789552,
+      "sha256_gzip": "0169a13c566ea057274a43e7097fde82cbfb32a563463917dc4bf04078194933",
+      "sha256_uncompressed": "6589ead1abd1dd68fb9f248f7839af22d2416fdad048789820358ee7c221509a",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-08-contours.json.gz",
+      "compressed_bytes": 395567,
+      "uncompressed_bytes": 12738977,
+      "sha256_gzip": "91fb4a17af5a53c1395bd0c4bcfbd24dc1b6e5ae69ed2916040394f5f7482d02",
+      "sha256_uncompressed": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-08-initial.json.gz",
+      "compressed_bytes": 90486,
+      "uncompressed_bytes": 2763104,
+      "sha256_gzip": "39415c27615d9c7e82208a35ac1dd301a7f776aa13700af8321916667a22a39b",
+      "sha256_uncompressed": "4b9a95bc0ab3af04e5742bef0ffc0379cea8bf8f9107ae9541e682e4cffbdf83",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-09-contours.json.gz",
+      "compressed_bytes": 383805,
+      "uncompressed_bytes": 12613557,
+      "sha256_gzip": "882abd64dc0aababe01033f1a0813cc6f7d0a8195b470da436330a5a90e5bd08",
+      "sha256_uncompressed": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-09-initial.json.gz",
+      "compressed_bytes": 90471,
+      "uncompressed_bytes": 2789738,
+      "sha256_gzip": "b1293c7a880752c51e9ca1a18d7b9d1eaef3ec83620077a0f96c2a019b70d977",
+      "sha256_uncompressed": "90f0bfd5ee8302f8835778a368eee2614f4153487952a13a51190723692fc18c",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-10-contours.json.gz",
+      "compressed_bytes": 379660,
+      "uncompressed_bytes": 12491220,
+      "sha256_gzip": "5f4391cc30aa78545028694614eab5c93c551a95598edb2f629b160fd76b01b9",
+      "sha256_uncompressed": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-10-initial.json.gz",
+      "compressed_bytes": 89906,
+      "uncompressed_bytes": 2762103,
+      "sha256_gzip": "514fca4cdd46bcb2745b56e04a299fc34c60ef95a75e2506944506d348ae860a",
+      "sha256_uncompressed": "afaaa5c154e9de1a459cd4d9eb3b6060d7847b8c89256488058ad02bfc79ecc9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-11-contours.json.gz",
+      "compressed_bytes": 387344,
+      "uncompressed_bytes": 12756829,
+      "sha256_gzip": "e7671bfb0acb06c0622a91520f4890613294cf2c41bf3538d2c2f753b6ce4fe8",
+      "sha256_uncompressed": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-11-initial.json.gz",
+      "compressed_bytes": 90337,
+      "uncompressed_bytes": 2789660,
+      "sha256_gzip": "5c341e20e5fa8c7c6496ce436a46a7e190d00930f22e675782f0f3d0834c2369",
+      "sha256_uncompressed": "456ea4fc3a40d613ea04cbe064c4691e8ac57e95ee70d00357272d1b3e1339cf",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-12-contours.json.gz",
+      "compressed_bytes": 390256,
+      "uncompressed_bytes": 12637641,
+      "sha256_gzip": "a4cc9befc345405365f26abe3a48e3afecc1ee5f235fb50e212b7ba6a00f9b31",
+      "sha256_uncompressed": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-12-initial.json.gz",
+      "compressed_bytes": 90289,
+      "uncompressed_bytes": 2774270,
+      "sha256_gzip": "9becc8f482956c90bbdd472b4adb3a386ea034f66356655e56d47cacaabd40ff",
+      "sha256_uncompressed": "63a486902dad216aeff39654add60109b6dfd019523089dcc30c737d8a2e700e",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-01-contours.json.gz",
+      "compressed_bytes": 389171,
+      "uncompressed_bytes": 12879453,
+      "sha256_gzip": "4a7089cd05cd50faa2da3d4ce3be26ccad84bad1d8698ef516b91324aef2ee2b",
+      "sha256_uncompressed": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-01-initial.json.gz",
+      "compressed_bytes": 90462,
+      "uncompressed_bytes": 2789878,
+      "sha256_gzip": "d14813965ce37e920ab49a013dcb7c4d4f01660734eeb79851efbf34d7aedbb8",
+      "sha256_uncompressed": "0f9e7580de521645ad412cbf7196aedce70830487810054830b98f813b19bbd5",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-02-contours.json.gz",
+      "compressed_bytes": 389174,
+      "uncompressed_bytes": 12701151,
+      "sha256_gzip": "3150f968cc7ae7c3df89c676c3238768bfab7ed7de58976d0067082cd4e4a6a5",
+      "sha256_uncompressed": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-02-initial.json.gz",
+      "compressed_bytes": 90491,
+      "uncompressed_bytes": 2782006,
+      "sha256_gzip": "5227acee0e515cb61f6ad29abefaa04acb3febc3f3912401552d15ae339513c2",
+      "sha256_uncompressed": "f8f7a33155e4b67a22c645dbb1c138def0be4d68c13bb6a51c3ec2d371407bb9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-03-contours.json.gz",
+      "compressed_bytes": 382445,
+      "uncompressed_bytes": 12603733,
+      "sha256_gzip": "e4726831de309fba4897ccb418ae291f9acb6c102fc34c66e6dc68846a3cc6b5",
+      "sha256_uncompressed": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-03-initial.json.gz",
+      "compressed_bytes": 90392,
+      "uncompressed_bytes": 2789898,
+      "sha256_gzip": "7b86ba26c16bdd037356422de2621081f16b74ad802b992c53dff446ddd16918",
+      "sha256_uncompressed": "17ef3d6cbdf1c05b91bc718b716ab60df65d556be76f487d54fbbe485b2c7694",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-04-contours.json.gz",
+      "compressed_bytes": 391361,
+      "uncompressed_bytes": 12683264,
+      "sha256_gzip": "cb9b7814ee02c19cfc85cadb29326249be155d61aad3d0805ff84924f8fcd4ed",
+      "sha256_uncompressed": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-04-initial.json.gz",
+      "compressed_bytes": 90492,
+      "uncompressed_bytes": 2773784,
+      "sha256_gzip": "3eb56c05f8ae880b01bcefb75cc07bcc7000a7a11e0c8188e09bd64ad5788371",
+      "sha256_uncompressed": "668da28c451968f99c5f2b89978f68f00b3fd73b7dc177393e784088641e0107",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-05-contours.json.gz",
+      "compressed_bytes": 384634,
+      "uncompressed_bytes": 12750982,
+      "sha256_gzip": "d2df00f2c9e7ddceb2ba6a4a6b2529c8ec7b0a6c737971a048eab004ba162fb7",
+      "sha256_uncompressed": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-05-initial.json.gz",
+      "compressed_bytes": 89711,
+      "uncompressed_bytes": 2769310,
+      "sha256_gzip": "9898440bfb5f7edc99b8f16bd5df7aac1fbb329512ca85255fa46d003a987ec7",
+      "sha256_uncompressed": "7dde5384a6848c1db1ddcc989a3f13c59d07a0d02b1ffcc4ae1e15d9cd72b320",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-06-contours.json.gz",
+      "compressed_bytes": 385980,
+      "uncompressed_bytes": 12590137,
+      "sha256_gzip": "9099eca1a9aba20cf68329866bde2bd83203b2d2eccf4e6f0d5c87d7cd89c0b7",
+      "sha256_uncompressed": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-06-initial.json.gz",
+      "compressed_bytes": 90603,
+      "uncompressed_bytes": 2782101,
+      "sha256_gzip": "b68fc8ccd37098d864e9ea3635b4b47c54b119b933abd3db6c85c09e6d1a7193",
+      "sha256_uncompressed": "f5add8fba0b284243d200f32aa98859eecf0253d9415347e5499d2371010e602",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-07-contours.json.gz",
+      "compressed_bytes": 389724,
+      "uncompressed_bytes": 12843784,
+      "sha256_gzip": "dfefa141f03c50145693b5b7001613e373c1c788a953ac07fe7c8890bcf8cf49",
+      "sha256_uncompressed": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-07-initial.json.gz",
+      "compressed_bytes": 90553,
+      "uncompressed_bytes": 2789552,
+      "sha256_gzip": "7a5fd0b743a5b0d22150dbdfeb4edcfbc9e4a349c67646fa283a1f25076822f9",
+      "sha256_uncompressed": "6589ead1abd1dd68fb9f248f7839af22d2416fdad048789820358ee7c221509a",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-08-contours.json.gz",
+      "compressed_bytes": 395567,
+      "uncompressed_bytes": 12738977,
+      "sha256_gzip": "447952707f43aae81b3f6b29f8ec78aaf9173e2ea3453b10c0c27f1be3fc652d",
+      "sha256_uncompressed": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-08-initial.json.gz",
+      "compressed_bytes": 90486,
+      "uncompressed_bytes": 2763104,
+      "sha256_gzip": "d322679f33501395798e6daba3913692ca7e907aef3e09103ccdd64cc4da822d",
+      "sha256_uncompressed": "4b9a95bc0ab3af04e5742bef0ffc0379cea8bf8f9107ae9541e682e4cffbdf83",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-09-contours.json.gz",
+      "compressed_bytes": 383805,
+      "uncompressed_bytes": 12613557,
+      "sha256_gzip": "d9725b07b0cfee4d87182d09c3ba9676b29c468ae475b82d9f204d51b74b7160",
+      "sha256_uncompressed": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-09-initial.json.gz",
+      "compressed_bytes": 90471,
+      "uncompressed_bytes": 2789738,
+      "sha256_gzip": "901fd4f916db0ff7be2931120b83ceed3fd5d34bd1f0e2fee1b788ee023f1d5f",
+      "sha256_uncompressed": "90f0bfd5ee8302f8835778a368eee2614f4153487952a13a51190723692fc18c",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-10-contours.json.gz",
+      "compressed_bytes": 379660,
+      "uncompressed_bytes": 12491220,
+      "sha256_gzip": "6a652fea8b08a02fc3a517627526b59c56ba2af957794140c569da3b70326372",
+      "sha256_uncompressed": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-10-initial.json.gz",
+      "compressed_bytes": 89906,
+      "uncompressed_bytes": 2762103,
+      "sha256_gzip": "a11c8bfe73ee5b98faf416d58a2d33c8bd0cdc9679b3d1ec75c4a9f5dcdeecdb",
+      "sha256_uncompressed": "afaaa5c154e9de1a459cd4d9eb3b6060d7847b8c89256488058ad02bfc79ecc9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-11-contours.json.gz",
+      "compressed_bytes": 387344,
+      "uncompressed_bytes": 12756829,
+      "sha256_gzip": "960c16ceec1f6cca8a8853a4f51f885c3072fb0165f1b0a413605560cf3ad832",
+      "sha256_uncompressed": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-11-initial.json.gz",
+      "compressed_bytes": 90337,
+      "uncompressed_bytes": 2789660,
+      "sha256_gzip": "5c8b9d4e955e3f098a719cd656289853cbe557d5b198d63a5e4a16dafb125797",
+      "sha256_uncompressed": "456ea4fc3a40d613ea04cbe064c4691e8ac57e95ee70d00357272d1b3e1339cf",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-12-contours.json.gz",
+      "compressed_bytes": 390256,
+      "uncompressed_bytes": 12637641,
+      "sha256_gzip": "89fbeefe5c3ff92b41ad2ffb72b12dbe23346e2b9d597ec36b5be84efe741864",
+      "sha256_uncompressed": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-12-initial.json.gz",
+      "compressed_bytes": 90289,
+      "uncompressed_bytes": 2774270,
+      "sha256_gzip": "ddfeef6ecb0874c066dcc1c8b49d6bd6d2b3ca74043140fbd26e7bfffe827c66",
+      "sha256_uncompressed": "63a486902dad216aeff39654add60109b6dfd019523089dcc30c737d8a2e700e",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-01-contours.json.gz",
+      "compressed_bytes": 389171,
+      "uncompressed_bytes": 12879453,
+      "sha256_gzip": "55e48804181a5121d1de95c914e774424174d1f40a67ee8feefe63751870bb4b",
+      "sha256_uncompressed": "2ad6b696d470d8b1bffaa25e92056077c9251069855f4a77516a1864ec2fd7b8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-01-initial.json.gz",
+      "compressed_bytes": 90462,
+      "uncompressed_bytes": 2789878,
+      "sha256_gzip": "0011c5ed8eddfd4ee686a571c2aadca7309cd3efe0fc5c37ebc668b4b707a3f9",
+      "sha256_uncompressed": "0f9e7580de521645ad412cbf7196aedce70830487810054830b98f813b19bbd5",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-02-contours.json.gz",
+      "compressed_bytes": 389174,
+      "uncompressed_bytes": 12701151,
+      "sha256_gzip": "2c24ff760036b80f80d08cea29b7759b007de3c6918e1472119995d1ea1965f2",
+      "sha256_uncompressed": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-02-initial.json.gz",
+      "compressed_bytes": 90491,
+      "uncompressed_bytes": 2782006,
+      "sha256_gzip": "a636f8078561ca6c99550a38f73f8cbc9aaa6d03938ddafce1950ee20faa0dfa",
+      "sha256_uncompressed": "f8f7a33155e4b67a22c645dbb1c138def0be4d68c13bb6a51c3ec2d371407bb9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-03-contours.json.gz",
+      "compressed_bytes": 382445,
+      "uncompressed_bytes": 12603733,
+      "sha256_gzip": "4218f14274dda4b7ebe6821d2bf0d3dd4385556465dcc256bfb1ca3c1058a216",
+      "sha256_uncompressed": "9d406a99dfc3097919bc97e9ea253c52ead72a19a0c6aa0a54749135ccfeeb9d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-03-initial.json.gz",
+      "compressed_bytes": 90392,
+      "uncompressed_bytes": 2789898,
+      "sha256_gzip": "f8b5c1c015ce7c59833a89b70145438e6f0a67b34f0cae5eba552e140dbf615c",
+      "sha256_uncompressed": "17ef3d6cbdf1c05b91bc718b716ab60df65d556be76f487d54fbbe485b2c7694",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-04-contours.json.gz",
+      "compressed_bytes": 391361,
+      "uncompressed_bytes": 12683264,
+      "sha256_gzip": "d4ad32ffcb9ed169ad987fae2a64cb47da94b41029a73cc6c77e819d2c7014a4",
+      "sha256_uncompressed": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-04-initial.json.gz",
+      "compressed_bytes": 90492,
+      "uncompressed_bytes": 2773784,
+      "sha256_gzip": "d83b15548ee20a0dcef91995f36c954ff44077cc10384eb43b03a97641abe886",
+      "sha256_uncompressed": "668da28c451968f99c5f2b89978f68f00b3fd73b7dc177393e784088641e0107",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-05-contours.json.gz",
+      "compressed_bytes": 384634,
+      "uncompressed_bytes": 12750982,
+      "sha256_gzip": "d47f6ca7ff8484b69e03ae5d27813dc9eef04fe180a6faef7151e66bcba43b5c",
+      "sha256_uncompressed": "26f05fcf2b5d7bce56f92af82d3cfa7c721acd63104551e3c72b49878db35de8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-05-initial.json.gz",
+      "compressed_bytes": 89711,
+      "uncompressed_bytes": 2769310,
+      "sha256_gzip": "ac35b1aec0dd1e93b271f5d7c0bb23ddcd87f2bc8f8fd57e8978757989e2d77a",
+      "sha256_uncompressed": "7dde5384a6848c1db1ddcc989a3f13c59d07a0d02b1ffcc4ae1e15d9cd72b320",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-06-contours.json.gz",
+      "compressed_bytes": 385980,
+      "uncompressed_bytes": 12590137,
+      "sha256_gzip": "62ffb01dcba65dba7ec63bcb78e499ee8bc053cc781fd1782ef320290064c208",
+      "sha256_uncompressed": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-06-initial.json.gz",
+      "compressed_bytes": 90603,
+      "uncompressed_bytes": 2782101,
+      "sha256_gzip": "24c24a0b089151c27f629a185f3daa5fd7e9ace52ab6cab90a6fbe668bb84468",
+      "sha256_uncompressed": "f5add8fba0b284243d200f32aa98859eecf0253d9415347e5499d2371010e602",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-07-contours.json.gz",
+      "compressed_bytes": 389724,
+      "uncompressed_bytes": 12843784,
+      "sha256_gzip": "60b43a00f1f8e9d6858d055f4bc718309d4b45b74661558d4b1a6f2bb5e32497",
+      "sha256_uncompressed": "3e448d538323269bb8f5ab928d94c6760c721e70978e89480ae9ada74e81c372",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-07-initial.json.gz",
+      "compressed_bytes": 90553,
+      "uncompressed_bytes": 2789552,
+      "sha256_gzip": "f03199885bd009d29117fcd3e6ceaaab7a06bd311169a3198373489dcdc7587b",
+      "sha256_uncompressed": "6589ead1abd1dd68fb9f248f7839af22d2416fdad048789820358ee7c221509a",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-08-contours.json.gz",
+      "compressed_bytes": 395567,
+      "uncompressed_bytes": 12738977,
+      "sha256_gzip": "92607db7ce30ec1297027ffe25bf5b70e648af542251d4a32f6bc8686bca3c43",
+      "sha256_uncompressed": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-08-initial.json.gz",
+      "compressed_bytes": 90486,
+      "uncompressed_bytes": 2763104,
+      "sha256_gzip": "fe968507a7d838b2e2b6fc474789358483000ae71ac65992c81c0944503dcee4",
+      "sha256_uncompressed": "4b9a95bc0ab3af04e5742bef0ffc0379cea8bf8f9107ae9541e682e4cffbdf83",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-09-contours.json.gz",
+      "compressed_bytes": 383805,
+      "uncompressed_bytes": 12613557,
+      "sha256_gzip": "277f0a8408dc71382dee5b9dddfb7e2531ca507126686780c2557149dc5d6758",
+      "sha256_uncompressed": "1781b3c1ef1cb32134fc6be729a114e31ed17500aae651952d90525328bc3e4d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-09-initial.json.gz",
+      "compressed_bytes": 90471,
+      "uncompressed_bytes": 2789738,
+      "sha256_gzip": "1e9cfbc2acbe9f7c349758e6259a47239d9ca624e7bbeb67f5e0a4d213b1364e",
+      "sha256_uncompressed": "90f0bfd5ee8302f8835778a368eee2614f4153487952a13a51190723692fc18c",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10-contours.json.gz",
+      "compressed_bytes": 379660,
+      "uncompressed_bytes": 12491220,
+      "sha256_gzip": "9cd6689242bc7af89cd7091b58f2caf2f162af4b7dc458f240c4920a16caff55",
+      "sha256_uncompressed": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10-initial.json.gz",
+      "compressed_bytes": 89906,
+      "uncompressed_bytes": 2762103,
+      "sha256_gzip": "5525673c92e9f39db143d0647d5da25e52be2eb4cb16fee11a52350a7dff4f70",
+      "sha256_uncompressed": "afaaa5c154e9de1a459cd4d9eb3b6060d7847b8c89256488058ad02bfc79ecc9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-11-contours.json.gz",
+      "compressed_bytes": 387344,
+      "uncompressed_bytes": 12756829,
+      "sha256_gzip": "3bbcb957bbd0060f2207ae873b93d3a5f5e052d08194ee32b2194337c01db62d",
+      "sha256_uncompressed": "61fa3312e033c70ea41d9b0813a8ef4858e5fcfdcfc7a59e0c0932091a48dee3",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-11-initial.json.gz",
+      "compressed_bytes": 90337,
+      "uncompressed_bytes": 2789660,
+      "sha256_gzip": "35d28f5904c142bd1cbbbc6026a1f3ca237f63800d80b2465eef53636f9d8efa",
+      "sha256_uncompressed": "456ea4fc3a40d613ea04cbe064c4691e8ac57e95ee70d00357272d1b3e1339cf",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-12-contours.json.gz",
+      "compressed_bytes": 390256,
+      "uncompressed_bytes": 12637641,
+      "sha256_gzip": "cb5794e6ed978cd89e1a10cc4dd0237ecc18d0f7f4e6cda8ac3882cecac98b53",
+      "sha256_uncompressed": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-12-initial.json.gz",
+      "compressed_bytes": 90289,
+      "uncompressed_bytes": 2774270,
+      "sha256_gzip": "bcee6b77f3ec362d219cdf89313ece78ec0bf3f9605f0b35b5b7fcdb2942a144",
+      "sha256_uncompressed": "63a486902dad216aeff39654add60109b6dfd019523089dcc30c737d8a2e700e",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-01-contours.json.gz",
+      "compressed_bytes": 389174,
+      "uncompressed_bytes": 12701151,
+      "sha256_gzip": "218ce119bb11197fab054e9c0c988a5ed6278393b18f01e06f14f29a02fd7c63",
+      "sha256_uncompressed": "418a7731cd3917a57fd45a19f92d88328837bb508ae4ee59ad1c26f9371c8e82",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-01-initial.json.gz",
+      "compressed_bytes": 90491,
+      "uncompressed_bytes": 2782006,
+      "sha256_gzip": "1b5c44307228acf583726e5e069ed15e2ea6b28599385dc94266e1b94ccbe27d",
+      "sha256_uncompressed": "f8f7a33155e4b67a22c645dbb1c138def0be4d68c13bb6a51c3ec2d371407bb9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-02-contours.json.gz",
+      "compressed_bytes": 391361,
+      "uncompressed_bytes": 12683264,
+      "sha256_gzip": "2df65a77823d94e050c23958ce8d9627c595c5e8dfd52d3e84d8368d16bde879",
+      "sha256_uncompressed": "e7d821c7b0f08f9546fe3d332e379a5821d69418f0115536c883196381c0b004",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-02-initial.json.gz",
+      "compressed_bytes": 90492,
+      "uncompressed_bytes": 2773784,
+      "sha256_gzip": "a3ada454f02ec5f5b4089977091f8a0a90fb1fbc664014a266aba140b37bbf81",
+      "sha256_uncompressed": "668da28c451968f99c5f2b89978f68f00b3fd73b7dc177393e784088641e0107",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-02-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-03-contours.json.gz",
+      "compressed_bytes": 385980,
+      "uncompressed_bytes": 12590137,
+      "sha256_gzip": "735020b059b279915aaea3f7639312d3cd5e4371fd6d439f4124493612a8a088",
+      "sha256_uncompressed": "9b21806d81c51c52f6e9117f96c3bafef4cd0bb1fb99989482dbf3eca879ae00",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-03-initial.json.gz",
+      "compressed_bytes": 90603,
+      "uncompressed_bytes": 2782101,
+      "sha256_gzip": "fc97f6638d8a5faf607a7a18cbd061656e7c384f2300ff9965765fd0d082ae9d",
+      "sha256_uncompressed": "f5add8fba0b284243d200f32aa98859eecf0253d9415347e5499d2371010e602",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-03-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-04-contours.json.gz",
+      "compressed_bytes": 395567,
+      "uncompressed_bytes": 12738977,
+      "sha256_gzip": "edbcc106e546b5a3113912fe954fab6e2e9bf4bcddfd45516ffb6a16b7fa26dc",
+      "sha256_uncompressed": "c932fe9540c9305de596ea3c3da34002ad22e32618bd8137368ecda8a311214b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-04-initial.json.gz",
+      "compressed_bytes": 90486,
+      "uncompressed_bytes": 2763104,
+      "sha256_gzip": "dc810eca06d180c6e300bfac2b95cd13b0d89a6ebad87816d00b3fb1b5209faf",
+      "sha256_uncompressed": "4b9a95bc0ab3af04e5742bef0ffc0379cea8bf8f9107ae9541e682e4cffbdf83",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-04-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-05-contours.json.gz",
+      "compressed_bytes": 379660,
+      "uncompressed_bytes": 12491220,
+      "sha256_gzip": "e752f6e15ec835f7c994453648adb9fdecc629f5f799596c483501e252d9d5ef",
+      "sha256_uncompressed": "761da26dd47f777a885ccbde17d62949e75ad4576b5474e4ca6fbd821c764253",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-05-initial.json.gz",
+      "compressed_bytes": 89906,
+      "uncompressed_bytes": 2762103,
+      "sha256_gzip": "6aee0428d67312f3b524ccb3794042de4f4b1eb6ae5b603dd8a7d20ddaf0d8bb",
+      "sha256_uncompressed": "afaaa5c154e9de1a459cd4d9eb3b6060d7847b8c89256488058ad02bfc79ecc9",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-05-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-06-contours.json.gz",
+      "compressed_bytes": 390256,
+      "uncompressed_bytes": 12637641,
+      "sha256_gzip": "de4be8384600b26cd9636f56e51dbddfaa84ad0e6c3c2330e5805bab38331637",
+      "sha256_uncompressed": "25501a63408d6d4510dc73aa421a55f0187ced37bac290ac27f73bc5b226382d",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-06-initial.json.gz",
+      "compressed_bytes": 90289,
+      "uncompressed_bytes": 2774270,
+      "sha256_gzip": "d5ab9dac2e639928c04f93ef49f39ad038a836c7dafd9e170fd742eae5623b82",
+      "sha256_uncompressed": "63a486902dad216aeff39654add60109b6dfd019523089dcc30c737d8a2e700e",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-06-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-07-contours.json.gz",
+      "compressed_bytes": 392647,
+      "uncompressed_bytes": 12793485,
+      "sha256_gzip": "65d323f57a9825013966d4419ef1b0d2b6cfb38192fd6872ca4d2a1f0ad3c756",
+      "sha256_uncompressed": "e193202d09c170be878c15ab7efb36d9826bd20b7b5642479275682660e6d807",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-07-initial.json.gz",
+      "compressed_bytes": 90681,
+      "uncompressed_bytes": 2782164,
+      "sha256_gzip": "9a56bc60ccfbed17ae07fa6f78aa9c0bc57b73598728ed220a83319df7ad7651",
+      "sha256_uncompressed": "2e032302f55b4b172124c37d87a191a48a9847fb6c0b7b30f8676882c1507ae8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-07-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-08-contours.json.gz",
+      "compressed_bytes": 389162,
+      "uncompressed_bytes": 12455339,
+      "sha256_gzip": "182af52518aea30b55b12db41703dd769c1c3542490e7694d638658946a84264",
+      "sha256_uncompressed": "61bae9ae7b95be09da91d23d8aa7d1b610b7786888b49bfbca233d60507af5ee",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-08-initial.json.gz",
+      "compressed_bytes": 90785,
+      "uncompressed_bytes": 2754639,
+      "sha256_gzip": "d5980ab83011d28bafdc3320e3e5cae67adda18f4f22890e793eeb7be3495b12",
+      "sha256_uncompressed": "d7912113f8366b266869235ce03533870110b89dbe47b9089696b861170901f6",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-08-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-09-contours.json.gz",
+      "compressed_bytes": 386666,
+      "uncompressed_bytes": 12582930,
+      "sha256_gzip": "b57bf937df8206a0a9a86ff71944f0ca938c7c1280f19d4447344c76280b0fa8",
+      "sha256_uncompressed": "3950e44d721880651414203041ca3260660524e6f920312de1862ba775362e2a",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-09-initial.json.gz",
+      "compressed_bytes": 90559,
+      "uncompressed_bytes": 2781495,
+      "sha256_gzip": "7d2b589df8afd5ad644f8bb3e0d30e2c3b0ad7466952e5adc2290f88e071dc87",
+      "sha256_uncompressed": "7699b4fca1b15b2aaf452837d9c7c2aba63a634a9c6cfebb8e2f166667f4b225",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-09-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-10-contours.json.gz",
+      "compressed_bytes": 388930,
+      "uncompressed_bytes": 12683685,
+      "sha256_gzip": "577c7213e74775b67a920026690784519ce395a07935fdb0944c2b2a405b6b77",
+      "sha256_uncompressed": "ed732a6bab8fd64f1e2a35182315c4a70ec468cdf023ea504b94c38c880a3ad6",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-10-initial.json.gz",
+      "compressed_bytes": 89764,
+      "uncompressed_bytes": 2754443,
+      "sha256_gzip": "7bbb4cd3042b061c9c63958160db2046b8ef74ce66f581730468ee8fdf7dcf92",
+      "sha256_uncompressed": "57d1cd8955b1c2ed2e3e22b2f46f91d28a319eed78e665f5c8e337f4c4f3d6a8",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-10-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-11-contours.json.gz",
+      "compressed_bytes": 386675,
+      "uncompressed_bytes": 12578070,
+      "sha256_gzip": "1d8683932f95ad53fd7301cc3dd8fc3f27457ebb5a369e3192a88f4d19dd1eff",
+      "sha256_uncompressed": "d40e4d473842103f478cdfd4cce451496be2322197bee26007cebaf2426e4670",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-11-initial.json.gz",
+      "compressed_bytes": 90563,
+      "uncompressed_bytes": 2782025,
+      "sha256_gzip": "77102ccc5d72f3575c7ea9519744f62a0de7473b8c8a377e8f5e0f011df34e82",
+      "sha256_uncompressed": "3c37433f41d90e1b70d8d316e2e46750089ba4f37213d0b62807224ca13876db",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-11-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-12-contours.json.gz",
+      "compressed_bytes": 395619,
+      "uncompressed_bytes": 12726623,
+      "sha256_gzip": "ecda455353c75ac1d25efd0d8a22e8bd2d903ac0b60c0b9563f52991d4e1eb41",
+      "sha256_uncompressed": "91ad9ebf50bee4e9ca9b900cd6d3477fc6afb416f4aa62ef3b0f4bf72a547956",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-12-initial.json.gz",
+      "compressed_bytes": 90393,
+      "uncompressed_bytes": 2763233,
+      "sha256_gzip": "d983a2349fb3d5a3ac6b38d0a457da4e3a16a1e7be17b82f875bfd2564ed0760",
+      "sha256_uncompressed": "02690d707d6a76067cd24bb4c6ad634ea536af21072735a3a4ce48b00c45869e",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-12-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-refined-pilot/sample-01-contours.json.gz",
+      "compressed_bytes": 380711,
+      "uncompressed_bytes": 12515122,
+      "sha256_gzip": "e4d15d9432ee9b2b3ad6397fe429b22716c80d82eee37eb891944464b7c9cc70",
+      "sha256_uncompressed": "621e319e73200760936f05ad62876db00db1a969ddfdef3126e8cf2acdc8748b",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-refined-pilot/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-refined-pilot/sample-01-initial.json.gz",
+      "compressed_bytes": 89434,
+      "uncompressed_bytes": 2734290,
+      "sha256_gzip": "e388fce724c27b6f7b15c0d69593ca8583189d5fc3f22f2f65cd8324a9286055",
+      "sha256_uncompressed": "d0aea62c601b893105395c4635a6a47cd786a74c82498df8542f74363e8ae0cb",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-refined-pilot/sample-01-archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/regulator-direction-check/contours.json.gz",
+      "compressed_bytes": 426317,
+      "uncompressed_bytes": 13196205,
+      "sha256_gzip": "f6bdaaf686af3d57384e7da0b4cf8dddfcb353de2b4b2509359218323c05d6f0",
+      "sha256_uncompressed": "1ae3c7760f94ed420d42d2b0685e521ab436ca902755819fc58120c80d5b410f",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/regulator-direction-check/archives.json"
+      ]
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/regulator-direction-check/initial.json.gz",
+      "compressed_bytes": 94541,
+      "uncompressed_bytes": 2745628,
+      "sha256_gzip": "0df68993fb8731066e8b90cdec1550dce2f2184911a129de4b7b2ac850367253",
+      "sha256_uncompressed": "6a4e1f2fafc243fb3ce179fe9560a6c3d55cdcbaa232b77697118ba0f2808c87",
+      "original_manifests": [
+        "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/regulator-direction-check/archives.json"
+      ]
+    }
+  ],
+  "archive_count": 127,
+  "compressed_bytes": 30161505,
+  "uncompressed_bytes": 972504751,
+  "production_source_snapshot": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-source-hashes.json",
+  "production_source_snapshot_sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+  "unchanged_snapshot_files": 1810,
+  "snapshot_differences": [
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs",
+      "expected_sha256": "5a78d46cf12c05e1889d3bbb52fbcbc5b1f518c35e39f3e9e875116cb1673b6b",
+      "observed_sha256": "28a41a303d830f7918b7d72ec6398f4f6d07af69d85831d319f615adea4b2dff"
+    }
+  ],
+  "snapshot_difference_interpretation": "Root confirmed the one lifecycle.rs mismatch is an authorized test-fixture-only RHS canonical reordering from [-4,-1] to [-1,-4], following a native fixture-seal assertion failure. A new source snapshot/rebuild is planned. This is unrelated to the independently generated prism values and is not a prism reference failure."
+}

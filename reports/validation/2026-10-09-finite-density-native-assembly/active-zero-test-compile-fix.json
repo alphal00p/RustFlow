@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "failure": "two lifecycle unit-test expressions used owned Symbolica rational-polynomial operands, which do not implement owned Add/Div",
+  "production_code_changed": false,
+  "correction": "borrow all arithmetic operands in the two test expressions",
+  "failed_build": "active-zero-build-resources.json",
+  "failed_log": "active-zero-build-resources.log",
+  "build_termination": "after native unit compile errors, stopped this Cargo process and compiler children to avoid mixing source versions",
+  "before_snapshot": "active-zero-source-hashes-before-test-operand-fix.json",
+  "after_snapshot": "active-zero-source-hashes.json",
+  "intermediate_rebuild": "active-zero-corrected-build-resources.json",
+  "intermediate_correction": "division operands were borrowed, but inspection found the remaining owned inner Add; this rebuild was stopped before numerical tests",
+  "intermediate_snapshot": "active-zero-source-hashes-before-inner-add-fix.json"
+}

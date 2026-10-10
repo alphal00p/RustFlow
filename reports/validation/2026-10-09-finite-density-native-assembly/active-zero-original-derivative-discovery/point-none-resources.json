@@ -1,0 +1,22 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "env",
+    "PROBE_DEPTH=3",
+    "PROBE_DOMAINS=32",
+    "PROBE_HINTS=none",
+    "PROBE_HINT_FILE=reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/global-hints.json",
+    "/tmp/active_zero_original_derivative_discovery",
+    "/tmp/active-zero-three-loop-single-round7.bin",
+    "point",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/point-none.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 5.096692657098174,
+  "user_seconds": 4.7463619999999995,
+  "system_seconds": 0.315085,
+  "peak_child_rss_kib": 147484,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

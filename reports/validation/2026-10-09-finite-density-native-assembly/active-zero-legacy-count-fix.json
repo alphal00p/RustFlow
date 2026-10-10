@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "change": "report the existing monotone requested count in the new historical_requested diagnostic for legacy closure too",
+  "before_snapshot": "active-zero-source-hashes-before-legacy-count-fix.json",
+  "after_snapshot": "active-zero-source-hashes.json",
+  "combined_check_before_fix": "active-zero-combined-check-resources.json",
+  "release_build_after_fix": "active-zero-final-build-resources.json"
+}

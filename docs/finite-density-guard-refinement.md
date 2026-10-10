@@ -115,6 +115,49 @@ historical in this mode, and checkpoints save `historical-discovery-gaps.json`
 with the exact domains, reasons and details. Finite target/derivative closure
 still makes no claim of complete symbolic coverage of those boxes.
 
+`active_target_closure` is a separate opt-in policy, requiring residual discovery,
+retained rules and frontier searches. It rebuilds reachability from the original
+target combinations after each native program update. It then follows the actual
+weighted auxiliary derivatives of the reached leaves. Coefficients are summed
+exactly within each target or derivative; different targets are never cancelled
+against one another. Native failures other than `NoApplicableRule` remain failures
+even if their formal coefficients could cancel. All source/application conditions
+are retained before summation.
+
+Every prospective stopping label and every derivative input receives a native
+discovery attempt before the final audit. Pending searches defer closure. The
+final program is rebound to the proposed basis and replayed, and all original
+target sums and final basis derivatives are recomputed with that one program.
+Historical requests are bounded by `max_requested` and retained in
+`active-request-history.json`; they do not become additional physical targets.
+Individually unresolved historical rows are recorded in `retired-unresolved.json`
+and excluded from the result's candidate map. Neither their retirement nor an
+unsuccessful search proves a zero integral. This policy makes no master-minimality
+claim. The runtime harness accepts `RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE=true`.
+History membership records a bounded search request, not complete coverage of
+its native domain. The final target/derivative audit establishes finite-system
+closure independently of that wider coverage. Detailed historical failure files
+are written when checkpoints are enabled; the returned diagnostics always
+include their count.
+
+`max_direct_zero_attempts` enables a bounded native point search before residual
+discovery. RustRed aligns each original source term with a requested point and
+checks whether that single instantiated identity proves a zero. It certifies and
+replays successful rules against the complete original source corpus. Such rules
+take precedence over expanding recurrences. This adds no analytic zero formulas
+and performs no frontend row elimination. It is useful when ordinary native
+discovery stops on an earlier nonzero recurrence before reaching an existing
+zero identity.
+
+The attempt cap applies to each discovery call. Completed point searches are
+memoized within the fixed source context, including unsuccessful complete scans;
+partial or unvisited searches remain eligible later. Memoization never labels
+an unsuccessful point zero or a master. Uncovered points remain historical gaps,
+and `direct-zero-*.json` checkpoints retain attempts, completion status and skipped
+seed diagnostics. The policy defaults to zero (disabled), requires residual
+discovery, and is exposed as `RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS` in the runtime
+harness.
+
 The initial 2026-10-09 standalone validation used `legacy-lorentz` sources,
 polynomial completion powers, native depth 3/domain budget 8192, and refinement
 limits 3/256/2, without requesting constant frontier sectors:

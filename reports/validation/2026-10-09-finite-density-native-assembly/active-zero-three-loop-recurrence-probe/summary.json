@@ -1,0 +1,150 @@
+{
+  "scope": "Native source-replayed precedence comparison on immutable singleton round007, original3 labels and12 actual shifted derivative labels plus10 active frontier labels. This does not close the family.",
+  "rules": 20781,
+  "zero_rhs_rules": 87,
+  "policies": [
+    {
+      "policy": "original",
+      "original_and_derivative_queries": 15,
+      "distinct_unresolved_labels": 110,
+      "applications": [
+        0,
+        0,
+        9,
+        61,
+        0,
+        0,
+        122,
+        0,
+        0,
+        0,
+        0,
+        162,
+        27,
+        0,
+        0
+      ],
+      "unresolved_terms": [
+        1,
+        1,
+        14,
+        7,
+        1,
+        1,
+        12,
+        1,
+        1,
+        1,
+        1,
+        82,
+        30,
+        1,
+        1
+      ],
+      "non_no_rule_terms": 0
+    },
+    {
+      "policy": "zero-first",
+      "original_and_derivative_queries": 15,
+      "distinct_unresolved_labels": 110,
+      "applications": [
+        0,
+        0,
+        9,
+        61,
+        0,
+        0,
+        122,
+        0,
+        0,
+        0,
+        0,
+        162,
+        27,
+        0,
+        0
+      ],
+      "unresolved_terms": [
+        1,
+        1,
+        14,
+        7,
+        1,
+        1,
+        12,
+        1,
+        1,
+        1,
+        1,
+        82,
+        30,
+        1,
+        1
+      ],
+      "non_no_rule_terms": 0
+    },
+    {
+      "policy": "shortest-rhs",
+      "original_and_derivative_queries": 15,
+      "distinct_unresolved_labels": 90,
+      "applications": [
+        0,
+        0,
+        9,
+        61,
+        0,
+        0,
+        123,
+        0,
+        0,
+        0,
+        0,
+        130,
+        27,
+        0,
+        0
+      ],
+      "unresolved_terms": [
+        1,
+        1,
+        14,
+        7,
+        1,
+        1,
+        12,
+        1,
+        1,
+        1,
+        1,
+        62,
+        30,
+        1,
+        1
+      ],
+      "non_no_rule_terms": 0
+    }
+  ],
+  "findings": [
+    "Zero-first matches original on all25 queries.",
+    "Shortest-RHS lowers the union of uncovered labels over the original3 and their12 derivative queries from110 to90, mainly82\u219262 terms for one medium-numerator derivative. This is limited evidence, not a generic policy recommendation.",
+    "Scalar derivative [1,1,2,1,1,0,0,0,0,0,0,0] remains directly uncovered and is the next requested-domain probe."
+  ],
+  "resources": {
+    "command": [
+      "timeout",
+      "180s",
+      "/tmp/active_zero_three_loop_recurrence_probe",
+      "/tmp/active-zero-three-loop-single-round7.bin",
+      "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/results",
+      "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/targets.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 14.646254844032228,
+    "user_seconds": 14.314672999999999,
+    "system_seconds": 0.227543,
+    "peak_child_rss_kib": 245860,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "source_snapshot": "active-zero-source-hashes.json",
+  "native_library_sha256": "931cde2c6e17835ee1104c56468c9a6f40950ba560b9dea9174b2b0bf48811e3"
+}

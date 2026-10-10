@@ -1,0 +1,23 @@
+{
+  "command": [
+    "cargo",
+    "check",
+    "--locked",
+    "--offline",
+    "--release",
+    "-p",
+    "symbolica-amflow",
+    "-p",
+    "rustred",
+    "--features",
+    "symbolica-amflow/python",
+    "--lib",
+    "--tests"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 62.2409632592462,
+  "user_seconds": 137.366542,
+  "system_seconds": 23.665019,
+  "peak_child_rss_kib": 2693120,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -9,7 +9,7 @@ use std::sync::Arc;
 
 use crate::algebra::{Coefficient, CoefficientPolynomial};
 use crate::solver::instantiate::instantiate_polynomial;
-use crate::solver::{Integral, Seed, SolverError};
+use crate::solver::{Integral, IntegralOrder, Seed, SolverError};
 
 use super::{GuardedRule, GuardedSourceSystem, IndexRole};
 
@@ -78,6 +78,62 @@ pub struct GuardedProgram<const N: usize> {
     pub(super) sources: Arc<GuardedSourceSystem<N>>,
     pub(super) rules: Vec<GuardedRule<N>>,
     pub(super) terminals: BTreeSet<[i64; N]>,
+}
+
+/// Every key in one pending map borrows the same replay-validated coordinate
+/// order. Numeric comparison is independent of a rule's symbolic sector.
+/// Harder labels sort first, so all incoming descending paths can coalesce
+/// before a supported label is expanded. Unsupported labels remain explicit
+/// application failures; their fallback position never changes their values.
+struct PendingKey<'a, const N: usize> {
+    integral: [i64; N],
+    numeric: Option<Integral<N>>,
+    order: Option<&'a IntegralOrder<N>>,
+}
+
+impl<'a, const N: usize> PendingKey<'a, N> {
+    fn new(integral: [i64; N], order: Option<&'a IntegralOrder<N>>) -> Self {
+        let mut values = [0_i16; N];
+        let numeric = integral
+            .iter()
+            .zip(&mut values)
+            .try_for_each(|(&value, slot)| {
+                *slot = i16::try_from(value).ok()?;
+                Some(())
+            })
+            .and_then(|()| Integral::numeric(values).ok());
+        Self {
+            integral,
+            numeric,
+            order,
+        }
+    }
+}
+
+impl<const N: usize> PartialEq for PendingKey<'_, N> {
+    fn eq(&self, other: &Self) -> bool {
+        self.integral == other.integral
+    }
+}
+
+impl<const N: usize> Eq for PendingKey<'_, N> {}
+
+impl<const N: usize> PartialOrd for PendingKey<'_, N> {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl<const N: usize> Ord for PendingKey<'_, N> {
+    fn cmp(&self, other: &Self) -> Ordering {
+        let ordering = match (self.order, &self.numeric, &other.numeric) {
+            (Some(order), Some(left), Some(right)) => order.compare(left, right),
+            (Some(_), None, Some(_)) => Ordering::Less,
+            (Some(_), Some(_), None) => Ordering::Greater,
+            _ => Ordering::Equal,
+        };
+        ordering.then_with(|| self.integral.cmp(&other.integral))
+    }
 }
 
 impl<const N: usize> GuardedProgram<N> {
@@ -376,14 +432,13 @@ impl<const N: usize> GuardedProgram<N> {
             });
             return Ok(result);
         }
-        let mut pending = BTreeMap::from([(target, self.one())]);
-        // A lexicographically earlier uncovered leaf may be reached again
-        // after it has left `pending`. Keep its exact coefficient sum, just as
-        // for declared terminals; distinct paths can cancel without any new
-        // reduction identity. Other failures remain explicit even if their
-        // labels coincide with an uncovered leaf.
+        let order = self.rules.first().map(|rule| &rule.order);
+        let mut pending = BTreeMap::from([(PendingKey::new(target, order), self.one())]);
+        // Keep exact uncovered sums, just as for declared terminals. Other
+        // failure records remain explicit even if their labels coincide.
         let mut uncovered = BTreeMap::new();
-        while let Some((integral, coefficient)) = pending.pop_first() {
+        while let Some((key, coefficient)) = pending.pop_first() {
+            let integral = key.integral;
             if result.rule_applications >= limits.max_rule_applications
                 && !self.terminals.contains(&integral)
                 && !self.is_zero(&integral)
@@ -395,13 +450,15 @@ impl<const N: usize> GuardedProgram<N> {
                 });
                 result
                     .unresolved
-                    .extend(pending.into_iter().map(|(integral, coefficient)| {
-                        GuardedUnresolvedTerm {
-                            integral,
-                            coefficient,
-                            reason: GuardedApplicationFailure::WorkLimit,
-                        }
-                    }));
+                    .extend(
+                        pending
+                            .into_iter()
+                            .map(|(key, coefficient)| GuardedUnresolvedTerm {
+                                integral: key.integral,
+                                coefficient,
+                                reason: GuardedApplicationFailure::WorkLimit,
+                            }),
+                    );
                 break;
             }
             let applied = self.apply(&integral)?;
@@ -430,12 +487,13 @@ impl<const N: usize> GuardedProgram<N> {
                         if weighted.is_zero() {
                             continue;
                         }
-                        if pending.contains_key(&child)
+                        let key = PendingKey::new(child, order);
+                        if pending.contains_key(&key)
                             || pending.len() < limits.max_pending_integrals
                         {
                             // Coalescing an existing key cannot grow the
                             // frontier and may free a slot by cancellation.
-                            accumulate(&mut pending, child, weighted);
+                            accumulate(&mut pending, key, weighted);
                         } else {
                             result.unresolved.push(GuardedUnresolvedTerm {
                                 integral: child,
@@ -498,11 +556,7 @@ fn retain_condition(conditions: &mut Vec<CoefficientPolynomial>, value: Coeffici
     }
 }
 
-fn accumulate<const N: usize>(
-    terms: &mut BTreeMap<[i64; N], Coefficient>,
-    key: [i64; N],
-    value: Coefficient,
-) {
+fn accumulate<K: Ord>(terms: &mut BTreeMap<K, Coefficient>, key: K, value: Coefficient) {
     if value.is_zero() {
         return;
     }
@@ -998,10 +1052,10 @@ pub(super) mod tests {
     }
 
     #[test]
-    fn uncovered_diamond_cancels_after_leaf_was_already_emitted() {
+    fn uncovered_diamond_cancels_in_native_pending_order() {
         let program = diamond_program(true);
-        // Lexicographic scheduling visits 4 -> 2 -> 1 -> 3 -> 1, so the
-        // opposite leaf contributions never coexist in the pending map.
+        // Historical lexicographic scheduling visited 4 -> 2 -> 1 -> 3 -> 1.
+        // Native order visits 4 -> 3 -> 2 and cancels the pending leaf.
         let result = program.reduce([4], Default::default()).unwrap();
         assert!(result.terms.is_empty());
         assert!(result.unresolved.is_empty());
@@ -1033,33 +1087,184 @@ pub(super) mod tests {
     }
 
     #[test]
-    fn uncovered_cancellation_does_not_erase_work_limit_evidence() {
+    fn exhausted_budget_keeps_all_unprocessed_weighted_terms() {
         let program = diamond_program(true);
         let result = program
             .reduce(
                 [4],
                 GuardedReductionLimits {
-                    max_rule_applications: 3,
+                    max_rule_applications: 2,
                     max_pending_integrals: 10,
                 },
             )
             .unwrap();
         assert_eq!(result.unresolved.len(), 2);
-        assert!(result.unresolved.iter().all(|term| term.integral == [1]));
         assert!(
             result
                 .unresolved
                 .iter()
-                .any(|term| { term.reason == GuardedApplicationFailure::NoApplicableRule })
+                .all(|term| { term.reason == GuardedApplicationFailure::WorkLimit })
         );
-        assert!(
-            result
-                .unresolved
-                .iter()
-                .any(|term| { term.reason == GuardedApplicationFailure::WorkLimit })
+        let remaining: BTreeMap<_, _> = result
+            .unresolved
+            .iter()
+            .map(|term| (term.integral, term.coefficient.clone()))
+            .collect();
+        assert_eq!(remaining[&[2]], program.one());
+        assert_eq!(
+            remaining[&[1]],
+            -program.rules[1].candidate.rhs[0].coefficient.clone()
         );
-        assert!((&result.unresolved[0].coefficient + &result.unresolved[1].coefficient).is_zero());
         assert!(!result.nonzero_conditions.is_empty());
+    }
+
+    fn guarded_pending_diamond(cancel: bool) -> GuardedProgram<1> {
+        let context = CoefficientContext::new(["pending_n", "pending_x", "pending_y"]);
+        let x = context.parameter("pending_x").unwrap();
+        let y = context.parameter("pending_y").unwrap();
+        let target = Integral::symbolic([0]).unwrap();
+        let branches = [
+            (
+                6,
+                context.one(),
+                vec![(-1, context.one()), (-4, context.one())],
+            ),
+            (5, context.one(), vec![(-1, context.one())]),
+            (
+                4,
+                context.one(),
+                vec![(
+                    -2,
+                    if cancel {
+                        -context.one()
+                    } else {
+                        context.one()
+                    },
+                )],
+            ),
+            (2, y.clone(), vec![(-1, &context.one() / &y)]),
+        ];
+        let sources = Arc::new(
+            GuardedSourceSystem::new(
+                "pending-native-order-guarded-diamond",
+                [IndexRole::Occupation],
+                [0],
+                branches
+                    .iter()
+                    .enumerate()
+                    .map(|(ordinal, (point, pivot, rhs))| {
+                        let mut row = vec![Term {
+                            integral: target,
+                            coefficient: pivot.numerator.clone(),
+                        }];
+                        row.extend(rhs.iter().map(|(shift, coefficient)| Term {
+                            integral: Integral::symbolic([*shift]).unwrap(),
+                            coefficient: (-(coefficient * pivot)).numerator,
+                        }));
+                        let source = GuardedSource::new(
+                            format!("pending-{ordinal}"),
+                            row,
+                            IndexDomain::new([IndexBounds::fixed(*point)]).unwrap(),
+                        );
+                        if *point == 5 {
+                            source.with_nonzero_conditions(vec![x.numerator.clone()])
+                        } else {
+                            source
+                        }
+                    })
+                    .collect(),
+            )
+            .unwrap(),
+        );
+        let rules = branches
+            .into_iter()
+            .enumerate()
+            .map(|(ordinal, (point, _, rhs))| {
+                sources
+                    .seal_candidate(
+                        RuleCandidate {
+                            case: Case::generic(),
+                            target,
+                            rhs: rhs
+                                .into_iter()
+                                .map(|(shift, coefficient)| Term {
+                                    integral: Integral::symbolic([shift]).unwrap(),
+                                    coefficient,
+                                })
+                                .collect(),
+                            sources: vec![SeedSource {
+                                basis_row: ordinal,
+                                seed: Seed {
+                                    integral: target,
+                                    shifts: [0],
+                                },
+                            }],
+                            stats: SearchStats::default(),
+                        },
+                        IntegralOrder::new([true], [false])
+                            .with_roles([IndexRole::Occupation])
+                            .unwrap(),
+                        IndexDomain::new([IndexBounds::fixed(point)]).unwrap(),
+                    )
+                    .unwrap()
+            })
+            .collect();
+        GuardedProgram::new(sources, rules, [[1]]).unwrap()
+    }
+
+    #[test]
+    fn pending_cancellation_avoids_unused_pole_but_retains_used_guard() {
+        let program = guarded_pending_diamond(true);
+        let result = program.reduce([6], Default::default()).unwrap();
+        assert!(result.terms.is_empty());
+        assert!(result.unresolved.is_empty());
+        assert_eq!(result.rule_applications, 3);
+        let context = CoefficientContext::new(["pending_n", "pending_x", "pending_y"]);
+        assert!(
+            result
+                .nonzero_conditions
+                .contains(&context.parameter("pending_x").unwrap().numerator)
+        );
+        assert!(
+            !result
+                .nonzero_conditions
+                .contains(&context.parameter("pending_y").unwrap().numerator)
+        );
+        let decoded = GuardedProgram::decode_generated(
+            &program.encode_native(Default::default()).unwrap(),
+            program.sources.clone(),
+            Default::default(),
+        )
+        .unwrap();
+        let reloaded = decoded.reduce([6], Default::default()).unwrap();
+        assert!(reloaded.unresolved.is_empty());
+        assert!(reloaded.terms.is_empty());
+        assert_eq!(reloaded.nonzero_conditions, result.nonzero_conditions);
+    }
+
+    #[test]
+    fn native_pending_order_expands_shared_child_once_within_exact_budget() {
+        let program = guarded_pending_diamond(false);
+        let result = program
+            .reduce(
+                [6],
+                GuardedReductionLimits {
+                    max_rule_applications: 4,
+                    max_pending_integrals: 10,
+                },
+            )
+            .unwrap();
+        assert!(result.unresolved.is_empty());
+        assert_eq!(result.rule_applications, 4);
+        let context = CoefficientContext::new(["pending_n", "pending_x", "pending_y"]);
+        let y = context.parameter("pending_y").unwrap();
+        assert_eq!(result.terms[&[1]], &(&context.one() + &context.one()) / &y);
+        assert!(
+            result
+                .nonzero_conditions
+                .contains(&context.parameter("pending_x").unwrap().numerator)
+        );
+        assert!(result.nonzero_conditions.contains(&y.numerator));
     }
 
     #[test]
@@ -1069,6 +1274,16 @@ pub(super) mod tests {
             program.apply(&[64]).unwrap().status,
             GuardedApplicationStatus::Unresolved(GuardedApplicationFailure::UnsupportedPower)
         );
+        for value in [64, i64::MAX] {
+            let result = program.reduce([value], Default::default()).unwrap();
+            assert_eq!(result.unresolved.len(), 1);
+            assert_eq!(result.unresolved[0].integral, [value]);
+            assert_eq!(result.unresolved[0].coefficient, program.one());
+            assert_eq!(
+                result.unresolved[0].reason,
+                GuardedApplicationFailure::UnsupportedPower
+            );
+        }
         let empty = GuardedProgram::new(program.sources, Vec::new(), []).unwrap();
         assert_eq!(
             empty.apply(&[0]).unwrap().status,

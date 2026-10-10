@@ -1,0 +1,27 @@
+{
+  "captured_utc": "2026-10-09T22:46:45.563195+00:00",
+  "command": [
+    "timeout",
+    "450",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/tmp/prism_regulator_direction_check.py"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3": {
+      "resolved_path": "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3.14",
+      "sha256": "9bfa54c39ad52bd64ea04e2b0c88599c0ddfcc2da5d3213a2f9fc1e833fa8e1c",
+      "size_bytes": 16528
+    },
+    "/tmp/prism_regulator_direction_check.py": {
+      "resolved_path": "/tmp/prism_regulator_direction_check.py",
+      "sha256": "644dca081f9c9670fcc493c569049e04a6b16ec8e951da933ad6a966d49a0dbc",
+      "size_bytes": 1759
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

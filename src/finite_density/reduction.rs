@@ -20,6 +20,8 @@ use super::guarded::{
 use crate::reduction::{LinearCombination, ReducedSystem};
 use crate::{DifferentialSystem, Error, Integral, Progress, Result, RunContext};
 
+mod active;
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AuxiliaryConvention {
     /// Stored Euclidean factors are rho+t; dI(a)/dt=-a I(a+1).
@@ -230,6 +232,14 @@ pub struct WeightedClosureOptions {
     /// Existing rules take precedence so adding rules preserves old rewrites.
     /// Zero keeps the original multi-domain search policy.
     pub max_domains_per_residual: usize,
+    /// Rebuild the needed integral module from original target sums after each
+    /// native rule update. Historical requests remain bounded evidence, rather
+    /// than additional targets. Requires residual discovery and rule retention.
+    pub active_target_closure: bool,
+    /// Native one-source zero proofs at requested concrete points before
+    /// ordinary discovery. A per-call attempt cap; zero disables the prepass.
+    /// Requires residual discovery. Completed point searches are memoized.
+    pub max_direct_zero_attempts: usize,
     /// A distinct directory per source/deformation context. Each round stores
     /// its exact native program plus explicitly provisional/closed metadata.
     pub checkpoints: Option<PathBuf>,
@@ -254,6 +264,8 @@ impl Default for WeightedClosureOptions {
             prioritize_requested_indices: false,
             max_reused_rules: 0,
             max_domains_per_residual: 0,
+            active_target_closure: false,
+            max_direct_zero_attempts: 0,
             checkpoints: None,
         }
     }
@@ -263,6 +275,16 @@ impl Default for WeightedClosureOptions {
 pub struct WeightedClosureDiagnostics {
     pub rounds: usize,
     pub requested: usize,
+    /// Unique labels submitted across all rounds, including retired requests.
+    pub historical_requested: usize,
+    /// Historical labels that the final program does not individually reduce;
+    /// these are not candidates or masters in an active-target closed result.
+    pub retired_unresolved: usize,
+    pub direct_zero_calls: usize,
+    pub direct_zero_attempts: usize,
+    pub direct_zero_rules: usize,
+    /// Completed bounded point searches, not zero or master classifications.
+    pub direct_zero_completed_points: BTreeSet<Vec<i64>>,
     /// Provisional labels explicitly added for native source discovery, including
     /// auxiliary-constant lower sectors that derivatives cannot request.
     pub native_frontier_requests: usize,
@@ -360,6 +382,18 @@ pub fn prepare_weighted_system<const N: usize>(
             "residual-focused discovery requires retained rules and requested index rays".into(),
         ));
     }
+    if options.active_target_closure
+        && (options.max_domains_per_residual == 0 || !options.search_frontier_sectors)
+    {
+        return Err(Error::InvalidInput(
+            "active target closure requires residual discovery and frontier searches".into(),
+        ));
+    }
+    if options.max_direct_zero_attempts > 0 && options.max_domains_per_residual == 0 {
+        return Err(Error::InvalidInput(
+            "direct zero discovery requires residual discovery and retained rules".into(),
+        ));
+    }
     if context.physical_arity() != deformation.physical_arity {
         return Err(Error::InvalidInput(
             "weighted source/deformation physical arities differ".into(),
@@ -419,6 +453,9 @@ pub fn prepare_weighted_system<const N: usize>(
             )?,
         );
     }
+    if options.active_target_closure {
+        return active::prepare(context, targets, deformation, options, conditions, run);
+    }
     let mut requested = targets
         .iter()
         .flat_map(|target| target.iter())
@@ -469,6 +506,7 @@ pub fn prepare_weighted_system<const N: usize>(
         )?;
         diagnostics.rounds = round + 1;
         diagnostics.requested = requested.len();
+        diagnostics.historical_requested = requested.len();
         diagnostics.native_rules = found.program.native().rules().len();
         diagnostics.uncovered_discovery_domains = found.unresolved.len();
         let mut frontier = BTreeSet::new();
@@ -713,6 +751,77 @@ fn discover_with_refinement<const N: usize>(
     let residual_policy = options.max_domains_per_residual > 0;
     let mut remaining_domains = options.discovery.max_domains;
     let current_terminals = terminals.iter().copied().collect::<BTreeSet<_>>();
+    if options.max_direct_zero_attempts > 0 {
+        let points = requested
+            .iter()
+            .filter(|point| {
+                !current_terminals.contains(*point)
+                    && !diagnostics
+                        .direct_zero_completed_points
+                        .contains(point.as_slice())
+            })
+            .copied()
+            .collect::<Vec<_>>();
+        for point in &points {
+            deformation.validate_integral(point)?;
+        }
+        if !points.is_empty() {
+            let zero = context.discover_direct_zeros(
+                &points,
+                terminals.iter().copied(),
+                options.max_direct_zero_attempts,
+            )?;
+            let rule_count = zero.discovery.program.native().rules().len();
+            if rule_count > options.max_reused_rules {
+                return Err(Error::Limit(
+                    "native direct-zero rules exceed the retained-rule budget".into(),
+                ));
+            }
+            let program = if let Some(previous) = retained.take() {
+                // A replayed zero can replace an expanding recurrence. All
+                // subsequent ordinary rules retain this zero-first precedence.
+                diagnostics.native_rule_unions += 1;
+                zero.discovery.program.union_replayed(
+                    previous,
+                    terminals.iter().copied(),
+                    options.max_reused_rules,
+                )?
+            } else {
+                zero.discovery.program
+            };
+            *retained = Some(program);
+            diagnostics.direct_zero_calls += 1;
+            diagnostics.direct_zero_attempts += zero.attempted_rows;
+            diagnostics.direct_zero_rules += rule_count;
+            diagnostics
+                .direct_zero_completed_points
+                .extend(zero.completed_points.iter().map(|p| p.to_vec()));
+            for gap in zero.discovery.unresolved {
+                let bounds = std::array::from_fn(|axis| {
+                    let bound = gap.domain.bounds()[axis];
+                    [bound.lower(), bound.upper()]
+                });
+                historical_gaps.insert((bounds, format!("{:?}:{}", gap.reason, gap.detail)), gap);
+            }
+            diagnostics.historical_discovery_domains = historical_gaps.len();
+            if let Some(directory) = &options.checkpoints {
+                std::fs::create_dir_all(directory)?;
+                let path = directory.join(format!(
+                    "direct-zero-{:04}.json",
+                    diagnostics.direct_zero_calls
+                ));
+                let temporary = path.with_extension("json.part");
+                std::fs::write(&temporary, serde_json::to_vec_pretty(&serde_json::json!({
+                    "schema":1, "attempt_budget":options.max_direct_zero_attempts,
+                    "attempted_rows":zero.attempted_rows, "zero_rules":rule_count,
+                    "requested_points":points.iter().map(|p| p.to_vec()).collect::<Vec<_>>(),
+                    "completed_points":zero.completed_points.iter().map(|p| p.to_vec()).collect::<Vec<_>>(),
+                    "completed_search_does_not_imply_zero":true, "skipped_seeds":zero.skipped_seeds,
+                })).map_err(|error| Error::Cache(error.to_string()))?)?;
+                std::fs::rename(temporary, path)?;
+            }
+        }
+    }
     for pass in 0..=options.guard_refinement.max_passes {
         run.cancellation.check()?;
         let search_requests = if residual_policy {
@@ -1166,7 +1275,11 @@ fn checkpoint<const N: usize>(
         "prioritize_requested_indices":options.prioritize_requested_indices,
         "max_reused_rules":options.max_reused_rules,
         "max_domains_per_residual":options.max_domains_per_residual,
-        "rule_precedence":if options.max_domains_per_residual > 0 { "retained-first" } else { "fresh-first" },
+        "active_target_closure":options.active_target_closure,
+        "max_direct_zero_attempts":options.max_direct_zero_attempts,
+        "rule_precedence":if options.max_direct_zero_attempts > 0 {
+            "new direct zeros, retained rules, ordinary fresh rules"
+        } else if options.max_domains_per_residual > 0 { "retained-first" } else { "fresh-first" },
         "native_rule_count":program.native().rules().len(),
         "requested": requested.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>(),
         "frontier": frontier.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>() });
@@ -1690,7 +1803,7 @@ mod tests {
         assert!(!reduction.unresolved.is_empty());
     }
 
-    fn compact_context() -> (GuardedContext<2>, FixedShellDeformation<2>) {
+    pub(super) fn compact_context() -> (GuardedContext<2>, FixedShellDeformation<2>) {
         let z = symbol!("weighted_closure_z");
         let t = symbol!("weighted_closure_t");
         let radius = symbol!("weighted_closure_R");

@@ -1,0 +1,38 @@
+{
+  "status": "sample grid complete; refinements and Laurent acceptance separate",
+  "configuration": {
+    "executable": "/tmp/prism_barnes_full_reference_v2",
+    "output": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-refined-pilot",
+    "denominator": 10000,
+    "count": 1,
+    "digits": 80,
+    "step": "1/40",
+    "cutoff": "18",
+    "sample_timeout": 500,
+    "start": 1
+  },
+  "executable_sha256": "6f5b358cdc7dd853c10ba04c97b49c313455dfc01fde918bb64bf707f1041ab2",
+  "source_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_regulator_analysis.py": "baf62cf59eafee6eb054f5943d5b5b0d12dbf22229c4f33aaa88b19a95049d24",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/run_grid.py": "a93a639059c8814d73e1548619b612467123c74e1eb619af2a126d177e7cfae9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_tail_check.py": "d14b4f6e9dd182b9043ed97cc71b1c1ba97bf4ea3c7c005249adac1f995fc0c6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_symbolic_regulator.py": "b0713d668511e0b50fc342cdd5cad843b416c10d85a9687b209125f6b82dc92d",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_symbolic_optimize.py": "5134169b0b21ade4392d37e5a61cad9102a16a06c9f046800d9cb4320607b3a5",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/prism_barnes_full_reference.rs": "83c26b8d9e8965278a521e955287343ab4bb6e28b09c0d1a2c2c922fcd652d29",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/monomials.json": "cc5b2409fffb5cadb003405099b1f5192afe7a6c54315699402c59d624062da3",
+    "examples/finite_density/triangular_prism.json": "7b408e421ebef0a056c2005763f813dd8e60d7ebaf807fbddedde8114f3ceb0e",
+    "fixtures/finite_density/prism_virtual_candidate_relations.json": "0f57d536eb5e7296d4aceff6e75e22c08a0f847add18b12b98a76ef218869336"
+  },
+  "native_amf_predictions_read": 0,
+  "oracle_answers_read": 0,
+  "scope": "supplemental original raised numerator prism target only; empirical reference refinement pending",
+  "completed_samples": [
+    {
+      "epsilon": "1/10000",
+      "file": "sample-01.json",
+      "sha256": "76f010f8b3e89b1efbf64dc0c20550daabb25fcb024463ab30ce0af750598efb",
+      "elapsed_seconds": 227.69788262899965
+    }
+  ],
+  "wall_seconds": 227.6980830002576
+}

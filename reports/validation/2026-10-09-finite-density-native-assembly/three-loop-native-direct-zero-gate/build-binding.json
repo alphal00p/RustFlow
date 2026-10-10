@@ -1,0 +1,7 @@
+{
+  "native_rlib": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+  "native_rlib_sha256": "931cde2c6e17835ee1104c56468c9a6f40950ba560b9dea9174b2b0bf48811e3",
+  "source_snapshot_sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+  "fresh_native_provenance": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-early-native-library.json",
+  "scope": "standalone native proof gate; no Cargo, production mutation or amplitude values"
+}

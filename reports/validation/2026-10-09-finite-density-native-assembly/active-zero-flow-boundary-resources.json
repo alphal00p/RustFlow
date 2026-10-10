@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_flow_boundary-9423d5e4f8668f3b",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.1817245278507471,
+  "user_seconds": 0.121822,
+  "system_seconds": 0.058484999999999995,
+  "peak_child_rss_kib": 15460,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,481 @@
+{
+  "status": "pass",
+  "scope": "native original-row required-cut-zero handling at two concrete even-numerator points; no amplitude or closure claim",
+  "correction_to_initial_hypothesis": "Although unspecialized substitution has two terms, the existing native instantiator drops the required-cut-zero term and replay agrees. Current strict direct-zero API already proves these points without any production extension.",
+  "native_owner": "vendor/rustred/crates/rustred-core/src/solver/instantiate.rs:148",
+  "requested_even_point": [
+    1,
+    2,
+    0,
+    1,
+    0,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "native_lorentz_only_zero_rules": [
+    {
+      "max_depth": 2,
+      "max_domains": 1,
+      "mode": "lorentz-only",
+      "nonzero_conditions": [],
+      "retained_rules": [
+        {
+          "rhs": [],
+          "sources": [
+            {
+              "ordinal_in_selected_corpus": 0,
+              "original_ordinal": 136,
+              "original_source_id": "lorentz/2/0/occupation-case-0",
+              "seed": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                -1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "rules": 1,
+      "seconds": 0.004149385,
+      "status": "Applied { rule: 0 }",
+      "target": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "terms": [],
+      "unresolved": []
+    },
+    {
+      "max_depth": 2,
+      "max_domains": 1,
+      "mode": "lorentz-only",
+      "nonzero_conditions": [],
+      "retained_rules": [
+        {
+          "rhs": [],
+          "sources": [
+            {
+              "ordinal_in_selected_corpus": 0,
+              "original_ordinal": 136,
+              "original_source_id": "lorentz/2/0/occupation-case-0",
+              "seed": [
+                1,
+                2,
+                0,
+                1,
+                0,
+                -1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "rules": 1,
+      "seconds": 0.003455852,
+      "status": "Applied { rule: 0 }",
+      "target": [
+        1,
+        3,
+        0,
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "terms": [],
+      "unresolved": []
+    }
+  ],
+  "full_corpus_nonzero_controls": [
+    {
+      "max_depth": 2,
+      "max_domains": 1,
+      "mode": "original",
+      "nonzero_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "retained_rules": [
+        {
+          "rhs": [
+            {
+              "coefficient": "(2-epsilon)/eta",
+              "label": [
+                [
+                  false,
+                  1
+                ],
+                [
+                  false,
+                  1
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  1
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  -2
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ]
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "ordinal_in_selected_corpus": 168,
+              "original_ordinal": 168,
+              "original_source_id": "lorentz/2/2/occupation-case-0",
+              "seed": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                -2,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "rules": 1,
+      "seconds": 0.009212472,
+      "status": "Applied { rule: 0 }",
+      "target": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "terms": [
+        {
+          "coefficient": "(2-epsilon)/eta",
+          "indices": [
+            1,
+            1,
+            0,
+            1,
+            0,
+            -2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    {
+      "max_depth": 2,
+      "max_domains": 1,
+      "mode": "original",
+      "nonzero_conditions": [
+        "4*eta",
+        "2*eta"
+      ],
+      "retained_rules": [
+        {
+          "rhs": [
+            {
+              "coefficient": "1/2*(1-epsilon)/eta",
+              "label": [
+                [
+                  false,
+                  1
+                ],
+                [
+                  false,
+                  2
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  1
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  -2
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ],
+                [
+                  false,
+                  0
+                ]
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "ordinal_in_selected_corpus": 168,
+              "original_ordinal": 168,
+              "original_source_id": "lorentz/2/2/occupation-case-0",
+              "seed": [
+                1,
+                2,
+                0,
+                1,
+                0,
+                -2,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "rules": 1,
+      "seconds": 0.009202202,
+      "status": "Applied { rule: 0 }",
+      "target": [
+        1,
+        3,
+        0,
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "terms": [
+        {
+          "coefficient": "1/2*(1-epsilon)/eta",
+          "indices": [
+            1,
+            2,
+            0,
+            1,
+            0,
+            -2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "unresolved": []
+    }
+  ],
+  "current_direct_api": "direct-api.json",
+  "direct_api_total_attempts": 3480,
+  "per_point_attempts": [
+    1740,
+    1740
+  ],
+  "direct_search_seconds": 0.01725783,
+  "diagnostic_optimization": "opt-level=0; do not compare runtime directly with opt-level=1 odd probe",
+  "strict_prepass_production_change_required_for_these_points": false,
+  "future_explicit_zero_domain_rhs_extension_still_separate": true,
+  "artifact_sha256": {
+    "build-binding.json": "4b803846afdb8852296f1b4d6f945f17c23a1bb757bcd76f8456a6d632d988d2",
+    "original-resources.provenance.json": "593df1b35d1532886629171e4e8a523c23662b44e74c130051f03737f1b81deb",
+    "lorentz-only-resources.log": "f09e933f28d2c65efef31fe7c196072152e0ee5ab221d3425c373ef90c2ef0e9",
+    "direct-api-probe.rs": "02aff93e68dfc91fef2b6c33e847ebad5b7e8f08fd16e54047004cb763a433b3",
+    "lorentz-only.json": "80565c5d95e15e240c522d7746cea8f2261d660b8ce60b15fa1147808439a04c",
+    "lorentz-only-resources.json": "823a00ad922ca2875ba776db8f44c3f7ef0662865540b24edbfd6fcdc7d9466b",
+    "probe.rs": "4cb9e22e1c11c47afbf00413f16a6fe31f091d01ee33fd76fc2f751daec5cbb1",
+    "original.json": "9678b8b43e12f3e623ba012ee1a5e6bc091ac5014f19ae45e4ac5e385b848ccf",
+    "original-resources.log": "7516375ef641dffccbb3bfe25d38e952c0115aa25d7147b4c06e5b5f6ad2e3b9",
+    "direct-api.json": "700be20da8c9ee4b0d85d6b6dc89cc8a8544d801ff7213b291062df019914c83",
+    "direct-api-resources.log": "e24366d0a368adc45ea13b3e72e694855950cbc7f883a0c6296d39a87d0a2dbd",
+    "direct-api-resources.provenance.json": "76e682cd1bbc7a0e030e45073776c8b590a8d5af641314f2ae3d4a3a813f3476",
+    "direct-api-resources.json": "2a0e9543e6a7ecade134a337fa7b3320d031ca3065d0386902fcf9d8c6af0368",
+    "lorentz-only-resources.provenance.json": "c8cf726f25821efc979ac5e940ca79459aa0af2152920a7ed9ade1b369550c40",
+    "original-resources.json": "a5ffed493c8a797f5a25724fb7d467a6059288e010e45d68bca994f7b2769d34"
+  }
+}

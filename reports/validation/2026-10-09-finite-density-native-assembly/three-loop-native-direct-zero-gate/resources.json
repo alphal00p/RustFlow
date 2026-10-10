@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/tmp/three_loop_native_direct_zero_probe",
+    "/tmp/three-loop-double-bc3c6bd.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-native-direct-zero-gate/result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.0368147399276495,
+  "user_seconds": 1.006891,
+  "system_seconds": 0.023823,
+  "peak_child_rss_kib": 21504,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

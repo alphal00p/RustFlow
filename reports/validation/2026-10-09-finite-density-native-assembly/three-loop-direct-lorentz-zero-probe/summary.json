@@ -1,0 +1,2154 @@
+{
+  "scope": "Bounded native discovery and exact original-source replay diagnostic, no analytic zero or custom elimination and no production source change.",
+  "direct_rows": [
+    {
+      "nonzero_conditions": [],
+      "original_terms": [
+        {
+          "coefficient": "-a_5",
+          "index_offsets": [
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "a_4",
+          "index_offsets": [
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-a_7",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-2*a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "eta*a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-2*a_1",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        }
+      ],
+      "seed": [
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "source_domain": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "source_guard_contains_seed": true,
+      "source_id": "lorentz/2/0/occupation-case-0",
+      "source_ordinal": 136,
+      "terms": [
+        {
+          "coefficient": "-2",
+          "indices": [
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "nonzero_conditions": [],
+      "original_terms": [
+        {
+          "coefficient": "-a_5",
+          "index_offsets": [
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "a_4",
+          "index_offsets": [
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-a_7",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-2*a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "eta*a_4",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        },
+        {
+          "coefficient": "-2*a_1",
+          "index_offsets": [
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              -1
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ],
+            [
+              true,
+              0
+            ]
+          ]
+        }
+      ],
+      "seed": [
+        1,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "source_domain": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "source_guard_contains_seed": true,
+      "source_id": "lorentz/2/0/occupation-case-0",
+      "source_ordinal": 136,
+      "terms": [
+        {
+          "coefficient": "-4",
+          "indices": [
+            1,
+            3,
+            2,
+            1,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "finding": "The zero is already in the original Lorentz corpus. Original and Lorentz-first full corpora stop at an earlier Euler recurrence at every maximum depth1..3. The Lorentz-only existing-row corpus is unresolved at depth1 and proves an empty RHS at depth2/3 for each odd target. Source reordering or increasing max_depth alone cannot remove the early-success selection effect.",
+  "native_source_locations": [
+    "vendor/rustred/crates/rustred-core/src/solver/search.rs:574 (first matching direct row returns)",
+    "vendor/rustred/crates/rustred-core/src/solver/search.rs:660 (first matching modular pivot ends case)",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs:245 (first applicable sealed rule)"
+  ],
+  "interpretation": "All reported programs were constructed through GuardedProgram::new, which replays the sources and certifies common order. The subset corpus is diagnostic only and is not spliced into the production program; conditions from applied rules remain in each result.",
+  "next_generic_probe": "An optional bounded native source-term-aligned point zero prepass can try original one-row candidates using existing canonicalize and seal/replay. No successful empty RHS means normal discovery remains unchanged. Any native API/source changes require a separate coordinated batch.",
+  "sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-direct-lorentz-zero-probe/probe.rs": "09dcc626add73f8acf04560acb70b1971b7f35ff8e19650256b8b5b7b14220f7",
+    "/tmp/three_loop_source_row_probe": "5f3efb0bbbd5999562902edf0660cbf7c056ad51bc793801d4b655ea66aa1a53",
+    "/tmp/three-loop-double-bc3c6bd.bin": "15e6eeb55e4969aa68d05b194952a82b451c03afd762367fedf5bee3fc4007e8",
+    "/tmp/librustred-union-probe-392075d0c6995fd1.rlib": "5fba4da6fd300c0e4ac7bd65a4b29ac3a67d776b585ca27b8cb1e9373bc808c0",
+    "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+  },
+  "probes": {
+    "original": [
+      {
+        "max_depth": 1,
+        "max_domains": 1,
+        "mode": "original",
+        "nonzero_conditions": [
+          "2*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002548378,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 2,
+        "max_domains": 1,
+        "mode": "original",
+        "nonzero_conditions": [
+          "2*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002242508,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 3,
+        "max_domains": 1,
+        "mode": "original",
+        "nonzero_conditions": [
+          "2*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002226277,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 1,
+        "max_domains": 1,
+        "mode": "original",
+        "nonzero_conditions": [
+          "4*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002229997,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/4*(1-2*epsilon)/eta",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 2,
+        "max_domains": 1,
+        "mode": "original",
+        "nonzero_conditions": [
+          "4*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002230317,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/4*(1-2*epsilon)/eta",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 3,
+        "max_domains": 1,
+        "mode": "original",
+        "nonzero_conditions": [
+          "4*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002237767,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/4*(1-2*epsilon)/eta",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "lorentz-first": [
+      {
+        "max_depth": 1,
+        "max_domains": 1,
+        "mode": "lorentz-first",
+        "nonzero_conditions": [
+          "2*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002554288,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 2,
+        "max_domains": 1,
+        "mode": "lorentz-first",
+        "nonzero_conditions": [
+          "2*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002209567,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 3,
+        "max_domains": 1,
+        "mode": "lorentz-first",
+        "nonzero_conditions": [
+          "2*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002186458,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/2*(3-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 1,
+        "max_domains": 1,
+        "mode": "lorentz-first",
+        "nonzero_conditions": [
+          "4*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002193256,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/4*(1-2*epsilon)/eta",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 2,
+        "max_domains": 1,
+        "mode": "lorentz-first",
+        "nonzero_conditions": [
+          "4*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002196607,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/4*(1-2*epsilon)/eta",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "max_depth": 3,
+        "max_domains": 1,
+        "mode": "lorentz-first",
+        "nonzero_conditions": [
+          "4*eta"
+        ],
+        "rules": 1,
+        "seconds": 0.002197267,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": [
+          {
+            "coefficient": "1/4*(1-2*epsilon)/eta",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "lorentz-only": [
+      {
+        "max_depth": 1,
+        "max_domains": 1,
+        "mode": "lorentz-only",
+        "nonzero_conditions": [],
+        "rules": 0,
+        "seconds": 0.000345691,
+        "status": "Unresolved(NoApplicableRule)",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": []
+      },
+      {
+        "max_depth": 2,
+        "max_domains": 1,
+        "mode": "lorentz-only",
+        "nonzero_conditions": [],
+        "rules": 1,
+        "seconds": 0.000811793,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": []
+      },
+      {
+        "max_depth": 3,
+        "max_domains": 1,
+        "mode": "lorentz-only",
+        "nonzero_conditions": [],
+        "rules": 1,
+        "seconds": 0.000719422,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          2,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": []
+      },
+      {
+        "max_depth": 1,
+        "max_domains": 1,
+        "mode": "lorentz-only",
+        "nonzero_conditions": [],
+        "rules": 0,
+        "seconds": 0.000290501,
+        "status": "Unresolved(NoApplicableRule)",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": []
+      },
+      {
+        "max_depth": 2,
+        "max_domains": 1,
+        "mode": "lorentz-only",
+        "nonzero_conditions": [],
+        "rules": 1,
+        "seconds": 0.000741482,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": []
+      },
+      {
+        "max_depth": 3,
+        "max_domains": 1,
+        "mode": "lorentz-only",
+        "nonzero_conditions": [],
+        "rules": 1,
+        "seconds": 0.000732122,
+        "status": "Applied { rule: 0 }",
+        "target": [
+          1,
+          3,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terms": []
+      }
+    ]
+  }
+}

@@ -522,7 +522,7 @@ at `d=2` and retains an explicit singular-threshold diagnostic.
 | Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
 | Full massive normalization | Complete massive-sunset scalar and raised-numerator values pass independent raw-Euclidean comparisons, including the nonzero vacuum and raised surface contributions |
 | Physical endpoint reconstruction | Complete massive and massless two-loop values/Laurent coefficients pass; singleton germs and independent rank-one blocks structurally admit all E7 cuts, with native closure/numerics unresolved; D7 double-cut infinity resonance remains explicit |
-| Three four-loop families | Exact distinct graph certificates and E7 endpoint admission available; independent E7 raised-line reference generated; all native predictions and the other two complete supplemental references absent |
+| Three four-loop families | Exact distinct graph certificates and E7 endpoint admission available; independent E7 and complete raised-prism Laurent references generated; E8 supplemental reference and all native four-loop numerical acceptance remain absent |
 | Ten stable Laurent digits | Complete massive-sunset Laurent comparison passes five profiles, independently changing digits, order, start scale and epsilon grid; no four-loop AMF-to-oracle comparison |
 
 An independent validation-only reference for both complete massive sunset targets
@@ -546,3 +546,12 @@ supplied I37 reference: all three Laurent coefficient expressions agree exactly
 after resolving the supplied constant. This is a
 [reference-versus-reference check](../reports/validation/2026-10-09-finite-density-native-assembly/independent-e7-reference/README.md),
 with zero AMF predictions read and no native four-loop acceptance claim.
+
+
+The independent [raised-prism reference](finite-density-prism-barnes-reference.md)
+now covers its complete eight-cut sum through Laurent order zero. Five complete
+profiles pass 20 coefficient refinements; the largest normalized empirical
+absolute uncertainty is 5.03e-16, not a rigorous error bound. It retains the
+fixed-original numerator mass derivative and moving upper surface. Production
+prism admission and native four-loop closure/numerical acceptance remain open;
+no oracle or native AMF comparison was made for this reference.

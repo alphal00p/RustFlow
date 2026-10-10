@@ -1,0 +1,18 @@
+{
+  "command": [
+    "cargo",
+    "check",
+    "--locked",
+    "--offline",
+    "--release",
+    "--features",
+    "python",
+    "--all-targets"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 47.765004482120275,
+  "user_seconds": 76.331122,
+  "system_seconds": 20.924764,
+  "peak_child_rss_kib": 1577020,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,43 @@
+{
+  "epsilon": "1/101",
+  "counts": [
+    {
+      "dimension": 0,
+      "pole_order": -2,
+      "terms": 36
+    },
+    {
+      "dimension": 0,
+      "pole_order": -1,
+      "terms": 545
+    },
+    {
+      "dimension": 0,
+      "pole_order": 0,
+      "terms": 1797
+    },
+    {
+      "dimension": 0,
+      "pole_order": 1,
+      "terms": 268
+    },
+    {
+      "dimension": 1,
+      "pole_order": -1,
+      "terms": 66
+    },
+    {
+      "dimension": 1,
+      "pole_order": 0,
+      "terms": 417
+    },
+    {
+      "dimension": 2,
+      "pole_order": 0,
+      "terms": 42
+    }
+  ],
+  "identically_zero_terms": 1082,
+  "minimum_nonconstant_gamma_pole_distance_at_rho_zero": "549/1919",
+  "problems": []
+}

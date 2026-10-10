@@ -1,0 +1,17 @@
+{
+  "captured_utc": "2026-10-10T00:48:22.076011+00:00",
+  "command": [
+    "target/release/deps/rustred-258a1e04558e72f1",
+    "solver::guarded",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "target/release/deps/rustred-258a1e04558e72f1": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/rustred-258a1e04558e72f1",
+      "sha256": "ef8d8fb749dce98710f4a81f24e024dbbd0cd63101e4a624ea84657544a57533",
+      "size_bytes": 632140792
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

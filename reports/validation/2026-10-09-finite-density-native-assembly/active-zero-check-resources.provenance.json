@@ -1,0 +1,26 @@
+{
+  "captured_utc": "2026-10-10T00:20:47.718015+00:00",
+  "command": [
+    "cargo",
+    "check",
+    "--locked",
+    "--offline",
+    "--release",
+    "--features",
+    "python",
+    "--all-targets"
+  ],
+  "argument_files": {
+    "cargo": {
+      "resolved_path": "/nix/store/cavxgwfb7l7akyvvqvnl39d6nw0wckgh-cargo-1.97.1/bin/cargo",
+      "sha256": "431bc749d662c3b5356b52559d3c312cd8b25bb45969d099ec85c1b9dd972e17",
+      "size_bytes": 432
+    },
+    "python": {
+      "resolved_path": "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3.14",
+      "sha256": "ee3549b0a0c65576b13b32abd410551ec8af9b2307cd726c89295de24213192f",
+      "size_bytes": 15776
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

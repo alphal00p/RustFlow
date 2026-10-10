@@ -1,0 +1,28 @@
+{
+  "command": [
+    "timeout",
+    "1800",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/generator/run_grid.py",
+    "/tmp/prism_barnes_full_reference_v2",
+    "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid",
+    "--denominator",
+    "500000",
+    "--count",
+    "12",
+    "--digits",
+    "70",
+    "--step",
+    "1/30",
+    "--cutoff",
+    "14",
+    "--sample-timeout",
+    "300"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1349.0388873708434,
+  "user_seconds": 1301.065198,
+  "system_seconds": 35.851577,
+  "peak_child_rss_kib": 1204300,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

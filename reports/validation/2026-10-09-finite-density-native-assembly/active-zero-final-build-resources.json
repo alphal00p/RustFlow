@@ -1,0 +1,33 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "--release",
+    "-p",
+    "symbolica-amflow",
+    "-p",
+    "rustred",
+    "--features",
+    "symbolica-amflow/python",
+    "--lib",
+    "--test",
+    "finite_density_runtime_flow",
+    "--test",
+    "finite_density_flow_boundary",
+    "--test",
+    "finite_density_massless_sources",
+    "--test",
+    "source_fingerprint",
+    "--test",
+    "python_finite_density",
+    "--no-run"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 500.0943166189827,
+  "user_seconds": 5391.670444,
+  "system_seconds": 310.818283,
+  "peak_child_rss_kib": 13621756,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,961 @@
+{
+  "schema_version": 1,
+  "status": "all five independent reference grids completed",
+  "scope": "Validation-only reference generation; no AMF predictions or supplied oracle records read. Timings exclude compilation and Nix startup. Controller time includes symbolic contour preparation and provenance hashing; numerical child records separate the actual arithmetic workload. Some grids ran concurrently, so summed wall times are workload totals, not elapsed calendar time.",
+  "profiles": [
+    {
+      "profile": "laurent-baseline",
+      "controller_resource": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline-resources.json",
+        "sha256": "2b81cdb2e195eb99d36a37ddfe02b63ae7340321446c1d5ac63891b29af5963c"
+      },
+      "controller_provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline-resources.provenance.json",
+        "sha256": "60f824884c6f703ca9e7ed5971775592c6d9fe1459514c65f29a6e10179ef45f"
+      },
+      "controller": {
+        "wall_seconds": 1307.1745736398734,
+        "user_seconds": 1259.340939,
+        "system_seconds": 34.715696,
+        "peak_child_rss_kib": 1204276
+      },
+      "numerical_processes": [
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-01-resources.json",
+            "sha256": "2181d22f058e59b4c6fa9c1f9bafc5ab3d430095b58612fde1abb3e104b396e1"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-01-resources.provenance.json",
+            "sha256": "05886eed92dd85ed9a28156e5fe53224a82b72db8199ad96d12cb9b0d0d30e60"
+          },
+          "wall_seconds": 91.13418713025749,
+          "user_seconds": 90.228409,
+          "system_seconds": 0.101648,
+          "peak_child_rss_kib": 61440
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-02-resources.json",
+            "sha256": "824b94f1aace58961449ae610d659373eaa6efd22f78a85b32909b3c3b305a60"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-02-resources.provenance.json",
+            "sha256": "feea5f1bba9a9b5dae6541816b6e2622c0db33a39a28a271a8d1ed596a0e315f"
+          },
+          "wall_seconds": 100.56580395670608,
+          "user_seconds": 95.461047,
+          "system_seconds": 0.07478,
+          "peak_child_rss_kib": 61500
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-03-resources.json",
+            "sha256": "10846644e50b2ae76b150a10ecee9f2d5f8eab2384f43ba1521493afbbd01faf"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-03-resources.provenance.json",
+            "sha256": "35e6f640abff950f6b047b00bec1edb001b261b41ea332aea068da0757813422"
+          },
+          "wall_seconds": 89.76299278624356,
+          "user_seconds": 88.964654,
+          "system_seconds": 0.132291,
+          "peak_child_rss_kib": 64588
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-04-resources.json",
+            "sha256": "25493d3add167d42000d87a70eed62806f3de78344d46f3c4ed6b53c070a44e9"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-04-resources.provenance.json",
+            "sha256": "98d5e57314a8dbb36516428d0608d841f12ca3b9aac1b1b16b40168bf8389349"
+          },
+          "wall_seconds": 89.09101739292964,
+          "user_seconds": 88.285793,
+          "system_seconds": 0.127687,
+          "peak_child_rss_kib": 64572
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-05-resources.json",
+            "sha256": "c5aa259780ff3c790a2c500ce48e79190ce9b821804b2b5201d390cefe77c77f"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-05-resources.provenance.json",
+            "sha256": "81157d4a4b01bd167aea871704dec2f0c7d6fd34421938f656f8e76dfc092f6a"
+          },
+          "wall_seconds": 110.4847344700247,
+          "user_seconds": 109.468091,
+          "system_seconds": 0.16685999999999998,
+          "peak_child_rss_kib": 64560
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-06-resources.json",
+            "sha256": "e27121e76214ad42a6952b2288111134f76bafbf60cd9ef6167420a83b552248"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-06-resources.provenance.json",
+            "sha256": "442fa539ed24a9b4e510367c0663cd0ffe3ef1a82685a9612b47df021daa2898"
+          },
+          "wall_seconds": 88.50723364204168,
+          "user_seconds": 87.711744,
+          "system_seconds": 0.122749,
+          "peak_child_rss_kib": 61476
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-07-resources.json",
+            "sha256": "0d2a1e8a507d0d613ad3a591c561251767fffc9a912be23314e5484f7fc5dabb"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-07-resources.provenance.json",
+            "sha256": "bbd2d33c8b8603f681601a6b2c199546ec6bccf49450de4a92c52bb322f5777d"
+          },
+          "wall_seconds": 92.2947210567072,
+          "user_seconds": 91.49925,
+          "system_seconds": 0.147245,
+          "peak_child_rss_kib": 64528
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-08-resources.json",
+            "sha256": "0b7e3150ec779e3a9d2e288c33348f1d2f577225116c42c707bc5a916f2509f3"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-08-resources.provenance.json",
+            "sha256": "9b42ec491b34fc8826ae11e1f4aacda8b71b639ff49d37082701cce44de8bdf9"
+          },
+          "wall_seconds": 109.56938264006749,
+          "user_seconds": 108.662127,
+          "system_seconds": 0.182887,
+          "peak_child_rss_kib": 64520
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-09-resources.json",
+            "sha256": "1758d9515209095979519c58e341c0509d23d5cad7530e69e757868aaa4b1d0f"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-09-resources.provenance.json",
+            "sha256": "eb6da0377a259a45357f543a6f7441b350a37a6a324a662e4ba835e588d163d6"
+          },
+          "wall_seconds": 98.00126093672588,
+          "user_seconds": 97.166079,
+          "system_seconds": 0.13797399999999999,
+          "peak_child_rss_kib": 64536
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-10-resources.json",
+            "sha256": "3095415b3a7da511351efd5f37c9cbdf698060182fea4326c8eef2c1cd894316"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-10-resources.provenance.json",
+            "sha256": "1070cb9fbd89ee5934a44215d195fe582d709d3f51ba538163f3e3021d7bbe43"
+          },
+          "wall_seconds": 96.34318019310012,
+          "user_seconds": 95.151486,
+          "system_seconds": 0.070937,
+          "peak_child_rss_kib": 64536
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-11-resources.json",
+            "sha256": "779bf5c8ddbc059361515b3bbbc9776541d1a88c84071312df4b78bc587b5b37"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-11-resources.provenance.json",
+            "sha256": "8a8b217442640f73f9a81b3911571ca3596a5db223d4e418dd070390fd614b4f"
+          },
+          "wall_seconds": 88.4616015390493,
+          "user_seconds": 87.68211,
+          "system_seconds": 0.15481399999999998,
+          "peak_child_rss_kib": 64568
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-12-resources.json",
+            "sha256": "982e1e94f1523261d384711df3f8628e80d6f8988fd4763dc60082172cc437c4"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-baseline/sample-12-resources.provenance.json",
+            "sha256": "0198fa8fb95d616d52a051e55ff7682c0bf6af9cb433ff55b1578821bf496015"
+          },
+          "wall_seconds": 88.30633951583877,
+          "user_seconds": 87.508574,
+          "system_seconds": 0.07178899999999999,
+          "peak_child_rss_kib": 61528
+        }
+      ],
+      "sum_numerical_wall_seconds": 1142.522455259692,
+      "peak_numerical_rss_kib": 64588
+    },
+    {
+      "profile": "laurent-nearby-grid",
+      "controller_resource": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid-resources.json",
+        "sha256": "111e5204cabdb4b63c3e2696adf1939472452dc347da7189a33042a9a6135ba6"
+      },
+      "controller_provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid-resources.provenance.json",
+        "sha256": "72d5eb2462106e9040db8f5c303d4a3d2a5b2e321e4bac3898dace27a469a8ef"
+      },
+      "controller": {
+        "wall_seconds": 1349.0388873708434,
+        "user_seconds": 1301.065198,
+        "system_seconds": 35.851577,
+        "peak_child_rss_kib": 1204300
+      },
+      "numerical_processes": [
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-01-resources.json",
+            "sha256": "668686474f3078954fc0fcb6146ea2d3159896158dde8705983ab112af240e9a"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-01-resources.provenance.json",
+            "sha256": "42ba453a38dd7ebebba34898b8988c435fab75e038ece272e4e923767e4787f6"
+          },
+          "wall_seconds": 93.49100691871718,
+          "user_seconds": 92.666837,
+          "system_seconds": 0.149411,
+          "peak_child_rss_kib": 64540
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-02-resources.json",
+            "sha256": "10a47de5bcef01052c1640bbae0244b215c89566b538a6a747a59252be98dac0"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-02-resources.provenance.json",
+            "sha256": "6652e5b8c5001fafcd14c9b90e53789b3cbef04118a5a8639ddb335788d102ce"
+          },
+          "wall_seconds": 93.47749532619491,
+          "user_seconds": 92.48688,
+          "system_seconds": 0.176735,
+          "peak_child_rss_kib": 64588
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-03-resources.json",
+            "sha256": "aabeeb328b54856dc8f1f757ed0dcecd6bb4e36c1c44b761c469ac782a3a8b82"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-03-resources.provenance.json",
+            "sha256": "8cdc21a261879bb1245be45f967be295a54b3321479ef1c3e0f41ba740ae8cb5"
+          },
+          "wall_seconds": 92.22464946610853,
+          "user_seconds": 91.288759,
+          "system_seconds": 0.161717,
+          "peak_child_rss_kib": 64552
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-04-resources.json",
+            "sha256": "3f1f24779b39c35923bb3155e8602d3154803738aeb57acd44aff4c351acb54c"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-04-resources.provenance.json",
+            "sha256": "548d1098ef0dd042a604f6ef524aa61312c28c2e242591df80d3cdb1e34fd3e7"
+          },
+          "wall_seconds": 88.66895633516833,
+          "user_seconds": 87.951835,
+          "system_seconds": 0.151213,
+          "peak_child_rss_kib": 64528
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-05-resources.json",
+            "sha256": "c58e677e92ee340cb5509811b26bc7fd14b33d3fc2d7f8db95c8e4e164e2d8bc"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-05-resources.provenance.json",
+            "sha256": "42ea3e8b2a1ea2ccef8cd2a573e74f317cde0506ea8edbd4fae7d7a26378c6f9"
+          },
+          "wall_seconds": 101.12725393008441,
+          "user_seconds": 99.99775,
+          "system_seconds": 0.203028,
+          "peak_child_rss_kib": 61456
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-06-resources.json",
+            "sha256": "bde97b8b7291d2a0bd0f4ca3952cf17e417797c0ddd707bcc1524c5ba7a4ba79"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-06-resources.provenance.json",
+            "sha256": "b2bf71113dac8ab899d8bcb5178fe520548cbd8e12d9efc42db49f976500ed9b"
+          },
+          "wall_seconds": 157.230539184995,
+          "user_seconds": 155.540717,
+          "system_seconds": 0.31124999999999997,
+          "peak_child_rss_kib": 64532
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-07-resources.json",
+            "sha256": "b8e398cd9e2e24bc0a928a9b40f7505405a5c9011375d47fa8a79da812fa2667"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-07-resources.provenance.json",
+            "sha256": "b4be6c85b9fe79efcecf2fa90100ba8656b13de84c58f03699bdef965fb2e7f7"
+          },
+          "wall_seconds": 98.81106666475534,
+          "user_seconds": 97.882306,
+          "system_seconds": 0.185554,
+          "peak_child_rss_kib": 64556
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-08-resources.json",
+            "sha256": "ceef4ffb8fc023da1e201362646ea5a9216cf4c48f2bd6d9ad027062fc7a63be"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-08-resources.provenance.json",
+            "sha256": "1eac8b60ece090ab5d0ae213bf8dd7da4f7b177cfdcda67f59fb45ea8d529ae4"
+          },
+          "wall_seconds": 95.0559306726791,
+          "user_seconds": 94.113467,
+          "system_seconds": 0.055763999999999994,
+          "peak_child_rss_kib": 61452
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-09-resources.json",
+            "sha256": "1e928ccfce71fdddf1c767d56bf21c381af045a4337079b0bd4c4c458e4ec90b"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-09-resources.provenance.json",
+            "sha256": "3a3c00244593f918f08f843f9178e240f3454318e83fa5e34fa1ec09b4081e51"
+          },
+          "wall_seconds": 94.05451277596876,
+          "user_seconds": 93.245361,
+          "system_seconds": 0.14235499999999998,
+          "peak_child_rss_kib": 61504
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-10-resources.json",
+            "sha256": "89457495102cc1224f969a9e893800dbdd31194162bc6f66f275ced56eea3bde"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-10-resources.provenance.json",
+            "sha256": "e84d9e1541e06d74b1189ebdf39a338f3714c2a02e9f50f5505fb4ee80738c81"
+          },
+          "wall_seconds": 88.95293071307242,
+          "user_seconds": 88.205421,
+          "system_seconds": 0.10385499999999999,
+          "peak_child_rss_kib": 64544
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-11-resources.json",
+            "sha256": "829f7ed6fd85cabf0711a49c1a67c36433594bfecc7276a605ba42fe6b7ef3f2"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-11-resources.provenance.json",
+            "sha256": "ab2760d58641cdd6cf549d40831058d138589ebd0c80464dfa2fb78cdc022d69"
+          },
+          "wall_seconds": 87.78583156270906,
+          "user_seconds": 87.015162,
+          "system_seconds": 0.11953699999999999,
+          "peak_child_rss_kib": 64536
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-12-resources.json",
+            "sha256": "7fa383beadfbb2d8f1938f4e6de477af4cd319ad40c6eee417304412a74d19be"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-nearby-grid/sample-12-resources.provenance.json",
+            "sha256": "3ab8261142b12974fc5cfe479468919bda644029677b9b1b73dc7bb56d364a01"
+          },
+          "wall_seconds": 87.1897258553654,
+          "user_seconds": 86.524912,
+          "system_seconds": 0.051604,
+          "peak_child_rss_kib": 64580
+        }
+      ],
+      "sum_numerical_wall_seconds": 1178.0698994058184,
+      "peak_numerical_rss_kib": 64588
+    },
+    {
+      "profile": "laurent-fine-baseline",
+      "controller_resource": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline-resources.json",
+        "sha256": "0c5460a1be7dd66ff2fef6572d5e92fdc3dfe0079e0c793b5d7cd3e6651c6486"
+      },
+      "controller_provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline-resources.provenance.json",
+        "sha256": "57fca82c338aab9c5c7eaf4bfe4315c482aef432ca91fc2976a1b127c104f9ad"
+      },
+      "controller": {
+        "wall_seconds": 1265.1902648569085,
+        "user_seconds": 1222.006639,
+        "system_seconds": 33.274829,
+        "peak_child_rss_kib": 1201208
+      },
+      "numerical_processes": [
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-01-resources.json",
+            "sha256": "efe6570d7eb422c4e10b1178811508a2f6d27984cdb0952df0ba116bfc1af120"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-01-resources.provenance.json",
+            "sha256": "628511ecc3b00b4d920e21c00ff629a5f6f4237ec6a6729aa1eb7cda67990fa6"
+          },
+          "wall_seconds": 88.79127409681678,
+          "user_seconds": 88.027919,
+          "system_seconds": 0.138766,
+          "peak_child_rss_kib": 64560
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-02-resources.json",
+            "sha256": "73c112a3bfeb3bd3befba7ed8c86e50677de5e49eab8fc308d5e13921891590f"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-02-resources.provenance.json",
+            "sha256": "9d844a6a245cc34093e88ba3f5e67149190eb39bf50d7ec12bb723b379dc272b"
+          },
+          "wall_seconds": 88.07207194715738,
+          "user_seconds": 87.285429,
+          "system_seconds": 0.122863,
+          "peak_child_rss_kib": 64576
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-03-resources.json",
+            "sha256": "0cc7fe194a61a52a130a6883f47b84220f2d19837dbd7ceac0517da50955a56a"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-03-resources.provenance.json",
+            "sha256": "1c65b944de37d14257bcff70a3e9dbe64e10ef184fff57e23716f4aa91bc3f58"
+          },
+          "wall_seconds": 108.35976243019104,
+          "user_seconds": 107.471164,
+          "system_seconds": 0.21004399999999998,
+          "peak_child_rss_kib": 64536
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-04-resources.json",
+            "sha256": "d9ab35da8f081f974f139a867f9d033cff74436e057dd30ea8b0cc881b5fb669"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-04-resources.provenance.json",
+            "sha256": "e4007f0d50f3142d3b86d1ca512fb5fb7efc5a083a8f147e6db066e1a7993ea7"
+          },
+          "wall_seconds": 106.1699118479155,
+          "user_seconds": 105.339636,
+          "system_seconds": 0.155744,
+          "peak_child_rss_kib": 64544
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-05-resources.json",
+            "sha256": "4f4a479994f1dc5351f2092f4558d3827132dd61160ffabec7335652d4d9056f"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-05-resources.provenance.json",
+            "sha256": "2d1041c24d763ab454616601af778d9cb2c04168a7c4115613c4285f814d1506"
+          },
+          "wall_seconds": 88.50526767922565,
+          "user_seconds": 87.677426,
+          "system_seconds": 0.153798,
+          "peak_child_rss_kib": 64592
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-06-resources.json",
+            "sha256": "fe539e802c60d4919301c2a9c948d6aaba337606899bd46b3c0c07e3458a8c78"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-06-resources.provenance.json",
+            "sha256": "b7b3a09f848db55b17edeb88cc72ff534587a1b2701587568da4fb20e146e96c"
+          },
+          "wall_seconds": 93.45140971196815,
+          "user_seconds": 90.758986,
+          "system_seconds": 0.14443599999999998,
+          "peak_child_rss_kib": 64564
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-07-resources.json",
+            "sha256": "749bf02b603cde0d8ae0fb86508121f512d79cdbc8fa25dd3ab92fbb7a3d8173"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-07-resources.provenance.json",
+            "sha256": "0f10a4da6a623d1610c8683f246196f9c4fd6d91051a39bc9515c88d7a63624b"
+          },
+          "wall_seconds": 88.75590288825333,
+          "user_seconds": 87.975519,
+          "system_seconds": 0.136487,
+          "peak_child_rss_kib": 64576
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-08-resources.json",
+            "sha256": "15779250452ec0eeebbc341ca861b10c9922d74d6755c8a95421d3439f8231ce"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-08-resources.provenance.json",
+            "sha256": "740a0e583fa61c0ec456cfa16d92f323601c2455f6d202904123ad3e6ed58658"
+          },
+          "wall_seconds": 88.12852525012568,
+          "user_seconds": 87.385629,
+          "system_seconds": 0.13272699999999998,
+          "peak_child_rss_kib": 64528
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-09-resources.json",
+            "sha256": "43b2882b7677caccffed4af969ecb80a6e408d9c80b63900a89ef47e184db942"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-09-resources.provenance.json",
+            "sha256": "01b2b1d98e33d8fcda67ddcaaa3eb1b9715ee141cf8bb220655e7beb87d3fce8"
+          },
+          "wall_seconds": 88.738760153763,
+          "user_seconds": 88.01119,
+          "system_seconds": 0.127796,
+          "peak_child_rss_kib": 64564
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-10-resources.json",
+            "sha256": "92dc5dac8306ac203e457bdd8c205820a0cc180e724f31abc393e391beb2362c"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-10-resources.provenance.json",
+            "sha256": "6b9b8b19bd7b2c8612e19e60e706d4a01747fb5ecb0f3b4c742881e165f470ad"
+          },
+          "wall_seconds": 89.5299691259861,
+          "user_seconds": 88.680303,
+          "system_seconds": 0.149356,
+          "peak_child_rss_kib": 61508
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-11-resources.json",
+            "sha256": "da58ea108faaede0ad24e817fe82403a758f9c0bee3d0283220418631e472de5"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-11-resources.provenance.json",
+            "sha256": "d0c7f98ae5ab94f4b38fff9f6030c9d92132aae4bfef11f28bdbe9b3f31b465b"
+          },
+          "wall_seconds": 87.78677032887936,
+          "user_seconds": 86.972079,
+          "system_seconds": 0.116159,
+          "peak_child_rss_kib": 64536
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-12-resources.json",
+            "sha256": "6033ce25d71f18ddb221dcdccf9c0bcaf1fcf13f64aad8a82841ece8d36c41c1"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-baseline/sample-12-resources.provenance.json",
+            "sha256": "0069c5a77847fa64579689d4031df38e4213f5295b5e028889624f69f206beee"
+          },
+          "wall_seconds": 88.16978349722922,
+          "user_seconds": 87.426859,
+          "system_seconds": 0.107875,
+          "peak_child_rss_kib": 64564
+        }
+      ],
+      "sum_numerical_wall_seconds": 1104.4594089575112,
+      "peak_numerical_rss_kib": 64592
+    },
+    {
+      "profile": "laurent-fine-precision",
+      "controller_resource": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision-resources.json",
+        "sha256": "75103a9d7597a13b7b720ad8a2c581dbaa3a0e285df7bb32c086c7438da02ad8"
+      },
+      "controller_provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision-resources.provenance.json",
+        "sha256": "f3036726aae5047f3e99b69c52c1b1a3a7e456f2921ed03f21e5a9aa05684300"
+      },
+      "controller": {
+        "wall_seconds": 1419.9364242916927,
+        "user_seconds": 1375.685706,
+        "system_seconds": 33.656851,
+        "peak_child_rss_kib": 1204300
+      },
+      "numerical_processes": [
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-01-resources.json",
+            "sha256": "8c80764555442302dfac1fa0e0b84860ed2a31db27bd259edf2a70e27398992b"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-01-resources.provenance.json",
+            "sha256": "36a1d5ee7e51a7a88a4287d7ab2d46e8214dccc391109927014e325051662348"
+          },
+          "wall_seconds": 105.5567204686813,
+          "user_seconds": 104.627794,
+          "system_seconds": 0.15252,
+          "peak_child_rss_kib": 64556
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-02-resources.json",
+            "sha256": "8580bc3c7803ab9e15f3cc57b37178d3e65c7b2e0d52d9f9af5f6226137fe1c5"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-02-resources.provenance.json",
+            "sha256": "585a9af3109e65852d2615186965d685dbb6dff1bfe3269dd496f0a2381f8715"
+          },
+          "wall_seconds": 108.65103568322957,
+          "user_seconds": 106.327917,
+          "system_seconds": 0.13611399999999999,
+          "peak_child_rss_kib": 64584
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-03-resources.json",
+            "sha256": "ddb7fb6a3f7f24b6abcf17d8607a6cf7be2093e0e23898182d8967211abf3951"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-03-resources.provenance.json",
+            "sha256": "1ba6a63b6f29196670a2d606726ed9321464aa71b96f04c7d0757bc72883a416"
+          },
+          "wall_seconds": 104.30319706629962,
+          "user_seconds": 103.270849,
+          "system_seconds": 0.13311199999999998,
+          "peak_child_rss_kib": 64600
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-04-resources.json",
+            "sha256": "40476f06a6c9a34bf55d85bf5d86e39915b2de91bc957d756526207fe5e09754"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-04-resources.provenance.json",
+            "sha256": "ac4bd63ad5986b7132ec6c1c96e36abe19efd95966a6c5c7934437d031727f4c"
+          },
+          "wall_seconds": 104.0474990028888,
+          "user_seconds": 103.095724,
+          "system_seconds": 0.20201,
+          "peak_child_rss_kib": 64552
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-05-resources.json",
+            "sha256": "ad393860c124fa32577bc14b838504523348ebcbaab4364f025c3fd0642cfb48"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-05-resources.provenance.json",
+            "sha256": "b282ebc26f6c27b6eb506a4baa206eac0afc85a63c48a8c8f5e87d2a5177bfe2"
+          },
+          "wall_seconds": 103.27370756492019,
+          "user_seconds": 102.521367,
+          "system_seconds": 0.037433999999999995,
+          "peak_child_rss_kib": 64564
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-06-resources.json",
+            "sha256": "b9344c6864d4a1d77819ac8b0cf929b82ce3721d775157fb2f1f0618aa2030ab"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-06-resources.provenance.json",
+            "sha256": "e8253030776455d4c1d3b0a254ee2de2d774131fea776ce9ef9e9ee91d66a746"
+          },
+          "wall_seconds": 105.24805349530652,
+          "user_seconds": 104.345248,
+          "system_seconds": 0.160136,
+          "peak_child_rss_kib": 64584
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-07-resources.json",
+            "sha256": "3191476608b35676edf045972171c94aa2e66432dc37aab99df7e8f15e5c242a"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-07-resources.provenance.json",
+            "sha256": "7d30c9f07cdd8972c5c26300421f0c1d8e2a0c910a2028b29d13fe64fbcd00f2"
+          },
+          "wall_seconds": 104.55683212494478,
+          "user_seconds": 103.594991,
+          "system_seconds": 0.16092499999999998,
+          "peak_child_rss_kib": 64544
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-08-resources.json",
+            "sha256": "70c314be65756f98d34c51dd3179c6d2df90240c6b662db231bf55e2a0ee3716"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-08-resources.provenance.json",
+            "sha256": "af4fcbe77f5a072752b7221976e19388619c069f7b40ea076ded9433e59f37b0"
+          },
+          "wall_seconds": 104.17881496297196,
+          "user_seconds": 103.229197,
+          "system_seconds": 0.11921699999999999,
+          "peak_child_rss_kib": 64588
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-09-resources.json",
+            "sha256": "6e5c82792ab29f4f82ea5f226f9bea095faa1f612957d2372800ddc8da296f59"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-09-resources.provenance.json",
+            "sha256": "03ac9e1b62f3bf86a225fcd1e8c57787516b5985b6810aff4eca9c84ceefaae4"
+          },
+          "wall_seconds": 105.01767630083486,
+          "user_seconds": 103.861215,
+          "system_seconds": 0.137741,
+          "peak_child_rss_kib": 64572
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-10-resources.json",
+            "sha256": "d803afd3b41b2d5cdfff75ccfa57e6660fa787f2c6f7ed830c099658b187d87c"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-10-resources.provenance.json",
+            "sha256": "aa3158faf1264749e0bb486b705c589f801070bd210dc4adbc72631c17294079"
+          },
+          "wall_seconds": 104.360432846006,
+          "user_seconds": 103.451576,
+          "system_seconds": 0.11966399999999999,
+          "peak_child_rss_kib": 61476
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-11-resources.json",
+            "sha256": "2c9215b8521798738094206588b7f53e537c94afef455bb436ed29108a67ae4a"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-11-resources.provenance.json",
+            "sha256": "696af5066ba8d26a077f4bbf10014acc1c0b6c0e84eedc52deff9f2d74fa399d"
+          },
+          "wall_seconds": 104.43493264168501,
+          "user_seconds": 103.350099,
+          "system_seconds": 0.11791299999999999,
+          "peak_child_rss_kib": 64564
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-12-resources.json",
+            "sha256": "32b19ac5f82313127d4a6d5c596bfe5fd1f60d1e6b5e9d480c417ec0d8e983e3"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-precision/sample-12-resources.provenance.json",
+            "sha256": "6daa8b6c7cd524e216bcafe308bc36dd7c1ddf2a29f7d5295e4c8818e8d31702"
+          },
+          "wall_seconds": 104.49153948528692,
+          "user_seconds": 103.674613,
+          "system_seconds": 0.131639,
+          "peak_child_rss_kib": 64544
+        }
+      ],
+      "sum_numerical_wall_seconds": 1258.1204416430555,
+      "peak_numerical_rss_kib": 64600
+    },
+    {
+      "profile": "laurent-fine-quadrature",
+      "controller_resource": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature-resources.json",
+        "sha256": "75b15d03011604c926a743fa851c8d43eea114d3e82299115f2b431673aa52e1"
+      },
+      "controller_provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature-resources.provenance.json",
+        "sha256": "0ec9df03b00c136b50ba2e2b510101aa0c6a1e2feab299d2a36015dae1230246"
+      },
+      "controller": {
+        "wall_seconds": 2634.1412717574276,
+        "user_seconds": 2583.645455,
+        "system_seconds": 33.711018,
+        "peak_child_rss_kib": 1204296
+      },
+      "numerical_processes": [
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-01-resources.json",
+            "sha256": "d94e27fb70a0296bd2848240e9e5220b61eb7d0d5688d5e8edbec7f026fd5771"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-01-resources.provenance.json",
+            "sha256": "a53c3f4c64f7ad00bdf4f82993c32afdc22023d0bdb8ed13d35d634bf17c9453"
+          },
+          "wall_seconds": 201.15930363815278,
+          "user_seconds": 199.527798,
+          "system_seconds": 0.145693,
+          "peak_child_rss_kib": 64548
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-02-resources.json",
+            "sha256": "3bef382d45245f8c89aab1c055e88df8dcf02392b3324dc87e3efeb6f82e81ba"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-02-resources.provenance.json",
+            "sha256": "f82e3ae70959d6f864009a5e5ea654eb1edbf45cd3c8a1307c1c3abcde9601b5"
+          },
+          "wall_seconds": 199.34711797488853,
+          "user_seconds": 197.740386,
+          "system_seconds": 0.151917,
+          "peak_child_rss_kib": 64548
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-03-resources.json",
+            "sha256": "10659aa433ff354f5357ed769d40ca19b2b72bf1e720da2bcfd1d0aee7bad8cf"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-03-resources.provenance.json",
+            "sha256": "670ef74e2aa51e37243093950cd65271cd15730f41f59d0dff3274c9cd9038fa"
+          },
+          "wall_seconds": 204.10945317009464,
+          "user_seconds": 202.51735,
+          "system_seconds": 0.16347499999999998,
+          "peak_child_rss_kib": 64544
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-04-resources.json",
+            "sha256": "e703d96a57ffe0112de6e66c4fcc7b9aa5ac2770aa83412c0ad0f56aefe4660b"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-04-resources.provenance.json",
+            "sha256": "99a3aac1036055d34398020a0d2a19a3cd8a93e778513c5bb7d13d7ad3d593a3"
+          },
+          "wall_seconds": 202.46294821472839,
+          "user_seconds": 200.790511,
+          "system_seconds": 0.128198,
+          "peak_child_rss_kib": 65080
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-05-resources.json",
+            "sha256": "99be85c96720a40571b4634648c93b11bb9984f1d491d7bf1661a4b13e8fde3a"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-05-resources.provenance.json",
+            "sha256": "e1aa1b9d089114377a3d1bbfb1efa58ef92104996a7beae921acff6efb55ce97"
+          },
+          "wall_seconds": 202.87044770969078,
+          "user_seconds": 201.349378,
+          "system_seconds": 0.16541,
+          "peak_child_rss_kib": 65464
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-06-resources.json",
+            "sha256": "400672e5d181aa21cf5249dac936b34d1a7ff0f51f228f9428f4499a11cd0376"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-06-resources.provenance.json",
+            "sha256": "5577db4246ab9c3a8e3d6aa0846ba0faccf594be1615629a5bbe58a9abaa2520"
+          },
+          "wall_seconds": 201.27759391395375,
+          "user_seconds": 199.771708,
+          "system_seconds": 0.11347,
+          "peak_child_rss_kib": 64664
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-07-resources.json",
+            "sha256": "fdf8e287377b693dd7b92cfb3b405f02d525efd67911dbe3cd83c544084e8fc1"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-07-resources.provenance.json",
+            "sha256": "7ec8cc063263608e589d3cf525e8ea784b4dd36e98a89f64d904997ea7a4369b"
+          },
+          "wall_seconds": 199.3337198938243,
+          "user_seconds": 197.722186,
+          "system_seconds": 0.11204199999999999,
+          "peak_child_rss_kib": 64928
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-08-resources.json",
+            "sha256": "26a5cab2e8864c150d0047acb209fdc63a425828fde4acc69a3372bfcb54404a"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-08-resources.provenance.json",
+            "sha256": "ab0c226ecab654b8c96bd92f7c293d00e7eddc8c8d9627c5bd85322e4f365552"
+          },
+          "wall_seconds": 199.283515421208,
+          "user_seconds": 197.711126,
+          "system_seconds": 0.137325,
+          "peak_child_rss_kib": 64548
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-09-resources.json",
+            "sha256": "ece189bb6d860fff2efd0ed0d63f2639ac3cc5e3a1c9aff55dd5334d4946fc45"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-09-resources.provenance.json",
+            "sha256": "38f5eb77668962b9c575aa05cc7e4fe20d2af4c3284238e2410b80f6524b53c6"
+          },
+          "wall_seconds": 204.17079398594797,
+          "user_seconds": 202.518363,
+          "system_seconds": 0.183055,
+          "peak_child_rss_kib": 64548
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10-resources.json",
+            "sha256": "b6d359d25ef900d3865a6d8851ccaf3c12d5d598ebc54e478cd526a12c6114b3"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-10-resources.provenance.json",
+            "sha256": "a5becb4480f92d1ff7d6d9c0f32d1cc48652e9c60fde1b265b66403590437958"
+          },
+          "wall_seconds": 247.3862902452238,
+          "user_seconds": 244.617533,
+          "system_seconds": 0.234318,
+          "peak_child_rss_kib": 62180
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-11-resources.json",
+            "sha256": "849e819892ad6cc043886232ef7de7cf2f82ee077df16361496f258f9f6093d6"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-11-resources.provenance.json",
+            "sha256": "92ee183044eb081a20e5ed037d5d1f0b6da86e91642676797ebf5d6ba7f6eda9"
+          },
+          "wall_seconds": 208.63834659196436,
+          "user_seconds": 206.516512,
+          "system_seconds": 0.150439,
+          "peak_child_rss_kib": 64544
+        },
+        {
+          "resource": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-12-resources.json",
+            "sha256": "ba78a7beac53b4f75b28999451a7e80f99dd75b1ef627c04b2121d889e29f997"
+          },
+          "provenance": {
+            "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-fine-quadrature/sample-12-resources.provenance.json",
+            "sha256": "01e792ff08a699b4760773f1c44fa394c9c93a2ac95c39d2c54313c30657e95d"
+          },
+          "wall_seconds": 202.18096148595214,
+          "user_seconds": 200.380875,
+          "system_seconds": 0.154804,
+          "peak_child_rss_kib": 64572
+        }
+      ],
+      "sum_numerical_wall_seconds": 2472.2204922456294,
+      "peak_numerical_rss_kib": 65464
+    }
+  ],
+  "sample_count": 60,
+  "sum_controller_wall_seconds": 7975.481421916746,
+  "sum_numerical_process_wall_seconds": 7155.3926975117065,
+  "peak_controller_rss_kib": 1204300,
+  "peak_numerical_rss_kib": 65464,
+  "linkage": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/standalone-linkage.json",
+    "sha256": "210706f02078fdf86ff4d716d5cedb172004f54d52643d7745fff515136aec02"
+  }
+}

@@ -63,6 +63,8 @@ impl Run {
             prioritize_requested_indices: setting("RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED", false),
             max_reused_rules: setting("RUSTFLOW_WEIGHTED_REUSED_RULES", 0),
             max_domains_per_residual: setting("RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL", 0),
+            active_target_closure: setting("RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE", false),
+            max_direct_zero_attempts: setting("RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS", 0),
             checkpoints: Some(report.join("native-closure")),
             ..Default::default()
         };

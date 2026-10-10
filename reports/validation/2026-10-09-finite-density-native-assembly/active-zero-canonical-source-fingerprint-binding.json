@@ -1,0 +1,15 @@
+{
+  "source_snapshot_sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+  "build_provenance_sha256": "d4500c314dad8730b5a2e68ca5d442ea27cd58ad737453ad516679b448872f87",
+  "launcher_sha256": "ab203a0060c328ceb61804c2f4817f9acc77d04ffce91c304d58f469a2f3ff23",
+  "gate": "source-fingerprint",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/source_fingerprint-3c52aa1b71e5ce60",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false
+}

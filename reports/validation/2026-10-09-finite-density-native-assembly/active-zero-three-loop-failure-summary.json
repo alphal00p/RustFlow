@@ -1,0 +1,501 @@
+{
+  "schema_version": 1,
+  "status": "both attempts failed native closure; no numerical acceptance",
+  "created_utc": "2026-10-10T00:55:05.660243+00:00",
+  "scope": "Two separate three-loop controls, not combined cut contributions or a completed amplitude. No saved numerical values and no reference comparison.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-source-hashes.json",
+    "sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+    "size_bytes": 270580
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-build-provenance.json",
+    "sha256": "1b0710e908c3875c5acdaee398d82e52c23ca3485d8e7c016a1509be1ed222e1",
+    "size_bytes": 3449
+  },
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "f8c23e306f1c0a785b79431d31b234e50d5cfde6afc06b556ca3930c0492c39c",
+    "RUSTRED_SOURCE_DIGEST": "13fbdef02acfb2a3466d927eaec61cf3060f8277b38b35123a5cd3b076a2864f",
+    "PORT_SOURCE_DIGEST": "c0b21791a7f06ce15942bb453edd75124b80484f006c7956cc5d44cf5970211e"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "runs": [
+    {
+      "name": "active-zero-three-loop-fixed",
+      "attempt_scope": "full amplitude, stopped while preparing first occupied cut [0]",
+      "cut_slots_at_failure": [
+        0
+      ],
+      "status": "failed_unclosed",
+      "failure_stage": "complete preparation",
+      "failure_reason": "active weighted provisional-frontier budget exhausted",
+      "exit_code": 101,
+      "rounds_completed": 8,
+      "frontier_limit": 1024,
+      "observed_frontier": 1025,
+      "unresolved_terms": 10548,
+      "round_counters": [
+        {
+          "round": 0,
+          "requested": 16,
+          "frontier": 7,
+          "native_rule_count": 20,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        },
+        {
+          "round": 1,
+          "requested": 60,
+          "frontier": 29,
+          "native_rule_count": 174,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        },
+        {
+          "round": 2,
+          "requested": 163,
+          "frontier": 109,
+          "native_rule_count": 1144,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        },
+        {
+          "round": 3,
+          "requested": 342,
+          "frontier": 216,
+          "native_rule_count": 3661,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        },
+        {
+          "round": 4,
+          "requested": 740,
+          "frontier": 494,
+          "native_rule_count": 7539,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        },
+        {
+          "round": 5,
+          "requested": 1240,
+          "frontier": 660,
+          "native_rule_count": 12166,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        },
+        {
+          "round": 6,
+          "requested": 1977,
+          "frontier": 988,
+          "native_rule_count": 16536,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        },
+        {
+          "round": 7,
+          "requested": 2216,
+          "frontier": 1025,
+          "native_rule_count": 20781,
+          "physical_arity": 11,
+          "storage_capacity": 12
+        }
+      ],
+      "active_request_history": {
+        "current_requests": 2216,
+        "historical_requests": 2481,
+        "historical_requests_are_additional_targets": false
+      },
+      "direct_zero_round_counters": [
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 1236,
+          "requested_points": 3,
+          "completed_points": 3,
+          "zero_rules": 0,
+          "skipped_seeds": 1164
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 5356,
+          "requested_points": 13,
+          "completed_points": 13,
+          "zero_rules": 0,
+          "skipped_seeds": 4863
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 18952,
+          "requested_points": 46,
+          "completed_points": 46,
+          "zero_rules": 0,
+          "skipped_seeds": 16932
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 47308,
+          "requested_points": 116,
+          "completed_points": 116,
+          "zero_rules": 3,
+          "skipped_seeds": 41991
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 93524,
+          "requested_points": 230,
+          "completed_points": 230,
+          "zero_rules": 6,
+          "skipped_seeds": 81664
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 193613,
+          "requested_points": 489,
+          "completed_points": 489,
+          "zero_rules": 34,
+          "skipped_seeds": 169519
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 262144,
+          "requested_points": 687,
+          "completed_points": 644,
+          "zero_rules": 18,
+          "skipped_seeds": 228147
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure/cut-0/direct-zero-0008.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 262144,
+          "requested_points": 940,
+          "completed_points": 643,
+          "zero_rules": 14,
+          "skipped_seeds": 225465
+        }
+      ],
+      "direct_zero_counter_note": "Completed search points are not zero certificates; zero_rules is the separately recorded proof count.",
+      "wall_seconds": 105.15216882480308,
+      "user_seconds": 103.453737,
+      "system_seconds": 0.837576,
+      "peak_child_rss_kib": 394956,
+      "configuration": {
+        "epsilon": "-5/4",
+        "guard_digits": 40,
+        "independent_reference_comparisons": 0,
+        "initial_epsilon_grid": 1000,
+        "input_path": "examples/finite_density/massless_three_loop_chain.json",
+        "native_closure": "WeightedClosureOptions { max_rounds: 16, max_frontier: 1024, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 0, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: true, requested_index_rays: true, prioritize_requested_indices: false, max_reused_rules: 65536, max_domains_per_residual: 32, active_target_closure: true, max_direct_zero_attempts: 262144, checkpoints: Some(\"reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/native-closure\") }",
+        "profiles": [
+          [
+            18,
+            60,
+            8
+          ],
+          [
+            28,
+            60,
+            8
+          ],
+          [
+            28,
+            80,
+            8
+          ],
+          [
+            28,
+            80,
+            12
+          ]
+        ],
+        "source_options": {
+          "free_virtual_zero_sectors": true,
+          "policy": "legacy-lorentz",
+          "positive_compact_energy_powers": false
+        }
+      },
+      "input": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/input.json",
+        "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+        "size_bytes": 1549
+      },
+      "configuration_artifact": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/configuration.json",
+        "sha256": "d8051e4868ab28425d28ce13012248a98d427df101d525e8155e570bfc846a08",
+        "size_bytes": 1299
+      },
+      "failure": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed/failure.json",
+        "sha256": "e2425e8c2e6c92fa4555b8a5bcfdf53b39395bc7f5ead933f67c4184db2a4721",
+        "size_bytes": 781
+      },
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed-resources.json",
+        "sha256": "30aa3e295ab2e1296c2108dc46ce722054d13ac5ec0e08055df02e8948938223",
+        "size_bytes": 1411
+      },
+      "launch_provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed-resources.provenance.json",
+        "sha256": "626d66660105b1e2d0c07915566207fab4980f899b9162d00b562fce5f936328",
+        "size_bytes": 2116
+      },
+      "executable": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "sha256": "321c4837ac5823e482b987f4abffe3822a11150b4edd060f60ff02da51e3db07",
+        "size_bytes": 1302452632
+      },
+      "numerical_values_saved": 0,
+      "independent_reference_comparisons": 0,
+      "numerical_acceptance": false
+    },
+    {
+      "name": "active-zero-three-loop-double",
+      "attempt_scope": "separate occupied-cut [0,3] control; not a full-amplitude run",
+      "cut_slots_at_failure": [
+        0,
+        3
+      ],
+      "status": "failed_unclosed",
+      "failure_stage": "occupied preparation",
+      "failure_reason": "active weighted provisional-frontier budget exhausted",
+      "exit_code": 101,
+      "rounds_completed": 8,
+      "frontier_limit": 1024,
+      "observed_frontier": 1025,
+      "unresolved_terms": 10029,
+      "round_counters": [
+        {
+          "round": 0,
+          "requested": 24,
+          "frontier": 19,
+          "native_rule_count": 16,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        },
+        {
+          "round": 1,
+          "requested": 76,
+          "frontier": 32,
+          "native_rule_count": 183,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        },
+        {
+          "round": 2,
+          "requested": 206,
+          "frontier": 143,
+          "native_rule_count": 949,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        },
+        {
+          "round": 3,
+          "requested": 333,
+          "frontier": 198,
+          "native_rule_count": 3104,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        },
+        {
+          "round": 4,
+          "requested": 586,
+          "frontier": 333,
+          "native_rule_count": 6218,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        },
+        {
+          "round": 5,
+          "requested": 927,
+          "frontier": 508,
+          "native_rule_count": 9480,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        },
+        {
+          "round": 6,
+          "requested": 1554,
+          "frontier": 935,
+          "native_rule_count": 12722,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        },
+        {
+          "round": 7,
+          "requested": 2026,
+          "frontier": 1025,
+          "native_rule_count": 15997,
+          "physical_arity": 13,
+          "storage_capacity": 16
+        }
+      ],
+      "active_request_history": {
+        "current_requests": 2026,
+        "historical_requests": 1780,
+        "historical_requests_are_additional_targets": false
+      },
+      "direct_zero_round_counters": [
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0001.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 6780,
+          "requested_points": 3,
+          "completed_points": 3,
+          "zero_rules": 0,
+          "skipped_seeds": 6692
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0002.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 47460,
+          "requested_points": 21,
+          "completed_points": 21,
+          "zero_rules": 0,
+          "skipped_seeds": 46546
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0003.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 124300,
+          "requested_points": 55,
+          "completed_points": 55,
+          "zero_rules": 0,
+          "skipped_seeds": 121175
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0004.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 262144,
+          "requested_points": 145,
+          "completed_points": 116,
+          "zero_rules": 9,
+          "skipped_seeds": 254695
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0005.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 262144,
+          "requested_points": 213,
+          "completed_points": 115,
+          "zero_rules": 0,
+          "skipped_seeds": 255294
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0006.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 262144,
+          "requested_points": 393,
+          "completed_points": 115,
+          "zero_rules": 0,
+          "skipped_seeds": 254562
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0007.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 262144,
+          "requested_points": 661,
+          "completed_points": 115,
+          "zero_rules": 0,
+          "skipped_seeds": 254424
+        },
+        {
+          "file": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure/direct-zero-0008.json",
+          "attempt_budget": 262144,
+          "attempted_rows": 262144,
+          "requested_points": 1192,
+          "completed_points": 115,
+          "zero_rules": 0,
+          "skipped_seeds": 253991
+        }
+      ],
+      "direct_zero_counter_note": "Completed search points are not zero certificates; zero_rules is the separately recorded proof count.",
+      "wall_seconds": 257.1313333478756,
+      "user_seconds": 253.689743,
+      "system_seconds": 1.415319,
+      "peak_child_rss_kib": 473280,
+      "configuration": {
+        "epsilon": "-5/4",
+        "guard_digits": 40,
+        "independent_reference_comparisons": 0,
+        "initial_epsilon_grid": 1000,
+        "input_path": "examples/finite_density/massless_three_loop_chain.json",
+        "native_closure": "WeightedClosureOptions { max_rounds: 16, max_frontier: 1024, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 0, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: true, requested_index_rays: true, prioritize_requested_indices: false, max_reused_rules: 65536, max_domains_per_residual: 32, active_target_closure: true, max_direct_zero_attempts: 262144, checkpoints: Some(\"reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/native-closure\") }",
+        "profiles": [
+          [
+            18,
+            60,
+            8
+          ]
+        ],
+        "source_options": {
+          "free_virtual_zero_sectors": true,
+          "policy": "legacy-lorentz",
+          "positive_compact_energy_powers": false
+        }
+      },
+      "input": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/input.json",
+        "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+        "size_bytes": 1549
+      },
+      "configuration_artifact": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/configuration.json",
+        "sha256": "247787da0d1405c2dbdde3549f67a0b3998417471231a6ce4e25b01fd1c5af76",
+        "size_bytes": 1176
+      },
+      "failure": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double/failure.json",
+        "sha256": "b4a9a26175cb45c59d427ae7c4f1a458a8d855f14b644c071b0b6244d6d8aee1",
+        "size_bytes": 876
+      },
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double-resources.json",
+        "sha256": "431af2d04230fe312d8bc194ef9c72e10b50dfc664433ca85a625b003e9b44fe",
+        "size_bytes": 1419
+      },
+      "launch_provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double-resources.provenance.json",
+        "sha256": "ae4d832f8c8f24a52e0328c4e43a200361acad66f91c40adac215b5683e699f7",
+        "size_bytes": 2125
+      },
+      "executable": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+        "sha256": "321c4837ac5823e482b987f4abffe3822a11150b4edd060f60ff02da51e3db07",
+        "size_bytes": 1302452632
+      },
+      "numerical_values_saved": 0,
+      "independent_reference_comparisons": 0,
+      "numerical_acceptance": false
+    }
+  ],
+  "archives": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-archives.json",
+    "sha256": "e3aec15665f7efffa3f730973d2f25f400e09d595d0b182ce6995911e23bd89b",
+    "size_bytes": 32422
+  },
+  "numerical_values_saved": 0,
+  "numerical_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "fixed_dimension_requested": "D=13/2; epsilon=-5/4; preparation failed before evaluation",
+  "later_canonical_build_note": "The subsequent canonical fixture-order correction and regression gate are separate evidence. These attempts bind the historical active-zero build and are not attributed to later binaries.",
+  "measurement_scope": "Prebuilt native execution; compilation and Nix startup excluded. Shared-host timing is not an isolated benchmark."
+}

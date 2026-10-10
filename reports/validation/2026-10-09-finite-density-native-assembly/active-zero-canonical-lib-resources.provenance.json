@@ -1,0 +1,24 @@
+{
+  "captured_utc": "2026-10-10T00:50:51.887836+00:00",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e",
+    "finite_density::",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/symbolica_amflow-6c032eef1649ac2e",
+      "sha256": "8e7d6475a37edde34c1a08b8b306fc9fe346332ed1658a6fc198512f985d3ef9",
+      "size_bytes": 1268763096
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

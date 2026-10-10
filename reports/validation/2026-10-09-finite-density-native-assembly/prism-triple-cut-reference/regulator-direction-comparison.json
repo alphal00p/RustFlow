@@ -1,0 +1,58 @@
+{
+  "status": "independent regulator-direction check passed at fixed epsilon; no Laurent/native acceptance",
+  "epsilon": "1/101",
+  "digits": 55,
+  "step": "1/30",
+  "cutoff": 14,
+  "directions": [
+    {
+      "beta": [
+        7,
+        11,
+        13
+      ],
+      "transfer": [
+        17,
+        19,
+        23
+      ],
+      "radial": [
+        29,
+        31,
+        37
+      ]
+    },
+    {
+      "beta": [
+        41,
+        43,
+        47
+      ],
+      "transfer": [
+        53,
+        59,
+        61
+      ],
+      "radial": [
+        67,
+        71,
+        73
+      ]
+    }
+  ],
+  "observed_absolute_difference": "1.3614547493931237298248023E-31",
+  "observed_relative_difference": "2.984502419268574996544414485158206755176694597449167209274832286718932091740430840111325715081209592E-34",
+  "proof": "strict high-D virtual/radial/angular bounds persist in an open multivariate analytic-index neighborhood; UV Gamma poles avoided; hence the physical point is holomorphic and regulator removal is direction independent",
+  "inputs": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/finite-epsilon/prism-barnes-full-55-refined.json",
+      "sha256": "833aab7a1b8179fb62d5728ffef97899488d1dd3eeb552ed336a392fb6485e9d"
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/regulator-direction-check/reference.json",
+      "sha256": "ffb3df26ce31274bd8363f324464a5ccfef0f94d7d6b4a82f4372fc06d60441b"
+    }
+  ],
+  "empirical_relative_criterion": "1e-12",
+  "native_amf_comparisons": 0
+}

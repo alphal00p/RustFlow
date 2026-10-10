@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "scope": "completed native unit artifact, Cargo fingerprint is later than stable binary; root combined build is still in progress",
+  "source_snapshot": "active-zero-source-hashes.json",
+  "source_snapshot_sha256": "6ee2c818548bcb0b9c6bc6ead3f12264399424468511a206e1568b1d880b3f86",
+  "artifact": "target/release/deps/rustred-258a1e04558e72f1",
+  "sha256": "2e5d12e71c9490fce2d24cbe4de3a616ceeac6ddf3dd1875874e37e11ab4a315",
+  "size_bytes": 632142904,
+  "mtime_utc": "2026-10-10T00:33:35.780836+00:00",
+  "fingerprint": "target/release/.fingerprint/rustred-258a1e04558e72f1/test-lib-rustred.json",
+  "fingerprint_sha256": "b85b676aa329bd69637774a73713fd78868a30a598b305806ea55b008d469e55",
+  "fingerprint_mtime_utc": "2026-10-10T00:33:37.778841+00:00",
+  "features": "[\"native\"]"
+}

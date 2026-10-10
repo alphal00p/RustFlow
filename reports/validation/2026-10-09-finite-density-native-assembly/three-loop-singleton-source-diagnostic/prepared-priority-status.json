@@ -1,0 +1,5 @@
+{
+  "status": "prepared_not_run",
+  "reason": "user steered to moving-cut-shell flow before diagnostic execution",
+  "scope": "19 fixed-point source-order queries; no production mutation; no claimed result"
+}

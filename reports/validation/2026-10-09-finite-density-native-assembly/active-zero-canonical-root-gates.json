@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Five root regression gates only; excludes the separately owned native guarded suite and all numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json",
+    "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-provenance.json",
+    "sha256": "d4500c314dad8730b5a2e68ca5d442ea27cd58ad737453ad516679b448872f87"
+  },
+  "unchanged_source_files": 1811,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "991cd4f6a17289608a3092723d654f0b5fe9c722c6698cb3456be5f25c1f6c37",
+    "RUSTRED_SOURCE_DIGEST": "83304d05399eb3342eab352b3758371e20d3f51f6819b42f057e1efd1c91c934",
+    "PORT_SOURCE_DIGEST": "c0b21791a7f06ce15942bb453edd75124b80484f006c7956cc5d44cf5970211e"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 73,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.21,
+      "wall_seconds": 7.23431410593912,
+      "peak_child_rss_kib": 27648,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-resources.json",
+          "sha256": "a61e4e1715166ff5c4c668c47edfb1476d78544b8b0d51879aec621329ebe666"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-resources.log",
+          "sha256": "03e5b8fd825edaf67c437bf8cad9fe0b340bf17b1554458bae7e3f58a880de07"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-resources.provenance.json",
+          "sha256": "c386b79b06dbd63f5bc6e02666ec0b7bb27c150817814372d48435b1b47e96a0"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-binding.json",
+          "sha256": "836d5b2174d7f58eed014d5c186d290ecdedfe77814f142ddcced33a39ef8c8e"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.1663643941283226,
+      "peak_child_rss_kib": 15468,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-resources.json",
+          "sha256": "d12ab9165febd08489e05ba9feda2009e54fd3e402313d6c027bc98a30db34c3"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-resources.provenance.json",
+          "sha256": "5ecffb6bbc1afbd262353297221961f7c06431b21b5c4f6bc31e46d18bfc0570"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-binding.json",
+          "sha256": "0eea249adb2518806e3d0eb126124436cb075736de616d42cb6789e350fd6b37"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.37,
+      "wall_seconds": 1.3921053279191256,
+      "peak_child_rss_kib": 18432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-resources.json",
+          "sha256": "84b7c10a23d73ecea54f64137391cf607d8fddf72cd979aa62d6cb93f61ae11d"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-resources.log",
+          "sha256": "8d04dedadbb9acaed1a52602afd0cc82bdf83c60c0cc7df48bed88c838b1abe5"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-resources.provenance.json",
+          "sha256": "5492db96aebee6f3bef5d49681837746dc45ea30bffba97b7ff5ba93710ba2fc"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-binding.json",
+          "sha256": "bd02fb2422d80cb430bd10a96202c8a264454a9b63fb95ea8cb3cbc9a47a57fe"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.013331254944205284,
+      "peak_child_rss_kib": 15428,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-resources.json",
+          "sha256": "85b9b12ba846609176786f3d780bc1890c5351290b31a823fb74abed87b3c6f4"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-resources.log",
+          "sha256": "6beadd90cb262ad9dfd2e1321edfa448e204c6221adadb7cd906b87e5c7920a1"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-resources.provenance.json",
+          "sha256": "c128250f820f8d6850e0ab2822caa3b2bd65077b4f5e404bbc62dd45b70d3076"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-binding.json",
+          "sha256": "a96531224083e86d8fdf4a26898d425ac035a890a19ddd711549a64ec64d7945"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.62,
+      "wall_seconds": 1.6442503780126572,
+      "peak_child_rss_kib": 27700,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-resources.json",
+          "sha256": "1f30502330f3e85789f0d30723ea51eb5d9fcb7a1636577da95891cb15755b50"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-resources.log",
+          "sha256": "9818c3173d671dcd277420ad58778058b023f40fde6146b3123c52ec19c715ba"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-resources.provenance.json",
+          "sha256": "5871afaf8cf8ce651db6b396950ffd8b9cd640f682b05da1348cad49b2d6ce19"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-binding.json",
+          "sha256": "80af660f2b3d3382c30c93d63530122743ea271ff12b36b14b0e5bd63babe9d5"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 89,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "635bf7e92879596ce4b085ddfbfc18bf417ca4ff754ca28c090f433aebc637fe"
+}

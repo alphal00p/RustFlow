@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "scope": "scalar-only diagnostic derived from the frozen three-loop input; does not replace the two-target acceptance gate",
+  "status": "timed_out_before_numerical_predictions",
+  "runtime_resources": {
+    "command": [
+      "timeout",
+      "240",
+      "env",
+      "RUSTFLOW_WEIGHTED_INPUT=reports/validation/2026-10-09-finite-density-native-assembly/three-loop-scalar-diagnostic-input.json",
+      "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+      "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+      "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+      "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false",
+      "RUSTFLOW_WEIGHTED_REUSED_RULES=65536",
+      "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL=32",
+      "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+      "RUSTFLOW_WEIGHTED_DEPTH=3",
+      "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+      "RUSTFLOW_WEIGHTED_ROUNDS=8",
+      "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+      "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+      "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+      "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+      "RUSTFLOW_WEIGHTED_CUTS=0,3",
+      "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual32-scalar-double",
+      "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+      "--ignored",
+      "--exact",
+      "runtime_graph_occupied_flow",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 124,
+    "wall_seconds": 240.03093972522765,
+    "user_seconds": 237.319255,
+    "system_seconds": 0.5268229999999999,
+    "peak_child_rss_kib": 213740,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "requested": 1,
+      "frontier": 1
+    },
+    {
+      "round": 1,
+      "requested": 4,
+      "frontier": 6
+    },
+    {
+      "round": 2,
+      "requested": 18,
+      "frontier": 81
+    },
+    {
+      "round": 3,
+      "requested": 139,
+      "frontier": 150
+    },
+    {
+      "round": 4,
+      "requested": 366,
+      "frontier": 191
+    },
+    {
+      "round": 5,
+      "requested": 642,
+      "frontier": 211
+    }
+  ],
+  "source_build": "residual-search-build-provenance.json",
+  "binary_and_input_provenance": "three-loop-residual32-scalar-double-resources.provenance.json",
+  "archives": [
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/historical-discovery-gaps.json",
+      "original_sha256": "8d5aa2c4726fc3091e7ece7d6d6b467bc8d12aa322474a686398483fdafcaa2e",
+      "original_bytes": 6993467,
+      "archive": "three-loop-residual32-scalar-double/native-closure/historical-discovery-gaps.json.gz",
+      "archive_sha256": "20b10b687f059d094aa2677918ef4bad9049edd072b521edd616fec7032ce4c4",
+      "archive_bytes": 53547,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-000-provisional.bin",
+      "original_sha256": "3f024580fc0999acf8a5c6109529e42e5bc5e38e9b10fce45cf77e13b46c8007",
+      "original_bytes": 115129,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-000-provisional.bin.gz",
+      "archive_sha256": "d4e5af38deb2e69477ee958ef4fce4fd12260c58098e2d29a649905076f7380e",
+      "archive_bytes": 5311,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-000-provisional.json",
+      "original_sha256": "d8b4a6f2831043df161e9e4c63bb2be8e34f00001d33b78bd2a8ac3ed8abe80d",
+      "original_bytes": 8455,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-000-provisional.json.gz",
+      "archive_sha256": "6444ff9c6171b8edb030db96e3fc0ba494d242785881c2ca9668b1de50a5abd9",
+      "archive_bytes": 1879,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-001-provisional.bin",
+      "original_sha256": "78fa779374a8ecd061770b2968f47576ab345d620d869c1af4584c7f9878b70b",
+      "original_bytes": 131624,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-001-provisional.bin.gz",
+      "archive_sha256": "f0a907ca7a5ce27bd2725ab22ea4717b7bd4178f7dc3a03e9276d38cc486dfe7",
+      "archive_bytes": 6361,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-001-provisional.json",
+      "original_sha256": "2a9745eb6b6b76ffe3749408f847aaf79b825ac3fbcab83fafe59886039e97a8",
+      "original_bytes": 9704,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-001-provisional.json.gz",
+      "archive_sha256": "35799ae5c9d9843db33c5c48f19a3e3a6b3d007b6e7b820ffde7e1030a632a9b",
+      "archive_bytes": 1934,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-002-provisional.bin",
+      "original_sha256": "c0eea586fe3a06fc9de475bfdc3e87243e087cd771931f2951ca30de42fbc196",
+      "original_bytes": 523755,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-002-provisional.bin.gz",
+      "archive_sha256": "819cafaeca01f8a84d5839bc49ad05a1f082eeaed2638927ace0dd44db559b17",
+      "archive_bytes": 32943,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-002-provisional.json",
+      "original_sha256": "7379006fe66b65608d1d8d2646f4b38d035ea8f51978b9a9a0ea720f16ed34ad",
+      "original_bytes": 23652,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-002-provisional.json.gz",
+      "archive_sha256": "20de3882e58ca37dbf9ff82ea4f46ee14ec3dbf876a4e183799555a3a19921ce",
+      "archive_bytes": 2335,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-003-provisional.bin",
+      "original_sha256": "50e97828f59d7670debaf64e7bb8e8aa88a54499154ae9457f21992cde5e46b1",
+      "original_bytes": 1638773,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-003-provisional.bin.gz",
+      "archive_sha256": "a06010496b9191bd98ec55968c0a23f18136d9086adf7bc57e68383724a00a0d",
+      "archive_bytes": 116021,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-003-provisional.json",
+      "original_sha256": "1bdbd105b77083ba34f54f63417cb2a0f6236da29a109b46ff5bc5d9ab3a76e2",
+      "original_bytes": 53461,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-003-provisional.json.gz",
+      "archive_sha256": "da75f893b7952a675858ccfd9dd4a938fc367b36439d91388f6d3fdb3afc17e7",
+      "archive_bytes": 3115,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-004-provisional.bin",
+      "original_sha256": "c6f1c2ba090e1ad585f37108bbd2c5dcf53617fd951262c06e7baa35d01c8500",
+      "original_bytes": 4240534,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-004-provisional.bin.gz",
+      "archive_sha256": "3deb90fcf901bd8965377a386348be7d17057c59426fc8e019c786ac1e5166cd",
+      "archive_bytes": 331142,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-004-provisional.json",
+      "original_sha256": "e3568a3d6575a756aedb6411453600433506e37fb5f7d06cd828c729eae3ee2a",
+      "original_bytes": 95591,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-004-provisional.json.gz",
+      "archive_sha256": "aa7e5ed9f7f94ec9a7ff51db886ce3d3cc2714415ba48926c71d9eba76a58487",
+      "archive_bytes": 4179,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-005-provisional.bin",
+      "original_sha256": "8136dfe47118d5a147a4416a30af119a623f91f2b46bdbb27d7f8326f0fe9345",
+      "original_bytes": 8117057,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-005-provisional.bin.gz",
+      "archive_sha256": "d8ca57f851da2163b4efb3b2ad337e1464383d1399ee7ef1117d5ae6b97a00a8",
+      "archive_bytes": 645332,
+      "decompression_verified": true
+    },
+    {
+      "original": "three-loop-residual32-scalar-double/native-closure/round-005-provisional.json",
+      "original_sha256": "a69af17c242b3e6da47eb2ae88988fdeae47f380617607d6812c179dfb54bcc7",
+      "original_bytes": 142181,
+      "archive": "three-loop-residual32-scalar-double/native-closure/round-005-provisional.json.gz",
+      "archive_sha256": "7dd0c6e00d8dfa32b30a2c564726ab5b95f917daf62603dcdce9ac26d48c992c",
+      "archive_bytes": 5187,
+      "decompression_verified": true
+    }
+  ]
+}

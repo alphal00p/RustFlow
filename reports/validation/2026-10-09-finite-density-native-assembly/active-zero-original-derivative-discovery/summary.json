@@ -1,0 +1,145 @@
+{
+  "scope": "Bounded exact native discovery for an actual derivative of original scalar target in frozen singleton round007; no physical admission or numerical predictions",
+  "target": [
+    1,
+    1,
+    2,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "source_snapshot": "active-zero-source-hashes.json",
+  "code_snapshot": "active-zero-canonical-source-hashes.json",
+  "native_rlib_sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+  "depth": 3,
+  "domain_cap": 32,
+  "cases": [
+    {
+      "case": "point-none",
+      "rules": 1,
+      "gaps": 0,
+      "application": "Applied { rule: 0 }",
+      "reduced_unresolved_terms": 20,
+      "discovery_seconds": 0.015997115,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DEPTH=3",
+          "PROBE_DOMAINS=32",
+          "PROBE_HINTS=none",
+          "PROBE_HINT_FILE=reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/global-hints.json",
+          "/tmp/active_zero_original_derivative_discovery",
+          "/tmp/active-zero-three-loop-single-round7.bin",
+          "point",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/point-none.json",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 5.096692657098174,
+        "user_seconds": 4.7463619999999995,
+        "system_seconds": 0.315085,
+        "peak_child_rss_kib": 147484,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    {
+      "case": "target-rays-none",
+      "rules": 10,
+      "gaps": 21,
+      "application": "Unresolved(NoApplicableRule)",
+      "reduced_unresolved_terms": 1,
+      "discovery_seconds": 0.025346856,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DEPTH=3",
+          "PROBE_DOMAINS=32",
+          "PROBE_HINTS=none",
+          "PROBE_HINT_FILE=reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/global-hints.json",
+          "/tmp/active_zero_original_derivative_discovery",
+          "/tmp/active-zero-three-loop-single-round7.bin",
+          "target-rays",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target-rays-none.json",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.8498048186302185,
+        "user_seconds": 4.712597,
+        "system_seconds": 0.10602299999999999,
+        "peak_child_rss_kib": 147488,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    {
+      "case": "target-rays-personal",
+      "rules": 12,
+      "gaps": 16,
+      "application": "Applied { rule: 0 }",
+      "reduced_unresolved_terms": 20,
+      "discovery_seconds": 0.061863139,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DEPTH=3",
+          "PROBE_DOMAINS=32",
+          "PROBE_HINTS=personal",
+          "PROBE_HINT_FILE=reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/global-hints.json",
+          "/tmp/active_zero_original_derivative_discovery",
+          "/tmp/active-zero-three-loop-single-round7.bin",
+          "target-rays",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target-rays-personal.json",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.9945778688415885,
+        "user_seconds": 4.852746,
+        "system_seconds": 0.109468,
+        "peak_child_rss_kib": 147492,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    {
+      "case": "target-rays-global",
+      "rules": 12,
+      "gaps": 16,
+      "application": "Applied { rule: 0 }",
+      "reduced_unresolved_terms": 20,
+      "discovery_seconds": 0.060332345,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DEPTH=3",
+          "PROBE_DOMAINS=32",
+          "PROBE_HINTS=global",
+          "PROBE_HINT_FILE=reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/global-hints.json",
+          "/tmp/active_zero_original_derivative_discovery",
+          "/tmp/active-zero-three-loop-single-round7.bin",
+          "target-rays",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target-rays-global.json",
+          "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-original-derivative-discovery/target.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 5.050290359184146,
+        "user_seconds": 4.824522,
+        "system_seconds": 0.193957,
+        "peak_child_rss_kib": 141340,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  ],
+  "conclusion": "Point and anchored-ray scheduling find a replayed recurrence missed by an unprioritized32-domain ray. Successful recurrences still expose20NoApplicableRule terms, so this proves improved local coverage rather than closure. Global hints here are only the15 original/root-derivative labels, not the full historical request set."
+}

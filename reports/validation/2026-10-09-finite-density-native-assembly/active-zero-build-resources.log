@@ -1,0 +1,86 @@
+   Compiling rustred v0.1.0 (/common/dev/rustflow_fermi/vendor/rustred/crates/rustred-core)
+warning: method `integer_zero_locus_misses_domain` is never used
+   --> vendor/rustred/crates/rustred-core/src/algebra/indexed/base_coefficients.rs:654:19
+    |
+213 | impl IndexedCoefficientContext {
+    | ------------------------------ method in this implementation
+...
+654 |     pub(crate) fn integer_zero_locus_misses_domain(
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `application_boxes` is never used
+  --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry.rs:61:15
+   |
+61 | pub(super) fn application_boxes<const N: usize>(
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: function `uniformly_zero_wide` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry.rs:481:15
+    |
+481 | pub(super) fn uniformly_zero_wide<Z: AsRef<[bool]>>(
+    |               ^^^^^^^^^^^^^^^^^^^
+
+warning: function `coefficient_vanishes` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry.rs:549:4
+    |
+549 | fn coefficient_vanishes(
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `coefficient_vanishes` is never used
+  --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry/bounded.rs:16:50
+   |
+16 | pub(in crate::foundry::artifact::source_port) fn coefficient_vanishes(
+   |                                                  ^^^^^^^^^^^^^^^^^^^^
+
+warning: associated function `try_new` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/parametric/affine.rs:197:19
+    |
+ 59 | impl AffineApplicationDomain {
+    | ---------------------------- associated function in this implementation
+...
+197 |     pub(crate) fn try_new(
+    |                   ^^^^^^^
+
+warning: method `restrict_polynomial_value` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/parametric/affine/restriction.rs:243:19
+    |
+134 | impl AffineDomainRestriction {
+    | ---------------------------- method in this implementation
+...
+243 |     pub(crate) fn restrict_polynomial_value(
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0369]: cannot divide `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>` by `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>`
+    --> vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs:1145:52
+     |
+1145 |             (2, y.clone(), vec![(-1, context.one() / y.clone())]),
+     |                                      ------------- ^ --------- symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>
+     |                                      |
+     |                                      symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>
+     |
+note: `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>` does not implement `Div`
+    --> /home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs:99:1
+     |
+  99 | pub struct RationalPolynomial<R: Ring, E: PositiveExponent = u16> {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>` is defined in another crate
+
+error[E0369]: cannot add `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>` to `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>`
+    --> vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs:1263:28
+     |
+1263 |             (context.one() + context.one()) / y.clone()
+     |              ------------- ^ ------------- symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>
+     |              |
+     |              symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>
+     |
+note: `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>` does not implement `std::ops::Add`
+    --> /home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs:99:1
+     |
+  99 | pub struct RationalPolynomial<R: Ring, E: PositiveExponent = u16> {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `symbolica::prelude::RationalPolynomial<symbolica::prelude::IntegerRing>` is defined in another crate
+
+   Compiling symbolica-amflow v0.1.0 (/common/dev/rustflow_fermi)
+For more information about this error, try `rustc --explain E0369`.
+error: could not compile `rustred` (lib test) due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...

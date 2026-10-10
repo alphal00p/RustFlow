@@ -205,11 +205,27 @@ def artifacts():
             }
             entries[-1]['targets'][0]['additional_independent_reference'] = {**independent, 'target_index':0}
             entries[-1]['targets'][1]['reference'] = {**independent, 'target_index':1}
+        elif record_id == 'I115':
+            entries[-1]['targets'][1]['reference'] = {
+                'status':'available_independent_laurent_reference_not_native_acceptance',
+                'file':'reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/reference.json',
+                'validation':'reports/validation/2026-10-09-finite-density-native-assembly/prism-triple-cut-reference/laurent-reference-validation.json',
+                'derivation':'docs/finite-density-prism-barnes-reference.md',
+                'target_index':1,'laurent_orders':[-4,0],
+                'method':'Independent complete eight-sector reference: native exact verification of five ordinary virtual identities, analytic compact beta integrals, and original-integrand raised triple-cut mass jet with moving upper surface evaluated by analytically continued Barnes quadrature. No AMF predictions or oracle values used.',
+                'target_absolute_uncertainty':'1e-12 in raw*(4*pi)^8*(exp(EulerGamma)/pi)^(4*epsilon) normalization',
+                'largest_empirical_absolute_uncertainty':'5.029239542725361e-16 in that comparison normalization',
+                'precision_evidence':'Five independent profiles with 12 epsilon samples each; 70/80 digits, epsilon denominators10000/500000/1000000, quadrature step1/30 versus1/40 and cutoff14 versus18, plus ten/twelve-node interpolation. All20 raw coefficient refinements passed.',
+                'uncertainty_caution':'Empirical refinement estimate, not a rigorous error bound; fitted small coefficients are retained, not forced to zero.',
+                'required_external_solvers':[],
+                'native_prediction_comparisons':0,
+                'next_gate':'A supported complete native weighted AMF evaluation and independently saved prediction/refinement comparison; production prism admission and native four-loop closure remain unverified.',
+            }
         else:
             entries[-1]['targets'][1]['reference'].update({
                 'derivation_and_obstacles':'docs/finite-density-missing-references.md',
                 'definition_only_diagnostics':'reports/validation/2026-10-09-finite-density-native-assembly/missing-reference-diagnostics.json',
-                'next_gate':('Common thermal matching for shared interior pole/discontinuity loci across all 29 cut sectors, then local UV/IR subtraction; independently assigned denominator PVs are not established.' if record_id=='I91' else 'Complete arithmetic, Barnes-quadrature and epsilon-grid refinements of the independent raised-target Laurent reference; the derived eight-sector finite-epsilon sum is already checked, but no full Laurent acceptance is claimed.'),
+                'next_gate':'Common thermal matching for shared interior pole/discontinuity loci across all 29 cut sectors, then local UV/IR subtraction; independently assigned denominator PVs are not established.',
             })
     # A small massive nonfactorized graph requires complete 0/1/2-cut assembly.
     small_edges=[[0,1],[1,0],[1,0]]

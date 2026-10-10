@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-10T00:52:41.913384+00:00",
+  "status": "regression_gates_passed",
+  "scope": "Completed active-reachability/direct-zero reduction checkpoint. This capture does not rerun numerical acceptance or change supported topology claims.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json",
+    "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+    "size_bytes": 270630
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-provenance.json",
+    "sha256": "d4500c314dad8730b5a2e68ca5d442ea27cd58ad737453ad516679b448872f87",
+    "size_bytes": 4919
+  },
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "991cd4f6a17289608a3092723d654f0b5fe9c722c6698cb3456be5f25c1f6c37",
+    "RUSTRED_SOURCE_DIGEST": "83304d05399eb3342eab352b3758371e20d3f51f6819b42f057e1efd1c91c934",
+    "PORT_SOURCE_DIGEST": "c0b21791a7f06ce15942bb453edd75124b80484f006c7956cc5d44cf5970211e"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "source_files_verified": 1811,
+  "root_gates": {
+    "report": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-root-gates.json",
+      "sha256": "9c5bf42e990c2790c268de7e76a00f2b8007c2060f993da5d893b8c5a9cbe54b",
+      "size_bytes": 8179
+    },
+    "passed": 89,
+    "failed": 0,
+    "gates": 5
+  },
+  "native_guarded_gate": {
+    "passed": 78,
+    "failed": 0,
+    "ignored": 1,
+    "harness_seconds": 0.09,
+    "wall_seconds": 0.10832844814285636,
+    "provenance": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-provenance.json",
+      "sha256": "9cc39969ac66052354232c11b0f388ff3ec676c8884eaa373cb4a44658560986",
+      "size_bytes": 738
+    },
+    "resources": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-resources.json",
+      "sha256": "5530a383ed5b763b389869a691d5e0796f97f57e7c7fe0dd12f3f92e7d7d1a8b",
+      "size_bytes": 370
+    },
+    "log": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-resources.log",
+      "sha256": "73086d9b04dd057b37ac229d58d720792bbd0872f3e95a8c0ea2786735e4b12a",
+      "size_bytes": 12332
+    },
+    "launch": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-resources.provenance.json",
+      "sha256": "96a9637098942640074a446b68bf265248da8406cdd73e5802c84da7b2e1e5e7",
+      "size_bytes": 572
+    }
+  },
+  "unique_tests_passed": 167,
+  "unique_tests_failed": 0,
+  "ignored_tests": 1,
+  "new_numerical_acceptance_runs": 0,
+  "three_loop_full_amplitude_validated": false,
+  "native_four_loop_acceptance": false,
+  "source_delta_from_prior_numerical_build": {
+    "files": [
+      "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs"
+    ],
+    "reason": "Authorized test-fixture RHS canonical operand order correction; prior source and failed native fixture evidence retained. No numerical rerun attributed to the new artifact hashes.",
+    "record": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-fixture-fix.json",
+      "sha256": "fc8b1c81dc4a09a923cee04e8a3bdc0d59060f5d6d62d8f3d9a6ac386fbbc6db",
+      "size_bytes": 639
+    }
+  },
+  "historical_numerical_evidence": {
+    "scope": "Previously saved predictions and comparisons; no new canonical-build numerical run.",
+    "two_loop_fixed_comparison": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-fixed-comparison.json",
+      "sha256": "f73fc74d65f7dacbcf81b52924ae9b35d28fe18bb90ce3d6ed7c4ecfc9f9851e",
+      "size_bytes": 52252
+    },
+    "two_loop_laurent_comparison": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-laurent-comparison.json",
+      "sha256": "21d65ca555646d5ec1505ea0249f2a64781d7ab8a28b6c93e09a75c7746cb51e",
+      "size_bytes": 50402
+    },
+    "two_loop_archives": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-two-loop-archives.json",
+      "sha256": "94a20e00bae8b5947622f382bf73ef8b63d7f4fcc0c7a55f8d3f2dce519da442",
+      "size_bytes": 95097
+    },
+    "three_loop_full_attempt": {
+      "status": "failed_unclosed",
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed-resources.json",
+        "sha256": "30aa3e295ab2e1296c2108dc46ce722054d13ac5ec0e08055df02e8948938223",
+        "size_bytes": 1411
+      },
+      "exit_code": 101
+    },
+    "three_loop_double_cut_control": {
+      "status": "failed_unclosed",
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-double-resources.json",
+        "sha256": "431af2d04230fe312d8bc194ef9c72e10b50dfc664433ca85a625b003e9b44fe",
+        "size_bytes": 1419
+      },
+      "exit_code": 101
+    }
+  },
+  "preserved_failed_native_gate": {
+    "resources": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-native-resources.json",
+      "sha256": "c5af5a1542503407cc7c5ad61be39047576a0fe5e3c77512ff89f8b1868fbe7c",
+      "size_bytes": 384
+    },
+    "log": {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-native-resources.log",
+      "sha256": "349ea4b825c0d385ddb0e35f835b2c8ea5aa7383b37521dc9f5853921137e934",
+      "size_bytes": 13322
+    },
+    "scope": "Original 76 passed / 2 fixture failures / 1 ignored; replaced only by the fresh canonical regression result, not deleted."
+  },
+  "new_report_artifacts": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-provenance.json",
+      "sha256": "d4500c314dad8730b5a2e68ca5d442ea27cd58ad737453ad516679b448872f87",
+      "size_bytes": 4919
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-resources.json",
+      "sha256": "81e23da8a013cce66d7dc2436f5430f4491468c5e9dcb605dd88cf758fc738bd",
+      "size_bytes": 704
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-resources.log",
+      "sha256": "0127ec93cc84dc521a494fb86ce1e633d5e3bd32f1509e93b515ea753018c4d9",
+      "size_bytes": 3198
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-resources.provenance.json",
+      "sha256": "3402ce8f41cf6daab5f3f0a8dc6f71d456001e8304b24597ee5bae2e744d4f86",
+      "size_bytes": 1083
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-fixture-fix.json",
+      "sha256": "fc8b1c81dc4a09a923cee04e8a3bdc0d59060f5d6d62d8f3d9a6ac386fbbc6db",
+      "size_bytes": 639
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-binding.json",
+      "sha256": "0eea249adb2518806e3d0eb126124436cb075736de616d42cb6789e350fd6b37",
+      "size_bytes": 535
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-resources.json",
+      "sha256": "d12ab9165febd08489e05ba9feda2009e54fd3e402313d6c027bc98a30db34c3",
+      "size_bytes": 404
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-resources.log",
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "size_bytes": 574
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-flow-boundary-resources.provenance.json",
+      "sha256": "5ecffb6bbc1afbd262353297221961f7c06431b21b5c4f6bc31e46d18bfc0570",
+      "size_bytes": 879
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-binding.json",
+      "sha256": "836d5b2174d7f58eed014d5c186d290ecdedfe77814f142ddcced33a39ef8c8e",
+      "size_bytes": 537
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-resources.json",
+      "sha256": "a61e4e1715166ff5c4c668c47edfb1476d78544b8b0d51879aec621329ebe666",
+      "size_bytes": 403
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-resources.log",
+      "sha256": "03e5b8fd825edaf67c437bf8cad9fe0b340bf17b1554458bae7e3f58a880de07",
+      "size_bytes": 8791
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-lib-resources.provenance.json",
+      "sha256": "c386b79b06dbd63f5bc6e02666ec0b7bb27c150817814372d48435b1b47e96a0",
+      "size_bytes": 867
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-binding.json",
+      "sha256": "bd02fb2422d80cb430bd10a96202c8a264454a9b63fb95ea8cb3cbc9a47a57fe",
+      "size_bytes": 541
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-resources.json",
+      "sha256": "84b7c10a23d73ecea54f64137391cf607d8fddf72cd979aa62d6cb93f61ae11d",
+      "size_bytes": 406
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-resources.log",
+      "sha256": "8d04dedadbb9acaed1a52602afd0cc82bdf83c60c0cc7df48bed88c838b1abe5",
+      "size_bytes": 435
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-massless-sources-resources.provenance.json",
+      "sha256": "5492db96aebee6f3bef5d49681837746dc45ea30bffba97b7ff5ba93710ba2fc",
+      "size_bytes": 888
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-provenance.json",
+      "sha256": "9cc39969ac66052354232c11b0f388ff3ec676c8884eaa373cb4a44658560986",
+      "size_bytes": 738
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-resources.json",
+      "sha256": "5530a383ed5b763b389869a691d5e0796f97f57e7c7fe0dd12f3f92e7d7d1a8b",
+      "size_bytes": 370
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-resources.log",
+      "sha256": "73086d9b04dd057b37ac229d58d720792bbd0872f3e95a8c0ea2786735e4b12a",
+      "size_bytes": 12332
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-native-resources.provenance.json",
+      "sha256": "96a9637098942640074a446b68bf265248da8406cdd73e5802c84da7b2e1e5e7",
+      "size_bytes": 572
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-binding.json",
+      "sha256": "80af660f2b3d3382c30c93d63530122743ea271ff12b36b14b0e5bd63babe9d5",
+      "size_bytes": 521
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-resources.json",
+      "sha256": "1f30502330f3e85789f0d30723ea51eb5d9fcb7a1636577da95891cb15755b50",
+      "size_bytes": 396
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-resources.log",
+      "sha256": "9818c3173d671dcd277420ad58778058b023f40fde6146b3123c52ec19c715ba",
+      "size_bytes": 193
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-python-resources.provenance.json",
+      "sha256": "5871afaf8cf8ce651db6b396950ffd8b9cd640f682b05da1348cad49b2d6ce19",
+      "size_bytes": 858
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-root-gates.json",
+      "sha256": "9c5bf42e990c2790c268de7e76a00f2b8007c2060f993da5d893b8c5a9cbe54b",
+      "size_bytes": 8179
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-binding.json",
+      "sha256": "a96531224083e86d8fdf4a26898d425ac035a890a19ddd711549a64ec64d7945",
+      "size_bytes": 530
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-resources.json",
+      "sha256": "85b9b12ba846609176786f3d780bc1890c5351290b31a823fb74abed87b3c6f4",
+      "size_bytes": 385
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-resources.log",
+      "sha256": "6beadd90cb262ad9dfd2e1321edfa448e204c6221adadb7cd906b87e5c7920a1",
+      "size_bytes": 3684
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-fingerprint-resources.provenance.json",
+      "sha256": "c128250f820f8d6850e0ab2822caa3b2bd65077b4f5e404bbc62dd45b70d3076",
+      "size_bytes": 846
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json",
+      "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+      "size_bytes": 270630
+    }
+  ],
+  "validation_utilities": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/capture-frozen-build.py",
+      "sha256": "a521f08ba989c24c9b82d66f5549655da48db12ca70883c2b6f785667735a7d9",
+      "size_bytes": 4777
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/run-frozen-root-gate.py",
+      "sha256": "ab203a0060c328ceb61804c2f4817f9acc77d04ffce91c304d58f469a2f3ff23",
+      "size_bytes": 2961
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/summarize-frozen-root-gates.py",
+      "sha256": "635bf7e92879596ce4b085ddfbfc18bf417ca4ff754ca28c090f433aebc637fe",
+      "size_bytes": 4045
+    }
+  ],
+  "measurement_scope": "Prebuilt gate execution times exclude Cargo/Nix startup. Shared-host measurements are not isolated benchmarks."
+}
