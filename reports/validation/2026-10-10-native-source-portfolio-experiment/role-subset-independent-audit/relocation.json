@@ -1,0 +1,10 @@
+{
+  "original_path": "reports/validation/2026-10-10-native-direct-hit-lookahead/role-subset-independent-audit",
+  "current_path": "reports/validation/2026-10-10-native-source-portfolio-experiment/role-subset-independent-audit",
+  "files_sha256_before_and_after": {
+    "audit.md": "cec95cb006253ef0b0992b59e3ed68e2c9caa5341cd2c0d08cd7739a2596c8b2",
+    "select.py": "729fb778c20c36df1ed4c2e719de07e532c16bffbd843c7b1c0820983f2a43e1",
+    "selection.json": "02749d10d75193799c64638a2de8c9466a7cbc81a214011512155577dccae717"
+  },
+  "byte_identical": true
+}

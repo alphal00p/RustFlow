@@ -1,0 +1,21 @@
+{
+  "status": "independent static review: no blocker found",
+  "scope": "timeout-resume scaffolding only; no independent compile, resumed-run result or numerical-acceptance claim",
+  "reviewed_sha256": {
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/pilot.rs": "167da094aa4f3afac4dd9e84c78d868c58744163a28560dfc411cd59d3cd94df",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/checkpoint.py": "b7c83e960dd9f5136f1ac001497e053c03e543a62055880029bf8d3592550953",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/run.py": "b80d2883548b2adc77164c4fdf7966e581717fd21cb4a3ab4f51e2743d4a8c2e",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/build.py": "fdf32a8be25d6412d57c910fe869fc340b2b81bf7c4e245371074cba01a4f459"
+  },
+  "invariants": [
+    "Only completed exit124 timeout without result/closed payload may resume",
+    "Exact source/config/target/limits and engine library binding retained",
+    "Native full-context decode, no master terminals, saved original targets and processed weighted derivatives replayed",
+    "Restores cumulative requested-point history, frontier, next_needed, conditions and round number",
+    "Retains total16rounds/4096requests/1024frontier/65536rules, not fresh per-run budgets",
+    "Unfinished round work repeated; prior elapsed cost retained",
+    "Post-audit launcher copies the authenticated commit-marker payload to the continuation directory, preserving an early-timeout resume point"
+  ],
+  "limitation": "progress.json is a non-atomic commit marker: timeout during its write causes safe parse failure rather than unsafe fallback",
+  "production_changes": false
+}

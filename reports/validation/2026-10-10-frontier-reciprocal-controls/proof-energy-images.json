@@ -1,0 +1,1036 @@
+{
+  "scope": "Exact coefficient specialization of the source rows named by every saved native rule proof. This audits proof-source image labels and final one-step RHS, not every transient internal elimination row. Required-cut and explicit certified zero images are reported separately. No additional integral relations are installed.",
+  "arms": {
+    "polynomial62": [
+      {
+        "point_ordinal": 0,
+        "target": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 1,
+        "target": [
+          1,
+          0,
+          0,
+          2,
+          2,
+          0,
+          -3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 2,
+        "target": [
+          1,
+          0,
+          -1,
+          2,
+          1,
+          0,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 3,
+        "target": [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 4,
+        "target": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          -2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 5,
+        "target": [
+          1,
+          2,
+          0,
+          0,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 6,
+        "target": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 7,
+        "target": [
+          1,
+          3,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 8,
+        "target": [
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 9,
+        "target": [
+          2,
+          0,
+          0,
+          2,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 10,
+        "target": [
+          2,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 11,
+        "target": [
+          2,
+          0,
+          0,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 12,
+        "target": [
+          2,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 13,
+        "target": [
+          2,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 14,
+        "target": [
+          3,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 15,
+        "target": [
+          3,
+          1,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 16,
+        "target": [
+          3,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 17,
+        "target": [
+          3,
+          2,
+          0,
+          0,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 18,
+        "target": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      }
+    ],
+    "reciprocal56": [
+      {
+        "point_ordinal": 0,
+        "target": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 1,
+        "target": [
+          1,
+          0,
+          0,
+          2,
+          2,
+          0,
+          -3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 2,
+        "target": [
+          1,
+          0,
+          -1,
+          2,
+          1,
+          0,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 3,
+        "target": [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 4,
+        "target": [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          -2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 5,
+        "target": [
+          1,
+          2,
+          0,
+          0,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 6,
+        "target": [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 7,
+        "target": [
+          1,
+          3,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [
+          {
+            "source_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-1",
+            "seed": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "indices": [
+              0,
+              2,
+              0,
+              1,
+              2,
+              0,
+              1,
+              0,
+              0,
+              2,
+              1,
+              0
+            ],
+            "exact_specialized_coefficient": [
+              [
+                [],
+                "-8"
+              ]
+            ],
+            "native_zero_reason": "required-cut nonpositive image"
+          },
+          {
+            "source_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-1",
+            "seed": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "indices": [
+              0,
+              2,
+              0,
+              1,
+              2,
+              0,
+              1,
+              0,
+              0,
+              3,
+              0,
+              0
+            ],
+            "exact_specialized_coefficient": [
+              [
+                [],
+                "-16"
+              ]
+            ],
+            "native_zero_reason": "required-cut nonpositive image"
+          },
+          {
+            "source_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-1",
+            "seed": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "indices": [
+              0,
+              2,
+              0,
+              1,
+              2,
+              0,
+              2,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "exact_specialized_coefficient": [
+              [
+                [],
+                "8"
+              ]
+            ],
+            "native_zero_reason": "required-cut nonpositive image"
+          },
+          {
+            "source_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-1",
+            "seed": [
+              1,
+              3,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "indices": [
+              0,
+              3,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              2,
+              1,
+              0
+            ],
+            "exact_specialized_coefficient": [
+              [
+                [],
+                "-8"
+              ]
+            ],
+            "native_zero_reason": "required-cut nonpositive image"
+          },
+          {
+            "source_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-1",
+            "seed": [
+              1,
+              3,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "indices": [
+              0,
+              3,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              3,
+              0,
+              0
+            ],
+            "exact_specialized_coefficient": [
+              [
+                [],
+                "-16"
+              ]
+            ],
+            "native_zero_reason": "required-cut nonpositive image"
+          },
+          {
+            "source_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-1",
+            "seed": [
+              1,
+              3,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "indices": [
+              0,
+              3,
+              0,
+              1,
+              1,
+              0,
+              2,
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            "exact_specialized_coefficient": [
+              [
+                [],
+                "8"
+              ]
+            ],
+            "native_zero_reason": "required-cut nonpositive image"
+          }
+        ],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 8,
+        "target": [
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 9,
+        "target": [
+          2,
+          0,
+          0,
+          2,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 10,
+        "target": [
+          2,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 11,
+        "target": [
+          2,
+          0,
+          0,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 12,
+        "target": [
+          2,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 13,
+        "target": [
+          2,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 14,
+        "target": [
+          3,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 15,
+        "target": [
+          3,
+          1,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 16,
+        "target": [
+          3,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 17,
+        "target": [
+          3,
+          2,
+          0,
+          0,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      },
+      {
+        "point_ordinal": 18,
+        "target": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "positive_occupied_energy_seed_count": 0,
+        "positive_occupied_energy_rhs": [],
+        "nonzero_coefficient_positive_source_images": [],
+        "positive_source_images_after_known_zeros": 0
+      }
+    ]
+  }
+}

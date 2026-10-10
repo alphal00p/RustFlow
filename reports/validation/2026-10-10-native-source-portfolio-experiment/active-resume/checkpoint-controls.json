@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "passed": 25,
+  "controls": [
+    "baseline_completed_timeout_metadata_admitted",
+    "proposal_completed_timeout_metadata_admitted",
+    "unfinished_parent_rejected",
+    "completed_non_timeout_rejected",
+    "failed_non_timeout_rejected",
+    "wrong_engine_rejected",
+    "unverified_parent_inputs_rejected",
+    "result_file_rejected",
+    "closed_program_rejected",
+    "enlarged_round_budget_rejected",
+    "changed_request_cap_rejected",
+    "changed_search_depth_rejected",
+    "changed_environment_rejected",
+    "historical_rules_import_rejected",
+    "different_target_count_rejected",
+    "noncontiguous_history_rejected",
+    "last_state_mismatch_rejected",
+    "frontier_exhaustion_rejected",
+    "no_pending_obligation_rejected",
+    "rule_exhaustion_rejected",
+    "duplicate_frontier_rejected",
+    "restored_frontier_not_needed_rejected",
+    "request_history_missing_rejected",
+    "request_exhaustion_rejected",
+    "global_round_exhaustion_rejected"
+  ],
+  "scope": "Metadata-only timeout-resume admission controls; no native replay or search executed. Native decode and exact saved-row replay occur in the compiled wrapper before continuing.",
+  "source_sha256": {
+    "checkpoint.py": "b7c83e960dd9f5136f1ac001497e053c03e543a62055880029bf8d3592550953",
+    "test-checkpoint.py": "9dd5c17950c527a4b107a116b77816c49e105d22b7a32c08ce262f272cab93ef",
+    "pilot.rs": "167da094aa4f3afac4dd9e84c78d868c58744163a28560dfc411cd59d3cd94df"
+  }
+}

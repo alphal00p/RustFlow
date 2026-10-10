@@ -1,0 +1,9 @@
+round=7 frontier=258 rules=2548 requested=422 pending=251
+round=8 frontier=175 rules=2830 requested=277 pending=168
+round=9 frontier=136 rules=3023 requested=194 pending=129
+round=10 frontier=92 rules=3166 requested=155 pending=85
+round=11 frontier=44 rules=3268 requested=111 pending=37
+round=12 frontier=19 rules=3309 requested=63 pending=12
+round=13 frontier=9 rules=3322 requested=38 pending=2
+round=14 frontier=7 rules=3324 requested=28 pending=0
+status=closed rounds=15

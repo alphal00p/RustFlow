@@ -1,0 +1,17 @@
+error[E0282]: type annotations needed for `Vec<_>`
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/pilot.rs:315:9
+    |
+315 |     let mut history = Vec::new();
+    |         ^^^^^^^^^^^
+...
+370 |             assert_eq!(item["round"].as_u64(), Some(i as u64));
+    |                        ---- type must be known at this point
+    |
+help: consider giving `history` an explicit type, where the type for type parameter `T` is specified
+    |
+315 |     let mut history: Vec<T> = Vec::new();
+    |                    ++++++++
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0282`.

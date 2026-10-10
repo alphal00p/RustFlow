@@ -1,0 +1,29 @@
+{
+  "scope": "Read-only patch-wide audit of isolated native point portfolio; no compilation or execution by reviewer and no production changes",
+  "status": "No blocker found; isolated build and19focused controls remain required",
+  "reviewed_source_sha256": {
+    "crates/rustred-core/src/solver/search.rs": "94f70a41bd4cc8e2293a86644977ce590fa94c855a2604f0bbe4dccac749e030",
+    "crates/rustred-core/src/solver/search/guarded_portfolio.rs": "b3c02848f30fbbf49dedcfd15ba89f3949b161c3edf0d8039731a72b02ad5559",
+    "crates/rustred-core/src/solver/search/guarded_portfolio_controls.rs": "f713a374b62b12ff178f923a41fea25e14e81c6b069c8415590b330545daff73",
+    "crates/rustred-core/src/solver/numeric.rs": "8782b944794a6e67b9f9ab940b017cea85cc3de5ea0e413f1291ee88cf5e7629",
+    "crates/rustred-core/src/solver/mod.rs": "5db27a6996f24639f5aa65d8385ce51d792c3f97886516cafe18b5d1e4b76f24",
+    "crates/rustred-core/src/solver/guarded/persistence.rs": "71b032880c7bd1a2f481f0da86bb862c8885c6f3ec104ceda2fc8ae1f4da033d"
+  },
+  "checks": {
+    "selector": "All protected powers must be symbolic; A zero shifts; C occupation0/cut<=0 and native index-coefficient degree. Empty rows excluded. Immutable original ordinal enumeration.",
+    "context": "Original full SourceSystem, guards, roles, variable/index maps, zero domains, ordering and seed order retained; subset only gates traversal.",
+    "baseline": "Original full search first. Empty baseline RHS skips portfolio; unsuccessful full search remains original error. Singleton numerical coordinate case and singleton scope required.",
+    "admission": "Preseal baseline and each successful trial with same full scope/order. Invalid baseline returns unchanged to outer owner; rejected alternative Certification/domain coverage retains baseline. Final outer seal retained.",
+    "conditions": "Exact rational-associate gate against original baseline, independent of current A/C winner; selected conditions untouched. Zero or foreign map rejected.",
+    "budgets": "Per alternative2048 attempted selected rows charged before instantiate,512 Some rows including empty projection counted after; min(inheriteddepth,3),64 trace rows,16384 trace terms. Counters checked before new work; native operations not preempted.",
+    "ordinary_rays": "Ordinary wrapper passes no guarded trial and unchanged conditions; rays/affine cases excluded before optional work. Public SourceVisitOrder contract unchanged.",
+    "errors": "Fatal Power/sample/algebra/canonicalization/exact-lift errors returned; explicit budget/depth/seed exhaustion and recorded Certification rejection allow fallback. No unresolved integral is made zero.",
+    "statistics": "Baseline, per-trial search and preseal times retained; policy and total time definitions explicit; selected proof stats remain distinct from total work.",
+    "persistence": "Isolated guarded schema identity changed; ordinary persistence unchanged. Focused controls require full-source original ordinal replay and round trip."
+  },
+  "test_review": {
+    "focused_control_count": 19,
+    "covered": "First direct/indirect alternatives, rational associates/new-locus rejection, original-baseline conditionless-A chain, zero/foreign map, role/literal guards, source-zero premise, both row counters, trace caps, fatal Power/exact-lift errors, baseline/trial Certification, empty/zero skip, ordinary/ray skip, ties/worse/exhaustion, roundtrip original ordinals.",
+    "nonsemantic_adjustment": "Owner converting two provenance ordinal vectors to sorted sets because trace order follows pivots, not source ordinal order; retain exact original ordinal membership assertion."
+  }
+}

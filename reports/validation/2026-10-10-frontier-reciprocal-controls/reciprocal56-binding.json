@@ -1,0 +1,22 @@
+{
+  "scope": "Fresh source-only native point discovery and encoded/decoded replay. No historical rules, numerical references, full closure or reciprocal necessity claim.",
+  "build_binding_sha256": "a115ff543ef40156a2fe99957ea5ab2e155429e465af86b84b053c565a9c213f",
+  "executable_sha256": "34d07beb8b1581933375f568d4594c524fe081f2d1672d3d38759c7cd6e4697a",
+  "source_corpus": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/program.bin",
+  "source_corpus_sha256": "d9ea2e0934790f13ae78ba402156f76d631f9be8ce0ee551ce140a4e8b6f5a81",
+  "fixture_sha256": "585ecced3c74801e10e92f1cdac2267db1c53bad91b17e71c6055f9ff1c6194a",
+  "probe_source_sha256": "38b6616b2a267cf56e3d67761fae82fc4fa6f8cdac244425897f8db274a4b305",
+  "launcher_sha256": "7d413709e03f52d13eda52de6d4b4376e8a51d92f1b2c682d8bbf7b4e8781072",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustred-source-portfolio-generic-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/reciprocal56.json",
+    "original"
+  ],
+  "exit_code": 0,
+  "post_run_inputs_unchanged": true,
+  "output_sha256": "b94214a3e26cf209890fa8453e09c09ccebc7c8f9633fcb893cad34acfbb4f95"
+}

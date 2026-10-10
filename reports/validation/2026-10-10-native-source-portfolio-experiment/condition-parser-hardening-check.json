@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "scope": "Validation-only parser hardening. Archived conditions use supported literal powers; reruns give identical rows, parameter-coverage decisions, proof hashes and counts. Original files preserved.",
+  "rejected_exponent_controls": [
+    "eta^(2+epsilon)",
+    "eta^(epsilon+2)",
+    "(eta+1)^(1+epsilon)",
+    "eta^epsilon",
+    "eta^(-1)",
+    "eta^(1/2)",
+    "eta^17",
+    "eta^(2+epsilon^2)"
+  ],
+  "accepted_exponent_controls": [
+    "eta^0",
+    "eta^2",
+    "eta^(4/2)",
+    "eta^(2+epsilon-epsilon)"
+  ],
+  "comparison_reruns": [
+    {
+      "label": "original-19",
+      "all_saved_conclusions_rows_conditions_and_proof_hashes_identical": true,
+      "points": 19,
+      "condition_gate_pass_points": 19
+    },
+    {
+      "label": "strongest62",
+      "all_saved_conclusions_rows_conditions_and_proof_hashes_identical": true,
+      "points": 19,
+      "condition_gate_pass_points": 19
+    }
+  ],
+  "artifact_sha256": {
+    "condition-parser-hardening-provenance.json": "2b01704a8d7abd002e14c807c710c88342725d30b7506514489aa086f707201d",
+    "condition-polynomials.py": "d5db70e68a1c2224cbe831dfbbbade65f22535ae58a7a84ecabd23eeccc5f14d",
+    "condition-polynomials-v2.py": "266c1f6e8a448f6fb149f2239c6a77923ab6b8566c688c45d353acaae6583957",
+    "compare-portfolio.py": "955e6427e12374238fa01a3003c32f56cc0931b34e27f4612002f9cd6880be6b",
+    "compare-portfolio-hardened.py": "35be3d9a8fe2ae662fcaa38c263c113cf483c9dfcfe50d8e6bbc5c309e2478b2",
+    "check-condition-parser-hardening.py": "2701ce3036be73a2374f0b39f54b6676492f644fb3189246dc129bc94ccd68ae",
+    "original-19-portfolio-comparison.json": "a9aee6799b5f236734b10a7ca9d72321dcefdca65058336bff9fe581a4450eb8",
+    "original-19-portfolio-comparison-hardened.json": "8d36afe0841f6bbaba21e2dfae6e65302586b669ff1358b0e3ed149acd845611",
+    "strongest62-portfolio-comparison.json": "4b297ec6dab08593f343c31818bae91a513cf30a65e1c4c890d49756047336e1",
+    "strongest62-portfolio-comparison-hardened.json": "d62048912437e5be1860d4bd6693e35ed3bdc64f30d79c0a539a07b921237846"
+  },
+  "production_modified": false,
+  "new_numerical_runs": 0
+}

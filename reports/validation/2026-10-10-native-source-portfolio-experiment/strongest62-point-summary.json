@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "status": "isolated_point_controls_passed",
+  "scope": "Fresh native discovery and proof replay on the unchanged complete 62-source polynomial corpus. This is a local search experiment, not a closed system or physical numerical result.",
+  "comparison": {
+    "points": 19,
+    "source_count": 62,
+    "baseline_applied": 19,
+    "proposal_applied": 19,
+    "baseline_rhs_terms": 143,
+    "proposal_rhs_terms": 127,
+    "strict_improvements": 2,
+    "condition_gate_pass_points": 19
+  },
+  "source_binding_checks": {
+    "all_complete_context_metadata_equal": true,
+    "original_52_rows_byte_equal_as_decoded_json": true,
+    "all_10_added_rows_match_upstream_terms_domains_and_conditions": true,
+    "all_19_baseline_maps_match_upstream_native_result": true,
+    "source_guards_and_zero_domains_unchanged_between_arms": true,
+    "historical_rules_imported": false
+  },
+  "complete_context_canonical_json_sha256": {
+    "imported_source_schema": "e9f44b432273591d07ca082bfe32dac15475e7d864e3a435b84c62c4d248b106",
+    "original_measure_id": "9e6beabdbb5fb770482211a6d5cc06f64c9e6aa0a6a4e9f7c77db957c1954834",
+    "roles": "9417cd95254efe585582c8ed2841d86f9309eb9c781c55b55cc9fce3937bea32",
+    "index_variable_positions": "bc04adf5bcefb4d0d6d92548c048867a98e9134d8cedb53ac5ea1010d5016801",
+    "zero_domains": "b70fa0cd47c692e0a857e5274f8eacebedb534f00d9f67b105bab150d47c6d88",
+    "original_source_rows": "cb792df7b6e76079da73ff00f71178cf412c266b5ed69725d36c35a3959720d7"
+  },
+  "improved_points": [
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 8,
+      "proposal_rhs_terms": 1,
+      "baseline_conditions": [
+        "8*eta",
+        "4*eta"
+      ],
+      "proposal_conditions": []
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        2,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 16,
+      "proposal_rhs_terms": 7,
+      "baseline_conditions": [
+        "eta"
+      ],
+      "proposal_conditions": [
+        "2*eta",
+        "eta"
+      ]
+    }
+  ],
+  "optional_arm_work": [
+    {
+      "label": "strict protected powers",
+      "outcomes": {
+        "attempted-row-budget": 12,
+        "rejected-new-condition-locus": 5,
+        "selected-strictly-shorter": 2
+      },
+      "attempted_rows": 29020,
+      "accepted_rows": 5323,
+      "guard_rejected_rows": 23697,
+      "empty_rows": 619,
+      "seeds": 1619,
+      "independent_rows": 4382,
+      "exact_trace_rows": 20,
+      "exact_trace_terms": 90
+    },
+    {
+      "label": "nonincreasing cut, index-dependent",
+      "outcomes": {
+        "attempted-row-budget": 2,
+        "not-strictly-shorter": 7,
+        "rejected-new-condition-locus": 9,
+        "selected-strictly-shorter": 1
+      },
+      "attempted_rows": 8958,
+      "accepted_rows": 2052,
+      "guard_rejected_rows": 6906,
+      "empty_rows": 80,
+      "seeds": 289,
+      "independent_rows": 1873,
+      "exact_trace_rows": 148,
+      "exact_trace_terms": 932
+    }
+  ],
+  "resources": {
+    "baseline": {
+      "command": [
+        "timeout",
+        "600",
+        "/tmp/rustred-source-portfolio-generic-probe-baseline",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.json",
+        "original"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.5903925187885761,
+      "user_seconds": 0.5568569999999999,
+      "system_seconds": 0.029757,
+      "peak_child_rss_kib": 15420,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    "proposal": {
+      "command": [
+        "timeout",
+        "600",
+        "/tmp/rustred-source-portfolio-generic-probe-proposal",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.json",
+        "original"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.5482070352882147,
+      "user_seconds": 1.50387,
+      "system_seconds": 0.032715999999999995,
+      "peak_child_rss_kib": 15456,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    }
+  },
+  "interpretation": "The two certified improvements reduce 143 RHS terms to 127. Optional point search is slower in this control (about 0.59 to 1.55 seconds); only a separately bounded active-closure pilot can test overall benefit.",
+  "limits_per_optional_arm": {
+    "depth": 3,
+    "attempted_rows": 2048,
+    "accepted_rows": 512,
+    "exact_trace_rows": 64,
+    "exact_trace_terms": 16384
+  },
+  "artifact_sha256": {
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/strongest62-portfolio-comparison.json": "4b297ec6dab08593f343c31818bae91a513cf30a65e1c4c890d49756047336e1",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-original-19-points.json": "275022f4e2611640816017a83c26e7805799787f26e1979d4ba62588b56ca155",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/points.json": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/generic-source-probe.rs": "38b6616b2a267cf56e3d67761fae82fc4fa6f8cdac244425897f8db274a4b305",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/run-generic-point-control.py": "a6da8781d28ac708252833fe04135d8657e35ec805041acf299ce0bc2c584971",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/summarize-strongest62-controls.py": "9ace3471664b509c20f7f7a618b430b127f748374c2550ec46f7a621735da406",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/compare-portfolio.py": "955e6427e12374238fa01a3003c32f56cc0931b34e27f4612002f9cd6880be6b",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/condition-polynomials.py": "d5db70e68a1c2224cbe831dfbbbade65f22535ae58a7a84ecabd23eeccc5f14d",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/focused-controls.json": "b7964882fccbbc54c11d7bd36ee814b7bd142b56d67d6615f38225220a75cf8b",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/native-build/build-binding.json": "14b04b6594ccc45835f75984771826490695892771cc2cf6ff43c879e606e3a2",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-generic-probe-build.json": "a115ff543ef40156a2fe99957ea5ab2e155429e465af86b84b053c565a9c213f",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.json": "219d67ffc7a81c27fa5a0a96e3337b69965cfc588aae8bff74b89607beecf3c0",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points-binding.json": "6ce86515239fd07081c6189e2bbe3c2742b1bb62ac2a2680ab7e7e254e027bce",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points-resources.json": "4dff7717b4fbffa06977e9d734f282778d6cc370c8e1a4ebeaa14ff5720977fd",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points-resources.log": "43c3b109ad28dba7cd327d5f288e2398ba973b620df914cd6a52ad2312b5a6f1",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points-resources.provenance.json": "6c2adc0ffbe8e742b9a03090f5abdceac34bc96d4f0680f666117dd3cdbce695",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-generic-probe-build.json": "f7c580251237f54ac8fe5960860435d429b1fda12d7eea4793b007ed3731e6ab",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.json": "9329dd864a31864c3205ae9d9f760188af6201f7bbc33528709cfa4254ee6178",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points-binding.json": "1e9cdcd89ad0cc01e37c08af5b292257d124d2bb297d6a7b4553d7af8771927c",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points-resources.json": "282bac44b6d3bf094fb38f04a2d2b16532fa8e87f8855e2244d77d92d4b032e0",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points-resources.log": "0108e49a58e0839a890d59b94e04c156f4a8c3cf96706333446ec2e03381141b",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points-resources.provenance.json": "5458019c4a0e4144da1493c40fc1bb02333b2474c0667f09bb4f6bef95caef76",
+    "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2",
+    "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/result.json": "948adf53b90fad28ad21237d2ba53d2bd760f5b427603aa10357a104a246a360"
+  },
+  "production_modified": false,
+  "closure_or_numerical_acceptance": false
+}

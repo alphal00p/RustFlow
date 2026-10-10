@@ -1,0 +1,25 @@
+{
+  "scope": "Narrow independent read-only audit of isolated conditions_covered implementation and original-baseline binding; no build or production edit",
+  "file_exists": true,
+  "reviewed_sha256": {
+    "/tmp/rustred-source-portfolio-20261010/crates/rustred-core/src/solver/search/guarded_portfolio.rs": "f0e8b6d2b90a70f2e0c640eb484fdda99956fa7c068d8e52165ec5ac16097990",
+    "/home/codex-2/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/symbolica-3.0.0/src/poly/polynomial.rs": "46bfa75a4ca8b87c9d468fda25541f3afa0ef1adef8d61ac67ef6db3a9f4c00f"
+  },
+  "status": "PASS by source audit; focused executable tests remain pending owner build",
+  "findings": [
+    "Alternative zero polynomials are rejected before constant handling. Alternative variable map must match original source context.",
+    "A nonzero constant in the native Integer coefficient ring adds no nonzero locus and is accepted.",
+    "Each nonconstant alternative must match at least one nonzero baseline with identical variable map through exact cross multiplication.",
+    "Symbolica explicitly requires stored coefficients nonzero and sorted; after is_zero rejection, coefficient[0] exists and is nonzero. With c=alternative.coefficients[0], b=baseline.coefficients[0], b*alternative=c*baseline proves rational proportionality by c/b, with no parameter division.",
+    "baseline_conditions is borrowed from the original presealed full-source rule before best is replaced by A or C. The gate does not compare against the current winner.",
+    "Only clones are scaled for equality; original replayed alternative conditions are neither rewritten nor discarded.",
+    "Condition dropping and redundant rational multiples are allowed; distinct powers/products, unfamiliar loci and foreign maps remain conservatively rejected."
+  ],
+  "recommended_focused_controls": [
+    "Zero rejected, nonzero positive/negative/rational associates accepted, distinct locus rejected.",
+    "Reject polynomial powers/products even where a broader root-set argument could imply nonzero.",
+    "Reject mismatched variable maps, including a foreign-map constant.",
+    "Baseline eta; A has no conditions and intermediate shorter RHS; C has eta,2eta and still shorter RHS. C remains admitted against original baseline.",
+    "Verify encode/decode retains the exact selected proof conditions, not a normalized or filtered replacement list."
+  ]
+}

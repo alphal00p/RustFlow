@@ -1,0 +1,650 @@
+{
+  "status": "both_native_active_closures_passed",
+  "scope": "One occupied singleton channel of the three-loop massless chain; both original weighted output sums and derivatives of every member of the discovered seven-element spanning basis pass the final native audit. No complete finite-density amplitude, basis minimality or numerical period claim.",
+  "shared_limits": {
+    "max_frontier": 1024,
+    "max_requested": 4096,
+    "max_rounds": 16,
+    "max_rules": 65536,
+    "depth": 3,
+    "source_count": 62,
+    "zero_attempts_per_round": 8192,
+    "ray_domains_per_requested_point": 1,
+    "point_domains_per_fallback": 1,
+    "shifted_ordinary_slots": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "arms": {
+    "baseline": {
+      "status": "closed",
+      "basis_size": 7,
+      "completed_rounds": 16,
+      "native_rules": 3553,
+      "frontier_history": [
+        24,
+        100,
+        343,
+        520,
+        479,
+        481,
+        436,
+        290,
+        196,
+        140,
+        56,
+        28,
+        18,
+        13,
+        10,
+        7
+      ],
+      "max_frontier_observed": 520,
+      "raw_retained_conditions": 677,
+      "rational_associate_classes": 152,
+      "source_zero_rules_added": 0,
+      "parent_timeout_exit_code": 124,
+      "parent_wall_seconds": 300.00971235567704,
+      "resume_exit_code": 0,
+      "resume_wall_seconds": 364.3787489538081,
+      "cumulative_process_wall_seconds": 664.3884613094851,
+      "parent_peak_child_rss_kib": 49260,
+      "resume_peak_child_rss_kib": 50316,
+      "inputs": [
+        {
+          "path": "active-resume/polynomial62-baseline/result.json",
+          "bytes": 86556,
+          "sha256": "6d6fccb5ff11db3901d74f168093e9c1225ee1dc69642aca0c969264fb667ea2"
+        },
+        {
+          "path": "active-resume/polynomial62-baseline/closed.bin",
+          "bytes": 2746930,
+          "sha256": "04b9ca5d3b76f21b3d2d4bb5b4c007d1f7b9af6e991510defecec0ff50960d7d"
+        },
+        {
+          "path": "active-resume/polynomial62-baseline/run-binding.json",
+          "bytes": 5040,
+          "sha256": "87202fe13ed776211e0217d242dc4ece8dc6a6f9f4911aac2e9ac746e9a28591"
+        },
+        {
+          "path": "active-resume/polynomial62-baseline/resources.json",
+          "bytes": 771,
+          "sha256": "12c3adf28703f0ae613b955e273ff3fbb1592ea589ca90cded2c04dddaeff13e"
+        }
+      ]
+    },
+    "proposal": {
+      "status": "closed",
+      "basis_size": 7,
+      "completed_rounds": 15,
+      "native_rules": 3324,
+      "frontier_history": [
+        24,
+        116,
+        252,
+        383,
+        453,
+        517,
+        403,
+        258,
+        175,
+        136,
+        92,
+        44,
+        19,
+        9,
+        7
+      ],
+      "max_frontier_observed": 517,
+      "raw_retained_conditions": 598,
+      "rational_associate_classes": 129,
+      "source_zero_rules_added": 0,
+      "parent_timeout_exit_code": 124,
+      "parent_wall_seconds": 300.00846097106114,
+      "resume_exit_code": 0,
+      "resume_wall_seconds": 368.6935250381939,
+      "cumulative_process_wall_seconds": 668.701986009255,
+      "parent_peak_child_rss_kib": 43068,
+      "resume_peak_child_rss_kib": 57904,
+      "inputs": [
+        {
+          "path": "active-resume/polynomial62-proposal/result.json",
+          "bytes": 76039,
+          "sha256": "423c6d83442b26f328e3a0e975241d1f4ed659d69d30baa39c1ad4dcd0dac776"
+        },
+        {
+          "path": "active-resume/polynomial62-proposal/closed.bin",
+          "bytes": 2407954,
+          "sha256": "20151796fdf8fe65d1db57a8df7811fe07904c2e1b224f0a722e4a49e6b78e48"
+        },
+        {
+          "path": "active-resume/polynomial62-proposal/run-binding.json",
+          "bytes": 5030,
+          "sha256": "68915e528643dbf197bb8e598d55a639349a1e1715b9dc86162c8c823895777e"
+        },
+        {
+          "path": "active-resume/polynomial62-proposal/resources.json",
+          "bytes": 760,
+          "sha256": "1825bba79822fa6c978c987e990d00cf35ef641964f28750cfc3409503884e9b"
+        }
+      ]
+    }
+  },
+  "same_exact_ordered_basis": true,
+  "same_exact_original_target_rows": true,
+  "same_exact_basis_derivative_rows": true,
+  "same_retained_condition_classes": false,
+  "original_targets": [
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ],
+  "basis": [
+    [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "target_then_derivative_rows": [
+    [
+      {
+        "coefficient": "1/3*(-1+epsilon)/eta^2",
+        "indices": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-2/3*(-1+epsilon)/eta^2",
+        "indices": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/3*(-1+epsilon)/eta^2",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/3*(-1+2*epsilon)/eta",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "1/5184*(192*epsilon-3456*epsilon*eta-88452*epsilon*eta^2-880*epsilon^2-7056*epsilon^2*eta+201609*epsilon^2*eta^2+3360*epsilon^3+44640*epsilon^3*eta-222912*epsilon^3*eta^2-9056*epsilon^4-80172*epsilon^4*eta+126927*epsilon^4*eta^2+11200*epsilon^5+70128*epsilon^5*eta-35640*epsilon^5*eta^2-5424*epsilon^6-28116*epsilon^6*eta+3888*epsilon^6*eta^2+608*epsilon^7+4032*epsilon^7*eta+14580*eta^2)/(epsilon*eta^3*(-3+epsilon)*(-2+epsilon)^2*(-1+2*epsilon))",
+        "indices": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/64*(71*epsilon*eta-15*eta+20*epsilon^2-104*epsilon^2*eta-20*epsilon^3+48*epsilon^3*eta)/(epsilon*eta^2*(-1+2*epsilon))",
+        "indices": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/324*(12+50*epsilon-63*epsilon*eta+270*eta-176*epsilon^2-738*epsilon^2*eta+162*epsilon^3+783*epsilon^3*eta-56*epsilon^4-288*epsilon^4*eta+8*epsilon^5+36*epsilon^5*eta)/(eta^3*(-3+epsilon)*(-2+epsilon)^2)",
+        "indices": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/5184*(192*epsilon-3456*epsilon*eta+23004*epsilon*eta^2-3088*epsilon^2-2304*epsilon^2*eta-36531*epsilon^2*eta^2+5392*epsilon^3+8928*epsilon^3*eta+25596*epsilon^3*eta^2-2160*epsilon^4-1728*epsilon^4*eta-8181*epsilon^4*eta^2-464*epsilon^5-2016*epsilon^5*eta+972*epsilon^5*eta^2+128*epsilon^6+576*epsilon^6*eta-4860*eta^2)/(epsilon*eta^3*(-3+epsilon)*(-2+epsilon)^2)",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2592*(192*epsilon+432*epsilon*eta-23004*epsilon*eta^2-688*epsilon^2-792*epsilon^2*eta+36531*epsilon^2*eta^2+608*epsilon^3-1296*epsilon^3*eta-25596*epsilon^3*eta^2+144*epsilon^4+3096*epsilon^4*eta+8181*epsilon^4*eta^2-320*epsilon^5-1728*epsilon^5*eta-972*epsilon^5*eta^2+64*epsilon^6+288*epsilon^6*eta+4860*eta^2)/(epsilon*eta^2*(-3+epsilon)*(-2+epsilon)^2)",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/64*(5-17*epsilon+12*epsilon^2)/(epsilon*eta)",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/32*(5-17*epsilon+12*epsilon^2)/epsilon",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-2*(-1+epsilon)/eta",
+        "indices": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-2*(-1+epsilon)/eta",
+        "indices": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-2*(-1+epsilon)/eta",
+        "indices": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-2*(-1+epsilon)/eta",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-(-1+2*epsilon)/eta",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-2*(-1+epsilon)/eta",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-(-1+2*epsilon)/eta",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ],
+  "native_audit_contract": "The saved runner rebinds exactly the final basis terminals through native replay, reduces the actual two original weighted sums and all seven actual derivative sums, and asserts no failures and no unresolved leaves before writing closed.bin.",
+  "conditions": {
+    "shared_classes": 111,
+    "baseline_only_classes": 41,
+    "proposal_only_classes": 18,
+    "both_sets_nonzero_at_epsilon_minus_5_over_4_and_eta_positive": true
+  },
+  "timing_scope": "Parents and continuations ran on an overlapping shared host. Cumulative values include timeout work and repeated unfinished-round work; exclude compilation and Nix startup. No performance superiority claim.",
+  "production_native_changed": false,
+  "numerical_periods_evaluated": false,
+  "analysis_inputs": [
+    {
+      "path": "compare-active-closure.py",
+      "bytes": 8121,
+      "sha256": "1edc855b4bcefa5d022800ae71745a7a4b5f7235d3e339a71abf460bd8baf428"
+    },
+    {
+      "path": "condition-polynomials-v2.py",
+      "bytes": 3798,
+      "sha256": "266c1f6e8a448f6fb149f2239c6a77923ab6b8566c688c45d353acaae6583957"
+    },
+    {
+      "path": "active-resume/pilot.rs",
+      "bytes": 31487,
+      "sha256": "167da094aa4f3afac4dd9e84c78d868c58744163a28560dfc411cd59d3cd94df"
+    }
+  ]
+}

@@ -1,0 +1,600 @@
+{
+  "scope": "Independent exact rational-polynomial condition audit of saved native point rules; no new native search or closure claim",
+  "inputs_sha256": {
+    "selector-controls-comparison.json": "0126306186e467b39a30bfa867854a6f3d3d2615b61b3e9a31b998ff40bc5348",
+    "check-conditions.py": "594e87e81290f589a0e0b9e64cc10fb2fe7c1aeff34e4b31f3f448fe8c537204"
+  },
+  "baseline_rhs_terms": 192,
+  "two_arm_condition_safe_rhs_terms": 181,
+  "improved_points": 2,
+  "simple_arithmetic_guard_checks": 6,
+  "points": [
+    {
+      "target": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 9,
+      "original_baseline_conditions": [
+        "-1+2*epsilon",
+        "-4+8*epsilon",
+        "-8+16*epsilon"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 9
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 9,
+      "original_baseline_conditions": [
+        "-1+2*epsilon",
+        "-4+8*epsilon"
+      ],
+      "shorter_trial_decisions": [
+        {
+          "arm": "A",
+          "rhs_terms": 4,
+          "condition_gate": false,
+          "matches": [
+            {
+              "condition": "eta",
+              "reason": "not rational-associate of baseline condition"
+            }
+          ],
+          "selected_at_this_step": false
+        }
+      ],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 9
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 6,
+      "original_baseline_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 6
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 6,
+      "original_baseline_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 6
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 1,
+      "original_baseline_conditions": [],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 1
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 24,
+      "original_baseline_conditions": [
+        "4*epsilon",
+        "16*epsilon",
+        "2*epsilon",
+        "32*epsilon",
+        "8*epsilon",
+        "16*epsilon*eta",
+        "epsilon",
+        "8*epsilon*eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 24
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 20,
+      "original_baseline_conditions": [
+        "epsilon",
+        "2*epsilon",
+        "4*epsilon",
+        "8*epsilon",
+        "16*epsilon",
+        "4*epsilon*eta",
+        "eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 20
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 6,
+      "original_baseline_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 6
+    },
+    {
+      "target": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 5,
+      "original_baseline_conditions": [
+        "3*eta",
+        "24*eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 5
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 21,
+      "original_baseline_conditions": [
+        "-4+4*epsilon",
+        "-8+8*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 21
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 13,
+      "original_baseline_conditions": [
+        "-2+2*epsilon",
+        "-16+16*epsilon",
+        "-4+4*epsilon",
+        "-1+epsilon"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 13
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 22,
+      "original_baseline_conditions": [
+        "-4+4*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-1+epsilon"
+      ],
+      "shorter_trial_decisions": [
+        {
+          "arm": "A",
+          "rhs_terms": 4,
+          "condition_gate": false,
+          "matches": [
+            {
+              "condition": "eta",
+              "reason": "not rational-associate of baseline condition"
+            }
+          ],
+          "selected_at_this_step": false
+        }
+      ],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 22
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        2,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 16,
+      "original_baseline_conditions": [
+        "eta"
+      ],
+      "shorter_trial_decisions": [
+        {
+          "arm": "A",
+          "rhs_terms": 10,
+          "condition_gate": true,
+          "matches": [],
+          "selected_at_this_step": true
+        },
+        {
+          "arm": "C",
+          "rhs_terms": 7,
+          "condition_gate": true,
+          "matches": [
+            {
+              "condition": "2*eta",
+              "reason": "rational associate",
+              "baseline_condition": "eta"
+            },
+            {
+              "condition": "eta",
+              "reason": "rational associate",
+              "baseline_condition": "eta"
+            }
+          ],
+          "selected_at_this_step": true
+        }
+      ],
+      "selected_arm": "C",
+      "selected_rhs_terms": 7
+    },
+    {
+      "target": [
+        2,
+        1,
+        2,
+        0,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 4,
+      "original_baseline_conditions": [
+        "eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 4
+    },
+    {
+      "target": [
+        2,
+        1,
+        2,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 17,
+      "original_baseline_conditions": [
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-16+16*epsilon",
+        "2*epsilon*eta-2*eta",
+        "-1+epsilon",
+        "eta",
+        "-4+4*epsilon"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 17
+    },
+    {
+      "target": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 8,
+      "original_baseline_conditions": [
+        "3*eta",
+        "24*eta",
+        "6*eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 8
+    },
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 2,
+      "original_baseline_conditions": [
+        "-3+2*epsilon"
+      ],
+      "shorter_trial_decisions": [
+        {
+          "arm": "A",
+          "rhs_terms": 0,
+          "condition_gate": true,
+          "matches": [
+            {
+              "condition": "-3+2*epsilon",
+              "reason": "rational associate",
+              "baseline_condition": "-3+2*epsilon"
+            },
+            {
+              "condition": "-6+4*epsilon",
+              "reason": "rational associate",
+              "baseline_condition": "-3+2*epsilon"
+            }
+          ],
+          "selected_at_this_step": true
+        },
+        {
+          "arm": "C",
+          "rhs_terms": 0,
+          "condition_gate": true,
+          "matches": [
+            {
+              "condition": "-3+2*epsilon",
+              "reason": "rational associate",
+              "baseline_condition": "-3+2*epsilon"
+            },
+            {
+              "condition": "-12+8*epsilon",
+              "reason": "rational associate",
+              "baseline_condition": "-3+2*epsilon"
+            }
+          ],
+          "selected_at_this_step": false
+        }
+      ],
+      "selected_arm": "A",
+      "selected_rhs_terms": 0
+    },
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 2,
+      "original_baseline_conditions": [
+        "2*eta",
+        "-6+4*epsilon",
+        "-3+2*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "4*epsilon*eta-6*eta",
+        "2*epsilon*eta-3*eta"
+      ],
+      "shorter_trial_decisions": [
+        {
+          "arm": "A",
+          "rhs_terms": 1,
+          "condition_gate": false,
+          "matches": [
+            {
+              "condition": "-1+epsilon",
+              "reason": "not rational-associate of baseline condition"
+            }
+          ],
+          "selected_at_this_step": false
+        }
+      ],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 2
+    },
+    {
+      "target": [
+        1,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 1,
+      "original_baseline_conditions": [
+        "4*epsilon*eta-6*eta",
+        "-6+4*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "2*eta",
+        "32*epsilon*eta-48*eta",
+        "eta"
+      ],
+      "shorter_trial_decisions": [],
+      "selected_arm": "baseline",
+      "selected_rhs_terms": 1
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "Bounded original-source discovery and proof replay; algebraic subset control on unchanged baseline native; full original ordinal mapping retained; no portfolio implementation or amplitude values.",
+  "build_binding_sha256": "27ce761b2d3a9361a92f1464077d0bd4521e6aee3f4da7374773c18c3ed72952",
+  "executable_sha256": "59d29e7e3f39d1b656fe947ab069cc19e7a13261ee94aae12a570a83c41c65ae",
+  "source_corpus_sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+  "fixture_sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+  "launcher_sha256": "d954d4c74c8586718b33ef6507e7198b52a947ad5ac5ed4ef3f1f3beb3ceb39f",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-role-subset-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/role-subset-controls/baseline-cut-nonincreasing-19-points.json",
+    "cut-nonincreasing"
+  ],
+  "exit_code": 0,
+  "post_run_inputs_unchanged": true,
+  "output_sha256": "6f5c5d3b5c9cd322e9334077045edb5bdbb713006ce54b90f19cbe9bdccaefd1"
+}

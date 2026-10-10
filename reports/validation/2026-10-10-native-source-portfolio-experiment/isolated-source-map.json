@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T03:07:08.988198+00:00",
+  "status": "frozen_ready_for_manual_build",
+  "workspace_copy": "/tmp/rustred-source-portfolio-20261010",
+  "original_workspace": "/common/dev/rustflow_fermi/vendor/rustred",
+  "production_modified": false,
+  "custom_cfg_for_controls": "rustflow_portfolio_controls",
+  "guarded_schema": "rustred.guarded-source-program.v2.point-source-portfolio-experiment-1",
+  "focused_controls": 19,
+  "focused_controls_status": "not_compiled_or_executed",
+  "files": {
+    "crates/rustred-core/src/solver/guarded/persistence.rs": {
+      "before_sha256": "04176aee407443b14020a447dca5dc6fa72856168665f265f20fb8c89c4d5eb6",
+      "after_sha256": "71b032880c7bd1a2f481f0da86bb862c8885c6f3ec104ceda2fc8ae1f4da033d",
+      "bytes": 23162,
+      "saved_source": "isolated-source/crates/rustred-core/src/solver/guarded/persistence.rs"
+    },
+    "crates/rustred-core/src/solver/mod.rs": {
+      "before_sha256": "a38bafbb135beaa2cbb6835ff91e1589f7d37f5e66a79d5ead1fc3a4a85aade0",
+      "after_sha256": "5db27a6996f24639f5aa65d8385ce51d792c3f97886516cafe18b5d1e4b76f24",
+      "bytes": 9223,
+      "saved_source": "isolated-source/crates/rustred-core/src/solver/mod.rs"
+    },
+    "crates/rustred-core/src/solver/numeric.rs": {
+      "before_sha256": "865f6de1de347737dd1eb5fdb3324ca3334bf979954c145890d5e87ccfd70fbb",
+      "after_sha256": "8782b944794a6e67b9f9ab940b017cea85cc3de5ea0e413f1291ee88cf5e7629",
+      "bytes": 17732,
+      "saved_source": "isolated-source/crates/rustred-core/src/solver/numeric.rs"
+    },
+    "crates/rustred-core/src/solver/search/guarded_portfolio.rs": {
+      "before_sha256": null,
+      "after_sha256": "b3c02848f30fbbf49dedcfd15ba89f3949b161c3edf0d8039731a72b02ad5559",
+      "bytes": 13671,
+      "saved_source": "isolated-source/crates/rustred-core/src/solver/search/guarded_portfolio.rs"
+    },
+    "crates/rustred-core/src/solver/search/guarded_portfolio_controls.rs": {
+      "before_sha256": null,
+      "after_sha256": "f713a374b62b12ff178f923a41fea25e14e81c6b069c8415590b330545daff73",
+      "bytes": 24577,
+      "saved_source": "isolated-source/crates/rustred-core/src/solver/search/guarded_portfolio_controls.rs"
+    },
+    "crates/rustred-core/src/solver/search.rs": {
+      "before_sha256": "e40d619c04576f2f32cac854597dcbb55eccfe6da30e6653695d57cb879e4c84",
+      "after_sha256": "94f70a41bd4cc8e2293a86644977ce590fa94c855a2604f0bbe4dccac749e030",
+      "bytes": 32313,
+      "saved_source": "isolated-source/crates/rustred-core/src/solver/search.rs"
+    }
+  },
+  "patch_sha256": "5d5406b5ebaa97c145abf1a65a83645210d7c294b0df45d00f67ad8aac4a3896",
+  "limits_per_trial": {
+    "depth": 3,
+    "attempted_rows": 2048,
+    "accepted_rows": 512,
+    "trace_rows": 64,
+    "trace_terms": 16384
+  },
+  "condition_gate": "Exact native polynomial rational associates or nonzero constants, compared to original sealed baseline. Actual conditions unchanged.",
+  "scope": "Isolated point-only candidate selection; rays and ordinary search unchanged; no closure or physical predictions."
+}

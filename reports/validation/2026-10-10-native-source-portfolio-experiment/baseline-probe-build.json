@@ -1,0 +1,67 @@
+{
+  "captured_utc": "2026-10-10T03:09:44.477385+00:00",
+  "tag": "baseline",
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/portfolio-probe.rs",
+    "sha256": "f4c89649444a7c09f76e48cbf3f3ac35f7bd27373c8d94d66e9903e914301349",
+    "bytes": 11217
+  },
+  "dependencies": {
+    "rustred": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+      "bytes": 435821774
+    },
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    }
+  },
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "source_portfolio_probe_baseline",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "rustred=/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/portfolio-probe.rs",
+    "-o",
+    "/tmp/rustred-source-portfolio-probe-baseline"
+  ],
+  "cargo_invoked": false,
+  "scope": "Standalone search/replay diagnostic only, using native arithmetic and elimination; no period or boundary evaluator.",
+  "exit_code": 0,
+  "wall_seconds": 19.799071532208472,
+  "executable": {
+    "path": "/tmp/rustred-source-portfolio-probe-baseline",
+    "sha256": "2c2afc42c5ca1bf7a78e370cab89e1200ccd204b805531bb3659beea865145fd",
+    "bytes": 443366720
+  }
+}

@@ -1,0 +1,16 @@
+warning: unused import: `std::collections::BTreeMap`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/portfolio-probe.rs:79:5
+   |
+79 | use std::collections::BTreeMap;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `symbolica::prelude`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/portfolio-probe.rs:80:5
+   |
+80 | use symbolica::prelude::*;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: 2 warnings emitted
+

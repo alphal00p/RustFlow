@@ -1,0 +1,18 @@
+{
+  "scope": "19 cfg-only native assertion controls; no physical periods or whole closure.",
+  "native_build_binding_sha256": "14b04b6594ccc45835f75984771826490695892771cc2cf6ff43c879e606e3a2",
+  "runner_build_binding_sha256": "7e811e85ee21fa503a53692b3d6fd041021dd457970dd6dc4bd51d48910683cd",
+  "library_sha256": "4d9423cd6fca369f184b29013998f13180556d3f6cc6767d445ed8c8ebcf6e45",
+  "executable_sha256": "dfca60db36638953e207c90f6507ef85f55b698b6ba779ecfb486bad569e306b",
+  "source_map_sha256": "0f17a621605cf4455356bec3e492d955a3e28b11be18296d5a49238980eab1ae",
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/rustred-source-portfolio-controls-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/focused-controls.json"
+  ],
+  "launcher_sha256": "582d0d811644685fe23648780f576eee8ba88b3f98180b1983bebbd6a5cfd690",
+  "exit_code": 0,
+  "post_run_sources_and_binaries_unchanged": true,
+  "output_sha256": "b7964882fccbbc54c11d7bd36ee814b7bd142b56d67d6615f38225220a75cf8b"
+}

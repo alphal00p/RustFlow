@@ -1,0 +1,7 @@
+{
+  "scope": "Validation-only checkpoint resume scaffolding and cfg-gated statistics; the native search/reduction/closure algorithm is retained.",
+  "base_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/pilot.rs",
+  "base_source_sha256": "6f0fbc2dc116917f8f081daf3687d289b795c4189e09ca7e08207f0031f7d9e6",
+  "generated_source_sha256_before_formatting": "03097ad16762acf6cb492d334753628bb50b978262bac43f98063e391cc6e89b",
+  "generator_sha256": "125dc372c530c5ecd1f6b4af87c3aa3dcaacd9470584bc6c4d9a8bed761c90b7"
+}

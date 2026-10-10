@@ -1,0 +1,7 @@
+{
+  "scope": "Separate validation helper version and comparator; original hash-bound scripts and reports preserved unchanged. Adds constant-polynomial exponent rejection; no native change.",
+  "original_helper_sha256": "d5db70e68a1c2224cbe831dfbbbade65f22535ae58a7a84ecabd23eeccc5f14d",
+  "hardened_helper_sha256": "266c1f6e8a448f6fb149f2239c6a77923ab6b8566c688c45d353acaae6583957",
+  "original_comparator_sha256": "955e6427e12374238fa01a3003c32f56cc0931b34e27f4612002f9cd6880be6b",
+  "hardened_comparator_sha256": "35be3d9a8fe2ae662fcaa38c263c113cf483c9dfcfe50d8e6bbc5c309e2478b2"
+}

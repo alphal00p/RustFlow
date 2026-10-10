@@ -110,8 +110,9 @@ and `[0,3]`. It requests a scalar and a raised occupied line with the original
 numerator `g1_2+u1*u2`, including its nonzero upper Fermi-surface contribution.
 The [independent reference](finite-density-three-loop-reference.md) is available
 at D=13/2 and through Laurent orders [-3,0], with arithmetic, quadrature and
-exact-algebra checks. Native reduction has not yet closed this case, so no
-three-loop amplitude comparison is claimed. The saved
+exact-algebra checks. A subsequent source-only pilot closes the `[0]` cut
+family, while complete production preparation and numerical validation remain
+pending; no three-loop amplitude comparison is claimed. The earlier saved
 [rule-reuse controls](../reports/validation/2026-10-09-finite-density-native-assembly/three-loop-rule-union-controls.json)
 and [residual-search diagnostic](../reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/summary.json)
 record this limitation. This intermediate gate does not replace any original
@@ -154,10 +155,25 @@ the [polynomial raw Ward controls](../reports/validation/2026-10-10-polynomial-r
 reproduce all 19 coefficient and condition maps without that domain extension.
 Keeping the energy factor explicit in the narrowly guarded surface identity,
 together with exact polynomial source shifts, gives 143 right-hand-side terms
-instead of 192. Both 62-source orders retain this result; neither is a closure
-certificate. Production massless admission remains polynomial. Separate bounded
-closure trials and a source-selection prototype are still under evaluation;
-three-loop numerical acceptance remains incomplete.
+instead of 192. Both 62-source orders retain this small-control result.
+Production massless admission remains polynomial.
+
+The subsequent [complete native closure pilots](../reports/validation/2026-10-10-native-source-portfolio-experiment/README.md)
+close the `[0]` singleton family on the same seven basis integrals, with exact
+agreement of the final original-target and basis-derivative coefficient rows.
+Unchanged RustRed needs 16 rounds and 3,553 rules; an isolated source-selection
+prototype needs 15 rounds and 3,324 rules. Their retained condition lists differ
+and remain explicit. Both runs include their timed-out initial segments and
+verified native continuations; shared-host elapsed times are not a comparative
+performance result. These are algebraic closure results for one cut, not the
+assembled three-loop amplitude.
+
+Since unchanged RustRed closes the polynomial corpus, production integration
+uses the optional `polynomial-closure-v1` source policy and keeps native search
+unchanged. The [integration gate](../reports/validation/2026-10-10-polynomial-closure-integration/)
+checks the actual public factory against the complete frozen corpus before
+full native preparation, boundaries, transport and Laurent refinement. Those
+three-loop numerical gates still precede four-loop numerical scale-up.
 
 ## Remaining acceptance evidence
 

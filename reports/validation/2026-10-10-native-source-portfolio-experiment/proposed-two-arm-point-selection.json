@@ -1,0 +1,624 @@
+{
+  "schema": 1,
+  "status": "saved_point_diagnostic_not_implemented",
+  "order": [
+    "original",
+    "strict",
+    "index-dependent"
+  ],
+  "limits_proposed_per_alternative": {
+    "max_depth": 3,
+    "attempted_rows": 2048,
+    "accepted_rows": 512,
+    "exact_trace_rows": 64,
+    "exact_trace_terms": 16384
+  },
+  "points": [
+    {
+      "target": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 9,
+      "baseline_conditions": [
+        "-1+2*epsilon",
+        "-4+8*epsilon",
+        "-8+16*epsilon"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 9,
+        "conditions": [
+          "-1+2*epsilon",
+          "-4+8*epsilon",
+          "-8+16*epsilon"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 9,
+      "baseline_conditions": [
+        "-1+2*epsilon",
+        "-4+8*epsilon"
+      ],
+      "selected": {
+        "arm": "strict",
+        "rhs_terms": 4,
+        "conditions": [
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 6,
+      "baseline_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 6,
+        "conditions": [
+          "2*eta",
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 6,
+      "baseline_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 6,
+        "conditions": [
+          "2*eta",
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 1,
+      "baseline_conditions": [],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 1,
+        "conditions": []
+      }
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 24,
+      "baseline_conditions": [
+        "4*epsilon",
+        "16*epsilon",
+        "2*epsilon",
+        "32*epsilon",
+        "8*epsilon",
+        "16*epsilon*eta",
+        "epsilon",
+        "8*epsilon*eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 24,
+        "conditions": [
+          "4*epsilon",
+          "16*epsilon",
+          "2*epsilon",
+          "32*epsilon",
+          "8*epsilon",
+          "16*epsilon*eta",
+          "epsilon",
+          "8*epsilon*eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 20,
+      "baseline_conditions": [
+        "epsilon",
+        "2*epsilon",
+        "4*epsilon",
+        "8*epsilon",
+        "16*epsilon",
+        "4*epsilon*eta",
+        "eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 20,
+        "conditions": [
+          "epsilon",
+          "2*epsilon",
+          "4*epsilon",
+          "8*epsilon",
+          "16*epsilon",
+          "4*epsilon*eta",
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 6,
+      "baseline_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 6,
+        "conditions": [
+          "2*eta",
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 5,
+      "baseline_conditions": [
+        "3*eta",
+        "24*eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 5,
+        "conditions": [
+          "3*eta",
+          "24*eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 21,
+      "baseline_conditions": [
+        "-4+4*epsilon",
+        "-8+8*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 21,
+        "conditions": [
+          "-4+4*epsilon",
+          "-8+8*epsilon",
+          "-32+32*epsilon",
+          "-2+2*epsilon"
+        ]
+      }
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 13,
+      "baseline_conditions": [
+        "-2+2*epsilon",
+        "-16+16*epsilon",
+        "-4+4*epsilon",
+        "-1+epsilon"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 13,
+        "conditions": [
+          "-2+2*epsilon",
+          "-16+16*epsilon",
+          "-4+4*epsilon",
+          "-1+epsilon"
+        ]
+      }
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 22,
+      "baseline_conditions": [
+        "-4+4*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-1+epsilon"
+      ],
+      "selected": {
+        "arm": "strict",
+        "rhs_terms": 4,
+        "conditions": [
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        2,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 16,
+      "baseline_conditions": [
+        "eta"
+      ],
+      "selected": {
+        "arm": "index-dependent",
+        "rhs_terms": 7,
+        "conditions": [
+          "2*eta",
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        2,
+        1,
+        2,
+        0,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 4,
+      "baseline_conditions": [
+        "eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 4,
+        "conditions": [
+          "eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        2,
+        1,
+        2,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 17,
+      "baseline_conditions": [
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-16+16*epsilon",
+        "2*epsilon*eta-2*eta",
+        "-1+epsilon",
+        "eta",
+        "-4+4*epsilon"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 17,
+        "conditions": [
+          "-2+2*epsilon",
+          "-8+8*epsilon",
+          "-16+16*epsilon",
+          "2*epsilon*eta-2*eta",
+          "-1+epsilon",
+          "eta",
+          "-4+4*epsilon"
+        ]
+      }
+    },
+    {
+      "target": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 8,
+      "baseline_conditions": [
+        "3*eta",
+        "24*eta",
+        "6*eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 8,
+        "conditions": [
+          "3*eta",
+          "24*eta",
+          "6*eta"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 2,
+      "baseline_conditions": [
+        "-3+2*epsilon"
+      ],
+      "selected": {
+        "arm": "strict",
+        "rhs_terms": 0,
+        "conditions": [
+          "-3+2*epsilon",
+          "-6+4*epsilon"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 2,
+      "baseline_conditions": [
+        "2*eta",
+        "-6+4*epsilon",
+        "-3+2*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "4*epsilon*eta-6*eta",
+        "2*epsilon*eta-3*eta"
+      ],
+      "selected": {
+        "arm": "strict",
+        "rhs_terms": 1,
+        "conditions": [
+          "-1+epsilon",
+          "-2+2*epsilon"
+        ]
+      }
+    },
+    {
+      "target": [
+        1,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 1,
+      "baseline_conditions": [
+        "4*epsilon*eta-6*eta",
+        "-6+4*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "2*eta",
+        "32*epsilon*eta-48*eta",
+        "eta"
+      ],
+      "selected": {
+        "arm": "original",
+        "rhs_terms": 1,
+        "conditions": [
+          "4*epsilon*eta-6*eta",
+          "-6+4*epsilon",
+          "8*epsilon*eta-12*eta",
+          "-12+8*epsilon",
+          "2*eta",
+          "32*epsilon*eta-48*eta",
+          "eta"
+        ]
+      }
+    }
+  ],
+  "baseline_rhs_terms": 192,
+  "selected_rhs_terms": 157,
+  "conditions_must_remain_binding": true,
+  "full_context_native_portfolio_run": false,
+  "closure_or_numerical_acceptance": false
+}

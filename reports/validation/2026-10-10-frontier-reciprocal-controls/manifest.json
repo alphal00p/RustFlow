@@ -1,0 +1,295 @@
+{
+  "recorded_utc": "2026-10-10T03:33:48.103716+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4811,
+      "sha256": "41616acdd26efddf75e5a9ad1e571b18dbd44709a20c7c0917e9d9548108ac00"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 7807,
+      "sha256": "55b191e033a2bf81857893336bb4f3bf37f91b1a64a86b1a4f31b2fdd82bf461"
+    },
+    {
+      "path": "archive-map.json",
+      "bytes": 16776,
+      "sha256": "d93a9d9755aa49a8afbe5555229b1f1fc85ecb3c1a9decec16bab41db4948b47"
+    },
+    {
+      "path": "baseline-generic-probe-build.json",
+      "bytes": 2807,
+      "sha256": "a115ff543ef40156a2fe99957ea5ab2e155429e465af86b84b053c565a9c213f"
+    },
+    {
+      "path": "generic-source-probe.rs",
+      "bytes": 11564,
+      "sha256": "38b6616b2a267cf56e3d67761fae82fc4fa6f8cdac244425897f8db274a4b305"
+    },
+    {
+      "path": "points.json",
+      "bytes": 1777,
+      "sha256": "585ecced3c74801e10e92f1cdac2267db1c53bad91b17e71c6055f9ff1c6194a"
+    },
+    {
+      "path": "polynomial62-binding.json",
+      "bytes": 1518,
+      "sha256": "39e84551cd8537c288681323450850cf1d0a9cd207fd0f8758f4bcc02c764463"
+    },
+    {
+      "path": "polynomial62-resources.json",
+      "bytes": 720,
+      "sha256": "2b2563372a3b3f2bd3223ea6fdd26da4f5d3dd8ad48d37aa49d0cc6c92343af4"
+    },
+    {
+      "path": "polynomial62-resources.log",
+      "bytes": 178,
+      "sha256": "0382be3e70032688cbd05aab1a38e71847f69ee6937f78f961e15746978a79ed"
+    },
+    {
+      "path": "polynomial62-resources.provenance.json",
+      "bytes": 1934,
+      "sha256": "28a5ed4234415ef5e9aa726cbf958777d83f15c3aa6abc56c5cb7eb26e68d7a3"
+    },
+    {
+      "path": "polynomial62.json.gz",
+      "bytes": 9980,
+      "sha256": "27c6625410a55915bfd51d1ce7883ed1b7c669f6b01ee3f125e0b3c287a42512"
+    },
+    {
+      "path": "polynomial62.proofs/point-00.bin.gz",
+      "bytes": 3836,
+      "sha256": "97d65249f1b2e376b9d386d309ed681cf4e63a10aa4b459a5c0a4330e7af54a3"
+    },
+    {
+      "path": "polynomial62.proofs/point-01.bin.gz",
+      "bytes": 3850,
+      "sha256": "47cdc0654328b818c07ddc1f926a627a228d54dc14bbe173cc8ef50b0ea9b6c5"
+    },
+    {
+      "path": "polynomial62.proofs/point-02.bin.gz",
+      "bytes": 3896,
+      "sha256": "973ae5491759b5e7f0f8b29e90ce8729959157f98cbf1b549fd835a54b9e2668"
+    },
+    {
+      "path": "polynomial62.proofs/point-03.bin.gz",
+      "bytes": 3799,
+      "sha256": "ffc1075dffb64278eba5fe10fcd4a02f35282b2c3c654059d06f89911192ac94"
+    },
+    {
+      "path": "polynomial62.proofs/point-04.bin.gz",
+      "bytes": 3796,
+      "sha256": "ee40e6bc85a4be6fe19b467e39122b214fb5d38671beadf4214042e7f02936b1"
+    },
+    {
+      "path": "polynomial62.proofs/point-05.bin.gz",
+      "bytes": 3799,
+      "sha256": "a778ce1a3e07497ea089302c3592179c090a4a1a5742ec3fb650fa93cfe6b582"
+    },
+    {
+      "path": "polynomial62.proofs/point-06.bin.gz",
+      "bytes": 3866,
+      "sha256": "56bddfea107dfdc616134988351ddd85cedbf4ebd3fe264ffbd39575de435d6b"
+    },
+    {
+      "path": "polynomial62.proofs/point-07.bin.gz",
+      "bytes": 3861,
+      "sha256": "ceb1a66c5382984042b80a2f785f612db5c1758e1fc19eeac4fa9e1c0e6a41b0"
+    },
+    {
+      "path": "polynomial62.proofs/point-08.bin.gz",
+      "bytes": 3821,
+      "sha256": "2c22f77c0621ce01efc0c5885fbc37afc1fc7245a0601f99b24a05045fe3f282"
+    },
+    {
+      "path": "polynomial62.proofs/point-09.bin.gz",
+      "bytes": 3808,
+      "sha256": "8d18d92db845707b6d72290765cdf2af4ddd737f3be8bfdd1c58e4366ac6e36f"
+    },
+    {
+      "path": "polynomial62.proofs/point-10.bin.gz",
+      "bytes": 3832,
+      "sha256": "14db238337c8c56a3cee905d4681cae8280486dab74a1a3e80d16e97683d0704"
+    },
+    {
+      "path": "polynomial62.proofs/point-11.bin.gz",
+      "bytes": 3799,
+      "sha256": "75491b6aadde505e4e8749f64625907239cf93c0856955ab6cc576919bc370e1"
+    },
+    {
+      "path": "polynomial62.proofs/point-12.bin.gz",
+      "bytes": 3866,
+      "sha256": "e31b0843e62443cbf2b0b677277a831b48f4d99ca4caae039fde0ae91c70d9cf"
+    },
+    {
+      "path": "polynomial62.proofs/point-13.bin.gz",
+      "bytes": 3781,
+      "sha256": "37dd1a428e0acb449e2eb11dceb21b160cfd22170002204a8a246246b1424b9e"
+    },
+    {
+      "path": "polynomial62.proofs/point-14.bin.gz",
+      "bytes": 3811,
+      "sha256": "f9737a5c6f94ba4ea7b5807e6b8202fd46c25ec7828f9e4b50e21e5115beb6a7"
+    },
+    {
+      "path": "polynomial62.proofs/point-15.bin.gz",
+      "bytes": 3791,
+      "sha256": "08ff99baf6bb1d2856cf7947c24f08de27c845857f593fc13c5ff72666cf3188"
+    },
+    {
+      "path": "polynomial62.proofs/point-16.bin.gz",
+      "bytes": 3877,
+      "sha256": "ae1344392c06da0d3b485993d020bdc221b82b47d8a08bfc3d6ed97fdbc3414c"
+    },
+    {
+      "path": "polynomial62.proofs/point-17.bin.gz",
+      "bytes": 3794,
+      "sha256": "97d68d6d246dfd8e2aedee223cd66932065d8732f777736d12cbc3290e0e0824"
+    },
+    {
+      "path": "polynomial62.proofs/point-18.bin.gz",
+      "bytes": 3723,
+      "sha256": "1ccad9ee5cdf3609c907e2d4d6ede16ddaf74f8f564e35cf6828cc06917d5213"
+    },
+    {
+      "path": "proof-energy-images.json",
+      "bytes": 21918,
+      "sha256": "e3d594712f4283c80ddd1ea111b1dbf4ddc14d023a371ce25435e654b23ad87e"
+    },
+    {
+      "path": "reciprocal56-binding.json",
+      "bytes": 1520,
+      "sha256": "b123335eb8668ee8a22f53569a9a52c812487003312fb3a5ca914793eec5bd63"
+    },
+    {
+      "path": "reciprocal56-resources.json",
+      "bytes": 731,
+      "sha256": "79783def8b98cc0fac5ac5a09278582cdb6f0b283fa7553cedfba0156f1554df"
+    },
+    {
+      "path": "reciprocal56-resources.log",
+      "bytes": 178,
+      "sha256": "85889198666e4352f9e9451fc2ac51a4dae2b4057d981f1223d944b3ab11cad1"
+    },
+    {
+      "path": "reciprocal56-resources.provenance.json",
+      "bytes": 1937,
+      "sha256": "9b92f333ca088b8fd24f4a8d5f42c3ed033f5cfddbcd3dce7209c887f22e6e87"
+    },
+    {
+      "path": "reciprocal56.json.gz",
+      "bytes": 9557,
+      "sha256": "6ca6101187e8c190bff5d27080fec87d55b388594511623b6e856d2a55992820"
+    },
+    {
+      "path": "reciprocal56.proofs/point-00.bin.gz",
+      "bytes": 3701,
+      "sha256": "e7d38514765e0bc349cc49ac463318fe1a83f64a8393b13c88af1a82dd116fe1"
+    },
+    {
+      "path": "reciprocal56.proofs/point-01.bin.gz",
+      "bytes": 3713,
+      "sha256": "26041ff6e505e5728d9df1c0fda6a119071f1c8a953c00af0b81766661c691b4"
+    },
+    {
+      "path": "reciprocal56.proofs/point-02.bin.gz",
+      "bytes": 3749,
+      "sha256": "3611cb8b0378923fe04e5b08f13685c0b8349d8660624abb126a5e1bf0b0b015"
+    },
+    {
+      "path": "reciprocal56.proofs/point-03.bin.gz",
+      "bytes": 3664,
+      "sha256": "5fde3212fb6525dc903fa126a02c6969a5adcff93e8b9f57f7e42c713a14f581"
+    },
+    {
+      "path": "reciprocal56.proofs/point-04.bin.gz",
+      "bytes": 3657,
+      "sha256": "262161358fb1f41652497c2a728d7084b953c2e8d093012be505e81c222844cd"
+    },
+    {
+      "path": "reciprocal56.proofs/point-05.bin.gz",
+      "bytes": 3664,
+      "sha256": "68c5642f8ce927b6fdf7e358cc7eb2f6a60ef252902258f349d92b3e9189ec48"
+    },
+    {
+      "path": "reciprocal56.proofs/point-06.bin.gz",
+      "bytes": 3740,
+      "sha256": "2d46c692302795f00357fa0249646877175e7341af267a0a3c3515d4372e3101"
+    },
+    {
+      "path": "reciprocal56.proofs/point-07.bin.gz",
+      "bytes": 3747,
+      "sha256": "b5e5243fc9c84f8e49dad8b267569ffed8c164b6e133b437d88de45a1d273423"
+    },
+    {
+      "path": "reciprocal56.proofs/point-08.bin.gz",
+      "bytes": 3686,
+      "sha256": "a24bcf8ea247128cf543936ea3400c14d97552e2f2cb8eadcaa1f4fec1b26afc"
+    },
+    {
+      "path": "reciprocal56.proofs/point-09.bin.gz",
+      "bytes": 3672,
+      "sha256": "7bd57ffb95d82ac36df3ed156aa503543387a237e4ef44ddea4dde13dede3b9f"
+    },
+    {
+      "path": "reciprocal56.proofs/point-10.bin.gz",
+      "bytes": 3699,
+      "sha256": "fb639342200d1e9faf52fb1bdecb4589290983210df41e853c6f136d08ac6fa8"
+    },
+    {
+      "path": "reciprocal56.proofs/point-11.bin.gz",
+      "bytes": 3658,
+      "sha256": "405126cc341a899aa134cb8d0802f5418d86d2cc4040cea69cef280ecff99545"
+    },
+    {
+      "path": "reciprocal56.proofs/point-12.bin.gz",
+      "bytes": 3733,
+      "sha256": "ee5e9ed72ae16538a504c744e639c0553c18875db42e97e91d2af064fba2e593"
+    },
+    {
+      "path": "reciprocal56.proofs/point-13.bin.gz",
+      "bytes": 3644,
+      "sha256": "0219158117dcf6223f59a1b75e7fe278587b039bd4f7a5ea8cae0a14c0b51826"
+    },
+    {
+      "path": "reciprocal56.proofs/point-14.bin.gz",
+      "bytes": 3672,
+      "sha256": "b356651a9edc11a4b76c96fa0eafb0822217a2f2dc6a76f1038efad013cbce30"
+    },
+    {
+      "path": "reciprocal56.proofs/point-15.bin.gz",
+      "bytes": 3649,
+      "sha256": "c200b8d42e3faea2a1a02eaf49b37c85304ade614c8927f80c5c2b15aebd2601"
+    },
+    {
+      "path": "reciprocal56.proofs/point-16.bin.gz",
+      "bytes": 3741,
+      "sha256": "c2c8a13b40200a24c3478ebcd804f346ba3296945a7e79eb0e3ff896fffc6e59"
+    },
+    {
+      "path": "reciprocal56.proofs/point-17.bin.gz",
+      "bytes": 3659,
+      "sha256": "1cd944716405ad67fa5149643579bf0575c04f760365d61e87461ccf4b89ebad"
+    },
+    {
+      "path": "reciprocal56.proofs/point-18.bin.gz",
+      "bytes": 3585,
+      "sha256": "55858075dafaf875b0c329f9a23e52e9f1b78845e522e15538e8661ccc3aa51f"
+    },
+    {
+      "path": "select-and-run.py",
+      "bytes": 4663,
+      "sha256": "7d413709e03f52d13eda52de6d4b4376e8a51d92f1b2c682d8bbf7b4e8781072"
+    },
+    {
+      "path": "selection.json",
+      "bytes": 5193,
+      "sha256": "cf9e48e96d78cb73ba4e80830816865c045b07396fda4dd56a77ebbaee8f9b67"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 18767,
+      "sha256": "05d808bdeb3e0ad81a097411409a61c3e93b7075de6d823be832636d5d7ae302"
+    }
+  ]
+}

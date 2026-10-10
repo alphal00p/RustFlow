@@ -1,0 +1,35 @@
+{
+  "captured_utc": "2026-10-10T03:19:15.298590+00:00",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-source-portfolio-generic-probe-proposal",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.json",
+    "original"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/rustred-source-portfolio-generic-probe-proposal": {
+      "resolved_path": "/tmp/rustred-source-portfolio-generic-probe-proposal",
+      "sha256": "6f4b8e75ba63b3b9b011d7cef1b84f0d810f9ebe76b3cd69c7b9573115f49541",
+      "size_bytes": 289676416
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+      "sha256": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2",
+      "size_bytes": 58458
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+      "sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+      "size_bytes": 1770
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

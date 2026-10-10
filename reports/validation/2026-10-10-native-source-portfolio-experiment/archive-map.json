@@ -1,0 +1,2010 @@
+{
+  "format": "gzip;mtime=0;level=9",
+  "scope": "Completed local verbose native programs/results only. Preserve raw closed programs, final result JSON, authenticated parent checkpoint pairs and every hash-bound local resume input. Frozen historical references retain original paths; restore before reuse.",
+  "protected_raw_sha256": {
+    "active-pilot/build-binding.json": "48ba9dfc544d6df2ce2810cd0e887791bea4e9b8b47b7599a2c30ec306f705c1",
+    "active-pilot/polynomial62-baseline/configuration.json": "91934a9a90b3567953071b6d44b91ee971f557975412698bd44083e809bdae87",
+    "active-pilot/polynomial62-baseline/progress.json": "a997329ebc479074ece59fe90d72dd6f9a80bd2303e70390f1f10167831be820",
+    "active-pilot/polynomial62-baseline/resources.json": "00d30ea43abf3aee9888b331e29f5cbbd8257fd442af924fa691d6e13d5e1b98",
+    "active-pilot/polynomial62-baseline/resources.provenance.json": "04e98d5ff29f03693d16be3768a321572af034d2cf6633d8b205c6b3d3ddc2c3",
+    "active-pilot/polynomial62-baseline/round-007.bin": "b7b4cc0cb3ccaf0978568c48fe3d90811b1dae628334192d395f9d873091d4c5",
+    "active-pilot/polynomial62-baseline/round-007.json": "f972d71e6be5445a4f4936e5c176f981262dffd10ccc2715713c2eb739492099",
+    "active-pilot/polynomial62-baseline/run-binding.json": "01cc4dc4df7fda2f6f59441efe9f3fe7f9cc29f32f03fc995db01f2b205b4c06",
+    "active-pilot/polynomial62-proposal/configuration.json": "91934a9a90b3567953071b6d44b91ee971f557975412698bd44083e809bdae87",
+    "active-pilot/polynomial62-proposal/progress.json": "492285013b5112d79d93ae14c6bcb311f412032ac925e3b58e2f844377ce4084",
+    "active-pilot/polynomial62-proposal/resources.json": "a0df05c5500e6dabb1fbe243ed77543e53a83ef408f8f1118304bcf706742088",
+    "active-pilot/polynomial62-proposal/resources.provenance.json": "9c337569f29ff37b52f88421c2338a0603fe88379f05bb6e9ba56c529955ea07",
+    "active-pilot/polynomial62-proposal/round-006.bin": "d9b5405fdad77b29c149453c31e877c99b20c9aedd6a08dc5c094c65bc60b1fe",
+    "active-pilot/polynomial62-proposal/round-006.json": "96a21c618b4dc37cfd75bc6b81b56d58448bca2c44264415f6ccbd5d176f7c09",
+    "active-pilot/polynomial62-proposal/run-binding.json": "d664ad4779d99cd68754530c21d69ef908ea329e1a9b7cb09dc37311012f1fe4",
+    "active-resume/baseline-build.json": "7f07a141e839823c6e5105bae961a2a82c924fbb0cc35c4939ddbd10e5953e9c",
+    "active-resume/checkpoint.py": "b7c83e960dd9f5136f1ac001497e053c03e543a62055880029bf8d3592550953",
+    "active-resume/pilot.rs": "167da094aa4f3afac4dd9e84c78d868c58744163a28560dfc411cd59d3cd94df",
+    "active-resume/polynomial62-baseline/closed.bin": "04b9ca5d3b76f21b3d2d4bb5b4c007d1f7b9af6e991510defecec0ff50960d7d",
+    "active-resume/polynomial62-baseline/configuration.json": "91934a9a90b3567953071b6d44b91ee971f557975412698bd44083e809bdae87",
+    "active-resume/polynomial62-baseline/progress.json": "475547009056a6d6996e5c4a2d2596da88039532611363c206880b4dc1ca0089",
+    "active-resume/polynomial62-baseline/resources.json": "12c3adf28703f0ae613b955e273ff3fbb1592ea589ca90cded2c04dddaeff13e",
+    "active-resume/polynomial62-baseline/resources.provenance.json": "bae129265ecb5bfa103153363620e212e4c11ffd87aaca3159fe8c6fac9cf694",
+    "active-resume/polynomial62-baseline/result.json": "6d6fccb5ff11db3901d74f168093e9c1225ee1dc69642aca0c969264fb667ea2",
+    "active-resume/polynomial62-baseline/resume-state.json": "be416341f165caa387d7b72e291f609d37ebb9f452f9b0596b84a8e4fc5e8e29",
+    "active-resume/polynomial62-baseline/round-007.bin": "b7b4cc0cb3ccaf0978568c48fe3d90811b1dae628334192d395f9d873091d4c5",
+    "active-resume/polynomial62-baseline/round-007.json": "f972d71e6be5445a4f4936e5c176f981262dffd10ccc2715713c2eb739492099",
+    "active-resume/polynomial62-baseline/run-binding.json": "87202fe13ed776211e0217d242dc4ece8dc6a6f9f4911aac2e9ac746e9a28591",
+    "active-resume/polynomial62-proposal/closed.bin": "20151796fdf8fe65d1db57a8df7811fe07904c2e1b224f0a722e4a49e6b78e48",
+    "active-resume/polynomial62-proposal/configuration.json": "91934a9a90b3567953071b6d44b91ee971f557975412698bd44083e809bdae87",
+    "active-resume/polynomial62-proposal/progress.json": "2dc91d9191d7660ca9e9de82c7fa15d0b684602a2d4a4d9e05c68e0c1393cfb5",
+    "active-resume/polynomial62-proposal/resources.json": "1825bba79822fa6c978c987e990d00cf35ef641964f28750cfc3409503884e9b",
+    "active-resume/polynomial62-proposal/resources.provenance.json": "2fe7e63e74747aff9ff5c55a87d95a0a901c8c6595e6e26a41abba61df90a205",
+    "active-resume/polynomial62-proposal/result.json": "423c6d83442b26f328e3a0e975241d1f4ed659d69d30baa39c1ad4dcd0dac776",
+    "active-resume/polynomial62-proposal/resume-state.json": "735a5da61e51821fb97808341cb465017872e8a8592352be9ab64dcfce4eb1de",
+    "active-resume/polynomial62-proposal/round-006.bin": "d9b5405fdad77b29c149453c31e877c99b20c9aedd6a08dc5c094c65bc60b1fe",
+    "active-resume/polynomial62-proposal/round-006.json": "96a21c618b4dc37cfd75bc6b81b56d58448bca2c44264415f6ccbd5d176f7c09",
+    "active-resume/polynomial62-proposal/run-binding.json": "68915e528643dbf197bb8e598d55a639349a1e1715b9dc86162c8c823895777e",
+    "active-resume/proposal-build.json": "a6981dbb78293a42bf273a4c77b2a57234f834098c197c6ba2583d54ba6beb91",
+    "active-resume/run.py": "b80d2883548b2adc77164c4fdf7966e581717fd21cb4a3ab4f51e2743d4a8c2e"
+  },
+  "files": [
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-000.bin",
+      "archive_path": "active-pilot/polynomial62-baseline/round-000.bin.gz",
+      "original_bytes": 49491,
+      "original_sha256": "dbd373dc1093e142cc0d808b56a1fe7dba0622bad03f1cf1e79ebd5a8a813371",
+      "archive_bytes": 5150,
+      "archive_sha256": "805a279931b2c1bc90a43b1307543abdde5a40ce83b7d27941eedc299b30b58f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-000.json",
+      "archive_path": "active-pilot/polynomial62-baseline/round-000.json.gz",
+      "original_bytes": 68273,
+      "original_sha256": "a99a2d8f8f86d176b3a7a7628a58c7e9f8c4b28a3ece067118da73404d380db0",
+      "archive_bytes": 1902,
+      "archive_sha256": "ee4290404367a0d8e3a25b7675553ec532a9dff9a4bcd8d34827a0be51b9dfa6",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-001.bin",
+      "archive_path": "active-pilot/polynomial62-baseline/round-001.bin.gz",
+      "original_bytes": 75974,
+      "original_sha256": "5246729e2c564e7f1d6cc8ee076d2acff512ffba38b2e8731265c5216b0b9d18",
+      "archive_bytes": 7681,
+      "archive_sha256": "f05ff9b045d83bc001f01d4b27f62bb93b520d0519586f807e5686d633858240",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-001.json",
+      "archive_path": "active-pilot/polynomial62-baseline/round-001.json.gz",
+      "original_bytes": 163330,
+      "original_sha256": "ccaa78ff575d8bcbdf79d740454dc1d988a177e615bcd969976df49a0ec116ba",
+      "archive_bytes": 4655,
+      "archive_sha256": "6cf414f0cdd86dcb0c8ea9eac8b14ead0d044f489ee1d9541ba1761e1d933925",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-002.bin",
+      "archive_path": "active-pilot/polynomial62-baseline/round-002.bin.gz",
+      "original_bytes": 246361,
+      "original_sha256": "db6bdb6b155d91760779f35532b64f4a28fe3afd10c1e9aa731be1864abf0382",
+      "archive_bytes": 21900,
+      "archive_sha256": "5dcda112e8a26d84b4fde6297dd02cca6b8feacadf5ae4ac702d6c7fe9ded3b2",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-002.json",
+      "archive_path": "active-pilot/polynomial62-baseline/round-002.json.gz",
+      "original_bytes": 626299,
+      "original_sha256": "a56397a1084648c087d1433b15d4ace95e1ecd3ff8dc4e0b509f51d13c364ed8",
+      "archive_bytes": 21902,
+      "archive_sha256": "bf3f81370ecd8d51e1ac4a4c9f298866d4ebc6f76d49df565b9cce104f71938b",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-003.bin",
+      "archive_path": "active-pilot/polynomial62-baseline/round-003.bin.gz",
+      "original_bytes": 656201,
+      "original_sha256": "f4e7e711f5630227e5b5a49ff91b22403873945a2594455bbafd99b74e573438",
+      "archive_bytes": 57825,
+      "archive_sha256": "5922367a62c96496d28c61dc5f3e275c51550486723f4f44a0f6cda8e9442266",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-003.json",
+      "archive_path": "active-pilot/polynomial62-baseline/round-003.json.gz",
+      "original_bytes": 1768732,
+      "original_sha256": "bf609c9c18773bf62af092b23a24a5a8b5737c02e0aa97557b59f97e42f8855b",
+      "archive_bytes": 95520,
+      "archive_sha256": "55821b9c126fb9ca546c6879c66056da04f2706633b783e05797e5c98f3c1090",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-004.bin",
+      "archive_path": "active-pilot/polynomial62-baseline/round-004.bin.gz",
+      "original_bytes": 1081203,
+      "original_sha256": "3e2a324b4233da7cca3c97163e43572ed603073c0d6559527bea98c6f955d31d",
+      "archive_bytes": 97681,
+      "archive_sha256": "2c8d502449531ab470317c1aa8eb4e3f551824cc615fbdd0845225b54ddfb195",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-004.json",
+      "archive_path": "active-pilot/polynomial62-baseline/round-004.json.gz",
+      "original_bytes": 2301376,
+      "original_sha256": "3926b59ef8486140c4a630465cbf95aba837a4edf7b23ab8595f334d850a4313",
+      "archive_bytes": 98864,
+      "archive_sha256": "4e0db34dadc82fd4c49e1d5f67f4a46e023aacbc8d00bf0e8c2ee27e2dab7f2b",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-005.bin",
+      "archive_path": "active-pilot/polynomial62-baseline/round-005.bin.gz",
+      "original_bytes": 1539892,
+      "original_sha256": "2dd77ba98919828008e36e8c93e882a6a4cd9aed5ecff8d9a7a0785549b39615",
+      "archive_bytes": 140476,
+      "archive_sha256": "bb4039aa6d97f9fe991046d534de3fa7557f0996a1d10c85fc3d740974bcfdb4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-005.json",
+      "archive_path": "active-pilot/polynomial62-baseline/round-005.json.gz",
+      "original_bytes": 2257234,
+      "original_sha256": "89c197482f274d1d554b9996b73251e21329724608ccc5ba4de1548300db5ebb",
+      "archive_bytes": 98727,
+      "archive_sha256": "03d72431b8b9f015c2067c66de1dd88ad26e63e6ae7a1ea8f15fe6b251902052",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-006.bin",
+      "archive_path": "active-pilot/polynomial62-baseline/round-006.bin.gz",
+      "original_bytes": 1874472,
+      "original_sha256": "df88eb6521e1892970864f2f254efc57ea878b279e0421341be6e72c7eda0bad",
+      "archive_bytes": 173707,
+      "archive_sha256": "6415e142a6a2ddef4cd6c6f36155db01409e6fdb28fb8957adc25fa906b285c8",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-baseline/round-006.json",
+      "archive_path": "active-pilot/polynomial62-baseline/round-006.json.gz",
+      "original_bytes": 2213582,
+      "original_sha256": "50d45ee4a55e32432643e263accd918af727204ee92bd5675891422b8c1af6f5",
+      "archive_bytes": 78912,
+      "archive_sha256": "9a9664ca8456a64ae66de9f6fabe7dd6ca3d640f8667dafec0d40b7befaf9796",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-000.bin",
+      "archive_path": "active-pilot/polynomial62-proposal/round-000.bin.gz",
+      "original_bytes": 48712,
+      "original_sha256": "300065001c564e39f792f08f8ae75aa8630c05b06ec1518593be3fb64bdc8841",
+      "archive_bytes": 5101,
+      "archive_sha256": "465ac7ca4591d8cd100eed68f8068c2532287706edc04185812793d14d3f2c21",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-000.json",
+      "archive_path": "active-pilot/polynomial62-proposal/round-000.json.gz",
+      "original_bytes": 86898,
+      "original_sha256": "3c708050ac467926e3b8932de71ec3972cfa31045491d438cec173da082e6215",
+      "archive_bytes": 3273,
+      "archive_sha256": "fc95dcd9bb4ad4a94b85c53731d062bb71911cecb9f627ea171524903d500595",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-001.bin",
+      "archive_path": "active-pilot/polynomial62-proposal/round-001.bin.gz",
+      "original_bytes": 75007,
+      "original_sha256": "7f1dc25bfb60e3c82edf6f3952bb8e05e7962c72fc9f8b463c89e66534b2bf3a",
+      "archive_bytes": 7574,
+      "archive_sha256": "fc6fdb54380ad8d1c43d8f57409728c62c879919a6824a50853c7973e844ef62",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-001.json",
+      "archive_path": "active-pilot/polynomial62-proposal/round-001.json.gz",
+      "original_bytes": 205101,
+      "original_sha256": "43d7f81d65a4d3de10daf74b76433c8f7aad4dbeeaa51c25e8cb3b410db27992",
+      "archive_bytes": 6956,
+      "archive_sha256": "c40dc89d051062f767073f0aed3360cd0a6be54be6a1cac5ee83bc8654174a58",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-002.bin",
+      "archive_path": "active-pilot/polynomial62-proposal/round-002.bin.gz",
+      "original_bytes": 209430,
+      "original_sha256": "63df1c3378e0900bb5f09fa6ee9b90cf4e7a392375dac1a4001aaa30d75d680c",
+      "archive_bytes": 19289,
+      "archive_sha256": "dac13b9a6f8471bacf11135ff9f12eb91ff8903370b2b18aad15634854ecfb47",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-002.json",
+      "archive_path": "active-pilot/polynomial62-proposal/round-002.json.gz",
+      "original_bytes": 719919,
+      "original_sha256": "d29af3e5b80d56eceb5faaf495ddc1200a24380ca08b6380f43664506b199f49",
+      "archive_bytes": 22588,
+      "archive_sha256": "585e4136170502686a41090dd19a61d3e5a94ca99dbf5e516e360844a8006511",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-003.bin",
+      "archive_path": "active-pilot/polynomial62-proposal/round-003.bin.gz",
+      "original_bytes": 484751,
+      "original_sha256": "9f4b79b4663f611affe86a4ba1e2f9a83bc5085e7c9da84ed584840e5db2d6a9",
+      "archive_bytes": 44418,
+      "archive_sha256": "947271dc50ffe1ea852c2608da0b18cdcaf1a2ed948caa2f250981321bccf7ce",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-003.json",
+      "archive_path": "active-pilot/polynomial62-proposal/round-003.json.gz",
+      "original_bytes": 1484697,
+      "original_sha256": "bf37c04601e516b4ef63720fd87a4c65347e646313ba5ef20c1960f9c6dbae82",
+      "archive_bytes": 55697,
+      "archive_sha256": "d9bf0b5a2a9989cc3e55dc1a2fea053e7dfab305bbea095104b11013628e5801",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-004.bin",
+      "archive_path": "active-pilot/polynomial62-proposal/round-004.bin.gz",
+      "original_bytes": 840773,
+      "original_sha256": "9bfd49e6cc345381e9801dec6b9836c76612e7006fe5c2ef8ea94fd244adacd5",
+      "archive_bytes": 77225,
+      "archive_sha256": "9b9719a8b9aed3f76cf7b607a3d1835823b1fbd8de4098e48bca6264bdf323e3",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-004.json",
+      "archive_path": "active-pilot/polynomial62-proposal/round-004.json.gz",
+      "original_bytes": 2143919,
+      "original_sha256": "b68c3dac55e0799a5dcf62c8921a58d6c1d46115c49229c0d7dd76ed922b09d0",
+      "archive_bytes": 90545,
+      "archive_sha256": "019a4f4b75c8d2cb5566eaf98ddc3fb4c82995e99926f0b0a148da7582e9b89e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-005.bin",
+      "archive_path": "active-pilot/polynomial62-proposal/round-005.bin.gz",
+      "original_bytes": 1280930,
+      "original_sha256": "69f97efae8003dc7d7053966ba261017f9e7bb8eea825c41b399ba7993a7dc94",
+      "archive_bytes": 118377,
+      "archive_sha256": "adc5969cfec2efa822281629c54d768b500f943089aa96e5e58160b704d2114a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-pilot/polynomial62-proposal/round-005.json",
+      "archive_path": "active-pilot/polynomial62-proposal/round-005.json.gz",
+      "original_bytes": 2614692,
+      "original_sha256": "dc7d67b90dba05d5745e828b9b2e97b080f11226716b668d6db759f3021a3507",
+      "archive_bytes": 109065,
+      "archive_sha256": "96a4a8287f7c11e3124bda820773c96be303173dd42943b472cab0c0f2959cd7",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-008.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-008.bin.gz",
+      "original_bytes": 2321401,
+      "original_sha256": "b60ad47de52f24161bb2aa486169fb6827b2b273fe09b393ce8182b207286720",
+      "archive_bytes": 219507,
+      "archive_sha256": "37a00d966053b91d096e1d80641850fe4d8257b29dddbf4d43aa1bfbd8b267cf",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-008.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-008.json.gz",
+      "original_bytes": 1483251,
+      "original_sha256": "6259d3c5c7349320b3854e084bbc6a69c27f05cb2ef5d12f981229b1121a9121",
+      "archive_bytes": 42888,
+      "archive_sha256": "887c4206930c87394576a66c1e64771a8472d298e2681d42c3c0cf223f973c73",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-009.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-009.bin.gz",
+      "original_bytes": 2528354,
+      "original_sha256": "54fb20868c8eea99b5b866bcff3b0b26c7c785d31402985686dff8dedd8acfcd",
+      "archive_bytes": 238073,
+      "archive_sha256": "c66380c54c3d67446b73e0328a64140952b4633a9c8d0f5d1d2a60ed8615da44",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-009.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-009.json.gz",
+      "original_bytes": 1203955,
+      "original_sha256": "cde5b8537eee671fd2ffb84033066badcc23cea08ea0d2971257bdd4c1b7b74d",
+      "archive_bytes": 50945,
+      "archive_sha256": "1a5b088619dc1f5b05ea76c9b1fd6d42b52a8bd44c1ad9921ba403ab77772e60",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-010.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-010.bin.gz",
+      "original_bytes": 2646991,
+      "original_sha256": "ad1508b67a0f25c2a3fa2973753e049513b3d1f99fb65458c5371a4f8180dec7",
+      "archive_bytes": 249300,
+      "archive_sha256": "24bc37796aed44a1050c066635f64d530cd0cfa839269a80dc6f2a68a6b641d1",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-010.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-010.json.gz",
+      "original_bytes": 926420,
+      "original_sha256": "2a4a97aaf4de13c618c23b9a5f61066373cbf13b7c7e61166620a6371c1274db",
+      "archive_bytes": 31332,
+      "archive_sha256": "16d683f5b15d52ebea269f0440f92c844cd83e75514d4ed81f1f0faf43a665b7",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-011.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-011.bin.gz",
+      "original_bytes": 2683380,
+      "original_sha256": "972985c40114d0f6b24f07bfb86a9537561d0a9374e014d56bc1be5af1bd7a95",
+      "archive_bytes": 253103,
+      "archive_sha256": "d0cdb446254b16e97943ecbac34d3cb5683775016492aa8610d376e6e5e2d94f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-011.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-011.json.gz",
+      "original_bytes": 637415,
+      "original_sha256": "e89acf1431a676572f6ac57ca47b52f60bd100a1e9ba4e9ecca86dd31b60ef75",
+      "archive_bytes": 23313,
+      "archive_sha256": "3d0641c7932e1996b40947df8cb9d1bb7a2b9150def319bc66957d60718d8122",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-012.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-012.bin.gz",
+      "original_bytes": 2701128,
+      "original_sha256": "f86503d5050fe64f6f1ea728cb1aee27f450d159adc8efe3d61349f7de10b923",
+      "archive_bytes": 254844,
+      "archive_sha256": "5d21cf029dde050a951a032be29923da3759b5d768edfcc00d48994824885ba0",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-012.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-012.json.gz",
+      "original_bytes": 537388,
+      "original_sha256": "b395cb4d02ccdf9e72b263bb35ca1593a2d0d17cc91d5c8f1f23d85f6fab500c",
+      "archive_bytes": 19749,
+      "archive_sha256": "9c9f56f609b969e1fb84d8fe46ca1a74fa5b7983235ea3ad481a24e74322b8ca",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-013.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-013.bin.gz",
+      "original_bytes": 2725804,
+      "original_sha256": "6d553775ae1cae52cf2d464a09a2a23d11e11e4976864e18f364e9e32c01b627",
+      "archive_bytes": 256731,
+      "archive_sha256": "012cd731babf659052259d9ba242ca11c896b9ff5072332a5da285be3b79e748",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-013.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-013.json.gz",
+      "original_bytes": 500446,
+      "original_sha256": "36247d85f68c765bb694296c64613069ec0e797ff7b546f6ed943dbffefcb559",
+      "archive_bytes": 18207,
+      "archive_sha256": "2037c0826efabd8ce3c4f43180b0c96130b4f059e2754f07a3c2fdc4b5c79c93",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-014.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-014.bin.gz",
+      "original_bytes": 2743623,
+      "original_sha256": "0e077d3caff63a60860aa7ba50cdf72b694cb84cf8c6b79b65ff33b26c678176",
+      "archive_bytes": 258070,
+      "archive_sha256": "04036f47192de68ad54bcff3dcf8a1860a81184892710defa71b46dd27581b1f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-014.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-014.json.gz",
+      "original_bytes": 483281,
+      "original_sha256": "30d5bc0cadf478eff3dbd1d621b43ef44bd8a3c15a9a4dae9cfb7e64684e484d",
+      "archive_bytes": 18061,
+      "archive_sha256": "0a9e1b4158539917d5eb341c01ce1abde51f3d1565e38b839f1d9cf1b9f3734e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-015.bin",
+      "archive_path": "active-resume/polynomial62-baseline/round-015.bin.gz",
+      "original_bytes": 2746839,
+      "original_sha256": "45a65bcdceed063a52f87be9925020f9b40398bcdcb108dad4b8715da00497aa",
+      "archive_bytes": 258343,
+      "archive_sha256": "2e29cfe46e80fcd6b44fd14008d2d50d56863010d922e306fa6c207a40fc0391",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-baseline/round-015.json",
+      "archive_path": "active-resume/polynomial62-baseline/round-015.json.gz",
+      "original_bytes": 469433,
+      "original_sha256": "80e1f139a76e50fb80a88871ee4457610d3ab195d077722afa97e6e36b47fda4",
+      "archive_bytes": 16811,
+      "archive_sha256": "16af598a05aab300be72e3f4e844c692ddf1311dc92fcab9202f4e30b0eec138",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-007.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-007.bin.gz",
+      "original_bytes": 1902167,
+      "original_sha256": "4e65aa04705952ed004c1b4ebd33b59dcfb44618016ce88b4e49a72cc39fbe4c",
+      "archive_bytes": 179203,
+      "archive_sha256": "792c78b597b5384876113de1c3dd067b77dad3e805826b615f0f9fb477c2117a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-007.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-007.json.gz",
+      "original_bytes": 2258116,
+      "original_sha256": "fcf24fab308af1f4fe37d498eca79b4b8bafe8bf01c59da04c2b046122d91045",
+      "archive_bytes": 80724,
+      "archive_sha256": "7b2653b2123ccb2599c4088148d09c32e9b6e0dbc14fe761858359a9dfd25899",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-008.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-008.bin.gz",
+      "original_bytes": 2047174,
+      "original_sha256": "4e8ef06a76ed346ee198479723964d082703fdadfc09b20968f81b90ec70aa2b",
+      "archive_bytes": 194811,
+      "archive_sha256": "6476e47ece223e5d0dab4e6d6398fa6f1811adefe9d3b8a64326021362bb7123",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-008.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-008.json.gz",
+      "original_bytes": 1595349,
+      "original_sha256": "0001079d6e3beadf2f36afd4bb0cf38964b125d6db7e0575dc7208b08b032fba",
+      "archive_bytes": 55214,
+      "archive_sha256": "9acfbdb6f27cae33c00303a0a64f81e9a06ed39e22728cfb9d37f73e50811abb",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-009.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-009.bin.gz",
+      "original_bytes": 2220856,
+      "original_sha256": "38730d0bce26123039534c37f8e9ad86865fc1e10c1748713eba5b5d5f78cfce",
+      "archive_bytes": 210971,
+      "archive_sha256": "63fc8622131e6f155fe2151a37e74a9f408ed15e9cab23ece44f1c4db1983d3e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-009.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-009.json.gz",
+      "original_bytes": 1214883,
+      "original_sha256": "eec934693e2b7ba8e95e2864d3ae34602a1811c76e06f7326acf1b2b719356d5",
+      "archive_bytes": 42595,
+      "archive_sha256": "0eadc3ef5abe306b276a53d2e6b3fbfd831a117d6595791f1e0f0df740ddc061",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-010.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-010.bin.gz",
+      "original_bytes": 2311704,
+      "original_sha256": "dff5b0af6ce1fdd0c108c8632405fc7e05df73a8bfc12c6d63d79d9f6e3033a4",
+      "archive_bytes": 220220,
+      "archive_sha256": "202ef864617425772eb6e557ed223291a2950f1df61b90ccc639e1c049ebb725",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-010.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-010.json.gz",
+      "original_bytes": 1024465,
+      "original_sha256": "b547127227c41658c59e949b53adebafb6ba9a0b69c22e011dc833d789155f18",
+      "archive_bytes": 35687,
+      "archive_sha256": "1298ade9dbb97815b93c115030998a61bb9389713ce0383da8e4168886e12ea5",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-011.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-011.bin.gz",
+      "original_bytes": 2373842,
+      "original_sha256": "b220c4fcddc1f6b59ee728a227c6ec5969fd0d41b6ccabdce6c65756a23fcb87",
+      "archive_bytes": 226619,
+      "archive_sha256": "b07f172672db448e9e3bd4fc2a101fd3e17358f596a44dbe435193cc33847f32",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-011.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-011.json.gz",
+      "original_bytes": 818004,
+      "original_sha256": "56cef51e5a0f0efa7000280043912bcc579aebdb0cbbcf118f513c10e80d98e2",
+      "archive_bytes": 29902,
+      "archive_sha256": "a7527226ed75cdb1fa025d9bf862e849bbdfc332b5b221b5ba799c60d6c5b333",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-012.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-012.bin.gz",
+      "original_bytes": 2395180,
+      "original_sha256": "5d61acf6a6bb25fb78eb81ff964aa5144ed8d953f7ab42a59fd4aba2105325c1",
+      "archive_bytes": 228834,
+      "archive_sha256": "ac6fa73cdff9102b6b3a7016939026afd2bcc0791d5a6343e0602646df2a2abf",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-012.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-012.json.gz",
+      "original_bytes": 580144,
+      "original_sha256": "ec579830b4e245a6a69c642107ffe35a3481c7fee16bfa3d0fa25d7087b1372e",
+      "archive_bytes": 21443,
+      "archive_sha256": "d47f52f8e56366ebfe8fbe59970332ddca5971b3b4802535009decee770ebd3d",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-013.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-013.bin.gz",
+      "original_bytes": 2407219,
+      "original_sha256": "7da90cdec2d5086b865775ac182889a100fd37577144a3f41e40f3428ce6baf8",
+      "archive_bytes": 229952,
+      "archive_sha256": "555598e5b7ada5b5320ab7ba5cdb34c8d3e283e8dfc27212c018999e9dfb5f1a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-013.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-013.json.gz",
+      "original_bytes": 475860,
+      "original_sha256": "0634ec4788360c7296c66414f99987d55e499e07b2a5324c571ed4b5c3ca0e99",
+      "archive_bytes": 17247,
+      "archive_sha256": "232bf7b4d8a2b54ea5e9d6ed0ac1fc1e80a5b3eb579c9f823bdc932fef88a211",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-014.bin",
+      "archive_path": "active-resume/polynomial62-proposal/round-014.bin.gz",
+      "original_bytes": 2407863,
+      "original_sha256": "072ef082b6199ac3ee2ef3686b65507cdab3c5dbc0983048f771806e71faf23e",
+      "archive_bytes": 230031,
+      "archive_sha256": "1e8de519217b4fa76a1dddf8f49dfec9a25c43ee0a1dfcce1c4948af0d89ff69",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "active-resume/polynomial62-proposal/round-014.json",
+      "archive_path": "active-resume/polynomial62-proposal/round-014.json.gz",
+      "original_bytes": 434094,
+      "original_sha256": "2e8474764254e330bfa215a843a95cb65c550fa5055d2a9b715bc74432eef9a7",
+      "archive_bytes": 15927,
+      "archive_sha256": "98b667530996f6fd9f4e2c8a08afdf320133c90c2ff57a0709007abc8065f089",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.json",
+      "archive_path": "baseline-original-19-points.json.gz",
+      "original_bytes": 541096,
+      "original_sha256": "275022f4e2611640816017a83c26e7805799787f26e1979d4ba62588b56ca155",
+      "archive_bytes": 8857,
+      "archive_sha256": "c4042120a2e9c5d18ac6e3d9482e29ed71962d66dfc171cee010803830ecb0c8",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-00.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 31457,
+      "original_sha256": "0392930b29f46a4ab3921c68e22499f6357c1b7fe10b3d61db336497a783cc2d",
+      "archive_bytes": 3442,
+      "archive_sha256": "c833409dc8191a1136769569d996d827e7df41f5a966c68ad3d34bce630db6a4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-01.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 31300,
+      "original_sha256": "dc693c9760b39172cc5d5317c99c6f50b5f57f29595d55792f479800205395c3",
+      "archive_bytes": 3443,
+      "archive_sha256": "a28dcb73ff19301e43292b51900919d4bcef15ee43d345715a6c5f4b95caabe4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-02.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 30149,
+      "original_sha256": "d4f88e42358dd6148a6c0d72891fee8a0278a4bed108a02560fe972da42afe8e",
+      "archive_bytes": 3337,
+      "archive_sha256": "cfd8fb78da97a961502e62e5c11a4d9dc7200efa643bce314657cdfb2bbb24e9",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-03.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 30149,
+      "original_sha256": "976890d2d883c73cf42a7a6f3346666918d34ab31c2020f1c04dd4fa5eda3b66",
+      "archive_bytes": 3329,
+      "archive_sha256": "3df353e32835cc95eae49ec9fd03a576eb2a54acdd500108535051844fa66bed",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-04.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 29473,
+      "original_sha256": "429dafefa9078fcaa72413a9d02dea97b00d38d8e6ec9e72b58fd75ff59aa2b5",
+      "archive_bytes": 3279,
+      "archive_sha256": "eb969be379e1da4ac53cbee8893d839d481dcf377c59fec05133a680ec9db5fb",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-05.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 34711,
+      "original_sha256": "b4ebae764a6494638fd9fe4058333f548f0280c592ba74e5ff22ddffc3e90ea3",
+      "archive_bytes": 3778,
+      "archive_sha256": "7191310f91a93fd24c9f23813c38d11e3163e731412da85cc914cd16e5e3a0fc",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-06.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 33361,
+      "original_sha256": "e45f42ed4f3a4c7caf9120381ef722e151a1bd42c3b8fdb6a16b6de15ede1bbe",
+      "archive_bytes": 3630,
+      "archive_sha256": "632b1ad7596de0865bb16c198d94a8be7406ce17bc69ae75443999cd8c0386df",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-07.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 30351,
+      "original_sha256": "a791ffec287b7c96b398d065841257ee8ae2c329a37c4af178f09eee85f53da6",
+      "archive_bytes": 3342,
+      "archive_sha256": "23f3567e24eab70aaab4f70d469e02037650447eebff88857d7a5c9b44e4e938",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-08.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 30363,
+      "original_sha256": "38fb627f286a4591216f91e23c03b98f0a68ea774365c5e79df763cd89208dc5",
+      "archive_bytes": 3348,
+      "archive_sha256": "8602860c91a2aa3c4b5edf9af715468e3c849abb8e346a08ba3819b11fee4b86",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-09.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 32323,
+      "original_sha256": "5099ac694132fd2893573fc00cec680235e8fd9eeb2efa61220b387ab7a0ffeb",
+      "archive_bytes": 3540,
+      "archive_sha256": "9f6e28830c9dc371b4d902367474d639497a7a2ac8b2fb71e81edd85948b9f84",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-10.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 32158,
+      "original_sha256": "9c826511840cd6b4dc2d72ed32f84dcfe8cfc5da7cadd841bdd0683fe263a3cf",
+      "archive_bytes": 3500,
+      "archive_sha256": "a02e913f2c44d88ca22807e01083975acaff8f2e0ffb2fe0ea0a25b118136eab",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-11.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 33514,
+      "original_sha256": "7093481c97d12548c989dd627bf8b4efcf60c7a66191814a08c712ceb271a294",
+      "archive_bytes": 3615,
+      "archive_sha256": "75f5db74336f57f90e0b4cfea68dc3881b7cd810564557ca58cdb7fb15ac0192",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-12.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 30788,
+      "original_sha256": "b7099c790dc549bb72f4237cb427913db76d4da81d2f0c3dec58932e6cfa3304",
+      "archive_bytes": 3418,
+      "archive_sha256": "92f183f81a6215110a57a46741a50edf91d0d57fd946c5ecfa2d6ca2cbee47c9",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-13.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 30290,
+      "original_sha256": "e24b98e632517262e0b90d7869d230242c76f37b374257c38dfce246c8a58a8c",
+      "archive_bytes": 3349,
+      "archive_sha256": "c3c307552793c75f1ec05b07363339073dd532832d921077afb1ea5dcc891aa5",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-14.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 33092,
+      "original_sha256": "2d1c8cbed42bb8291e2eaaef59212e9ee307d26bef791a856a41ea2fe18f272b",
+      "archive_bytes": 3582,
+      "archive_sha256": "ad113a36e424fbcfbbb8ae1d3f635d7354b9d33d8c088a5672d72d07509dccb4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-15.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 30745,
+      "original_sha256": "fe2cea79f49e2ddb2dd5c471c6f976e03dd88b3cd85a0c8127278ba0225d12fc",
+      "archive_bytes": 3380,
+      "archive_sha256": "d8a1c9046ac226cf20c1f679c72a689da8709d2d7735e8a74c295eea7d655337",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-16.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 30146,
+      "original_sha256": "5083c03ba2c1368e1e953c6482b36614f9be4d4128c3ce2e1736b10735fada5a",
+      "archive_bytes": 3349,
+      "archive_sha256": "faca7ccff544953ded63ca3b166a85d1fb42a73468b8aaaebd7ee8e5d50d5342",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-17.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 31027,
+      "original_sha256": "39679cc3869e7897c4da9962c112313c059a69728bfacf344cec56d7d87b0202",
+      "archive_bytes": 3405,
+      "archive_sha256": "1820c1d4c160a8b63d4fa2bdf306da9be9bb1fa139415312a452494ac6333c37",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-original-19-points.proofs/point-18.bin",
+      "archive_path": "baseline-original-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 30828,
+      "original_sha256": "1af65f6ad47d20e57e8bc4dac137bc7b3dc06f3dd5c1b9e837a9a6e696781e0f",
+      "archive_bytes": 3378,
+      "archive_sha256": "cf38b4df1a8625e4744c91550b07c12b6e0a8ef37eeafac58152e60a671e4f9e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.json",
+      "archive_path": "baseline-strongest62-19-points.json.gz",
+      "original_bytes": 586085,
+      "original_sha256": "219d67ffc7a81c27fa5a0a96e3337b69965cfc588aae8bff74b89607beecf3c0",
+      "archive_bytes": 11059,
+      "archive_sha256": "7ea28a5ba786aae0565f0792e5b61432ed0ab594f047566fdec049912d765908",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-00.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 34290,
+      "original_sha256": "a9f2684d9e3de1b16ad0b0b9ef8cd4acd1f19191c38b509a311a593e9ac01145",
+      "archive_bytes": 3769,
+      "archive_sha256": "22c4cabc8cc39ef465cb1d3ff171b9f1fa4f619f157dd843ad3b1ae4c47ae250",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-01.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 34290,
+      "original_sha256": "b781fab8317ea8b3aaee45b5adec24f064b3ef0966936fce734ac14ac5f3d3e7",
+      "archive_bytes": 3774,
+      "archive_sha256": "e6fe3e53a977a486dc2569c90dd86318230090a6e9a54da33f61d23ff8544171",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-02.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 34518,
+      "original_sha256": "2612f90530c50d5bee343889e2f62ed405dde7ca163561d69348776e663d4b54",
+      "archive_bytes": 3797,
+      "archive_sha256": "2a0d5c485dbd739df39794dd09ecf564c61b4392cb2c54318d8f1cf8c507462c",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-03.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 34290,
+      "original_sha256": "844bd76dfc2e355693e459e7608ee3e7df1ca2078ec94762c1c047bca92f5cfe",
+      "archive_bytes": 3777,
+      "archive_sha256": "8adf46f012f9394b94c5c77b9bd5070bea45dc43cf87f2084e46eedaf3e11a90",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-04.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 35360,
+      "original_sha256": "43c9d4714a3676544df333a3e0b1cb64ab9a12f0240790cc17c301eb69a9320b",
+      "archive_bytes": 3873,
+      "archive_sha256": "506ed7d9f831e3c026a91bd7146a4adf18c3032d695167335f732ef13beab6ec",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-05.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 39489,
+      "original_sha256": "9f6a9cbaebccac00b6d2125ba00d7e68b5cc9ae6cfcf7c67a4b2f5ca40ed50f7",
+      "archive_bytes": 4285,
+      "archive_sha256": "32037ffdbb265573110b2d963b8dd72b786a7a393acd5c7d3febdcd901d71c54",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-06.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 35080,
+      "original_sha256": "c9f26902ab369c0acad2f5170a1c57610922753051e06c00aa19c25296afd279",
+      "archive_bytes": 3837,
+      "archive_sha256": "b091e2f72f8d3f5b3969d5796a54a831a9f0acdda3bf927757e1b8c796bcf43f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-07.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 35106,
+      "original_sha256": "f6e7f9c92813e96a5770f20d0fe7bc2ee77d6103ee74c89f54b386834bba5400",
+      "archive_bytes": 3852,
+      "archive_sha256": "e5908fed841e3a83af9a96c95e267c3f64446ce5f2fa7b8783bfe7b6e39bbc21",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-08.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 34290,
+      "original_sha256": "6d50be0781043acc4372316b4872ad36fe412e10b4a14c5d35de400b28bd43fd",
+      "archive_bytes": 3779,
+      "archive_sha256": "e4697e50d7a0324c28d83e87442976721f11e04042a745002f036934a537f2ee",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-09.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 37101,
+      "original_sha256": "73644b2e33deae40269565fe13194cfe044be501779cfb231c9317d38e9ae142",
+      "archive_bytes": 4034,
+      "archive_sha256": "c55774ef7e55cb45f023c7bc1760fdd5fd0dc0b83a2a69403079a1a80f5e04a3",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-10.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 34570,
+      "original_sha256": "7880f4a56f48785b1521643e1608e7bd9e86bfd0af631473e5135ee65896e34d",
+      "archive_bytes": 3813,
+      "archive_sha256": "6cdcb41d028df4588e0dd08468cf4733e81918d98803368818e36984c111128e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-11.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 38292,
+      "original_sha256": "d2f6771230f46eff1efd2444f91ea2bbba46413dca7daee0d7da4e5884bf8c1a",
+      "archive_bytes": 4121,
+      "archive_sha256": "a99edd97cd31dbdb1a324ebb96ac6e0022d34f5ce3a38b4369462271ada670bc",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-12.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 35566,
+      "original_sha256": "a8bed88f9c2c615ccfee294ca46f81704ea61e8d665c2acf7b3378a9b4ebf152",
+      "archive_bytes": 3910,
+      "archive_sha256": "38996e1abd66810e7c4198e00a81cef282b65f64ce8f2c26e44831e75df20f06",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-13.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 34518,
+      "original_sha256": "8d8a7cc15f85405f3b6783336b0bb4760ad8a02c18e7bf94c08b3393205da9cc",
+      "archive_bytes": 3808,
+      "archive_sha256": "36ce9c5d896012d43e1306283383607192ef12fed2550d5dd6debd89e5b4f30e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-14.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 37870,
+      "original_sha256": "9a3d74d4b2f37b7934cdf3a5dd493c0f09b62ebd42c577269207708e26c22753",
+      "archive_bytes": 4073,
+      "archive_sha256": "66ba0471d3ad34e872a1246055311165c3857a60cf50d0a56330517395699bcf",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-15.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 35523,
+      "original_sha256": "233f76db7a600573d179dc37698f4e114c63c9198763ec8310c8b36a92e1b4a1",
+      "archive_bytes": 3874,
+      "archive_sha256": "0076b5e8e42f7af9103f333362101d4809cf786e6d89901e8f19dca0bc8d4863",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-16.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 34329,
+      "original_sha256": "ae8dabd7e6353347671063771548f7b4ca34af66e4a01abc8f2aefec79426147",
+      "archive_bytes": 3784,
+      "archive_sha256": "475f905749841d71d55958980ce93860e2c28c527602164a591f9bb055f73c94",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-17.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 35805,
+      "original_sha256": "695f24c610fb5a2822149ff756e5c685c51237d0afa34f99211779e164dc21c1",
+      "archive_bytes": 3901,
+      "archive_sha256": "5d0370aea0ae2a5ea0100a19ea61373126deeaf9e8b4d57578d9f5884e33891d",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "baseline-strongest62-19-points.proofs/point-18.bin",
+      "archive_path": "baseline-strongest62-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 35606,
+      "original_sha256": "89a8e5e4d54275d21916015c3eeb57dff2a2d50a0104b3c697ee05089a68e185",
+      "archive_bytes": 3877,
+      "archive_sha256": "5ba49647e3d1594c19c65f0315b7af550559758341532054b85bbc8b37da8a44",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.json",
+      "archive_path": "proposal-original-19-points.json.gz",
+      "original_bytes": 573236,
+      "original_sha256": "e6ce2e8261b221d1babc914d2882ed7c9598842271d919298708c04ab95425fe",
+      "archive_bytes": 11822,
+      "archive_sha256": "78af1769f9679e270e9f37077afe6f0ad68db209746467ba7b1aebe8ded8c42e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-00.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 31493,
+      "original_sha256": "3d640fe6277331fc8c1da1d52800d9af098bf2ad1e210d77bd1cff6d7d64ea80",
+      "archive_bytes": 3461,
+      "archive_sha256": "9420a20aeb80652fb35788ad63f59d96abe2faf5ba900fc8f1f2bef3b0b26d57",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-01.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 31336,
+      "original_sha256": "992a0e4ffe2b9785e5c5956fbe0fcf63ac9c0311e39ea600e0c0f31441cef3b0",
+      "archive_bytes": 3458,
+      "archive_sha256": "95c2bdf737c3dd96f71d37db05887a5b4c920cbe23150463267af85dc94b3f60",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-02.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 30185,
+      "original_sha256": "7fa2c76a4a8e36a11b218d586c178501202969ca6b9fe08c109e07d89abb0540",
+      "archive_bytes": 3358,
+      "archive_sha256": "d15e7dfad80aea635aedc5e875ff29a6054394575fa225009ffae0e47413f061",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-03.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 30185,
+      "original_sha256": "5e5e8660b8113b8863b58dce63f3d90dc7cb27cee62c541ade2c288e65f3c48c",
+      "archive_bytes": 3351,
+      "archive_sha256": "8935ee9634a21dcb72748d41e6d4ff1d4e64504091528ad340ad72231b473ab1",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-04.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 29509,
+      "original_sha256": "4cfbff901fb1036d91918ef1efd347d547a3093bbf6eb93d750128e1df4714b3",
+      "archive_bytes": 3298,
+      "archive_sha256": "30fb7f36d2ee6b168b83343c40e77a9d8fc056dd097c6074443cf47f7c702e11",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-05.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 34747,
+      "original_sha256": "79b402b3bdc1720d4cbf7cc99a2c028f1e067d5bca665d3ea159a2d36679987f",
+      "archive_bytes": 3804,
+      "archive_sha256": "dbd3ace5fcf91850d78a834383eab5b596bf0f61f16f514b3168ef273fa592a2",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-06.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 33397,
+      "original_sha256": "bf96892f836c6819220f26789e16b4eed17168f8a2d42530bf163b006e61cbf0",
+      "archive_bytes": 3649,
+      "archive_sha256": "db5a694d031567ee0c45300e1d2db4b18f0f25530026e3cabfcebf21aca62a4a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-07.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 30387,
+      "original_sha256": "c8c5d19319d42d0195a13b9500c65db22e7a424b37d567e04134ebc8953493e6",
+      "archive_bytes": 3363,
+      "archive_sha256": "663c676b1524f705e809f474e3231d747c036a6e59eadc5072fac79711c34ab8",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-08.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 30399,
+      "original_sha256": "f27c07e7ebbd6a4d62ce33c5d50c1fc18226473ecac4cbb9441200b845501bf3",
+      "archive_bytes": 3369,
+      "archive_sha256": "9c229a2ef1782a355e10ceb02d440ade1446475192a19c59afbecedda9a9a02f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-09.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 32359,
+      "original_sha256": "f08e93577ef185a27049b90bac96ba44fb295b152525a863d557723c0f5e1913",
+      "archive_bytes": 3560,
+      "archive_sha256": "db1d7f698464341a9f3ccad4ca1d4bb68a1732bc3ccdef1147557ec90f4a0fcf",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-10.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 32194,
+      "original_sha256": "f70826841ea785bff16981a78c70b2830bd66103ba57da891d4c550047d4caaa",
+      "archive_bytes": 3520,
+      "archive_sha256": "5bba888bb7c205d2865f1915d12ae97710777b997a4482a3e972f701c4b9bf1f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-11.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 33550,
+      "original_sha256": "de51d967dde356a613ae07113b87f284d9eb37d8f0d4756c03a6628c7c7490b8",
+      "archive_bytes": 3633,
+      "archive_sha256": "8b296d35d29bfd6d0a7334e3963fbaa6d80e524512bb3f8db4085ec7b0ab5e00",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-12.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 30312,
+      "original_sha256": "bc79ff0025f6e6359d9b7642a876772e86e5144af02a9bed6564e86352e3f50b",
+      "archive_bytes": 3368,
+      "archive_sha256": "799956192660094cb72a11d28b67c0d5ff647ad627ccc43e99689276c4116d4d",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-13.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 30326,
+      "original_sha256": "4b6fa32005177657a273cddad1ea5a0fab68b816c95816193a733384f9aadb55",
+      "archive_bytes": 3367,
+      "archive_sha256": "ea734e296cbd92ba9dd592ad71dbf592226c1908fe1307f0848373fdf6d5873c",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-14.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 33128,
+      "original_sha256": "9a42723e19a3d60108901d4c5b79bb0d82bc3c059464d2215dc5913de1011f36",
+      "archive_bytes": 3601,
+      "archive_sha256": "05e5fc1a3104abe4913e0494c57cbb666d5f72f43b123abc626e5ee1d43c34ff",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-15.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 30781,
+      "original_sha256": "6c0664690532dfc6858b6de9dcfbcb9a3fe27fb19729ab0856dd653e1e955ae7",
+      "archive_bytes": 3397,
+      "archive_sha256": "72df74637e8fea2780bbf759bf884128cf70943bf3d02e1666b060b0da2ea23e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-16.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 29958,
+      "original_sha256": "5c8b8d5916f480e91ea42462b164d7bb1124abd2089115172e7912c596d54ba6",
+      "archive_bytes": 3336,
+      "archive_sha256": "30fc2639a0c4f1214642769264d7fb18a582711e792af6421409854381e9a4c4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-17.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 31063,
+      "original_sha256": "94670bd95cc49b548ebaa7b09485fac19e564d3da9455163922e1e8e669b6928",
+      "archive_bytes": 3422,
+      "archive_sha256": "d9f3e39e698d3e92184fc98d9e4ce26203cc07ed80c5d29c8d1a8f5c2e7952cf",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-original-19-points.proofs/point-18.bin",
+      "archive_path": "proposal-original-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 30864,
+      "original_sha256": "da7607186fd7f06d659c20bc52ca3617ef2388123ac70558b75a2436fca4d54c",
+      "archive_bytes": 3397,
+      "archive_sha256": "67382efa137327cddf6b038104fc4b1a3b12da1ca0c3716929fd40073270f9e2",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.json",
+      "archive_path": "proposal-strongest62-19-points.json.gz",
+      "original_bytes": 618493,
+      "original_sha256": "9329dd864a31864c3205ae9d9f760188af6201f7bbc33528709cfa4254ee6178",
+      "archive_bytes": 14000,
+      "archive_sha256": "e31135fe7299f603bd8544b36420ab4eed493c88a56e706ed6d6ea27754fd701",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-00.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 34326,
+      "original_sha256": "d2210a02e2f041d7b6b5e8381a8bc680e506d7b05cd62fdb7a46412b60835015",
+      "archive_bytes": 3788,
+      "archive_sha256": "829732d51ac6d181f9e32f8b9db3eba81f51e314e7e3143fba285fe91fe7fe66",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-01.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 34326,
+      "original_sha256": "f4766b54a6fbb4b98b2a7ae03e576d317024eea872cef4b251db5cc33f4117a9",
+      "archive_bytes": 3793,
+      "archive_sha256": "53d55133c6fd568dcd1195dc7f32fe2fa631bf0966cd3986dfbf4ad2e986fb7c",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-02.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 34554,
+      "original_sha256": "9ca6c4b0b9628726db1415a6f8cac0269f5ecd351e8b80ec0af72eddd8bcd64b",
+      "archive_bytes": 3816,
+      "archive_sha256": "106dda5f94b14ef38613c79722b133b1838734cbc153fda1041390f3c448d30a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-03.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 34326,
+      "original_sha256": "b57d4fb4863cec19b947d75c6fde53e6735f966fcba0648a2d12811fa836f8ad",
+      "archive_bytes": 3796,
+      "archive_sha256": "02f5afc61bb9ed0cd476b1c73d7473f79bd4eaf881450b571e5e9ad1b0355d1a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-04.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 34287,
+      "original_sha256": "cc530f983b5fc3601dc41d17042c92197fdb2295fcfadd3cbb355f1cce842bbe",
+      "archive_bytes": 3799,
+      "archive_sha256": "d484d726b5ba8d214f9125f6ab1e465912cdda420dc8cc54bcf1b97f1fb29c18",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-05.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 39525,
+      "original_sha256": "5247ee2d091c60f880270d2e2a8cacd4db34f68e88e7f23eb8655348dac264e5",
+      "archive_bytes": 4304,
+      "archive_sha256": "a6fa1bfb0425fd97877001c7bf513f7323fc36121e9cd208bf630e25516c5554",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-06.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 35116,
+      "original_sha256": "b6f0fabdf89b244e885033d4edef68be71cf9232ed97d8ad0200d2f68760403c",
+      "archive_bytes": 3855,
+      "archive_sha256": "2868700756ef1bf969041071f17d9ee75d2558aa1ae72ee9c95097fcebdd3505",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-07.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 35142,
+      "original_sha256": "772bf5b64362ee792b18b63daa5118d0685bc7dd47cd41f3aed89051ef64b079",
+      "archive_bytes": 3871,
+      "archive_sha256": "b14714bbd3d850998aadaacd2d02a8d9671889e278016740777642c2e553db43",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-08.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 34326,
+      "original_sha256": "4188abb00828cb175a649a4e4aa84f72428f098166d4771f2ba87cb57153645e",
+      "archive_bytes": 3799,
+      "archive_sha256": "fca6e8069246c38082e830c731b7d0e4dde717c179f044c88473c5035b52df72",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-09.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 37137,
+      "original_sha256": "fd422de1865c2e876645b5534bd05c89c54ea4797d4392c7bc4a6de873bfe96c",
+      "archive_bytes": 4052,
+      "archive_sha256": "aef8ad2060d39a8a39418621157071300b94a2f690de437a397461ca58120f4d",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-10.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 34606,
+      "original_sha256": "95280ee26d0378dfe75d88a6c02454d896d9f9848f38064e3887b1994c5b5af1",
+      "archive_bytes": 3830,
+      "archive_sha256": "1ffe78a653c926ec5bcc8b4845f1ea17b71b25b28babef5323f6bc96669a1d35",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-11.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 38328,
+      "original_sha256": "be18b383de6871332396aa0eb8a3c9cb4b28a6c8104444eea36bbc82aab20357",
+      "archive_bytes": 4139,
+      "archive_sha256": "8b4246b9a9c6b0ddcf29de7d852279eac3bc5d0bfaf7912e1c98cdc0758d9b59",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-12.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 35090,
+      "original_sha256": "2f12e85cd83a0b11895723d0655a43e4e5f426f4cb78e326b612997d5385c916",
+      "archive_bytes": 3864,
+      "archive_sha256": "737081f595f98eda0803d1c6168cf336b871b72af977780f9ce4e8339a486d1a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-13.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 34554,
+      "original_sha256": "737f1cf808afb42c33ae92da30b59aaba31bb447bcd26d88a67dc9444813b1d5",
+      "archive_bytes": 3827,
+      "archive_sha256": "e644aa0208f53007acb7b77bb22d7ba1256548a32e8ee2d42e81c2a1922c729d",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-14.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 37906,
+      "original_sha256": "5e6b96a7526b5ab32e9b4d753e71a752aa176afb6d1cd8f346c13da0cd672b32",
+      "archive_bytes": 4091,
+      "archive_sha256": "ec6cc34d591561fdf02eef4e2341ed6a7ef5cba185344fae5f57cba699053ee9",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-15.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 35559,
+      "original_sha256": "49c96c8f498422728cb84285646f66ce8db7d56733298ce2d37762874199b4c6",
+      "archive_bytes": 3894,
+      "archive_sha256": "8ec9dc9683e5e36efbbfb64ab3b22d06dac83e1ecabd7ecad63eb09da5de6fcf",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-16.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 34365,
+      "original_sha256": "f99e70cb42a08d076ba67d3d085e7a8116f19db5b2570bc583ba74411f9caa0e",
+      "archive_bytes": 3804,
+      "archive_sha256": "d70cde5e33a36d576d2ff945e99cf4160d3e485b0fbab5ab77d9d03ee175087d",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-17.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 35841,
+      "original_sha256": "b1604e53106e06a3239e1ca3062bf17a08493dfeab4ce022121d11b079c94191",
+      "archive_bytes": 3922,
+      "archive_sha256": "093b0e22f9a1b77e5ae19bbe986406e367034ab0f664844c6d46f924ede7d00e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "proposal-strongest62-19-points.proofs/point-18.bin",
+      "archive_path": "proposal-strongest62-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 35642,
+      "original_sha256": "9b44ab9d4a4866c93c7c220f02d0e5fffa6c2165d9a0b2174f9c110cb4a86ff4",
+      "archive_bytes": 3896,
+      "archive_sha256": "4148776d36d1c10f1ed8f1b63ca161ec916f4e7f635f18745f7872f7b9311f1a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.json",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.json.gz",
+      "original_bytes": 399319,
+      "original_sha256": "6f5c5d3b5c9cd322e9334077045edb5bdbb713006ce54b90f19cbe9bdccaefd1",
+      "archive_bytes": 8022,
+      "archive_sha256": "82811a98e96d81ffb8abdc1da2f35f0f8ab0e5880ffb4861e7a8a349098a0220",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-00.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 23949,
+      "original_sha256": "d4c9f560fd44f5b0140e1b427166e197742e1e1e85917603ad880e63b922b36c",
+      "archive_bytes": 2993,
+      "archive_sha256": "e6689e3a9bde573c53bdf332be3df3bbc2d4a87debaad8ab0a0dc8979a522503",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-01.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 23792,
+      "original_sha256": "c3560e90289c055623eba5a45d9038833a54a6189f4b221823c35fd4df18cfef",
+      "archive_bytes": 2999,
+      "archive_sha256": "faaffd4b366a5d76b34f0a5e0a05bb9b9a5f194e77719e58211ae7428945d715",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-02.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 22758,
+      "original_sha256": "7b828e36669d94194bd2ef8e794b001590c7dcb537281a2ad92241572b425166",
+      "archive_bytes": 2905,
+      "archive_sha256": "43c50d83b2b9142b25063f3359a2e954282e5399cb39f058f25bcea1ba465694",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-03.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 22758,
+      "original_sha256": "0cf6fde8e0f7a2d20aebe8025e3f1864a16ae2e665d5c1cc023481bb06f02e23",
+      "archive_bytes": 2900,
+      "archive_sha256": "cf14314d4a838a14f8a9372bc710f04c6fe92d8ad0c67c7f70ac34d57798cc11",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-04.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 22082,
+      "original_sha256": "3ceb3e8b5e5d5b43c6a01fbe44cbd4d4355608bf08c2452f3b23bf257c2cca1a",
+      "archive_bytes": 2843,
+      "archive_sha256": "a883fcf7d3291729ac5938ce3c7c69ad6adfc080b314a6322eb1d15d30e032d8",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-05.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 30954,
+      "original_sha256": "c9e03cdcb3632182312a76b8059d429ef8ebfe90ef7cf6d79e1d925a48583ff7",
+      "archive_bytes": 3592,
+      "archive_sha256": "b9af9f1f28de6b93069e1bd1dd21aaf03f25fc1c0085c2a92f42548d42257bf6",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-06.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 25853,
+      "original_sha256": "d43f9b871c5cfbc96ce31a9e4e18b4c2ea2d13087772cb8b24525f84034f7c98",
+      "archive_bytes": 3176,
+      "archive_sha256": "cb61079ee5ef925d87b42caaae8d4a1569489a0db8cf4b2a62a80d017e47f69f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-07.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 22960,
+      "original_sha256": "f33f7bebc1b06bf9ba17aaf4c5b6cbc03f0a606757a606788696c6ace3413b9e",
+      "archive_bytes": 2911,
+      "archive_sha256": "604b979919f71b9505bfd18ea8cfe9f3b929f174dda0b1a1d3c80fc59639bb8f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-08.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 22972,
+      "original_sha256": "c0a731dad94851d1c8597ca4f8ee8af2aa2c183807813f0149d2da44b7923f65",
+      "archive_bytes": 2916,
+      "archive_sha256": "57efc7648ce6a963bff4ea1cc72f06e3654fa692df4e48e944ade5929791cbac",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-09.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 24815,
+      "original_sha256": "4d5b98896f867705f4f8b3917c3722cbe0b74cfe9937557b96fc0dd155af7207",
+      "archive_bytes": 3089,
+      "archive_sha256": "229b70722b745bc13f02be5dcd43a98ab060b178dd626e0376abc0054de55d76",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-10.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 24767,
+      "original_sha256": "117ca2439cad8074d41c1f1e1dfd36f0400a3245e3d6717037021de3a8544fb9",
+      "archive_bytes": 3058,
+      "archive_sha256": "4be3aff93189de01914d9841eb4d28ff5dd4b8af081915e0f849ac923183b637",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-11.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 26006,
+      "original_sha256": "ebefea21930d48565e7d8bf854a5443972d5eaa4733b486d12d75eab1ae352ab",
+      "archive_bytes": 3156,
+      "archive_sha256": "7cde724b1bc7ac0f442c0b3f3c07f6055fcb512eabcd006adb2314c439318e96",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-12.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 22885,
+      "original_sha256": "3ea50ce91ed26b109236958fbe2968e17063553e2170f80d6a890bd3923f59ed",
+      "archive_bytes": 2916,
+      "archive_sha256": "63b69f4a52701b22414fc2012f711786ab2557a4a660868e376ed13c8bba1c85",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-13.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 22899,
+      "original_sha256": "450a6672e201196fb1068ef39a559851d2852976202fee0dbab826ef98d63bc6",
+      "archive_bytes": 2913,
+      "archive_sha256": "687c366aa14b80e71fd28e722eb111ebcfaee6e2f1c9eb6924a0b61556acef36",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-14.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 25701,
+      "original_sha256": "164e9a7dfdd24de0eebdb0087146a9c38ef25eca1fa5710f2bf932293127b0c2",
+      "archive_bytes": 3143,
+      "archive_sha256": "d3e375e2f6f065a5468e5d717ef0cf8a7765f87868cdf2be08dd49900d977570",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-15.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 23354,
+      "original_sha256": "d8ea81e95e5c0e644961f8364d80fcc83e2c2757c5d78eafcc9404b80b884d39",
+      "archive_bytes": 2940,
+      "archive_sha256": "f9150838646a9d4b460099df0ca3b3158c04baadd55977a95205ca24529ce8f5",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-16.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 22755,
+      "original_sha256": "7a624fa5dbcaf5c3a5f12944c36f5a7f1addfac58e228f57550714cfff5f8f60",
+      "archive_bytes": 2919,
+      "archive_sha256": "a99433d739dcaf4d507311202acd635e1a0c666f2aa6f0f4ca4735cb1c1f422b",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-17.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 23636,
+      "original_sha256": "07d0ec2be3616cdac61f84e6adca5835783caa5fe56cb47490befdc0ef70bd1c",
+      "archive_bytes": 2966,
+      "archive_sha256": "f04b54a554861ac795b2986768ed44a33bfb54ddccbd4e7fec487bc4ee2e7df0",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-18.bin",
+      "archive_path": "role-subset-controls/baseline-cut-nonincreasing-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 23437,
+      "original_sha256": "39f139ed92d882647ad4bbce0a21d51a5434b8519f1e3da937ad3de0e2d25fda",
+      "archive_bytes": 2941,
+      "archive_sha256": "8218d7588bdcfd4a901ba465762ae04562957f8b23d5b50521e27007330fe594",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.json",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.json.gz",
+      "original_bytes": 398763,
+      "original_sha256": "bb699025d447352aa87961dcd33dbbb2ec6013a543d2d35dcc13f33c3c138d81",
+      "archive_bytes": 8023,
+      "archive_sha256": "948af66355f16b711602421de1f6423a2791108aeaceed7ed23ba97583fa71d1",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-00.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 23556,
+      "original_sha256": "3f9556c33fb607703914eabbd2c42eeb9683f577b9a87c073071bfd1fa214b56",
+      "archive_bytes": 2937,
+      "archive_sha256": "5ea1d290d73579ba145dd99f0bdbe091489207a6df09bbefb065505859e4b894",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-01.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 23500,
+      "original_sha256": "576ac2d4fed34c7c2a51f9f0b533e8bb8f5eac0b2d28b53bf3f6fedb3060ac59",
+      "archive_bytes": 2943,
+      "archive_sha256": "58fc7e8a526634a06ad08bde27767a38e896a61dd15e94f5efaabefea0263e5a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-02.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 22567,
+      "original_sha256": "7498075fcb1a1d76584011c11c47f36b0ffd572e5835aa049d4e14cc5a894a12",
+      "archive_bytes": 2856,
+      "archive_sha256": "9b6c65c4bf449db071ad2daeb0de64190061cdd6e6615e61a7ec13c7f639aea7",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-03.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 22567,
+      "original_sha256": "98ac31a1fc12c7d625b155adb50e368cd5b58a7649551b2af7e70a62da8aafb9",
+      "archive_bytes": 2849,
+      "archive_sha256": "0b710637ce28c480ddc188ee45d7c4cc79534f3693131065b83151c8cc315158",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-04.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 23068,
+      "original_sha256": "2ee72fc0abef823c27cbd738ace08c04126cf4afcc460d0b33c1386d4d84c882",
+      "archive_bytes": 2929,
+      "archive_sha256": "c97c15f3036fe6392907e4ec964ed2f69518cb093820a8fb33a5dd4b63e02de4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-05.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 30561,
+      "original_sha256": "f3fe02d9f106a4f7a2c8b5203b049ce169c26cfb19880e8d8d4c14750d6a5993",
+      "archive_bytes": 3539,
+      "archive_sha256": "2dfeaa9a959c2e08302ee47afe1ba3b735365cf54fba3eec3f46498aff04207e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-06.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 25561,
+      "original_sha256": "3d38b9742bdd93c1012beb5885f97ee2b61089330d8bc04874ea54261196e13e",
+      "archive_bytes": 3126,
+      "archive_sha256": "70f143de255184cb4f1163ea97dab3d2a1db46b1197617cb2280420b12f9a273",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-07.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 22668,
+      "original_sha256": "6187d9ebd0e32a5550e284b6e3b6935297241138d21783d489dca2851549ac24",
+      "archive_bytes": 2864,
+      "archive_sha256": "445d28f27528b948041fc026572f507d078f76ef3240b0245a96d6a0f73f5b13",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-08.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 22579,
+      "original_sha256": "5977c5a92d05bf69ef478357274122724e265a00356fd5e4e055ba31ed074b74",
+      "archive_bytes": 2863,
+      "archive_sha256": "af6f2e98cd7c9b30492e35db4476e4218f67f4e430981a5bc5e58598d9c2c2b9",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-09.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 24422,
+      "original_sha256": "093820eecce815729aeb5ac213f49221261f7496d5ff35ea90f2e5868ac6a460",
+      "archive_bytes": 3037,
+      "archive_sha256": "b90b10df64421075a84a40054a174181f2f177dc6d37f06d07bf3f20a20269dd",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-10.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 24374,
+      "original_sha256": "bce73e25ceccac6b5f6b2fc3bce0f819167f8cc2c2e70a10400472767dae4351",
+      "archive_bytes": 3005,
+      "archive_sha256": "1365c67fa93082f6549656ebc1f93b86ca613f363bc19ea1e45e70df9d98dd7a",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-11.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 25613,
+      "original_sha256": "d8fc763d781ca494f3c3e96b795606544038c07f6780586378bc0c5f6d7a7901",
+      "archive_bytes": 3103,
+      "archive_sha256": "01080c27a8589b55446d8a0e48ebf0bfdf5c1340fface435814052a7e5703e01",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-12.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 22694,
+      "original_sha256": "5aead180bcaeed3f7b85b25013df07502f391c9804ab6df8ff963e15f0f23709",
+      "archive_bytes": 2870,
+      "archive_sha256": "04a6341c104bd9ba3acbb82d14c2e84e7759c442c68ccd41e49e4f9a773efb78",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-13.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 22506,
+      "original_sha256": "b5be01d3acb7a2e8f11b0a14d3e7a7a4f939fef975d8a36d656554f17d5acc0d",
+      "archive_bytes": 2862,
+      "archive_sha256": "275559be1ef99a91255c1732778f65b3b9ed9582184f853b3a9cfc54eaaf1adf",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-14.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 25308,
+      "original_sha256": "4fc000549091d8819c43c2e84cbe5b5dc898ad6653040050fe5ca5fd2cb14364",
+      "archive_bytes": 3080,
+      "archive_sha256": "34a167878ea79b9078259049d91aab03cb4dbfedbd0044ceeace5059c1b54bb7",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-15.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 22961,
+      "original_sha256": "5c8308809850474e00497b3d35be13782dac6bc47c540e16024ec98b889fa1a7",
+      "archive_bytes": 2891,
+      "archive_sha256": "a47b2403f48733a633723437dc0bfcbdb1ce6fb6f2d26484cb43a076bcc028e2",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-16.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 22411,
+      "original_sha256": "19554ecae079d4a9cf5ae8d5c1b229ea9d322de940dc4618e7cf3bfa95178c8b",
+      "archive_bytes": 2859,
+      "archive_sha256": "7722dc28e3469612e5819249d858741863a9abd7da67abae1d77ef4335fb2286",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-17.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 23243,
+      "original_sha256": "810fc6b9078a249e70d03768f6ef542f8db906ff3a34e0fdf679a9f1b05612ae",
+      "archive_bytes": 2915,
+      "archive_sha256": "2e98ed363db4215a1b833a9c110f9e1917b00cf2964d2ae2f6fae17d0846b032",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-18.bin",
+      "archive_path": "role-subset-controls/baseline-index-dependent-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 23044,
+      "original_sha256": "77e5a6abdd43b98cf53aa1d2916008df833558963b2d992e5a9b2a6b905f3585",
+      "archive_bytes": 2890,
+      "archive_sha256": "205535f8bf2198b8ad5cacee3c81cb4ca43e57b2227f38ccfc626d4f48dd8a15",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.json",
+      "archive_path": "role-subset-controls/baseline-original-19-points.json.gz",
+      "original_bytes": 553387,
+      "original_sha256": "67123298725c6e8923fcab15bbf64f94ca567906e14f28164e5a87ae767ad264",
+      "archive_bytes": 9589,
+      "archive_sha256": "db026300a0d52610d2c0d61b2ec45c80943bf657a3075970f82e0fe3985be336",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-00.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 31457,
+      "original_sha256": "0392930b29f46a4ab3921c68e22499f6357c1b7fe10b3d61db336497a783cc2d",
+      "archive_bytes": 3442,
+      "archive_sha256": "c833409dc8191a1136769569d996d827e7df41f5a966c68ad3d34bce630db6a4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-01.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 31300,
+      "original_sha256": "dc693c9760b39172cc5d5317c99c6f50b5f57f29595d55792f479800205395c3",
+      "archive_bytes": 3443,
+      "archive_sha256": "a28dcb73ff19301e43292b51900919d4bcef15ee43d345715a6c5f4b95caabe4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-02.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 30149,
+      "original_sha256": "d4f88e42358dd6148a6c0d72891fee8a0278a4bed108a02560fe972da42afe8e",
+      "archive_bytes": 3337,
+      "archive_sha256": "cfd8fb78da97a961502e62e5c11a4d9dc7200efa643bce314657cdfb2bbb24e9",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-03.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 30149,
+      "original_sha256": "976890d2d883c73cf42a7a6f3346666918d34ab31c2020f1c04dd4fa5eda3b66",
+      "archive_bytes": 3329,
+      "archive_sha256": "3df353e32835cc95eae49ec9fd03a576eb2a54acdd500108535051844fa66bed",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-04.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 29473,
+      "original_sha256": "429dafefa9078fcaa72413a9d02dea97b00d38d8e6ec9e72b58fd75ff59aa2b5",
+      "archive_bytes": 3279,
+      "archive_sha256": "eb969be379e1da4ac53cbee8893d839d481dcf377c59fec05133a680ec9db5fb",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-05.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 34711,
+      "original_sha256": "b4ebae764a6494638fd9fe4058333f548f0280c592ba74e5ff22ddffc3e90ea3",
+      "archive_bytes": 3778,
+      "archive_sha256": "7191310f91a93fd24c9f23813c38d11e3163e731412da85cc914cd16e5e3a0fc",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-06.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 33361,
+      "original_sha256": "e45f42ed4f3a4c7caf9120381ef722e151a1bd42c3b8fdb6a16b6de15ede1bbe",
+      "archive_bytes": 3630,
+      "archive_sha256": "632b1ad7596de0865bb16c198d94a8be7406ce17bc69ae75443999cd8c0386df",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-07.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 30351,
+      "original_sha256": "a791ffec287b7c96b398d065841257ee8ae2c329a37c4af178f09eee85f53da6",
+      "archive_bytes": 3342,
+      "archive_sha256": "23f3567e24eab70aaab4f70d469e02037650447eebff88857d7a5c9b44e4e938",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-08.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 30363,
+      "original_sha256": "38fb627f286a4591216f91e23c03b98f0a68ea774365c5e79df763cd89208dc5",
+      "archive_bytes": 3348,
+      "archive_sha256": "8602860c91a2aa3c4b5edf9af715468e3c849abb8e346a08ba3819b11fee4b86",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-09.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 32323,
+      "original_sha256": "5099ac694132fd2893573fc00cec680235e8fd9eeb2efa61220b387ab7a0ffeb",
+      "archive_bytes": 3540,
+      "archive_sha256": "9f6e28830c9dc371b4d902367474d639497a7a2ac8b2fb71e81edd85948b9f84",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-10.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 32158,
+      "original_sha256": "9c826511840cd6b4dc2d72ed32f84dcfe8cfc5da7cadd841bdd0683fe263a3cf",
+      "archive_bytes": 3500,
+      "archive_sha256": "a02e913f2c44d88ca22807e01083975acaff8f2e0ffb2fe0ea0a25b118136eab",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-11.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 33514,
+      "original_sha256": "7093481c97d12548c989dd627bf8b4efcf60c7a66191814a08c712ceb271a294",
+      "archive_bytes": 3615,
+      "archive_sha256": "75f5db74336f57f90e0b4cfea68dc3881b7cd810564557ca58cdb7fb15ac0192",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-12.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 30788,
+      "original_sha256": "b7099c790dc549bb72f4237cb427913db76d4da81d2f0c3dec58932e6cfa3304",
+      "archive_bytes": 3418,
+      "archive_sha256": "92f183f81a6215110a57a46741a50edf91d0d57fd946c5ecfa2d6ca2cbee47c9",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-13.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 30290,
+      "original_sha256": "e24b98e632517262e0b90d7869d230242c76f37b374257c38dfce246c8a58a8c",
+      "archive_bytes": 3349,
+      "archive_sha256": "c3c307552793c75f1ec05b07363339073dd532832d921077afb1ea5dcc891aa5",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-14.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 33092,
+      "original_sha256": "2d1c8cbed42bb8291e2eaaef59212e9ee307d26bef791a856a41ea2fe18f272b",
+      "archive_bytes": 3582,
+      "archive_sha256": "ad113a36e424fbcfbbb8ae1d3f635d7354b9d33d8c088a5672d72d07509dccb4",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-15.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 30745,
+      "original_sha256": "fe2cea79f49e2ddb2dd5c471c6f976e03dd88b3cd85a0c8127278ba0225d12fc",
+      "archive_bytes": 3380,
+      "archive_sha256": "d8a1c9046ac226cf20c1f679c72a689da8709d2d7735e8a74c295eea7d655337",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-16.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 30146,
+      "original_sha256": "5083c03ba2c1368e1e953c6482b36614f9be4d4128c3ce2e1736b10735fada5a",
+      "archive_bytes": 3349,
+      "archive_sha256": "faca7ccff544953ded63ca3b166a85d1fb42a73468b8aaaebd7ee8e5d50d5342",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-17.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 31027,
+      "original_sha256": "39679cc3869e7897c4da9962c112313c059a69728bfacf344cec56d7d87b0202",
+      "archive_bytes": 3405,
+      "archive_sha256": "1820c1d4c160a8b63d4fa2bdf306da9be9bb1fa139415312a452494ac6333c37",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-original-19-points.proofs/point-18.bin",
+      "archive_path": "role-subset-controls/baseline-original-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 30828,
+      "original_sha256": "1af65f6ad47d20e57e8bc4dac137bc7b3dc06f3dd5c1b9e837a9a6e696781e0f",
+      "archive_bytes": 3378,
+      "archive_sha256": "cf38b4df1a8625e4744c91550b07c12b6e0a8ef37eeafac58152e60a671e4f9e",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.json",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.json.gz",
+      "original_bytes": 157491,
+      "original_sha256": "610e755a9fe590987904b142af8fb17d20ac21a069434e49c381985d8df57149",
+      "archive_bytes": 3822,
+      "archive_sha256": "29abc278960e3485f00fb5affd888bd9c91186ffe82e5ba747e9c34a6e304811",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-00.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-00.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-01.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-01.bin.gz",
+      "original_bytes": 16104,
+      "original_sha256": "af15bb3ed032e339798780e234632a3369ed53be67ffa42e7cbf14ed7c436337",
+      "archive_bytes": 2537,
+      "archive_sha256": "6cb328658df801272778eb095d8f607179ad1005efd08597da4320e9d5833610",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-02.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-02.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-03.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-03.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-04.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-04.bin.gz",
+      "original_bytes": 15482,
+      "original_sha256": "15cc05c5a19a68a5dc35c5a8c461a002ec7e93c9a9c8d2d10bcc2831c466357d",
+      "archive_bytes": 2488,
+      "archive_sha256": "7e4ce5aa53396c95596f093e345b17211a4c0583879c3e192dd7e46c60a07e00",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-05.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-05.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-06.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-06.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-07.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-07.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-08.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-08.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-09.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-09.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-10.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-10.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-11.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-11.bin.gz",
+      "original_bytes": 16104,
+      "original_sha256": "f5074b0dacdb31cc73ffeaa44dc7cd5c7f0e6f0ead4d3c6a3def0def5463ca4c",
+      "archive_bytes": 2541,
+      "archive_sha256": "ac2779a40f938180291cee106c684003cf484a409146a43bcf4a5aeb3d916ff8",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-12.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-12.bin.gz",
+      "original_bytes": 16120,
+      "original_sha256": "2e1cd87144fb1ba2ccb6344b8f230560fe30cf950f0c7ee11c29f1d1199292de",
+      "archive_bytes": 2554,
+      "archive_sha256": "a2fa75979bed6938ec3a12184b7ce7d753e820cdcaf7a966a3a3add9cdb1897c",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-13.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-13.bin.gz",
+      "original_bytes": 16143,
+      "original_sha256": "44c9fc352bc5e5d18086dc248a2d7065067fd9eaf8ddc45d54e054ede212dfbf",
+      "archive_bytes": 2552,
+      "archive_sha256": "521ba96f2f1f50d76e06f18ccc00ca8f1ec62727217f1a6945732132de422d4b",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-14.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-14.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-15.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-15.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-16.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-16.bin.gz",
+      "original_bytes": 15931,
+      "original_sha256": "8b4b3802594f0efb3a433f73d300f96dccc1ac5e096f964378fca382433787d7",
+      "archive_bytes": 2532,
+      "archive_sha256": "26096f87e01601be8ff9f0b2490fd7377e8a550d024f82390f2639ae4734661c",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-17.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-17.bin.gz",
+      "original_bytes": 16035,
+      "original_sha256": "e83311b8524ff7d919165fc7697eebc49115871c8f23911628049b63956f8257",
+      "archive_bytes": 2531,
+      "archive_sha256": "efcf146319f655400603c77c7e0719f7a254b7efe5b7171984cfe6a55919ad9f",
+      "byte_roundtrip_verified": true
+    },
+    {
+      "original_path": "role-subset-controls/baseline-strict-19-points.proofs/point-18.bin",
+      "archive_path": "role-subset-controls/baseline-strict-19-points.proofs/point-18.bin.gz",
+      "original_bytes": 15252,
+      "original_sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "archive_bytes": 2435,
+      "archive_sha256": "a675026b0a221277df7a0048d1e55d29e0bc79f27397d6f9c6a34e529574a039",
+      "byte_roundtrip_verified": true
+    }
+  ]
+}

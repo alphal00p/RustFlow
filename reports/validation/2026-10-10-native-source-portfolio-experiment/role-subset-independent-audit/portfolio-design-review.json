@@ -1,0 +1,33 @@
+{
+  "scope": "Independent read-only design review; no portfolio implementation, build, performance or closure gate",
+  "status": "No soundness blocker to the isolated singleton-domain experiment with explicit condition-coverage limits",
+  "reviewed_sha256": {
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/design.md": "bdb1a3e9632ac741305388c45f29181dfc638340bd18370f8e2e099550acc148",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/selector-controls-comparison.json": "0126306186e467b39a30bfa867854a6f3d3d2615b61b3e9a31b998ff40bc5348",
+    "vendor/rustred/crates/rustred-core/src/solver/search.rs": "e40d619c04576f2f32cac854597dcbb55eccfe6da30e6653695d57cb879e4c84",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/search.rs": "6f56b588060978124d6700db69c8f668d6d48b42c338460f4789a4f559f1bf53",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/replay.rs": "9c62a88bb1bb4209cc3bd6c8c4528830af8be9d82fbb576378c73affe66b5297",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": "28a41a303d830f7918b7d72ec6398f4f6d07af69d85831d319f615adea4b2dff",
+    "vendor/rustred/crates/rustred-core/src/solver/sector/selection/model.rs": "28db90a0439fcb2ff578d21af1e0bb92864c6876953c568b5069fe8d26a156d5"
+  },
+  "required_implementation_contracts": [
+    "Enable only guarded singleton coordinate cases initially; ordinary and ray paths unchanged.",
+    "Traverse private original-ordinal subsets in the unchanged full context; preserve SourceVisitOrder permutation contract.",
+    "Pre-seal baseline and trials using identical full context/order/discovery point; record trial Certification rejection without replacing baseline.",
+    "Propagate arithmetic, Power, sample, exact-lift and canonicalization failures; budget/depth/seed exhaustion alone permits ordinary fallback.",
+    "Compare strictly shorter exact RHS, A then C, keep earlier winner on ties and skip optional work for a zero baseline.",
+    "2048 selected attempts charged before scope.instantiate;512 successful Some rows including projected-empty;64 exact trace rows and16384 trace terms per alternative; inherit minimum depth3 bound.",
+    "RuleTrialLimits supplies no independent matrix-entry or coefficient-growth bound and does not preempt one native operation; retain outer resource bound.",
+    "Record total optional work and repeated pre-seal replay cost separately from selected-candidate proof stats."
+  ],
+  "parameter_coverage_limitation": "A sealed shorter candidate may introduce another parameter nonzero locus. Native apply only specializes integer indices, so retaining a baseline rule alone cannot route a later epsilon-sample pole. Preserve all replayed conditions and do not claim baseline parameter coverage unless extra implication checks or parameter-aware fallback are separately proved.",
+  "focused_gates": [
+    "First indirect full winner replaced by a shorter original-subset proof, retaining original ordinals through encode/decode.",
+    "Strict and nonincreasing selectors reject literal protected constants, handle every protected axis, preserve H0/positive-H guards and all zero-domain premises.",
+    "Trial seals to narrower/wrong point or fails Certification: retain baseline and report reason.",
+    "Changed parameter conditions remain present; explicit counterexample documents no general exceptional-locus coverage promise.",
+    "2048th attempt boundary and rejected-seed accounting;512th instantiated-row boundary including empty rows; both trace caps and depth exhaustion.",
+    "Fatal optional Power/sample/exact failures remain explicit despite saved baseline.",
+    "Empty subset, already-zero baseline, ties and worse candidates retain baseline; ordinary result/stats unchanged."
+  ]
+}

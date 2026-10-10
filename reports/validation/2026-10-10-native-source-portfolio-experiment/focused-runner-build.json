@@ -1,0 +1,52 @@
+{
+  "captured_utc": "2026-10-10T03:11:46.245832+00:00",
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/run-focused-controls.rs",
+    "sha256": "99192ccfc3401b07e994393ed6bfc91af5e91f7f9e5ce09988188c342f875398",
+    "bytes": 562
+  },
+  "dependencies": {
+    "rustred": {
+      "path": "/tmp/librustred-source-portfolio-20261010.rlib",
+      "sha256": "4d9423cd6fca369f184b29013998f13180556d3f6cc6767d445ed8c8ebcf6e45",
+      "bytes": 234226546
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    }
+  },
+  "native_build_binding_sha256": "14b04b6594ccc45835f75984771826490695892771cc2cf6ff43c879e606e3a2",
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "native_source_portfolio_controls",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "rustred=/tmp/librustred-source-portfolio-20261010.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/run-focused-controls.rs",
+    "-o",
+    "/tmp/rustred-source-portfolio-controls-20261010"
+  ],
+  "cargo_invoked": false,
+  "exit_code": 0,
+  "wall_seconds": 5.8934044959023595,
+  "executable": {
+    "path": "/tmp/rustred-source-portfolio-controls-20261010",
+    "sha256": "dfca60db36638953e207c90f6507ef85f55b698b6ba779ecfb486bad569e306b",
+    "bytes": 261859800
+  }
+}

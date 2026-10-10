@@ -1,0 +1,28 @@
+{
+  "controls": [
+    "condition_gate_exact_and_map_safe",
+    "coverage_compares_original_baseline_after_conditionless_A",
+    "selectors_protect_all_roles_and_literal_indices",
+    "first_direct_shorter_zero_keeps_full_ordinals_and_roundtrips",
+    "first_indirect_is_eligible_and_keeps_full_ordinals",
+    "rational_associate_conditions_accepted_unchanged",
+    "new_parameter_condition_retains_baseline",
+    "certification_failure_retains_baseline",
+    "baseline_certification_failure_returns_unchanged_candidate",
+    "attempted_guard_rejections_and_accepted_budget_are_distinct",
+    "attempt_cap_stops_before_next_selected_instantiation",
+    "trace_caps_return_baseline_without_truncated_proof",
+    "optional_power_failure_propagates",
+    "optional_exact_lift_failure_propagates",
+    "empty_subset_and_initial_zero_skip_safely",
+    "ordinary_and_ray_paths_have_no_portfolio",
+    "equal_and_larger_candidates_keep_first_baseline",
+    "bounded_search_exhaustion_retains_baseline",
+    "source_zero_premise_survives_full_context_replay"
+  ],
+  "failed": 0,
+  "passed": 19,
+  "production_modified": false,
+  "scope": "Isolated point-only native portfolio branch controls; no physical values or full closure.",
+  "status": "passed"
+}

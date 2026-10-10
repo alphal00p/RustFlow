@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "status": "isolated_point_controls_passed",
+  "scope": "Fresh native discovery from the complete original 52-source corpus, exact replay and persistence roundtrip. No historical rules imported; no production modification, active closure or physical amplitude acceptance.",
+  "focused_controls_passed": 19,
+  "comparison": {
+    "points": 19,
+    "source_count": 52,
+    "baseline_applied": 19,
+    "proposal_applied": 19,
+    "baseline_rhs_terms": 192,
+    "proposal_rhs_terms": 181,
+    "strict_improvements": 2,
+    "condition_gate_pass_points": 19
+  },
+  "improved_points": [
+    {
+      "target": [
+        2,
+        1,
+        1,
+        2,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 16,
+      "proposal_rhs_terms": 7,
+      "baseline_conditions": [
+        "eta"
+      ],
+      "proposal_conditions": [
+        "2*eta",
+        "eta"
+      ]
+    },
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "baseline_rhs_terms": 2,
+      "proposal_rhs_terms": 0,
+      "baseline_conditions": [
+        "-3+2*epsilon"
+      ],
+      "proposal_conditions": [
+        "-3+2*epsilon",
+        "-6+4*epsilon"
+      ]
+    }
+  ],
+  "optional_arm_work": [
+    {
+      "label": "strict protected powers",
+      "outcomes": {
+        "attempted-row-budget": 12,
+        "not-strictly-shorter": 2,
+        "rejected-new-condition-locus": 3,
+        "selected-strictly-shorter": 2
+      },
+      "attempted_rows": 29020,
+      "accepted_rows": 5323,
+      "guard_rejected_rows": 23697,
+      "empty_rows": 619,
+      "seeds": 1619,
+      "independent_rows": 4382,
+      "exact_trace_rows": 20,
+      "exact_trace_terms": 90
+    },
+    {
+      "label": "nonincreasing cut, index-dependent",
+      "outcomes": {
+        "attempted-row-budget": 2,
+        "not run after earlier exact zero": 1,
+        "not-strictly-shorter": 15,
+        "selected-strictly-shorter": 1
+      },
+      "attempted_rows": 7728,
+      "accepted_rows": 1776,
+      "guard_rejected_rows": 5952,
+      "empty_rows": 64,
+      "seeds": 250,
+      "independent_rows": 1621,
+      "exact_trace_rows": 135,
+      "exact_trace_terms": 880
+    }
+  ],
+  "cross_schema_controls": {
+    "baseline": {
+      "exit_code": 0,
+      "incompatible_guarded_program_rejected": true
+    },
+    "proposal": {
+      "exit_code": 0,
+      "incompatible_guarded_program_rejected": true
+    }
+  },
+  "resources": {
+    "baseline": {
+      "command": [
+        "timeout",
+        "600",
+        "/tmp/rustred-source-portfolio-probe-baseline",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-original-19-points.json",
+        "original"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.0933234873227775,
+      "user_seconds": 1.028679,
+      "system_seconds": 0.056005,
+      "peak_child_rss_kib": 58416,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    "proposal": {
+      "command": [
+        "timeout",
+        "600",
+        "/tmp/rustred-source-portfolio-probe-proposal",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-original-19-points.json",
+        "original"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.0066494503989816,
+      "user_seconds": 1.93698,
+      "system_seconds": 0.05363,
+      "peak_child_rss_kib": 58392,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    }
+  },
+  "cost_interpretation": "Optional searches increase the measured local point-control time. These small controls establish two shorter certified rules, not a net closure or runtime advantage.",
+  "limits_per_optional_arm": {
+    "depth": 3,
+    "attempted_rows": 2048,
+    "accepted_rows": 512,
+    "exact_trace_rows": 64,
+    "exact_trace_terms": 16384
+  },
+  "condition_scope": "Every admitted alternative condition is a nonzero constant or an exact nonzero rational multiple of an original sealed baseline condition; original conditions are retained unchanged.",
+  "failure_semantics": "Budget, exhaustion and alternative certification rejection retain baseline. Fatal arithmetic, sample and exact-lift failures propagate. Ordinary and ray paths are disabled.",
+  "artifact_sha256": {
+    "original-19-portfolio-comparison.json": "a9aee6799b5f236734b10a7ca9d72321dcefdca65058336bff9fe581a4450eb8",
+    "focused-controls.json": "b7964882fccbbc54c11d7bd36ee814b7bd142b56d67d6615f38225220a75cf8b",
+    "focused-controls-binding.json": "6aa9d721628b66527fd2355f80af865145473cb48aa973fd12674d64b4704d69",
+    "focused-controls-resources.json": "7899bff7d6ed4c3f4346ef485493cd575970758f178922f9d8750ede4fee73f0",
+    "isolated-source-map.json": "0f17a621605cf4455356bec3e492d955a3e28b11be18296d5a49238980eab1ae",
+    "isolated-native.patch": "5d5406b5ebaa97c145abf1a65a83645210d7c294b0df45d00f67ad8aac4a3896",
+    "native-build/build-binding.json": "14b04b6594ccc45835f75984771826490695892771cc2cf6ff43c879e606e3a2",
+    "portfolio-probe.rs": "f4c89649444a7c09f76e48cbf3f3ac35f7bd27373c8d94d66e9903e914301349",
+    "compare-portfolio.py": "955e6427e12374238fa01a3003c32f56cc0931b34e27f4612002f9cd6880be6b",
+    "condition-polynomials.py": "d5db70e68a1c2224cbe831dfbbbade65f22535ae58a7a84ecabd23eeccc5f14d",
+    "points.json": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+    "summarize-point-controls.py": "ea112822fb4782e3800d3a5b96e22c301f393ba89fffa41933e97c5f6b3443e0",
+    "baseline-original-19-points.json": "275022f4e2611640816017a83c26e7805799787f26e1979d4ba62588b56ca155",
+    "baseline-original-19-points-binding.json": "3e7a6577370a5f048704cb6662514fb378767d7481b279f265509561ba894bf1",
+    "baseline-original-19-points-resources.json": "d1d98c5fca790fcbc1d9619e2208b22bd0bb53344d3849bc56382bea01369c38",
+    "baseline-original-19-points-resources.log": "1e873fed09a38a1ff32f2512c5e84937fad757715504ea6e8fa577be0738b319",
+    "baseline-original-19-points-resources.provenance.json": "a6c350bbb6784c86eb2f9d047a5bf76948a49725e8e6a594125fcff78c452331",
+    "cross-schema-baseline-resources.json": "4438b2498dc889c1f61d3a2b1d74491cdb67af3975f90058531f84cc4544e3d4",
+    "cross-schema-baseline-resources.log": "c74d376fe44554197e2ee1f627f4738791b1ce98a16307a4a1d42bea56c2107b",
+    "cross-schema-baseline-resources.provenance.json": "24fce28f4efab36bada7d7b80fc54b391a889349e9393cf9e48a4ed38b1fac09",
+    "proposal-original-19-points.json": "e6ce2e8261b221d1babc914d2882ed7c9598842271d919298708c04ab95425fe",
+    "proposal-original-19-points-binding.json": "10b152a4aa6247fcff9e94a4f63681b4507645d121927006853da07a94bb55af",
+    "proposal-original-19-points-resources.json": "534225fcf969ecd397277846bbfabfba4cf3e0c5f169c127baf12df6f2ad60cc",
+    "proposal-original-19-points-resources.log": "73ecca212eeb40cecfde9ff2cd92738a9b5b7be9ab7982b366842812efe3dd61",
+    "proposal-original-19-points-resources.provenance.json": "a24db28d694995e10f34ce60689eb00a86770581cac22bbfbc1a82773af9e9e3",
+    "cross-schema-proposal-resources.json": "4dfed45df8311d32010b3d1793f84045ba9131f6990abf1f26d2dbaa823de6b0",
+    "cross-schema-proposal-resources.log": "c74d376fe44554197e2ee1f627f4738791b1ce98a16307a4a1d42bea56c2107b",
+    "cross-schema-proposal-resources.provenance.json": "c4bb750d0d0ee4d756a614ae558fe85abe2c2839636cb7728abccd074362e79e"
+  },
+  "production_modified": false,
+  "closure_or_numerical_acceptance": false
+}

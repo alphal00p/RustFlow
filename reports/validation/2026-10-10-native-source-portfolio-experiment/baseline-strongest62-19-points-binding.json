@@ -1,0 +1,22 @@
+{
+  "scope": "Fresh exact native source discovery; explicit known v1/v2 source-only decoding. No imported historical rules, physical values or closure claim.",
+  "build_binding_sha256": "a115ff543ef40156a2fe99957ea5ab2e155429e465af86b84b053c565a9c213f",
+  "executable_sha256": "34d07beb8b1581933375f568d4594c524fe081f2d1672d3d38759c7cd6e4697a",
+  "source_corpus": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+  "source_corpus_sha256": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2",
+  "fixture_sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+  "probe_source_sha256": "38b6616b2a267cf56e3d67761fae82fc4fa6f8cdac244425897f8db274a4b305",
+  "launcher_sha256": "a6da8781d28ac708252833fe04135d8657e35ec805041acf299ce0bc2c584971",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-source-portfolio-generic-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.json",
+    "original"
+  ],
+  "exit_code": 0,
+  "post_run_inputs_unchanged": true,
+  "output_sha256": "219d67ffc7a81c27fa5a0a96e3337b69965cfc588aae8bff74b89607beecf3c0"
+}

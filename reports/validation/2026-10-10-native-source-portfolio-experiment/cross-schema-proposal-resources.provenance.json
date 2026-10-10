@@ -1,0 +1,34 @@
+{
+  "captured_utc": "2026-10-10T03:14:07.102995+00:00",
+  "command": [
+    "/tmp/rustred-source-portfolio-probe-proposal",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/unused-cross-schema-proposal.json",
+    "original",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-original-19-points.proofs/point-00.bin"
+  ],
+  "argument_files": {
+    "/tmp/rustred-source-portfolio-probe-proposal": {
+      "resolved_path": "/tmp/rustred-source-portfolio-probe-proposal",
+      "sha256": "05876c24924049b56381311196920ccf828c44a04b43c65d8899159ef5b282a0",
+      "size_bytes": 289366208
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+      "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+      "size_bytes": 7422642
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+      "sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+      "size_bytes": 1770
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-original-19-points.proofs/point-00.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-original-19-points.proofs/point-00.bin",
+      "sha256": "0392930b29f46a4ab3921c68e22499f6357c1b7fe10b3d61db336497a783cc2d",
+      "size_bytes": 31457
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

@@ -1,0 +1,29 @@
+{
+  "scope": "Bounded native source-only active closure diagnostic; complete original target sums and derivatives. No predictions or numerical acceptance.",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustred-source-portfolio-active-pilot-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-proposal"
+  ],
+  "settings": {
+    "PILOT_REQUESTS": "4096",
+    "PILOT_ROUNDS": "16",
+    "PILOT_FRONTIER": "1024",
+    "PILOT_RULES": "65536",
+    "PILOT_ZERO_ATTEMPTS": "8192",
+    "PILOT_DEPTH": "3",
+    "PILOT_RAY_DOMAINS": "1",
+    "PILOT_POINT_DOMAINS": "1",
+    "PILOT_REPLAY_OLD": "false"
+  },
+  "engine": "proposal",
+  "executable_sha256": "2f8f42e24558967e92b199019cb5c2d0f969037cbdff2b5f610c0366512ac4f6",
+  "source_corpus_sha256": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2",
+  "build_binding_sha256": "48ba9dfc544d6df2ce2810cd0e887791bea4e9b8b47b7599a2c30ec306f705c1",
+  "launcher_sha256": "d3dbb37c9adc70364a5e93865f4af140e50d648ec90662231dc2a5a4e641c087",
+  "native_binding_sha256": "48ba9dfc544d6df2ce2810cd0e887791bea4e9b8b47b7599a2c30ec306f705c1",
+  "exit_code": 124,
+  "post_run_inputs_unchanged": true
+}

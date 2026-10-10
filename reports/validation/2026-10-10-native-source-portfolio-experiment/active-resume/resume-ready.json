@@ -1,0 +1,79 @@
+{
+  "status": "frozen_compiled_ready_for_authorized_continuation",
+  "scope": "Validation-only resume wrapper; no continuation executed by this task. Same global limits and native engine; full proof decode and saved-row replay before new search.",
+  "metadata_controls_passed": 25,
+  "baseline_build_seconds": 19.87092991080135,
+  "proposal_build_seconds": 19.291560899931937,
+  "files": {
+    "README.md": {
+      "sha256": "95bc18a1c52489f56a0313fed0b7c18fba7aeb7406831a339274ed726fe132a7",
+      "bytes": 2526
+    },
+    "baseline-build-attempt-1.json": {
+      "sha256": "c63f1176155dbea17bc9e80cadf4719280bf043a03bb0efb4985bf3200978b23",
+      "bytes": 2639
+    },
+    "baseline-build-attempt-1.log": {
+      "sha256": "f65ab8b6788c51784971f1a3a19b48f906fb1e811c0d2c44a27155b85e397e9c",
+      "bytes": 697
+    },
+    "baseline-build.json": {
+      "sha256": "7f07a141e839823c6e5105bae961a2a82c924fbb0cc35c4939ddbd10e5953e9c",
+      "bytes": 2811
+    },
+    "baseline-build.log": {
+      "sha256": "d664629df14d79525ec82448df98287ae4e09598786b1f3ba3d42ffcf4ec428a",
+      "bytes": 481
+    },
+    "build.py": {
+      "sha256": "fdf32a8be25d6412d57c910fe869fc340b2b81bf7c4e245371074cba01a4f459",
+      "bytes": 2549
+    },
+    "checkpoint-controls.json": {
+      "sha256": "418b8bbfbb93bb3e45b999927b6c88576fd6827d4602ae5171009687dc9a465a",
+      "bytes": 1484
+    },
+    "checkpoint.py": {
+      "sha256": "b7c83e960dd9f5136f1ac001497e053c03e543a62055880029bf8d3592550953",
+      "bytes": 2345
+    },
+    "failed-inference-source-binding.json": {
+      "sha256": "8bcaa798ef87514560732175dd92ec909935d391c77352dcdf05819239b558db",
+      "bytes": 579
+    },
+    "failed-inference-source.rs": {
+      "sha256": "c2a0789171836f05e44ff69e3751d4f754b4db87c3627669a93ca55265d910fa",
+      "bytes": 31466
+    },
+    "pilot.rs": {
+      "sha256": "167da094aa4f3afac4dd9e84c78d868c58744163a28560dfc411cd59d3cd94df",
+      "bytes": 31487
+    },
+    "prepare-source.py": {
+      "sha256": "3502692acfc99652f566ef338621ac3a89408d0a1390e0adccb2c1d0dd12c640",
+      "bytes": 7124
+    },
+    "proposal-build.json": {
+      "sha256": "a6981dbb78293a42bf273a4c77b2a57234f834098c197c6ba2583d54ba6beb91",
+      "bytes": 2783
+    },
+    "proposal-build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "run.py": {
+      "sha256": "b80d2883548b2adc77164c4fdf7966e581717fd21cb4a3ab4f51e2743d4a8c2e",
+      "bytes": 5294
+    },
+    "source-binding.json": {
+      "sha256": "e3a7052e403b0ea0fe0b872a44b4cc8665066c71faff08938db773944dfaa3d3",
+      "bytes": 579
+    },
+    "test-checkpoint.py": {
+      "sha256": "9dd5c17950c527a4b107a116b77816c49e105d22b7a32c08ce262f272cab93ef",
+      "bytes": 3805
+    }
+  },
+  "production_modified": false,
+  "closure_or_numerical_acceptance": false
+}

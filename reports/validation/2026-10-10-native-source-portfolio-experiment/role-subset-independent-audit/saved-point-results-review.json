@@ -1,0 +1,64 @@
+{
+  "status": "read-only independent saved-output audit passed",
+  "scope": "Local point rules only; not closure, algebraic master minimality, runtime benefit, or numerical acceptance",
+  "cases": [
+    {
+      "case": "original",
+      "points": 19,
+      "rhs_counts": [
+        192,
+        181
+      ],
+      "strict_improvements": 2,
+      "all_conditions_covered": true,
+      "equal_context_fields_checked": [
+        "original_source_rows",
+        "source_program",
+        "source_count",
+        "source_term_count"
+      ],
+      "proof_payload_hashes_verified": 38,
+      "inputs_sha256": {
+        "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-original-19-points.json": "275022f4e2611640816017a83c26e7805799787f26e1979d4ba62588b56ca155",
+        "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-original-19-points.json": "e6ce2e8261b221d1babc914d2882ed7c9598842271d919298708c04ab95425fe",
+        "reports/validation/2026-10-10-native-source-portfolio-experiment/original-19-portfolio-comparison.json": "a9aee6799b5f236734b10a7ca9d72321dcefdca65058336bff9fe581a4450eb8"
+      }
+    },
+    {
+      "case": "strongest62",
+      "points": 19,
+      "rhs_counts": [
+        143,
+        127
+      ],
+      "strict_improvements": 2,
+      "all_conditions_covered": true,
+      "equal_context_fields_checked": [
+        "original_source_rows",
+        "source_program",
+        "source_count",
+        "source_term_count",
+        "roles",
+        "zero_domains",
+        "index_variable_positions",
+        "original_measure_id",
+        "imported_source_schema"
+      ],
+      "proof_payload_hashes_verified": 38,
+      "inputs_sha256": {
+        "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.json": "219d67ffc7a81c27fa5a0a96e3337b69965cfc588aae8bff74b89607beecf3c0",
+        "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.json": "9329dd864a31864c3205ae9d9f760188af6201f7bbc33528709cfa4254ee6178",
+        "reports/validation/2026-10-10-native-source-portfolio-experiment/strongest62-portfolio-comparison.json": "4b297ec6dab08593f343c31818bae91a513cf30a65e1c4c890d49756047336e1"
+      }
+    }
+  ],
+  "comparator_review": "Full original source ordinals and bounded optional-arm work recorded; strongest62 summary checks each added row and full context; baseline comparison remains original baseline",
+  "helper_hardening_finding": "Symbolic exponents must be rejected rather than using only their constant coefficient; current audited corpus has no such exponent and all gate conclusions unaffected",
+  "reviewed_files_sha256": {
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/compare-portfolio.py": "955e6427e12374238fa01a3003c32f56cc0931b34e27f4612002f9cd6880be6b",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/condition-polynomials.py": "d5db70e68a1c2224cbe831dfbbbade65f22535ae58a7a84ecabd23eeccc5f14d",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/summarize-strongest62-controls.py": "9ace3471664b509c20f7f7a618b430b127f748374c2550ec46f7a621735da406",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/strongest62-point-summary.json": "47e667d47047e2253566aadfa4cb896b43cf679bf8c9b2e25d971e54f03314c6",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/original-19-point-summary.json": "62cefb76917cebd727d9c4ed37558bd470372b020efe06a7e22845cadeddafb3"
+  }
+}

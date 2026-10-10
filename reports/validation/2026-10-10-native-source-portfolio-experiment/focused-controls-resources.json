@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/rustred-source-portfolio-controls-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/focused-controls.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.016530882101505995,
+  "user_seconds": 0.003041,
+  "system_seconds": 0.013356,
+  "peak_child_rss_kib": 15436,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

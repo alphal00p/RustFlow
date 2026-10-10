@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/tmp/rustred-source-portfolio-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/unused-cross-schema-baseline.json",
+    "original",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-original-19-points.proofs/point-00.bin"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.35320468014106154,
+  "user_seconds": 0.309904,
+  "system_seconds": 0.040836,
+  "peak_child_rss_kib": 52272,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "Bounded original-source discovery and proof replay; Point-only full-source portfolio control; no physical values or closure claim.",
+  "build_binding_sha256": "10563c580973d7699165bdda3ead2a1ee57a125a3b74ba472cbfe28a6d16634a",
+  "executable_sha256": "2c2afc42c5ca1bf7a78e370cab89e1200ccd204b805531bb3659beea865145fd",
+  "source_corpus_sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+  "fixture_sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+  "launcher_sha256": "f5e1505bb8e35bbdddecb117b26263f8b7f03686a4403464e5f842177d5de66a",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-source-portfolio-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-original-19-points.json",
+    "original"
+  ],
+  "exit_code": 0,
+  "post_run_inputs_unchanged": true,
+  "output_sha256": "275022f4e2611640816017a83c26e7805799787f26e1979d4ba62588b56ca155"
+}

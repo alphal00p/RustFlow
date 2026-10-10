@@ -1,0 +1,35 @@
+{
+  "captured_utc": "2026-10-10T03:30:08.284268+00:00",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustred-source-portfolio-generic-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/reciprocal56.json",
+    "original"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/rustred-source-portfolio-generic-probe-baseline": {
+      "resolved_path": "/tmp/rustred-source-portfolio-generic-probe-baseline",
+      "sha256": "34d07beb8b1581933375f568d4594c524fe081f2d1672d3d38759c7cd6e4697a",
+      "size_bytes": 443682408
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/program.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/program.bin",
+      "sha256": "d9ea2e0934790f13ae78ba402156f76d631f9be8ce0ee551ce140a4e8b6f5a81",
+      "size_bytes": 57625
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/points.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/points.json",
+      "sha256": "585ecced3c74801e10e92f1cdac2267db1c53bad91b17e71c6055f9ff1c6194a",
+      "size_bytes": 1777
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

@@ -1,0 +1,22 @@
+{
+  "scope": "Fresh source-only native point discovery and encoded/decoded replay. No historical rules, numerical references, full closure or reciprocal necessity claim.",
+  "build_binding_sha256": "a115ff543ef40156a2fe99957ea5ab2e155429e465af86b84b053c565a9c213f",
+  "executable_sha256": "34d07beb8b1581933375f568d4594c524fe081f2d1672d3d38759c7cd6e4697a",
+  "source_corpus": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+  "source_corpus_sha256": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2",
+  "fixture_sha256": "585ecced3c74801e10e92f1cdac2267db1c53bad91b17e71c6055f9ff1c6194a",
+  "probe_source_sha256": "38b6616b2a267cf56e3d67761fae82fc4fa6f8cdac244425897f8db274a4b305",
+  "launcher_sha256": "7d413709e03f52d13eda52de6d4b4376e8a51d92f1b2c682d8bbf7b4e8781072",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustred-source-portfolio-generic-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/polynomial62.json",
+    "original"
+  ],
+  "exit_code": 0,
+  "post_run_inputs_unchanged": true,
+  "output_sha256": "7ff83e73b157ddf23b22d3a08297b22e95e54439d787269f2daf8c9b411c5dd6"
+}

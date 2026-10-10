@@ -1,0 +1,344 @@
+{
+  "frontier_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-007.json",
+  "frontier_sha256": "f972d71e6be5445a4f4936e5c176f981262dffd10ccc2715713c2eb739492099",
+  "frontier_count": 290,
+  "round": 7,
+  "policy": "Stratify by exact (required-cut index0, occupied-energy index6). Choose the first and last in each stratum sorted by (upper H9, virtual-energy indices7,8, full label), plus the lower median of the most populous stratum (ties by stratum). Selection uses labels only, no coefficients, rule outcome or reference values.",
+  "strata": [
+    {
+      "cut_power": 1,
+      "occupied_energy_index": -3,
+      "population": 5,
+      "selected": [
+        [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          2,
+          0,
+          -3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 1,
+      "occupied_energy_index": -2,
+      "population": 28,
+      "selected": [
+        [
+          1,
+          0,
+          -1,
+          2,
+          1,
+          0,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 1,
+      "occupied_energy_index": -1,
+      "population": 47,
+      "selected": [
+        [
+          1,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          -2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          0,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 1,
+      "occupied_energy_index": 0,
+      "population": 149,
+      "selected": [
+        [
+          1,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          3,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 2,
+      "occupied_energy_index": -2,
+      "population": 7,
+      "selected": [
+        [
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          2,
+          1,
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 2,
+      "occupied_energy_index": -1,
+      "population": 13,
+      "selected": [
+        [
+          2,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          2,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 2,
+      "occupied_energy_index": 0,
+      "population": 30,
+      "selected": [
+        [
+          2,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 3,
+      "occupied_energy_index": -1,
+      "population": 2,
+      "selected": [
+        [
+          3,
+          0,
+          -1,
+          1,
+          2,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "cut_power": 3,
+      "occupied_energy_index": 0,
+      "population": 9,
+      "selected": [
+        [
+          3,
+          0,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          2,
+          0,
+          0,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "extra_median_stratum": [
+    1,
+    0
+  ],
+  "extra_median_point": [
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "selected_count": 19,
+  "points_sha256": "585ecced3c74801e10e92f1cdac2267db1c53bad91b17e71c6055f9ff1c6194a"
+}

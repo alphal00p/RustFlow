@@ -1,0 +1,413 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T02:44:06.627594+00:00",
+  "scope": "Completed controls moved byte-exact after execution to keep frozen negative experiment separate. Recorded execution and proof paths are historical; resolve old prefix to new prefix. No report bytes changed.",
+  "old_absolute_prefix": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/role-subset-controls",
+  "new_absolute_prefix": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/role-subset-controls",
+  "files": {
+    "baseline-index-dependent-19-points-resources.json": {
+      "sha256": "482287ddc4e45e9bd90f70b8def43f4e867943fc054a2f8b7b3502078180180c",
+      "bytes": 762
+    },
+    "baseline-index-dependent-19-points-binding.json": {
+      "sha256": "0686633cc6274ef7233e529f0b64594df749cb1fd9a7d822c1e9d7741d44934a",
+      "bytes": 1343
+    },
+    "baseline-probe-build.json": {
+      "sha256": "27ce761b2d3a9361a92f1464077d0bd4521e6aee3f4da7374773c18c3ed72952",
+      "bytes": 2775
+    },
+    "baseline-original-19-points-resources.log": {
+      "sha256": "939348ef5167054f2c44fe6c898bcf80c12912a1c6a595dfdf42fae4511b5679",
+      "bytes": 213
+    },
+    "baseline-original-19-points.json": {
+      "sha256": "67123298725c6e8923fcab15bbf64f94ca567906e14f28164e5a87ae767ad264",
+      "bytes": 553387
+    },
+    "baseline-index-dependent-19-points.json": {
+      "sha256": "bb699025d447352aa87961dcd33dbbb2ec6013a543d2d35dcc13f33c3c138d81",
+      "bytes": 398763
+    },
+    "probe.rs": {
+      "sha256": "a8f73602921b6a492f34f1114b3263a65d52e8b667c290039ce475234f52eed0",
+      "bytes": 11654
+    },
+    "run-point-control.py": {
+      "sha256": "d954d4c74c8586718b33ef6507e7198b52a947ad5ac5ed4ef3f1f3beb3ceb39f",
+      "bytes": 2327
+    },
+    "baseline-original-19-points-resources.provenance.json": {
+      "sha256": "df335bd526fe4fa8162556adb3cc81a3d8e8b53639ac35f3a44799b2d0b34cda",
+      "bytes": 1961
+    },
+    "baseline-strict-19-points.json": {
+      "sha256": "610e755a9fe590987904b142af8fb17d20ac21a069434e49c381985d8df57149",
+      "bytes": 157491
+    },
+    "baseline-original-19-points-binding.json": {
+      "sha256": "daacfda4e108db62278f69d63e3a6fd5c060d6dc45a4edf1d9d2da2930580360",
+      "bytes": 1329
+    },
+    "baseline-strict-19-points-resources.provenance.json": {
+      "sha256": "3c30991773af69f03f2e3d818be8dce0ef2b9ee31ac986b6bcb3ff84e185a815",
+      "bytes": 1957
+    },
+    "baseline-strict-19-points-resources.log": {
+      "sha256": "1aa6f698b58a562b9afd6251aea9518ab987dae96aaced19f97b5fd926d87e02",
+      "bytes": 208
+    },
+    "baseline-probe-build.log": {
+      "sha256": "ffe4b41eca4e234d2633f605b8465863eb8d4caa83c09d75e10cd446a3f2e6f5",
+      "bytes": 608
+    },
+    "baseline-cut-nonincreasing-19-points.json": {
+      "sha256": "6f5c5d3b5c9cd322e9334077045edb5bdbb713006ce54b90f19cbe9bdccaefd1",
+      "bytes": 399319
+    },
+    "baseline-index-dependent-19-points-resources.provenance.json": {
+      "sha256": "11d2d50e1ea3a402866b573ab619f111af4a106585334c5d7bef11a8822bb092",
+      "bytes": 1975
+    },
+    "baseline-original-19-points-resources.json": {
+      "sha256": "85077057cb6977e2f91b321fb50a4dcf8ebcaffe8cf5b527695f58b151a9b33f",
+      "bytes": 749
+    },
+    "baseline-index-dependent-19-points-resources.log": {
+      "sha256": "9bfd5a7e1abc26895afd4c40532bd40eb28c83bcdf34934c195cc2a6ffaf4633",
+      "bytes": 227
+    },
+    "baseline-strict-19-points-binding.json": {
+      "sha256": "c51d2c536db37f18a219ce37b0bb628a3ab569c670aa92f340a02248b0caa74b",
+      "bytes": 1325
+    },
+    "baseline-cut-nonincreasing-19-points-resources.json": {
+      "sha256": "40a02c35a90b8580ffdbca116bad8302302ec08410f1ef0ab7e81420943e5f58",
+      "bytes": 767
+    },
+    "build-probe.py": {
+      "sha256": "3230d2f116a5713b3e59bb4d65cd44b070a0d43d3d92550cd74651b4560b0ea8",
+      "bytes": 2933
+    },
+    "baseline-cut-nonincreasing-19-points-resources.provenance.json": {
+      "sha256": "5d1b8ed935ac6ebe87a1bd8e02abf212b73cc5b1d12a0bb158edaacf2c448860",
+      "bytes": 1979
+    },
+    "baseline-strict-19-points-resources.json": {
+      "sha256": "2f04907aed31e6ef1ba901a303b32f5ed37f3cdd3d3799a9f4a782403a9fbc7b",
+      "bytes": 758
+    },
+    "baseline-cut-nonincreasing-19-points-binding.json": {
+      "sha256": "9adfa7d1bcb1103a6a4330ed24568e1daf8dbb26fe949e307aa5368db41b200b",
+      "bytes": 1347
+    },
+    "baseline-cut-nonincreasing-19-points-resources.log": {
+      "sha256": "8d4080db0b3a1fd83380d414835dc93ee27a2fff12584ee1afc6da2d0dce7fd0",
+      "bytes": 231
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-00.bin": {
+      "sha256": "d4c9f560fd44f5b0140e1b427166e197742e1e1e85917603ad880e63b922b36c",
+      "bytes": 23949
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-07.bin": {
+      "sha256": "f33f7bebc1b06bf9ba17aaf4c5b6cbc03f0a606757a606788696c6ace3413b9e",
+      "bytes": 22960
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-09.bin": {
+      "sha256": "4d5b98896f867705f4f8b3917c3722cbe0b74cfe9937557b96fc0dd155af7207",
+      "bytes": 24815
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-18.bin": {
+      "sha256": "39f139ed92d882647ad4bbce0a21d51a5434b8519f1e3da937ad3de0e2d25fda",
+      "bytes": 23437
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-16.bin": {
+      "sha256": "7a624fa5dbcaf5c3a5f12944c36f5a7f1addfac58e228f57550714cfff5f8f60",
+      "bytes": 22755
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-11.bin": {
+      "sha256": "ebefea21930d48565e7d8bf854a5443972d5eaa4733b486d12d75eab1ae352ab",
+      "bytes": 26006
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-08.bin": {
+      "sha256": "c0a731dad94851d1c8597ca4f8ee8af2aa2c183807813f0149d2da44b7923f65",
+      "bytes": 22972
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-06.bin": {
+      "sha256": "d43f9b871c5cfbc96ce31a9e4e18b4c2ea2d13087772cb8b24525f84034f7c98",
+      "bytes": 25853
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-01.bin": {
+      "sha256": "c3560e90289c055623eba5a45d9038833a54a6189f4b221823c35fd4df18cfef",
+      "bytes": 23792
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-10.bin": {
+      "sha256": "117ca2439cad8074d41c1f1e1dfd36f0400a3245e3d6717037021de3a8544fb9",
+      "bytes": 24767
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-17.bin": {
+      "sha256": "07d0ec2be3616cdac61f84e6adca5835783caa5fe56cb47490befdc0ef70bd1c",
+      "bytes": 23636
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-14.bin": {
+      "sha256": "164e9a7dfdd24de0eebdb0087146a9c38ef25eca1fa5710f2bf932293127b0c2",
+      "bytes": 25701
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-13.bin": {
+      "sha256": "450a6672e201196fb1068ef39a559851d2852976202fee0dbab826ef98d63bc6",
+      "bytes": 22899
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-02.bin": {
+      "sha256": "7b828e36669d94194bd2ef8e794b001590c7dcb537281a2ad92241572b425166",
+      "bytes": 22758
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-05.bin": {
+      "sha256": "c9e03cdcb3632182312a76b8059d429ef8ebfe90ef7cf6d79e1d925a48583ff7",
+      "bytes": 30954
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-12.bin": {
+      "sha256": "3ea50ce91ed26b109236958fbe2968e17063553e2170f80d6a890bd3923f59ed",
+      "bytes": 22885
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-15.bin": {
+      "sha256": "d8ea81e95e5c0e644961f8364d80fcc83e2c2757c5d78eafcc9404b80b884d39",
+      "bytes": 23354
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-04.bin": {
+      "sha256": "3ceb3e8b5e5d5b43c6a01fbe44cbd4d4355608bf08c2452f3b23bf257c2cca1a",
+      "bytes": 22082
+    },
+    "baseline-cut-nonincreasing-19-points.proofs/point-03.bin": {
+      "sha256": "0cf6fde8e0f7a2d20aebe8025e3f1864a16ae2e665d5c1cc023481bb06f02e23",
+      "bytes": 22758
+    },
+    "baseline-index-dependent-19-points.proofs/point-16.bin": {
+      "sha256": "19554ecae079d4a9cf5ae8d5c1b229ea9d322de940dc4618e7cf3bfa95178c8b",
+      "bytes": 22411
+    },
+    "baseline-index-dependent-19-points.proofs/point-11.bin": {
+      "sha256": "d8fc763d781ca494f3c3e96b795606544038c07f6780586378bc0c5f6d7a7901",
+      "bytes": 25613
+    },
+    "baseline-index-dependent-19-points.proofs/point-18.bin": {
+      "sha256": "77e5a6abdd43b98cf53aa1d2916008df833558963b2d992e5a9b2a6b905f3585",
+      "bytes": 23044
+    },
+    "baseline-index-dependent-19-points.proofs/point-09.bin": {
+      "sha256": "093820eecce815729aeb5ac213f49221261f7496d5ff35ea90f2e5868ac6a460",
+      "bytes": 24422
+    },
+    "baseline-index-dependent-19-points.proofs/point-00.bin": {
+      "sha256": "3f9556c33fb607703914eabbd2c42eeb9683f577b9a87c073071bfd1fa214b56",
+      "bytes": 23556
+    },
+    "baseline-index-dependent-19-points.proofs/point-07.bin": {
+      "sha256": "6187d9ebd0e32a5550e284b6e3b6935297241138d21783d489dca2851549ac24",
+      "bytes": 22668
+    },
+    "baseline-index-dependent-19-points.proofs/point-10.bin": {
+      "sha256": "bce73e25ceccac6b5f6b2fc3bce0f819167f8cc2c2e70a10400472767dae4351",
+      "bytes": 24374
+    },
+    "baseline-index-dependent-19-points.proofs/point-17.bin": {
+      "sha256": "810fc6b9078a249e70d03768f6ef542f8db906ff3a34e0fdf679a9f1b05612ae",
+      "bytes": 23243
+    },
+    "baseline-index-dependent-19-points.proofs/point-06.bin": {
+      "sha256": "3d38b9742bdd93c1012beb5885f97ee2b61089330d8bc04874ea54261196e13e",
+      "bytes": 25561
+    },
+    "baseline-index-dependent-19-points.proofs/point-01.bin": {
+      "sha256": "576ac2d4fed34c7c2a51f9f0b533e8bb8f5eac0b2d28b53bf3f6fedb3060ac59",
+      "bytes": 23500
+    },
+    "baseline-index-dependent-19-points.proofs/point-08.bin": {
+      "sha256": "5977c5a92d05bf69ef478357274122724e265a00356fd5e4e055ba31ed074b74",
+      "bytes": 22579
+    },
+    "baseline-index-dependent-19-points.proofs/point-02.bin": {
+      "sha256": "7498075fcb1a1d76584011c11c47f36b0ffd572e5835aa049d4e14cc5a894a12",
+      "bytes": 22567
+    },
+    "baseline-index-dependent-19-points.proofs/point-05.bin": {
+      "sha256": "f3fe02d9f106a4f7a2c8b5203b049ce169c26cfb19880e8d8d4c14750d6a5993",
+      "bytes": 30561
+    },
+    "baseline-index-dependent-19-points.proofs/point-14.bin": {
+      "sha256": "4fc000549091d8819c43c2e84cbe5b5dc898ad6653040050fe5ca5fd2cb14364",
+      "bytes": 25308
+    },
+    "baseline-index-dependent-19-points.proofs/point-13.bin": {
+      "sha256": "b5be01d3acb7a2e8f11b0a14d3e7a7a4f939fef975d8a36d656554f17d5acc0d",
+      "bytes": 22506
+    },
+    "baseline-index-dependent-19-points.proofs/point-04.bin": {
+      "sha256": "2ee72fc0abef823c27cbd738ace08c04126cf4afcc460d0b33c1386d4d84c882",
+      "bytes": 23068
+    },
+    "baseline-index-dependent-19-points.proofs/point-03.bin": {
+      "sha256": "98ac31a1fc12c7d625b155adb50e368cd5b58a7649551b2af7e70a62da8aafb9",
+      "bytes": 22567
+    },
+    "baseline-index-dependent-19-points.proofs/point-12.bin": {
+      "sha256": "5aead180bcaeed3f7b85b25013df07502f391c9804ab6df8ff963e15f0f23709",
+      "bytes": 22694
+    },
+    "baseline-index-dependent-19-points.proofs/point-15.bin": {
+      "sha256": "5c8308809850474e00497b3d35be13782dac6bc47c540e16024ec98b889fa1a7",
+      "bytes": 22961
+    },
+    "baseline-original-19-points.proofs/point-05.bin": {
+      "sha256": "b4ebae764a6494638fd9fe4058333f548f0280c592ba74e5ff22ddffc3e90ea3",
+      "bytes": 34711
+    },
+    "baseline-original-19-points.proofs/point-02.bin": {
+      "sha256": "d4f88e42358dd6148a6c0d72891fee8a0278a4bed108a02560fe972da42afe8e",
+      "bytes": 30149
+    },
+    "baseline-original-19-points.proofs/point-13.bin": {
+      "sha256": "e24b98e632517262e0b90d7869d230242c76f37b374257c38dfce246c8a58a8c",
+      "bytes": 30290
+    },
+    "baseline-original-19-points.proofs/point-14.bin": {
+      "sha256": "2d1c8cbed42bb8291e2eaaef59212e9ee307d26bef791a856a41ea2fe18f272b",
+      "bytes": 33092
+    },
+    "baseline-original-19-points.proofs/point-03.bin": {
+      "sha256": "976890d2d883c73cf42a7a6f3346666918d34ab31c2020f1c04dd4fa5eda3b66",
+      "bytes": 30149
+    },
+    "baseline-original-19-points.proofs/point-04.bin": {
+      "sha256": "429dafefa9078fcaa72413a9d02dea97b00d38d8e6ec9e72b58fd75ff59aa2b5",
+      "bytes": 29473
+    },
+    "baseline-original-19-points.proofs/point-15.bin": {
+      "sha256": "fe2cea79f49e2ddb2dd5c471c6f976e03dd88b3cd85a0c8127278ba0225d12fc",
+      "bytes": 30745
+    },
+    "baseline-original-19-points.proofs/point-12.bin": {
+      "sha256": "b7099c790dc549bb72f4237cb427913db76d4da81d2f0c3dec58932e6cfa3304",
+      "bytes": 30788
+    },
+    "baseline-original-19-points.proofs/point-11.bin": {
+      "sha256": "7093481c97d12548c989dd627bf8b4efcf60c7a66191814a08c712ceb271a294",
+      "bytes": 33514
+    },
+    "baseline-original-19-points.proofs/point-16.bin": {
+      "sha256": "5083c03ba2c1368e1e953c6482b36614f9be4d4128c3ce2e1736b10735fada5a",
+      "bytes": 30146
+    },
+    "baseline-original-19-points.proofs/point-18.bin": {
+      "sha256": "1af65f6ad47d20e57e8bc4dac137bc7b3dc06f3dd5c1b9e837a9a6e696781e0f",
+      "bytes": 30828
+    },
+    "baseline-original-19-points.proofs/point-09.bin": {
+      "sha256": "5099ac694132fd2893573fc00cec680235e8fd9eeb2efa61220b387ab7a0ffeb",
+      "bytes": 32323
+    },
+    "baseline-original-19-points.proofs/point-07.bin": {
+      "sha256": "a791ffec287b7c96b398d065841257ee8ae2c329a37c4af178f09eee85f53da6",
+      "bytes": 30351
+    },
+    "baseline-original-19-points.proofs/point-00.bin": {
+      "sha256": "0392930b29f46a4ab3921c68e22499f6357c1b7fe10b3d61db336497a783cc2d",
+      "bytes": 31457
+    },
+    "baseline-original-19-points.proofs/point-17.bin": {
+      "sha256": "39679cc3869e7897c4da9962c112313c059a69728bfacf344cec56d7d87b0202",
+      "bytes": 31027
+    },
+    "baseline-original-19-points.proofs/point-10.bin": {
+      "sha256": "9c826511840cd6b4dc2d72ed32f84dcfe8cfc5da7cadd841bdd0683fe263a3cf",
+      "bytes": 32158
+    },
+    "baseline-original-19-points.proofs/point-01.bin": {
+      "sha256": "dc693c9760b39172cc5d5317c99c6f50b5f57f29595d55792f479800205395c3",
+      "bytes": 31300
+    },
+    "baseline-original-19-points.proofs/point-06.bin": {
+      "sha256": "e45f42ed4f3a4c7caf9120381ef722e151a1bd42c3b8fdb6a16b6de15ede1bbe",
+      "bytes": 33361
+    },
+    "baseline-original-19-points.proofs/point-08.bin": {
+      "sha256": "38fb627f286a4591216f91e23c03b98f0a68ea774365c5e79df763cd89208dc5",
+      "bytes": 30363
+    },
+    "baseline-strict-19-points.proofs/point-02.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-05.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-14.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-13.bin": {
+      "sha256": "44c9fc352bc5e5d18086dc248a2d7065067fd9eaf8ddc45d54e054ede212dfbf",
+      "bytes": 16143
+    },
+    "baseline-strict-19-points.proofs/point-04.bin": {
+      "sha256": "15cc05c5a19a68a5dc35c5a8c461a002ec7e93c9a9c8d2d10bcc2831c466357d",
+      "bytes": 15482
+    },
+    "baseline-strict-19-points.proofs/point-03.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-12.bin": {
+      "sha256": "2e1cd87144fb1ba2ccb6344b8f230560fe30cf950f0c7ee11c29f1d1199292de",
+      "bytes": 16120
+    },
+    "baseline-strict-19-points.proofs/point-15.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-18.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-16.bin": {
+      "sha256": "8b4b3802594f0efb3a433f73d300f96dccc1ac5e096f964378fca382433787d7",
+      "bytes": 15931
+    },
+    "baseline-strict-19-points.proofs/point-11.bin": {
+      "sha256": "f5074b0dacdb31cc73ffeaa44dc7cd5c7f0e6f0ead4d3c6a3def0def5463ca4c",
+      "bytes": 16104
+    },
+    "baseline-strict-19-points.proofs/point-00.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-07.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-09.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-10.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-17.bin": {
+      "sha256": "e83311b8524ff7d919165fc7697eebc49115871c8f23911628049b63956f8257",
+      "bytes": 16035
+    },
+    "baseline-strict-19-points.proofs/point-08.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-06.bin": {
+      "sha256": "77411c035b61fcded4fae91e85bc40193ecbab2943d06700a7a37bbc357c84d8",
+      "bytes": 15252
+    },
+    "baseline-strict-19-points.proofs/point-01.bin": {
+      "sha256": "af15bb3ed032e339798780e234632a3369ed53be67ffa42e7cbf14ed7c436337",
+      "bytes": 16104
+    }
+  }
+}

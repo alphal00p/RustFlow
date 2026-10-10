@@ -1,0 +1,7684 @@
+{
+  "schema": 1,
+  "status": "saved_native_point_rules_compared",
+  "scope": "Bounded isolated point-only original-source portfolio, independent native replay/roundtrip and exact rational-associate condition check. No active-closure or physical amplitude claim.",
+  "points": 19,
+  "source_count": 62,
+  "baseline_applied": 19,
+  "proposal_applied": 19,
+  "baseline_rhs_terms": 143,
+  "proposal_rhs_terms": 127,
+  "strict_improvements": 2,
+  "identical_rhs": 17,
+  "condition_gate_pass_points": 19,
+  "rows": [
+    {
+      "target": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 1,
+      "proposal_rhs_terms": 1,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.002918589,
+          "baseline_exact_materialization": 0.000683142,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 13,
+          "baseline_rhs_terms": 1,
+          "baseline_rows": 13,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.046672049,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.002858809,
+          "selected_arm": 0,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.049590638,
+          "trials": [
+            {
+              "accepted_rows": 330,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 56,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1718,
+              "independent_rows": 273,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.038230734,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 37,
+              "attempted_rows": 145,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.001713505,
+              "exact_trace_rows": 8,
+              "exact_trace_terms": 51,
+              "guard_rejected_rows": 108,
+              "independent_rows": 37,
+              "nonzero_conditions": 3,
+              "rhs_terms": 9,
+              "search_elapsed": 0.005390725,
+              "seeds": 5,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 1,
+      "proposal_rhs_terms": 1,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.001289654,
+          "baseline_exact_materialization": 6.716e-05,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 13,
+          "baseline_rhs_terms": 1,
+          "baseline_rows": 13,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.012409737,
+          "preseal_calls": 3,
+          "preseal_elapsed": 0.004876255,
+          "selected_arm": 0,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.013699391,
+          "trials": [
+            {
+              "accepted_rows": 21,
+              "attempted_rows": 93,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 1,
+              "exact_trace_terms": 5,
+              "guard_rejected_rows": 72,
+              "independent_rows": 20,
+              "nonzero_conditions": 1,
+              "rhs_terms": 4,
+              "search_elapsed": 0.002079576,
+              "seeds": 6,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 37,
+              "attempted_rows": 145,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.001691725,
+              "exact_trace_rows": 13,
+              "exact_trace_terms": 83,
+              "guard_rejected_rows": 108,
+              "independent_rows": 37,
+              "nonzero_conditions": 2,
+              "rhs_terms": 9,
+              "search_elapsed": 0.005337046,
+              "seeds": 5,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 2,
+      "proposal_rhs_terms": 2,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.001487544,
+          "baseline_exact_materialization": 8.8091e-05,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 14,
+          "baseline_rhs_terms": 2,
+          "baseline_rows": 14,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.05078954,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.000795972,
+          "selected_arm": 0,
+          "selected_rhs_terms": 2,
+          "total_elapsed": 0.052277084,
+          "trials": [
+            {
+              "accepted_rows": 376,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 40,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1672,
+              "independent_rows": 329,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.045557636,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 39,
+              "attempted_rows": 153,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.000226191,
+              "exact_trace_rows": 2,
+              "exact_trace_terms": 12,
+              "guard_rejected_rows": 114,
+              "independent_rows": 39,
+              "nonzero_conditions": 2,
+              "rhs_terms": 6,
+              "search_elapsed": 0.004302263,
+              "seeds": 5,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 1,
+      "proposal_rhs_terms": 1,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.001520384,
+          "baseline_exact_materialization": 8.1e-05,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 13,
+          "baseline_rhs_terms": 1,
+          "baseline_rows": 13,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.045521356,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.000709473,
+          "selected_arm": 0,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.04704174,
+          "trials": [
+            {
+              "accepted_rows": 355,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 50,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1693,
+              "independent_rows": 304,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.040587021,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 39,
+              "attempted_rows": 153,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.00021836,
+              "exact_trace_rows": 2,
+              "exact_trace_terms": 12,
+              "guard_rejected_rows": 114,
+              "independent_rows": 39,
+              "nonzero_conditions": 2,
+              "rhs_terms": 6,
+              "search_elapsed": 0.004106202,
+              "seeds": 5,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 8,
+      "proposal_rhs_terms": 1,
+      "strict_improvement": true,
+      "rhs_identical": false,
+      "conditions_identical": false,
+      "baseline_conditions": [
+        "8*eta",
+        "4*eta"
+      ],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.006342319,
+          "baseline_exact_materialization": 0.000323461,
+          "baseline_exact_trace_rows": 4,
+          "baseline_independent_rows": 57,
+          "baseline_rhs_terms": 8,
+          "baseline_rows": 57,
+          "baseline_seeds": 4,
+          "completion": "strictly-shorter-covered-alternative",
+          "policy_elapsed": 0.068449274,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.000987743,
+          "selected_arm": 1,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.074791593,
+          "trials": [
+            {
+              "accepted_rows": 46,
+              "attempted_rows": 163,
+              "completion": "selected-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 1,
+              "exact_trace_terms": 2,
+              "guard_rejected_rows": 117,
+              "independent_rows": 45,
+              "nonzero_conditions": 0,
+              "rhs_terms": 1,
+              "search_elapsed": 0.004313513,
+              "seeds": 10,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 464,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 24,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1584,
+              "independent_rows": 425,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.063021927,
+              "seeds": 65,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 5,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-1"
+        },
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 57,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-1"
+        },
+        {
+          "original_ordinal": 45,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-1"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 0,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "source_id": "multiplication/9/0"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 24,
+      "proposal_rhs_terms": 24,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "4*epsilon",
+        "16*epsilon",
+        "2*epsilon",
+        "32*epsilon",
+        "8*epsilon",
+        "16*epsilon*eta",
+        "epsilon",
+        "8*epsilon*eta"
+      ],
+      "proposal_conditions": [
+        "4*epsilon",
+        "16*epsilon",
+        "2*epsilon",
+        "32*epsilon",
+        "8*epsilon",
+        "16*epsilon*eta",
+        "epsilon",
+        "8*epsilon*eta"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "4*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon"
+        },
+        {
+          "condition": "16*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon"
+        },
+        {
+          "condition": "2*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon"
+        },
+        {
+          "condition": "32*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon"
+        },
+        {
+          "condition": "8*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon"
+        },
+        {
+          "condition": "16*epsilon*eta",
+          "reason": "rational associate",
+          "baseline_condition": "16*epsilon*eta"
+        },
+        {
+          "condition": "epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon"
+        },
+        {
+          "condition": "8*epsilon*eta",
+          "reason": "rational associate",
+          "baseline_condition": "16*epsilon*eta"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.183079275,
+          "baseline_exact_materialization": 0.012138996,
+          "baseline_exact_trace_rows": 56,
+          "baseline_independent_rows": 979,
+          "baseline_rhs_terms": 24,
+          "baseline_rows": 1142,
+          "baseline_seeds": 117,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.133722998,
+          "preseal_calls": 1,
+          "preseal_elapsed": 0.027860843,
+          "selected_arm": 0,
+          "selected_rhs_terms": 24,
+          "total_elapsed": 0.316802273,
+          "trials": [
+            {
+              "accepted_rows": 376,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 40,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1672,
+              "independent_rows": 331,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.04729233,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 440,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 24,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1608,
+              "independent_rows": 404,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.058439504,
+              "seeds": 65,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 16,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            3,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            3,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 32,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 48,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 48,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 48,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 16,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            3,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            3,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            2,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 32,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 48,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 48,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 48,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/3/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 5,
+      "proposal_rhs_terms": 5,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "4*eta",
+        "2*eta"
+      ],
+      "proposal_conditions": [
+        "4*eta",
+        "2*eta"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "4*eta",
+          "reason": "rational associate",
+          "baseline_condition": "4*eta"
+        },
+        {
+          "condition": "2*eta",
+          "reason": "rational associate",
+          "baseline_condition": "4*eta"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.005127036,
+          "baseline_exact_materialization": 0.000253461,
+          "baseline_exact_trace_rows": 4,
+          "baseline_independent_rows": 49,
+          "baseline_rhs_terms": 5,
+          "baseline_rows": 49,
+          "baseline_seeds": 4,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.080053418,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.007680223,
+          "selected_arm": 0,
+          "selected_rhs_terms": 5,
+          "total_elapsed": 0.085180454,
+          "trials": [
+            {
+              "accepted_rows": 355,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 50,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1693,
+              "independent_rows": 304,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.040991682,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 247,
+              "attempted_rows": 1177,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 16,
+              "exact_materialization": 0.002686688,
+              "exact_trace_rows": 24,
+              "exact_trace_terms": 144,
+              "guard_rejected_rows": 930,
+              "independent_rows": 228,
+              "nonzero_conditions": 7,
+              "rhs_terms": 20,
+              "search_elapsed": 0.031189183,
+              "seeds": 37,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        1,
+        2,
+        2,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 6,
+      "proposal_rhs_terms": 6,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "8*eta",
+        "4*eta"
+      ],
+      "proposal_conditions": [
+        "8*eta",
+        "4*eta"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "8*eta",
+          "reason": "rational associate",
+          "baseline_condition": "8*eta"
+        },
+        {
+          "condition": "4*eta",
+          "reason": "rational associate",
+          "baseline_condition": "8*eta"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.005935338,
+          "baseline_exact_materialization": 0.000295281,
+          "baseline_exact_trace_rows": 4,
+          "baseline_independent_rows": 53,
+          "baseline_rhs_terms": 6,
+          "baseline_rows": 53,
+          "baseline_seeds": 4,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.053041878,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.001344244,
+          "selected_arm": 0,
+          "selected_rhs_terms": 6,
+          "total_elapsed": 0.058977216,
+          "trials": [
+            {
+              "accepted_rows": 385,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 35,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1663,
+              "independent_rows": 341,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.046379178,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 47,
+              "attempted_rows": 185,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.000222601,
+              "exact_trace_rows": 2,
+              "exact_trace_terms": 12,
+              "guard_rejected_rows": 138,
+              "independent_rows": 47,
+              "nonzero_conditions": 2,
+              "rhs_terms": 6,
+              "search_elapsed": 0.005197136,
+              "seeds": 6,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 1,
+      "proposal_rhs_terms": 1,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.001261394,
+          "baseline_exact_materialization": 6.4701e-05,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 13,
+          "baseline_rhs_terms": 1,
+          "baseline_rows": 13,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.043209848,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.000674231,
+          "selected_arm": 0,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.044471242,
+          "trials": [
+            {
+              "accepted_rows": 355,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 50,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1693,
+              "independent_rows": 304,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.0403863,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 19,
+              "attempted_rows": 73,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.000197521,
+              "exact_trace_rows": 2,
+              "exact_trace_terms": 11,
+              "guard_rejected_rows": 54,
+              "independent_rows": 19,
+              "nonzero_conditions": 2,
+              "rhs_terms": 5,
+              "search_elapsed": 0.002031196,
+              "seeds": 3,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 60,
+          "seed": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "polynomial-singleton-raw-normalized-boost/bulk"
+        }
+      ]
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 21,
+      "proposal_rhs_terms": 21,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "-4+4*epsilon",
+        "-8+8*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon"
+      ],
+      "proposal_conditions": [
+        "-4+4*epsilon",
+        "-8+8*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "-4+4*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        },
+        {
+          "condition": "-8+8*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        },
+        {
+          "condition": "-32+32*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        },
+        {
+          "condition": "-2+2*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.009233738,
+          "baseline_exact_materialization": 0.001546415,
+          "baseline_exact_trace_rows": 11,
+          "baseline_independent_rows": 59,
+          "baseline_rhs_terms": 21,
+          "baseline_rows": 70,
+          "baseline_seeds": 6,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.052511056,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.00695916,
+          "selected_arm": 0,
+          "selected_rhs_terms": 21,
+          "total_elapsed": 0.061744794,
+          "trials": [
+            {
+              "accepted_rows": 365,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 45,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1683,
+              "independent_rows": 272,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.039632898,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 45,
+              "attempted_rows": 177,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.001172784,
+              "exact_trace_rows": 8,
+              "exact_trace_terms": 63,
+              "guard_rejected_rows": 132,
+              "independent_rows": 37,
+              "nonzero_conditions": 4,
+              "rhs_terms": 21,
+              "search_elapsed": 0.005792668,
+              "seeds": 6,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 4,
+      "proposal_rhs_terms": 4,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.001641164,
+          "baseline_exact_materialization": 0.000123241,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 14,
+          "baseline_rhs_terms": 4,
+          "baseline_rows": 14,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.058908415,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.005283466,
+          "selected_arm": 0,
+          "selected_rhs_terms": 4,
+          "total_elapsed": 0.060549579,
+          "trials": [
+            {
+              "accepted_rows": 376,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 40,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1672,
+              "independent_rows": 284,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.041294043,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 92,
+              "attempted_rows": 365,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.002034386,
+              "exact_trace_rows": 14,
+              "exact_trace_terms": 98,
+              "guard_rejected_rows": 273,
+              "independent_rows": 79,
+              "nonzero_conditions": 4,
+              "rhs_terms": 13,
+              "search_elapsed": 0.012187516,
+              "seeds": 12,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        1,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 22,
+      "proposal_rhs_terms": 22,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "-4+4*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-1+epsilon"
+      ],
+      "proposal_conditions": [
+        "-4+4*epsilon",
+        "-32+32*epsilon",
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-1+epsilon"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "-4+4*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        },
+        {
+          "condition": "-32+32*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        },
+        {
+          "condition": "-2+2*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        },
+        {
+          "condition": "-8+8*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        },
+        {
+          "condition": "-1+epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-4+4*epsilon"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.01015018,
+          "baseline_exact_materialization": 0.002407647,
+          "baseline_exact_trace_rows": 16,
+          "baseline_independent_rows": 59,
+          "baseline_rhs_terms": 22,
+          "baseline_rows": 70,
+          "baseline_seeds": 6,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.021222233,
+          "preseal_calls": 3,
+          "preseal_elapsed": 0.011965875,
+          "selected_arm": 0,
+          "selected_rhs_terms": 22,
+          "total_elapsed": 0.031372413,
+          "trials": [
+            {
+              "accepted_rows": 25,
+              "attempted_rows": 111,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 1,
+              "exact_trace_terms": 5,
+              "guard_rejected_rows": 86,
+              "independent_rows": 20,
+              "nonzero_conditions": 1,
+              "rhs_terms": 4,
+              "search_elapsed": 0.002403927,
+              "seeds": 7,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 45,
+              "attempted_rows": 177,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.002056717,
+              "exact_trace_rows": 13,
+              "exact_trace_terms": 102,
+              "guard_rejected_rows": 132,
+              "independent_rows": 37,
+              "nonzero_conditions": 5,
+              "rhs_terms": 22,
+              "search_elapsed": 0.00672778,
+              "seeds": 6,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            3,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 8,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            2,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            1,
+            2,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        2,
+        1,
+        1,
+        2,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 16,
+      "proposal_rhs_terms": 7,
+      "strict_improvement": true,
+      "rhs_identical": false,
+      "conditions_identical": false,
+      "baseline_conditions": [
+        "eta"
+      ],
+      "proposal_conditions": [
+        "2*eta",
+        "eta"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "2*eta",
+          "reason": "rational associate",
+          "baseline_condition": "eta"
+        },
+        {
+          "condition": "eta",
+          "reason": "rational associate",
+          "baseline_condition": "eta"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.008306715,
+          "baseline_exact_materialization": 0.000428071,
+          "baseline_exact_trace_rows": 3,
+          "baseline_independent_rows": 60,
+          "baseline_rhs_terms": 16,
+          "baseline_rows": 71,
+          "baseline_seeds": 6,
+          "completion": "strictly-shorter-covered-alternative",
+          "policy_elapsed": 0.03686986,
+          "preseal_calls": 3,
+          "preseal_elapsed": 0.001899505,
+          "selected_arm": 2,
+          "selected_rhs_terms": 7,
+          "total_elapsed": 0.045176575,
+          "trials": [
+            {
+              "accepted_rows": 285,
+              "attempted_rows": 1505,
+              "completion": "selected-strictly-shorter",
+              "empty_rows": 25,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 1,
+              "exact_trace_terms": 11,
+              "guard_rejected_rows": 1220,
+              "independent_rows": 208,
+              "nonzero_conditions": 0,
+              "rhs_terms": 10,
+              "search_elapsed": 0.029688198,
+              "seeds": 84,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 47,
+              "attempted_rows": 185,
+              "completion": "selected-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.000215451,
+              "exact_trace_rows": 2,
+              "exact_trace_terms": 13,
+              "guard_rejected_rows": 138,
+              "independent_rows": 39,
+              "nonzero_conditions": 2,
+              "rhs_terms": 7,
+              "search_elapsed": 0.005157685,
+              "seeds": 6,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 8,
+          "seed": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        2,
+        1,
+        2,
+        0,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 2,
+      "proposal_rhs_terms": 2,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.001420144,
+          "baseline_exact_materialization": 8.9681e-05,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 14,
+          "baseline_rhs_terms": 2,
+          "baseline_rows": 14,
+          "baseline_seeds": 1,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.008272564,
+          "preseal_calls": 3,
+          "preseal_elapsed": 0.002370937,
+          "selected_arm": 0,
+          "selected_rhs_terms": 2,
+          "total_elapsed": 0.009692708,
+          "trials": [
+            {
+              "accepted_rows": 19,
+              "attempted_rows": 83,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.000166081,
+              "exact_trace_rows": 2,
+              "exact_trace_terms": 11,
+              "guard_rejected_rows": 64,
+              "independent_rows": 15,
+              "nonzero_conditions": 1,
+              "rhs_terms": 4,
+              "search_elapsed": 0.001681254,
+              "seeds": 5,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 38,
+              "attempted_rows": 149,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 0,
+              "exact_materialization": 0.000642092,
+              "exact_trace_rows": 6,
+              "exact_trace_terms": 35,
+              "guard_rejected_rows": 111,
+              "independent_rows": 30,
+              "nonzero_conditions": 1,
+              "rhs_terms": 4,
+              "search_elapsed": 0.004105582,
+              "seeds": 5,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 4,
+          "seed": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 56,
+          "seed": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        2,
+        1,
+        2,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 17,
+      "proposal_rhs_terms": 17,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-16+16*epsilon",
+        "2*epsilon*eta-2*eta",
+        "-1+epsilon",
+        "eta",
+        "-4+4*epsilon"
+      ],
+      "proposal_conditions": [
+        "-2+2*epsilon",
+        "-8+8*epsilon",
+        "-16+16*epsilon",
+        "2*epsilon*eta-2*eta",
+        "-1+epsilon",
+        "eta",
+        "-4+4*epsilon"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "-2+2*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-2+2*epsilon"
+        },
+        {
+          "condition": "-8+8*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-2+2*epsilon"
+        },
+        {
+          "condition": "-16+16*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-2+2*epsilon"
+        },
+        {
+          "condition": "2*epsilon*eta-2*eta",
+          "reason": "rational associate",
+          "baseline_condition": "2*epsilon*eta-2*eta"
+        },
+        {
+          "condition": "-1+epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-2+2*epsilon"
+        },
+        {
+          "condition": "eta",
+          "reason": "rational associate",
+          "baseline_condition": "eta"
+        },
+        {
+          "condition": "-4+4*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-2+2*epsilon"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.014900914,
+          "baseline_exact_materialization": 0.003823172,
+          "baseline_exact_trace_rows": 21,
+          "baseline_independent_rows": 85,
+          "baseline_rhs_terms": 17,
+          "baseline_rows": 96,
+          "baseline_seeds": 8,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.073268898,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.018090033,
+          "selected_arm": 0,
+          "selected_rhs_terms": 17,
+          "total_elapsed": 0.088169812,
+          "trials": [
+            {
+              "accepted_rows": 375,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 40,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1673,
+              "independent_rows": 284,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.042396636,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 63,
+              "attempted_rows": 249,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.004094302,
+              "exact_trace_rows": 21,
+              "exact_trace_terms": 160,
+              "guard_rejected_rows": 186,
+              "independent_rows": 55,
+              "nonzero_conditions": 7,
+              "rhs_terms": 17,
+              "search_elapsed": 0.012598058,
+              "seeds": 8,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            3,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            3,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 20,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            3,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            3,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            2,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 36,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/0/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            2,
+            1,
+            2,
+            1,
+            2,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 8,
+      "proposal_rhs_terms": 8,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "3*eta",
+        "24*eta",
+        "6*eta"
+      ],
+      "proposal_conditions": [
+        "3*eta",
+        "24*eta",
+        "6*eta"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "3*eta",
+          "reason": "rational associate",
+          "baseline_condition": "3*eta"
+        },
+        {
+          "condition": "24*eta",
+          "reason": "rational associate",
+          "baseline_condition": "3*eta"
+        },
+        {
+          "condition": "6*eta",
+          "reason": "rational associate",
+          "baseline_condition": "3*eta"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.005169375,
+          "baseline_exact_materialization": 0.000243611,
+          "baseline_exact_trace_rows": 2,
+          "baseline_independent_rows": 33,
+          "baseline_rhs_terms": 8,
+          "baseline_rows": 44,
+          "baseline_seeds": 4,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.046323728,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.001274094,
+          "selected_arm": 0,
+          "selected_rhs_terms": 8,
+          "total_elapsed": 0.051493103,
+          "trials": [
+            {
+              "accepted_rows": 375,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 40,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1673,
+              "independent_rows": 284,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.042116905,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 27,
+              "attempted_rows": 105,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.000253261,
+              "exact_trace_rows": 2,
+              "exact_trace_terms": 14,
+              "guard_rejected_rows": 78,
+              "independent_rows": 19,
+              "nonzero_conditions": 3,
+              "rhs_terms": 8,
+              "search_elapsed": 0.002808079,
+              "seeds": 4,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 24,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 1,
+      "proposal_rhs_terms": 1,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [],
+      "proposal_conditions": [],
+      "condition_gate_pass": true,
+      "condition_matches": [],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.009256688,
+          "baseline_exact_materialization": 9.3391e-05,
+          "baseline_exact_trace_rows": 3,
+          "baseline_independent_rows": 104,
+          "baseline_rhs_terms": 1,
+          "baseline_rows": 106,
+          "baseline_seeds": 8,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.068559084,
+          "preseal_calls": 3,
+          "preseal_elapsed": 0.004103232,
+          "selected_arm": 0,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.077815772,
+          "trials": [
+            {
+              "accepted_rows": 426,
+              "attempted_rows": 1848,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 48,
+              "exact_materialization": 0.000255341,
+              "exact_trace_rows": 6,
+              "exact_trace_terms": 19,
+              "guard_rejected_rows": 1422,
+              "independent_rows": 365,
+              "nonzero_conditions": 2,
+              "rhs_terms": 0,
+              "search_elapsed": 0.036397258,
+              "seeds": 103,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 276,
+              "attempted_rows": 1230,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 16,
+              "exact_materialization": 0.000935703,
+              "exact_trace_rows": 13,
+              "exact_trace_terms": 52,
+              "guard_rejected_rows": 954,
+              "independent_rows": 252,
+              "nonzero_conditions": 2,
+              "rhs_terms": 0,
+              "search_elapsed": 0.027939784,
+              "seeds": 39,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 5,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-1"
+        },
+        {
+          "original_ordinal": 0,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "multiplication/9/0"
+        },
+        {
+          "original_ordinal": 57,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-1"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 5,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/0/0/occupation-case-1"
+        },
+        {
+          "original_ordinal": 0,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "multiplication/9/0"
+        },
+        {
+          "original_ordinal": 57,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "shifted-polynomial-global-boost/global-boost/occupied-0/occupation-case-1"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 2,
+      "proposal_rhs_terms": 2,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "2*eta",
+        "-6+4*epsilon",
+        "-3+2*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "4*epsilon*eta-6*eta",
+        "2*epsilon*eta-3*eta"
+      ],
+      "proposal_conditions": [
+        "2*eta",
+        "-6+4*epsilon",
+        "-3+2*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "4*epsilon*eta-6*eta",
+        "2*epsilon*eta-3*eta"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "2*eta",
+          "reason": "rational associate",
+          "baseline_condition": "2*eta"
+        },
+        {
+          "condition": "-6+4*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-6+4*epsilon"
+        },
+        {
+          "condition": "-3+2*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-6+4*epsilon"
+        },
+        {
+          "condition": "8*epsilon*eta-12*eta",
+          "reason": "rational associate",
+          "baseline_condition": "8*epsilon*eta-12*eta"
+        },
+        {
+          "condition": "-12+8*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-6+4*epsilon"
+        },
+        {
+          "condition": "4*epsilon*eta-6*eta",
+          "reason": "rational associate",
+          "baseline_condition": "8*epsilon*eta-12*eta"
+        },
+        {
+          "condition": "2*epsilon*eta-3*eta",
+          "reason": "rational associate",
+          "baseline_condition": "8*epsilon*eta-12*eta"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.003430361,
+          "baseline_exact_materialization": 0.000495301,
+          "baseline_exact_trace_rows": 7,
+          "baseline_independent_rows": 35,
+          "baseline_rhs_terms": 2,
+          "baseline_rows": 36,
+          "baseline_seeds": 3,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.019327078,
+          "preseal_calls": 3,
+          "preseal_elapsed": 0.005679355,
+          "selected_arm": 0,
+          "selected_rhs_terms": 2,
+          "total_elapsed": 0.022757439,
+          "trials": [
+            {
+              "accepted_rows": 123,
+              "attempted_rows": 641,
+              "completion": "rejected-new-condition-locus",
+              "empty_rows": 10,
+              "exact_materialization": 0.000545592,
+              "exact_trace_rows": 8,
+              "exact_trace_terms": 37,
+              "guard_rejected_rows": 518,
+              "independent_rows": 111,
+              "nonzero_conditions": 2,
+              "rhs_terms": 1,
+              "search_elapsed": 0.011125504,
+              "seeds": 36,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 23,
+              "attempted_rows": 89,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.000468541,
+              "exact_trace_rows": 7,
+              "exact_trace_terms": 29,
+              "guard_rejected_rows": 66,
+              "independent_rows": 23,
+              "nonzero_conditions": 7,
+              "rhs_terms": 2,
+              "search_elapsed": 0.002397377,
+              "seeds": 3,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        }
+      ]
+    },
+    {
+      "target": [
+        1,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 1,
+      "proposal_rhs_terms": 1,
+      "strict_improvement": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "4*epsilon*eta-6*eta",
+        "-6+4*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "2*eta",
+        "32*epsilon*eta-48*eta",
+        "eta"
+      ],
+      "proposal_conditions": [
+        "4*epsilon*eta-6*eta",
+        "-6+4*epsilon",
+        "8*epsilon*eta-12*eta",
+        "-12+8*epsilon",
+        "2*eta",
+        "32*epsilon*eta-48*eta",
+        "eta"
+      ],
+      "condition_gate_pass": true,
+      "condition_matches": [
+        {
+          "condition": "4*epsilon*eta-6*eta",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon*eta-6*eta"
+        },
+        {
+          "condition": "-6+4*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-6+4*epsilon"
+        },
+        {
+          "condition": "8*epsilon*eta-12*eta",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon*eta-6*eta"
+        },
+        {
+          "condition": "-12+8*epsilon",
+          "reason": "rational associate",
+          "baseline_condition": "-6+4*epsilon"
+        },
+        {
+          "condition": "2*eta",
+          "reason": "rational associate",
+          "baseline_condition": "2*eta"
+        },
+        {
+          "condition": "32*epsilon*eta-48*eta",
+          "reason": "rational associate",
+          "baseline_condition": "4*epsilon*eta-6*eta"
+        },
+        {
+          "condition": "eta",
+          "reason": "rational associate",
+          "baseline_condition": "2*eta"
+        }
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "portfolio_stats": [
+        {
+          "baseline_direct_hit": false,
+          "baseline_elapsed": 0.004303163,
+          "baseline_exact_materialization": 0.000651212,
+          "baseline_exact_trace_rows": 9,
+          "baseline_independent_rows": 43,
+          "baseline_rhs_terms": 1,
+          "baseline_rows": 45,
+          "baseline_seeds": 4,
+          "completion": "baseline-retained",
+          "policy_elapsed": 0.041873585,
+          "preseal_calls": 2,
+          "preseal_elapsed": 0.005906368,
+          "selected_arm": 0,
+          "selected_rhs_terms": 1,
+          "total_elapsed": 0.046176748,
+          "trials": [
+            {
+              "accepted_rows": 355,
+              "attempted_rows": 2048,
+              "completion": "attempted-row-budget",
+              "empty_rows": 50,
+              "exact_materialization": 0.0,
+              "exact_trace_rows": 0,
+              "exact_trace_terms": 0,
+              "guard_rejected_rows": 1693,
+              "independent_rows": 288,
+              "nonzero_conditions": 0,
+              "rhs_terms": null,
+              "search_elapsed": 0.032813188,
+              "seeds": 114,
+              "selected_source_rows": 18,
+              "selector": "strict-protected-symbolic-zero"
+            },
+            {
+              "accepted_rows": 27,
+              "attempted_rows": 105,
+              "completion": "not-strictly-shorter",
+              "empty_rows": 0,
+              "exact_materialization": 0.000700812,
+              "exact_trace_rows": 9,
+              "exact_trace_terms": 41,
+              "guard_rejected_rows": 78,
+              "independent_rows": 27,
+              "nonzero_conditions": 7,
+              "rhs_terms": 1,
+              "search_elapsed": 0.003028569,
+              "seeds": 4,
+              "selected_source_rows": 32,
+              "selector": "nonincreasing-cut-index-dependent"
+            }
+          ]
+        }
+      ],
+      "baseline_sources": [
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            -1,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            -1,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            -1,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            -1,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 40,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 24,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            -1,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 44,
+          "seed": [
+            1,
+            -1,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-0"
+        },
+        {
+          "original_ordinal": 28,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-0"
+        }
+      ]
+    }
+  ],
+  "proofs": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-00.bin": {
+      "sha256": "a9f2684d9e3de1b16ad0b0b9ef8cd4acd1f19191c38b509a311a593e9ac01145",
+      "bytes": 34290
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-00.bin": {
+      "sha256": "d2210a02e2f041d7b6b5e8381a8bc680e506d7b05cd62fdb7a46412b60835015",
+      "bytes": 34326
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-01.bin": {
+      "sha256": "b781fab8317ea8b3aaee45b5adec24f064b3ef0966936fce734ac14ac5f3d3e7",
+      "bytes": 34290
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-01.bin": {
+      "sha256": "f4766b54a6fbb4b98b2a7ae03e576d317024eea872cef4b251db5cc33f4117a9",
+      "bytes": 34326
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-02.bin": {
+      "sha256": "2612f90530c50d5bee343889e2f62ed405dde7ca163561d69348776e663d4b54",
+      "bytes": 34518
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-02.bin": {
+      "sha256": "9ca6c4b0b9628726db1415a6f8cac0269f5ecd351e8b80ec0af72eddd8bcd64b",
+      "bytes": 34554
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-03.bin": {
+      "sha256": "844bd76dfc2e355693e459e7608ee3e7df1ca2078ec94762c1c047bca92f5cfe",
+      "bytes": 34290
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-03.bin": {
+      "sha256": "b57d4fb4863cec19b947d75c6fde53e6735f966fcba0648a2d12811fa836f8ad",
+      "bytes": 34326
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-04.bin": {
+      "sha256": "43c9d4714a3676544df333a3e0b1cb64ab9a12f0240790cc17c301eb69a9320b",
+      "bytes": 35360
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-04.bin": {
+      "sha256": "cc530f983b5fc3601dc41d17042c92197fdb2295fcfadd3cbb355f1cce842bbe",
+      "bytes": 34287
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-05.bin": {
+      "sha256": "9f6a9cbaebccac00b6d2125ba00d7e68b5cc9ae6cfcf7c67a4b2f5ca40ed50f7",
+      "bytes": 39489
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-05.bin": {
+      "sha256": "5247ee2d091c60f880270d2e2a8cacd4db34f68e88e7f23eb8655348dac264e5",
+      "bytes": 39525
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-06.bin": {
+      "sha256": "c9f26902ab369c0acad2f5170a1c57610922753051e06c00aa19c25296afd279",
+      "bytes": 35080
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-06.bin": {
+      "sha256": "b6f0fabdf89b244e885033d4edef68be71cf9232ed97d8ad0200d2f68760403c",
+      "bytes": 35116
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-07.bin": {
+      "sha256": "f6e7f9c92813e96a5770f20d0fe7bc2ee77d6103ee74c89f54b386834bba5400",
+      "bytes": 35106
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-07.bin": {
+      "sha256": "772bf5b64362ee792b18b63daa5118d0685bc7dd47cd41f3aed89051ef64b079",
+      "bytes": 35142
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-08.bin": {
+      "sha256": "6d50be0781043acc4372316b4872ad36fe412e10b4a14c5d35de400b28bd43fd",
+      "bytes": 34290
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-08.bin": {
+      "sha256": "4188abb00828cb175a649a4e4aa84f72428f098166d4771f2ba87cb57153645e",
+      "bytes": 34326
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-09.bin": {
+      "sha256": "73644b2e33deae40269565fe13194cfe044be501779cfb231c9317d38e9ae142",
+      "bytes": 37101
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-09.bin": {
+      "sha256": "fd422de1865c2e876645b5534bd05c89c54ea4797d4392c7bc4a6de873bfe96c",
+      "bytes": 37137
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-10.bin": {
+      "sha256": "7880f4a56f48785b1521643e1608e7bd9e86bfd0af631473e5135ee65896e34d",
+      "bytes": 34570
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-10.bin": {
+      "sha256": "95280ee26d0378dfe75d88a6c02454d896d9f9848f38064e3887b1994c5b5af1",
+      "bytes": 34606
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-11.bin": {
+      "sha256": "d2f6771230f46eff1efd2444f91ea2bbba46413dca7daee0d7da4e5884bf8c1a",
+      "bytes": 38292
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-11.bin": {
+      "sha256": "be18b383de6871332396aa0eb8a3c9cb4b28a6c8104444eea36bbc82aab20357",
+      "bytes": 38328
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-12.bin": {
+      "sha256": "a8bed88f9c2c615ccfee294ca46f81704ea61e8d665c2acf7b3378a9b4ebf152",
+      "bytes": 35566
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-12.bin": {
+      "sha256": "2f12e85cd83a0b11895723d0655a43e4e5f426f4cb78e326b612997d5385c916",
+      "bytes": 35090
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-13.bin": {
+      "sha256": "8d8a7cc15f85405f3b6783336b0bb4760ad8a02c18e7bf94c08b3393205da9cc",
+      "bytes": 34518
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-13.bin": {
+      "sha256": "737f1cf808afb42c33ae92da30b59aaba31bb447bcd26d88a67dc9444813b1d5",
+      "bytes": 34554
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-14.bin": {
+      "sha256": "9a3d74d4b2f37b7934cdf3a5dd493c0f09b62ebd42c577269207708e26c22753",
+      "bytes": 37870
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-14.bin": {
+      "sha256": "5e6b96a7526b5ab32e9b4d753e71a752aa176afb6d1cd8f346c13da0cd672b32",
+      "bytes": 37906
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-15.bin": {
+      "sha256": "233f76db7a600573d179dc37698f4e114c63c9198763ec8310c8b36a92e1b4a1",
+      "bytes": 35523
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-15.bin": {
+      "sha256": "49c96c8f498422728cb84285646f66ce8db7d56733298ce2d37762874199b4c6",
+      "bytes": 35559
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-16.bin": {
+      "sha256": "ae8dabd7e6353347671063771548f7b4ca34af66e4a01abc8f2aefec79426147",
+      "bytes": 34329
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-16.bin": {
+      "sha256": "f99e70cb42a08d076ba67d3d085e7a8116f19db5b2570bc583ba74411f9caa0e",
+      "bytes": 34365
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-17.bin": {
+      "sha256": "695f24c610fb5a2822149ff756e5c685c51237d0afa34f99211779e164dc21c1",
+      "bytes": 35805
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-17.bin": {
+      "sha256": "b1604e53106e06a3239e1ca3062bf17a08493dfeab4ce022121d11b079c94191",
+      "bytes": 35841
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.proofs/point-18.bin": {
+      "sha256": "89a8e5e4d54275d21916015c3eeb57dff2a2d50a0104b3c697ee05089a68e185",
+      "bytes": 35606
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.proofs/point-18.bin": {
+      "sha256": "9b44ab9d4a4866c93c7c220f02d0e5fffa6c2165d9a0b2174f9c110cb4a86ff4",
+      "bytes": 35642
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/baseline-strongest62-19-points.json": "219d67ffc7a81c27fa5a0a96e3337b69965cfc588aae8bff74b89607beecf3c0",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/proposal-strongest62-19-points.json": "9329dd864a31864c3205ae9d9f760188af6201f7bbc33528709cfa4254ee6178",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/points.json": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/compare-portfolio.py": "955e6427e12374238fa01a3003c32f56cc0931b34e27f4612002f9cd6880be6b",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/condition-polynomials.py": "d5db70e68a1c2224cbe831dfbbbade65f22535ae58a7a84ecabd23eeccc5f14d"
+  },
+  "production_modified": false,
+  "closure_or_numerical_acceptance": false
+}

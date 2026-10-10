@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-source-portfolio-resume-proposal-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/polynomial62-proposal",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-proposal"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 368.6935250381939,
+  "user_seconds": 365.874553,
+  "system_seconds": 0.236836,
+  "peak_child_rss_kib": 57904,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

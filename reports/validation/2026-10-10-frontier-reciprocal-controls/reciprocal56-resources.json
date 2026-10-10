@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustred-source-portfolio-generic-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-frontier-reciprocal-controls/reciprocal56.json",
+    "original"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.8066492839716375,
+  "user_seconds": 0.7891809999999999,
+  "system_seconds": 0.012105,
+  "peak_child_rss_kib": 15464,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

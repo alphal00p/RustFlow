@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-role-subset-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/role-subset-controls/baseline-strict-19-points.json",
+    "strict"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.3642163053154945,
+  "user_seconds": 4.282212,
+  "system_seconds": 0.053210999999999994,
+  "peak_child_rss_kib": 58440,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

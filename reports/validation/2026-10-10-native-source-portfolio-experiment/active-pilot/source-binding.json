@@ -1,0 +1,7 @@
+{
+  "scope": "Source-only fresh discovery; same bounded active-frontier algorithm with point portfolio statistics added. No prior rules reused.",
+  "base_source": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/pilot.rs",
+  "base_source_sha256": "a3de8e098cd305d94d8b17584cc7b4be5e5888b92d844e7796547315b0c57e5d",
+  "source_sha256": "6f0fbc2dc116917f8f081daf3687d289b795c4189e09ca7e08207f0031f7d9e6",
+  "generator_sha256": "dd161573d62f783fc2080fdf4688520bea083611bb056740d4a08fb5e9b47be0"
+}
