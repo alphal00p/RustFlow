@@ -224,6 +224,10 @@ impl<const N: usize> GuardedSourceSystem<N> {
                 }
             });
             let shifts = recenter.map(i64::from);
+            // Besides source guards, the discovery box now also binds every
+            // explicit measure-zero column removed by scope.instantiate.
+            // Keep its translated pullback: a zero valid before recentering
+            // must never be silently extended to a newly reached index face.
             let mut domain = discovery_domain
                 .intersection(&discovery_domain.pullback(&shifts)?)
                 .ok_or_else(|| {

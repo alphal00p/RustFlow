@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+    "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-provenance.json",
+    "sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7"
+  },
+  "unchanged_source_files": 2478,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "c0b21791a7f06ce15942bb453edd75124b80484f006c7956cc5d44cf5970211e"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "native",
+      "status": "passed",
+      "passed": 84,
+      "failed": 0,
+      "ignored": 1,
+      "measured": 0,
+      "filtered": 3041,
+      "harness_seconds": 0.09,
+      "wall_seconds": 0.11052206996828318,
+      "peak_child_rss_kib": 15412,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-resources.json",
+          "sha256": "351718bc6064993d3ac23414846e369aa23fb6441dde643e210441ef07bd118a"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-resources.log",
+          "sha256": "61f8e286ede2ad21887524fd3490156d4db96346494e4d5c6088bbf217e615af"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-resources.provenance.json",
+          "sha256": "27d9fe082b814e6c8d8fb3325f8af47743e14d8e1353929d736d2f881a93c855"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-binding.json",
+          "sha256": "6680c7d637cf00a1754cefc44da85a2eaa03a18a54441725a24ed3855b754f87"
+        }
+      }
+    },
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 73,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.17,
+      "wall_seconds": 7.193852039985359,
+      "peak_child_rss_kib": 24576,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-resources.json",
+          "sha256": "4031f91006f8c276729865db9687ed9f9e57b989cbbc3eac00cf66ee8ca4c32a"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-resources.log",
+          "sha256": "1bf28acc7509ad22e1f75f2cf680df643af45b983e60ac121b8f0960e9098333"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-resources.provenance.json",
+          "sha256": "72c16c36c0a3b5ae62ecb5e73b25474cd517a881d263cdfe34e549bab9b90e37"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-binding.json",
+          "sha256": "878e2082d32f19fe5008fd194e8bfe83596e028d13d698bc7cfc487eb000e70f"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.16867429809644818,
+      "peak_child_rss_kib": 15416,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-resources.json",
+          "sha256": "75dc2764c190a9d82d5af90f7aa2341172ce570977b133928a800463d69e7c9f"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-resources.provenance.json",
+          "sha256": "d14ff512979027efe7a8f20ba280af6d3bfdd154f4c90f239a0e78404cfaf610"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-binding.json",
+          "sha256": "e010d9a71da2437f292528306df8033345001aafb12790b2aef798cbfb32fcbd"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.39,
+      "wall_seconds": 1.4050593678839505,
+      "peak_child_rss_kib": 18432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-resources.json",
+          "sha256": "42a6f3b6268e9ec1ff621537c46ddc82534b978e734a7506f12777544c067914"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-resources.log",
+          "sha256": "3a59bf863e8da494aa287e06781fcbd4325018d8d81deabd14f2179480835766"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-resources.provenance.json",
+          "sha256": "3dcfedecec76c6302b7337ce7e3d75c0a0d3c5797a496a0c352a3890df92196c"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-binding.json",
+          "sha256": "c68e3322c2e320cc9aefd05f4e036529e5358a3be6a56fec3e7eddc487edae20"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.011891331057995558,
+      "peak_child_rss_kib": 15368,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-resources.json",
+          "sha256": "1498f03c2b3d2c091a9a16cc482dde13810dacfd5b5401700454ae8c89595f9a"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-resources.log",
+          "sha256": "8325ee62156c9fa15a977c4c91f806a4acd658591ac21c6fa73993c674e57f89"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-resources.provenance.json",
+          "sha256": "a5eca4228c6f71b7a22ea8bdfd91c0618fabaa5eec38716c15c0d575c56a131c"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-binding.json",
+          "sha256": "7f70afafd580550905484c93085d23236c1e65cdc562eead8cf5d654e65f504b"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.8,
+      "wall_seconds": 1.8259035306982696,
+      "peak_child_rss_kib": 30744,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-resources.json",
+          "sha256": "fe34488283626002517f364e4f19a5ef8316d4ec9497fe7bb11b11401b678af3"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-resources.log",
+          "sha256": "56e50b2deab0f37fae4852d2d9e4c95173d5fa24a962f042aa36b70a2db2444e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-resources.provenance.json",
+          "sha256": "1e9739ff9eae294a88a142bc4853b3af00f4c827a0ca11c142f5af87bfef8030"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-binding.json",
+          "sha256": "18618c30e0519e9347e0185869b86eff108016a720163cf865a510bd18c68bd4"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.03,
+      "wall_seconds": 0.05300608463585377,
+      "peak_child_rss_kib": 15404,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-resources.json",
+          "sha256": "6492e796b05358e20ac356431ffc21276aeadcff152e22cbe3d453b0dd6a324f"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-resources.log",
+          "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-resources.provenance.json",
+          "sha256": "3577a4a92a92576f973a6975f25c550b995593f8331ca2420e2abf7a21920bb5"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-binding.json",
+          "sha256": "48b0ca141d2dd708de622e17270bb5a8a804100a248a19f32bcd548f67a2d344"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 176,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "087b007a12ccd2aeede89edff61f153968adb568c5491d1b74c8a1333326b192"
+}

@@ -1,0 +1,8 @@
+{
+  "native_library_sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+  "preserved_library": "/tmp/librustred-zero-projection-392075d0c6995fd1.rlib",
+  "frozen_source_snapshot_sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+  "gate_status": "native library compiled; coordinated full unit/integration gates pending",
+  "source_archive": "../round-006-provisional.bin",
+  "proof_policy": "extract original schema-v1 source corpus only; never load historical rules; rediscover source-replayed schema-v2 candidates"
+}

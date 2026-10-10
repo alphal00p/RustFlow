@@ -1,0 +1,7 @@
+{
+  "scope": "Native library artifact completed during shared release build; complete build and guarded suite still pending",
+  "path": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+  "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+  "size_bytes": 435821774,
+  "source_snapshot_sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+}

@@ -1,0 +1,40 @@
+{
+  "captured_utc": "2026-10-10T01:42:22.618837+00:00",
+  "command": [
+    "timeout",
+    "60s",
+    "/tmp/three_loop_point_active_order_witness",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/three_loop_point_active_order_witness": {
+      "resolved_path": "/tmp/three_loop_point_active_order_witness",
+      "sha256": "a039281e5cab8f8b9ca139ec687a0e08cb3ae636914f2bd7763b72b4980ee798",
+      "size_bytes": 426295296
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+      "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+      "size_bytes": 7422642
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.bin",
+      "sha256": "338c2e5a73707606481c5c7c1924847113e9376b2b46e6479b06ba0ccb96c96e",
+      "size_bytes": 1589832
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.json",
+      "sha256": "f0bd553601658ab5c5f3f6865105a281a0473f2268e7dd0b357ef18f6a06d30d",
+      "size_bytes": 4845532
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

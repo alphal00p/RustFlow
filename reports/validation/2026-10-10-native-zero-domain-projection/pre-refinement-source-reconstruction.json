@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "Reconstruct the frozen pre-refinement source snapshot from the exact committed base, tracked-source binary patch, and explicit untracked source copies; unrelated report/docs changes excluded.",
+  "base_commit": "0b17219b7f01169426dd8139661475b1e54ab730",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+    "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+  },
+  "patch": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-source.patch",
+    "sha256": "8f089d7fd7d239e2aa286e88992ec42cf88cc295e8d9b13161ed6d717c75e12a"
+  },
+  "untracked_sources": [
+    {
+      "original_path": "vendor/rustred/crates/rustred-core/src/solver/guarded/search/zero_projection_tests.rs",
+      "saved_path": "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-untracked-source/vendor/rustred/crates/rustred-core/src/solver/guarded/search/zero_projection_tests.rs",
+      "sha256": "f914008cd41ec9fcad902384b3acb1629af9ca3e166e215db72dd948d05d213b"
+    }
+  ],
+  "unchanged_sources_verified": 2478,
+  "reconstruction_verified_in_temporary_directory": true,
+  "patched_files_verified": [
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/replay.rs",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/search.rs",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/search/direct_zero.rs"
+  ]
+}

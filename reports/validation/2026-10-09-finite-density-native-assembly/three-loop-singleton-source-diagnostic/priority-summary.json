@@ -1,0 +1,220 @@
+{
+  "scope": "19 matched native fixed-point searches, maxdepth3 and one domain per point, preserved canonical native rlib e2e61c1c. Original sources, guards, conditions and zero domains retained except explicitly named subset controls; every candidate sealed by native source replay. No production source policy, minimality, derivative closure or numerical acceptance claim.",
+  "observations": [
+    "Moving virtual rows first in the full corpus changes proof traces but all19 RHS/condition results remain identical.",
+    "Virtual-only changes4 RHSs, creates no new H surface terms, and proves one surface descendant zero; it also omits multiplication sources and worsens two RHS lengths.",
+    "Subset results concern first bounded discovered recurrences, not minimal master counts or global closure."
+  ],
+  "controls": [
+    {
+      "mode": "original",
+      "source_count": 52,
+      "point_count": 19,
+      "applied": 19,
+      "total_rhs_terms": 192,
+      "new_upper_surface_terms": 2,
+      "cut_index_raises": 0,
+      "identical_rhs_to_original": 19,
+      "identical_conditions_to_original": 19,
+      "wall_seconds": 0.9665860491804779,
+      "peak_child_rss_kib": 58380,
+      "differences": []
+    },
+    {
+      "mode": "virtual-first",
+      "source_count": 52,
+      "point_count": 19,
+      "applied": 19,
+      "total_rhs_terms": 192,
+      "new_upper_surface_terms": 2,
+      "cut_index_raises": 0,
+      "identical_rhs_to_original": 19,
+      "identical_conditions_to_original": 19,
+      "wall_seconds": 0.9440667638555169,
+      "peak_child_rss_kib": 58420,
+      "differences": []
+    },
+    {
+      "mode": "virtual-only",
+      "source_count": 32,
+      "point_count": 19,
+      "applied": 19,
+      "total_rhs_terms": 199,
+      "new_upper_surface_terms": 0,
+      "cut_index_raises": 0,
+      "identical_rhs_to_original": 15,
+      "identical_conditions_to_original": 15,
+      "wall_seconds": 0.9630911271087825,
+      "peak_child_rss_kib": 55340,
+      "differences": [
+        {
+          "target": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "original_rhs_count": 1,
+          "rhs_count": 10,
+          "conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "target": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "original_rhs_count": 24,
+          "rhs_count": 33,
+          "conditions": [
+            "-2+epsilon",
+            "4-6*epsilon+2*epsilon^2",
+            "-4+2*epsilon",
+            "16-24*epsilon+8*epsilon^2",
+            "32-48*epsilon+16*epsilon^2",
+            "-8+4*epsilon",
+            "8-12*epsilon+4*epsilon^2",
+            "-16+8*epsilon",
+            "-24*epsilon*eta+16*eta+8*epsilon^2*eta",
+            "8*epsilon*eta-16*eta",
+            "2-3*epsilon+epsilon^2",
+            "-12*epsilon*eta+8*eta+4*epsilon^2*eta"
+          ]
+        },
+        {
+          "target": [
+            2,
+            1,
+            1,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "original_rhs_count": 16,
+          "rhs_count": 7,
+          "conditions": [
+            "2*eta",
+            "eta"
+          ]
+        },
+        {
+          "target": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "original_rhs_count": 2,
+          "rhs_count": 0,
+          "conditions": [
+            "-3+2*epsilon",
+            "-12+8*epsilon"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "virtual-with-algebra",
+      "source_count": 36,
+      "point_count": 19,
+      "applied": 19,
+      "total_rhs_terms": 192,
+      "new_upper_surface_terms": 0,
+      "cut_index_raises": 0,
+      "identical_rhs_to_original": 17,
+      "identical_conditions_to_original": 17,
+      "wall_seconds": 0.2045865235850215,
+      "peak_child_rss_kib": 52244,
+      "differences": [
+        {
+          "target": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "original_rhs_count": 24,
+          "rhs_count": 33,
+          "conditions": [
+            "-2+epsilon",
+            "4-6*epsilon+2*epsilon^2",
+            "-4+2*epsilon",
+            "16-24*epsilon+8*epsilon^2",
+            "32-48*epsilon+16*epsilon^2",
+            "-8+4*epsilon",
+            "8-12*epsilon+4*epsilon^2",
+            "-16+8*epsilon",
+            "-24*epsilon*eta+16*eta+8*epsilon^2*eta",
+            "8*epsilon*eta-16*eta",
+            "2-3*epsilon+epsilon^2",
+            "-12*epsilon*eta+8*eta+4*epsilon^2*eta"
+          ]
+        },
+        {
+          "target": [
+            2,
+            1,
+            1,
+            2,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "original_rhs_count": 16,
+          "rhs_count": 7,
+          "conditions": [
+            "2*eta",
+            "eta"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "status": "incomplete_native_closure",
+  "scope": "Current pre-refinement native projection build, full three-loop fixed-dimension attempt. Stopped during first singleton preparation before all-cut construction or transport.",
+  "failed_cut_slots": [
+    0
+  ],
+  "failure": "incomplete reduction or boundary data: occupied weighted connection unresolved: active weighted provisional-frontier budget exhausted; rounds=7, provisional=1025, unresolved_terms=14439; first residual indices/reasons=[([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 1, 1, 0, -1, 0, -1, 0, 0, 0], NoApplicableRule), ([1, 0, 2, 1, 1, 0, -1, -1, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 2, 1, 1, 0, -1, 0, -1, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 2, 0, -1, -1, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 1, 1, 0, -1, 0, -1, 0, 0, 0], NoApplicableRule)]",
+  "rounds": 7,
+  "provisional_frontier": 1025,
+  "frontier_limit": 1024,
+  "unresolved_terms": 14439,
+  "reported_progress": [
+    {
+      "round": 0,
+      "requested": 16,
+      "basis_size": 7,
+      "new_derivatives": 13
+    },
+    {
+      "round": 1,
+      "requested": 60,
+      "basis_size": 29,
+      "new_derivatives": 46
+    },
+    {
+      "round": 2,
+      "requested": 153,
+      "basis_size": 99,
+      "new_derivatives": 106
+    },
+    {
+      "round": 3,
+      "requested": 337,
+      "basis_size": 214,
+      "new_derivatives": 228
+    },
+    {
+      "round": 4,
+      "requested": 762,
+      "basis_size": 516,
+      "new_derivatives": 511
+    },
+    {
+      "round": 5,
+      "requested": 1313,
+      "basis_size": 691,
+      "new_derivatives": 721
+    }
+  ],
+  "wall_seconds": 60.432538284920156,
+  "peak_child_rss_kib": 340644,
+  "numerical_predictions_saved": 0,
+  "reference_comparisons": 0,
+  "three_loop_acceptance": false,
+  "improvement_claimed": false,
+  "artifacts": {
+    "failure.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/failure.json",
+      "sha256": "d26211b61386c182628310156e232f004b805afa8eaaae79179bc1e74f890a26"
+    },
+    "configuration.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/configuration.json",
+      "sha256": "bef2630a0ea5b1545e7ed4fbd95d3826f340da896dbe36dd39fc5e559b473cce"
+    },
+    "input.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/input.json",
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+    },
+    "zero-projection-three-loop-fixed-resources.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-resources.json",
+      "sha256": "322cbf782c719c161302fc4c183c6cd86bcc2bc720b059518cae573c8d1809b7"
+    },
+    "zero-projection-three-loop-fixed-resources.provenance.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-resources.provenance.json",
+      "sha256": "9f85d351f8b6d5fc9d6baae55c906417d1cc4114928826f2a87c5ff64f8b84d3"
+    },
+    "zero-projection-three-loop-fixed-binding.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-binding.json",
+      "sha256": "b09664c767c81bd62c0fc2a4f6372f98798097391873e6d041dacfa7679320d6"
+    },
+    "zero-projection-three-loop-archives.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-archives.json",
+      "sha256": "e3e5ce5d3c3790241f9ec500da86c839d2e4977149a801d8a816fef7fbb2cf59"
+    },
+    "zero-projection-source-hashes.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+      "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+    },
+    "zero-projection-build-provenance.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-provenance.json",
+      "sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7"
+    }
+  }
+}

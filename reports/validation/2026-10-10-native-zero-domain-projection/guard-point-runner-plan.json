@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "prefix": "guard-point",
+  "status": "prepared_only_waiting_for_source_owner_readiness",
+  "source_snapshot_captured": false,
+  "build_started": false,
+  "old_checkpoint_immutable": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-artifacts.json",
+    "sha256": "665982a7505d193357e6c970e1bfc40d19ef8c8c42eee3bbf71f5aa0bbd57261"
+  },
+  "unchanged_shared_helpers": {
+    "capture-source-snapshot.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/capture-source-snapshot.py",
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b"
+    },
+    "frozen_sources.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/frozen_sources.py",
+      "sha256": "604f43a7d4da6f77e3f9142222f568a93e66f5458b5390e7b5295032190e2921"
+    },
+    "capture-frozen-build.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/capture-frozen-build.py",
+      "sha256": "af3b0e92b7a2ad0b8a33ac7793f020e71dc916adc6cb80ba1bc15e7a484809ef"
+    },
+    "run-frozen-root-gate.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/run-frozen-root-gate.py",
+      "sha256": "5deb2a7e83c2aa19f186615b84a9a863fd594fa94afe7eb20bae7c1038d5e9c8"
+    },
+    "summarize-frozen-root-gates.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/summarize-frozen-root-gates.py",
+      "sha256": "087b007a12ccd2aeede89edff61f153968adb568c5491d1b74c8a1333326b192"
+    },
+    "run-resource-command.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+    }
+  },
+  "new_launcher": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/launch-guard-point-build.py",
+    "sha256": "f99dc5d1425668d83cbfda5d73625992089588ab9c078a9ecfd9c0d737861666"
+  },
+  "source_freeze_rule": "No source snapshot or Cargo execution before boundary owner readiness and root coordination. Source inventory includes untracked native and RustFlow tests.",
+  "capture_after_successful_build": {
+    "script": "capture-frozen-build.py",
+    "arguments": [
+      "--prefix",
+      "guard-point",
+      "--extra-artifact",
+      "target/release/deps/finite_density_capacity-fceac547516b5e9d"
+    ],
+    "condition": "Use exact current path emitted by completed Cargo log; capture rejects mismatch."
+  },
+  "ordered_gates": [
+    {
+      "gate": "native",
+      "filter": "solver::guarded",
+      "condition": "captured completed build and frozen source; must pass before root gates"
+    },
+    {
+      "gate": "lib",
+      "filter": "finite_density::",
+      "purpose": "includes new point-refinement regression tests and physical-owner invariants"
+    },
+    {
+      "gate": "flow-boundary"
+    },
+    {
+      "gate": "massless-sources"
+    },
+    {
+      "gate": "source-fingerprint"
+    },
+    {
+      "gate": "python"
+    },
+    {
+      "gate": "capacity"
+    }
+  ],
+  "runtime_target": "finite_density_runtime_flow",
+  "features": [
+    "symbolica-amflow/python"
+  ],
+  "numerical_ownership": "root; no numerical runs launched by this plan",
+  "numerical_configuration_change": "Root will record guard_refinement.max_passes=1 explicitly; historical failed runs used0. Do not describe this as a source-only numerical counterfactual.",
+  "release_acceptance": "Requires actual massless two-loop fixed/Laurent comparisons on saved predictions; passing unit gates alone is insufficient. Three-loop/four-loop statuses remain unresolved until their own full gates pass.",
+  "all_prior_results_preserved": true
+}

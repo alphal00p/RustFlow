@@ -1,0 +1,35 @@
+{
+  "captured_utc": "2026-10-10T01:17:36.714851+00:00",
+  "command": [
+    "timeout",
+    "120s",
+    "/tmp/three_loop_temporal_euler_probe",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/original.json",
+    "original"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/three_loop_temporal_euler_probe": {
+      "resolved_path": "/tmp/three_loop_temporal_euler_probe",
+      "sha256": "374ec8089d4abdbeb8c0d8145a0a3a33d1cdb1d0fa4981a72be5746705cfce7a",
+      "size_bytes": 1254591584
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+      "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+      "size_bytes": 7422642
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+      "sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+      "size_bytes": 1770
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

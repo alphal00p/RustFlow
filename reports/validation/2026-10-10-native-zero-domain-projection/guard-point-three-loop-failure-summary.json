@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "status": "failed_bounded_native_closure",
+  "numerical_acceptance": false,
+  "saved_prediction_count": 0,
+  "reference_comparison_count": 0,
+  "scope": "Full three-loop attempt stopped during preparation of first occupied singleton [0]; later cuts and all four configured numerical profiles were not evaluated.",
+  "cut_slots_at_failure": [
+    0
+  ],
+  "rounds": 8,
+  "frontier_limit": 1024,
+  "provisional_frontier": 1025,
+  "frontier_trajectory": [
+    7,
+    29,
+    99,
+    256,
+    420,
+    641,
+    914,
+    1025
+  ],
+  "unresolved_terms": 9850,
+  "failure": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/failure.json",
+    "sha256": "3088d4391af6505c4ac8cc5134e34fb878bfcb7999b68a6f8fb12ced6b84b36b"
+  },
+  "configuration": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/configuration.json",
+    "sha256": "ea2f9fc057c95b21c69512f52d82ccb4a910bddb93a06c365d027b83867b9bc8"
+  },
+  "input": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/input.json",
+    "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+  },
+  "execution": {
+    "resources": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.json",
+      "sha256": "08c03af19bcb8786219e416a4e685f4e96e9e44baf7192ca014b1cda5174b4ce"
+    },
+    "launch": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.provenance.json",
+      "sha256": "3fc9de5b94277a2b44ba4bee4fe1d793c6f7f4276fe26ace5747504b7240fe94"
+    },
+    "binding": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-binding.json",
+      "sha256": "f42dd20f997bb421d6acc43ea9c7dd465afdd0713a035a54fc2b435ac28320d8"
+    },
+    "exit_code": 101,
+    "harness_seconds": 123.93,
+    "wall_seconds": 123.94649042701349,
+    "peak_child_rss_kib": 387620,
+    "executable_sha256": "b31ec216907f22953ff12684e54aff2acd69953b475575bbba021294c8bf3dd4"
+  },
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-hashes.json",
+    "sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-provenance.json",
+    "sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca"
+  },
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "784d1eb6a4dfd8fefef06e26f659382e7aacc9bc86bd5be771c826ce7b035f21"
+  },
+  "improvement_claim": false
+}

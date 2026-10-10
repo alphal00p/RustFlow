@@ -1,0 +1,1274 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T01:41:11.812221+00:00",
+  "scope": "Completed pre-point-refinement projection source/build/regression/numerical/diagnostic artifacts. No production point refinement is included. Future fixes require a new prefix and preserve these bytes.",
+  "status": "blocked_by_massless_condition_guard_regression",
+  "release_validated": false,
+  "source_snapshot_sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+  "source_files_verified_unchanged": 2478,
+  "source_reconstruction": "pre-refinement-source-reconstruction.json",
+  "file_count": 302,
+  "total_bytes": 245651371,
+  "files": {
+    "reports/validation/2026-10-10-native-zero-domain-projection/README.md": {
+      "sha256": "846c329d12d0d294e84996a9182a0350c35dee60f572e101a119309f5e2ab5a0",
+      "size_bytes": 3971
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/archive-completed-three-loop.py": {
+      "sha256": "e8f040b3d018bdfe050f836ae3205ac647de2afe3a6f827aa3da878827b19544",
+      "size_bytes": 2931
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/bind-early-native-gate.py": {
+      "sha256": "f2e0e88207d47bf1d69e263acfe4f6e9a4024f45ddb9fbfc8c8b978a812f8fa4",
+      "size_bytes": 2504
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/capture-frozen-build.py": {
+      "sha256": "af3b0e92b7a2ad0b8a33ac7793f020e71dc916adc6cb80ba1bc15e7a484809ef",
+      "size_bytes": 5383
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/capture-pre-refinement-artifacts.py": {
+      "sha256": "6a67c4a2e7ac5115e46722534395f9b95a59fdc6aeb343368b220937f64a3cd4",
+      "size_bytes": 3329
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/capture-source-snapshot.py": {
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "size_bytes": 2075
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/assessment.md": {
+      "sha256": "991093f718d918991bccb6e1694ee4fc43a83ccde49be8df035629a11293cad3",
+      "size_bytes": 1333
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/binding.json": {
+      "sha256": "3d1274bd66db101a10ef90288dac973f6ef8ade7b793989463bc4fd37174c94a",
+      "size_bytes": 1160
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/coupled-gap.json": {
+      "sha256": "66da37fe98b4a59eb3220d7d890cbf9da062ee0f4767c679331a6ac19b62d7a9",
+      "size_bytes": 1565
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-binding.json": {
+      "sha256": "62995565f5b20112703efbbebc5aeb053b9c17cfd202d7e0a7d59fbe7f91edf1",
+      "size_bytes": 2005
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-resources.json": {
+      "sha256": "ba758fa2680570686a913a10a2ab90d0256d8a28fe05cb37cf5e0376474d4f34",
+      "size_bytes": 593
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-resources.log": {
+      "sha256": "18b4dd6faa9253f623b86b922e5cdc42d6c976fa743ce4ebabbf4ae3aa62be74",
+      "size_bytes": 90
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-resources.provenance.json": {
+      "sha256": "3759c0c7d8925e4e2ba05164eb2a0488f7016a4cbc9b2495a30570417a84d9b6",
+      "size_bytes": 1198
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.bin": {
+      "sha256": "a5d2cfcece9dc789aefc62e7dff209c57137f8db8c8538099b6419134eeb7bb7",
+      "size_bytes": 85564
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.json": {
+      "sha256": "3a6ebeb839251edff089fc1a6e2b75d8b1001dfc2574973f756564bf453c4e4c",
+      "size_bytes": 45419
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.rs": {
+      "sha256": "79edd10836c5f87e36d15cdbcc58157282201bb03dbc774fc2741f7d401c18fd",
+      "size_bytes": 7265
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/probe.rs": {
+      "sha256": "def6cb6d4d99eebb688204e6db4c9835f2e8cda151d63c1be3d3cf59c9e6122c",
+      "size_bytes": 5112
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/resources.json": {
+      "sha256": "9724bb183cdae5c490fd18177712ae12d11211a71b587fca239c044559ef892d",
+      "size_bytes": 563
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/resources.log": {
+      "sha256": "18b4dd6faa9253f623b86b922e5cdc42d6c976fa743ce4ebabbf4ae3aa62be74",
+      "size_bytes": 90
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/resources.provenance.json": {
+      "sha256": "a5d4e62f4c97c1936b0b8a189660c6f9624260725796f6d9b016b8ededc6b417",
+      "size_bytes": 1169
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/rules.json": {
+      "sha256": "e66b7f5e5c021a3fbdb042018812495e123ea7d5984ff6789de458c237f13018",
+      "size_bytes": 43484
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/frozen_sources.py": {
+      "sha256": "604f43a7d4da6f77e3f9142222f568a93e66f5458b5390e7b5295032190e2921",
+      "size_bytes": 1906
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/configuration.json": {
+      "sha256": "3bf0d4d8e85e8c470e8be2bd74d057c93677ff343ce594a72e87b19974be6e1e",
+      "size_bytes": 1155
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/input.json": {
+      "sha256": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+      "size_bytes": 1060
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/guard-refinements.json": {
+      "sha256": "82c7f457cc8d7aabf850fc1b9ecc0e140e71fc216c2d1cfa5ce55989322a040b",
+      "size_bytes": 13669
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-000-provisional.bin": {
+      "sha256": "7a2263a653af6b37e34600d42a17baf34057aac551073ad45a5365b365eec736",
+      "size_bytes": 140622
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-000-provisional.json": {
+      "sha256": "e3f3605f9e4edb4062efe2e0ada410020a5b384ee3c5cf73d4d2135341e9161c",
+      "size_bytes": 4333
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-001-provisional.bin": {
+      "sha256": "52f24af3cbb0a90c30c50ac07adf352be9bd48f7be68cad4643db96df3d57179",
+      "size_bytes": 247631
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-001-provisional.json": {
+      "sha256": "739fe005ce2750192c40cf6f394f2e42f8fba32afd9c8debae405023c14aa15f",
+      "size_bytes": 6756
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-002-closed.bin": {
+      "sha256": "5c52e3aeee597645694dd92ef3c30625937052b19f63ced6b35d483c101921f7",
+      "size_bytes": 258732
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-002-closed.json": {
+      "sha256": "1899514e92bd9c40a2b0cb2aa53b6770b709d7cf327874ba5cbf4e9da1dd59d9",
+      "size_bytes": 6751
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "4a7eb7490517e0c9e2ab6ce1c04e6f502a3b72bc86a57f3bffc0cf36c0a39389",
+      "size_bytes": 258684
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "fac5bf29664605daa7e103a729ebc7d30176abc52c5e79648c7637070306ace2",
+      "size_bytes": 6756
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/guard-refinements.json": {
+      "sha256": "7d52022def3eaddc0cac7998dfb2e95ba2cd5e273c694f37c339c5c447873720",
+      "size_bytes": 50778
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-000-provisional.bin": {
+      "sha256": "259efc9212592665a6b0b286c23b1f9b44bfe07de6933d685c1e0c3914ad8f7e",
+      "size_bytes": 239251
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-000-provisional.json": {
+      "sha256": "f99cb1ab328e5ac758b65e1b9738e2d9eb7c5df613f241f9a150eda9ea9ee0b4",
+      "size_bytes": 6860
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-001-provisional.bin": {
+      "sha256": "4b7e49991b760bec419b1a246e019c2e0e4e3d5e349d9ce7df29c4db8af41972",
+      "size_bytes": 670012
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-001-provisional.json": {
+      "sha256": "13f027e2bb231f5458182ec918f140c5829570309c9c7a6f9f8d6e27b8e06456",
+      "size_bytes": 13611
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-002-closed.bin": {
+      "sha256": "29f9c073ce19c48bfd2f42a4075e0e94227fd88c22ba6c79f7a25e123f80965c",
+      "size_bytes": 746682
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-002-closed.json": {
+      "sha256": "e8ad9f3a008d792afaa12726347fa784047e0a2f7931945b632447568d153f1e",
+      "size_bytes": 13700
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-002-provisional.bin": {
+      "sha256": "6f629ebba6d22e08d3d9a0137c51ec4fc73ad18c9053eb706d7c0d9e7115f95b",
+      "size_bytes": 746602
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-0-1/round-002-provisional.json": {
+      "sha256": "0c9d49759edde8a9ccbba5805b5a482dd8a9eaf7a8542d549ef838fef9ea2904",
+      "size_bytes": 13705
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/guard-refinements.json": {
+      "sha256": "d5c35a28eef5e7fd891ce544a87eb21030582547e3f0ee3c34c928e325b1e88c",
+      "size_bytes": 9907
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-000-provisional.bin": {
+      "sha256": "de00a548836fa806b5d7f27b75a5a4f233a763d225f42ab5af6bcdd3d1880e05",
+      "size_bytes": 127934
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-000-provisional.json": {
+      "sha256": "c7912fd379d2d09ca16fb8f7bca94a8b33c719df3ae2f3463b5fe7a223b7e5c5",
+      "size_bytes": 4793
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-001-provisional.bin": {
+      "sha256": "857443e572e8033edb9107d3ff6b7455fc629b9deffc85a0a021ef0ba4c9fe47",
+      "size_bytes": 350473
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-001-provisional.json": {
+      "sha256": "5d9643ae9b31e08188462feed262e51276d5aa143cd48cfeba502cf88bb74eaf",
+      "size_bytes": 10033
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-002-closed.bin": {
+      "sha256": "b442ef9b5d132da9998bfa9c21b7ddd68a8c4b5becfc13cb477a6ba4c1c8eb5d",
+      "size_bytes": 464355
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-002-closed.json": {
+      "sha256": "036f42ca9ce8baaafa4beb6ac2eaf8b8d217fcf796fb0a1eb55c220915520c93",
+      "size_bytes": 11625
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-002-provisional.bin": {
+      "sha256": "3be3e50ee5396a835c8bd66166ab36ffe6dc82e73d1fabf872c85780805d13c6",
+      "size_bytes": 464307
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/native-closure/cut-1/round-002-provisional.json": {
+      "sha256": "9b6acf4eba376640aea6fe49fe1ebd88965bdcd2dec741abcbde0c30f9d684f8",
+      "size_bytes": 11630
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/prediction-28-80-12.json": {
+      "sha256": "36efffc4ee48713d17f5990460d8a746a60e8fa9eb4eeeceef390069510e4c60",
+      "size_bytes": 61915
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-binding.json": {
+      "sha256": "694099bf6a5d6d957556b3df417436d1c26b256a1dccaeff9697ebfc7eb6216d",
+      "size_bytes": 2006
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-comparison.json": {
+      "sha256": "13dda54c24a1b961cbe8ed49b29a8186869c466bf4a17ba351119c3c89f91dbc",
+      "size_bytes": 14333
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-post-run-binding.json": {
+      "sha256": "5218b8f6ad344e7762f2ff8e5487a1bb34d942f8bd1191ad6ea2699647311463",
+      "size_bytes": 447
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-resources.json": {
+      "sha256": "f3537109699f47365725c8c0b9d490701f909cd7da3f649b55ec5e95c6af1ab6",
+      "size_bytes": 734
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-resources.log": {
+      "sha256": "f9e12a0a3740cdd9d8ff96ae68bf9f5e134ee2ac552af9538c0e7af0fd95be88",
+      "size_bytes": 32694
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-resources.provenance.json": {
+      "sha256": "719bbf81c96f583779095db3efa0c34c36adc439fc19bed20ab70cc5299b7d0a",
+      "size_bytes": 1454
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-summary.json": {
+      "sha256": "01c15e4b7d615bdbc0e88b648901019add380cb7a7afb1e306157bd8b9e37e30",
+      "size_bytes": 3720
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-source-reconstruction.json": {
+      "sha256": "2b5d3fd319077efe496f6aeaa2bc87fe00df292fab6ff74b58a61bda352a29fa",
+      "size_bytes": 1575
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-source.patch": {
+      "sha256": "8f089d7fd7d239e2aa286e88992ec42cf88cc295e8d9b13161ed6d717c75e12a",
+      "size_bytes": 7906
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-untracked-source/vendor/rustred/crates/rustred-core/src/solver/guarded/search/zero_projection_tests.rs": {
+      "sha256": "f914008cd41ec9fcad902384b3acb1629af9ca3e166e215db72dd948d05d213b",
+      "size_bytes": 8703
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/configuration.json": {
+      "sha256": "2763857baded0f9f3d33dfe3eda77a43616da8b74f53fff9e5e341226cbb68c2",
+      "size_bytes": 1294
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/failure.json": {
+      "sha256": "6b5a45d297eda16909e7fd4373399445ceca9fd54b04da4b259c621c622f38ff",
+      "size_bytes": 768
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "size_bytes": 1549
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/active-request-history.json": {
+      "sha256": "8454ce58fca772ee3e1c8b8f0779033f6fd3fcc3ce4f0048830dffa7ed67a3b7",
+      "size_bytes": 631843
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json": {
+      "sha256": "13173594d686fb88c9b04ee79b087dab0ea62683749778cb5b505ce9ce1b107a",
+      "size_bytes": 297700
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json": {
+      "sha256": "06fc68ce7f57811ae35eb3b9cd33da5753bd002331a94df1eedd793e4ff658bb",
+      "size_bytes": 3077286
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json": {
+      "sha256": "4a69c47da9f69efce88dadb8655aef00da86538cb2ca66722495f77a8d5b6dbf",
+      "size_bytes": 14963428
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json": {
+      "sha256": "9ff76d80597a9271c1a5a496985bfd3f6389dddfb31dd818465fdacddd0257cf",
+      "size_bytes": 49994345
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json": {
+      "sha256": "a1bac6a776337ff356c91e8d8281e622b8beb97171308115ed63b79d82e41f0a",
+      "size_bytes": 58621011
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json": {
+      "sha256": "54cabbf733d9619c4b9686c985d455a2cda4b4b9188f4338fbdcaeabe7fedafb",
+      "size_bytes": 58179783
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json": {
+      "sha256": "4e7ddae0f83c017b7789c3694b3f8811201d0dfdbc072cf11906e865a3a6c415",
+      "size_bytes": 9237514
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin": {
+      "sha256": "955fa75da987388c6d6a190eb3d2695a2523ce2bbae089ae77eb5e3292d51495",
+      "size_bytes": 64423
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-000-provisional.json": {
+      "sha256": "952bb7e27ce235318faeb022702dd349ea2699e6b4e3e48d56af80d0e13dd39e",
+      "size_bytes": 16711
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin": {
+      "sha256": "311185cbbc72b63df57e1f34ed1cb50f09e40162885006b61eb4c0f4d6476357",
+      "size_bytes": 444574
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-001-provisional.json": {
+      "sha256": "0d58a8fe830807d4d5d115804d052902f550b6eeefb3eb6ab5fc09d674945d67",
+      "size_bytes": 49028
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "1dc405cfacf6615aca6e3bfb39147bfa9c6a185d6576748fb141f94edc227684",
+      "size_bytes": 2151597
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "f56d27e29ab55247d47787cda0daea94db55057f46735443972cad190774a3b6",
+      "size_bytes": 149701
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin": {
+      "sha256": "f84091e0f024491d56257d79f2ed3b6f03895dc1640e4579812e1d5a46e1a42c",
+      "size_bytes": 4969431
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-003-provisional.json": {
+      "sha256": "9d9e5f23c98dfa5e6273dbc9d8543614c2978da3cf5f4653eb1fba969df8b276",
+      "size_bytes": 257933
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin": {
+      "sha256": "5b7b8aef161ed02cd77d98aa3bc66c6d3f7281305442ec157f2a96d701ff7d90",
+      "size_bytes": 7510653
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-004-provisional.json": {
+      "sha256": "80e43c0512ec55e783cb023cfff03d7939547ef8489a435bc6999588d0700cfe",
+      "size_bytes": 402692
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin": {
+      "sha256": "5e69e7bbfa60f94f6cee2f20e9ccea3fca44cb4850da39a5a6e089d32c1cdfad",
+      "size_bytes": 9892121
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/native-closure/cut-0/round-005-provisional.json": {
+      "sha256": "ded107c2dbf9ded754cb3f43131619945f64548aece6722f119df704dd92b6d1",
+      "size_bytes": 413239
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-old-build-binding.json": {
+      "sha256": "71ac6d83548ae1c81551b50d00fd4c4f57b47849584627ce88b76cb1ca7afdb7",
+      "size_bytes": 3125
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-resources.json": {
+      "sha256": "886b737e4700465f5f25b792d611d0d6101cda81df673880707795f92bf73c8e",
+      "size_bytes": 1414
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-resources.log": {
+      "sha256": "b7e6d6f1b5b8a562db855db080646e06aa455b6e5fdf494358e20bbdde83fa6f",
+      "size_bytes": 1547
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-resources.provenance.json": {
+      "sha256": "a3dcbde034e38bcc942ec4979ce7dbbdf906d5128142f43a0ea8d197a8ffe83b",
+      "size_bytes": 2121
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-summary.json": {
+      "sha256": "4a4db32d7ea8ba31d087f634cfd9d4d35f4c172c7dec8897bb83ea325ad4d38e",
+      "size_bytes": 6627
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-frozen-root-gate.py": {
+      "sha256": "5deb2a7e83c2aa19f186615b84a9a863fd594fa94afe7eb20bae7c1038d5e9c8",
+      "size_bytes": 3136
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-massive-regression.py": {
+      "sha256": "d1659fddc760435358e56965e4863d22207d225d1cb130319e7873f24259fbe1",
+      "size_bytes": 3050
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-numerical-gate.initial.py": {
+      "sha256": "61533cb33344d81853d7dcc043dce749a4ec3c56982b33a53dce85414caddaf6",
+      "size_bytes": 3469
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-numerical-gate.py": {
+      "sha256": "80d6e8da4431991516f914ed32fd258a6d50f1590e627af477fd2531d549e6da",
+      "size_bytes": 3495
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "size_bytes": 2367
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/runner-origin.json": {
+      "sha256": "4998ef8e103c035aa94e5bf32f0f0021e8e2a2df3176f62459af7fe313a99014",
+      "size_bytes": 1388
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/summarize-frozen-root-gates.py": {
+      "sha256": "087b007a12ccd2aeede89edff61f153968adb568c5491d1b74c8a1333326b192",
+      "size_bytes": 4126
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/validation-plan.json": {
+      "sha256": "7b4364a87077072535bdd3061e6717a9d00c639ddf6e3fa5881dcecaae1eab81",
+      "size_bytes": 4120
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-provenance.json": {
+      "sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7",
+      "size_bytes": 5140
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-resources.json": {
+      "sha256": "bc568cfae7f8131b3199c150c2aca6dd0b2da9677485b122677e2183c585e11d",
+      "size_bytes": 742
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-resources.log": {
+      "sha256": "10dba0c37de11f928111868aeb935e8b02fd0fccd2e4e871a200ed3a2d83674a",
+      "size_bytes": 3307
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-resources.provenance.json": {
+      "sha256": "e6a99818aa0bc67130ae6cf2bdaab6ab127654d4436a79fafb5f1173ab414033",
+      "size_bytes": 1128
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-binding.json": {
+      "sha256": "48b0ca141d2dd708de622e17270bb5a8a804100a248a19f32bcd548f67a2d344",
+      "size_bytes": 525
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-resources.json": {
+      "sha256": "6492e796b05358e20ac356431ffc21276aeadcff152e22cbe3d453b0dd6a324f",
+      "size_bytes": 401
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-resources.log": {
+      "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495",
+      "size_bytes": 364
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-capacity-resources.provenance.json": {
+      "sha256": "3577a4a92a92576f973a6975f25c550b995593f8331ca2420e2abf7a21920bb5",
+      "size_bytes": 864
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-checkpoint-status.json": {
+      "sha256": "18a416c414bbf21a5a617a50295fa69f7ef6f6844c1c4a7109bf5701b4ac12da",
+      "size_bytes": 7889
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-binding.json": {
+      "sha256": "e010d9a71da2437f292528306df8033345001aafb12790b2aef798cbfb32fcbd",
+      "size_bytes": 535
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-resources.json": {
+      "sha256": "75dc2764c190a9d82d5af90f7aa2341172ce570977b133928a800463d69e7c9f",
+      "size_bytes": 394
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-resources.log": {
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "size_bytes": 574
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-flow-boundary-resources.provenance.json": {
+      "sha256": "d14ff512979027efe7a8f20ba280af6d3bfdd154f4c90f239a0e78404cfaf610",
+      "size_bytes": 879
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-binding.json": {
+      "sha256": "878e2082d32f19fe5008fd194e8bfe83596e028d13d698bc7cfc487eb000e70f",
+      "size_bytes": 537
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-resources.json": {
+      "sha256": "4031f91006f8c276729865db9687ed9f9e57b989cbbc3eac00cf66ee8ca4c32a",
+      "size_bytes": 415
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-resources.log": {
+      "sha256": "1bf28acc7509ad22e1f75f2cf680df643af45b983e60ac121b8f0960e9098333",
+      "size_bytes": 8791
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-lib-resources.provenance.json": {
+      "sha256": "72c16c36c0a3b5ae62ecb5e73b25474cd517a881d263cdfe34e549bab9b90e37",
+      "size_bytes": 867
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-binding.json": {
+      "sha256": "c68e3322c2e320cc9aefd05f4e036529e5358a3be6a56fec3e7eddc487edae20",
+      "size_bytes": 541
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-resources.json": {
+      "sha256": "42a6f3b6268e9ec1ff621537c46ddc82534b978e734a7506f12777544c067914",
+      "size_bytes": 395
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-resources.log": {
+      "sha256": "3a59bf863e8da494aa287e06781fcbd4325018d8d81deabd14f2179480835766",
+      "size_bytes": 435
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-massless-sources-resources.provenance.json": {
+      "sha256": "3dcfedecec76c6302b7337ce7e3d75c0a0d3c5797a496a0c352a3890df92196c",
+      "size_bytes": 888
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-binding.json": {
+      "sha256": "6680c7d637cf00a1754cefc44da85a2eaa03a18a54441725a24ed3855b754f87",
+      "size_bytes": 1089
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-early-binding.json": {
+      "sha256": "68e2fbf38bb6c83befcf00a6651f515e20b36a60fdcf5decb8e4cedf52ec3dc6",
+      "size_bytes": 704
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-library-early-binding.json": {
+      "sha256": "3b317f1ecc31407097a31e09a342f5934fd35937cd821fc7e30c9868e33d77dd",
+      "size_bytes": 396
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-resources.json": {
+      "sha256": "351718bc6064993d3ac23414846e369aa23fb6441dde643e210441ef07bd118a",
+      "size_bytes": 396
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-resources.log": {
+      "sha256": "61f8e286ede2ad21887524fd3490156d4db96346494e4d5c6088bbf217e615af",
+      "size_bytes": 13041
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-resources.provenance.json": {
+      "sha256": "27d9fe082b814e6c8d8fb3325f8af47743e14d8e1353929d736d2f881a93c855",
+      "size_bytes": 838
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-preserved-native-library.json": {
+      "sha256": "af11ce5c7fed6090c8f9ea8c41719f3efe91eecb109ed16bacb2923deb690230",
+      "size_bytes": 2154
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-binding.json": {
+      "sha256": "18618c30e0519e9347e0185869b86eff108016a720163cf865a510bd18c68bd4",
+      "size_bytes": 521
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-resources.json": {
+      "sha256": "fe34488283626002517f364e4f19a5ef8316d4ec9497fe7bb11b11401b678af3",
+      "size_bytes": 396
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-resources.log": {
+      "sha256": "56e50b2deab0f37fae4852d2d9e4c95173d5fa24a962f042aa36b70a2db2444e",
+      "size_bytes": 193
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-python-resources.provenance.json": {
+      "sha256": "1e9739ff9eae294a88a142bc4853b3af00f4c827a0ca11c142f5af87bfef8030",
+      "size_bytes": 858
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-root-gates.json": {
+      "sha256": "7002deb3b2dea544810a0324a4a94e5d6e8fbf6ec125823fd5f65b6241d5c9e1",
+      "size_bytes": 10543
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-binding.json": {
+      "sha256": "7f70afafd580550905484c93085d23236c1e65cdc562eead8cf5d654e65f504b",
+      "size_bytes": 530
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-resources.json": {
+      "sha256": "1498f03c2b3d2c091a9a16cc482dde13810dacfd5b5401700454ae8c89595f9a",
+      "size_bytes": 397
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-resources.log": {
+      "sha256": "8325ee62156c9fa15a977c4c91f806a4acd658591ac21c6fa73993c674e57f89",
+      "size_bytes": 3647
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-fingerprint-resources.provenance.json": {
+      "sha256": "a5eca4228c6f71b7a22ea8bdfd91c0618fabaa5eec38716c15c0d575c56a131c",
+      "size_bytes": 846
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json": {
+      "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+      "size_bytes": 436437
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-archives.json": {
+      "sha256": "e3e5ce5d3c3790241f9ec500da86c839d2e4977149a801d8a816fef7fbb2cf59",
+      "size_bytes": 15804
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-failure-summary.json": {
+      "sha256": "4421a646cc0a482b2f91bb1a2677568b5f29b262bcf486a598618458fe27d3c2",
+      "size_bytes": 4299
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/configuration.json": {
+      "sha256": "bef2630a0ea5b1545e7ed4fbd95d3826f340da896dbe36dd39fc5e559b473cce",
+      "size_bytes": 1302
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/failure.json": {
+      "sha256": "d26211b61386c182628310156e232f004b805afa8eaaae79179bc1e74f890a26",
+      "size_bytes": 781
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "size_bytes": 1549
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "4ac1990477de77ed6ac3eb79c5ddaf6207c76cc9e6c1421112daffdd15407feb",
+      "size_bytes": 12034
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "cadbcdf25ecb794b767b45d5b61890adff0bce8c481b2707baeb9de1c1c8da1d",
+      "size_bytes": 4880
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "0bad37a112a8ea6196e2cdc263f98ec5943721c74dc33b51e5f976f25ea68f88",
+      "size_bytes": 19589
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "478a9f4da0b7c679c6b72cca95c502f0b0c998d54a82012e82c51201c6f4bd37",
+      "size_bytes": 67754
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "a09c2c73a218862f658a00e3b0e3bd807bdf6c688c264276eda1d1926511b85d",
+      "size_bytes": 153862
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "e68c1436decb8d076b103680f0abbc9ab5eec06df3a032211769f6da40708999",
+      "size_bytes": 328250
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "38efb833235fcb32cd3b87b200318206228dc8c6355a1086e4cf80af47df0ce7",
+      "size_bytes": 713942
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "f1ccd0f5056992ebc56d0801a7e17a447fe8d585628a00d8d49c2ccaf6306208",
+      "size_bytes": 916716
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "e152ac1f29eede3776c174f50872e74400622c6bca0df41facfd77d6570fcf77",
+      "size_bytes": 67608
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "485087bbaf160e8322f133eb68885499888b4db587103f4a7a52095d93ac89b2",
+      "size_bytes": 4680
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "7eda574625b3b0f21f0a47e0d22e351fdc1f308602fe308c4fe53f12f3890e5c",
+      "size_bytes": 1989
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "edf3f50c4c88e2c7d3240e536e3fcc625c55f1b8df339258f9c8cfa6077a08d6",
+      "size_bytes": 10560
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "9fc7dc8a8ae2ec4c258f359f12a14cf035e2b90db17f068f081dc6e325a9c1da",
+      "size_bytes": 2203
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "9ac6cd8ee2f0e3dfe6bdcb90c13334f68364dcf1ba69a0afdea79abaddc63481",
+      "size_bytes": 49902
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "3c18b998e99df7f2437c6071c63fa6719567be03ea463d8a1860165b0e91b327",
+      "size_bytes": 2734
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "dfb3620f73d3b2c92c11c9d56ca8f900d6e63d504b45c980613198be190653f7",
+      "size_bytes": 145486
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "b821bf36aaeecca8a7ca061f55da59a3240f160cdefc9e67e3e47d47b4b90b98",
+      "size_bytes": 4065
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "7f7f9f5cd56c4652b288b4f973f76f7541d1e66a59f80aa7b44b25d7138564dd",
+      "size_bytes": 326413
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "57e117d0aca95c475d5e7c0dfead649b58fe123f87fc8f924bc742d1b34efd21",
+      "size_bytes": 6684
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "e0490158ece635d26e8d8cd60b1a25d75471641fadef3498e538bec7f433cc1a",
+      "size_bytes": 517486
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "ce8ebedeb9f07092cd59bb880c2b0e74d781deef78f0465cc8e268991e24e620",
+      "size_bytes": 9100
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "ab5ec2c075cd0943c8581c1ee215eee41aa25e4785a9f538560efa2e05494c65",
+      "size_bytes": 672494
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "74ca402ecff0fa3959f49d83fb16c30705f8c0f5d9f7035aed6393e13c68268c",
+      "size_bytes": 12623
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-binding.json": {
+      "sha256": "b09664c767c81bd62c0fc2a4f6372f98798097391873e6d041dacfa7679320d6",
+      "size_bytes": 2854
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-resources.json": {
+      "sha256": "322cbf782c719c161302fc4c183c6cd86bcc2bc720b059518cae573c8d1809b7",
+      "size_bytes": 1423
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-resources.log.gz": {
+      "sha256": "4cfd0ec51e15e4ce68f6dd8fdb39cc809ee625a337fca5c245ac747f0b00b0c0",
+      "size_bytes": 617
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-resources.provenance.json": {
+      "sha256": "9f85d351f8b6d5fc9d6baae55c906417d1cc4114928826f2a87c5ff64f8b84d3",
+      "size_bytes": 2119
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/configuration.json": {
+      "sha256": "e318f5786baa46adf346722b49d98e2de0ba7b90c415d2851ce907c5b714bb36",
+      "size_bytes": 1299
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/failure.json": {
+      "sha256": "84ddc9372fdd2dfc2604de17fb8142a92793a4aa96228c888e76446a4a256033",
+      "size_bytes": 364
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "size_bytes": 1057
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/active-request-history.json": {
+      "sha256": "c87b7d3947557179b3d14cb0043067c582ef307fb59a5e16d7a0ed22ec348d84",
+      "size_bytes": 7286
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json": {
+      "sha256": "9e645fd784ec3c56090c6c78e8568cf5df6f97cbdbb42e9fc564ad733d44c1ab",
+      "size_bytes": 122812
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json": {
+      "sha256": "6cc80d7f12f75f9789354ee8058349d6a4ca65811cb8f581f1f6ccc92f86bc6b",
+      "size_bytes": 312053
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json": {
+      "sha256": "432368cb629e74252e17d47c948084a254f71f2e93bc98ccd4b888970d3549b9",
+      "size_bytes": 352258
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json": {
+      "sha256": "230bd52a2c0c2a5d76f5e5354edbdb4dda4eea9f112d862b275abc5f1adc428c",
+      "size_bytes": 519624
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json": {
+      "sha256": "58871987ff07d6578a568341653c932cfb2ccf2c9f7e76483f275feb499df132",
+      "size_bytes": 602809
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json": {
+      "sha256": "76bbdabf4f60c4c6595c7bcff5e6581de4dbb1919212d3cf8e92e1a45c6c8869",
+      "size_bytes": 401482
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json": {
+      "sha256": "9815ca7463dcb29cd87588a721ea19c60d4b692b9899cd90ea12e047e038dc55",
+      "size_bytes": 112144
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json": {
+      "sha256": "b8cfe891b90b4dec16b905fc2f406bb3fb0c147322ffee61deab3831f58a6786",
+      "size_bytes": 56550
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json": {
+      "sha256": "f3e9b0a03b6b454451e36bae948109891c6714e0f4a3d97d14b7b55d7e90349c",
+      "size_bytes": 80342
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin": {
+      "sha256": "5d8b4661122e9c077283a9799c386ec0b1b0be4cebef232c4d95bac2e6c49173",
+      "size_bytes": 27249
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-000-provisional.json": {
+      "sha256": "cdee66b08f8295c3808b295dfdd1e41c9751842f991e1067f77ea8f571eb5fa0",
+      "size_bytes": 8114
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin": {
+      "sha256": "b629aec369cfce453e0d736076ada75192083d3eca203557d2b6fd1aa16e72b3",
+      "size_bytes": 53216
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-001-provisional.json": {
+      "sha256": "4b68dc03f30e623f86997a2182266985f642bdedab760a4df8edbb0ca594a124",
+      "size_bytes": 8267
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "71adb0dc2087e7d65ea6006fba59b1f4cd4d363600839c8159ef6a54e598bebc",
+      "size_bytes": 92082
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "61da9def1f7851da85a179288fbd80e49e90fe14a2cb623b763d0b1ef01b8f3c",
+      "size_bytes": 9410
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin": {
+      "sha256": "bf3dd9c26d9cba8740d5e83b30f67673a405de7e6ac6de0d630b7b9efdbe3e96",
+      "size_bytes": 140054
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-003-provisional.json": {
+      "sha256": "176b7e0d30addc4315304725e061d7855951555ddd0a5e196c161c6dea98ea33",
+      "size_bytes": 9937
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin": {
+      "sha256": "d0d0089f47c9673396cde2607406ae87aa08a56576267440a5087e75dbd6d99c",
+      "size_bytes": 190861
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-004-provisional.json": {
+      "sha256": "36901c3caa2fa5958d43ba29df022db76bbc967c98d07e40901267fa3b832d62",
+      "size_bytes": 9023
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin": {
+      "sha256": "1d51e23a2d5a2b4ebe0ec9cfa2fdd9ea26b9cf4479ae87917b9ef6cede33c76f",
+      "size_bytes": 222692
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-005-provisional.json": {
+      "sha256": "cd4572541f3c17dede52ec76a241932411f5fa98696ce6c82e9e8ae2a1815128",
+      "size_bytes": 7501
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin": {
+      "sha256": "88b293afe32f8e0067d9d8978b7d8a259484553ffdb6ee726e3dd0711503c9de",
+      "size_bytes": 229857
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-006-provisional.json": {
+      "sha256": "1e0f78e84576e5a831c2e376ccd2127188fb6ec03f7aac37e0203322e7e115aa",
+      "size_bytes": 7197
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "7358cb380d63140000fada8b079443ffea9826e100130c80e3d272e8d69de3b3",
+      "size_bytes": 236570
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "7dfcea94a2e919f50341ba6d5d15e92d99ecae87670883e304fac8967b9e1c0b",
+      "size_bytes": 6888
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin": {
+      "sha256": "c13e0acd5053c63a0873a8960c3d618598ec3e1b54cd609b9ec414c3c196b3e7",
+      "size_bytes": 236554
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0/round-007-provisional.json": {
+      "sha256": "025b1138b650047f70dde2888b239e5de64663dbedb3ceae6f3d288fe0aba1c2",
+      "size_bytes": 6893
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/active-request-history.json": {
+      "sha256": "33204bb62b4db531caa13ae977ecb50e5f389560da63dc5c9167c32635fc8297",
+      "size_bytes": 1272
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json": {
+      "sha256": "d1660a0fa975d54793a61444f30a89bdf54d75e12e4c54a1fcfe3b5a55436942",
+      "size_bytes": 498698
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json": {
+      "sha256": "824e7ad3b9f162845a93000c7e9d4e499fb6dfc016e51e54f567fd932d36e186",
+      "size_bytes": 987653
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json": {
+      "sha256": "f39f37a4120427325d07d6fc5f735da2b7adf3ad4af16a334e887a8ee868a722",
+      "size_bytes": 35384
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin": {
+      "sha256": "d03354700b6ccd63711d023bd1e70327e8f992a07330da7383e035703f0e11b9",
+      "size_bytes": 46759
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json": {
+      "sha256": "29cc7ff8df89aa3ffd4ca4ad9a31fbc0b68fbc2ff105f528961eae291795b7c7",
+      "size_bytes": 7950
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin": {
+      "sha256": "30be79332795bba41963db90f494d13a4f70a8eb6a36dc621da28a268eff159d",
+      "size_bytes": 85216
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json": {
+      "sha256": "aa8fe5dd720f128b8636dafced2dd94ca142e20aa4735b11084e2a2fef2d8e74",
+      "size_bytes": 6819
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/active-request-history.json": {
+      "sha256": "9f5ce7a964bddb31d9beb5fbc2747a9a843d1db1dcdc6401710fe2027c8d8606",
+      "size_bytes": 2651
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json": {
+      "sha256": "f5fe41b878cf4fa3ddcef7c9fbfe46f148be46263c137a21c281f5d65fec5e97",
+      "size_bytes": 91491
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json": {
+      "sha256": "2bed02a9fdc6bc765131b2a8650ea8d6a0fe1106684f987858ffef8420eb4fe0",
+      "size_bytes": 148747
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json": {
+      "sha256": "56e4d909dbbcbfbd7ffc698e22e08557db468ff4b09e1060fc559445a159353d",
+      "size_bytes": 235416
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json": {
+      "sha256": "b9eb219e5a8478ed75c58528b4f02501eb2bcef9604e5605db66984f1d817f57",
+      "size_bytes": 147278
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/direct-zero-0005.json": {
+      "sha256": "e37b1c6c3bcde9788e21d6b6107edb123d7daefd6188f984057b5f6b60e7de61",
+      "size_bytes": 89035
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/direct-zero-0006.json": {
+      "sha256": "06f256cfe6244417aa977b6bb20c43a48d464f07e215ac37fd4cfa5626a4d598",
+      "size_bytes": 28930
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json": {
+      "sha256": "cb1e442e2035d24df68c062e9cb72a023088ca7ffe80b92100f2d2c1f7ef225c",
+      "size_bytes": 36563
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin": {
+      "sha256": "1381c02df8678823bc052a6dcf8f33cd43dc6ba047867d132ed480be3f5922e9",
+      "size_bytes": 27412
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-000-provisional.json": {
+      "sha256": "457b9cbe36a18d8aef336c1d68e85e53a64230af36162bcdf85ad314e9fd9129",
+      "size_bytes": 7042
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin": {
+      "sha256": "00dcdf381a6a76d2ef4973d4b0debe65c212c5c21786d75822f48c5ec9cde1c1",
+      "size_bytes": 47862
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-001-provisional.json": {
+      "sha256": "9f64ec2fc22ac24756d764c30d403846a333847b223f61f0dbe00c41dfcd47a5",
+      "size_bytes": 7727
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin": {
+      "sha256": "26812b5494fddda0e6c1d6519db19162d304e8669b78df8d91da8c0481c8a68a",
+      "size_bytes": 86730
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-002-provisional.json": {
+      "sha256": "b2adae9fe1604a1868aecafe00ffbb866760c2b1fa3ff84ff200f95b3ad1ca79",
+      "size_bytes": 7422
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin": {
+      "sha256": "58695aae0b6c6c8038cabae0f7beec52b483f697b457255ca170e7581bc590c0",
+      "size_bytes": 116148
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-003-provisional.json": {
+      "sha256": "2656115bc1324096eb213e3aa3cd9029d1401be74524773d2b133602b5540cb5",
+      "size_bytes": 7114
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-004-provisional.bin": {
+      "sha256": "99831060b8b7d93032f89cd311360416e49f9c2eb6bc52c2b9964a641cb10058",
+      "size_bytes": 123991
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-004-provisional.json": {
+      "sha256": "eeba4833172af75a01550f1c235fe34b75bd8eb1058f0f836b397a81a8190eda",
+      "size_bytes": 7039
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-005-closed.bin": {
+      "sha256": "1572870df31cdb05b07b5ef6ecaa663d320c99722fa99db1653c0b60dfe69ef4",
+      "size_bytes": 131923
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-005-closed.json": {
+      "sha256": "ed2c202d63d05c0ddf37d9d465786cfc350a9fe7e71a8399783d639f74b30b26",
+      "size_bytes": 6882
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-005-provisional.bin": {
+      "sha256": "ec4c9a1af311d95a8829456661430e6edbed900be2022b270f8cf926af6dfd09",
+      "size_bytes": 131899
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-1/round-005-provisional.json": {
+      "sha256": "bf444f006a50cefed0cb64d77a51441fc6ee1dbd703f1b5021b6e732e75091dc",
+      "size_bytes": 6887
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-binding.json": {
+      "sha256": "42a1582baf048bd5e56df4e40dcf39879e8022e648c4d80da0a15f8a6b83738f",
+      "size_bytes": 2848
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-resources.json": {
+      "sha256": "dce85b14ef38304aa3325f5f6ae704ba967a4599273d54a45941caf08051cb09",
+      "size_bytes": 1408
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-resources.log": {
+      "sha256": "974f599330ea646a8bbe9b4b6cd1676d27ca561c7ad271b941609e3e4376fb19",
+      "size_bytes": 1950
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-resources.provenance.json": {
+      "sha256": "4ec883c21add65dd33630f70d6d636d898d8f71b334c481bd1cfbf6a916b6bcc",
+      "size_bytes": 2116
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/configuration.json": {
+      "sha256": "e3fb674905a1170b284bb1ba8080398fa7a074ba41465f70bdb813f00d8b90ba",
+      "size_bytes": 1307
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/failure.json": {
+      "sha256": "84ddc9372fdd2dfc2604de17fb8142a92793a4aa96228c888e76446a4a256033",
+      "size_bytes": 364
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "size_bytes": 1057
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/active-request-history.json": {
+      "sha256": "c87b7d3947557179b3d14cb0043067c582ef307fb59a5e16d7a0ed22ec348d84",
+      "size_bytes": 7286
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0001.json": {
+      "sha256": "9e645fd784ec3c56090c6c78e8568cf5df6f97cbdbb42e9fc564ad733d44c1ab",
+      "size_bytes": 122812
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0002.json": {
+      "sha256": "6cc80d7f12f75f9789354ee8058349d6a4ca65811cb8f581f1f6ccc92f86bc6b",
+      "size_bytes": 312053
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0003.json": {
+      "sha256": "432368cb629e74252e17d47c948084a254f71f2e93bc98ccd4b888970d3549b9",
+      "size_bytes": 352258
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0004.json": {
+      "sha256": "230bd52a2c0c2a5d76f5e5354edbdb4dda4eea9f112d862b275abc5f1adc428c",
+      "size_bytes": 519624
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0005.json": {
+      "sha256": "58871987ff07d6578a568341653c932cfb2ccf2c9f7e76483f275feb499df132",
+      "size_bytes": 602809
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0006.json": {
+      "sha256": "76bbdabf4f60c4c6595c7bcff5e6581de4dbb1919212d3cf8e92e1a45c6c8869",
+      "size_bytes": 401482
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0007.json": {
+      "sha256": "9815ca7463dcb29cd87588a721ea19c60d4b692b9899cd90ea12e047e038dc55",
+      "size_bytes": 112144
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/direct-zero-0008.json": {
+      "sha256": "b8cfe891b90b4dec16b905fc2f406bb3fb0c147322ffee61deab3831f58a6786",
+      "size_bytes": 56550
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/historical-discovery-gaps.json": {
+      "sha256": "5ec5eb59af1c173a624ff949421174f946772c1c88e9da99134a1edd2bac9a57",
+      "size_bytes": 78108
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-000-provisional.bin": {
+      "sha256": "01ae41dfbdbb9827d78fc0646913330afc37945edff8542aaafd3bacacfe3def",
+      "size_bytes": 27249
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-000-provisional.json": {
+      "sha256": "4b267e6665d9fc9b5b42e3cede7fa570b1c8d0c78e40a14204b256d5fc80e5dd",
+      "size_bytes": 8113
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-001-provisional.bin": {
+      "sha256": "5885246a6c0f929c044b3f2575c054fcc5f3af3f04456e93ee43b633f6401e35",
+      "size_bytes": 53223
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-001-provisional.json": {
+      "sha256": "306e0245b443ff5a5fab195dd8908cc98f8a692d29549dd94423a9df4972ddc9",
+      "size_bytes": 8266
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "89956da1e7cae1cb8570390e24fb6e1cc0dd91a82c56c763f30144e151d2d6c9",
+      "size_bytes": 92186
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "23f37dac12edca825e6565a2464c3ef62ef0dd0cda6e044d8ebff32b99c65f77",
+      "size_bytes": 9409
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-003-provisional.bin": {
+      "sha256": "aaeabed02f0d4fbc1f4bd439913eaac9123a0773d9b85c8471c556b58c32c5c8",
+      "size_bytes": 140483
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-003-provisional.json": {
+      "sha256": "198f5f25608e6ce2c36dcc6b1d443bfcef5be9e2dbe31cee83522dd20142f43a",
+      "size_bytes": 9936
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-004-provisional.bin": {
+      "sha256": "acd9cb45e059fe5b5cecd01f60cbb0facdb2fc97b5fc58b414adf127dab8d310",
+      "size_bytes": 191495
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-004-provisional.json": {
+      "sha256": "d97ab243aae8e0481632321930cf7adc3ff2461bfa8116b4b805a8ae4d8067c9",
+      "size_bytes": 9022
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-005-provisional.bin": {
+      "sha256": "f085b77d638648ce1372f4e16ed57471f7d144d9073e1da616219402ec02b610",
+      "size_bytes": 223326
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-005-provisional.json": {
+      "sha256": "a4a45004754f80369e6e44810c0495d77527a57fa6302faf95a74abeaeea1dae",
+      "size_bytes": 7500
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-006-provisional.bin": {
+      "sha256": "4339db0ccfed2ff5dda3de8cb21c24dacb57c8e55e8fad2667facaa49a637da0",
+      "size_bytes": 230491
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-006-provisional.json": {
+      "sha256": "e8fae244bb69c49192c3cd1b6bc5291b2b5ca84c881449da6f8b30ce416d69b9",
+      "size_bytes": 7196
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "dab07d055fed3974041c2f7f2bca3e9dd0efd3753c6e2ae1e3cf5c8d3333bd68",
+      "size_bytes": 237204
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "2405fbb3ee167c65e749e62bdd96040a5fa02b76a62d0812cf91a8d84e8d99c7",
+      "size_bytes": 6887
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-007-provisional.bin": {
+      "sha256": "7da1e3e6c4bf16cf05802be6735892d71ef1b101bc3da10016459ad329015178",
+      "size_bytes": 237188
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0/round-007-provisional.json": {
+      "sha256": "7b4d35176aef6a5bbf557964b86f3daa0a0992ba666fdf210badcb73bc81e005",
+      "size_bytes": 6892
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/active-request-history.json": {
+      "sha256": "33204bb62b4db531caa13ae977ecb50e5f389560da63dc5c9167c32635fc8297",
+      "size_bytes": 1272
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/direct-zero-0001.json": {
+      "sha256": "d1660a0fa975d54793a61444f30a89bdf54d75e12e4c54a1fcfe3b5a55436942",
+      "size_bytes": 498698
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/direct-zero-0002.json": {
+      "sha256": "824e7ad3b9f162845a93000c7e9d4e499fb6dfc016e51e54f567fd932d36e186",
+      "size_bytes": 987653
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/historical-discovery-gaps.json": {
+      "sha256": "b9fdf03bba4dd58965e24bfea214c09aa8c9351357138148185de5582cb886d7",
+      "size_bytes": 34845
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/round-000-provisional.bin": {
+      "sha256": "205f58ba24599e98dcc668978225d066d0df2db0b5513ecbb271e6778a442287",
+      "size_bytes": 46759
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/round-000-provisional.json": {
+      "sha256": "da8ed3cd80e4a5700abe7f369ad425637dead8a216c73e182858d386eb74d021",
+      "size_bytes": 7949
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/round-001-provisional.bin": {
+      "sha256": "2900f16275ca5bad84bcb63f6bba626939ab4c86652a1140789de9f82073416f",
+      "size_bytes": 85386
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-0-1/round-001-provisional.json": {
+      "sha256": "66d1d7591209355ceb018c70ef6f2e1182952555dc467d431288d04e382617c8",
+      "size_bytes": 6818
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/active-request-history.json": {
+      "sha256": "07c894e866d2a8048877341a1e15d498381c2f7eab4ad2b340e904f1d4926f0b",
+      "size_bytes": 2496
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/direct-zero-0001.json": {
+      "sha256": "f5fe41b878cf4fa3ddcef7c9fbfe46f148be46263c137a21c281f5d65fec5e97",
+      "size_bytes": 91491
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/direct-zero-0002.json": {
+      "sha256": "2bed02a9fdc6bc765131b2a8650ea8d6a0fe1106684f987858ffef8420eb4fe0",
+      "size_bytes": 148747
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/direct-zero-0003.json": {
+      "sha256": "3ea3ac7aa9a85d376f7d903fcca47a3e510002f462f1546e32e5bdbee3a07d0e",
+      "size_bytes": 236296
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/direct-zero-0004.json": {
+      "sha256": "b9eb219e5a8478ed75c58528b4f02501eb2bcef9604e5605db66984f1d817f57",
+      "size_bytes": 147278
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/direct-zero-0005.json": {
+      "sha256": "e37b1c6c3bcde9788e21d6b6107edb123d7daefd6188f984057b5f6b60e7de61",
+      "size_bytes": 89035
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/direct-zero-0006.json": {
+      "sha256": "06f256cfe6244417aa977b6bb20c43a48d464f07e215ac37fd4cfa5626a4d598",
+      "size_bytes": 28930
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/historical-discovery-gaps.json": {
+      "sha256": "1e74d02335bd11d865cdc58e3aba4d11158317eea5c4c5539559974d6d0ea09d",
+      "size_bytes": 31586
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-000-provisional.bin": {
+      "sha256": "669380a5a76343818df1c7838d935b772f602800b459e55bc29747fa09b595d0",
+      "size_bytes": 27412
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-000-provisional.json": {
+      "sha256": "e50bfe2e94fda6e3738b5c8b499efd4a62efeb2809665f736d5c338bd6398bdd",
+      "size_bytes": 7041
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-001-provisional.bin": {
+      "sha256": "782f8a4ede8102598eab709cf9df351a9643c43526603c90c695ba76d485f3db",
+      "size_bytes": 49260
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-001-provisional.json": {
+      "sha256": "5223ebe9bd977569c8ea58a33d1cbf669d11e2620b93f213d58c8562139d5ffb",
+      "size_bytes": 7647
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-002-provisional.bin": {
+      "sha256": "86fae57833bf41e60a122f0fea4f8b0939e625de837811b125330489a823196a",
+      "size_bytes": 81134
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-002-provisional.json": {
+      "sha256": "d3422d1c08acfc6c03d49b8802181ce871cc54b614ea5d07929cb90f6abf9de4",
+      "size_bytes": 7190
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-003-provisional.bin": {
+      "sha256": "6c2c890ad9f7403c038a677575e11de3dbf7a8aacaeb5099bcde6e967ecf9d9a",
+      "size_bytes": 107572
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-003-provisional.json": {
+      "sha256": "4feb9c97ae64ac30438fe6e1796705974a087eb55abcd3f9f50d39db141ee647",
+      "size_bytes": 6882
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-004-provisional.bin": {
+      "sha256": "88a66cd50ef8c462b7c405a5f7b0ffe819a036e1cf468d6d5d7f57f3ce1517c9",
+      "size_bytes": 112457
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-004-provisional.json": {
+      "sha256": "adf2fa8a5138f1fd679881046e4bc7bc799f0b7d38baeb44ea1b7a59439c2d3a",
+      "size_bytes": 6807
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-005-closed.bin": {
+      "sha256": "97a0229fee699daf3756b867ece71bb4cf1b9438fd98f897dfa9a8fd603ec801",
+      "size_bytes": 117421
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-005-closed.json": {
+      "sha256": "e2253fe5a8fc10a9b4fdc3130927cf1949cbd57feb33d66377089c2974de7a03",
+      "size_bytes": 6650
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-005-provisional.bin": {
+      "sha256": "5c28e1c1e5b99bd6555f8e9ffa466024c5ba44dc841782f786fb5750fc767239",
+      "size_bytes": 117405
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/native-closure/cut-1/round-005-provisional.json": {
+      "sha256": "bbb97672fef6e9e34bec568e97afdedebd8d57fc1a6a108c62b16e33d789dd02",
+      "size_bytes": 6655
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed-binding.json": {
+      "sha256": "9a1b38581c3fb8bc9c458c53383252cb28815b6a4280238593624aa7517e899a",
+      "size_bytes": 2864
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed-resources.json": {
+      "sha256": "bbaeaca41478df022cf853c99109b612a0b367ff4bc89e05e8ee7998bce57d18",
+      "size_bytes": 1416
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed-resources.log": {
+      "sha256": "d078dad79ee1db4a016de9222c6c541f5abc2b79502f044988481476bc959a76",
+      "size_bytes": 1949
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed-resources.provenance.json": {
+      "sha256": "f378a142f87c2b688ecdac3b1a1ce28a915a106dde7a3e0cb997765a9e53b89f",
+      "size_bytes": 2124
+    }
+  },
+  "external_artifacts": {
+    "docs/finite-density-zero-source-projection.md": {
+      "sha256": "6f0c03c9404da9869c7b6a42e3d0ccadc90336b3ab0e72c622d7824989298de7",
+      "size_bytes": 3185
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-provenance.json": {
+      "sha256": "d4500c314dad8730b5a2e68ca5d442ea27cd58ad737453ad516679b448872f87",
+      "size_bytes": 4919
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json": {
+      "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+      "size_bytes": 270630
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed-resources.json": {
+      "sha256": "30aa3e295ab2e1296c2108dc46ce722054d13ac5ec0e08055df02e8948938223",
+      "size_bytes": 1411
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": {
+      "sha256": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+      "size_bytes": 5591
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": {
+      "sha256": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+      "size_bytes": 10581
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": {
+      "sha256": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+      "size_bytes": 1310
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": {
+      "sha256": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+      "size_bytes": 1060
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": {
+      "sha256": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+      "size_bytes": 15882
+    }
+  },
+  "archive_original_hashes_verified": 24,
+  "excluded": [
+    "Python __pycache__ bytecode",
+    "this self-referential manifest"
+  ],
+  "passing_regression_tests": 176,
+  "ignored_regression_tests": 1,
+  "massive_reference_comparisons": 10,
+  "massive_historical_comparisons": 10,
+  "massless_fixed_variants_failed": 2,
+  "massless_laurent_not_run": true,
+  "three_loop_numerical_predictions": 0,
+  "native_four_loop_acceptance": false,
+  "source_capsule_reconstruction_verified": true
+}

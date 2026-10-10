@@ -117,6 +117,16 @@ and [residual-search diagnostic](../reports/validation/2026-10-09-finite-density
 record this limitation. This intermediate gate does not replace any original
 four-loop family, raised target or mandatory oracle record.
 
+The subsequent native source-projection checkpoint retains explicit measure-zero
+domains during original-row replay and versions guarded persistence accordingly.
+Its initially exposed massless two-loop index-guard failure is resolved by
+[bounded native point refinement](finite-density-conditional-points.md). The
+massless fixed-dimension/Laurent and massive regression comparisons pass again;
+the three-loop frontier still exceeds its configured limit. The separate
+[fixed-spatial-occupation moving-shell assessment](finite-density-moving-shell-exploration.md)
+does not establish a multi-loop advantage, so the production deformation remains
+fixed-shell while reduction closure is investigated.
+
 ## Remaining acceptance evidence
 
 Exact certificates and bounded algebraic pilots are useful gates, but do not

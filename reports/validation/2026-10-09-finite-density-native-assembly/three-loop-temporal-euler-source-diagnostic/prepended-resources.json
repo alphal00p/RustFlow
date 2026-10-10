@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "120s",
+    "/tmp/three_loop_temporal_euler_probe",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/prepended.json",
+    "prepended"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 17.384531078860164,
+  "user_seconds": 17.04558,
+  "system_seconds": 0.15140699999999999,
+  "peak_child_rss_kib": 125952,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

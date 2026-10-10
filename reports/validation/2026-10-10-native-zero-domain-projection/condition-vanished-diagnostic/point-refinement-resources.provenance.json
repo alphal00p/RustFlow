@@ -1,0 +1,21 @@
+{
+  "captured_utc": "2026-10-10T01:38:04.889091+00:00",
+  "command": [
+    "/tmp/zero_projection_condition_point_probe",
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.json"
+  ],
+  "argument_files": {
+    "/tmp/zero_projection_condition_point_probe": {
+      "resolved_path": "/tmp/zero_projection_condition_point_probe",
+      "sha256": "4002f127fa07f2e8ce1dd39a70d871b2856d4f9849af64ea3c95211f92ce43e1",
+      "size_bytes": 424406320
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "sha256": "30be79332795bba41963db90f494d13a4f70a8eb6a36dc621da28a268eff159d",
+      "size_bytes": 85216
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

@@ -1,0 +1,135 @@
+{
+  "schema": 2,
+  "status": "two_loop_regression_scope_validated_three_loop_closure_incomplete",
+  "checkpoint_regression_scope_validated": true,
+  "full_feature_validated": false,
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-hashes.json",
+    "sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287"
+  },
+  "source_delta": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-delta.json",
+    "sha256": "5d263e2fd92755563f5715f3faa2ff93dc47a8604d10a2da9c833ac8714a8989"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-provenance.json",
+    "sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca"
+  },
+  "regression_gates": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-root-gates.json",
+    "sha256": "81205593315d4f1244e700a511773e62c616714f7eb34d48d5b9cdb7cdba7a92"
+  },
+  "source_files": 2478,
+  "build_artifacts": 11,
+  "unique_regression_tests_passed": 179,
+  "ignored": 1,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "784d1eb6a4dfd8fefef06e26f659382e7aacc9bc86bd5be771c826ce7b035f21"
+  },
+  "numerical_gates": {
+    "two-loop-fixed": {
+      "status": "passed",
+      "execution": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.json",
+          "sha256": "2b152f75d65913d4585eb9969624373a5d3fb35ebef5b77dce5ad63dde4a4511"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.provenance.json",
+          "sha256": "423506b517b2c5d8cb5d19ad0f5077fd3ca25c1e4975f1e8b1494d69513268b8"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-binding.json",
+          "sha256": "84f455b6b24783a0954f926e8f17aff442da7dd13d37052688d4d7f3639c9944"
+        },
+        "exit_code": 0,
+        "harness_seconds": 5.16,
+        "wall_seconds": 5.183790765237063,
+        "peak_child_rss_kib": 29504,
+        "executable_sha256": "b31ec216907f22953ff12684e54aff2acd69953b475575bbba021294c8bf3dd4"
+      },
+      "comparison": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-comparison.json",
+        "sha256": "65d224819d2a3c4f056783064c5dbe4b6f088ab43f2955ab3d2bbe61991f387c"
+      },
+      "reference_comparison_count": 40,
+      "independent_refinement_comparison_count": 30,
+      "largest_relative_reference_difference": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+      "largest_relative_refinement_difference": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+      "largest_absolute_difference_under_absolute_criterion": "0",
+      "relative_tolerance": "1e-12",
+      "small_magnitude_threshold": "1e-20",
+      "small_absolute_tolerance": "1e-25",
+      "imaginary_zero_absolute_tolerance": "1e-25",
+      "profile_count": 4
+    },
+    "two-loop-laurent": {
+      "status": "passed",
+      "execution": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.json",
+          "sha256": "3b4c182a64cd13db1516090249ae941c246cc858de63106bab08714d79ca1b88"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.provenance.json",
+          "sha256": "99ac5f006dc6680957d05bed78719e98a2afedc5be94fcce5ad115f91c8bc67a"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-binding.json",
+          "sha256": "b320c3594014125cefc890e8f339a4999560a42850a32cfff7873d4a0cab3aab"
+        },
+        "exit_code": 0,
+        "harness_seconds": 94.65,
+        "wall_seconds": 94.66581993829459,
+        "peak_child_rss_kib": 30876,
+        "executable_sha256": "b31ec216907f22953ff12684e54aff2acd69953b475575bbba021294c8bf3dd4"
+      },
+      "comparison": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-comparison.json",
+        "sha256": "fd242a50862c65cfe0f62a2fb447fdbd250c9fb4c3e70d88898bc21ec27348cc"
+      },
+      "reference_comparison_count": 30,
+      "independent_refinement_comparison_count": 24,
+      "largest_relative_reference_difference": "2.041136525965978003930408791132414108823096798870896291285970536438753861629237793188399844869034108E-44",
+      "largest_relative_refinement_difference": "2.041136525965871943160585869054226904077073159303460082774492625348008292521059681817111783963230506E-44",
+      "largest_absolute_difference_under_absolute_criterion": "8.661497055645898292374991768187706620116566810207180110452091549572976556700000000000000000000000000E-56",
+      "relative_tolerance": "1e-12",
+      "small_magnitude_threshold": "1e-20",
+      "small_absolute_tolerance": "1e-25",
+      "imaginary_zero_absolute_tolerance": "1e-25",
+      "profile_count": 5
+    }
+  },
+  "massive_regression": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-summary.json",
+    "sha256": "352023857fe2d0ac9775dea219ef30b469dc81b157027775b70b5e92e0275593"
+  },
+  "three_loop_failure": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-failure-summary.json",
+    "sha256": "2fdf026c6843bfbfb8c7bdbae6943493c76130dad518d2ca47e377913fee3c3b"
+  },
+  "runtime_configuration_distinction": "Massless fixed/Laurent and three-loop controls explicitly use guard_refinement.max_passes=1 with active closure/rays; prior failed projection controls used0. Massive regression retains its unchanged default closure, including max_passes=3 and inactive active-closure/ray options.",
+  "laurent_provenance_limitation": "Laurent predictions serialize total expansions, not per-sector construction metadata. The full-amplitude runtime implementation, exact source/build/executable binding, matching fixed-dimension cut coverage, and saved configuration bind that run; no additional per-sector Laurent evidence is invented.",
+  "historical_failures": {
+    "unchanged_manifest": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-artifacts.json",
+      "sha256": "665982a7505d193357e6c970e1bfc40d19ef8c8c42eee3bbf71f5aa0bbd57261"
+    },
+    "archive_resolution": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/released-native-archives.json",
+      "sha256": "e153d45204b183f09a69f4f96933d421d6f70bb5f493eaa224c29e3a54e4a885"
+    },
+    "scope": "Prior valid conditional rule was unavailable on a coupled exceptional index face. Both failed massless controls and earlier three-loop failures remain preserved; the fresh point refinement supplies new exact native proofs instead of suppressing ConditionVanished."
+  },
+  "three_loop_full_amplitude_validated": false,
+  "native_four_loop_acceptance": false,
+  "supplied_oracle_numerical_records_compared": 0,
+  "reference_uncertainty": "Empirical quadrature, precision, and native refinement evidence; no rigorous numerical interval bound.",
+  "timing_scope": "Prebuilt execution on shared host, compilation/Nix startup excluded; no isolated speedup claim.",
+  "summary_script": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/summarize-guard-point-checkpoint.py",
+    "sha256": "c33f7db6a0cc8bb4840d9746158b1dbacf78fa0561d05601387d26b0b9e3ef26"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "captured_utc": "2026-10-10T01:15:59.223860+00:00",
+  "command": [
+    "timeout",
+    "600",
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_three_loop_chain.json",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=true",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES=65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL=32",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE=true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS=262144",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_WEIGHTED_DEPTH=3",
+    "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+    "RUSTFLOW_WEIGHTED_ROUNDS=16",
+    "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "env": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+      "sha256": "3c3aae163cb84c72c1437fcc36488cb019bf78d1ff2d5b148a9dffed8a30df5f",
+      "size_bytes": 1302452472
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

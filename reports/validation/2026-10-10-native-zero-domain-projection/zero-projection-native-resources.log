@@ -1,0 +1,108 @@
+
+running 85 tests
+test solver::guarded::boundary_tests::bulk_to_surface_transition_preserves_theta_and_strict_descent ... ok
+test solver::guarded::boundary_tests::domain_budget_keeps_a_rule_and_all_unsearched_remainders ... ok
+test solver::guarded::boundary_tests::empty_rhs_still_retains_the_original_source_weight_pole ... ok
+test solver::guarded::boundary_tests::recentered_rule_does_not_cross_the_source_lower_boundary ... ok
+test solver::guarded::boundary_tests::surface_boundary_is_discovered_from_bulk_only_source_on_a_ray ... ok
+test solver::guarded::boundary_tests::wide_guard_refinement_keeps_symbolic_rules_and_reports_unsupported_faces ... ok
+test solver::guarded::domain::tests::difference_is_disjoint_exact_and_budgeted ... ok
+test solver::guarded::domain::tests::occupation_bulk_is_a_point_and_cut_zero_is_not_an_invalid_coordinate ... ok
+test solver::guarded::domain::tests::translated_source_guards_are_pulled_back_without_negating_minimum ... ok
+test solver::guarded::lifecycle::tests::bounded_reduction_retains_the_exact_unresolved_frontier ... ok
+test solver::guarded::lifecycle::tests::exhausted_budget_keeps_all_unprocessed_weighted_terms ... ok
+test solver::guarded::lifecycle::tests::native_pending_order_expands_shared_child_once_within_exact_budget ... ok
+test solver::guarded::lifecycle::tests::occupation_zero_is_a_terminal_and_reduction_preserves_conditions ... ok
+test solver::guarded::lifecycle::tests::pending_cancellation_avoids_unused_pole_but_retains_used_guard ... ok
+test solver::guarded::lifecycle::tests::pending_cap_stages_rhs_without_losing_weighted_frontier_terms ... ok
+test solver::guarded::lifecycle::tests::replayed_terminal_rebind_checks_budget_and_terminal_admission ... ok
+test solver::guarded::lifecycle::tests::replayed_terminal_rebind_rechecks_original_source_proof ... ok
+test solver::guarded::lifecycle::tests::replayed_terminal_rebind_replaces_stopping_set_and_retains_conditions ... ok
+test solver::guarded::lifecycle::tests::replayed_union_counts_duplicate_rules_against_the_budget ... ok
+test solver::guarded::lifecycle::tests::replayed_union_rechecks_rule_proofs ... ok
+test solver::guarded::lifecycle::tests::replayed_union_rejects_every_original_source_binding_mismatch ... ok
+test solver::guarded::lifecycle::tests::replayed_union_requires_one_native_coordinate_order ... ok
+test solver::guarded::lifecycle::tests::replayed_union_retains_complementary_rules_conditions_and_only_current_terminals ... ok
+test solver::guarded::lifecycle::tests::uncovered_diamond_cancels_in_native_pending_order ... ok
+test solver::guarded::lifecycle::tests::uncovered_diamond_combines_nonzero_coefficients_exactly ... ok
+test solver::guarded::lifecycle::tests::unsupported_powers_and_missing_rules_are_explicit ... ok
+test solver::guarded::lifecycle::tests::zero_rhs_retains_the_replayed_physical_pivot_condition ... ok
+test solver::guarded::lifecycle::tests::zero_rhs_still_checks_inherited_source_conditions ... ok
+test solver::guarded::model::tests::undefined_occupation_does_not_become_zero_when_a_required_cut_is_missing ... ok
+test solver::guarded::persistence::tests::legacy_guarded_v1_proofs_require_explicit_rediscovery ... ok
+test solver::guarded::persistence::tests::native_roundtrip_replays_and_preserves_conditional_reduction ... ok
+test solver::guarded::persistence::tests::saved_program_rejects_a_different_measure_and_source_guard ... ok
+test solver::guarded::persistence::tests::saved_program_rejects_corrupt_rule_domain_via_replay ... ok
+test solver::guarded::reference_conversion::euclidean_energy_moments_keep_phases_and_differentiated_fermi_surfaces ... pasted D5 conversion: max_cut_power=3 max_energy_power=4 sigma_cases=30 exact_check_us=1017
+ok
+test solver::guarded::reference_conversion::pasted_sunset_relation_matches_independent_double_cut_and_native_surface_conversion ... pasted D4/R1: build_us=240 discovery_us=497 replay_us=18 apply_us=96 generated_rules=1 unresolved_domains=0 tested_targets=2 applied=2
+ok
+test solver::guarded::reference_cut_conversion::tests::complete_kernel_jets_match_independent_raised_cut_moments ... ok
+test solver::guarded::reference_cut_conversion::tests::coupled_two_energy_kernel_requires_mixed_derivatives ... ok
+test solver::guarded::reference_cut_conversion::tests::independent_energy_ibps_include_kernel_derivatives_in_bulk_and_surface_sectors ... ok
+test solver::guarded::reference_cut_conversion::tests::native_spatial_source_matches_independent_weighted_ibp_and_nonzero_surfaces ... ok
+test solver::guarded::reference_cut_conversion::tests::omitting_kernel_derivatives_or_surface_terms_fails ... ok
+test solver::guarded::reference_cut_conversion::tests::two_cut_legs_retain_mixed_kernel_derivatives_and_surfaces ... ok
+test solver::guarded::reference_cut_plan::tests::all_supplied_energy_tensors_expand_to_the_original_complex_polynomial ... ok
+test solver::guarded::reference_cut_plan::tests::allowed_cut_sets_use_covector_independence_and_positive_propagator_powers ... ok
+test solver::guarded::reference_cut_plan::tests::every_cut_basis_has_exact_inverse_and_correct_oriented_line_images ... ok
+test solver::guarded::reference_cut_plan::tests::negatively_charged_lines_preserve_energy_polynomials_and_i_phases ... ok
+test solver::guarded::reference_cut_plan::tests::raised_multi_cut_recipes_keep_surface_and_mixed_full_kernel_derivatives ... ok
+test solver::guarded::reference_routing::tests::bubble_reflection_expansion_handles_squared_numerators_and_shifted_origin_energies ... ok
+test solver::guarded::reference_routing::tests::general_bubble_reflections_are_unimodular_involutions_with_the_stated_quadratic_image ... ok
+test solver::guarded::reference_routing::tests::origin_change_expands_shifted_energy_numerators_exactly ... ok
+test solver::guarded::reference_routing::tests::scalar_canonicalization_agrees_across_measure_preserving_images ... ok
+test solver::guarded::reference_routing::tests::supplied_factorization_graphs_separate_the_same_tadpole_and_sunset ... ok
+test solver::guarded::reference_routing::tests::supplied_zero_sectors_have_explicit_vacuum_blocks ... ok
+test solver::guarded::reference_routing::tests::triangle_energy_independent_numerator_has_an_exact_reflection_reduction ... ok
+test solver::guarded::reference_spatial::one_two_three_loop_spatial_rows_match_native_projected_generators ... ok
+test solver::guarded::reference_spatial::spatial_tadpole_has_d_divergence_and_energy_squared_numerator ... ok
+test solver::guarded::reference_validation::bounded_supplied_reference_probe_reports_outcomes ... ignored, bounded supplied-reference performance pilot; run explicitly with --ignored --nocapture
+test solver::guarded::reference_validation::every_supplied_three_loop_term_has_an_explicit_formal_cut_conversion ... supplied D1 formal cut conversion: reference_terms=30 cut_plans=229 full_kernel_jets=435 surface_jets=117 differentiated_kernel_jets=117 mixed_surface_jets=7 mixed_kernel_jets=7 imaginary_numerator_terms=42 max_surface_order=2 max_kernel_derivative=2 elapsed=1.599286ms; remaining vacuum kernels are unevaluated
+ok
+test solver::guarded::reference_validation::full_l_support_cancels_ancestors_and_preserves_original_source_positions ... ok
+test solver::guarded::reference_validation::transposed_certificate_checks_columns_after_the_first_full_rank_subsystem ... reference late-inconsistent-column-regression: exact_stage=transposed-subsystem equations=1/2 weight_rank=1/1 elapsed=74.49µs
+reference late-inconsistent-column-regression: exact_stage=transposed-subsystem exact_pass=false trace_rows=1 nonzero_weights=1 equations=1/2 residual_columns=1 transpose=48.3µs elimination=60.7µs weights=1.7µs multiply_back=49.49µs total=161.251µs
+reference late-inconsistent-column-regression: exact_stage=consistent-control equations=1/2 weight_rank=1/1 elapsed=3.23µs
+reference late-inconsistent-column-regression: exact_stage=consistent-control exact_pass=true trace_rows=1 nonzero_weights=1 equations=1/2 residual_columns=0 transpose=1.38µs elimination=13.3µs weights=560ns multiply_back=2.6µs total=18.36µs
+ok
+test solver::guarded::reference_validation::transposed_certificate_recovers_symbolic_weights_with_nonunit_pivots ... reference symbolic-certificate-regression: exact_stage=transposed-symbolic equations=2/2 weight_rank=2/2 elapsed=35.73µs
+reference symbolic-certificate-regression: exact_stage=transposed-symbolic exact_pass=true trace_rows=2 nonzero_weights=2 equations=2/2 residual_columns=0 transpose=3.97µs elimination=46.33µs weights=2.6µs multiply_back=8.84µs total=62.99µs
+ok
+test solver::guarded::reference_validation::unlucky_specialization_can_lose_both_bounded_exact_supports ... reference specialized-zero-regression: exact_stage=modular-weight-support exact_pass=false reason=inconsistent-transposed-equation equations=1/2 trace_rows=1 transpose=7.02µs elimination=16.58µs
+reference specialized-zero-regression: exact_stage=actual-pattern-support exact_pass=false reason=inconsistent-transposed-equation equations=1/2 trace_rows=1 transpose=1.31µs elimination=3.281µs
+reference specialized-zero-regression: exact_stage=diagnostic-full-source-check equations=2/2 weight_rank=2/2 elapsed=3.971µs
+reference specialized-zero-regression: exact_stage=diagnostic-full-source-check exact_pass=true trace_rows=2 nonzero_weights=2 equations=2/2 residual_columns=0 transpose=1.12µs elimination=13.309µs weights=2.629µs multiply_back=6.551µs total=24.14µs
+ok
+test solver::guarded::reference_weighted_spatial::three_loop_native_spatial_sources_match_independent_weighted_cut_derivatives ... D1 cutwise spatial source comparison: seeds=16 vectors_per_seed=9 cut_masks=138 exact_rows=1242 compared_terms=10795 raised_cut_masks=45 native_boundary_terms=1108 weighted_boundary_contributions=1804 imaginary_rows=72 native_construction=2.69342ms comparison=25.51991ms; before routing, kernels unevaluated
+ok
+test solver::guarded::replay::tests::empty_rhs_keeps_source_weight_pole_and_rejects_tampering ... ok
+test solver::guarded::replay::tests::recentering_transports_original_source_domain_and_conditions ... ok
+test solver::guarded::search::direct_zero::tests::direct_zero_budget_is_global_and_completed_points_are_distinct_from_gaps ... ok
+test solver::guarded::search::direct_zero::tests::direct_zero_never_promotes_unsupported_seeds_or_existing_zero_evidence ... ok
+test solver::guarded::search::direct_zero::tests::direct_zero_occupation_guards_conditions_and_upfront_validation ... ok
+test solver::guarded::search::direct_zero::tests::direct_zero_original_source_replay_rejects_corrupted_seed ... ok
+test solver::guarded::search::direct_zero::tests::direct_zero_point_replays_existing_row_hidden_by_first_recurrence ... ok
+test solver::guarded::search::direct_zero::tests::direct_zero_rejects_invalid_occupation_images_and_sector_crossings ... ok
+test solver::guarded::search::priority_tests::empty_priority_hints_preserve_rule_transport_and_unresolved_order ... ok
+test solver::guarded::search::priority_tests::occupation_priority_points_cannot_be_undefined ... ok
+test solver::guarded::search::priority_tests::partitioned_search_preserves_rules_conditions_and_all_unvisited_boxes ... ok
+test solver::guarded::search::priority_tests::partitioned_zero_budget_reports_gaps_but_still_validates_all_requests ... ok
+test solver::guarded::search::priority_tests::requested_sign_child_is_searched_before_unrelated_siblings ... ok
+test solver::guarded::search::zero_projection_tests::finite_point_zero_replays_conditions_and_binds_zero_context ... ok
+test solver::guarded::search::zero_projection_tests::occupation_bulk_survives_and_invalid_images_are_checked_before_projection ... ok
+test solver::guarded::search::zero_projection_tests::partial_zero_box_does_not_erase_a_symbolic_source_column ... ok
+test solver::guarded::search::zero_projection_tests::recentering_keeps_the_projected_zero_discovery_domain_guard ... ok
+test solver::guarded::search::zero_projection_tests::required_cut_zeros_and_explicit_measure_zeros_coexist ... ok
+test solver::guarded::tests::connected_three_loop_weighted_bubble_insertion_matches_independent_radial_integrals ... weighted IBP pilot: loops=3 generated_rules=6 unresolved_domains=6 tested_targets=27 applied=18
+ok
+test solver::guarded::tests::connected_two_loop_weighted_sunset_matches_independent_radial_integrals ... weighted IBP pilot: loops=2 generated_rules=6 unresolved_domains=6 tested_targets=27 applied=18
+ok
+test solver::guarded::tests::native_discovery_replay_and_application_preserve_nonzero_fermi_surfaces ... weighted IBP pilot: loops=1 generated_rules=9 unresolved_domains=0 tested_targets=36 applied=36
+ok
+test solver::guarded::tests::published_four_loop_c_cut_has_exact_nonzero_surface_pilot ... weighted IBP pilot: loops=4 generated_rules=6 unresolved_domains=6 tested_targets=27 applied=18
+ok
+test solver::guarded::tests::raised_mass_shell_cuts_and_energy_numerators_match_independent_moments ... ok
+
+test result: ok. 84 passed; 0 failed; 1 ignored; 0 measured; 3041 filtered out; finished in 0.09s
+

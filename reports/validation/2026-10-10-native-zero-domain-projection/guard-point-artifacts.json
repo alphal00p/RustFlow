@@ -1,0 +1,1311 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T02:06:33.583084+00:00",
+  "scope": "Completed guard-point regression checkpoint only; no full-feature or three/four-loop numerical acceptance. Historical failed zero-projection runs remain unchanged and linked through their frozen manifest and archive resolution.",
+  "status": "captured_and_verified",
+  "source_snapshot_sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287",
+  "source_files_verified_unchanged": 2478,
+  "build_provenance_sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca",
+  "build_artifacts_verified_unchanged": 11,
+  "validation_status_sha256": "20bff5dbf6009e6b8b9aff6f887ee967aef480b4e20455be7e5432d09b67c680",
+  "archive_manifest_sha256": "1d9873d9887ac555f342896cc5755490802cf702acf19d6cfae9df85b9ecf6aa",
+  "archives_roundtrip_verified": 135,
+  "file_count": 308,
+  "size_bytes": 14185927,
+  "files": {
+    "reports/validation/2026-10-10-native-zero-domain-projection/capture-frozen-build.py": {
+      "sha256": "af3b0e92b7a2ad0b8a33ac7793f020e71dc916adc6cb80ba1bc15e7a484809ef",
+      "size_bytes": 5383
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/capture-guard-point-artifacts.py": {
+      "sha256": "8207a066838562c9b76c9d6fa28637fd7119ea2d33903aa1ff6de51ed4cbb07c",
+      "size_bytes": 4780
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/capture-source-snapshot.py": {
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "size_bytes": 2075
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/compare-guard-point-default-path.py": {
+      "sha256": "a414645c2b4f67315d822ee26a0df5415c8b9ae23ae374511e854337b9a62800",
+      "size_bytes": 2975
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/frozen_sources.py": {
+      "sha256": "604f43a7d4da6f77e3f9142222f568a93e66f5458b5390e7b5295032190e2921",
+      "size_bytes": 1906
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-provenance.json": {
+      "sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca",
+      "size_bytes": 5122
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-resources.json": {
+      "sha256": "78efefecc540545b40dac5ccacdc218e0188487521f697cfc07b85f23c47cde0",
+      "size_bytes": 739
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-resources.log": {
+      "sha256": "ed45222d0571d37d28073b707137a84eb473c0bf344e77bc8f4421807117ebf7",
+      "size_bytes": 3215
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-resources.provenance.json": {
+      "sha256": "4a5bc2433baf95d34cc055573ebec7408eb33c328c01cf0f796d5f0f631348ca",
+      "size_bytes": 1128
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-binding.json": {
+      "sha256": "3b2c2e18d3c104ac2a27820c0089e40181b947fb39d3c3eadfe8d9256b2599e4",
+      "size_bytes": 525
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-resources.json": {
+      "sha256": "8b32743e0628289eba39bd8929b56fdaf7e5047b39030741bb787c1db0f337cd",
+      "size_bytes": 401
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-resources.log": {
+      "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495",
+      "size_bytes": 364
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-resources.provenance.json": {
+      "sha256": "6d107fa53bbc224f59fbe244edfde548163672b311907e317a19653962cac69d",
+      "size_bytes": 864
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-binding.json": {
+      "sha256": "ce70eeee524e18e9014c8de0643271aa606e3dd643b85e0179714480c51555e7",
+      "size_bytes": 535
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-resources.json": {
+      "sha256": "adc3785385859825aa376931bbc06850525cb062aab370238f2db102f8d9d36a",
+      "size_bytes": 404
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-resources.log": {
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "size_bytes": 574
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-resources.provenance.json": {
+      "sha256": "2ce1db948d580e4b3669cc921b3718f6f0b4baedfd6e6f7cacd83b6f8c14973c",
+      "size_bytes": 879
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-binding.json": {
+      "sha256": "12b2a57bcc3fc151ef7452bcb76a783edf4a64c38a500e0f2489658595a8c9d5",
+      "size_bytes": 537
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-resources.json": {
+      "sha256": "3fc366e3e3de0ba86f57cdd72b0aa06e0d18beabaedcf9d5051db9915b564b0e",
+      "size_bytes": 404
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-resources.log": {
+      "sha256": "ae5d6d3f04f983573cf2b1158a11a8fb76c66bd1b14027c846d6a67ebaea9b04",
+      "size_bytes": 9136
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-resources.provenance.json": {
+      "sha256": "8f0a623ee36288e40c0d6d83df6cb434fb9edc31329488aeef4268ae64ddec14",
+      "size_bytes": 867
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-default-path-comparison.json": {
+      "sha256": "0850a2968cc63086b1b31a8f7a705077f596bec63f1fcd862ddca288f0e9e53a",
+      "size_bytes": 7291
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/configuration.json": {
+      "sha256": "444bc09947d986b65b479666d8b9d973c962fef422cb60b670b1442f19a1a8bb",
+      "size_bytes": 1167
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/input.json": {
+      "sha256": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+      "size_bytes": 1060
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/guard-refinements.json": {
+      "sha256": "82c7f457cc8d7aabf850fc1b9ecc0e140e71fc216c2d1cfa5ce55989322a040b",
+      "size_bytes": 13669
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-000-provisional.bin": {
+      "sha256": "7a2263a653af6b37e34600d42a17baf34057aac551073ad45a5365b365eec736",
+      "size_bytes": 140622
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-000-provisional.json": {
+      "sha256": "e3f3605f9e4edb4062efe2e0ada410020a5b384ee3c5cf73d4d2135341e9161c",
+      "size_bytes": 4333
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-001-provisional.bin": {
+      "sha256": "52f24af3cbb0a90c30c50ac07adf352be9bd48f7be68cad4643db96df3d57179",
+      "size_bytes": 247631
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-001-provisional.json": {
+      "sha256": "739fe005ce2750192c40cf6f394f2e42f8fba32afd9c8debae405023c14aa15f",
+      "size_bytes": 6756
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-002-closed.bin": {
+      "sha256": "5c52e3aeee597645694dd92ef3c30625937052b19f63ced6b35d483c101921f7",
+      "size_bytes": 258732
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-002-closed.json": {
+      "sha256": "1899514e92bd9c40a2b0cb2aa53b6770b709d7cf327874ba5cbf4e9da1dd59d9",
+      "size_bytes": 6751
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "4a7eb7490517e0c9e2ab6ce1c04e6f502a3b72bc86a57f3bffc0cf36c0a39389",
+      "size_bytes": 258684
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "fac5bf29664605daa7e103a729ebc7d30176abc52c5e79648c7637070306ace2",
+      "size_bytes": 6756
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/guard-refinements.json": {
+      "sha256": "7d52022def3eaddc0cac7998dfb2e95ba2cd5e273c694f37c339c5c447873720",
+      "size_bytes": 50778
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-000-provisional.bin": {
+      "sha256": "259efc9212592665a6b0b286c23b1f9b44bfe07de6933d685c1e0c3914ad8f7e",
+      "size_bytes": 239251
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-000-provisional.json": {
+      "sha256": "f99cb1ab328e5ac758b65e1b9738e2d9eb7c5df613f241f9a150eda9ea9ee0b4",
+      "size_bytes": 6860
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-001-provisional.bin": {
+      "sha256": "4b7e49991b760bec419b1a246e019c2e0e4e3d5e349d9ce7df29c4db8af41972",
+      "size_bytes": 670012
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-001-provisional.json": {
+      "sha256": "13f027e2bb231f5458182ec918f140c5829570309c9c7a6f9f8d6e27b8e06456",
+      "size_bytes": 13611
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-002-closed.bin": {
+      "sha256": "29f9c073ce19c48bfd2f42a4075e0e94227fd88c22ba6c79f7a25e123f80965c",
+      "size_bytes": 746682
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-002-closed.json": {
+      "sha256": "e8ad9f3a008d792afaa12726347fa784047e0a2f7931945b632447568d153f1e",
+      "size_bytes": 13700
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-002-provisional.bin": {
+      "sha256": "6f629ebba6d22e08d3d9a0137c51ec4fc73ad18c9053eb706d7c0d9e7115f95b",
+      "size_bytes": 746602
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-0-1/round-002-provisional.json": {
+      "sha256": "0c9d49759edde8a9ccbba5805b5a482dd8a9eaf7a8542d549ef838fef9ea2904",
+      "size_bytes": 13705
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/guard-refinements.json": {
+      "sha256": "d5c35a28eef5e7fd891ce544a87eb21030582547e3f0ee3c34c928e325b1e88c",
+      "size_bytes": 9907
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-000-provisional.bin": {
+      "sha256": "de00a548836fa806b5d7f27b75a5a4f233a763d225f42ab5af6bcdd3d1880e05",
+      "size_bytes": 127934
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-000-provisional.json": {
+      "sha256": "c7912fd379d2d09ca16fb8f7bca94a8b33c719df3ae2f3463b5fe7a223b7e5c5",
+      "size_bytes": 4793
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-001-provisional.bin": {
+      "sha256": "857443e572e8033edb9107d3ff6b7455fc629b9deffc85a0a021ef0ba4c9fe47",
+      "size_bytes": 350473
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-001-provisional.json": {
+      "sha256": "5d9643ae9b31e08188462feed262e51276d5aa143cd48cfeba502cf88bb74eaf",
+      "size_bytes": 10033
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-002-closed.bin": {
+      "sha256": "b442ef9b5d132da9998bfa9c21b7ddd68a8c4b5becfc13cb477a6ba4c1c8eb5d",
+      "size_bytes": 464355
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-002-closed.json": {
+      "sha256": "036f42ca9ce8baaafa4beb6ac2eaf8b8d217fcf796fb0a1eb55c220915520c93",
+      "size_bytes": 11625
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-002-provisional.bin": {
+      "sha256": "3be3e50ee5396a835c8bd66166ab36ffe6dc82e73d1fabf872c85780805d13c6",
+      "size_bytes": 464307
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/native-closure/cut-1/round-002-provisional.json": {
+      "sha256": "9b6acf4eba376640aea6fe49fe1ebd88965bdcd2dec741abcbde0c30f9d684f8",
+      "size_bytes": 11630
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression/prediction-28-80-12.json": {
+      "sha256": "36efffc4ee48713d17f5990460d8a746a60e8fa9eb4eeeceef390069510e4c60",
+      "size_bytes": 61915
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-binding.json": {
+      "sha256": "4e252c6277e5df417249db9a393cc01dd6c740f90b7cfc80b4ff0be8b73e110f",
+      "size_bytes": 2018
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-comparison.json": {
+      "sha256": "27e8eb7f486c713c8a38ccf149fc2dc5aa6bdb4232e8126e68ed90b49bba6930",
+      "size_bytes": 14357
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-post-run-binding.json": {
+      "sha256": "9235527095a2b0543e34bd9380ddd6e472f8240e655dd644ed182fb2bc962c19",
+      "size_bytes": 447
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-resources.json": {
+      "sha256": "529d1caedd48dd7bead5ad23c871958577eac8984758faa94d42a8e176feda8b",
+      "size_bytes": 746
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-resources.log": {
+      "sha256": "218c39e8c9e481aba2813fd99af075852872138f18b9585a2b18e7293efbbe30",
+      "size_bytes": 32694
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-resources.provenance.json": {
+      "sha256": "ce39d64b4f1b3a30a93360a7c827fe11ddf0ac2216c013e28ca6c82e8cd9469a",
+      "size_bytes": 1466
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-summary.json": {
+      "sha256": "352023857fe2d0ac9775dea219ef30b469dc81b157027775b70b5e92e0275593",
+      "size_bytes": 2753
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-binding.json": {
+      "sha256": "c1430390b7988fcf6f368c2bf52f48d0d8ca9412ce6455f25052d57043ba9f42",
+      "size_bytes": 541
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-resources.json": {
+      "sha256": "513d2bada0fef85de105e9d30638a3c9c43c95dba1c51963ff8294404bc86a03",
+      "size_bytes": 396
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-resources.log": {
+      "sha256": "8d04dedadbb9acaed1a52602afd0cc82bdf83c60c0cc7df48bed88c838b1abe5",
+      "size_bytes": 435
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-resources.provenance.json": {
+      "sha256": "2f7b5432be58f0597c0f53a1d5ec2a6df331927577d6281c63eb87a20a04a39e",
+      "size_bytes": 888
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-archive-verification.json": {
+      "sha256": "fa20388cff89a044b44129171f2ebc50c0a370ab434f2f66225ff6ae5b839288",
+      "size_bytes": 223
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-archives.json": {
+      "sha256": "1d9873d9887ac555f342896cc5755490802cf702acf19d6cfae9df85b9ecf6aa",
+      "size_bytes": 99171
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-archives.md": {
+      "sha256": "d9e7f35b21359fd5df0bbec79f4afd70f1024a76853a3b05a222761570dbe721",
+      "size_bytes": 1352
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-binding.json": {
+      "sha256": "280a5f53544fe5b1d456e2dd2dc8c687545eedbdef3444a212870e87efa6aaf7",
+      "size_bytes": 530
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.json": {
+      "sha256": "aade75bb6cdeec25be2c332b0c95e156f04f4ece2a8f76df60a8ac8206e9e328",
+      "size_bytes": 407
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.log": {
+      "sha256": "f8d2cb844c45d3f81d3dfb0f539825feb7195139ea3c1ae5fbde5400be9cac5a",
+      "size_bytes": 13032
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.provenance.json": {
+      "sha256": "b9358be33cfc802f0d9069dbbee8bbf80e89f95eb4df60e1e1948c2dd2f6fd67",
+      "size_bytes": 838
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-binding.json": {
+      "sha256": "78febb1cf7517da86c6d43952e0babbd8ba83b80355280d8376ea641978d8923",
+      "size_bytes": 521
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-resources.json": {
+      "sha256": "578c00bb83ecd5c264e54090ad74a175b2d6aaae16491084724f2af269b4de42",
+      "size_bytes": 386
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-resources.log": {
+      "sha256": "acfedd322457a6a2d0e6c8e839940993c85dc5bd383aef6b48bf2597c56556e8",
+      "size_bytes": 193
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-resources.provenance.json": {
+      "sha256": "03fe16bf023c743afab77f17cfc10c707eb38550a10c6b7969b6bc805493f9ca",
+      "size_bytes": 858
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-root-gates.json": {
+      "sha256": "81205593315d4f1244e700a511773e62c616714f7eb34d48d5b9cdb7cdba7a92",
+      "size_bytes": 10422
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-runner-plan.json": {
+      "sha256": "3bf03b9da957e2b52c86dbed206868922b250d1458f5b4cab16fbb86adcb0205",
+      "size_bytes": 3725
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-delta.json": {
+      "sha256": "5d263e2fd92755563f5715f3faa2ff93dc47a8604d10a2da9c833ac8714a8989",
+      "size_bytes": 1132
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-binding.json": {
+      "sha256": "691dd9e1dcce825515e2740d7cb37219815b052e2a18193a788c89e53c5dc1c9",
+      "size_bytes": 530
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-resources.json": {
+      "sha256": "facf1484dbce965fdd6b7cd4231dcb21cae65a4387622fce20f496959d58816d",
+      "size_bytes": 385
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-resources.log": {
+      "sha256": "5ce07011acb52ba21db5470ce6cc78714222d8a1d2249e232d8d9ed01b49cc2e",
+      "size_bytes": 3684
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-resources.provenance.json": {
+      "sha256": "860d32031236e10d367c3ef8b903dc60cd4255eafdf91261e08b1288c7952faf",
+      "size_bytes": 846
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-hashes.json": {
+      "sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287",
+      "size_bytes": 436504
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-failure-summary.json": {
+      "sha256": "2fdf026c6843bfbfb8c7bdbae6943493c76130dad518d2ca47e377913fee3c3b",
+      "size_bytes": 2956
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/configuration.json": {
+      "sha256": "ea2f9fc057c95b21c69512f52d82ccb4a910bddb93a06c365d027b83867b9bc8",
+      "size_bytes": 1298
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/failure.json": {
+      "sha256": "3088d4391af6505c4ac8cc5134e34fb878bfcb7999b68a6f8fb12ced6b84b36b",
+      "size_bytes": 780
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "size_bytes": 1549
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "fc7253fd46b6dc3ff1b586266e916f93ed7955676e98404a90ea43a4c5032e79",
+      "size_bytes": 14469
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/conditional-point-refinements.json": {
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "size_bytes": 159
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "cadbcdf25ecb794b767b45d5b61890adff0bce8c481b2707baeb9de1c1c8da1d",
+      "size_bytes": 4880
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "0bad37a112a8ea6196e2cdc263f98ec5943721c74dc33b51e5f976f25ea68f88",
+      "size_bytes": 19589
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "478a9f4da0b7c679c6b72cca95c502f0b0c998d54a82012e82c51201c6f4bd37",
+      "size_bytes": 67754
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "a09c2c73a218862f658a00e3b0e3bd807bdf6c688c264276eda1d1926511b85d",
+      "size_bytes": 153862
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "858a263d752b94a2ac59d84a00b4abd63fda63e20e9afc8747c6853725088f01",
+      "size_bytes": 382747
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "d84c23657880bb11b9f766b6b0b7a2b7f6d29efb0f276cc761df7b2133bc2b21",
+      "size_bytes": 639791
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "318f34d59cd3bfe1314dbbb8c8959cf93a6ded5f68f472a2ad2c19198119af64",
+      "size_bytes": 889013
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "72823ed7f0853d74a3860ff4cc4b1d2bca46a0b17d6ce369bc8fa4f33ad2d352",
+      "size_bytes": 914836
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/guard-refinements.json": {
+      "sha256": "c5c4f9b99add5427fcc5c3fcc3bdf20f59da7caab51540348826c924b1e029fd",
+      "size_bytes": 2082
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "08e5d992f0d62f8a7d424a1ee72131352a572ce509039a8a2f93c08b2cb4ab54",
+      "size_bytes": 86815
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "485087bbaf160e8322f133eb68885499888b4db587103f4a7a52095d93ac89b2",
+      "size_bytes": 4680
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "7eda574625b3b0f21f0a47e0d22e351fdc1f308602fe308c4fe53f12f3890e5c",
+      "size_bytes": 1989
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "edf3f50c4c88e2c7d3240e536e3fcc625c55f1b8df339258f9c8cfa6077a08d6",
+      "size_bytes": 10560
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "9fc7dc8a8ae2ec4c258f359f12a14cf035e2b90db17f068f081dc6e325a9c1da",
+      "size_bytes": 2203
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "9ac6cd8ee2f0e3dfe6bdcb90c13334f68364dcf1ba69a0afdea79abaddc63481",
+      "size_bytes": 49902
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "3c18b998e99df7f2437c6071c63fa6719567be03ea463d8a1860165b0e91b327",
+      "size_bytes": 2734
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "8d46e05d4685c8e07fb362c15924771a27b8595970231e5e998f50368d7786be",
+      "size_bytes": 217941
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "9a985a0c2d00a95d194f2025b3de4d01835b3f9785ee7338f5fe26663c53789d",
+      "size_bytes": 4408
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "3713b9bb4b131ca8c41748b8007bd4c64f7e1377a80107316ff184f2d9fac51a",
+      "size_bytes": 399388
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "d5e23484b004d52bce64939ae133babd7a549290bc500480975226b9308089c5",
+      "size_bytes": 6187
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "940a6fa81712a1a4f863a77375986fc9d8dd4416fc1537e7d51392fc9a01cfaa",
+      "size_bytes": 559831
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "3e0b910f3ac148186d83ce0706659809f0db84582d69b0c97c66b95901cb2d81",
+      "size_bytes": 8510
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "a688d5cc539830f5386aac8e47a5bdd76e32fe0de9249ac676d11ea3d8113fd5",
+      "size_bytes": 755873
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "678958c20ee4dba0538fc9f7343cd81dfa7b4dfc79b9ff1e70c31127bcd72a39",
+      "size_bytes": 11367
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "ee8aa2e771ec634fa000b33f6d299df65794c3408ca0961c99d656112cdcf38b",
+      "size_bytes": 961329
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz": {
+      "sha256": "374cc36cc8935ed7f1541856df5d1c537a2d62c7f34f63ac6b2304aed48fbb86",
+      "size_bytes": 13049
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-binding.json": {
+      "sha256": "f42dd20f997bb421d6acc43ea9c7dd465afdd0713a035a54fc2b435ac28320d8",
+      "size_bytes": 2846
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.json": {
+      "sha256": "08c03af19bcb8786219e416a4e685f4e96e9e44baf7192ca014b1cda5174b4ce",
+      "size_bytes": 1409
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.log.gz": {
+      "sha256": "01f44b12b49716e3fbb370fc24067d434fb5d31bef584e171731931a1bd3174c",
+      "size_bytes": 632
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.provenance.json": {
+      "sha256": "3fc9de5b94277a2b44ba4bee4fe1d793c6f7f4276fe26ace5747504b7240fe94",
+      "size_bytes": 2115
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/configuration.json": {
+      "sha256": "3528b25c1e4fc63a7c24202573580d1410cd8c9b11e07126215ea92442913c4c",
+      "size_bytes": 1295
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "size_bytes": 1057
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/active-request-history.json": {
+      "sha256": "c87b7d3947557179b3d14cb0043067c582ef307fb59a5e16d7a0ed22ec348d84",
+      "size_bytes": 7286
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/conditional-point-refinements.json": {
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "size_bytes": 159
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "47de0442b3df92b4019265f0862d780f1b438fa551235b9a835b85313f13e71f",
+      "size_bytes": 2592
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "d55a0d105231d4be07bb0d408538902ab8575cc74f83822f2627d00311153b45",
+      "size_bytes": 6002
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "9ec814a2be704293cb5cbc7346759a34520db9fcb8e3f07d2448a0b7a61db2e6",
+      "size_bytes": 6618
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "2825665ac16e4c93218c6e7b6f334ee352a6d7185a7056f494b33093c9c3f2cf",
+      "size_bytes": 9577
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "3bfe5bb905fb102fda9701ec08ca0fe3428d21c6b86063324f887c36ba556c04",
+      "size_bytes": 11031
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "8c42b3cb76d65673aee7459516112c016a5fa0a7f6dc62bc54de1c8ce07c424e",
+      "size_bytes": 7528
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "ce735bcc522f8f767d5a560e7d268002af73a3b0e3b90a58f42aae8d9bd60bcf",
+      "size_bytes": 2416
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "c848e540cad87da70ae9ec6fdacd86fb3db2ff582e3c0c5089dee8383a8d2523",
+      "size_bytes": 1387
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "03dbd81137c7c2a3d01af6b271977ce78749709e37ed58256a5ace2d0f6f2497",
+      "size_bytes": 1329
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "7ae592a23e681ddbb010fa302773d5423a189024c06c2b31b7486865f09ed5f7",
+      "size_bytes": 4411
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.json": {
+      "sha256": "cdee66b08f8295c3808b295dfdd1e41c9751842f991e1067f77ea8f571eb5fa0",
+      "size_bytes": 8114
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "94dd2a27b1cfd17e8a38d7a3e4fc629e37696aff1d8c5f3b18911b761ceb187d",
+      "size_bytes": 7872
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "76bf00e54dc1309b354937b20224ba23015bbe0c6815bc77206f4f9d4136a19b",
+      "size_bytes": 1848
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "f8944bebc74d6c8ebbfcd8bff9456e7a35cfaa2c73308e8f0770fd8ff965a46f",
+      "size_bytes": 12143
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "f0b32d0395b0106e5555fb05597dcf5c4e81607d28edde136be58a2c9ea1c8c3",
+      "size_bytes": 1899
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "0b4fe35b4334d09d2a3cf2096e08741b6617339f93d8345f1fd2c2ba8ee18c3e",
+      "size_bytes": 17159
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "1e2ec05659bf0a903636167150a21fe496d27af59aa2d30ca62d7016aa44da82",
+      "size_bytes": 1913
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "7907f8b317e0d485a4f1171a14eb736abf6756c03d245a65fcffd73b70ed8066",
+      "size_bytes": 23842
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "e5ed1ecaabff1a573c214b0290c9874b460d15f204aa8363cf9d885047cb1369",
+      "size_bytes": 1878
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "2fcf398ab4b10b7fb8bdffa282ec2b519746d453420394f4219cb8ebd066d0e6",
+      "size_bytes": 27705
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.json": {
+      "sha256": "cd4572541f3c17dede52ec76a241932411f5fa98696ce6c82e9e8ae2a1815128",
+      "size_bytes": 7501
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "6f7a5bd72993f28065142dff1cade56728a41c28e37ee4423547370205293f77",
+      "size_bytes": 28137
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.json": {
+      "sha256": "1e0f78e84576e5a831c2e376ccd2127188fb6ec03f7aac37e0203322e7e115aa",
+      "size_bytes": 7197
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-closed.bin.gz": {
+      "sha256": "0bca2f732160820237c2b061e501c9f4480591f496756be4dfea5e57928c7737",
+      "size_bytes": 28435
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "7dfcea94a2e919f50341ba6d5d15e92d99ecae87670883e304fac8967b9e1c0b",
+      "size_bytes": 6888
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "bb70442f22baa554dc3a6a9934fcd11e47b56bbc3dd7358f504a03e5178a4d4b",
+      "size_bytes": 28428
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.json": {
+      "sha256": "025b1138b650047f70dde2888b239e5de64663dbedb3ceae6f3d288fe0aba1c2",
+      "size_bytes": 6893
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/active-request-history.json": {
+      "sha256": "3c8499b5b50c1d36b0d023bf640b1413f80671425110db74a10ab86740ba01a0",
+      "size_bytes": 3612
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json": {
+      "sha256": "8c09245ecedeb6a58a2a92e389272c5be195aa54cb8141669a2f4a31ae78dcfc",
+      "size_bytes": 539
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "c58961273d1b7406fde5b55a48fe7d78ca1e08ad978543ce5ccc0e06a9ad2648",
+      "size_bytes": 7538
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "f20ae26cdb72bb31a16d217cc53dbdd86e7297a6ec40d392e8a29521ca0e7db9",
+      "size_bytes": 14564
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "85aea9db69fb9a84e19b47840c055cd802505e54c16ebbb5c54324a36839e7ff",
+      "size_bytes": 21486
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "4df5f9924711e3436d20761b2456b230a30be90713d0966e84f946af15b767df",
+      "size_bytes": 14455
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "365bac3cef3cf95350fd521ef00a365d5934d74ba21d68eb3a85f93da6bdd2a7",
+      "size_bytes": 12064
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "72060b0a90bc896f005d184e518d3dc468670841f1360b9122f3eddcaa2cbef7",
+      "size_bytes": 2787
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json": {
+      "sha256": "70cfb4842ef76ac845b4d4447946890cb5ebff6c2a2888552fed1138ba557bcc",
+      "size_bytes": 1676
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "10fc8726a2c70908c166e80888eddc73ed3ebf300e4e3c84b6583264559586f9",
+      "size_bytes": 1652
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "e9c841a190a3c9a9a10090e3353bfa8a8bd5dc47432cd3ecd186627a3aae7895",
+      "size_bytes": 5124
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json": {
+      "sha256": "29cc7ff8df89aa3ffd4ca4ad9a31fbc0b68fbc2ff105f528961eae291795b7c7",
+      "size_bytes": 7950
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "dea842f6ff6488579f7f9c080340c4625ac3790e0ca9b31f13aeb7a03b7ec41e",
+      "size_bytes": 12930
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "d3c556ca4d451e6963e80e1899593b938e3cedb2a7b99b333cfe5124bc5ad42a",
+      "size_bytes": 1806
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "f7c6b716aaa57ee917a7854ba49438799da113a4f3bc62a80939ea1a981656f8",
+      "size_bytes": 19610
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "34896cf0b45b5ab645b7926005b3f2c008672d05d31f51951b5745dd3246af21",
+      "size_bytes": 1806
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "85e827126ffb5736f5a6a165619ebcff27865fed4e0168f1360df39032f15ea6",
+      "size_bytes": 21008
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "f62c2c1927c2fab550ea0eb76ea1cd90c3b355665fff4268261e6c5f8c35b5a9",
+      "size_bytes": 1809
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "1c3b26809163bd004e4d1bde2d3805338b1afbd11cb91448ed26e147107854dd",
+      "size_bytes": 21679
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json": {
+      "sha256": "62afd4408d1e9821aa9968a92c56051739a4c24388f3dd78e1bea71c6f125f55",
+      "size_bytes": 7658
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin.gz": {
+      "sha256": "756836545094eb3b655b1114309b89c391f12c29c668c9de43c8258253d2fa21",
+      "size_bytes": 21885
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "fdcee63ef215702c5dc0affc26e38239b93b8920667402afb2dede7657cdcf0c",
+      "size_bytes": 7467
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin.gz": {
+      "sha256": "8e37ba420f183245dd55b47c64fc6457d885cafcbf11aba50b4f6c9d03201a02",
+      "size_bytes": 21875
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json": {
+      "sha256": "51f64209ec2b84aca65993a271f8efed07d340e8ce8a0703e5820d416cc1cbb4",
+      "size_bytes": 7472
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/active-request-history.json": {
+      "sha256": "9f5ce7a964bddb31d9beb5fbc2747a9a843d1db1dcdc6401710fe2027c8d8606",
+      "size_bytes": 2651
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/conditional-point-refinements.json": {
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "size_bytes": 159
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json.gz": {
+      "sha256": "1ba41ad75f75bae50ef071a7765b945ea4d4f1cc89395854c634824dea930594",
+      "size_bytes": 2021
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json.gz": {
+      "sha256": "5a973e60b0c7672d8add90267910c5963c4de48d573df18abc84d2d1d2398003",
+      "size_bytes": 3089
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json.gz": {
+      "sha256": "f8de0d6b75e8cec526f8637f924b1599206606bbe415cd867cfdb1c93ee9f40e",
+      "size_bytes": 4591
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json.gz": {
+      "sha256": "35deb89ecb9866591c835572c82473648735c99b886c7f31205f9b30c3617806",
+      "size_bytes": 3053
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0005.json.gz": {
+      "sha256": "ccf625fbf6b9d1822626cd9c706ecd2b4787107ef9487676ea0da3d392aa90e2",
+      "size_bytes": 1981
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0006.json.gz": {
+      "sha256": "4ad0521808769260bbc3f1ced3ed7aa7a8136471915b9a2569680cc2f1ab9b38",
+      "size_bytes": 890
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json.gz": {
+      "sha256": "5157e6971b216cd1e4247cd224fedcd6c19e96a06c6627f6ebd7afda35c416d9",
+      "size_bytes": 803
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "3f9e478daa1ef37ac846c1f0d61eb9519f8662a5e32679c2559dd26581e53ffc",
+      "size_bytes": 4385
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.json": {
+      "sha256": "457b9cbe36a18d8aef336c1d68e85e53a64230af36162bcdf85ad314e9fd9129",
+      "size_bytes": 7042
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "dba1dd1f78b303da54ec36d5c662eb8ec8da052e8e89d8ccc31aed53b87f3633",
+      "size_bytes": 6565
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.json": {
+      "sha256": "9f64ec2fc22ac24756d764c30d403846a333847b223f61f0dbe00c41dfcd47a5",
+      "size_bytes": 7727
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "f6672a8ca4433c4db4630604febef33be4b9f12d360df4da6bc58b0648fe3731",
+      "size_bytes": 10354
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.json": {
+      "sha256": "b2adae9fe1604a1868aecafe00ffbb866760c2b1fa3ff84ff200f95b3ad1ca79",
+      "size_bytes": 7422
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin.gz": {
+      "sha256": "3c130671ac1d03d676d30ccbe68334ad3ff3923d1c23c2f7aab6108e3d2ff16f",
+      "size_bytes": 12765
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.json": {
+      "sha256": "2656115bc1324096eb213e3aa3cd9029d1401be74524773d2b133602b5540cb5",
+      "size_bytes": 7114
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-004-provisional.bin.gz": {
+      "sha256": "5f5be5d0af1c6ba5fb4d6cc4f1f49ae29b86dde1b69605165c0ba3bfa674e29b",
+      "size_bytes": 13236
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-004-provisional.json": {
+      "sha256": "eeba4833172af75a01550f1c235fe34b75bd8eb1058f0f836b397a81a8190eda",
+      "size_bytes": 7039
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-closed.bin.gz": {
+      "sha256": "7962a7bb2d7fed147706e8a8696b223a754ef210aa2fe44d57ca3bd0711e39b6",
+      "size_bytes": 13574
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-closed.json": {
+      "sha256": "ed2c202d63d05c0ddf37d9d465786cfc350a9fe7e71a8399783d639f74b30b26",
+      "size_bytes": 6882
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-provisional.bin.gz": {
+      "sha256": "b9d3aa70f46a0f48e88259e87ef57934f7e310f2a0f4de0b0f8afb20f8bd3f85",
+      "size_bytes": 13564
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-provisional.json": {
+      "sha256": "bf444f006a50cefed0cb64d77a51441fc6ee1dbd703f1b5021b6e732e75091dc",
+      "size_bytes": 6887
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-18-60-8.json": {
+      "sha256": "43882bc914df8f1afda736356115fb9d434487af0dae250f83889e385a294001",
+      "size_bytes": 211822
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-28-60-8.json": {
+      "sha256": "573f9c01f149e977cae08c946b22e4e3e14afff67254aba3256cb13b53fc4bac",
+      "size_bytes": 211882
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-28-80-12.json": {
+      "sha256": "8379bcfebcbba4b6a84d03fb536f339b0321bc69d61d8af828abd86506f4424e",
+      "size_bytes": 211883
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-28-80-8.json": {
+      "sha256": "e469988a6b9d34526710444019fd16796c83f96b0d9ad934f2987e65cee7f111",
+      "size_bytes": 211882
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-binding.json": {
+      "sha256": "84f455b6b24783a0954f926e8f17aff442da7dd13d37052688d4d7f3639c9944",
+      "size_bytes": 2838
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-comparison.json": {
+      "sha256": "65d224819d2a3c4f056783064c5dbe4b6f088ab43f2955ab3d2bbe61991f387c",
+      "size_bytes": 52207
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.json": {
+      "sha256": "2b152f75d65913d4585eb9969624373a5d3fb35ebef5b77dce5ad63dde4a4511",
+      "size_bytes": 1401
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.log.gz": {
+      "sha256": "9f9a951608765298ee401f67f995b4b28a564e126eff84e228a16b622c9992fc",
+      "size_bytes": 887
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.provenance.json": {
+      "sha256": "423506b517b2c5d8cb5d19ad0f5077fd3ca25c1e4975f1e8b1494d69513268b8",
+      "size_bytes": 2112
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/configuration.json": {
+      "sha256": "11311ec473b493a4104445bd9ca6867b4d6fcae098ad9448bd72bb00837dc195",
+      "size_bytes": 1297
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "size_bytes": 1057
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/active-request-history.json": {
+      "sha256": "c87b7d3947557179b3d14cb0043067c582ef307fb59a5e16d7a0ed22ec348d84",
+      "size_bytes": 7286
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/conditional-point-refinements.json": {
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "size_bytes": 159
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "47de0442b3df92b4019265f0862d780f1b438fa551235b9a835b85313f13e71f",
+      "size_bytes": 2592
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "d55a0d105231d4be07bb0d408538902ab8575cc74f83822f2627d00311153b45",
+      "size_bytes": 6002
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "9ec814a2be704293cb5cbc7346759a34520db9fcb8e3f07d2448a0b7a61db2e6",
+      "size_bytes": 6618
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "2825665ac16e4c93218c6e7b6f334ee352a6d7185a7056f494b33093c9c3f2cf",
+      "size_bytes": 9577
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "3bfe5bb905fb102fda9701ec08ca0fe3428d21c6b86063324f887c36ba556c04",
+      "size_bytes": 11031
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "8c42b3cb76d65673aee7459516112c016a5fa0a7f6dc62bc54de1c8ce07c424e",
+      "size_bytes": 7528
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "ce735bcc522f8f767d5a560e7d268002af73a3b0e3b90a58f42aae8d9bd60bcf",
+      "size_bytes": 2416
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "c848e540cad87da70ae9ec6fdacd86fb3db2ff582e3c0c5089dee8383a8d2523",
+      "size_bytes": 1387
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "03dbd81137c7c2a3d01af6b271977ce78749709e37ed58256a5ace2d0f6f2497",
+      "size_bytes": 1329
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "7ae592a23e681ddbb010fa302773d5423a189024c06c2b31b7486865f09ed5f7",
+      "size_bytes": 4411
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.json": {
+      "sha256": "cdee66b08f8295c3808b295dfdd1e41c9751842f991e1067f77ea8f571eb5fa0",
+      "size_bytes": 8114
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "94dd2a27b1cfd17e8a38d7a3e4fc629e37696aff1d8c5f3b18911b761ceb187d",
+      "size_bytes": 7872
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "76bf00e54dc1309b354937b20224ba23015bbe0c6815bc77206f4f9d4136a19b",
+      "size_bytes": 1848
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "f8944bebc74d6c8ebbfcd8bff9456e7a35cfaa2c73308e8f0770fd8ff965a46f",
+      "size_bytes": 12143
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "f0b32d0395b0106e5555fb05597dcf5c4e81607d28edde136be58a2c9ea1c8c3",
+      "size_bytes": 1899
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "0b4fe35b4334d09d2a3cf2096e08741b6617339f93d8345f1fd2c2ba8ee18c3e",
+      "size_bytes": 17159
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "1e2ec05659bf0a903636167150a21fe496d27af59aa2d30ca62d7016aa44da82",
+      "size_bytes": 1913
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "7907f8b317e0d485a4f1171a14eb736abf6756c03d245a65fcffd73b70ed8066",
+      "size_bytes": 23842
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "e5ed1ecaabff1a573c214b0290c9874b460d15f204aa8363cf9d885047cb1369",
+      "size_bytes": 1878
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "2fcf398ab4b10b7fb8bdffa282ec2b519746d453420394f4219cb8ebd066d0e6",
+      "size_bytes": 27705
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.json": {
+      "sha256": "cd4572541f3c17dede52ec76a241932411f5fa98696ce6c82e9e8ae2a1815128",
+      "size_bytes": 7501
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "6f7a5bd72993f28065142dff1cade56728a41c28e37ee4423547370205293f77",
+      "size_bytes": 28137
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.json": {
+      "sha256": "1e0f78e84576e5a831c2e376ccd2127188fb6ec03f7aac37e0203322e7e115aa",
+      "size_bytes": 7197
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-closed.bin.gz": {
+      "sha256": "0bca2f732160820237c2b061e501c9f4480591f496756be4dfea5e57928c7737",
+      "size_bytes": 28435
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "7dfcea94a2e919f50341ba6d5d15e92d99ecae87670883e304fac8967b9e1c0b",
+      "size_bytes": 6888
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "bb70442f22baa554dc3a6a9934fcd11e47b56bbc3dd7358f504a03e5178a4d4b",
+      "size_bytes": 28428
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.json": {
+      "sha256": "025b1138b650047f70dde2888b239e5de64663dbedb3ceae6f3d288fe0aba1c2",
+      "size_bytes": 6893
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/active-request-history.json": {
+      "sha256": "3c8499b5b50c1d36b0d023bf640b1413f80671425110db74a10ab86740ba01a0",
+      "size_bytes": 3612
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json": {
+      "sha256": "8c09245ecedeb6a58a2a92e389272c5be195aa54cb8141669a2f4a31ae78dcfc",
+      "size_bytes": 539
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "c58961273d1b7406fde5b55a48fe7d78ca1e08ad978543ce5ccc0e06a9ad2648",
+      "size_bytes": 7538
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "f20ae26cdb72bb31a16d217cc53dbdd86e7297a6ec40d392e8a29521ca0e7db9",
+      "size_bytes": 14564
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "85aea9db69fb9a84e19b47840c055cd802505e54c16ebbb5c54324a36839e7ff",
+      "size_bytes": 21486
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "4df5f9924711e3436d20761b2456b230a30be90713d0966e84f946af15b767df",
+      "size_bytes": 14455
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "365bac3cef3cf95350fd521ef00a365d5934d74ba21d68eb3a85f93da6bdd2a7",
+      "size_bytes": 12064
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "72060b0a90bc896f005d184e518d3dc468670841f1360b9122f3eddcaa2cbef7",
+      "size_bytes": 2787
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json": {
+      "sha256": "70cfb4842ef76ac845b4d4447946890cb5ebff6c2a2888552fed1138ba557bcc",
+      "size_bytes": 1676
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "10fc8726a2c70908c166e80888eddc73ed3ebf300e4e3c84b6583264559586f9",
+      "size_bytes": 1652
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "e9c841a190a3c9a9a10090e3353bfa8a8bd5dc47432cd3ecd186627a3aae7895",
+      "size_bytes": 5124
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json": {
+      "sha256": "29cc7ff8df89aa3ffd4ca4ad9a31fbc0b68fbc2ff105f528961eae291795b7c7",
+      "size_bytes": 7950
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "dea842f6ff6488579f7f9c080340c4625ac3790e0ca9b31f13aeb7a03b7ec41e",
+      "size_bytes": 12930
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "d3c556ca4d451e6963e80e1899593b938e3cedb2a7b99b333cfe5124bc5ad42a",
+      "size_bytes": 1806
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "f7c6b716aaa57ee917a7854ba49438799da113a4f3bc62a80939ea1a981656f8",
+      "size_bytes": 19610
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "34896cf0b45b5ab645b7926005b3f2c008672d05d31f51951b5745dd3246af21",
+      "size_bytes": 1806
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "85e827126ffb5736f5a6a165619ebcff27865fed4e0168f1360df39032f15ea6",
+      "size_bytes": 21008
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "f62c2c1927c2fab550ea0eb76ea1cd90c3b355665fff4268261e6c5f8c35b5a9",
+      "size_bytes": 1809
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "1c3b26809163bd004e4d1bde2d3805338b1afbd11cb91448ed26e147107854dd",
+      "size_bytes": 21679
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json": {
+      "sha256": "62afd4408d1e9821aa9968a92c56051739a4c24388f3dd78e1bea71c6f125f55",
+      "size_bytes": 7658
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin.gz": {
+      "sha256": "756836545094eb3b655b1114309b89c391f12c29c668c9de43c8258253d2fa21",
+      "size_bytes": 21885
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "fdcee63ef215702c5dc0affc26e38239b93b8920667402afb2dede7657cdcf0c",
+      "size_bytes": 7467
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin.gz": {
+      "sha256": "8e37ba420f183245dd55b47c64fc6457d885cafcbf11aba50b4f6c9d03201a02",
+      "size_bytes": 21875
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json": {
+      "sha256": "51f64209ec2b84aca65993a271f8efed07d340e8ce8a0703e5820d416cc1cbb4",
+      "size_bytes": 7472
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/active-request-history.json": {
+      "sha256": "9f5ce7a964bddb31d9beb5fbc2747a9a843d1db1dcdc6401710fe2027c8d8606",
+      "size_bytes": 2651
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/conditional-point-refinements.json": {
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "size_bytes": 159
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json.gz": {
+      "sha256": "1ba41ad75f75bae50ef071a7765b945ea4d4f1cc89395854c634824dea930594",
+      "size_bytes": 2021
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json.gz": {
+      "sha256": "5a973e60b0c7672d8add90267910c5963c4de48d573df18abc84d2d1d2398003",
+      "size_bytes": 3089
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json.gz": {
+      "sha256": "f8de0d6b75e8cec526f8637f924b1599206606bbe415cd867cfdb1c93ee9f40e",
+      "size_bytes": 4591
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json.gz": {
+      "sha256": "35deb89ecb9866591c835572c82473648735c99b886c7f31205f9b30c3617806",
+      "size_bytes": 3053
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0005.json.gz": {
+      "sha256": "ccf625fbf6b9d1822626cd9c706ecd2b4787107ef9487676ea0da3d392aa90e2",
+      "size_bytes": 1981
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0006.json.gz": {
+      "sha256": "4ad0521808769260bbc3f1ced3ed7aa7a8136471915b9a2569680cc2f1ab9b38",
+      "size_bytes": 890
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json.gz": {
+      "sha256": "5157e6971b216cd1e4247cd224fedcd6c19e96a06c6627f6ebd7afda35c416d9",
+      "size_bytes": 803
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "size_bytes": 2
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "3f9e478daa1ef37ac846c1f0d61eb9519f8662a5e32679c2559dd26581e53ffc",
+      "size_bytes": 4385
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.json": {
+      "sha256": "457b9cbe36a18d8aef336c1d68e85e53a64230af36162bcdf85ad314e9fd9129",
+      "size_bytes": 7042
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "dba1dd1f78b303da54ec36d5c662eb8ec8da052e8e89d8ccc31aed53b87f3633",
+      "size_bytes": 6565
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.json": {
+      "sha256": "9f64ec2fc22ac24756d764c30d403846a333847b223f61f0dbe00c41dfcd47a5",
+      "size_bytes": 7727
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "f6672a8ca4433c4db4630604febef33be4b9f12d360df4da6bc58b0648fe3731",
+      "size_bytes": 10354
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.json": {
+      "sha256": "b2adae9fe1604a1868aecafe00ffbb866760c2b1fa3ff84ff200f95b3ad1ca79",
+      "size_bytes": 7422
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin.gz": {
+      "sha256": "3c130671ac1d03d676d30ccbe68334ad3ff3923d1c23c2f7aab6108e3d2ff16f",
+      "size_bytes": 12765
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.json": {
+      "sha256": "2656115bc1324096eb213e3aa3cd9029d1401be74524773d2b133602b5540cb5",
+      "size_bytes": 7114
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-004-provisional.bin.gz": {
+      "sha256": "5f5be5d0af1c6ba5fb4d6cc4f1f49ae29b86dde1b69605165c0ba3bfa674e29b",
+      "size_bytes": 13236
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-004-provisional.json": {
+      "sha256": "eeba4833172af75a01550f1c235fe34b75bd8eb1058f0f836b397a81a8190eda",
+      "size_bytes": 7039
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-closed.bin.gz": {
+      "sha256": "7962a7bb2d7fed147706e8a8696b223a754ef210aa2fe44d57ca3bd0711e39b6",
+      "size_bytes": 13574
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-closed.json": {
+      "sha256": "ed2c202d63d05c0ddf37d9d465786cfc350a9fe7e71a8399783d639f74b30b26",
+      "size_bytes": 6882
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-provisional.bin.gz": {
+      "sha256": "b9d3aa70f46a0f48e88259e87ef57934f7e310f2a0f4de0b0f8afb20f8bd3f85",
+      "size_bytes": 13564
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-provisional.json": {
+      "sha256": "bf444f006a50cefed0cb64d77a51441fc6ee1dbd703f1b5021b6e732e75091dc",
+      "size_bytes": 6887
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-18-60-8-grid-1000.json": {
+      "sha256": "126dc29a10d5ed9e9065d1c40e1c5db708877244c59cf669976e1145017d075c",
+      "size_bytes": 1028
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-60-8-grid-1000.json": {
+      "sha256": "e7eaa08be4a194ecc868dd9079a8417f5cf93c048a819f4a6e500aff4a8b6948",
+      "size_bytes": 1088
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-80-12-grid-1000.json": {
+      "sha256": "5665041225017dce7e4a3803851b76b9d5a299fce32e7c0e7d4ef5b667a5bc79",
+      "size_bytes": 1089
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-80-12-grid-2000.json": {
+      "sha256": "ddffdbeeecc762a258e2802d73bbdfa57aa9df0abbb2d1ff6ededb9a1ad4e1f1",
+      "size_bytes": 1089
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-80-8-grid-1000.json": {
+      "sha256": "fc0e87590d281a04b5755da7c14adbcba0773cf7ddf3f9df0e82bdc308018ac9",
+      "size_bytes": 1088
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-binding.json": {
+      "sha256": "b320c3594014125cefc890e8f339a4999560a42850a32cfff7873d4a0cab3aab",
+      "size_bytes": 2840
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-comparison.json": {
+      "sha256": "fd242a50862c65cfe0f62a2fb447fdbd250c9fb4c3e70d88898bc21ec27348cc",
+      "size_bytes": 50366
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.json": {
+      "sha256": "3b4c182a64cd13db1516090249ae941c246cc858de63106bab08714d79ca1b88",
+      "size_bytes": 1413
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.log.gz": {
+      "sha256": "49c182143e530636d80415a0ec44ca3692a15da812729af1c4a0e5ebc0d81a01",
+      "size_bytes": 4266
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.provenance.json": {
+      "sha256": "99ac5f006dc6680957d05bed78719e98a2afedc5be94fcce5ad115f91c8bc67a",
+      "size_bytes": 2112
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-validation-status.json": {
+      "sha256": "20bff5dbf6009e6b8b9aff6f887ee967aef480b4e20455be7e5432d09b67c680",
+      "size_bytes": 8038
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/launch-guard-point-build.py": {
+      "sha256": "f99dc5d1425668d83cbfda5d73625992089588ab9c078a9ecfd9c0d737861666",
+      "size_bytes": 1968
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-frozen-root-gate.py": {
+      "sha256": "5deb2a7e83c2aa19f186615b84a9a863fd594fa94afe7eb20bae7c1038d5e9c8",
+      "size_bytes": 3136
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-guard-point-gate.py": {
+      "sha256": "da8b9b5cd942c41a1d5799d440a8c3d5bff2a316d3c08d496e83ea47cbebe450",
+      "size_bytes": 3506
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-guard-point-massive-regression.py": {
+      "sha256": "afc6ea9cff3737e77bc77a77604f91daa9890652dd935a7e3d7ce3f51def5e49",
+      "size_bytes": 3094
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "size_bytes": 2367
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/summarize-frozen-root-gates.py": {
+      "sha256": "087b007a12ccd2aeede89edff61f153968adb568c5491d1b74c8a1333326b192",
+      "size_bytes": 4126
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/summarize-guard-point-checkpoint.py": {
+      "sha256": "c33f7db6a0cc8bb4840d9746158b1dbacf78fa0561d05601387d26b0b9e3ef26",
+      "size_bytes": 9518
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/verify-guard-point-native-archives.py": {
+      "sha256": "8f598d337f59babf50c7d897f20b5de568faf1000274a432abaf556ed97c8044",
+      "size_bytes": 1844
+    }
+  },
+  "external_references": {
+    "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-artifacts.json": {
+      "sha256": "665982a7505d193357e6c970e1bfc40d19ef8c8c42eee3bbf71f5aa0bbd57261",
+      "size_bytes": 79028
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/released-native-archives.json": {
+      "sha256": "e153d45204b183f09a69f4f96933d421d6f70bb5f493eaa224c29e3a54e4a885",
+      "size_bytes": 63161
+    },
+    "docs/finite-density-conditional-points.md": {
+      "sha256": "c41570ee97a26688b26497332f2130e94dc515c06bbb6d6749f5e5a6a5e3c976",
+      "size_bytes": 2653
+    },
+    "docs/finite-density-plan.md": {
+      "sha256": "4dce2f2aa8b2238cf39708afbb1e1f4b516b075b4e35623226d90218bf6002d5",
+      "size_bytes": 10737
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": {
+      "sha256": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+      "size_bytes": 18692
+    },
+    "examples/finite_density/massless_two_loop_sunset.json": {
+      "sha256": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+      "size_bytes": 1058
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": {
+      "sha256": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+      "size_bytes": 1310
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": {
+      "sha256": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+      "size_bytes": 10581
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": {
+      "sha256": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+      "size_bytes": 15882
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": {
+      "sha256": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+      "size_bytes": 1060
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": {
+      "sha256": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+      "size_bytes": 5591
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/input.json": {
+      "sha256": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+      "size_bytes": 1060
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/configuration.json": {
+      "sha256": "3bf0d4d8e85e8c470e8be2bd74d057c93677ff343ce594a72e87b19974be6e1e",
+      "size_bytes": 1155
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/prediction-28-80-12.json": {
+      "sha256": "36efffc4ee48713d17f5990460d8a746a60e8fa9eb4eeeceef390069510e4c60",
+      "size_bytes": 61915
+    }
+  },
+  "full_feature_validated": false,
+  "three_loop_full_amplitude_validated": false,
+  "native_four_loop_acceptance": false,
+  "supplied_oracle_numerical_records_compared": 0
+}

@@ -1,0 +1,40 @@
+{
+  "scope": "Bounded native exact-point rediscovery plus retained-first replay union; complete derivative closure not established",
+  "depth": 3,
+  "max_domains": 32,
+  "source_program_binding": "binding.json",
+  "files": {
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.rs": {
+      "bytes": 7265,
+      "sha256": "79edd10836c5f87e36d15cdbcc58157282201bb03dbc774fc2741f7d401c18fd"
+    },
+    "/tmp/zero_projection_condition_point_probe": {
+      "bytes": 424406320,
+      "sha256": "4002f127fa07f2e8ce1dd39a70d871b2856d4f9849af64ea3c95211f92ce43e1"
+    },
+    "/tmp/librustred-zero-projection-392075d0c6995fd1.rlib": {
+      "bytes": 435821774,
+      "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.json": {
+      "bytes": 45419,
+      "sha256": "3a6ebeb839251edff089fc1a6e2b75d8b1001dfc2574973f756564bf453c4e4c"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.bin": {
+      "bytes": 85564,
+      "sha256": "a5d2cfcece9dc789aefc62e7dff209c57137f8db8c8538099b6419134eeb7bb7"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-resources.json": {
+      "bytes": 593,
+      "sha256": "ba758fa2680570686a913a10a2ab90d0256d8a28fe05cb37cf5e0376474d4f34"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-resources.log": {
+      "bytes": 90,
+      "sha256": "18b4dd6faa9253f623b86b922e5cdc42d6c976fa743ce4ebabbf4ae3aa62be74"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-resources.provenance.json": {
+      "bytes": 1198,
+      "sha256": "3759c0c7d8925e4e2ba05164eb2a0488f7016a4cbc9b2495a30570417a84d9b6"
+    }
+  }
+}

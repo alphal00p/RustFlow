@@ -1,0 +1,219 @@
+{
+  "scope": "same archived original sources and19point fixtures; source-only schema-v1 extraction, freshschema-v2 discovery/replay; no oldproof imported; native suite/full gates pending at launch",
+  "native_library_sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+  "old_native_library_sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+  "controls": [
+    {
+      "mode": "original",
+      "points": 19,
+      "applied": 19,
+      "old_rhs_terms": 192,
+      "new_rhs_terms": 192,
+      "old_zero_rules": 0,
+      "new_zero_rules": 0,
+      "rhs_identical_to_old": 19,
+      "conditions_identical_to_old": 18,
+      "new_surface_terms": 2,
+      "wall_seconds": 0.21505044912919402,
+      "peak_child_rss_kib": 55364,
+      "differences": [
+        {
+          "target": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "old_rhs_count": 1,
+          "new_rhs_count": 1,
+          "old_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta",
+            "2*epsilon*eta-3*eta"
+          ],
+          "new_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "virtual-first",
+      "points": 19,
+      "applied": 19,
+      "old_rhs_terms": 192,
+      "new_rhs_terms": 192,
+      "old_zero_rules": 0,
+      "new_zero_rules": 0,
+      "rhs_identical_to_old": 19,
+      "conditions_identical_to_old": 18,
+      "new_surface_terms": 2,
+      "wall_seconds": 0.21744448831304908,
+      "peak_child_rss_kib": 55316,
+      "differences": [
+        {
+          "target": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "old_rhs_count": 1,
+          "new_rhs_count": 1,
+          "old_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta",
+            "2*epsilon*eta-3*eta"
+          ],
+          "new_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "virtual-only",
+      "points": 19,
+      "applied": 19,
+      "old_rhs_terms": 199,
+      "new_rhs_terms": 199,
+      "old_zero_rules": 1,
+      "new_zero_rules": 1,
+      "rhs_identical_to_old": 19,
+      "conditions_identical_to_old": 18,
+      "new_surface_terms": 0,
+      "wall_seconds": 0.23003517230972648,
+      "peak_child_rss_kib": 52276,
+      "differences": [
+        {
+          "target": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "old_rhs_count": 1,
+          "new_rhs_count": 1,
+          "old_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta",
+            "2*epsilon*eta-3*eta"
+          ],
+          "new_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "virtual-with-algebra",
+      "points": 19,
+      "applied": 19,
+      "old_rhs_terms": 192,
+      "new_rhs_terms": 192,
+      "old_zero_rules": 0,
+      "new_zero_rules": 0,
+      "rhs_identical_to_old": 19,
+      "conditions_identical_to_old": 18,
+      "new_surface_terms": 0,
+      "wall_seconds": 0.17976884404197335,
+      "peak_child_rss_kib": 52272,
+      "differences": [
+        {
+          "target": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "old_rhs_count": 1,
+          "new_rhs_count": 1,
+          "old_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta",
+            "2*epsilon*eta-3*eta"
+          ],
+          "new_conditions": [
+            "4*epsilon*eta-6*eta",
+            "-6+4*epsilon",
+            "8*epsilon*eta-12*eta",
+            "-12+8*epsilon",
+            "2*eta",
+            "32*epsilon*eta-48*eta",
+            "eta"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/tmp/three-loop-reachable-zero",
+    "/tmp/active-zero-three-loop-single-round7.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-reachable-zero-diagnostic/results",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/targets.json",
+    "/tmp/active-zero-three-loop-request-history.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 12.42693551396951,
+  "user_seconds": 12.069281,
+  "system_seconds": 0.24931299999999998,
+  "peak_child_rss_kib": 294940,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,1424 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-10T02:04:19.748522+00:00",
+  "scope": "Finalized guard-point two-loop fixed/Laurent and three-loop failed native discovery corpora and sibling raw resource logs. Predictions/configurations/inputs/resource summaries and small native diagnostics remain raw; massive artifacts excluded.",
+  "reader_release": "Root released all completed guard-point native corpora, confirmed by acceptance owner before archival.",
+  "compression": "gzip level9, mtime0, empty embedded filename",
+  "records": [
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/active-request-history.json",
+      "original_bytes": 538970,
+      "original_sha256": "ba5c936c3a66ae467dfdf8ac6c7f94aaaece3c1408e07728c5533aaf1eb5f585",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/active-request-history.json.gz",
+      "archive_bytes": 14469,
+      "archive_sha256": "fc7253fd46b6dc3ff1b586266e916f93ed7955676e98404a90ea43a4c5032e79"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json",
+      "original_bytes": 297700,
+      "original_sha256": "13173594d686fb88c9b04ee79b087dab0ea62683749778cb5b505ce9ce1b107a",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz",
+      "archive_bytes": 4880,
+      "archive_sha256": "cadbcdf25ecb794b767b45d5b61890adff0bce8c481b2707baeb9de1c1c8da1d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json",
+      "original_bytes": 1239481,
+      "original_sha256": "faec213d3a360a6cf9599f69be3eb6208400daba6669d57398f7604212a98712",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz",
+      "archive_bytes": 19589,
+      "archive_sha256": "0bad37a112a8ea6196e2cdc263f98ec5943721c74dc33b51e5f976f25ea68f88"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json",
+      "original_bytes": 4302645,
+      "original_sha256": "24235b1763ef567a0eac68d4b7cb06608eb42d53168945e0d9e823b766a8ed40",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz",
+      "archive_bytes": 67754,
+      "archive_sha256": "478a9f4da0b7c679c6b72cca95c502f0b0c998d54a82012e82c51201c6f4bd37"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json",
+      "original_bytes": 9734871,
+      "original_sha256": "14301cb5123bc8510ad1fc3a9cda327c390795401fccf7cb2285ada1c51ae913",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz",
+      "archive_bytes": 153862,
+      "archive_sha256": "a09c2c73a218862f658a00e3b0e3bd807bdf6c688c264276eda1d1926511b85d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json",
+      "original_bytes": 24161037,
+      "original_sha256": "bf9469a8cbee9c4c9270f32466ae3274003c4474323d9c91e5048ae5e65fd4a7",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz",
+      "archive_bytes": 382747,
+      "archive_sha256": "858a263d752b94a2ac59d84a00b4abd63fda63e20e9afc8747c6853725088f01"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json",
+      "original_bytes": 40431088,
+      "original_sha256": "1f291ab5a541090d01a199ff8a51b4fb8c13ac216dc239f6903f3fb402b99dac",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz",
+      "archive_bytes": 639791,
+      "archive_sha256": "d84c23657880bb11b9f766b6b0b7a2b7f6d29efb0f276cc761df7b2133bc2b21"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json",
+      "original_bytes": 55832956,
+      "original_sha256": "7d14c11b582f5f21fd5551594d8f0316a80042dc1b44093b6288db3a54e63165",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz",
+      "archive_bytes": 889013,
+      "archive_sha256": "318f34d59cd3bfe1314dbbb8c8959cf93a6ded5f68f472a2ad2c19198119af64"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0008.json",
+      "original_bytes": 57318390,
+      "original_sha256": "c66e53ace9b157365f35f9848250c62517117644c124f9a7303d1264d1fc3c77",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz",
+      "archive_bytes": 914836,
+      "archive_sha256": "72823ed7f0853d74a3860ff4cc4b1d2bca46a0b17d6ce369bc8fa4f33ad2d352"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json",
+      "original_bytes": 9220840,
+      "original_sha256": "b7f3a65ac37e4f433e56370ba245fd1d7b2aee812fb4d4a69056f6332569c231",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "archive_bytes": 86815,
+      "archive_sha256": "08e5d992f0d62f8a7d424a1ee72131352a572ce509039a8a2f93c08b2cb4ab54"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "original_bytes": 42173,
+      "original_sha256": "5eea8a3f92355ee33c68b4da0a37048357b2ebcbd95217f7fb55284f9d2d8409",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_bytes": 4680,
+      "archive_sha256": "485087bbaf160e8322f133eb68885499888b4db587103f4a7a52095d93ac89b2"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json",
+      "original_bytes": 10689,
+      "original_sha256": "d17cb3c0ccd21bafcbfde45f88c0040801ebe653c3c5d5a00d34a7819f78b7be",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_bytes": 1989,
+      "archive_sha256": "7eda574625b3b0f21f0a47e0d22e351fdc1f308602fe308c4fe53f12f3890e5c"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "original_bytes": 111248,
+      "original_sha256": "a4c97d0d240b64a4d969b89809e37b9f69eee8d42f4c53c9971866e7100881db",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_bytes": 10560,
+      "archive_sha256": "edf3f50c4c88e2c7d3240e536e3fcc625c55f1b8df339258f9c8cfa6077a08d6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+      "original_bytes": 18662,
+      "original_sha256": "66df53b61409496931e45e771756aab0177370626098626e45773d76be3d133f",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_bytes": 2203,
+      "archive_sha256": "9fc7dc8a8ae2ec4c258f359f12a14cf035e2b90db17f068f081dc6e325a9c1da"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "original_bytes": 577992,
+      "original_sha256": "b51dd1b0ca7608be40933be48c4b9fc1e3810e5d5240d346aaa303989a752879",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_bytes": 49902,
+      "archive_sha256": "9ac6cd8ee2f0e3dfe6bdcb90c13334f68364dcf1ba69a0afdea79abaddc63481"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "original_bytes": 38434,
+      "original_sha256": "8aa76c38fafdf34bd484657d6a966494535dbe82d2c79662447ac084c5c3e71b",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_bytes": 2734,
+      "archive_sha256": "3c18b998e99df7f2437c6071c63fa6719567be03ea463d8a1860165b0e91b327"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "original_bytes": 2389479,
+      "original_sha256": "65d696c6ba45633a06b9429e73a891b53121b47051f3b1bb360d8ec46f5452a7",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "archive_bytes": 217941,
+      "archive_sha256": "8d46e05d4685c8e07fb362c15924771a27b8595970231e5e998f50368d7786be"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+      "original_bytes": 84803,
+      "original_sha256": "8673221dd390c772a9a371690688b4f043ebc0fd077d185dfd75aa53963aa69c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "archive_bytes": 4408,
+      "archive_sha256": "9a985a0c2d00a95d194f2025b3de4d01835b3f9785ee7338f5fe26663c53789d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "original_bytes": 4120680,
+      "original_sha256": "b98019894b94fa1a735ea6c2a347843ac843387f33fa370632774d2b320585c9",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "archive_bytes": 399388,
+      "archive_sha256": "3713b9bb4b131ca8c41748b8007bd4c64f7e1377a80107316ff184f2d9fac51a"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+      "original_bytes": 146035,
+      "original_sha256": "3e4bc0f851b47d8f8241cd570bfde0adfcca08c30c396ecfe1af75d7cdb0cbbb",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "archive_bytes": 6187,
+      "archive_sha256": "d5e23484b004d52bce64939ae133babd7a549290bc500480975226b9308089c5"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "original_bytes": 5763277,
+      "original_sha256": "ef38086bec129195c22da3b32458b45d12ec2f95819328d68c0fe671d7d6c840",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "archive_bytes": 559831,
+      "archive_sha256": "940a6fa81712a1a4f863a77375986fc9d8dd4416fc1537e7d51392fc9a01cfaa"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json",
+      "original_bytes": 230547,
+      "original_sha256": "babd03982eb61acc6e72d6542dac19eb0b5da76bdeb9a065c74b1ef2977b9115",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz",
+      "archive_bytes": 8510,
+      "archive_sha256": "3e0b910f3ac148186d83ce0706659809f0db84582d69b0c97c66b95901cb2d81"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "original_bytes": 7631885,
+      "original_sha256": "bf450869cf8ea05332be5702f0db9ad0d5e2e50b8ed9893f2c81bb96cff51536",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "archive_bytes": 755873,
+      "archive_sha256": "a688d5cc539830f5386aac8e47a5bdd76e32fe0de9249ac676d11ea3d8113fd5"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json",
+      "original_bytes": 335430,
+      "original_sha256": "787160d0cc64be6f64e3af26cb3cc498a22d8bb2900a185ed5ef1d7639824136",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz",
+      "archive_bytes": 11367,
+      "archive_sha256": "678958c20ee4dba0538fc9f7343cd81dfa7b4dfc79b9ff1e70c31127bcd72a39"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.bin",
+      "original_bytes": 9606509,
+      "original_sha256": "c4a591e353846b0fd87f1828d66a9bbe2a4dbaa41e10e23cace20d2e1202c70a",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz",
+      "archive_bytes": 961329,
+      "archive_sha256": "ee8aa2e771ec634fa000b33f6d299df65794c3408ca0961c99d656112cdcf38b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.json",
+      "original_bytes": 392250,
+      "original_sha256": "6a5ba0f0d2cf7df1154853c8e5c3ea3d8a40e111957c4d9ad948c711a70feeb7",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz",
+      "archive_bytes": 13049,
+      "archive_sha256": "374cc36cc8935ed7f1541856df5d1c537a2d62c7f34f63ac6b2304aed48fbb86"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.log",
+      "original_bytes": 1730,
+      "original_sha256": "e8aa5720e6aa4c8a3c5066bd80373b73200d89e57ea642eb92b65ca14b4b4992",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.log.gz",
+      "archive_bytes": 632,
+      "archive_sha256": "01f44b12b49716e3fbb370fc24067d434fb5d31bef584e171731931a1bd3174c"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json",
+      "original_bytes": 122812,
+      "original_sha256": "9e645fd784ec3c56090c6c78e8568cf5df6f97cbdbb42e9fc564ad733d44c1ab",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz",
+      "archive_bytes": 2592,
+      "archive_sha256": "47de0442b3df92b4019265f0862d780f1b438fa551235b9a835b85313f13e71f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json",
+      "original_bytes": 312053,
+      "original_sha256": "6cc80d7f12f75f9789354ee8058349d6a4ca65811cb8f581f1f6ccc92f86bc6b",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz",
+      "archive_bytes": 6002,
+      "archive_sha256": "d55a0d105231d4be07bb0d408538902ab8575cc74f83822f2627d00311153b45"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json",
+      "original_bytes": 352258,
+      "original_sha256": "432368cb629e74252e17d47c948084a254f71f2e93bc98ccd4b888970d3549b9",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz",
+      "archive_bytes": 6618,
+      "archive_sha256": "9ec814a2be704293cb5cbc7346759a34520db9fcb8e3f07d2448a0b7a61db2e6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json",
+      "original_bytes": 519624,
+      "original_sha256": "230bd52a2c0c2a5d76f5e5354edbdb4dda4eea9f112d862b275abc5f1adc428c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz",
+      "archive_bytes": 9577,
+      "archive_sha256": "2825665ac16e4c93218c6e7b6f334ee352a6d7185a7056f494b33093c9c3f2cf"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json",
+      "original_bytes": 602809,
+      "original_sha256": "58871987ff07d6578a568341653c932cfb2ccf2c9f7e76483f275feb499df132",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz",
+      "archive_bytes": 11031,
+      "archive_sha256": "3bfe5bb905fb102fda9701ec08ca0fe3428d21c6b86063324f887c36ba556c04"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json",
+      "original_bytes": 401482,
+      "original_sha256": "76bbdabf4f60c4c6595c7bcff5e6581de4dbb1919212d3cf8e92e1a45c6c8869",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz",
+      "archive_bytes": 7528,
+      "archive_sha256": "8c42b3cb76d65673aee7459516112c016a5fa0a7f6dc62bc54de1c8ce07c424e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json",
+      "original_bytes": 112144,
+      "original_sha256": "9815ca7463dcb29cd87588a721ea19c60d4b692b9899cd90ea12e047e038dc55",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz",
+      "archive_bytes": 2416,
+      "archive_sha256": "ce735bcc522f8f767d5a560e7d268002af73a3b0e3b90a58f42aae8d9bd60bcf"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json",
+      "original_bytes": 56550,
+      "original_sha256": "b8cfe891b90b4dec16b905fc2f406bb3fb0c147322ffee61deab3831f58a6786",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz",
+      "archive_bytes": 1387,
+      "archive_sha256": "c848e540cad87da70ae9ec6fdacd86fb3db2ff582e3c0c5089dee8383a8d2523"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json",
+      "original_bytes": 80342,
+      "original_sha256": "f3e9b0a03b6b454451e36bae948109891c6714e0f4a3d97d14b7b55d7e90349c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1329,
+      "archive_sha256": "03dbd81137c7c2a3d01af6b271977ce78749709e37ed58256a5ace2d0f6f2497"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "original_bytes": 27249,
+      "original_sha256": "5d8b4661122e9c077283a9799c386ec0b1b0be4cebef232c4d95bac2e6c49173",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_bytes": 4411,
+      "archive_sha256": "7ae592a23e681ddbb010fa302773d5423a189024c06c2b31b7486865f09ed5f7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "original_bytes": 53216,
+      "original_sha256": "b629aec369cfce453e0d736076ada75192083d3eca203557d2b6fd1aa16e72b3",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_bytes": 7872,
+      "archive_sha256": "94dd2a27b1cfd17e8a38d7a3e4fc629e37696aff1d8c5f3b18911b761ceb187d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+      "original_bytes": 8267,
+      "original_sha256": "4b68dc03f30e623f86997a2182266985f642bdedab760a4df8edbb0ca594a124",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_bytes": 1848,
+      "archive_sha256": "76bf00e54dc1309b354937b20224ba23015bbe0c6815bc77206f4f9d4136a19b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "original_bytes": 92082,
+      "original_sha256": "71adb0dc2087e7d65ea6006fba59b1f4cd4d363600839c8159ef6a54e598bebc",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_bytes": 12143,
+      "archive_sha256": "f8944bebc74d6c8ebbfcd8bff9456e7a35cfaa2c73308e8f0770fd8ff965a46f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "original_bytes": 9410,
+      "original_sha256": "61da9def1f7851da85a179288fbd80e49e90fe14a2cb623b763d0b1ef01b8f3c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_bytes": 1899,
+      "archive_sha256": "f0b32d0395b0106e5555fb05597dcf5c4e81607d28edde136be58a2c9ea1c8c3"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "original_bytes": 140054,
+      "original_sha256": "bf3dd9c26d9cba8740d5e83b30f67673a405de7e6ac6de0d630b7b9efdbe3e96",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "archive_bytes": 17159,
+      "archive_sha256": "0b4fe35b4334d09d2a3cf2096e08741b6617339f93d8345f1fd2c2ba8ee18c3e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+      "original_bytes": 9937,
+      "original_sha256": "176b7e0d30addc4315304725e061d7855951555ddd0a5e196c161c6dea98ea33",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "archive_bytes": 1913,
+      "archive_sha256": "1e2ec05659bf0a903636167150a21fe496d27af59aa2d30ca62d7016aa44da82"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "original_bytes": 190861,
+      "original_sha256": "d0d0089f47c9673396cde2607406ae87aa08a56576267440a5087e75dbd6d99c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "archive_bytes": 23842,
+      "archive_sha256": "7907f8b317e0d485a4f1171a14eb736abf6756c03d245a65fcffd73b70ed8066"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+      "original_bytes": 9023,
+      "original_sha256": "36901c3caa2fa5958d43ba29df022db76bbc967c98d07e40901267fa3b832d62",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "archive_bytes": 1878,
+      "archive_sha256": "e5ed1ecaabff1a573c214b0290c9874b460d15f204aa8363cf9d885047cb1369"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "original_bytes": 222692,
+      "original_sha256": "1d51e23a2d5a2b4ebe0ec9cfa2fdd9ea26b9cf4479ae87917b9ef6cede33c76f",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "archive_bytes": 27705,
+      "archive_sha256": "2fcf398ab4b10b7fb8bdffa282ec2b519746d453420394f4219cb8ebd066d0e6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "original_bytes": 229857,
+      "original_sha256": "88b293afe32f8e0067d9d8978b7d8a259484553ffdb6ee726e3dd0711503c9de",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "archive_bytes": 28137,
+      "archive_sha256": "6f7a5bd72993f28065142dff1cade56728a41c28e37ee4423547370205293f77"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-closed.bin",
+      "original_bytes": 236570,
+      "original_sha256": "7358cb380d63140000fada8b079443ffea9826e100130c80e3d272e8d69de3b3",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-closed.bin.gz",
+      "archive_bytes": 28435,
+      "archive_sha256": "0bca2f732160820237c2b061e501c9f4480591f496756be4dfea5e57928c7737"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin",
+      "original_bytes": 236554,
+      "original_sha256": "c13e0acd5053c63a0873a8960c3d618598ec3e1b54cd609b9ec414c3c196b3e7",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz",
+      "archive_bytes": 28428,
+      "archive_sha256": "bb70442f22baa554dc3a6a9934fcd11e47b56bbc3dd7358f504a03e5178a4d4b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json",
+      "original_bytes": 498698,
+      "original_sha256": "d1660a0fa975d54793a61444f30a89bdf54d75e12e4c54a1fcfe3b5a55436942",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "archive_bytes": 7538,
+      "archive_sha256": "c58961273d1b7406fde5b55a48fe7d78ca1e08ad978543ce5ccc0e06a9ad2648"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json",
+      "original_bytes": 987653,
+      "original_sha256": "824e7ad3b9f162845a93000c7e9d4e499fb6dfc016e51e54f567fd932d36e186",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "archive_bytes": 14564,
+      "archive_sha256": "f20ae26cdb72bb31a16d217cc53dbdd86e7297a6ec40d392e8a29521ca0e7db9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json",
+      "original_bytes": 1478094,
+      "original_sha256": "5dfe254866469b6c953485c4c43ed4122e4adbd45e94a6f7e69a5962374444fb",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "archive_bytes": 21486,
+      "archive_sha256": "85aea9db69fb9a84e19b47840c055cd802505e54c16ebbb5c54324a36839e7ff"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json",
+      "original_bytes": 974396,
+      "original_sha256": "4f987ee3ae37c7318c39c611a1d197984c97e5855a2cf4c92ddfdd6bf6144020",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "archive_bytes": 14455,
+      "archive_sha256": "4df5f9924711e3436d20761b2456b230a30be90713d0966e84f946af15b767df"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json",
+      "original_bytes": 810801,
+      "original_sha256": "e7401bd34a10c9b09a055e558c1e9f991a15c259f029a34002c02c2d1fcb89ea",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "archive_bytes": 12064,
+      "archive_sha256": "365bac3cef3cf95350fd521ef00a365d5934d74ba21d68eb3a85f93da6bdd2a7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json",
+      "original_bytes": 163352,
+      "original_sha256": "660166a12038bac2b660d70b0ee241c45312698a666131fc738f7766f41dd49f",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "archive_bytes": 2787,
+      "archive_sha256": "72060b0a90bc896f005d184e518d3dc468670841f1360b9122f3eddcaa2cbef7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "original_bytes": 113588,
+      "original_sha256": "2addc2acc665bbde83635de8505015092ebc716539566252c8698ab065e8d133",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1652,
+      "archive_sha256": "10fc8726a2c70908c166e80888eddc73ed3ebf300e4e3c84b6583264559586f9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_bytes": 46759,
+      "original_sha256": "d03354700b6ccd63711d023bd1e70327e8f992a07330da7383e035703f0e11b9",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_bytes": 5124,
+      "archive_sha256": "e9c841a190a3c9a9a10090e3353bfa8a8bd5dc47432cd3ecd186627a3aae7895"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_bytes": 123110,
+      "original_sha256": "58c756768cfdd581121beb45c1ccbcdc1f2c2edfcb5b58d29b8aa74d382fa0ac",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_bytes": 12930,
+      "archive_sha256": "dea842f6ff6488579f7f9c080340c4625ac3790e0ca9b31f13aeb7a03b7ec41e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "original_bytes": 8697,
+      "original_sha256": "55ddf4e43d4afb10a3ee60fb4df97e5464253dbfd934f62ef2ba4d54d929ad47",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_bytes": 1806,
+      "archive_sha256": "d3c556ca4d451e6963e80e1899593b938e3cedb2a7b99b333cfe5124bc5ad42a"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_bytes": 193641,
+      "original_sha256": "84f1baebf4166bb684ca2ffa455fb1a391e26bead5deadfaa97b930adffad02b",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_bytes": 19610,
+      "archive_sha256": "f7c6b716aaa57ee917a7854ba49438799da113a4f3bc62a80939ea1a981656f8"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "original_bytes": 8412,
+      "original_sha256": "8a1577cfe9febfdd811c2dffab45e7b5a1659129f78fc7f7190ef2bc00437455",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_bytes": 1806,
+      "archive_sha256": "34896cf0b45b5ab645b7926005b3f2c008672d05d31f51951b5745dd3246af21"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin",
+      "original_bytes": 214763,
+      "original_sha256": "973cb0d8ca61079f43fc911526a8a311d964974a86fbba88715843c7e816a15b",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "archive_bytes": 21008,
+      "archive_sha256": "85e827126ffb5736f5a6a165619ebcff27865fed4e0168f1360df39032f15ea6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json",
+      "original_bytes": 8406,
+      "original_sha256": "2443779afc113490f6fe92d4a5ccbd55386c565145287935d2f68e5206f2e955",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "archive_bytes": 1809,
+      "archive_sha256": "f62c2c1927c2fab550ea0eb76ea1cd90c3b355665fff4268261e6c5f8c35b5a9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin",
+      "original_bytes": 229151,
+      "original_sha256": "5c362eb8de30b803b9438117f6b786f7c489633268a3ed1fabfcb7a9506f92a4",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "archive_bytes": 21679,
+      "archive_sha256": "1c3b26809163bd004e4d1bde2d3805338b1afbd11cb91448ed26e147107854dd"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin",
+      "original_bytes": 241030,
+      "original_sha256": "ad76c085b44f3980e91464a0ef451e6e08260a0dc70125d63588d5284c11923e",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin.gz",
+      "archive_bytes": 21885,
+      "archive_sha256": "756836545094eb3b655b1114309b89c391f12c29c668c9de43c8258253d2fa21"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin",
+      "original_bytes": 241000,
+      "original_sha256": "70674a41c95baee3baec5745e0ca84d590ce0f07e7f76c6a732ecf924f9a18f5",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "archive_bytes": 21875,
+      "archive_sha256": "8e37ba420f183245dd55b47c64fc6457d885cafcbf11aba50b4f6c9d03201a02"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json",
+      "original_bytes": 91491,
+      "original_sha256": "f5fe41b878cf4fa3ddcef7c9fbfe46f148be46263c137a21c281f5d65fec5e97",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json.gz",
+      "archive_bytes": 2021,
+      "archive_sha256": "1ba41ad75f75bae50ef071a7765b945ea4d4f1cc89395854c634824dea930594"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json",
+      "original_bytes": 148747,
+      "original_sha256": "2bed02a9fdc6bc765131b2a8650ea8d6a0fe1106684f987858ffef8420eb4fe0",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json.gz",
+      "archive_bytes": 3089,
+      "archive_sha256": "5a973e60b0c7672d8add90267910c5963c4de48d573df18abc84d2d1d2398003"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json",
+      "original_bytes": 235416,
+      "original_sha256": "56e4d909dbbcbfbd7ffc698e22e08557db468ff4b09e1060fc559445a159353d",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json.gz",
+      "archive_bytes": 4591,
+      "archive_sha256": "f8de0d6b75e8cec526f8637f924b1599206606bbe415cd867cfdb1c93ee9f40e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json",
+      "original_bytes": 147278,
+      "original_sha256": "b9eb219e5a8478ed75c58528b4f02501eb2bcef9604e5605db66984f1d817f57",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json.gz",
+      "archive_bytes": 3053,
+      "archive_sha256": "35deb89ecb9866591c835572c82473648735c99b886c7f31205f9b30c3617806"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0005.json",
+      "original_bytes": 89035,
+      "original_sha256": "e37b1c6c3bcde9788e21d6b6107edb123d7daefd6188f984057b5f6b60e7de61",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0005.json.gz",
+      "archive_bytes": 1981,
+      "archive_sha256": "ccf625fbf6b9d1822626cd9c706ecd2b4787107ef9487676ea0da3d392aa90e2"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0006.json",
+      "original_bytes": 28930,
+      "original_sha256": "06f256cfe6244417aa977b6bb20c43a48d464f07e215ac37fd4cfa5626a4d598",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/direct-zero-0006.json.gz",
+      "archive_bytes": 890,
+      "archive_sha256": "4ad0521808769260bbc3f1ced3ed7aa7a8136471915b9a2569680cc2f1ab9b38"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json",
+      "original_bytes": 36563,
+      "original_sha256": "cb1e442e2035d24df68c062e9cb72a023088ca7ffe80b92100f2d2c1f7ef225c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 803,
+      "archive_sha256": "5157e6971b216cd1e4247cd224fedcd6c19e96a06c6627f6ebd7afda35c416d9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "original_bytes": 27412,
+      "original_sha256": "1381c02df8678823bc052a6dcf8f33cd43dc6ba047867d132ed480be3f5922e9",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_bytes": 4385,
+      "archive_sha256": "3f9e478daa1ef37ac846c1f0d61eb9519f8662a5e32679c2559dd26581e53ffc"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "original_bytes": 47862,
+      "original_sha256": "00dcdf381a6a76d2ef4973d4b0debe65c212c5c21786d75822f48c5ec9cde1c1",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_bytes": 6565,
+      "archive_sha256": "dba1dd1f78b303da54ec36d5c662eb8ec8da052e8e89d8ccc31aed53b87f3633"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "original_bytes": 86730,
+      "original_sha256": "26812b5494fddda0e6c1d6519db19162d304e8669b78df8d91da8c0481c8a68a",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_bytes": 10354,
+      "archive_sha256": "f6672a8ca4433c4db4630604febef33be4b9f12d360df4da6bc58b0648fe3731"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin",
+      "original_bytes": 116148,
+      "original_sha256": "58695aae0b6c6c8038cabae0f7beec52b483f697b457255ca170e7581bc590c0",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin.gz",
+      "archive_bytes": 12765,
+      "archive_sha256": "3c130671ac1d03d676d30ccbe68334ad3ff3923d1c23c2f7aab6108e3d2ff16f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-004-provisional.bin",
+      "original_bytes": 123991,
+      "original_sha256": "99831060b8b7d93032f89cd311360416e49f9c2eb6bc52c2b9964a641cb10058",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-004-provisional.bin.gz",
+      "archive_bytes": 13236,
+      "archive_sha256": "5f5be5d0af1c6ba5fb4d6cc4f1f49ae29b86dde1b69605165c0ba3bfa674e29b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-closed.bin",
+      "original_bytes": 131923,
+      "original_sha256": "1572870df31cdb05b07b5ef6ecaa663d320c99722fa99db1653c0b60dfe69ef4",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-closed.bin.gz",
+      "archive_bytes": 13574,
+      "archive_sha256": "7962a7bb2d7fed147706e8a8696b223a754ef210aa2fe44d57ca3bd0711e39b6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-provisional.bin",
+      "original_bytes": 131899,
+      "original_sha256": "ec4c9a1af311d95a8829456661430e6edbed900be2022b270f8cf926af6dfd09",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-provisional.bin.gz",
+      "archive_bytes": 13564,
+      "archive_sha256": "b9d3aa70f46a0f48e88259e87ef57934f7e310f2a0f4de0b0f8afb20f8bd3f85"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.log",
+      "original_bytes": 14256,
+      "original_sha256": "d22d4a9b7dde82e0c74a54f30db1a0b1fd3616088ababa7000b10c4941039252",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.log.gz",
+      "archive_bytes": 887,
+      "archive_sha256": "9f9a951608765298ee401f67f995b4b28a564e126eff84e228a16b622c9992fc"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json",
+      "original_bytes": 122812,
+      "original_sha256": "9e645fd784ec3c56090c6c78e8568cf5df6f97cbdbb42e9fc564ad733d44c1ab",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json.gz",
+      "archive_bytes": 2592,
+      "archive_sha256": "47de0442b3df92b4019265f0862d780f1b438fa551235b9a835b85313f13e71f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json",
+      "original_bytes": 312053,
+      "original_sha256": "6cc80d7f12f75f9789354ee8058349d6a4ca65811cb8f581f1f6ccc92f86bc6b",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json.gz",
+      "archive_bytes": 6002,
+      "archive_sha256": "d55a0d105231d4be07bb0d408538902ab8575cc74f83822f2627d00311153b45"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json",
+      "original_bytes": 352258,
+      "original_sha256": "432368cb629e74252e17d47c948084a254f71f2e93bc98ccd4b888970d3549b9",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json.gz",
+      "archive_bytes": 6618,
+      "archive_sha256": "9ec814a2be704293cb5cbc7346759a34520db9fcb8e3f07d2448a0b7a61db2e6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json",
+      "original_bytes": 519624,
+      "original_sha256": "230bd52a2c0c2a5d76f5e5354edbdb4dda4eea9f112d862b275abc5f1adc428c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json.gz",
+      "archive_bytes": 9577,
+      "archive_sha256": "2825665ac16e4c93218c6e7b6f334ee352a6d7185a7056f494b33093c9c3f2cf"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json",
+      "original_bytes": 602809,
+      "original_sha256": "58871987ff07d6578a568341653c932cfb2ccf2c9f7e76483f275feb499df132",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json.gz",
+      "archive_bytes": 11031,
+      "archive_sha256": "3bfe5bb905fb102fda9701ec08ca0fe3428d21c6b86063324f887c36ba556c04"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json",
+      "original_bytes": 401482,
+      "original_sha256": "76bbdabf4f60c4c6595c7bcff5e6581de4dbb1919212d3cf8e92e1a45c6c8869",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json.gz",
+      "archive_bytes": 7528,
+      "archive_sha256": "8c42b3cb76d65673aee7459516112c016a5fa0a7f6dc62bc54de1c8ce07c424e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json",
+      "original_bytes": 112144,
+      "original_sha256": "9815ca7463dcb29cd87588a721ea19c60d4b692b9899cd90ea12e047e038dc55",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json.gz",
+      "archive_bytes": 2416,
+      "archive_sha256": "ce735bcc522f8f767d5a560e7d268002af73a3b0e3b90a58f42aae8d9bd60bcf"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json",
+      "original_bytes": 56550,
+      "original_sha256": "b8cfe891b90b4dec16b905fc2f406bb3fb0c147322ffee61deab3831f58a6786",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json.gz",
+      "archive_bytes": 1387,
+      "archive_sha256": "c848e540cad87da70ae9ec6fdacd86fb3db2ff582e3c0c5089dee8383a8d2523"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json",
+      "original_bytes": 80342,
+      "original_sha256": "f3e9b0a03b6b454451e36bae948109891c6714e0f4a3d97d14b7b55d7e90349c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1329,
+      "archive_sha256": "03dbd81137c7c2a3d01af6b271977ce78749709e37ed58256a5ace2d0f6f2497"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "original_bytes": 27249,
+      "original_sha256": "5d8b4661122e9c077283a9799c386ec0b1b0be4cebef232c4d95bac2e6c49173",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_bytes": 4411,
+      "archive_sha256": "7ae592a23e681ddbb010fa302773d5423a189024c06c2b31b7486865f09ed5f7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "original_bytes": 53216,
+      "original_sha256": "b629aec369cfce453e0d736076ada75192083d3eca203557d2b6fd1aa16e72b3",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_bytes": 7872,
+      "archive_sha256": "94dd2a27b1cfd17e8a38d7a3e4fc629e37696aff1d8c5f3b18911b761ceb187d"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.json",
+      "original_bytes": 8267,
+      "original_sha256": "4b68dc03f30e623f86997a2182266985f642bdedab760a4df8edbb0ca594a124",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_bytes": 1848,
+      "archive_sha256": "76bf00e54dc1309b354937b20224ba23015bbe0c6815bc77206f4f9d4136a19b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin",
+      "original_bytes": 92082,
+      "original_sha256": "71adb0dc2087e7d65ea6006fba59b1f4cd4d363600839c8159ef6a54e598bebc",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_bytes": 12143,
+      "archive_sha256": "f8944bebc74d6c8ebbfcd8bff9456e7a35cfaa2c73308e8f0770fd8ff965a46f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.json",
+      "original_bytes": 9410,
+      "original_sha256": "61da9def1f7851da85a179288fbd80e49e90fe14a2cb623b763d0b1ef01b8f3c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_bytes": 1899,
+      "archive_sha256": "f0b32d0395b0106e5555fb05597dcf5c4e81607d28edde136be58a2c9ea1c8c3"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin",
+      "original_bytes": 140054,
+      "original_sha256": "bf3dd9c26d9cba8740d5e83b30f67673a405de7e6ac6de0d630b7b9efdbe3e96",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin.gz",
+      "archive_bytes": 17159,
+      "archive_sha256": "0b4fe35b4334d09d2a3cf2096e08741b6617339f93d8345f1fd2c2ba8ee18c3e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.json",
+      "original_bytes": 9937,
+      "original_sha256": "176b7e0d30addc4315304725e061d7855951555ddd0a5e196c161c6dea98ea33",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.json.gz",
+      "archive_bytes": 1913,
+      "archive_sha256": "1e2ec05659bf0a903636167150a21fe496d27af59aa2d30ca62d7016aa44da82"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin",
+      "original_bytes": 190861,
+      "original_sha256": "d0d0089f47c9673396cde2607406ae87aa08a56576267440a5087e75dbd6d99c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin.gz",
+      "archive_bytes": 23842,
+      "archive_sha256": "7907f8b317e0d485a4f1171a14eb736abf6756c03d245a65fcffd73b70ed8066"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.json",
+      "original_bytes": 9023,
+      "original_sha256": "36901c3caa2fa5958d43ba29df022db76bbc967c98d07e40901267fa3b832d62",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.json.gz",
+      "archive_bytes": 1878,
+      "archive_sha256": "e5ed1ecaabff1a573c214b0290c9874b460d15f204aa8363cf9d885047cb1369"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin",
+      "original_bytes": 222692,
+      "original_sha256": "1d51e23a2d5a2b4ebe0ec9cfa2fdd9ea26b9cf4479ae87917b9ef6cede33c76f",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin.gz",
+      "archive_bytes": 27705,
+      "archive_sha256": "2fcf398ab4b10b7fb8bdffa282ec2b519746d453420394f4219cb8ebd066d0e6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin",
+      "original_bytes": 229857,
+      "original_sha256": "88b293afe32f8e0067d9d8978b7d8a259484553ffdb6ee726e3dd0711503c9de",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin.gz",
+      "archive_bytes": 28137,
+      "archive_sha256": "6f7a5bd72993f28065142dff1cade56728a41c28e37ee4423547370205293f77"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-closed.bin",
+      "original_bytes": 236570,
+      "original_sha256": "7358cb380d63140000fada8b079443ffea9826e100130c80e3d272e8d69de3b3",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-closed.bin.gz",
+      "archive_bytes": 28435,
+      "archive_sha256": "0bca2f732160820237c2b061e501c9f4480591f496756be4dfea5e57928c7737"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin",
+      "original_bytes": 236554,
+      "original_sha256": "c13e0acd5053c63a0873a8960c3d618598ec3e1b54cd609b9ec414c3c196b3e7",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin.gz",
+      "archive_bytes": 28428,
+      "archive_sha256": "bb70442f22baa554dc3a6a9934fcd11e47b56bbc3dd7358f504a03e5178a4d4b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json",
+      "original_bytes": 498698,
+      "original_sha256": "d1660a0fa975d54793a61444f30a89bdf54d75e12e4c54a1fcfe3b5a55436942",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "archive_bytes": 7538,
+      "archive_sha256": "c58961273d1b7406fde5b55a48fe7d78ca1e08ad978543ce5ccc0e06a9ad2648"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json",
+      "original_bytes": 987653,
+      "original_sha256": "824e7ad3b9f162845a93000c7e9d4e499fb6dfc016e51e54f567fd932d36e186",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "archive_bytes": 14564,
+      "archive_sha256": "f20ae26cdb72bb31a16d217cc53dbdd86e7297a6ec40d392e8a29521ca0e7db9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json",
+      "original_bytes": 1478094,
+      "original_sha256": "5dfe254866469b6c953485c4c43ed4122e4adbd45e94a6f7e69a5962374444fb",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "archive_bytes": 21486,
+      "archive_sha256": "85aea9db69fb9a84e19b47840c055cd802505e54c16ebbb5c54324a36839e7ff"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json",
+      "original_bytes": 974396,
+      "original_sha256": "4f987ee3ae37c7318c39c611a1d197984c97e5855a2cf4c92ddfdd6bf6144020",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "archive_bytes": 14455,
+      "archive_sha256": "4df5f9924711e3436d20761b2456b230a30be90713d0966e84f946af15b767df"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json",
+      "original_bytes": 810801,
+      "original_sha256": "e7401bd34a10c9b09a055e558c1e9f991a15c259f029a34002c02c2d1fcb89ea",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "archive_bytes": 12064,
+      "archive_sha256": "365bac3cef3cf95350fd521ef00a365d5934d74ba21d68eb3a85f93da6bdd2a7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json",
+      "original_bytes": 163352,
+      "original_sha256": "660166a12038bac2b660d70b0ee241c45312698a666131fc738f7766f41dd49f",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "archive_bytes": 2787,
+      "archive_sha256": "72060b0a90bc896f005d184e518d3dc468670841f1360b9122f3eddcaa2cbef7"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "original_bytes": 113588,
+      "original_sha256": "2addc2acc665bbde83635de8505015092ebc716539566252c8698ab065e8d133",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 1652,
+      "archive_sha256": "10fc8726a2c70908c166e80888eddc73ed3ebf300e4e3c84b6583264559586f9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_bytes": 46759,
+      "original_sha256": "d03354700b6ccd63711d023bd1e70327e8f992a07330da7383e035703f0e11b9",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_bytes": 5124,
+      "archive_sha256": "e9c841a190a3c9a9a10090e3353bfa8a8bd5dc47432cd3ecd186627a3aae7895"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_bytes": 123110,
+      "original_sha256": "58c756768cfdd581121beb45c1ccbcdc1f2c2edfcb5b58d29b8aa74d382fa0ac",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_bytes": 12930,
+      "archive_sha256": "dea842f6ff6488579f7f9c080340c4625ac3790e0ca9b31f13aeb7a03b7ec41e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "original_bytes": 8697,
+      "original_sha256": "55ddf4e43d4afb10a3ee60fb4df97e5464253dbfd934f62ef2ba4d54d929ad47",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_bytes": 1806,
+      "archive_sha256": "d3c556ca4d451e6963e80e1899593b938e3cedb2a7b99b333cfe5124bc5ad42a"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_bytes": 193641,
+      "original_sha256": "84f1baebf4166bb684ca2ffa455fb1a391e26bead5deadfaa97b930adffad02b",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_bytes": 19610,
+      "archive_sha256": "f7c6b716aaa57ee917a7854ba49438799da113a4f3bc62a80939ea1a981656f8"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "original_bytes": 8412,
+      "original_sha256": "8a1577cfe9febfdd811c2dffab45e7b5a1659129f78fc7f7190ef2bc00437455",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_bytes": 1806,
+      "archive_sha256": "34896cf0b45b5ab645b7926005b3f2c008672d05d31f51951b5745dd3246af21"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin",
+      "original_bytes": 214763,
+      "original_sha256": "973cb0d8ca61079f43fc911526a8a311d964974a86fbba88715843c7e816a15b",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "archive_bytes": 21008,
+      "archive_sha256": "85e827126ffb5736f5a6a165619ebcff27865fed4e0168f1360df39032f15ea6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json",
+      "original_bytes": 8406,
+      "original_sha256": "2443779afc113490f6fe92d4a5ccbd55386c565145287935d2f68e5206f2e955",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "archive_bytes": 1809,
+      "archive_sha256": "f62c2c1927c2fab550ea0eb76ea1cd90c3b355665fff4268261e6c5f8c35b5a9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin",
+      "original_bytes": 229151,
+      "original_sha256": "5c362eb8de30b803b9438117f6b786f7c489633268a3ed1fabfcb7a9506f92a4",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "archive_bytes": 21679,
+      "archive_sha256": "1c3b26809163bd004e4d1bde2d3805338b1afbd11cb91448ed26e147107854dd"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin",
+      "original_bytes": 241030,
+      "original_sha256": "ad76c085b44f3980e91464a0ef451e6e08260a0dc70125d63588d5284c11923e",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin.gz",
+      "archive_bytes": 21885,
+      "archive_sha256": "756836545094eb3b655b1114309b89c391f12c29c668c9de43c8258253d2fa21"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin",
+      "original_bytes": 241000,
+      "original_sha256": "70674a41c95baee3baec5745e0ca84d590ce0f07e7f76c6a732ecf924f9a18f5",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "archive_bytes": 21875,
+      "archive_sha256": "8e37ba420f183245dd55b47c64fc6457d885cafcbf11aba50b4f6c9d03201a02"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json",
+      "original_bytes": 91491,
+      "original_sha256": "f5fe41b878cf4fa3ddcef7c9fbfe46f148be46263c137a21c281f5d65fec5e97",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json.gz",
+      "archive_bytes": 2021,
+      "archive_sha256": "1ba41ad75f75bae50ef071a7765b945ea4d4f1cc89395854c634824dea930594"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json",
+      "original_bytes": 148747,
+      "original_sha256": "2bed02a9fdc6bc765131b2a8650ea8d6a0fe1106684f987858ffef8420eb4fe0",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json.gz",
+      "archive_bytes": 3089,
+      "archive_sha256": "5a973e60b0c7672d8add90267910c5963c4de48d573df18abc84d2d1d2398003"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json",
+      "original_bytes": 235416,
+      "original_sha256": "56e4d909dbbcbfbd7ffc698e22e08557db468ff4b09e1060fc559445a159353d",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json.gz",
+      "archive_bytes": 4591,
+      "archive_sha256": "f8de0d6b75e8cec526f8637f924b1599206606bbe415cd867cfdb1c93ee9f40e"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json",
+      "original_bytes": 147278,
+      "original_sha256": "b9eb219e5a8478ed75c58528b4f02501eb2bcef9604e5605db66984f1d817f57",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json.gz",
+      "archive_bytes": 3053,
+      "archive_sha256": "35deb89ecb9866591c835572c82473648735c99b886c7f31205f9b30c3617806"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0005.json",
+      "original_bytes": 89035,
+      "original_sha256": "e37b1c6c3bcde9788e21d6b6107edb123d7daefd6188f984057b5f6b60e7de61",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0005.json.gz",
+      "archive_bytes": 1981,
+      "archive_sha256": "ccf625fbf6b9d1822626cd9c706ecd2b4787107ef9487676ea0da3d392aa90e2"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0006.json",
+      "original_bytes": 28930,
+      "original_sha256": "06f256cfe6244417aa977b6bb20c43a48d464f07e215ac37fd4cfa5626a4d598",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/direct-zero-0006.json.gz",
+      "archive_bytes": 890,
+      "archive_sha256": "4ad0521808769260bbc3f1ced3ed7aa7a8136471915b9a2569680cc2f1ab9b38"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json",
+      "original_bytes": 36563,
+      "original_sha256": "cb1e442e2035d24df68c062e9cb72a023088ca7ffe80b92100f2d2c1f7ef225c",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "archive_bytes": 803,
+      "archive_sha256": "5157e6971b216cd1e4247cd224fedcd6c19e96a06c6627f6ebd7afda35c416d9"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "original_bytes": 27412,
+      "original_sha256": "1381c02df8678823bc052a6dcf8f33cd43dc6ba047867d132ed480be3f5922e9",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_bytes": 4385,
+      "archive_sha256": "3f9e478daa1ef37ac846c1f0d61eb9519f8662a5e32679c2559dd26581e53ffc"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "original_bytes": 47862,
+      "original_sha256": "00dcdf381a6a76d2ef4973d4b0debe65c212c5c21786d75822f48c5ec9cde1c1",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_bytes": 6565,
+      "archive_sha256": "dba1dd1f78b303da54ec36d5c662eb8ec8da052e8e89d8ccc31aed53b87f3633"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "original_bytes": 86730,
+      "original_sha256": "26812b5494fddda0e6c1d6519db19162d304e8669b78df8d91da8c0481c8a68a",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_bytes": 10354,
+      "archive_sha256": "f6672a8ca4433c4db4630604febef33be4b9f12d360df4da6bc58b0648fe3731"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin",
+      "original_bytes": 116148,
+      "original_sha256": "58695aae0b6c6c8038cabae0f7beec52b483f697b457255ca170e7581bc590c0",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin.gz",
+      "archive_bytes": 12765,
+      "archive_sha256": "3c130671ac1d03d676d30ccbe68334ad3ff3923d1c23c2f7aab6108e3d2ff16f"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-004-provisional.bin",
+      "original_bytes": 123991,
+      "original_sha256": "99831060b8b7d93032f89cd311360416e49f9c2eb6bc52c2b9964a641cb10058",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-004-provisional.bin.gz",
+      "archive_bytes": 13236,
+      "archive_sha256": "5f5be5d0af1c6ba5fb4d6cc4f1f49ae29b86dde1b69605165c0ba3bfa674e29b"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-closed.bin",
+      "original_bytes": 131923,
+      "original_sha256": "1572870df31cdb05b07b5ef6ecaa663d320c99722fa99db1653c0b60dfe69ef4",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-closed.bin.gz",
+      "archive_bytes": 13574,
+      "archive_sha256": "7962a7bb2d7fed147706e8a8696b223a754ef210aa2fe44d57ca3bd0711e39b6"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-provisional.bin",
+      "original_bytes": 131899,
+      "original_sha256": "ec4c9a1af311d95a8829456661430e6edbed900be2022b270f8cf926af6dfd09",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-provisional.bin.gz",
+      "archive_bytes": 13564,
+      "archive_sha256": "b9d3aa70f46a0f48e88259e87ef57934f7e310f2a0f4de0b0f8afb20f8bd3f85"
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.log",
+      "original_bytes": 496315,
+      "original_sha256": "05bd9a4f394fd9b5859d1a6e6e8654d2eeee350b748ecc95f1a901733468467f",
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.log.gz",
+      "archive_bytes": 4266,
+      "archive_sha256": "49c182143e530636d80415a0ec44ca3692a15da812729af1c4a0e5ebc0d81a01"
+    }
+  ],
+  "preserved_files": {
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/configuration.json": {
+      "bytes": 1298,
+      "sha256": "ea2f9fc057c95b21c69512f52d82ccb4a910bddb93a06c365d027b83867b9bc8"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/failure.json": {
+      "bytes": 780,
+      "sha256": "3088d4391af6505c4ac8cc5134e34fb878bfcb7999b68a6f8fb12ced6b84b36b"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/input.json": {
+      "bytes": 1549,
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/conditional-point-refinements.json": {
+      "bytes": 159,
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed/native-closure/cut-0/guard-refinements.json": {
+      "bytes": 2082,
+      "sha256": "c5c4f9b99add5427fcc5c3fcc3bdf20f59da7caab51540348826c924b1e029fd"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-binding.json": {
+      "bytes": 2846,
+      "sha256": "f42dd20f997bb421d6acc43ea9c7dd465afdd0713a035a54fc2b435ac28320d8"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.json": {
+      "bytes": 1409,
+      "sha256": "08c03af19bcb8786219e416a4e685f4e96e9e44baf7192ca014b1cda5174b4ce"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-three-loop-fixed-resources.provenance.json": {
+      "bytes": 2115,
+      "sha256": "3fc9de5b94277a2b44ba4bee4fe1d793c6f7f4276fe26ace5747504b7240fe94"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/configuration.json": {
+      "bytes": 1295,
+      "sha256": "3528b25c1e4fc63a7c24202573580d1410cd8c9b11e07126215ea92442913c4c"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/input.json": {
+      "bytes": 1057,
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/active-request-history.json": {
+      "bytes": 7286,
+      "sha256": "c87b7d3947557179b3d14cb0043067c582ef307fb59a5e16d7a0ed22ec348d84"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/conditional-point-refinements.json": {
+      "bytes": 159,
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/retired-unresolved.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.json": {
+      "bytes": 8114,
+      "sha256": "cdee66b08f8295c3808b295dfdd1e41c9751842f991e1067f77ea8f571eb5fa0"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.json": {
+      "bytes": 7501,
+      "sha256": "cd4572541f3c17dede52ec76a241932411f5fa98696ce6c82e9e8ae2a1815128"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.json": {
+      "bytes": 7197,
+      "sha256": "1e0f78e84576e5a831c2e376ccd2127188fb6ec03f7aac37e0203322e7e115aa"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-closed.json": {
+      "bytes": 6888,
+      "sha256": "7dfcea94a2e919f50341ba6d5d15e92d99ecae87670883e304fac8967b9e1c0b"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.json": {
+      "bytes": 6893,
+      "sha256": "025b1138b650047f70dde2888b239e5de64663dbedb3ceae6f3d288fe0aba1c2"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/active-request-history.json": {
+      "bytes": 3612,
+      "sha256": "3c8499b5b50c1d36b0d023bf640b1413f80671425110db74a10ab86740ba01a0"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json": {
+      "bytes": 539,
+      "sha256": "8c09245ecedeb6a58a2a92e389272c5be195aa54cb8141669a2f4a31ae78dcfc"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json": {
+      "bytes": 1676,
+      "sha256": "70cfb4842ef76ac845b4d4447946890cb5ebff6c2a2888552fed1138ba557bcc"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json": {
+      "bytes": 7950,
+      "sha256": "29cc7ff8df89aa3ffd4ca4ad9a31fbc0b68fbc2ff105f528961eae291795b7c7"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json": {
+      "bytes": 7658,
+      "sha256": "62afd4408d1e9821aa9968a92c56051739a4c24388f3dd78e1bea71c6f125f55"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json": {
+      "bytes": 7467,
+      "sha256": "fdcee63ef215702c5dc0affc26e38239b93b8920667402afb2dede7657cdcf0c"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json": {
+      "bytes": 7472,
+      "sha256": "51f64209ec2b84aca65993a271f8efed07d340e8ce8a0703e5820d416cc1cbb4"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/active-request-history.json": {
+      "bytes": 2651,
+      "sha256": "9f5ce7a964bddb31d9beb5fbc2747a9a843d1db1dcdc6401710fe2027c8d8606"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/conditional-point-refinements.json": {
+      "bytes": 159,
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/retired-unresolved.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.json": {
+      "bytes": 7042,
+      "sha256": "457b9cbe36a18d8aef336c1d68e85e53a64230af36162bcdf85ad314e9fd9129"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.json": {
+      "bytes": 7727,
+      "sha256": "9f64ec2fc22ac24756d764c30d403846a333847b223f61f0dbe00c41dfcd47a5"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.json": {
+      "bytes": 7422,
+      "sha256": "b2adae9fe1604a1868aecafe00ffbb866760c2b1fa3ff84ff200f95b3ad1ca79"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.json": {
+      "bytes": 7114,
+      "sha256": "2656115bc1324096eb213e3aa3cd9029d1401be74524773d2b133602b5540cb5"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-004-provisional.json": {
+      "bytes": 7039,
+      "sha256": "eeba4833172af75a01550f1c235fe34b75bd8eb1058f0f836b397a81a8190eda"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-closed.json": {
+      "bytes": 6882,
+      "sha256": "ed2c202d63d05c0ddf37d9d465786cfc350a9fe7e71a8399783d639f74b30b26"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/native-closure/cut-1/round-005-provisional.json": {
+      "bytes": 6887,
+      "sha256": "bf444f006a50cefed0cb64d77a51441fc6ee1dbd703f1b5021b6e732e75091dc"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-18-60-8.json": {
+      "bytes": 211822,
+      "sha256": "43882bc914df8f1afda736356115fb9d434487af0dae250f83889e385a294001"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-28-60-8.json": {
+      "bytes": 211882,
+      "sha256": "573f9c01f149e977cae08c946b22e4e3e14afff67254aba3256cb13b53fc4bac"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-28-80-12.json": {
+      "bytes": 211883,
+      "sha256": "8379bcfebcbba4b6a84d03fb536f339b0321bc69d61d8af828abd86506f4424e"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed/prediction-28-80-8.json": {
+      "bytes": 211882,
+      "sha256": "e469988a6b9d34526710444019fd16796c83f96b0d9ad934f2987e65cee7f111"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-binding.json": {
+      "bytes": 2838,
+      "sha256": "84f455b6b24783a0954f926e8f17aff442da7dd13d37052688d4d7f3639c9944"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-comparison.json": {
+      "bytes": 52207,
+      "sha256": "65d224819d2a3c4f056783064c5dbe4b6f088ab43f2955ab3d2bbe61991f387c"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.json": {
+      "bytes": 1401,
+      "sha256": "2b152f75d65913d4585eb9969624373a5d3fb35ebef5b77dce5ad63dde4a4511"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-fixed-resources.provenance.json": {
+      "bytes": 2112,
+      "sha256": "423506b517b2c5d8cb5d19ad0f5077fd3ca25c1e4975f1e8b1494d69513268b8"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/configuration.json": {
+      "bytes": 1297,
+      "sha256": "11311ec473b493a4104445bd9ca6867b4d6fcae098ad9448bd72bb00837dc195"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/input.json": {
+      "bytes": 1057,
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/active-request-history.json": {
+      "bytes": 7286,
+      "sha256": "c87b7d3947557179b3d14cb0043067c582ef307fb59a5e16d7a0ed22ec348d84"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/conditional-point-refinements.json": {
+      "bytes": 159,
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/retired-unresolved.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.json": {
+      "bytes": 8114,
+      "sha256": "cdee66b08f8295c3808b295dfdd1e41c9751842f991e1067f77ea8f571eb5fa0"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.json": {
+      "bytes": 7501,
+      "sha256": "cd4572541f3c17dede52ec76a241932411f5fa98696ce6c82e9e8ae2a1815128"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.json": {
+      "bytes": 7197,
+      "sha256": "1e0f78e84576e5a831c2e376ccd2127188fb6ec03f7aac37e0203322e7e115aa"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-closed.json": {
+      "bytes": 6888,
+      "sha256": "7dfcea94a2e919f50341ba6d5d15e92d99ecae87670883e304fac8967b9e1c0b"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.json": {
+      "bytes": 6893,
+      "sha256": "025b1138b650047f70dde2888b239e5de64663dbedb3ceae6f3d288fe0aba1c2"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/active-request-history.json": {
+      "bytes": 3612,
+      "sha256": "3c8499b5b50c1d36b0d023bf640b1413f80671425110db74a10ab86740ba01a0"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json": {
+      "bytes": 539,
+      "sha256": "8c09245ecedeb6a58a2a92e389272c5be195aa54cb8141669a2f4a31ae78dcfc"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json": {
+      "bytes": 1676,
+      "sha256": "70cfb4842ef76ac845b4d4447946890cb5ebff6c2a2888552fed1138ba557bcc"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json": {
+      "bytes": 7950,
+      "sha256": "29cc7ff8df89aa3ffd4ca4ad9a31fbc0b68fbc2ff105f528961eae291795b7c7"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json": {
+      "bytes": 7658,
+      "sha256": "62afd4408d1e9821aa9968a92c56051739a4c24388f3dd78e1bea71c6f125f55"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": {
+      "bytes": 7467,
+      "sha256": "fdcee63ef215702c5dc0affc26e38239b93b8920667402afb2dede7657cdcf0c"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json": {
+      "bytes": 7472,
+      "sha256": "51f64209ec2b84aca65993a271f8efed07d340e8ce8a0703e5820d416cc1cbb4"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/active-request-history.json": {
+      "bytes": 2651,
+      "sha256": "9f5ce7a964bddb31d9beb5fbc2747a9a843d1db1dcdc6401710fe2027c8d8606"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/conditional-point-refinements.json": {
+      "bytes": 159,
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/retired-unresolved.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.json": {
+      "bytes": 7042,
+      "sha256": "457b9cbe36a18d8aef336c1d68e85e53a64230af36162bcdf85ad314e9fd9129"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.json": {
+      "bytes": 7727,
+      "sha256": "9f64ec2fc22ac24756d764c30d403846a333847b223f61f0dbe00c41dfcd47a5"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.json": {
+      "bytes": 7422,
+      "sha256": "b2adae9fe1604a1868aecafe00ffbb866760c2b1fa3ff84ff200f95b3ad1ca79"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.json": {
+      "bytes": 7114,
+      "sha256": "2656115bc1324096eb213e3aa3cd9029d1401be74524773d2b133602b5540cb5"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-004-provisional.json": {
+      "bytes": 7039,
+      "sha256": "eeba4833172af75a01550f1c235fe34b75bd8eb1058f0f836b397a81a8190eda"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-closed.json": {
+      "bytes": 6882,
+      "sha256": "ed2c202d63d05c0ddf37d9d465786cfc350a9fe7e71a8399783d639f74b30b26"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/native-closure/cut-1/round-005-provisional.json": {
+      "bytes": 6887,
+      "sha256": "bf444f006a50cefed0cb64d77a51441fc6ee1dbd703f1b5021b6e732e75091dc"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-18-60-8-grid-1000.json": {
+      "bytes": 1028,
+      "sha256": "126dc29a10d5ed9e9065d1c40e1c5db708877244c59cf669976e1145017d075c"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-60-8-grid-1000.json": {
+      "bytes": 1088,
+      "sha256": "e7eaa08be4a194ecc868dd9079a8417f5cf93c048a819f4a6e500aff4a8b6948"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-80-12-grid-1000.json": {
+      "bytes": 1089,
+      "sha256": "5665041225017dce7e4a3803851b76b9d5a299fce32e7c0e7d4ef5b667a5bc79"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-80-12-grid-2000.json": {
+      "bytes": 1089,
+      "sha256": "ddffdbeeecc762a258e2802d73bbdfa57aa9df0abbb2d1ff6ededb9a1ad4e1f1"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent/prediction-28-80-8-grid-1000.json": {
+      "bytes": 1088,
+      "sha256": "fc0e87590d281a04b5755da7c14adbcba0773cf7ddf3f9df0e82bdc308018ac9"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-binding.json": {
+      "bytes": 2840,
+      "sha256": "b320c3594014125cefc890e8f339a4999560a42850a32cfff7873d4a0cab3aab"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-comparison.json": {
+      "bytes": 50366,
+      "sha256": "fd242a50862c65cfe0f62a2fb447fdbd250c9fb4c3e70d88898bc21ec27348cc"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.json": {
+      "bytes": 1413,
+      "sha256": "3b4c182a64cd13db1516090249ae941c246cc858de63106bab08714d79ca1b88"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-two-loop-laurent-resources.provenance.json": {
+      "bytes": 2112,
+      "sha256": "99ac5f006dc6680957d05bed78719e98a2afedc5be94fcce5ad115f91c8bc67a"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-artifacts.json": {
+      "bytes": 79028,
+      "sha256": "665982a7505d193357e6c970e1bfc40d19ef8c8c42eee3bbf71f5aa0bbd57261"
+    }
+  },
+  "totals": {
+    "files": 135,
+    "original_bytes": 258712016,
+    "archive_bytes": 7247690
+  }
+}

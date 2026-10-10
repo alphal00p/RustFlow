@@ -1,0 +1,32 @@
+{
+  "scope": "One full old-native program decoded and exactly replayed before inspecting ordering edges; no alternative order or hand-installed rule.",
+  "probe": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/ordering-witness.rs",
+    "sha256": "d62aa0b66498c695a39a7c5f1161562102a0ab3a886e874d887dcdd8ebbf03cd"
+  },
+  "binary": {
+    "path": "/tmp/three_loop_point_active_order_witness",
+    "sha256": "a039281e5cab8f8b9ca139ec687a0e08cb3ae636914f2bd7763b72b4980ee798"
+  },
+  "native_library": {
+    "path": "/tmp/librustred-active-zero-canonical-392075d0c6995fd1.rlib",
+    "sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464"
+  },
+  "source_program": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9"
+  },
+  "replayed_program": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.bin",
+    "sha256": "338c2e5a73707606481c5c7c1924847113e9376b2b46e6479b06ba0ccb96c96e"
+  },
+  "requests": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.json",
+    "sha256": "f0bd553601658ab5c5f3f6865105a281a0473f2268e7dd0b357ef18f6a06d30d"
+  },
+  "result": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/ordering-witness.json",
+    "sha256": "a201419f3c94f9b3feb3cb25fce0b1ebe2f122e5dc007c9210f3ff5dd8bf25fb"
+  },
+  "resource": "ordering-witness-resources.json"
+}

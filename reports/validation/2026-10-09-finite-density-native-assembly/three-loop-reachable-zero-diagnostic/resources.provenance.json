@@ -1,0 +1,33 @@
+{
+  "captured_utc": "2026-10-10T01:13:28.155834+00:00",
+  "command": [
+    "/tmp/three-loop-reachable-zero",
+    "/tmp/active-zero-three-loop-single-round7.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-reachable-zero-diagnostic/results",
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/targets.json",
+    "/tmp/active-zero-three-loop-request-history.json"
+  ],
+  "argument_files": {
+    "/tmp/three-loop-reachable-zero": {
+      "resolved_path": "/tmp/three-loop-reachable-zero",
+      "sha256": "281e73f12327b0db4874aaf9983dba7a591fed18c737564afde296b9830bdc11",
+      "size_bytes": 416523016
+    },
+    "/tmp/active-zero-three-loop-single-round7.bin": {
+      "resolved_path": "/tmp/active-zero-three-loop-single-round7.bin",
+      "sha256": "2df229c54694d6887e5f26891aadc20be77988b4a98ab57ba74d2267476810da",
+      "size_bytes": 9325692
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/targets.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-recurrence-probe/targets.json",
+      "sha256": "b0ff6b5227c28758bfcc382987d5f57f0d2254819f0a28ea94cadbc4b34016fa",
+      "size_bytes": 2338
+    },
+    "/tmp/active-zero-three-loop-request-history.json": {
+      "resolved_path": "/tmp/active-zero-three-loop-request-history.json",
+      "sha256": "77025c91f0c64d4faee1688632105cfb13777add9e08b7dea085db1d29e8f8ac",
+      "size_bytes": 570555
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

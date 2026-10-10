@@ -203,6 +203,7 @@ pub fn evaluate_request(
                 "guard_refinement_added_domains":diagnostics.guard_refinement_added_domains,
                 "guard_refinement_budget_exhausted":diagnostics.guard_refinement_budget_exhausted,
                 "guard_refinements":diagnostics.guard_refinements,
+                "conditional_point_refinements":diagnostics.conditional_point_refinements,
             }))
             .collect::<Vec<_>>()
     );

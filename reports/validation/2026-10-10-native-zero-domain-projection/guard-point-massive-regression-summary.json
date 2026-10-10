@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "One D=12/5 profile (28 digits, order80, start12, guard40), both original targets, vacuum/all occupied cuts/full amplitude. Unchanged default closure configuration; no new precision-refinement claim.",
+  "normalization": "unscaled Euclidean amplitude",
+  "execution": {
+    "resources": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-resources.json",
+      "sha256": "529d1caedd48dd7bead5ad23c871958577eac8984758faa94d42a8e176feda8b"
+    },
+    "launch": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-resources.provenance.json",
+      "sha256": "ce39d64b4f1b3a30a93360a7c827fe11ddf0ac2216c013e28ca6c82e8cd9469a"
+    },
+    "binding": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-binding.json",
+      "sha256": "4e252c6277e5df417249db9a393cc01dd6c740f90b7cfc80b4ff0be8b73e110f"
+    },
+    "exit_code": 0,
+    "harness_seconds": 47.4,
+    "wall_seconds": 47.419368444010615,
+    "peak_child_rss_kib": 46216,
+    "executable_sha256": "b31ec216907f22953ff12684e54aff2acd69953b475575bbba021294c8bf3dd4"
+  },
+  "comparison": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression-comparison.json",
+    "sha256": "27e8eb7f486c713c8a38ccf149fc2dc5aa6bdb4232e8126e68ed90b49bba6930"
+  },
+  "immediate_predecessor_comparison": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-default-path-comparison.json",
+    "sha256": "0850a2968cc63086b1b31a8f7a705077f596bec63f1fcd862ddca288f0e9e53a"
+  },
+  "independent_reference_values_compared": 10,
+  "historical_values_compared": 10,
+  "assembly_identities_checked": 2,
+  "immediate_predecessor_identical_decimal_strings": 10,
+  "largest_relative_reference_difference": "9.448822657573757205344272543705462220627273918656051730084247068597370200527153532518210053715103533E-36",
+  "reference_uncertainty": "Empirical independent quadrature/precision refinement, not a rigorous error interval.",
+  "independent_refinement_comparison_count": 0,
+  "native_occupied_basis_sizes": [
+    6,
+    6,
+    8
+  ],
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-hashes.json",
+    "sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-provenance.json",
+    "sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca"
+  },
+  "supplied_oracle_numerical_records_compared": 0
+}

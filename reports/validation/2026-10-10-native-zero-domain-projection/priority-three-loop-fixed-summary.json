@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "status": "incomplete_native_closure",
+  "scope": "OLD canonical pre-projection executable; priority=true matched control. Ongoing worktree edits were not compiled into this executable.",
+  "attempted": "full three-loop amplitude at epsilon=-5/4, four requested refinement profiles",
+  "completed_profiles": 0,
+  "failed_occupied_cut": [
+    0
+  ],
+  "stage": "complete preparation",
+  "failure": "incomplete reduction or boundary data: occupied weighted connection unresolved: active weighted provisional-frontier budget exhausted; rounds=6, provisional=1025, unresolved_terms=7076; first residual indices/reasons=[([1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 0, 1, 0, 0, -1, 0, 1, 0, 0], NoApplicableRule), ([1, 1, 0, 0, 1, 0, 0, 0, -1, 1, 0, 0], NoApplicableRule), ([1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0], NoApplicableRule), ([1, 1, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+  "rounds": 6,
+  "provisional_frontier": 1025,
+  "frontier_limit": 1024,
+  "unresolved_terms": 7076,
+  "reported_progress": [
+    {
+      "round": 0,
+      "requested": 38,
+      "basis_size": 35,
+      "new_derivatives": 35
+    },
+    {
+      "round": 1,
+      "requested": 173,
+      "basis_size": 167,
+      "new_derivatives": 166
+    },
+    {
+      "round": 2,
+      "requested": 590,
+      "basis_size": 578,
+      "new_derivatives": 573
+    },
+    {
+      "round": 3,
+      "requested": 1191,
+      "basis_size": 865,
+      "new_derivatives": 930
+    },
+    {
+      "round": 4,
+      "requested": 2236,
+      "basis_size": 1011,
+      "new_derivatives": 1181
+    }
+  ],
+  "resources": {
+    "command": [
+      "timeout",
+      "600",
+      "env",
+      "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_three_loop_chain.json",
+      "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+      "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+      "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+      "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=true",
+      "RUSTFLOW_WEIGHTED_REUSED_RULES=65536",
+      "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL=32",
+      "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE=true",
+      "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS=262144",
+      "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+      "RUSTFLOW_WEIGHTED_DEPTH=3",
+      "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+      "RUSTFLOW_WEIGHTED_ROUNDS=16",
+      "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+      "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+      "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+      "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+      "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed",
+      "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+      "--ignored",
+      "--exact",
+      "runtime_graph_full_amplitude",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 101,
+    "wall_seconds": 94.63571922061965,
+    "user_seconds": 92.911184,
+    "system_seconds": 0.8694379999999999,
+    "peak_child_rss_kib": 356040,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "native_closure_passed": false,
+  "numerical_predictions_saved": 0,
+  "independent_reference_comparisons": 0,
+  "three_loop_acceptance": false,
+  "four_loop_acceptance": false,
+  "compiled_build": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-provenance.json",
+    "sha256": "d4500c314dad8730b5a2e68ca5d442ea27cd58ad737453ad516679b448872f87"
+  },
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json",
+    "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476"
+  },
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "991cd4f6a17289608a3092723d654f0b5fe9c722c6698cb3456be5f25c1f6c37",
+    "RUSTRED_SOURCE_DIGEST": "83304d05399eb3342eab352b3758371e20d3f51f6819b42f057e1efd1c91c934",
+    "PORT_SOURCE_DIGEST": "c0b21791a7f06ce15942bb453edd75124b80484f006c7956cc5d44cf5970211e"
+  },
+  "executable": {
+    "path": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "sha256": "3c3aae163cb84c72c1437fcc36488cb019bf78d1ff2d5b148a9dffed8a30df5f",
+    "size_bytes": 1302452472
+  },
+  "input": {
+    "path": "examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "intentional_parameter_changes": [
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false -> true",
+    "distinct output directory"
+  ],
+  "artifacts": {
+    "priority-three-loop-fixed-old-build-binding.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-old-build-binding.json",
+      "sha256": "71ac6d83548ae1c81551b50d00fd4c4f57b47849584627ce88b76cb1ca7afdb7"
+    },
+    "priority-three-loop-fixed-resources.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-resources.json",
+      "sha256": "886b737e4700465f5f25b792d611d0d6101cda81df673880707795f92bf73c8e"
+    },
+    "priority-three-loop-fixed-resources.log": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-resources.log",
+      "sha256": "b7e6d6f1b5b8a562db855db080646e06aa455b6e5fdf494358e20bbdde83fa6f"
+    },
+    "priority-three-loop-fixed-resources.provenance.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-resources.provenance.json",
+      "sha256": "a3dcbde034e38bcc942ec4979ce7dbbdf906d5128142f43a0ea8d197a8ffe83b"
+    },
+    "configuration.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/configuration.json",
+      "sha256": "2763857baded0f9f3d33dfe3eda77a43616da8b74f53fff9e5e341226cbb68c2"
+    },
+    "failure.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/failure.json",
+      "sha256": "6b5a45d297eda16909e7fd4373399445ceca9fd54b04da4b259c621c622f38ff"
+    },
+    "input.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed/input.json",
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724"
+    }
+  },
+  "checkpoint_archive_status": "raw native files retained pending coordinated reader check"
+}

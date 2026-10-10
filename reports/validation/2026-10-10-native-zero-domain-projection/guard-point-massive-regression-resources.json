@@ -1,0 +1,22 @@
+{
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massive_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=4/5",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression",
+    "timeout",
+    "300",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 47.419368444010615,
+  "user_seconds": 46.99855,
+  "system_seconds": 0.076196,
+  "peak_child_rss_kib": 46216,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

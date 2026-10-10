@@ -10,6 +10,8 @@ use crate::solver::{
 use std::collections::VecDeque;
 
 mod direct_zero;
+#[cfg(test)]
+mod zero_projection_tests;
 pub use direct_zero::{
     GuardedDirectZeroSearch, GuardedDirectZeroSkip, GuardedDirectZeroSkipReason,
 };
@@ -68,7 +70,32 @@ impl<'a, const N: usize> GuardedSearchScope<'a, N> {
                 return Ok(None);
             }
         }
-        Ok(Some(result))
+        if self.problem.zero_domains.is_empty() {
+            return Ok(Some(result));
+        }
+        // A supplied measure-zero box is an identity on its entire integer
+        // domain, not an ordinary zero-sector guess. Project only when the
+        // whole image of this recorded discovery box is covered. In
+        // particular, intersection at a boundary is insufficient. Validate
+        // every occupation image above before removing any column.
+        //
+        // Independent replay calls this same owner on the saved discovery
+        // domain. Its recentering guard intersects that domain with its
+        // translated pullback, so every replayed zero remains valid after the
+        // winning target is translated back to its canonical label.
+        let mut projected = Vec::with_capacity(result.len());
+        for term in result {
+            let image = image_domain(&self.domain, &term.integral)?;
+            if !self
+                .problem
+                .zero_domains
+                .iter()
+                .any(|zero| image.is_subset_of(zero))
+            {
+                projected.push(term);
+            }
+        }
+        Ok(Some(projected))
     }
 }
 

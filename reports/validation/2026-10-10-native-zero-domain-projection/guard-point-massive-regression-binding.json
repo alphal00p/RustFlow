@@ -1,0 +1,40 @@
+{
+  "scope": "One current-source massive two-loop profile; prediction generation only, no reference values read. Numerical comparison follows saved output.",
+  "source_snapshot_sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287",
+  "build_provenance_sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca",
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "784d1eb6a4dfd8fefef06e26f659382e7aacc9bc86bd5be771c826ce7b035f21"
+  },
+  "input": {
+    "path": "examples/finite_density/massive_two_loop_sunset.json",
+    "sha256": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a"
+  },
+  "executable": {
+    "path": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "sha256": "b31ec216907f22953ff12684e54aff2acd69953b475575bbba021294c8bf3dd4",
+    "size_bytes": 1302031640,
+    "mtime_utc": "2026-10-10T01:54:55.400978+00:00"
+  },
+  "baseline_command": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/requested-rays-massive-regression-resources.provenance.json",
+    "sha256": "f6494f012ce386310edf39b905a0d09649528d4f1d73686546f989173f9e4dca"
+  },
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massive_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=4/5",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massive-regression",
+    "timeout",
+    "300",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture"
+  ],
+  "launcher_sha256": "afc6ea9cff3737e77bc77a77604f91daa9890652dd935a7e3d7ce3f51def5e49",
+  "inherited_weighted_and_density_environment_removed": true
+}

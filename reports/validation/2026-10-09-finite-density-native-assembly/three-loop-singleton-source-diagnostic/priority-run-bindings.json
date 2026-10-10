@@ -1,0 +1,26 @@
+{
+  "captured_utc": "2026-10-10T01:08:42.958913+00:00",
+  "scope": "run previously prepared standalone source-order probe against preserved canonical native library; source corpus retained exactly except ordering/subset explicitly declared per mode",
+  "files": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/prepared-priority-probe.rs": {
+      "sha256": "d67a9d5ac59d0e41dd4df0c3cc1650d2bc1c48387d2eb45d780dd9cf340589ab",
+      "bytes": 6425
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin": {
+      "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+      "bytes": 7422642
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json": {
+      "sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+      "bytes": 1770
+    },
+    "/tmp/three_loop_singleton_priority_probe": {
+      "sha256": "ea2324ef460b740c4f73ce218ac171d388509fa37143fd59864a961a5615f26f",
+      "bytes": 442989616
+    },
+    "/tmp/librustred-active-zero-canonical-392075d0c6995fd1.rlib": {
+      "sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+      "bytes": 436047138
+    }
+  }
+}

@@ -59,7 +59,9 @@ impl<const N: usize> GuardedSourceSystem<N> {
     /// points. All points are role-validated before any work, even beyond the
     /// budget. Duplicate points are visited once, in first-occurrence order.
     ///
-    /// Only a nonzero single-term instantiated row can succeed. Its canonical
+    /// Only a nonzero single-term instantiated row can succeed, after the
+    /// native scope applies required-cut and uniformly proved measure zeros.
+    /// Its canonical
     /// target must equal the requested point and its empty RHS must pass the
     /// existing original-source replay and condition reconstruction. Seeds keep
     /// ordinary/required-cut sectors, while occupation seeds may cross zero

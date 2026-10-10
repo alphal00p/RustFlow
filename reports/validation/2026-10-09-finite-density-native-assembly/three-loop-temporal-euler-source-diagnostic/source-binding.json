@@ -1,0 +1,29 @@
+{
+  "captured_utc": "2026-10-10T01:20:46.399996+00:00",
+  "compiler": "nix develop rustc1.97.1; edition2024,opt0,debuginfo0; CARGO_CRATE_NAME=temporal_euler_probe",
+  "native_library_sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+  "root_library": "target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib; canonical build, same as moving-shell native-one-loop/source-binding.json",
+  "source_snapshot": "active-zero-canonical-source-hashes.json",
+  "files": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/probe.rs": {
+      "sha256": "a2279d3dc94d03c65f5967392522965981cf3c69f8693a529c608035d480c301",
+      "size_bytes": 12844
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/probe-before-normalization-audit.rs": {
+      "sha256": "fbcc0fa9bf7472ee6c646c0ab0c8af910828e502ee46516bec3b8d1488aa5cf8",
+      "size_bytes": 11894
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin": {
+      "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+      "size_bytes": 7422642
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json": {
+      "sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+      "size_bytes": 1770
+    },
+    "examples/finite_density/massless_three_loop_chain.json": {
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "size_bytes": 1550
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "captured_utc": "2026-10-10T01:30:33.748447+00:00",
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massive_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=4/5",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-native-zero-domain-projection/massive-regression",
+    "timeout",
+    "300",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "env": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+      "sha256": "cb77807979bffb9ce393a7f5425f83198c54100a9411d0b81070ea0d3c11e699",
+      "size_bytes": 1302480672
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

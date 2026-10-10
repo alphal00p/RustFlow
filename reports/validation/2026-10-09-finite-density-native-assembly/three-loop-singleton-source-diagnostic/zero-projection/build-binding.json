@@ -1,0 +1,25 @@
+{
+  "captured_utc": "2026-10-10T01:26:58.499434+00:00",
+  "files": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/virtual-algebra-control.rs": {
+      "sha256": "bf65248c1d363386835c10fc809137e85fa0ce620e0970f96ce2c50822a38520",
+      "bytes": 6571
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin": {
+      "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+      "bytes": 7422642
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json": {
+      "sha256": "cb84c3c6f035c3421bbd632b05a75127059a73611b5454bfa560cd7818a4ef7c",
+      "bytes": 1770
+    },
+    "/tmp/three_loop_zero_projection_probe": {
+      "sha256": "aadd2475b8fb2ce1f7f12360c463b9e4764e97b4bff2d83709b2e6a8587d6ef6",
+      "bytes": 424184952
+    },
+    "/tmp/librustred-zero-projection-392075d0c6995fd1.rlib": {
+      "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+      "bytes": 435821774
+    }
+  }
+}

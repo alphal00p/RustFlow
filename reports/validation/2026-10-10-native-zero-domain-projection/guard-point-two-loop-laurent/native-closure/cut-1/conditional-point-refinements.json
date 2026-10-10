@@ -1,0 +1,6 @@
+{
+  "refinements": [],
+  "schema": 1,
+  "scope": "bounded native exact-point searches for ConditionVanished leaves",
+  "search_does_not_imply_coverage": true
+}

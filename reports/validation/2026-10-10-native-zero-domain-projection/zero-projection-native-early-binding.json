@@ -1,0 +1,13 @@
+{
+  "scope": "Fresh native guarded suite executed as soon as native unit binary linked; full shared build still linking other targets. Final completed-build binding will require identical executable SHA.",
+  "source_snapshot_sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+  "executable": {
+    "path": "target/release/deps/rustred-258a1e04558e72f1",
+    "sha256": "2ade4eee609051f20140d93a6e12d92b6d141079228c11bb111f6af02eae9f4f",
+    "size_bytes": 629301624
+  },
+  "unit_feature_fingerprint": {
+    "path": "target/release/.fingerprint/rustred-258a1e04558e72f1/test-lib-rustred.json",
+    "sha256": "b85b676aa329bd69637774a73713fd78868a30a598b305806ea55b008d469e55"
+  }
+}

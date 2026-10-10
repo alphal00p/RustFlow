@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "status": "blocked_by_massless_two_loop_regression",
+  "release_validated": false,
+  "scope": "Experimental frozen conservative native zero-domain projection; passing unit/adapter checks and a massive sample do not override the failed massless preparation regression.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+    "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-provenance.json",
+    "sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7"
+  },
+  "passing_regressions": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-root-gates.json",
+    "sha256": "7002deb3b2dea544810a0324a4a94e5d6e8fbf6ec125823fd5f65b6241d5c9e1"
+  },
+  "passing_massive_sample": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-summary.json",
+    "sha256": "01c15e4b7d615bdbc0e88b648901019add380cb7a7afb1e306157bd8b9e37e30"
+  },
+  "massless_fixed_regression": {
+    "status": "failed",
+    "stage": "complete preparation",
+    "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: native active weighted application failed; rounds=2, provisional=0, unresolved_terms=1; first residual indices/reasons=[([1, 1, 2, -1, -1, 0, 0, 0, 0], ConditionVanished { rule: 106, condition: 0 })]",
+    "cut_slots": [
+      0,
+      1
+    ],
+    "rounds": 2,
+    "reason": "ConditionVanished",
+    "rule": 106,
+    "condition": 0,
+    "residual_indices": [
+      1,
+      1,
+      2,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "wall_seconds": 1.9295947458595037,
+    "peak_child_rss_kib": 21592,
+    "numerical_predictions_saved": 0,
+    "reference_comparisons": 0,
+    "artifacts": {
+      "failure.json": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/failure.json",
+        "sha256": "84ddc9372fdd2dfc2604de17fb8142a92793a4aa96228c888e76446a4a256033"
+      },
+      "zero-projection-two-loop-fixed-resources.json": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-resources.json",
+        "sha256": "dce85b14ef38304aa3325f5f6ae704ba967a4599273d54a45941caf08051cb09"
+      },
+      "zero-projection-two-loop-fixed-binding.json": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-binding.json",
+        "sha256": "42a1582baf048bd5e56df4e40dcf39879e8022e648c4d80da0a15f8a6b83738f"
+      },
+      "zero-projection-two-loop-fixed-resources.provenance.json": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-resources.provenance.json",
+        "sha256": "4ec883c21add65dd33630f70d6d636d898d8f71b334c481bd1cfbf6a916b6bcc"
+      },
+      "zero-projection-two-loop-fixed-resources.log": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed-resources.log",
+        "sha256": "974f599330ea646a8bbe9b4b6cd1676d27ca561c7ad271b941609e3e4376fb19"
+      }
+    }
+  },
+  "massless_laurent_regression": "not launched because fixed-dimension preparation failed",
+  "current_three_loop_control": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-failure-summary.json",
+    "sha256": "4421a646cc0a482b2f91bb1a2677568b5f29b262bcf486a598618458fe27d3c2"
+  },
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "supplied_oracle_numerical_records_compared": 0,
+  "source_fix_status": "Future point-refinement changes must use a new source/build prefix; this failed experimental snapshot is immutable.",
+  "massless_priority_control": {
+    "status": "failed",
+    "same_guard": "a_3-a_4 != 0",
+    "same_target": [
+      1,
+      1,
+      2,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "predictions_saved": 0,
+    "failure": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed/failure.json",
+      "sha256": "84ddc9372fdd2dfc2604de17fb8142a92793a4aa96228c888e76446a4a256033"
+    },
+    "resources": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed-resources.json",
+      "sha256": "bbaeaca41478df022cf853c99109b612a0b367ff4bc89e05e8ee7998bce57d18"
+    },
+    "binding": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-priority-fixed-binding.json",
+      "sha256": "9a1b38581c3fb8bc9c458c53383252cb28815b6a4280238593624aa7517e899a"
+    }
+  },
+  "massless_condition_diagnosis": {
+    "scope": "Completed native v2 decode/replay plus standalone point-refinement diagnosis; no production change.",
+    "interpretation": "Replay-valid conditional recurrence has guard a_3-a_4 != 0 on a3,a4<=-1. The failing point has both=-1 and belongs to the explicitly saved coupled exceptional locus. This is an uncovered valid guard, not evidence of an unsound zero projection or invalid physical period. Preserve ConditionVanished until native proof resolves the point.",
+    "evidence": {
+      "binding.json": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/binding.json",
+        "sha256": "3d1274bd66db101a10ef90288dac973f6ef8ade7b793989463bc4fd37174c94a"
+      },
+      "rules.json": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/rules.json",
+        "sha256": "e66b7f5e5c021a3fbdb042018812495e123ea7d5984ff6789de458c237f13018"
+      },
+      "coupled-gap.json": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/coupled-gap.json",
+        "sha256": "66da37fe98b4a59eb3220d7d890cbf9da062ee0f4767c679331a6ac19b62d7a9"
+      }
+    },
+    "native_point_probe": {
+      "status": "conditional recurrence recovered; union remains unresolved",
+      "point_discovery_depth": 3,
+      "point_discovery_domain_cap": 32,
+      "recovered_rule_condition": "eta != 0",
+      "remaining_no_rule_leaves": 2,
+      "scope": "No condition failure after native point rule replay; not a full-flow closure proof or numerical result.",
+      "artifacts": {
+        "point-refinement.json": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.json",
+          "sha256": "3a6ebeb839251edff089fc1a6e2b75d8b1001dfc2574973f756564bf453c4e4c"
+        },
+        "point-refinement.bin": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.bin",
+          "sha256": "a5d2cfcece9dc789aefc62e7dff209c57137f8db8c8538099b6419134eeb7bb7"
+        },
+        "point-refinement-binding.json": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement-binding.json",
+          "sha256": "62995565f5b20112703efbbebc5aeb053b9c17cfd202d7e0a7d59fbe7f91edf1"
+        },
+        "assessment.md": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/assessment.md",
+          "sha256": "991093f718d918991bccb6e1694ee4fc43a83ccde49be8df035629a11293cad3"
+        }
+      }
+    }
+  },
+  "source_reconstruction": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/pre-refinement-source-reconstruction.json",
+    "sha256": "2b5d3fd319077efe496f6aeaa2bc87fe00df292fab6ff74b58a61bda352a29fa"
+  }
+}

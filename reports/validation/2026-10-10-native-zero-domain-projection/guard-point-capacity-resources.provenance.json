@@ -1,0 +1,23 @@
+{
+  "captured_utc": "2026-10-10T01:57:24.136508+00:00",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_capacity-fceac547516b5e9d",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/finite_density_capacity-fceac547516b5e9d": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_capacity-fceac547516b5e9d",
+      "sha256": "177ea2eaace83bf8284c57c7f0406cb05822ae14e835b817220b748c15aeb41e",
+      "size_bytes": 1289651792
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

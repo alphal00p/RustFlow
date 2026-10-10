@@ -1,0 +1,22 @@
+{
+  "scope": "lossless storage only; original proof and report bytes are recoverable with gzip",
+  "mtime": 0,
+  "files": {
+    "results/result.json": {
+      "original_sha256": "7963ff17591977ce58c7c7d2af62f4f7f0ace77722068969535c25d8cd0a3e9e",
+      "original_bytes": 301065,
+      "archive": "results/result.json.gz",
+      "archive_sha256": "ac3e05a092126bcc9ad9b7d93e6e8e0169faf2d85dab889e0d29adaf6bc148f5",
+      "archive_bytes": 12378,
+      "lossless_roundtrip_verified": true
+    },
+    "results/zero-first.bin": {
+      "original_sha256": "364d6d41fb974a6367ada3e39218b03463ecc9fda72ed3bca9ebfbd7c5f0f04e",
+      "original_bytes": 9326304,
+      "archive": "results/zero-first.bin.gz",
+      "archive_sha256": "fdb47c9b1db2b3b5907f38f129d3ffd829ba5d536b78a081b0f2118f2fbd0af4",
+      "archive_bytes": 888213,
+      "lossless_roundtrip_verified": true
+    }
+  }
+}

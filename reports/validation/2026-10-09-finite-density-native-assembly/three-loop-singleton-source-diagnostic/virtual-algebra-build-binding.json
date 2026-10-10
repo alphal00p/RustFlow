@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-10T01:17:18.519375+00:00",
+  "base_bindings": "priority-run-bindings.json",
+  "native_library_sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+  "files": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/virtual-algebra-control.rs": {
+      "sha256": "bf65248c1d363386835c10fc809137e85fa0ce620e0970f96ce2c50822a38520",
+      "bytes": 6571
+    },
+    "/tmp/three_loop_virtual_algebra_control": {
+      "sha256": "f7d0cd78187e07cb26b396eb903ba374c30affc6bcdebb45c5e0876a3e67faea",
+      "bytes": 424273088
+    }
+  }
+}

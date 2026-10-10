@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "/tmp/three_loop_virtual_algebra_control",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/virtual-with-algebra.json",
+    "virtual-with-algebra"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.2045865235850215,
+  "user_seconds": 0.157836,
+  "system_seconds": 0.044726999999999996,
+  "peak_child_rss_kib": 52244,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,68 @@
+{
+  "scope": "Historical diagnostic: newly exposed basis labels were differentiated before their own native request; final audit remains exact, but this scheduling differs from production active closure.",
+  "probe_sha256": "5c1fd8699ac2287ba30093c4394660cd03c5edea4c8b427f18028ffa940d87fe",
+  "controls": {
+    "canonical": {
+      "status": "frontier-budget",
+      "history": [
+        {
+          "frontier": 130,
+          "point_fallbacks": 15,
+          "requested": 15,
+          "retired": 3,
+          "round": 0,
+          "rules": 15,
+          "seconds": 0.656374877,
+          "zero_rules": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "/tmp/three_loop_point_active_old",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/old-canonical"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0512868161313236,
+        "user_seconds": 0.9644579999999999,
+        "system_seconds": 0.080688,
+        "peak_child_rss_kib": 58428,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "result": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/old-canonical/result.json"
+    },
+    "projection": {
+      "status": "frontier-budget",
+      "history": [
+        {
+          "frontier": 130,
+          "point_fallbacks": 15,
+          "requested": 15,
+          "retired": 3,
+          "round": 0,
+          "rules": 15,
+          "seconds": 0.638474348,
+          "zero_rules": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "/tmp/three_loop_point_active_projection",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/new-projection"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.002600328065455,
+        "user_seconds": 0.941441,
+        "system_seconds": 0.059017,
+        "peak_child_rss_kib": 58428,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "result": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/new-projection/result.json"
+    }
+  }
+}

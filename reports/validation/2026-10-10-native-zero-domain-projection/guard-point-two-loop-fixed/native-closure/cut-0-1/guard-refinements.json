@@ -1,0 +1,147 @@
+{
+  "added_domains": [
+    [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        0,
+        0
+      ]
+    ]
+  ],
+  "native_parent_gaps": [
+    {
+      "axis": 7,
+      "fixed_values": [
+        1,
+        2
+      ],
+      "native_failure": "recentered source proof misses the requested target domain",
+      "parent_bounds": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "pass": 2,
+      "trigger": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "options": {
+    "max_added_domains": 256,
+    "max_interval_width": 2,
+    "max_passes": 1
+  },
+  "parent_coverage_certified": false,
+  "schema": 1
+}

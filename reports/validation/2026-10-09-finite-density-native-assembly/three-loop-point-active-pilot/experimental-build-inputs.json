@@ -1,0 +1,104 @@
+{
+  "scope": "Read-only proposed standalone build inputs; no experimental native build executed here. Refresh after parent coordinated production build.",
+  "fingerprint": {
+    "path": "target/release/.fingerprint/rustred-392075d0c6995fd1/lib-rustred.json",
+    "sha256": "5e3609f12e7b3f8933aba3405bdcf2f25882fe858c7a5b4fa3cedde5d8d91c44"
+  },
+  "deps": [
+    {
+      "name": "rustred_order",
+      "cargo_dependency_u64": 5706981512261138891,
+      "fingerprint_little_endian_hex": "cbf90bd27245334f",
+      "matches": [
+        {
+          "path": "target/release/deps/librustred_order-e68acee729c8a4f8.rlib",
+          "sha256": "403e4cdafa27e0d5d1832b96e5b4f4e2701e9aa1ea069d7b6d0c4d900860cb7e"
+        }
+      ]
+    },
+    {
+      "name": "blake3",
+      "cargo_dependency_u64": 15059736767819716970,
+      "fingerprint_little_endian_hex": "6a99c8e8cceefed0",
+      "matches": [
+        {
+          "path": "target/release/deps/libblake3-d00e8c4219217a2f.rlib",
+          "sha256": "96689a81fb034207b83e1107c759fa4365cb7e47364cf619db132bfc744ebd29"
+        }
+      ]
+    },
+    {
+      "name": "bincode",
+      "cargo_dependency_u64": 3169496138083783616,
+      "fingerprint_little_endian_hex": "c0d374e3f14ffc2b",
+      "matches": [
+        {
+          "path": "target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+          "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60"
+        }
+      ]
+    },
+    {
+      "name": "rayon",
+      "cargo_dependency_u64": 13129736754314153783,
+      "fingerprint_little_endian_hex": "370f4983033236b6",
+      "matches": [
+        {
+          "path": "target/release/deps/librayon-f3b6f0ec1256b153.rlib",
+          "sha256": "e8a80e3f6722d17909f00e08bc88b561ae6e3a4adb03649c6df9573c2828ede2"
+        }
+      ]
+    },
+    {
+      "name": "rand",
+      "cargo_dependency_u64": 15313876221564166678,
+      "fingerprint_little_endian_hex": "1622a28049d185d4",
+      "matches": [
+        {
+          "path": "target/release/deps/librand-d3f81ddd260c4f56.rlib",
+          "sha256": "2a37f7aa4636f5ecc04ae9a87b5c1836a606b409a8d16d477c25316e5a5e2c32"
+        }
+      ]
+    },
+    {
+      "name": "symbolica",
+      "cargo_dependency_u64": 385543394876369414,
+      "fingerprint_little_endian_hex": "06aa1ac9acb95905",
+      "matches": [
+        {
+          "path": "target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+          "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+        }
+      ]
+    }
+  ],
+  "generated_arity_candidates": [
+    {
+      "path": "target/release/build/rustred-0d400df32017e6eb/out/runtime_arities.rs",
+      "sha256": "b7f4ba0bd8889324699a40b6b267493bb7c7735ba54b11ce0e60c94852a9b492"
+    },
+    {
+      "path": "target/release/build/rustred-f6c9d066d828ad69/out/runtime_arities.rs",
+      "sha256": "b7f4ba0bd8889324699a40b6b267493bb7c7735ba54b11ce0e60c94852a9b492"
+    },
+    {
+      "path": "target/release/build/rustred-790d7faed7c42925/out/runtime_arities.rs",
+      "sha256": "b7f4ba0bd8889324699a40b6b267493bb7c7735ba54b11ce0e60c94852a9b492"
+    }
+  ],
+  "patch": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/experimental-occupation-first.patch",
+    "sha256": "e7e257162c8e78ff0a32ff5b4def60bb30af90089f3a4e19fc50ea79b4dffdd8"
+  },
+  "patch_base_sources": [
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/index.rs",
+      "sha256": "80a3f22dba3e68b62392763654a4432ecfe552217ff632358599752b92c6ba8e"
+    },
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs",
+      "sha256": "04176aee407443b14020a447dca5dc6fa72856168665f265f20fb8c89c4d5eb6"
+    }
+  ],
+  "patch_status": "Proposed total-degree-plus-occupation-lex control only, not applied. Parent is first building a narrower total-degree-only prefix experiment under a distinct schema."
+}

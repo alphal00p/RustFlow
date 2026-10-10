@@ -1,0 +1,40 @@
+{
+  "scope": "One current-source massive two-loop profile; prediction generation only, no reference values read. Numerical comparison follows saved output.",
+  "source_snapshot_sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+  "build_provenance_sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7",
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "c0b21791a7f06ce15942bb453edd75124b80484f006c7956cc5d44cf5970211e"
+  },
+  "input": {
+    "path": "examples/finite_density/massive_two_loop_sunset.json",
+    "sha256": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a"
+  },
+  "executable": {
+    "path": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "sha256": "cb77807979bffb9ce393a7f5425f83198c54100a9411d0b81070ea0d3c11e699",
+    "size_bytes": 1302480672,
+    "mtime_utc": "2026-10-10T01:27:14.141776+00:00"
+  },
+  "baseline_command": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/requested-rays-massive-regression-resources.provenance.json",
+    "sha256": "f6494f012ce386310edf39b905a0d09649528d4f1d73686546f989173f9e4dca"
+  },
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massive_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=4/5",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-native-zero-domain-projection/massive-regression",
+    "timeout",
+    "300",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture"
+  ],
+  "launcher_sha256": "d1659fddc760435358e56965e4863d22207d225d1cb130319e7873f24259fbe1",
+  "inherited_weighted_and_density_environment_removed": true
+}

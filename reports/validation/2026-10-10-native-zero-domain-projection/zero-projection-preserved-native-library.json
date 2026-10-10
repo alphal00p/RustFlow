@@ -1,0 +1,78 @@
+{
+  "scope": "Preserved new native-only library for read-only standalone source rediscovery; no old proof import",
+  "source_path": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+  "preserved_path": "/tmp/rustflow-zero-projection-native-library/librustred-392075d0c6995fd1.rlib",
+  "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+  "features": [
+    "native"
+  ],
+  "feature_fingerprint": {
+    "path": "target/release/.fingerprint/rustred-392075d0c6995fd1/lib-rustred.json",
+    "sha256": "5e3609f12e7b3f8933aba3405bdcf2f25882fe858c7a5b4fa3cedde5d8d91c44"
+  },
+  "dependencies": [
+    [
+      2442470269441587549,
+      "build_script_build",
+      false,
+      6449696353710696453
+    ],
+    [
+      6303744891922679093,
+      "rustred_order",
+      false,
+      5706981512261138891
+    ],
+    [
+      8841681343991089453,
+      "blake3",
+      false,
+      15059736767819716970
+    ],
+    [
+      11862723254873017773,
+      "bincode",
+      false,
+      3169496138083783616
+    ],
+    [
+      11910974697091955563,
+      "rayon",
+      false,
+      13129736754314153783
+    ],
+    [
+      14668903365372062426,
+      "rand",
+      false,
+      15313876221564166678
+    ],
+    [
+      17020882691900786901,
+      "symbolica",
+      false,
+      385543394876369414
+    ]
+  ],
+  "source_snapshot_sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+  "symbolica_dependency": {
+    "path": "target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+    "features": [
+      "bincode",
+      "float-mpfr",
+      "integer-gmp",
+      "native_code_generation",
+      "numpy",
+      "pyo3",
+      "pyo3-stub-gen-derive",
+      "python_export",
+      "serde",
+      "tracing_max_level_info"
+    ],
+    "fingerprint_path": "target/release/.fingerprint/symbolica-02ed301b2d4bd7f2/lib-symbolica.json",
+    "fingerprint_sha256": "45861a60f72555450465aca11f931cc4d4bab89616c2648cf06aaf0307e69bb5",
+    "cargo_dependency_fingerprint_u64": 385543394876369414,
+    "cargo_little_endian_fingerprint": "06aa1ac9acb95905"
+  }
+}

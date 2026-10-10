@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "scope": "Completed failed full-three-loop native checkpoints and sibling raw log only. Inputs/configuration/failure/resources/bindings remain plain. Massless programs remain raw for diagnosis.",
+  "reader_release": "Parent, guarded dependency owner, and boundary owner explicitly confirmed no remaining readers.",
+  "compression": "gzip level9, mtime0, empty embedded filename",
+  "complete": true,
+  "records": [
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/active-request-history.json",
+      "original_sha256": "f1b8c05ca8a4db9dceeb38334c0110f56a984bfa66c5eb873499cb926e5c8d44",
+      "original_bytes": 442683,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/active-request-history.json.gz",
+      "archive_sha256": "4ac1990477de77ed6ac3eb79c5ddaf6207c76cc9e6c1421112daffdd15407feb",
+      "archive_bytes": 12034,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json",
+      "original_sha256": "13173594d686fb88c9b04ee79b087dab0ea62683749778cb5b505ce9ce1b107a",
+      "original_bytes": 297700,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz",
+      "archive_sha256": "cadbcdf25ecb794b767b45d5b61890adff0bce8c481b2707baeb9de1c1c8da1d",
+      "archive_bytes": 4880,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json",
+      "original_sha256": "faec213d3a360a6cf9599f69be3eb6208400daba6669d57398f7604212a98712",
+      "original_bytes": 1239481,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz",
+      "archive_sha256": "0bad37a112a8ea6196e2cdc263f98ec5943721c74dc33b51e5f976f25ea68f88",
+      "archive_bytes": 19589,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json",
+      "original_sha256": "24235b1763ef567a0eac68d4b7cb06608eb42d53168945e0d9e823b766a8ed40",
+      "original_bytes": 4302645,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz",
+      "archive_sha256": "478a9f4da0b7c679c6b72cca95c502f0b0c998d54a82012e82c51201c6f4bd37",
+      "archive_bytes": 67754,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json",
+      "original_sha256": "14301cb5123bc8510ad1fc3a9cda327c390795401fccf7cb2285ada1c51ae913",
+      "original_bytes": 9734871,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz",
+      "archive_sha256": "a09c2c73a218862f658a00e3b0e3bd807bdf6c688c264276eda1d1926511b85d",
+      "archive_bytes": 153862,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json",
+      "original_sha256": "84dd4ec8688e30c819d0350299387c54ee67b81519fbf1d546c047f6443e56ed",
+      "original_bytes": 20624129,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz",
+      "archive_sha256": "e68c1436decb8d076b103680f0abbc9ab5eec06df3a032211769f6da40708999",
+      "archive_bytes": 328250,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json",
+      "original_sha256": "e589a8bbdcacac165ef570673e4e477a65c1adc47a91736656d58d853d2a8519",
+      "original_bytes": 45202946,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz",
+      "archive_sha256": "38efb833235fcb32cd3b87b200318206228dc8c6355a1086e4cf80af47df0ce7",
+      "archive_bytes": 713942,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json",
+      "original_sha256": "38bc8f65ffcf3972adfce0e574e38173f0a8b7cafe3560ae20f7f3b1df514964",
+      "original_bytes": 58083090,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz",
+      "archive_sha256": "f1ccd0f5056992ebc56d0801a7e17a447fe8d585628a00d8d49c2ccaf6306208",
+      "archive_bytes": 916716,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json",
+      "original_sha256": "f694beace9d6b2d6357041cee5e7492fafb981ff785873196c742cf23f96039d",
+      "original_bytes": 7277586,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "archive_sha256": "e152ac1f29eede3776c174f50872e74400622c6bca0df41facfd77d6570fcf77",
+      "archive_bytes": 67608,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "original_sha256": "5eea8a3f92355ee33c68b4da0a37048357b2ebcbd95217f7fb55284f9d2d8409",
+      "original_bytes": 42173,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_sha256": "485087bbaf160e8322f133eb68885499888b4db587103f4a7a52095d93ac89b2",
+      "archive_bytes": 4680,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-000-provisional.json",
+      "original_sha256": "d17cb3c0ccd21bafcbfde45f88c0040801ebe653c3c5d5a00d34a7819f78b7be",
+      "original_bytes": 10689,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_sha256": "7eda574625b3b0f21f0a47e0d22e351fdc1f308602fe308c4fe53f12f3890e5c",
+      "archive_bytes": 1989,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "original_sha256": "a4c97d0d240b64a4d969b89809e37b9f69eee8d42f4c53c9971866e7100881db",
+      "original_bytes": 111248,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_sha256": "edf3f50c4c88e2c7d3240e536e3fcc625c55f1b8df339258f9c8cfa6077a08d6",
+      "archive_bytes": 10560,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+      "original_sha256": "66df53b61409496931e45e771756aab0177370626098626e45773d76be3d133f",
+      "original_bytes": 18662,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_sha256": "9fc7dc8a8ae2ec4c258f359f12a14cf035e2b90db17f068f081dc6e325a9c1da",
+      "archive_bytes": 2203,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "original_sha256": "b51dd1b0ca7608be40933be48c4b9fc1e3810e5d5240d346aaa303989a752879",
+      "original_bytes": 577992,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_sha256": "9ac6cd8ee2f0e3dfe6bdcb90c13334f68364dcf1ba69a0afdea79abaddc63481",
+      "archive_bytes": 49902,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "original_sha256": "8aa76c38fafdf34bd484657d6a966494535dbe82d2c79662447ac084c5c3e71b",
+      "original_bytes": 38434,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_sha256": "3c18b998e99df7f2437c6071c63fa6719567be03ea463d8a1860165b0e91b327",
+      "archive_bytes": 2734,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "original_sha256": "457ca49606cfcd299a3b6fce0ea5e27e99789704a4010a13a3a2b97b2d65ac56",
+      "original_bytes": 1669261,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "archive_sha256": "dfb3620f73d3b2c92c11c9d56ca8f900d6e63d504b45c980613198be190653f7",
+      "archive_bytes": 145486,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+      "original_sha256": "4edb363bdc0043eefe44953ac0ebac97a01085db16ff94ede6025c74a163f542",
+      "original_bytes": 74735,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "archive_sha256": "b821bf36aaeecca8a7ca061f55da59a3240f160cdefc9e67e3e47d47b4b90b98",
+      "archive_bytes": 4065,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "original_sha256": "074cf4c4ad8d60cb704b4e97b1cb1e0a75cdba72dabc9b0f588ccaaf8a7e9abb",
+      "original_bytes": 3460466,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "archive_sha256": "7f7f9f5cd56c4652b288b4f973f76f7541d1e66a59f80aa7b44b25d7138564dd",
+      "archive_bytes": 326413,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+      "original_sha256": "24620a749c59f7a065be887ce1c498bccd9057134eca2002a83ad1885ecd2179",
+      "original_bytes": 162931,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "archive_sha256": "57e117d0aca95c475d5e7c0dfead649b58fe123f87fc8f924bc742d1b34efd21",
+      "archive_bytes": 6684,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "original_sha256": "86531f40151e7bbba5717a3cd27401ca390420fa8c3ff27500e3acaef26557b1",
+      "original_bytes": 5422878,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "archive_sha256": "e0490158ece635d26e8d8cd60b1a25d75471641fadef3498e538bec7f433cc1a",
+      "archive_bytes": 517486,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-005-provisional.json",
+      "original_sha256": "a5705f213fb8eedda4abe3499e5392453783843071423a3d4625d748b556c7da",
+      "original_bytes": 251082,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz",
+      "archive_sha256": "ce8ebedeb9f07092cd59bb880c2b0e74d781deef78f0465cc8e268991e24e620",
+      "archive_bytes": 9100,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "original_sha256": "59f2a64f21f4c22d091a4744ebbfb1743099d90854311bd92d054aa7967f1560",
+      "original_bytes": 7107359,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "archive_sha256": "ab5ec2c075cd0943c8581c1ee215eee41aa25e4785a9f538560efa2e05494c65",
+      "archive_bytes": 672494,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-006-provisional.json",
+      "original_sha256": "17fe8541674f1382c48b14abe5336de07b60fb21b42e9ce5987bfbb4a99d9b57",
+      "original_bytes": 377354,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz",
+      "archive_sha256": "74ca402ecff0fa3959f49d83fb16c30705f8c0f5d9f7035aed6393e13c68268c",
+      "archive_bytes": 12623,
+      "decompressed_sha256_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-resources.log",
+      "original_sha256": "1fd5bd342e4333479cc1e7473cae3390fa74976814af09fa0cf46ff82a0b6a2a",
+      "original_bytes": 1640,
+      "archive_path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-fixed-resources.log.gz",
+      "archive_sha256": "4cfd0ec51e15e4ce68f6dd8fdb39cc809ee625a337fca5c245ac747f0b00b0c0",
+      "archive_bytes": 617,
+      "decompressed_sha256_verified": true
+    }
+  ],
+  "file_count": 24,
+  "original_bytes": 166532035,
+  "archive_bytes": 4051671,
+  "script_sha256": "e8f040b3d018bdfe050f836ae3205ac647de2afe3a6f827aa3da878827b19544"
+}

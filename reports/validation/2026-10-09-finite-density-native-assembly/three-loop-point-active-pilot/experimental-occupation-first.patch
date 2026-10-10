@@ -1,0 +1,80 @@
+--- a/src/solver/index.rs
++++ b/src/solver/index.rs
+@@ -192,12 +192,9 @@
+         self.physical_arity
+     }
+ 
+-    /// Keep occupation degree separate from the ordinary physical order.
+-    ///
+-    /// Roles determine the required-cut mask. Ordinary and cut coordinates
+-    /// retain every existing priority; occupation total degree and then its
+-    /// coordinate lexicographic order break only physical-order ties. Thus an
+-    /// occupation can be raised when the physical part strictly decreases.
++    /// EXPERIMENT ONLY: order occupation total degree and occupation lex before
++    /// every ordinary/cut physical component. Ordinary and cut comparisons keep
++    /// their existing priorities once the occupation labels tie.
+     pub fn with_roles(
+         mut self,
+         roles: [super::guarded::IndexRole; N],
+@@ -495,6 +492,22 @@
+             }
+         }
+ 
++        // EXPERIMENT ONLY: grade occupied distributions before all physical
++        // coordinates. Admitted numeric occupation powers are nonnegative;
++        // symbolic shifts compare against a common base on the guarded box.
++        let occupation_degree = occupation_right.cmp(&occupation_left);
++        if occupation_degree != Ordering::Equal {
++            return occupation_degree;
++        }
++        for axis in 0..N {
++            if self.is_occupation(axis) {
++                let order = right[axis].value().cmp(&left[axis].value());
++                if order != Ordering::Equal {
++                    return order;
++                }
++            }
++        }
++
+         let aggregate = denominators_right
+             .cmp(&denominators_left)
+             .then(sector_lex.reverse())
+@@ -527,18 +540,6 @@
+         };
+         if physical_ties != Ordering::Equal {
+             return physical_ties;
+-        }
+-        let occupation_degree = occupation_right.cmp(&occupation_left);
+-        if occupation_degree != Ordering::Equal {
+-            return occupation_degree;
+-        }
+-        for axis in 0..N {
+-            if self.is_occupation(axis) {
+-                let order = right[axis].value().cmp(&left[axis].value());
+-                if order != Ordering::Equal {
+-                    return order;
+-                }
+-            }
+         }
+         Ordering::Equal
+     }
+--- a/src/solver/guarded/persistence.rs
++++ b/src/solver/guarded/persistence.rs
+@@ -22,7 +22,7 @@
+ // v1 proofs can retain columns and extra guards that this quotient removes;
+ // they must be rediscovered, not silently rewritten during deserialization.
+ // This version applies only to guarded-source programs, not ordinary rules.
+-const SCHEMA: &str = "rustred.guarded-source-program.v2";
++const SCHEMA: &str = "rustred.guarded-source-program.experimental-occupation-first.v1";
+ const STRUCTURE_LIMIT: usize = 64 * 1024 * 1024;
+ 
+ type DomainRecord = Vec<(Option<i64>, Option<i64>)>;
+@@ -229,7 +229,7 @@
+         }
+         if record.schema == "rustred.guarded-source-program.v1" {
+             return Err(BinaryIoError::Invalid(
+-                "guarded proof schema v1 predates uniform measure-zero projection; rediscover with schema v2",
++                "guarded proof schema v1 predates uniform measure-zero projection; rediscover with the experimental occupation-first schema",
+             ));
+         }
+         if record.schema != SCHEMA {

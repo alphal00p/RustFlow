@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T01:15:54.289804+00:00",
+  "scope": "Matched priority=true control executed with the OLD canonical pre-zero-projection build while worktree source edits proceed. No claim that current worktree sources equal this historical snapshot.",
+  "baseline_command": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-three-loop-fixed-resources.json",
+    "sha256": "30aa3e295ab2e1296c2108dc46ce722054d13ac5ec0e08055df02e8948938223"
+  },
+  "command": [
+    "timeout",
+    "600",
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_three_loop_chain.json",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=true",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES=65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL=32",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE=true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS=262144",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_WEIGHTED_DEPTH=3",
+    "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+    "RUSTFLOW_WEIGHTED_ROUNDS=16",
+    "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "intentional_parameter_changes": [
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false -> true",
+    "distinct output directory"
+  ],
+  "compiled_build": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-build-provenance.json",
+    "sha256": "d4500c314dad8730b5a2e68ca5d442ea27cd58ad737453ad516679b448872f87"
+  },
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json",
+    "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476"
+  },
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "991cd4f6a17289608a3092723d654f0b5fe9c722c6698cb3456be5f25c1f6c37",
+    "RUSTRED_SOURCE_DIGEST": "83304d05399eb3342eab352b3758371e20d3f51f6819b42f057e1efd1c91c934",
+    "PORT_SOURCE_DIGEST": "c0b21791a7f06ce15942bb453edd75124b80484f006c7956cc5d44cf5970211e"
+  },
+  "executable": {
+    "path": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "sha256": "3c3aae163cb84c72c1437fcc36488cb019bf78d1ff2d5b148a9dffed8a30df5f",
+    "size_bytes": 1302452472
+  },
+  "input": {
+    "path": "examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "new_zero_projection_source_in_executable": false,
+  "current_worktree_source_equality_claimed": false,
+  "independent_reference_values_read": false
+}

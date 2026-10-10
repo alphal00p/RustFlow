@@ -18,7 +18,11 @@ use super::{
     GuardedProgram, GuardedRule, GuardedSourceSystem, IndexBounds, IndexDomain, IndexRole,
 };
 
-const SCHEMA: &str = "rustred.guarded-source-program.v1";
+// v2 binds source replay to uniform explicit measure-zero projection. Valid
+// v1 proofs can retain columns and extra guards that this quotient removes;
+// they must be rediscovered, not silently rewritten during deserialization.
+// This version applies only to guarded-source programs, not ordinary rules.
+const SCHEMA: &str = "rustred.guarded-source-program.v2";
 const STRUCTURE_LIMIT: usize = 64 * 1024 * 1024;
 
 type DomainRecord = Vec<(Option<i64>, Option<i64>)>;
@@ -218,10 +222,18 @@ impl<const N: usize> GuardedProgram<N> {
             bincode::config::standard().with_limit::<STRUCTURE_LIMIT>(),
         )
         .map_err(native)?;
-        if used != structure.len() || record.schema != SCHEMA {
+        if used != structure.len() {
             return Err(BinaryIoError::Invalid(
-                "guarded program schema or trailing bytes",
+                "guarded program has trailing structure bytes",
             ));
+        }
+        if record.schema == "rustred.guarded-source-program.v1" {
+            return Err(BinaryIoError::Invalid(
+                "guarded proof schema v1 predates uniform measure-zero projection; rediscover with schema v2",
+            ));
+        }
+        if record.schema != SCHEMA {
+            return Err(BinaryIoError::Invalid("unsupported guarded proof schema"));
         }
         validate_record_limits(&record, limits)?;
         if record.measure != expected.measure_id
@@ -494,6 +506,45 @@ mod tests {
         assert_eq!(before.terms, after.terms);
         assert_eq!(before.nonzero_conditions, after.nonzero_conditions);
         assert!(after.unresolved.is_empty());
+    }
+
+    #[test]
+    fn legacy_guarded_v1_proofs_require_explicit_rediscovery() {
+        let program = sample("legacy-guarded-v1");
+        let bytes = program.encode_native(Default::default()).unwrap();
+        let envelope = inspect_program(&bytes, Default::default()).unwrap();
+        // The v1 record layout is unchanged. Preserve that actual schema tag
+        // in an otherwise valid historical serialization; do not migrate its
+        // candidate equations or conditions into the new proof semantics.
+        let (mut record, _): (Record, _) = bincode::decode_from_slice(
+            envelope.section(SectionTag::PROGRAM).unwrap(),
+            bincode::config::standard(),
+        )
+        .unwrap();
+        assert_eq!(record.schema, SCHEMA);
+        record.schema = "rustred.guarded-source-program.v1".into();
+        let structure = bincode::encode_to_vec(record, bincode::config::standard()).unwrap();
+        let sections = envelope
+            .sections()
+            .iter()
+            .map(|section| BinarySection {
+                tag: section.tag,
+                bytes: if section.tag == SectionTag::PROGRAM {
+                    &structure
+                } else {
+                    section.bytes
+                },
+            })
+            .collect::<Vec<_>>();
+        let legacy = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
+        let error =
+            GuardedProgram::decode_generated(&legacy, program.sources.clone(), Default::default())
+                .unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("schema v1 predates uniform measure-zero projection")
+        );
     }
 
     #[test]

@@ -1,0 +1,4 @@
+
+thread 'main' (337164) panicked at reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/probe.rs:61:4:
+geometry mismatch for lorentz/0/2/occupation-case-0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

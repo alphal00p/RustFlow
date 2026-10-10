@@ -1,0 +1,162 @@
+diff --git a/vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs b/vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs
+index 685bd1b..bf5100c 100644
+--- a/vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs
++++ b/vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs
+@@ -18,7 +18,11 @@ use super::{
+     GuardedProgram, GuardedRule, GuardedSourceSystem, IndexBounds, IndexDomain, IndexRole,
+ };
+ 
+-const SCHEMA: &str = "rustred.guarded-source-program.v1";
++// v2 binds source replay to uniform explicit measure-zero projection. Valid
++// v1 proofs can retain columns and extra guards that this quotient removes;
++// they must be rediscovered, not silently rewritten during deserialization.
++// This version applies only to guarded-source programs, not ordinary rules.
++const SCHEMA: &str = "rustred.guarded-source-program.v2";
+ const STRUCTURE_LIMIT: usize = 64 * 1024 * 1024;
+ 
+ type DomainRecord = Vec<(Option<i64>, Option<i64>)>;
+@@ -218,11 +222,19 @@ impl<const N: usize> GuardedProgram<N> {
+             bincode::config::standard().with_limit::<STRUCTURE_LIMIT>(),
+         )
+         .map_err(native)?;
+-        if used != structure.len() || record.schema != SCHEMA {
++        if used != structure.len() {
+             return Err(BinaryIoError::Invalid(
+-                "guarded program schema or trailing bytes",
++                "guarded program has trailing structure bytes",
+             ));
+         }
++        if record.schema == "rustred.guarded-source-program.v1" {
++            return Err(BinaryIoError::Invalid(
++                "guarded proof schema v1 predates uniform measure-zero projection; rediscover with schema v2",
++            ));
++        }
++        if record.schema != SCHEMA {
++            return Err(BinaryIoError::Invalid("unsupported guarded proof schema"));
++        }
+         validate_record_limits(&record, limits)?;
+         if record.measure != expected.measure_id
+             || record.roles
+@@ -496,6 +508,45 @@ mod tests {
+         assert!(after.unresolved.is_empty());
+     }
+ 
++    #[test]
++    fn legacy_guarded_v1_proofs_require_explicit_rediscovery() {
++        let program = sample("legacy-guarded-v1");
++        let bytes = program.encode_native(Default::default()).unwrap();
++        let envelope = inspect_program(&bytes, Default::default()).unwrap();
++        // The v1 record layout is unchanged. Preserve that actual schema tag
++        // in an otherwise valid historical serialization; do not migrate its
++        // candidate equations or conditions into the new proof semantics.
++        let (mut record, _): (Record, _) = bincode::decode_from_slice(
++            envelope.section(SectionTag::PROGRAM).unwrap(),
++            bincode::config::standard(),
++        )
++        .unwrap();
++        assert_eq!(record.schema, SCHEMA);
++        record.schema = "rustred.guarded-source-program.v1".into();
++        let structure = bincode::encode_to_vec(record, bincode::config::standard()).unwrap();
++        let sections = envelope
++            .sections()
++            .iter()
++            .map(|section| BinarySection {
++                tag: section.tag,
++                bytes: if section.tag == SectionTag::PROGRAM {
++                    &structure
++                } else {
++                    section.bytes
++                },
++            })
++            .collect::<Vec<_>>();
++        let legacy = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
++        let error =
++            GuardedProgram::decode_generated(&legacy, program.sources.clone(), Default::default())
++                .unwrap_err();
++        assert!(
++            error
++                .to_string()
++                .contains("schema v1 predates uniform measure-zero projection")
++        );
++    }
++
+     #[test]
+     fn saved_program_rejects_a_different_measure_and_source_guard() {
+         let program = sample("measure-a");
+diff --git a/vendor/rustred/crates/rustred-core/src/solver/guarded/replay.rs b/vendor/rustred/crates/rustred-core/src/solver/guarded/replay.rs
+index 9f3327b..f8636c8 100644
+--- a/vendor/rustred/crates/rustred-core/src/solver/guarded/replay.rs
++++ b/vendor/rustred/crates/rustred-core/src/solver/guarded/replay.rs
+@@ -224,6 +224,10 @@ impl<const N: usize> GuardedSourceSystem<N> {
+                 }
+             });
+             let shifts = recenter.map(i64::from);
++            // Besides source guards, the discovery box now also binds every
++            // explicit measure-zero column removed by scope.instantiate.
++            // Keep its translated pullback: a zero valid before recentering
++            // must never be silently extended to a newly reached index face.
+             let mut domain = discovery_domain
+                 .intersection(&discovery_domain.pullback(&shifts)?)
+                 .ok_or_else(|| {
+diff --git a/vendor/rustred/crates/rustred-core/src/solver/guarded/search.rs b/vendor/rustred/crates/rustred-core/src/solver/guarded/search.rs
+index 8674d3f..c937e79 100644
+--- a/vendor/rustred/crates/rustred-core/src/solver/guarded/search.rs
++++ b/vendor/rustred/crates/rustred-core/src/solver/guarded/search.rs
+@@ -10,6 +10,8 @@ use crate::solver::{
+ use std::collections::VecDeque;
+ 
+ mod direct_zero;
++#[cfg(test)]
++mod zero_projection_tests;
+ pub use direct_zero::{
+     GuardedDirectZeroSearch, GuardedDirectZeroSkip, GuardedDirectZeroSkipReason,
+ };
+@@ -68,7 +70,32 @@ impl<'a, const N: usize> GuardedSearchScope<'a, N> {
+                 return Ok(None);
+             }
+         }
+-        Ok(Some(result))
++        if self.problem.zero_domains.is_empty() {
++            return Ok(Some(result));
++        }
++        // A supplied measure-zero box is an identity on its entire integer
++        // domain, not an ordinary zero-sector guess. Project only when the
++        // whole image of this recorded discovery box is covered. In
++        // particular, intersection at a boundary is insufficient. Validate
++        // every occupation image above before removing any column.
++        //
++        // Independent replay calls this same owner on the saved discovery
++        // domain. Its recentering guard intersects that domain with its
++        // translated pullback, so every replayed zero remains valid after the
++        // winning target is translated back to its canonical label.
++        let mut projected = Vec::with_capacity(result.len());
++        for term in result {
++            let image = image_domain(&self.domain, &term.integral)?;
++            if !self
++                .problem
++                .zero_domains
++                .iter()
++                .any(|zero| image.is_subset_of(zero))
++            {
++                projected.push(term);
++            }
++        }
++        Ok(Some(projected))
+     }
+ }
+ 
+diff --git a/vendor/rustred/crates/rustred-core/src/solver/guarded/search/direct_zero.rs b/vendor/rustred/crates/rustred-core/src/solver/guarded/search/direct_zero.rs
+index 1f225d1..2590734 100644
+--- a/vendor/rustred/crates/rustred-core/src/solver/guarded/search/direct_zero.rs
++++ b/vendor/rustred/crates/rustred-core/src/solver/guarded/search/direct_zero.rs
+@@ -59,7 +59,9 @@ impl<const N: usize> GuardedSourceSystem<N> {
+     /// points. All points are role-validated before any work, even beyond the
+     /// budget. Duplicate points are visited once, in first-occurrence order.
+     ///
+-    /// Only a nonzero single-term instantiated row can succeed. Its canonical
++    /// Only a nonzero single-term instantiated row can succeed, after the
++    /// native scope applies required-cut and uniformly proved measure zeros.
++    /// Its canonical
+     /// target must equal the requested point and its empty RHS must pass the
+     /// existing original-source replay and condition reconstruction. Seeds keep
+     /// ordinary/required-cut sectors, while occupation seeds may cross zero

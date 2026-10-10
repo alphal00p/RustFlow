@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "scope": "Exact source changes between frozen projection and guard-point build snapshots; runtime guard_passes0to1 is an additional explicit numerical configuration change.",
+  "before_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+    "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+  },
+  "after_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-hashes.json",
+    "sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287"
+  },
+  "changed_files": {
+    "src/finite_density/interface.rs": {
+      "before_sha256": "3a56dae20c48579bd1e46cfaa0e8cd5357109f1ef430540acdd73860fb3a23e2",
+      "after_sha256": "a89e61febaca982fce863c472b1fc46da52d8e94886448cbf522979ea50aa6c4"
+    },
+    "src/finite_density/reduction.rs": {
+      "before_sha256": "9a623168fc424847742f8e826b16c2f09fb7c395b9d135af1cec1878259babb7",
+      "after_sha256": "cf76ba23e1a4aa6b875bea5ee0d5cb26e208d5ccb20b7048ea798e15c1714928"
+    }
+  },
+  "removed_files": []
+}

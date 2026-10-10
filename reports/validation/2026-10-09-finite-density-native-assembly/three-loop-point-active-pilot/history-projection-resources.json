@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "/tmp/three_loop_point_active_history_projection",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/history-new-projection"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 5.162200702819973,
+  "user_seconds": 5.04932,
+  "system_seconds": 0.08030699999999999,
+  "peak_child_rss_kib": 64572,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

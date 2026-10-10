@@ -1,0 +1,24 @@
+{
+  "command": [
+    "timeout",
+    "300s",
+    "env",
+    "PILOT_ROUNDS=16",
+    "PILOT_FRONTIER=1024",
+    "PILOT_REQUESTS=4096",
+    "PILOT_RULES=65536",
+    "PILOT_ZERO_ATTEMPTS=8192",
+    "PILOT_RAY_DOMAINS=1",
+    "PILOT_POINT_DOMAINS=1",
+    "PILOT_DEPTH=3",
+    "/tmp/three_loop_point_active_history_large_old",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 220.6950176563114,
+  "user_seconds": 218.771133,
+  "system_seconds": 0.286292,
+  "peak_child_rss_kib": 91252,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

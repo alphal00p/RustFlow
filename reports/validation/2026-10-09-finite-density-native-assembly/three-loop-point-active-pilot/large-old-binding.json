@@ -1,0 +1,32 @@
+{
+  "captured_utc": "2026-10-10T01:37:24.660242+00:00",
+  "probe": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/probe-large-budget.rs",
+    "sha256": "cc8238fbba2451034999b0af7c3529def5fa4278bd86992394f7a458f61cd062"
+  },
+  "binary": {
+    "path": "/tmp/three_loop_point_active_history_large_old",
+    "sha256": "9f4c73210f2d457d1e0f49c847b9d952c2ad256e738911aba3320238aefa37c9"
+  },
+  "native_library": {
+    "path": "/tmp/librustred-active-zero-canonical-392075d0c6995fd1.rlib",
+    "sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464"
+  },
+  "source_program": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9"
+  },
+  "inherits_production_and_dependency_bindings": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/source-binding.json",
+  "new_production_source": false,
+  "expected_limits": {
+    "max_rounds": 16,
+    "max_frontier": 1024,
+    "max_requested": 4096,
+    "max_rules": 65536,
+    "depth": 3,
+    "ray_domains_per_requested_point": 1,
+    "point_domains_per_fallback": 1,
+    "zero_attempts_per_round": 8192,
+    "timeout_seconds": 300
+  }
+}

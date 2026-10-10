@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "60s",
+    "/tmp/three_loop_point_active_order_witness",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.bin",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/large-old-canonical/round-003.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 13.244664892088622,
+  "user_seconds": 12.612285,
+  "system_seconds": 0.5450309999999999,
+  "peak_child_rss_kib": 666648,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

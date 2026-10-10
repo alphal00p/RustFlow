@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-hashes.json",
+    "sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-provenance.json",
+    "sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca"
+  },
+  "unchanged_source_files": 2478,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "784d1eb6a4dfd8fefef06e26f659382e7aacc9bc86bd5be771c826ce7b035f21"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "native",
+      "status": "passed",
+      "passed": 84,
+      "failed": 0,
+      "ignored": 1,
+      "measured": 0,
+      "filtered": 3041,
+      "harness_seconds": 0.08,
+      "wall_seconds": 0.0866094222292304,
+      "peak_child_rss_kib": 15444,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.json",
+          "sha256": "aade75bb6cdeec25be2c332b0c95e156f04f4ece2a8f76df60a8ac8206e9e328"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.log",
+          "sha256": "f8d2cb844c45d3f81d3dfb0f539825feb7195139ea3c1ae5fbde5400be9cac5a"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.provenance.json",
+          "sha256": "b9358be33cfc802f0d9069dbbee8bbf80e89f95eb4df60e1e1948c2dd2f6fd67"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-binding.json",
+          "sha256": "280a5f53544fe5b1d456e2dd2dc8c687545eedbdef3444a212870e87efa6aaf7"
+        }
+      }
+    },
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 76,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.08,
+      "wall_seconds": 7.097364952787757,
+      "peak_child_rss_kib": 30720,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-resources.json",
+          "sha256": "3fc366e3e3de0ba86f57cdd72b0aa06e0d18beabaedcf9d5051db9915b564b0e"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-resources.log",
+          "sha256": "ae5d6d3f04f983573cf2b1158a11a8fb76c66bd1b14027c846d6a67ebaea9b04"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-resources.provenance.json",
+          "sha256": "8f0a623ee36288e40c0d6d83df6cb434fb9edc31329488aeef4268ae64ddec14"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-lib-binding.json",
+          "sha256": "12b2a57bcc3fc151ef7452bcb76a783edf4a64c38a500e0f2489658595a8c9d5"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.1678002467378974,
+      "peak_child_rss_kib": 15432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-resources.json",
+          "sha256": "adc3785385859825aa376931bbc06850525cb062aab370238f2db102f8d9d36a"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-resources.provenance.json",
+          "sha256": "2ce1db948d580e4b3669cc921b3718f6f0b4baedfd6e6f7cacd83b6f8c14973c"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-flow-boundary-binding.json",
+          "sha256": "ce70eeee524e18e9014c8de0643271aa606e3dd643b85e0179714480c51555e7"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.37,
+      "wall_seconds": 1.3907203492708504,
+      "peak_child_rss_kib": 18432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-resources.json",
+          "sha256": "513d2bada0fef85de105e9d30638a3c9c43c95dba1c51963ff8294404bc86a03"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-resources.log",
+          "sha256": "8d04dedadbb9acaed1a52602afd0cc82bdf83c60c0cc7df48bed88c838b1abe5"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-resources.provenance.json",
+          "sha256": "2f7b5432be58f0597c0f53a1d5ec2a6df331927577d6281c63eb87a20a04a39e"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-massless-sources-binding.json",
+          "sha256": "c1430390b7988fcf6f368c2bf52f48d0d8ca9412ce6455f25052d57043ba9f42"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.012785443104803562,
+      "peak_child_rss_kib": 15404,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-resources.json",
+          "sha256": "facf1484dbce965fdd6b7cd4231dcb21cae65a4387622fce20f496959d58816d"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-resources.log",
+          "sha256": "5ce07011acb52ba21db5470ce6cc78714222d8a1d2249e232d8d9ed01b49cc2e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-resources.provenance.json",
+          "sha256": "860d32031236e10d367c3ef8b903dc60cd4255eafdf91261e08b1288c7952faf"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-fingerprint-binding.json",
+          "sha256": "691dd9e1dcce825515e2740d7cb37219815b052e2a18193a788c89e53c5dc1c9"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.32,
+      "wall_seconds": 1.3355820425786078,
+      "peak_child_rss_kib": 30744,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-resources.json",
+          "sha256": "578c00bb83ecd5c264e54090ad74a175b2d6aaae16491084724f2af269b4de42"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-resources.log",
+          "sha256": "acfedd322457a6a2d0e6c8e839940993c85dc5bd383aef6b48bf2597c56556e8"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-resources.provenance.json",
+          "sha256": "03fe16bf023c743afab77f17cfc10c707eb38550a10c6b7969b6bc805493f9ca"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-python-binding.json",
+          "sha256": "78febb1cf7517da86c6d43952e0babbd8ba83b80355280d8376ea641978d8923"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.03,
+      "wall_seconds": 0.05171966413035989,
+      "peak_child_rss_kib": 15380,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-resources.json",
+          "sha256": "8b32743e0628289eba39bd8929b56fdaf7e5047b39030741bb787c1db0f337cd"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-resources.log",
+          "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-resources.provenance.json",
+          "sha256": "6d107fa53bbc224f59fbe244edfde548163672b311907e317a19653962cac69d"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-capacity-binding.json",
+          "sha256": "3b2c2e18d3c104ac2a27820c0089e40181b947fb39d3c3eadfe8d9256b2599e4"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 179,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "087b007a12ccd2aeede89edff61f153968adb568c5491d1b74c8a1333326b192"
+}

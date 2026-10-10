@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "scope": "Conservative exact native zero-domain source projection; guarded persistence schema2. No broadening of numerical physical admission.",
+  "source_freeze": "confirmed by source owner and parent before snapshot",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+    "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+  },
+  "ordered_gates": [
+    {
+      "stage": "one shared release build",
+      "status": "passed",
+      "targets": [
+        "rustred lib",
+        "symbolica-amflow lib",
+        "finite_density_runtime_flow",
+        "finite_density_flow_boundary",
+        "finite_density_massless_sources",
+        "source_fingerprint",
+        "python_finite_density",
+        "finite_density_capacity"
+      ],
+      "features": [
+        "symbolica-amflow/python"
+      ],
+      "network": "--locked --offline",
+      "build_provenance": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-provenance.json",
+        "sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7"
+      }
+    },
+    {
+      "stage": "native guarded unit suite",
+      "status": "passed",
+      "condition": "completed shared build provenance bound to frozen source inventory; must pass before root gates",
+      "passed": 84,
+      "ignored": 1
+    },
+    {
+      "stage": "root regression gates",
+      "status": "passed",
+      "targets": [
+        "finite_density:: library subset",
+        "flow-boundary",
+        "massless-sources",
+        "source-fingerprint",
+        "Python runtime",
+        "capacity"
+      ],
+      "passed": 92,
+      "gate_summary": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-root-gates.json",
+        "sha256": "7002deb3b2dea544810a0324a4a94e5d6e8fbf6ec125823fd5f65b6241d5c9e1"
+      }
+    },
+    {
+      "stage": "two-loop fixed-D and Laurent regressions",
+      "status": "massive one-profile passed; both massless priority variants failed on the same coupled exceptional guard, Laurent not launched",
+      "policy": "save all predictions before independent comparisons; fresh native schema2 checkpoints",
+      "massive_launcher": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/run-massive-regression.py",
+        "sha256": "d1659fddc760435358e56965e4863d22207d225d1cb130319e7873f24259fbe1"
+      },
+      "massive_summary": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-summary.json",
+        "sha256": "01c15e4b7d615bdbc0e88b648901019add380cb7a7afb1e306157bd8b9e37e30"
+      },
+      "massless_failure": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/failure.json",
+        "sha256": "84ddc9372fdd2dfc2604de17fb8142a92793a4aa96228c888e76446a4a256033"
+      }
+    },
+    {
+      "stage": "three-loop bounded controls",
+      "status": "completed failure:7 rounds,frontier1025,unresolved14439,no predictions",
+      "policy": "matched old/new binaries and settings; incomplete closure never counted as numerical acceptance",
+      "summary": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-three-loop-failure-summary.json",
+        "sha256": "4421a646cc0a482b2f91bb1a2677568b5f29b262bcf486a598618458fe27d3c2"
+      }
+    }
+  ],
+  "historical_control": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/priority-three-loop-fixed-summary.json",
+    "sha256": "4a4db32d7ea8ba31d087f634cfd9d4d35f4c172c7dec8897bb83ea325ad4d38e"
+  },
+  "schema_migration": "guarded v1 artifacts must be rejected; preserve them as historical evidence and regenerate native rules from unchanged exact source rows",
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "required_external_solver_dependency": false,
+  "current_status": "blocked_by_massless_two_loop_regression",
+  "release_validated": false
+}

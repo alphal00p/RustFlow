@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "Current frozen native projection build, massive two-loop full amplitude at D12/5, one28-digit/order80/start12 profile; both original targets and all sectors.",
+  "reference_comparisons": 10,
+  "historical_same_profile_comparisons": 10,
+  "assembly_checks": 2,
+  "new_refinement_comparisons": 0,
+  "occupied_basis": [
+    {
+      "cut_slots": [
+        0
+      ],
+      "basis_size": 6
+    },
+    {
+      "cut_slots": [
+        1
+      ],
+      "basis_size": 6
+    },
+    {
+      "cut_slots": [
+        0,
+        1
+      ],
+      "basis_size": 8
+    }
+  ],
+  "wall_seconds": 47.84535191999748,
+  "peak_child_rss_kib": 43008,
+  "reference_uncertainty": "independent node and precision changes, not a rigorous interval bound",
+  "timing_scope": "Prebuilt process on a shared host, compilation and executable hashing excluded; no isolated benchmark claim.",
+  "supplied_oracle_records_compared": 0,
+  "three_loop_acceptance": false,
+  "four_loop_acceptance": false,
+  "artifacts": {
+    "zero-projection-source-hashes.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+      "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+    },
+    "zero-projection-build-provenance.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-build-provenance.json",
+      "sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7"
+    },
+    "massive-regression-binding.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-binding.json",
+      "sha256": "694099bf6a5d6d957556b3df417436d1c26b256a1dccaeff9697ebfc7eb6216d"
+    },
+    "massive-regression-post-run-binding.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-post-run-binding.json",
+      "sha256": "5218b8f6ad344e7762f2ff8e5487a1bb34d942f8bd1191ad6ea2699647311463"
+    },
+    "massive-regression-resources.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-resources.json",
+      "sha256": "f3537109699f47365725c8c0b9d490701f909cd7da3f649b55ec5e95c6af1ab6"
+    },
+    "massive-regression-resources.provenance.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-resources.provenance.json",
+      "sha256": "719bbf81c96f583779095db3efa0c34c36adc439fc19bed20ab70cc5299b7d0a"
+    },
+    "massive-regression-resources.log": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-resources.log",
+      "sha256": "f9e12a0a3740cdd9d8ff96ae68bf9f5e134ee2ac552af9538c0e7af0fd95be88"
+    },
+    "massive-regression-comparison.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression-comparison.json",
+      "sha256": "13dda54c24a1b961cbe8ed49b29a8186869c466bf4a17ba351119c3c89f91dbc"
+    },
+    "prediction-28-80-12.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/prediction-28-80-12.json",
+      "sha256": "36efffc4ee48713d17f5990460d8a746a60e8fa9eb4eeeceef390069510e4c60"
+    },
+    "input.json": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/massive-regression/input.json",
+      "sha256": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4"
+    },
+    "run-massive-regression.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/run-massive-regression.py",
+      "sha256": "d1659fddc760435358e56965e4863d22207d225d1cb130319e7873f24259fbe1"
+    }
+  }
+}

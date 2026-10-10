@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/python_finite_density-86655a919328faf8",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.3355820425786078,
+  "user_seconds": 1.257879,
+  "system_seconds": 0.070809,
+  "peak_child_rss_kib": 30744,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

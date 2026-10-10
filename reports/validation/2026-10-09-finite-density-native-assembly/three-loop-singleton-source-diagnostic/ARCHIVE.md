@@ -1,0 +1,3 @@
+The eight finalized OLD/FRESH source-order result payloads are stored as deterministic gzip files. `archive-manifest.json` records both original and compressed byte counts and SHA-256 hashes; historical resource/provenance argv are unchanged. Run `python verify-archive.py` to verify every payload and retained binding and repeat all 76 saved RHS/condition comparisons. To inspect a payload, decompress its `.json.gz` file; this recovers the exact original JSON bytes.
+
+The round-006 program and metadata and points fixture remain uncompressed for the separate active pilot. This archive contains bounded native source-search diagnostics, not a derivative-closed or numerical amplitude result.

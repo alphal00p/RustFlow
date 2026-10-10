@@ -1,0 +1,90 @@
+{
+  "status": "completed-negative-presentation-control",
+  "scope": "fixed original52-row source corpus, no new physical zeros or numerical amplitude",
+  "points": 19,
+  "max_depth": 3,
+  "max_domains_per_point": 1,
+  "results": {
+    "original": {
+      "source_count": 52,
+      "applied": 19,
+      "rhs_terms": 192,
+      "identical_rhs_and_conditions_to_original": 19,
+      "discovery_seconds_sum": 0.598305092,
+      "process": {
+        "command": [
+          "timeout",
+          "120s",
+          "/tmp/three_loop_temporal_euler_probe",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/original.json",
+          "original"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 17.24462756095454,
+        "user_seconds": 16.848035,
+        "system_seconds": 0.204682,
+        "peak_child_rss_kib": 129028,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "appended": {
+      "source_count": 58,
+      "applied": 19,
+      "rhs_terms": 192,
+      "identical_rhs_and_conditions_to_original": 19,
+      "discovery_seconds_sum": 0.69322543,
+      "process": {
+        "command": [
+          "timeout",
+          "120s",
+          "/tmp/three_loop_temporal_euler_probe",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/appended.json",
+          "appended"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 17.382227681111544,
+        "user_seconds": 17.022966,
+        "system_seconds": 0.160378,
+        "peak_child_rss_kib": 119808,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "prepended": {
+      "source_count": 58,
+      "applied": 19,
+      "rhs_terms": 192,
+      "identical_rhs_and_conditions_to_original": 19,
+      "discovery_seconds_sum": 0.712274563,
+      "process": {
+        "command": [
+          "timeout",
+          "120s",
+          "/tmp/three_loop_temporal_euler_probe",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-temporal-euler-source-diagnostic/prepended.json",
+          "prepended"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 17.384531078860164,
+        "user_seconds": 17.04558,
+        "system_seconds": 0.15140699999999999,
+        "peak_child_rss_kib": 125952,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  },
+  "geometry_original_row_checks": 52,
+  "shifted_U_source_span_checks": 12,
+  "native_backend": "preserved canonical e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464, before explicit measure-zero projection extension",
+  "recommendation": "No production temporal-Euler policy justified by this matched control. All19 exact first applications, RHS coefficients, and retained conditions are unchanged by appended or prepended polynomial fields.",
+  "normalization_audit": "Every fresh geometry row and every shifted-U comparison agrees up to one explicitly recorded nonzero rational constant, preserving the same homogeneous identity and guard. First literal-equality diagnostic failures are retained separately.",
+  "not_proved": [
+    "No full three-loop closure or numerical value from this experiment.",
+    "No claim that all polynomial vector fields or all search budgets are redundant."
+  ]
+}

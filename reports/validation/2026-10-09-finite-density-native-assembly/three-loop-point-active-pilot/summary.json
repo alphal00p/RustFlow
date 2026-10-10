@@ -1,0 +1,148 @@
+{
+  "scope": "Validation-only exact native discovery. Process exit 0 means diagnostic completed, not closed basis. No period values or numerical transport.",
+  "request_policy": "Persistent exact requested-point history; defer every new basis label and every missing raw derivative label; domain containment alone is not coverage. Final native stopping-set audit is mandatory for success.",
+  "limits": {
+    "rounds": 8,
+    "frontier": 128,
+    "rules": 32768,
+    "depth": 3,
+    "ray_domains_per_requested_point": 1,
+    "point_domains_per_fallback": 1,
+    "direct_zero_attempts_per_round": 8192,
+    "wall_timeout_seconds": 180
+  },
+  "conditions": "Every actually applied native nonzero condition retained; non-NoApplicableRule residuals cause explicit failure.",
+  "early_pair": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/early-generation-summary.json",
+  "binding": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/source-binding.json",
+  "controls": {
+    "old": {
+      "status": "frontier-budget",
+      "history": [
+        {
+          "frontier": 54,
+          "point_fallbacks": 15,
+          "requested": 15,
+          "retired": 3,
+          "round": 0,
+          "rules": 15,
+          "seconds": 0.626375237,
+          "zero_rules": 0
+        },
+        {
+          "frontier": 129,
+          "point_fallbacks": 54,
+          "requested": 57,
+          "retired": 52,
+          "round": 1,
+          "rules": 68,
+          "seconds": 5.089142263,
+          "zero_rules": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "/tmp/three_loop_point_active_history_old",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/history-old-canonical"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 6.0899520590901375,
+        "user_seconds": 5.9681999999999995,
+        "system_seconds": 0.08279299999999999,
+        "peak_child_rss_kib": 64572,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "result": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/history-old-canonical/result.json",
+        "sha256": "b50cfb43641cbee59eb4d0722efc0a34852a90d6bfb0f4a7262ef176a0581775",
+        "bytes": 10217
+      }
+    },
+    "projection": {
+      "status": "frontier-budget",
+      "history": [
+        {
+          "frontier": 54,
+          "point_fallbacks": 15,
+          "requested": 15,
+          "retired": 3,
+          "round": 0,
+          "rules": 15,
+          "seconds": 0.635100647,
+          "zero_rules": 0
+        },
+        {
+          "frontier": 129,
+          "point_fallbacks": 54,
+          "requested": 57,
+          "retired": 52,
+          "round": 1,
+          "rules": 68,
+          "seconds": 4.149301316,
+          "zero_rules": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "/tmp/three_loop_point_active_history_projection",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/history-new-projection"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 5.162200702819973,
+        "user_seconds": 5.04932,
+        "system_seconds": 0.08030699999999999,
+        "peak_child_rss_kib": 64572,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "result": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/history-new-projection/result.json",
+        "sha256": "683e1a30230cf84e7cf94b08971ebe21a539ac63542c48b38475c91af4f04903",
+        "bytes": 10078
+      }
+    }
+  },
+  "round_exact_comparisons": [
+    {
+      "round": 0,
+      "all_non_timing_fields_identical": true,
+      "deferred_basis": 54,
+      "deferred_raw_derivatives": 0,
+      "frontier": 54,
+      "requested": 15,
+      "attempted_exact_points": 15,
+      "conditions_by_control": {
+        "canonical": 19,
+        "projection": 19
+      },
+      "different_non_timing_fields": []
+    },
+    {
+      "round": 1,
+      "all_non_timing_fields_identical": false,
+      "deferred_basis": 126,
+      "deferred_raw_derivatives": 1,
+      "frontier": 129,
+      "requested": 57,
+      "attempted_exact_points": 69,
+      "conditions_by_control": {
+        "canonical": 44,
+        "projection": 39
+      },
+      "different_non_timing_fields": [
+        "conditions_encountered",
+        "deferred_basis_labels",
+        "derivative_rows",
+        "frontier",
+        "next_needed",
+        "original_target_rows",
+        "pending_new_derivative_labels"
+      ]
+    }
+  ],
+  "conclusion": "Both corrected controls stop at the frontier budget after the same two rounds (54 then129 labels). Round0 is identical; round1 target/derivative coefficients, some frontier labels and applied conditions differ. Projection changes the algebraic reduction but does not establish closure or improve the equal bounded stopping result. Program equivalence is not claimed."
+}

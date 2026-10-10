@@ -1,0 +1,14 @@
+{
+  "status": "pass",
+  "new_archives": 105,
+  "original_bytes": 235520123,
+  "archive_bytes": 6168481,
+  "frozen_entries_verified": 311,
+  "frozen_entries_read_through_archives": 105,
+  "frozen_manifest_unchanged": true,
+  "sha256": {
+    "released-native-archives.json": "e153d45204b183f09a69f4f96933d421d6f70bb5f493eaa224c29e3a54e4a885",
+    "verify-released-archives.py": "e46cf2a6ab870efc5559fc7ec0f23be85acd05d50222ba5d5cda22c00678a1e5",
+    "pre-refinement-artifacts.json": "665982a7505d193357e6c970e1bfc40d19ef8c8c42eee3bbf71f5aa0bbd57261"
+  }
+}

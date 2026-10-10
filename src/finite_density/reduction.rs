@@ -200,6 +200,16 @@ pub struct GuardRefinementRecord {
     pub trigger: Vec<i64>,
 }
 
+/// One concrete conditional index face submitted to native discovery. This is
+/// search evidence, not a replacement for a successful native application.
+#[derive(Clone, Debug, Serialize)]
+pub struct ConditionalPointRefinement {
+    /// Zero-based pass within one bounded discovery call.
+    pub pass: usize,
+    pub integral: Vec<i64>,
+    pub allocated_domains: usize,
+}
+
 #[derive(Clone, Debug)]
 pub struct WeightedClosureOptions {
     pub max_rounds: usize,
@@ -228,7 +238,8 @@ pub struct WeightedClosureOptions {
     pub max_reused_rules: usize,
     /// Opt-in residual-focused discovery. Each actual NoApplicableRule leaf
     /// receives this many allocated domain visits, sharing discovery.max_domains
-    /// across refinement passes. Requires requested rays and retained rules.
+    /// across refinement passes. ConditionVanished leaves receive exact-point
+    /// searches from the same allocation. Requires requested rays and retained rules.
     /// Existing rules take precedence so adding rules preserves old rewrites.
     /// Zero keeps the original multi-domain search policy.
     pub max_domains_per_residual: usize,
@@ -294,6 +305,9 @@ pub struct WeightedClosureDiagnostics {
     pub residual_search_requests: usize,
     /// Conservative allocations, which can exceed actual native domain visits.
     pub residual_allocated_domains: usize,
+    /// Exact-point searches for native vanishing guards, separate from finite
+    /// axis subdivisions. Failed searches never install a terminal or zero.
+    pub conditional_point_refinements: Vec<ConditionalPointRefinement>,
     pub native_rule_applications: usize,
     /// Discovery need not solve every native index domain to close the finite
     /// requested target and derivative set. Under residual-focused scheduling,
@@ -750,6 +764,10 @@ fn discover_with_refinement<const N: usize>(
 ) -> Result<GuardedDiscovery<N>> {
     let residual_policy = options.max_domains_per_residual > 0;
     let mut remaining_domains = options.discovery.max_domains;
+    // The source corpus and point-search options are immutable during this
+    // call. An unsuccessful exact-point search cannot gain coverage by being
+    // repeated in every refinement pass.
+    let mut attempted_guard_points = BTreeSet::new();
     let current_terminals = terminals.iter().copied().collect::<BTreeSet<_>>();
     if options.max_direct_zero_attempts > 0 {
         let points = requested
@@ -824,7 +842,7 @@ fn discover_with_refinement<const N: usize>(
     }
     for pass in 0..=options.guard_refinement.max_passes {
         run.cancellation.check()?;
-        let search_requests = if residual_policy {
+        let (search_requests, guard_points) = if residual_policy {
             let program = if let Some(previous) = retained.take() {
                 if previous.native().terminals() == &current_terminals {
                     previous
@@ -839,7 +857,7 @@ fn discover_with_refinement<const N: usize>(
                     .discover(Vec::new(), terminals.iter().copied(), options.discovery)?
                     .program
             };
-            let (residuals, failed) = residual_search_requests(
+            let (residuals, guard_points, failed) = residual_search_requests(
                 &program,
                 requested,
                 deformation,
@@ -857,21 +875,40 @@ fn discover_with_refinement<const N: usize>(
                 });
             }
             *retained = Some(program);
-            diagnostics.residual_search_requests += residuals.len();
-            residuals
+            diagnostics.residual_search_requests += residuals.len() + guard_points.len();
+            (residuals, guard_points)
         } else {
-            requested.clone()
+            (requested.clone(), BTreeSet::new())
         };
         let priority_points = if options.prioritize_requested_indices {
-            search_requests.iter().copied().collect::<Vec<_>>()
+            search_requests
+                .union(&guard_points)
+                .copied()
+                .collect::<Vec<_>>()
         } else {
             Vec::new()
         };
+        let new_guard_points = guard_points
+            .difference(&attempted_guard_points)
+            .copied()
+            .collect::<Vec<_>>();
         let mut submitted = if residual_policy {
-            discovery_domains(&search_requests, &deformation.roles, true, true)?
-                .into_iter()
-                .filter_map(|domain| domain.intersection(deformation.admitted_domain()))
-                .collect::<Vec<_>>()
+            // A coupled exceptional locus (for example a_i=a_j) need not be
+            // representable by a coordinate ray. Its actual failed integer
+            // label is an exact box and must not be broadened back into a ray.
+            let mut points = new_guard_points
+                .iter()
+                .map(|point| {
+                    IndexDomain::new(point.map(IndexBounds::fixed))
+                        .map_err(|error| Error::InvalidInput(error.to_string()))
+                })
+                .collect::<Result<Vec<_>>>()?;
+            points.extend(
+                discovery_domains(&search_requests, &deformation.roles, true, true)?
+                    .into_iter()
+                    .filter_map(|domain| domain.intersection(deformation.admitted_domain())),
+            );
+            points
         } else {
             domains.to_vec()
         };
@@ -887,6 +924,22 @@ fn discover_with_refinement<const N: usize>(
                 .cloned(),
         );
         let mut found = if residual_policy {
+            let mut guard_budget = remaining_domains;
+            for point in &new_guard_points {
+                let allocated = options.max_domains_per_residual.min(guard_budget);
+                if allocated == 0 {
+                    break;
+                }
+                guard_budget -= allocated;
+                attempted_guard_points.insert(*point);
+                diagnostics
+                    .conditional_point_refinements
+                    .push(ConditionalPointRefinement {
+                        pass,
+                        integral: point.to_vec(),
+                        allocated_domains: allocated,
+                    });
+            }
             let allocated = options
                 .max_domains_per_residual
                 .saturating_mul(submitted.len())
@@ -920,8 +973,8 @@ fn discover_with_refinement<const N: usize>(
             }
             if let Some(previous) = retained.take() {
                 found.program = if residual_policy {
-                    // Fill old NoApplicableRule leaves without diverting old
-                    // reduction paths to a different first-applicable rule.
+                    // Fill uncovered leaves, including exact conditional
+                    // faces, without diverting successful old reductions.
                     previous.union_replayed(
                         found.program,
                         terminals.iter().copied(),
@@ -968,12 +1021,23 @@ fn discover_with_refinement<const N: usize>(
                     }))
                     .map_err(|error| Error::Cache(error.to_string()))?,
                 )?;
+                std::fs::write(
+                    directory.join("conditional-point-refinements.json"),
+                    serde_json::to_vec_pretty(&serde_json::json!({
+                        "schema":1,
+                        "scope":"bounded native exact-point searches for ConditionVanished leaves",
+                        "search_does_not_imply_coverage":true,
+                        "refinements":diagnostics.conditional_point_refinements,
+                    }))
+                    .map_err(|error| Error::Cache(error.to_string()))?,
+                )?;
             }
         }
-        if options.guard_refinement.max_passes == 0 {
+        if options.guard_refinement.max_passes == 0 && !residual_policy {
             return Ok(found);
         }
         let mut residuals = BTreeSet::new();
+        let mut conditional_points = BTreeSet::new();
         for target in requested {
             run.cancellation.check()?;
             let reduced = found.program.reduce(*target, options.application)?;
@@ -984,6 +1048,15 @@ fn discover_with_refinement<const N: usize>(
             }
             for residual in reduced.unresolved {
                 deformation.validate_integral(&residual.integral)?;
+                if residual_policy
+                    && matches!(
+                        residual.reason,
+                        GuardedApplicationFailure::ConditionVanished { .. }
+                    )
+                {
+                    conditional_points.insert(residual.integral);
+                    continue;
+                }
                 if residual.reason != GuardedApplicationFailure::NoApplicableRule {
                     // Let the ordinary caller report native application failure.
                     return Ok(found);
@@ -999,7 +1072,16 @@ fn discover_with_refinement<const N: usize>(
                 }
             }
         }
-        let mut added = false;
+        let new_conditional_points = conditional_points
+            .difference(&attempted_guard_points)
+            .next()
+            .is_some();
+        let mut added = new_conditional_points
+            && pass < options.guard_refinement.max_passes
+            && remaining_domains > 0;
+        if new_conditional_points && !added {
+            diagnostics.guard_refinement_budget_exhausted = true;
+        }
         for gap in &found.unresolved {
             if gap.reason != GuardedUnresolvedReason::UnprovedDescent {
                 continue;
@@ -1095,8 +1177,9 @@ fn residual_search_requests<const N: usize>(
     diagnostics: &mut WeightedClosureDiagnostics,
     conditions: &mut BTreeMap<String, Atom>,
     run: &RunContext,
-) -> Result<(BTreeSet<[i64; N]>, bool)> {
+) -> Result<(BTreeSet<[i64; N]>, BTreeSet<[i64; N]>, bool)> {
     let mut residuals = BTreeSet::new();
+    let mut guard_points = BTreeSet::new();
     let mut failed = false;
     for target in requested {
         run.cancellation.check()?;
@@ -1109,16 +1192,24 @@ fn residual_search_requests<const N: usize>(
         }
         for residual in reduced.unresolved {
             deformation.validate_integral(&residual.integral)?;
-            if residual.reason == GuardedApplicationFailure::NoApplicableRule {
-                if !residual.coefficient.is_zero() {
-                    residuals.insert(residual.integral);
+            match residual.reason {
+                GuardedApplicationFailure::NoApplicableRule => {
+                    if !residual.coefficient.is_zero() {
+                        residuals.insert(residual.integral);
+                    }
                 }
-            } else {
-                failed = true;
+                GuardedApplicationFailure::ConditionVanished { .. } => {
+                    // Preserve this as a failed conditional application until
+                    // another original-source proof actually reduces it. Do
+                    // not cancel it with any target or ordinary residual.
+                    guard_points.insert(residual.integral);
+                }
+                _ => failed = true,
             }
         }
     }
-    Ok((residuals, failed))
+    residuals.retain(|point| !guard_points.contains(point));
+    Ok((residuals, guard_points, failed))
 }
 
 /// Pick one narrowest finite axis whose singleton faces have not all already
@@ -1559,6 +1650,243 @@ mod tests {
                 .unresolved
                 .iter()
                 .any(|term| term.reason == GuardedApplicationFailure::WorkLimit)
+        );
+    }
+
+    fn coupled_guard_context(
+        with_point_pivot: bool,
+    ) -> (GuardedContext<2>, FixedShellDeformation<2>) {
+        use crate::finite_density::guarded::{GuardedIdentity, GuardedIdentityTerm};
+        let a = symbol!("conditional_point_a");
+        let b = symbol!("conditional_point_b");
+        let eta = symbol!("conditional_point_eta");
+        let parameter = symbol!("conditional_point_parameter");
+        let roles = [IndexRole::Ordinary; 2];
+        let domain = IndexDomain::new([
+            IndexBounds::new(Some(1), None).unwrap(),
+            IndexBounds::new(Some(1), None).unwrap(),
+        ])
+        .unwrap();
+        // A synthetic native source fixture, not a physical integral claim.
+        // The first original identity yields a ray rule guarded by a-b. At
+        // a=b it cannot solve the target; the second original identity can.
+        let identities = [
+            ("coupled-pivot", Atom::var(a) - Atom::var(b)),
+            ("point-pivot", Atom::var(eta)),
+        ]
+        .into_iter()
+        .take(if with_point_pivot { 2 } else { 1 })
+        .map(|(id, pivot)| GuardedIdentity {
+            id: id.into(),
+            terms: vec![
+                GuardedIdentityTerm {
+                    shift: [0, 0],
+                    coefficient: pivot,
+                },
+                GuardedIdentityTerm {
+                    shift: [-1, 0],
+                    coefficient: Atom::num(-1),
+                },
+            ],
+            domain: domain.clone(),
+            nonzero_conditions: vec![Atom::var(parameter)],
+        })
+        .collect();
+        let context = GuardedContext::new(
+            GuardedMeasureIdentity {
+                measure: "synthetic two-index native proof regression".into(),
+                support: "original source identities only on positive indices".into(),
+                orientation: "formal".into(),
+                normalization: "formal".into(),
+                branch: "parameter!=0; no physical period supplied".into(),
+                deformation: "ordinary index0 derivative".into(),
+            },
+            roles,
+            [a, b],
+            vec![eta, parameter],
+            identities,
+        )
+        .unwrap();
+        let deformation = FixedShellDeformation::new(
+            eta,
+            AuxiliaryConvention::NativeMinusEta,
+            roles,
+            [true, false],
+        )
+        .unwrap();
+        (context, deformation)
+    }
+
+    #[test]
+    fn conditional_index_face_is_resolved_by_bounded_native_point_replay() {
+        let (context, deformation) = coupled_guard_context(true);
+        let target = [2, 2];
+        let options = WeightedClosureOptions {
+            requested_index_rays: true,
+            max_reused_rules: 128,
+            max_domains_per_residual: 1,
+            discovery: GuardedDiscoveryOptions {
+                max_domains: 2,
+                ..Default::default()
+            },
+            guard_refinement: GuardRefinementOptions {
+                max_passes: 1,
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let mut diagnostics = WeightedClosureDiagnostics::default();
+        let mut conditions = BTreeMap::new();
+        let found = discover_with_refinement(
+            &context,
+            &[],
+            &[],
+            &BTreeSet::from([target]),
+            &deformation,
+            &options,
+            &mut Vec::new(),
+            &mut None,
+            &mut BTreeMap::new(),
+            &mut diagnostics,
+            &mut conditions,
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert_eq!(diagnostics.residual_allocated_domains, 2);
+        assert_eq!(diagnostics.conditional_point_refinements.len(), 1);
+        let point = &diagnostics.conditional_point_refinements[0];
+        assert_eq!(point.integral, target);
+        assert_eq!(point.pass, 1);
+        assert_eq!(point.allocated_domains, 1);
+        assert!(found.program.native().terminals().is_empty());
+        assert!(found.unresolved.iter().any(|gap| {
+            gap.reason == GuardedUnresolvedReason::ExceptionalCondition
+                && gap.detail.contains("coupled")
+        }));
+        // Round-trip replay must still validate both original-source proofs.
+        let decoded = context
+            .decode(
+                &found.program.encode(Default::default()).unwrap(),
+                Default::default(),
+            )
+            .unwrap();
+        let reduced = decoded.reduce(target, options.application).unwrap();
+        assert!(reduced.rule_applications > 0);
+        assert!(reduced.unresolved.iter().all(|leaf| {
+            leaf.reason == GuardedApplicationFailure::NoApplicableRule && leaf.integral != target
+        }));
+        assert!(
+            reduced
+                .nonzero_conditions
+                .iter()
+                .any(|condition| { condition.contains_symbol(symbol!("conditional_point_eta")) })
+        );
+        assert!(reduced.nonzero_conditions.iter().any(|condition| {
+            condition.contains_symbol(symbol!("conditional_point_parameter"))
+        }));
+    }
+
+    #[test]
+    fn conditional_index_face_remains_failure_when_refinement_budget_is_exhausted() {
+        let (context, deformation) = coupled_guard_context(true);
+        let target = [2, 2];
+        for (max_passes, max_domains) in [(0, 2), (1, 1)] {
+            let options = WeightedClosureOptions {
+                requested_index_rays: true,
+                max_reused_rules: 128,
+                max_domains_per_residual: 1,
+                discovery: GuardedDiscoveryOptions {
+                    max_domains,
+                    ..Default::default()
+                },
+                guard_refinement: GuardRefinementOptions {
+                    max_passes,
+                    ..Default::default()
+                },
+                ..Default::default()
+            };
+            let mut diagnostics = WeightedClosureDiagnostics::default();
+            let found = discover_with_refinement(
+                &context,
+                &[],
+                &[],
+                &BTreeSet::from([target]),
+                &deformation,
+                &options,
+                &mut Vec::new(),
+                &mut None,
+                &mut BTreeMap::new(),
+                &mut diagnostics,
+                &mut BTreeMap::new(),
+                &RunContext::default(),
+            )
+            .unwrap();
+            assert_eq!(diagnostics.residual_allocated_domains, 1);
+            assert!(diagnostics.conditional_point_refinements.is_empty());
+            assert!(diagnostics.guard_refinement_budget_exhausted);
+            assert!(found.program.native().terminals().is_empty());
+            let failed = found.program.reduce(target, options.application).unwrap();
+            assert!(failed.unresolved.iter().any(|leaf| {
+                leaf.integral == target
+                    && matches!(
+                        leaf.reason,
+                        GuardedApplicationFailure::ConditionVanished { .. }
+                    )
+            }));
+        }
+    }
+
+    #[test]
+    fn unsuccessful_conditional_point_search_is_not_repeated_or_promoted() {
+        let (context, deformation) = coupled_guard_context(false);
+        let target = [2, 2];
+        let options = WeightedClosureOptions {
+            requested_index_rays: true,
+            max_reused_rules: 128,
+            max_domains_per_residual: 1,
+            discovery: GuardedDiscoveryOptions {
+                max_domains: 4,
+                ..Default::default()
+            },
+            guard_refinement: GuardRefinementOptions {
+                max_passes: 3,
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let mut diagnostics = WeightedClosureDiagnostics::default();
+        let found = discover_with_refinement(
+            &context,
+            &[],
+            &[],
+            &BTreeSet::from([target]),
+            &deformation,
+            &options,
+            &mut Vec::new(),
+            &mut None,
+            &mut BTreeMap::new(),
+            &mut diagnostics,
+            &mut BTreeMap::new(),
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert_eq!(diagnostics.conditional_point_refinements.len(), 1);
+        assert_eq!(diagnostics.residual_allocated_domains, 2);
+        assert!(found.program.native().terminals().is_empty());
+        assert!(found.unresolved.iter().any(|gap| {
+            gap.domain == IndexDomain::new(target.map(IndexBounds::fixed)).unwrap()
+        }));
+        assert!(
+            found
+                .program
+                .reduce(target, options.application)
+                .unwrap()
+                .unresolved
+                .iter()
+                .any(|leaf| matches!(
+                    leaf.reason,
+                    GuardedApplicationFailure::ConditionVanished { .. }
+                ))
         );
     }
 

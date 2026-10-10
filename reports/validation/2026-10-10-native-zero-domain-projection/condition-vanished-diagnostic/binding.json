@@ -1,0 +1,25 @@
+{
+  "scope": "Read-only standalone native v2 exact replay diagnostic; no Cargo or production mutation",
+  "files": {
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/probe.rs": {
+      "bytes": 5112,
+      "sha256": "def6cb6d4d99eebb688204e6db4c9835f2e8cda151d63c1be3d3cf59c9e6122c"
+    },
+    "/tmp/zero_projection_condition_probe": {
+      "bytes": 416115056,
+      "sha256": "89d9cac1966d34c3881efddcdb63c4845bb2f6eb7e8f3b63816332bcf469c2fe"
+    },
+    "/tmp/librustred-zero-projection-392075d0c6995fd1.rlib": {
+      "bytes": 435821774,
+      "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json": {
+      "bytes": 436437,
+      "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336"
+    },
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin": {
+      "bytes": 85216,
+      "sha256": "30be79332795bba41963db90f494d13a4f70a8eb6a36dc621da28a268eff159d"
+    }
+  }
+}

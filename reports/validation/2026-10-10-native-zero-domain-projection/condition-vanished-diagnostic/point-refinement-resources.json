@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/tmp/zero_projection_condition_point_probe",
+    "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+    "reports/validation/2026-10-10-native-zero-domain-projection/condition-vanished-diagnostic/point-refinement.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.044301741756498814,
+  "user_seconds": 0.026157999999999997,
+  "system_seconds": 0.017880999999999998,
+  "peak_child_rss_kib": 15388,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

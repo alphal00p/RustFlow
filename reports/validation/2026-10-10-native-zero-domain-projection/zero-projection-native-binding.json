@@ -1,0 +1,23 @@
+{
+  "source_snapshot_sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+  "build_provenance_sha256": "b963e11b4c6b6ca0fa678f159099db4745c2851350bd833730c91f89664651b7",
+  "launcher_sha256": "f2e0e88207d47bf1d69e263acfe4f6e9a4024f45ddb9fbfc8c8b978a812f8fa4",
+  "gate": "native",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/rustred-258a1e04558e72f1",
+    "solver::guarded",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false,
+  "scope": "The fresh native suite ran once after its executable linked; this record binds that exact execution to the subsequently completed shared build.",
+  "early_binding": {
+    "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-native-early-binding.json",
+    "sha256": "68e2fbf38bb6c83befcf00a6651f515e20b36a60fdcf5decb8e4cedf52ec3dc6"
+  },
+  "resources_sha256": "351718bc6064993d3ac23414846e369aa23fb6441dde643e210441ef07bd118a",
+  "launch_sha256": "27d9fe082b814e6c8d8fb3325f8af47743e14d8e1353929d736d2f881a93c855"
+}

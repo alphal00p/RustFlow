@@ -1,0 +1,73 @@
+{
+  "recorded_utc": "2026-10-10T01:34:43.130581+00:00",
+  "scope": "Standalone validation diagnostic, no production source changes; historical source data reconstructed; old proofs not imported; original sources/zero domains/conditions/order retained.",
+  "corrected_probe": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/probe.rs",
+    "sha256": "2b50c30a1bfc9ee65083d76979057af455ffb9276dbd04df5636a46cda1dc89c",
+    "bytes": 18173
+  },
+  "early_probe": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/probe-early-generation.rs",
+    "sha256": "5c1fd8699ac2287ba30093c4394660cd03c5edea4c8b427f18028ffa940d87fe",
+    "bytes": 17329
+  },
+  "source_program": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+    "bytes": 7422642
+  },
+  "libraries": {
+    "canonical": {
+      "library": {
+        "path": "/tmp/librustred-active-zero-canonical-392075d0c6995fd1.rlib",
+        "sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+        "bytes": 436047138
+      },
+      "production_snapshot": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json",
+        "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+        "bytes": 270630
+      },
+      "features": [
+        "native"
+      ]
+    },
+    "projection": {
+      "library": {
+        "path": "/tmp/rustflow-zero-projection-native-library/librustred-392075d0c6995fd1.rlib",
+        "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+        "bytes": 435821774
+      },
+      "production_snapshot": {
+        "path": "reports/validation/2026-10-10-native-zero-domain-projection/zero-projection-source-hashes.json",
+        "sha256": "c8fc2962ba146ca63ca549fe7408358e5931a828da3da4a135a0219afed0a336",
+        "bytes": 436437
+      },
+      "features": [
+        "native"
+      ]
+    }
+  },
+  "compiler_flags": [
+    "--edition=2024",
+    "-C opt-level=0",
+    "-C debuginfo=0"
+  ],
+  "dependencies": [
+    {
+      "path": "target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    {
+      "path": "target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    {
+      "path": "target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    }
+  ]
+}

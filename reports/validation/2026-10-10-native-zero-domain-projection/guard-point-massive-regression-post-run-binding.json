@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "source_snapshot_sha256": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287",
+  "build_provenance_sha256": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca",
+  "executable_sha256": "b31ec216907f22953ff12684e54aff2acd69953b475575bbba021294c8bf3dd4",
+  "unchanged_source_and_executable_verified": true,
+  "resources_sha256": "529d1caedd48dd7bead5ad23c871958577eac8984758faa94d42a8e176feda8b"
+}
