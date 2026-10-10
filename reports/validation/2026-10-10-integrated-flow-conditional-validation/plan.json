@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "scope": "Independent post-save scalar candidate-ODE comparison only; guessed equation remains uncertified",
+  "producer": {
+    "finite-result.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json",
+      "sha256": "d08524bf3bc919a4587a4e341b89be29beba0f6fa8e200c4b17e55b7fa5fe0d6",
+      "bytes": 52995
+    },
+    "endpoint-result.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-result.json",
+      "sha256": "7188447f3493af895ae53d206c7e25e4ec509450c919d1f86b5d85ba13e71053",
+      "bytes": 17930
+    },
+    "finite-run.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-run.json",
+      "sha256": "9ab8725436273a97477ae7560104ba210ec3bf2c90d13322d6bc135bac555743",
+      "bytes": 605
+    },
+    "endpoint-run.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-run.json",
+      "sha256": "99ede1c77f17f77b606ffa2ab370cc5b93040df7458edb25cd6fe84e62501018",
+      "bytes": 623
+    },
+    "finite-run.provenance.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-run.provenance.json",
+      "sha256": "89d29208127cd00121c400d4cff57a1673469f857ea2233e73da24bec2fee79b",
+      "bytes": 1529
+    },
+    "endpoint-run.provenance.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-run.provenance.json",
+      "sha256": "a962bef3b80c108b82cb7ea0fe78f24d37216abd251b80bd1ffe050fc70f6eff",
+      "bytes": 1511
+    },
+    "build.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/build.json",
+      "sha256": "fbd59a7d1dfbfa04aa33834a6af3f455982ce625d18cd4cb4abacd2da857d445",
+      "bytes": 1902
+    },
+    "endpoint-build.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-build.json",
+      "sha256": "d34872e7f00bc0eb349f5f3bb6241dfbc4929184d3539ce529281d1512367de0",
+      "bytes": 1898
+    },
+    "companion.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "bytes": 2983
+    },
+    "scalar-coefficients.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/scalar-coefficients.json",
+      "sha256": "bedb14f125a80fd6d05ded97909382c61ec88b2aa99b1881cd9cc94e85a19f09",
+      "bytes": 6572
+    },
+    "transport.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/transport.rs",
+      "sha256": "ec4fcb108ca1ce950daf1f352fdf66ee54efa1463cc21a9fe086acda2644092d",
+      "bytes": 3738
+    },
+    "endpoint.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint.rs",
+      "sha256": "c3c58df3efcbe933cdac17dbfb73ab39d0a1adae3825ec313a67fb6c181e0358",
+      "bytes": 3844
+    },
+    "derive.py": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/derive.py",
+      "sha256": "cf3b6a9e788bbe9068fe7eefa1223da8be3375f84f4ebfe190877624c0687e93",
+      "bytes": 3350
+    }
+  },
+  "normalization": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/normalization.json",
+    "sha256": "a7417598d2d3be683f185d80a3c60544df76e49b5ad2afd438e9caadda79a99a",
+    "bytes": 2355
+  },
+  "normalization_run": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/run.json",
+    "sha256": "da889d631e8d027f8da659e1339b73c565e5068d14ae2aae19f21cfc4c1e71a9",
+    "bytes": 2797
+  },
+  "normalizer_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/build-01/binding.json",
+    "sha256": "3b032cf0e369b6d17123b840961e4732424692ea8604c2fab9a2c4134bda3265",
+    "bytes": 3712
+  },
+  "producer_state_convention": "state[0] or endpoint[0] is g=eta^(1/4)*F(1/eta); multiply once by native tadpole*compact factor*native measure; no extra eta power",
+  "expected": {
+    "target": 0,
+    "dimension": "13/2",
+    "cut_slots": [
+      0,
+      3
+    ],
+    "finite_grid": {
+      "digits": [
+        30,
+        50
+      ],
+      "boundary_terms": [
+        32,
+        48,
+        64
+      ],
+      "start_eta": [
+        16,
+        32
+      ],
+      "end_eta": [
+        16,
+        8,
+        4,
+        2,
+        1
+      ]
+    },
+    "endpoint_grid": {
+      "digits": [
+        30,
+        50
+      ],
+      "boundary_and_frobenius_terms": [
+        32,
+        48,
+        64
+      ],
+      "start_eta": [
+        16,
+        32
+      ],
+      "match_eta": "1/8"
+    },
+    "extra_endpoint": "finest match1/16 failure retained; not replaced"
+  },
+  "references": {
+    "eta2": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta2-n32-d80/reference.json",
+      "sha256": "aa171bd44d4ac3ac0a45f453ed773da4ec2227cf8aef1f2174fb88a7583a786c",
+      "bytes": 2726
+    },
+    "eta0": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json",
+      "sha256": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+      "bytes": 18298
+    }
+  },
+  "criterion": {
+    "relative": "1e-12",
+    "absolute_zero": "1e-25"
+  },
+  "claims_excluded": [
+    "all-order equation identity",
+    "certified physical endpoint",
+    "raised target result",
+    "Laurent continuation",
+    "full three-loop or four-loop acceptance"
+  ],
+  "moment_coefficients": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/coefficients.json",
+    "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+    "bytes": 204428
+  },
+  "series_contract": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/series-contract.json",
+    "sha256": "d01cdaa604e457b8f533b3c357cfc8ae9cd6f463a651dadca8c28c47c33d2154",
+    "bytes": 1535
+  }
+}

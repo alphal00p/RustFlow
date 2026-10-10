@@ -1,0 +1,27 @@
+{
+  "captured_utc": "2026-10-10T10:43:03.703642+00:00",
+  "command": [
+    "/tmp/rustflow-integrated-candidate-transport-20261010/transport",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/scalar-coefficients.json",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json"
+  ],
+  "argument_files": {
+    "/tmp/rustflow-integrated-candidate-transport-20261010/transport": {
+      "resolved_path": "/tmp/rustflow-integrated-candidate-transport-20261010/transport",
+      "sha256": "e80985e25850e5f6447861097673e94d3a02aba4cfc45eb5747f9d18ba4dc46b",
+      "size_bytes": 1239646080
+    },
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "size_bytes": 2983
+    },
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/scalar-coefficients.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/scalar-coefficients.json",
+      "sha256": "bedb14f125a80fd6d05ded97909382c61ec88b2aa99b1881cd9cc94e85a19f09",
+      "size_bytes": 6572
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

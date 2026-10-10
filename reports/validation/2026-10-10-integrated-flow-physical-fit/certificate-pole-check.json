@@ -1,0 +1,36 @@
+{
+  "status": "fixed_direct_eta_ansatz_obstructed_not_no_identity",
+  "identity_certified": false,
+  "source_sha256": "e9f42003b464ba0fe25a5e8daadfa9bf67e3a24410545835a4b58f6210f346ce",
+  "candidate_sha256": "252a5aa37c821fc0dad292675e7e088cfa4074b9216908cfd00281ed3d00c35a",
+  "kernel": "T = weight(r,c,x) * (eta+V/U^2)^(5/4)/(eta-physical_factor[2]); projective U=1",
+  "allowed_certificate_denominator_power_per_irreducible_factor": 2,
+  "L_over_T_generic_pole_on_K": 4,
+  "div_R_plus_R_dlogT_max_pole_on_K": 3,
+  "witness": {
+    "alpha": [
+      "1/2",
+      "1/2"
+    ],
+    "r": [
+      "1/2",
+      "1/2"
+    ],
+    "cos_angle": "0",
+    "eta": "-1/8",
+    "U": "1",
+    "V": "1/8",
+    "F": "0",
+    "other_denominator": "3/8",
+    "leading_deta4_coefficient": "-217/134784",
+    "falling_kernel_power": "105/256",
+    "nonzero_K_minus4_residue": "-7595/11501568"
+  },
+  "proof": "At a generic smooth K=0 point the highest eta derivative contributes a4*falling(5/4,4)/K^4. Lower derivatives have pole<=3. Its numerator is not identically zero on K=0, witnessed by direct exact evaluation of the actual U/F/V source polynomials. R_i with irreducible K-pole<=2 gives derivative-plus-log-derivative pole<=3. Other distinct allowed factors are generically regular on K=0. Thus this fixed direct-eta rational certificate ansatz cannot certify this candidate.",
+  "scope_limits": [
+    "Does not rule out higher-pole certificates, recurrence telescopers, other representations, boundary-coupled systems or an actual identity.",
+    "No telescoping linear system was run because this necessary condition fails.",
+    "No enlarged ansatz, new fit, endpoint answer or raised-target holdout was used.",
+    "Forcing must be treated as boundary terms; no independently prescribed interior forcing kernel with a compensating K^-4 pole was allowed."
+  ]
+}

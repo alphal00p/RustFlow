@@ -1,0 +1,144 @@
+{
+  "schema": 1,
+  "scope": "rational arithmetic and frozen metadata only; no new coefficient generation, fit, reference or numerical profile",
+  "rational_checks": [
+    {
+      "name": "bulk_absolute",
+      "actual": "1580/6237",
+      "expected": "1580/6237",
+      "pass": true
+    },
+    {
+      "name": "surface_absolute",
+      "actual": "38/99",
+      "expected": "38/99",
+      "pass": true
+    },
+    {
+      "name": "kernel_derivative_absolute",
+      "actual": "3808/14157",
+      "expected": "3808/14157",
+      "pass": true
+    },
+    {
+      "name": "B0_multiplier",
+      "actual": "1987/2772",
+      "expected": "1987/2772",
+      "pass": true
+    },
+    {
+      "name": "B1_multiplier",
+      "actual": "476/1573",
+      "expected": "476/1573",
+      "pass": true
+    },
+    {
+      "name": "signed_leading_raised",
+      "actual": "43/264",
+      "expected": "43/264",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_0",
+      "actual": "1/2",
+      "expected": "1/2",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_1",
+      "actual": "-2/3",
+      "expected": "-2/3",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_2",
+      "actual": "3/4",
+      "expected": "3/4",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_3",
+      "actual": "-4/5",
+      "expected": "-4/5",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_4",
+      "actual": "5/6",
+      "expected": "5/6",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_5",
+      "actual": "-6/7",
+      "expected": "-6/7",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_6",
+      "actual": "7/8",
+      "expected": "7/8",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_7",
+      "actual": "-8/9",
+      "expected": "-8/9",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_8",
+      "actual": "9/10",
+      "expected": "9/10",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_9",
+      "actual": "-10/11",
+      "expected": "-10/11",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_10",
+      "actual": "11/12",
+      "expected": "11/12",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_11",
+      "actual": "-12/13",
+      "expected": "-12/13",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_12",
+      "actual": "13/14",
+      "expected": "13/14",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_13",
+      "actual": "-14/15",
+      "expected": "-14/15",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_14",
+      "actual": "15/16",
+      "expected": "15/16",
+      "pass": true
+    },
+    {
+      "name": "composition_inverse_15",
+      "actual": "-16/17",
+      "expected": "-16/17",
+      "pass": true
+    }
+  ],
+  "conditional_endpoint_metadata": {
+    "successful_profiles": 12,
+    "failed_profiles": 1,
+    "physical_endpoint_accepted": false,
+    "identity_certified": false
+  }
+}

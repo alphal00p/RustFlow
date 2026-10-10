@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "status": "frozen",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "3cebd68ee5e4c66887236e3edc2bc57e3ac1f378c4d577483eeba25ba8adce5b",
+      "bytes": 1976
+    },
+    {
+      "path": "compare.py",
+      "sha256": "8736af137eeaef318500dc6db405d5c356cad52653a850a5913c327d2eab56e4",
+      "bytes": 7775
+    },
+    {
+      "path": "comparison.json",
+      "sha256": "d4c35fbde76b3403401810e49c1409ae1a0b17fa5f5a4a371c9cbc2845aa45af",
+      "bytes": 11597
+    },
+    {
+      "path": "physical-predictions.json",
+      "sha256": "65931c77fcf8e3a51958b635226d4b53c06d670dd671aeaf27e866e126f75620",
+      "bytes": 27768
+    },
+    {
+      "path": "plan.json",
+      "sha256": "d26ecb1d5069ba5f27c4c75f4990370ad8f8dd95bfde7c89ff2c7db69824d174",
+      "bytes": 6671
+    },
+    {
+      "path": "producer-freeze/build.json",
+      "sha256": "fbd59a7d1dfbfa04aa33834a6af3f455982ce625d18cd4cb4abacd2da857d445",
+      "bytes": 1902
+    },
+    {
+      "path": "producer-freeze/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "bytes": 2983
+    },
+    {
+      "path": "producer-freeze/derive.py",
+      "sha256": "cf3b6a9e788bbe9068fe7eefa1223da8be3375f84f4ebfe190877624c0687e93",
+      "bytes": 3350
+    },
+    {
+      "path": "producer-freeze/endpoint-build.json",
+      "sha256": "d34872e7f00bc0eb349f5f3bb6241dfbc4929184d3539ce529281d1512367de0",
+      "bytes": 1898
+    },
+    {
+      "path": "producer-freeze/endpoint-result.json",
+      "sha256": "7188447f3493af895ae53d206c7e25e4ec509450c919d1f86b5d85ba13e71053",
+      "bytes": 17930
+    },
+    {
+      "path": "producer-freeze/endpoint-run.json",
+      "sha256": "99ede1c77f17f77b606ffa2ab370cc5b93040df7458edb25cd6fe84e62501018",
+      "bytes": 623
+    },
+    {
+      "path": "producer-freeze/endpoint-run.provenance.json",
+      "sha256": "a962bef3b80c108b82cb7ea0fe78f24d37216abd251b80bd1ffe050fc70f6eff",
+      "bytes": 1511
+    },
+    {
+      "path": "producer-freeze/endpoint.rs",
+      "sha256": "c3c58df3efcbe933cdac17dbfb73ab39d0a1adae3825ec313a67fb6c181e0358",
+      "bytes": 3844
+    },
+    {
+      "path": "producer-freeze/finite-result.json",
+      "sha256": "d08524bf3bc919a4587a4e341b89be29beba0f6fa8e200c4b17e55b7fa5fe0d6",
+      "bytes": 52995
+    },
+    {
+      "path": "producer-freeze/finite-run.json",
+      "sha256": "9ab8725436273a97477ae7560104ba210ec3bf2c90d13322d6bc135bac555743",
+      "bytes": 605
+    },
+    {
+      "path": "producer-freeze/finite-run.provenance.json",
+      "sha256": "89d29208127cd00121c400d4cff57a1673469f857ea2233e73da24bec2fee79b",
+      "bytes": 1529
+    },
+    {
+      "path": "producer-freeze/scalar-coefficients.json",
+      "sha256": "bedb14f125a80fd6d05ded97909382c61ec88b2aa99b1881cd9cc94e85a19f09",
+      "bytes": 6572
+    },
+    {
+      "path": "producer-freeze/transport.rs",
+      "sha256": "ec4fcb108ca1ce950daf1f352fdf66ee54efa1463cc21a9fe086acda2644092d",
+      "bytes": 3738
+    },
+    {
+      "path": "provenance-review.json",
+      "sha256": "1df6be637479b257d40b65001b385d9127d6e42923062ff9e70bddd463325bc7",
+      "bytes": 3638
+    },
+    {
+      "path": "summary.json",
+      "sha256": "a2761d253e8171537d2b489fb81fdf28d63ef54edd553beac6e5a88cedac68c2",
+      "bytes": 2058
+    }
+  ],
+  "file_count": 20,
+  "total_bytes": 160963
+}

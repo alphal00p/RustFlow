@@ -1,0 +1,9 @@
+{
+  "exit_code": 1,
+  "stage": "historical reference metadata authentication",
+  "reason": "Legacy reference records integer zero input counters, not boolean false. Strict boolean identity rejected before numerical comparisons.",
+  "source_sha256": "e11fd7e35390fd010c73704821f09d474b4aa77646e54d22b864ca821cbbd062",
+  "predictions_unchanged": true,
+  "numerical_comparison_output_written": false,
+  "correction": "Require exact int type and zero, retaining normalization equality."
+}

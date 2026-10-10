@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "status": "frozen_complete_report_only",
+  "captured_utc": "2026-10-10T10:49:45.607329+00:00",
+  "root": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit",
+  "scope": "Finite-data scalar candidate, bounded raised-target miss, conditional ordinary transport only; no physical identity or endpoint acceptance",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "a1c3af846e14838af7c3ecf16a05d813dd7372cf3fcd97c066ab7aa7b8b06ec2",
+      "bytes": 3710
+    },
+    {
+      "path": "all-candidates-freeze.json",
+      "sha256": "a9ef2b6dc941b58e431a199f861a64692000a9bc7fb4ab8124077ae1191dad53",
+      "bytes": 2538
+    },
+    {
+      "path": "certificate-pole-check.json",
+      "sha256": "a11bbc6320a82680c4b72929de5d284dec230c208ad8d39f6c6ca41aab721bf2",
+      "bytes": 1852
+    },
+    {
+      "path": "certificate-pole-check.py",
+      "sha256": "7dea5f67c92254fff12721b9c8cee8fcfebe655444e45a99b530d149de0db5fd",
+      "bytes": 3684
+    },
+    {
+      "path": "input-binding.json",
+      "sha256": "3dcc1470c5b4a3f82792261dfd4ef24dc5038761b5d6ec8bb7b83cf88abe698b",
+      "bytes": 1646
+    },
+    {
+      "path": "summary.json",
+      "sha256": "e99ec9e5473eb23739bf22cea40b3bfb86607ef05f1ba877fb5ae0ca5e8c0b87",
+      "bytes": 6456
+    },
+    {
+      "path": "target-0/digest-resources.json",
+      "sha256": "91ff9a87dfb27d095953602c4fbf165e2a6ce108f435e8de216767c52344fb5f",
+      "bytes": 321
+    },
+    {
+      "path": "target-0/digest.log",
+      "sha256": "79b1cccf79620cad2f12cf21ce1ba15dd9fed612220e955025a04181575ef158",
+      "bytes": 65
+    },
+    {
+      "path": "target-0/fit-recurrence-resources.json",
+      "sha256": "ecf01b5e6188a53c4b05e9bf974835faa8ac1e96e2ee971b96219f0ed1ba8199",
+      "bytes": 483
+    },
+    {
+      "path": "target-0/fit-recurrence.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target-0/fit-theta-resources.json",
+      "sha256": "38655b106172653a5f0ed52e8d58fc630c7b35284f2d4a4c82cfe6f669f9e9ba",
+      "bytes": 466
+    },
+    {
+      "path": "target-0/fit-theta.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target-0/heldout-binding-after-freeze.json",
+      "sha256": "8847f1086475685866f5fe8142fb9aa199f4ccc3823f771ce99c008ea2925035",
+      "bytes": 368
+    },
+    {
+      "path": "target-0/holdout-result.json",
+      "sha256": "d4cd7a406410ec0402bade5dc3fcffb524df29b56e2938d092f58d769c89a114",
+      "bytes": 4658
+    },
+    {
+      "path": "target-0/recurrence-candidate.json",
+      "sha256": "252a5aa37c821fc0dad292675e7e088cfa4074b9216908cfd00281ed3d00c35a",
+      "bytes": 2969
+    },
+    {
+      "path": "target-0/theta-candidate.json",
+      "sha256": "4f3c82011162621b7116e93305a398443c4f504ffcff5462747e1552512c0005",
+      "bytes": 3231
+    },
+    {
+      "path": "target-0/validate-resources.json",
+      "sha256": "3bbd59c93951ad104ceba699585d7faec6bcc7dbcd8efefd06d9dc844148c8bb",
+      "bytes": 766
+    },
+    {
+      "path": "target-0/validate.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target-1/digest-resources.json",
+      "sha256": "9d226ef7f9295b27d5d9cb132b163f44888d124a0d252a623486624d7ac4fbf2",
+      "bytes": 340
+    },
+    {
+      "path": "target-1/digest.log",
+      "sha256": "b90b1d893936de5426a00fdd4e7cccce9e02875cf191c7f454a433a34e075ae9",
+      "bytes": 65
+    },
+    {
+      "path": "target-1/fit-recurrence-resources.json",
+      "sha256": "74fc945c2b248309de79c491a35e02f6a7221a24a8810a745e71db4dfe8fed25",
+      "bytes": 471
+    },
+    {
+      "path": "target-1/fit-recurrence.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target-1/fit-theta-resources.json",
+      "sha256": "09d4ad46f5488e72fba995988474b79521de5198445b1fb60b121d1209453072",
+      "bytes": 468
+    },
+    {
+      "path": "target-1/fit-theta.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target-1/recurrence-candidate.json",
+      "sha256": "b0b2291beb49c7baae2e3b80ff20a0c0ce65c0b2a110b262503d939437eb9eee",
+      "bytes": 3231
+    },
+    {
+      "path": "target-1/theta-candidate.json",
+      "sha256": "f7d5b829ffb9efad047868b43164672cd736d5db8fe90123254cacbc2d6806b8",
+      "bytes": 3231
+    }
+  ],
+  "files_count": 26,
+  "total_bytes": 41019
+}

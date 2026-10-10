@@ -1,0 +1,115 @@
+{
+  "schema": "candidate-forced-companion.v1",
+  "identity_certified": false,
+  "target_index": 0,
+  "q": 1,
+  "beta": "-1/4",
+  "recurrence_order": 2,
+  "differential_order": 4,
+  "p_n_ascending": [
+    [
+      "1",
+      "-118/39",
+      "-3784/1053",
+      "-32/27",
+      "-128/1053"
+    ],
+    [
+      "-1573/54",
+      "-2794/81",
+      "-5002/351",
+      "-32/13",
+      "-160/1053"
+    ],
+    [
+      "-1430/81",
+      "-424/27",
+      "-5120/1053",
+      "-224/351",
+      "-32/1053"
+    ]
+  ],
+  "L_beta_theta_rows_t_ascending": [
+    [
+      "-1805/936",
+      "-3610/351",
+      "0"
+    ],
+    [
+      "-152/39",
+      "-17917/1053",
+      "-5320/1053"
+    ],
+    [
+      "-2180/1053",
+      "-3238/351",
+      "-4768/1053"
+    ],
+    [
+      "-448/1053",
+      "-704/351",
+      "-1376/1053"
+    ],
+    [
+      "-32/1053",
+      "-160/1053",
+      "-128/1053"
+    ]
+  ],
+  "startup_B_t_ascending": [
+    "-14/117",
+    "0"
+  ],
+  "equation": "sum_k A_k(t) theta_t^k g(t) = t^beta B(t), g=t^beta F, theta_t=t*d/dt",
+  "conversion_checked_coefficients": 64,
+  "matrix_eta": [
+    [
+      "0",
+      "-1/eta",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "-1/eta",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "-1/eta",
+      "0"
+    ],
+    [
+      "((-1805/936)*(1/eta)^0+(-3610/351)*(1/eta)^1)/(eta*((-32/1053)*(1/eta)^0+(-160/1053)*(1/eta)^1+(-128/1053)*(1/eta)^2))",
+      "((-152/39)*(1/eta)^0+(-17917/1053)*(1/eta)^1+(-5320/1053)*(1/eta)^2)/(eta*((-32/1053)*(1/eta)^0+(-160/1053)*(1/eta)^1+(-128/1053)*(1/eta)^2))",
+      "((-2180/1053)*(1/eta)^0+(-3238/351)*(1/eta)^1+(-4768/1053)*(1/eta)^2)/(eta*((-32/1053)*(1/eta)^0+(-160/1053)*(1/eta)^1+(-128/1053)*(1/eta)^2))",
+      "((-448/1053)*(1/eta)^0+(-704/351)*(1/eta)^1+(-1376/1053)*(1/eta)^2)/(eta*((-32/1053)*(1/eta)^0+(-160/1053)*(1/eta)^1+(-128/1053)*(1/eta)^2))",
+      "-((-14/117)*(1/eta)^0)/(eta*((-32/1053)*(1/eta)^0+(-160/1053)*(1/eta)^1+(-128/1053)*(1/eta)^2))"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "0",
+      "-(-1/4)/eta"
+    ]
+  ],
+  "highest_theta_coefficient": "-32/1053*(1+t)*(1+4*t)",
+  "leading_eta_derivative_coefficient": "-32/1053*eta^2*(eta+1)*(eta+4)",
+  "ordinary_singularities": [
+    "0",
+    "-1",
+    "-4"
+  ],
+  "normalization": "Native hard master and compact angular normalization remain factored; output is g only",
+  "inputs": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json": "252a5aa37c821fc0dad292675e7e088cfa4074b9216908cfd00281ed3d00c35a",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json": "378b0f1ad6df009f43f59348faaa9a828caa7d83d625b93a465fcb849fc8d1a9",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-holdout.json": "6bcb2687e49c475c1a7c6b99b48cdbac13ab4730dde0bba9df05aba994b42740"
+  }
+}

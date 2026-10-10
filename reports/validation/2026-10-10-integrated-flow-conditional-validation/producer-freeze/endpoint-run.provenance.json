@@ -1,0 +1,27 @@
+{
+  "captured_utc": "2026-10-10T10:46:26.474002+00:00",
+  "command": [
+    "/tmp/rustflow-integrated-candidate-transport-20261010/endpoint",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-result.json"
+  ],
+  "argument_files": {
+    "/tmp/rustflow-integrated-candidate-transport-20261010/endpoint": {
+      "resolved_path": "/tmp/rustflow-integrated-candidate-transport-20261010/endpoint",
+      "sha256": "d3d973e6fc8532327f15655cc8e88c04b1e87c3e6e8642b375e23d1c0a49c607",
+      "size_bytes": 1239666232
+    },
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "size_bytes": 2983
+    },
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json",
+      "sha256": "d08524bf3bc919a4587a4e341b89be29beba0f6fa8e200c4b17e55b7fa5fe0d6",
+      "size_bytes": 52995
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

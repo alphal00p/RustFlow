@@ -1,0 +1,940 @@
+{
+  "schema": 1,
+  "scope": "Normalized saved scalar candidate predictions; equation remains unproved",
+  "inputs": {
+    "plan": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-validation/plan.json",
+      "sha256": "d26ecb1d5069ba5f27c4c75f4990370ad8f8dd95bfde7c89ff2c7db69824d174",
+      "bytes": 6671
+    },
+    "script": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-validation/compare.py",
+      "sha256": "8736af137eeaef318500dc6db405d5c356cad52653a850a5913c327d2eab56e4",
+      "bytes": 7775
+    },
+    "finite-result.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json",
+      "sha256": "d08524bf3bc919a4587a4e341b89be29beba0f6fa8e200c4b17e55b7fa5fe0d6",
+      "bytes": 52995
+    },
+    "endpoint-result.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-result.json",
+      "sha256": "7188447f3493af895ae53d206c7e25e4ec509450c919d1f86b5d85ba13e71053",
+      "bytes": 17930
+    },
+    "finite-run.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-run.json",
+      "sha256": "9ab8725436273a97477ae7560104ba210ec3bf2c90d13322d6bc135bac555743",
+      "bytes": 605
+    },
+    "endpoint-run.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-run.json",
+      "sha256": "99ede1c77f17f77b606ffa2ab370cc5b93040df7458edb25cd6fe84e62501018",
+      "bytes": 623
+    },
+    "finite-run.provenance.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-run.provenance.json",
+      "sha256": "89d29208127cd00121c400d4cff57a1673469f857ea2233e73da24bec2fee79b",
+      "bytes": 1529
+    },
+    "endpoint-run.provenance.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-run.provenance.json",
+      "sha256": "a962bef3b80c108b82cb7ea0fe78f24d37216abd251b80bd1ffe050fc70f6eff",
+      "bytes": 1511
+    },
+    "build.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/build.json",
+      "sha256": "fbd59a7d1dfbfa04aa33834a6af3f455982ce625d18cd4cb4abacd2da857d445",
+      "bytes": 1902
+    },
+    "endpoint-build.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-build.json",
+      "sha256": "d34872e7f00bc0eb349f5f3bb6241dfbc4929184d3539ce529281d1512367de0",
+      "bytes": 1898
+    },
+    "companion.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "bytes": 2983
+    },
+    "scalar-coefficients.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/scalar-coefficients.json",
+      "sha256": "bedb14f125a80fd6d05ded97909382c61ec88b2aa99b1881cd9cc94e85a19f09",
+      "bytes": 6572
+    },
+    "transport.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/transport.rs",
+      "sha256": "ec4fcb108ca1ce950daf1f352fdf66ee54efa1463cc21a9fe086acda2644092d",
+      "bytes": 3738
+    },
+    "endpoint.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint.rs",
+      "sha256": "c3c58df3efcbe933cdac17dbfb73ab39d0a1adae3825ec313a67fb6c181e0358",
+      "bytes": 3844
+    },
+    "derive.py": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/derive.py",
+      "sha256": "cf3b6a9e788bbe9068fe7eefa1223da8be3375f84f4ebfe190877624c0687e93",
+      "bytes": 3350
+    },
+    "normalization": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/normalization.json",
+      "sha256": "a7417598d2d3be683f185d80a3c60544df76e49b5ad2afd438e9caadda79a99a",
+      "bytes": 2355
+    },
+    "normalization_run": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/run.json",
+      "sha256": "da889d631e8d027f8da659e1339b73c565e5068d14ae2aae19f21cfc4c1e71a9",
+      "bytes": 2797
+    },
+    "normalizer_build": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/build-01/binding.json",
+      "sha256": "3b032cf0e369b6d17123b840961e4732424692ea8604c2fab9a2c4134bda3265",
+      "bytes": 3712
+    },
+    "moment_coefficients": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/coefficients.json",
+      "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+      "bytes": 204428
+    },
+    "series_contract": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/series-contract.json",
+      "sha256": "d01cdaa604e457b8f533b3c357cfc8ae9cd6f463a651dadca8c28c47c33d2154",
+      "bytes": 1535
+    }
+  },
+  "rows": [
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785165335968905553456355946025570942953229952684571868166931053998349",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870154876612290075387304957471014269020624786053185163250861512490300356657",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909445911712061698130587344762596050251601622660075457472276895443506906643",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672528912617622554646873193335241487150035505465723305662799868671862649889",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279367514196486933769088335523990290287689428216826237875810119970340178",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002641415502225855533265422366647775229967962049599835227292999",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351405413469498359634757926657612789444784631574523262550454024",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468133458517571210007659339370892783819418190404755502958474807",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671432430606944226068568050386681717278864025084924843770403688",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463998989907567941763928905655098663002799132615561019231860650236",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002700023011634565668581755328706273816568677224157568573279079",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351441256664480093915354826372670286708616367705975239369991949",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468143590567023765682260110324021359695806248471501452386418495",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671436056504088649258471193728094009402427121431165931704962362",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463998991610187821654085082288010414979614376337711328976346479132",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002700055206238866305082695340294027413346854379210159633891567",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351468720694419339042669668778844911986519777878812933074433033",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468173865601430990687993239184094595713456860460729182277019066",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671455290788171912804794166553173096149417630766356429519600439",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463999002445764846587463268575743584602072263989853185768883213747",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002700055206238864060786567834126534612866451369347834956508834",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351468720694414854068417725277454071753543587727757376858703516",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468173865601426004673437425099270199573076539424974429338786489",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671455290788168739809249794487933602277252885568405847082337614",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463999002445764844799263015269147921049371067512766312927684204196",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "16",
+      "value": {
+        "re": "0.000000000033910540869265431274778583900270005520623886643186429330409882401803041938436425210133386",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351468720694419339181745323909384898058969396902563806756541331",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468173865601430990777022756826062309153079072213087270927396622",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671455290788171912855193402668229922942022293623681967152929251",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "1",
+      "value": {
+        "re": "0.000000000010499516984057773627944246399900244576484658749091489768258820200896731191267032033618682",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785165335968807438189916634509180703181229675998248282798198043142207",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870154876612290075309170044305476054027343804450462612004417269202706634155",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909445911712061698070688088066150928175160060776899173343394660381576104213",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672528912617622554603167880430581356008835510335693998953324887116152360306",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279367514196486903390248011317144558030556796645003302426712616931544984",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002641317386959416221749031347651251355573114238560289663071622",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351405335334585194096542932795545410381656876899938824062506945",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468133398618314513562537262278197635663796556399520827850651587",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671432386901631321408436908518038673862728243227481567991351816",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463998989877189101439722059922325077854592051946187781374354364346",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002699924896368126357065365177029042506248559011901999015266907",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351441178529566928377139833013418526563497770398163991496681935",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468143530667767069237138033913268681379205856566070989160110198",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671436012798775744598340052508842915602341765824597992297794925",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463998991579808981329878236555725929094663509727251963958693303917",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002699957090972426993566304197253494702208079538522965866008803",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351468642559506173504454674817246347598906072593142007846629501",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468173805702174294242871162011696084524699728014939692058052464",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671455247082859008144663024675682840073954052856986546730005256",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463999002415386006263256422842930302660718752436898057391610865083",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "16",
+      "value": {
+        "re": "0.000000000033910540869265431274778583900269995709097242474927017769812635155100709941769431471266156",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351468642559501688530202731839399177735228422732797857807745613",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468173805702169308228315348588178784735636487228189384053298982",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "2",
+      "value": {
+        "re": "0.0000000000151054046250206672529045761671455247082855835149118653243154675732930948031914571311929682",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463999002415386004475056169536857673366039752250815612047624300087",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "16",
+      "value": {
+        "re": "0.0000000000339105408692654312747785839002699957090972427120347902224981650845478470988238951741818971",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "8",
+      "value": {
+        "re": "0.0000000000270049428837394870155070481351468642559506173643530330126368953639682390590335627210394741",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "4",
+      "value": {
+        "re": "0.0000000000207023459850645909446121956468173805702174294331900679863271895849480343381688238278896164",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "2",
+      "value": {
+        "re": "0.000000000015105404625020667252904576167145524708285900819506226086491132103047045830881749449951146",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "finite",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "eta": "1",
+      "value": {
+        "re": "0.0000000000104995169840577736279442463999002415386006263284069164929616071039918157594493714337617178",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "frobenius_terms": 32,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741437397001380842557118757658857620282818533402843701464962647052179578",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 30,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "frobenius_terms": 32,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.0000000000020788792020813522674153031538093934572167057300270726116472344703639114442937609448240535",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "frobenius_terms": 48,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380941319516764564044285203828338860157447251300740162693014634",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 30,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "frobenius_terms": 48,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380954756292198034421358413052623374095385851010401190128949699",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "frobenius_terms": 64,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380954756292195816645520439301981280084592394429948502613287938",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 30,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "frobenius_terms": 64,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380954756292198034455339082126836278411640232833712493795080649",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 16,
+      "frobenius_terms": 32,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741437397001380782407742906143566084047602861387500179147463714872099886",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 50,
+      "boundary_terms": 32,
+      "start_eta": 32,
+      "frobenius_terms": 32,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380939285572294721487415723693557647596724985495595615945701363",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 16,
+      "frobenius_terms": 48,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380941259367388712528993667678455537246961177065283350808919338",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 50,
+      "boundary_terms": 48,
+      "start_eta": 32,
+      "frobenius_terms": 48,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380954696142822182906066875506437964177653229781920365709234168",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 16,
+      "frobenius_terms": 64,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.0000000000020788792020813522674153031538095469614281996513022890315084194311202539321648428429184095",
+        "im": "0.0"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "digits": 50,
+      "boundary_terms": 64,
+      "start_eta": 32,
+      "frobenius_terms": 64,
+      "match_eta": "1/8",
+      "eta": "0",
+      "value": {
+        "re": "0.00000000000207887920208135226741530315380954696142822182940047544677049365075194154907085379162691575",
+        "im": "0.0"
+      }
+    }
+  ],
+  "failed_extra_endpoint_match": [
+    {
+      "boundary_terms": 64,
+      "digits": 50,
+      "frobenius_terms": 64,
+      "match_eta": "1/16",
+      "result": {
+        "error": "Limit(\"Taylor continuation step budget exhausted (29 accepted, 59 rejected, 88 predicates) at (8.1236740489994165051679084090956018139481809225274733647634787681031364094e-2+0i) toward (6.2500000000000000000000000000000000000000000000000000000000000000000000000e-2+0i)\")"
+      },
+      "seconds": 0.225063563,
+      "start_eta": 32,
+      "working_digits": 70
+    }
+  ],
+  "reference_reads": 0,
+  "identity_certified": false
+}

@@ -1,0 +1,53 @@
+{
+  "frozen_utc": "2026-10-10T10:36:08.948778+00:00",
+  "targets": [
+    {
+      "id": 0,
+      "family": "recurrence",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/theta-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        },
+        {
+          "family": "recurrence",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+      "candidate_sha256": "252a5aa37c821fc0dad292675e7e088cfa4074b9216908cfd00281ed3d00c35a",
+      "candidate_blake3": "ac8376f9b005e58968aa6053d6c621c05ff9ff07993ece5c2818abf6beb84577",
+      "training_sha256": "378b0f1ad6df009f43f59348faaa9a828caa7d83d625b93a465fcb849fc8d1a9",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    },
+    {
+      "id": 1,
+      "family": "recurrence",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/theta-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        },
+        {
+          "family": "recurrence",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/recurrence-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/recurrence-candidate.json",
+      "candidate_sha256": "b0b2291beb49c7baae2e3b80ff20a0c0ce65c0b2a110b262503d939437eb9eee",
+      "candidate_blake3": "ca4fbafeafd2bbb2e7d5fa6a436ad2003d1e10db6221809bf9ea9a7e4e01d8b7",
+      "training_sha256": "7164162fd2462dd2d4d6428b361bae5fbf2854abf254fd6e34e6c0f818b46189",
+      "candidate_present": false,
+      "training_status": "no_candidate_within_fixed_shapes"
+    }
+  ],
+  "heldout_access_started": false,
+  "structure": "separate operators/recurrences; no cross-target common annihilator; recurrence forcing/beta conjugation retained; future certified companion may be block diagonal",
+  "selection_from_training_only": true,
+  "identity_certified": false
+}

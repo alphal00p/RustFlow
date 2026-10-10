@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "status": "frozen",
+  "scope": "same-series finite-eta fallback and explicit unresolved endpoint",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "764206e6b2c629cad227442b385845675f0ce739fc28acc056b0d07bb822302a",
+      "bytes": 2326
+    },
+    {
+      "path": "bound-plan.json",
+      "sha256": "f2f9bb3fb235a06177218b29627aa0dddd4aa5d4615c4aa3e4259c0ccf6f1706",
+      "bytes": 2028
+    },
+    {
+      "path": "bounds.md",
+      "sha256": "ba923d2c403b847c948516187b743ad107a59f182ecb0881b1622ec94a5dab60",
+      "bytes": 3634
+    },
+    {
+      "path": "compare.py",
+      "sha256": "8c6fce185d626042dd6c51acb03536016a89ff9e0d228c6671f6afeaed477609",
+      "bytes": 5144
+    },
+    {
+      "path": "comparison-attempt00.json",
+      "sha256": "6d9b7519032ae02251f714463b44fb44c928a6cb5ebeea94f6d9b86baf63f685",
+      "bytes": 485
+    },
+    {
+      "path": "comparison.json",
+      "sha256": "fd5380a07c0f06b53b76c7c1ec7ceb37ba7fc84c488fce5f9a0165fddb865478",
+      "bytes": 49763
+    },
+    {
+      "path": "execution-provenance.json",
+      "sha256": "6a3e1b3580df41d8d3950b9d7417a46fc34234fe4bed506a235b41b67c1895ef",
+      "bytes": 2326
+    },
+    {
+      "path": "historical/compare-attempt00.py",
+      "sha256": "e11fd7e35390fd010c73704821f09d474b4aa77646e54d22b864ca821cbbd062",
+      "bytes": 5060
+    },
+    {
+      "path": "plan.json",
+      "sha256": "014cb66ecbe9884d40bc910b1bcf87afe173485c5143e6908d831403b9ec47e9",
+      "bytes": 3853
+    },
+    {
+      "path": "predict.py",
+      "sha256": "959029a0a8d041cff888ea1b22d1ac570f521e9cbdf706561d9cd9d5838aaaed",
+      "bytes": 6645
+    },
+    {
+      "path": "prediction-launch.json",
+      "sha256": "e550b870b3ad7c7f36161691cd6caa0254f89f7baea1dd7b77d2980600cfae5a",
+      "bytes": 1250
+    },
+    {
+      "path": "prediction-run.json",
+      "sha256": "a37d80d704bb7136bb3fc4c19b557ffb4a3232b58920f8f81d59260ae4cc4a5e",
+      "bytes": 1579
+    },
+    {
+      "path": "prediction.log",
+      "sha256": "66421ac0bd64a1bb6f7cbf4c24442333c39d08574c6d52a12c2e31eacd77d1fd",
+      "bytes": 327
+    },
+    {
+      "path": "predictions.json",
+      "sha256": "8705426a44b5c7fdae6c2591b0a3a3b207f8b56ce619a9542166d358d8a068b3",
+      "bytes": 173703
+    },
+    {
+      "path": "proof-inputs/raised-norm.md",
+      "sha256": "cb0700f2b4038238cbe8788b072f61bfb227097082f9e0b0446ebf1702c60f04",
+      "bytes": 2777
+    },
+    {
+      "path": "raised-bound-plan.json",
+      "sha256": "04d954038acafa713020efa94d2e68ebadbfb9fde45fef56fb740e330cd727ff",
+      "bytes": 1416
+    },
+    {
+      "path": "raised-bound.json",
+      "sha256": "573d58ad17095b03bf2fbb349d8dad752c05226e4a065c57a3e1e5e53c7e1863",
+      "bytes": 54288
+    },
+    {
+      "path": "raised-bound.py",
+      "sha256": "43f12ba6a55761ab1400d6ea69e4fcd1f7638e6e8df192f6f520894047719839",
+      "bytes": 3408
+    },
+    {
+      "path": "run-predict.py",
+      "sha256": "77e8bf0eeb93d02d454123ff5cac0b4f7cd85937f44a75fc7577978d537d4731",
+      "bytes": 1320
+    },
+    {
+      "path": "scalar-bound.json",
+      "sha256": "13f24bcef29f4022394afd593bcef3dd14d409ec91d6a1db2abca246c283198c",
+      "bytes": 44734
+    },
+    {
+      "path": "scalar-bound.py",
+      "sha256": "d95a2cb838b3d6e5ed288de814c6597afcb049e0065a5c55058ac975edb85ac3",
+      "bytes": 3415
+    },
+    {
+      "path": "summary.json",
+      "sha256": "1ad6c849cf1a59118f1080dca914a596ab64c8b13a22904b74949222af3dd860",
+      "bytes": 15214
+    },
+    {
+      "path": "transformed-coefficients.json",
+      "sha256": "5138ebab854c6166a240d1752512a56bdd1f2eb0f9a837da34b4879d6d5c35c0",
+      "bytes": 23672
+    }
+  ],
+  "file_count": 23,
+  "total_bytes": 408367
+}

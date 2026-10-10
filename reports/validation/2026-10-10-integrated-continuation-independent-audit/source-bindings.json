@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "status": "exact-read-only-bindings",
+  "files": [
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/artifact-manifest.json",
+      "sha256": "f5c8bd5944636fb436f47d9833104c517342aba1437770010f1ab854a787e053",
+      "bytes": 13656
+    },
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/scalar-source-kernel.json",
+      "sha256": "e9f42003b464ba0fe25a5e8daadfa9bf67e3a24410545835a4b58f6210f346ce",
+      "bytes": 4375
+    },
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/grading.md",
+      "sha256": "db13f944a5c2045d2e8fab933349e763a0aef6e09c6051e999b1a51688fdaaa3",
+      "bytes": 1837
+    },
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/convergent-germ.md",
+      "sha256": "758a006abf1b9d4205769741c46179d14c81052b430d844d0b60be38319aa543",
+      "bytes": 4252
+    },
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/sharp-germ-bound.md",
+      "sha256": "025704dad6a0c43ad273390903e9b8dbbca026b8b1e2b2fdc09715e3ed85eda7",
+      "bytes": 2113
+    },
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/generation-summary.json",
+      "sha256": "23e2d70c0080a8a883251dc3681ac66cb33589a672584d9dbf264dd4e6084f5a",
+      "bytes": 6678
+    },
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/generate.rs",
+      "sha256": "241112d1f966ba107b576d6d1ec541fd7c7ef7693e48f3b18b20313e3f7a6292",
+      "bytes": 14081
+    },
+    {
+      "group": "producer",
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-source/compact_exact.rs",
+      "sha256": "ac64728926612cf7af9a5cd3db4d168d8896d1653b1781304f70bd8aacc5dcf2",
+      "bytes": 2619
+    },
+    {
+      "group": "continuation",
+      "path": "reports/validation/2026-10-10-integrated-moment-continuation/plan.json",
+      "sha256": "014cb66ecbe9884d40bc910b1bcf87afe173485c5143e6908d831403b9ec47e9",
+      "bytes": 3853
+    },
+    {
+      "group": "continuation",
+      "path": "reports/validation/2026-10-10-integrated-moment-continuation/predict.py",
+      "sha256": "959029a0a8d041cff888ea1b22d1ac570f521e9cbdf706561d9cd9d5838aaaed",
+      "bytes": 6645
+    },
+    {
+      "group": "continuation",
+      "path": "reports/validation/2026-10-10-integrated-moment-continuation/predictions.json",
+      "sha256": "8705426a44b5c7fdae6c2591b0a3a3b207f8b56ce619a9542166d358d8a068b3",
+      "bytes": 173703
+    },
+    {
+      "group": "continuation",
+      "path": "reports/validation/2026-10-10-integrated-moment-continuation/transformed-coefficients.json",
+      "sha256": "5138ebab854c6166a240d1752512a56bdd1f2eb0f9a837da34b4879d6d5c35c0",
+      "bytes": 23672
+    },
+    {
+      "group": "continuation",
+      "path": "reports/validation/2026-10-10-integrated-moment-continuation/prediction-run.json",
+      "sha256": "a37d80d704bb7136bb3fc4c19b557ffb4a3232b58920f8f81d59260ae4cc4a5e",
+      "bytes": 1579
+    },
+    {
+      "group": "continuation",
+      "path": "reports/validation/2026-10-10-integrated-moment-continuation/bound-plan.json",
+      "sha256": "f2f9bb3fb235a06177218b29627aa0dddd4aa5d4615c4aa3e4259c0ccf6f1706",
+      "bytes": 2028
+    },
+    {
+      "group": "candidate",
+      "path": "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+      "sha256": "252a5aa37c821fc0dad292675e7e088cfa4074b9216908cfd00281ed3d00c35a",
+      "bytes": 2969
+    },
+    {
+      "group": "candidate",
+      "path": "reports/validation/2026-10-10-integrated-flow-physical-fit/certificate-pole-check.py",
+      "sha256": "7dea5f67c92254fff12721b9c8cee8fcfebe655444e45a99b530d149de0db5fd",
+      "bytes": 3684
+    },
+    {
+      "group": "candidate",
+      "path": "reports/validation/2026-10-10-integrated-flow-physical-fit/certificate-pole-check.json",
+      "sha256": "a11bbc6320a82680c4b72929de5d284dec230c208ad8d39f6c6ca41aab721bf2",
+      "bytes": 1852
+    },
+    {
+      "group": "conditional",
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-transport/derive.py",
+      "sha256": "cf3b6a9e788bbe9068fe7eefa1223da8be3375f84f4ebfe190877624c0687e93",
+      "bytes": 3350
+    },
+    {
+      "group": "conditional",
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "bytes": 2983
+    },
+    {
+      "group": "conditional",
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-transport/transport.rs",
+      "sha256": "ec4fcb108ca1ce950daf1f352fdf66ee54efa1463cc21a9fe086acda2644092d",
+      "bytes": 3738
+    },
+    {
+      "group": "conditional",
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json",
+      "sha256": "d08524bf3bc919a4587a4e341b89be29beba0f6fa8e200c4b17e55b7fa5fe0d6",
+      "bytes": 52995
+    },
+    {
+      "group": "conditional",
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint.rs",
+      "sha256": "c3c58df3efcbe933cdac17dbfb73ab39d0a1adae3825ec313a67fb6c181e0358",
+      "bytes": 3844
+    },
+    {
+      "group": "conditional",
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-result.json",
+      "sha256": "7188447f3493af895ae53d206c7e25e4ec509450c919d1f86b5d85ba13e71053",
+      "bytes": 17930
+    },
+    {
+      "group": "normalization",
+      "path": "reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/normalization.json",
+      "sha256": "a7417598d2d3be683f185d80a3c60544df76e49b5ad2afd438e9caadda79a99a",
+      "bytes": 2355
+    }
+  ],
+  "no_reference_values_used_for_bound_derivation": true,
+  "no_raised_holdout_parsed": true
+}

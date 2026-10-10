@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "checks": [
+    {
+      "run_provenance": "finite-run.provenance.json",
+      "argument": "/tmp/rustflow-integrated-candidate-transport-20261010/transport",
+      "sha256": "e80985e25850e5f6447861097673e94d3a02aba4cfc45eb5747f9d18ba4dc46b",
+      "passed": true
+    },
+    {
+      "run_provenance": "finite-run.provenance.json",
+      "argument": "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "passed": true
+    },
+    {
+      "run_provenance": "finite-run.provenance.json",
+      "argument": "reports/validation/2026-10-10-integrated-flow-conditional-transport/scalar-coefficients.json",
+      "sha256": "bedb14f125a80fd6d05ded97909382c61ec88b2aa99b1881cd9cc94e85a19f09",
+      "passed": true
+    },
+    {
+      "run_provenance": "endpoint-run.provenance.json",
+      "argument": "/tmp/rustflow-integrated-candidate-transport-20261010/endpoint",
+      "sha256": "d3d973e6fc8532327f15655cc8e88c04b1e87c3e6e8642b375e23d1c0a49c607",
+      "passed": true
+    },
+    {
+      "run_provenance": "endpoint-run.provenance.json",
+      "argument": "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+      "sha256": "bc24cc8a382743f1a02788295b8eea4f1e9bbaad25e1b38147b68afab96c36fe",
+      "passed": true
+    },
+    {
+      "run_provenance": "endpoint-run.provenance.json",
+      "argument": "reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json",
+      "sha256": "d08524bf3bc919a4587a4e341b89be29beba0f6fa8e200c4b17e55b7fa5fe0d6",
+      "passed": true
+    },
+    {
+      "equation_input": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+      "sha256": "252a5aa37c821fc0dad292675e7e088cfa4074b9216908cfd00281ed3d00c35a",
+      "passed": true
+    },
+    {
+      "equation_input": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+      "sha256": "378b0f1ad6df009f43f59348faaa9a828caa7d83d625b93a465fcb849fc8d1a9",
+      "passed": true
+    },
+    {
+      "equation_input": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-holdout.json",
+      "sha256": "6bcb2687e49c475c1a7c6b99b48cdbac13ab4730dde0bba9df05aba994b42740",
+      "passed": true
+    }
+  ],
+  "producer_manifest": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/artifact-manifest.json",
+    "sha256": "567971b0cd626f434a5e0ffa4a96c832f941e747a9fbb0311fdbde87e9d4aaff",
+    "bytes": 5055
+  },
+  "source_scope": "All resource-wrapper inputs agree with the frozen build/equation/coefficient chain. The equation remains a finite-data candidate.",
+  "python": {
+    "path": "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3.14",
+    "sha256": "9bfa54c39ad52bd64ea04e2b0c88599c0ddfcc2da5d3213a2f9fc1e833fa8e1c",
+    "bytes": 16528
+  },
+  "mpmath_version": "1.3.0",
+  "mpmath_module": {
+    "path": "/nix/store/vm12q3zvz6yp0wklj2b76smgdknnc7wz-python3.13-mpmath-1.3.0/lib/python3.13/site-packages/mpmath/__init__.py",
+    "sha256": "b241584d2c1fc0304b0a1015ea923749d7b0800411dd406dcab7c82bf25d9fe8",
+    "bytes": 8765
+  },
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-validation/compare.py",
+    "sha256": "8736af137eeaef318500dc6db405d5c356cad52653a850a5913c327d2eab56e4",
+    "bytes": 7775
+  }
+}

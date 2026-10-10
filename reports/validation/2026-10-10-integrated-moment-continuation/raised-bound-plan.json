@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "scope": "Separate source-derived absolute raised C2 bulk/surface norm; unchanged prospective coefficient/sample/radius grid",
+  "source_derivation": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-continuation-independent-audit/raised-norm.md",
+    "sha256": "cb0700f2b4038238cbe8788b072f61bfb227097082f9e0b0446ebf1702c60f04",
+    "bytes": 2777
+  },
+  "base_plan": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/bound-plan.json",
+    "sha256": "f2f9bb3fb235a06177218b29627aa0dddd4aa5d4615c4aa3e4259c0ccf6f1706",
+    "bytes": 2028
+  },
+  "transformed_coefficients": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/transformed-coefficients.json",
+    "sha256": "5138ebab854c6166a240d1752512a56bdd1f2eb0f9a837da34b4879d6d5c35c0",
+    "bytes": 23672
+  },
+  "constant_B0": "1987/2772",
+  "constant_B1": "476/1573",
+  "B0": "(1+r)^(5/4)/(1-r)",
+  "B1": "(r/4)*[(5/16)*(1+r)^(1/4)/(1-r)+(1+r)^(5/4)/(1-r)^2]",
+  "absolute_tail": "M(r)*(w/r)^N/(1-w/r)",
+  "relative_tail": "T/(abs(S_N)-T) only when abs(S_N)>T",
+  "no_abs_h0_bound": true,
+  "no_new_numerical_profiles": true,
+  "no_reference_reads": true,
+  "endpoint": "not bounded",
+  "rounding": "exact upward fourth-root rational enclosures; numerical physical normalization rounding remains separate"
+}

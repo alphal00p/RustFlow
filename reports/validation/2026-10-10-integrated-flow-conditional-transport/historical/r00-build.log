@@ -1,0 +1,14 @@
+error: unexpected closing delimiter: `}`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/transport.rs:45:1
+   |
+ 7 | fn main(){
+   |          - the nearest open delimiter
+...
+10 |  let data:Value=serde_json::from_str(&std::fs::read_to_string(&args[2]).unwrap()).unwrap()).unwrap();
+   |                                                                                           - missing open `(` for this delimiter
+...
+45 | }
+   | ^ unexpected closing delimiter
+
+error: aborting due to 1 previous error
+

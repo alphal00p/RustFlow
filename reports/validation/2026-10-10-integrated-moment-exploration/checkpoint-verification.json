@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T10:55:21.182043+00:00",
+  "scope": "Artifact integrity and unchanged production tree; mathematical and numerical evidence is in the bound reports",
+  "base_commit": "1d5e82b03496a736b665b279296b03f13d41e138",
+  "head_before_final_checkpoint": "302ecec4c86eb379dd734334ae064f04cbf416ce",
+  "verifier": {
+    "bytes": 3779,
+    "sha256": "9244f734566a4c0008f2d79900e4d376e519314f4eae05a1764695a5f66149ed"
+  },
+  "manifests": [
+    {
+      "path": "reports/validation/2026-10-10-integrated-angular-review/artifact-manifest.json",
+      "bytes": 2227,
+      "sha256": "35aa9ffc495d8bf2af89023603da0c13360b64c6330a487f50db81450b4acd1a",
+      "verified_files": 14
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-certificate-preflight/artifact-manifest.json",
+      "bytes": 367,
+      "sha256": "f5d204c4c8b118289313124c8dd5a2fe08204ac10fd81c7c9e052869cf90988c",
+      "verified_files": 2
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-continuation-independent-audit/artifact-manifest.json",
+      "bytes": 930,
+      "sha256": "08790cb26d17d5a913b5eb0bbc1e7f0d8b08edc1dfea9d8a68fa1a728f867488",
+      "verified_files": 5
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-transport/artifact-manifest.json",
+      "bytes": 5055,
+      "sha256": "567971b0cd626f434a5e0ffa4a96c832f941e747a9fbb0311fdbde87e9d4aaff",
+      "verified_files": 30
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-flow-conditional-validation/artifact-manifest.json",
+      "bytes": 3337,
+      "sha256": "8fe8aaf19734af04779254ca0e3e01861d64082e162e8e4814de406d9e1eb56d",
+      "verified_files": 20
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-flow-physical-fit/artifact-manifest.json",
+      "bytes": 4616,
+      "sha256": "134e04e05393475924146a35a537aff6461e5a2c368b3d917f99638e152c02da",
+      "verified_files": 26
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-flow-reconstruction/implementation-manifest.json",
+      "bytes": 18373,
+      "sha256": "21067ac1a36ac008ecefe89edfca24e502397413541697e640f861ed6c18c32c",
+      "verified_files": 108
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-flow-target-protocol/artifact-manifest.json",
+      "bytes": 13194,
+      "sha256": "94530647d42a1e082ec6ff16721fe5c4acab07749f778f2a8bca388c223816f1",
+      "verified_files": 74
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-moment-continuation/artifact-manifest.json",
+      "bytes": 3688,
+      "sha256": "0043765cc52dfe8d5ca18b46f94e63b633740d8bba6cb093a04942ccf3a4f14a",
+      "verified_files": 23
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-moment-expansion/artifact-manifest.json",
+      "bytes": 13656,
+      "sha256": "f5c8bd5944636fb436f47d9833104c517342aba1437770010f1ab854a787e053",
+      "verified_files": 92
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-moment-series-comparison/artifact-manifest.json",
+      "bytes": 8962,
+      "sha256": "047c099d7bc22b24226df51374ffb319395d2b9051727f03036ac125f47bee89",
+      "verified_files": 53
+    },
+    {
+      "path": "reports/validation/2026-10-10-integrated-moment-validation/artifact-manifest.json",
+      "bytes": 24729,
+      "sha256": "9a5c399d406cb7bbd0a9140d8e54bc87d6086db6dd15b026cc5971280a6b319e",
+      "verified_files": 149
+    }
+  ],
+  "verified_files": 596,
+  "production_unchanged": true,
+  "failures": [],
+  "passed": true
+}

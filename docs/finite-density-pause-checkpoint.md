@@ -1,4 +1,29 @@
-# Safe pause checkpoint — 2026-10-10
+# Finite-density checkpoint — 2026-10-10
+
+## Current checkpoint: bounded integrated-moment exploration
+
+At the user's request, occupation-aware closure remains paused. The alternative
+fixed-shell moment route has completed its bounded exploration on the actual
+three-loop double cut `[0,3]`, retaining both original targets. Generic Gaussian
+and angular extensions produce 64 exact coefficients per target in under a
+second, with independent tensor, ordinary-vacuum, surface and finite-eta checks.
+Production code and the earlier work are preserved.
+
+The scalar recurrence candidate passes all 16 held-out equations and 24
+independent finite-eta/endpoint comparisons. It remains unproved; the fixed
+certificate ansatz has an explicit pole-order obstruction. The raised target
+has no candidate within the declared limits. Direct continuation of the same
+64 coefficients improves finite-eta values but fails the endpoint criterion.
+Thus neither full three-loop fixed-dimension/Laurent acceptance nor four-loop
+scale-up is established. The next methodological gap is a justified integrated
+equation or controlled endpoint continuation, not polynomial boundary generation.
+
+See the [complete exploration assessment](../reports/validation/2026-10-10-integrated-moment-exploration/README.md)
+for the frozen budgets, exact provenance, successful checks and retained failures.
+Do not resume the historical closure or enlarge the exhausted reconstruction
+limits implicitly from this checkpoint.
+
+## Historical safe pause — 2026-10-10
 
 Paused at the user's request. All owned validation and build processes have
 stopped. The feature remains incomplete: full three-loop fixed-dimension and

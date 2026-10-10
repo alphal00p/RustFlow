@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-candidate-transport-20261010/endpoint",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/companion.json",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/finite-result.json",
+    "reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint-result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.9937130860053003,
+  "user_seconds": 1.9443920000000001,
+  "system_seconds": 0.035685999999999996,
+  "peak_child_rss_kib": 15444,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

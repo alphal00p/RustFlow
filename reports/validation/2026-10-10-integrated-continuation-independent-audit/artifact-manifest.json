@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "status": "frozen",
+  "scope": "independent source/sign/normalization/conditional-ODE and finite-circle majorant audit; no physical eta0 acceptance",
+  "files": [
+    {
+      "path": "audit.md",
+      "sha256": "eb9cd94a388e2abe0bfea262f5d4ad03406e8e0bf745ad1ea038fd95013b5465",
+      "bytes": 6300
+    },
+    {
+      "path": "exact-checks.json",
+      "sha256": "0f984924e9239dceaa62d70aaba6e216bc74f87f4ac6996070e51669fcca8973",
+      "bytes": 3048
+    },
+    {
+      "path": "freeze.py",
+      "sha256": "495592cc3e7e7aa62bf9e8557745ddac0217610327fab3fb2b4a5e25a868e91d",
+      "bytes": 4245
+    },
+    {
+      "path": "raised-norm.md",
+      "sha256": "cb0700f2b4038238cbe8788b072f61bfb227097082f9e0b0446ebf1702c60f04",
+      "bytes": 2777
+    },
+    {
+      "path": "source-bindings.json",
+      "sha256": "913997eb2f7511a7d6c3e1244f55c26eabf16615288a8f2095991d7059e9f420",
+      "bytes": 6083
+    }
+  ]
+}

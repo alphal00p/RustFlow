@@ -1,0 +1,14 @@
+{
+  "stage": "fit-recurrence",
+  "args": [
+    "fit",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+    "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+    "recurrence"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.04895801329985261,
+  "user_seconds": 0.04513699999999998,
+  "system_seconds": 0.0029439999999999467,
+  "cumulative_child_peak_rss_kib": 52416
+}

@@ -1,0 +1,16 @@
+{
+  "stage": "validate",
+  "args": [
+    "validate",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+    "ac8376f9b005e58968aa6053d6c621c05ff9ff07993ece5c2818abf6beb84577",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-holdout.json",
+    "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/holdout-result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.003041478805243969,
+  "user_seconds": 0.0,
+  "system_seconds": 0.0026890000000000525,
+  "cumulative_child_peak_rss_kib": 52416
+}

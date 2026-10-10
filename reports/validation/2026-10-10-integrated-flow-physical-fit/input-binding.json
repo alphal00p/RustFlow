@@ -1,0 +1,28 @@
+{
+  "captured_utc": "2026-10-10T10:36:08.108838+00:00",
+  "config_sha256": "ebd4736abbf7b0fad2806077e26e2038b9ccce48d91385a2f372cc830a6eb951",
+  "launcher_sha256": "29f85938f1853928f8e0633d0b3a1b6a4f19761096d0974797f1778b98405696",
+  "executable": {
+    "path": "/tmp/rustflow-integrated-fitter-20261010/fitter",
+    "sha256": "e4411e0815078478ef95be9c19005d559b04357b74bd175c6c9bfae10ac9dea5"
+  },
+  "targets": [
+    {
+      "id": 0,
+      "training_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+      "training_sha256": "378b0f1ad6df009f43f59348faaa9a828caa7d83d625b93a465fcb849fc8d1a9",
+      "series_identity": "e732c29d7530d42539240f5d856b22a2fcb750f9ee194a5599733a6793d17066",
+      "holdout_path_not_opened": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-holdout.json"
+    },
+    {
+      "id": 1,
+      "training_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-1-training.json",
+      "training_sha256": "7164162fd2462dd2d4d6428b361bae5fbf2854abf254fd6e34e6c0f818b46189",
+      "series_identity": "16d73030f85941d25a164d12ef386b090faf232ac60bc8f383a4a37d7ae7bb89",
+      "holdout_path_not_opened": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-1-holdout.json"
+    }
+  ],
+  "primary_family": "theta per target; recurrence training-only fallback after no theta candidate; joint formal channels within target",
+  "aggregate_fit_seconds": 300,
+  "no_physical_identity_certified": true
+}

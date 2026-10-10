@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "scope": "Bounded same-frozen-series direct composition and Pade diagnostics, independent of guessed ODE and reference formula",
+  "transformation": {
+    "R": "4",
+    "alpha": "1/4",
+    "variable": "w=R/(eta+R)",
+    "H": "(1-w)^alpha G(w/[R*(1-w)])",
+    "physical": "native_normalization * R^alpha * w^(-alpha) * H(w)",
+    "exact_composition": "h_k = sum_{n=0}^k g_n * R^(-n) * (-1)^(k-n) * binomial(alpha-n,k-n)"
+  },
+  "profiles": {
+    "partial_sum_terms": [
+      32,
+      48,
+      64
+    ],
+    "digits": [
+      30,
+      50
+    ],
+    "eta": [
+      "8",
+      "2",
+      "0"
+    ],
+    "pade_degrees": [
+      [
+        16,
+        16
+      ],
+      [
+        24,
+        24
+      ],
+      [
+        31,
+        32
+      ]
+    ]
+  },
+  "producer": {
+    "coefficients": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/coefficients.json",
+      "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+      "bytes": 204428
+    },
+    "normalization": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/normalization.json",
+      "sha256": "a7417598d2d3be683f185d80a3c60544df76e49b5ad2afd438e9caadda79a99a",
+      "bytes": 2355
+    },
+    "normalization_run": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/normalization-64/run.json",
+      "sha256": "da889d631e8d027f8da659e1339b73c565e5068d14ae2aae19f21cfc4c1e71a9",
+      "bytes": 2797
+    },
+    "series_manifest": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-series-comparison/artifact-manifest.json",
+      "sha256": "047c099d7bc22b24226df51374ffb319395d2b9051727f03036ac125f47bee89",
+      "bytes": 8962
+    },
+    "coefficient_count": 64,
+    "targets": [
+      0,
+      1
+    ],
+    "unknown_tail": true
+  },
+  "references": {
+    "finite_eta_manifest": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/artifact-manifest.json",
+      "sha256": "9a5c399d406cb7bbd0a9140d8e54bc87d6086db6dd15b026cc5971280a6b319e",
+      "bytes": 24729
+    },
+    "eta8": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta8-n32-d80/reference.json",
+      "sha256": "a25dba6ed3458ee8225d39c1132088f75bab738f62ef3584628409050a4db8a6",
+      "bytes": 2724
+    },
+    "eta2": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta2-n32-d80/reference.json",
+      "sha256": "aa171bd44d4ac3ac0a45f453ed773da4ec2227cf8aef1f2174fb88a7583a786c",
+      "bytes": 2726
+    },
+    "eta0": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json",
+      "sha256": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+      "bytes": 18298
+    }
+  },
+  "prospective_numerical_criterion": {
+    "relative": "1e-12",
+    "absolute_zero": "1e-25",
+    "scope": "diagnostic numerical consistency, not mathematical endpoint acceptance"
+  },
+  "limits": {
+    "numerical_prediction_timeout_seconds": 120,
+    "new_coefficients": false,
+    "reference_reads_by_prediction_process": false,
+    "ode_input": false,
+    "production_changes": false
+  },
+  "qualifications": [
+    "Transformed kernels are analytic on the open unit w disk under the source proof.",
+    "At w=1 there is no geometric tail bound from analyticity alone.",
+    "Pade agreement, fit residuals and precision/truncation stability remain diagnostics without a norm/remainder certificate.",
+    "No future profile retuning from these reference comparisons."
+  ]
+}

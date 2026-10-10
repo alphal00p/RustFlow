@@ -1,0 +1,14 @@
+{
+  "stage": "fit-theta",
+  "args": [
+    "fit",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-1-training.json",
+    "reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/theta-candidate.json",
+    "theta"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.20170287135988474,
+  "user_seconds": 0.19469400000000003,
+  "system_seconds": 0.0049639999999999684,
+  "cumulative_child_peak_rss_kib": 52416
+}

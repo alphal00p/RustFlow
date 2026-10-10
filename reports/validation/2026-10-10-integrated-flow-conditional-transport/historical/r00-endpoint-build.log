@@ -1,0 +1,10 @@
+error: mismatched closing delimiter: `)`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/endpoint.rs:28:23
+   |
+28 | ...on!({"digits":digits,"working_digits":digits+20,"boundary_terms":terms,"frobenius_terms":terms,"start_eta":start,"match_eta":format!("1/{denominator}"),"seconds":begin.elapsed().as_secs_f64(),"result":match result{Ok(v)=>v,Err(e)=>json!({"error":format!("{e:?}")})}));
+   |       -^ unclosed delimiter                                                                                                                                                                                                                                                 ^ mismatched closing delimiter
+   |       |
+   |       closing delimiter possibly meant for this
+
+error: aborting due to 1 previous error
+

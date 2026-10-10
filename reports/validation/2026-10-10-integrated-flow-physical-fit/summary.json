@@ -1,0 +1,164 @@
+{
+  "finished_utc": "2026-10-10T10:36:08.952722+00:00",
+  "status": "bounded_candidate_attempt_incomplete_or_rejected",
+  "selected": [
+    {
+      "id": 0,
+      "family": "recurrence",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/theta-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        },
+        {
+          "family": "recurrence",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+          "status": "training_candidate_only"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+      "candidate_sha256": "252a5aa37c821fc0dad292675e7e088cfa4074b9216908cfd00281ed3d00c35a",
+      "candidate_blake3": "ac8376f9b005e58968aa6053d6c621c05ff9ff07993ece5c2818abf6beb84577",
+      "training_sha256": "378b0f1ad6df009f43f59348faaa9a828caa7d83d625b93a465fcb849fc8d1a9",
+      "candidate_present": true,
+      "training_status": "training_candidate_only"
+    },
+    {
+      "id": 1,
+      "family": "recurrence",
+      "attempts": [
+        {
+          "family": "theta",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/theta-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        },
+        {
+          "family": "recurrence",
+          "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/recurrence-candidate.json",
+          "status": "no_candidate_within_fixed_shapes"
+        }
+      ],
+      "candidate": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/recurrence-candidate.json",
+      "candidate_sha256": "b0b2291beb49c7baae2e3b80ff20a0c0ce65c0b2a110b262503d939437eb9eee",
+      "candidate_blake3": "ca4fbafeafd2bbb2e7d5fa6a436ad2003d1e10db6221809bf9ea9a7e4e01d8b7",
+      "training_sha256": "7164162fd2462dd2d4d6428b361bae5fbf2854abf254fd6e34e6c0f818b46189",
+      "candidate_present": false,
+      "training_status": "no_candidate_within_fixed_shapes"
+    }
+  ],
+  "validation": [
+    {
+      "id": 0,
+      "status": "heldout_pass_candidate_only",
+      "heldout_access_started": true
+    },
+    {
+      "id": 1,
+      "status": "no_candidate_within_fixed_shapes",
+      "heldout_access_started": false
+    }
+  ],
+  "aggregate_wall_seconds": 0.8446565321646631,
+  "holdout_access_started": true,
+  "runs": [
+    {
+      "stage": "fit-theta",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+        "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/theta-candidate.json",
+        "theta"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.1606122120283544,
+      "user_seconds": 0.15377399999999997,
+      "system_seconds": 0.004966000000000026,
+      "cumulative_child_peak_rss_kib": 52416
+    },
+    {
+      "stage": "fit-recurrence",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+        "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+        "recurrence"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.04895801329985261,
+      "user_seconds": 0.04513699999999998,
+      "system_seconds": 0.0029439999999999467,
+      "cumulative_child_peak_rss_kib": 52416
+    },
+    {
+      "stage": "digest",
+      "args": [
+        "digest",
+        "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003594032023102045,
+      "user_seconds": 0.0,
+      "system_seconds": 0.0030280000000000307,
+      "cumulative_child_peak_rss_kib": 52416
+    },
+    {
+      "stage": "fit-theta",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-1-training.json",
+        "reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/theta-candidate.json",
+        "theta"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.20170287135988474,
+      "user_seconds": 0.19469400000000003,
+      "system_seconds": 0.0049639999999999684,
+      "cumulative_child_peak_rss_kib": 52416
+    },
+    {
+      "stage": "fit-recurrence",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-1-training.json",
+        "reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/recurrence-candidate.json",
+        "recurrence"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.22496825410053134,
+      "user_seconds": 0.220688,
+      "system_seconds": 0.001987000000000072,
+      "cumulative_child_peak_rss_kib": 52416
+    },
+    {
+      "stage": "digest",
+      "args": [
+        "digest",
+        "reports/validation/2026-10-10-integrated-flow-physical-fit/target-1/recurrence-candidate.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.0032730200327932835,
+      "user_seconds": 0.0009040000000000159,
+      "system_seconds": 0.0017999999999999128,
+      "cumulative_child_peak_rss_kib": 52416
+    },
+    {
+      "stage": "validate",
+      "args": [
+        "validate",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json",
+        "ac8376f9b005e58968aa6053d6c621c05ff9ff07993ece5c2818abf6beb84577",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-holdout.json",
+        "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/holdout-result.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.003041478805243969,
+      "user_seconds": 0.0,
+      "system_seconds": 0.0026890000000000525,
+      "cumulative_child_peak_rss_kib": 52416
+    }
+  ],
+  "identity_certified": false,
+  "no_retry_or_family_change_after_holdout": true
+}

@@ -1,0 +1,38 @@
+{
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/predict.py"
+  ],
+  "timeout_seconds": 120,
+  "inputs": {
+    "plan.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/plan.json",
+      "sha256": "014cb66ecbe9884d40bc910b1bcf87afe173485c5143e6908d831403b9ec47e9",
+      "bytes": 3853
+    },
+    "predict.py": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/predict.py",
+      "sha256": "959029a0a8d041cff888ea1b22d1ac570f521e9cbdf706561d9cd9d5838aaaed",
+      "bytes": 6645
+    },
+    "run-predict.py": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/run-predict.py",
+      "sha256": "77e8bf0eeb93d02d454123ff5cac0b4f7cd85937f44a75fc7577978d537d4731",
+      "bytes": 1320
+    }
+  },
+  "python": {
+    "path": "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3.14",
+    "sha256": "9bfa54c39ad52bd64ea04e2b0c88599c0ddfcc2da5d3213a2f9fc1e833fa8e1c",
+    "bytes": 16528
+  },
+  "reference_values_passed": false,
+  "exit_code": 0,
+  "wall_seconds": 1.6185911130160093,
+  "inputs_unchanged": true,
+  "prediction": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/predictions.json",
+    "sha256": "8705426a44b5c7fdae6c2591b0a3a3b207f8b56ce619a9542166d358d8a068b3",
+    "bytes": 173703
+  }
+}

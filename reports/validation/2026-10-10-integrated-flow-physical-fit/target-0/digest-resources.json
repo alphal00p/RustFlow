@@ -1,0 +1,12 @@
+{
+  "stage": "digest",
+  "args": [
+    "digest",
+    "reports/validation/2026-10-10-integrated-flow-physical-fit/target-0/recurrence-candidate.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.003594032023102045,
+  "user_seconds": 0.0,
+  "system_seconds": 0.0030280000000000307,
+  "cumulative_child_peak_rss_kib": 52416
+}

@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "scope": "Source-based scalar Cauchy tail bound; no reference values, no fitted equation",
+  "radii": [
+    "4/5",
+    "9/10",
+    "19/20",
+    "49/50",
+    "99/100"
+  ],
+  "eta": [
+    "8",
+    "2",
+    "0"
+  ],
+  "terms": [
+    32,
+    48,
+    64
+  ],
+  "R": "4",
+  "alpha": "1/4",
+  "nu": "5/4",
+  "normalized_H_bound": "M(r)/abs(h0) <= (1+r)^nu/(1-r)",
+  "positive_scalar_lower_bound": "H(w)/h0 >= (1-w)^nu for real 0<=w<1",
+  "relative_tail_bound": "((1+r)/(1-w))^nu * (w/r)^N / ((1-r)*(1-w/r))",
+  "arithmetic": "exact Fraction, upward rational fourth-root enclosure with denominator10^60; every enclosure verified by exact fourth powers",
+  "radius_selection": "minimum among the prospectively fixed admissible radii; no reference-dependent choice",
+  "eta0": "no admissible radius; no endpoint bound",
+  "raised": "not bounded by abs(h0); finite signed component norm required separately",
+  "source_bindings": {
+    "convergent-germ.md": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/convergent-germ.md",
+      "sha256": "758a006abf1b9d4205769741c46179d14c81052b430d844d0b60be38319aa543",
+      "bytes": 4252
+    },
+    "sharp-germ-bound.md": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/sharp-germ-bound.md",
+      "sha256": "025704dad6a0c43ad273390903e9b8dbbca026b8b1e2b2fdc09715e3ed85eda7",
+      "bytes": 2113
+    },
+    "gaussian-wide-prefix-64/coefficients.json": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-64/coefficients.json",
+      "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+      "bytes": 204428
+    }
+  },
+  "prediction_binding": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-continuation/predictions.json",
+    "sha256": "8705426a44b5c7fdae6c2591b0a3a3b207f8b56ce619a9542166d358d8a068b3",
+    "bytes": 173703
+  }
+}

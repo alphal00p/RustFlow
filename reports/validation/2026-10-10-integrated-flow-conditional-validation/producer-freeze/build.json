@@ -1,0 +1,46 @@
+{
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "integrated_candidate_transport",
+    "-C",
+    "opt-level=1",
+    "-C",
+    "debuginfo=0",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "--extern",
+    "symbolica_amflow=/tmp/rustflow-integrated-candidate-transport-20261010/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "serde_json=/tmp/rustflow-integrated-candidate-transport-20261010/libserde_json-84255895f7dd0f90.rlib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "-L",
+    "native=/nix/store/rgnappqqc5vbq60gza5fflyk84sylwl6-python3-3.14.6/lib",
+    "-C",
+    "link-arg=-Wl,-rpath,/nix/store/rgnappqqc5vbq60gza5fflyk84sylwl6-python3-3.14.6/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-conditional-transport/transport.rs",
+    "-o",
+    "/tmp/rustflow-integrated-candidate-transport-20261010/transport"
+  ],
+  "dependencies": {
+    "symbolica_amflow": {
+      "path": "/tmp/rustflow-integrated-candidate-transport-20261010/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "b7b2beaf983314c86123d5cef173d93faa8b605f1648cce72c340ec9a6d80687"
+    },
+    "serde_json": {
+      "path": "/tmp/rustflow-integrated-candidate-transport-20261010/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95"
+    }
+  },
+  "source_sha256": "ec4fcb108ca1ce950daf1f352fdf66ee54efa1463cc21a9fe086acda2644092d",
+  "exit_code": 0,
+  "seconds": 27.409910949878395,
+  "executable": {
+    "path": "/tmp/rustflow-integrated-candidate-transport-20261010/transport",
+    "sha256": "e80985e25850e5f6447861097673e94d3a02aba4cfc45eb5747f9d18ba4dc46b"
+  }
+}

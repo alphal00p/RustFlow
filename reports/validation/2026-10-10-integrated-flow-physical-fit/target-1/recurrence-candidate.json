@@ -1,0 +1,173 @@
+{
+  "audit": {
+    "attempts": [
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 1,
+        "rank": 2,
+        "rows": 47,
+        "unknowns": 2
+      },
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 2,
+        "rank": 3,
+        "rows": 46,
+        "unknowns": 3
+      },
+      {
+        "degree": 1,
+        "nullity": 0,
+        "order": 1,
+        "rank": 4,
+        "rows": 47,
+        "unknowns": 4
+      },
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 3,
+        "rank": 4,
+        "rows": 45,
+        "unknowns": 4
+      },
+      {
+        "degree": 0,
+        "nullity": 0,
+        "order": 4,
+        "rank": 5,
+        "rows": 44,
+        "unknowns": 5
+      },
+      {
+        "degree": 2,
+        "nullity": 0,
+        "order": 1,
+        "rank": 6,
+        "rows": 47,
+        "unknowns": 6
+      },
+      {
+        "degree": 1,
+        "nullity": 0,
+        "order": 2,
+        "rank": 6,
+        "rows": 46,
+        "unknowns": 6
+      },
+      {
+        "degree": 3,
+        "nullity": 0,
+        "order": 1,
+        "rank": 8,
+        "rows": 47,
+        "unknowns": 8
+      },
+      {
+        "degree": 1,
+        "nullity": 0,
+        "order": 3,
+        "rank": 8,
+        "rows": 45,
+        "unknowns": 8
+      },
+      {
+        "degree": 2,
+        "nullity": 0,
+        "order": 2,
+        "rank": 9,
+        "rows": 46,
+        "unknowns": 9
+      },
+      {
+        "degree": 4,
+        "nullity": 0,
+        "order": 1,
+        "rank": 10,
+        "rows": 47,
+        "unknowns": 10
+      },
+      {
+        "degree": 1,
+        "nullity": 0,
+        "order": 4,
+        "rank": 10,
+        "rows": 44,
+        "unknowns": 10
+      },
+      {
+        "degree": 3,
+        "nullity": 0,
+        "order": 2,
+        "rank": 12,
+        "rows": 46,
+        "unknowns": 12
+      },
+      {
+        "degree": 2,
+        "nullity": 0,
+        "order": 3,
+        "rank": 12,
+        "rows": 45,
+        "unknowns": 12
+      },
+      {
+        "degree": 4,
+        "nullity": 0,
+        "order": 2,
+        "rank": 15,
+        "rows": 46,
+        "unknowns": 15
+      },
+      {
+        "degree": 2,
+        "nullity": 0,
+        "order": 4,
+        "rank": 15,
+        "rows": 44,
+        "unknowns": 15
+      },
+      {
+        "degree": 3,
+        "nullity": 0,
+        "order": 3,
+        "rank": 16,
+        "rows": 45,
+        "unknowns": 16
+      },
+      {
+        "degree": 4,
+        "nullity": 0,
+        "order": 3,
+        "rank": 20,
+        "rows": 45,
+        "unknowns": 20
+      },
+      {
+        "degree": 3,
+        "nullity": 0,
+        "order": 4,
+        "rank": 20,
+        "rows": 44,
+        "unknowns": 20
+      },
+      {
+        "degree": 4,
+        "nullity": 0,
+        "order": 4,
+        "rank": 25,
+        "rows": 44,
+        "unknowns": 25
+      }
+    ],
+    "status": "no_candidate_within_fixed_shapes"
+  },
+  "candidate": null,
+  "holdout_read": false,
+  "identity_certified": false,
+  "schema": "integrated-fit-candidate.v1",
+  "series_identity": "16d73030f85941d25a164d12ef386b090faf232ac60bc8f383a4a37d7ae7bb89",
+  "training_blake3": "66689a1e9718a3dfc9f1091fbd7b1c1fb84d837e86e7a3e79a32040e31b2a1ff"
+}
