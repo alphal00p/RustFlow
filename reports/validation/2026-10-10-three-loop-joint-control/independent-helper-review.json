@@ -1,0 +1,27 @@
+{
+  "status": "read-only pre-build helper review passed with explicit standalone provenance requirements",
+  "files_sha256": {
+    "run.py": "ccd3b713d311a607d76d5da6a77072d4767741b8e021d9d04c64e47157c78971",
+    "build-capsule.py": "ac63c5a124f34869bd51864219bf2c396369726261c34466e8046bcd1072837f",
+    "generate-harness.py": "e15cb9e807d09f13bb5edf96008fcdb172d1f3b31f0a703e679b8a2becb9d1a3",
+    "capture-prerequisites.py": "34b0cc8212a4324d2640607d13f8783ef32814c6acb0b4596f2ae27a3f2628e0"
+  },
+  "original_runtime_sha256": "7e0a56ac65bab2273c652a1103c9ec0f8ee2d5694ac41e90aed6e45262e9730b",
+  "fixed_phase_sha256": "3c4ae01ef790bddaa1839177e0df379aa0ed8840e5c65d1be1865d0e908a0088",
+  "laurent_phase_sha256": "f5dbad2f3f99362bade22affd07090b0553b16fc106651c7d2366440b8658bb5",
+  "checks": [
+    "Generator preserves the original runtime source and appends one joined test with exactly one fresh Run/full before two byte-identical original phase bodies. Each phase keeps its own previous-refinement accumulator.",
+    "The joined fixed phase retains all four profiles and all physical sector/certificate reports; Laurent retains the four base profiles and doubled final grid. No independent values appear in either body.",
+    "The capsule binds the tested production RustFlow and RustRed rlib SHA values to the coherent source/build/gates before linking a separate test harness; later run binds the captured executable/harness/input rather than the shared target.",
+    "The runtime command clears inherited weighted/density options, retains original input/targets and exact requested ray1/point1/source policy/settings, and imports no rules or checkpoint. Shared preparation is reuse of the same public prepared object, not reuse of experimental native proofs.",
+    "Lower-loop comparison artifacts are copied as launch prerequisites only and are not passed through runtime settings or loaded by producer code.",
+    "The outer 7200-second cap is a new whole joined-run budget, not a claimed speed benchmark or relaxed algebraic/numerical criterion."
+  ],
+  "follow_up_checks": [
+    "After successful standalone linking, record/hash actual compiler identity and verify direct library bytes remain unchanged. Direct Symbolica/serde_json selection currently uses newest rlib; incompatible Symbolica identities should fail Rust type/link checking, but actual selected bytes must remain explicit.",
+    "A report-local comparator must authenticate this standalone capsule/library/harness identity and absolute captured input path. It must not manufacture the ordinary runtime executable filename or require later live ROOT sources.",
+    "A partial or timed-out joined run must not count as complete fixed/Laurent acceptance; preserve per-phase saved outputs and markers without inferring omitted profiles."
+  ],
+  "production_modified": false,
+  "build_or_numeric_run_performed_by_review": false
+}

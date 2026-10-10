@@ -1,0 +1,30 @@
+{
+  "scope": "isolated frontend draft only; no shared source mutation",
+  "files": [
+    {
+      "path": "src/finite_density/guarded.rs",
+      "sha256": "07f43708eea74aa130c7c96f8a84c7795c46f0926d73636fed272144ab648e11",
+      "bytes": 50040
+    },
+    {
+      "path": "src/finite_density/reduction.rs",
+      "sha256": "732f85379361e31965ab944a6bfd3cd1723b7b87815f9471cdf462f89ce54abd",
+      "bytes": 99051
+    },
+    {
+      "path": "src/finite_density/reduction/active.rs",
+      "sha256": "a9f42ccfec590120f9f7707a7789c42ab1cfabe3063097a1a41da2c922621d7b",
+      "bytes": 48602
+    },
+    {
+      "path": "src/finite_density/interface.rs",
+      "sha256": "027a1f2fed9169169fa4138b18ab9323d39893c75a5642612ad4d88845c4333c",
+      "bytes": 14908
+    },
+    {
+      "path": "tests/finite_density_runtime_flow.rs",
+      "sha256": "dc69380085f5e21709bd69e4a761ff96aa4911ac453131dd88ca59a17874efe6",
+      "bytes": 19008
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "scope": "Independent static review of isolated deterministic bounded whole-unit batch memoization; no production edits, compilation, test execution or performance acceptance by reviewer.",
+  "verdict": "No source-level correctness blocker found in the reviewed snapshot. Runtime gates remain pending.",
+  "inputs": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-parallel-reduction-assessment/implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs",
+      "sha256": "7f2430a9426ea941d9403a750f0fc2ed181ef2a6eb4727631eaf5f258cae50e9",
+      "bytes": 68366
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-parallel-reduction-assessment/implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs",
+      "sha256": "fa3f4f935104adcc1d1bfa8c8138eb39d3805cd2890071a6a48f0d495c115bc1",
+      "bytes": 15813
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-parallel-reduction-assessment/implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/batch.rs",
+      "sha256": "90f98531c319e57bef314e7e0fafe355770f701eef1716c874eac2e6775ded6f",
+      "bytes": 9679
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-parallel-reduction-assessment/implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs",
+      "sha256": "67d044f6f0bfc373882c7da51e5861e9bb5467bd27e535075e903569e3543d2a",
+      "bytes": 19787
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-parallel-reduction-assessment/implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests/batch_tests.rs",
+      "sha256": "120edd30450202513b32ed828f8ff7f81cd05b15367bf49dbe6d9c5ba48d7850",
+      "bytes": 12605
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/vendor/rustred/crates/rustred-core/src/persistence/atoms.rs",
+      "sha256": "48f32837b3c3f2ea04f5ebdc300915ab383ea357ef88c322cdadd8f9d9abd341",
+      "bytes": 15543
+    },
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/state.rs",
+      "sha256": "53b2521d7e8366ab49ad851883965d73a6e99dc2c2461373ec683ac71c0b750f",
+      "bytes": 68365
+    }
+  ],
+  "checked_invariants": [
+    "Program rules/source/order are borrowed immutably. Each worker calls unchanged plain native reduce with the exact same target and reduction limits. No descendant-tail replacement or within-reduction queue change.",
+    "Coordinator holds the memo mutex across planning, native work and ordered commit. Cache hit/recency/insertion/eviction follows input order, giving an induction against a serial caller that continues through all Result values.",
+    "Planned duplicate misses share at most the first prefetched result. A later real miss reexecutes if the first result was uncacheable or evicted. Snapshot hits evicted before their turn also reexecute.",
+    "Whole native result includes exact terminal and unresolved coefficients, ordered conditions, non-NoRule failures and logical application counts. Existing memo refuses non-NoRule results, preserving failure evidence.",
+    "Batch is explicitly non-fail-fast. All per-item native or codec errors remain errors; later independent work may already have executed. Caller must inspect each item and account actual batch work even if it stops logical consumption early.",
+    "Actual known applications include every native Ok result; native Err sets an explicit incomplete-count flag. Returned logical, cached and uncached application totals remain distinct.",
+    "Pool-construction and input-bound errors precede native work/cache mutation. Pool size and input window bound simultaneous whole reductions and staged count, not total CAS threads, scratch memory, returned decoded coefficients or latency.",
+    "Native lifecycle and prior memo implementation differ only by batch module/reexports; no existing serial/ordinary API behavior is changed."
+  ],
+  "test_review": {
+    "drafted_tests": 8,
+    "executed_by_reviewer": 0,
+    "coverage": [
+      "ordered coefficient/condition equality",
+      "canceled unused guard",
+      "exact cache slot/record/condition/encoded state equality",
+      "snapshot-hit eviction and duplicate miss",
+      "memo disabled and zero capacity",
+      "WorkLimit and invalid occupation/no-rule distinction",
+      "coupled ConditionVanished remains uncached",
+      "owned codec error with later executed item",
+      "invalid batch bounds and empty batch"
+    ],
+    "optional_strengthening": [
+      "Prime a completed same target at a distinct valid reduction limit so the exact-limit-key test does not rely on an uncacheable low-limit WorkLimit result.",
+      "Exercise native Err accounting separately from codec errors and Ok unresolved failures, e.g. a test-private corrupted condition index map."
+    ]
+  },
+  "resource_and_state_qualification": [
+    "No cancellation poll is added inside plain native reduction. Native-call and decode/CAS latency remain inherited.",
+    "Pinned Symbolica partial state export includes global variable lists and finite fields. Current plain reduce path uses polynomial/rational operations and ordered memo.insert performs RP atom registration. Bytewise cache/quota equivalence is not a promise under unrelated concurrent process-global Symbolica state mutation.",
+    "GuardedUnitMemo owned-byte quota continues to exclude returned reductions and encode/decode/CAS scratch. Batch max_in_flight additionally bounds only item/result count."
+  ],
+  "promotion_status": "Isolated draft only; parent coordinates tests and any later integration."
+}

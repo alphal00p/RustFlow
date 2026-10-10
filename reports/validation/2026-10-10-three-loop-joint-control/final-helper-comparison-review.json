@@ -1,0 +1,44 @@
+{
+  "status": "static producer/capsule/comparison audit passed; complete numerical output still pending",
+  "reviewed_utc": "2026-10-10T08:19:17.576503+00:00",
+  "files_sha256": {
+    "reports/validation/2026-10-10-three-loop-joint-control/generate-harness.py": "e15cb9e807d09f13bb5edf96008fcdb172d1f3b31f0a703e679b8a2becb9d1a3",
+    "reports/validation/2026-10-10-three-loop-joint-control/build-capsule.py": "b83bee09c9ab0e1274013a86de6890a2eb75bc87b6641c4e8287c1be7231f790",
+    "reports/validation/2026-10-10-three-loop-joint-control/capture-prerequisites.py": "34b0cc8212a4324d2640607d13f8783ef32814c6acb0b4596f2ae27a3f2628e0",
+    "reports/validation/2026-10-10-three-loop-joint-control/run.py": "ccd3b713d311a607d76d5da6a77072d4767741b8e021d9d04c64e47157c78971",
+    "reports/validation/2026-10-10-three-loop-joint-control/capsule-binding.json": "be99237c630fb93df7f53311058f7caf0717d89fa9bba9b6939cc74070a2bba4",
+    "reports/validation/2026-10-10-three-loop-joint-control/build.json": "58e521302030e83c638075ba88256cfd311a9200b3efdfe333a147eec20e811c",
+    "reports/validation/2026-10-10-three-loop-joint-control/harness-binding.json": "26a1d09ac6b9d8763a7df16818fa075d2a62ff8a05fa3773b91d86755cf55ac5",
+    "reports/validation/2026-10-10-three-loop-joint-control/numerical-prerequisites.json": "c5f43c7a4df58cfcd8292d75a4c7b4ff37a80df0950054d3a748ccf54b1360c3",
+    "reports/validation/2026-10-10-three-loop-joint-control/comparison-plan.json": "e8047a451e56b81c9daa067e1665282842ab91ae97c2df80d33926d88f3c0196",
+    "reports/validation/2026-10-10-three-loop-joint-control/comparison-readiness.json": "d93d3e038d947e65beaa26fbf952a65e849f7a622d56345a0aca46cec5dedd59",
+    "reports/validation/2026-10-10-three-loop-joint-control/joint_provenance.py": "7d36f7d4f863dd13c4ce735806c24f2148c7bc3c4b90a2a36882a7e9765456c7",
+    "reports/validation/2026-10-10-three-loop-joint-control/compare-joint.py": "9ee4c2936810486a69f3316ebb83b65c6b0d208762832a8f25ee37ffe8835ebf",
+    "reports/validation/2026-10-10-three-loop-joint-control/compare_three_loop_reference.py": "37bc451996bcdefc3ed6cdb57001000a3188be1b4c7c7a747031b7d095d637f1",
+    "reports/validation/2026-10-10-three-loop-joint-control/certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "reports/validation/2026-10-10-three-loop-joint-control/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-three-loop-joint-control/comparison-digest-binding.json": "3ab5dc5908b0de5709e444f15d1c791421ab9182741a6915789f5926ae231751",
+    "reports/validation/2026-10-10-three-loop-joint-control/comparison-evidence/native-digest-build.json": "e70765dd25498a7d56d23aff35af0efa0ceb12b4f8623927c527d465fc43c456",
+    "reports/validation/2026-10-10-three-loop-joint-control/check-static-comparison.py": "9e28605e6d3eaae46e9704352382609e52d3a0c6b5205969be8d1a70535268c0"
+  },
+  "restored_source_assets": 2485,
+  "exact_joined_phase_body_checks": 2,
+  "preparation_count": 1,
+  "cargo_dependency_fingerprints_exact": true,
+  "development_library_symlinks_scope": "Used only during the frozen standalone link; static producer bytes and archived source/evidence are authenticated independently of later shared libraries.",
+  "packaging_failures_retained": [
+    "build-attempt00",
+    "build-attempt01"
+  ],
+  "numeric_arithmetic_refinement_assembly_subloops_ast_equal": true,
+  "numeric_subloops_checked": 7,
+  "tolerances_or_references_changed": false,
+  "digest_executable_sha256": "b5d7d77cf54c747031e0dc8cc02395461cf1d8654bb57880d12f87dbbe30b27f",
+  "comparison_scope": "Both complete fixed and Laurent phase markers, successful static post-run checks, exactly four fixed and five Laurent profiles, original input/normalization, explicit physical singleton zero certificates and actual multicut AMF proof/transactions, before reference comparison. No live production-source substitute.",
+  "remaining_limitations": [
+    "No result from the active joint computation is accepted by this static review.",
+    "The metadata validator binds the typed singleton theorem report; it is not an independent second theorem prover.",
+    "Individual Laurent cut coefficients are not inferred from the joined full-amplitude fit."
+  ],
+  "production_modified": false
+}

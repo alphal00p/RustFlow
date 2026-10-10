@@ -1,0 +1,6 @@
+{
+  "status": "exact direct dependency correction reviewed",
+  "source_sha256": "72a0ec531a0c082b1279506f640ece27aa077c511d7689334dc8f31d6e34df36",
+  "finding": "The updated helper derives the root rlib Cargo fingerprint from its captured artifact suffix, matches exact Symbolica/serde_json dependency fingerprint u64 values to little-endian marker bytes, requires a unique library, and copies/hashes root and direct dependency fingerprint evidence. The actual compiler path, hash and -vV are bound. This closes the previous mtime-selection concern.",
+  "scope": "Read-only pre-link review, no claim that linking or native calculations have completed."
+}

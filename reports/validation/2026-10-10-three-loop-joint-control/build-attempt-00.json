@@ -1,0 +1,9 @@
+{
+  "status": "failed before compilation",
+  "error": "EXDEV: hardlinks from repository target/release/deps to /tmp are not supported by the current filesystem layout",
+  "build_helper_sha256": "f099210466e249de0a31fed1241cf6936f78586767ec29569aaccf61fb488bd6",
+  "compiler_invoked": false,
+  "prediction_started": false,
+  "source_or_shared_target_changed": false,
+  "recorded_utc": "2026-10-10T08:06:02.939274+00:00"
+}

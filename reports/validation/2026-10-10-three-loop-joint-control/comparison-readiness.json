@@ -1,0 +1,17 @@
+{
+  "status": "syntax and unchanged numerical-loop AST checks passed; actual comparison awaits complete saved joint output",
+  "scope": "Static capsule source/archive/executable and same production library identity, exact 9 profiles, singleton physical-zero certificates, actual double-cut proof BLAKE3/transaction/history audit, complete phase markers before any reference comparison. Live ROOT source/executable state is not substituted. The copied digest utility and build record are included in comparison pre/post hashes; joined phase bodies and all executed launcher identities are checked.",
+  "numerical_reference_and_tolerance_changes": false,
+  "failures_and_timeouts_accepted_as_complete": false,
+  "files_sha256": {
+    "reports/validation/2026-10-10-three-loop-joint-control/certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "reports/validation/2026-10-10-three-loop-joint-control/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-three-loop-joint-control/compare_three_loop_reference.py": "37bc451996bcdefc3ed6cdb57001000a3188be1b4c7c7a747031b7d095d637f1",
+    "reports/validation/2026-10-10-three-loop-joint-control/joint_provenance.py": "7d36f7d4f863dd13c4ce735806c24f2148c7bc3c4b90a2a36882a7e9765456c7",
+    "reports/validation/2026-10-10-three-loop-joint-control/compare-joint.py": "9ee4c2936810486a69f3316ebb83b65c6b0d208762832a8f25ee37ffe8835ebf",
+    "reports/validation/2026-10-10-three-loop-joint-control/comparison-digest-binding.json": "3ab5dc5908b0de5709e444f15d1c791421ab9182741a6915789f5926ae231751"
+  },
+  "initial_unexecuted_plan_preserved": true,
+  "numeric_arithmetic_refinement_assembly_subloops_ast_equal_to_historical_comparator": true,
+  "numeric_subloops_checked": 7
+}

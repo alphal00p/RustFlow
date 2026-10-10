@@ -1,0 +1,7 @@
+{
+  "status": "failed before compilation",
+  "error": "empty evidence directory from attempt00 already exists",
+  "build_helper_sha256": "72a0ec531a0c082b1279506f640ece27aa077c511d7689334dc8f31d6e34df36",
+  "compiler_invoked": false,
+  "prediction_started": false
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "isolated uncompiled draft; production files unchanged",
+  "files": [
+    {
+      "path": "src/finite_density/guarded.rs",
+      "sha256": "e2fbb343607a282ba2fe0b17d263e10ef17e9944114b9e73ca91f92f7299a23d",
+      "base_sha256": "07f43708eea74aa130c7c96f8a84c7795c46f0926d73636fed272144ab648e11",
+      "bytes": 52794
+    },
+    {
+      "path": "src/finite_density/interface.rs",
+      "sha256": "1fe87211b4a923f4538e4329a3920012be3c8747e198cbcbe804ecc6e37253a8",
+      "base_sha256": "027a1f2fed9169169fa4138b18ab9323d39893c75a5642612ad4d88845c4333c",
+      "bytes": 15379
+    },
+    {
+      "path": "src/finite_density/reduction/active.rs",
+      "sha256": "04230fd0bb6275acfbf72b6eaf9a498b3abc36bbd767b6e750bd50afd3ee1324",
+      "base_sha256": "a9f42ccfec590120f9f7707a7789c42ab1cfabe3063097a1a41da2c922621d7b",
+      "bytes": 77448
+    },
+    {
+      "path": "src/finite_density/reduction.rs",
+      "sha256": "545f725f4975bc6d7d86eff708baade7f0d7380e9b42926eba1b0ddad3b0612a",
+      "base_sha256": "732f85379361e31965ab944a6bfd3cd1723b7b87815f9471cdf462f89ce54abd",
+      "bytes": 102965
+    },
+    {
+      "path": "tests/finite_density_runtime_flow.rs",
+      "sha256": "96b1dc561a1ed30a6876084a093bb28771e3f01e9e6ae16c2caaf1ce1b20aba0",
+      "base_sha256": "dc69380085f5e21709bd69e4a761ff96aa4911ac453131dd88ca59a17874efe6",
+      "bytes": 20135
+    }
+  ]
+}

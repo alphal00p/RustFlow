@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-source-hashes.json",
+    "sha256": "9057e506ce003298a77236f53f23eb0343ae0275fec1d723596d95ec1f262896"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-build-provenance.json",
+    "sha256": "1fddcdcf394206a3a90f779dd9029bddeaeb26238a6f3c89a6a9ad45b812fa01"
+  },
+  "unchanged_source_files": 2485,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f",
+    "RUSTRED_SOURCE_DIGEST": "9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb",
+    "PORT_SOURCE_DIGEST": "e44acb3a9f067fb5067b461dd8c85467bbbe8ba2daeebc80addad0b7f5a554d4"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "native",
+      "status": "passed",
+      "passed": 91,
+      "failed": 0,
+      "ignored": 1,
+      "measured": 0,
+      "filtered": 3041,
+      "harness_seconds": 0.09,
+      "wall_seconds": 0.11279008910059929,
+      "peak_child_rss_kib": 15400,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-native-resources.json",
+          "sha256": "15bc21fa9e342df2f5e4561d64eae4c14cdc3a3a52248d4fba9401d772275192"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-native-resources.log",
+          "sha256": "a840996d506fed13f5e7180105a64b99d6c39754fc1c74ac12ba8e8dc80862cd"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-native-resources.provenance.json",
+          "sha256": "6b383918b8381bf6b0618be18e0de48e6da26c2944318f282ac80727f2df4889"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-native-binding.json",
+          "sha256": "253ef8c351a59d0d6c07f5546decf5e977f86a9a31da05cbc2c2eb4d50075fd2"
+        }
+      }
+    },
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 107,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.65,
+      "wall_seconds": 7.675208901055157,
+      "peak_child_rss_kib": 24576,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-lib-resources.json",
+          "sha256": "a6374da8cb3d2a253bc49f9c63605319de47bca6a6e69515fcfd1fe2c4afadd0"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-lib-resources.log",
+          "sha256": "5c46c2ed5f4b7379a062c774f5c4fa01f28ce53729366eb6de5e67a88e18e643"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-lib-resources.provenance.json",
+          "sha256": "9dedcb3646a964b8556a963c111f12fc70179feba161a512701d93b5990fb698"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-lib-binding.json",
+          "sha256": "962b88d951301436d21c535637fd74bdb70ef9a651670313786d36696843ca0a"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.17053392762318254,
+      "peak_child_rss_kib": 15396,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-flow-boundary-resources.json",
+          "sha256": "fcb388f6352deef7ec3017c6714903e0065953f6800a07ca1ffe6e81c349374b"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-flow-boundary-resources.provenance.json",
+          "sha256": "f2ea1f87ba35ed396075038e245ab7060f7c2ed3fc8314191e18a3f6bce3f0b6"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-flow-boundary-binding.json",
+          "sha256": "eef6da1f8711dd148b5e0892ebe894037705b8ca3f9506ba1b4b8caa906b4cb6"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.38,
+      "wall_seconds": 1.4023480140604079,
+      "peak_child_rss_kib": 18432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-massless-sources-resources.json",
+          "sha256": "903222c0280ca85e0d17f42772a9ac25690937422902e84b32d791c97681819c"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-massless-sources-resources.log",
+          "sha256": "9a423b0549e1d3c579e38881dca906fad8fcb1aed415b5d4e661e95df7a5c09e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-massless-sources-resources.provenance.json",
+          "sha256": "c40500e5fb3e0d150249a1e123db13be784ae1fdef17f86cdb97ae2e5a29252b"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-massless-sources-binding.json",
+          "sha256": "7062893ebafcc902c4dc064f359338fbc6d11fb3fb770fbdc39bf7129009636c"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.013686093036085367,
+      "peak_child_rss_kib": 15380,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-source-fingerprint-resources.json",
+          "sha256": "ad2f1d4f5f9479674fe1e4c186f7403d9fea6c44cd3d51fd79bc63115bc88a1e"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-source-fingerprint-resources.log",
+          "sha256": "f30bab7d2bf4e52bebb18cabd6012c17bbb867b2cf52efc4bf09292bec0dfab7"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-source-fingerprint-resources.provenance.json",
+          "sha256": "9a8f98660f437b6df0627f0e66b558faa01356f7564d998e7913474dffec2aa3"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-source-fingerprint-binding.json",
+          "sha256": "636b889948df9ad6e49dd3c4f41fc18af3293977bd174ccf120f08a0c620288b"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.77,
+      "wall_seconds": 1.7907376568764448,
+      "peak_child_rss_kib": 30720,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-python-resources.json",
+          "sha256": "a6e5ec5e5016f72bd064ede2eee5a7e45fbdc10ee4b5458ede8964e514ecb0d7"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-python-resources.log",
+          "sha256": "b662839bce1057373f2a9af903d076b8e6e732c62862ad244595a00ae94a3558"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-python-resources.provenance.json",
+          "sha256": "befa1cc014996e52a8223ef243371849de76e32f6da7b16483db9cc62f56c2fa"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-python-binding.json",
+          "sha256": "0f9230d78804b85770ddf1a820bb31bc0d0cbc69a51e713f2680800fdcb55e55"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.04,
+      "wall_seconds": 0.055971463210880756,
+      "peak_child_rss_kib": 15416,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-capacity-resources.json",
+          "sha256": "fb891eab22859780dd1009db02106f117cbc6f5d638bb85c3d6bd125b859ad63"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-capacity-resources.log",
+          "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-capacity-resources.provenance.json",
+          "sha256": "5debc154a9069b697f70f1c542536f379fe63d04e9ae51ef4437f417d4d0e2a2"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-capacity-binding.json",
+          "sha256": "1720f0118ac34b0aea9cb8304550b3e256af91b1ef3027b9af124bfd5dffd139"
+        }
+      }
+    },
+    {
+      "gate": "polynomial-sources",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.06,
+      "wall_seconds": 0.07860450400039554,
+      "peak_child_rss_kib": 15448,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-polynomial-sources-resources.json",
+          "sha256": "a57c7964b43949c143e87741faf49422ee273a5be0f930a74fab6924a935b4af"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-polynomial-sources-resources.log",
+          "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-polynomial-sources-resources.provenance.json",
+          "sha256": "7b825d107e56e78e2b6e0f0560bb82a95c031016533f3eed5b243acb12b5bc90"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-polynomial-sources-binding.json",
+          "sha256": "415cafbca75fd84ef97fdcb1fb3d81b8de3c1e9448038afdf34fbb7d18ed6a2d"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 218,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+}

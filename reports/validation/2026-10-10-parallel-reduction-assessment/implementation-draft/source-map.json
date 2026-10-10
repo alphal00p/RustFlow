@@ -1,0 +1,22 @@
+{
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/batch.rs": {
+    "sha256": "9c4f4363ae958a403222bc8ce5f2a69d73af68b891ddc9a9142508cadee77831",
+    "base_sha256": null
+  },
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests/batch_tests.rs": {
+    "sha256": "f9a87be2dbf8142733fbdea8e502f4da851b976a21633467ef1b623be766673c",
+    "base_sha256": null
+  },
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs": {
+    "sha256": "67d044f6f0bfc373882c7da51e5861e9bb5467bd27e535075e903569e3543d2a",
+    "base_sha256": "7fc54e295b905b68de6380be4ac17ecbdc1425982a4e46a0acb1eda017ebf69b"
+  },
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs": {
+    "sha256": "fa3f4f935104adcc1d1bfa8c8138eb39d3805cd2890071a6a48f0d495c115bc1",
+    "base_sha256": "3c452f4b5684330b7502703eb37b446c4aecab57e898f67456c6b586f98ee6de"
+  },
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": {
+    "sha256": "7f2430a9426ea941d9403a750f0fc2ed181ef2a6eb4727631eaf5f258cae50e9",
+    "base_sha256": "ac4d34e733eed3e9c393a28284606b128a7b7d027580984b107b3290c19aadd0"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "scope": "compile-time Send+Sync gate; no reduction or execution; shared target read-only",
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-type=lib",
+    "--emit=metadata",
+    "-A",
+    "dead_code",
+    "--crate-name",
+    "parallel_reduction_traits",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "--extern",
+    "rustred=/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-parallel-reduction-assessment/send-sync.rs",
+    "-o",
+    "/tmp/rustflow-parallel-reduction-traits.rmeta"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.09265445405617356,
+  "libs": {
+    "rustred": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "dc3c900d6fcf11c2996d0d599266eae8c7f3f71f925995b711bf8181e1a5c515",
+      "frozen_build_expected_sha256": "dc3c900d6fcf11c2996d0d599266eae8c7f3f71f925995b711bf8181e1a5c515"
+    },
+    "symbolica_amflow": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "1ceb94f9bcdd8ac16e3eb7dc71ed9eb9ba1ed1db02c1b06012c76730f73aa985",
+      "frozen_build_expected_sha256": "1ceb94f9bcdd8ac16e3eb7dc71ed9eb9ba1ed1db02c1b06012c76730f73aa985"
+    },
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "frozen_build_expected_sha256": null
+    }
+  },
+  "source_sha256": "1ac4198fd09d8c900a03c37466573807c912d050bb1e7e74ebf8159603118c1f",
+  "frozen_build_provenance": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-integration/terminal-promotion-build-provenance.json",
+    "sha256": "7a2bb0deafabb402d5d70bd6b2d776e1006c632b5f92ab9de30d55af33e8550d"
+  },
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 21.1.8\n",
+  "source_files": {
+    "src/finite_density/reduction/active.rs": "a9f42ccfec590120f9f7707a7789c42ab1cfabe3063097a1a41da2c922621d7b",
+    "src/finite_density/guarded.rs": "07f43708eea74aa130c7c96f8a84c7795c46f0926d73636fed272144ab648e11",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": "ac4d34e733eed3e9c393a28284606b128a7b7d027580984b107b3290c19aadd0",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs": "3c452f4b5684330b7502703eb37b446c4aecab57e898f67456c6b586f98ee6de",
+    "vendor/rustred/crates/rustred-core/src/algebra/thread_owned.rs": "839c2ae863101320f9b106707a6fdbb011e681d4dd34468b58218d65172d2ca4"
+  }
+}

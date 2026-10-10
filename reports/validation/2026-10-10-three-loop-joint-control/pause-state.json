@@ -1,0 +1,24 @@
+{
+  "status": "paused_at_user_request",
+  "captured_utc": "2026-10-10T09:22:30.072882+00:00",
+  "active_owned_processes": 0,
+  "saved_json_files_parsed": 68,
+  "archived_checkpoints": 24,
+  "native_closure": false,
+  "fixed_predictions": 0,
+  "laurent_predictions": 0,
+  "numerical_comparisons": 0,
+  "last_provisional_round": 5,
+  "last_provisional_requested": 3343,
+  "last_provisional_frontier": 3315,
+  "last_completed_discovery": {
+    "call": 7,
+    "requests": 3343,
+    "allocated_domains": 6629,
+    "native_rules": 10235
+  },
+  "runtime_child_exit": -15,
+  "launcher_exit": 241,
+  "static_capsule_unchanged": true,
+  "resume_requires_fresh_production_preparation": true
+}

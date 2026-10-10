@@ -1,0 +1,7 @@
+{
+  "scope": "Nix toolchain resolved during both isolated native test builds; compiler uses unchanged pinned dependency artifacts.",
+  "rustc": "/nix/store/paaihvr59q1101200mabmk7y4yhw42g7-rustc-wrapper-1.97.1/bin/rustc",
+  "rustc_sha256": "d1e06b7c73a05d2c899ae69b0463aa0e3865dd45f929d7044972670b313998b1",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 21.1.8\n",
+  "nix_flake_lock_sha256": "01d38f66c85385251cedc49d5fbebf52da6d46b937038b771619291c5177caa4"
+}

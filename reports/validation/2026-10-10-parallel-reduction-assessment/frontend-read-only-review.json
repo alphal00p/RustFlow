@@ -1,0 +1,25 @@
+{
+  "scope": "Independent static review of isolated frontend batch wiring; no execution, promotion or performance claim.",
+  "verdict": "No source-level correctness blocker found in this snapshot. Coherent frontend compilation/tests remain separate.",
+  "files": {
+    "src/finite_density/guarded.rs": "e2fbb343607a282ba2fe0b17d263e10ef17e9944114b9e73ca91f92f7299a23d",
+    "src/finite_density/reduction.rs": "545f725f4975bc6d7d86eff708baade7f0d7380e9b42926eba1b0ddad3b0612a",
+    "src/finite_density/reduction/active.rs": "30c383b8b9a0b67061333838ca21b250271fd3e88a50360af5a49e04cf608f28",
+    "src/finite_density/interface.rs": "1fe87211b4a923f4538e4329a3920012be3c8747e198cbcbe804ecc6e37253a8",
+    "tests/finite_density_runtime_flow.rs": "96b1dc561a1ed30a6876084a093bb28771e3f01e9e6ae16c2caaf1ce1b20aba0"
+  },
+  "reviewed_contracts": [
+    "Optional default None leaves original reduce_sum path available. Only independent components of one weighted sum are chunked; active pending visitation/discovery order remain unchanged.",
+    "Input validation includes zero-weight labels and stops at first invalid input; earlier native/output failure takes precedence over saved later validation failure.",
+    "Native/codec/conversion errors stay ordered per-item errors. Later errors are counted but later conditions/results never enter the consumed logical prefix.",
+    "Whole-batch executed native work is recorded before logical commits; unknown work inside native Err stays explicitly incomplete. Logical/memoized prefix counts remain separate from actual/speculative counters.",
+    "Per-item ordered memo snapshots preserve consumed-prefix peak accounting for the actual execution. Retained-byte caps remain native owned-payload caps, not decoded/CAS scratch bounds.",
+    "Returned terms/residuals are validated under the unchanged admitted-domain contract; only NoApplicableRule residuals may cancel within the weighted sum. Other failures remain explicit.",
+    "Final source replay and target/every-basis-derivative reconstruction callsites remain in place. No lower-level pending queue or scalar algebra is replaced."
+  ],
+  "qualifications": [
+    "Extra cancellation polls can stop after native work before committing a finished batch; tests explicitly account that work and retain no later guards. This is an opt-in bounded-batch cancellation contract.",
+    "Symbolica global registry export prevents a universal identical cache-byte/hit/peak claim when external registrations or interleaved frontend CAS change global state. Controlled native serial/batch tests establish their own scoped equality only.",
+    "Private result-shape invariants (ordered item/snapshot/window counts) are supplied by the native API and its tests. The wrapper does not ingest an untrusted serialized batch."
+  ]
+}

@@ -1,0 +1,77 @@
+--- reports/validation/2026-10-10-singleton-physical-zero-integration-v2/compare_three_loop_reference.py
++++ reports/validation/2026-10-10-three-loop-joint-control/compare_three_loop_reference.py
+@@ -66,71 +66,9 @@
+ 
+ 
+ def validate_native_provenance(args, directories, definition_path):
+-    # The runtime harness prepares all sectors through Run::full in both modes.
+-    # Laurent records currently omit per-sector construction reports, so bind
+-    # them to a completed fixed-D gate using the same input, source options,
+-    # closure options, exact executable and native compile identities.
+-    provenance_path = args.run_provenance.resolve()
+-    snapshot_path = args.source_snapshot.resolve()
+-    provenance_paths = [provenance_path] + [p.resolve() for p in args.additional_run_provenance]
+-    require(len(provenance_paths) == len(directories), "one runtime provenance per prediction directory required")
+-    snapshot = read(snapshot_path)
+-    executable = None
+-    for captured in provenance_paths:
+-        provenance = read(captured)
+-        executables = [v for k,v in provenance["argument_files"].items() if Path(k).name.startswith("finite_density_runtime_flow-")]
+-        require(len(executables) == 1, "no unique captured runtime native executable")
+-        sha = executables[0]["sha256"]
+-        require(executable is None or executable == sha, "native executable changed between resumed runs")
+-        executable = sha
+-    inputs = provenance_paths + [snapshot_path]
+-    checked_sources = {}
+-    for name in ["Cargo.lock","src/finite_density/assembly.rs","src/finite_density/flow.rs","src/finite_density/guarded.rs","src/finite_density/singleton_zero.rs","src/finite_density/massless_endpoint.rs","tests/finite_density_runtime_flow.rs",str(definition_path.relative_to(ROOT))]:
+-        require(name in snapshot["files"], "native source snapshot missing " + name)
+-        require(digest(ROOT/name) == snapshot["files"][name], "native source artifact changed: " + name)
+-        checked_sources[name] = snapshot["files"][name]
+-    baseline = None
+-    compile_ids = set()
+-    metadata_files = []
+-    certificate_arrays = []
+-    for directory in directories:
+-        certs, certpath = load_certificates(directory,read(definition_path),CUTS)
+-        certificate_arrays.append(certs); inputs.append(certpath)
+-        config_path = directory/"configuration.json"
+-        config = read(config_path);inputs.append(config_path)
+-        require(config["independent_reference_comparisons"] == 0, "native configuration contains reference comparisons")
+-        require(config["input_path"] == str(definition_path.relative_to(ROOT)), "native configuration uses different input")
+-        require(config["profiles"] == [list(x) for x in CONFIGURATIONS], "full precision/order/start profiles required")
+-        # Rust Debug represents checkpoint paths as escaped quoted strings.
+-        closure = re.sub(r'checkpoints: Some\((?:\\"|\").*?(?:\\"|\")\)', 'checkpoints: None', config["native_closure"])
+-        normalized = {"source_options":config["source_options"],"native_closure":closure,"guard_digits":config["guard_digits"]}
+-        require(baseline is None or normalized == baseline, "native source/closure policy changed between prediction directories")
+-        baseline = normalized
+-        for cuts in (CUTS[-1],):
+-            sub = directory/"native-closure"/("cut-"+"-".join(map(str,cuts)))
+-            files = sorted(sub.glob("round-*-closed.json"))
+-            require(files, "missing successful native closure metadata for cut " + str(cuts))
+-            for path in files:
+-                row=read(path);require(row["status"]=="closed","unclosed native program")
+-                fields=row["measure_id"].split(":",3)
+-                require(fields[0]=="rustflow-weighted-sources-v1" and all(re.fullmatch(r"[0-9a-f]{64}",x) for x in fields[1:3]),"missing native dependency compile identities")
+-                compile_ids.add(tuple(fields[1:3]));inputs.append(path);metadata_files.append({"path":label(path),"sha256":digest(path),"cut_slots":cuts,"physical_arity":row["physical_arity"],"storage_capacity":row["storage_capacity"]})
+-    require(len(compile_ids)==1,"native dependency compile identities changed")
+-    require(all(c==certificate_arrays[0]for c in certificate_arrays),"physical singleton certificates changed between resumed runs")
+-    report={"configuration":baseline,"executable_sha256":executable,"dependency_compile_ids":list(next(iter(compile_ids))),"source_snapshot_sha256":digest(snapshot_path),"checked_source_files":checked_sources,"closed_metadata":metadata_files,"physical_zero_certificates":certificate_arrays[0]}
+-    if args.mode=="laurent":
+-        require(args.sample_comparison is not None,"Laurent gate requires matching successful fixed-D construction evidence")
+-        sample_path=args.sample_comparison.resolve();sample=read(sample_path);inputs.append(sample_path)
+-        require(sample["status"]=="passed" and sample["mode"]=="sample","fixed-D construction evidence did not pass")
+-        old=sample["native_provenance"]
+-        for key in ["configuration","executable_sha256","dependency_compile_ids","source_snapshot_sha256","physical_zero_certificates"]:
+-            require(old[key]==report[key],"Laurent provenance differs from successful fixed-D run: "+key)
+-        for name,sha in sample["inputs_sha256"].items():
+-            path=ROOT/name if not Path(name).is_absolute() else Path(name)
+-            require(digest(path)==sha,"fixed-D supporting artifact changed: "+name)
+-        report["fixed_dimension_comparison"]={"path":label(sample_path),"sha256":digest(sample_path)}
+-        report["construction_limit"]="Laurent harness omits direct per-sector reports; multicut weighted-AMF construction and separate singleton physical-zero certificates are bound to the successful fixed-D gate and the identical Run::full source/executable and exact native compile identities. No per-sector Laurent coefficient claim."
+-    return report,inputs
++    from joint_provenance import verify_joint
++    require(directories == [(Path(__file__).resolve().parent/"predictions").resolve()], "joint comparison uses its exact captured prediction directory")
++    return verify_joint(args.mode)
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)

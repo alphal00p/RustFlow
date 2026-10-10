@@ -1,0 +1,63 @@
+{
+  "scope": "Completed production-library lower-loop comparisons are launch prerequisites. Their values are never passed to the joint native prediction process.",
+  "captured_files": [
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-two-loop-fixed-comparison.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-two-loop-fixed-comparison.json",
+      "sha256": "00f3e341c3c8a4f80203321cc70d19509deb138ba4bc48ec61bbf8d0b67b23c9",
+      "bytes": 53711
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-two-loop-fixed-comparison-binding.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-two-loop-fixed-comparison-binding.json",
+      "sha256": "287c3c14b21116eecd0cba7f9946a9b1a680d2ab7f66ffd8e50c4f6b79ecd554",
+      "bytes": 33757
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-two-loop-fixed-binding.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-two-loop-fixed-binding.json",
+      "sha256": "a2446cb68ae6b3f87fde8712e58d612ae64474d60a435dd61d2d83ed6ca917a5",
+      "bytes": 2510
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-two-loop-laurent-comparison.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-two-loop-laurent-comparison.json",
+      "sha256": "a69d999372e3dfb1351c09d253712ac735eed85e5ab4c5e6b1b39851dd8a78af",
+      "bytes": 51548
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-two-loop-laurent-comparison-binding.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-two-loop-laurent-comparison-binding.json",
+      "sha256": "9a72b28228a8cccccfa8702d7880f184783d63339e2b5af833a612ad92fc2347",
+      "bytes": 34473
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-two-loop-laurent-binding.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-two-loop-laurent-binding.json",
+      "sha256": "4f575cea7b7a06b8955356741e6e63fd2a047d9f6fc054deea80d0bd12b3b037",
+      "bytes": 2510
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-massive-regression-comparison.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-massive-regression-comparison.json",
+      "sha256": "a288ddf8fe1f1aa5ba58acecfcc9b57da0d7dbcb29e04f349c28e2857a4a6797",
+      "bytes": 14360
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-massive-regression-comparison-binding.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-massive-regression-comparison-binding.json",
+      "sha256": "17505489a518fb1f0032b96b25d873d2f7a01cb51c367f9b466b2ca46c789e08",
+      "bytes": 13071
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/singleton-physical-zero-v2-massive-regression-binding.json",
+      "copy_path": "evidence/singleton-physical-zero-v2-massive-regression-binding.json",
+      "sha256": "ba30636a56ca478469babaac6a441e16430bc64cb5327379efa6fc0b631af2db",
+      "bytes": 2987
+    }
+  ],
+  "source_snapshot_sha256": "9057e506ce003298a77236f53f23eb0343ae0275fec1d723596d95ec1f262896",
+  "build_provenance_sha256": "1fddcdcf394206a3a90f779dd9029bddeaeb26238a6f3c89a6a9ad45b812fa01",
+  "all_three_comparisons_passed": true,
+  "capture_script_sha256": "34b0cc8212a4324d2640607d13f8783ef32814c6acb0b4596f2ae27a3f2628e0"
+}

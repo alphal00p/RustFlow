@@ -1,0 +1,157 @@
+{
+  "scope": "Frozen isolated batch experiment at user-requested safe pause; external /tmp executable/library bindings are recorded in build/resource reports.",
+  "files": {
+    "README.md": {
+      "sha256": "168d71d96744b2dfff40dbf7a280b619157f3472115b3fa4f505608f15715413",
+      "bytes": 3031
+    },
+    "batch-tests-01.json": {
+      "sha256": "63159363cf1832515ba801ff47bbf75ae9c69338bc36bb288b50877c8f16da87",
+      "bytes": 373
+    },
+    "batch-tests-01.log": {
+      "sha256": "2f17c059e7ff17376431e931ba3d8639e7895dee6275bf453e90bf9cd9989755",
+      "bytes": 1399
+    },
+    "batch-tests-01.provenance.json": {
+      "sha256": "15069a279163eb53d02cd06d1e209b2f01623ea1e81c883502a6ceec01317f3b",
+      "bytes": 558
+    },
+    "build-isolated.py": {
+      "sha256": "f6cf0f962b11c377742c563480eba46f03078045c5678a20cc0d960f8258b925",
+      "bytes": 3903
+    },
+    "design.md": {
+      "sha256": "2bd5ebe8c3a6acc6972efb6e438371784ffae60deb190b3e4b253610dc0f9595",
+      "bytes": 4160
+    },
+    "frontend-read-only-review.json": {
+      "sha256": "58e47a5f56e9957ff13b02dcb9222ddaddd51ce59a92e2bc2cb452d64a43265e",
+      "bytes": 2808
+    },
+    "guarded-tests-02.json": {
+      "sha256": "9398dede82e6ade17dc923cf4e677edc9a9a62e73e8fcccbe4f22e4a7972a5ee",
+      "bytes": 374
+    },
+    "guarded-tests-02.log": {
+      "sha256": "093a5be3329aab6240a3877e008aa3f775256126adba9ddb97d6f478a2f55bea",
+      "bytes": 16442
+    },
+    "guarded-tests-02.provenance.json": {
+      "sha256": "2d6d7e24283f7182591ab4e21064d892b50f3e367018fb99867392a47bd128d7",
+      "bytes": 560
+    },
+    "implementation-draft/base-source-map.json": {
+      "sha256": "01fa595440e4962b7f0ef15b443f370023efeb4e3f68dc23c4a6e9cd81cff146",
+      "bytes": 449
+    },
+    "implementation-draft/native-batch.patch": {
+      "sha256": "0f19e0018e8a8a39644839f0885daf2723935e4fad096af5c1f755221d57f01d",
+      "bytes": 28865
+    },
+    "implementation-draft/revision-01/batch.patch": {
+      "sha256": "2a6d55246bdd27207e725f35937ec70890954933a58dbddd7fd54009e10c00db",
+      "bytes": 26427
+    },
+    "implementation-draft/revision-01/source-map.json": {
+      "sha256": "73a3e924991cd808d495f25df9b2ad0f7427dbe9e9a7fe97847fa761db86cb17",
+      "bytes": 1184
+    },
+    "implementation-draft/revision-01/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/batch.rs": {
+      "sha256": "90f98531c319e57bef314e7e0fafe355770f701eef1716c874eac2e6775ded6f",
+      "bytes": 9679
+    },
+    "implementation-draft/revision-01/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests/batch_tests.rs": {
+      "sha256": "82ad2fec57a5ba9851562e46c552a03a5da8ae8ca3093b65e5c913940d18d53c",
+      "bytes": 14677
+    },
+    "implementation-draft/revision-01/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs": {
+      "sha256": "67d044f6f0bfc373882c7da51e5861e9bb5467bd27e535075e903569e3543d2a",
+      "bytes": 19787
+    },
+    "implementation-draft/revision-01/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs": {
+      "sha256": "fa3f4f935104adcc1d1bfa8c8138eb39d3805cd2890071a6a48f0d495c115bc1",
+      "bytes": 15813
+    },
+    "implementation-draft/revision-01/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": {
+      "sha256": "7f2430a9426ea941d9403a750f0fc2ed181ef2a6eb4727631eaf5f258cae50e9",
+      "bytes": 68366
+    },
+    "implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/batch.rs": {
+      "sha256": "9c4f4363ae958a403222bc8ce5f2a69d73af68b891ddc9a9142508cadee77831",
+      "bytes": 10093
+    },
+    "implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests/batch_tests.rs": {
+      "sha256": "f9a87be2dbf8142733fbdea8e502f4da851b976a21633467ef1b623be766673c",
+      "bytes": 16640
+    },
+    "implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs": {
+      "sha256": "67d044f6f0bfc373882c7da51e5861e9bb5467bd27e535075e903569e3543d2a",
+      "bytes": 19787
+    },
+    "implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs": {
+      "sha256": "fa3f4f935104adcc1d1bfa8c8138eb39d3805cd2890071a6a48f0d495c115bc1",
+      "bytes": 15813
+    },
+    "implementation-draft/source/vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": {
+      "sha256": "7f2430a9426ea941d9403a750f0fc2ed181ef2a6eb4727631eaf5f258cae50e9",
+      "bytes": 68366
+    },
+    "implementation-draft/source-map.json": {
+      "sha256": "e00c2c6fc278c7735eb2b15081037fa0fba21013b477209f4702ac8af495f86d",
+      "bytes": 1184
+    },
+    "independent-batch-review.json": {
+      "sha256": "b4124608c08286ae8dc8146a32a45212f337155b31a489e85760d3ed7f8de75d",
+      "bytes": 5832
+    },
+    "j3-completed-checkpoint-observations.json": {
+      "sha256": "5c7052e54c52bdba7376faf896cc02f480cbf58315899beb4a0b7b8e569557c7",
+      "bytes": 5966
+    },
+    "library-build-02.json": {
+      "sha256": "e123ab022f68f41376c74ef679eee47ef515679a03d5b43288805d4b228c19c6",
+      "bytes": 380390
+    },
+    "library-build-02.log": {
+      "sha256": "caf9d801e81365f63899c4e2f65a42bf4f60f812fe9e36de73d44424dbffb39f",
+      "bytes": 2254
+    },
+    "safe-pause-state.json": {
+      "sha256": "e90037bdd5cf21dcd070f3a0edda0fd635f504cb4bbe380e38ed817bed941f4a",
+      "bytes": 1245
+    },
+    "send-sync-build.json": {
+      "sha256": "51920753e9b05ce7692e4573768db0d08377acbbc55149cc845272589fd55e2e",
+      "bytes": 3112
+    },
+    "send-sync-build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "send-sync.rs": {
+      "sha256": "1ac4198fd09d8c900a03c37466573807c912d050bb1e7e74ebf8159603118c1f",
+      "bytes": 585
+    },
+    "tests-build-01.json": {
+      "sha256": "aa1f9b305c3594ae27b2590e36f60a00eed76c66ca441b1bd8a089be684ed845",
+      "bytes": 380368
+    },
+    "tests-build-01.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tests-build-02.json": {
+      "sha256": "c724d54d0fea66512492f5924a74be809ed5968741be2cc751b2011bf2d8920e",
+      "bytes": 380367
+    },
+    "tests-build-02.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "toolchain-binding.json": {
+      "sha256": "b0e75f2ae8cd586c4a269e22bc85979ee538a53d6d3ba9246576bb02bd1fd76a",
+      "bytes": 660
+    }
+  }
+}

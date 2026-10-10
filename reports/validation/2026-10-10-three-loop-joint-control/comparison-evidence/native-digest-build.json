@@ -1,0 +1,61 @@
+{
+  "scope": "Tiny validation-only adapter linked to the cached native BLAKE3 dependency. No Cargo, RustFlow source mutation, native proof change or reference-value calculation.",
+  "exit_code": 0,
+  "wall_seconds": 1.3066513082012534,
+  "command": [
+    "nix",
+    "develop",
+    "--command",
+    "rustc",
+    "--edition=2024",
+    "-O",
+    "-L",
+    "dependency=target/release/deps",
+    "--extern",
+    "blake3=/common/dev/rustflow_fermi/target/release/deps/libblake3-7e7c54a1423310f4.rlib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/blake3-222d768860627915/out",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/blake3-9252326cebd21167/out",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/native-digest.rs",
+    "-o",
+    "/tmp/rustflow-singleton-physical-zero-v2-digest"
+  ],
+  "source_snapshot_sha256": "9057e506ce003298a77236f53f23eb0343ae0275fec1d723596d95ec1f262896",
+  "build_provenance_sha256": "1fddcdcf394206a3a90f779dd9029bddeaeb26238a6f3c89a6a9ad45b812fa01",
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration-v2/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "/common/dev/rustflow_fermi/target/release/deps/libblake3-7e7c54a1423310f4.rlib": "56bd027558287801746b55a81b904418d78ac1c9c6bc61b2ee06cc1078a58381"
+  },
+  "native_archives_sha256": {
+    "/common/dev/rustflow_fermi/target/release/build/blake3-222d768860627915/out/libblake3_sse2_sse41_avx2_assembly.a": "27b162c8d04584d072d78786a65952fb2725006d4e753c321417a362887ea2c8",
+    "/common/dev/rustflow_fermi/target/release/build/blake3-222d768860627915/out/libblake3_avx512_assembly.a": "ac7b50f9e6dede52a96b2f2436d2cccf110c88df45854f25841c2a9335eb5e12",
+    "/common/dev/rustflow_fermi/target/release/build/blake3-9252326cebd21167/out/libblake3_sse2_sse41_avx2_assembly.a": "c54fbd0e6fb3ac073020c8306420ebf959584b57f28af7c6a8751a53305494f4",
+    "/common/dev/rustflow_fermi/target/release/build/blake3-9252326cebd21167/out/libblake3_avx512_assembly.a": "136b1985fdb1e8ad83d8f1d7769c18a7ade8d568bddd9f05cc4d29c2e00a6a3a"
+  },
+  "builder_sha256": "8baa2c5e08f5df58913af9edaa1b69119e24c38745faf75e178edff599227c73",
+  "executable": {
+    "path": "/tmp/rustflow-singleton-physical-zero-v2-digest",
+    "sha256": "b5d7d77cf54c747031e0dc8cc02395461cf1d8654bb57880d12f87dbbe30b27f"
+  },
+  "controls": [
+    {
+      "name": "empty",
+      "bytes": 0,
+      "blake3": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262",
+      "actual_output": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262 0",
+      "exit_code": 0,
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "name": "abc",
+      "bytes": 3,
+      "blake3": "6437b3ac38465133ffb63b75273a8db548c558465d79db03fd359c6cd5bd9d85",
+      "actual_output": "6437b3ac38465133ffb63b75273a8db548c558465d79db03fd359c6cd5bd9d85 3",
+      "exit_code": 0,
+      "stderr": "",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "captured_utc": "2026-10-10T09:16:57.163917+00:00",
+  "command": [
+    "/tmp/rustred-ordered-unit-batch-tests-20261010-02",
+    "solver::guarded",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "/tmp/rustred-ordered-unit-batch-tests-20261010-02": {
+      "resolved_path": "/tmp/rustred-ordered-unit-batch-tests-20261010-02",
+      "sha256": "b055fd17af6fa53fc2b8756d62c667204423f86a998a1e1d49ec58b125e15a2b",
+      "size_bytes": 325103184
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

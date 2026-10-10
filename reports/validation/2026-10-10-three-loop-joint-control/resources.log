@@ -1,0 +1,8 @@
+
+running 1 test
+test runtime_graph_joint_predictions ... DifferentialClosure { round: 0, requested: 32, basis_size: 27, new_derivatives: 26 }
+DifferentialClosure { round: 1, requested: 194, basis_size: 188, new_derivatives: 184 }
+DifferentialClosure { round: 2, requested: 834, basis_size: 822, new_derivatives: 816 }
+DifferentialClosure { round: 3, requested: 1839, basis_size: 1820, new_derivatives: 1810 }
+DifferentialClosure { round: 4, requested: 2783, basis_size: 2758, new_derivatives: 2745 }
+DifferentialClosure { round: 5, requested: 3343, basis_size: 3315, new_derivatives: 3301 }

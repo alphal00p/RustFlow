@@ -1,0 +1,8 @@
+{
+  "reason": "User requested pause when safe",
+  "requested_utc": "2026-10-10T09:20:37.259446+00:00",
+  "signal": "SIGTERM",
+  "pid": 25661,
+  "verified_executable": "/tmp/rustflow-three-loop-joint-20261010/runtime",
+  "scope": "Stop only the owned runtime child; allow timeout/resource/launcher wrappers to save termination and immutable-capsule checks. Completed native checkpoints remain evidence, not resumable state or closure."
+}

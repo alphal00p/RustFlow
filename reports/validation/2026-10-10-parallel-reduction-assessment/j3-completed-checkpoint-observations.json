@@ -1,0 +1,176 @@
+{
+  "captured_utc": "2026-10-10T08:50:35.179695+00:00",
+  "scope": "read-only published checkpoint counts; not timings, closure or failure diagnosis",
+  "rounds": [
+    {
+      "file": "reports/validation/2026-10-10-three-loop-joint-control/predictions/native-closure/cut-0-3/round-000-provisional.json",
+      "sha256": "f5d07981e78cf38ab89b828efeb4d45c37e03f0958d889888d4fffd4b031b4bc",
+      "mtime_utc": "2026-10-10T08:09:42.130145+00:00",
+      "round": 0,
+      "native_rules": 11,
+      "frontier": 27,
+      "requested": 32,
+      "active_counts": {
+        "completed_requests": 12,
+        "deferred_requests": 0,
+        "historical_requests": 12,
+        "next_needed": 32,
+        "submitted_requests": 12
+      }
+    },
+    {
+      "file": "reports/validation/2026-10-10-three-loop-joint-control/predictions/native-closure/cut-0-3/round-001-provisional.json",
+      "sha256": "864eb660383e2c544b9562c385ef6fbd7b58dfed5986d7bd64f887953c7e9af6",
+      "mtime_utc": "2026-10-10T08:09:44.061150+00:00",
+      "round": 1,
+      "native_rules": 34,
+      "frontier": 188,
+      "requested": 194,
+      "active_counts": {
+        "completed_requests": 32,
+        "deferred_requests": 0,
+        "historical_requests": 38,
+        "next_needed": 194,
+        "submitted_requests": 32
+      }
+    },
+    {
+      "file": "reports/validation/2026-10-10-three-loop-joint-control/predictions/native-closure/cut-0-3/round-002-provisional.json",
+      "sha256": "6810869cc11dd210039083834d273b09b66ede71bd487bf41bf4b8d27ffc1409",
+      "mtime_utc": "2026-10-10T08:09:51.461166+00:00",
+      "round": 2,
+      "native_rules": 221,
+      "frontier": 822,
+      "requested": 834,
+      "active_counts": {
+        "completed_requests": 194,
+        "deferred_requests": 0,
+        "historical_requests": 222,
+        "next_needed": 834,
+        "submitted_requests": 194
+      }
+    },
+    {
+      "file": "reports/validation/2026-10-10-three-loop-joint-control/predictions/native-closure/cut-0-3/round-003-provisional.json",
+      "sha256": "e4410505be4b6446df65f024df6290215026eb3f30a38a70eccdcdc23e09176f",
+      "mtime_utc": "2026-10-10T08:10:27.326245+00:00",
+      "round": 3,
+      "native_rules": 1083,
+      "frontier": 1820,
+      "requested": 1839,
+      "active_counts": {
+        "completed_requests": 834,
+        "deferred_requests": 0,
+        "historical_requests": 1038,
+        "next_needed": 1839,
+        "submitted_requests": 834
+      }
+    },
+    {
+      "file": "reports/validation/2026-10-10-three-loop-joint-control/predictions/native-closure/cut-0-3/round-004-provisional.json",
+      "sha256": "0d28a5b0c61e8085e2f1eb2559f6a52a98349d793511384891ca7d1ade2cd83b",
+      "mtime_utc": "2026-10-10T08:17:06.662415+00:00",
+      "round": 4,
+      "native_rules": 3114,
+      "frontier": 2758,
+      "requested": 2783,
+      "active_counts": {
+        "completed_requests": 1839,
+        "deferred_requests": 0,
+        "historical_requests": 2848,
+        "next_needed": 2783,
+        "submitted_requests": 1839
+      }
+    },
+    {
+      "file": "reports/validation/2026-10-10-three-loop-joint-control/predictions/native-closure/cut-0-3/round-005-provisional.json",
+      "sha256": "afa1113d76e00ed97674070d2ccc14fc0b9611833854d3c971b41e93dedb6f47",
+      "mtime_utc": "2026-10-10T08:39:40.440875+00:00",
+      "round": 5,
+      "native_rules": 6283,
+      "frontier": 3315,
+      "requested": 3343,
+      "active_counts": {
+        "completed_requests": 2783,
+        "deferred_requests": 0,
+        "historical_requests": 5593,
+        "next_needed": 3343,
+        "submitted_requests": 2783
+      }
+    }
+  ],
+  "completed_discovery": {
+    "file": "reports/validation/2026-10-10-three-loop-joint-control/predictions/native-closure/cut-0-3/requested-discovery-0007.json",
+    "sha256": "7290d2b9ef9bcdb852133a869c3d5163dc495a353b70260993d69559678244be",
+    "mtime_utc": "2026-10-10T08:40:36.688026+00:00",
+    "status": "complete",
+    "call": 7,
+    "completed_requests": 3343,
+    "deferred_requests": 0,
+    "allocated_domains": 6629,
+    "remaining_domains": 26139,
+    "allocation_is_measured_visits": false,
+    "native_program": {
+      "blake3": "eb47ca163597db5f102054bdd50b5d082c120c8450722681bf74a5c15dd1b13e",
+      "bytes": 14181714,
+      "rules": 10235
+    },
+    "historical_gap_count": 25078,
+    "transaction_keys": [
+      "allocated_point_domains",
+      "allocated_ray_domains",
+      "complete",
+      "integral",
+      "point_gaps",
+      "point_probe",
+      "point_still_unresolved",
+      "ray_gaps",
+      "ray_probe",
+      "reason",
+      "remaining_after",
+      "remaining_before",
+      "retained_probe"
+    ],
+    "retained_probe_statuses": {
+      "Unresolved(NoApplicableRule)": 3315,
+      "Applied { rule: 39 }": 1,
+      "Applied { rule: 13 }": 1,
+      "Applied { rule: 398 }": 1,
+      "Applied { rule: 73 }": 1,
+      "Applied { rule: 1689 }": 1,
+      "Applied { rule: 101 }": 1,
+      "Applied { rule: 572 }": 1,
+      "Applied { rule: 2037 }": 1,
+      "Applied { rule: 4808 }": 1,
+      "Applied { rule: 4809 }": 1,
+      "Applied { rule: 0 }": 1,
+      "Applied { rule: 686 }": 1,
+      "Applied { rule: 139 }": 1,
+      "Applied { rule: 2232 }": 1,
+      "Applied { rule: 1 }": 1,
+      "Applied { rule: 711 }": 1,
+      "Applied { rule: 145 }": 1,
+      "Applied { rule: 160 }": 1,
+      "Applied { rule: 810 }": 1,
+      "Applied { rule: 2504 }": 1,
+      "Applied { rule: 2505 }": 1,
+      "Applied { rule: 5451 }": 1,
+      "Applied { rule: 180 }": 1,
+      "Applied { rule: 2652 }": 1,
+      "Applied { rule: 2 }": 1,
+      "Applied { rule: 907 }": 1,
+      "Applied { rule: 3 }": 1,
+      "Applied { rule: 4 }": 1
+    },
+    "ray_probe_statuses": {
+      "Unresolved(NoApplicableRule)": 3314,
+      "absent": 28,
+      "Applied { rule: 0 }": 1
+    },
+    "point_probe_statuses": {
+      "Applied { rule: 0 }": 3299,
+      "Unresolved(NoApplicableRule)": 15,
+      "absent": 29
+    }
+  }
+}

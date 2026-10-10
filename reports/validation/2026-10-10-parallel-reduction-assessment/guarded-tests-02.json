@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/rustred-ordered-unit-batch-tests-20261010-02",
+    "solver::guarded",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.14343538787215948,
+  "user_seconds": 0.092927,
+  "system_seconds": 0.06511,
+  "peak_child_rss_kib": 15432,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

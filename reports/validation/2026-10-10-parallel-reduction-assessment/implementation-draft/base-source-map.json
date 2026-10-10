@@ -1,0 +1,5 @@
+{
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": "ac4d34e733eed3e9c393a28284606b128a7b7d027580984b107b3290c19aadd0",
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo.rs": "3c452f4b5684330b7502703eb37b446c4aecab57e898f67456c6b586f98ee6de",
+  "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle/unit_memo/tests.rs": "7fc54e295b905b68de6380be4ac17ecbdc1425982a4e46a0acb1eda017ebf69b"
+}

@@ -1,0 +1,14 @@
+
+running 9 tests
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_duplicate_coupled_guard_failures_are_not_cached_or_canceled ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_exact_limit_keys_and_memo_caps_survive_ordered_commit ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_keeps_work_limits_invalid_occupations_and_norule_distinct ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_native_error_marks_actual_count_incomplete_and_continues ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_preserves_ordered_conditions_and_canceled_unused_guards ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_rejects_bounds_before_touching_cache_or_work ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_reports_owned_codec_error_per_item_and_later_executed_work ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_snapshot_hit_eviction_and_duplicate_miss_match_serial_lru ... ok
+test solver::guarded::lifecycle::unit_memo::tests::batch_tests::bounded_batch_unretained_duplicates_execute_again_and_plain_calls_do_not_deduplicate ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 3143 filtered out; finished in 0.02s
+

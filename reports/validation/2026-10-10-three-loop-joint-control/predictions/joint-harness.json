@@ -1,0 +1,11 @@
+{
+  "original_runtime_phase_bodies": true,
+  "persisted_rules_loaded": false,
+  "phase_configuration": "configuration.json",
+  "phase_order": [
+    "fixed_dimension",
+    "laurent"
+  ],
+  "prepared_flow_count": 1,
+  "reference_values_loaded": false
+}

@@ -1,0 +1,69 @@
+{
+  "status": "paused, uncompiled isolated draft",
+  "files": {
+    "PAUSE.md": {
+      "sha256": "8989228ff23452bf8f6bea9bdbcb57926aadcf5d14139a91af7d0777ee7104ef",
+      "bytes": 3623
+    },
+    "base/src/finite_density/guarded.rs": {
+      "sha256": "07f43708eea74aa130c7c96f8a84c7795c46f0926d73636fed272144ab648e11",
+      "bytes": 50040
+    },
+    "base/src/finite_density/interface.rs": {
+      "sha256": "027a1f2fed9169169fa4138b18ab9323d39893c75a5642612ad4d88845c4333c",
+      "bytes": 14908
+    },
+    "base/src/finite_density/reduction/active.rs": {
+      "sha256": "a9f42ccfec590120f9f7707a7789c42ab1cfabe3063097a1a41da2c922621d7b",
+      "bytes": 48602
+    },
+    "base/src/finite_density/reduction.rs": {
+      "sha256": "732f85379361e31965ab944a6bfd3cd1723b7b87815f9471cdf462f89ce54abd",
+      "bytes": 99051
+    },
+    "base/tests/finite_density_runtime_flow.rs": {
+      "sha256": "dc69380085f5e21709bd69e4a761ff96aa4911ac453131dd88ca59a17874efe6",
+      "bytes": 19008
+    },
+    "base-source-map.json": {
+      "sha256": "111cf7b008b88291e606592c814328e89971e6816da8b0ebebe744f1db7afb45",
+      "bytes": 935
+    },
+    "build-full-crate.py": {
+      "sha256": "706d3fa8f7ec649ba8a8d022f9adadd6cf66382ce5747af8f952ee9d2d558993",
+      "bytes": 16299
+    },
+    "frontend-unit-batch.patch": {
+      "sha256": "d5cefc273257ea5e7ba84f485c1279349a7cdb321ac71dec4c7f7076fbd6c165",
+      "bytes": 49940
+    },
+    "pause-state.json": {
+      "sha256": "13b1474e6be726fadefabc22d4d1237d6cb4cafe157eece99153ecda5e04ba86",
+      "bytes": 1086
+    },
+    "source/src/finite_density/guarded.rs": {
+      "sha256": "e2fbb343607a282ba2fe0b17d263e10ef17e9944114b9e73ca91f92f7299a23d",
+      "bytes": 52794
+    },
+    "source/src/finite_density/interface.rs": {
+      "sha256": "1fe87211b4a923f4538e4329a3920012be3c8747e198cbcbe804ecc6e37253a8",
+      "bytes": 15379
+    },
+    "source/src/finite_density/reduction/active.rs": {
+      "sha256": "04230fd0bb6275acfbf72b6eaf9a498b3abc36bbd767b6e750bd50afd3ee1324",
+      "bytes": 77448
+    },
+    "source/src/finite_density/reduction.rs": {
+      "sha256": "545f725f4975bc6d7d86eff708baade7f0d7380e9b42926eba1b0ddad3b0612a",
+      "bytes": 102965
+    },
+    "source/tests/finite_density_runtime_flow.rs": {
+      "sha256": "96b1dc561a1ed30a6876084a093bb28771e3f01e9e6ae16c2caaf1ce1b20aba0",
+      "bytes": 20135
+    },
+    "source-map.json": {
+      "sha256": "9d1fa51aa56461ff9ff9bdc99dc87d0be3bcb70ea92c4d6a14cda7bb584790e9",
+      "bytes": 1379
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "Existing standalone BLAKE3 utility only, no RustFlow algorithms; executable has a unique v2 path.",
+  "source_record": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2/native-digest-build.json",
+  "source_record_sha256": "e70765dd25498a7d56d23aff35af0efa0ceb12b4f8623927c527d465fc43c456",
+  "executable": {
+    "path": "/tmp/rustflow-singleton-physical-zero-v2-digest",
+    "sha256": "b5d7d77cf54c747031e0dc8cc02395461cf1d8654bb57880d12f87dbbe30b27f"
+  }
+}

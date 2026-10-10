@@ -1,0 +1,1203 @@
+--- a/src/finite_density/guarded.rs
++++ b/src/finite_density/guarded.rs
+@@ -10,8 +10,9 @@
+ use rustred::algebra::{Coefficient, CoefficientPolynomial};
+ use rustred::persistence::BinaryIoLimits;
+ pub use rustred::solver::guarded::{
+-    GuardedApplicationFailure, GuardedReductionLimits, GuardedUnitMemoLimits, GuardedUnitMemoUsage,
+-    GuardedUnresolved, IndexBounds, IndexDomain, IndexRole,
++    GuardedApplicationFailure, GuardedReductionLimits, GuardedUnitBatchLimits,
++    GuardedUnitBatchStats, GuardedUnitMemoLimits, GuardedUnitMemoUsage, GuardedUnresolved,
++    IndexBounds, IndexDomain, IndexRole,
+ };
+ use rustred::solver::guarded::{GuardedProgram, GuardedSource, GuardedSourceSystem};
+ use rustred::solver::{Integral as NativeIntegral, SearchOptions, Term};
+@@ -140,6 +141,18 @@
+     pub unresolved: Vec<GuardedAtomUnresolved<N>>,
+     pub nonzero_conditions: Vec<Atom>,
+     pub rule_applications: usize,
++}
++
++/// Ordered unit results plus execution accounting, including items after a
++/// logical frontend error. No result is combined with another target here.
++pub(crate) struct GuardedAtomBatch<const N: usize> {
++    pub items: Vec<GuardedAtomBatchItem<N>>,
++    pub stats: GuardedUnitBatchStats,
++}
++
++pub(crate) struct GuardedAtomBatchItem<const N: usize> {
++    pub result: Result<(GuardedAtomReduction<N>, bool)>,
++    pub memo_usage_after: Option<GuardedUnitMemoUsage>,
+ }
+ 
+ impl<const N: usize> GuardedContext<N> {
+@@ -688,6 +701,66 @@
+             self.convert_reduction(reduced.reduction)?,
+             reduced.cache_hit,
+         ))
++    }
++
++    /// Validate only through the first invalid input. Earlier valid units are
++    /// executed before that validation error is appended to the ordered result.
++    /// Conversion errors remain per-item errors so all executed work is visible.
++    pub(crate) fn reduce_batch_memoized(
++        &self,
++        targets: &[[i64; N]],
++        limits: GuardedReductionLimits,
++        batch: GuardedUnitBatchLimits,
++    ) -> Result<GuardedAtomBatch<N>> {
++        if batch.max_workers == 0
++            || batch.max_in_flight == 0
++            || batch.max_workers > batch.max_in_flight
++            || targets.len() > batch.max_in_flight
++        {
++            return Err(Error::InvalidInput(
++                "invalid independent unit batch bounds".into(),
++            ));
++        }
++        let mut prefix = targets.len();
++        let mut validation_error = None;
++        for (index, target) in targets.iter().enumerate() {
++            if let Err(error) = validate_storage_label(target, self.physical_arity) {
++                prefix = index;
++                validation_error = Some(error);
++                break;
++            }
++        }
++        let native = self
++            .native
++            .reduce_batch_memoized(&targets[..prefix], limits, batch)
++            .map_err(|error| Error::Reduction(error.to_string()))?;
++        let mut items = native
++            .items
++            .into_iter()
++            .zip(native.memo_usage_after)
++            .map(|(item, usage)| {
++                let result = item
++                    .map_err(|error| Error::Reduction(error.to_string()))
++                    .and_then(|item| {
++                        self.convert_reduction(item.reduction)
++                            .map(|reduced| (reduced, item.cache_hit))
++                    });
++                GuardedAtomBatchItem {
++                    result,
++                    memo_usage_after: usage,
++                }
++            })
++            .collect::<Vec<_>>();
++        if let Some(error) = validation_error {
++            items.push(GuardedAtomBatchItem {
++                result: Err(error),
++                memo_usage_after: None,
++            });
++        }
++        Ok(GuardedAtomBatch {
++            items,
++            stats: native.stats,
++        })
+     }
+ 
+     fn convert_reduction(
+--- a/src/finite_density/interface.rs
++++ b/src/finite_density/interface.rs
+@@ -206,6 +206,11 @@
+                 "residual_allocated_domains":diagnostics.residual_allocated_domains,
+                 "native_rule_applications":diagnostics.native_rule_applications,
+                 "performed_native_rule_applications":diagnostics.native_rule_applications-diagnostics.memoized_rule_applications,
++        "performed_native_rule_applications_scope":"logical committed uncached calls",
++        "actual_known_native_rule_applications":((diagnostics.native_rule_applications-diagnostics.memoized_rule_applications) as u128
++            +diagnostics.unit_batch.speculative_known_rule_applications).to_string(),
++        "actual_native_application_count_complete":diagnostics.unit_batch.actual_application_count_complete,
++        "unit_batch":diagnostics.unit_batch.report(),
+                 "memoized_rule_applications":diagnostics.memoized_rule_applications,
+                 "unit_memo_hits":diagnostics.unit_memo_hits,"unit_memo_misses":diagnostics.unit_memo_misses,
+                 "unit_memo_peak_owned_bytes":diagnostics.unit_memo_peak_owned_bytes,
+--- a/src/finite_density/reduction/active.rs
++++ b/src/finite_density/reduction/active.rs
+@@ -28,42 +28,16 @@
+         run.cancellation.check()?;
+         let (reduced, memoized) = program.reduce_memoized(*indices, limits)?;
+         let memo_usage = program.unit_reduction_memo_usage()?;
+-        if memoized {
+-            diagnostics.unit_memo_hits += 1;
+-            diagnostics.memoized_rule_applications += reduced.rule_applications;
+-        } else if memo_usage.is_some() {
+-            diagnostics.unit_memo_misses += 1;
+-        }
+-        if let Some(u) = memo_usage {
+-            diagnostics.unit_memo_peak_owned_bytes =
+-                diagnostics.unit_memo_peak_owned_bytes.max(u.owned_bytes);
+-            diagnostics.unit_memo_peak_entries = diagnostics.unit_memo_peak_entries.max(u.entries);
+-            diagnostics.unit_memo_peak_output_terms =
+-                diagnostics.unit_memo_peak_output_terms.max(u.output_terms);
+-            diagnostics.unit_memo_peak_conditions =
+-                diagnostics.unit_memo_peak_conditions.max(u.conditions);
+-            diagnostics.unit_memo_peak_polynomial_terms = diagnostics
+-                .unit_memo_peak_polynomial_terms
+-                .max(u.polynomial_terms);
+-        }
+-        diagnostics.native_rule_applications += reduced.rule_applications;
+-        retain_conditions(conditions, reduced.nonzero_conditions);
+-        for (label, coefficient) in reduced.terms {
+-            deformation.validate_integral(&label)?;
+-            *result.terms.entry(label).or_insert_with(Atom::new) += weight * coefficient;
+-        }
+-        for mut residual in reduced.unresolved {
+-            deformation.validate_integral(&residual.integral)?;
+-            residual.coefficient = (weight * residual.coefficient).together().cancel();
+-            if residual.reason == GuardedApplicationFailure::NoApplicableRule {
+-                *result
+-                    .leaves
+-                    .entry(residual.integral)
+-                    .or_insert_with(Atom::new) += residual.coefficient;
+-            } else {
+-                result.failures.push(residual);
+-            }
+-        }
++        commit_unit(
++            &mut result,
++            weight,
++            reduced,
++            memoized,
++            memo_usage,
++            deformation,
++            diagnostics,
++            conditions,
++        )?;
+     }
+     for map in [&mut result.terms, &mut result.leaves] {
+         map.retain(|_, coefficient| {
+@@ -71,6 +45,251 @@
+             !coefficient.is_zero()
+         });
+     }
++    Ok(result)
++}
++
++/// Commit precisely one reached logical unit. Later executed batch units never
++/// contribute conditions or old logical/memo counters after the first error.
++fn commit_unit<const N: usize>(
++    result: &mut Sum<N>,
++    weight: &Atom,
++    reduced: super::super::guarded::GuardedAtomReduction<N>,
++    memoized: bool,
++    memo_usage: Option<super::super::guarded::GuardedUnitMemoUsage>,
++    deformation: &FixedShellDeformation<N>,
++    diagnostics: &mut WeightedClosureDiagnostics,
++    conditions: &mut BTreeMap<String, Atom>,
++) -> Result<()> {
++    if memoized {
++        diagnostics.unit_memo_hits += 1;
++        diagnostics.memoized_rule_applications += reduced.rule_applications;
++    } else if memo_usage.is_some() {
++        diagnostics.unit_memo_misses += 1;
++    }
++    if let Some(u) = memo_usage {
++        diagnostics.unit_memo_peak_owned_bytes =
++            diagnostics.unit_memo_peak_owned_bytes.max(u.owned_bytes);
++        diagnostics.unit_memo_peak_entries = diagnostics.unit_memo_peak_entries.max(u.entries);
++        diagnostics.unit_memo_peak_output_terms =
++            diagnostics.unit_memo_peak_output_terms.max(u.output_terms);
++        diagnostics.unit_memo_peak_conditions =
++            diagnostics.unit_memo_peak_conditions.max(u.conditions);
++        diagnostics.unit_memo_peak_polynomial_terms = diagnostics
++            .unit_memo_peak_polynomial_terms
++            .max(u.polynomial_terms);
++    }
++    diagnostics.native_rule_applications += reduced.rule_applications;
++    retain_conditions(conditions, reduced.nonzero_conditions);
++    for (label, coefficient) in reduced.terms {
++        deformation.validate_integral(&label)?;
++        *result.terms.entry(label).or_insert_with(Atom::new) += weight * coefficient;
++    }
++    for mut residual in reduced.unresolved {
++        deformation.validate_integral(&residual.integral)?;
++        residual.coefficient = (weight * residual.coefficient).together().cancel();
++        if residual.reason == GuardedApplicationFailure::NoApplicableRule {
++            *result
++                .leaves
++                .entry(residual.integral)
++                .or_insert_with(Atom::new) += residual.coefficient;
++        } else {
++            result.failures.push(residual);
++        }
++    }
++    Ok(())
++}
++
++fn record_batch_execution(
++    diagnostics: &mut WeightedClosureDiagnostics,
++    stats: &super::super::guarded::GuardedUnitBatchStats,
++) -> Result<()> {
++    let mut next = diagnostics.unit_batch.clone();
++    macro_rules! add {
++        ($field:ident, $value:expr) => {
++            next.$field = next
++                .$field
++                .checked_add($value)
++                .ok_or_else(|| Error::Limit("unit batch execution counter overflow".into()))?;
++        };
++    }
++    add!(calls, 1);
++    add!(input_units, stats.input_calls);
++    add!(prefetched_native_calls, stats.prefetched_native_calls);
++    add!(fallback_native_calls, stats.fallback_native_calls);
++    add!(
++        native_calls_returning_error,
++        stats.native_calls_returning_error
++    );
++    add!(executed_cache_hits, stats.cache_hits);
++    add!(executed_cache_misses, stats.cache_misses);
++    add!(
++        actual_known_rule_applications,
++        stats.actual_known_rule_applications
++    );
++    next.peak_private_workers = next.peak_private_workers.max(stats.private_pool_workers);
++    next.simultaneous_native_calls_bound = next
++        .simultaneous_native_calls_bound
++        .max(stats.simultaneous_native_calls_bound);
++    next.actual_application_count_complete &= stats.actual_application_count_complete;
++    diagnostics.unit_batch = next;
++    Ok(())
++}
++
++/// Inspect every returned item and account all executed work, but retain only
++/// the ordered logical prefix through its first error. A conversion error is
++/// already an item error; native partial work on Err remains explicitly unknown.
++fn commit_batch<const N: usize>(
++    result: &mut Sum<N>,
++    weights: &[&Atom],
++    batch: super::super::guarded::GuardedAtomBatch<N>,
++    deformation: &FixedShellDeformation<N>,
++    diagnostics: &mut WeightedClosureDiagnostics,
++    conditions: &mut BTreeMap<String, Atom>,
++    run: &RunContext,
++) -> Result<()> {
++    record_batch_execution(diagnostics, &batch.stats)?;
++    let mut first_error = None;
++    let mut accounted_units = 0usize;
++    let mut accounted_uncached = 0u128;
++    let mut item_errors = 0usize;
++    for (item, weight) in batch.items.into_iter().zip(weights) {
++        if item.result.is_err() {
++            item_errors += 1;
++        }
++        if first_error.is_some() {
++            continue;
++        }
++        let committed = (|| {
++            let (reduced, memoized) = item.result?;
++            run.cancellation.check()?;
++            accounted_units += 1;
++            if !memoized {
++                accounted_uncached += reduced.rule_applications as u128;
++            }
++            commit_unit(
++                result,
++                weight,
++                reduced,
++                memoized,
++                item.memo_usage_after,
++                deformation,
++                diagnostics,
++                conditions,
++            )
++        })();
++        if let Err(error) = committed {
++            first_error = Some(error);
++        }
++    }
++    let speculative = batch
++        .stats
++        .actual_known_rule_applications
++        .checked_sub(accounted_uncached)
++        .ok_or_else(|| Error::Reduction("unit batch application accounting mismatch".into()))?;
++    let uncommitted = batch
++        .stats
++        .input_calls
++        .checked_sub(accounted_units)
++        .ok_or_else(|| Error::Reduction("unit batch item accounting mismatch".into()))?;
++    let counters = &mut diagnostics.unit_batch;
++    macro_rules! add {
++        ($field:ident, $value:expr) => {
++            counters.$field = counters
++                .$field
++                .checked_add($value)
++                .ok_or_else(|| Error::Limit("unit batch commit counter overflow".into()))?;
++        };
++    }
++    add!(item_errors, item_errors);
++    add!(logical_accounted_units, accounted_units);
++    add!(uncommitted_units, uncommitted);
++    add!(speculative_known_rule_applications, speculative);
++    if let Some(error) = first_error {
++        return Err(error);
++    }
++    run.cancellation.check()?;
++    Ok(())
++}
++
++fn reduce_sum_with_batch<const N: usize>(
++    program: &GuardedReductionProgram<N>,
++    input: &BTreeMap<[i64; N], Atom>,
++    deformation: &FixedShellDeformation<N>,
++    limits: GuardedReductionLimits,
++    batch: Option<super::super::guarded::GuardedUnitBatchLimits>,
++    diagnostics: &mut WeightedClosureDiagnostics,
++    conditions: &mut BTreeMap<String, Atom>,
++    run: &RunContext,
++) -> Result<Sum<N>> {
++    let Some(batch) = batch else {
++        return reduce_sum(
++            program,
++            input,
++            deformation,
++            limits,
++            diagnostics,
++            conditions,
++            run,
++        );
++    };
++    if batch.max_workers == 0 || batch.max_in_flight == 0 || batch.max_workers > batch.max_in_flight
++    {
++        return Err(Error::InvalidInput(
++            "invalid independent unit batch bounds".into(),
++        ));
++    }
++    let mut result = Sum::default();
++    let mut remaining = input.iter();
++    loop {
++        run.cancellation.check()?;
++        let mut labels = Vec::new();
++        let mut weights = Vec::new();
++        let mut pending_validation = None;
++        while labels.len() < batch.max_in_flight {
++            let Some((label, weight)) = remaining.next() else {
++                break;
++            };
++            // Validate even exact-zero weights, matching the serial contract.
++            // Never inspect a later label after the first invalid one.
++            if let Err(error) = deformation.validate_integral(label) {
++                pending_validation = Some(error);
++                break;
++            }
++            if weight.is_zero() {
++                continue;
++            }
++            labels.push(*label);
++            weights.push(weight);
++        }
++        if !labels.is_empty() {
++            run.cancellation.check()?;
++            let reduced = program.reduce_batch_memoized(&labels, limits, batch)?;
++            // Earlier native/converted/output errors take precedence over the
++            // saved validation error, exactly as ordered serial calls do.
++            commit_batch(
++                &mut result,
++                &weights,
++                reduced,
++                deformation,
++                diagnostics,
++                conditions,
++                run,
++            )?;
++        }
++        if let Some(error) = pending_validation {
++            return Err(error);
++        }
++        if labels.is_empty() {
++            break;
++        }
++    }
++    for map in [&mut result.terms, &mut result.leaves] {
++        map.retain(|_, coefficient| {
++            *coefficient = coefficient.together().cancel();
++            !coefficient.is_zero()
++        });
++    }
++    run.cancellation.check()?;
+     Ok(result)
+ }
+ 
+@@ -199,11 +418,12 @@
+         let mut failures = Vec::new();
+         let mut uncovered = Vec::new();
+         for target in targets {
+-            let sum = reduce_sum(
++            let sum = reduce_sum_with_batch(
+                 &found.program,
+                 target,
+                 deformation,
+                 options.application,
++                options.unit_reduction_batch,
+                 &mut diagnostics,
+                 &mut conditions,
+                 run,
+@@ -243,11 +463,12 @@
+                 deferred = true;
+                 continue;
+             }
+-            let sum = reduce_sum(
++            let sum = reduce_sum_with_batch(
+                 &found.program,
+                 &derivative,
+                 deformation,
+                 options.application,
++                options.unit_reduction_batch,
+                 &mut diagnostics,
+                 &mut conditions,
+                 run,
+@@ -372,11 +593,12 @@
+                 name: "active weighted final original target audit".into(),
+             })?;
+             for target in targets {
+-                let sum = reduce_sum(
++                let sum = reduce_sum_with_batch(
+                     &program,
+                     target,
+                     deformation,
+                     options.application,
++                    options.unit_reduction_batch,
+                     &mut diagnostics,
+                     &mut conditions,
+                     run,
+@@ -390,11 +612,12 @@
+             })?;
+             for leaf in &frontier {
+                 let derivative = deformation.derivative(*leaf)?;
+-                let sum = reduce_sum(
++                let sum = reduce_sum_with_batch(
+                     &program,
+                     &derivative,
+                     deformation,
+                     options.application,
++                    options.unit_reduction_batch,
+                     &mut diagnostics,
+                     &mut conditions,
+                     run,
+@@ -438,11 +661,12 @@
+                 ),
+             })?;
+             for label in history.iter().take(selected) {
+-                let reduced = reduce_sum(
++                let reduced = reduce_sum_with_batch(
+                     &program,
+                     &BTreeMap::from([(*label, Atom::num(1))]),
+                     deformation,
+                     options.application,
++                    options.unit_reduction_batch,
+                     &mut diagnostics,
+                     &mut conditions,
+                     run,
+@@ -1264,3 +1488,542 @@
+         );
+     }
+ }
++
++#[cfg(test)]
++mod batch_tests {
++    use super::super::super::guarded::{
++        GuardedAtomBatch, GuardedAtomBatchItem, GuardedAtomReduction, GuardedUnitBatchLimits,
++        GuardedUnitBatchStats, GuardedUnitMemoLimits,
++    };
++    use super::*;
++
++    fn caps(workers: usize, window: usize) -> GuardedUnitBatchLimits {
++        GuardedUnitBatchLimits {
++            max_workers: workers,
++            max_in_flight: window,
++        }
++    }
++    fn options() -> WeightedClosureOptions {
++        WeightedClosureOptions {
++            active_target_closure: true,
++            requested_index_rays: true,
++            max_reused_rules: 8192,
++            max_domains_per_residual: 32,
++            max_history_candidate_maps: Some(0),
++            ..Default::default()
++        }
++    }
++    fn assert_old_diagnostics(a: &WeightedClosureDiagnostics, b: &WeightedClosureDiagnostics) {
++        let mut a = a.clone();
++        let mut b = b.clone();
++        // Symbolica's process-global export table can change encoded byte
++        // footprints. Compare algorithmic/logical work, not cache efficiency.
++        for d in [&mut a, &mut b] {
++            d.unit_batch = Default::default();
++            d.memoized_rule_applications = 0;
++            d.unit_memo_hits = 0;
++            d.unit_memo_misses = 0;
++            d.unit_memo_peak_owned_bytes = 0;
++            d.unit_memo_peak_entries = 0;
++            d.unit_memo_peak_output_terms = 0;
++            d.unit_memo_peak_conditions = 0;
++            d.unit_memo_peak_polynomial_terms = 0;
++        }
++        assert_eq!(format!("{a:?}"), format!("{b:?}"));
++    }
++    fn fixture() -> (GuardedReductionProgram<2>, FixedShellDeformation<2>) {
++        let (context, deformation) = super::super::tests::compact_context();
++        let program = context
++            .discover(
++                vec![IndexDomain::new([IndexBounds::fixed(2), IndexBounds::fixed(0)]).unwrap()],
++                [],
++                GuardedDiscoveryOptions {
++                    max_depth: 3,
++                    ..Default::default()
++                },
++            )
++            .unwrap()
++            .program;
++        (program, deformation)
++    }
++    fn assert_sum(a: &Sum<2>, b: &Sum<2>) {
++        assert_eq!(a.terms, b.terms);
++        assert_eq!(a.leaves, b.leaves);
++        assert_eq!(format!("{:?}", a.failures), format!("{:?}", b.failures));
++    }
++
++    #[test]
++    fn unit_batch_full_compact_closure_preserves_basis_matrix_targets_guards_program_and_logical_counts()
++     {
++        let (context, deformation) = super::super::tests::compact_context();
++        let targets = [BTreeMap::from([
++            ([1, 0], Atom::num(1)),
++            ([2, 0], Atom::num(2)),
++        ])];
++        for memo in [
++            None,
++            Some(GuardedUnitMemoLimits::default()),
++            Some(GuardedUnitMemoLimits {
++                max_entries: 1,
++                ..Default::default()
++            }),
++        ] {
++            let make = |batch| {
++                let outcome = prepare_weighted_system(
++                    &context,
++                    &targets,
++                    &deformation,
++                    WeightedClosureOptions {
++                        unit_reduction_memo: memo,
++                        unit_reduction_batch: batch,
++                        ..options()
++                    },
++                    &RunContext::default(),
++                )
++                .unwrap();
++                let WeightedClosureOutcome::Closed(closed) = outcome else {
++                    panic!("{outcome:?}")
++                };
++                closed
++            };
++            let serial = make(None);
++            for batch in [caps(1, 1), caps(1, 2), caps(2, 2)] {
++                let got = make(Some(batch));
++                assert_eq!(serial.reduced.basis, got.reduced.basis);
++                assert_eq!(serial.reduced.matrix, got.reduced.matrix);
++                assert_eq!(serial.reduced.targets, got.reduced.targets);
++                assert_eq!(
++                    serial.reduced.nonzero_conditions,
++                    got.reduced.nonzero_conditions
++                );
++                assert_eq!(serial.reduced.candidates, got.reduced.candidates);
++                assert_eq!(
++                    serial.program.encode(Default::default()).unwrap(),
++                    got.program.encode(Default::default()).unwrap()
++                );
++                assert_old_diagnostics(&serial.diagnostics, &got.diagnostics);
++                let d = &got.diagnostics;
++                assert!(d.unit_batch.calls > 0);
++                assert_eq!(d.unit_batch.speculative_known_rule_applications, 0);
++                assert!(d.unit_batch.actual_application_count_complete);
++                assert_eq!(
++                    d.unit_batch.actual_known_rule_applications,
++                    (d.native_rule_applications - d.memoized_rule_applications) as u128
++                );
++                if let Some(memo) = memo {
++                    assert!(d.unit_memo_peak_owned_bytes <= memo.max_owned_bytes);
++                    assert!(d.unit_memo_peak_entries <= memo.max_entries);
++                    assert!(d.unit_memo_peak_output_terms <= memo.max_output_terms);
++                    assert!(d.unit_memo_peak_conditions <= memo.max_conditions);
++                    assert!(d.unit_memo_peak_polynomial_terms <= memo.max_polynomial_terms);
++                }
++                assert!(got.program.unit_reduction_memo_usage().unwrap().is_none());
++            }
++        }
++    }
++
++    #[test]
++    fn unit_batch_actual_weighted_cancellation_and_work_failures_match_serial() {
++        let (program, deformation) = fixture();
++        let first = program.reduce([2, 0], Default::default()).unwrap();
++        assert!(!first.unresolved.is_empty());
++        let mut equation = BTreeMap::from([([2, 0], Atom::num(1))]);
++        for residual in first.unresolved {
++            assert_eq!(residual.reason, GuardedApplicationFailure::NoApplicableRule);
++            *equation.entry(residual.integral).or_insert_with(Atom::new) -= residual.coefficient;
++        }
++        for applications in [0, 1, 16] {
++            for pending in [0, 1, 16] {
++                let limits = GuardedReductionLimits {
++                    max_rule_applications: applications,
++                    max_pending_integrals: pending,
++                };
++                let mut ds = WeightedClosureDiagnostics::default();
++                let mut cs = BTreeMap::new();
++                let serial = reduce_sum(
++                    &program,
++                    &equation,
++                    &deformation,
++                    limits,
++                    &mut ds,
++                    &mut cs,
++                    &RunContext::default(),
++                )
++                .unwrap();
++                for batch in [caps(1, 1), caps(2, 2)] {
++                    let mut db = WeightedClosureDiagnostics::default();
++                    let mut cb = BTreeMap::new();
++                    let got = reduce_sum_with_batch(
++                        &program,
++                        &equation,
++                        &deformation,
++                        limits,
++                        Some(batch),
++                        &mut db,
++                        &mut cb,
++                        &RunContext::default(),
++                    )
++                    .unwrap();
++                    assert_sum(&serial, &got);
++                    assert_eq!(cs, cb);
++                    assert_old_diagnostics(&ds, &db);
++                    assert_eq!(db.unit_batch.speculative_known_rule_applications, 0);
++                }
++            }
++        }
++    }
++
++    #[test]
++    fn unit_batch_validation_executes_only_the_earlier_valid_prefix() {
++        let (program, deformation) = fixture();
++        let input = BTreeMap::from([
++            ([1, 0], Atom::num(1)),
++            ([2, -1], Atom::new()),
++            ([3, 0], Atom::num(1)),
++        ]);
++        let mut ds = Default::default();
++        let mut cs = BTreeMap::new();
++        let serial = reduce_sum(
++            &program,
++            &input,
++            &deformation,
++            Default::default(),
++            &mut ds,
++            &mut cs,
++            &RunContext::default(),
++        )
++        .err()
++        .unwrap();
++        let mut db = WeightedClosureDiagnostics::default();
++        let mut cb = BTreeMap::new();
++        let got = reduce_sum_with_batch(
++            &program,
++            &input,
++            &deformation,
++            Default::default(),
++            Some(caps(2, 3)),
++            &mut db,
++            &mut cb,
++            &RunContext::default(),
++        )
++        .err()
++        .unwrap();
++        assert_eq!(serial.to_string(), got.to_string());
++        assert_old_diagnostics(&ds, &db);
++        assert_eq!(cs, cb);
++        assert_eq!(db.unit_batch.input_units, 1);
++        assert_eq!(db.unit_batch.prefetched_native_calls, 1);
++        assert_eq!(db.unit_batch.logical_accounted_units, 1);
++    }
++
++    #[test]
++    fn unit_batch_earlier_output_domain_error_precedes_later_invalid_target() {
++        let (program, deformation) = fixture();
++        let first = program.reduce([2, 0], Default::default()).unwrap();
++        assert!(first.unresolved.iter().any(|r| r.integral[0] != 2));
++        let deformation = deformation
++            .with_admitted_domain(
++                IndexDomain::new([
++                    IndexBounds::fixed(2),
++                    IndexBounds::new(Some(0), None).unwrap(),
++                ])
++                .unwrap(),
++            )
++            .unwrap();
++        let input = BTreeMap::from([([2, 0], Atom::num(1)), ([3, -1], Atom::num(1))]);
++        let mut ds = Default::default();
++        let mut cs = BTreeMap::new();
++        let serial = reduce_sum(
++            &program,
++            &input,
++            &deformation,
++            Default::default(),
++            &mut ds,
++            &mut cs,
++            &RunContext::default(),
++        )
++        .err()
++        .unwrap();
++        let mut db = WeightedClosureDiagnostics::default();
++        let mut cb = BTreeMap::new();
++        let got = reduce_sum_with_batch(
++            &program,
++            &input,
++            &deformation,
++            Default::default(),
++            Some(caps(2, 2)),
++            &mut db,
++            &mut cb,
++            &RunContext::default(),
++        )
++        .err()
++        .unwrap();
++        assert_eq!(serial.to_string(), got.to_string());
++        assert_old_diagnostics(&ds, &db);
++        assert_eq!(cs, cb);
++        assert_eq!(db.unit_batch.input_units, 1);
++    }
++
++    fn good(applications: usize, guard: Atom) -> GuardedAtomBatchItem<2> {
++        GuardedAtomBatchItem {
++            result: Ok((
++                GuardedAtomReduction {
++                    terms: BTreeMap::from([([1, 0], Atom::num(1))]),
++                    unresolved: Vec::new(),
++                    nonzero_conditions: vec![guard],
++                    rule_applications: applications,
++                },
++                false,
++            )),
++            memo_usage_after: None,
++        }
++    }
++    #[test]
++    fn unit_batch_error_prefix_retains_first_error_and_accounts_later_work_without_guards() {
++        let (_, deformation) = fixture();
++        let first_guard = Atom::var(symbol!("unit_batch_first_guard"));
++        let later_guard = Atom::var(symbol!("unit_batch_later_guard"));
++        let batch = GuardedAtomBatch {
++            items: vec![
++                good(3, first_guard.clone()),
++                GuardedAtomBatchItem {
++                    result: Err(Error::Reduction("first native error".into())),
++                    memo_usage_after: None,
++                },
++                good(7, later_guard.clone()),
++                GuardedAtomBatchItem {
++                    result: Err(Error::Reduction("later native error".into())),
++                    memo_usage_after: None,
++                },
++            ],
++            stats: GuardedUnitBatchStats {
++                input_calls: 4,
++                prefetched_native_calls: 4,
++                native_calls_returning_error: 2,
++                actual_known_rule_applications: 10,
++                actual_application_count_complete: false,
++                ..Default::default()
++            },
++        };
++        let one = Atom::num(1);
++        let weights = [&one; 4];
++        let mut ds = WeightedClosureDiagnostics::default();
++        let mut cs = BTreeMap::new();
++        let error = commit_batch(
++            &mut Sum::default(),
++            &weights,
++            batch,
++            &deformation,
++            &mut ds,
++            &mut cs,
++            &RunContext::default(),
++        )
++        .err()
++        .unwrap();
++        assert!(error.to_string().contains("first native error"));
++        assert_eq!(ds.native_rule_applications, 3);
++        assert_eq!(ds.unit_batch.actual_known_rule_applications, 10);
++        assert_eq!(ds.unit_batch.speculative_known_rule_applications, 7);
++        assert_eq!(ds.unit_batch.logical_accounted_units, 1);
++        assert_eq!(ds.unit_batch.uncommitted_units, 3);
++        assert_eq!(ds.unit_batch.item_errors, 2);
++        assert!(!ds.unit_batch.actual_application_count_complete);
++        assert!(cs.values().any(|c| c == &first_guard));
++        assert!(!cs.values().any(|c| c == &later_guard));
++    }
++
++    #[test]
++    fn unit_batch_post_execution_cancellation_accounts_work_but_commits_no_guard() {
++        let (_, deformation) = fixture();
++        let run = RunContext::default();
++        run.cancellation.cancel();
++        let batch = GuardedAtomBatch {
++            items: vec![good(3, Atom::var(symbol!("batch_cancel_guard")))],
++            stats: GuardedUnitBatchStats {
++                input_calls: 1,
++                prefetched_native_calls: 1,
++                actual_known_rule_applications: 3,
++                actual_application_count_complete: true,
++                ..Default::default()
++            },
++        };
++        let mut ds = WeightedClosureDiagnostics::default();
++        let mut cs = BTreeMap::new();
++        let one = Atom::num(1);
++        assert!(matches!(
++            commit_batch(
++                &mut Sum::default(),
++                &[&one],
++                batch,
++                &deformation,
++                &mut ds,
++                &mut cs,
++                &run
++            ),
++            Err(Error::Cancelled)
++        ));
++        assert!(cs.is_empty());
++        assert_eq!(ds.native_rule_applications, 0);
++        assert_eq!(ds.unit_batch.actual_known_rule_applications, 3);
++        assert_eq!(ds.unit_batch.speculative_known_rule_applications, 3);
++    }
++
++    #[test]
++    fn unit_batch_requires_active_closure_and_nonzero_consistent_caps() {
++        let (context, deformation) = super::super::tests::compact_context();
++        let targets = [BTreeMap::from([([1, 0], Atom::num(1))])];
++        for (active, caps) in [
++            (false, caps(1, 1)),
++            (true, caps(0, 1)),
++            (true, caps(1, 0)),
++            (true, caps(2, 1)),
++        ] {
++            assert!(matches!(
++                prepare_weighted_system(
++                    &context,
++                    &targets,
++                    &deformation,
++                    WeightedClosureOptions {
++                        active_target_closure: active,
++                        unit_reduction_batch: Some(caps),
++                        ..options()
++                    },
++                    &RunContext::default()
++                ),
++                Err(Error::InvalidInput(_))
++            ));
++        }
++        assert!(
++            WeightedClosureOptions::default()
++                .unit_reduction_batch
++                .is_none()
++        );
++    }
++
++    #[test]
++    fn unit_batch_cancellation_before_final_replay_cannot_publish_closed() {
++        use std::sync::Arc;
++        let (context, deformation) = super::super::tests::compact_context();
++        let token = crate::CancellationToken::default();
++        let captured = token.clone();
++        let run = RunContext {
++            cancellation: token,
++            progress: Some(Arc::new(move |event| {
++                if let Progress::Stage { name } = event {
++                    if name == "active weighted final complete source replay" {
++                        captured.cancel();
++                    }
++                }
++            })),
++        };
++        let got = prepare_weighted_system(
++            &context,
++            &[BTreeMap::from([
++                ([1, 0], Atom::num(1)),
++                ([2, 0], Atom::num(2)),
++            ])],
++            &deformation,
++            WeightedClosureOptions {
++                unit_reduction_batch: Some(caps(2, 2)),
++                unit_reduction_memo: Some(Default::default()),
++                ..options()
++            },
++            &run,
++        );
++        assert!(matches!(got, Err(Error::Cancelled)));
++    }
++    #[test]
++    fn unit_batch_compiled_source_and_native_artifact_identities_are_bound() {
++        let (context, _) = super::super::tests::compact_context();
++        let program = context
++            .discover(Vec::new(), [], Default::default())
++            .unwrap()
++            .program;
++        let identity = program.native().sources().measure_id();
++        assert!(identity.contains(env!("RUSTRED_SOURCE_DIGEST")));
++        assert!(identity.contains(env!("DEPENDENCY_SOURCE_DIGEST")));
++        assert!(!env!("PORT_SOURCE_DIGEST").is_empty());
++        if let Some(path) = option_env!("RUSTFLOW_UNIT_BATCH_BUILD_BINDING") {
++            let bound: serde_json::Value =
++                serde_json::from_slice(&std::fs::read(path).unwrap()).unwrap();
++            for (key, actual) in [
++                ("PORT_SOURCE_DIGEST", env!("PORT_SOURCE_DIGEST")),
++                ("RUSTRED_SOURCE_DIGEST", env!("RUSTRED_SOURCE_DIGEST")),
++                ("DEPENDENCY_SOURCE_DIGEST", env!("DEPENDENCY_SOURCE_DIGEST")),
++            ] {
++                assert_eq!(bound["compile_environment"][key].as_str().unwrap(), actual);
++                assert_ne!(
++                    bound["baseline_compile_identities"][key].as_str().unwrap(),
++                    actual
++                );
++            }
++            assert_ne!(
++                bound["baseline_native_sha256"],
++                bound["direct_libraries"]["rustred"]["sha256"]
++            );
++            assert!(
++                bound["native_overlay"]
++                    .as_array()
++                    .unwrap()
++                    .iter()
++                    .any(|row| row["destination"]
++                        .as_str()
++                        .unwrap()
++                        .ends_with("unit_memo/batch.rs"))
++            );
++        }
++    }
++
++    /// Run once per fresh process with a distinct output path. This is a tiny
++    /// compact-family closure control, not a physical numerical benchmark.
++    #[test]
++    #[ignore]
++    fn unit_batch_cold_process_control() {
++        let mode = std::env::var("RUSTFLOW_UNIT_BATCH_CONTROL_MODE").unwrap();
++        let batch = match mode.as_str() {
++            "serial" => None,
++            "worker1" => Some(caps(1, 2)),
++            "worker2" => Some(caps(2, 2)),
++            _ => panic!("bad control mode"),
++        };
++        let (context, deformation) = super::super::tests::compact_context();
++        let targets = [BTreeMap::from([
++            ([1, 0], Atom::num(1)),
++            ([2, 0], Atom::num(2)),
++        ])];
++        let got = prepare_weighted_system(
++            &context,
++            &targets,
++            &deformation,
++            WeightedClosureOptions {
++                unit_reduction_batch: batch,
++                unit_reduction_memo: Some(Default::default()),
++                ..options()
++            },
++            &RunContext::default(),
++        )
++        .unwrap();
++        let WeightedClosureOutcome::Closed(closed) = got else {
++            panic!("{got:?}")
++        };
++        let encoded = closed.program.encode(Default::default()).unwrap();
++        let output = serde_json::json!({
++            "mode":mode,
++            "basis":closed.reduced.basis.iter().map(|i| i.0.clone()).collect::<Vec<_>>(),
++            "matrix":closed.reduced.matrix.iter().map(|r|r.iter().map(Atom::to_canonical_string).collect::<Vec<_>>()).collect::<Vec<_>>(),
++            "targets":closed.reduced.targets.iter().map(|target|target.iter().map(|(i,c)|serde_json::json!({"index":i.0,"coefficient":c.to_canonical_string()})).collect::<Vec<_>>()).collect::<Vec<_>>(),
++            "conditions":closed.reduced.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
++            "program_blake3":blake3::hash(&encoded).to_hex().to_string(),
++            "program_bytes":encoded.len(),
++            "native_rule_applications":closed.diagnostics.native_rule_applications,
++            "memoized_rule_applications":closed.diagnostics.memoized_rule_applications,
++            "memo_hits":closed.diagnostics.unit_memo_hits,"memo_misses":closed.diagnostics.unit_memo_misses,
++            "memo_peak_bytes":closed.diagnostics.unit_memo_peak_owned_bytes,
++            "batch":closed.diagnostics.unit_batch.report(),
++            "compiled_identity":{"port":env!("PORT_SOURCE_DIGEST"),"native":env!("RUSTRED_SOURCE_DIGEST"),"dependencies":env!("DEPENDENCY_SOURCE_DIGEST")},
++        });
++        let path = std::env::var("RUSTFLOW_UNIT_BATCH_CONTROL_OUTPUT").unwrap();
++        assert!(!std::path::Path::new(&path).exists());
++        std::fs::write(path, serde_json::to_vec_pretty(&output).unwrap()).unwrap();
++    }
++}
+--- a/src/finite_density/reduction.rs
++++ b/src/finite_density/reduction.rs
+@@ -273,6 +273,10 @@
+     /// fully replayed promotion of exact NoRule leaves can carry entries into
+     /// the final audit. No entries survive a new discovery round.
+     pub unit_reduction_memo: Option<super::guarded::GuardedUnitMemoLimits>,
++    /// Optional bounded whole-unit batch within one ordered weighted sum.
++    /// Requires active closure. This never reorders the active frontier or
++    /// combines different targets. None preserves serial application.
++    pub unit_reduction_batch: Option<super::guarded::GuardedUnitBatchLimits>,
+     /// Native one-source zero proofs at requested concrete points before
+     /// ordinary discovery. A per-call attempt cap; zero disables the prepass.
+     /// Requires a retained discovery schedule. Completed point searches are memoized.
+@@ -305,9 +309,72 @@
+             active_target_closure: false,
+             max_history_candidate_maps: None,
+             unit_reduction_memo: None,
++            unit_reduction_batch: None,
+             max_direct_zero_attempts: 0,
+             checkpoints: None,
+         }
++    }
++}
++
++/// Work performed by the optional batch engine, separate from the original
++/// logical counters. Unknown partial work inside native Err is never estimated.
++#[derive(Clone, Debug)]
++pub struct WeightedUnitBatchDiagnostics {
++    pub calls: usize,
++    pub input_units: usize,
++    pub prefetched_native_calls: usize,
++    pub fallback_native_calls: usize,
++    pub native_calls_returning_error: usize,
++    pub item_errors: usize,
++    pub logical_accounted_units: usize,
++    pub uncommitted_units: usize,
++    pub executed_cache_hits: usize,
++    pub executed_cache_misses: usize,
++    pub peak_private_workers: usize,
++    pub simultaneous_native_calls_bound: usize,
++    pub actual_known_rule_applications: u128,
++    pub speculative_known_rule_applications: u128,
++    pub actual_application_count_complete: bool,
++}
++impl Default for WeightedUnitBatchDiagnostics {
++    fn default() -> Self {
++        Self {
++            calls: 0,
++            input_units: 0,
++            prefetched_native_calls: 0,
++            fallback_native_calls: 0,
++            native_calls_returning_error: 0,
++            item_errors: 0,
++            logical_accounted_units: 0,
++            uncommitted_units: 0,
++            executed_cache_hits: 0,
++            executed_cache_misses: 0,
++            peak_private_workers: 0,
++            simultaneous_native_calls_bound: 0,
++            actual_known_rule_applications: 0,
++            speculative_known_rule_applications: 0,
++            actual_application_count_complete: true,
++        }
++    }
++}
++impl WeightedUnitBatchDiagnostics {
++    pub fn report(&self) -> serde_json::Value {
++        serde_json::json!({
++            "calls":self.calls,"input_units":self.input_units,
++            "prefetched_native_calls":self.prefetched_native_calls,
++            "fallback_native_calls":self.fallback_native_calls,
++            "native_calls_returning_error":self.native_calls_returning_error,
++            "item_errors":self.item_errors,"logical_accounted_units":self.logical_accounted_units,
++            "uncommitted_units":self.uncommitted_units,
++            "executed_cache_hits":self.executed_cache_hits,"executed_cache_misses":self.executed_cache_misses,
++            "peak_private_workers":self.peak_private_workers,
++            "simultaneous_native_calls_bound":self.simultaneous_native_calls_bound,
++            "actual_known_rule_applications":self.actual_known_rule_applications.to_string(),
++            "speculative_known_rule_applications":self.speculative_known_rule_applications.to_string(),
++            "actual_application_count_complete":self.actual_application_count_complete,
++            "scope":"bounded unit components within one weighted sum; no active-frontier or native pending-order change",
++            "resource_scope":"worker/window counts; no CAS scratch, decoded-result byte, or per-unit cancellation guarantee"
++        })
+     }
+ }
+ 
+@@ -356,6 +423,7 @@
+     pub native_rule_applications: usize,
+     /// Portion of logical applications served from the bounded memo.
+     pub memoized_rule_applications: usize,
++    pub unit_batch: WeightedUnitBatchDiagnostics,
+     pub unit_memo_hits: usize,
+     pub unit_memo_misses: usize,
+     pub unit_memo_peak_owned_bytes: usize,
+@@ -434,6 +502,17 @@
+         return Err(Error::InvalidInput(
+             "weighted closure needs targets and positive work limits".into(),
+         ));
++    }
++    if let Some(batch) = options.unit_reduction_batch {
++        if !options.active_target_closure
++            || batch.max_workers == 0
++            || batch.max_in_flight == 0
++            || batch.max_workers > batch.max_in_flight
++        {
++            return Err(Error::InvalidInput(
++                "unit reduction batch requires active closure and positive worker/window limits with workers <= window".into(),
++            ));
++        }
+     }
+     if options.unit_reduction_memo.is_some() && !options.active_target_closure {
+         return Err(Error::InvalidInput(
+@@ -1507,6 +1586,9 @@
+         "max_requested":options.max_requested,
+         "active_target_closure":options.active_target_closure,
+         "max_history_candidate_maps":options.max_history_candidate_maps,
++        "unit_reduction_batch":options.unit_reduction_batch.map(|b| serde_json::json!({
++            "max_workers":b.max_workers,"max_in_flight":b.max_in_flight,
++            "scope":"ordered components within one weighted sum"})),
+         "unit_reduction_memo":options.unit_reduction_memo.map(|m| serde_json::json!({
+             "max_entries":m.max_entries,"max_output_terms":m.max_output_terms,"max_conditions":m.max_conditions,
+             "max_polynomial_terms":m.max_polynomial_terms,"max_owned_bytes":m.max_owned_bytes,
+--- a/tests/finite_density_runtime_flow.rs
++++ b/tests/finite_density_runtime_flow.rs
+@@ -7,7 +7,7 @@
+     DensityInput,
+     assembly::PreparedDensityFlow,
+     flow::{OccupiedFlowEvaluation, PreparedOccupiedFlow},
+-    guarded::GuardedUnitMemoLimits,
++    guarded::{GuardedUnitBatchLimits, GuardedUnitMemoLimits},
+     preparation::WeightedSourceOptions,
+     reduction::{
+         GuardRefinementOptions, RequestedRayPointOptions, WeightedClosureDiagnostics,
+@@ -77,6 +77,12 @@
+                 },
+             ),
+             active_target_closure: setting("RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE", false),
++            unit_reduction_batch: setting("RUSTFLOW_WEIGHTED_UNIT_BATCH", false).then(|| {
++                GuardedUnitBatchLimits {
++                    max_workers: setting("RUSTFLOW_WEIGHTED_UNIT_BATCH_WORKERS", 2),
++                    max_in_flight: setting("RUSTFLOW_WEIGHTED_UNIT_BATCH_WINDOW", 2),
++                }
++            }),
+             unit_reduction_memo: setting("RUSTFLOW_WEIGHTED_UNIT_MEMO", false).then(|| {
+                 let defaults = GuardedUnitMemoLimits::default();
+                 GuardedUnitMemoLimits {
+@@ -132,6 +138,10 @@
+         run.save("configuration.json", json!({
+             "input_path":input_path,
+             "native_closure":format!("{:?}",run.closure),
++            "unit_reduction_batch":run.closure.unit_reduction_batch.map(|caps| json!({
++                "max_workers":caps.max_workers,"max_in_flight":caps.max_in_flight,
++                "scope":"bounded components within one ordered weighted sum; active traversal unchanged",
++            })),
+             "unit_reduction_memo":run.closure.unit_reduction_memo.map(|caps| json!({
+                 "max_entries":caps.max_entries,"max_output_terms":caps.max_output_terms,
+                 "max_conditions":caps.max_conditions,"max_polynomial_terms":caps.max_polynomial_terms,
+@@ -246,6 +256,11 @@
+         "all_diagnostics":format!("{diagnostics:?}"),
+         "native_rule_applications":diagnostics.native_rule_applications,
+         "performed_native_rule_applications":diagnostics.native_rule_applications-diagnostics.memoized_rule_applications,
++        "performed_native_rule_applications_scope":"logical committed uncached calls",
++        "actual_known_native_rule_applications":((diagnostics.native_rule_applications-diagnostics.memoized_rule_applications) as u128
++            +diagnostics.unit_batch.speculative_known_rule_applications).to_string(),
++        "actual_native_application_count_complete":diagnostics.unit_batch.actual_application_count_complete,
++        "unit_batch":diagnostics.unit_batch.report(),
+         "memoized_rule_applications":diagnostics.memoized_rule_applications,
+         "unit_memo_hits":diagnostics.unit_memo_hits,"unit_memo_misses":diagnostics.unit_memo_misses,
+         "unit_memo_peak_owned_bytes":diagnostics.unit_memo_peak_owned_bytes,

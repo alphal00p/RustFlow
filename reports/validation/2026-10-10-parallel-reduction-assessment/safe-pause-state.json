@@ -1,0 +1,32 @@
+{
+  "status": "paused at user request; no active process owned by this agent",
+  "captured_utc": "2026-10-10T09:20:56.075906+00:00",
+  "scope": "Isolated complete native batch prototype only. No live source/shared target edits, no frontend compile or promotion, no performance claim.",
+  "patch": {
+    "path": "reports/validation/2026-10-10-parallel-reduction-assessment/implementation-draft/native-batch.patch",
+    "sha256": "0f19e0018e8a8a39644839f0885daf2723935e4fad096af5c1f755221d57f01d"
+  },
+  "final_guarded_tests": {
+    "passed": 111,
+    "ignored": 1,
+    "failed": 0,
+    "new_batch_tests": 10,
+    "resources": "reports/validation/2026-10-10-parallel-reduction-assessment/guarded-tests-02.json"
+  },
+  "library": {
+    "path": "/tmp/librustred-ordered-unit-batch-20261010-02.rlib",
+    "sha256": "8e56c07bec346f7200cca9c1517b1e7f588e656c7708af0f1a7e1d15f2fa1b4a",
+    "bytes": 227581098
+  },
+  "library_build_seconds": 183.21509688626975,
+  "production_sources_unchanged": true,
+  "isolated_sources_unchanged": true,
+  "next_work_not_started": "Frontend isolated metadata/test compile by boundary owner; any promotion requires root coordination.",
+  "sessions_closed": [
+    24602,
+    95984,
+    58970,
+    14351,
+    56225
+  ]
+}

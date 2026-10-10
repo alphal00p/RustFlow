@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-10T09:21:44.820835+00:00",
+  "status": "safe pause requested by user",
+  "active_processes": [],
+  "active_sessions": [],
+  "production_edits": false,
+  "shared_target_writes": false,
+  "cargo_invocations": 0,
+  "frontend_compiles": 0,
+  "frontend_tests_executed": 0,
+  "python_builder_syntax_check": "passed",
+  "nonignored_tests_drafted": 9,
+  "ignored_cold_process_test_drafted": 1,
+  "builder_prepared_or_executed": false,
+  "patch_sha256": "d5cefc273257ea5e7ba84f485c1279349a7cdb321ac71dec4c7f7076fbd6c165",
+  "source_map_sha256": "9d1fa51aa56461ff9ff9bdc99dc87d0be3bcb70ea92c4d6a14cda7bb584790e9",
+  "remaining": [
+    "Review launcher against final native build metadata shape",
+    "Copy and bind current partial-flow snapshot/dependencies and validated rev2 native artifact",
+    "Isolated full-crate metadata/test compilation and source-fingerprint gate",
+    "Run drafted tests and cold-process serial/1-worker/2-worker controls",
+    "Retain every failure before revisions",
+    "Independent review and parent decision before production promotion"
+  ]
+}
