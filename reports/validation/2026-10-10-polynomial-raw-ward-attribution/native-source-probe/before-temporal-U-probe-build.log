@@ -1,0 +1,10 @@
+warning: unused variable: `mu`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs:50:6
+   |
+50 |  let mu=Atom::num(family.shells()[0].chemical_potential.clone());let dminus2=Atom::num(2)-Atom::num(2)*Atom::var(epsilon);let upper=...
+   |      ^^ help: if this is intentional, prefix it with an underscore: `_mu`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: 1 warning emitted
+

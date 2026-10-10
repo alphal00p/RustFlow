@@ -1,0 +1,18 @@
+{
+  "scope": "Read-only raw Ward source construction/proof/production-owner design audit; no production changes or native acceptance claim",
+  "status": "Raw signs, source guards and exact upper recentering verified; shifted polynomial boost domain pullback verified",
+  "reviewed_sha256": {
+    "reports/validation/2026-10-10-polynomial-raw-ward-attribution/raw-polynomial-Ward-owner-plan.md": "96c07f240bd5b41b4d2a816d7f6b8f9a3976a6768026e19257edcd9421f96274",
+    "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs": "0b4d2e518f5a33a8b089f374b4c5655d298f38d136e8031614448594c771bef3",
+    "src/finite_density/measure.rs": "eef3449b8c95847a042593fd2eec8ce5bb09bf7563bb8ef2ba998322c8fb654a",
+    "src/finite_density/preparation.rs": "f7c5f5a35a176104d61760dd88f9fdee6d2e713e766e6a3e3b0f9ca3068168e6",
+    "src/finite_density/massless_endpoint.rs": "131b4fedd8816cfbadd9ceb7e80e051c1e4844acdbabb63e7f4d101fe121929f"
+  },
+  "findings": [
+    "Raw E*H rows are polynomial and equivalent to the earlier mu rows by existing distribution multiplication.",
+    "Source base energy indices remain0; polynomial image energy numerator shift\u22121 does not widen them.",
+    "Raised cuts, positive cut mass, multiple compact loops and nonzero energy-factor source powers excluded.",
+    "Four full-boost source shifts apply+1 consistently to coefficient indices and term shifts, with original domain pulled back to aE<=\u22121 and all zero domains unchanged.",
+    "Generic production construction belongs in measure polynomial conversion with preparation bound singleton-origin admission, not guessed factor slots or reciprocal admission."
+  ]
+}

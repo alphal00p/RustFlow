@@ -1,0 +1,62 @@
+{
+  "original": [
+    "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original-resources.json",
+    "timeout",
+    "90s",
+    "env",
+    "RAW_WARD_RECENTER=0",
+    "/tmp/rustflow-raw-ward-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original",
+    "original"
+  ],
+  "ward-only": [
+    "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only-resources.json",
+    "timeout",
+    "90s",
+    "env",
+    "RAW_WARD_RECENTER=0",
+    "/tmp/rustflow-raw-ward-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only",
+    "ward-only"
+  ],
+  "boost-ward": [
+    "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward-resources.json",
+    "timeout",
+    "90s",
+    "env",
+    "RAW_WARD_RECENTER=0",
+    "/tmp/rustflow-raw-ward-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward",
+    "boost-ward"
+  ],
+  "ward-boost": [
+    "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost-resources.json",
+    "timeout",
+    "90s",
+    "env",
+    "RAW_WARD_RECENTER=0",
+    "/tmp/rustflow-raw-ward-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost",
+    "ward-boost"
+  ]
+}

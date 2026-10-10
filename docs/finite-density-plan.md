@@ -148,6 +148,17 @@ gives no improvement; its motivating example already has a first indirect
 winner. Production search remains unchanged while bounded source selection is
 investigated with exact replay and explicit condition-coverage checks.
 
+The [normalized-boost attribution](../reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/README.md)
+finds shorter small reductions after adding inverse occupied-energy powers, but
+the [polynomial raw Ward controls](../reports/validation/2026-10-10-polynomial-raw-ward-attribution/README.md)
+reproduce all 19 coefficient and condition maps without that domain extension.
+Keeping the energy factor explicit in the narrowly guarded surface identity,
+together with exact polynomial source shifts, gives 143 right-hand-side terms
+instead of 192. Both 62-source orders retain this result; neither is a closure
+certificate. Production massless admission remains polynomial. Separate bounded
+closure trials and a source-selection prototype are still under evaluation;
+three-loop numerical acceptance remains incomplete.
+
 ## Remaining acceptance evidence
 
 Exact certificates and bounded algebraic pilots are useful gates, but do not

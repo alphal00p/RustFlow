@@ -1,0 +1,68 @@
+{
+  "recorded_utc": "2026-10-10T03:24:12.988053+00:00",
+  "scope": "Polynomial-only guarded sources; no production code changes",
+  "physical_family": "Original 3-loop singleton cut0, native capacity12, physical arity11, original two outputs and three labels/coefficient phases",
+  "base_sources": 52,
+  "source_groups": {
+    "shifted_temporal_U": 4,
+    "shifted_global_boost": 4,
+    "independent_polynomial_raw_Ward": 2
+  },
+  "Ward_domain": "Exactly one occupied future massless shell C1, mu1, all medium-coordinate completion indices0, lowerH0; original scalar completion<=0 and tail0",
+  "shifted_source_domain": "Exact original pullback a6+1 gives a6<=-1; coefficient and condition substitution plus all integral shifts retained",
+  "old_zero_domains_unchanged": true,
+  "no_reciprocal_admission": true,
+  "old_rules_imported": false,
+  "inputs": [
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs",
+      "sha256": "7e89e21c3a9622b70d3a3db8bb02c4a720ddcb9fba95394c07e1adf0e9c7d282",
+      "bytes": 18160
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/source-delta.patch",
+      "sha256": "f5e185bb09287771f8c8908a4ecd118955aa8ca05ac36dac072d44244d7e98fd",
+      "bytes": 17862
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/normalized-polynomial-c1-proof.md",
+      "sha256": "7389bcfaa04ea5bb470732d42bba100ca0c989d95ae330e3830d25cd82ab9b0a",
+      "bytes": 5504
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/normalized-polynomial-c1-checks.json",
+      "sha256": "3447aea05dd11e4e9f4e87baf9632770db3c6b756e6b7af6a49df88db545f257",
+      "bytes": 5210
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/derivation.md",
+      "sha256": "800a318163533b6570af955c637e9c57e9a8a9edfaacfa77aee3b6ab9cda5b8c",
+      "bytes": 7591
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/cartesian-results.json",
+      "sha256": "e32b574137c25e307e96ff948cced8c214c23abd7d0beca0eb9624a7a8f9b4e3",
+      "bytes": 202380
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/independent-source-audit.json",
+      "sha256": "78ee002436f2b819b4ea19fe7472b7db68e360e079ce8d03c0d080448e1aea7e",
+      "bytes": 732
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json",
+      "sha256": "10c56050042c63ffc5130805637b8cbb8c4a62b4649759595cf933bbb456303e",
+      "bytes": 2019
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/source-restriction-comparison.json",
+      "sha256": "595342fa0fb73a50790838aec4302f10015d0ea924429b411b6540bfece40f7d",
+      "bytes": 13884
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/raw-Ward-review.json",
+      "sha256": "1f53ddfbc50c0d62e66e82fe482955d248fba7a78595913fa76e37a258823b45",
+      "bytes": 1679
+    }
+  ]
+}

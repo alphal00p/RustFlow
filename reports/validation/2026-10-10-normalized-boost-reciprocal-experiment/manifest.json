@@ -1,0 +1,236 @@
+{
+  "recorded_utc": "2026-10-10T03:24:12.989959+00:00",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/README.md",
+      "sha256": "e10191f1bc5393cff38fadef3768069ab486ac0e9653272d5730f30e0bd97b12",
+      "bytes": 3413
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/compile.py",
+      "sha256": "03498ecfd32b3a9ffe30485591bf8d6cc8adea84ac36f163df1e796836c83325",
+      "bytes": 1868
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/program.bin",
+      "sha256": "d9ea2e0934790f13ae78ba402156f76d631f9be8ce0ee551ce140a4e8b6f5a81",
+      "bytes": 57625
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first/result.json",
+      "sha256": "cf4a6a2433e3bb577c5fe9439ab06d10e3b230b97bdc88e4f8cf43c247b0d025",
+      "bytes": 169948
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first-resources.json",
+      "sha256": "6bdc9a52e78eab1b8db0cefc0dd34a236ff760126fe4634b81d4942a6cb0127d",
+      "bytes": 897
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first-resources.log",
+      "sha256": "39160c39871d8499fcf7a7d14a14a4384ec7ff636309ce1ba61f0784fb89a40d",
+      "bytes": 60
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first-resources.provenance.json",
+      "sha256": "1dd1f4e90a15c5544520ad73b29b93829841b82195dc2d3c58894c8f6d1fe74c",
+      "bytes": 2501
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last/program.bin",
+      "sha256": "bce3e609f92a519b8d71395649c532be256bda4a97c2f989778c194560e17b5d",
+      "bytes": 57673
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last/result.json",
+      "sha256": "a36db6ce78fc16f946c2622293cfad9f19c42775321f6cdccf1cf3148e31a7cd",
+      "bytes": 170380
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last-resources.json",
+      "sha256": "a3dbe96d7e37f2c8eae44c725493a9769dcbf02c1b9116d34723f97895d6fb68",
+      "bytes": 884
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last-resources.log",
+      "sha256": "440546217fa912346a60ef2b1ce9c6fa1f28c16cb43bd47849d960e2f84a7707",
+      "bytes": 59
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last-resources.provenance.json",
+      "sha256": "0645b854fba6f9ab86d0699336f4ff98f1cbf8266b673160ff31b0824a7179e7",
+      "bytes": 2499
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/original/program.bin",
+      "sha256": "569dce669f03dbd286b12d76968e0383707d12529bfe0c1626230d49dc04b079",
+      "bytes": 60938
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/original/result.json",
+      "sha256": "947e6838673f9783e38b7d8ca925b54e8b4afc4d5f6ccda6e78055fddceaf322",
+      "bytes": 213677
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/original-resources.json",
+      "sha256": "56891d0628b7057d323449a88cfc8c5e830fafe1f6258f224aada0189af0dd75",
+      "bytes": 883
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/original-resources.log",
+      "sha256": "a4d6038dffa5d624eacc4efe6272e8f0cbed740f0d6086211ec3dab5cc7eed29",
+      "bytes": 52
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/original-resources.provenance.json",
+      "sha256": "c718d28ddde8f61b27a0f01c29bd17bad738e8edc972c73bcf5b8e53c4da8c24",
+      "bytes": 2485
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/planned-commands.json",
+      "sha256": "1d2d7b57709e627b328a450a2742d901c86e1169ac9c96974c0ec82f6a0dcbd1",
+      "bytes": 6015
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/polynomial-shifted/program.bin",
+      "sha256": "a0904b151605417961642aca4f69a816bbaf4bd095f1be91bb46a924e69638ad",
+      "bytes": 62615
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/polynomial-shifted/result.json",
+      "sha256": "510875bf024370261c2f8552b9733187739be30fd9d15fdc6a126450c01e5dbc",
+      "bytes": 201478
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/polynomial-shifted-resources.json",
+      "sha256": "e5493aa39798ab1e50e99e5b3930996accb46a5ddeab2a6aa81762f6ccfa90f0",
+      "bytes": 891
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/polynomial-shifted-resources.log",
+      "sha256": "837e47db7ac7f8c0780c5589d1d2b6ab2e0bfa4f92f08615e3a899fd47039855",
+      "bytes": 62
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/polynomial-shifted-resources.provenance.json",
+      "sha256": "26266bbf672814983e680aa41742a791b629d314d0185d8bdb398dddaf87f995",
+      "bytes": 2505
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/probe-build-binding.json",
+      "sha256": "e767d2b68c8d4602fde2e0599b581b4bc2c2e70f792b6333c8a810605ce0dcc2",
+      "bytes": 2618
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/probe-build.json",
+      "sha256": "2e0900b17f73649f1bf018c6acfea5818c346a73377cd72bed7706ba62088d0a",
+      "bytes": 221
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/probe-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/probe.rs",
+      "sha256": "3e70bada16930b0962afb570f84f0a8772efafcedd741f364142f55da7e42c2b",
+      "bytes": 13376
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/run.py",
+      "sha256": "849f9b4da78c9914b3e812c754798e95ce95b7082a923133de2a225185b4f0c3",
+      "bytes": 933
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/source-delta.patch",
+      "sha256": "bff2cd67f6cf2b803a2b3545b964549ad34687e4b5b5de767d00abc28e679491",
+      "bytes": 14080
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/superseded-context-description-probe-build-binding.json",
+      "sha256": "15879a65883fd2fbd51717ca23ca5fdc3ba50fb8e8f81f80c577c51dc15569ab",
+      "bytes": 2618
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/superseded-context-description-probe-build.json",
+      "sha256": "31ac235912b8e617b5e64551b39ddbc2edc79499745cdab591ba10f1ebbb9c26",
+      "bytes": 219
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/superseded-context-description-probe-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/superseded-context-description-probe.rs",
+      "sha256": "cbce138f07091df19043665ce272a6c656fe7226cfcb65e47106144bc605317c",
+      "bytes": 13171
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened/program.bin",
+      "sha256": "7815241943efd367340854eeb4275d358fdd1ba47183ea6576ea9eae45755166",
+      "bytes": 61809
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened/result.json",
+      "sha256": "30cc38afe45dae17dda4033b3265c04d805dda58878a16c9c312ddc0337a5780",
+      "bytes": 214160
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-raw/program.bin",
+      "sha256": "277611281a5e16139bf01fe50d1c14d9f3579f20ec11f7ec4d31d1620bb641e5",
+      "bytes": 63526
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-raw/result.json",
+      "sha256": "64db7c8672c0926512af43d35a0c3b7ea44bce8d200b3c64376256ab688231ed",
+      "bytes": 208285
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-raw-resources.json",
+      "sha256": "84d442ce9d3956f6b81f390e70ed9d22f70fa5048b4dfb54c0974f1fe5a24b36",
+      "bytes": 876
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-raw-resources.log",
+      "sha256": "aa87fc0813dba7bd47517d34bd3f7a098fae88789ab5d2e9ed2a48be131079ce",
+      "bytes": 55
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-raw-resources.provenance.json",
+      "sha256": "e925f7c0c278bc5289c693fa74787d13579971add2689f6ae1fd651ff75db607",
+      "bytes": 2491
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-resources.json",
+      "sha256": "dfd5db54845629d6c43a2e020ca94e10d0e66e0b61e0805cb3f69f8441aa807d",
+      "bytes": 879
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-resources.log",
+      "sha256": "710e8abd2c34cea0900333dc17013275f8ad1c9f763c42305bb3634abed08650",
+      "bytes": 51
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-resources.provenance.json",
+      "sha256": "b11e633afccac8b300aadf9531d04389dac804d18c286b7634a11ee1d7cfcc08",
+      "bytes": 2483
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/polynomial-attribution.json",
+      "sha256": "e02e5ff9b129708b47b099bd56f66fa57797227c0989e19778102c270d9e1fb8",
+      "bytes": 1060
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/source-binding.json",
+      "sha256": "546511d9166228fdfabbd5fb9f9a7c80ed17469f2f088dd90fd318607cbf3a1c",
+      "bytes": 3447
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/summary.json",
+      "sha256": "7c1fe7f1204a872e176c1175ad7af59dcddbbee4ac04b6837daab0f687accb89",
+      "bytes": 27058
+    }
+  ],
+  "documentation_review_utc": "2026-10-10T03:30:05.597688+00:00"
+}

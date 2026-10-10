@@ -1,0 +1,60 @@
+{
+  "recorded_utc": "2026-10-10T03:24:12.989527+00:00",
+  "note": "Every historical build used the mutable probe.rs path; this table maps its recorded SHA to an immutable preserved revision. Per-run provenance binds the executable actually used.",
+  "revisions": [
+    {
+      "source": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/recentered-only-probe.rs",
+        "sha256": "50eac583bc5945fd5d54134a1db6b77921a6ff7057636e9732ae635a2706e3db",
+        "bytes": 16449
+      },
+      "build_binding": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/recentered-only-probe-build-binding.json",
+        "sha256": "c419a225f794291bdd50ab5dd5453a157b248ccac4f54c198065bf7c2d7fc8c8",
+        "bytes": 2589
+      },
+      "build_result": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/recentered-only-probe-build.json",
+        "sha256": "4a172bfaeffdb6b5143604e996fbe5e63ea902bd089cab1ec60b6b2a67824ab2",
+        "bytes": 207
+      },
+      "historical_original_source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs"
+    },
+    {
+      "source": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/before-temporal-U-probe.rs",
+        "sha256": "0b4d2e518f5a33a8b089f374b4c5655d298f38d136e8031614448594c771bef3",
+        "bytes": 16526
+      },
+      "build_binding": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/before-temporal-U-probe-build-binding.json",
+        "sha256": "dcd9abc76048268b22c0aa45a03d316664c6780ce134f876ceb488f400b39379",
+        "bytes": 2589
+      },
+      "build_result": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/before-temporal-U-probe-build.json",
+        "sha256": "bb36df4ca5cead8d45c1b5edb5431a8d8a20f9f4a3c50620a2ad458f3795ad9d",
+        "bytes": 207
+      },
+      "historical_original_source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs"
+    },
+    {
+      "source": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs",
+        "sha256": "7e89e21c3a9622b70d3a3db8bb02c4a720ddcb9fba95394c07e1adf0e9c7d282",
+        "bytes": 18160
+      },
+      "build_binding": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe-build-binding.json",
+        "sha256": "a0f091fe41227b4059c369d85d50b5ec5d893a7faf4e2f70085bd40f2a5a3e23",
+        "bytes": 2589
+      },
+      "build_result": {
+        "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe-build.json",
+        "sha256": "c03b716d06736324b7c03b2efa9fd9e9a8c907c571989bfcb89a366035e343c3",
+        "bytes": 207
+      },
+      "historical_original_source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs"
+    }
+  ]
+}

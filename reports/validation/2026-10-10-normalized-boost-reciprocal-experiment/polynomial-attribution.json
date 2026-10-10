@@ -1,0 +1,19 @@
+{
+  "recorded_utc": "2026-10-10T03:16:50.019549+00:00",
+  "conclusion": "All19 widened-normalized polynomial-target RHS coefficient/condition maps are reproduced exactly by original-domain shifted-global-boost4 plus independently derived unrecentered rawC1Ward2. No gain in this finite comparison requires reciprocal-energy admission.",
+  "widened_rhs_terms": 143,
+  "polynomial_rhs_terms": 143,
+  "exact_matching_physical_labels": 19,
+  "positive_E_probes_in_polynomial_control": "NoApplicableRule, preserving original admission",
+  "comparison": {
+    "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/unrecentered-summary.json",
+    "sha256": "3b292aec1a3fe45bccf32232826a88d40dcfff19c27323d48f63d1f86472be78",
+    "bytes": 5883
+  },
+  "source_restriction_comparison": {
+    "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/source-restriction-comparison.json",
+    "sha256": "595342fa0fb73a50790838aec4302f10015d0ea924429b411b6540bfece40f7d",
+    "bytes": 13884
+  },
+  "no_closed_basis_or_numerical_claim": true
+}

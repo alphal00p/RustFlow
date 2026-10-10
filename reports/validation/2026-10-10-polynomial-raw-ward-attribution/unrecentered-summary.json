@@ -1,0 +1,138 @@
+{
+  "recorded_utc": "2026-10-10T03:12:40.957544+00:00",
+  "arms": {
+    "original": {
+      "source_count": 52,
+      "source_recentered": false,
+      "native_rules": 19,
+      "polynomial_rhs_terms": 192,
+      "same_widened_normalized_rhs_conditions": 8,
+      "positive_energy_probes": [
+        "Unresolved(NoApplicableRule)",
+        "Unresolved(NoApplicableRule)"
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "RAW_WARD_RECENTER=0",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original",
+          "original"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0810442930087447,
+        "user_seconds": 0.995559,
+        "system_seconds": 0.07864399999999999,
+        "peak_child_rss_kib": 64512,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "ward-only": {
+      "source_count": 54,
+      "source_recentered": false,
+      "native_rules": 19,
+      "polynomial_rhs_terms": 152,
+      "same_widened_normalized_rhs_conditions": 13,
+      "positive_energy_probes": [
+        "Unresolved(NoApplicableRule)",
+        "Unresolved(NoApplicableRule)"
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "RAW_WARD_RECENTER=0",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only",
+          "ward-only"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.940252706874162,
+        "user_seconds": 0.887652,
+        "system_seconds": 0.045842,
+        "peak_child_rss_kib": 64612,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "boost-ward": {
+      "source_count": 58,
+      "source_recentered": false,
+      "native_rules": 19,
+      "polynomial_rhs_terms": 143,
+      "same_widened_normalized_rhs_conditions": 19,
+      "positive_energy_probes": [
+        "Unresolved(NoApplicableRule)",
+        "Unresolved(NoApplicableRule)"
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "RAW_WARD_RECENTER=0",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward",
+          "boost-ward"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.8883037022314966,
+        "user_seconds": 0.8406549999999999,
+        "system_seconds": 0.041000999999999996,
+        "peak_child_rss_kib": 64576,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "ward-boost": {
+      "source_count": 58,
+      "source_recentered": false,
+      "native_rules": 19,
+      "polynomial_rhs_terms": 143,
+      "same_widened_normalized_rhs_conditions": 19,
+      "positive_energy_probes": [
+        "Unresolved(NoApplicableRule)",
+        "Unresolved(NoApplicableRule)"
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "RAW_WARD_RECENTER=0",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost",
+          "ward-boost"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.8918859222903848,
+        "user_seconds": 0.8490249999999999,
+        "system_seconds": 0.036899999999999995,
+        "peak_child_rss_kib": 64604,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  },
+  "exact_comparison_ignores_rule_ordinal_only": true
+}

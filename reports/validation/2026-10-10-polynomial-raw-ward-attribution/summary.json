@@ -1,0 +1,864 @@
+{
+  "recorded_utc": "2026-10-10T03:08:54.327081+00:00",
+  "scope": "No-widening source attribution for normalized reciprocal boost; no closed basis or numerical evaluation",
+  "arms": {
+    "original": {
+      "source_count": 52,
+      "rules": 19,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 192,
+      "same_original_rhs_conditions": 19,
+      "same_widened_normalized_rhs_conditions": 8,
+      "differences": [],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/original",
+          "original"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.087488400284201,
+        "user_seconds": 1.018067,
+        "system_seconds": 0.061947999999999996,
+        "peak_child_rss_kib": 61440,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "ward-only": {
+      "source_count": 54,
+      "rules": 19,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 177,
+      "same_original_rhs_conditions": 18,
+      "same_widened_normalized_rhs_conditions": 9,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        }
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-only",
+          "ward-only"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0045153829269111,
+        "user_seconds": 0.9543079999999999,
+        "system_seconds": 0.043572,
+        "peak_child_rss_kib": 61584,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "shifted-only": {
+      "source_count": 56,
+      "rules": 19,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 183,
+      "same_original_rhs_conditions": 13,
+      "same_widened_normalized_rhs_conditions": 14,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 2,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 1,
+          "after_terms": 8,
+          "before_conditions": [],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 6,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 4,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 2,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 2,
+          "after_terms": 1,
+          "before_conditions": [
+            "-3+2*epsilon"
+          ],
+          "after_conditions": []
+        }
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/shifted-only",
+          "shifted-only"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0085377641953528,
+        "user_seconds": 0.955912,
+        "system_seconds": 0.045595,
+        "peak_child_rss_kib": 61568,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "boost-ward": {
+      "source_count": 58,
+      "rules": 19,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 168,
+      "same_original_rhs_conditions": 12,
+      "same_widened_normalized_rhs_conditions": 15,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 2,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 1,
+          "after_terms": 8,
+          "before_conditions": [],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 6,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 4,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 2,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 2,
+          "after_terms": 1,
+          "before_conditions": [
+            "-3+2*epsilon"
+          ],
+          "after_conditions": []
+        }
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/boost-ward",
+          "boost-ward"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9471083790995181,
+        "user_seconds": 0.8968569999999999,
+        "system_seconds": 0.043566999999999995,
+        "peak_child_rss_kib": 64664,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "ward-boost": {
+      "source_count": 58,
+      "rules": 19,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 168,
+      "same_original_rhs_conditions": 12,
+      "same_widened_normalized_rhs_conditions": 15,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 2,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 1,
+          "after_terms": 8,
+          "before_conditions": [],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 6,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 4,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 2,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 2,
+          "after_terms": 1,
+          "before_conditions": [
+            "-3+2*epsilon"
+          ],
+          "after_conditions": []
+        }
+      ],
+      "strict_guard_cases": 8,
+      "encoded_decoded_replay": true,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-raw-ward-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-boost",
+          "ward-boost"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9513450311496854,
+        "user_seconds": 0.9065829999999999,
+        "system_seconds": 0.036728,
+        "peak_child_rss_kib": 61568,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  },
+  "polynomial_added_orders_identical": true,
+  "widened_comparison_file": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last/result.json",
+  "comparison_ignores_rule_ordinal_but_checks_all_coefficients_conditions": true
+}

@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 38.504284381866455,
+  "executable": {
+    "path": "/tmp/rustflow-raw-ward-probe",
+    "sha256": "76a2d394d46bbc602559acaebdc3865bb5e0342e3c2332afeab9148f186d52e4"
+  }
+}

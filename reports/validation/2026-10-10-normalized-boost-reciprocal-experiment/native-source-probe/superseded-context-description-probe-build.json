@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 42.865019896999,
+  "executable": {
+    "path": "/tmp/rustflow-reciprocal-global-boost-probe",
+    "sha256": "e1c9d3a140a12789bc79deec61db8fa344041e15a1d8dbe98bbbd1e93d76fbf7"
+  }
+}

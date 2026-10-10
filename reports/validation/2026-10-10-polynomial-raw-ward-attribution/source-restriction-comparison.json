@@ -1,0 +1,773 @@
+{
+  "recorded_utc": "2026-10-10T03:14:49.461108+00:00",
+  "scope": "Exact symbolic rational-polynomial comparison of source coefficients and shifts after explicit domain restriction and existing zero projection; no elimination or period evaluation",
+  "normal_input": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last/result.json",
+    "sha256": "a36db6ce78fc16f946c2622293cfad9f19c42775321f6cdccf1cf3148e31a7cd"
+  },
+  "raw_input": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward/result.json",
+    "sha256": "416caa4acc408b00908072159de4d725fcee7e5ce2d901cf78344f68f085d361"
+  },
+  "checker": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/check-source-restriction.py",
+    "sha256": "9831384f2501fad97e79d037b7e1e163bc5abd71bf3011d620cd2dee8519d47b"
+  },
+  "rows": [
+    {
+      "branch": "bulk",
+      "normalized_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-0",
+      "raw_id": "polynomial-singleton-raw-normalized-boost/bulk",
+      "raw_guard": [
+        [
+          1,
+          1
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "normalized_guard": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "raw_guard_is_subset": true,
+      "constant_nonzero_scale": 8,
+      "coefficient_and_shift_equality": true,
+      "raw_row": [
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [],
+              "-1"
+            ]
+          ]
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [],
+              "2"
+            ],
+            [
+              [
+                [
+                  "epsilon",
+                  1
+                ]
+              ],
+              "-2"
+            ]
+          ]
+        }
+      ],
+      "restricted_normalized_row": [
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [],
+              "-8"
+            ]
+          ]
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [],
+              "16"
+            ],
+            [
+              [
+                [
+                  "epsilon",
+                  1
+                ]
+              ],
+              "-16"
+            ]
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "coefficient": "-8",
+          "reason": "required-cut C_n zero for n<=0"
+        },
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "coefficient": "8",
+          "reason": "required-cut C_n zero for n<=0"
+        },
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "4*a_8",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "8+8*a_6",
+          "reason": "required-cut C_n zero for n<=0"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "4*a_8",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "-4*a_8",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "8*a_7",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "coefficient": "8",
+          "reason": "existing finite-label lower-contact origin zero"
+        }
+      ],
+      "nonconstant_conditions_match": true,
+      "normalized_declared_conditions_retained": [
+        "2",
+        "2",
+        "2"
+      ],
+      "raw_declared_conditions_retained": [],
+      "extra_conditions_are_verified_nonzero_rational_constants": true
+    },
+    {
+      "branch": "positive upper",
+      "normalized_id": "normalized-global-boost/global-boost/occupied-0/occupation-case-1",
+      "raw_id": "polynomial-singleton-raw-normalized-boost/positive-upper",
+      "raw_guard": [
+        [
+          1,
+          1
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          null
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "normalized_guard": [
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          null
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          null,
+          0
+        ],
+        [
+          1,
+          null
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "raw_guard_is_subset": true,
+      "constant_nonzero_scale": 8,
+      "coefficient_and_shift_equality": true,
+      "raw_row": [
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [
+                [
+                  "a_9",
+                  1
+                ]
+              ],
+              "1"
+            ]
+          ]
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [],
+              "2"
+            ],
+            [
+              [
+                [
+                  "epsilon",
+                  1
+                ]
+              ],
+              "-2"
+            ]
+          ]
+        }
+      ],
+      "restricted_normalized_row": [
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [
+                [
+                  "a_9",
+                  1
+                ]
+              ],
+              "8"
+            ]
+          ]
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": [
+            [
+              [],
+              "16"
+            ],
+            [
+              [
+                [
+                  "epsilon",
+                  1
+                ]
+              ],
+              "-16"
+            ]
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "coefficient": "-8",
+          "reason": "required-cut C_n zero for n<=0"
+        },
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "coefficient": "-8*a_9",
+          "reason": "required-cut C_n zero for n<=0"
+        },
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "4*a_8",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "8+8*a_6",
+          "reason": "required-cut C_n zero for n<=0"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "4*a_8",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "-4*a_8",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient": "8*a_7",
+          "reason": "exact coefficient zero under guard"
+        },
+        {
+          "shift": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "coefficient": "8",
+          "reason": "existing finite-label lower-contact origin zero"
+        }
+      ],
+      "nonconstant_conditions_match": true,
+      "normalized_declared_conditions_retained": [
+        "2",
+        "2",
+        "2"
+      ],
+      "raw_declared_conditions_retained": [],
+      "extra_conditions_are_verified_nonzero_rational_constants": true
+    }
+  ],
+  "physical_proof_caveat": "The polynomial raw Ward source is independently justified by the shell cutoff theorem. This comparison does not replay an original polynomial source at a forbidden reciprocal seed or widen production admission."
+}

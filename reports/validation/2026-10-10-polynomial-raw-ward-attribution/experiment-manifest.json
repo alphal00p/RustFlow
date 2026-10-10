@@ -1,0 +1,446 @@
+{
+  "recorded_utc": "2026-10-10T03:24:28.353046+00:00",
+  "excluded_evolving_material": [
+    "drafts/**",
+    "implementation-draft/**",
+    "polynomial-closure-draft/**"
+  ],
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/README.md",
+      "sha256": "aa25182cd65c6d907068c6a3707f8f4d6240f3b4d871d82265c69a7bb22eaf6e",
+      "bytes": 4968
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/check-source-restriction.py",
+      "sha256": "9831384f2501fad97e79d037b7e1e163bc5abd71bf3011d620cd2dee8519d47b",
+      "bytes": 5154
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/before-temporal-U-probe-build-binding.json",
+      "sha256": "dcd9abc76048268b22c0aa45a03d316664c6780ce134f876ceb488f400b39379",
+      "bytes": 2589
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/before-temporal-U-probe-build.json",
+      "sha256": "bb36df4ca5cead8d45c1b5edb5431a8d8a20f9f4a3c50620a2ad458f3795ad9d",
+      "bytes": 207
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/before-temporal-U-probe-build.log",
+      "sha256": "2914ad84dd88a8390135f0cfde50c1639bd739ba956a9528afafe7903d65eff1",
+      "bytes": 500
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/before-temporal-U-probe.rs",
+      "sha256": "0b4d2e518f5a33a8b089f374b4c5655d298f38d136e8031614448594c771bef3",
+      "bytes": 16526
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/boost-ward/program.bin",
+      "sha256": "ad1eef46b3dc5e4984fc8f6ed9a81f8e14aab57345a8395fdbcd2b6d56171924",
+      "bytes": 60881
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/boost-ward/result.json",
+      "sha256": "bf3e6b3d311e9f8082093ca8a22c8dd70a9bcfa09c92a0d7ef6d603b870be677",
+      "bytes": 193140
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/boost-ward-resources.json",
+      "sha256": "83cd2ee5d87d5e3731fdf19af9db13294acfbf6a3792de2141396dc38919229a",
+      "bytes": 875
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/boost-ward-resources.log",
+      "sha256": "21598e3e6cde62fd67cb8721459c1b7b800ab5a9dc338cfa091cb198599c19bb",
+      "bytes": 54
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/boost-ward-resources.provenance.json",
+      "sha256": "5e468ed531b1f4745406b564a5007a0f34494628c7d7410e4e9e6685e31b189e",
+      "bytes": 2437
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/compile.py",
+      "sha256": "1cad28f5a86544db001e2bd3abfb247c9fdbfc704519e827c9d8abbb42455557",
+      "bytes": 1846
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/original/program.bin",
+      "sha256": "cbba984dce5ecd920e1abb9a51fa798cdb0a08b62c7412b55aba83aee5959902",
+      "bytes": 60840
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/original/result.json",
+      "sha256": "f24d32085e86cdb1a47e1a2ef922bc347e4bf290f6114e3c3e3b27f5a179ce82",
+      "bytes": 219717
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/original-resources.json",
+      "sha256": "c8d40e9f4bb908a0018cf5badf649592f3ef828acaf59622080cd6b034d07ba0",
+      "bytes": 860
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/original-resources.log",
+      "sha256": "a4d6038dffa5d624eacc4efe6272e8f0cbed740f0d6086211ec3dab5cc7eed29",
+      "bytes": 52
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/original-resources.provenance.json",
+      "sha256": "4c5e5c4d477e3f1fa7cab1c020cc32e4b62f38a43c30c34daee7033e6e7ebd18",
+      "bytes": 2433
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/planned-commands.json",
+      "sha256": "2edca71414585471de64e28817de7260399503f78f32c136630a6ae6aac2b845",
+      "bytes": 4814
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe-build-binding.json",
+      "sha256": "a0f091fe41227b4059c369d85d50b5ec5d893a7faf4e2f70085bd40f2a5a3e23",
+      "bytes": 2589
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe-build.json",
+      "sha256": "c03b716d06736324b7c03b2efa9fd9e9a8c907c571989bfcb89a366035e343c3",
+      "bytes": 207
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe-build.log",
+      "sha256": "2914ad84dd88a8390135f0cfde50c1639bd739ba956a9528afafe7903d65eff1",
+      "bytes": 500
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/probe.rs",
+      "sha256": "7e89e21c3a9622b70d3a3db8bb02c4a720ddcb9fba95394c07e1adf0e9c7d282",
+      "bytes": 18160
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/recentered-only-probe-build-binding.json",
+      "sha256": "c419a225f794291bdd50ab5dd5453a157b248ccac4f54c198065bf7c2d7fc8c8",
+      "bytes": 2589
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/recentered-only-probe-build.json",
+      "sha256": "4a172bfaeffdb6b5143604e996fbe5e63ea902bd089cab1ec60b6b2a67824ab2",
+      "bytes": 207
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/recentered-only-probe-build.log",
+      "sha256": "2914ad84dd88a8390135f0cfde50c1639bd739ba956a9528afafe7903d65eff1",
+      "bytes": 500
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/recentered-only-probe.rs",
+      "sha256": "50eac583bc5945fd5d54134a1db6b77921a6ff7057636e9732ae635a2706e3db",
+      "bytes": 16449
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/run-strongest62.py",
+      "sha256": "5ff29cf010b24d0ba789f883987d442edfab996d5a57d740792a36a856ed87d2",
+      "bytes": 943
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/run-unrecentered.py",
+      "sha256": "16f5a1d6ffb3a593623b692574cafa8e050bb6873bdb8edb117f7c6e6e05f45c",
+      "bytes": 942
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/run.py",
+      "sha256": "7bf6f50ecd49fd4d236994d9bc5357de9c412eab0e9c9ac295549b5caf6f36b4",
+      "bytes": 882
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/shifted-only/program.bin",
+      "sha256": "3eec83d7d7f675cd1654eb3dc9c1d6b9e600b84aec39352a8a4bf7d4245a2dbf",
+      "bytes": 62543
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/shifted-only/result.json",
+      "sha256": "94bfc961c41a4df4c98b1304a36d55cbdbcc3da902cf26c49640481451b55e9d",
+      "bytes": 207560
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/shifted-only-resources.json",
+      "sha256": "9cf9d865a25c3f52f5117d1cbb988e95840e42e9777e5d43c016d01012795ffe",
+      "bytes": 857
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/shifted-only-resources.log",
+      "sha256": "93e3b4180df2cc2f7a206f6f06e3d2a99200865ed8ae672613a5560b480d9014",
+      "bytes": 56
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/shifted-only-resources.provenance.json",
+      "sha256": "2c3e06c92f2403b0869f3a93dbbb10557204e19a406b5466f25757428db24c0f",
+      "bytes": 2441
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/source-delta.patch",
+      "sha256": "f5e185bb09287771f8c8908a4ecd118955aa8ca05ac36dac072d44244d7e98fd",
+      "bytes": 17862
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+      "sha256": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2",
+      "bytes": 58458
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/result.json",
+      "sha256": "948adf53b90fad28ad21237d2ba53d2bd760f5b427603aa10357a104a246a360",
+      "bytes": 203272
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward-resources.json",
+      "sha256": "f64257f279a8a5fef54975700cb75c720232ef62379dfc41a215ac8619999942",
+      "bytes": 935
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward-resources.log",
+      "sha256": "21598e3e6cde62fd67cb8721459c1b7b800ab5a9dc338cfa091cb198599c19bb",
+      "bytes": 54
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward-resources.provenance.json",
+      "sha256": "bc41e20198420fef8c30e42a841ef21fa7047fe5de5d0233e7f3e0a774002b4f",
+      "bytes": 2750
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-planned-commands.json",
+      "sha256": "71c147aa20957cd0378e0fe7bcfc948a0fa39b1ddc00e541065a49585edaeb39",
+      "bytes": 2117
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-ward-boost/program.bin",
+      "sha256": "de67bb87420c3fa423c1fdd6916e7258f11d66f037775c50384f88450d7762d1",
+      "bytes": 58458
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-ward-boost/result.json",
+      "sha256": "7571d92931c5ef3cb934640003de1ccb8c3cba06615671efec69be0db29c27dd",
+      "bytes": 203272
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-ward-boost-resources.json",
+      "sha256": "d7633f66f5f0b010b8256dd0592e1e688cb9cf95532a10c72858a0de2ebf5c21",
+      "bytes": 947
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-ward-boost-resources.log",
+      "sha256": "3dd91486925b1b42879a6bd3b59d936b76eabcda0a832425384cb00988731e75",
+      "bytes": 54
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-ward-boost-resources.provenance.json",
+      "sha256": "4ce033d236dc2645700e8164e32e6c605c1f14dc97cd72a6da3de74b900f2359",
+      "bytes": 2750
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward/program.bin",
+      "sha256": "be23b772d720ed283d61fb300d59fbae1ed7a7c219f03237cb2f7f48bd1543cd",
+      "bytes": 57179
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward/result.json",
+      "sha256": "416caa4acc408b00908072159de4d725fcee7e5ce2d901cf78344f68f085d361",
+      "bytes": 175858
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward-resources.json",
+      "sha256": "a24369b1762106ff1b89d428e926bda652c202700628f71af3b89b5e6bb56337",
+      "bytes": 926
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward-resources.log",
+      "sha256": "21598e3e6cde62fd67cb8721459c1b7b800ab5a9dc338cfa091cb198599c19bb",
+      "bytes": 54
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-boost-ward-resources.provenance.json",
+      "sha256": "9f534396adf5cf1b764279f8ceff5cf825523d222b228715e702cedebdc151c0",
+      "bytes": 2719
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original/program.bin",
+      "sha256": "fffb62158c534df4d13060c87a521fa488545e79ab8c5dfccc9a7441e01a9a81",
+      "bytes": 60855
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original/result.json",
+      "sha256": "1febbbe49c70d6f3997e8d2be097e45ac11415fd5e3ffe42fe34f82d81a3aebd",
+      "bytes": 219691
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original-resources.json",
+      "sha256": "30740b70dff173d8f055d50388fc3a57f9769333ea5c0ef51cce32bb8c0ecee5",
+      "bytes": 911
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original-resources.log",
+      "sha256": "a4d6038dffa5d624eacc4efe6272e8f0cbed740f0d6086211ec3dab5cc7eed29",
+      "bytes": 52
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-original-resources.provenance.json",
+      "sha256": "e2288fe93babcaa212a6e03f91468bb871de3e5655adfa1f048263062510b412",
+      "bytes": 2715
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-planned-commands.json",
+      "sha256": "75ec552333b781a287cfa726edf2f8e737710278929bfdf776678ff265d930b0",
+      "bytes": 4099
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost/program.bin",
+      "sha256": "fec630cb147bac70d0a738f4fac042e78053a472b64ad150f63f2619a7dc953c",
+      "bytes": 57179
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost/result.json",
+      "sha256": "11a8b617aa2041930982f911bd869287b66581c4691420cdc58193881b3a2854",
+      "bytes": 175858
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost-resources.json",
+      "sha256": "576ad654a1f2598b5a5eb90018f1353b3b7be8dae24abf858e2dcffc3a7b131a",
+      "bytes": 926
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost-resources.log",
+      "sha256": "3dd91486925b1b42879a6bd3b59d936b76eabcda0a832425384cb00988731e75",
+      "bytes": 54
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-boost-resources.provenance.json",
+      "sha256": "74dd86037c960c926f8f7ee84cc84ec0251b2db4cc082aa8bd8bb65adf0b38d1",
+      "bytes": 2719
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only/program.bin",
+      "sha256": "5300abad34f7aabecb74d5f9473360d3d37f465986d9754e545a19da6bb0b0a5",
+      "bytes": 55580
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only/result.json",
+      "sha256": "f3f28bf4e2809958cb95cffe560ea0a21f919ae7e54fd7f734cbe58b7b9d3543",
+      "bytes": 188018
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only-resources.json",
+      "sha256": "d73a292f517368e885fe744ee74d6efda98e6c4174f6d79503315a41948047d3",
+      "bytes": 901
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only-resources.log",
+      "sha256": "5f535a2e8347688bc94e0bb58fe81d4fef35b00777b790824e7bea3b0ee920ac",
+      "bytes": 53
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/unrecentered-ward-only-resources.provenance.json",
+      "sha256": "43bdb47761c9f71278062108b42b9746bc65017abf9a7eb1433e2db540e99777",
+      "bytes": 2717
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-boost/program.bin",
+      "sha256": "5933ffb3e0cdc8886b4edcf77a186f8b5fcdc58fd5e72904b1eec426cb574c78",
+      "bytes": 60881
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-boost/result.json",
+      "sha256": "f29d483d8a1e90c47651f21cc4ce26d91708895039c0f3de14d3b02b9456b6eb",
+      "bytes": 193140
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-boost-resources.json",
+      "sha256": "e442352ea84f943865b7dda27093b3d5aff11dd5b4e4ed217fa08973cb389867",
+      "bytes": 863
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-boost-resources.log",
+      "sha256": "3dd91486925b1b42879a6bd3b59d936b76eabcda0a832425384cb00988731e75",
+      "bytes": 54
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-boost-resources.provenance.json",
+      "sha256": "e89ebcf438feaffd4f14bbcb842797324e21de63ede53a2783d3cd1e144e93d3",
+      "bytes": 2437
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-only/program.bin",
+      "sha256": "ed6af7991e806fc2b8cb5e3cce9b722e2f41e879d96b054b6743d486e03e332e",
+      "bytes": 59282
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-only/result.json",
+      "sha256": "46df29ec494e6e9b0b3b3be1b5a0db6d993efb6fbbaabba61d9ac8dacb89838e",
+      "bytes": 205300
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-only-resources.json",
+      "sha256": "f3955054de44216e2c47af550d4954bb0536c578d1e87a0ff6f86db836e17e67",
+      "bytes": 861
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-only-resources.log",
+      "sha256": "5f535a2e8347688bc94e0bb58fe81d4fef35b00777b790824e7bea3b0ee920ac",
+      "bytes": 53
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/ward-only-resources.provenance.json",
+      "sha256": "e976c96047fb477af451ca8c15f8637da52f829070aa919a21fc81fa9351980c",
+      "bytes": 2435
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/raw-Ward-review.json",
+      "sha256": "1f53ddfbc50c0d62e66e82fe482955d248fba7a78595913fa76e37a258823b45",
+      "bytes": 1679
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/raw-polynomial-Ward-owner-plan.md",
+      "sha256": "96c07f240bd5b41b4d2a816d7f6b8f9a3976a6768026e19257edcd9421f96274",
+      "bytes": 6787
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/source-binding.json",
+      "sha256": "58cbb0f6b12a7f8c0045dc543e4ff638e5a392d29011b12a6d8fbb171ca60169",
+      "bytes": 3164
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/source-restriction-before-constant-condition-check.py",
+      "sha256": "2532f6948881061a19ee4e92ed693a25ec09aa73730793d95d6c46e57f95438a",
+      "bytes": 4703
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/source-restriction-comparison.json",
+      "sha256": "595342fa0fb73a50790838aec4302f10015d0ea924429b411b6540bfece40f7d",
+      "bytes": 13884
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/source-restriction-first-attempt.json",
+      "sha256": "a947fbe518a502729e6e4e2cba2ffe3a406c03409f7a54f089d71c6af084c446",
+      "bytes": 427
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/source-revisions.json",
+      "sha256": "1cca0148ae41a236abe09ee098f8878200834a51c8ccd083749f929a4faa4166",
+      "bytes": 3210
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/strongest62-summary.json",
+      "sha256": "6b84af3b87b4d37fe29c0b8d05a698a1347f272566e02d8cc7089dc11142de17",
+      "bytes": 3728
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/summary.json",
+      "sha256": "ffecb0ffbc4fdfdaf1fad75126321f09f982e64f9481e0eb27191f66ce593bad",
+      "bytes": 19796
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/unrecentered-summary.json",
+      "sha256": "3b292aec1a3fe45bccf32232826a88d40dcfff19c27323d48f63d1f86472be78",
+      "bytes": 5883
+    }
+  ],
+  "documentation_review_utc": "2026-10-10T03:30:05.608358+00:00"
+}

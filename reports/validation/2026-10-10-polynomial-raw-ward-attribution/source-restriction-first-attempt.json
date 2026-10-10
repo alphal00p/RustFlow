@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "failed_assertion": "n['conditions']==[] and r['conditions']==[]",
+  "finding": "Normalized source retains three exact nonzero conditions 2 from denominator clearing; raw source has none. Coefficient/shift proportionality assertion passed before this check.",
+  "action": "Preserve all conditions; verify each extra condition is a nonzero rational constant, then compare remaining symbolic conditions."
+}

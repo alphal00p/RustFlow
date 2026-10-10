@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "/tmp/rustflow-raw-ward-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/boost-ward",
+    "boost-ward"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.9471083790995181,
+  "user_seconds": 0.8968569999999999,
+  "system_seconds": 0.043566999999999995,
+  "peak_child_rss_kib": 64664,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

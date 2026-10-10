@@ -1,0 +1,1181 @@
+{
+  "recorded_utc": "2026-10-10T03:02:35.333914+00:00",
+  "scope": "Small fresh native exact source/domain attribution; no closed basis, numerical evaluation or production admission",
+  "arms": {
+    "original": {
+      "source_count": 52,
+      "rules": 19,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 192,
+      "same_polynomial_rhs_conditions": 19,
+      "differences": [],
+      "polynomial_rhs_inverse_energy_terms": 0,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        }
+      ],
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-global-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/original",
+          "original"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0620374390855432,
+        "user_seconds": 1.003924,
+        "system_seconds": 0.051837999999999995,
+        "peak_child_rss_kib": 64512,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "polynomial-shifted": {
+      "source_count": 56,
+      "rules": 19,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 183,
+      "same_polynomial_rhs_conditions": 13,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 2,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 1,
+          "after_terms": 8,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 6,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 4,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 2,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 2,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-3+2*epsilon"
+          ],
+          "after_conditions": []
+        }
+      ],
+      "polynomial_rhs_inverse_energy_terms": 0,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Unresolved(NoApplicableRule)",
+          "rhs_terms": 0
+        }
+      ],
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-global-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/polynomial-shifted",
+          "polynomial-shifted"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9846811518073082,
+        "user_seconds": 0.932801,
+        "system_seconds": 0.045884,
+        "peak_child_rss_kib": 64604,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "widened": {
+      "source_count": 52,
+      "rules": 21,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 192,
+      "same_polynomial_rhs_conditions": 19,
+      "differences": [],
+      "polynomial_rhs_inverse_energy_terms": 0,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 19 }",
+          "rhs_terms": 2
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 20 }",
+          "rhs_terms": 2
+        }
+      ],
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-global-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened",
+          "widened"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9954217900522053,
+        "user_seconds": 0.9508139999999999,
+        "system_seconds": 0.039116,
+        "peak_child_rss_kib": 64612,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "widened-raw": {
+      "source_count": 56,
+      "rules": 21,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 189,
+      "same_polynomial_rhs_conditions": 16,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 1,
+          "after_terms": 8,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 4,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 2,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-3+2*epsilon"
+          ],
+          "after_conditions": []
+        }
+      ],
+      "polynomial_rhs_inverse_energy_terms": 0,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 19 }",
+          "rhs_terms": 2
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 20 }",
+          "rhs_terms": 2
+        }
+      ],
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-global-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/widened-raw",
+          "widened-raw"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0032584820874035,
+        "user_seconds": 0.94938,
+        "system_seconds": 0.047694,
+        "peak_child_rss_kib": 64604,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "normalized-first": {
+      "source_count": 56,
+      "rules": 21,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 143,
+      "same_polynomial_rhs_conditions": 8,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 9,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-1+2*epsilon",
+            "-4+8*epsilon",
+            "-8+16*epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 9,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-1+2*epsilon",
+            "-4+8*epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 2,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 1,
+          "after_terms": 8,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 20,
+          "after_terms": 5,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 6,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 5,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "3*eta",
+            "24*eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 4,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 2,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 2,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-3+2*epsilon"
+          ],
+          "after_conditions": []
+        }
+      ],
+      "polynomial_rhs_inverse_energy_terms": 0,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 19 }",
+          "rhs_terms": 1
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 20 }",
+          "rhs_terms": 1
+        }
+      ],
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-global-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-first",
+          "normalized-first"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.8581633321009576,
+        "user_seconds": 0.7946409999999999,
+        "system_seconds": 0.057669,
+        "peak_child_rss_kib": 64600,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "normalized-last": {
+      "source_count": 56,
+      "rules": 21,
+      "polynomial_points": 19,
+      "polynomial_rhs_terms": 143,
+      "same_polynomial_rhs_conditions": 8,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 9,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-1+2*epsilon",
+            "-4+8*epsilon",
+            "-8+16*epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 9,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-1+2*epsilon",
+            "-4+8*epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 2,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 1,
+          "after_terms": 8,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 20,
+          "after_terms": 5,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 6,
+          "after_terms": 6,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "2*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "8*eta",
+            "4*eta"
+          ]
+        },
+        {
+          "point": [
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 5,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "3*eta",
+            "24*eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 4,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 2,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": []
+        },
+        {
+          "point": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "before_terms": 2,
+          "after_terms": 1,
+          "after_positive_energy_rhs": 0,
+          "before_conditions": [
+            "-3+2*epsilon"
+          ],
+          "after_conditions": []
+        }
+      ],
+      "polynomial_rhs_inverse_energy_terms": 0,
+      "reciprocal_probes": [
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 19 }",
+          "rhs_terms": 2
+        },
+        {
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "status": "Applied { rule: 20 }",
+          "rhs_terms": 2
+        }
+      ],
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-global-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/normalized-last",
+          "normalized-last"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.856947218067944,
+        "user_seconds": 0.802716,
+        "system_seconds": 0.048692,
+        "peak_child_rss_kib": 64600,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  },
+  "normalized_first_last_identical": false,
+  "polynomial_shifted_vs_widened_normalized_first19_identical": false,
+  "unnormalized_field_metadata_note": "Raw direction/divergence audit the original global boost; normalized coefficients are in normalized_boost_sources"
+}

@@ -1,0 +1,105 @@
+{
+  "recorded_utc": "2026-10-10T03:01:42.958139+00:00",
+  "physical_source_proof": "Polynomial correlated boost from generic WeightedMeasure; normalized row is full integrand-index shift+1 with coefficients/conditions substituted and exact domain pullback. Widened arms independently invoke boundR finite-label reciprocal origin continuation.",
+  "geometry": {
+    "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+    "slot": 6,
+    "factor": "E0=q6",
+    "loop": 0,
+    "mass_squared": 0,
+    "mu": 1,
+    "only_extended_axis": 6
+  },
+  "original_physical_labels_in_19_controls": [
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "new_physical_targets": false,
+  "zero_domains_policy": "No new zero boxes; only existing lower-contact and free-virtual polynomial boxes extend exactE0axis underR joint radial valuation and unchangedvirtual-null-direction proof",
+  "all_other_completion_bounds_retained": true,
+  "occupation_and_zero_tail_bounds_retained": true,
+  "no_old_rule_import": true,
+  "source_bindings": [
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/probe.rs",
+      "sha256": "3e70bada16930b0962afb570f84f0a8772efafcedd741f364142f55da7e42c2b",
+      "bytes": 13376
+    },
+    {
+      "path": "reports/validation/2026-10-10-normalized-boost-reciprocal-experiment/native-source-probe/source-delta.patch",
+      "sha256": "bff2cd67f6cf2b803a2b3545b964549ad34687e4b5b5de767d00abc28e679491",
+      "bytes": 14080
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/assessment.md",
+      "sha256": "78a02857eb8d925d9e6edfb741d74e2197afba776ae3780132f7c157f8678f24",
+      "bytes": 9718
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/normal-identity-results.json",
+      "sha256": "04bd3e9a50bea558c50480f348ab52c724cd85c8ea7b2d37e2121d6e235adcb4",
+      "bytes": 64931
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json",
+      "sha256": "10c56050042c63ffc5130805637b8cbb8c4a62b4649759595cf933bbb456303e",
+      "bytes": 2019
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/assessment-provenance.json",
+      "sha256": "79ea7c46dd561d4d2511140800b84672298b77ed68c7727867d78ad611b150c5",
+      "bytes": 4577
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/derivation.md",
+      "sha256": "800a318163533b6570af955c637e9c57e9a8a9edfaacfa77aee3b6ab9cda5b8c",
+      "bytes": 7591
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/cartesian-results.json",
+      "sha256": "e32b574137c25e307e96ff948cced8c214c23abd7d0beca0eb9624a7a8f9b4e3",
+      "bytes": 202380
+    }
+  ],
+  "superseded_context_description": "Initial successfully compiled wrapper was not executed; temporary adapter metadata was corrected to name reciprocal branch explicitly, with no source-row/domain change. Its source/build log/binding retained."
+}
