@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 42.8478376287967,
+  "executable": {
+    "path": "/tmp/rustflow-polynomial-normalized-boost-probe",
+    "sha256": "8d809484444dd0511f79f292d4e5099a40efe90fa668b990396ce6d04af2afca"
+  }
+}

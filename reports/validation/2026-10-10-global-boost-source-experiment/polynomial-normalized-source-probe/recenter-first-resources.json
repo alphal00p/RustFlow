@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "/tmp/rustflow-polynomial-normalized-boost-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/recenter-first",
+    "recenter-first"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.996769963297993,
+  "user_seconds": 0.945329,
+  "system_seconds": 0.043834,
+  "peak_child_rss_kib": 61480,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

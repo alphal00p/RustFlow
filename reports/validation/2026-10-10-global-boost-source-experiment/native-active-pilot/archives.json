@@ -1,0 +1,79 @@
+{
+  "recorded_utc": "2026-10-10T02:43:29.067465+00:00",
+  "files": [
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-000.bin",
+      "raw_sha256": "b2a58ff8c555cbfaa2bbfef5b811e33b37a3e1918b3d1de39f7e42f5762c5341",
+      "raw_bytes": 54938,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-000.bin.gz",
+      "gzip_sha256": "9e9644d55711d49a5fa27de2b159312ded7764b6e0bce42aade7642b23af14e1",
+      "gzip_bytes": 5595,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-000.json",
+      "raw_sha256": "92758772545440dc051fc7c285d52840c59e66e0cf4ed4bf7187ed61e3ba1a87",
+      "raw_bytes": 85809,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-000.json.gz",
+      "gzip_sha256": "1c0ff23b32850d1e39d6def058bef715b38191d9380c7ffc8ba468951bc55e1d",
+      "gzip_bytes": 2472,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-001.bin",
+      "raw_sha256": "1e04c679c6cf9c5cef12d54b9a1c3da4126fbb29b80dab78ba94626a1bbf7b3c",
+      "raw_bytes": 93816,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-001.bin.gz",
+      "gzip_sha256": "3b4a5846792aac335a618cc53bc6bb168ddf01961c0d6135ca0e278dc4112aef",
+      "gzip_bytes": 9433,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-001.json",
+      "raw_sha256": "c819cf5d684a990cb164e26f3ab96591cba7f4d6e61e2fa103e7d2873d404a12",
+      "raw_bytes": 279221,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-001.json.gz",
+      "gzip_sha256": "26b5b86345c41c29660586f51be94b6b1fbeedd1adfcb5be134442cfc3100ae7",
+      "gzip_bytes": 7324,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-002.bin",
+      "raw_sha256": "363ee1d497b1ca75bba37d83b492e4b978f2c438a7957c279c215856018daff7",
+      "raw_bytes": 349091,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-002.bin.gz",
+      "gzip_sha256": "258e1914a892b9fe39858d2b921aabeb1fbc4d00f3cd36f9bcd8905126610bc5",
+      "gzip_bytes": 30775,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-002.json",
+      "raw_sha256": "49852b549ab905f6d8cb8c9bdefe05636ffeb9abd023c5f9212cb6481b4cf0a3",
+      "raw_bytes": 940321,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-002.json.gz",
+      "gzip_sha256": "360894e07c8b7fc7f56d8e1577ae036e84d4bc62464c20d27659c555ccb9ea28",
+      "gzip_bytes": 38869,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-003.bin",
+      "raw_sha256": "51d2ecb3a2e2baab2cbcbaa98245a93a7689f770d45a121036a1484cffb44860",
+      "raw_bytes": 1192911,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-003.bin.gz",
+      "gzip_sha256": "3c5e3cb729c3ca4afb333c0c848b06b38f5134ff6bb1fabcf4871f7ef5c1c3b0",
+      "gzip_bytes": 100019,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-003.json",
+      "raw_sha256": "f0e603fdd307ace2b794fc6fb8c3d0dbd313a15b3e0c869afd4351b470d1325b",
+      "raw_bytes": 3451347,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-003.json.gz",
+      "gzip_sha256": "8c3725f4d723b9b26c592fca4bc07790bfe7a0d240f2f986d5418765b0c3903d",
+      "gzip_bytes": 442441,
+      "restore_checked": true
+    }
+  ],
+  "raw_bytes": 6447454,
+  "gzip_bytes": 636928
+}

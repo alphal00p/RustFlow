@@ -1,0 +1,17 @@
+error[E0618]: expected function, found `[IndexBounds; 12]`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/combined-polynomial-source-probe/probe.rs:81:105
+   |
+18 | fn bounds<const N:usize>(v:&IndexDomain<N>)->Domain{v.bounds().iter().map(|b|(b.lower(),b.upper())).collect()}
+   | --------------------------------------------------- this function of the same name is available here, but it's shadowed by the local binding
+...
+44 |  let mut bounds=*IndexDomain::for_roles(&roles).bounds();bounds[11]=IndexBounds::fixed(0);for b in &mut bounds[5..9]{*b=IndexBounds:...
+   |      ---------- `bounds` has type `[IndexBounds; 12]`
+...
+81 |  assert_eq!(normal.len(),4);let normal_audit=normal.iter().map(|s|serde_json::json!({"id":s.id,"domain":bounds(&s.domain),"terms":s....
+   |                                                                                                         ^^^^^^-----------
+   |                                                                                                         |
+   |                                                                                                         call expression requires function
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0618`.

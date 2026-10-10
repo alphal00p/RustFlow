@@ -1,0 +1,19 @@
+{
+  "scope": "Validation-only narrow polynomial singleton C1 tangent-shell source proof and exact radial checks; no production edits or native closure claim",
+  "git_head": "1ea0f6c5227f42a91f876f995647b4bd97d43f20",
+  "files_sha256": {
+    "reports/validation/2026-10-10-global-boost-source-experiment/normalized-polynomial-c1-proof.md": "7389bcfaa04ea5bb470732d42bba100ca0c989d95ae330e3830d25cd82ab9b0a",
+    "reports/validation/2026-10-10-global-boost-source-experiment/check-normalized-polynomial-c1.py": "fa5371c90cc396049d3d0ddf81f7551fe051e21a01357e5158c37e6e183b9115",
+    "reports/validation/2026-10-10-global-boost-source-experiment/normalized-polynomial-c1-checks.json": "3447aea05dd11e4e9f4e87baf9632770db3c6b756e6b7af6a49df88db545f257",
+    "reports/validation/2026-10-10-global-boost-source-experiment/derivation.md": "800a318163533b6570af955c637e9c57e9a8a9edfaacfa77aee3b6ab9cda5b8c",
+    "reports/validation/2026-10-10-global-boost-source-experiment/cartesian-results.json": "e32b574137c25e307e96ff948cced8c214c23abd7d0beca0eb9624a7a8f9b4e3",
+    "src/finite_density/measure.rs": "eef3449b8c95847a042593fd2eec8ce5bb09bf7563bb8ef2ba998322c8fb654a",
+    "src/finite_density/massless_endpoint.rs": "131b4fedd8816cfbadd9ceb7e80e051c1e4844acdbabb63e7f4d101fe121929f",
+    "src/finite_density/preparation.rs": "f7c5f5a35a176104d61760dd88f9fdee6d2e713e766e6a3e3b0f9ca3068168e6"
+  },
+  "result": {
+    "valid_radial_checks": 30,
+    "excluded_guard_counterexamples": 14
+  },
+  "raw_native_probe_owner": "guarded_dependency; separate native-source artifacts and replay provenance"
+}

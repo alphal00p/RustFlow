@@ -1,0 +1,302 @@
+{
+  "scope": "Exact radial distribution checks of the proposed polynomial source guards; no production/native flow admission",
+  "normalization": "raw native Cn; common A_(D-1)/2 divided out",
+  "script_sha256": "fa5371c90cc396049d3d0ddf81f7551fe051e21a01357e5158c37e6e183b9115",
+  "proof_sha256": "7389bcfaa04ea5bb470732d42bba100ca0c989d95ae330e3830d25cd82ab9b0a",
+  "valid_checks": [
+    {
+      "D": 7,
+      "mu": "1",
+      "upper_index": 1,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "1",
+      "upper_index": 2,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "1",
+      "upper_index": 3,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "1",
+      "upper_index": 4,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "1",
+      "upper_index": 5,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "3/2",
+      "upper_index": 1,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "3/2",
+      "upper_index": 2,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "3/2",
+      "upper_index": 3,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "3/2",
+      "upper_index": 4,
+      "residual": "0"
+    },
+    {
+      "D": 7,
+      "mu": "3/2",
+      "upper_index": 5,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "1",
+      "upper_index": 1,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "1",
+      "upper_index": 2,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "1",
+      "upper_index": 3,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "1",
+      "upper_index": 4,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "1",
+      "upper_index": 5,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "3/2",
+      "upper_index": 1,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "3/2",
+      "upper_index": 2,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "3/2",
+      "upper_index": 3,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "3/2",
+      "upper_index": 4,
+      "residual": "0"
+    },
+    {
+      "D": 9,
+      "mu": "3/2",
+      "upper_index": 5,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "1",
+      "upper_index": 1,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "1",
+      "upper_index": 2,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "1",
+      "upper_index": 3,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "1",
+      "upper_index": 4,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "1",
+      "upper_index": 5,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "3/2",
+      "upper_index": 1,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "3/2",
+      "upper_index": 2,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "3/2",
+      "upper_index": 3,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "3/2",
+      "upper_index": 4,
+      "residual": "0"
+    },
+    {
+      "D": 11,
+      "mu": "3/2",
+      "upper_index": 5,
+      "residual": "0"
+    }
+  ],
+  "excluded_domain_counterexamples": [
+    {
+      "reason": "raised cut excluded",
+      "D": 7,
+      "mu": "1",
+      "n": 2,
+      "r": 0,
+      "residual": "-4/3"
+    },
+    {
+      "reason": "energy numerator excluded",
+      "D": 7,
+      "mu": "1",
+      "n": 1,
+      "r": 2,
+      "residual": "-2/7"
+    },
+    {
+      "reason": "raised cut excluded",
+      "D": 7,
+      "mu": "3/2",
+      "n": 2,
+      "r": 0,
+      "residual": "-9/2"
+    },
+    {
+      "reason": "energy numerator excluded",
+      "D": 7,
+      "mu": "3/2",
+      "n": 1,
+      "r": 2,
+      "residual": "-2187/448"
+    },
+    {
+      "reason": "raised cut excluded",
+      "D": 9,
+      "mu": "1",
+      "n": 2,
+      "r": 0,
+      "residual": "-6/5"
+    },
+    {
+      "reason": "energy numerator excluded",
+      "D": 9,
+      "mu": "1",
+      "n": 1,
+      "r": 2,
+      "residual": "-2/9"
+    },
+    {
+      "reason": "raised cut excluded",
+      "D": 9,
+      "mu": "3/2",
+      "n": 2,
+      "r": 0,
+      "residual": "-729/80"
+    },
+    {
+      "reason": "energy numerator excluded",
+      "D": 9,
+      "mu": "3/2",
+      "n": 1,
+      "r": 2,
+      "residual": "-2187/256"
+    },
+    {
+      "reason": "raised cut excluded",
+      "D": 11,
+      "mu": "1",
+      "n": 2,
+      "r": 0,
+      "residual": "-8/7"
+    },
+    {
+      "reason": "energy numerator excluded",
+      "D": 11,
+      "mu": "1",
+      "n": 1,
+      "r": 2,
+      "residual": "-2/11"
+    },
+    {
+      "reason": "raised cut excluded",
+      "D": 11,
+      "mu": "3/2",
+      "n": 2,
+      "r": 0,
+      "residual": "-2187/112"
+    },
+    {
+      "reason": "energy numerator excluded",
+      "D": 11,
+      "mu": "3/2",
+      "n": 1,
+      "r": 2,
+      "residual": "-177147/11264"
+    },
+    {
+      "reason": "positive cut mass excluded",
+      "D": 3,
+      "mu": "1",
+      "mass": "1/2",
+      "residual": "-1/2"
+    },
+    {
+      "reason": "positive cut mass excluded",
+      "D": 3,
+      "mu": "3/2",
+      "mass": "1/2",
+      "residual": "-1/2"
+    }
+  ],
+  "passed": 30,
+  "counterexamples_verified": 14
+}

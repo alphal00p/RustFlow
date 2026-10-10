@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 41.028897929005325,
+  "executable": {
+    "path": "/tmp/rustflow-global-boost-probe",
+    "sha256": "055c6cf401c1c5f557e17d14a941113657d891f9a11186d2b4dfb0dac93a4908"
+  }
+}

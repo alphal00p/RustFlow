@@ -1,0 +1,19 @@
+[
+  "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+  "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+  "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/resources.json",
+  "timeout",
+  "300s",
+  "env",
+  "PILOT_ROUNDS=16",
+  "PILOT_FRONTIER=1024",
+  "PILOT_REQUESTS=4096",
+  "PILOT_RULES=65536",
+  "PILOT_ZERO_ATTEMPTS=8192",
+  "PILOT_RAY_DOMAINS=1",
+  "PILOT_POINT_DOMAINS=1",
+  "PILOT_DEPTH=3",
+  "/tmp/rustflow-global-boost-active-pilot",
+  "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/recenter-last/program.bin",
+  "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run"
+]

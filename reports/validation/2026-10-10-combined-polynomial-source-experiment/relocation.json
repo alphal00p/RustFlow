@@ -1,0 +1,7 @@
+{
+  "recorded_utc": "2026-10-10T02:55:23.603980+00:00",
+  "old_prefix": "reports/validation/2026-10-10-global-boost-source-experiment/combined-polynomial-source-probe",
+  "new_prefix": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe",
+  "reason": "Parent requested a separate scientific report checkpoint; no successful runtime occurred at old location",
+  "previous_compile_failure": "Diagnostic-only bounds local variable shadowed helper; fixed call to bounds_of; failed source and exact bindings/log preserved"
+}

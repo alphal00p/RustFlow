@@ -1,0 +1,608 @@
+{
+  "captured_utc": "2026-10-10T02:59:33.571124+00:00",
+  "scope": "Frozen polynomial global-boost and narrow C1 Ward source explorations; no production changes or three-loop numerical acceptance",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "d017cf6caffc6edcee26176e8d82a916ef01f2feb2938ab3b436b1c4af1a8c8c",
+      "bytes": 3691
+    },
+    {
+      "path": "cartesian-results.json",
+      "sha256": "e32b574137c25e307e96ff948cced8c214c23abd7d0beca0eb9624a7a8f9b4e3",
+      "bytes": 202380
+    },
+    {
+      "path": "check-cartesian.py",
+      "sha256": "61b5e709fc7360299bc391eea8d4506f65c27bb80a5cbc11c8abfcc35e10b572",
+      "bytes": 6163
+    },
+    {
+      "path": "check-normalized-polynomial-c1.py",
+      "sha256": "fa5371c90cc396049d3d0ddf81f7551fe051e21a01357e5158c37e6e183b9115",
+      "bytes": 2621
+    },
+    {
+      "path": "derivation-provenance.json",
+      "sha256": "bf14a66a8e6e7bdfea78c4fd21e8402170233c4f286f902b096e2972d29316eb",
+      "bytes": 2293
+    },
+    {
+      "path": "derivation.md",
+      "sha256": "800a318163533b6570af955c637e9c57e9a8a9edfaacfa77aee3b6ab9cda5b8c",
+      "bytes": 7591
+    },
+    {
+      "path": "native-active-pilot/README.md",
+      "sha256": "65c7396b9c5c3ab8d9c2f62af9c834321b2e521cc401093346a28802dc80b17f",
+      "bytes": 2170
+    },
+    {
+      "path": "native-active-pilot/archives.json",
+      "sha256": "9c6b36973f5be467cd11e8e3597db3b2e3ee7276a0336645d2b0301a7080cc91",
+      "bytes": 4271
+    },
+    {
+      "path": "native-active-pilot/compile.py",
+      "sha256": "ddc1545d8d7844007babc8b4880500ea615322108a4bc0369fae8e6ce98153ac",
+      "bytes": 1762
+    },
+    {
+      "path": "native-active-pilot/manifest.json",
+      "sha256": "745539a584dea666d510e505cb76c8590d5c6014d8a0b020aed4d4e9b3e11bba",
+      "bytes": 5906
+    },
+    {
+      "path": "native-active-pilot/pilot-build-binding.json",
+      "sha256": "b3e04c8e854d538db611f82e4148ecc731e17c03cf91ec004ec1dff8ba05a59a",
+      "bytes": 2247
+    },
+    {
+      "path": "native-active-pilot/pilot-build.json",
+      "sha256": "dbce6bfd1f39f7575c6df98ef356d7f55dd923012093ab9e2ac5dfbcd0e282f5",
+      "bytes": 218
+    },
+    {
+      "path": "native-active-pilot/pilot-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "native-active-pilot/pilot.rs",
+      "sha256": "a3de8e098cd305d94d8b17584cc7b4be5e5888b92d844e7796547315b0c57e5d",
+      "bytes": 18404
+    },
+    {
+      "path": "native-active-pilot/planned-command.json",
+      "sha256": "249c470da991a298d025431ffff2eb7ed906a683031fc6f8517ed0f5981ad14a",
+      "bytes": 849
+    },
+    {
+      "path": "native-active-pilot/resources.json",
+      "sha256": "b44e1890eb164e8b27b7e82b13f40454357ca5bda3b5568bfc72179c77bdc6a4",
+      "bytes": 819
+    },
+    {
+      "path": "native-active-pilot/resources.log",
+      "sha256": "a93448d9bc9f845c94da3859d87165e5d1122412f8555f1bed62bf39b3d86866",
+      "bytes": 224
+    },
+    {
+      "path": "native-active-pilot/resources.provenance.json",
+      "sha256": "3c8fb47261b7fd1c573c04992f3244491c95fd8f82fdccc496d9bfbc6450720a",
+      "bytes": 1850
+    },
+    {
+      "path": "native-active-pilot/run/configuration.json",
+      "sha256": "acc2591b32ae879cf4c94489eb47a1bf07c2a1a943768928948ad2e89e3eebea",
+      "bytes": 8999
+    },
+    {
+      "path": "native-active-pilot/run/progress.json",
+      "sha256": "e6b94d4c037db2c8f59874501c98842da0f00d426c8981c535aa40ebc6ba492d",
+      "bytes": 724
+    },
+    {
+      "path": "native-active-pilot/run/round-000.bin.gz",
+      "sha256": "9e9644d55711d49a5fa27de2b159312ded7764b6e0bce42aade7642b23af14e1",
+      "bytes": 5595
+    },
+    {
+      "path": "native-active-pilot/run/round-000.json.gz",
+      "sha256": "1c0ff23b32850d1e39d6def058bef715b38191d9380c7ffc8ba468951bc55e1d",
+      "bytes": 2472
+    },
+    {
+      "path": "native-active-pilot/run/round-001.bin.gz",
+      "sha256": "3b4a5846792aac335a618cc53bc6bb168ddf01961c0d6135ca0e278dc4112aef",
+      "bytes": 9433
+    },
+    {
+      "path": "native-active-pilot/run/round-001.json.gz",
+      "sha256": "26b5b86345c41c29660586f51be94b6b1fbeedd1adfcb5be134442cfc3100ae7",
+      "bytes": 7324
+    },
+    {
+      "path": "native-active-pilot/run/round-002.bin.gz",
+      "sha256": "258e1914a892b9fe39858d2b921aabeb1fbc4d00f3cd36f9bcd8905126610bc5",
+      "bytes": 30775
+    },
+    {
+      "path": "native-active-pilot/run/round-002.json.gz",
+      "sha256": "360894e07c8b7fc7f56d8e1577ae036e84d4bc62464c20d27659c555ccb9ea28",
+      "bytes": 38869
+    },
+    {
+      "path": "native-active-pilot/run/round-003.bin.gz",
+      "sha256": "3c5e3cb729c3ca4afb333c0c848b06b38f5134ff6bb1fabcf4871f7ef5c1c3b0",
+      "bytes": 100019
+    },
+    {
+      "path": "native-active-pilot/run/round-003.json.gz",
+      "sha256": "8c3725f4d723b9b26c592fca4bc07790bfe7a0d240f2f986d5418765b0c3903d",
+      "bytes": 442441
+    },
+    {
+      "path": "native-active-pilot/runner-source.patch",
+      "sha256": "8f01d8c5a9235e84b6abd9fb7f85dfd6e868467e35db47df89a48275ec63afc5",
+      "bytes": 1613
+    },
+    {
+      "path": "native-active-pilot/source-binding.json",
+      "sha256": "7640bef42499f987fe73274ee8bbbda49b59b09d6bb2d2da0576e0dad66c4ee3",
+      "bytes": 1568
+    },
+    {
+      "path": "native-active-pilot/summarize.py",
+      "sha256": "ca4d2bfacaad92923974ce93ccb8b4ad58ee9c99ff8bb45c2d57af3ebafb688b",
+      "bytes": 2598
+    },
+    {
+      "path": "native-active-pilot/summary.json",
+      "sha256": "e63606b3a2b198fc3655dec881c993b5a48e095d6bcecae902f47c05976abd82",
+      "bytes": 21496
+    },
+    {
+      "path": "native-source-probe/README.md",
+      "sha256": "19fe021eb3fe8b793b547c549853ee4ae33272d79ab2b48cd5cdcf2d2ac1e42b",
+      "bytes": 2232
+    },
+    {
+      "path": "native-source-probe/boost-first/program.bin",
+      "sha256": "8f126be7bd2f62fc41405fa29358ba325151511b1b5ce032ead3d0e83ef9569f",
+      "bytes": 62463
+    },
+    {
+      "path": "native-source-probe/boost-first/result.json",
+      "sha256": "8d4c94daf975a28ecd5417f9eb1af681e96bfac27d7d162ea61f16c91ff71ce7",
+      "bytes": 167408
+    },
+    {
+      "path": "native-source-probe/boost-first-resources.json",
+      "sha256": "c6a6927b256471e0ebd5ff35f5311f6567cffe29c88dd2bdd020d865f217a313",
+      "bytes": 870
+    },
+    {
+      "path": "native-source-probe/boost-first-resources.log",
+      "sha256": "47d84dd4ddf3dea9dd444c2e4de101e40f5b150b6d3a61bc917033d74208030e",
+      "bytes": 55
+    },
+    {
+      "path": "native-source-probe/boost-first-resources.provenance.json",
+      "sha256": "a1353fd4b3df2266f6db8dc18ac58cb9cf17ceca267e984b45dfe4edbc712160",
+      "bytes": 2450
+    },
+    {
+      "path": "native-source-probe/boost-last/program.bin",
+      "sha256": "6a13441e44e448b7daaaf3750e7f1e890698e828b454658b4822a95167550375",
+      "bytes": 62462
+    },
+    {
+      "path": "native-source-probe/boost-last/result.json",
+      "sha256": "1684d6e3bed00b95b83a173423b6df25eac588c252e649b03d76acd895eea59b",
+      "bytes": 167407
+    },
+    {
+      "path": "native-source-probe/boost-last-resources.json",
+      "sha256": "02e5fbf23932aa743698aad66585ce6ce5f3ebad960dd16209e8ded32d6809c9",
+      "bytes": 868
+    },
+    {
+      "path": "native-source-probe/boost-last-resources.log",
+      "sha256": "e12a8ae450c8ad702f4018b0a31e3e83f30f15fd1f6df4cf725abb5baeb43aeb",
+      "bytes": 54
+    },
+    {
+      "path": "native-source-probe/boost-last-resources.provenance.json",
+      "sha256": "34ea6c392b95770e4a3966fd19eeb658208f60d7af2aebdd853f401e0e705c02",
+      "bytes": 2448
+    },
+    {
+      "path": "native-source-probe/compile.py",
+      "sha256": "0ce68c19438c5500d0b1d69c1b5788e0ac46cf2f4a3614193de9c06d4fa37ff8",
+      "bytes": 1849
+    },
+    {
+      "path": "native-source-probe/original/program.bin",
+      "sha256": "1144117995c66d456f9ffaf9476bd3adcb354d6e917a0ad0142431664b1c289b",
+      "bytes": 60743
+    },
+    {
+      "path": "native-source-probe/original/result.json",
+      "sha256": "d89385026d3c5338d3e379611736d368d537b81afbd643be3781f12336b6a468",
+      "bytes": 173284
+    },
+    {
+      "path": "native-source-probe/original-resources.json",
+      "sha256": "b786b94acecb3014a1b475fd2ac7008fef3861b04822682a0588c85cda957f4e",
+      "bytes": 852
+    },
+    {
+      "path": "native-source-probe/original-resources.log",
+      "sha256": "9563cf2908bf2675333f7f7ee19a418f6f71fd9f20a5f9ecd25f3e77175581a4",
+      "bytes": 52
+    },
+    {
+      "path": "native-source-probe/original-resources.provenance.json",
+      "sha256": "792a434d79960032449e0dc86b8b85defb7adf5512c1f0336b6e5ec6979f75bb",
+      "bytes": 2444
+    },
+    {
+      "path": "native-source-probe/planned-commands.json",
+      "sha256": "bbbd055c548a8fd72f0579563562023b385e1d147d6f525c5bc773461d7f8e35",
+      "bytes": 2894
+    },
+    {
+      "path": "native-source-probe/probe-build-binding.json",
+      "sha256": "5afb308b9f1476a061adb855f5eb3a6e0533da6ca2b3839f7fa9726820b658b1",
+      "bytes": 2591
+    },
+    {
+      "path": "native-source-probe/probe-build.json",
+      "sha256": "f4c0fcdc243f535b63d6c04e40590803a77e5431bd0f88c90d29f3fa3dca67a2",
+      "bytes": 211
+    },
+    {
+      "path": "native-source-probe/probe-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "native-source-probe/probe.rs",
+      "sha256": "9a6085e789035b3939faf5ece39db2d7b147c63532951c27bb896d6b615f6286",
+      "bytes": 10855
+    },
+    {
+      "path": "native-source-probe/summary.json",
+      "sha256": "c6e6e6c1f55c46a2f9d82612e7e9f8179513ef008dfb62fd38af3f8bffe708c1",
+      "bytes": 38577
+    },
+    {
+      "path": "normalized-polynomial-c1-checks.json",
+      "sha256": "3447aea05dd11e4e9f4e87baf9632770db3c6b756e6b7af6a49df88db545f257",
+      "bytes": 5210
+    },
+    {
+      "path": "normalized-polynomial-c1-proof.md",
+      "sha256": "7389bcfaa04ea5bb470732d42bba100ca0c989d95ae330e3830d25cd82ab9b0a",
+      "bytes": 5504
+    },
+    {
+      "path": "normalized-polynomial-c1-provenance.json",
+      "sha256": "1dd2fd4b1b83e0628f0ea6f9e5ab4cb5571a393bc781012331e54e98eb1aebfc",
+      "bytes": 1590
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/README.md",
+      "sha256": "60a4e386e96710beb64c76d3fb06ca87e6c8d7cc6a96ab5a679f0aa68cf02505",
+      "bytes": 2212
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/archives.json",
+      "sha256": "69982b6013032ba46e8c2d45d5269a8064503dec214488e2074cb687a81cd2df",
+      "bytes": 4466
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/manifest.json",
+      "sha256": "cdb2424f166efbbe0ab0351f496709b3ddf3d018540c63668389aae07ff4e1d3",
+      "bytes": 5054
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/planned-command.json",
+      "sha256": "5bcb3c9c608eb913cde63e8a2a2adc0f034c8cd94018a9e317625efb34b5ac3d",
+      "bytes": 897
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/resources.json",
+      "sha256": "5557b9c7d8f07ef682ac3557660b48ddcc92813035df88b8c7fe21a4a00606b7",
+      "bytes": 849
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/resources.log",
+      "sha256": "a76a6f6f641d057cc96ae88749951a6d8986feb338d957eea9c0ed8f38b03b1c",
+      "bytes": 256
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/resources.provenance.json",
+      "sha256": "94614f131bb5c6c271e2c2a8b3e9488f4b94998ecdd60cfebb5762ab7bfdd6e7",
+      "bytes": 1919
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/configuration.json",
+      "sha256": "592aa0e93b8a595cf13d422a781da94def3ec3214c6064402ecafffc4bfe66da",
+      "bytes": 9065
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/progress.json",
+      "sha256": "0835a53d4b7851d5ec8e21ed47217d5836bd350487e18cbde29feb8e0c6bec39",
+      "bytes": 724
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/result.json",
+      "sha256": "52f7672e21cd445562a3e9b42d2b6da62bf01d9ff25962e9fa1fe6de50d0e22a",
+      "bytes": 31948
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-000.bin.gz",
+      "sha256": "f33ef426bbaed7830c4a372a2721e84b480b870df1e00970721e9abca929e2d2",
+      "bytes": 5408
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-000.json.gz",
+      "sha256": "a515a8b9e51a63b63025936f8996c235bacea26d56b62941599df23651e3f4bf",
+      "bytes": 2352
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-001.bin.gz",
+      "sha256": "e305481397e7cd7f023177b53c231e7a9fd3f57c2209b9c2c8fd97f98413989c",
+      "bytes": 10042
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-001.json.gz",
+      "sha256": "66f1012773b69c4a11955af388e05edb82b6f1950a8c907f754ca39803297373",
+      "bytes": 8618
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-002.bin.gz",
+      "sha256": "782f09e6a7bae7cb3d4bd0dbddf8d2095b90bb374dd9dd1c61df557241c021f7",
+      "bytes": 36832
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-002.json.gz",
+      "sha256": "1418fbbd55c4393fdbccb244c43e6d79d60372fdf672378b1b9ccc752c5f161c",
+      "bytes": 43684
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-003.bin.gz",
+      "sha256": "9bfe9616795207fae5d6c6cf5bb8fc09cbc6c1a7c556833bf4045a128b96697a",
+      "bytes": 132269
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/run/round-003.json.gz",
+      "sha256": "0a495bf086bffd19d9299063adc204bee67996be8165291fecc53390bb05b4a7",
+      "bytes": 665215
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/source-binding.json",
+      "sha256": "8f082d64d4a9a852f3f4774dd4b6de8da00bfa0f4db6a99d9fef5ccdc645121c",
+      "bytes": 2242
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/summarize.py",
+      "sha256": "3ae0734d8f6fcf8cad9e141533c2809d871e90a3490d44f38c6441b54f424225",
+      "bytes": 2627
+    },
+    {
+      "path": "polynomial-normalized-active-pilot/summary.json",
+      "sha256": "a8fa781da9d020c5b37cc2edf9f1ebe57c24396e9846dadc589d213c397848fa",
+      "bytes": 21854
+    },
+    {
+      "path": "polynomial-normalized-source-probe/README.md",
+      "sha256": "d3ec0883f08116df22f9f8a96420402ff4f930735c571d76b00f51ae39cdb101",
+      "bytes": 2574
+    },
+    {
+      "path": "polynomial-normalized-source-probe/compile.py",
+      "sha256": "ecd54d6a44e73538be4e3d0a4a923f179570d3a0ad6ac7ae4e1543fb7e9f3075",
+      "bytes": 1879
+    },
+    {
+      "path": "polynomial-normalized-source-probe/independent-source-audit.json",
+      "sha256": "fb0ecc9c545596614c1e52bf86a75a5855743062d18c896b80c58b0279abaafd",
+      "bytes": 712
+    },
+    {
+      "path": "polynomial-normalized-source-probe/manifest.json",
+      "sha256": "e9d4e1e369a17701ff82a655b0121d24ac15f1d4bb3c03198255ff0492551458",
+      "bytes": 9497
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-first/program.bin",
+      "sha256": "007463316e707c066784fa030f59faf40f0e542e7ef735b4c58d84248c2c1281",
+      "bytes": 59279
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-first/result.json",
+      "sha256": "84ac3383768944cd3a84a933d32bb6325479fd7e991d2bba93d889e95ac18438",
+      "bytes": 151627
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-first-resources.json",
+      "sha256": "6e71f3a7f6b25190b926601bcfab37645181f3e0d017990d79f23a736f7ad5f5",
+      "bytes": 902
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-first-resources.log",
+      "sha256": "1c0b56d954a0332b9fe9ea380fab41802844d8a36d2aa2ab9d3beaa09a7fbc3f",
+      "bytes": 56
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-first-resources.provenance.json",
+      "sha256": "b7f24c80f14102ed1a985ff7f694d19d85a0c76e13f6626a016f7c2e38d26a1e",
+      "bytes": 2512
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-last/program.bin",
+      "sha256": "91189178bcd6a6afbb617e41362b558d3efb65d904fae4dfc8b93c16a525a763",
+      "bytes": 59278
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-last/result.json",
+      "sha256": "2398fd090ae471f42f01017512034966bfc7a937f66920ee2ce2345db5bf0d6a",
+      "bytes": 151626
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-last-resources.json",
+      "sha256": "c6a78d9e2bae03c21bdc743345027f75ebf13a2958bfbcbafbf33af9ac7eb278",
+      "bytes": 898
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-last-resources.log",
+      "sha256": "377a44d3fa8f9c2edfcf287c93c6091c5596c8788a21481111fd37dc40802c29",
+      "bytes": 55
+    },
+    {
+      "path": "polynomial-normalized-source-probe/narrow-last-resources.provenance.json",
+      "sha256": "119194dea7103d411cf5a7da558d3ef853465c6c044cf0d7d600590efdac5b48",
+      "bytes": 2510
+    },
+    {
+      "path": "polynomial-normalized-source-probe/original/program.bin",
+      "sha256": "e9a9308e462f9d5795cd0f2dbb13a8ef2feb27c2dd4a03b0a0b5598c3f7c7ddf",
+      "bytes": 60788
+    },
+    {
+      "path": "polynomial-normalized-source-probe/original/result.json",
+      "sha256": "3b3228da2d023e5b05c9f6ae714958c95156a4a143fe8d75fadc8db46304590a",
+      "bytes": 165627
+    },
+    {
+      "path": "polynomial-normalized-source-probe/original-resources.json",
+      "sha256": "f4c8d558591e6b9524b743f97267f3782c0de5fcea46979f3437a04bfcd049e9",
+      "bytes": 891
+    },
+    {
+      "path": "polynomial-normalized-source-probe/original-resources.log",
+      "sha256": "9563cf2908bf2675333f7f7ee19a418f6f71fd9f20a5f9ecd25f3e77175581a4",
+      "bytes": 52
+    },
+    {
+      "path": "polynomial-normalized-source-probe/original-resources.provenance.json",
+      "sha256": "819dc168525334616bc21ef69a3d687d4d6e8816447d5ef82b607596c8562900",
+      "bytes": 2504
+    },
+    {
+      "path": "polynomial-normalized-source-probe/physical-proof-binding.json",
+      "sha256": "f61f0a8076d91edb18ae854462d2eb14d0d032d467b71ca0d0d653004e542c92",
+      "bytes": 1609
+    },
+    {
+      "path": "polynomial-normalized-source-probe/planned-commands.json",
+      "sha256": "00592dd94626738299314ffdb8dba0bc97b4aeeb0e5692a3a9693468f0794512",
+      "bytes": 5085
+    },
+    {
+      "path": "polynomial-normalized-source-probe/probe-build-binding.json",
+      "sha256": "0ce5cc01481f9505bb6893085c8191507929a0e8f0c30728b51d37268e123626",
+      "bytes": 2636
+    },
+    {
+      "path": "polynomial-normalized-source-probe/probe-build.json",
+      "sha256": "1d6865b2bab6734b62cb69d6ba3deef1227c979822fdc197b3391653fe80c2a8",
+      "bytes": 224
+    },
+    {
+      "path": "polynomial-normalized-source-probe/probe-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "polynomial-normalized-source-probe/probe.rs",
+      "sha256": "0c2c59054a4cdd2750f9d577e9d36ec6a97b5998c7003c88ccf33abd4d10cef9",
+      "bytes": 14425
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-first/program.bin",
+      "sha256": "a014b6c3aa87a967762f69d0f635be147697ae5217f1b3d6dc58c35eaa8fced2",
+      "bytes": 59442
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-first/result.json",
+      "sha256": "6176f9bd16b0093db55e22348a08a0e0d56bbb706cb624cbb7decd47a29b1d31",
+      "bytes": 151666
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-first-resources.json",
+      "sha256": "0744b1d1df4640f0fe2b3587f799ce92372f6ac215f42270d201b0fa019ecdaf",
+      "bytes": 893
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-first-resources.log",
+      "sha256": "d7d5122331b31446201969774ae5a7e8e5f50ab871d01dfc570fa83ecc4a107a",
+      "bytes": 58
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-first-resources.provenance.json",
+      "sha256": "59459b460edb62e389db764282c01c5a394465be1f4692fdac72d887f8674a91",
+      "bytes": 2516
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-last/program.bin",
+      "sha256": "dfe102079154ade36b5d88cb68055f8aab3d6ad90ecbe1bb4382388c3cccc3e9",
+      "bytes": 59441
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-last/result.json",
+      "sha256": "8320a6aa470aac31961974378e2e3dffcdf274a40d78cfab19d4b236c2b90425",
+      "bytes": 151665
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-last-resources.json",
+      "sha256": "0d19aed135f94c1a534af7134cd94de41d93a31138fb33ba1a8c253c55b49cea",
+      "bytes": 891
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-last-resources.log",
+      "sha256": "abc38a9d68d301e5f59bea66e4fe0486a7d8027788223a9240a63bab85ce98ea",
+      "bytes": 57
+    },
+    {
+      "path": "polynomial-normalized-source-probe/recenter-last-resources.provenance.json",
+      "sha256": "e0c4410807585e6d91fb5cd640a05d34adf07ba251c8d2f36fa9ec5505920a2b",
+      "bytes": 2514
+    },
+    {
+      "path": "polynomial-normalized-source-probe/run.py",
+      "sha256": "bb5945974b8638f0678840a8e71dd9e177e7856f8f7337d97f24f6c291a611f7",
+      "bytes": 924
+    },
+    {
+      "path": "polynomial-normalized-source-probe/source-delta.patch",
+      "sha256": "8f793b9af95b5f6610e073e0b12f660367473523fbe01b09c69928123a54829b",
+      "bytes": 13399
+    },
+    {
+      "path": "polynomial-normalized-source-probe/summary.json",
+      "sha256": "d801acd8134988f16eb135bc9f47abd2792cfdd8d8b1b7922128e18c6236e1f5",
+      "bytes": 9916
+    }
+  ],
+  "files_count": 117,
+  "total_bytes": 3851919,
+  "nested_manifests_verified": [
+    {
+      "manifest": "native-active-pilot/manifest.json",
+      "files": 25
+    },
+    {
+      "manifest": "polynomial-normalized-active-pilot/manifest.json",
+      "files": 20
+    },
+    {
+      "manifest": "polynomial-normalized-source-probe/manifest.json",
+      "files": 37
+    }
+  ],
+  "archives_roundtrip_verified": 16
+}

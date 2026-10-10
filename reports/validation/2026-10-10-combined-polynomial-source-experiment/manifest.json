@@ -1,0 +1,170 @@
+{
+  "recorded_utc": "2026-10-10T02:57:28.268693+00:00",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/README.md",
+      "sha256": "6168c4677470a9a9c62c6a79d975ea202f653236b38251f688880d679b18bb7f",
+      "bytes": 2830
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/compile.py",
+      "sha256": "5e176964daaa176baa7c84e75e31a5dc3514f1894cbc13435db5c74e50bdb0a9",
+      "bytes": 1863
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/failed-before-bounds-name-fix-probe-build-binding.json",
+      "sha256": "862f5ccc8f8a0268b2b250d43531246235627863756b81b33be9b0bdf8c59f38",
+      "bytes": 2624
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/failed-before-bounds-name-fix-probe-build.json",
+      "sha256": "6519ff4bcca397e820bd23dbdbb79c09bc35e21c527fcbc1d6e2d2f27f55ce1c",
+      "bytes": 60
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/failed-before-bounds-name-fix-probe-build.log",
+      "sha256": "96eaacead46d0c295352a7af33a373fa5cbdbd115f729b8dbf581c9fc95457f9",
+      "bytes": 1309
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/failed-before-bounds-name-fix-probe.rs",
+      "sha256": "b62caa99b3a9349c3e3c99ad1e7de3e37c8485c7b317824a67358a674f84b1b8",
+      "bytes": 15674
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/failed-before-bounds-name-fix-source-binding.json",
+      "sha256": "f5e15f6af3eed9fc7437bcb4b79cc28457308e93cee0557cef9526126c73dadb",
+      "bytes": 1985
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/failed-before-bounds-name-fix-source-delta.patch",
+      "sha256": "fccd24bdf4433d58e2a7acaa48fede3eb80d821f975480da1f5654320dbd30fb",
+      "bytes": 10314
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward/program.bin",
+      "sha256": "2c8643c13ad5c9de3a177b617eb8c8be6394f50805efe72dcdea3b61ff518f75",
+      "bytes": 58551
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward/result.json",
+      "sha256": "bc19704020d3bbd8ec322a0d367749604a06092e77117624bf7dc349da12ca98",
+      "bytes": 167298
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward-resources.json",
+      "sha256": "ef6846c34422ddd9c3ff52b86a011e1346753399e492ed11495299ff9af87016",
+      "bytes": 894
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward-resources.log",
+      "sha256": "da52fee4df4945adc17188722422e2f8a1345d3aedc71d5ee9f90834a20873be",
+      "bytes": 55
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward-resources.provenance.json",
+      "sha256": "ba400cd4a8db844519e1bfedc0ce6c63f4780c4f1477ae18560aedcf2f56cfc7",
+      "bytes": 2478
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original/program.bin",
+      "sha256": "fbdd5636c0e5e0f60942909c8f7f0c783bdc90ace3da8812d0a3ca6521a07525",
+      "bytes": 60834
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original/result.json",
+      "sha256": "8f09cfddbd728e855aca8dbbb06e28ed5f64661b5812689687d2f4deafb5aeac",
+      "bytes": 193014
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original-resources.json",
+      "sha256": "e5d7dbd3c90967ded38e10fe1000277d680ddd724e432fc0cbc2ed879b2f1d29",
+      "bytes": 875
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original-resources.log",
+      "sha256": "9563cf2908bf2675333f7f7ee19a418f6f71fd9f20a5f9ecd25f3e77175581a4",
+      "bytes": 52
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original-resources.provenance.json",
+      "sha256": "2a194216c1acb93fe44b023bfc4c0ee04c080c135cbb7443ec81882f111cea23",
+      "bytes": 2472
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/planned-commands.json",
+      "sha256": "aa104992e6e74efeab9226b734477bd87b38d2f5d5f5be922cb19f5f2dfe5aaa",
+      "bytes": 2961
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/probe-build-binding.json",
+      "sha256": "21ab0a91103acc7ad55f56f5cac513e4374d1998649b992ca8bceedc13fad96c",
+      "bytes": 2612
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/probe-build.json",
+      "sha256": "f156ee18612a16df137918621d012f2de2ed56b65f5137e255b1136fb5e498b7",
+      "bytes": 217
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/probe-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/probe.rs",
+      "sha256": "8736d4de5b9cc2477db9c4874b3a5a191a0a99557faca2e6f4a959f6a9b04675",
+      "bytes": 15677
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/run.py",
+      "sha256": "8ce3cb118ad7c53781df7fc3f90e6742dc6e05a73cbd36553e6cc4d48b36fad9",
+      "bytes": 874
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/source-binding.json",
+      "sha256": "d9574fab1ade9f219d27b88a71c3bef03897d4917132ab71d4ba224e61d8590c",
+      "bytes": 2132
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/source-delta.patch",
+      "sha256": "bd28e6d7b2cc0778e7f8dfc46cde3ad17e432932dd1ce7b0c5bbd9e20559e4ae",
+      "bytes": 10311
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal/program.bin",
+      "sha256": "42f84557899a18a03cd68c79a725292f41feff9f70867be588e422044aaaad58",
+      "bytes": 58551
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal/result.json",
+      "sha256": "f5fc1f24a8a8fab036a8ad183f15738388d36b15683c88006b66ccf54777992c",
+      "bytes": 167298
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal-resources.json",
+      "sha256": "cf2f190709ecc4f8b725d478748576bbe6e8a1b2f901e14266b81cbfc30a4bd0",
+      "bytes": 872
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal-resources.log",
+      "sha256": "ee1949ead7aec4a2c89c9a6435c0dfa77f28535bef704773629ca9b136254c02",
+      "bytes": 55
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal-resources.provenance.json",
+      "sha256": "39dea251de752fc4dbf3b9feebfe9dd0f7a1d402838525691e0f348530df16c6",
+      "bytes": 2478
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/relocation.json",
+      "sha256": "2a7b615ec96e704f0f1af8a76eae6706168d7e5c260fb1e9f9dd287e8e69ea3d",
+      "bytes": 557
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/summary.json",
+      "sha256": "6f46bfafd45cb648358817eb63bfa2195a495fafdc64c4d6c467143609537edd",
+      "bytes": 7534
+    }
+  ]
+}

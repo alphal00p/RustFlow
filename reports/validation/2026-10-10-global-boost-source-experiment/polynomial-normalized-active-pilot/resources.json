@@ -1,0 +1,24 @@
+{
+  "command": [
+    "timeout",
+    "300s",
+    "env",
+    "PILOT_ROUNDS=16",
+    "PILOT_FRONTIER=1024",
+    "PILOT_REQUESTS=4096",
+    "PILOT_RULES=65536",
+    "PILOT_ZERO_ATTEMPTS=8192",
+    "PILOT_RAY_DOMAINS=1",
+    "PILOT_POINT_DOMAINS=1",
+    "PILOT_DEPTH=3",
+    "/tmp/rustflow-global-boost-active-pilot",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/recenter-last/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 228.99880378786474,
+  "user_seconds": 227.18691,
+  "system_seconds": 0.14540799999999998,
+  "peak_child_rss_kib": 51580,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

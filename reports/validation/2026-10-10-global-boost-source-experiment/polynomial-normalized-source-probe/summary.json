@@ -1,0 +1,286 @@
+{
+  "recorded_utc": "2026-10-10T02:46:15.680484+00:00",
+  "scope": "Matched native source-presentation probes only; independent physical proof/domain separately bound; no inverse-energy admission or closed basis",
+  "arms": {
+    "original": {
+      "source_count": 52,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 192,
+      "same_rhs_conditions": 19,
+      "differences": [],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-polynomial-normalized-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/original",
+          "original"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0417271628975868,
+        "user_seconds": 0.9579519999999999,
+        "system_seconds": 0.07762,
+        "peak_child_rss_kib": 61440,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "narrow-first": {
+      "source_count": 54,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 177,
+      "same_rhs_conditions": 18,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_status": "Applied { rule: 6 }",
+          "after_status": "Applied { rule: 6 }",
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        }
+      ],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-polynomial-normalized-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/narrow-first",
+          "narrow-first"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9598077279515564,
+        "user_seconds": 0.903706,
+        "system_seconds": 0.049735999999999995,
+        "peak_child_rss_kib": 61484,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "narrow-last": {
+      "source_count": 54,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 177,
+      "same_rhs_conditions": 18,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_status": "Applied { rule: 6 }",
+          "after_status": "Applied { rule: 6 }",
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        }
+      ],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-polynomial-normalized-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/narrow-last",
+          "narrow-last"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9793977220542729,
+        "user_seconds": 0.9292199999999999,
+        "system_seconds": 0.042917,
+        "peak_child_rss_kib": 61480,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "recenter-first": {
+      "source_count": 54,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 177,
+      "same_rhs_conditions": 18,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_status": "Applied { rule: 6 }",
+          "after_status": "Applied { rule: 6 }",
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        }
+      ],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-polynomial-normalized-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/recenter-first",
+          "recenter-first"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.996769963297993,
+        "user_seconds": 0.945329,
+        "system_seconds": 0.043834,
+        "peak_child_rss_kib": 61480,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "recenter-last": {
+      "source_count": 54,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 177,
+      "same_rhs_conditions": 18,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_status": "Applied { rule: 6 }",
+          "after_status": "Applied { rule: 6 }",
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ]
+        }
+      ],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-polynomial-normalized-boost-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/recenter-last",
+          "recenter-last"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9864368429407477,
+        "user_seconds": 0.928195,
+        "system_seconds": 0.04965,
+        "peak_child_rss_kib": 61484,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  },
+  "unnormalized_field_metadata_note": "Raw result direction/divergence fields retain the unnormalized polynomial boost solely to verify scalar-factor invariance; they are NOT the new normalized source divergence. New independently derived sources are exactly additional_sources.",
+  "new_source_domain": "Exactly massless C1, all energy completion indices0, lowerH0, original Gram<=0, virtual powers as originally admitted, tails0",
+  "recenter_vs_unrecenter_identical": true,
+  "prepend_vs_append_identical": true
+}

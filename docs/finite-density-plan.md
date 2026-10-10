@@ -136,6 +136,18 @@ original polynomial domains and reduce early frontier growth, but the bounded
 three-loop pilot still fails to close. Neither experiment changes production
 ordering, massless admission or the three-loop numerical acceptance gate.
 
+Further [correlated Lorentz-source controls](../reports/validation/2026-10-10-global-boost-source-experiment/README.md)
+derive an exact polynomial boost identity and a narrowly guarded simple-cut
+surface recurrence. Each improves selected reductions, but their separate
+bounded full pilots remain unclosed. The narrow recurrence and the earlier
+polynomial temporal source shifts retain their complementary improvements in
+[combined small controls](../reports/validation/2026-10-10-combined-polynomial-source-experiment/README.md).
+They remain exploratory source additions. An isolated
+[direct-match search lookahead](../reports/validation/2026-10-10-native-direct-hit-lookahead/README.md)
+gives no improvement; its motivating example already has a first indirect
+winner. Production search remains unchanged while bounded source selection is
+investigated with exact replay and explicit condition-coverage checks.
+
 ## Remaining acceptance evidence
 
 Exact certificates and bounded algebraic pilots are useful gates, but do not

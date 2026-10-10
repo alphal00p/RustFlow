@@ -1,0 +1,29 @@
+{
+  "recorded_utc": "2026-10-10T02:45:32.665196+00:00",
+  "physical_claim": "Independent shell-tangent cutoff identity on exactly C1, all energy powers0, lower occupation0; no reciprocal-energy integral admission or forbidden old-source seed",
+  "native_claim": "Only exact implications of supplied new guarded rows; native replay alone does not establish their physical proof",
+  "source_domain_unchanged": true,
+  "new_zero_domains": false,
+  "bindings": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/normalized-polynomial-c1-proof.md",
+      "sha256": "7389bcfaa04ea5bb470732d42bba100ca0c989d95ae330e3830d25cd82ab9b0a"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/derivation.md",
+      "sha256": "800a318163533b6570af955c637e9c57e9a8a9edfaacfa77aee3b6ab9cda5b8c"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/probe.rs",
+      "sha256": "0c2c59054a4cdd2750f9d577e9d36ec6a97b5998c7003c88ccf33abd4d10cef9"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/source-delta.patch",
+      "sha256": "8f793b9af95b5f6610e073e0b12f660367473523fbe01b09c69928123a54829b"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "original": [
+    "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original-resources.json",
+    "timeout",
+    "90s",
+    "/tmp/rustflow-combined-polynomial-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original",
+    "original"
+  ],
+  "normal-ward": [
+    "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward-resources.json",
+    "timeout",
+    "90s",
+    "/tmp/rustflow-combined-polynomial-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward",
+    "normal-ward"
+  ],
+  "ward-normal": [
+    "/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal-resources.json",
+    "timeout",
+    "90s",
+    "/tmp/rustflow-combined-polynomial-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal",
+    "ward-normal"
+  ]
+}

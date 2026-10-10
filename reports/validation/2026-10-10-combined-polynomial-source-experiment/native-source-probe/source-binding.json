@@ -1,0 +1,47 @@
+{
+  "recorded_utc": "2026-10-10T02:55:23.604642+00:00",
+  "controls": [
+    "original52",
+    "original52+shifted-polynomialU4+recentered-C1Ward2",
+    "original52+recentered-C1Ward2+shifted-polynomialU4"
+  ],
+  "raw_global_boost_added": false,
+  "reciprocal_domain_widened": false,
+  "original_targets_and_zero_domains_unchanged": true,
+  "shifted_U_guard": "exact original domain pullbacka6+1; a6<=-1",
+  "Ward_guard": "cut1mass0; all3energy completion indices0; lowerH0; original otherbounds",
+  "source_bindings": [
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/probe.rs",
+      "sha256": "8736d4de5b9cc2477db9c4874b3a5a191a0a99557faca2e6f4a959f6a9b04675"
+    },
+    {
+      "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/source-delta.patch",
+      "sha256": "bd28e6d7b2cc0778e7f8dfc46cde3ad17e432932dd1ce7b0c5bbd9e20559e4ae"
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-source-probe/manifest.json",
+      "sha256": "e9d4e1e369a17701ff82a655b0121d24ac15f1d4bb3c03198255ff0492551458",
+      "bytes": 9497
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/normalized-polynomial-c1-proof.md",
+      "sha256": "7389bcfaa04ea5bb470732d42bba100ca0c989d95ae330e3830d25cd82ab9b0a",
+      "bytes": 5504
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/manifest.json",
+      "sha256": "80573e44033ef97c0c37d7b333cf4636908a3249565c6b7aa29dc1d5b1956b93",
+      "bytes": 8144
+    },
+    {
+      "path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/independent-source-audit.json",
+      "sha256": "78ee002436f2b819b4ea19fe7472b7db68e360e079ce8d03c0d080448e1aea7e",
+      "bytes": 732
+    }
+  ],
+  "relocation": {
+    "path": "reports/validation/2026-10-10-combined-polynomial-source-experiment/relocation.json",
+    "sha256": "2a7b615ec96e704f0f1af8a76eae6706168d7e5c260fb1e9f9dd287e8e69ea3d"
+  }
+}

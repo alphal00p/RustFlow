@@ -1,0 +1,256 @@
+{
+  "recorded_utc": "2026-10-10T02:56:49.055587+00:00",
+  "scope": "Matched combination of original-domain shifted-U rows and strict polynomialC1Ward rows only; no reciprocal admission or finite closure",
+  "arms": {
+    "original": {
+      "source_count": 52,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 192,
+      "same_rhs_conditions": 19,
+      "differences": [],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-combined-polynomial-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/original",
+          "original"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0306713450700045,
+        "user_seconds": 0.9568249999999999,
+        "system_seconds": 0.06679,
+        "peak_child_rss_kib": 61440,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "normal-ward": {
+      "source_count": 58,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 164,
+      "same_rhs_conditions": 16,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ],
+          "after_status": "Applied { rule: 6 }"
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 3,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": [],
+          "after_status": "Applied { rule: 10 }"
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 1,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": [],
+          "after_status": "Applied { rule: 13 }"
+        }
+      ],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-combined-polynomial-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/normal-ward",
+          "normal-ward"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9196627167984843,
+        "user_seconds": 0.8693289999999999,
+        "system_seconds": 0.044060999999999996,
+        "peak_child_rss_kib": 61524,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    "ward-normal": {
+      "source_count": 58,
+      "rules": 19,
+      "points": 19,
+      "total_rhs_terms": 164,
+      "same_rhs_conditions": 16,
+      "differences": [
+        {
+          "point": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 20,
+          "after_terms": 5,
+          "before_conditions": [
+            "epsilon",
+            "2*epsilon",
+            "4*epsilon",
+            "8*epsilon",
+            "16*epsilon",
+            "4*epsilon*eta",
+            "eta"
+          ],
+          "after_conditions": [
+            "4*eta",
+            "2*eta"
+          ],
+          "after_status": "Applied { rule: 6 }"
+        },
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 13,
+          "after_terms": 3,
+          "before_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "after_conditions": [],
+          "after_status": "Applied { rule: 10 }"
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "before_terms": 4,
+          "after_terms": 1,
+          "before_conditions": [
+            "eta"
+          ],
+          "after_conditions": [],
+          "after_status": "Applied { rule: 13 }"
+        }
+      ],
+      "strict_source_guard_checks": 8,
+      "encoded_decoded_replay": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-combined-polynomial-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal",
+          "ward-normal"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9202960589900613,
+        "user_seconds": 0.874111,
+        "system_seconds": 0.039881,
+        "peak_child_rss_kib": 61512,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  },
+  "added_order_results_identical": true,
+  "unnormalized_field_metadata_note": "Raw result direction/divergence fields audit the old unnormalized global boost scalar invariance only; actual new source rows are additional_sources and shifted_polynomial_U_sources. No rawboost row is added."
+}

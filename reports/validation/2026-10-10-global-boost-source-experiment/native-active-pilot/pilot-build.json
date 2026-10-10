@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 19.189125013072044,
+  "executable": {
+    "path": "/tmp/rustflow-global-boost-active-pilot",
+    "sha256": "9d39544c5e740502a859e93ccec078ee7ae37a7fca76267914347b86d8390af6"
+  }
+}

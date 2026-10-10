@@ -1,0 +1,54 @@
+{
+  "status": "exact_algebra_checks_pass",
+  "created_utc": "2026-10-10T02:34:01.291864+00:00",
+  "head_at_capture": "c1f1db7e6aaa94baf1960a44c3f96212fec910ed",
+  "scope": "Read-only mathematical/current-source audit and independent exact polynomial checks; no production changes or native closure claim",
+  "counts": {
+    "cartesian_fields": 56,
+    "gram_actions": 340,
+    "energy_actions": 160,
+    "radial_cases": 90,
+    "positive_upper_cases": 720
+  },
+  "artifacts": {
+    "reports/validation/2026-10-10-global-boost-source-experiment/derivation.md": {
+      "bytes": 7591,
+      "sha256": "800a318163533b6570af955c637e9c57e9a8a9edfaacfa77aee3b6ab9cda5b8c"
+    },
+    "reports/validation/2026-10-10-global-boost-source-experiment/check-cartesian.py": {
+      "bytes": 6163,
+      "sha256": "61b5e709fc7360299bc391eea8d4506f65c27bb80a5cbc11c8abfcc35e10b572"
+    },
+    "reports/validation/2026-10-10-global-boost-source-experiment/cartesian-results.json": {
+      "bytes": 202380,
+      "sha256": "e32b574137c25e307e96ff948cced8c214c23abd7d0beca0eb9624a7a8f9b4e3"
+    }
+  },
+  "reviewed_sources": {
+    "src/finite_density/measure.rs": {
+      "bytes": 43538,
+      "sha256": "eef3449b8c95847a042593fd2eec8ce5bb09bf7563bb8ef2ba998322c8fb654a"
+    },
+    "src/finite_density/basis.rs": {
+      "bytes": 12347,
+      "sha256": "459f14bb294b5cc27fd4f43dbcda285c3bc9e24230515691ab90630d573a6484"
+    },
+    "src/finite_density/geometry.rs": {
+      "bytes": 23046,
+      "sha256": "cdfa001bab8a005d3ad9882d1624fa1f0869acf338aa75feb960a6afadbf7b0d"
+    },
+    "src/finite_density/preparation.rs": {
+      "bytes": 20411,
+      "sha256": "f7c5f5a35a176104d61760dd88f9fdee6d2e713e766e6a3e3b0f9ca3068168e6"
+    },
+    "examples/finite_density/massless_three_loop_chain.json": {
+      "bytes": 1550,
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json": {
+      "bytes": 2019,
+      "sha256": "10c56050042c63ffc5130805637b8cbb8c4a62b4649759595cf933bbb456303e"
+    }
+  },
+  "geometry_finding": "Actual occupied cut0 family binds slot6=q6=E0, no external fixed vector. The general Q proof covers every rational routing row, including tilted cuts."
+}

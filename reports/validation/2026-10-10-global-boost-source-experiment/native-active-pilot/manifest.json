@@ -1,0 +1,130 @@
+{
+  "recorded_utc": "2026-10-10T02:43:29.067920+00:00",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/README.md",
+      "sha256": "65c7396b9c5c3ab8d9c2f62af9c834321b2e521cc401093346a28802dc80b17f",
+      "bytes": 2170
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/archives.json",
+      "sha256": "9c6b36973f5be467cd11e8e3597db3b2e3ee7276a0336645d2b0301a7080cc91",
+      "bytes": 4271
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/compile.py",
+      "sha256": "ddc1545d8d7844007babc8b4880500ea615322108a4bc0369fae8e6ce98153ac",
+      "bytes": 1762
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/pilot-build-binding.json",
+      "sha256": "b3e04c8e854d538db611f82e4148ecc731e17c03cf91ec004ec1dff8ba05a59a",
+      "bytes": 2247
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/pilot-build.json",
+      "sha256": "dbce6bfd1f39f7575c6df98ef356d7f55dd923012093ab9e2ac5dfbcd0e282f5",
+      "bytes": 218
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/pilot-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/pilot.rs",
+      "sha256": "a3de8e098cd305d94d8b17584cc7b4be5e5888b92d844e7796547315b0c57e5d",
+      "bytes": 18404
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/planned-command.json",
+      "sha256": "249c470da991a298d025431ffff2eb7ed906a683031fc6f8517ed0f5981ad14a",
+      "bytes": 849
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/resources.json",
+      "sha256": "b44e1890eb164e8b27b7e82b13f40454357ca5bda3b5568bfc72179c77bdc6a4",
+      "bytes": 819
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/resources.log",
+      "sha256": "a93448d9bc9f845c94da3859d87165e5d1122412f8555f1bed62bf39b3d86866",
+      "bytes": 224
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/resources.provenance.json",
+      "sha256": "3c8fb47261b7fd1c573c04992f3244491c95fd8f82fdccc496d9bfbc6450720a",
+      "bytes": 1850
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/configuration.json",
+      "sha256": "acc2591b32ae879cf4c94489eb47a1bf07c2a1a943768928948ad2e89e3eebea",
+      "bytes": 8999
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/progress.json",
+      "sha256": "e6b94d4c037db2c8f59874501c98842da0f00d426c8981c535aa40ebc6ba492d",
+      "bytes": 724
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-000.bin.gz",
+      "sha256": "9e9644d55711d49a5fa27de2b159312ded7764b6e0bce42aade7642b23af14e1",
+      "bytes": 5595
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-000.json.gz",
+      "sha256": "1c0ff23b32850d1e39d6def058bef715b38191d9380c7ffc8ba468951bc55e1d",
+      "bytes": 2472
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-001.bin.gz",
+      "sha256": "3b4a5846792aac335a618cc53bc6bb168ddf01961c0d6135ca0e278dc4112aef",
+      "bytes": 9433
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-001.json.gz",
+      "sha256": "26b5b86345c41c29660586f51be94b6b1fbeedd1adfcb5be134442cfc3100ae7",
+      "bytes": 7324
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-002.bin.gz",
+      "sha256": "258e1914a892b9fe39858d2b921aabeb1fbc4d00f3cd36f9bcd8905126610bc5",
+      "bytes": 30775
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-002.json.gz",
+      "sha256": "360894e07c8b7fc7f56d8e1577ae036e84d4bc62464c20d27659c555ccb9ea28",
+      "bytes": 38869
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-003.bin.gz",
+      "sha256": "3c5e3cb729c3ca4afb333c0c848b06b38f5134ff6bb1fabcf4871f7ef5c1c3b0",
+      "bytes": 100019
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/run/round-003.json.gz",
+      "sha256": "8c3725f4d723b9b26c592fca4bc07790bfe7a0d240f2f986d5418765b0c3903d",
+      "bytes": 442441
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/runner-source.patch",
+      "sha256": "8f01d8c5a9235e84b6abd9fb7f85dfd6e868467e35db47df89a48275ec63afc5",
+      "bytes": 1613
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/source-binding.json",
+      "sha256": "7640bef42499f987fe73274ee8bbbda49b59b09d6bb2d2da0576e0dad66c4ee3",
+      "bytes": 1568
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/summarize.py",
+      "sha256": "ca4d2bfacaad92923974ce93ccb8b4ad58ee9c99ff8bb45c2d57af3ebafb688b",
+      "bytes": 2598
+    },
+    {
+      "path": "reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/summary.json",
+      "sha256": "e63606b3a2b198fc3655dec881c993b5a48e095d6bcecae902f47c05976abd82",
+      "bytes": 21496
+    }
+  ]
+}

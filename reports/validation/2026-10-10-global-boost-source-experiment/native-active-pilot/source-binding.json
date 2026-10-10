@@ -1,0 +1,24 @@
+{
+  "baseline_runner": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/runner/active-pilot.rs",
+    "sha256": "be3b9d135e742de50315e809d8109ce8085dc7420050720ee9a40aaff0106741"
+  },
+  "new_runner": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/native-active-pilot/pilot.rs",
+    "sha256": "a3de8e098cd305d94d8b17584cc7b4be5e5888b92d844e7796547315b0c57e5d"
+  },
+  "generator": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/native-source-probe/probe.rs",
+    "sha256": "9a6085e789035b3939faf5ece39db2d7b147c63532951c27bb896d6b615f6286"
+  },
+  "source_program": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/native-source-probe/boost-last/program.bin",
+    "sha256": "6a13441e44e448b7daaaf3750e7f1e890698e828b454658b4822a95167550375"
+  },
+  "source_result": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/native-source-probe/boost-last/result.json",
+    "sha256": "1684d6e3bed00b95b83a173423b6df25eac588c252e649b03d76acd895eea59b"
+  },
+  "source_policy": "Original52rows plus4 automatically geometry-derived correlated global boost IBPs; exact original source/zero guards. Import only v2 source record data and discard every small-probe rule.",
+  "runner_delta": "Accept v2 source record rather than historicalv1; no search, target, derivative, budget, native-order or final-audit change."
+}

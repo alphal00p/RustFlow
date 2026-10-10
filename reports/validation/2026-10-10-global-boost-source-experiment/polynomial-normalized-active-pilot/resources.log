@@ -1,0 +1,5 @@
+round=0 frontier=43 rules=15 requested=15 pending=43
+round=1 frontier=190 rules=58 requested=46 pending=190
+round=2 frontier=610 rules=274 requested=193 pending=609
+round=3 frontier=1025 rules=951 requested=616 pending=1020
+status=frontier-budget rounds=4

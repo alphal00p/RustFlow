@@ -1,0 +1,77 @@
+{
+  "recorded_utc": "2026-10-10T02:52:11.433199+00:00",
+  "files": [
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-000.bin",
+      "raw_sha256": "70809623b8097775c9f206973ea8de70ae3a57bff922f457fd5e50bdc3569c73",
+      "raw_bytes": 52414,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-000.bin.gz",
+      "gzip_sha256": "f33ef426bbaed7830c4a372a2721e84b480b870df1e00970721e9abca929e2d2",
+      "gzip_bytes": 5408,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-000.json",
+      "raw_sha256": "a40dc17e724c823aba7535b52cbc382ce23db4f83cf95510797bc65b2a686c87",
+      "raw_bytes": 84523,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-000.json.gz",
+      "gzip_sha256": "a515a8b9e51a63b63025936f8996c235bacea26d56b62941599df23651e3f4bf",
+      "gzip_bytes": 2352,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-001.bin",
+      "raw_sha256": "326083015bfb0f8df94380da79f6ab8d2505b21b244e4320a04d963dda341196",
+      "raw_bytes": 104063,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-001.bin.gz",
+      "gzip_sha256": "e305481397e7cd7f023177b53c231e7a9fd3f57c2209b9c2c8fd97f98413989c",
+      "gzip_bytes": 10042,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-001.json",
+      "raw_sha256": "efeafe966cb3faafe63dad90f3ba23482639c757af001d379f62adafeede2c85",
+      "raw_bytes": 305014,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-001.json.gz",
+      "gzip_sha256": "66f1012773b69c4a11955af388e05edb82b6f1950a8c907f754ca39803297373",
+      "gzip_bytes": 8618,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-002.bin",
+      "raw_sha256": "a3fc41d21dca6525913f241e38245c67809596d526f4fe74db54a25835096113",
+      "raw_bytes": 423036,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-002.bin.gz",
+      "gzip_sha256": "782f09e6a7bae7cb3d4bd0dbddf8d2095b90bb374dd9dd1c61df557241c021f7",
+      "gzip_bytes": 36832,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-002.json",
+      "raw_sha256": "02c41cf71356bcc7e1bcb8dbe56c8d5c61bfc0e63d02d1aadc641942f719f760",
+      "raw_bytes": 1155737,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-002.json.gz",
+      "gzip_sha256": "1418fbbd55c4393fdbccb244c43e6d79d60372fdf672378b1b9ccc752c5f161c",
+      "gzip_bytes": 43684,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-003.bin",
+      "raw_sha256": "32f3aae691cebd0eaf3bf956e7cc29a8c65f0c3fda142f2bc2df2339df3e1d2e",
+      "raw_bytes": 1577765,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-003.bin.gz",
+      "gzip_sha256": "9bfe9616795207fae5d6c6cf5bb8fc09cbc6c1a7c556833bf4045a128b96697a",
+      "gzip_bytes": 132269,
+      "restore_checked": true
+    },
+    {
+      "raw_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-003.json",
+      "raw_sha256": "147c3b476450e2ccbc8ad111ec9e9f668548fb06214bdfe7f516b247b01f75ff",
+      "raw_bytes": 4745981,
+      "gzip_path": "reports/validation/2026-10-10-global-boost-source-experiment/polynomial-normalized-active-pilot/run/round-003.json.gz",
+      "gzip_sha256": "0a495bf086bffd19d9299063adc204bee67996be8165291fecc53390bb05b4a7",
+      "gzip_bytes": 665215,
+      "restore_checked": true
+    }
+  ]
+}

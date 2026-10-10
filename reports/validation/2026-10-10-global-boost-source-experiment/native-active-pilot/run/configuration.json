@@ -1,0 +1,79 @@
+{
+  "depth": 3,
+  "max_frontier": 1024,
+  "max_requested": 4096,
+  "max_rounds": 16,
+  "max_rules": 65536,
+  "measure_id": "rustflow-weighted-sources-v1:13fbdef02acfb2a3466d927eaec61cf3060f8277b38b35123a5cd3b076a2864f:f8c23e306f1c0a785b79431d31b234e50d5cfde6afc06b556ca3930c0492c39c:{\"measure\":\"independent occupied Cn and Hn; input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e; factors=[rustflow_occupied::q_0, rustflow_occupied::q_3, rustflow_occupied::q_5, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_2-rustflow_occupied::q_5), -(-rustflow_occupied::q_3+2*rustflow_occupied::q_4-rustflow_occupied::q_5), rustflow_occupied::q_1, rustflow_occupied::q_6, rustflow_occupied::q_7, rustflow_occupied::q_8, 1-rustflow_occupied::q_6, rustflow_occupied::q_6]; massless source origin evidence=joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=singleton-UV-meromorphic-null-germ;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0];shifted=[1, 2, 3, 4];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"(-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_4)*-1\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 2, virtual_affine_shift: [], denominator_rows: [(1, [\\\"1\\\", \\\"0\\\"], \\\"0\\\"), (2, [\\\"0\\\", \\\"1\\\"], \\\"0\\\"), (3, [\\\"0\\\", \\\"-1\\\"], \\\"1\\\"), (4, [\\\"1\\\", \\\"-1\\\"], \\\"0\\\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\\\"1\\\"] }; source presentation=legacy-lorentz; positive compact energy completion powers=false\",\"support\":\"real compact shell coordinates; [OccupiedShell { loop_index: 0, physical_slot: 0, upper_slot: 9, lower_slot: 10, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }]; certified joint dimensional origin zero jets: occupied loop 0, cut slot 0>=1 and lower-energy slot 10>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[1];nonpositive=[2, 3, 4];virtual-null=[\\\"0\\\", \\\"1\\\"]; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[2, 3];nonpositive=[1, 4];virtual-null=[\\\"1\\\", \\\"0\\\"]; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[4];nonpositive=[1, 2, 3];virtual-null=[\\\"1\\\", \\\"1\\\"]\",\"orientation\":\"future first 1 loops; q=(-i PE0,-PEvec); inverse routing=[[1, 0, 0], [0, 1, 0], [0, 0, 1]]; determinant=1\",\"normalization\":\"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included\",\"branch\":\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=singleton-UV-meromorphic-null-germ;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0];shifted=[1, 2, 3, 4];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"(-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_4)*-1\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 2, virtual_affine_shift: [], denominator_rows: [(1, [\\\"1\\\", \\\"0\\\"], \\\"0\\\"), (2, [\\\"0\\\", \\\"1\\\"], \\\"0\\\"), (3, [\\\"0\\\", \\\"-1\\\"], \\\"1\\\"), (4, [\\\"1\\\", \\\"-1\\\"], \\\"0\\\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\\\"1\\\"] }; joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\",\"deformation\":\"native Di-eta on [1, 2, 3, 4]; physical shells and upper/lower supports fixed; input indices and coefficients fixed\"}:zero-tail-storage-v1:physical=11:capacity=12;source-presentation=exact-global-correlated-boost-v1;mode=boost-last;all-Gram-actions=0;energy-action-EiE0-g0i;divergence=(D-1)E0;original-polynomial-domain-unchanged",
+  "old_proof_optional_replay": null,
+  "old_proofs_reused": false,
+  "original_targets": [
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ],
+  "point_domains_per_fallback": 1,
+  "ray_domains_per_requested_point": 1,
+  "request_history_policy": "explicit requested labels only; basis and raw derivative labels deferred until requested; max_requested caps cumulative history",
+  "shifted_ordinary_slots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "source_count": 56,
+  "source_program": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-global-boost-source-experiment/native-source-probe/boost-last/program.bin",
+  "zero_attempts_per_round": 8192
+}

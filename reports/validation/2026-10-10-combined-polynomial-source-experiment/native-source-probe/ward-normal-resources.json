@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "/tmp/rustflow-combined-polynomial-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-combined-polynomial-source-experiment/native-source-probe/ward-normal",
+    "ward-normal"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.9202960589900613,
+  "user_seconds": 0.874111,
+  "system_seconds": 0.039881,
+  "peak_child_rss_kib": 61512,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

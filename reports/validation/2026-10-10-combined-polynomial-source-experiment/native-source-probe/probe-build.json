@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 37.67679927917197,
+  "executable": {
+    "path": "/tmp/rustflow-combined-polynomial-probe",
+    "sha256": "e3915c70d17c8f06a5b2dbdc7635937ff9b275dba29b57281b9ae6d283864a06"
+  }
+}
