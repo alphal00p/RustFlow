@@ -1,0 +1,615 @@
+--- a/src/solver/guarded/persistence.rs
++++ b/src/solver/guarded/persistence.rs
+@@ -22,7 +22,7 @@
+ // v1 proofs can retain columns and extra guards that this quotient removes;
+ // they must be rediscovered, not silently rewritten during deserialization.
+ // This version applies only to guarded-source programs, not ordinary rules.
+-const SCHEMA: &str = "rustred.guarded-source-program.v2";
++const SCHEMA: &str = "rustred.guarded-source-program.v2.direct-hit-lookahead-experiment-1";
+ const STRUCTURE_LIMIT: usize = 64 * 1024 * 1024;
+ 
+ type DomainRecord = Vec<(Option<i64>, Option<i64>)>;
+--- a/src/solver/numeric.rs
++++ b/src/solver/numeric.rs
+@@ -287,6 +287,7 @@
+                         elapsed: start.elapsed(),
+                         exact_materialization: exact_elapsed,
+                         discovery: stats.discovery,
++                        ..Default::default()
+                     },
+                 });
+             }
+--- /dev/null
++++ b/src/solver/search/direct_lookahead_tests.rs
+@@ -0,0 +1,330 @@
++//! Isolated experiment controls. No physical periods or analytic zeros supplied.
++use super::*;
++use crate::algebra::CoefficientContext;
++use crate::solver::{CoordinateCase, Power};
++use crate::solver::guarded::{
++    GuardedApplicationStatus, GuardedProgram, GuardedSearchScope, GuardedSource,
++    GuardedSourceSystem, IndexBounds, IndexDomain, IndexRole,
++};
++
++fn point(n: i64) -> IndexDomain<1> {
++    IndexDomain::new([IndexBounds::fixed(n)]).unwrap()
++}
++fn fixture(rows: &[(&[i16], i64)]) -> Arc<GuardedSourceSystem<1>> {
++    let c = CoefficientContext::new(["lookahead_n", "lookahead_x"]);
++    let sources = rows
++        .iter()
++        .enumerate()
++        .map(|(i, (shifts, at))| {
++            GuardedSource::new(
++                format!("source-{i}"),
++                shifts
++                    .iter()
++                    .map(|&s| Term {
++                        integral: Integral::symbolic([s]).unwrap(),
++                        coefficient: c.one().numerator,
++                    })
++                    .collect(),
++                point(*at),
++            )
++            .with_nonzero_conditions(vec![c.parameter("lookahead_x").unwrap().numerator])
++        })
++        .collect();
++    Arc::new(
++        GuardedSourceSystem::new(
++            "isolated-direct-lookahead",
++            [IndexRole::Ordinary],
++            [0],
++            sources,
++        )
++        .unwrap(),
++    )
++}
++fn run(
++    system: &GuardedSourceSystem<1>,
++    cap: Option<DirectLookaheadLimits>,
++    depth: u32,
++) -> Result<RuleCandidate<1>, TrialSearchError> {
++    let solver = SectorSolver::new_guarded(&system.system, [true], system.roles).unwrap();
++    let scope = GuardedSearchScope::new(system, point(1));
++    let mut work = RuleTrialStats::default();
++    solver.search_attempt_inner(
++        CoordinateCase::new([Some(1)]).unwrap().into(),
++        SearchOptions {
++            max_depth: Some(depth),
++            ..Default::default()
++        },
++        None,
++        None,
++        false,
++        &mut work,
++        |_| {},
++        Some(&scope),
++        cap,
++    )
++}
++fn success(result: Result<RuleCandidate<1>, TrialSearchError>) -> RuleCandidate<1> {
++    match result {
++        Ok(c) => c,
++        Err(TrialSearchError::Solver(e)) => panic!("{e}"),
++        Err(TrialSearchError::Limit(e)) => panic!("{e:?}"),
++    }
++}
++fn caps(rows: usize, trace: usize, terms: usize) -> Option<DirectLookaheadLimits> {
++    Some(DirectLookaheadLimits {
++        extra_rows: rows,
++        trace_rows: trace,
++        trace_terms: terms,
++    })
++}
++
++#[test]
++fn later_native_indirect_zero_beats_direct_and_roundtrips_with_conditions() {
++    // Baseline I(1)=-I(0); later I(2)+I(1)=0 and I(2)=0 imply I(1)=0.
++    // Neither later row is a target-leading source at the initial point.
++    let system = fixture(&[(&[0, -1], 1), (&[1, 0], 1), (&[1], 1)]);
++    let baseline = success(run(&system, None, 0));
++    assert_eq!(baseline.rhs.len(), 1);
++    let candidate = success(run(&system, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0));
++    assert!(candidate.rhs.is_empty());
++    assert!(!candidate.stats.direct_hit);
++    assert_eq!(candidate.sources.len(), 2);
++    let stats = candidate.stats.direct_lookahead.unwrap();
++    assert_eq!(stats.extra_attempted_rows, 2);
++    assert_eq!(stats.indirect_trace_rows, 2);
++    assert_eq!(stats.completion, "strictly-smaller-indirect");
++    let found = system
++        .solve_domain(
++            point(1),
++            SearchOptions {
++                max_depth: Some(0),
++                ..Default::default()
++            },
++        )
++        .unwrap();
++    let program = GuardedProgram::new(system.clone(), found.rules, []).unwrap();
++    let bytes = program.encode_native(Default::default()).unwrap();
++    let decoded = GuardedProgram::decode_generated(&bytes, system, Default::default()).unwrap();
++    let applied = decoded.apply(&[1]).unwrap();
++    assert!(matches!(
++        applied.status,
++        GuardedApplicationStatus::Applied { .. }
++    ));
++    assert!(applied.terms.is_empty());
++    assert_eq!(applied.nonzero_conditions.len(), 1);
++}
++
++#[test]
++fn extra_row_limit_preserves_identical_baseline_proof() {
++    let system = fixture(&[(&[0, -1], 1), (&[1, 0], 1), (&[1], 1)]);
++    let baseline = success(run(&system, None, 0));
++    for n in [0, 1] {
++        let got = success(run(&system, caps(n, 64, 16384), 0));
++        assert_eq!(got.rhs, baseline.rhs);
++        assert_eq!(got.sources, baseline.sources);
++        assert!(got.stats.direct_hit);
++        assert_eq!(got.stats.exact_trace_rows, 1);
++        assert_eq!(got.stats.direct_lookahead.unwrap().extra_attempted_rows, n);
++        assert_eq!(
++            got.stats.direct_lookahead.unwrap().completion,
++            "source-row-budget-fallback"
++        );
++    }
++}
++
++#[test]
++fn guard_rejected_attempts_consume_extra_budget() {
++    let system = fixture(&[(&[0, -1], 1), (&[1, 0], 2), (&[1], 1)]);
++    let got = success(run(&system, caps(1, 64, 16384), 0));
++    let extra = got.stats.direct_lookahead.unwrap();
++    assert_eq!(extra.extra_attempted_rows, 1);
++    assert_eq!(extra.guard_rejected_rows, 1);
++    assert_eq!(extra.completion, "source-row-budget-fallback");
++    assert_eq!(got.rhs.len(), 1);
++}
++
++#[test]
++fn trace_caps_return_complete_direct_proof_never_truncated_lift() {
++    let system = fixture(&[(&[0, -1], 1), (&[1, 0], 1), (&[1], 1)]);
++    for cap in [caps(512, 1, 16384), caps(512, 64, 1)] {
++        let got = success(run(&system, cap, 0));
++        assert_eq!(got.rhs.len(), 1);
++        assert_eq!(got.sources.len(), 1);
++        assert!(got.stats.direct_hit);
++        assert_eq!(
++            got.stats.direct_lookahead.unwrap().completion,
++            "indirect-trace-budget-fallback"
++        );
++    }
++}
++
++#[test]
++fn first_indirect_and_initial_zero_do_not_launch_lookahead() {
++    let indirect = fixture(&[(&[1, 0], 1), (&[1], 1)]);
++    let got = success(run(&indirect, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0));
++    assert!(got.rhs.is_empty());
++    assert!(!got.stats.direct_hit);
++    assert!(got.stats.direct_lookahead.is_none());
++    let zero = fixture(&[(&[0], 1), (&[1, 0], 1), (&[1], 1)]);
++    let got = success(run(&zero, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0));
++    assert!(got.rhs.is_empty());
++    assert!(got.stats.direct_hit);
++    assert!(got.stats.direct_lookahead.is_none());
++}
++
++#[test]
++fn larger_indirect_rhs_and_depth_exhaustion_keep_fallback() {
++    let larger = fixture(&[(&[0, -1], 1), (&[1, 0, -1, -2], 1), (&[1], 1)]);
++    let got = success(run(&larger, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0));
++    assert_eq!(got.rhs.len(), 1);
++    assert!(got.stats.direct_hit);
++    assert_eq!(
++        got.stats.direct_lookahead.unwrap().indirect_rhs_terms,
++        Some(2)
++    );
++    assert_eq!(
++        got.stats.direct_lookahead.unwrap().completion,
++        "indirect-not-smaller-fallback"
++    );
++    let exhausted = fixture(&[(&[0, -1], 1)]);
++    let got = success(run(&exhausted, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0));
++    assert_eq!(got.rhs.len(), 1);
++    assert_eq!(
++        got.stats.direct_lookahead.unwrap().completion,
++        "depth-exhaustion-fallback"
++    );
++}
++
++#[test]
++fn later_direct_zero_is_immediately_optimal() {
++    let system = fixture(&[(&[0, -1], 1), (&[0], 1), (&[1, 0], 1), (&[1], 1)]);
++    let got = success(run(&system, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0));
++    assert!(got.rhs.is_empty());
++    assert!(got.stats.direct_hit);
++    assert_eq!(got.sources.len(), 1);
++    let extra = got.stats.direct_lookahead.unwrap();
++    assert_eq!(extra.extra_attempted_rows, 1);
++    assert_eq!(extra.completion, "exact-direct-zero");
++}
++
++#[test]
++fn ordinary_first_direct_and_no_direct_search_do_not_use_experiment() {
++    for (rows, want_direct, want_terms) in [
++        (
++            vec![(&[0, -1][..], 1), (&[1, 0][..], 1), (&[1][..], 1)],
++            true,
++            1,
++        ),
++        (vec![(&[1, 0][..], 1), (&[1][..], 1)], false, 0),
++    ] {
++        let system = fixture(&rows);
++        let solver = SectorSolver {
++            system: &system.system,
++            basis: system.system.rows().to_vec(),
++            order: IntegralOrder::new([true], [false]),
++            config: SectorConfig::default(),
++        };
++        let got = solver
++            .solve_case(
++                CoordinateCase::new([Some(1)]).unwrap(),
++                SearchOptions {
++                    max_depth: Some(0),
++                    ..Default::default()
++                },
++            )
++            .unwrap();
++        assert_eq!(got.stats.direct_hit, want_direct);
++        assert_eq!(got.rhs.len(), want_terms);
++        assert!(got.stats.direct_lookahead.is_none());
++    }
++}
++
++#[test]
++fn optional_fatal_power_error_is_not_hidden_by_direct_fallback() {
++    let system = fixture(&[(&[0, -1], 1), (&[Power::MAX], 1)]);
++    let baseline = success(run(&system, None, 0));
++    assert_eq!(baseline.rhs.len(), 1);
++    assert!(matches!(
++        run(&system, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0),
++        Err(TrialSearchError::Solver(SolverError::Power(
++            crate::solver::PowerError::OutOfRange { value: 64 }
++        )))
++    ));
++}
++
++#[test]
++fn equal_size_indirect_rhs_keeps_original_direct_proof() {
++    let system = fixture(&[(&[0, -1], 1), (&[1, 0], 1), (&[1, -2], 1)]);
++    let baseline = success(run(&system, None, 0));
++    let got = success(run(&system, Some(EXPERIMENT_DIRECT_LOOKAHEAD), 0));
++    assert_eq!(got.rhs, baseline.rhs);
++    assert_eq!(got.sources, baseline.sources);
++    assert_eq!(
++        got.stats.direct_lookahead.unwrap().indirect_rhs_terms,
++        Some(1)
++    );
++    assert_eq!(
++        got.stats.direct_lookahead.unwrap().completion,
++        "indirect-not-smaller-fallback"
++    );
++}
++
++#[test]
++fn smaller_indirect_retains_its_own_nonzero_conditions_after_sealing() {
++    let c = CoefficientContext::new([
++        "lookahead_condition_n",
++        "lookahead_condition_x",
++        "lookahead_condition_y",
++    ]);
++    let specs: Vec<(&[i16], &str)> = vec![
++        (&[0, -1], "lookahead_condition_x"),
++        (&[1, 0], "lookahead_condition_y"),
++        (&[1], "lookahead_condition_y"),
++    ];
++    let rows = specs
++        .iter()
++        .enumerate()
++        .map(|(i, (shifts, condition))| {
++            GuardedSource::new(
++                format!("conditional-{i}"),
++                shifts
++                    .iter()
++                    .map(|&s| Term {
++                        integral: Integral::symbolic([s]).unwrap(),
++                        coefficient: c.one().numerator,
++                    })
++                    .collect(),
++                point(1),
++            )
++            .with_nonzero_conditions(vec![c.parameter(condition).unwrap().numerator])
++        })
++        .collect();
++    let system = Arc::new(
++        GuardedSourceSystem::new(
++            "isolated-lookahead-conditional-choice",
++            [IndexRole::Ordinary],
++            [0],
++            rows,
++        )
++        .unwrap(),
++    );
++    let found = system
++        .solve_domain(
++            point(1),
++            SearchOptions {
++                max_depth: Some(0),
++                ..Default::default()
++            },
++        )
++        .unwrap();
++    let program = GuardedProgram::new(system.clone(), found.rules, []).unwrap();
++    let bytes = program.encode_native(Default::default()).unwrap();
++    let decoded = GuardedProgram::decode_generated(&bytes, system, Default::default()).unwrap();
++    let applied = decoded.apply(&[1]).unwrap();
++    assert!(applied.terms.is_empty());
++    assert!(
++        applied
++            .nonzero_conditions
++            .contains(&c.parameter("lookahead_condition_y").unwrap().numerator)
++    );
++}
+--- a/src/solver/search.rs
++++ b/src/solver/search.rs
+@@ -92,6 +92,49 @@
+     pub elapsed: Duration,
+     pub exact_materialization: Duration,
+     pub discovery: Option<DiscoveryStats>,
++    /// Isolated experiment diagnostics, never a physical coverage certificate.
++    pub direct_lookahead: Option<DirectLookaheadStats>,
++}
++
++#[derive(Clone, Copy, Debug, Default)]
++pub struct DirectLookaheadStats {
++    pub extra_attempted_rows: usize,
++    pub guard_rejected_rows: usize,
++    pub withheld_direct_rows: usize,
++    pub first_direct_rhs_terms: usize,
++    pub indirect_rhs_terms: Option<usize>,
++    pub indirect_trace_rows: usize,
++    pub indirect_trace_terms: usize,
++    pub completion: &'static str,
++}
++
++#[derive(Clone, Copy)]
++struct DirectLookaheadLimits {
++    extra_rows: usize,
++    trace_rows: usize,
++    trace_terms: usize,
++}
++
++const EXPERIMENT_DIRECT_LOOKAHEAD: DirectLookaheadLimits = DirectLookaheadLimits {
++    extra_rows: 512,
++    trace_rows: 64,
++    trace_terms: 16_384,
++};
++
++fn finish_direct_lookahead<const N: usize>(
++    mut candidate: RuleCandidate<N>,
++    stats: &mut SearchStats,
++    completion: &'static str,
++) -> RuleCandidate<N> {
++    if let Some(extra) = &mut stats.direct_lookahead {
++        extra.completion = completion;
++    }
++    // Aggregate attempted work is retained, but the proof kind/size belongs
++    // to the selected candidate, not a rejected indirect alternative.
++    stats.direct_hit = candidate.stats.direct_hit;
++    stats.exact_trace_rows = candidate.stats.exact_trace_rows;
++    candidate.stats = *stats;
++    candidate
+ }
+ 
+ #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+@@ -169,6 +212,7 @@
+             &mut work,
+             |_| {},
+             Some(scope),
++            Some(EXPERIMENT_DIRECT_LOOKAHEAD),
+         );
+         match result {
+             Ok(mut candidate) => {
+@@ -482,6 +526,7 @@
+             &mut work,
+             observe,
+             None,
++            None,
+         );
+         work.search.elapsed = start.elapsed();
+         if let Ok(candidate) = &mut result {
+@@ -500,11 +545,13 @@
+         work: &mut RuleTrialStats,
+         mut observe: impl FnMut(SearchEvent<N>),
+         guarded: Option<&super::guarded::GuardedSearchScope<'_, N>>,
++        lookahead: Option<DirectLookaheadLimits>,
+     ) -> Result<RuleCandidate<N>, TrialSearchError> {
+         let stats = &mut work.search;
+         let mut probe = None;
+         let mut original_rows = Vec::new();
+         let mut original_sources = Vec::new();
++        let mut direct_fallback: Option<RuleCandidate<N>> = None;
+         let initial = case.integral();
+         let mut seeds = Seeds::new(initial, *self.order.sector(), self.seed_frozen());
+         if let Some(scope) = guarded {
+@@ -532,6 +579,13 @@
+         while let Some(seed) = seeds.next() {
+             let depth = seeds.depth();
+             if options.max_depth.is_some_and(|limit| depth > limit) {
++                if let Some(candidate) = direct_fallback.take() {
++                    return Ok(finish_direct_lookahead(
++                        candidate,
++                        stats,
++                        "depth-exhaustion-fallback",
++                    ));
++                }
+                 return Err(SolverError::SearchExhausted {
+                     depth: depth - 1,
+                     rows: stats.rows,
+@@ -550,6 +604,20 @@
+                 });
+             }
+             for position in 0..self.basis.len() {
++                if direct_fallback.is_some() {
++                    let cap = lookahead.expect("fallback requires explicit experiment limits");
++                    let extra = stats.direct_lookahead.as_mut().unwrap();
++                    if extra.extra_attempted_rows == cap.extra_rows {
++                        return Ok(finish_direct_lookahead(
++                            direct_fallback.take().unwrap(),
++                            stats,
++                            "source-row-budget-fallback",
++                        ));
++                    }
++                    // Charge attempted rows before guard rejection or empty-row
++                    // projection; baseline work before the first hit is uncapped.
++                    extra.extra_attempted_rows += 1;
++                }
+                 if limits.is_some_and(|limit| stats.rows >= limit.max_rows) {
+                     return Err(TrialSearchError::Limit(RuleTrialBudget::SourceRows));
+                 }
+@@ -560,6 +628,9 @@
+                 }
+                 let row = if let Some(scope) = guarded {
+                     let Some(row) = scope.instantiate(ordinal, source, &seed, &self.order)? else {
++                        if let Some(extra) = &mut stats.direct_lookahead {
++                            extra.guard_rejected_rows += 1;
++                        }
+                         continue;
+                     };
+                     row
+@@ -595,13 +666,38 @@
+                     });
+                     let (target, rhs) = canonicalize(row, &self.system.indices)?;
+                     stats.discovery = probe.as_ref().map(|p: &Probe<N>| p.discovery.stats());
+-                    return Ok(RuleCandidate {
+-                        case,
++                    let candidate = RuleCandidate {
++                        case: case.clone(),
+                         target,
+                         rhs,
+                         sources: vec![source],
+                         stats: *stats,
+-                    });
++                    };
++                    if lookahead.is_none() || candidate.rhs.is_empty() {
++                        return Ok(finish_direct_lookahead(
++                            candidate,
++                            stats,
++                            "exact-direct-zero",
++                        ));
++                    }
++                    if direct_fallback.is_none() {
++                        stats.direct_lookahead = Some(DirectLookaheadStats {
++                            first_direct_rhs_terms: candidate.rhs.len(),
++                            withheld_direct_rows: 1,
++                            completion: "searching",
++                            ..Default::default()
++                        });
++                        direct_fallback = Some(candidate);
++                    } else {
++                        stats
++                            .direct_lookahead
++                            .as_mut()
++                            .unwrap()
++                            .withheld_direct_rows += 1;
++                    }
++                    // Do not add matching direct rows to GPLU: their target
++                    // pivot would immediately reproduce the baseline choice.
++                    continue;
+                 }
+                 if case.is_numerical()
+                     && self.order.compare(&initial, &leading.integral) == Ordering::Less
+@@ -617,7 +713,39 @@
+                     original_sources.push(source);
+                     stats.independent_rows += 1;
+                     if case.matches(&pivot) {
+-                        let trace = if let Some(limit) = limits {
++                        let trace = if direct_fallback.is_some() {
++                            let cap = lookahead.unwrap();
++                            let mut trace_rows = 0_usize;
++                            let mut trace_terms = 0_usize;
++                            let bounded = active_probe.discovery.trace_bounded(
++                                original_rows.len() - 1,
++                                cap.trace_rows,
++                                cap.trace_terms,
++                                |row| {
++                                    let terms = original_rows[row].len();
++                                    trace_rows += 1;
++                                    trace_terms = trace_terms.saturating_add(terms);
++                                    terms
++                                },
++                            );
++                            let extra = stats.direct_lookahead.as_mut().unwrap();
++                            extra.indirect_trace_rows = trace_rows;
++                            extra.indirect_trace_terms = trace_terms;
++                            match bounded {
++                                Ok(trace) => trace,
++                                Err(
++                                    RuleTrialBudget::ExactTraceRows
++                                    | RuleTrialBudget::ExactTraceTerms,
++                                ) => {
++                                    return Ok(finish_direct_lookahead(
++                                        direct_fallback.take().unwrap(),
++                                        stats,
++                                        "indirect-trace-budget-fallback",
++                                    ));
++                                }
++                                Err(other) => return Err(TrialSearchError::Limit(other)),
++                            }
++                        } else if let Some(limit) = limits {
+                             active_probe
+                                 .discovery
+                                 .trace_bounded(
+@@ -681,16 +809,41 @@
+                         let (target, rhs) = canonicalize(exact, &self.system.indices)?;
+                         stats.exact_materialization = exact_start.elapsed();
+                         stats.discovery = Some(discovery);
+-                        return Ok(RuleCandidate {
++                        stats.direct_hit = false;
++                        let candidate = RuleCandidate {
+                             case,
+                             target,
+                             rhs,
+                             sources,
+                             stats: *stats,
+-                        });
++                        };
++                        if let Some(fallback) = direct_fallback.take() {
++                            stats.direct_lookahead.as_mut().unwrap().indirect_rhs_terms =
++                                Some(candidate.rhs.len());
++                            if candidate.rhs.len() < fallback.rhs.len() {
++                                return Ok(finish_direct_lookahead(
++                                    candidate,
++                                    stats,
++                                    "strictly-smaller-indirect",
++                                ));
++                            }
++                            return Ok(finish_direct_lookahead(
++                                fallback,
++                                stats,
++                                "indirect-not-smaller-fallback",
++                            ));
++                        }
++                        return Ok(candidate);
+                     }
+                 }
+             }
++        }
++        if let Some(candidate) = direct_fallback {
++            return Ok(finish_direct_lookahead(
++                candidate,
++                stats,
++                "seed-exhaustion-fallback",
++            ));
+         }
+         Err(SolverError::SearchExhausted {
+             depth: seeds.depth() as u32,
+@@ -773,3 +926,6 @@
+ 
+ #[cfg(test)]
+ mod source_order_tests;
++
++#[cfg(test)]
++mod direct_lookahead_tests;

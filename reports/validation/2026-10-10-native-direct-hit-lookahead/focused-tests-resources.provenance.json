@@ -1,0 +1,17 @@
+{
+  "captured_utc": "2026-10-10T02:38:04.583081+00:00",
+  "command": [
+    "/tmp/rustred-direct-hit-lookahead-tests-20261010",
+    "solver::search::direct_lookahead_tests",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "/tmp/rustred-direct-hit-lookahead-tests-20261010": {
+      "resolved_path": "/tmp/rustred-direct-hit-lookahead-tests-20261010",
+      "sha256": "edaaf0cffc82bf1c001dfaf67dca5fe66783993eae0f91149b4454657a1c228d",
+      "size_bytes": 324318144
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

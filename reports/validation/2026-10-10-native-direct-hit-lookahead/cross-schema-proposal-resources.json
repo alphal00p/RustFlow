@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/rustred-direct-hit-lookahead-probe-proposal",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-10-native-direct-hit-lookahead/points.json",
+    "reports/validation/2026-10-10-native-direct-hit-lookahead/unused-cross-schema-proposal.json",
+    "original",
+    "reports/validation/2026-10-10-native-direct-hit-lookahead/baseline-original-19-points.proofs/point-00.bin"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.36103509133681655,
+  "user_seconds": 0.319174,
+  "system_seconds": 0.039167,
+  "peak_child_rss_kib": 52260,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

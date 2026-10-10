@@ -1,0 +1,16 @@
+
+running 11 tests
+test solver::search::direct_lookahead_tests::equal_size_indirect_rhs_keeps_original_direct_proof ... ok
+test solver::search::direct_lookahead_tests::extra_row_limit_preserves_identical_baseline_proof ... ok
+test solver::search::direct_lookahead_tests::first_indirect_and_initial_zero_do_not_launch_lookahead ... ok
+test solver::search::direct_lookahead_tests::guard_rejected_attempts_consume_extra_budget ... ok
+test solver::search::direct_lookahead_tests::larger_indirect_rhs_and_depth_exhaustion_keep_fallback ... ok
+test solver::search::direct_lookahead_tests::later_direct_zero_is_immediately_optimal ... ok
+test solver::search::direct_lookahead_tests::later_native_indirect_zero_beats_direct_and_roundtrips_with_conditions ... ok
+test solver::search::direct_lookahead_tests::optional_fatal_power_error_is_not_hidden_by_direct_fallback ... ok
+test solver::search::direct_lookahead_tests::ordinary_first_direct_and_no_direct_search_do_not_use_experiment ... ok
+test solver::search::direct_lookahead_tests::smaller_indirect_retains_its_own_nonzero_conditions_after_sealing ... ok
+test solver::search::direct_lookahead_tests::trace_caps_return_complete_direct_proof_never_truncated_lift ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 3126 filtered out; finished in 0.01s
+

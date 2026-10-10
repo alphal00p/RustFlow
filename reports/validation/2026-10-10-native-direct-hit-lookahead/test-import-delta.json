@@ -1,0 +1,9 @@
+{
+  "scope": "Test-only missing Power import corrected after successful native library build, before test-binary compilation. Production/search/persistence sources unchanged.",
+  "path": "crates/rustred-core/src/solver/search/direct_lookahead_tests.rs",
+  "before_sha256": "1ad224f368dd66fbfe1e550e10a5869c670327b5f31bf06984191b21c19e92f9",
+  "after_sha256": "5c50fbe9786ee46243f5550cd2e730b229b256a6b16c92fac4b8dbbe393b0935",
+  "exact_diff": "--- before\n+++ after\n@@ -1,7 +1,7 @@\n //! Isolated experiment controls. No physical periods or analytic zeros supplied.\n use super::*;\n use crate::algebra::CoefficientContext;\n-use crate::solver::CoordinateCase;\n+use crate::solver::{CoordinateCase, Power};\n use crate::solver::guarded::{\n     GuardedApplicationStatus, GuardedProgram, GuardedSearchScope, GuardedSource,\n     GuardedSourceSystem, IndexBounds, IndexDomain, IndexRole,\n",
+  "native_library_binding_sha256": "64c38737ed9b859069a6e01158be6a8522d57f5a0f6ccbb7d6aad19565adae96",
+  "lib_source_snapshot_preserved": true
+}

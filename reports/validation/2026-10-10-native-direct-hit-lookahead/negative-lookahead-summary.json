@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-10T02:43:12.660447+00:00",
+  "status": "negative_search_experiment_complete",
+  "scope": "Isolated native strategy only; unchanged production, equations, ordering and exact proof owner. No full active pilot, differential closure, period prediction or three-/four-loop acceptance.",
+  "focused_tests": {
+    "passed": 11,
+    "failed": 0,
+    "resources": "focused-tests-resources.json"
+  },
+  "source_point_comparison": {
+    "points": 19,
+    "baseline_applied": 19,
+    "proposal_applied": 19,
+    "identical_rhs": 19,
+    "identical_condition_lists": 19,
+    "baseline_rhs_terms": 192,
+    "proposal_rhs_terms": 192,
+    "strict_improvements": 0
+  },
+  "entered_lookahead": [
+    {
+      "target": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0
+      ],
+      "details": {
+        "completion": "indirect-not-smaller-fallback",
+        "extra_attempted_rows": 193,
+        "first_direct_rhs_terms": 1,
+        "guard_rejected_rows": 145,
+        "indirect_rhs_terms": 10,
+        "indirect_trace_rows": 16,
+        "indirect_trace_terms": 73,
+        "withheld_direct_rows": 1
+      }
+    }
+  ],
+  "odd_zero_witness": {
+    "full_corpus_first_winner": "indirect; direct-hit lookahead does not start",
+    "full_rhs_terms": 2,
+    "virtual_subset_rhs_terms": 0,
+    "both_baseline_and_proposal_virtual_zero_replayed": true
+  },
+  "cross_schema_rejection": {
+    "baseline_rejects_experiment": true,
+    "experiment_rejects_baseline": true
+  },
+  "fallback_limits": "Only row/trace/depth/seed exhaustion; arithmetic/sample/exact-lift errors propagate and there is no fallback guarantee after alternative sealing/conditional coverage failure.",
+  "initial_failed_builds_preserved": true,
+  "historical_plan": "plan.json remains the pre-build plan; this report records final outcome.",
+  "production_recommendation": false,
+  "full_pilot_run": false,
+  "artifact_manifest": "negative-lookahead-artifacts.json"
+}

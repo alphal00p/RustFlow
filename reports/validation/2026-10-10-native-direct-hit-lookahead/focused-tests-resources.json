@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/rustred-direct-hit-lookahead-tests-20261010",
+    "solver::search::direct_lookahead_tests",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.024628239683806896,
+  "user_seconds": 0.001766,
+  "system_seconds": 0.026517,
+  "peak_child_rss_kib": 15516,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-direct-hit-lookahead-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/odd-zero-point.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/baseline-virtual-only-odd-witness.json",
+    "virtual-only"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.40500663593411446,
+  "user_seconds": 0.362516,
+  "system_seconds": 0.039938,
+  "peak_child_rss_kib": 55324,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

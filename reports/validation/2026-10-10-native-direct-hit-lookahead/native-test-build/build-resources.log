@@ -1,0 +1,92 @@
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+ --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/atoms/tests.rs:8:5
+  |
+8 |     symbolica::parse!(source).to_rational_polynomial::<_, _, u16>(&Q, &Z, None)
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+  = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+  = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/atoms/tests.rs:104:20
+    |
+104 |     let variable = symbolica::symbol!("atom_table_normalize_x");
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::symbol` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/atoms/tests.rs:106:21
+    |
+106 |     let numerator = symbolica::parse!("atom_table_normalize_x^2 - 1")
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/atoms/tests.rs:108:23
+    |
+108 |     let denominator = symbolica::parse!("atom_table_normalize_x - 1")
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/atoms/tests.rs:137:9
+    |
+137 |         symbolica::parse!("atom_table_normalize_x + 1")
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+  --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/catalog/tests.rs:19:17
+   |
+19 |                 symbolica::parse!("catalog_test::Gam(1,1)^2/catalog_test::ep^2"),
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+   = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+   = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+  --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/catalog/tests.rs:23:17
+   |
+23 |                 symbolica::parse!("catalog_test::Gam(1,1)^2/catalog_test::ep^2"),
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+   = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+   = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+  --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/catalog/tests.rs:27:17
+   |
+27 |                 symbolica::parse!("catalog_test::PR4+catalog_test::PR9/2"),
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+   = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+   = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/persistence/catalog/tests.rs:148:21
+    |
+148 |         let value = symbolica::parse!(expression);
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `symbolica::parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: aborting due to 9 previous errors
+

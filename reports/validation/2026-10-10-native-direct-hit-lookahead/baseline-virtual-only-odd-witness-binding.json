@@ -1,0 +1,20 @@
+{
+  "scope": "Bounded original-source discovery and proof replay; provisional experiment evidence until focused unit gate passes; no amplitude values.",
+  "build_binding_sha256": "18955a6c31879014ad6f0a9c8e226acd13e5160f111b53fb6a8ed00391544ac2",
+  "executable_sha256": "4b983b3b410f52ad9f30a4c22f5e2daeeb97cb9602c410bc44694e62776b6cf9",
+  "source_corpus_sha256": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+  "fixture_sha256": "b202be8964542bb87cb2bd76090403930a9f7efd468668fa6dea3abada5e3cb1",
+  "launcher_sha256": "2fbe81ccd2026209c9ad01ebb25b7986ff570553c1e9a85f5fc1e2a91fbeffef",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustred-direct-hit-lookahead-probe-baseline",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/odd-zero-point.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/baseline-virtual-only-odd-witness.json",
+    "virtual-only"
+  ],
+  "exit_code": 0,
+  "post_run_inputs_unchanged": true,
+  "output_sha256": "632e5c849b7d60d337db9f1702cbb5d0c3a243ab99aba3bb1db23dc2c041e427"
+}

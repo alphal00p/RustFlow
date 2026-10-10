@@ -1,0 +1,560 @@
+{
+  "schema": 1,
+  "status": "saved_search_results_compared",
+  "scope": "Exact native point-rule presentation comparison, including exceptional conditions and certification/discovery gaps. Shorter RHS does not imply equal conditional coverage, differential closure, or a physical amplitude.",
+  "mode": "virtual-only",
+  "points": 1,
+  "baseline_applied": 1,
+  "proposal_applied": 1,
+  "strictly_shorter_applied_rhs_points": 0,
+  "identical_rhs_points": 1,
+  "identical_condition_lists": 1,
+  "baseline_total_rhs_terms": 0,
+  "proposal_total_rhs_terms": 0,
+  "rows": [
+    {
+      "target": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "baseline_status": "Applied { rule: 0 }",
+      "proposal_status": "Applied { rule: 0 }",
+      "baseline_rhs_terms": 0,
+      "proposal_rhs_terms": 0,
+      "both_applied": true,
+      "strictly_shorter_applied_rhs": false,
+      "rhs_identical": true,
+      "conditions_identical": true,
+      "baseline_conditions": [
+        "-3+2*epsilon",
+        "-12+8*epsilon"
+      ],
+      "proposal_conditions": [
+        "-3+2*epsilon",
+        "-12+8*epsilon"
+      ],
+      "baseline_gaps": [],
+      "proposal_gaps": [],
+      "baseline_sources": [
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 45,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 33,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/3/occupation-case-1"
+        },
+        {
+          "original_ordinal": 45,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 41,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 33,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/3/occupation-case-1"
+        }
+      ],
+      "proposal_sources": [
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 25,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 45,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 29,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 33,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/3/occupation-case-1"
+        },
+        {
+          "original_ordinal": 45,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/2/occupation-case-1"
+        },
+        {
+          "original_ordinal": 41,
+          "seed": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/2/1/occupation-case-1"
+        },
+        {
+          "original_ordinal": 33,
+          "seed": [
+            1,
+            -1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "source_id": "lorentz/1/3/occupation-case-1"
+        }
+      ],
+      "baseline_search_stats": [
+        {
+          "direct_hit": false,
+          "exact_trace_rows": 13,
+          "independent_rows": 252,
+          "lookahead": null,
+          "rows": 276,
+          "seeds": 39
+        }
+      ],
+      "proposal_search_stats": [
+        {
+          "direct_hit": false,
+          "exact_trace_rows": 13,
+          "independent_rows": 252,
+          "lookahead": null,
+          "rows": 276,
+          "seeds": 39
+        }
+      ]
+    }
+  ],
+  "proof_files": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/baseline-virtual-only-odd-witness.proofs/point-00.bin": {
+      "sha256": "d49af02d13cb863eea22890cbc736c8af7487f6f22eb22375e2b0ff36270f22d",
+      "bytes": 22408
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/proposal-virtual-only-odd-witness.proofs/point-00.bin": {
+      "sha256": "57dfc99496af7250a0fc8e0db357f953103823ad504f0e2d0587502346b044a4",
+      "bytes": 22442
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-native-direct-hit-lookahead/baseline-virtual-only-odd-witness.json": "632e5c849b7d60d337db9f1702cbb5d0c3a243ab99aba3bb1db23dc2c041e427",
+    "reports/validation/2026-10-10-native-direct-hit-lookahead/proposal-virtual-only-odd-witness.json": "0c47978ac2b9ae0d12dcb2149c98b9e36f3745b04ec72cefda1b18c2acb8aa09",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/compare-points.py": "7a43434d60dda4d5623e7410f63f46d555906be28fac6c56e1e32fe2633bdd40",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-direct-hit-lookahead/odd-zero-point.json": "b202be8964542bb87cb2bd76090403930a9f7efd468668fa6dea3abada5e3cb1"
+  },
+  "production_recommendation": false,
+  "physical_numerical_acceptance": false
+}

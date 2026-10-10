@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-10T02:27:05.613549+00:00",
+  "scope": "Read-only audit of isolated native guarded direct-hit lookahead. No production modification, runtime test execution or physical closure claim.",
+  "conclusion": "No unsound rule-admission path found. Bounded candidate fallback and final coverage preservation are different contracts; only the former is promised.",
+  "findings": [
+    {
+      "topic": "Fallback contract",
+      "status": "clarified_by_owner",
+      "detail": "The exact retained direct candidate is returned on extra-row budget, selected-trace budget, depth exhaustion or seed exhaustion. Arithmetic, power, modular sample, lifting and canonicalization failures intentionally propagate. The audit initially flagged these propagated errors against an unconditional fallback reading; root explicitly clarified that suppressing such failures is forbidden."
+    },
+    {
+      "topic": "Selection before sealing",
+      "status": "explicit_experiment_limitation",
+      "detail": "A strictly smaller indirect candidate or later direct zero is selected before guarded replay/descent sealing, RHS sign refinement and condition exception handling. It can introduce stronger conditions, more domain splits, a certification failure or a coupled exceptional gap, thereby losing baseline coverage. No invalid proof is accepted: unchanged sealing still rejects it. This initial experiment must record all conditions/failures and must not claim coverage preservation. Retaining fallback through final guarded admission is a separate production design if results justify it."
+    },
+    {
+      "topic": "Bounded extra work",
+      "status": "source_audit_pass",
+      "detail": "At most512 additional source attempts after the first nonzero direct hit; charge occurs before guard rejection and empty-row projection. Selected indirect replay input is capped at64rows/16384terms. Over-budget tracing returns the complete retained direct candidate, never a truncated proof. Baseline search before the first hit remains uncapped apart from existing depth controls; exact coefficient arithmetic/wall time is not bounded by these input-size caps."
+    },
+    {
+      "topic": "Exact provenance and conditions",
+      "status": "source_audit_pass",
+      "detail": "Original guarded source ordinals/seeds and same immutable scope are retained. Alternative modular pivots are lifted exactly, then independently sealed from original source rows. Source conditions, rational denominators, domain pullbacks, uniform zero-domain projection, role images and descent checks remain unchanged. Search RHS size alone is not proof authority."
+    },
+    {
+      "topic": "Ordinary callers",
+      "status": "source_audit_pass",
+      "detail": "The ordinary entrypoint passes lookahead=None. It retains first-direct/first-indirect chronology, source order, seed order and native lifting. The helper returns identical selected proof statistics in this path; the new optional diagnostic staysNone."
+    },
+    {
+      "topic": "Candidate portfolio scope",
+      "status": "explicit_experiment_limitation",
+      "detail": "Matching nonzero direct rows are withheld from GPLU and later nonzero direct rows are not ranked; the first target-matching indirect pivot ends the search even if its RHS is not smaller. This is a narrow bounded lookahead, not an exhaustive minimum-RHS portfolio."
+    },
+    {
+      "topic": "Build launcher path",
+      "status": "sent_to_owner",
+      "detail": "At review time build-lookahead.py treated /tmp/rustred-direct-hit-lookahead as core root, while it was a full workspace copy. The standalone source/relative diff paths must address crates/rustred-core. Acceptance/root were notified before build."
+    }
+  ],
+  "test_source_review": {
+    "present_cases": [
+      "indirect zero with source replay/persistence and conditions",
+      "extra attempted-row cap preserves baseline RHS and sources",
+      "guard-rejected attempts consume budget",
+      "trace row/term caps return complete direct proof",
+      "first-indirect and initial-zero bypass lookahead",
+      "larger indirect fallback and depth exhaustion",
+      "later direct zero",
+      "ordinary first-direct and first-indirect unchanged"
+    ],
+    "recommended_additions_sent_to_owner": [
+      "fatal optional lifting/sample error propagates despite fallback",
+      "equal-size indirect preserves first fallback",
+      "alternative-specific source conditions remain enforced; no claim of baseline coverage"
+    ]
+  },
+  "reviewed_files": {
+    "/tmp/rustred-direct-hit-lookahead.patch": {
+      "bytes": 24162,
+      "sha256": "b64f69f629cd1726c04dea62320e81cd34dfdf1a99856f1f045a876cd57c8248"
+    },
+    "/tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/solver/search.rs": {
+      "bytes": 37666,
+      "sha256": "3ab9cf7ffd5a21c37b6f60574408cce1d4703830462f10a5f7fbb5b5719cb4b7"
+    },
+    "/tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/solver/search/direct_lookahead_tests.rs": {
+      "bytes": 11469,
+      "sha256": "1ad224f368dd66fbfe1e550e10a5869c670327b5f31bf06984191b21c19e92f9"
+    },
+    "/tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/solver/guarded/search.rs": {
+      "bytes": 32088,
+      "sha256": "6f56b588060978124d6700db69c8f668d6d48b42c338460f4789a4f559f1bf53"
+    },
+    "/tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/solver/guarded/replay.rs": {
+      "bytes": 21587,
+      "sha256": "9c62a88bb1bb4209cc3bd6c8c4528830af8be9d82fbb576378c73affe66b5297"
+    },
+    "/tmp/rustred-direct-hit-lookahead/crates/rustred-core/src/solver/guarded/persistence.rs": {
+      "bytes": 23160,
+      "sha256": "30d0347b790b3e82f6a3d7e447badf7f5b214f980f840a975d904c93f46fa1fb"
+    }
+  },
+  "runtime_validation": "Not performed by this audit; test owner is still adding cases before the isolated build."
+}

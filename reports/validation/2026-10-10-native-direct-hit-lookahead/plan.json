@@ -1,0 +1,319 @@
+{
+  "schema": 1,
+  "status": "source_frozen_build_and_execution_pending",
+  "scope": "Isolated native guarded first-direct-hit lookahead; no production edit, no new source equations or integral ordering, no alternate elimination engine, no physical or closure acceptance.",
+  "isolated_native_root": "/tmp/rustred-direct-hit-lookahead",
+  "modified_files": {
+    "crates/rustred-core/src/solver/search.rs": {
+      "before_sha256": "e40d619c04576f2f32cac854597dcbb55eccfe6da30e6653695d57cb879e4c84",
+      "after_sha256": "3ab9cf7ffd5a21c37b6f60574408cce1d4703830462f10a5f7fbb5b5719cb4b7"
+    },
+    "crates/rustred-core/src/solver/numeric.rs": {
+      "before_sha256": "865f6de1de347737dd1eb5fdb3324ca3334bf979954c145890d5e87ccfd70fbb",
+      "after_sha256": "8782b944794a6e67b9f9ab940b017cea85cc3de5ea0e413f1291ee88cf5e7629"
+    },
+    "crates/rustred-core/src/solver/guarded/persistence.rs": {
+      "before_sha256": "04176aee407443b14020a447dca5dc6fa72856168665f265f20fb8c89c4d5eb6",
+      "after_sha256": "30d0347b790b3e82f6a3d7e447badf7f5b214f980f840a975d904c93f46fa1fb"
+    },
+    "crates/rustred-core/src/solver/search/direct_lookahead_tests.rs": {
+      "before_sha256": null,
+      "after_sha256": "5c50fbe9786ee46243f5550cd2e730b229b256a6b16c92fac4b8dbbe393b0935"
+    }
+  },
+  "experiment_tag": "rustred.guarded-source-program.v2.direct-hit-lookahead-experiment-1",
+  "guarded_only": true,
+  "limits": {
+    "baseline_native_depth": 3,
+    "additional_attempted_source_rows_after_first_direct": 512,
+    "maximum_indirect_exact_trace_rows": 64,
+    "maximum_indirect_exact_trace_terms": 16384
+  },
+  "budget_semantics": "Every post-fallback attempted source row counts, including guard rejection and empty projected rows. Baseline pre-first-hit work is unchanged. Matching direct rows are withheld from modular GPLU; a later direct exactzero wins immediately. Stop at the first bounded indirect target pivot and select only if exact canonical RHS has strictly fewer terms.",
+  "fallback_scope": "Saved direct proof is returned only on extra-row budget, exact-trace budget, depth exhaustion or seed exhaustion. Arithmetic/power/sample/canonicalization/exact-lift failures propagate intentionally. No fallback guarantee after alternative candidate selection fails downstream sealing or has stronger exceptional conditions.",
+  "test_filter": "solver::search::direct_lookahead_tests",
+  "focused_tests": 11,
+  "tests_status": "frozen; not compiled or run",
+  "native_build_request": "Compile isolated library and isolated --test library sequentially without Cargo; run focused11 tests before point comparisons. Consider existing guarded invariant suite separately and retain any strategy-sensitive failures.",
+  "point_controls": {
+    "all_points": "reports/validation/2026-10-10-native-direct-hit-lookahead/points.json",
+    "count": 19,
+    "modes": [
+      "original",
+      "virtual-only"
+    ],
+    "depth": 3,
+    "domains_per_point": 1,
+    "known_odd_zero_point": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      -1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "historical_full_rhs_terms": 2,
+    "historical_virtual_only_rhs_terms": 0,
+    "historical_zero_conditions": [
+      "-3+2*epsilon",
+      "-12+8*epsilon"
+    ],
+    "historical_trace": [
+      {
+        "original_ordinal": 25,
+        "seed": [
+          1,
+          -1,
+          1,
+          0,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/1/occupation-case-1"
+      },
+      {
+        "original_ordinal": 25,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/1/occupation-case-1"
+      },
+      {
+        "original_ordinal": 25,
+        "seed": [
+          1,
+          0,
+          2,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/1/occupation-case-1"
+      },
+      {
+        "original_ordinal": 29,
+        "seed": [
+          1,
+          -1,
+          1,
+          0,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/2/occupation-case-1"
+      },
+      {
+        "original_ordinal": 25,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/1/occupation-case-1"
+      },
+      {
+        "original_ordinal": 29,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/2/occupation-case-1"
+      },
+      {
+        "original_ordinal": 29,
+        "seed": [
+          1,
+          0,
+          2,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/2/occupation-case-1"
+      },
+      {
+        "original_ordinal": 45,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/2/2/occupation-case-1"
+      },
+      {
+        "original_ordinal": 29,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/2/occupation-case-1"
+      },
+      {
+        "original_ordinal": 33,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/3/occupation-case-1"
+      },
+      {
+        "original_ordinal": 45,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/2/2/occupation-case-1"
+      },
+      {
+        "original_ordinal": 41,
+        "seed": [
+          1,
+          0,
+          1,
+          0,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/2/1/occupation-case-1"
+      },
+      {
+        "original_ordinal": 33,
+        "seed": [
+          1,
+          -1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "source_id": "lorentz/1/3/occupation-case-1"
+      }
+    ]
+  },
+  "runner_contract": "Extract only original rows, guards, conditions, roles and zero boxes from the preserved schema-v1 corpus; never import historical rules. Native rediscovery, original-source replay, encode/decode replay, target application, exact RHS/conditions/gaps/proof-source identities recorded. Compile the proposal runner with --cfg direct_hit_lookahead and the baseline runner without it. Both consume the identical probe.rs. Optional sixth argument is a cross-schema program path expected to be rejected.",
+  "corpus_binding": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin": "76d42709da2130c56ded73e62b83c7a672f454e14dcf5d13a9feb2c4b8900ab9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/archive-manifest.json": "4f140b8d8c6918db76837a21bdca7450eb5dd4116ea4cdf908c767f6d5f9d628"
+  },
+  "next_required_reports": [
+    "isolated native and runner build/provenance",
+    "focused test result",
+    "19-point baseline/proposal with complete conditions and Certification gaps",
+    "known odd witness baseline/proposal plus subset diagnostic",
+    "cross-schema rejection",
+    "bounded work and replay hashes"
+  ],
+  "production_recommendation": false,
+  "test_only_delta": "test-import-delta.json"
+}
