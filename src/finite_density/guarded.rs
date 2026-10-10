@@ -75,7 +75,7 @@ pub struct GuardedIdentity<const N: usize> {
 }
 
 /// Bounded native discovery, independent of the physical loop count.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize)]
 pub struct GuardedDiscoveryOptions {
     pub max_depth: u32,
     pub max_domains: usize,
@@ -118,6 +118,13 @@ pub struct GuardedReductionProgram<const N: usize> {
     native: GuardedProgram<N>,
     physical_arity: usize,
     dummy_symbols: Vec<Symbol>,
+}
+
+/// One native application used to schedule discovery, not a full reduction.
+pub(crate) struct GuardedAtomApplication<const N: usize> {
+    pub status: rustred::solver::guarded::GuardedApplicationStatus,
+    pub terms: BTreeMap<[i64; N], Atom>,
+    pub nonzero_conditions: Vec<Atom>,
 }
 
 #[derive(Clone, Debug)]
@@ -465,6 +472,38 @@ impl<const N: usize> GuardedReductionProgram<N> {
 
     pub fn native(&self) -> &GuardedProgram<N> {
         &self.native
+    }
+
+    pub(crate) fn apply_for_discovery(
+        &self,
+        target: [i64; N],
+    ) -> Result<GuardedAtomApplication<N>> {
+        validate_storage_label(&target, self.physical_arity)?;
+        let applied = self
+            .native
+            .apply(&target)
+            .map_err(|error| Error::Reduction(error.to_string()))?;
+        let result = GuardedAtomApplication {
+            status: applied.status,
+            terms: applied
+                .terms
+                .into_iter()
+                .map(|(indices, coefficient)| (indices, coefficient.to_expression()))
+                .collect(),
+            nonzero_conditions: applied
+                .nonzero_conditions
+                .into_iter()
+                .map(|condition| condition.to_expression())
+                .collect(),
+        };
+        for (label, coefficient) in &result.terms {
+            validate_storage_label(label, self.physical_arity)?;
+            validate_storage_expression(coefficient, &self.dummy_symbols)?;
+        }
+        for condition in &result.nonzero_conditions {
+            validate_storage_expression(condition, &self.dummy_symbols)?;
+        }
+        Ok(result)
     }
 
     pub fn encode(&self, limits: BinaryIoLimits) -> Result<Vec<u8>> {

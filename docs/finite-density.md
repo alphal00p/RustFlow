@@ -427,6 +427,21 @@ source/cache identities; the default presentation remains unchanged. The
 [source derivation and attribution controls](../reports/validation/2026-10-10-polynomial-raw-ward-attribution/README.md)
 separate physical validity from native replay and numerical acceptance.
 
+`WeightedClosureOptions::requested_ray_point` selects an optional bounded
+schedule for active closure. Set `RequestedRayPointOptions` with positive ray
+and exact-point domain caps, enable requested rays, frontier searches and rule
+retention, and disable residual allocation, interval refinement and priority
+hints. The default remains unchanged. For each explicitly requested label the
+schedule first probes the retained native program, then searches a symbolic ray
+and, if necessary, the exact integer point. Each search uses the original
+sources and native replay. The round starts with the original targets and their
+raw auxiliary derivatives. Only completed search transactions enter request
+history; allocation-deferred requests cannot certify closure. Final target
+reconstruction and every basis derivative are still independently audited by
+one native program. Checkpoints bind the program, scheduling transactions and
+request history, and record retained applicability conditions. These are
+evidence checkpoints, not a resumable preparation interface.
+
 The complete massless two-loop sunset now passes all four native profiles at
 D=13/2 and D=15/4, and five Laurent profiles through order zero. All occupied
 sectors use native weighted AMF, with closed bases 2, 2 and 3. The 110 independent

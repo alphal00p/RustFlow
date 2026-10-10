@@ -8,7 +8,7 @@ use symbolica_amflow::finite_density::{
     assembly::PreparedDensityFlow,
     flow::{OccupiedFlowEvaluation, PreparedOccupiedFlow},
     preparation::WeightedSourceOptions,
-    reduction::{GuardRefinementOptions, WeightedClosureOptions},
+    reduction::{GuardRefinementOptions, RequestedRayPointOptions, WeightedClosureOptions},
 };
 use symbolica_amflow::*;
 
@@ -63,6 +63,12 @@ impl Run {
             prioritize_requested_indices: setting("RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED", false),
             max_reused_rules: setting("RUSTFLOW_WEIGHTED_REUSED_RULES", 0),
             max_domains_per_residual: setting("RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL", 0),
+            requested_ray_point: setting("RUSTFLOW_WEIGHTED_REQUESTED_RAY_POINT", false).then(
+                || RequestedRayPointOptions {
+                    max_domains_per_ray: setting("RUSTFLOW_WEIGHTED_RAY_DOMAINS", 1),
+                    max_domains_per_point: setting("RUSTFLOW_WEIGHTED_POINT_DOMAINS", 1),
+                },
+            ),
             active_target_closure: setting("RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE", false),
             max_direct_zero_attempts: setting("RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS", 0),
             checkpoints: Some(report.join("native-closure")),

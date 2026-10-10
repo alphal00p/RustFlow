@@ -84,6 +84,11 @@ pub(super) fn prepare<const N: usize>(
         .map(|(indices, _)| *indices)
         .collect::<BTreeSet<_>>();
     let mut requested = roots.clone();
+    if options.requested_ray_point.is_some() {
+        for root in &roots {
+            requested.extend(deformation.derivative(*root)?.keys().copied());
+        }
+    }
     let mut history = BTreeSet::new();
     let mut diagnostics = WeightedClosureDiagnostics::default();
     let mut learned = Vec::new();
@@ -114,27 +119,58 @@ pub(super) fn prepare<const N: usize>(
         .filter_map(|domain| domain.intersection(deformation.admitted_domain()))
         .collect::<Vec<_>>();
         // No earlier provisional stopping set is allowed to hide descendants.
-        let found = discover_with_refinement(
-            context,
-            &domains,
-            &[],
-            &requested,
-            deformation,
-            &options,
-            &mut learned,
-            &mut retained,
-            &mut gaps,
-            &mut diagnostics,
-            &mut conditions,
-            run,
-        )?;
-        history.extend(&requested);
+        let (found, completed_requests, deferred_requests) =
+            if options.requested_ray_point.is_some() {
+                for label in &requested {
+                    deformation.validate_integral(label)?;
+                }
+                discover_direct_zeros(
+                    context,
+                    &[],
+                    &requested,
+                    deformation,
+                    &options,
+                    &mut retained,
+                    &mut gaps,
+                    &mut diagnostics,
+                    run,
+                )?;
+                requested::prepare(
+                    context,
+                    &requested,
+                    deformation,
+                    &options,
+                    &mut retained,
+                    &mut gaps,
+                    &mut diagnostics,
+                    &mut conditions,
+                    run,
+                )?
+            } else {
+                let found = discover_with_refinement(
+                    context,
+                    &domains,
+                    &[],
+                    &requested,
+                    deformation,
+                    &options,
+                    &mut learned,
+                    &mut retained,
+                    &mut gaps,
+                    &mut diagnostics,
+                    &mut conditions,
+                    run,
+                )?;
+                (found, requested.clone(), BTreeSet::new())
+            };
+        history.extend(&completed_requests);
         diagnostics.rounds = round + 1;
         diagnostics.requested = requested.len();
         diagnostics.historical_requested = history.len();
         diagnostics.native_rules = found.program.native().rules().len();
         diagnostics.uncovered_discovery_domains = found.unresolved.len();
         let mut needed = roots.clone();
+        needed.extend(&deferred_requests);
         let mut frontier = BTreeSet::new();
         let mut pending = BTreeSet::new();
         let mut failures = Vec::new();
@@ -160,7 +196,7 @@ pub(super) fn prepare<const N: usize>(
                 }
             }));
         }
-        let mut deferred = false;
+        let mut deferred = !deferred_requests.is_empty();
         while failures.is_empty() {
             let Some(leaf) = pending.pop_first() else {
                 break;
@@ -218,7 +254,43 @@ pub(super) fn prepare<const N: usize>(
         diagnostics.provisional_sizes.push(frontier.len());
         diagnostics.native_frontier_requests +=
             frontier.iter().filter(|i| !history.contains(*i)).count();
-        checkpoint(&options, round, false, &found.program, &needed, &frontier)?;
+        let requested_discovery = if options.requested_ray_point.is_some() {
+            options
+                .checkpoints
+                .as_ref()
+                .map(|directory| {
+                    let name = format!(
+                        "requested-discovery-{:04}.json",
+                        diagnostics.requested_ray_point_calls
+                    );
+                    let bytes = std::fs::read(directory.join(&name))?;
+                    Ok::<_, Error>(serde_json::json!({"path":name,
+                    "blake3":blake3::hash(&bytes).to_hex().to_string()}))
+                })
+                .transpose()?
+        } else {
+            None
+        };
+        let active_state = serde_json::json!({
+            "requested_discovery":requested_discovery,
+            "historical_requests":history.iter().map(|i| i.to_vec()).collect::<Vec<_>>(),
+            "submitted_requests":requested.iter().map(|i| i.to_vec()).collect::<Vec<_>>(),
+            "completed_requests":completed_requests.iter().map(|i| i.to_vec()).collect::<Vec<_>>(),
+            "deferred_requests":deferred_requests.iter().map(|i| i.to_vec()).collect::<Vec<_>>(),
+            "next_needed":needed.iter().map(|i| i.to_vec()).collect::<Vec<_>>(),
+            "history_is_coverage_certificate":false,
+        });
+        run.cancellation.check()?;
+        checkpoint(
+            &options,
+            round,
+            false,
+            &found.program,
+            &needed,
+            &frontier,
+            Some(&active_state),
+            run,
+        )?;
         if let Some(directory) = &options.checkpoints {
             let path = directory.join("active-request-history.json");
             let temporary = directory.join("active-request-history.json.part");
@@ -345,7 +417,17 @@ pub(super) fn prepare<const N: usize>(
                 )?;
                 std::fs::rename(temporary, path)?;
             }
-            checkpoint(&options, round, true, &program, &needed, &frontier)?;
+            run.cancellation.check()?;
+            checkpoint(
+                &options,
+                round,
+                true,
+                &program,
+                &needed,
+                &frontier,
+                Some(&active_state),
+                run,
+            )?;
             return Ok(WeightedClosureOutcome::Closed(WeightedReducedSystem {
                 reduced: ReducedSystem {
                     basis: frontier

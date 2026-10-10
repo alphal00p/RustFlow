@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "lossless_archives_verified": 295,
+  "preserved_raw_files_verified": 23,
+  "historical_report_bindings_verified": 255,
+  "nested_manifests": {
+    "reports/validation/2026-10-10-requested-ray-point-integration/pilot-transfer-read-only/manifest.json": {
+      "sha256": "acf3552c0b5567c4f902f286d55743689040030ccf93d304711d85c1cced48a5",
+      "verified_files": 3
+    },
+    "reports/validation/2026-10-10-native-ray-point-fallback-fixture/manifest.json": {
+      "sha256": "ae5f5a3ec277a70690f677cd5f1956045e165f8c17d907340c80a537f2bb596b",
+      "verified_files": 17
+    }
+  },
+  "external_reporting_bindings": {
+    "docs/finite-density-plan.md": {
+      "sha256": "692a265578703af83bb6063dd076321d56261614631e611cc5854a95c3ebe671",
+      "scope": "Post-run reporting text; separate from the frozen source/build identity."
+    }
+  },
+  "scope": "Archive/report integrity only. The final source/build verification was captured before releasing that freeze. No later source edit is attributed to the recorded build."
+}

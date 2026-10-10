@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "scope": "Final frozen source and build verification after all K runs completed. Any subsequent source batch is a separate attempt.",
+  "verified_utc": "2026-10-10T04:59:45.245959+00:00",
+  "source_snapshot_sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+  "source_files": 2483,
+  "build_provenance_sha256": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+  "captured_build_artifacts_verified": 12
+}

@@ -1,0 +1,1833 @@
+{
+  "schema": 1,
+  "scope": "Optional requested-ray-point native discovery integration and lower-loop default-branch regression evidence, with all four failed three-loop numerical requests preserved. One cut-0 native connection closed; no three-loop or four-loop amplitude is accepted.",
+  "new_root_tests_passed": 115,
+  "native_tests_reused_by_exact_identity": 84,
+  "new_native_test_invocations": 0,
+  "successful_lower_loop_runs": 3,
+  "failed_three_loop_runs": 4,
+  "three_loop_predictions": 0,
+  "supplied_oracle_numerical_records_compared": 0,
+  "archive_map_sha256": "d8aa9d0f8ccc0e53c6a02339d53865cf355a20569cb6dda37a21f9af3d6f00c5",
+  "verification_sha256": "81fd432399e59ebc805249916203f839de871998047db0663e91046c7f62dcc7",
+  "files": {
+    "README.md": {
+      "sha256": "79583d82c06678fce812ba0b11ab79f4272f0fac9ce0e5b0eb562d0053b19c16",
+      "bytes": 6679
+    },
+    "archive-and-binding-verification.json": {
+      "sha256": "81fd432399e59ebc805249916203f839de871998047db0663e91046c7f62dcc7",
+      "bytes": 1045
+    },
+    "archive-completed-outputs.py": {
+      "sha256": "94a2db4ecba7f7958cf34e6855d42f19ca97dc241605b5d010c4aaddd176127b",
+      "bytes": 4061
+    },
+    "build-native-digest.py": {
+      "sha256": "3e06fb1ebcc2d10d25aa1bbce9fbe841e0f01645fd8f8e5be67b0edec7ba9124",
+      "bytes": 3776
+    },
+    "capture-frozen-build.py": {
+      "sha256": "44fd15f950255fc3c64b98fac988683e82f2448931d5c420a7e9c4d361657f2d",
+      "bytes": 5441
+    },
+    "capture-requested-ray-point-build.py": {
+      "sha256": "763d4ba06db817100b141e8b611912480a04a853dd609aadf8384fe6c48bfefe",
+      "bytes": 883
+    },
+    "capture-source-snapshot.py": {
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "bytes": 2075
+    },
+    "compare-completed-predictions.py": {
+      "sha256": "32cff7c2785304d6372dba72dd2d5ac3b2d7e016db4e043b228b72ed55d32883",
+      "bytes": 13467
+    },
+    "comparison-plan.json": {
+      "sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+      "bytes": 5399
+    },
+    "double-residual-control-plan.json": {
+      "sha256": "22626f8ea37cb743d236e0a78475d3b51c39069528defc8350bc71bead826de6",
+      "bytes": 557
+    },
+    "finalize-report.py": {
+      "sha256": "85d638148fa10e540f1641e262d972d54967d1f2aed72d8926e5fe11169b9e7a",
+      "bytes": 5629
+    },
+    "frozen_sources.py": {
+      "sha256": "217c38e656a12f54cbc4ae9b6b9492c47ecd3ab5b60bf0ea3645202634080dd6",
+      "bytes": 1909
+    },
+    "helper-template-provenance.json": {
+      "sha256": "d47efc555101724ebb33a45482d3ccd4ae54eba405e3ad0473c22bcbaeaded0a",
+      "bytes": 6807
+    },
+    "launch-requested-ray-point-build.py": {
+      "sha256": "86ab49c5ec35ae51e4569bd18affe5bda994c9008085ae1641fcb02f9b8da381",
+      "bytes": 3442
+    },
+    "lower-loop-summary-template.json": {
+      "sha256": "57cf35f8d2708eb4f54da423df26affc744a515ec5d339f0cd5220c51ce8dd6a",
+      "bytes": 430
+    },
+    "native-digest-build.json": {
+      "sha256": "8715e13405335297d0c3c0bfbbc22a47a2adaa8408db8a99c86c9b417a528f10",
+      "bytes": 3047
+    },
+    "native-digest-build.log": {
+      "sha256": "6a4d20789402a13fd8b6b4d223b2193e7101770c4396ce3852f36e9794e529b4",
+      "bytes": 56
+    },
+    "native-digest-control-abc.bin": {
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "bytes": 3
+    },
+    "native-digest-control-empty.bin": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "native-digest.rs": {
+      "sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+      "bytes": 818
+    },
+    "pilot-transfer-read-only/compare.py": {
+      "sha256": "60ed55e1643a924df1d7c0d8db14f9c6f93b55c2ff88037522eba1cf77a4f26b",
+      "bytes": 5528
+    },
+    "pilot-transfer-read-only/manifest.json": {
+      "sha256": "acf3552c0b5567c4f902f286d55743689040030ccf93d304711d85c1cced48a5",
+      "bytes": 1042
+    },
+    "pilot-transfer-read-only/through-round-006.json": {
+      "sha256": "b90113bf760acc6fc671d1d949518baee5ec21177245258c0ee93bcf112df5e4",
+      "bytes": 16512
+    },
+    "pilot-transfer-read-only/through-round-015.json": {
+      "sha256": "d09cccaa800cb5fe2ae36497cc7750c1c5ce077c29130c6350791a60e230bfdb",
+      "bytes": 37234
+    },
+    "preparation-readiness.json": {
+      "sha256": "2c94dfca5741cd4d8e86f4f30b5650453f5f0c5a34b846d286e6a23c4631ca90",
+      "bytes": 3659
+    },
+    "requested-ray-point-actual62-source-equivalence.json": {
+      "sha256": "b2ea8ee6679de1050d99b5f0d40273400126d564c7b21594696fd16fe2ac4aad",
+      "bytes": 513935
+    },
+    "requested-ray-point-build-provenance.json": {
+      "sha256": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+      "bytes": 5419
+    },
+    "requested-ray-point-build-resources.json": {
+      "sha256": "7519aa5d83a00bdbb3c4eb8e3e2140b763af0f4c2e9462a22287b297ee169d76",
+      "bytes": 797
+    },
+    "requested-ray-point-build-resources.log": {
+      "sha256": "94a4acaae639dc280dbdfbcab11de04c2b3d47d90512a491267a27a83dcd03f4",
+      "bytes": 3344
+    },
+    "requested-ray-point-build-resources.provenance.json": {
+      "sha256": "6e6bdffff75edb4bc4746260b4458d97e24c115af4a624d53a49d84f640651b1",
+      "bytes": 1183
+    },
+    "requested-ray-point-capacity-binding.json": {
+      "sha256": "c6f4fe5f915c5e6c8495ae8421714acc709b87198fd53e4f66628814992c1040",
+      "bytes": 525
+    },
+    "requested-ray-point-capacity-resources.json": {
+      "sha256": "4224831ec3f9b0276b67c72dd0482b9c027d3449101be52bfc6d106b366634b6",
+      "bytes": 401
+    },
+    "requested-ray-point-capacity-resources.log": {
+      "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad",
+      "bytes": 364
+    },
+    "requested-ray-point-capacity-resources.provenance.json": {
+      "sha256": "3913b24bd1b7474e261592c1a21d35d78ed491147c5845ace0f81345dd43b2db",
+      "bytes": 859
+    },
+    "requested-ray-point-checkpoint-summary.json": {
+      "sha256": "382bc9a667945bf4c78ad832011f1280c53a53ad9304885bb514a5a36a86372f",
+      "bytes": 29902
+    },
+    "requested-ray-point-final-source-verification.json": {
+      "sha256": "7147704e938fdc97af643b7791f0778bac24f99ee65af84593ed89ab6e9ac466",
+      "bytes": 475
+    },
+    "requested-ray-point-flow-boundary-binding.json": {
+      "sha256": "de8e019c151ca6572eda3bc5a2450639e7e8559f6d9e9a072d8c10579825cfc9",
+      "bytes": 535
+    },
+    "requested-ray-point-flow-boundary-resources.json": {
+      "sha256": "3f5a5c8b1b9677d73cbc391a370fd2c7a58ff934803453faf3fc043941dc426f",
+      "bytes": 405
+    },
+    "requested-ray-point-flow-boundary-resources.log": {
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "bytes": 574
+    },
+    "requested-ray-point-flow-boundary-resources.provenance.json": {
+      "sha256": "15cbc777ea4d05242284a9d795350a550300e65efc015bd2c2febe6775858a42",
+      "bytes": 874
+    },
+    "requested-ray-point-lib-binding.json": {
+      "sha256": "b2235765d5e1e971a816d07863ee4c423bc0e460ee921969c0d6216417765b19",
+      "bytes": 537
+    },
+    "requested-ray-point-lib-resources.json": {
+      "sha256": "99cef08f68b4865b9be8fa54f85daa8d9ed66a909e679c550359eafd2aeef4db",
+      "bytes": 403
+    },
+    "requested-ray-point-lib-resources.log": {
+      "sha256": "abb20d5c141aa0f365abec362c6446986ff57504a773e3402720196cd3e74552",
+      "bytes": 11600
+    },
+    "requested-ray-point-lib-resources.provenance.json": {
+      "sha256": "6354efed896e1bc2573239878e26e17e0526ccf357334185fe5453b4de3b253a",
+      "bytes": 862
+    },
+    "requested-ray-point-lower-loop-regressions.json": {
+      "sha256": "3ede1f07f046cd10b3dbf06d9daf56d068d2176c7b2bb0036aaea27d9591a9b6",
+      "bytes": 9007
+    },
+    "requested-ray-point-massive-regression/configuration.json": {
+      "sha256": "e82c1088b37ad7c8f7ccbdc97bee7a5332f247605917938db4f6ca3f3b4cad43",
+      "bytes": 1211
+    },
+    "requested-ray-point-massive-regression/input.json": {
+      "sha256": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+      "bytes": 1060
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/guard-refinements.json.gz": {
+      "sha256": "1bfaa7bfa5fc8f44c1196e0e9b5e752e8ad19bae062bf32a58d225fb4e34b366",
+      "bytes": 513
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "8ddcbe46ebc01221e59183d21824378a8763d7191951050bd6d338d07cdf04f2",
+      "bytes": 14988
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "2b8881cf3965e43235517b036b2de3730bbfaa72d4148562b498b50cfa29af1f",
+      "bytes": 1523
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "0e0f7ee99226dd87d8e2d36ac4d3f23d91cc3d74ea78af9f3bce15b74a781c8b",
+      "bytes": 36167
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "2fd894cf5fdbc769fe9b20b40eb821620de15aac5586b5f108325de89448b132",
+      "bytes": 1607
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.bin": {
+      "sha256": "84db15100e802ef889a51cc7b9adf3b79f99fc726e8797475a9d2ca9aa561280",
+      "bytes": 267137
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.json": {
+      "sha256": "9f2337838397996a4af55e27a7c8776107b09630007afd783f26c5fa09d27a35",
+      "bytes": 6237
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "49bf40380191c8cb7e17f3e5f408119a3cf7800f6b878f18237c580e5a1ba489",
+      "bytes": 37260
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "5aba7742ac61c0bf01b96246e576d6ef536707b2780e71fe64dc2869dd98771e",
+      "bytes": 1609
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "abc9aa83808f1383daa579d8a08211aa30ff5a8f169b0f3b242d97166bf021c9",
+      "bytes": 981
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "ddddc5c802d72537b23908be7476507ad4e4f1801fae6d5ece36612b2c5c1bf7",
+      "bytes": 29301
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "f32605120083329cad224713beff7e2e5eca94c5d5f43db853f84325cd91fee4",
+      "bytes": 1696
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.bin": {
+      "sha256": "63595a78843a40b86af0db207df37fcba627af148e933ddfe35e21e3617ca2dc",
+      "bytes": 1352738
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.json": {
+      "sha256": "e29fcf0b2d25fb93bdcc0998341aa9ab8a1ebed0e7c700319d0a31dde0391cfb",
+      "bytes": 10276
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "d48820c476de85ea36d0cb7e63b85c58212a76bda6135f8ccbca6964ff9b0f75",
+      "bytes": 163045
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "d8fda3041d1afa0dc682d0a9fe9d08d8ab05b3cdc3968ab439de4c1208288b4b",
+      "bytes": 1762
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/guard-refinements.json.gz": {
+      "sha256": "4701e9c623f51cd68160d8fcd9d3d866702f3a00be518a5b35204e1873471481",
+      "bytes": 474
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "0eaffb3597d0e667f269ab291594e23f574ddc0a3aa6e855745eca7568476f64",
+      "bytes": 12454
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-000-provisional.json.gz": {
+      "sha256": "592312450ae5706d651cbed09772a8fad0aeae43a7f84f95326390a9774ff50c",
+      "bytes": 1572
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "1b03c97606a61e76b98fd8ca153db87ee9b1fc90cf8eb58caa76c8716e9211c6",
+      "bytes": 44852
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-001-provisional.json.gz": {
+      "sha256": "07a1b03b52b3abe44329ad6d8084080e5e6e1d9e6003451f3353168220e08e32",
+      "bytes": 1778
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.bin": {
+      "sha256": "7f0a72287d938ff81e94f4f0808f5286b3fb9b51e072fb20ef753aa6c2b75330",
+      "bytes": 520750
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.json": {
+      "sha256": "5c98a473168de12ba4bab256aacb3e74380ff1211c94b956865a536cd5417131",
+      "bytes": 10725
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "3df37dd1d5419b19825f8d523b94015c8cb3b4ae5ccbad32efc23891ea0496f5",
+      "bytes": 72847
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-002-provisional.json.gz": {
+      "sha256": "5b76575430560f899560070e27543155c0c122f978fe2e209614e7b4d1ef9375",
+      "bytes": 1819
+    },
+    "requested-ray-point-massive-regression/prediction-28-80-12.json": {
+      "sha256": "8dbfa298bb97fc887f19495b974ec37cb500fc601e164605c1dbb49f98c6c014",
+      "bytes": 74548
+    },
+    "requested-ray-point-massive-regression-binding.json": {
+      "sha256": "ac5f27cdbd5e02956a340c04988a1b05982c2714b49291699d9a60e9d732e804",
+      "bytes": 2959
+    },
+    "requested-ray-point-massive-regression-comparison-binding.json": {
+      "sha256": "e1198fb4a6ac2851c1bad5f1fc45ef15bf1f5df272afdb9a6fad969bd0b5feff",
+      "bytes": 11537
+    },
+    "requested-ray-point-massive-regression-comparison.json": {
+      "sha256": "ae01a52cb045950d0d6dc92861fe9d980a4b9222eaf9c336168fb96299619061",
+      "bytes": 14332
+    },
+    "requested-ray-point-massive-regression-resources.json": {
+      "sha256": "4be78867441c048d56f8c318035aa3a72d591f51d7a7d7bcc656172ae7cfe426",
+      "bytes": 816
+    },
+    "requested-ray-point-massive-regression-resources.log.gz": {
+      "sha256": "553c54674ed1c0df5f5eafe84a81f2cb05d772747fdd87b77ef236c086d9a0be",
+      "bytes": 2049
+    },
+    "requested-ray-point-massive-regression-resources.provenance.json": {
+      "sha256": "53ba12aa95e6ae29aa2d0fc8b1ce86c175236cda99914803f72189023798ea9d",
+      "bytes": 1537
+    },
+    "requested-ray-point-massless-sources-binding.json": {
+      "sha256": "64647e96003b18e38b844537de051049b9a53c077cce5c884b9d8bb4f40d3493",
+      "bytes": 541
+    },
+    "requested-ray-point-massless-sources-resources.json": {
+      "sha256": "f2c9df409f0bea94e2fd863b0673be378588a0bacbed3bb97def491c5aff48c8",
+      "bytes": 408
+    },
+    "requested-ray-point-massless-sources-resources.log": {
+      "sha256": "9a423b0549e1d3c579e38881dca906fad8fcb1aed415b5d4e661e95df7a5c09e",
+      "bytes": 435
+    },
+    "requested-ray-point-massless-sources-resources.provenance.json": {
+      "sha256": "1b7ad2b4724c2cc6b2c15632d3857beb1665cfc9491b38735bc8eac31e7da813",
+      "bytes": 883
+    },
+    "requested-ray-point-native-archives.json": {
+      "sha256": "d8aa9d0f8ccc0e53c6a02339d53865cf355a20569cb6dda37a21f9af3d6f00c5",
+      "bytes": 147608
+    },
+    "requested-ray-point-native-gate-reuse.json": {
+      "sha256": "e21737a80b492689701be05ad026f53364de7b5c0a30099719b8e32b685003df",
+      "bytes": 2024
+    },
+    "requested-ray-point-polynomial-sources-binding.json": {
+      "sha256": "56a5745a91f809104a7d49f989d7ec72079d684dd57894738b21a3a2c33c855a",
+      "bytes": 1010
+    },
+    "requested-ray-point-polynomial-sources-resources.json": {
+      "sha256": "c2465d17ffde27a0d40f92dc8d05cb83b9736a647afab7ad04f499084b7134f2",
+      "bytes": 411
+    },
+    "requested-ray-point-polynomial-sources-resources.log": {
+      "sha256": "1832ec31f23d17874adad93f0b2f14ae2b9b62be997c1678ceb5cdbba786c6e2",
+      "bytes": 188
+    },
+    "requested-ray-point-polynomial-sources-resources.provenance.json": {
+      "sha256": "41fab0864531a1af4ef802b2621597b5a27e8cb999e07b2e3b7d5797a34c1a40",
+      "bytes": 889
+    },
+    "requested-ray-point-python-binding.json": {
+      "sha256": "1cca1c5dd0804401fb8252f6578680f78ba91f07876f44b0bd52627f47563f83",
+      "bytes": 521
+    },
+    "requested-ray-point-python-resources.json": {
+      "sha256": "999cefacc7ce28654e7e8a08241559eb6743da1a9b755315a921980fc46bcf43",
+      "bytes": 396
+    },
+    "requested-ray-point-python-resources.log": {
+      "sha256": "412190830669c857d5de291b59527f7c851521b7413e605be7af7003d336a537",
+      "bytes": 193
+    },
+    "requested-ray-point-python-resources.provenance.json": {
+      "sha256": "a80b67232a6880246f4fd2b32cb3d06c5e50e2bb20b6ebfdaa1149779ebf3e2c",
+      "bytes": 853
+    },
+    "requested-ray-point-root-gates.json": {
+      "sha256": "a1ecdd7d213fd0e25fabb1fa62ce17d49b904e7739160b40efbde76c7ef499f1",
+      "bytes": 10778
+    },
+    "requested-ray-point-source-fingerprint-binding.json": {
+      "sha256": "eabd5092ad561d274f19f330797cf5c01e9a8d13dced21603150faeba729ae15",
+      "bytes": 530
+    },
+    "requested-ray-point-source-fingerprint-resources.json": {
+      "sha256": "ebbfa817deeafb11644d2327bde38b5f158ed2e239d4044b1beb06e275df11ba",
+      "bytes": 380
+    },
+    "requested-ray-point-source-fingerprint-resources.log": {
+      "sha256": "6df5c4902e9d5cbfca82835300dee6038e86b206107ecd037d34b68ef939e57e",
+      "bytes": 4279
+    },
+    "requested-ray-point-source-fingerprint-resources.provenance.json": {
+      "sha256": "4cf4e1db3b07d9fe367f2e99c9ffe73ae3602747757954123216372b271333e5",
+      "bytes": 841
+    },
+    "requested-ray-point-source-hashes.json": {
+      "sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+      "bytes": 377581
+    },
+    "requested-ray-point-three-loop-double/configuration.json": {
+      "sha256": "407abe650b59d06e9d5b3d6b3c1ddb9eb14889d6f9059faf5d8c2859c6d53892",
+      "bytes": 1295
+    },
+    "requested-ray-point-three-loop-double/failure.json": {
+      "sha256": "4e73f356f9e235ce143ce3bc641c16c7bc7d12440f43562fefafb10f92de3d07",
+      "bytes": 876
+    },
+    "requested-ray-point-three-loop-double/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "requested-ray-point-three-loop-double/native-closure/active-request-history.json.gz": {
+      "sha256": "77fc39bfc58f05b72088cf99a2d41173ea756d58e098ceb34fe786a5e1c1a607",
+      "bytes": 7510
+    },
+    "requested-ray-point-three-loop-double/native-closure/direct-zero-0001.json.gz": {
+      "sha256": "88ec99782219d5664e4c3f641aeabafb7020052f625a557e795702d8bb282873",
+      "bytes": 32022
+    },
+    "requested-ray-point-three-loop-double/native-closure/direct-zero-0002.json.gz": {
+      "sha256": "f06828d7d63bd8e4c6969a7c11e1a8d10b3aa528de9e205d2165d3df416bbb08",
+      "bytes": 32060
+    },
+    "requested-ray-point-three-loop-double/native-closure/direct-zero-0003.json.gz": {
+      "sha256": "a6497973e30d0d0a5676c12cabd5a4f7570defe0455c524f4d06f0895761dc4a",
+      "bytes": 32601
+    },
+    "requested-ray-point-three-loop-double/native-closure/direct-zero-0004.json.gz": {
+      "sha256": "eedb88fdb9fae8d2a61a489a1e4d7e132a70cbac776d171793d8d9958634937b",
+      "bytes": 35230
+    },
+    "requested-ray-point-three-loop-double/native-closure/requested-discovery-0001.json.gz": {
+      "sha256": "8d052b1dfc03f22b355d4e37d9d434a2045cf1bb9692de4fdb75ca424db5f00a",
+      "bytes": 4072
+    },
+    "requested-ray-point-three-loop-double/native-closure/requested-discovery-0002.json.gz": {
+      "sha256": "d2fc34e4d3d15aa321d46dd2cb0d89642991ccd0cc131479194b50957267428b",
+      "bytes": 7503
+    },
+    "requested-ray-point-three-loop-double/native-closure/requested-discovery-0003.json.gz": {
+      "sha256": "244833889dff5eb99b1872331db58bcc2851909c20659fe602d3f5e0a369faee",
+      "bytes": 32959
+    },
+    "requested-ray-point-three-loop-double/native-closure/requested-discovery-0004.json.gz": {
+      "sha256": "ee849174e131f18cf8e0029845c14040555e9d12c1f7aeb1bced9b1d3b86b1d1",
+      "bytes": 105724
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-000-provisional.bin.gz": {
+      "sha256": "42c870bdaa0729c7811bad60e2b4dbeebba125241a31e4d3d71cd46d8bb9fd60",
+      "bytes": 6952
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-000-provisional.json.gz": {
+      "sha256": "798ca1ba5b51692920a41892a4a472643cd6b74363b9876db236c40bc8578e52",
+      "bytes": 2941
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-001-provisional.bin.gz": {
+      "sha256": "b3ced6058089a516b438ec5a592821e0bb6a4aea12c8a500cc170f8fc7f8474e",
+      "bytes": 10989
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-001-provisional.json.gz": {
+      "sha256": "e86d841f9672de340c45145efba6a1aefd879d6bdd7fa11225ab93d9710524a3",
+      "bytes": 5419
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-002-provisional.bin.gz": {
+      "sha256": "c3694a604931986c49c07f017c13063c7ca4ddc6f51f8ef617ff520ed5ee4e68",
+      "bytes": 46271
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-002-provisional.json.gz": {
+      "sha256": "d7fad2660bb4faf4bc7b3f24a57b29292e3620a67bc544fbe3289209b94938e2",
+      "bytes": 14876
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-003-provisional.bin.gz": {
+      "sha256": "03c171b2492c8802c4ce0c40d03b192160bab7fd2aa793f1adf2642d3062b70d",
+      "bytes": 180822
+    },
+    "requested-ray-point-three-loop-double/native-closure/round-003-provisional.json.gz": {
+      "sha256": "c95833891cc5615b3be7d69603794398433f978f016d9dd0c0bf4de33fff90de",
+      "bytes": 24899
+    },
+    "requested-ray-point-three-loop-double/sector.json": {
+      "sha256": "56e1caf4e79b1713bf11b9a54c26946e9e3ea252239469fc627db01626da6912",
+      "bytes": 239
+    },
+    "requested-ray-point-three-loop-double-binding.json": {
+      "sha256": "b29d5f7ea226401e3b7d1e159ecca88c9d88c328f9e59854d8875c104eab8198",
+      "bytes": 2861
+    },
+    "requested-ray-point-three-loop-double-residual-control/configuration.json": {
+      "sha256": "a101aa0181acfa34da4616a228731789988c3f1f8ac1827edbe0e91253bc8319",
+      "bytes": 1234
+    },
+    "requested-ray-point-three-loop-double-residual-control/failure.json": {
+      "sha256": "f0fd02e699c32102ded26031b10008568234ebf7a7cc005aae389b2abee2d914",
+      "bytes": 875
+    },
+    "requested-ray-point-three-loop-double-residual-control/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/active-request-history.json.gz": {
+      "sha256": "62ff9ef5e09808698292725d41f72d087bdfcb799c6476388eb392b2817c7784",
+      "bytes": 12528
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0001.json.gz": {
+      "sha256": "3fb8db119d6152a82f0bb08942e1d2497f3a5a88716028c075e5ab36cfc1828a",
+      "bytes": 31964
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0002.json.gz": {
+      "sha256": "7fe38b4c71703a7ed62242cfdd892a87e03daab27d52039c5d86e2621627dad6",
+      "bytes": 32025
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0003.json.gz": {
+      "sha256": "542ef80d977be85e3dd94b227544ca1b1ca514f767dcf2d61e9741c4a982dc70",
+      "bytes": 32281
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0004.json.gz": {
+      "sha256": "a6e8cf41f2112a656a045f58dbb0255d722b1ea86ef07c611ff5ce10313a635a",
+      "bytes": 32506
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0005.json.gz": {
+      "sha256": "5d35dcd181a0a7db9cbe326992f513a7fa7ab8b9cac42c9dd3c4c1d56bb6b4b2",
+      "bytes": 33460
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0006.json.gz": {
+      "sha256": "8adc2c10fcc68e095017c084b2e52f8b3e9c9d867b779096ba965479c0424dd1",
+      "bytes": 35049
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0007.json.gz": {
+      "sha256": "36f2fa676c4dbba83b6a375f21fb0dc456e611fdb2cdd16c556b89b1d4b44d41",
+      "bytes": 37920
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/historical-discovery-gaps.json.gz": {
+      "sha256": "c0482448143ff6f9d5463871c7cfbb30ae0e5d2f8c63bcf492996be74806be5e",
+      "bytes": 117776
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-000-provisional.bin.gz": {
+      "sha256": "29a42ef5e742a59528d7529b445572af61f330a0dc0f4c10b0129082505c857e",
+      "bytes": 7590
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-000-provisional.json.gz": {
+      "sha256": "79279fa55de87124fd6033f45c5b5382bc00d0a0614c2c4a0befe4928a7f6e15",
+      "bytes": 2689
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-001-provisional.bin.gz": {
+      "sha256": "f65c26e62f5458b539d615aa1e7a71be260310d2b37ac01ab0a08f6618bc0098",
+      "bytes": 23178
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-001-provisional.json.gz": {
+      "sha256": "12be79783ce446a1f6ae4061a4b51aa036cf731b6474a0e6e9fe6d2e753df435",
+      "bytes": 3323
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-002-provisional.bin.gz": {
+      "sha256": "97481061219181078ec0ed7c05f54b62333f3dd2ddd38738f24555de54df9189",
+      "bytes": 68975
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-002-provisional.json.gz": {
+      "sha256": "2c8b61151b3808e789f9943e31a2c2614570a9d4a3c8b9c33f25e35d302c58b0",
+      "bytes": 5074
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-003-provisional.bin.gz": {
+      "sha256": "ea612f05c90f739c0936101057685bea07eb8ae0d969af9ec41dfc67bbcd2b8c",
+      "bytes": 212585
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-003-provisional.json.gz": {
+      "sha256": "4581a180963cc978feb843947c0de91372f8c1664a4534f4ebc23f52aff1f824",
+      "bytes": 8967
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-004-provisional.bin.gz": {
+      "sha256": "022fec18968d1c25d3ad3cf35952c7f9e7951f8acb4781b90c180d55567c7b56",
+      "bytes": 401234
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-004-provisional.json.gz": {
+      "sha256": "cb646643503d5828cba43bb6264fc934f240872cab0f50d8f43b8e61784b7bd0",
+      "bytes": 14981
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-005-provisional.bin.gz": {
+      "sha256": "0700ec9199ea0486e71da816d615a1f1ef1e0c277ad74cd13e47d9ceb74af23a",
+      "bytes": 649166
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-005-provisional.json.gz": {
+      "sha256": "01754ddee996ce24a37f41450e1f85c9b132a1103605770061134d5f6ada646a",
+      "bytes": 25826
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-006-provisional.bin.gz": {
+      "sha256": "a89a6c182bd128d59298b11eb5bf66f102e9bf2d0f9d41aca90ad31717eca77b",
+      "bytes": 818545
+    },
+    "requested-ray-point-three-loop-double-residual-control/native-closure/round-006-provisional.json.gz": {
+      "sha256": "f54beaaac6d054891711225f56170ee929031036a1fed65ec416acae33f94efb",
+      "bytes": 37036
+    },
+    "requested-ray-point-three-loop-double-residual-control/sector.json": {
+      "sha256": "56e1caf4e79b1713bf11b9a54c26946e9e3ea252239469fc627db01626da6912",
+      "bytes": 239
+    },
+    "requested-ray-point-three-loop-double-residual-control-binding.json": {
+      "sha256": "c3c2073179bcd79c2f00a61a8fca5789d981d986174ac8225a363c3484787f73",
+      "bytes": 4001
+    },
+    "requested-ray-point-three-loop-double-residual-control-resources.json": {
+      "sha256": "eab683a6114ba17df2734de5c4040c1e205d9cedfa8f9e0972d2f7d423c42109",
+      "bytes": 463
+    },
+    "requested-ray-point-three-loop-double-residual-control-resources.log.gz": {
+      "sha256": "8d904dfe54d27ab34346153d30c75d5c065ffe5bd5a3de6f6498cf57fda7054d",
+      "bytes": 618
+    },
+    "requested-ray-point-three-loop-double-residual-control-resources.provenance.json": {
+      "sha256": "d0694330319ecb3d4aab1c48062ffa75736b755df5daa3496d4cc4c91a27548d",
+      "bytes": 938
+    },
+    "requested-ray-point-three-loop-double-resources.json": {
+      "sha256": "609751779bec249596240d8451ec1cf192484218d300c02473677505b97bc9ba",
+      "bytes": 472
+    },
+    "requested-ray-point-three-loop-double-resources.log.gz": {
+      "sha256": "fdff2ec213e9a05a1e016cdcdbebe3c055362dec2d0a98a68bcbd97377a2d9ba",
+      "bytes": 582
+    },
+    "requested-ray-point-three-loop-double-resources.provenance.json": {
+      "sha256": "39826aaaca7738493ca7d2500c980727cc1d13d5aaf00ee5efdcfd3f8ea2141a",
+      "bytes": 938
+    },
+    "requested-ray-point-three-loop-fixed/configuration.json": {
+      "sha256": "70f19f50c2d429302dba42f6a3af5095e5193d7deaae4696fc578c81281178f7",
+      "bytes": 1418
+    },
+    "requested-ray-point-three-loop-fixed/failure.json": {
+      "sha256": "98e5686b2bc104f696fb8ca166f33e3c8fde405aed6248168170e464f01c4012",
+      "bytes": 773
+    },
+    "requested-ray-point-three-loop-fixed/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "8402b9cafdf692359fe18e8150331f3aaa0518786d6cbd21e4daf4ea8f296cbe",
+      "bytes": 10111
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "f5d02a54074a7e86fafdcfcd6d6fe11fc2e9419eb70df4547d8a263db61b0cad",
+      "bytes": 26397
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "7d4a68c1a341df8c344597740cc5a860540cf040c4c4cd39726fe9b53cd8ae3c",
+      "bytes": 30078
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "1954cd6d38d27ed2c9c4ae16bb75de593f585534d58a1f49fa911e313d5654c7",
+      "bytes": 30283
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "c2d9b62c5e5a33fd38e012b623567d1643285660be0c08e8b7f844dbe7a989ef",
+      "bytes": 31115
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "30533c5bfa1c6f759ad3d12ead23564d1e33d449a3aa97939a5bf094804e0271",
+      "bytes": 31514
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "8f15761cc785adc0f50c9cc7d0d82e4cd41436ea97021f31fed80b00c9342744",
+      "bytes": 31522
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "458c540cb00287de84d93a8ff679023b5062f13a79348608143a8d08133ac398",
+      "bytes": 32287
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "c93feccfa97084c2c2b5cd62579dd9c19f30c37d03cf1ab992887b02e83023e0",
+      "bytes": 32732
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0009.json.gz": {
+      "sha256": "fed7bc9c2c2c4efca6ccc5890c4973e2f87a7056e026a5143e2e601ea8bfae19",
+      "bytes": 32338
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0010.json.gz": {
+      "sha256": "8003fef0460cbd4ef1661f27568b91a306f7469d11b0ab9e3f37298bb5c87536",
+      "bytes": 32469
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0011.json.gz": {
+      "sha256": "c6c72d92cf9502477258e59e59c3376089454e306307fa9efc7f1ae82e19851a",
+      "bytes": 30771
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0012.json.gz": {
+      "sha256": "8fba2f0374403e694c3b303c84a28a1aa6567bd15109569f0d7148099fd7482d",
+      "bytes": 30357
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0013.json.gz": {
+      "sha256": "c90aa6674131ce7d4a809e79b30c35f36f8918b663d088a0e96f6857c44683b5",
+      "bytes": 30356
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0014.json.gz": {
+      "sha256": "0ec68b6373a60a3b1d656a499d6e3aaa9f4c7341d906df5f2f366fdf403c171f",
+      "bytes": 30969
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0015.json.gz": {
+      "sha256": "5e61e28c9ec555b5d23aea7294646a1749b5f89502607e0aba12b6c072ec4f5a",
+      "bytes": 30444
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0016.json.gz": {
+      "sha256": "d2851b287943c60d4ac29557f668ff5afee63731c71f8844d390e75e0751c562",
+      "bytes": 14774
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0001.json.gz": {
+      "sha256": "03c5fcdee2103d7ca8a0f8f68d26e5a68fa90d369b5c24428fd0e059a9adde2d",
+      "bytes": 4315
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0002.json.gz": {
+      "sha256": "6a9cecc13dfda77fbd78a0bdfdb65ca692ff775f1cf6494628d3f3fef547a87d",
+      "bytes": 5840
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0003.json.gz": {
+      "sha256": "426c13b0edc457ea7cd47b60795ad260198dfa4955defd93a4c393c07e89aaaa",
+      "bytes": 15170
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0004.json.gz": {
+      "sha256": "60733f57af1c0488a23f7f2a59117789e03a45d0b24ad5ca26654f9a98c1f528",
+      "bytes": 35935
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0005.json.gz": {
+      "sha256": "504d54cd45a84b661dab3c4146fbbfaf20223259a16f901b4b7246932a3aebfe",
+      "bytes": 41547
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0006.json.gz": {
+      "sha256": "ec0768a8d560268583484c510e538eb35a24293cbc89f8c08c95de60f27ee2a4",
+      "bytes": 43234
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0007.json.gz": {
+      "sha256": "e73f3116aea6f282fce5f89085bfad8eb8371e00c0880a27d2cc78ccac409888",
+      "bytes": 38047
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0008.json.gz": {
+      "sha256": "1e07d2d1236e28bde9662177721e513f15b11666b9651e1d98210a53379e21ef",
+      "bytes": 34683
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0009.json.gz": {
+      "sha256": "86d451074362f47c234950da35f0cd860b3072c41bb702d4ddd3bee5596e4754",
+      "bytes": 26201
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0010.json.gz": {
+      "sha256": "61b896c68763f56e0b842faf02198d70748ed2eddd282b7131950d67dcbb2ad3",
+      "bytes": 23254
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0011.json.gz": {
+      "sha256": "9e80e869d060a1b409d4c8fc57abde269c636828168b321ca1840f1cdab9a921",
+      "bytes": 15733
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0012.json.gz": {
+      "sha256": "501e171ff550f47efccb980e6d347f3d4f94b8f2dde5d6459ce15dd22652f482",
+      "bytes": 8871
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0013.json.gz": {
+      "sha256": "fc31dd6e3738ebdcb17aef18235aabb3ea5e5a1cd6cb37be8aba42c2f52952f7",
+      "bytes": 6641
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0014.json.gz": {
+      "sha256": "b96cd76183daf12acc8c00af4515f2987d3f165c9a5540d08f3933501786f1d9",
+      "bytes": 6269
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0015.json.gz": {
+      "sha256": "43f359b5ec9e1663ba9462f860aeaef38dc74c7ceba00bc9240d59ea30a14a68",
+      "bytes": 5670
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0016.json": {
+      "sha256": "81adfaf44b6ae06b630dd2bb32fba32ef2c51f13d306466cb0d7e884a3882980",
+      "bytes": 97126
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/retired-unresolved.json.gz": {
+      "sha256": "c0a410dcf98f42d8852e211904eb92bf691cad60baa2f15512c03a2c2bd2be90",
+      "bytes": 1617
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "ee2d32089014ecee11515dda13c90f6bf0a54b93e6e10cf92ebc7516266ed508",
+      "bytes": 5162
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "8664f061a1c3c82e65dfbdfa53a0874dc57f9e178d3dabe52fe7d88bb06c34da",
+      "bytes": 2871
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "e0f08ccef6af244d260853ce62bcf46975755f3907490d8cf27243fbcbb94567",
+      "bytes": 7692
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "30662cec681b329046ce627d9d8156c62997e5ce1c439734b9899f5d8d748702",
+      "bytes": 3896
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "97b50ca84fd2989d63b550b245f0afa26173ee4dab77d12c91de00f91799f613",
+      "bytes": 21901
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "5d55e75b1eabb80bdc91c850d9f199789dcb65c5796d65055153c6f122f5d17f",
+      "bytes": 8044
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "5ad7e327736c71b00006c4d9578318dde1bd002eb394b02cd4122122a505f1cb",
+      "bytes": 57826
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "f7299be2bf280ec16eca5faee1be4fd25399c451c82fd1ceb1e8154216f2031d",
+      "bytes": 13516
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "a8f0f275e79c4b566108df215bf6604f9dd71ba48bc91641711f60ad78536541",
+      "bytes": 97687
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "5d8518cbdada18391dbe7f08fcf8917144669c059d7651aa1f2981dd774b47b7",
+      "bytes": 16499
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "9e48823a5ba5bf92eb15c6627ec4134eb2609a2015f039f7d68d5a419bf4b868",
+      "bytes": 140473
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "2a179f599c018157b48dca710473b0bf15a4c35abfe80d2274f6f78de2a17c2b",
+      "bytes": 18159
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "b405f48e626681e42f9ab2004fba8b947dad135359308d6da54d7ea2e5bd073e",
+      "bytes": 173705
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "7974fd03d69ecdda4290b49b8a49c72ec3517b80985380a74eacbcca5a21a1bb",
+      "bytes": 19284
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "6764a8e4edb8dafbfb011832739831faae8a68b4e071ef8363e20b1c7f6105fd",
+      "bytes": 200959
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz": {
+      "sha256": "3ab64fdb47364bdb23884125fd4d88ef7b768a5c727e36626368ffb362978ce5",
+      "bytes": 18865
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-008-provisional.bin.gz": {
+      "sha256": "602185e3866885f70f3e051628b3acf393d3e3bb4938c4b7046d203c29f9d337",
+      "bytes": 219507
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-008-provisional.json.gz": {
+      "sha256": "355b0d8790396ac7d9bd5069b8e91685b285a54c02fce413ad1df40c543b8286",
+      "bytes": 17650
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-009-provisional.bin.gz": {
+      "sha256": "21150d8f9b1afd3748cd31c49f4aa2ae1d64b681b7737236259e5dde9fc796f0",
+      "bytes": 238078
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-009-provisional.json.gz": {
+      "sha256": "0c7cd0c0c34d729a906e97b4f626d3665af1269989822332031d4b06bdc6cfa1",
+      "bytes": 16338
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-010-provisional.bin.gz": {
+      "sha256": "4a6076fd9686f1d0fab008dcd9366ce2dd3bea23c25ef1160d8286fe2ed7e8fd",
+      "bytes": 249309
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-010-provisional.json.gz": {
+      "sha256": "f1f4f24ca3d1c1ba2da586d44ff612b5bf709abaa8cd6bc5df9b2f61e8f8eb52",
+      "bytes": 15242
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-011-provisional.bin.gz": {
+      "sha256": "3b336921675271a656c09deaf484e6aa87af665cdd17aa5b7b8fe5853e7ce2f0",
+      "bytes": 253107
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-011-provisional.json.gz": {
+      "sha256": "a5337cfb37a667d12e20674260756ccd26b2b34d01e362dc9c0d459117cc9c82",
+      "bytes": 14365
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-012-provisional.bin.gz": {
+      "sha256": "3f3de5675e6732fb86c697b89af705cb01e1e90f590b1ba81c5614879f769359",
+      "bytes": 254852
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-012-provisional.json.gz": {
+      "sha256": "08b3ea36c93f565ad9e43f63daf3665d5257c2a7380951ee35bbda2ca6df2833",
+      "bytes": 14025
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-013-provisional.bin.gz": {
+      "sha256": "3d22a9a725b7c6fbc648a13d147a321c0670caa53f7bce2c3e13b4ba61ef4020",
+      "bytes": 256734
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-013-provisional.json.gz": {
+      "sha256": "802ec239bede85f3662c3c75dfdb2346d48e91030119a09fdba9067eef06750c",
+      "bytes": 13870
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-014-provisional.bin.gz": {
+      "sha256": "6be07bef735b57e5b9a462a0061c20a1180183d750c35e2e674e9bc2bc60564e",
+      "bytes": 258073
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-014-provisional.json.gz": {
+      "sha256": "7b7d9dbc3f458025640f0590973d5bed4e6e5d1b4685246b7483fa3d6e471019",
+      "bytes": 13797
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.bin": {
+      "sha256": "400eea4470408221f3110448e7999a26ed008ffb248d151be2013e4c1050469a",
+      "bytes": 2749095
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.json": {
+      "sha256": "228e69acb192af810ac573d357b0a6e36dfa962e4d3fbd7fd2f93978d4a28bca",
+      "bytes": 488346
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.bin": {
+      "sha256": "46efc446d5a66bbd351a583f866b44aeb3329c0025804d4fd1a42ef743d34d44",
+      "bytes": 2749004
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.json": {
+      "sha256": "7489918649aa00b3b3c57c1dbbd152f4b37ad6d535e1e99c2f2eac944ba04808",
+      "bytes": 488351
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/active-request-history.json.gz": {
+      "sha256": "178fb0c64c63a57bb8821c7a534f64503745c108f83f2aee3cfaaacd62b6f7b4",
+      "bytes": 5580
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0001.json.gz": {
+      "sha256": "ecf556dfc41a525bd0373cb9a3b282aa38bb5c281a57f893090fc685f5a10a18",
+      "bytes": 28566
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0002.json.gz": {
+      "sha256": "23a7bc6faf910289f60c72a018fadaa812ab990feec3cb498e71d1f426e95848",
+      "bytes": 28816
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0003.json.gz": {
+      "sha256": "ef9098fbcf23ab6b1e31b94bb92dd17f4ebb3731a9c724d58d5b5963669dd797",
+      "bytes": 31032
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0001.json.gz": {
+      "sha256": "12c26cd1ed4f6293ea3ff5dc16ac5ac506be5d128cda2732f09860136cab112b",
+      "bytes": 5121
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0002.json.gz": {
+      "sha256": "6c633a5e99c329d83110de1ff70a4f8be17d195b1aacc9343552188fb6fd742b",
+      "bytes": 15036
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0003.json.gz": {
+      "sha256": "38de3cfffa0c544b8acbfeeb60da6c3aab9749991d175a0ff40b01567ac7a257",
+      "bytes": 74237
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.bin.gz": {
+      "sha256": "cbaa082e619576293808568b82fe2c13b6aa171fa677027f548016b54eb8f053",
+      "bytes": 6960
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.json.gz": {
+      "sha256": "8a5be3c764aec86cd446abe0e6a0de090accbb370e618ba270632e758ba498e0",
+      "bytes": 3267
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-001-provisional.bin.gz": {
+      "sha256": "cd71b3af06d5da83bc67337c4c24f7f3ad0db3d896a5a6ada6edc008dcf4c247",
+      "bytes": 21046
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-001-provisional.json.gz": {
+      "sha256": "65ae6fae2fa3f944745733d151df946606609c957cdf7a3ef27af1d47663b4dd",
+      "bytes": 8605
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-002-provisional.bin.gz": {
+      "sha256": "ae7cd75520e5e69a7f114328f46a354f236b2eb63e3c70b23de4d9fa321e072e",
+      "bytes": 119161
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-002-provisional.json.gz": {
+      "sha256": "ce954933249d70623e385f202f618f97f47cfe7cc460d783938a4212ee10b5fb",
+      "bytes": 19683
+    },
+    "requested-ray-point-three-loop-fixed-binding.json": {
+      "sha256": "d2a44c4a3aba343ae5cc8a9bb357bbb400308d57b0cd5a717a7c69d3aefc1570",
+      "bytes": 2851
+    },
+    "requested-ray-point-three-loop-fixed-resources.json": {
+      "sha256": "0ec0e176ef65050e1715ddda2149cdf7e7c98e88887dbcf135312512634fd8fc",
+      "bytes": 465
+    },
+    "requested-ray-point-three-loop-fixed-resources.log.gz": {
+      "sha256": "0fcb765751ce53df7664bd658dcd87c24bd790c3884f0872b253740e88b9dd2f",
+      "bytes": 773
+    },
+    "requested-ray-point-three-loop-fixed-resources.provenance.json": {
+      "sha256": "160b851a0d4e919643c70df337cc3f577a8ee654e4063361555aabb9f47df272",
+      "bytes": 940
+    },
+    "requested-ray-point-three-loop-single3-residual-control/configuration.json": {
+      "sha256": "fda70f23fd3d31e9b0ad068356e52b60db9c33283f10c41ed1f86ebb63907221",
+      "bytes": 1235
+    },
+    "requested-ray-point-three-loop-single3-residual-control/failure.json": {
+      "sha256": "cfe3b8ae9495e1de796c7c9f22eee7169dacfe84c7069aed601fa4f3dc50a5ba",
+      "bytes": 490
+    },
+    "requested-ray-point-three-loop-single3-residual-control/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/active-request-history.json.gz": {
+      "sha256": "2e8fc8b0f31497e6b73d2dea0b141b8f18c8c2b7819d68bf182e2ac8c42ebc16",
+      "bytes": 4789
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0001.json.gz": {
+      "sha256": "c5c16d95c1e777b48aa87a484aee271cc1d3a3dfcdcf67d55523bb501b719bc3",
+      "bytes": 7028
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0002.json.gz": {
+      "sha256": "b3333b2df50e5604e7154163b88cfe2ef58b46a5ce3c0b847e807d25bfc65e6d",
+      "bytes": 19789
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0003.json.gz": {
+      "sha256": "2f56d08f2c4923714fd12d9ff3dac0c0570269f4aa7f623b93d92406e8130fdd",
+      "bytes": 32622
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0004.json.gz": {
+      "sha256": "e247f681de9420b9657a0f451af2623dfa7fec7c4c70e0b281874039f161c552",
+      "bytes": 34215
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0005.json.gz": {
+      "sha256": "fb487a8c1c51109150859f9d918f8a17d30e350e31b6c436ee846b0dd20fd49e",
+      "bytes": 34966
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/historical-discovery-gaps.json.gz": {
+      "sha256": "0cc7862bdbe3cd9a2e580959f55f6e5d7ace2bfbf95b8267dabcf2ac18280fc9",
+      "bytes": 54023
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-000-provisional.bin.gz": {
+      "sha256": "90574f7d92e38483bbf73a211b1b66cbcdd5e056e3abd09c14833c3529e4cf16",
+      "bytes": 6632
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-000-provisional.json.gz": {
+      "sha256": "cd4f27e261524e67ea73b82de88c7fb03494265549661848a6b9ed7fce99d30e",
+      "bytes": 2543
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-001-provisional.bin.gz": {
+      "sha256": "42b3f8a676a5ca4d582cad1995e7a4ccddad54bf4322c870bfaf61e6a6eb2459",
+      "bytes": 28670
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-001-provisional.json.gz": {
+      "sha256": "a0d85d99e27f7eb7e38606bb9b1a3a9fd8ae2329b8c9635b354461790add696a",
+      "bytes": 3622
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-002-provisional.bin.gz": {
+      "sha256": "81e6b2ac29471b28b3422b7a7095d08e45741bf68de4e0e5677e3d6e52fab57d",
+      "bytes": 103189
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-002-provisional.json.gz": {
+      "sha256": "feeed4d4fa94625e14b67e3a2a872794d0d5b96dc0553bbbe0efb5884bbe01ff",
+      "bytes": 7580
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-003-provisional.bin.gz": {
+      "sha256": "96e3234eda0a675b35f5817d3ba1b64e7f7d4ca2451919d9a391ccfabc3fa990",
+      "bytes": 316513
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-003-provisional.json.gz": {
+      "sha256": "ed3cbd817ded265aeb8ca1beb1b3c8d1d688395a7c5a1749d986b7fd36b14c2d",
+      "bytes": 13359
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-004-provisional.bin.gz": {
+      "sha256": "652b813b64bfd862d9fd102cb6f9d6a4a9faae08b7c18f60557e7b59ba7b9015",
+      "bytes": 548637
+    },
+    "requested-ray-point-three-loop-single3-residual-control/native-closure/round-004-provisional.json.gz": {
+      "sha256": "7f719be1f8c961dc9d972d5bf7ab65d6b223ba2a3875262e2b407030eaf1d404",
+      "bytes": 15361
+    },
+    "requested-ray-point-three-loop-single3-residual-control/sector.json": {
+      "sha256": "3b93195b838225014f4d07d08c4219d91b108098db7126c24987f80eae3836bb",
+      "bytes": 232
+    },
+    "requested-ray-point-three-loop-single3-residual-control-binding.json": {
+      "sha256": "8cc178e665fb05d1b65b378d843481a4737b21e25ae827a34831c372079eed02",
+      "bytes": 4268
+    },
+    "requested-ray-point-three-loop-single3-residual-control-resources.json": {
+      "sha256": "1e1e443b3531f1146a2d4546e0c9d67fa6295981d6a9c5e382cb965cfa51e154",
+      "bytes": 472
+    },
+    "requested-ray-point-three-loop-single3-residual-control-resources.log.gz": {
+      "sha256": "b88bb6e599c67a235566a8fb20053155850053bc01a0d9ddf9fee1bfe8b37262",
+      "bytes": 559
+    },
+    "requested-ray-point-three-loop-single3-residual-control-resources.provenance.json": {
+      "sha256": "147fd6f193b6b33ca0b6a105b6982afcabe78bec699d0478f52585b1a2f37dc3",
+      "bytes": 938
+    },
+    "requested-ray-point-two-loop-fixed/configuration.json": {
+      "sha256": "5199ef228eb654c4c76aec3a16ace73c04174c55e743ffea1cbadc262ba3d11b",
+      "bytes": 1339
+    },
+    "requested-ray-point-two-loop-fixed/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "bytes": 1057
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "a3abd8a0e36d8a6fa076963cf50e6293a8f7493d9bb3891a927eebb1e2ccb96c",
+      "bytes": 326
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "b1e29b4d2a909dfec8a0bae4137f64be42f6a9d873ff1565f0d4ec4f8b8d1505",
+      "bytes": 3474
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "0745c107066eb3bf1cd745c8d2b3922f7f958ce0ab0fbdcae19228f9e4e35fa8",
+      "bytes": 6289
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "135c5002eebba6b5c066f6ea36a732998e9541cc58098c9914c43d5dceef1f74",
+      "bytes": 9217
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "4a813c18cc997e6bc5293c6a26056bebcb7cc15e65e89c228d354b2be193a550",
+      "bytes": 8234
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "4fa1f48f9f20330faff68022dcc2c01eba7aa57f4cefe2e332bc774f81cefffa",
+      "bytes": 2623
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "11878824dddd542b775d549bf61b31e57c3986a69aa4b8b0049a09cd6441a839",
+      "bytes": 1916
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "bd4d2b009ce1b8cc35080d8cb5c828357ca44d9e49927303552137ee0cc30839",
+      "bytes": 1919
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "cb976f0b997bb7cd7cf4109b5b45263ec40bd6c208977e1a1f7a919f872de21c",
+      "bytes": 1141
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "7ebfa2a03c4f0a6e8c958b10ec37d85d4d60ce0fe174cf3a8d76d689e7f32a08",
+      "bytes": 855
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "351c2ad06355379c122a2fe93cc09041893780be84c09551e73224c639b0ee9f",
+      "bytes": 5297
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "e7f440ce36c151a03e9ef36fb8f85d1656ff8d114620ed15b3a8103db270d9af",
+      "bytes": 2390
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "7fc053b1080fadabf7d528e5fcfb5e8412c2dd859d4af545b5c02c2345fa5507",
+      "bytes": 8701
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "152aec00edeb11ca4733a99796934e618aa8cbbb0b9c3760e10ee967759b9561",
+      "bytes": 2484
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "7f8a87f6cd5d49279e9718b72b3f1275419185fdff3e699903f8ed4837625565",
+      "bytes": 13345
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "04866ec3338c5aa4d5879bd7f1a57c7b50f88b123ad17d1129c4816fe33f6e10",
+      "bytes": 2555
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "40a96ab9886b390ca1fe409bb84eb2f482e0aa9c7bf42812ef2d2de8cef8246e",
+      "bytes": 18408
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "977ff31a0d85f1ad386e27a1832d4e208943cf0bc56d6a6c4cb9a8941b39dac7",
+      "bytes": 2547
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "9b4db7a6c6be7a088ca3fb5332754768a90cdd10b86badaf490042e79c86d5e2",
+      "bytes": 19689
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "2a7c6fc6bd90b81e668d80f0c8bb16b033c55bdc67811a7ba8701799fe243b74",
+      "bytes": 2536
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "a5f54a352bb190ed6e8644d351297041db361a120a2bdcb7550db17b12c5d706",
+      "bytes": 20040
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "38fedef0d25c492fea0640e0d37714fbdc74fb26505eab537a6505f55539dbce",
+      "bytes": 2518
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "bd2620e731c5c8fa1ac10ac1eb845ced705bbdefd6b175ac74013e3672c47c6e",
+      "bytes": 20406
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "b166acc2a19e01a2998b6e794f0d1568aa37807da2d95056018be1b42e29bf35",
+      "bytes": 2517
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5",
+      "bytes": 178855
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "35f30030aae7cfaade6ff16a8e49512c8fcb9401d15312f22dbf148c462b3316",
+      "bytes": 16423
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "7a020e65d9e55e3c47b5c02da7df38bcf676cbbc4f35cd2392aed2bd67db2202",
+      "bytes": 20600
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz": {
+      "sha256": "e7de0afd3fb9fe9622ddfe8e1adfabda0271167072c194d044ad023c04bcb2ce",
+      "bytes": 2503
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/active-request-history.json.gz": {
+      "sha256": "ddbe7b2ec24c317160dc5b0421e820e1c7a2df3bb52786b7495e74894eabdbc8",
+      "bytes": 296
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "33d40a62446fd4071dd437df2f16cd80887ea6a8fcd06060c8d31de231b3d79c",
+      "bytes": 15918
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "d0693f81713c08ee5d208fd20cbfd41ce8d674d671e2b177179627c76c66a6b4",
+      "bytes": 31441
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "a16e22b1ff55d28bf726adeb8b3ce8df7e72b7d4c45464258e0fd0491e02e34d",
+      "bytes": 87577
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "4482d41a0eb71ef1e9d68511b085edbcbb4c86f03e3af97653d12ca14abd5c3e",
+      "bytes": 41331
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "52a9eb04f994c89b01807dd6d4f71f32951fe8f93c1e757dd6405cdc7d4d7f59",
+      "bytes": 15868
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "c33dda9a15ebdc690e19bb1a15eedc74964db815834178a0fe637df33c7e9fa6",
+      "bytes": 5586
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "d64f63c2c727c7c59f0790075c7e85f22c2b735176cfbee090264c9c498e1550",
+      "bytes": 325
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "772b911d170422191d1df5a6ca1123ba384c2f1ac83085d26f765f55916782a6",
+      "bytes": 2999
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json.gz": {
+      "sha256": "c737380f62a28c9437f299c471436abc47c7cb4162fcc18615954e6695f111d9",
+      "bytes": 167
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "e5b0d2c4aadebc6ce594dc6d763657872b2a5205c09f86a6562433b595f62024",
+      "bytes": 6396
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "f10bf11dabbe520f17e78aff91391faa5aab16c6bd784cce5e2ac289967e7014",
+      "bytes": 2269
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "19307eb2fc88b18f479a237434540982ab79d7dc2bf455af09054fe7a51c9784",
+      "bytes": 10434
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "b965714eb398759c595828bfdbff22862cff24207c1b813b58ccb63731c285cf",
+      "bytes": 2445
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "661272f8a473a1aaeb9f826d44ae5f3399f7157878c9ed761d9da80f443fe2a0",
+      "bytes": 30886
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "12bf08357b31300c0d425f45dc80958480b442d502365f529ef9a989696c49e6",
+      "bytes": 2463
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "959aad5e054e0b279de79f5f2855e6b483d15c559870310851715819dec926b0",
+      "bytes": 38688
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "c101258ac729c6e2528c4ecd73fc623fe89a75eaaf0b063a29555aa8a00235af",
+      "bytes": 2461
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "1d874011e8b5b7a67822b687a679d75ed2d1b9c0fd4fd897eb760b45f4117195",
+      "bytes": 40525
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz": {
+      "sha256": "91995cae3891d7942407ed782598700e750a2bbf479643209c26b83140a6b2a7",
+      "bytes": 2442
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1",
+      "bytes": 391658
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "5df266e403e1c1378261d25de60e978d4b3fb1cbb51038aa049856ede6490cbf",
+      "bytes": 17404
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin.gz": {
+      "sha256": "f11aa37c2b8654cb90f554cf7abd959d0cdc8ac5f88deecdfd54f90d8145baf5",
+      "bytes": 41267
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json.gz": {
+      "sha256": "ff015fecec65d1db2f7ac8a1bf2381ca32c8f21c82f189f8f4b948b7345b04ed",
+      "bytes": 2422
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/active-request-history.json.gz": {
+      "sha256": "ac341eec85824aef7bd356d89bf7f54b6029b5dadc4bb26e6446ffcf8e494912",
+      "bytes": 204
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json.gz": {
+      "sha256": "0e8c2df661357f02b47b5a287044f05f47acf67ddb24e4630779d0d5c716d4c7",
+      "bytes": 2679
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json.gz": {
+      "sha256": "c610b6b3c8e1dfa38bbff8074e6b7b66827a73264e801f0a389f2b7ea45aeadb",
+      "bytes": 2698
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json.gz": {
+      "sha256": "8c8027a5fd282da1cb2d17b77d99697ebf5fd849e79dc8a99ea2e5d7bb3ff7c3",
+      "bytes": 4905
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json.gz": {
+      "sha256": "7e8e71cd9a76f76fab4d177991da7729e4f7008cc016c0d97b5e80d03c3f99b9",
+      "bytes": 2684
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json.gz": {
+      "sha256": "3f6a08c34e848bb49afb624fc2804a459bb384a11bb65dd9c3289800b25a17d3",
+      "bytes": 749
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "c164db8965ff7be05687b43fcdd238434a7e4906bdd073d7bc4bdfb2bfa9a05e",
+      "bytes": 4792
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.json.gz": {
+      "sha256": "ff5e6defcb0e04f2723dfd86dec8dc873c4424afdd9d2446d10dcd331f5886a3",
+      "bytes": 2299
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "647bf7197990ec18d5a551565ef09729306eb25541660545d596e85fa5d7bb18",
+      "bytes": 6530
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.json.gz": {
+      "sha256": "075565cc325ee9ab1c27fdadcaa6b2bd951bbc6b6ab8946164ff69565e9afa31",
+      "bytes": 2361
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "6e0c6ace0a55c490a600ff097fb5679d921dd5031e0cb8c9fa08aa83aef5d3d1",
+      "bytes": 10393
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.json.gz": {
+      "sha256": "6ddf5e17c2f01832a2a6803bb3d3ecd8f0ec736c4a7dc7a7d5f85eb1ba8c6a1e",
+      "bytes": 2370
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-closed.bin": {
+      "sha256": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c",
+      "bytes": 111388
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-closed.json": {
+      "sha256": "f949c59b5b95af64ee8aadf98d3eecedf3ad1b8676cf59965aa73421f1419d7e",
+      "bytes": 13141
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin.gz": {
+      "sha256": "d25586fabc7b05423460f12542876ca48ed58804096e88bfe9227cc6e3ee5667",
+      "bytes": 12585
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.json.gz": {
+      "sha256": "571b50f782d817345435ae77746677f464d04ac6602d9347d8633457eaa3f42e",
+      "bytes": 2354
+    },
+    "requested-ray-point-two-loop-fixed/prediction-18-60-8.json": {
+      "sha256": "b80f6e38646f6f55a404c74c16ea1416b377910ad8c0d41364fbfe4ad951f2af",
+      "bytes": 159560
+    },
+    "requested-ray-point-two-loop-fixed/prediction-28-60-8.json": {
+      "sha256": "26c6c12a27b9196a62367c3bc223dc08be3a46034ef764b9b51b743741d3221f",
+      "bytes": 159620
+    },
+    "requested-ray-point-two-loop-fixed/prediction-28-80-12.json": {
+      "sha256": "cb65511b0d380eeb002ccea2b627106e3b50d2e1f6fc2a8de577e0e6fef5aac0",
+      "bytes": 159621
+    },
+    "requested-ray-point-two-loop-fixed/prediction-28-80-8.json": {
+      "sha256": "3cd6d5565826a3875e93fb33ca3dd7bbc2866a2ca7073d8df5f971413e2dfd6d",
+      "bytes": 159620
+    },
+    "requested-ray-point-two-loop-fixed-binding.json": {
+      "sha256": "160aab41209dee13d02507ec9a6da057cd7ae5eff18519bb8b1bdee39ee97852",
+      "bytes": 2442
+    },
+    "requested-ray-point-two-loop-fixed-comparison-binding.json": {
+      "sha256": "d6e3a14ff15d116d19fc665f5866c6aa253a7815f3ce72c4c865c2ab0bb66883",
+      "bytes": 12149
+    },
+    "requested-ray-point-two-loop-fixed-comparison.json": {
+      "sha256": "88af62bbac77d3853f9e4b52d02a182b0ddadccb537798db2e78a1dcc4c806a7",
+      "bytes": 52657
+    },
+    "requested-ray-point-two-loop-fixed-resources.json": {
+      "sha256": "5b2a25247161a386c3ee89eb2c9c2ab298b1336b5247413aead92e2522a09ae1",
+      "bytes": 459
+    },
+    "requested-ray-point-two-loop-fixed-resources.log.gz": {
+      "sha256": "e004c4f711bb2f920792840b3db913742d8ae126868809ec66645f2c03a7c8fb",
+      "bytes": 880
+    },
+    "requested-ray-point-two-loop-fixed-resources.provenance.json": {
+      "sha256": "2b151eca8fe8e763b5ff57c4e0a5b2c232cacb6a06db8bfc105f7850493c1448",
+      "bytes": 944
+    },
+    "requested-ray-point-two-loop-laurent/configuration.json": {
+      "sha256": "9a2ee0bdedf75e3be2ed5ba97774bd0d5f4a59096af644654ff7a6a5fe732dd9",
+      "bytes": 1341
+    },
+    "requested-ray-point-two-loop-laurent/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "bytes": 1057
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "a3abd8a0e36d8a6fa076963cf50e6293a8f7493d9bb3891a927eebb1e2ccb96c",
+      "bytes": 326
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "b1e29b4d2a909dfec8a0bae4137f64be42f6a9d873ff1565f0d4ec4f8b8d1505",
+      "bytes": 3474
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "0745c107066eb3bf1cd745c8d2b3922f7f958ce0ab0fbdcae19228f9e4e35fa8",
+      "bytes": 6289
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "135c5002eebba6b5c066f6ea36a732998e9541cc58098c9914c43d5dceef1f74",
+      "bytes": 9217
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "4a813c18cc997e6bc5293c6a26056bebcb7cc15e65e89c228d354b2be193a550",
+      "bytes": 8234
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "4fa1f48f9f20330faff68022dcc2c01eba7aa57f4cefe2e332bc774f81cefffa",
+      "bytes": 2623
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "11878824dddd542b775d549bf61b31e57c3986a69aa4b8b0049a09cd6441a839",
+      "bytes": 1916
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "bd4d2b009ce1b8cc35080d8cb5c828357ca44d9e49927303552137ee0cc30839",
+      "bytes": 1919
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "cb976f0b997bb7cd7cf4109b5b45263ec40bd6c208977e1a1f7a919f872de21c",
+      "bytes": 1141
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "7ebfa2a03c4f0a6e8c958b10ec37d85d4d60ce0fe174cf3a8d76d689e7f32a08",
+      "bytes": 855
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "351c2ad06355379c122a2fe93cc09041893780be84c09551e73224c639b0ee9f",
+      "bytes": 5297
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "e7f440ce36c151a03e9ef36fb8f85d1656ff8d114620ed15b3a8103db270d9af",
+      "bytes": 2390
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "7fc053b1080fadabf7d528e5fcfb5e8412c2dd859d4af545b5c02c2345fa5507",
+      "bytes": 8701
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "152aec00edeb11ca4733a99796934e618aa8cbbb0b9c3760e10ee967759b9561",
+      "bytes": 2484
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "7f8a87f6cd5d49279e9718b72b3f1275419185fdff3e699903f8ed4837625565",
+      "bytes": 13345
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "04866ec3338c5aa4d5879bd7f1a57c7b50f88b123ad17d1129c4816fe33f6e10",
+      "bytes": 2555
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "40a96ab9886b390ca1fe409bb84eb2f482e0aa9c7bf42812ef2d2de8cef8246e",
+      "bytes": 18408
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "977ff31a0d85f1ad386e27a1832d4e208943cf0bc56d6a6c4cb9a8941b39dac7",
+      "bytes": 2547
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "9b4db7a6c6be7a088ca3fb5332754768a90cdd10b86badaf490042e79c86d5e2",
+      "bytes": 19689
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "2a7c6fc6bd90b81e668d80f0c8bb16b033c55bdc67811a7ba8701799fe243b74",
+      "bytes": 2536
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "a5f54a352bb190ed6e8644d351297041db361a120a2bdcb7550db17b12c5d706",
+      "bytes": 20040
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "38fedef0d25c492fea0640e0d37714fbdc74fb26505eab537a6505f55539dbce",
+      "bytes": 2518
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "bd2620e731c5c8fa1ac10ac1eb845ced705bbdefd6b175ac74013e3672c47c6e",
+      "bytes": 20406
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "b166acc2a19e01a2998b6e794f0d1568aa37807da2d95056018be1b42e29bf35",
+      "bytes": 2517
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5",
+      "bytes": 178855
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "35f30030aae7cfaade6ff16a8e49512c8fcb9401d15312f22dbf148c462b3316",
+      "bytes": 16423
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "7a020e65d9e55e3c47b5c02da7df38bcf676cbbc4f35cd2392aed2bd67db2202",
+      "bytes": 20600
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.json.gz": {
+      "sha256": "e7de0afd3fb9fe9622ddfe8e1adfabda0271167072c194d044ad023c04bcb2ce",
+      "bytes": 2503
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/active-request-history.json.gz": {
+      "sha256": "ddbe7b2ec24c317160dc5b0421e820e1c7a2df3bb52786b7495e74894eabdbc8",
+      "bytes": 296
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "33d40a62446fd4071dd437df2f16cd80887ea6a8fcd06060c8d31de231b3d79c",
+      "bytes": 15918
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "d0693f81713c08ee5d208fd20cbfd41ce8d674d671e2b177179627c76c66a6b4",
+      "bytes": 31441
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "a16e22b1ff55d28bf726adeb8b3ce8df7e72b7d4c45464258e0fd0491e02e34d",
+      "bytes": 87577
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "4482d41a0eb71ef1e9d68511b085edbcbb4c86f03e3af97653d12ca14abd5c3e",
+      "bytes": 41331
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "52a9eb04f994c89b01807dd6d4f71f32951fe8f93c1e757dd6405cdc7d4d7f59",
+      "bytes": 15868
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "c33dda9a15ebdc690e19bb1a15eedc74964db815834178a0fe637df33c7e9fa6",
+      "bytes": 5586
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "d64f63c2c727c7c59f0790075c7e85f22c2b735176cfbee090264c9c498e1550",
+      "bytes": 325
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "772b911d170422191d1df5a6ca1123ba384c2f1ac83085d26f765f55916782a6",
+      "bytes": 2999
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json.gz": {
+      "sha256": "c737380f62a28c9437f299c471436abc47c7cb4162fcc18615954e6695f111d9",
+      "bytes": 167
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "e5b0d2c4aadebc6ce594dc6d763657872b2a5205c09f86a6562433b595f62024",
+      "bytes": 6396
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "f10bf11dabbe520f17e78aff91391faa5aab16c6bd784cce5e2ac289967e7014",
+      "bytes": 2269
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "19307eb2fc88b18f479a237434540982ab79d7dc2bf455af09054fe7a51c9784",
+      "bytes": 10434
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "b965714eb398759c595828bfdbff22862cff24207c1b813b58ccb63731c285cf",
+      "bytes": 2445
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "661272f8a473a1aaeb9f826d44ae5f3399f7157878c9ed761d9da80f443fe2a0",
+      "bytes": 30886
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "12bf08357b31300c0d425f45dc80958480b442d502365f529ef9a989696c49e6",
+      "bytes": 2463
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "959aad5e054e0b279de79f5f2855e6b483d15c559870310851715819dec926b0",
+      "bytes": 38688
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "c101258ac729c6e2528c4ecd73fc623fe89a75eaaf0b063a29555aa8a00235af",
+      "bytes": 2461
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "1d874011e8b5b7a67822b687a679d75ed2d1b9c0fd4fd897eb760b45f4117195",
+      "bytes": 40525
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz": {
+      "sha256": "91995cae3891d7942407ed782598700e750a2bbf479643209c26b83140a6b2a7",
+      "bytes": 2442
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1",
+      "bytes": 391658
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "5df266e403e1c1378261d25de60e978d4b3fb1cbb51038aa049856ede6490cbf",
+      "bytes": 17404
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin.gz": {
+      "sha256": "f11aa37c2b8654cb90f554cf7abd959d0cdc8ac5f88deecdfd54f90d8145baf5",
+      "bytes": 41267
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json.gz": {
+      "sha256": "ff015fecec65d1db2f7ac8a1bf2381ca32c8f21c82f189f8f4b948b7345b04ed",
+      "bytes": 2422
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/active-request-history.json.gz": {
+      "sha256": "ac341eec85824aef7bd356d89bf7f54b6029b5dadc4bb26e6446ffcf8e494912",
+      "bytes": 204
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json.gz": {
+      "sha256": "0e8c2df661357f02b47b5a287044f05f47acf67ddb24e4630779d0d5c716d4c7",
+      "bytes": 2679
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json.gz": {
+      "sha256": "c610b6b3c8e1dfa38bbff8074e6b7b66827a73264e801f0a389f2b7ea45aeadb",
+      "bytes": 2698
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json.gz": {
+      "sha256": "8c8027a5fd282da1cb2d17b77d99697ebf5fd849e79dc8a99ea2e5d7bb3ff7c3",
+      "bytes": 4905
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json.gz": {
+      "sha256": "7e8e71cd9a76f76fab4d177991da7729e4f7008cc016c0d97b5e80d03c3f99b9",
+      "bytes": 2684
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json.gz": {
+      "sha256": "3f6a08c34e848bb49afb624fc2804a459bb384a11bb65dd9c3289800b25a17d3",
+      "bytes": 749
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "c164db8965ff7be05687b43fcdd238434a7e4906bdd073d7bc4bdfb2bfa9a05e",
+      "bytes": 4792
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.json.gz": {
+      "sha256": "ff5e6defcb0e04f2723dfd86dec8dc873c4424afdd9d2446d10dcd331f5886a3",
+      "bytes": 2299
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "647bf7197990ec18d5a551565ef09729306eb25541660545d596e85fa5d7bb18",
+      "bytes": 6530
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.json.gz": {
+      "sha256": "075565cc325ee9ab1c27fdadcaa6b2bd951bbc6b6ab8946164ff69565e9afa31",
+      "bytes": 2361
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "6e0c6ace0a55c490a600ff097fb5679d921dd5031e0cb8c9fa08aa83aef5d3d1",
+      "bytes": 10393
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.json.gz": {
+      "sha256": "6ddf5e17c2f01832a2a6803bb3d3ecd8f0ec736c4a7dc7a7d5f85eb1ba8c6a1e",
+      "bytes": 2370
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-closed.bin": {
+      "sha256": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c",
+      "bytes": 111388
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-closed.json": {
+      "sha256": "f949c59b5b95af64ee8aadf98d3eecedf3ad1b8676cf59965aa73421f1419d7e",
+      "bytes": 13141
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin.gz": {
+      "sha256": "d25586fabc7b05423460f12542876ca48ed58804096e88bfe9227cc6e3ee5667",
+      "bytes": 12585
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.json.gz": {
+      "sha256": "571b50f782d817345435ae77746677f464d04ac6602d9347d8633457eaa3f42e",
+      "bytes": 2354
+    },
+    "requested-ray-point-two-loop-laurent/prediction-18-60-8-grid-1000.json": {
+      "sha256": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+      "bytes": 1028
+    },
+    "requested-ray-point-two-loop-laurent/prediction-28-60-8-grid-1000.json": {
+      "sha256": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+      "bytes": 1088
+    },
+    "requested-ray-point-two-loop-laurent/prediction-28-80-12-grid-1000.json": {
+      "sha256": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+      "bytes": 1089
+    },
+    "requested-ray-point-two-loop-laurent/prediction-28-80-12-grid-2000.json": {
+      "sha256": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74",
+      "bytes": 1089
+    },
+    "requested-ray-point-two-loop-laurent/prediction-28-80-8-grid-1000.json": {
+      "sha256": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+      "bytes": 1088
+    },
+    "requested-ray-point-two-loop-laurent-binding.json": {
+      "sha256": "e56439d04569374909042370f95a44e12fe4dfea4670af7758d7d2d9b0106060",
+      "bytes": 2442
+    },
+    "requested-ray-point-two-loop-laurent-comparison-binding.json": {
+      "sha256": "78769874ecbe152943b0106213eb14084757a39a448239c1d59f7f0ef326c41e",
+      "bytes": 12831
+    },
+    "requested-ray-point-two-loop-laurent-comparison.json": {
+      "sha256": "b239e41b5d5301df0aea9c8a5bb3e20abf2c9ff09d11fb753b0a87678234bfe5",
+      "bytes": 50618
+    },
+    "requested-ray-point-two-loop-laurent-resources.json": {
+      "sha256": "af5b7ca4aaf863d3be0c23c1abcc9b88f8c4fd0767d2989eeeccaf60ce8f6fdc",
+      "bytes": 459
+    },
+    "requested-ray-point-two-loop-laurent-resources.log.gz": {
+      "sha256": "c24ede7ae302e4d4dc3261d821f17204696697162fd1426f1c3c36df764393f4",
+      "bytes": 4269
+    },
+    "requested-ray-point-two-loop-laurent-resources.provenance.json": {
+      "sha256": "0c19f753c140859db14f20672dd084865307f96202c6b9526d55bb8080aaae37",
+      "bytes": 942
+    },
+    "reuse-native-gate.py": {
+      "sha256": "0ef30dd75361dbf94535cc1a7d16cc5bef5455cd0fd07243070908ad7f0e55fc",
+      "bytes": 3286
+    },
+    "run-frozen-root-gate.py": {
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+      "bytes": 4005
+    },
+    "run-massive-regression.py": {
+      "sha256": "c0a2a62b9bdf3a3882e058e46a513ac837ed41db66b865ed2dfdb6b354ef220f",
+      "bytes": 4627
+    },
+    "run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    "run-root-gates.py": {
+      "sha256": "9457514b4626abcf846a56fbd61bee006d4dabb8ec496356b9089629dde0959b",
+      "bytes": 967
+    },
+    "run-three-loop-double-residual-control.py": {
+      "sha256": "62dc8176fe99d2f5a266030038e36bde44bd7f9351ef02e20079b0621faa2db9",
+      "bytes": 6918
+    },
+    "run-three-loop-gate.py": {
+      "sha256": "d3a93b75230bc5156d0818ade6106742b1b248c5f09fa2f73a991c1ab498388f",
+      "bytes": 5518
+    },
+    "run-three-loop-single3-residual-control.py": {
+      "sha256": "e6c59ab6da691d928d7cb2948eb3e48f3b4338f060802ee6c28cd27de6d378e6",
+      "bytes": 7042
+    },
+    "run-two-loop-gate.py": {
+      "sha256": "b1af76c7806e5d7e7b0193385ed325d930ea3230ac54b767d796b11df5342f10",
+      "bytes": 4811
+    },
+    "single3-residual-control-plan.json": {
+      "sha256": "6b1fab726c37a04c28d31731e4376ea9d5768d08a5ce8eaab651127407f31915",
+      "bytes": 588
+    },
+    "summarize-checkpoint.py": {
+      "sha256": "5e96402c0e47119e87e389d951e6183227b7ad0fc34e92a280464597c327e189",
+      "bytes": 8557
+    },
+    "summarize-frozen-root-gates.py": {
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+      "bytes": 4149
+    },
+    "summarize-lower-loop-regressions.py": {
+      "sha256": "4fadbf83225b848c9aab48823396cfc4c53f02d9f482993e87585e9b59bb44f1",
+      "bytes": 5441
+    }
+  },
+  "file_count": 454,
+  "bytes": 22402391
+}

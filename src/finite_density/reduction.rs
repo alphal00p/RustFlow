@@ -21,6 +21,9 @@ use crate::reduction::{LinearCombination, ReducedSystem};
 use crate::{DifferentialSystem, Error, Integral, Progress, Result, RunContext};
 
 mod active;
+mod requested;
+#[cfg(test)]
+mod requested_tests;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AuxiliaryConvention {
@@ -210,6 +213,15 @@ pub struct ConditionalPointRefinement {
     pub allocated_domains: usize,
 }
 
+/// Bounded native searches at each explicitly requested label. A symbolic ray
+/// is followed by an exact-point search only when its native application misses.
+/// This schedules the existing source-replayed reducer; it changes no identities.
+#[derive(Clone, Copy, Debug, Serialize)]
+pub struct RequestedRayPointOptions {
+    pub max_domains_per_ray: usize,
+    pub max_domains_per_point: usize,
+}
+
 #[derive(Clone, Debug)]
 pub struct WeightedClosureOptions {
     pub max_rounds: usize,
@@ -243,13 +255,17 @@ pub struct WeightedClosureOptions {
     /// Existing rules take precedence so adding rules preserves old rewrites.
     /// Zero keeps the original multi-domain search policy.
     pub max_domains_per_residual: usize,
+    /// Optional explicit-request ray/point schedule, with empty stopping sets.
+    /// Requires active closure and retained rules. Mutually exclusive with
+    /// residual allocation, interval refinement and requested-priority hints.
+    pub requested_ray_point: Option<RequestedRayPointOptions>,
     /// Rebuild the needed integral module from original target sums after each
     /// native rule update. Historical requests remain bounded evidence, rather
-    /// than additional targets. Requires residual discovery and rule retention.
+    /// than additional targets. Requires a retained residual or requested-point schedule.
     pub active_target_closure: bool,
     /// Native one-source zero proofs at requested concrete points before
     /// ordinary discovery. A per-call attempt cap; zero disables the prepass.
-    /// Requires residual discovery. Completed point searches are memoized.
+    /// Requires a retained discovery schedule. Completed point searches are memoized.
     pub max_direct_zero_attempts: usize,
     /// A distinct directory per source/deformation context. Each round stores
     /// its exact native program plus explicitly provisional/closed metadata.
@@ -275,6 +291,7 @@ impl Default for WeightedClosureOptions {
             prioritize_requested_indices: false,
             max_reused_rules: 0,
             max_domains_per_residual: 0,
+            requested_ray_point: None,
             active_target_closure: false,
             max_direct_zero_attempts: 0,
             checkpoints: None,
@@ -305,6 +322,11 @@ pub struct WeightedClosureDiagnostics {
     pub residual_search_requests: usize,
     /// Conservative allocations, which can exceed actual native domain visits.
     pub residual_allocated_domains: usize,
+    pub requested_ray_point_calls: usize,
+    /// Conservatively allocated caps, not measured native visits.
+    pub requested_ray_point_allocated_domains: usize,
+    pub requested_ray_point_fallbacks: usize,
+    pub requested_ray_point_deferred: usize,
     /// Exact-point searches for native vanishing guards, separate from finite
     /// axis subdivisions. Failed searches never install a terminal or zero.
     pub conditional_point_refinements: Vec<ConditionalPointRefinement>,
@@ -396,16 +418,42 @@ pub fn prepare_weighted_system<const N: usize>(
             "residual-focused discovery requires retained rules and requested index rays".into(),
         ));
     }
+    if let Some(schedule) = options.requested_ray_point {
+        if schedule.max_domains_per_ray == 0
+            || schedule.max_domains_per_point == 0
+            || schedule
+                .max_domains_per_ray
+                .checked_add(schedule.max_domains_per_point)
+                .is_none()
+            || options.discovery.max_domains == 0
+            || !options.active_target_closure
+            || !options.search_frontier_sectors
+            || !options.requested_index_rays
+            || options.max_reused_rules == 0
+            || options.max_domains_per_residual != 0
+            || options.guard_refinement.max_passes != 0
+            || options.prioritize_requested_indices
+        {
+            return Err(Error::InvalidInput(
+                "requested ray/point discovery needs positive bounded allocations, active frontier closure, requested rays and retained rules; residual allocation, guard refinement and priority hints must be disabled".into(),
+            ));
+        }
+    }
     if options.active_target_closure
-        && (options.max_domains_per_residual == 0 || !options.search_frontier_sectors)
+        && ((options.max_domains_per_residual == 0 && options.requested_ray_point.is_none())
+            || !options.search_frontier_sectors)
     {
         return Err(Error::InvalidInput(
-            "active target closure requires residual discovery and frontier searches".into(),
+            "active target closure requires a retained discovery schedule and frontier searches"
+                .into(),
         ));
     }
-    if options.max_direct_zero_attempts > 0 && options.max_domains_per_residual == 0 {
+    if options.max_direct_zero_attempts > 0
+        && options.max_domains_per_residual == 0
+        && options.requested_ray_point.is_none()
+    {
         return Err(Error::InvalidInput(
-            "direct zero discovery requires residual discovery and retained rules".into(),
+            "direct zero discovery requires a retained discovery schedule".into(),
         ));
     }
     if context.physical_arity() != deformation.physical_arity {
@@ -555,6 +603,8 @@ pub fn prepare_weighted_system<const N: usize>(
             &found.program,
             &requested,
             &frontier,
+            None,
+            run,
         )?;
         if !failures.is_empty() {
             return Ok(unclosed(
@@ -703,6 +753,8 @@ pub fn prepare_weighted_system<const N: usize>(
                 &final_found.program,
                 &requested,
                 &frontier,
+                None,
+                run,
             )?;
             return Ok(WeightedClosureOutcome::Closed(WeightedReducedSystem {
                 reduced: ReducedSystem {
@@ -748,26 +800,17 @@ type HistoricalDiscoveryGaps<const N: usize> =
     BTreeMap<([[Option<i64>; 2]; N], String), GuardedUnresolved<N>>;
 
 #[allow(clippy::too_many_arguments)]
-fn discover_with_refinement<const N: usize>(
+fn discover_direct_zeros<const N: usize>(
     context: &GuardedContext<N>,
-    domains: &[IndexDomain<N>],
     terminals: &[[i64; N]],
     requested: &BTreeSet<[i64; N]>,
     deformation: &FixedShellDeformation<N>,
     options: &WeightedClosureOptions,
-    learned: &mut Vec<IndexDomain<N>>,
     retained: &mut Option<GuardedReductionProgram<N>>,
     historical_gaps: &mut HistoricalDiscoveryGaps<N>,
     diagnostics: &mut WeightedClosureDiagnostics,
-    conditions: &mut BTreeMap<String, Atom>,
     run: &RunContext,
-) -> Result<GuardedDiscovery<N>> {
-    let residual_policy = options.max_domains_per_residual > 0;
-    let mut remaining_domains = options.discovery.max_domains;
-    // The source corpus and point-search options are immutable during this
-    // call. An unsuccessful exact-point search cannot gain coverage by being
-    // repeated in every refinement pass.
-    let mut attempted_guard_points = BTreeSet::new();
+) -> Result<()> {
     let current_terminals = terminals.iter().copied().collect::<BTreeSet<_>>();
     if options.max_direct_zero_attempts > 0 {
         let points = requested
@@ -784,11 +827,13 @@ fn discover_with_refinement<const N: usize>(
             deformation.validate_integral(point)?;
         }
         if !points.is_empty() {
+            run.cancellation.check()?;
             let zero = context.discover_direct_zeros(
                 &points,
                 terminals.iter().copied(),
                 options.max_direct_zero_attempts,
             )?;
+            run.cancellation.check()?;
             let rule_count = zero.discovery.program.native().rules().len();
             if rule_count > options.max_reused_rules {
                 return Err(Error::Limit(
@@ -840,6 +885,42 @@ fn discover_with_refinement<const N: usize>(
             }
         }
     }
+    Ok(())
+}
+
+#[allow(clippy::too_many_arguments)]
+fn discover_with_refinement<const N: usize>(
+    context: &GuardedContext<N>,
+    domains: &[IndexDomain<N>],
+    terminals: &[[i64; N]],
+    requested: &BTreeSet<[i64; N]>,
+    deformation: &FixedShellDeformation<N>,
+    options: &WeightedClosureOptions,
+    learned: &mut Vec<IndexDomain<N>>,
+    retained: &mut Option<GuardedReductionProgram<N>>,
+    historical_gaps: &mut HistoricalDiscoveryGaps<N>,
+    diagnostics: &mut WeightedClosureDiagnostics,
+    conditions: &mut BTreeMap<String, Atom>,
+    run: &RunContext,
+) -> Result<GuardedDiscovery<N>> {
+    let residual_policy = options.max_domains_per_residual > 0;
+    let mut remaining_domains = options.discovery.max_domains;
+    // The source corpus and point-search options are immutable during this
+    // call. An unsuccessful exact-point search cannot gain coverage by being
+    // repeated in every refinement pass.
+    let mut attempted_guard_points = BTreeSet::new();
+    let current_terminals = terminals.iter().copied().collect::<BTreeSet<_>>();
+    discover_direct_zeros(
+        context,
+        terminals,
+        requested,
+        deformation,
+        options,
+        retained,
+        historical_gaps,
+        diagnostics,
+        run,
+    )?;
     for pass in 0..=options.guard_refinement.max_passes {
         run.cancellation.check()?;
         let (search_requests, guard_points) = if residual_policy {
@@ -1347,6 +1428,8 @@ fn checkpoint<const N: usize>(
     program: &GuardedReductionProgram<N>,
     requested: &BTreeSet<[i64; N]>,
     frontier: &[[i64; N]],
+    active_state: Option<&serde_json::Value>,
+    run: &RunContext,
 ) -> Result<()> {
     let Some(directory) = options.checkpoints.as_deref() else {
         return Ok(());
@@ -1356,7 +1439,11 @@ fn checkpoint<const N: usize>(
     let base = format!("round-{round:03}-{tag}");
     let program_path = directory.join(format!("{base}.bin"));
     let temporary = directory.join(format!("{base}.bin.part"));
-    std::fs::write(&temporary, program.encode(Default::default())?)?;
+    let program_bytes = program.encode(Default::default())?;
+    run.cancellation.check()?;
+    let program_digest = blake3::hash(&program_bytes).to_hex().to_string();
+    std::fs::write(&temporary, &program_bytes)?;
+    run.cancellation.check()?;
     std::fs::rename(temporary, program_path)?;
     let metadata = serde_json::json!({ "schema": 1, "round": round, "status": tag,
         "measure_id": program.native().sources().measure_id(),
@@ -1366,11 +1453,21 @@ fn checkpoint<const N: usize>(
         "prioritize_requested_indices":options.prioritize_requested_indices,
         "max_reused_rules":options.max_reused_rules,
         "max_domains_per_residual":options.max_domains_per_residual,
+        "requested_ray_point":options.requested_ray_point,
+        "discovery_schedule":if options.requested_ray_point.is_some() { "requested-ray-point-v1" } else { "legacy" },
+        "program_blake3":program_digest, "program_bytes":program_bytes.len(),
+        "discovery":{"max_depth":options.discovery.max_depth,
+            "max_domains":options.discovery.max_domains,"sample_seed":options.discovery.sample_seed},
+        "application":{"max_rule_applications":options.application.max_rule_applications,
+            "max_pending_integrals":options.application.max_pending_integrals},
+        "active_state":active_state,
+        "max_rounds":options.max_rounds, "max_frontier":options.max_frontier,
+        "max_requested":options.max_requested,
         "active_target_closure":options.active_target_closure,
         "max_direct_zero_attempts":options.max_direct_zero_attempts,
         "rule_precedence":if options.max_direct_zero_attempts > 0 {
             "new direct zeros, retained rules, ordinary fresh rules"
-        } else if options.max_domains_per_residual > 0 { "retained-first" } else { "fresh-first" },
+        } else if options.max_domains_per_residual > 0 || options.requested_ray_point.is_some() { "retained-first" } else { "fresh-first" },
         "native_rule_count":program.native().rules().len(),
         "requested": requested.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>(),
         "frontier": frontier.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>() });
@@ -1380,6 +1477,7 @@ fn checkpoint<const N: usize>(
         &temporary,
         serde_json::to_vec_pretty(&metadata).map_err(|e| Error::Cache(e.to_string()))?,
     )?;
+    run.cancellation.check()?;
     std::fs::rename(temporary, path)?;
     Ok(())
 }

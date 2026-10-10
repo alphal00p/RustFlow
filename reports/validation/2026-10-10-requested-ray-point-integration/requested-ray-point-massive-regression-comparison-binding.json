@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "scope": "One D12/5 28:80:12 massive profile, vacuum/all cuts/full amplitude for both targets; independent reference and historical comparison. No new precision refinement claim.",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py",
+    "--predictions",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression",
+    "--output",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-comparison.json"
+  ],
+  "native_provenance": {
+    "executable_sha256": "136eb66a829f3d96e20568b0c5444ed2104e996a96c61077ce65ef2f8bb357da",
+    "source_snapshot_sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+      "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+      "PORT_SOURCE_DIGEST": "c49479ab66da60033d84291bbc81f8bc8271371c7cf7a1188dac9386ef9887cb"
+    },
+    "configuration": {
+      "source_options": {
+        "free_virtual_zero_sectors": false,
+        "policy": "polynomial-closure-v1",
+        "positive_compact_energy_powers": false
+      },
+      "guard_digits": 40,
+      "native_closure": "WeightedClosureOptions { max_rounds: 12, max_frontier: 256, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 3, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: false, requested_index_rays: false, prioritize_requested_indices: false, max_reused_rules: 0, max_domains_per_residual: 0, requested_ray_point: None, active_target_closure: false, max_direct_zero_attempts: 0, checkpoints: None }"
+    },
+    "closed_metadata": [
+      {
+        "cut_slots": [
+          0
+        ],
+        "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.json",
+        "sha256": "9f2337838397996a4af55e27a7c8776107b09630007afd783f26c5fa09d27a35",
+        "proof_path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.bin",
+        "proof_sha256": "84db15100e802ef889a51cc7b9adf3b79f99fc726e8797475a9d2ca9aa561280",
+        "program_blake3_verified": "30de8db6a84b3ff3b95e43e454f94b64fbe38577b544470fe2d196604ae312b2",
+        "program_bytes_verified": 267137,
+        "requested_discovery": null
+      },
+      {
+        "cut_slots": [
+          1
+        ],
+        "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.json",
+        "sha256": "5c98a473168de12ba4bab256aacb3e74380ff1211c94b956865a536cd5417131",
+        "proof_path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.bin",
+        "proof_sha256": "7f0a72287d938ff81e94f4f0808f5286b3fb9b51e072fb20ef753aa6c2b75330",
+        "program_blake3_verified": "195e0a8a0f73b2c2316bee93b42d18cfbb6d2dab6f1c85e3eb643b3e5a2ac03f",
+        "program_bytes_verified": 520750,
+        "requested_discovery": null
+      },
+      {
+        "cut_slots": [
+          0,
+          1
+        ],
+        "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.json",
+        "sha256": "e29fcf0b2d25fb93bdcc0998341aa9ab8a1ebed0e7c700319d0a31dde0391cfb",
+        "proof_path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.bin",
+        "proof_sha256": "63595a78843a40b86af0db207df37fcba627af148e933ddfe35e21e3617ca2dc",
+        "program_blake3_verified": "03f082d9c8eec923dd3c8c74d8d68c41cea899c8773c0dc6b43788ca359e331d",
+        "program_bytes_verified": 1352738,
+        "requested_discovery": null
+      }
+    ],
+    "native_digest_tool": {
+      "record_sha256": "8715e13405335297d0c3c0bfbbc22a47a2adaa8408db8a99c86c9b417a528f10",
+      "path": "/tmp/rustflow-requested-ray-point-digest",
+      "sha256": "e1bd31743da665c826419e73501d2f3cdeb85986918cb08f1c8da249dd14a755"
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-requested-ray-point-integration/native-digest-build.json": "8715e13405335297d0c3c0bfbbc22a47a2adaa8408db8a99c86c9b417a528f10",
+    "reports/validation/2026-10-10-requested-ray-point-integration/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "reports/validation/2026-10-10-requested-ray-point-integration/build-native-digest.py": "3e06fb1ebcc2d10d25aa1bbce9fbe841e0f01645fd8f8e5be67b0edec7ba9124",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-binding.json": "ac5f27cdbd5e02956a340c04988a1b05982c2714b49291699d9a60e9d732e804",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.json": "4be78867441c048d56f8c318035aa3a72d591f51d7a7d7bcc656172ae7cfe426",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.provenance.json": "53ba12aa95e6ae29aa2d0fc8b1ce86c175236cda99914803f72189023798ea9d",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/configuration.json": "e82c1088b37ad7c8f7ccbdc97bee7a5332f247605917938db4f6ca3f3b4cad43",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/input.json": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/prediction-28-80-12.json": "8dbfa298bb97fc887f19495b974ec37cb500fc601e164605c1dbb49f98c6c014",
+    "reports/validation/2026-10-10-requested-ray-point-integration/compare-completed-predictions.py": "32cff7c2785304d6372dba72dd2d5ac3b2d7e016db4e043b228b72ed55d32883",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.json": "9f2337838397996a4af55e27a7c8776107b09630007afd783f26c5fa09d27a35",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.bin": "84db15100e802ef889a51cc7b9adf3b79f99fc726e8797475a9d2ca9aa561280",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.json": "5c98a473168de12ba4bab256aacb3e74380ff1211c94b956865a536cd5417131",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.bin": "7f0a72287d938ff81e94f4f0808f5286b3fb9b51e072fb20ef753aa6c2b75330",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.json": "e29fcf0b2d25fb93bdcc0998341aa9ab8a1ebed0e7c700319d0a31dde0391cfb",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.bin": "63595a78843a40b86af0db207df37fcba627af148e933ddfe35e21e3617ca2dc",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e",
+    "reports/validation/2026-10-10-requested-ray-point-integration/comparison-plan.json": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c"
+  },
+  "definitions_and_tolerances_changed": false,
+  "production_modified": false,
+  "exit_code": 0,
+  "comparison_sha256": "ae01a52cb045950d0d6dc92861fe9d980a4b9222eaf9c336168fb96299619061"
+}

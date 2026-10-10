@@ -1,0 +1,2477 @@
+{
+  "schema": 1,
+  "scope": "Completed verbose native payloads and logs only. Inputs, configuration, predictions, comparison reports, final closed proofs and the completed three-loop cut-0 transaction/provisional chain are retained raw. No proof or numerical value is modified.",
+  "runs": [
+    "two-loop-fixed",
+    "two-loop-laurent",
+    "massive-regression",
+    "three-loop-fixed",
+    "three-loop-double",
+    "three-loop-double-residual-control",
+    "three-loop-single3-residual-control"
+  ],
+  "gzip_mtime": 0,
+  "compression_level": 9,
+  "reader_release_explicit": true,
+  "preserved_raw": {
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.bin": {
+      "sha256": "84db15100e802ef889a51cc7b9adf3b79f99fc726e8797475a9d2ca9aa561280",
+      "bytes": 267137
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0/round-002-closed.json": {
+      "sha256": "9f2337838397996a4af55e27a7c8776107b09630007afd783f26c5fa09d27a35",
+      "bytes": 6237
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.bin": {
+      "sha256": "63595a78843a40b86af0db207df37fcba627af148e933ddfe35e21e3617ca2dc",
+      "bytes": 1352738
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-closed.json": {
+      "sha256": "e29fcf0b2d25fb93bdcc0998341aa9ab8a1ebed0e7c700319d0a31dde0391cfb",
+      "bytes": 10276
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.bin": {
+      "sha256": "7f0a72287d938ff81e94f4f0808f5286b3fb9b51e072fb20ef753aa6c2b75330",
+      "bytes": 520750
+    },
+    "requested-ray-point-massive-regression/native-closure/cut-1/round-002-closed.json": {
+      "sha256": "5c98a473168de12ba4bab256aacb3e74380ff1211c94b956865a536cd5417131",
+      "bytes": 10725
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0016.json": {
+      "sha256": "81adfaf44b6ae06b630dd2bb32fba32ef2c51f13d306466cb0d7e884a3882980",
+      "bytes": 97126
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.bin": {
+      "sha256": "400eea4470408221f3110448e7999a26ed008ffb248d151be2013e4c1050469a",
+      "bytes": 2749095
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.json": {
+      "sha256": "228e69acb192af810ac573d357b0a6e36dfa962e4d3fbd7fd2f93978d4a28bca",
+      "bytes": 488346
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.bin": {
+      "sha256": "46efc446d5a66bbd351a583f866b44aeb3329c0025804d4fd1a42ef743d34d44",
+      "bytes": 2749004
+    },
+    "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.json": {
+      "sha256": "7489918649aa00b3b3c57c1dbbd152f4b37ad6d535e1e99c2f2eac944ba04808",
+      "bytes": 488351
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5",
+      "bytes": 178855
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "35f30030aae7cfaade6ff16a8e49512c8fcb9401d15312f22dbf148c462b3316",
+      "bytes": 16423
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1",
+      "bytes": 391658
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "5df266e403e1c1378261d25de60e978d4b3fb1cbb51038aa049856ede6490cbf",
+      "bytes": 17404
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-closed.bin": {
+      "sha256": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c",
+      "bytes": 111388
+    },
+    "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-closed.json": {
+      "sha256": "f949c59b5b95af64ee8aadf98d3eecedf3ad1b8676cf59965aa73421f1419d7e",
+      "bytes": 13141
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5",
+      "bytes": 178855
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "35f30030aae7cfaade6ff16a8e49512c8fcb9401d15312f22dbf148c462b3316",
+      "bytes": 16423
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1",
+      "bytes": 391658
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "5df266e403e1c1378261d25de60e978d4b3fb1cbb51038aa049856ede6490cbf",
+      "bytes": 17404
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-closed.bin": {
+      "sha256": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c",
+      "bytes": 111388
+    },
+    "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-closed.json": {
+      "sha256": "f949c59b5b95af64ee8aadf98d3eecedf3ad1b8676cf59965aa73421f1419d7e",
+      "bytes": 13141
+    }
+  },
+  "entries": [
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0/guard-refinements.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0/guard-refinements.json.gz",
+      "original_sha256": "6728ebdf3a90dbfa027937f972fd2b1fc0d59a70a5c53a7e6ad5012bd77192f7",
+      "archive_sha256": "1bfaa7bfa5fc8f44c1196e0e9b5e752e8ad19bae062bf32a58d225fb4e34b366",
+      "original_bytes": 6275,
+      "archive_bytes": 513
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_sha256": "c699e86a57df9f19872275553b67494356a9101e9f39e29104af7f35d6665d35",
+      "archive_sha256": "8ddcbe46ebc01221e59183d21824378a8763d7191951050bd6d338d07cdf04f2",
+      "original_bytes": 125481,
+      "archive_bytes": 14988
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_sha256": "e75c938faa1cf5b9633ed2e7abef8d97db2a9bf41ee5f620e682433259eaf32d",
+      "archive_sha256": "2b8881cf3965e43235517b036b2de3730bbfaa72d4148562b498b50cfa29af1f",
+      "original_bytes": 4353,
+      "archive_bytes": 1523
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_sha256": "5cbc642e0356d948cdc71503f5f701ed3c24afbc71776a65d9f0fe87fb190620",
+      "archive_sha256": "0e0f7ee99226dd87d8e2d36ac4d3f23d91cc3d74ea78af9f3bce15b74a781c8b",
+      "original_bytes": 260693,
+      "archive_bytes": 36167
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_sha256": "25860cf06e1905b9c92702c593a7c9ff9f1a2127b2bd35d2cb9a5da13bc7b26a",
+      "archive_sha256": "2fd894cf5fdbc769fe9b20b40eb821620de15aac5586b5f108325de89448b132",
+      "original_bytes": 6242,
+      "archive_bytes": 1607
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_sha256": "7d7fccaff24968a69684837d71401d0ba242d73f52b6e5ec342aa858348d459d",
+      "archive_sha256": "49bf40380191c8cb7e17f3e5f408119a3cf7800f6b878f18237c580e5a1ba489",
+      "original_bytes": 267089,
+      "archive_bytes": 37260
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_sha256": "aed3558828c887c338d9ea967d2b8cab6ffdd914b02a22a88809ed3b9765611a",
+      "archive_sha256": "5aba7742ac61c0bf01b96246e576d6ef536707b2780e71fe64dc2869dd98771e",
+      "original_bytes": 6242,
+      "archive_bytes": 1609
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_sha256": "6213808e355e162ada45e6371d780ec38e1c5fd1d09042ecbc862a3e954806e9",
+      "archive_sha256": "abc9aa83808f1383daa579d8a08211aa30ff5a8f169b0f3b242d97166bf021c9",
+      "original_bytes": 40343,
+      "archive_bytes": 981
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_sha256": "ad6b32c5dfa0791ca23d4c43fb7e1e4bbe6c9ac776f1de28b6c1edfd1c75c7c9",
+      "archive_sha256": "ddddc5c802d72537b23908be7476507ad4e4f1801fae6d5ece36612b2c5c1bf7",
+      "original_bytes": 356165,
+      "archive_bytes": 29301
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_sha256": "f8d877fb443e59ad67ab42787252be5da9ce1774e75ae9ac4c6492b7af4a6b40",
+      "archive_sha256": "f32605120083329cad224713beff7e2e5eca94c5d5f43db853f84325cd91fee4",
+      "original_bytes": 8222,
+      "archive_bytes": 1696
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_sha256": "2e70f28a8a0bea81df731e4de5a02f1c3754ee2f27eb9bff0eaa41bb77bb8c6b",
+      "archive_sha256": "d48820c476de85ea36d0cb7e63b85c58212a76bda6135f8ccbca6964ff9b0f75",
+      "original_bytes": 1352658,
+      "archive_bytes": 163045
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_sha256": "906a2952f3910c8ca959bcc6aab28f3029d03676d24f385c386193f454a43d09",
+      "archive_sha256": "d8fda3041d1afa0dc682d0a9fe9d08d8ab05b3cdc3968ab439de4c1208288b4b",
+      "original_bytes": 10281,
+      "archive_bytes": 1762
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-1/guard-refinements.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-1/guard-refinements.json.gz",
+      "original_sha256": "c96ed47ca1cc31e15afa5a9667300d328026e6b6d85a64276a75151ffb5c11db",
+      "archive_sha256": "4701e9c623f51cd68160d8fcd9d3d866702f3a00be518a5b35204e1873471481",
+      "original_bytes": 6251,
+      "archive_bytes": 474
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_sha256": "8f2a9986b692402aae5d08d61b85d1ef24c693d62642402227cc97d718864fa7",
+      "archive_sha256": "0eaffb3597d0e667f269ab291594e23f574ddc0a3aa6e855745eca7568476f64",
+      "original_bytes": 104584,
+      "archive_bytes": 12454
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_sha256": "96e022af1e189a014f463126f655a6f38e333e2c522d0367fa8a65704616cd10",
+      "archive_sha256": "592312450ae5706d651cbed09772a8fad0aeae43a7f84f95326390a9774ff50c",
+      "original_bytes": 5419,
+      "archive_bytes": 1572
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_sha256": "a8bbd1887f1a06457e4ff47607d47fa538b9c7ce6947030cc9e50e74c02f2fac",
+      "archive_sha256": "1b03c97606a61e76b98fd8ca153db87ee9b1fc90cf8eb58caa76c8716e9211c6",
+      "original_bytes": 348849,
+      "archive_bytes": 44852
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_sha256": "73e6dadc22942907030ee59c2b406c396d4c718e159d6771e41d96afebd26006",
+      "archive_sha256": "07a1b03b52b3abe44329ad6d8084080e5e6e1d9e6003451f3353168220e08e32",
+      "original_bytes": 9666,
+      "archive_bytes": 1778
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_sha256": "cb847843ae2a96ae597813dfeede06c775186036c14f12b000b26251da4964a8",
+      "archive_sha256": "3df37dd1d5419b19825f8d523b94015c8cb3b4ae5ccbad32efc23891ea0496f5",
+      "original_bytes": 520702,
+      "archive_bytes": 72847
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "requested-ray-point-massive-regression/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_sha256": "0ad9ee1442447d38377d2d1ced48c7c528a3d55ef5432826d11ffbb4bb8e2c41",
+      "archive_sha256": "5b76575430560f899560070e27543155c0c122f978fe2e209614e7b4d1ef9375",
+      "original_bytes": 10730,
+      "archive_bytes": 1819
+    },
+    {
+      "original_path": "requested-ray-point-massive-regression-resources.log",
+      "archive_path": "requested-ray-point-massive-regression-resources.log.gz",
+      "original_sha256": "4a919ef35840471dde44a6b73079620354267653003894d6ae7ef9ce210295a6",
+      "archive_sha256": "553c54674ed1c0df5f5eafe84a81f2cb05d772747fdd87b77ef236c086d9a0be",
+      "original_bytes": 32513,
+      "archive_bytes": 2049
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/active-request-history.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/active-request-history.json.gz",
+      "original_sha256": "0c2eed6b28d2ee66a4396ad4b2998a8debca5e8a6036580ed17ef1d3011070d7",
+      "archive_sha256": "77fc39bfc58f05b72088cf99a2d41173ea756d58e098ceb34fe786a5e1c1a607",
+      "original_bytes": 328342,
+      "archive_bytes": 7510
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0001.json.gz",
+      "original_sha256": "20527a2ff2a52d380e1251f865c6c31629ef17c622c3a1acf9003661f0438b12",
+      "archive_sha256": "88ec99782219d5664e4c3f641aeabafb7020052f625a557e795702d8bb282873",
+      "original_bytes": 2233108,
+      "archive_bytes": 32022
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0002.json.gz",
+      "original_sha256": "ad8a42851f1e31a880a4294a6e40fc6ae1700b95e6dbac46691375f6c22c8eef",
+      "archive_sha256": "f06828d7d63bd8e4c6969a7c11e1a8d10b3aa528de9e205d2165d3df416bbb08",
+      "original_bytes": 2235365,
+      "archive_bytes": 32060
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0003.json.gz",
+      "original_sha256": "0c7656933fc18ed0920fde6dc0fa6ecb758b59662ef9509f03f4b0d51a3e5be5",
+      "archive_sha256": "a6497973e30d0d0a5676c12cabd5a4f7570defe0455c524f4d06f0895761dc4a",
+      "original_bytes": 2244122,
+      "archive_bytes": 32601
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/direct-zero-0004.json.gz",
+      "original_sha256": "72d9697f7dc245cb88cac399b1826c37ab96816cf7df4705b9ab627de8f22ed5",
+      "archive_sha256": "eedb88fdb9fae8d2a61a489a1e4d7e132a70cbac776d171793d8d9958634937b",
+      "original_bytes": 2355693,
+      "archive_bytes": 35230
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0001.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0001.json.gz",
+      "original_sha256": "4fa6ebd345c01f095015eef1fcdb09a8cebe679b7c5006dcffd24148ed3b3034",
+      "archive_sha256": "8d052b1dfc03f22b355d4e37d9d434a2045cf1bb9692de4fdb75ca424db5f00a",
+      "original_bytes": 91783,
+      "archive_bytes": 4072
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0002.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0002.json.gz",
+      "original_sha256": "01dee6db7ea6139231aca0eed9a3ad089c16f3eda23bfb264435a3d05fc8a196",
+      "archive_sha256": "d2fc34e4d3d15aa321d46dd2cb0d89642991ccd0cc131479194b50957267428b",
+      "original_bytes": 234439,
+      "archive_bytes": 7503
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0003.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0003.json.gz",
+      "original_sha256": "921d19d6c7687a7da75f48f518e76cc07eb15b9a727c092e5ad2e6b4ecdb9894",
+      "archive_sha256": "244833889dff5eb99b1872331db58bcc2851909c20659fe602d3f5e0a369faee",
+      "original_bytes": 1445496,
+      "archive_bytes": 32959
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0004.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/requested-discovery-0004.json.gz",
+      "original_sha256": "df5917bf47332be464285d3e57a450ca588eb0b9c9b801134955d7bf9d4ddd2d",
+      "archive_sha256": "ee849174e131f18cf8e0029845c14040555e9d12c1f7aeb1bced9b1d3b86b1d1",
+      "original_bytes": 5559295,
+      "archive_bytes": 105724
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-000-provisional.bin.gz",
+      "original_sha256": "91ba465027e2da1de7f869223562683fc99dba873f8a18d5a6851b0cb32861c5",
+      "archive_sha256": "42c870bdaa0729c7811bad60e2b4dbeebba125241a31e4d3d71cd46d8bb9fd60",
+      "original_bytes": 147731,
+      "archive_bytes": 6952
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-000-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-000-provisional.json.gz",
+      "original_sha256": "0c91756d384b93ae052b7e056746c68860bcf67074864a7c9e18f374a3b6556c",
+      "archive_sha256": "798ca1ba5b51692920a41892a4a472643cd6b74363b9876db236c40bc8578e52",
+      "original_bytes": 32134,
+      "archive_bytes": 2941
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-001-provisional.bin.gz",
+      "original_sha256": "a2bfac8a2f87ccae4eb5e65897d4a211fb96d15ec8a73805134eb7b1af78f681",
+      "archive_sha256": "b3ced6058089a516b438ec5a592821e0bb6a4aea12c8a500cc170f8fc7f8474e",
+      "original_bytes": 201417,
+      "archive_bytes": 10989
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-001-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-001-provisional.json.gz",
+      "original_sha256": "c19a8a7b711995ed8ca8ca3811247fb2da2cbe202a0e8927527af2a31b3841e9",
+      "archive_sha256": "e86d841f9672de340c45145efba6a1aefd879d6bdd7fa11225ab93d9710524a3",
+      "original_bytes": 127048,
+      "archive_bytes": 5419
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-002-provisional.bin.gz",
+      "original_sha256": "a0c3d0c40e0ea267bdffa7c9435131b2a688dd6e21b66bb026c1277c40510200",
+      "archive_sha256": "c3694a604931986c49c07f017c13063c7ca4ddc6f51f8ef617ff520ed5ee4e68",
+      "original_bytes": 722562,
+      "archive_bytes": 46271
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-002-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-002-provisional.json.gz",
+      "original_sha256": "f8e9b88c16b89560c8a56cf8d8afd4a1a2c065e06bb8b93eb45a563d66166df9",
+      "archive_sha256": "d7fad2660bb4faf4bc7b3f24a57b29292e3620a67bc544fbe3289209b94938e2",
+      "original_bytes": 549812,
+      "archive_bytes": 14876
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-003-provisional.bin.gz",
+      "original_sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+      "archive_sha256": "03c171b2492c8802c4ce0c40d03b192160bab7fd2aa793f1adf2642d3062b70d",
+      "original_bytes": 2684862,
+      "archive_bytes": 180822
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double/native-closure/round-003-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double/native-closure/round-003-provisional.json.gz",
+      "original_sha256": "6a77611d33d8751b1e0eb7b0e2d5247524673dfbeef0c012e4e81777d708bfef",
+      "archive_sha256": "c95833891cc5615b3be7d69603794398433f978f016d9dd0c0bf4de33fff90de",
+      "original_bytes": 1062011,
+      "archive_bytes": 24899
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/active-request-history.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/active-request-history.json.gz",
+      "original_sha256": "4e6c54955305c076e0354f64d3a679244bc97ef65c695a9bb390865b5453c9d9",
+      "archive_sha256": "62ff9ef5e09808698292725d41f72d087bdfcb799c6476388eb392b2817c7784",
+      "original_bytes": 567561,
+      "archive_bytes": 12528
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0001.json.gz",
+      "original_sha256": "131fb88a11158b21284d868fd58a3c6116be04462df5c0c937d6547d8987b9ee",
+      "archive_sha256": "3fb8db119d6152a82f0bb08942e1d2497f3a5a88716028c075e5ab36cfc1828a",
+      "original_bytes": 2255068,
+      "archive_bytes": 31964
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0002.json.gz",
+      "original_sha256": "662b748765f5c6952ce6bf5a95916839a3f472e1a09c1f6ac122d2c11afc6e29",
+      "archive_sha256": "7fe38b4c71703a7ed62242cfdd892a87e03daab27d52039c5d86e2621627dad6",
+      "original_bytes": 2234113,
+      "archive_bytes": 32025
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0003.json.gz",
+      "original_sha256": "4792acfc8d7dbf0244ec37a48ee5afdae0e7dfd36df1f79e620d4e4d4878eeff",
+      "archive_sha256": "542ef80d977be85e3dd94b227544ca1b1ca514f767dcf2d61e9741c4a982dc70",
+      "original_bytes": 2236730,
+      "archive_bytes": 32281
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0004.json.gz",
+      "original_sha256": "ad22fae0d648434b5a7e601881063c375e4ce4221247532564526d50128dc374",
+      "archive_sha256": "a6e8cf41f2112a656a045f58dbb0255d722b1ea86ef07c611ff5ce10313a635a",
+      "original_bytes": 2266297,
+      "archive_bytes": 32506
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0005.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0005.json.gz",
+      "original_sha256": "5e419da89c5acf457aadb7b704d1556462746cd7ac0e6caf489a3739af4f6b67",
+      "archive_sha256": "5d35dcd181a0a7db9cbe326992f513a7fa7ab8b9cac42c9dd3c4c1d56bb6b4b2",
+      "original_bytes": 2284467,
+      "archive_bytes": 33460
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0006.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0006.json.gz",
+      "original_sha256": "82849dc35c74c1bdf095f4f12060a66ea211d6421e6682354066ee0c1d1e689d",
+      "archive_sha256": "8adc2c10fcc68e095017c084b2e52f8b3e9c9d867b779096ba965479c0424dd1",
+      "original_bytes": 2347125,
+      "archive_bytes": 35049
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0007.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/direct-zero-0007.json.gz",
+      "original_sha256": "06b879489980e504f0e316691273582196d15a6a0c638b38b1963b145745c99e",
+      "archive_sha256": "36f2fa676c4dbba83b6a375f21fb0dc456e611fdb2cdd16c556b89b1d4b44d41",
+      "original_bytes": 2451153,
+      "archive_bytes": 37920
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/historical-discovery-gaps.json.gz",
+      "original_sha256": "625cb97ebf0252d14f6d692b999aeef394d6ec6ace1927a713b7c69d24302292",
+      "archive_sha256": "c0482448143ff6f9d5463871c7cfbb30ae0e5d2f8c63bcf492996be74806be5e",
+      "original_bytes": 14891012,
+      "archive_bytes": 117776
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-000-provisional.bin.gz",
+      "original_sha256": "e075ab234486ba310ecbe667033c0358aef454226f587b22af9832b104f81361",
+      "archive_sha256": "29a42ef5e742a59528d7529b445572af61f330a0dc0f4c10b0129082505c857e",
+      "original_bytes": 154175,
+      "archive_bytes": 7590
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-000-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-000-provisional.json.gz",
+      "original_sha256": "5f2468b9d28eaeb08511ffc8cf0898234616e1c2b6289875d3389489d36c40ff",
+      "archive_sha256": "79279fa55de87124fd6033f45c5b5382bc00d0a0614c2c4a0befe4928a7f6e15",
+      "original_bytes": 22672,
+      "archive_bytes": 2689
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-001-provisional.bin.gz",
+      "original_sha256": "5c604e99daa72f6ebc02731978dac1fec1fb53c7021c3a48112df4878931e37a",
+      "archive_sha256": "f65c26e62f5458b539d615aa1e7a71be260310d2b37ac01ab0a08f6618bc0098",
+      "original_bytes": 366594,
+      "archive_bytes": 23178
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-001-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-001-provisional.json.gz",
+      "original_sha256": "3679df338457f2ae35f1a2dd4e1a391f9badaa091799c93aed84fa0ab9b8692b",
+      "archive_sha256": "12be79783ce446a1f6ae4061a4b51aa036cf731b6474a0e6e9fe6d2e753df435",
+      "original_bytes": 55122,
+      "archive_bytes": 3323
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-002-provisional.bin.gz",
+      "original_sha256": "902594eea65e740c1a5fa1d497e6d13351e195b9a8285b40ec30bb86fe474e6a",
+      "archive_sha256": "97481061219181078ec0ed7c05f54b62333f3dd2ddd38738f24555de54df9189",
+      "original_bytes": 945823,
+      "archive_bytes": 68975
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-002-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-002-provisional.json.gz",
+      "original_sha256": "5c8428749d45a6d81e4e96f76e061fc715e95854c2e68f9e5b132ea34348203e",
+      "archive_sha256": "2c8b61151b3808e789f9943e31a2c2614570a9d4a3c8b9c33f25e35d302c58b0",
+      "original_bytes": 140097,
+      "archive_bytes": 5074
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-003-provisional.bin.gz",
+      "original_sha256": "4eef146c07bd11fc1bd94844b3dadba0319304232c750b667c6cae27862cdc9f",
+      "archive_sha256": "ea612f05c90f739c0936101057685bea07eb8ae0d969af9ec41dfc67bbcd2b8c",
+      "original_bytes": 2688551,
+      "archive_bytes": 212585
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-003-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-003-provisional.json.gz",
+      "original_sha256": "cd2e08bb7e44dd78232aca3eaae7385f61452f4bc2bbd9fbb9b9c45f3b2fc19b",
+      "archive_sha256": "4581a180963cc978feb843947c0de91372f8c1664a4534f4ebc23f52aff1f824",
+      "original_bytes": 298480,
+      "archive_bytes": 8967
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-004-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-004-provisional.bin.gz",
+      "original_sha256": "bc39757bff1069c27d6124c1dd6eb70d3a959d09f2fab2be45023f34620ec8dc",
+      "archive_sha256": "022fec18968d1c25d3ad3cf35952c7f9e7951f8acb4781b90c180d55567c7b56",
+      "original_bytes": 4747197,
+      "archive_bytes": 401234
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-004-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-004-provisional.json.gz",
+      "original_sha256": "c173181e9bc663cb5d8b9379712cbc3e952f5364d1bc6a0025a3df0ce568c3a6",
+      "archive_sha256": "cb646643503d5828cba43bb6264fc934f240872cab0f50d8f43b8e61784b7bd0",
+      "original_bytes": 591577,
+      "archive_bytes": 14981
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-005-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-005-provisional.bin.gz",
+      "original_sha256": "e69522b94a18819a4d74c2d00d4ae4b39fc5fa8ea1f06619c7ffedc16826ff4f",
+      "archive_sha256": "0700ec9199ea0486e71da816d615a1f1ef1e0c277ad74cd13e47d9ceb74af23a",
+      "original_bytes": 7685580,
+      "archive_bytes": 649166
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-005-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-005-provisional.json.gz",
+      "original_sha256": "216f761c18afb25ab215307ca5088d0323075af2896998c472e3943655ed233e",
+      "archive_sha256": "01754ddee996ce24a37f41450e1f85c9b132a1103605770061134d5f6ada646a",
+      "original_bytes": 1135218,
+      "archive_bytes": 25826
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-006-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-006-provisional.bin.gz",
+      "original_sha256": "d3a65738892fdb090e0cf34232d102fc0968453ddbf7cc0071277895f5a236ce",
+      "archive_sha256": "a89a6c182bd128d59298b11eb5bf66f102e9bf2d0f9d41aca90ad31717eca77b",
+      "original_bytes": 9852079,
+      "archive_bytes": 818545
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-006-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control/native-closure/round-006-provisional.json.gz",
+      "original_sha256": "682698ab870aeac95e4415c983af1c2f7f54d6f4deaa5f2d679d6ac0b5d6aeeb",
+      "archive_sha256": "f54beaaac6d054891711225f56170ee929031036a1fed65ec416acae33f94efb",
+      "original_bytes": 1745716,
+      "archive_bytes": 37036
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-residual-control-resources.log",
+      "archive_path": "requested-ray-point-three-loop-double-residual-control-resources.log.gz",
+      "original_sha256": "93d6cb1af955c18dfedb343d15b8386bca93315ecf0fc4f2874a1750bd2e3f5b",
+      "archive_sha256": "8d904dfe54d27ab34346153d30c75d5c065ffe5bd5a3de6f6498cf57fda7054d",
+      "original_bytes": 1735,
+      "archive_bytes": 618
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-double-resources.log",
+      "archive_path": "requested-ray-point-three-loop-double-resources.log.gz",
+      "original_sha256": "30597049fd5a0c89dca12785c2389889818b049d04f62b8217fc11423d0e944a",
+      "archive_sha256": "fdff2ec213e9a05a1e016cdcdbebe3c055362dec2d0a98a68bcbd97377a2d9ba",
+      "original_bytes": 1473,
+      "archive_bytes": 582
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/active-request-history.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/active-request-history.json.gz",
+      "original_sha256": "43095a25e359608d9bac3d27c98e0676323706eecb6e4c5b43cf1e2684a5cfe0",
+      "archive_sha256": "8402b9cafdf692359fe18e8150331f3aaa0518786d6cbd21e4daf4ea8f296cbe",
+      "original_bytes": 377393,
+      "archive_bytes": 10111
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz",
+      "original_sha256": "177264ef8007f03e83a67803fae3fa22a8f7afda65d78ff3ed5409132d112740",
+      "archive_sha256": "f5d02a54074a7e86fafdcfcd6d6fe11fc2e9419eb70df4547d8a263db61b0cad",
+      "original_bytes": 1691864,
+      "archive_bytes": 26397
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz",
+      "original_sha256": "4df4bf120d7a9a314936fd8966d8dcf0ecd390c0950522abe680564222bac1f8",
+      "archive_sha256": "7d4a68c1a341df8c344597740cc5a860540cf040c4c4cd39726fe9b53cd8ae3c",
+      "original_bytes": 1890843,
+      "archive_bytes": 30078
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz",
+      "original_sha256": "6a137deb0c256119da3adfd6e9b16cd740377cf9f8c1afd86b3bcb17fbaa8d02",
+      "archive_sha256": "1954cd6d38d27ed2c9c4ae16bb75de593f585534d58a1f49fa911e313d5654c7",
+      "original_bytes": 1871162,
+      "archive_bytes": 30283
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz",
+      "original_sha256": "acf0e6de2cfc2ac68a5503fad572cf0477a38bda7c1c99c19e5878f96e50a18c",
+      "archive_sha256": "c2d9b62c5e5a33fd38e012b623567d1643285660be0c08e8b7f844dbe7a989ef",
+      "original_bytes": 1848583,
+      "archive_bytes": 31115
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz",
+      "original_sha256": "56974e36185c0e0ba41b3d865f8ebb9b5ccb5eb6e12f605dd5215c65e7e0cf33",
+      "archive_sha256": "30533c5bfa1c6f759ad3d12ead23564d1e33d449a3aa97939a5bf094804e0271",
+      "original_bytes": 1913387,
+      "archive_bytes": 31514
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz",
+      "original_sha256": "8c8fc06a39ffb082dfc3bc8f92096749db1551d97d73313b0faf3f3e06f06c65",
+      "archive_sha256": "8f15761cc785adc0f50c9cc7d0d82e4cd41436ea97021f31fed80b00c9342744",
+      "original_bytes": 1902228,
+      "archive_bytes": 31522
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz",
+      "original_sha256": "06546189885caad075446c48c7e1fd643f8936c199012644fce362f2cda1c8a0",
+      "archive_sha256": "458c540cb00287de84d93a8ff679023b5062f13a79348608143a8d08133ac398",
+      "original_bytes": 1934527,
+      "archive_bytes": 32287
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0008.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz",
+      "original_sha256": "cefecb54e57a68bebd635845f32df2a96bb7913cb27f5c03a851582ba6582f9c",
+      "archive_sha256": "c93feccfa97084c2c2b5cd62579dd9c19f30c37d03cf1ab992887b02e83023e0",
+      "original_bytes": 1972036,
+      "archive_bytes": 32732
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0009.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0009.json.gz",
+      "original_sha256": "080c35d55ff93583cea75808bd851b7a8f6e5d5bdac9ca72c62a63dd4f4dbe8a",
+      "archive_sha256": "fed7bc9c2c2c4efca6ccc5890c4973e2f87a7056e026a5143e2e601ea8bfae19",
+      "original_bytes": 1951937,
+      "archive_bytes": 32338
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0010.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0010.json.gz",
+      "original_sha256": "320c2be5e7f24288499b7fa73121380d24d976a43257a516573bff9b67d30a5f",
+      "archive_sha256": "8003fef0460cbd4ef1661f27568b91a306f7469d11b0ab9e3f37298bb5c87536",
+      "original_bytes": 1941121,
+      "archive_bytes": 32469
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0011.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0011.json.gz",
+      "original_sha256": "d1171265469ea98795ea908d3fa80dd1771a9a6da5c1f29ef312a0208717e4a9",
+      "archive_sha256": "c6c72d92cf9502477258e59e59c3376089454e306307fa9efc7f1ae82e19851a",
+      "original_bytes": 1933159,
+      "archive_bytes": 30771
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0012.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0012.json.gz",
+      "original_sha256": "bcc6c179fb7e8772805aef0bc2a87358d9c7e5460bcb1c77c756cb543cb761ab",
+      "archive_sha256": "8fba2f0374403e694c3b303c84a28a1aa6567bd15109569f0d7148099fd7482d",
+      "original_bytes": 1907762,
+      "archive_bytes": 30357
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0013.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0013.json.gz",
+      "original_sha256": "88574cf5b94b1cd17ffd832fcffe28e22a9d5cae08a2437e05fa45dedac39f26",
+      "archive_sha256": "c90aa6674131ce7d4a809e79b30c35f36f8918b663d088a0e96f6857c44683b5",
+      "original_bytes": 1913234,
+      "archive_bytes": 30356
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0014.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0014.json.gz",
+      "original_sha256": "b1f46470712a65583501c7ab748d44bd0fe6178ae49941d8b6cc030f2931867d",
+      "archive_sha256": "0ec68b6373a60a3b1d656a499d6e3aaa9f4c7341d906df5f2f366fdf403c171f",
+      "original_bytes": 1899928,
+      "archive_bytes": 30969
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0015.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0015.json.gz",
+      "original_sha256": "2703519c812d0d253c7619054058aee6429e4f7c70f72900dc165ae8ffd405aa",
+      "archive_sha256": "5e61e28c9ec555b5d23aea7294646a1749b5f89502607e0aba12b6c072ec4f5a",
+      "original_bytes": 1895253,
+      "archive_bytes": 30444
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0016.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/direct-zero-0016.json.gz",
+      "original_sha256": "bcc5d09cabdb701f85c99c6f064feeaf8b18d8814a1857caa99a8250b634f32f",
+      "archive_sha256": "d2851b287943c60d4ac29557f668ff5afee63731c71f8844d390e75e0751c562",
+      "original_bytes": 887653,
+      "archive_bytes": 14774
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0001.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0001.json.gz",
+      "original_sha256": "1d90395b3a0aae9062fefd621a892a88a82f5ec3a7cf6a3de0a73e5dd41ad53c",
+      "archive_sha256": "03c5fcdee2103d7ca8a0f8f68d26e5a68fa90d369b5c24428fd0e059a9adde2d",
+      "original_bytes": 93051,
+      "archive_bytes": 4315
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0002.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0002.json.gz",
+      "original_sha256": "1181e50716740cff14cea5572cd0b52da505ac9b5359b323e38fcf36ed20e9cc",
+      "archive_sha256": "6a9cecc13dfda77fbd78a0bdfdb65ca692ff775f1cf6494628d3f3fef547a87d",
+      "original_bytes": 153707,
+      "archive_bytes": 5840
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0003.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0003.json.gz",
+      "original_sha256": "155fecaad6e9050aa29baecbee3e37263f4d5d7775d18fa9992b8d4d6cf61b95",
+      "archive_sha256": "426c13b0edc457ea7cd47b60795ad260198dfa4955defd93a4c393c07e89aaaa",
+      "original_bytes": 564448,
+      "archive_bytes": 15170
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0004.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0004.json.gz",
+      "original_sha256": "ce53e9a54166aea443d765b6af5331720cfd85ddb53a0ce6c98583ef5fc96ded",
+      "archive_sha256": "60733f57af1c0488a23f7f2a59117789e03a45d0b24ad5ca26654f9a98c1f528",
+      "original_bytes": 1658017,
+      "archive_bytes": 35935
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0005.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0005.json.gz",
+      "original_sha256": "975b4b3faa5edfef4e9283ef794006121867305c04af939a84818174460dde43",
+      "archive_sha256": "504d54cd45a84b661dab3c4146fbbfaf20223259a16f901b4b7246932a3aebfe",
+      "original_bytes": 2066804,
+      "archive_bytes": 41547
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0006.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0006.json.gz",
+      "original_sha256": "d51b93a5bd00f295f2209c515828a1115fc53798a7b19859092d311b3368ed72",
+      "archive_sha256": "ec0768a8d560268583484c510e538eb35a24293cbc89f8c08c95de60f27ee2a4",
+      "original_bytes": 2027334,
+      "archive_bytes": 43234
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0007.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0007.json.gz",
+      "original_sha256": "744621979562141ee1e2a6cc07a613268372d913b378fe114ec5bf04603344a0",
+      "archive_sha256": "e73f3116aea6f282fce5f89085bfad8eb8371e00c0880a27d2cc78ccac409888",
+      "original_bytes": 1913955,
+      "archive_bytes": 38047
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0008.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0008.json.gz",
+      "original_sha256": "fcfae0a5309424bef83abe00e3c17c4122143395afd9d8e163ce351e0d54c5b1",
+      "archive_sha256": "1e07d2d1236e28bde9662177721e513f15b11666b9651e1d98210a53379e21ef",
+      "original_bytes": 1723903,
+      "archive_bytes": 34683
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0009.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0009.json.gz",
+      "original_sha256": "8bc50d61b7c08a96f4a9ad79221d7390a0d47ba39061f30f834d987ec49df398",
+      "archive_sha256": "86d451074362f47c234950da35f0cd860b3072c41bb702d4ddd3bee5596e4754",
+      "original_bytes": 1213170,
+      "archive_bytes": 26201
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0010.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0010.json.gz",
+      "original_sha256": "8088213e1b75154e815a7d35eac245b349e188d7c2a969b0b94f1d69858b3dee",
+      "archive_sha256": "61b896c68763f56e0b842faf02198d70748ed2eddd282b7131950d67dcbb2ad3",
+      "original_bytes": 932862,
+      "archive_bytes": 23254
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0011.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0011.json.gz",
+      "original_sha256": "f7bcb6d65c7fe7acefa769e3eea5edd90c6c74b0744dacc7085c4c4b10c5a0e8",
+      "archive_sha256": "9e80e869d060a1b409d4c8fc57abde269c636828168b321ca1840f1cdab9a921",
+      "original_bytes": 631997,
+      "archive_bytes": 15733
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0012.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0012.json.gz",
+      "original_sha256": "d82679f2600dbea958f9a33ada95d9cabfb1b721a7ff56e1e2a80c97e4bee4ab",
+      "archive_sha256": "501e171ff550f47efccb980e6d347f3d4f94b8f2dde5d6459ce15dd22652f482",
+      "original_bytes": 284485,
+      "archive_bytes": 8871
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0013.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0013.json.gz",
+      "original_sha256": "45ac80e6f7dae11faf4097fcec0939545cebf5e8be4b85a2ae04e4346415f317",
+      "archive_sha256": "fc31dd6e3738ebdcb17aef18235aabb3ea5e5a1cd6cb37be8aba42c2f52952f7",
+      "original_bytes": 174900,
+      "archive_bytes": 6641
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0014.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0014.json.gz",
+      "original_sha256": "6756581a575f7a33422398a7d09c55a9bd16187adc5fd506dbdbe7b30692e4e1",
+      "archive_sha256": "b96cd76183daf12acc8c00af4515f2987d3f165c9a5540d08f3933501786f1d9",
+      "original_bytes": 155228,
+      "archive_bytes": 6269
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0015.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0015.json.gz",
+      "original_sha256": "33d901287f4f47bfdf9d5d09510bad2a4316da3b1cffae2f95c29b4d5c0f4ed5",
+      "archive_sha256": "43f359b5ec9e1663ba9462f860aeaef38dc74c7ceba00bc9240d59ea30a14a68",
+      "original_bytes": 122518,
+      "archive_bytes": 5670
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/retired-unresolved.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/retired-unresolved.json.gz",
+      "original_sha256": "beb0ab94b94069dd9f01f748e2a84ff658ebad9634486ac1a9340d66e2369393",
+      "archive_sha256": "c0a410dcf98f42d8852e211904eb92bf691cad60baa2f15512c03a2c2bd2be90",
+      "original_bytes": 64427,
+      "archive_bytes": 1617
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_sha256": "c5743d58b900a1a610af6b36fde0e39eddb9e5063295d4d5a8fed28ba32817db",
+      "archive_sha256": "ee2d32089014ecee11515dda13c90f6bf0a54b93e6e10cf92ebc7516266ed508",
+      "original_bytes": 51656,
+      "archive_bytes": 5162
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_sha256": "d7e4400bd38ab64fd99e4b90edacf28ab11794111d14c2323a024d3896efec87",
+      "archive_sha256": "8664f061a1c3c82e65dfbdfa53a0874dc57f9e178d3dabe52fe7d88bb06c34da",
+      "original_bytes": 28586,
+      "archive_bytes": 2871
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_sha256": "f6d4f04d6afe90087d49a22567af433e00c76d626464b92d47b8ca09efea0d8a",
+      "archive_sha256": "e0f08ccef6af244d260853ce62bcf46975755f3907490d8cf27243fbcbb94567",
+      "original_bytes": 78139,
+      "archive_bytes": 7692
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_sha256": "11bfc86b804709649a5988bee7ae88ffd0bfe099f3eeca53d7dfc211b0f620a6",
+      "archive_sha256": "30662cec681b329046ce627d9d8156c62997e5ce1c439734b9899f5d8d748702",
+      "original_bytes": 65418,
+      "archive_bytes": 3896
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_sha256": "9e467e7765ad01e517dad13f2e58dcca7b0d49e9b7a7b4a81387620c70e88a6b",
+      "archive_sha256": "97b50ca84fd2989d63b550b245f0afa26173ee4dab77d12c91de00f91799f613",
+      "original_bytes": 248526,
+      "archive_bytes": 21901
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_sha256": "7768dcd0f65bb52cbcd6ec26152d2a242068e28318de623a7febb8cf5e51d67f",
+      "archive_sha256": "5d55e75b1eabb80bdc91c850d9f199789dcb65c5796d65055153c6f122f5d17f",
+      "original_bytes": 199041,
+      "archive_bytes": 8044
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "original_sha256": "3417dac08cd31aaa9330d29ef5a04d107b7e6c15a937a1a31a16cc44f31d2e0a",
+      "archive_sha256": "5ad7e327736c71b00006c4d9578318dde1bd002eb394b02cd4122122a505f1cb",
+      "original_bytes": 658366,
+      "archive_bytes": 57826
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "original_sha256": "b8eb9d36d26f2cdf25d1da73215d1ee1d387183b7e00c0cc32b81e5f0c20c17c",
+      "archive_sha256": "f7299be2bf280ec16eca5faee1be4fd25399c451c82fd1ceb1e8154216f2031d",
+      "original_bytes": 394229,
+      "archive_bytes": 13516
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "original_sha256": "989a785fd75adc44d8cf05bcf57139be5f24afc96e6c5ecf124fcb6877d1c584",
+      "archive_sha256": "a8f0f275e79c4b566108df215bf6604f9dd71ba48bc91641711f60ad78536541",
+      "original_bytes": 1083368,
+      "archive_bytes": 97687
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "original_sha256": "69df6072c636beb1e23e725c85693cc6ec867a5ecc3be85350a862c858ccf23d",
+      "archive_sha256": "5d8518cbdada18391dbe7f08fcf8917144669c059d7651aa1f2981dd774b47b7",
+      "original_bytes": 510939,
+      "archive_bytes": 16499
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "original_sha256": "85123aa766611275c65e60aaa634a566f81165435b8275a023705d565145a8e2",
+      "archive_sha256": "9e48823a5ba5bf92eb15c6627ec4134eb2609a2015f039f7d68d5a419bf4b868",
+      "original_bytes": 1542057,
+      "archive_bytes": 140473
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz",
+      "original_sha256": "df8be3f206ec91b103995551849ae61ee94b552f0b2a5d705ac6338b17704b75",
+      "archive_sha256": "2a179f599c018157b48dca710473b0bf15a4c35abfe80d2274f6f78de2a17c2b",
+      "original_bytes": 573177,
+      "archive_bytes": 18159
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "original_sha256": "3525e4cc097c52a5d457bb02c395474cde97b4260fcd88d125d957d4daec89f9",
+      "archive_sha256": "b405f48e626681e42f9ab2004fba8b947dad135359308d6da54d7ea2e5bd073e",
+      "original_bytes": 1876637,
+      "archive_bytes": 173705
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz",
+      "original_sha256": "c5ec0016f1c1d248f654dbf555b9f3b79e7a0b30ce759256c8e2e6fba6a83ec5",
+      "archive_sha256": "7974fd03d69ecdda4290b49b8a49c72ec3517b80985380a74eacbcca5a21a1bb",
+      "original_bytes": 628883,
+      "archive_bytes": 19284
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz",
+      "original_sha256": "d1aec94f08d635846de310a4652c2b78b0488bb3b39f9a2207cc76def42da621",
+      "archive_sha256": "6764a8e4edb8dafbfb011832739831faae8a68b4e071ef8363e20b1c7f6105fd",
+      "original_bytes": 2148626,
+      "archive_bytes": 200959
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz",
+      "original_sha256": "394e13d947296af8e4d058740cbbbdcc97ed85135e8cb443827a0c5b4dc29bb9",
+      "archive_sha256": "3ab64fdb47364bdb23884125fd4d88ef7b768a5c727e36626368ffb362978ce5",
+      "original_bytes": 623235,
+      "archive_bytes": 18865
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-008-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-008-provisional.bin.gz",
+      "original_sha256": "69cab68df138b80c1d643498e22a0acd91e6a04eab81db331e96a9f1fcd4a63f",
+      "archive_sha256": "602185e3866885f70f3e051628b3acf393d3e3bb4938c4b7046d203c29f9d337",
+      "original_bytes": 2323566,
+      "archive_bytes": 219507
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-008-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-008-provisional.json.gz",
+      "original_sha256": "6767f7fb7f688bea140cead5d20faed4c2cc244b0befbbb50a47638906e36930",
+      "archive_sha256": "355b0d8790396ac7d9bd5069b8e91685b285a54c02fce413ad1df40c543b8286",
+      "original_bytes": 585080,
+      "archive_bytes": 17650
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-009-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-009-provisional.bin.gz",
+      "original_sha256": "22fbdf9978bd760da580a2068a0dc224c52c5ff27768e72bea42cc352e43f534",
+      "archive_sha256": "21150d8f9b1afd3748cd31c49f4aa2ae1d64b681b7737236259e5dde9fc796f0",
+      "original_bytes": 2530519,
+      "archive_bytes": 238078
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-009-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-009-provisional.json.gz",
+      "original_sha256": "89befa4671923f42ce77f9112a06db65094027bdc81b32d1a554620ef4527b9e",
+      "archive_sha256": "0c7cd0c0c34d729a906e97b4f626d3665af1269989822332031d4b06bdc6cfa1",
+      "original_bytes": 563271,
+      "archive_bytes": 16338
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-010-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-010-provisional.bin.gz",
+      "original_sha256": "fc20d4600819eea296ad8a37c5afac511d2d5d1116c57391588bbf0c978f108a",
+      "archive_sha256": "4a6076fd9686f1d0fab008dcd9366ce2dd3bea23c25ef1160d8286fe2ed7e8fd",
+      "original_bytes": 2649156,
+      "archive_bytes": 249309
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-010-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-010-provisional.json.gz",
+      "original_sha256": "3f2a9c6f1194fdee0436080aae8b10a13a191a19bffbed5846f7f7c27baac08d",
+      "archive_sha256": "f1f4f24ca3d1c1ba2da586d44ff612b5bf709abaa8cd6bc5df9b2f61e8f8eb52",
+      "original_bytes": 533237,
+      "archive_bytes": 15242
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-011-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-011-provisional.bin.gz",
+      "original_sha256": "328021fea668e87db391937c9104555dedc8490da9e54975a20a9f68b2544323",
+      "archive_sha256": "3b336921675271a656c09deaf484e6aa87af665cdd17aa5b7b8fe5853e7ce2f0",
+      "original_bytes": 2685545,
+      "archive_bytes": 253107
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-011-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-011-provisional.json.gz",
+      "original_sha256": "df026c15d3af22f5b0a51afe03951e4e0d80880634a14e5301c951495be03e17",
+      "archive_sha256": "a5337cfb37a667d12e20674260756ccd26b2b34d01e362dc9c0d459117cc9c82",
+      "original_bytes": 504286,
+      "archive_bytes": 14365
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-012-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-012-provisional.bin.gz",
+      "original_sha256": "a0e51d6f92bd3a0a054305645eb063e12c97c44fb020a90106536acb330a724a",
+      "archive_sha256": "3f3de5675e6732fb86c697b89af705cb01e1e90f590b1ba81c5614879f769359",
+      "original_bytes": 2703293,
+      "archive_bytes": 254852
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-012-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-012-provisional.json.gz",
+      "original_sha256": "f4c9bc923eb256b0dc0c3620a68d5b531e370c92cf0f1f390065498b247c863c",
+      "archive_sha256": "08b3ea36c93f565ad9e43f63daf3665d5257c2a7380951ee35bbda2ca6df2833",
+      "original_bytes": 495098,
+      "archive_bytes": 14025
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-013-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-013-provisional.bin.gz",
+      "original_sha256": "e1f805b997e2d2b029af547f66314e3bb0188cdc4fc1487472dbf616b2b50959",
+      "archive_sha256": "3d22a9a725b7c6fbc648a13d147a321c0670caa53f7bce2c3e13b4ba61ef4020",
+      "original_bytes": 2727969,
+      "archive_bytes": 256734
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-013-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-013-provisional.json.gz",
+      "original_sha256": "fc97feb1405c78a15c892dce37c21b68cd61b7befd0a4b7faf96969ed41167a2",
+      "archive_sha256": "802ec239bede85f3662c3c75dfdb2346d48e91030119a09fdba9067eef06750c",
+      "original_bytes": 491781,
+      "archive_bytes": 13870
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-014-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-014-provisional.bin.gz",
+      "original_sha256": "7fe171e47f90425c13235798009d01c2af8b39a3c04777e4935056c6923db8b6",
+      "archive_sha256": "6be07bef735b57e5b9a462a0061c20a1180183d750c35e2e674e9bc2bc60564e",
+      "original_bytes": 2745788,
+      "archive_bytes": 258073
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-014-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-014-provisional.json.gz",
+      "original_sha256": "08d774b81dd9aff0a6f850414a11f91becc41a24a3af7e31a6c0f0bf4e49e093",
+      "archive_sha256": "7b7d9dbc3f458025640f0590973d5bed4e6e5d1b4685246b7483fa3d6e471019",
+      "original_bytes": 489989,
+      "archive_bytes": 13797
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/active-request-history.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/active-request-history.json.gz",
+      "original_sha256": "4e4158c4be8fcd0cf0840c89e5f780d942f69d3d60b7ffa42c17ea82ebfa3d95",
+      "archive_sha256": "178fb0c64c63a57bb8821c7a534f64503745c108f83f2aee3cfaaacd62b6f7b4",
+      "original_bytes": 190169,
+      "archive_bytes": 5580
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0001.json.gz",
+      "original_sha256": "21da28a76845600e9f66f8c9b6247c56e51c48f7a6250119a417373eb7020ee3",
+      "archive_sha256": "ecf556dfc41a525bd0373cb9a3b282aa38bb5c281a57f893090fc685f5a10a18",
+      "original_bytes": 1898390,
+      "archive_bytes": 28566
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0002.json.gz",
+      "original_sha256": "3d2255291b8349c10e7ccd35dc5a430dd5d43e8e0d5e41838060c8749e4269b3",
+      "archive_sha256": "23a7bc6faf910289f60c72a018fadaa812ab990feec3cb498e71d1f426e95848",
+      "original_bytes": 1860739,
+      "archive_bytes": 28816
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/direct-zero-0003.json.gz",
+      "original_sha256": "2b6dbde8ba68376b02b0fe22ecd9c1788cad392337a175e428057da0c1bf6200",
+      "archive_sha256": "ef9098fbcf23ab6b1e31b94bb92dd17f4ebb3731a9c724d58d5b5963669dd797",
+      "original_bytes": 1862116,
+      "archive_bytes": 31032
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0001.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0001.json.gz",
+      "original_sha256": "49f275d68e1c7065d9e83bf405a02a29850ae7dbacdac5ac74a496522729cfe9",
+      "archive_sha256": "12c26cd1ed4f6293ea3ff5dc16ac5ac506be5d128cda2732f09860136cab112b",
+      "original_bytes": 121153,
+      "archive_bytes": 5121
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0002.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0002.json.gz",
+      "original_sha256": "9926ebeea062a01e9644481db8e657c81712164136fd35a4df47d0a4e7fdc8a7",
+      "archive_sha256": "6c633a5e99c329d83110de1ff70a4f8be17d195b1aacc9343552188fb6fd742b",
+      "original_bytes": 501277,
+      "archive_bytes": 15036
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0003.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/requested-discovery-0003.json.gz",
+      "original_sha256": "31e00e0c7c1bea33af2197a05f50048f42e87f0cd3bacecea730185e0d4ece77",
+      "archive_sha256": "38de3cfffa0c544b8acbfeeb60da6c3aab9749991d175a0ff40b01567ac7a257",
+      "original_bytes": 3226195,
+      "archive_bytes": 74237
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.bin.gz",
+      "original_sha256": "f39245eb74555b88a3118987798520277330eb60e6e423aa55b5c88a8cc2e0f2",
+      "archive_sha256": "cbaa082e619576293808568b82fe2c13b6aa171fa677027f548016b54eb8f053",
+      "original_bytes": 77744,
+      "archive_bytes": 6960
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.json.gz",
+      "original_sha256": "5d3e40bbf4df2823a79b586c187823f6977b7d6456122dcc091740a226e3cb45",
+      "archive_sha256": "8a5be3c764aec86cd446abe0e6a0de090accbb370e618ba270632e758ba498e0",
+      "original_bytes": 42382,
+      "archive_bytes": 3267
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-001-provisional.bin.gz",
+      "original_sha256": "0dccdb112f2356db7c502ab612a6ce9154c4a0b8a604daa71a9681344d77ab1d",
+      "archive_sha256": "cd71b3af06d5da83bc67337c4c24f7f3ad0db3d896a5a6ada6edc008dcf4c247",
+      "original_bytes": 250446,
+      "archive_bytes": 21046
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-001-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-001-provisional.json.gz",
+      "original_sha256": "e90133432b9ceec54eafb05b35b45d9ff3bf1b9d78cb7edaa7c54739c6d1f559",
+      "archive_sha256": "65ae6fae2fa3f944745733d151df946606609c957cdf7a3ef27af1d47663b4dd",
+      "original_bytes": 222081,
+      "archive_bytes": 8605
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-002-provisional.bin.gz",
+      "original_sha256": "090efba6faced9d00f931f338c30e00be8d869d84c72ce50855f93dcdb485bd2",
+      "archive_sha256": "ae7cd75520e5e69a7f114328f46a354f236b2eb63e3c70b23de4d9fa321e072e",
+      "original_bytes": 1435645,
+      "archive_bytes": 119161
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-002-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-fixed/native-closure/cut-3/round-002-provisional.json.gz",
+      "original_sha256": "d77587a74e57450f8e5cd0c26f1d14bc0530774d715a1136dd2a15c09c9612f4",
+      "archive_sha256": "ce954933249d70623e385f202f618f97f47cfe7cc460d783938a4212ee10b5fb",
+      "original_bytes": 634142,
+      "archive_bytes": 19683
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-fixed-resources.log",
+      "archive_path": "requested-ray-point-three-loop-fixed-resources.log.gz",
+      "original_sha256": "3e9f4e7b61bdf804e3f603dd06fddc5476212ba40c51b1095f701b70411b6dd3",
+      "archive_sha256": "0fcb765751ce53df7664bd658dcd87c24bd790c3884f0872b253740e88b9dd2f",
+      "original_bytes": 2675,
+      "archive_bytes": 773
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/active-request-history.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/active-request-history.json.gz",
+      "original_sha256": "bf098261416ff9ca605832afea29653c9eb9de9e11a126a7a0915c56eebf8518",
+      "archive_sha256": "2e8fc8b0f31497e6b73d2dea0b141b8f18c8c2b7819d68bf182e2ac8c42ebc16",
+      "original_bytes": 205079,
+      "archive_bytes": 4789
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0001.json.gz",
+      "original_sha256": "100f0544fcd53e08175debef0a259c2dc5e741c1799e4ef85b4059b2ed3e12bd",
+      "archive_sha256": "c5c16d95c1e777b48aa87a484aee271cc1d3a3dfcdcf67d55523bb501b719bc3",
+      "original_bytes": 426536,
+      "archive_bytes": 7028
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0002.json.gz",
+      "original_sha256": "0e4db868fe36cee978b13fa5faae4c4d7770b2020fbde337e9765b467b98ed76",
+      "archive_sha256": "b3333b2df50e5604e7154163b88cfe2ef58b46a5ce3c0b847e807d25bfc65e6d",
+      "original_bytes": 1234947,
+      "archive_bytes": 19789
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0003.json.gz",
+      "original_sha256": "4ce147b9a53b83cc78c8d18d589ce4f5a2d197a11069b87d77f132ee9a533745",
+      "archive_sha256": "2f56d08f2c4923714fd12d9ff3dac0c0570269f4aa7f623b93d92406e8130fdd",
+      "original_bytes": 2006473,
+      "archive_bytes": 32622
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0004.json.gz",
+      "original_sha256": "0547020af8b322ee43de9a898868753fdb2d14f420f7a102eb1737ac56604f4d",
+      "archive_sha256": "e247f681de9420b9657a0f451af2623dfa7fec7c4c70e0b281874039f161c552",
+      "original_bytes": 2102076,
+      "archive_bytes": 34215
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0005.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/direct-zero-0005.json.gz",
+      "original_sha256": "79633081eecda7badf22f54eda945bf206e0ce3942d7f7bbee6b921e4810c93e",
+      "archive_sha256": "fb487a8c1c51109150859f9d918f8a17d30e350e31b6c436ee846b0dd20fd49e",
+      "original_bytes": 2101392,
+      "archive_bytes": 34966
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/historical-discovery-gaps.json.gz",
+      "original_sha256": "dc334b3964ad69075855699f153f8714408cbeca713939b908eb401b0a2893b4",
+      "archive_sha256": "0cc7862bdbe3cd9a2e580959f55f6e5d7ace2bfbf95b8267dabcf2ac18280fc9",
+      "original_bytes": 6304150,
+      "archive_bytes": 54023
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-000-provisional.bin.gz",
+      "original_sha256": "f692a6ff22ec4d635a1ad8957b94d6c35ac917ad90e4dade10f6867e9c07b2e4",
+      "archive_sha256": "90574f7d92e38483bbf73a211b1b66cbcdd5e056e3abd09c14833c3529e4cf16",
+      "original_bytes": 78622,
+      "archive_bytes": 6632
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-000-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-000-provisional.json.gz",
+      "original_sha256": "1e55c9923082ec52676b088057c7fb55f7ada6dc5d98a4cb9e846a790e6152f5",
+      "archive_sha256": "cd4f27e261524e67ea73b82de88c7fb03494265549661848a6b9ed7fce99d30e",
+      "original_bytes": 18276,
+      "archive_bytes": 2543
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-001-provisional.bin.gz",
+      "original_sha256": "dc8cd9735aca176a40b520596c681ee0da924efcef86d673e2759db76757ca10",
+      "archive_sha256": "42b3f8a676a5ca4d582cad1995e7a4ccddad54bf4322c870bfaf61e6a6eb2459",
+      "original_bytes": 360086,
+      "archive_bytes": 28670
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-001-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-001-provisional.json.gz",
+      "original_sha256": "0541c7e3ead2de477a5757ba2df2fc6ed4f3c9059562347ede64f00baa01560e",
+      "archive_sha256": "a0d85d99e27f7eb7e38606bb9b1a3a9fd8ae2329b8c9635b354461790add696a",
+      "original_bytes": 67343,
+      "archive_bytes": 3622
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-002-provisional.bin.gz",
+      "original_sha256": "8f664c08b31daa48a12a895d6c102e46fbb6a0d8f2253aeb687fa480b8aeb996",
+      "archive_sha256": "81e6b2ac29471b28b3422b7a7095d08e45741bf68de4e0e5677e3d6e52fab57d",
+      "original_bytes": 1316365,
+      "archive_bytes": 103189
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-002-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-002-provisional.json.gz",
+      "original_sha256": "bc413498a71a6c29f696424527182a1b9aa8af0f1c3d185c095d1582becbe86f",
+      "archive_sha256": "feeed4d4fa94625e14b67e3a2a872794d0d5b96dc0553bbbe0efb5884bbe01ff",
+      "original_bytes": 234925,
+      "archive_bytes": 7580
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-003-provisional.bin.gz",
+      "original_sha256": "b8365785ae18bd4143e442224997a5f879aaf11faf2ee7c1b321fe7b8135268e",
+      "archive_sha256": "96e3234eda0a675b35f5817d3ba1b64e7f7d4ca2451919d9a391ccfabc3fa990",
+      "original_bytes": 3911780,
+      "archive_bytes": 316513
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-003-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-003-provisional.json.gz",
+      "original_sha256": "14605eb39334d44e472c2d31c13c13fa910dc98e39915ae93a44f48a18593d01",
+      "archive_sha256": "ed3cbd817ded265aeb8ca1beb1b3c8d1d688395a7c5a1749d986b7fd36b14c2d",
+      "original_bytes": 503490,
+      "archive_bytes": 13359
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-004-provisional.bin",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-004-provisional.bin.gz",
+      "original_sha256": "a06e66aaafdc933cac5a4782ecc91ac619e977c01515d1c82667a56459563fb6",
+      "archive_sha256": "652b813b64bfd862d9fd102cb6f9d6a4a9faae08b7c18f60557e7b59ba7b9015",
+      "original_bytes": 6870554,
+      "archive_bytes": 548637
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-004-provisional.json",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control/native-closure/round-004-provisional.json.gz",
+      "original_sha256": "6fd7d2b000399421fa85bb91926b7ae272ca506a3d259551abb2613eb0993015",
+      "archive_sha256": "7f719be1f8c961dc9d972d5bf7ab65d6b223ba2a3875262e2b407030eaf1d404",
+      "original_bytes": 621758,
+      "archive_bytes": 15361
+    },
+    {
+      "original_path": "requested-ray-point-three-loop-single3-residual-control-resources.log",
+      "archive_path": "requested-ray-point-three-loop-single3-residual-control-resources.log.gz",
+      "original_sha256": "f4894343d9d4c5fcce4eb1eece3d9d04b4f4ffa699c9734c20eea46ef593115b",
+      "archive_sha256": "b88bb6e599c67a235566a8fb20053155850053bc01a0d9ddf9fee1bfe8b37262",
+      "original_bytes": 1171,
+      "archive_bytes": 559
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/active-request-history.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/active-request-history.json.gz",
+      "original_sha256": "25b110d8556ee4104b71bafcb95e8669ac9f010066c90ce271416d9309a9499d",
+      "archive_sha256": "a3abd8a0e36d8a6fa076963cf50e6293a8f7493d9bb3891a927eebb1e2ccb96c",
+      "original_bytes": 4013,
+      "archive_bytes": 326
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz",
+      "original_sha256": "94c058fbd221e420a6fad0e8d547c656dbe1f4f081084e7463a55113ad458814",
+      "archive_sha256": "b1e29b4d2a909dfec8a0bae4137f64be42f6a9d873ff1565f0d4ec4f8b8d1505",
+      "original_bytes": 174614,
+      "archive_bytes": 3474
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz",
+      "original_sha256": "3712638e227a3d31c645e421ce06a905253cabc1772cbdd0620b3eceac5a4d92",
+      "archive_sha256": "0745c107066eb3bf1cd745c8d2b3922f7f958ce0ab0fbdcae19228f9e4e35fa8",
+      "original_bytes": 330630,
+      "archive_bytes": 6289
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz",
+      "original_sha256": "7d6a2b606b862117f7c70a4938d55dce41bcf2f782108232da6b1bfddc8e4a79",
+      "archive_sha256": "135c5002eebba6b5c066f6ea36a732998e9541cc58098c9914c43d5dceef1f74",
+      "original_bytes": 501046,
+      "archive_bytes": 9217
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz",
+      "original_sha256": "d6ad43472da4a22b340a33ea2dff5730b8a5b1415115b2289cf383eaaa6b880b",
+      "archive_sha256": "4a813c18cc997e6bc5293c6a26056bebcb7cc15e65e89c228d354b2be193a550",
+      "original_bytes": 446511,
+      "archive_bytes": 8234
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz",
+      "original_sha256": "4cf5866750fd0f2f222475d29caad1d9611c0c558f513c195256e67862c10628",
+      "archive_sha256": "4fa1f48f9f20330faff68022dcc2c01eba7aa57f4cefe2e332bc774f81cefffa",
+      "original_bytes": 121979,
+      "archive_bytes": 2623
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz",
+      "original_sha256": "38fda2749f9f10ef1d1ea75a9bcd6ee733ba39daa04e91a87e164f8079802f7c",
+      "archive_sha256": "11878824dddd542b775d549bf61b31e57c3986a69aa4b8b0049a09cd6441a839",
+      "original_bytes": 85255,
+      "archive_bytes": 1916
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz",
+      "original_sha256": "2652d20e9c1f55b5632f7d17ced79994757caf3aea9c325838928016d924a402",
+      "archive_sha256": "bd4d2b009ce1b8cc35080d8cb5c828357ca44d9e49927303552137ee0cc30839",
+      "original_bytes": 85738,
+      "archive_bytes": 1919
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz",
+      "original_sha256": "ca9981ad735af5665963a6e30d4951a2a2b38d022e74f77112b63eec142227e6",
+      "archive_sha256": "cb976f0b997bb7cd7cf4109b5b45263ec40bd6c208977e1a1f7a919f872de21c",
+      "original_bytes": 41711,
+      "archive_bytes": 1141
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "original_sha256": "a189f468a652c76e654c4186dbb8728cd79c49844670a7dae3a112876e8fd55d",
+      "archive_sha256": "7ebfa2a03c4f0a6e8c958b10ec37d85d4d60ce0fe174cf3a8d76d689e7f32a08",
+      "original_bytes": 36669,
+      "archive_bytes": 855
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/retired-unresolved.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/retired-unresolved.json.gz",
+      "original_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "archive_sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "original_bytes": 2,
+      "archive_bytes": 22
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_sha256": "b1b97d39fb6894c03677c070d112c0f54f7fdee8a1ba85b4d9eb35a6880c65e5",
+      "archive_sha256": "351c2ad06355379c122a2fe93cc09041893780be84c09551e73224c639b0ee9f",
+      "original_bytes": 37104,
+      "archive_bytes": 5297
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_sha256": "8f8ce95086279a16d27eec244ad1ed7baa990ed2e64639cfe8b0c0310cc1e34c",
+      "archive_sha256": "e7f440ce36c151a03e9ef36fb8f85d1656ff8d114620ed15b3a8103db270d9af",
+      "original_bytes": 12971,
+      "archive_bytes": 2390
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_sha256": "d68daa1fa27115f37cab510855549acf30db738ae8aafcc5d15de2255be44d49",
+      "archive_sha256": "7fc053b1080fadabf7d528e5fcfb5e8412c2dd859d4af545b5c02c2345fa5507",
+      "original_bytes": 62131,
+      "archive_bytes": 8701
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_sha256": "cfd842396c3b4b7a7c91ecf149100ba225bc0f164672a590b17ceafc5ea8e5f9",
+      "archive_sha256": "152aec00edeb11ca4733a99796934e618aa8cbbb0b9c3760e10ee967759b9561",
+      "original_bytes": 16209,
+      "archive_bytes": 2484
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_sha256": "dbf6a704b30de24b59c427484d6240ba4742f7bd515b027b159f2a9a57042d3e",
+      "archive_sha256": "7f8a87f6cd5d49279e9718b72b3f1275419185fdff3e699903f8ed4837625565",
+      "original_bytes": 100782,
+      "archive_bytes": 13345
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_sha256": "6f61ff95d03ea8192b422ad439bf3b1d4dd0352d1f0ecd15a67c9f3e88dfc8be",
+      "archive_sha256": "04866ec3338c5aa4d5879bd7f1a57c7b50f88b123ad17d1129c4816fe33f6e10",
+      "original_bytes": 18260,
+      "archive_bytes": 2555
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "original_sha256": "49bccd624d79644d8ea670d676a2694e5399e2b539cf1473a718cb07e535dbbc",
+      "archive_sha256": "40a96ab9886b390ca1fe409bb84eb2f482e0aa9c7bf42812ef2d2de8cef8246e",
+      "original_bytes": 149923,
+      "archive_bytes": 18408
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "original_sha256": "316ae5507e27bad689c5803f20f9806187706fa91095775bc65666ec3128dc0b",
+      "archive_sha256": "977ff31a0d85f1ad386e27a1832d4e208943cf0bc56d6a6c4cb9a8941b39dac7",
+      "original_bytes": 17926,
+      "archive_bytes": 2547
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "original_sha256": "f60abf1007a7df6c6205f75af0d53cb0d547c84024fdcaf4a8b7dabea039e823",
+      "archive_sha256": "9b4db7a6c6be7a088ca3fb5332754768a90cdd10b86badaf490042e79c86d5e2",
+      "original_bytes": 160523,
+      "archive_bytes": 19689
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "original_sha256": "6500c28d302f75e01e026d80182a9b5344692d87e62346ed81be55d6c588a401",
+      "archive_sha256": "2a7c6fc6bd90b81e668d80f0c8bb16b033c55bdc67811a7ba8701799fe243b74",
+      "original_bytes": 16828,
+      "archive_bytes": 2536
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "original_sha256": "ab669820ddf525f5b6e286380c576ce566e789ce4c444c80eb170160a8417af9",
+      "archive_sha256": "a5f54a352bb190ed6e8644d351297041db361a120a2bdcb7550db17b12c5d706",
+      "original_bytes": 166636,
+      "archive_bytes": 20040
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz",
+      "original_sha256": "534b904ba1a3df225f6c8898cd0802cec8c7261a4ba2f10337aa120d42bc93e4",
+      "archive_sha256": "38fedef0d25c492fea0640e0d37714fbdc74fb26505eab537a6505f55539dbce",
+      "original_bytes": 16826,
+      "archive_bytes": 2518
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "original_sha256": "dc940c291c65e6dc27e649057780336e4a432df8afc8f305139d2fbe6328af9d",
+      "archive_sha256": "bd2620e731c5c8fa1ac10ac1eb845ced705bbdefd6b175ac74013e3672c47c6e",
+      "original_bytes": 174028,
+      "archive_bytes": 20406
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz",
+      "original_sha256": "f654219ed02b4f6afbdf2ebd00c2caefdb2d63dd13303bf6c2f20891780fb342",
+      "archive_sha256": "b166acc2a19e01a2998b6e794f0d1568aa37807da2d95056018be1b42e29bf35",
+      "original_bytes": 16768,
+      "archive_bytes": 2517
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz",
+      "original_sha256": "9f7b90d508273c38e365d6b46c33dcdeab01a4bf4c2ec369b5846e58a4419504",
+      "archive_sha256": "7a020e65d9e55e3c47b5c02da7df38bcf676cbbc4f35cd2392aed2bd67db2202",
+      "original_bytes": 178839,
+      "archive_bytes": 20600
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz",
+      "original_sha256": "9a74f8a5e98b6482be72643dbf6ef2ae108993afd7e5161bb2ea804614da793d",
+      "archive_sha256": "e7de0afd3fb9fe9622ddfe8e1adfabda0271167072c194d044ad023c04bcb2ce",
+      "original_bytes": 16428,
+      "archive_bytes": 2503
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/active-request-history.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/active-request-history.json.gz",
+      "original_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9",
+      "archive_sha256": "ddbe7b2ec24c317160dc5b0421e820e1c7a2df3bb52786b7495e74894eabdbc8",
+      "original_bytes": 4750,
+      "archive_bytes": 296
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "original_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3",
+      "archive_sha256": "33d40a62446fd4071dd437df2f16cd80887ea6a8fcd06060c8d31de231b3d79c",
+      "original_bytes": 1073621,
+      "archive_bytes": 15918
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "original_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d",
+      "archive_sha256": "d0693f81713c08ee5d208fd20cbfd41ce8d674d671e2b177179627c76c66a6b4",
+      "original_bytes": 2133818,
+      "archive_bytes": 31441
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "original_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806",
+      "archive_sha256": "a16e22b1ff55d28bf726adeb8b3ce8df7e72b7d4c45464258e0fd0491e02e34d",
+      "original_bytes": 6039744,
+      "archive_bytes": 87577
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "original_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a",
+      "archive_sha256": "4482d41a0eb71ef1e9d68511b085edbcbb4c86f03e3af97653d12ca14abd5c3e",
+      "original_bytes": 2827391,
+      "archive_bytes": 41331
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "original_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78",
+      "archive_sha256": "52a9eb04f994c89b01807dd6d4f71f32951fe8f93c1e757dd6405cdc7d4d7f59",
+      "original_bytes": 1062477,
+      "archive_bytes": 15868
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "original_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23",
+      "archive_sha256": "c33dda9a15ebdc690e19bb1a15eedc74964db815834178a0fe637df33c7e9fa6",
+      "original_bytes": 349058,
+      "archive_bytes": 5586
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b",
+      "archive_sha256": "d64f63c2c727c7c59f0790075c7e85f22c2b735176cfbee090264c9c498e1550",
+      "original_bytes": 1676,
+      "archive_bytes": 325
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "original_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b",
+      "archive_sha256": "772b911d170422191d1df5a6ca1123ba384c2f1ac83085d26f765f55916782a6",
+      "original_bytes": 249057,
+      "archive_bytes": 2999
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json.gz",
+      "original_sha256": "12070be86c3259eb10b36ca05b1ae5a31d8cc8e14cbc417c3d377b624712d5cf",
+      "archive_sha256": "c737380f62a28c9437f299c471436abc47c7cb4162fcc18615954e6695f111d9",
+      "original_bytes": 378,
+      "archive_bytes": 167
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_sha256": "8e00f55e9c3393dc88dbfe74932b2c9ce3c746328ed900226c6364e2338a6c96",
+      "archive_sha256": "e5b0d2c4aadebc6ce594dc6d763657872b2a5205c09f86a6562433b595f62024",
+      "original_bytes": 72802,
+      "archive_bytes": 6396
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_sha256": "a5b270a62ee3efd2cbff5c0d4b4300a729c62b0cae4a0ffd22e589773f4c8c91",
+      "archive_sha256": "f10bf11dabbe520f17e78aff91391faa5aab16c6bd784cce5e2ac289967e7014",
+      "original_bytes": 11174,
+      "archive_bytes": 2269
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_sha256": "cb7a8e44d5d81cdc5a8d2bae3222467edfec492569fbe0edad6eb7e5833b217d",
+      "archive_sha256": "19307eb2fc88b18f479a237434540982ab79d7dc2bf455af09054fe7a51c9784",
+      "original_bytes": 110983,
+      "archive_bytes": 10434
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_sha256": "09dbe73be0f9f8ebc33655b8f1252c9ac96049e48b6c6a884eb6dcacb2486304",
+      "archive_sha256": "b965714eb398759c595828bfdbff22862cff24207c1b813b58ccb63731c285cf",
+      "original_bytes": 17127,
+      "archive_bytes": 2445
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_sha256": "6a008a6b88f3a243e959c9f1f5405155b87fa14bf38cbdfa96f851b62921888c",
+      "archive_sha256": "661272f8a473a1aaeb9f826d44ae5f3399f7157878c9ed761d9da80f443fe2a0",
+      "original_bytes": 277449,
+      "archive_bytes": 30886
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_sha256": "d4342c5994bd19a948968560cbf22d89673b48723e881072c98b05e1fac15bcd",
+      "archive_sha256": "12bf08357b31300c0d425f45dc80958480b442d502365f529ef9a989696c49e6",
+      "original_bytes": 19886,
+      "archive_bytes": 2463
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "original_sha256": "ea355fcb0c15324bf30210898baff4c8a27c0ece727eea4f351644e60d7168eb",
+      "archive_sha256": "959aad5e054e0b279de79f5f2855e6b483d15c559870310851715819dec926b0",
+      "original_bytes": 343862,
+      "archive_bytes": 38688
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "original_sha256": "df850d50ce191399e8e219766f1acff08ff9e2d486b0cf5aec870f0e46a8d5ef",
+      "archive_sha256": "c101258ac729c6e2528c4ecd73fc623fe89a75eaaf0b063a29555aa8a00235af",
+      "original_bytes": 18270,
+      "archive_bytes": 2461
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "original_sha256": "af18b997dedb80f4bdb77fea8ec3860200fb21e168d3d22b18365de64cbe30a1",
+      "archive_sha256": "1d874011e8b5b7a67822b687a679d75ed2d1b9c0fd4fd897eb760b45f4117195",
+      "original_bytes": 368881,
+      "archive_bytes": 40525
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "original_sha256": "d4045de662c8a5cb1dfd2d7b136c665b0726dda43afa8ed6957fbffc71bc2efc",
+      "archive_sha256": "91995cae3891d7942407ed782598700e750a2bbf479643209c26b83140a6b2a7",
+      "original_bytes": 17524,
+      "archive_bytes": 2442
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "original_sha256": "453086cc523ebebe202dd0d5ec0b58bff376ca290f9ac9304ab9aaddb5c63063",
+      "archive_sha256": "f11aa37c2b8654cb90f554cf7abd959d0cdc8ac5f88deecdfd54f90d8145baf5",
+      "original_bytes": 391608,
+      "archive_bytes": 41267
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json.gz",
+      "original_sha256": "c1a24c22eca1f6ab007ff26e911aa94ada896a07b1253dd0622472d51485747e",
+      "archive_sha256": "ff015fecec65d1db2f7ac8a1bf2381ca32c8f21c82f189f8f4b948b7345b04ed",
+      "original_bytes": 17409,
+      "archive_bytes": 2422
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/active-request-history.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/active-request-history.json.gz",
+      "original_sha256": "05558e53c423582a78906866930fcd6a525bff6ecd05c9a621310ccd771efb0f",
+      "archive_sha256": "ac341eec85824aef7bd356d89bf7f54b6029b5dadc4bb26e6446ffcf8e494912",
+      "original_bytes": 1736,
+      "archive_bytes": 204
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json.gz",
+      "original_sha256": "6e1734aedd00504265a525592baea1cf267577459ca754ced6dda04d4cffee11",
+      "archive_sha256": "0e8c2df661357f02b47b5a287044f05f47acf67ddb24e4630779d0d5c716d4c7",
+      "original_bytes": 130157,
+      "archive_bytes": 2679
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json.gz",
+      "original_sha256": "3577b460e973761eab051b64e373f1878979336aad8fa467e3094ac677ae659c",
+      "archive_sha256": "c610b6b3c8e1dfa38bbff8074e6b7b66827a73264e801f0a389f2b7ea45aeadb",
+      "original_bytes": 127808,
+      "archive_bytes": 2698
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json.gz",
+      "original_sha256": "c9b0a67303e7e984919125c5e55bb76212dde58fbc09ddf4fb418967087fc402",
+      "archive_sha256": "8c8027a5fd282da1cb2d17b77d99697ebf5fd849e79dc8a99ea2e5d7bb3ff7c3",
+      "original_bytes": 259613,
+      "archive_bytes": 4905
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json.gz",
+      "original_sha256": "babd642fdcc1a2ae569a0f7242c5034d52968141bac8ac4c5f14253cb80b5397",
+      "archive_sha256": "7e8e71cd9a76f76fab4d177991da7729e4f7008cc016c0d97b5e80d03c3f99b9",
+      "original_bytes": 130867,
+      "archive_bytes": 2684
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "original_sha256": "4229fe46404e90c757e1247902455fa1634db0e5c17362635f97bea0be64a1d5",
+      "archive_sha256": "3f6a08c34e848bb49afb624fc2804a459bb384a11bb65dd9c3289800b25a17d3",
+      "original_bytes": 28649,
+      "archive_bytes": 749
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/retired-unresolved.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/retired-unresolved.json.gz",
+      "original_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "archive_sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "original_bytes": 2,
+      "archive_bytes": 22
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_sha256": "daac6c031627df8bc65656e22842c4a7888ac3a62db81fc2aab9a759c18d5bc7",
+      "archive_sha256": "c164db8965ff7be05687b43fcdd238434a7e4906bdd073d7bc4bdfb2bfa9a05e",
+      "original_bytes": 32737,
+      "archive_bytes": 4792
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_sha256": "867b205247f9c165a5a222171dbaf0dfe347f9e0849b8bd3a9379cca1591c79c",
+      "archive_sha256": "ff5e6defcb0e04f2723dfd86dec8dc873c4424afdd9d2446d10dcd331f5886a3",
+      "original_bytes": 11169,
+      "archive_bytes": 2299
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_sha256": "f82606b5965f2ca9e62e7ce2c8f602cb5254212dae5f41402f9adabb8e7eef7c",
+      "archive_sha256": "647bf7197990ec18d5a551565ef09729306eb25541660545d596e85fa5d7bb18",
+      "original_bytes": 48610,
+      "archive_bytes": 6530
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_sha256": "7f1535dbe731a19233cd4d61b05063db8f7d4da6fba920d3134b0e4c10bfe964",
+      "archive_sha256": "075565cc325ee9ab1c27fdadcaa6b2bd951bbc6b6ab8946164ff69565e9afa31",
+      "original_bytes": 12996,
+      "archive_bytes": 2361
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_sha256": "888921845bb9f0597b2a3ba20a54d41d43110ff061e450a47fc87557df94adf0",
+      "archive_sha256": "6e0c6ace0a55c490a600ff097fb5679d921dd5031e0cb8c9fa08aa83aef5d3d1",
+      "original_bytes": 87663,
+      "archive_bytes": 10393
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_sha256": "becc49df6892dcaae53b287cb2a817f587117174458dc5d10b631ca1b24da10e",
+      "archive_sha256": "6ddf5e17c2f01832a2a6803bb3d3ecd8f0ec736c4a7dc7a7d5f85eb1ba8c6a1e",
+      "original_bytes": 13736,
+      "archive_bytes": 2370
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin.gz",
+      "original_sha256": "7d7739a5616d893765962be188aef48802adf934509b1fc9956f89e30e65cf2a",
+      "archive_sha256": "d25586fabc7b05423460f12542876ca48ed58804096e88bfe9227cc6e3ee5667",
+      "original_bytes": 111372,
+      "archive_bytes": 12585
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-fixed/native-closure/cut-1/round-003-provisional.json.gz",
+      "original_sha256": "e89ed006ca176fec136b77046855551ce3795e6acc84a303cfbe9b2486cef211",
+      "archive_sha256": "571b50f782d817345435ae77746677f464d04ac6602d9347d8633457eaa3f42e",
+      "original_bytes": 13146,
+      "archive_bytes": 2354
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-fixed-resources.log",
+      "archive_path": "requested-ray-point-two-loop-fixed-resources.log.gz",
+      "original_sha256": "b24074f9a4c72141477b0c831d99985c23133d62c00402ecda148e9c84e00ad5",
+      "archive_sha256": "e004c4f711bb2f920792840b3db913742d8ae126868809ec66645f2c03a7c8fb",
+      "original_bytes": 14276,
+      "archive_bytes": 880
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/active-request-history.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/active-request-history.json.gz",
+      "original_sha256": "25b110d8556ee4104b71bafcb95e8669ac9f010066c90ce271416d9309a9499d",
+      "archive_sha256": "a3abd8a0e36d8a6fa076963cf50e6293a8f7493d9bb3891a927eebb1e2ccb96c",
+      "original_bytes": 4013,
+      "archive_bytes": 326
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json.gz",
+      "original_sha256": "94c058fbd221e420a6fad0e8d547c656dbe1f4f081084e7463a55113ad458814",
+      "archive_sha256": "b1e29b4d2a909dfec8a0bae4137f64be42f6a9d873ff1565f0d4ec4f8b8d1505",
+      "original_bytes": 174614,
+      "archive_bytes": 3474
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json.gz",
+      "original_sha256": "3712638e227a3d31c645e421ce06a905253cabc1772cbdd0620b3eceac5a4d92",
+      "archive_sha256": "0745c107066eb3bf1cd745c8d2b3922f7f958ce0ab0fbdcae19228f9e4e35fa8",
+      "original_bytes": 330630,
+      "archive_bytes": 6289
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json.gz",
+      "original_sha256": "7d6a2b606b862117f7c70a4938d55dce41bcf2f782108232da6b1bfddc8e4a79",
+      "archive_sha256": "135c5002eebba6b5c066f6ea36a732998e9541cc58098c9914c43d5dceef1f74",
+      "original_bytes": 501046,
+      "archive_bytes": 9217
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json.gz",
+      "original_sha256": "d6ad43472da4a22b340a33ea2dff5730b8a5b1415115b2289cf383eaaa6b880b",
+      "archive_sha256": "4a813c18cc997e6bc5293c6a26056bebcb7cc15e65e89c228d354b2be193a550",
+      "original_bytes": 446511,
+      "archive_bytes": 8234
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json.gz",
+      "original_sha256": "4cf5866750fd0f2f222475d29caad1d9611c0c558f513c195256e67862c10628",
+      "archive_sha256": "4fa1f48f9f20330faff68022dcc2c01eba7aa57f4cefe2e332bc774f81cefffa",
+      "original_bytes": 121979,
+      "archive_bytes": 2623
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json.gz",
+      "original_sha256": "38fda2749f9f10ef1d1ea75a9bcd6ee733ba39daa04e91a87e164f8079802f7c",
+      "archive_sha256": "11878824dddd542b775d549bf61b31e57c3986a69aa4b8b0049a09cd6441a839",
+      "original_bytes": 85255,
+      "archive_bytes": 1916
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json.gz",
+      "original_sha256": "2652d20e9c1f55b5632f7d17ced79994757caf3aea9c325838928016d924a402",
+      "archive_sha256": "bd4d2b009ce1b8cc35080d8cb5c828357ca44d9e49927303552137ee0cc30839",
+      "original_bytes": 85738,
+      "archive_bytes": 1919
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json.gz",
+      "original_sha256": "ca9981ad735af5665963a6e30d4951a2a2b38d022e74f77112b63eec142227e6",
+      "archive_sha256": "cb976f0b997bb7cd7cf4109b5b45263ec40bd6c208977e1a1f7a919f872de21c",
+      "original_bytes": 41711,
+      "archive_bytes": 1141
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json.gz",
+      "original_sha256": "a189f468a652c76e654c4186dbb8728cd79c49844670a7dae3a112876e8fd55d",
+      "archive_sha256": "7ebfa2a03c4f0a6e8c958b10ec37d85d4d60ce0fe174cf3a8d76d689e7f32a08",
+      "original_bytes": 36669,
+      "archive_bytes": 855
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/retired-unresolved.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/retired-unresolved.json.gz",
+      "original_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "archive_sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "original_bytes": 2,
+      "archive_bytes": 22
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_sha256": "b1b97d39fb6894c03677c070d112c0f54f7fdee8a1ba85b4d9eb35a6880c65e5",
+      "archive_sha256": "351c2ad06355379c122a2fe93cc09041893780be84c09551e73224c639b0ee9f",
+      "original_bytes": 37104,
+      "archive_bytes": 5297
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_sha256": "8f8ce95086279a16d27eec244ad1ed7baa990ed2e64639cfe8b0c0310cc1e34c",
+      "archive_sha256": "e7f440ce36c151a03e9ef36fb8f85d1656ff8d114620ed15b3a8103db270d9af",
+      "original_bytes": 12971,
+      "archive_bytes": 2390
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_sha256": "d68daa1fa27115f37cab510855549acf30db738ae8aafcc5d15de2255be44d49",
+      "archive_sha256": "7fc053b1080fadabf7d528e5fcfb5e8412c2dd859d4af545b5c02c2345fa5507",
+      "original_bytes": 62131,
+      "archive_bytes": 8701
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_sha256": "cfd842396c3b4b7a7c91ecf149100ba225bc0f164672a590b17ceafc5ea8e5f9",
+      "archive_sha256": "152aec00edeb11ca4733a99796934e618aa8cbbb0b9c3760e10ee967759b9561",
+      "original_bytes": 16209,
+      "archive_bytes": 2484
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_sha256": "dbf6a704b30de24b59c427484d6240ba4742f7bd515b027b159f2a9a57042d3e",
+      "archive_sha256": "7f8a87f6cd5d49279e9718b72b3f1275419185fdff3e699903f8ed4837625565",
+      "original_bytes": 100782,
+      "archive_bytes": 13345
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_sha256": "6f61ff95d03ea8192b422ad439bf3b1d4dd0352d1f0ecd15a67c9f3e88dfc8be",
+      "archive_sha256": "04866ec3338c5aa4d5879bd7f1a57c7b50f88b123ad17d1129c4816fe33f6e10",
+      "original_bytes": 18260,
+      "archive_bytes": 2555
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin.gz",
+      "original_sha256": "49bccd624d79644d8ea670d676a2694e5399e2b539cf1473a718cb07e535dbbc",
+      "archive_sha256": "40a96ab9886b390ca1fe409bb84eb2f482e0aa9c7bf42812ef2d2de8cef8246e",
+      "original_bytes": 149923,
+      "archive_bytes": 18408
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-003-provisional.json.gz",
+      "original_sha256": "316ae5507e27bad689c5803f20f9806187706fa91095775bc65666ec3128dc0b",
+      "archive_sha256": "977ff31a0d85f1ad386e27a1832d4e208943cf0bc56d6a6c4cb9a8941b39dac7",
+      "original_bytes": 17926,
+      "archive_bytes": 2547
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin.gz",
+      "original_sha256": "f60abf1007a7df6c6205f75af0d53cb0d547c84024fdcaf4a8b7dabea039e823",
+      "archive_sha256": "9b4db7a6c6be7a088ca3fb5332754768a90cdd10b86badaf490042e79c86d5e2",
+      "original_bytes": 160523,
+      "archive_bytes": 19689
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-004-provisional.json.gz",
+      "original_sha256": "6500c28d302f75e01e026d80182a9b5344692d87e62346ed81be55d6c588a401",
+      "archive_sha256": "2a7c6fc6bd90b81e668d80f0c8bb16b033c55bdc67811a7ba8701799fe243b74",
+      "original_bytes": 16828,
+      "archive_bytes": 2536
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin.gz",
+      "original_sha256": "ab669820ddf525f5b6e286380c576ce566e789ce4c444c80eb170160a8417af9",
+      "archive_sha256": "a5f54a352bb190ed6e8644d351297041db361a120a2bdcb7550db17b12c5d706",
+      "original_bytes": 166636,
+      "archive_bytes": 20040
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-005-provisional.json.gz",
+      "original_sha256": "534b904ba1a3df225f6c8898cd0802cec8c7261a4ba2f10337aa120d42bc93e4",
+      "archive_sha256": "38fedef0d25c492fea0640e0d37714fbdc74fb26505eab537a6505f55539dbce",
+      "original_bytes": 16826,
+      "archive_bytes": 2518
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin.gz",
+      "original_sha256": "dc940c291c65e6dc27e649057780336e4a432df8afc8f305139d2fbe6328af9d",
+      "archive_sha256": "bd2620e731c5c8fa1ac10ac1eb845ced705bbdefd6b175ac74013e3672c47c6e",
+      "original_bytes": 174028,
+      "archive_bytes": 20406
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-006-provisional.json.gz",
+      "original_sha256": "f654219ed02b4f6afbdf2ebd00c2caefdb2d63dd13303bf6c2f20891780fb342",
+      "archive_sha256": "b166acc2a19e01a2998b6e794f0d1568aa37807da2d95056018be1b42e29bf35",
+      "original_bytes": 16768,
+      "archive_bytes": 2517
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin.gz",
+      "original_sha256": "9f7b90d508273c38e365d6b46c33dcdeab01a4bf4c2ec369b5846e58a4419504",
+      "archive_sha256": "7a020e65d9e55e3c47b5c02da7df38bcf676cbbc4f35cd2392aed2bd67db2202",
+      "original_bytes": 178839,
+      "archive_bytes": 20600
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0/round-007-provisional.json.gz",
+      "original_sha256": "9a74f8a5e98b6482be72643dbf6ef2ae108993afd7e5161bb2ea804614da793d",
+      "archive_sha256": "e7de0afd3fb9fe9622ddfe8e1adfabda0271167072c194d044ad023c04bcb2ce",
+      "original_bytes": 16428,
+      "archive_bytes": 2503
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/active-request-history.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/active-request-history.json.gz",
+      "original_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9",
+      "archive_sha256": "ddbe7b2ec24c317160dc5b0421e820e1c7a2df3bb52786b7495e74894eabdbc8",
+      "original_bytes": 4750,
+      "archive_bytes": 296
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "original_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3",
+      "archive_sha256": "33d40a62446fd4071dd437df2f16cd80887ea6a8fcd06060c8d31de231b3d79c",
+      "original_bytes": 1073621,
+      "archive_bytes": 15918
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "original_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d",
+      "archive_sha256": "d0693f81713c08ee5d208fd20cbfd41ce8d674d671e2b177179627c76c66a6b4",
+      "original_bytes": 2133818,
+      "archive_bytes": 31441
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "original_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806",
+      "archive_sha256": "a16e22b1ff55d28bf726adeb8b3ce8df7e72b7d4c45464258e0fd0491e02e34d",
+      "original_bytes": 6039744,
+      "archive_bytes": 87577
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "original_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a",
+      "archive_sha256": "4482d41a0eb71ef1e9d68511b085edbcbb4c86f03e3af97653d12ca14abd5c3e",
+      "original_bytes": 2827391,
+      "archive_bytes": 41331
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "original_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78",
+      "archive_sha256": "52a9eb04f994c89b01807dd6d4f71f32951fe8f93c1e757dd6405cdc7d4d7f59",
+      "original_bytes": 1062477,
+      "archive_bytes": 15868
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "original_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23",
+      "archive_sha256": "c33dda9a15ebdc690e19bb1a15eedc74964db815834178a0fe637df33c7e9fa6",
+      "original_bytes": 349058,
+      "archive_bytes": 5586
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b",
+      "archive_sha256": "d64f63c2c727c7c59f0790075c7e85f22c2b735176cfbee090264c9c498e1550",
+      "original_bytes": 1676,
+      "archive_bytes": 325
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "original_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b",
+      "archive_sha256": "772b911d170422191d1df5a6ca1123ba384c2f1ac83085d26f765f55916782a6",
+      "original_bytes": 249057,
+      "archive_bytes": 2999
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json.gz",
+      "original_sha256": "12070be86c3259eb10b36ca05b1ae5a31d8cc8e14cbc417c3d377b624712d5cf",
+      "archive_sha256": "c737380f62a28c9437f299c471436abc47c7cb4162fcc18615954e6695f111d9",
+      "original_bytes": 378,
+      "archive_bytes": 167
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_sha256": "8e00f55e9c3393dc88dbfe74932b2c9ce3c746328ed900226c6364e2338a6c96",
+      "archive_sha256": "e5b0d2c4aadebc6ce594dc6d763657872b2a5205c09f86a6562433b595f62024",
+      "original_bytes": 72802,
+      "archive_bytes": 6396
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_sha256": "a5b270a62ee3efd2cbff5c0d4b4300a729c62b0cae4a0ffd22e589773f4c8c91",
+      "archive_sha256": "f10bf11dabbe520f17e78aff91391faa5aab16c6bd784cce5e2ac289967e7014",
+      "original_bytes": 11174,
+      "archive_bytes": 2269
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_sha256": "cb7a8e44d5d81cdc5a8d2bae3222467edfec492569fbe0edad6eb7e5833b217d",
+      "archive_sha256": "19307eb2fc88b18f479a237434540982ab79d7dc2bf455af09054fe7a51c9784",
+      "original_bytes": 110983,
+      "archive_bytes": 10434
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_sha256": "09dbe73be0f9f8ebc33655b8f1252c9ac96049e48b6c6a884eb6dcacb2486304",
+      "archive_sha256": "b965714eb398759c595828bfdbff22862cff24207c1b813b58ccb63731c285cf",
+      "original_bytes": 17127,
+      "archive_bytes": 2445
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_sha256": "6a008a6b88f3a243e959c9f1f5405155b87fa14bf38cbdfa96f851b62921888c",
+      "archive_sha256": "661272f8a473a1aaeb9f826d44ae5f3399f7157878c9ed761d9da80f443fe2a0",
+      "original_bytes": 277449,
+      "archive_bytes": 30886
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_sha256": "d4342c5994bd19a948968560cbf22d89673b48723e881072c98b05e1fac15bcd",
+      "archive_sha256": "12bf08357b31300c0d425f45dc80958480b442d502365f529ef9a989696c49e6",
+      "original_bytes": 19886,
+      "archive_bytes": 2463
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "original_sha256": "ea355fcb0c15324bf30210898baff4c8a27c0ece727eea4f351644e60d7168eb",
+      "archive_sha256": "959aad5e054e0b279de79f5f2855e6b483d15c559870310851715819dec926b0",
+      "original_bytes": 343862,
+      "archive_bytes": 38688
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "original_sha256": "df850d50ce191399e8e219766f1acff08ff9e2d486b0cf5aec870f0e46a8d5ef",
+      "archive_sha256": "c101258ac729c6e2528c4ecd73fc623fe89a75eaaf0b063a29555aa8a00235af",
+      "original_bytes": 18270,
+      "archive_bytes": 2461
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "original_sha256": "af18b997dedb80f4bdb77fea8ec3860200fb21e168d3d22b18365de64cbe30a1",
+      "archive_sha256": "1d874011e8b5b7a67822b687a679d75ed2d1b9c0fd4fd897eb760b45f4117195",
+      "original_bytes": 368881,
+      "archive_bytes": 40525
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "original_sha256": "d4045de662c8a5cb1dfd2d7b136c665b0726dda43afa8ed6957fbffc71bc2efc",
+      "archive_sha256": "91995cae3891d7942407ed782598700e750a2bbf479643209c26b83140a6b2a7",
+      "original_bytes": 17524,
+      "archive_bytes": 2442
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin.gz",
+      "original_sha256": "453086cc523ebebe202dd0d5ec0b58bff376ca290f9ac9304ab9aaddb5c63063",
+      "archive_sha256": "f11aa37c2b8654cb90f554cf7abd959d0cdc8ac5f88deecdfd54f90d8145baf5",
+      "original_bytes": 391608,
+      "archive_bytes": 41267
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json.gz",
+      "original_sha256": "c1a24c22eca1f6ab007ff26e911aa94ada896a07b1253dd0622472d51485747e",
+      "archive_sha256": "ff015fecec65d1db2f7ac8a1bf2381ca32c8f21c82f189f8f4b948b7345b04ed",
+      "original_bytes": 17409,
+      "archive_bytes": 2422
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/active-request-history.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/active-request-history.json.gz",
+      "original_sha256": "05558e53c423582a78906866930fcd6a525bff6ecd05c9a621310ccd771efb0f",
+      "archive_sha256": "ac341eec85824aef7bd356d89bf7f54b6029b5dadc4bb26e6446ffcf8e494912",
+      "original_bytes": 1736,
+      "archive_bytes": 204
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/conditional-point-refinements.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/conditional-point-refinements.json.gz",
+      "original_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "archive_sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "original_bytes": 159,
+      "archive_bytes": 143
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json.gz",
+      "original_sha256": "6e1734aedd00504265a525592baea1cf267577459ca754ced6dda04d4cffee11",
+      "archive_sha256": "0e8c2df661357f02b47b5a287044f05f47acf67ddb24e4630779d0d5c716d4c7",
+      "original_bytes": 130157,
+      "archive_bytes": 2679
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json.gz",
+      "original_sha256": "3577b460e973761eab051b64e373f1878979336aad8fa467e3094ac677ae659c",
+      "archive_sha256": "c610b6b3c8e1dfa38bbff8074e6b7b66827a73264e801f0a389f2b7ea45aeadb",
+      "original_bytes": 127808,
+      "archive_bytes": 2698
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json.gz",
+      "original_sha256": "c9b0a67303e7e984919125c5e55bb76212dde58fbc09ddf4fb418967087fc402",
+      "archive_sha256": "8c8027a5fd282da1cb2d17b77d99697ebf5fd849e79dc8a99ea2e5d7bb3ff7c3",
+      "original_bytes": 259613,
+      "archive_bytes": 4905
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json.gz",
+      "original_sha256": "babd642fdcc1a2ae569a0f7242c5034d52968141bac8ac4c5f14253cb80b5397",
+      "archive_sha256": "7e8e71cd9a76f76fab4d177991da7729e4f7008cc016c0d97b5e80d03c3f99b9",
+      "original_bytes": 130867,
+      "archive_bytes": 2684
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json.gz",
+      "original_sha256": "4229fe46404e90c757e1247902455fa1634db0e5c17362635f97bea0be64a1d5",
+      "archive_sha256": "3f6a08c34e848bb49afb624fc2804a459bb384a11bb65dd9c3289800b25a17d3",
+      "original_bytes": 28649,
+      "archive_bytes": 749
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/retired-unresolved.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/retired-unresolved.json.gz",
+      "original_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "archive_sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "original_bytes": 2,
+      "archive_bytes": 22
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_sha256": "daac6c031627df8bc65656e22842c4a7888ac3a62db81fc2aab9a759c18d5bc7",
+      "archive_sha256": "c164db8965ff7be05687b43fcdd238434a7e4906bdd073d7bc4bdfb2bfa9a05e",
+      "original_bytes": 32737,
+      "archive_bytes": 4792
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_sha256": "867b205247f9c165a5a222171dbaf0dfe347f9e0849b8bd3a9379cca1591c79c",
+      "archive_sha256": "ff5e6defcb0e04f2723dfd86dec8dc873c4424afdd9d2446d10dcd331f5886a3",
+      "original_bytes": 11169,
+      "archive_bytes": 2299
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_sha256": "f82606b5965f2ca9e62e7ce2c8f602cb5254212dae5f41402f9adabb8e7eef7c",
+      "archive_sha256": "647bf7197990ec18d5a551565ef09729306eb25541660545d596e85fa5d7bb18",
+      "original_bytes": 48610,
+      "archive_bytes": 6530
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_sha256": "7f1535dbe731a19233cd4d61b05063db8f7d4da6fba920d3134b0e4c10bfe964",
+      "archive_sha256": "075565cc325ee9ab1c27fdadcaa6b2bd951bbc6b6ab8946164ff69565e9afa31",
+      "original_bytes": 12996,
+      "archive_bytes": 2361
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_sha256": "888921845bb9f0597b2a3ba20a54d41d43110ff061e450a47fc87557df94adf0",
+      "archive_sha256": "6e0c6ace0a55c490a600ff097fb5679d921dd5031e0cb8c9fa08aa83aef5d3d1",
+      "original_bytes": 87663,
+      "archive_bytes": 10393
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_sha256": "becc49df6892dcaae53b287cb2a817f587117174458dc5d10b631ca1b24da10e",
+      "archive_sha256": "6ddf5e17c2f01832a2a6803bb3d3ecd8f0ec736c4a7dc7a7d5f85eb1ba8c6a1e",
+      "original_bytes": 13736,
+      "archive_bytes": 2370
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin.gz",
+      "original_sha256": "7d7739a5616d893765962be188aef48802adf934509b1fc9956f89e30e65cf2a",
+      "archive_sha256": "d25586fabc7b05423460f12542876ca48ed58804096e88bfe9227cc6e3ee5667",
+      "original_bytes": 111372,
+      "archive_bytes": 12585
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "requested-ray-point-two-loop-laurent/native-closure/cut-1/round-003-provisional.json.gz",
+      "original_sha256": "e89ed006ca176fec136b77046855551ce3795e6acc84a303cfbe9b2486cef211",
+      "archive_sha256": "571b50f782d817345435ae77746677f464d04ac6602d9347d8633457eaa3f42e",
+      "original_bytes": 13146,
+      "archive_bytes": 2354
+    },
+    {
+      "original_path": "requested-ray-point-two-loop-laurent-resources.log",
+      "archive_path": "requested-ray-point-two-loop-laurent-resources.log.gz",
+      "original_sha256": "a8ce8548a61781a394df48f7c29ef48239e354fe215d82a46bf4cd16725d9cdf",
+      "archive_sha256": "c24ede7ae302e4d4dc3261d821f17204696697162fd1426f1c3c36df764393f4",
+      "original_bytes": 496336,
+      "archive_bytes": 4269
+    }
+  ],
+  "file_count": 295,
+  "original_bytes": 243977103,
+  "archive_bytes": 9957094,
+  "all_restore_checks_passed": true,
+  "archive_script_sha256": "94a2db4ecba7f7958cf34e6855d42f19ca97dc241605b5d010c4aaddd176127b"
+}

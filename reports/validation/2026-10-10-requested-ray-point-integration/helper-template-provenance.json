@@ -1,0 +1,95 @@
+{
+  "scope": "Separate requested-ray-point integration helpers copied from immutable v2 report; no source snapshot, build or numerical process is started by preparation.",
+  "template_manifest_sha256": "911ee020351c1b574791d9a190375d0d9baabf7a699a67791ba997c4c24facc7",
+  "helpers": {
+    "frozen_sources.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/frozen_sources.py",
+      "template_sha256": "0bf7fa848b444bc753569139b92ff8d4e1a14b1c1d42aad74ceb50e68865fc77",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/frozen_sources.py",
+      "new_sha256": "217c38e656a12f54cbc4ae9b6b9492c47ecd3ab5b60bf0ea3645202634080dd6"
+    },
+    "capture-source-snapshot.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/capture-source-snapshot.py",
+      "template_sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/capture-source-snapshot.py",
+      "new_sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b"
+    },
+    "capture-frozen-build.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/capture-frozen-build.py",
+      "template_sha256": "4af4c758173aa13a1df4b93a57ab9aa8ea4945daa28f944cbfb3860d7cd1ad59",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/capture-frozen-build.py",
+      "new_sha256": "44fd15f950255fc3c64b98fac988683e82f2448931d5c420a7e9c4d361657f2d"
+    },
+    "run-frozen-root-gate.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/run-frozen-root-gate.py",
+      "template_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/run-frozen-root-gate.py",
+      "new_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8"
+    },
+    "summarize-frozen-root-gates.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/summarize-frozen-root-gates.py",
+      "template_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/summarize-frozen-root-gates.py",
+      "new_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+    },
+    "run-resource-command.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/run-resource-command.py",
+      "template_sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/run-resource-command.py",
+      "new_sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+    },
+    "launch-polynomial-closure-build.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/launch-polynomial-closure-build.py",
+      "template_sha256": "ca5fed684b5857e63016122e824de8941826039cf05ed7e0b9bc81ba5f9abe3f",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/launch-requested-ray-point-build.py",
+      "new_sha256": "7082fb7c351106ddf445f9284e0f04950461418e283501edfb08ac30f6ec56a5"
+    },
+    "capture-polynomial-closure-build.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/capture-polynomial-closure-build.py",
+      "template_sha256": "e38f3245f5d264d495014136d35f99cddb39236888b1f634df887a8e18c4b82a",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/capture-requested-ray-point-build.py",
+      "new_sha256": "763d4ba06db817100b141e8b611912480a04a853dd609aadf8384fe6c48bfefe"
+    },
+    "reuse-native-gate.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/reuse-native-gate.py",
+      "template_sha256": "f04aaa77564e9521b766904b9a5c67b33b1ab52bc8c3f79d0087fb3992b3df24",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/reuse-native-gate.py",
+      "new_sha256": "0ef30dd75361dbf94535cc1a7d16cc5bef5455cd0fd07243070908ad7f0e55fc"
+    },
+    "run-root-gates.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/run-root-gates.py",
+      "template_sha256": "4a9f01e626f32212682e91cab7bef850fbaa4effe89bc1bfab1b7de66bbb3b9c",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/run-root-gates.py",
+      "new_sha256": "9457514b4626abcf846a56fbd61bee006d4dabb8ec496356b9089629dde0959b"
+    },
+    "run-three-loop-gate.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/run-three-loop-gate.py",
+      "template_sha256": "87162f683471d4464bd52d9ab106acfa555dc46ad2a070e56683ee9b0944f50a",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/run-three-loop-gate.py",
+      "new_sha256": "dbfc5048185ad9b3538b8eeb63c5819315070cf063c3fe74c00c4335e5c4d169"
+    },
+    "run-two-loop-gate.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/run-two-loop-gate.py",
+      "template_sha256": "897d789b5c5a78e00cbbe34e7655814f0ee0b2c7c0abc3d5ff8e1cc450606160",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/run-two-loop-gate.py",
+      "new_sha256": "ecbf162bde23825a229df6755286e7f98fb3b0e0e93f7923b4071eda80650645"
+    },
+    "run-massive-regression.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/run-massive-regression.py",
+      "template_sha256": "839834e2b9ce590b215311c54867568ab19f414a92f489b0151a5fdd2c31dc01",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/run-massive-regression.py",
+      "new_sha256": "e12425288e6ca666c12e4958e253c23673dfefac6b324135f10b47a3d187fbf4"
+    },
+    "compare-completed-predictions.py": {
+      "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/compare-completed-predictions.py",
+      "template_sha256": "2257a2b25c3d96cddabcdef8bc4f156b5c5e8216f5f28595f3bba6f061d4c12f",
+      "new_path": "reports/validation/2026-10-10-requested-ray-point-integration/compare-completed-predictions.py",
+      "new_sha256": "e5e43bc3cf82d11ee3114ce4ec97449971521c204a6ef10d37cfcca21a2e776a"
+    }
+  },
+  "comparison_plan": {
+    "template_sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+    "copied_sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+    "frozen_reference_and_comparator_assets_verified": 18
+  }
+}

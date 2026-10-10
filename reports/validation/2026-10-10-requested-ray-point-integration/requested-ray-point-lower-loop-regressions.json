@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "Default-branch lower-loop numerical regression after adding the optional requested-ray-point scheduler. The new schedule is disabled and J settings/source policy remain unchanged. Complete massless two-loop fixed-D and Laurent profiles, plus one massive two-loop profile. No three-loop or four-loop numerical acceptance follows from this report.",
+  "source_policy": "polynomial-closure-v1",
+  "requested_ray_point_schedule_enabled": false,
+  "predictions_saved_before_reference_comparison": true,
+  "supplied_oracle_numerical_records_compared": 0,
+  "reference_uncertainty": "Empirical independent precision/quadrature refinement and exact formula checks; no rigorous numerical error interval.",
+  "performance_scope": "Prebuilt process resources only, excluding compilation and Nix setup. Concurrent independent runs prevent a controlled speed comparison.",
+  "massive_scope": "Single existing 28-digit/order-80/start-scale-12 profile; no new massive refinement claim.",
+  "gates": [
+    {
+      "gate": "two-loop-fixed",
+      "status": "passed",
+      "harness_seconds": 6.69,
+      "wall_seconds": 6.704807028640062,
+      "peak_child_rss_kib": 46160,
+      "reference_comparisons": 40,
+      "independent_profile_refinements": 30,
+      "historical_same_profile_comparisons": 0,
+      "assembly_checks": 8,
+      "largest_reference_relative_difference": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+      "largest_reference_absolute_difference": "3.4121037186962069290411517449865E-70",
+      "largest_refinement_relative_difference": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+      "largest_historical_relative_difference": null,
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-binding.json",
+          "sha256": "160aab41209dee13d02507ec9a6da057cd7ae5eff18519bb8b1bdee39ee97852"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-resources.json",
+          "sha256": "5b2a25247161a386c3ee89eb2c9c2ab298b1336b5247413aead92e2522a09ae1"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-comparison.json",
+          "sha256": "88af62bbac77d3853f9e4b52d02a182b0ddadccb537798db2e78a1dcc4c806a7"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-comparison-binding.json",
+          "sha256": "d6e3a14ff15d116d19fc665f5866c6aa253a7815f3ce72c4c865c2ab0bb66883"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-resources.provenance.json",
+          "sha256": "2b151eca8fe8e763b5ff57c4e0a5b2c232cacb6a06db8bfc105f7850493c1448"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-resources.log",
+          "sha256": "b24074f9a4c72141477b0c831d99985c23133d62c00402ecda148e9c84e00ad5"
+        }
+      }
+    },
+    {
+      "gate": "two-loop-laurent",
+      "status": "passed",
+      "harness_seconds": 139.43,
+      "wall_seconds": 139.44387518893927,
+      "peak_child_rss_kib": 45612,
+      "reference_comparisons": 30,
+      "independent_profile_refinements": 24,
+      "historical_same_profile_comparisons": 0,
+      "assembly_checks": 0,
+      "largest_reference_relative_difference": "2.041136525965978003930408804967162140194053923396263027938938078601923303126923855708841071449594151E-44",
+      "largest_reference_absolute_difference": "1.1745950820691640507721879595913459936811546687210E-47",
+      "largest_refinement_relative_difference": "0.9999999999999662789820765106409904644051330867995512301954813353606913364878255606222658848636170305",
+      "largest_historical_relative_difference": null,
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-binding.json",
+          "sha256": "e56439d04569374909042370f95a44e12fe4dfea4670af7758d7d2d9b0106060"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-resources.json",
+          "sha256": "af5b7ca4aaf863d3be0c23c1abcc9b88f8c4fd0767d2989eeeccaf60ce8f6fdc"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-comparison.json",
+          "sha256": "b239e41b5d5301df0aea9c8a5bb3e20abf2c9ff09d11fb753b0a87678234bfe5"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-comparison-binding.json",
+          "sha256": "78769874ecbe152943b0106213eb14084757a39a448239c1d59f7f0ef326c41e"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-resources.provenance.json",
+          "sha256": "0c19f753c140859db14f20672dd084865307f96202c6b9526d55bb8080aaae37"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-resources.log",
+          "sha256": "a8ce8548a61781a394df48f7c29ef48239e354fe215d82a46bf4cd16725d9cdf"
+        }
+      }
+    },
+    {
+      "gate": "massive-regression",
+      "status": "passed",
+      "harness_seconds": 49.5,
+      "wall_seconds": 49.5201934822835,
+      "peak_child_rss_kib": 70712,
+      "reference_comparisons": 10,
+      "independent_profile_refinements": 0,
+      "historical_same_profile_comparisons": 10,
+      "assembly_checks": 2,
+      "largest_reference_relative_difference": "9.448822657573757205344272543705462164866680568357354600394433173136786775137590600321253156047528368E-36",
+      "largest_reference_absolute_difference": "5.591962512684841877215945815219655663000000000000000425669170804770472422728499909310862088315648929E-38",
+      "largest_refinement_relative_difference": null,
+      "largest_historical_relative_difference": "3.126880367294401822762087193147855540425250160200645842114784347243379270736498630071765857473420769E-59",
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-binding.json",
+          "sha256": "ac5f27cdbd5e02956a340c04988a1b05982c2714b49291699d9a60e9d732e804"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.json",
+          "sha256": "4be78867441c048d56f8c318035aa3a72d591f51d7a7d7bcc656172ae7cfe426"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-comparison.json",
+          "sha256": "ae01a52cb045950d0d6dc92861fe9d980a4b9222eaf9c336168fb96299619061"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-comparison-binding.json",
+          "sha256": "e1198fb4a6ac2851c1bad5f1fc45ef15bf1f5df272afdb9a6fad969bd0b5feff"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.provenance.json",
+          "sha256": "53ba12aa95e6ae29aa2d0fc8b1ce86c175236cda99914803f72189023798ea9d"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.log",
+          "sha256": "4a919ef35840471dde44a6b73079620354267653003894d6ae7ef9ce210295a6"
+        }
+      }
+    }
+  ],
+  "bindings_sha256": {
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-root-gates.json": "a1ecdd7d213fd0e25fabb1fa62ce17d49b904e7739160b40efbde76c7ef499f1",
+    "reports/validation/2026-10-10-requested-ray-point-integration/summarize-lower-loop-regressions.py": "4fadbf83225b848c9aab48823396cfc4c53f02d9f482993e87585e9b59bb44f1"
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json",
+    "sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json",
+    "sha256": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac"
+  },
+  "unchanged_source_files": 2483,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "c49479ab66da60033d84291bbc81f8bc8271371c7cf7a1188dac9386ef9887cb"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 95,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.39,
+      "wall_seconds": 7.41591811273247,
+      "peak_child_rss_kib": 21504,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-lib-resources.json",
+          "sha256": "99cef08f68b4865b9be8fa54f85daa8d9ed66a909e679c550359eafd2aeef4db"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-lib-resources.log",
+          "sha256": "abb20d5c141aa0f365abec362c6446986ff57504a773e3402720196cd3e74552"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-lib-resources.provenance.json",
+          "sha256": "6354efed896e1bc2573239878e26e17e0526ccf357334185fe5453b4de3b253a"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-lib-binding.json",
+          "sha256": "b2235765d5e1e971a816d07863ee4c423bc0e460ee921969c0d6216417765b19"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.1718569230288267,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-flow-boundary-resources.json",
+          "sha256": "3f5a5c8b1b9677d73cbc391a370fd2c7a58ff934803453faf3fc043941dc426f"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-flow-boundary-resources.provenance.json",
+          "sha256": "15cbc777ea4d05242284a9d795350a550300e65efc015bd2c2febe6775858a42"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-flow-boundary-binding.json",
+          "sha256": "de8e019c151ca6572eda3bc5a2450639e7e8559f6d9e9a072d8c10579825cfc9"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.38,
+      "wall_seconds": 1.3980355472303927,
+      "peak_child_rss_kib": 18432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massless-sources-resources.json",
+          "sha256": "f2c9df409f0bea94e2fd863b0673be378588a0bacbed3bb97def491c5aff48c8"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massless-sources-resources.log",
+          "sha256": "9a423b0549e1d3c579e38881dca906fad8fcb1aed415b5d4e661e95df7a5c09e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massless-sources-resources.provenance.json",
+          "sha256": "1b7ad2b4724c2cc6b2c15632d3857beb1665cfc9491b38735bc8eac31e7da813"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massless-sources-binding.json",
+          "sha256": "64647e96003b18e38b844537de051049b9a53c077cce5c884b9d8bb4f40d3493"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.011214823927730322,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-fingerprint-resources.json",
+          "sha256": "ebbfa817deeafb11644d2327bde38b5f158ed2e239d4044b1beb06e275df11ba"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-fingerprint-resources.log",
+          "sha256": "6df5c4902e9d5cbfca82835300dee6038e86b206107ecd037d34b68ef939e57e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-fingerprint-resources.provenance.json",
+          "sha256": "4cf4e1db3b07d9fe367f2e99c9ffe73ae3602747757954123216372b271333e5"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-fingerprint-binding.json",
+          "sha256": "eabd5092ad561d274f19f330797cf5c01e9a8d13dced21603150faeba729ae15"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.76,
+      "wall_seconds": 1.781135203782469,
+      "peak_child_rss_kib": 30748,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-python-resources.json",
+          "sha256": "999cefacc7ce28654e7e8a08241559eb6743da1a9b755315a921980fc46bcf43"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-python-resources.log",
+          "sha256": "412190830669c857d5de291b59527f7c851521b7413e605be7af7003d336a537"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-python-resources.provenance.json",
+          "sha256": "a80b67232a6880246f4fd2b32cb3d06c5e50e2bb20b6ebfdaa1149779ebf3e2c"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-python-binding.json",
+          "sha256": "1cca1c5dd0804401fb8252f6578680f78ba91f07876f44b0bd52627f47563f83"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.04,
+      "wall_seconds": 0.053660806734114885,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-capacity-resources.json",
+          "sha256": "4224831ec3f9b0276b67c72dd0482b9c027d3449101be52bfc6d106b366634b6"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-capacity-resources.log",
+          "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-capacity-resources.provenance.json",
+          "sha256": "3913b24bd1b7474e261592c1a21d35d78ed491147c5845ace0f81345dd43b2db"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-capacity-binding.json",
+          "sha256": "c6f4fe5f915c5e6c8495ae8421714acc709b87198fd53e4f66628814992c1040"
+        }
+      }
+    },
+    {
+      "gate": "polynomial-sources",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.07,
+      "wall_seconds": 0.08495825435966253,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-polynomial-sources-resources.json",
+          "sha256": "c2465d17ffde27a0d40f92dc8d05cb83b9736a647afab7ad04f499084b7134f2"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-polynomial-sources-resources.log",
+          "sha256": "1832ec31f23d17874adad93f0b2f14ae2b9b62be997c1678ceb5cdbba786c6e2"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-polynomial-sources-resources.provenance.json",
+          "sha256": "41fab0864531a1af4ef802b2621597b5a27e8cb999e07b2e3b7d5797a34c1a40"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-polynomial-sources-binding.json",
+          "sha256": "56a5745a91f809104a7d49f989d7ec72079d684dd57894738b21a3a2c33c855a"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 115,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+}

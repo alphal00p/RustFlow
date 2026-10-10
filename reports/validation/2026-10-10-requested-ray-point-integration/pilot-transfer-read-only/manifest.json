@@ -1,0 +1,20 @@
+{
+  "scope": "Frozen read-only exact scheduling comparison through all 16 cut-0 rounds. Production and source-only pilot both closed seven basis labels with 3553 rules. No native proof or numerical period imported; conditions and RHS coefficients are not asserted equal by this JSON-only comparison.",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/pilot-transfer-read-only/compare.py",
+      "bytes": 5528,
+      "sha256": "60ed55e1643a924df1d7c0d8db14f9c6f93b55c2ff88037522eba1cf77a4f26b"
+    },
+    {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/pilot-transfer-read-only/through-round-006.json",
+      "bytes": 16512,
+      "sha256": "b90113bf760acc6fc671d1d949518baee5ec21177245258c0ee93bcf112df5e4"
+    },
+    {
+      "path": "reports/validation/2026-10-10-requested-ray-point-integration/pilot-transfer-read-only/through-round-015.json",
+      "bytes": 37234,
+      "sha256": "d09cccaa800cb5fe2ae36497cc7750c1c5ce077c29130c6350791a60e230bfdb"
+    }
+  ]
+}

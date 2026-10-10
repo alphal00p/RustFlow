@@ -1,0 +1,63 @@
+{
+  "status": "prepared_not_built",
+  "scope": "Script compilation, literal option audit and inventory membership checks only; no source snapshot captured and no Cargo or numerical command launched.",
+  "report_prefix": "requested-ray-point",
+  "source_policy": "polynomial-closure-v1",
+  "required_source_paths_in_inventory": [
+    "src/finite_density/reduction/requested.rs",
+    "src/finite_density/reduction/requested_tests.rs",
+    "src/finite_density/reduction/active.rs",
+    "src/finite_density/guarded.rs",
+    "tests/finite_density_runtime_flow.rs",
+    "tests/finite_density_polynomial_sources.rs"
+  ],
+  "explicit_snapshot_fixture": {
+    "path": "reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "sha256": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2"
+  },
+  "frozen_reference_and_comparator_assets": 18,
+  "three_loop_schedule": {
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAY_POINT": "true",
+    "RUSTFLOW_WEIGHTED_RAY_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_POINT_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": "0",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": "0",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS": "8192",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES": "65536",
+    "RUSTFLOW_WEIGHTED_DEPTH": "3",
+    "RUSTFLOW_WEIGHTED_DOMAINS": "8192",
+    "RUSTFLOW_WEIGHTED_ROUNDS": "16",
+    "RUSTFLOW_WEIGHTED_FRONTIER": "1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED": "4096",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1"
+  },
+  "lower_loop_literal_settings_equal_J": true,
+  "three_loop_fixed_timeout_seconds": 3600,
+  "scripts_sha256": {
+    "build-native-digest.py": "3e06fb1ebcc2d10d25aa1bbce9fbe841e0f01645fd8f8e5be67b0edec7ba9124",
+    "capture-frozen-build.py": "44fd15f950255fc3c64b98fac988683e82f2448931d5c420a7e9c4d361657f2d",
+    "capture-requested-ray-point-build.py": "763d4ba06db817100b141e8b611912480a04a853dd609aadf8384fe6c48bfefe",
+    "capture-source-snapshot.py": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+    "compare-completed-predictions.py": "32cff7c2785304d6372dba72dd2d5ac3b2d7e016db4e043b228b72ed55d32883",
+    "frozen_sources.py": "217c38e656a12f54cbc4ae9b6b9492c47ecd3ab5b60bf0ea3645202634080dd6",
+    "launch-requested-ray-point-build.py": "86ab49c5ec35ae51e4569bd18affe5bda994c9008085ae1641fcb02f9b8da381",
+    "reuse-native-gate.py": "0ef30dd75361dbf94535cc1a7d16cc5bef5455cd0fd07243070908ad7f0e55fc",
+    "run-frozen-root-gate.py": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+    "run-massive-regression.py": "c0a2a62b9bdf3a3882e058e46a513ac837ed41db66b865ed2dfdb6b354ef220f",
+    "run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+    "run-root-gates.py": "9457514b4626abcf846a56fbd61bee006d4dabb8ec496356b9089629dde0959b",
+    "run-three-loop-gate.py": "d3a93b75230bc5156d0818ade6106742b1b248c5f09fa2f73a991c1ab498388f",
+    "run-two-loop-gate.py": "b1af76c7806e5d7e7b0193385ed325d930ea3230ac54b767d796b11df5342f10",
+    "summarize-frozen-root-gates.py": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+  },
+  "explicit_requested_point_fixture": {
+    "path": "fixtures/finite_density/requested_point_source_rows.json",
+    "sha256": "789aacca33f653e1e8df7a02e5434f1ea3690f18c057253fa8789aa2a6e4753c"
+  },
+  "native_digest_utility": {
+    "source_sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "build_status": "not_run",
+    "build_requires": "completed coherent K capture",
+    "scope": "validation-only native BLAKE3 adapter; no Cargo or source mutation"
+  }
+}

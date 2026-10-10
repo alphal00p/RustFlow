@@ -1,0 +1,10 @@
+warning: unused import: `symbolica::prelude`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-native-ray-point-fallback-fixture/probe.rs:21:5
+   |
+21 | use symbolica::prelude::*;
+   |     ^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: 1 warning emitted
+

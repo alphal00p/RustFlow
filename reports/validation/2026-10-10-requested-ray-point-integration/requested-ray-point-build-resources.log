@@ -1,0 +1,65 @@
+   Compiling symbolica-amflow v0.1.0 (/common/dev/rustflow_fermi)
+warning: method `integer_zero_locus_misses_domain` is never used
+   --> vendor/rustred/crates/rustred-core/src/algebra/indexed/base_coefficients.rs:654:19
+    |
+213 | impl IndexedCoefficientContext {
+    | ------------------------------ method in this implementation
+...
+654 |     pub(crate) fn integer_zero_locus_misses_domain(
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `application_boxes` is never used
+  --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry.rs:61:15
+   |
+61 | pub(super) fn application_boxes<const N: usize>(
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: function `uniformly_zero_wide` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry.rs:481:15
+    |
+481 | pub(super) fn uniformly_zero_wide<Z: AsRef<[bool]>>(
+    |               ^^^^^^^^^^^^^^^^^^^
+
+warning: function `coefficient_vanishes` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry.rs:549:4
+    |
+549 | fn coefficient_vanishes(
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `coefficient_vanishes` is never used
+  --> vendor/rustred/crates/rustred-core/src/foundry/artifact/source_port/geometry/bounded.rs:16:50
+   |
+16 | pub(in crate::foundry::artifact::source_port) fn coefficient_vanishes(
+   |                                                  ^^^^^^^^^^^^^^^^^^^^
+
+warning: associated function `try_new` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/parametric/affine.rs:197:19
+    |
+ 59 | impl AffineApplicationDomain {
+    | ---------------------------- associated function in this implementation
+...
+197 |     pub(crate) fn try_new(
+    |                   ^^^^^^^
+
+warning: method `restrict_polynomial_value` is never used
+   --> vendor/rustred/crates/rustred-core/src/foundry/parametric/affine/restriction.rs:243:19
+    |
+134 | impl AffineDomainRestriction {
+    | ---------------------------- method in this implementation
+...
+243 |     pub(crate) fn restrict_polynomial_value(
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `rustred` (lib) generated 7 warnings
+    Finished `release` profile [optimized + debuginfo] target(s) in 7m 05s
+  Executable unittests src/lib.rs (target/release/deps/rustred-258a1e04558e72f1)
+  Executable unittests src/lib.rs (target/release/deps/symbolica_amflow-6c032eef1649ac2e)
+  Executable tests/finite_density_capacity.rs (target/release/deps/finite_density_capacity-fceac547516b5e9d)
+  Executable tests/finite_density_flow_boundary.rs (target/release/deps/finite_density_flow_boundary-9423d5e4f8668f3b)
+  Executable tests/finite_density_massless_sources.rs (target/release/deps/finite_density_massless_sources-6295c8431ae8f488)
+  Executable tests/finite_density_polynomial_sources.rs (target/release/deps/finite_density_polynomial_sources-67356704627148d2)
+  Executable tests/finite_density_runtime_flow.rs (target/release/deps/finite_density_runtime_flow-44939937ffe8534f)
+  Executable tests/python_finite_density.rs (target/release/deps/python_finite_density-86655a919328faf8)
+  Executable tests/source_fingerprint.rs (target/release/deps/source_fingerprint-3c52aa1b71e5ce60)

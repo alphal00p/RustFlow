@@ -1,0 +1,8 @@
+"full62" "ray" "Unresolved(NoApplicableRule)" rhs=0
+"full62" "point" "Applied { rule: 0 }" rhs=1
+"row4" "ray" "Unresolved(NoApplicableRule)" rhs=0
+"row4" "point" "Unresolved(NoApplicableRule)" rhs=0
+"row60" "ray" "Unresolved(NoApplicableRule)" rhs=0
+"row60" "point" "Unresolved(NoApplicableRule)" rhs=0
+"rows4_60" "ray" "Unresolved(NoApplicableRule)" rhs=0
+"rows4_60" "point" "Applied { rule: 0 }" rhs=1

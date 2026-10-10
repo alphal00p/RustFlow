@@ -1,0 +1,20 @@
+{
+  "scope": "Prepared but unrun selected-sector control. No source or numerical-definition changes.",
+  "source_launcher_sha256": "d3a93b75230bc5156d0818ade6106742b1b248c5f09fa2f73a991c1ab498388f",
+  "control_launcher_sha256": "62dc8176fe99d2f5a266030038e36bde44bd7f9351ef02e20079b0621faa2db9",
+  "requested_ray_point": false,
+  "max_domains_per_residual": 32,
+  "guard_passes": 3,
+  "direct_zero_attempts": 8192,
+  "profile": [
+    18,
+    60,
+    8
+  ],
+  "cut_slots": [
+    0,
+    3
+  ],
+  "timeout_seconds": 600,
+  "full_amplitude_acceptance": false
+}

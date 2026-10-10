@@ -1,0 +1,442 @@
+{
+  "scope": "Read-only scheduling/label comparison. Source equivalence is established by the separate production 62-row gate. Conditions/RHS coefficients are not asserted equal here. No native proof or numerical value was imported.",
+  "script_sha256": "60ed55e1643a924df1d7c0d8db14f9c6f93b55c2ff88037522eba1cf77a4f26b",
+  "last_completed_round": 6,
+  "all_compared_checks_match": true,
+  "rounds": [
+    {
+      "round": 0,
+      "checks": {
+        "frontier_labels": true,
+        "native_rule_count": true,
+        "submitted_labels": true,
+        "historical_labels": true,
+        "next_needed_labels": true,
+        "searched_labels_and_application_statuses": true,
+        "no_deferred_transactions": true
+      },
+      "all_checks_match": true,
+      "counts": {
+        "frontier": [
+          24,
+          24
+        ],
+        "rules": [
+          15,
+          15
+        ],
+        "submitted": [
+          15,
+          15
+        ],
+        "searched": [
+          15,
+          15
+        ],
+        "allocated_domains": 30,
+        "deferred": 0
+      },
+      "application_differences": [],
+      "inputs": [
+        {
+          "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-000.json.gz",
+          "bytes": 1902,
+          "sha256": "ee4290404367a0d8e3a25b7675553ec532a9dff9a4bcd8d34827a0be51b9dfa6",
+          "decoded_json_sha256": "a99a2d8f8f86d176b3a7a7628a58c7e9f8c4b28a3ece067118da73404d380db0"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json",
+          "bytes": 28586,
+          "sha256": "d7e4400bd38ab64fd99e4b90edacf28ab11794111d14c2323a024d3896efec87",
+          "decoded_json_sha256": "d7e4400bd38ab64fd99e4b90edacf28ab11794111d14c2323a024d3896efec87"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0001.json",
+          "bytes": 93051,
+          "sha256": "1d90395b3a0aae9062fefd621a892a88a82f5ec3a7cf6a3de0a73e5dd41ad53c",
+          "decoded_json_sha256": "1d90395b3a0aae9062fefd621a892a88a82f5ec3a7cf6a3de0a73e5dd41ad53c"
+        }
+      ],
+      "production_checkpoint_program_binding": {
+        "blake3": "59b3153f20fbb3a9ba84fd749cabaf17f0588f168f5fd2b5ddf04dbe3bd6deee",
+        "bytes": 51656
+      },
+      "production_transaction_checkpoint_binding": {
+        "blake3": "fefaa7ae7cf1705979b26d0bb1cc1cf3390fee430bca5ebe513c609014a89a79",
+        "path": "requested-discovery-0001.json"
+      }
+    },
+    {
+      "round": 1,
+      "checks": {
+        "frontier_labels": true,
+        "native_rule_count": true,
+        "submitted_labels": true,
+        "historical_labels": true,
+        "next_needed_labels": true,
+        "searched_labels_and_application_statuses": true,
+        "no_deferred_transactions": true
+      },
+      "all_checks_match": true,
+      "counts": {
+        "frontier": [
+          100,
+          100
+        ],
+        "rules": [
+          39,
+          39
+        ],
+        "submitted": [
+          27,
+          27
+        ],
+        "searched": [
+          24,
+          24
+        ],
+        "allocated_domains": 48,
+        "deferred": 0
+      },
+      "application_differences": [],
+      "inputs": [
+        {
+          "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-001.json.gz",
+          "bytes": 4655,
+          "sha256": "6cf414f0cdd86dcb0c8ea9eac8b14ead0d044f489ee1d9541ba1761e1d933925",
+          "decoded_json_sha256": "ccaa78ff575d8bcbdf79d740454dc1d988a177e615bcd969976df49a0ec116ba"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+          "bytes": 65418,
+          "sha256": "11bfc86b804709649a5988bee7ae88ffd0bfe099f3eeca53d7dfc211b0f620a6",
+          "decoded_json_sha256": "11bfc86b804709649a5988bee7ae88ffd0bfe099f3eeca53d7dfc211b0f620a6"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0002.json",
+          "bytes": 153707,
+          "sha256": "1181e50716740cff14cea5572cd0b52da505ac9b5359b323e38fcf36ed20e9cc",
+          "decoded_json_sha256": "1181e50716740cff14cea5572cd0b52da505ac9b5359b323e38fcf36ed20e9cc"
+        }
+      ],
+      "production_checkpoint_program_binding": {
+        "blake3": "2b9c8031a3f558e741c02bc551a725a8f7c20d7c59c3fe89da96f9bb8d10d073",
+        "bytes": 78139
+      },
+      "production_transaction_checkpoint_binding": {
+        "blake3": "a20fdb0e32e7e06f4ba00e182de30554fcc60e64ed13208d1d7572f623a87daa",
+        "path": "requested-discovery-0002.json"
+      }
+    },
+    {
+      "round": 2,
+      "checks": {
+        "frontier_labels": true,
+        "native_rule_count": true,
+        "submitted_labels": true,
+        "historical_labels": true,
+        "next_needed_labels": true,
+        "searched_labels_and_application_statuses": true,
+        "no_deferred_transactions": true
+      },
+      "all_checks_match": true,
+      "counts": {
+        "frontier": [
+          343,
+          343
+        ],
+        "rules": [
+          151,
+          151
+        ],
+        "submitted": [
+          103,
+          103
+        ],
+        "searched": [
+          100,
+          100
+        ],
+        "allocated_domains": 200,
+        "deferred": 0
+      },
+      "application_differences": [],
+      "inputs": [
+        {
+          "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-002.json.gz",
+          "bytes": 21902,
+          "sha256": "bf3f81370ecd8d51e1ac4a4c9f298866d4ebc6f76d49df565b9cce104f71938b",
+          "decoded_json_sha256": "a56397a1084648c087d1433b15d4ace95e1ecd3ff8dc4e0b509f51d13c364ed8"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+          "bytes": 199041,
+          "sha256": "7768dcd0f65bb52cbcd6ec26152d2a242068e28318de623a7febb8cf5e51d67f",
+          "decoded_json_sha256": "7768dcd0f65bb52cbcd6ec26152d2a242068e28318de623a7febb8cf5e51d67f"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0003.json",
+          "bytes": 564448,
+          "sha256": "155fecaad6e9050aa29baecbee3e37263f4d5d7775d18fa9992b8d4d6cf61b95",
+          "decoded_json_sha256": "155fecaad6e9050aa29baecbee3e37263f4d5d7775d18fa9992b8d4d6cf61b95"
+        }
+      ],
+      "production_checkpoint_program_binding": {
+        "blake3": "2e6d58866e54f528bfc4c87af508075426994ca074f82fc47202721f128283aa",
+        "bytes": 248526
+      },
+      "production_transaction_checkpoint_binding": {
+        "blake3": "184c1f335150060c73c3a5acb83797e53d7e27fd7b8b98f688d41930009e949e",
+        "path": "requested-discovery-0003.json"
+      }
+    },
+    {
+      "round": 3,
+      "checks": {
+        "frontier_labels": true,
+        "native_rule_count": true,
+        "submitted_labels": true,
+        "historical_labels": true,
+        "next_needed_labels": true,
+        "searched_labels_and_application_statuses": true,
+        "no_deferred_transactions": true
+      },
+      "all_checks_match": true,
+      "counts": {
+        "frontier": [
+          520,
+          520
+        ],
+        "rules": [
+          548,
+          548
+        ],
+        "submitted": [
+          349,
+          349
+        ],
+        "searched": [
+          343,
+          343
+        ],
+        "allocated_domains": 686,
+        "deferred": 0
+      },
+      "application_differences": [],
+      "inputs": [
+        {
+          "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-003.json.gz",
+          "bytes": 95520,
+          "sha256": "55821b9c126fb9ca546c6879c66056da04f2706633b783e05797e5c98f3c1090",
+          "decoded_json_sha256": "bf609c9c18773bf62af092b23a24a5a8b5737c02e0aa97557b59f97e42f8855b"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+          "bytes": 394229,
+          "sha256": "b8eb9d36d26f2cdf25d1da73215d1ee1d387183b7e00c0cc32b81e5f0c20c17c",
+          "decoded_json_sha256": "b8eb9d36d26f2cdf25d1da73215d1ee1d387183b7e00c0cc32b81e5f0c20c17c"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0004.json",
+          "bytes": 1658017,
+          "sha256": "ce53e9a54166aea443d765b6af5331720cfd85ddb53a0ce6c98583ef5fc96ded",
+          "decoded_json_sha256": "ce53e9a54166aea443d765b6af5331720cfd85ddb53a0ce6c98583ef5fc96ded"
+        }
+      ],
+      "production_checkpoint_program_binding": {
+        "blake3": "8d226d2e8d81e56f507d95331cdd3d65f56589030dd897f125667dade2c4df80",
+        "bytes": 658366
+      },
+      "production_transaction_checkpoint_binding": {
+        "blake3": "053935f3f3150b728a58be39b5c90619ca34ccc8c0b2149e64cf17de82c0128d",
+        "path": "requested-discovery-0004.json"
+      }
+    },
+    {
+      "round": 4,
+      "checks": {
+        "frontier_labels": true,
+        "native_rule_count": true,
+        "submitted_labels": true,
+        "historical_labels": true,
+        "next_needed_labels": true,
+        "searched_labels_and_application_statuses": true,
+        "no_deferred_transactions": true
+      },
+      "all_checks_match": true,
+      "counts": {
+        "frontier": [
+          479,
+          479
+        ],
+        "rules": [
+          1157,
+          1157
+        ],
+        "submitted": [
+          530,
+          530
+        ],
+        "searched": [
+          520,
+          520
+        ],
+        "allocated_domains": 1040,
+        "deferred": 0
+      },
+      "application_differences": [],
+      "inputs": [
+        {
+          "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-004.json.gz",
+          "bytes": 98864,
+          "sha256": "4e0db34dadc82fd4c49e1d5f67f4a46e023aacbc8d00bf0e8c2ee27e2dab7f2b",
+          "decoded_json_sha256": "3926b59ef8486140c4a630465cbf95aba837a4edf7b23ab8595f334d850a4313"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+          "bytes": 510939,
+          "sha256": "69df6072c636beb1e23e725c85693cc6ec867a5ecc3be85350a862c858ccf23d",
+          "decoded_json_sha256": "69df6072c636beb1e23e725c85693cc6ec867a5ecc3be85350a862c858ccf23d"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0005.json",
+          "bytes": 2066804,
+          "sha256": "975b4b3faa5edfef4e9283ef794006121867305c04af939a84818174460dde43",
+          "decoded_json_sha256": "975b4b3faa5edfef4e9283ef794006121867305c04af939a84818174460dde43"
+        }
+      ],
+      "production_checkpoint_program_binding": {
+        "blake3": "6796fb28625e5377cdbac2da135292426572499f2be6619e100bfad46f1a3765",
+        "bytes": 1083368
+      },
+      "production_transaction_checkpoint_binding": {
+        "blake3": "479ec15070d95028844223f4823e3206d7cff7f269a6405bd5dc09c1d2404c3d",
+        "path": "requested-discovery-0005.json"
+      }
+    },
+    {
+      "round": 5,
+      "checks": {
+        "frontier_labels": true,
+        "native_rule_count": true,
+        "submitted_labels": true,
+        "historical_labels": true,
+        "next_needed_labels": true,
+        "searched_labels_and_application_statuses": true,
+        "no_deferred_transactions": true
+      },
+      "all_checks_match": true,
+      "counts": {
+        "frontier": [
+          481,
+          481
+        ],
+        "rules": [
+          1744,
+          1744
+        ],
+        "submitted": [
+          494,
+          494
+        ],
+        "searched": [
+          482,
+          482
+        ],
+        "allocated_domains": 964,
+        "deferred": 0
+      },
+      "application_differences": [],
+      "inputs": [
+        {
+          "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-005.json.gz",
+          "bytes": 98727,
+          "sha256": "03d72431b8b9f015c2067c66de1dd88ad26e63e6ae7a1ea8f15fe6b251902052",
+          "decoded_json_sha256": "89c197482f274d1d554b9996b73251e21329724608ccc5ba4de1548300db5ebb"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json",
+          "bytes": 573177,
+          "sha256": "df8be3f206ec91b103995551849ae61ee94b552f0b2a5d705ac6338b17704b75",
+          "decoded_json_sha256": "df8be3f206ec91b103995551849ae61ee94b552f0b2a5d705ac6338b17704b75"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0006.json",
+          "bytes": 2027334,
+          "sha256": "d51b93a5bd00f295f2209c515828a1115fc53798a7b19859092d311b3368ed72",
+          "decoded_json_sha256": "d51b93a5bd00f295f2209c515828a1115fc53798a7b19859092d311b3368ed72"
+        }
+      ],
+      "production_checkpoint_program_binding": {
+        "blake3": "e2957fa5529db733ea71439fbf723f8eb18d2d2a4f3a30875f38931cd8048339",
+        "bytes": 1542057
+      },
+      "production_transaction_checkpoint_binding": {
+        "blake3": "7c1e2a30732e2c94f9d3e5bb4d395ff7c4f664b14b43c7bc072b8e6c3350f1a6",
+        "path": "requested-discovery-0006.json"
+      }
+    },
+    {
+      "round": 6,
+      "checks": {
+        "frontier_labels": true,
+        "native_rule_count": true,
+        "submitted_labels": true,
+        "historical_labels": true,
+        "next_needed_labels": true,
+        "searched_labels_and_application_statuses": true,
+        "no_deferred_transactions": true
+      },
+      "all_checks_match": true,
+      "counts": {
+        "frontier": [
+          436,
+          436
+        ],
+        "rules": [
+          2315,
+          2315
+        ],
+        "submitted": [
+          498,
+          498
+        ],
+        "searched": [
+          481,
+          481
+        ],
+        "allocated_domains": 962,
+        "deferred": 0
+      },
+      "application_differences": [],
+      "inputs": [
+        {
+          "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-pilot/polynomial62-baseline/round-006.json.gz",
+          "bytes": 78912,
+          "sha256": "9a9664ca8456a64ae66de9f6fabe7dd6ca3d640f8667dafec0d40b7befaf9796",
+          "decoded_json_sha256": "50d45ee4a55e32432643e263accd918af727204ee92bd5675891422b8c1af6f5"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json",
+          "bytes": 628883,
+          "sha256": "c5ec0016f1c1d248f654dbf555b9f3b79e7a0b30ce759256c8e2e6fba6a83ec5",
+          "decoded_json_sha256": "c5ec0016f1c1d248f654dbf555b9f3b79e7a0b30ce759256c8e2e6fba6a83ec5"
+        },
+        {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0007.json",
+          "bytes": 1913955,
+          "sha256": "744621979562141ee1e2a6cc07a613268372d913b378fe114ec5bf04603344a0",
+          "decoded_json_sha256": "744621979562141ee1e2a6cc07a613268372d913b378fe114ec5bf04603344a0"
+        }
+      ],
+      "production_checkpoint_program_binding": {
+        "blake3": "4328738dbc73101a8437a4755a57c74dd3f67d3e1f3ffe43aa2694dbbc85cbde",
+        "bytes": 1876637
+      },
+      "production_transaction_checkpoint_binding": {
+        "blake3": "e4a365fd849d7484fe441450bbc075b47392b2880d00e1507b93d7ec035f511e",
+        "path": "requested-discovery-0007.json"
+      }
+    }
+  ]
+}

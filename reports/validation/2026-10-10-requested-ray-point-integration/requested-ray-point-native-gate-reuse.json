@@ -1,0 +1,23 @@
+{
+  "status": "prior_native_gate_reused_by_exact_identity",
+  "scope": "No native test rerun. All native sources, dependency declarations, native features, test executable and library hashes match the prior passing gate.",
+  "reused_passed_tests": 84,
+  "reused_ignored_tests": 1,
+  "new_native_test_invocations": 0,
+  "new_numerical_runs": 0,
+  "native_source_files": 2183,
+  "native_binaries": {
+    "target/release/deps/rustred-258a1e04558e72f1": "2ade4eee609051f20140d93a6e12d92b6d141079228c11bb111f6af02eae9f4f",
+    "target/release/deps/librustred-392075d0c6995fd1.rlib": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0"
+  },
+  "artifacts": {
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-source-hashes.json": "7cd8015820dc711de2a08d8b1839564baaced6391e277897408dbebd51629287",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-build-provenance.json": "eebc9447e1715b9e21c22f96ecc645b3542350435de30d5d1663bf63670852ca",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.json": "aade75bb6cdeec25be2c332b0c95e156f04f4ece2a8f76df60a8ac8206e9e328",
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-resources.log": "f8d2cb844c45d3f81d3dfb0f539825feb7195139ea3c1ae5fbde5400be9cac5a",
+    "reports/validation/2026-10-10-native-zero-domain-projection/guard-point-native-binding.json": "280a5f53544fe5b1d456e2dd2dc8c687545eedbdef3444a212870e87efa6aaf7",
+    "reports/validation/2026-10-10-requested-ray-point-integration/reuse-native-gate.py": "0ef30dd75361dbf94535cc1a7d16cc5bef5455cd0fd07243070908ad7f0e55fc"
+  }
+}

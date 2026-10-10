@@ -1,0 +1,362 @@
+{
+  "schema": 1,
+  "status": "requested_schedule_integration_and_lower_loop_regressions_passed_three_loop_blocked",
+  "source_policy": "polynomial-closure-v1",
+  "unchanged_native_rustred": true,
+  "new_root_tests_passed": 115,
+  "native_tests_reused_by_exact_identity": 84,
+  "new_native_test_invocations": 0,
+  "actual_factory_source_equivalence": {
+    "ordered_sources": 62,
+    "historical_rules_imported": false
+  },
+  "lower_loop_regressions": [
+    {
+      "gate": "two-loop-fixed",
+      "status": "passed",
+      "harness_seconds": 6.69,
+      "wall_seconds": 6.704807028640062,
+      "peak_child_rss_kib": 46160,
+      "reference_comparisons": 40,
+      "independent_profile_refinements": 30,
+      "historical_same_profile_comparisons": 0,
+      "assembly_checks": 8,
+      "largest_reference_relative_difference": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+      "largest_reference_absolute_difference": "3.4121037186962069290411517449865E-70",
+      "largest_refinement_relative_difference": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+      "largest_historical_relative_difference": null,
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-binding.json",
+          "sha256": "160aab41209dee13d02507ec9a6da057cd7ae5eff18519bb8b1bdee39ee97852"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-resources.json",
+          "sha256": "5b2a25247161a386c3ee89eb2c9c2ab298b1336b5247413aead92e2522a09ae1"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-comparison.json",
+          "sha256": "88af62bbac77d3853f9e4b52d02a182b0ddadccb537798db2e78a1dcc4c806a7"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-comparison-binding.json",
+          "sha256": "d6e3a14ff15d116d19fc665f5866c6aa253a7815f3ce72c4c865c2ab0bb66883"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-resources.provenance.json",
+          "sha256": "2b151eca8fe8e763b5ff57c4e0a5b2c232cacb6a06db8bfc105f7850493c1448"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-fixed-resources.log",
+          "sha256": "b24074f9a4c72141477b0c831d99985c23133d62c00402ecda148e9c84e00ad5"
+        }
+      }
+    },
+    {
+      "gate": "two-loop-laurent",
+      "status": "passed",
+      "harness_seconds": 139.43,
+      "wall_seconds": 139.44387518893927,
+      "peak_child_rss_kib": 45612,
+      "reference_comparisons": 30,
+      "independent_profile_refinements": 24,
+      "historical_same_profile_comparisons": 0,
+      "assembly_checks": 0,
+      "largest_reference_relative_difference": "2.041136525965978003930408804967162140194053923396263027938938078601923303126923855708841071449594151E-44",
+      "largest_reference_absolute_difference": "1.1745950820691640507721879595913459936811546687210E-47",
+      "largest_refinement_relative_difference": "0.9999999999999662789820765106409904644051330867995512301954813353606913364878255606222658848636170305",
+      "largest_historical_relative_difference": null,
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-binding.json",
+          "sha256": "e56439d04569374909042370f95a44e12fe4dfea4670af7758d7d2d9b0106060"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-resources.json",
+          "sha256": "af5b7ca4aaf863d3be0c23c1abcc9b88f8c4fd0767d2989eeeccaf60ce8f6fdc"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-comparison.json",
+          "sha256": "b239e41b5d5301df0aea9c8a5bb3e20abf2c9ff09d11fb753b0a87678234bfe5"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-comparison-binding.json",
+          "sha256": "78769874ecbe152943b0106213eb14084757a39a448239c1d59f7f0ef326c41e"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-resources.provenance.json",
+          "sha256": "0c19f753c140859db14f20672dd084865307f96202c6b9526d55bb8080aaae37"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-two-loop-laurent-resources.log",
+          "sha256": "a8ce8548a61781a394df48f7c29ef48239e354fe215d82a46bf4cd16725d9cdf"
+        }
+      }
+    },
+    {
+      "gate": "massive-regression",
+      "status": "passed",
+      "harness_seconds": 49.5,
+      "wall_seconds": 49.5201934822835,
+      "peak_child_rss_kib": 70712,
+      "reference_comparisons": 10,
+      "independent_profile_refinements": 0,
+      "historical_same_profile_comparisons": 10,
+      "assembly_checks": 2,
+      "largest_reference_relative_difference": "9.448822657573757205344272543705462164866680568357354600394433173136786775137590600321253156047528368E-36",
+      "largest_reference_absolute_difference": "5.591962512684841877215945815219655663000000000000000425669170804770472422728499909310862088315648929E-38",
+      "largest_refinement_relative_difference": null,
+      "largest_historical_relative_difference": "3.126880367294401822762087193147855540425250160200645842114784347243379270736498630071765857473420769E-59",
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-binding.json",
+          "sha256": "ac5f27cdbd5e02956a340c04988a1b05982c2714b49291699d9a60e9d732e804"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.json",
+          "sha256": "4be78867441c048d56f8c318035aa3a72d591f51d7a7d7bcc656172ae7cfe426"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-comparison.json",
+          "sha256": "ae01a52cb045950d0d6dc92861fe9d980a4b9222eaf9c336168fb96299619061"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-comparison-binding.json",
+          "sha256": "e1198fb4a6ac2851c1bad5f1fc45ef15bf1f5df272afdb9a6fad969bd0b5feff"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.provenance.json",
+          "sha256": "53ba12aa95e6ae29aa2d0fc8b1ce86c175236cda99914803f72189023798ea9d"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-massive-regression-resources.log",
+          "sha256": "4a919ef35840471dde44a6b73079620354267653003894d6ae7ef9ce210295a6"
+        }
+      }
+    }
+  ],
+  "three_loop_attempts": [
+    {
+      "attempt": "three-loop-fixed",
+      "status": "failed_preparation",
+      "requested_ray_point": true,
+      "full_amplitude_requested": true,
+      "attempted_cut_at_failure": [
+        3
+      ],
+      "completed_rounds_at_failure": 3,
+      "frontier_progression": [
+        58,
+        458,
+        1025
+      ],
+      "unresolved_terms": 1474,
+      "failure_stage": "complete preparation",
+      "failure": "incomplete reduction or boundary data: occupied weighted connection unresolved: active weighted provisional-frontier budget exhausted; rounds=3, provisional=1025, unresolved_terms=1474; first residual indices/reasons=[([0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 2, -1, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([-1, 0, 1, 2, 2, 0, 0, -1, 0, 0, 0, 0], NoApplicableRule), ([-1, 0, 2, 2, 1, 0, 0, -1, 0, 0, 0, 0], NoApplicableRule), ([-1, 1, 0, 2, 2, 0, 0, -1, 0, 0, 0, 0], NoApplicableRule)]",
+      "exit_code": 101,
+      "harness_seconds": 170.97,
+      "wall_seconds": 170.97595411725342,
+      "peak_child_rss_kib": 73984,
+      "predictions_saved": 0,
+      "numerical_acceptance": false
+    },
+    {
+      "attempt": "three-loop-double",
+      "status": "failed_preparation",
+      "requested_ray_point": true,
+      "full_amplitude_requested": false,
+      "attempted_cut_at_failure": [
+        0,
+        3
+      ],
+      "completed_rounds_at_failure": 4,
+      "frontier_progression": [
+        27,
+        188,
+        822,
+        1025
+      ],
+      "unresolved_terms": 2344,
+      "failure_stage": "occupied preparation",
+      "failure": "incomplete reduction or boundary data: occupied weighted connection unresolved: active weighted provisional-frontier budget exhausted; rounds=4, provisional=1025, unresolved_terms=2344; first residual indices/reasons=[([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 3, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, -1, 0, 0, 1, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 2, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+      "exit_code": 101,
+      "harness_seconds": 83.64,
+      "wall_seconds": 83.65574030764401,
+      "peak_child_rss_kib": 85836,
+      "predictions_saved": 0,
+      "numerical_acceptance": false
+    },
+    {
+      "attempt": "three-loop-double-residual-control",
+      "status": "failed_preparation",
+      "requested_ray_point": false,
+      "full_amplitude_requested": false,
+      "attempted_cut_at_failure": [
+        0,
+        3
+      ],
+      "completed_rounds_at_failure": 7,
+      "frontier_progression": [
+        19,
+        32,
+        120,
+        248,
+        451,
+        888,
+        1025
+      ],
+      "unresolved_terms": 7346,
+      "failure_stage": "occupied preparation",
+      "failure": "incomplete reduction or boundary data: occupied weighted connection unresolved: active weighted provisional-frontier budget exhausted; rounds=7, provisional=1025, unresolved_terms=7346; first residual indices/reasons=[([1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0], NoApplicableRule), ([1, -1, -1, 1, 1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0], NoApplicableRule), ([1, 0, -1, 1, 1, -1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0], NoApplicableRule)]",
+      "exit_code": 101,
+      "harness_seconds": 143.02,
+      "wall_seconds": 143.02823376981542,
+      "peak_child_rss_kib": 277416,
+      "predictions_saved": 0,
+      "numerical_acceptance": false
+    },
+    {
+      "attempt": "three-loop-single3-residual-control",
+      "status": "failed_preparation",
+      "requested_ray_point": false,
+      "full_amplitude_requested": false,
+      "attempted_cut_at_failure": [
+        3
+      ],
+      "completed_rounds_at_failure": 5,
+      "frontier_progression": [
+        3,
+        85,
+        255,
+        406,
+        279
+      ],
+      "unresolved_terms": 2,
+      "failure_stage": "occupied preparation",
+      "failure": "incomplete reduction or boundary data: occupied weighted connection unresolved: native active weighted application failed; rounds=5, provisional=279, unresolved_terms=2; first residual indices/reasons=[([1, 1, 2, 1, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0], ConditionVanished { rule: 8273, condition: 0 }), ([1, 1, 2, 1, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0], ConditionVanished { rule: 8273, condition: 0 })]",
+      "exit_code": 101,
+      "harness_seconds": 54.01,
+      "wall_seconds": 54.0256011611782,
+      "peak_child_rss_kib": 170708,
+      "predictions_saved": 0,
+      "numerical_acceptance": false
+    }
+  ],
+  "completed_cut0_connection": {
+    "cut_slots": [
+      0
+    ],
+    "status": "native_connection_closed",
+    "completed_rounds": 16,
+    "basis_size": 7,
+    "native_rule_count": 3553,
+    "frontier_progression": [
+      24,
+      100,
+      343,
+      520,
+      479,
+      481,
+      436,
+      290,
+      196,
+      140,
+      56,
+      28,
+      18,
+      13,
+      10,
+      7
+    ],
+    "closed_program_blake3": "9c42b1cfd42a7a181b68e3d7a2d10635c9ae1cce393c212051dbcf2a6352249b",
+    "closed_program_bytes": 2749095,
+    "closed_program_sha256": "400eea4470408221f3110448e7999a26ed008ffb248d151be2013e4c1050469a",
+    "transaction_and_provisional_digests_verified": true,
+    "raw_protected_paths": [
+      "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.json",
+      "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.bin",
+      "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.json",
+      "requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.bin",
+      "requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0016.json"
+    ],
+    "scope": "One occupied native connection only. Full preparation fails later; no three-loop numerical value is accepted."
+  },
+  "three_loop_laurent_run_performed": false,
+  "three_loop_numerical_acceptance": false,
+  "four_loop_numerical_acceptance": false,
+  "supplied_oracle_numerical_records_compared": 0,
+  "scope": "Passed default-branch two-loop regressions and optional schedule integration tests. Four three-loop requests fail before any prediction. A completed cut-0 native connection does not certify a full amplitude. Timings overlap other work; no performance comparison is claimed. Reference precision is empirical refinement evidence, not a rigorous bound.",
+  "bindings_sha256": {
+    "reports/validation/2026-10-10-requested-ray-point-integration/native-digest-build.json": "8715e13405335297d0c3c0bfbbc22a47a2adaa8408db8a99c86c9b417a528f10",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-build-provenance.json": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-final-source-verification.json": "7147704e938fdc97af643b7791f0778bac24f99ee65af84593ed89ab6e9ac466",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-lower-loop-regressions.json": "3ede1f07f046cd10b3dbf06d9daf56d068d2176c7b2bb0036aaea27d9591a9b6",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-native-gate-reuse.json": "e21737a80b492689701be05ad026f53364de7b5c0a30099719b8e32b685003df",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-root-gates.json": "a1ecdd7d213fd0e25fabb1fa62ce17d49b904e7739160b40efbde76c7ef499f1",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-source-hashes.json": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double/configuration.json": "407abe650b59d06e9d5b3d6b3c1ddb9eb14889d6f9059faf5d8c2859c6d53892",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double/failure.json": "4e73f356f9e235ce143ce3bc641c16c7bc7d12440f43562fefafb10f92de3d07",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double/input.json": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double/native-closure/round-000-provisional.json": "0c91756d384b93ae052b7e056746c68860bcf67074864a7c9e18f374a3b6556c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double/native-closure/round-001-provisional.json": "c19a8a7b711995ed8ca8ca3811247fb2da2cbe202a0e8927527af2a31b3841e9",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double/native-closure/round-002-provisional.json": "f8e9b88c16b89560c8a56cf8d8afd4a1a2c065e06bb8b93eb45a563d66166df9",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double/native-closure/round-003-provisional.json": "6a77611d33d8751b1e0eb7b0e2d5247524673dfbeef0c012e4e81777d708bfef",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-binding.json": "b29d5f7ea226401e3b7d1e159ecca88c9d88c328f9e59854d8875c104eab8198",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/configuration.json": "a101aa0181acfa34da4616a228731789988c3f1f8ac1827edbe0e91253bc8319",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/failure.json": "f0fd02e699c32102ded26031b10008568234ebf7a7cc005aae389b2abee2d914",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/input.json": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/native-closure/round-000-provisional.json": "5f2468b9d28eaeb08511ffc8cf0898234616e1c2b6289875d3389489d36c40ff",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/native-closure/round-001-provisional.json": "3679df338457f2ae35f1a2dd4e1a391f9badaa091799c93aed84fa0ab9b8692b",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/native-closure/round-002-provisional.json": "5c8428749d45a6d81e4e96f76e061fc715e95854c2e68f9e5b132ea34348203e",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/native-closure/round-003-provisional.json": "cd2e08bb7e44dd78232aca3eaae7385f61452f4bc2bbd9fbb9b9c45f3b2fc19b",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/native-closure/round-004-provisional.json": "c173181e9bc663cb5d8b9379712cbc3e952f5364d1bc6a0025a3df0ce568c3a6",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/native-closure/round-005-provisional.json": "216f761c18afb25ab215307ca5088d0323075af2896998c472e3943655ed233e",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control/native-closure/round-006-provisional.json": "682698ab870aeac95e4415c983af1c2f7f54d6f4deaa5f2d679d6ac0b5d6aeeb",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control-binding.json": "c3c2073179bcd79c2f00a61a8fca5789d981d986174ac8225a363c3484787f73",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control-resources.json": "eab683a6114ba17df2734de5c4040c1e205d9cedfa8f9e0972d2f7d423c42109",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-residual-control-resources.log": "93d6cb1af955c18dfedb343d15b8386bca93315ecf0fc4f2874a1750bd2e3f5b",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-resources.json": "609751779bec249596240d8451ec1cf192484218d300c02473677505b97bc9ba",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-double-resources.log": "30597049fd5a0c89dca12785c2389889818b049d04f62b8217fc11423d0e944a",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/configuration.json": "70f19f50c2d429302dba42f6a3af5095e5193d7deaae4696fc578c81281178f7",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/failure.json": "98e5686b2bc104f696fb8ca166f33e3c8fde405aed6248168170e464f01c4012",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/input.json": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/requested-discovery-0016.json": "81adfaf44b6ae06b630dd2bb32fba32ef2c51f13d306466cb0d7e884a3882980",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-000-provisional.json": "d7e4400bd38ab64fd99e4b90edacf28ab11794111d14c2323a024d3896efec87",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-001-provisional.json": "11bfc86b804709649a5988bee7ae88ffd0bfe099f3eeca53d7dfc211b0f620a6",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-002-provisional.json": "7768dcd0f65bb52cbcd6ec26152d2a242068e28318de623a7febb8cf5e51d67f",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-003-provisional.json": "b8eb9d36d26f2cdf25d1da73215d1ee1d387183b7e00c0cc32b81e5f0c20c17c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-004-provisional.json": "69df6072c636beb1e23e725c85693cc6ec867a5ecc3be85350a862c858ccf23d",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-005-provisional.json": "df8be3f206ec91b103995551849ae61ee94b552f0b2a5d705ac6338b17704b75",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-006-provisional.json": "c5ec0016f1c1d248f654dbf555b9f3b79e7a0b30ce759256c8e2e6fba6a83ec5",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-007-provisional.json": "394e13d947296af8e4d058740cbbbdcc97ed85135e8cb443827a0c5b4dc29bb9",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-008-provisional.json": "6767f7fb7f688bea140cead5d20faed4c2cc244b0befbbb50a47638906e36930",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-009-provisional.json": "89befa4671923f42ce77f9112a06db65094027bdc81b32d1a554620ef4527b9e",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-010-provisional.json": "3f2a9c6f1194fdee0436080aae8b10a13a191a19bffbed5846f7f7c27baac08d",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-011-provisional.json": "df026c15d3af22f5b0a51afe03951e4e0d80880634a14e5301c951495be03e17",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-012-provisional.json": "f4c9bc923eb256b0dc0c3620a68d5b531e370c92cf0f1f390065498b247c863c",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-013-provisional.json": "fc97feb1405c78a15c892dce37c21b68cd61b7befd0a4b7faf96969ed41167a2",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-014-provisional.json": "08d774b81dd9aff0a6f850414a11f91becc41a24a3af7e31a6c0f0bf4e49e093",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.bin": "400eea4470408221f3110448e7999a26ed008ffb248d151be2013e4c1050469a",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-closed.json": "228e69acb192af810ac573d357b0a6e36dfa962e4d3fbd7fd2f93978d4a28bca",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.bin": "46efc446d5a66bbd351a583f866b44aeb3329c0025804d4fd1a42ef743d34d44",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-0/round-015-provisional.json": "7489918649aa00b3b3c57c1dbbd152f4b37ad6d535e1e99c2f2eac944ba04808",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-000-provisional.json": "5d3e40bbf4df2823a79b586c187823f6977b7d6456122dcc091740a226e3cb45",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-001-provisional.json": "e90133432b9ceec54eafb05b35b45d9ff3bf1b9d78cb7edaa7c54739c6d1f559",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed/native-closure/cut-3/round-002-provisional.json": "d77587a74e57450f8e5cd0c26f1d14bc0530774d715a1136dd2a15c09c9612f4",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed-binding.json": "d2a44c4a3aba343ae5cc8a9bb357bbb400308d57b0cd5a717a7c69d3aefc1570",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed-resources.json": "0ec0e176ef65050e1715ddda2149cdf7e7c98e88887dbcf135312512634fd8fc",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-fixed-resources.log": "3e9f4e7b61bdf804e3f603dd06fddc5476212ba40c51b1095f701b70411b6dd3",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/configuration.json": "fda70f23fd3d31e9b0ad068356e52b60db9c33283f10c41ed1f86ebb63907221",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/failure.json": "cfe3b8ae9495e1de796c7c9f22eee7169dacfe84c7069aed601fa4f3dc50a5ba",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/input.json": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/native-closure/round-000-provisional.json": "1e55c9923082ec52676b088057c7fb55f7ada6dc5d98a4cb9e846a790e6152f5",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/native-closure/round-001-provisional.json": "0541c7e3ead2de477a5757ba2df2fc6ed4f3c9059562347ede64f00baa01560e",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/native-closure/round-002-provisional.json": "bc413498a71a6c29f696424527182a1b9aa8af0f1c3d185c095d1582becbe86f",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/native-closure/round-003-provisional.json": "14605eb39334d44e472c2d31c13c13fa910dc98e39915ae93a44f48a18593d01",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control/native-closure/round-004-provisional.json": "6fd7d2b000399421fa85bb91926b7ae272ca506a3d259551abb2613eb0993015",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control-binding.json": "8cc178e665fb05d1b65b378d843481a4737b21e25ae827a34831c372079eed02",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control-resources.json": "1e1e443b3531f1146a2d4546e0c9d67fa6295981d6a9c5e382cb965cfa51e154",
+    "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-three-loop-single3-residual-control-resources.log": "f4894343d9d4c5fcce4eb1eece3d9d04b4f4ffa699c9734c20eea46ef593115b",
+    "reports/validation/2026-10-10-requested-ray-point-integration/summarize-checkpoint.py": "5e96402c0e47119e87e389d951e6183227b7ad0fc34e92a280464597c327e189"
+  }
+}

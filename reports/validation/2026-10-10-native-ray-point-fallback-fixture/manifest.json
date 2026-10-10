@@ -1,0 +1,90 @@
+{
+  "scope": "Frozen standalone native fallback fixture experiment; new production test execution pending",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/README.md",
+      "sha256": "4e3bcf25a0fb5088a011a6972cd3a72b75d2a1508981c347fbce739c955fa56e",
+      "bytes": 1717
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/build-binding.json",
+      "sha256": "2cc0aa4000cd963e263f85b8264cd36453d0d454bab311f8d8dfcc9118dc73e3",
+      "bytes": 2844
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/compile.log",
+      "sha256": "aa5c8efc3b153041bddaab117506a535b13fa5d7493869b4e4dbda657877648b",
+      "bytes": 334
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/full62-point.bin",
+      "sha256": "c972511ae582511274d04ef48eb88751e20e19e96f8999e7fc714842dc6d256a",
+      "bytes": 34279
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/full62-ray.bin",
+      "sha256": "e03eab9279114e9bb1615a3a4515732eec57d5827d8c12de845e012f9643f9b8",
+      "bytes": 34010
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/probe.rs",
+      "sha256": "e7d43cc6e3fa8d25130eded24a0bb5358f4f571376d61f7dbdaf51af8702642c",
+      "bytes": 5310
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/resources.json",
+      "sha256": "9fcbe93f1507b291a62f67d10e92ca99ffeee2d639de6e74814937867ddac2af",
+      "bytes": 592
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/resources.log",
+      "sha256": "88d613ec00cbcd21df7d2c73f1658cc6075b1ba1e21585ee52dc29cbe689e1be",
+      "bytes": 404
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/resources.provenance.json",
+      "sha256": "7a95cf5195014ac3e8aa7a01fb60b49264a317e2f02a5f8a48f517341d639169",
+      "bytes": 1437
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/result.json",
+      "sha256": "a763ab22f795d58db7636689319c6f14d2563aaa21bd0ed4c02188f60897b2a5",
+      "bytes": 12062
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/row4-point.bin",
+      "sha256": "c9936423f7629fb1e02c0ea0f622bd5a7bd29dd873c4cadc87e731ab32a80b62",
+      "bytes": 9527
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/row4-ray.bin",
+      "sha256": "c9936423f7629fb1e02c0ea0f622bd5a7bd29dd873c4cadc87e731ab32a80b62",
+      "bytes": 9527
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/row60-point.bin",
+      "sha256": "6bd49be19cbd2a6b5a537ed81f561fbd31bca4e0526b071f5f030aed3b295ed1",
+      "bytes": 9021
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/row60-ray.bin",
+      "sha256": "6bd49be19cbd2a6b5a537ed81f561fbd31bca4e0526b071f5f030aed3b295ed1",
+      "bytes": 9021
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/rows4_60-point.bin",
+      "sha256": "fdd4bed0441c08eabd1f41161fa612c77924aee59683b1dba097fb7d9577c80f",
+      "bytes": 10080
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/rows4_60-ray.bin",
+      "sha256": "987731851ab7743927871ac1b542f57118f48692674656572104bee243f17a28",
+      "bytes": 9811
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-ray-point-fallback-fixture/run-binding.json",
+      "sha256": "79d1fd218740bec4f30e80d3bde652b2889fe32d61823861e63d83d810f71eea",
+      "bytes": 833
+    }
+  ]
+}

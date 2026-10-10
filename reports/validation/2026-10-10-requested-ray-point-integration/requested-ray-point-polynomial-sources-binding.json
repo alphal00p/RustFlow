@@ -1,0 +1,22 @@
+{
+  "source_snapshot_sha256": "5a5ea4d86fdf3b589cf25607cf310e5f2d2292d32f50704998872181fd8d316c",
+  "build_provenance_sha256": "8af0bf3b5a2d7f6f6ad981b81b486a23c6e51da7967b8d8f81d9ddfaa0b4e0ac",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "polynomial-sources",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false,
+  "report_environment": {
+    "RUSTFLOW_POLYNOMIAL_SOURCE_REPORT": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-actual62-source-equivalence.json"
+  },
+  "source_equivalence_report": {
+    "path": "reports/validation/2026-10-10-requested-ray-point-integration/requested-ray-point-actual62-source-equivalence.json",
+    "sha256": "b2ea8ee6679de1050d99b5f0d40273400126d564c7b21594696fd16fe2ac4aad"
+  }
+}

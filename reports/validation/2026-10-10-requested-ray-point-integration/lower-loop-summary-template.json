@@ -1,0 +1,6 @@
+{
+  "template_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/summarize-lower-loop-regressions.py",
+  "template_sha256": "103ebdffc63cea697ce4d42e2200e58aaef99bf3af66a922ae0ef8445a3d8f58",
+  "summary_script_sha256": "4fadbf83225b848c9aab48823396cfc4c53f02d9f482993e87585e9b59bb44f1",
+  "scope": "Summary preparation only; run after all three lower-loop predictions and independent comparisons complete."
+}

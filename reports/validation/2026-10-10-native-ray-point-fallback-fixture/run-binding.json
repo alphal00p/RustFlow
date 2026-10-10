@@ -1,0 +1,16 @@
+{
+  "scope": "Fresh native discovery from original pilot rows; all historical rules discarded; no periods",
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/native-ray-point-fallback-fixture-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-ray-point-fallback-fixture"
+  ],
+  "source_program": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-raw-ward-attribution/native-source-probe/strongest62-boost-ward/program.bin",
+    "sha256": "f482d60e6aee6f3187be2eac039b26fec8fb8cc7cef185d577b5d2f8ddad14a2"
+  },
+  "executable_sha256": "df40e5414c6bd6eb60b205710e948349e1bfee1d460ae92bc71fc13deaf5974f",
+  "exit_code": 0
+}

@@ -1,0 +1,19 @@
+{
+  "scope": "Prepared but unrun selected-cut3 existing-option control, bound to the failed full K run. No source or physical-definition changes.",
+  "template_sha256": "62dc8176fe99d2f5a266030038e36bde44bd7f9351ef02e20079b0621faa2db9",
+  "control_launcher_sha256": "e6c59ab6da691d928d7cb2948eb3e48f3b4338f060802ee6c28cd27de6d378e6",
+  "requested_ray_point": false,
+  "max_domains_per_residual": 32,
+  "guard_passes": 3,
+  "direct_zero_attempts": 8192,
+  "profile": [
+    18,
+    60,
+    8
+  ],
+  "cut_slots": [
+    3
+  ],
+  "timeout_seconds": 600,
+  "full_amplitude_acceptance": false
+}

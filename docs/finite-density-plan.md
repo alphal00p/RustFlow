@@ -110,9 +110,9 @@ and `[0,3]`. It requests a scalar and a raised occupied line with the original
 numerator `g1_2+u1*u2`, including its nonzero upper Fermi-surface contribution.
 The [independent reference](finite-density-three-loop-reference.md) is available
 at D=13/2 and through Laurent orders [-3,0], with arithmetic, quadrature and
-exact-algebra checks. A subsequent source-only pilot closes the `[0]` cut
-family, while complete production preparation and numerical validation remain
-pending; no three-loop amplitude comparison is claimed. The earlier saved
+exact-algebra checks. Both a source-only pilot and the subsequent production
+schedule close the `[0]` cut family, while complete preparation and numerical
+validation remain pending; no three-loop amplitude comparison is claimed. The earlier saved
 [rule-reuse controls](../reports/validation/2026-10-09-finite-density-native-assembly/three-loop-rule-union-controls.json)
 and [residual-search diagnostic](../reports/validation/2026-10-09-finite-density-native-assembly/three-loop-residual-batch-probe/summary.json)
 record this limitation. This intermediate gate does not replace any original
@@ -178,6 +178,32 @@ nonunit-routing fixtures and their correction remain recorded separately; no
 production admission rule was relaxed. Full native three-loop preparation,
 boundaries, transport and Laurent refinement remain pending. Those numerical
 gates still precede four-loop numerical scale-up.
+
+The integrated polynomial policy also passes the massless fixed-dimension and
+Laurent two-loop regressions and the massive two-loop profile. Four bounded
+production three-loop preparation controls fail before generating predictions:
+raising conditional-point passes and total allocation exposes further coupled
+index conditions; reducing the per-residual allocation to one leaves a growing
+unreduced frontier. Their [frozen report](../reports/validation/2026-10-10-polynomial-closure-integration-v2/README.md)
+preserves every failure. The successful standalone pilot additionally searches
+exact points after ordinary ray misses. An optional production schedule now
+transfers this existing native mechanism. Its [integration checkpoint](../reports/validation/2026-10-10-requested-ray-point-integration/README.md)
+passes 115 tests and retains authenticated reuse of the 84 native RustRed tests.
+The massless two-loop comparisons pass at fixed dimension (40 references and
+30 refinements) and in the Laurent expansion (30 references and 24 refinements).
+The massive profile passes ten independent references, ten historical comparisons
+and two assembly checks. No new elimination backend or source-admission
+extension is introduced by that scheduling change.
+
+Production preparation now closes the three-loop `[0]` cut on seven basis
+integrals and 3,553 native rules, matching all 16 rounds of the standalone pilot.
+The `[3]` and `[0,3]` cuts still exceed the frontier cap with the new schedule.
+Separate controls using the existing residual schedule also fail: the former
+encounters a vanishing index condition and the latter exceeds the frontier cap.
+The complete three-loop amplitude has no prediction yet. The `[3]` cut energy
+is a difference of completion factors, so the current exact-`c*E` source policy
+does not add its shifted temporal and boost presentations. General polynomial
+reindexing for that case is being assessed separately before changing the policy.
 
 ## Remaining acceptance evidence
 
