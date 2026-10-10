@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-10T10:00:57.436528+00:00",
+  "plan_sha256": "b69272f5c65488be7526d94abba218a5888b0dc75d4bb6f36d55146d339f6a47",
+  "reason": "Independent finite-eta validation spans the convergent large-mass disk and continuation regime with fewer points; fixed before any reference values",
+  "reference_eta": [
+    8,
+    2,
+    "1/2"
+  ],
+  "reference_profiles": {
+    "quadrature_order": [
+      16,
+      24,
+      32
+    ],
+    "digits": [
+      50,
+      80
+    ]
+  },
+  "reference_runtime_seconds": {
+    "one_run": 180,
+    "cumulative": 600
+  },
+  "start_with_eta": 8,
+  "reference_values_generated_only_after_first_producer_predictions": true,
+  "reconstruction_and_coefficient_budgets_unchanged": true,
+  "complex_path_check": "only if a transported candidate/justified equation is available"
+}

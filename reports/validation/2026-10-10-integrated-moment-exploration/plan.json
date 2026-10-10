@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "status": "prospective_bounded_exploration_not_production",
+  "created_utc": "2026-10-10T09:56:22.105057+00:00",
+  "base_commit": "1d5e82b03496a736b665b279296b03f13d41e138",
+  "input": {
+    "path": "examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "cut_slots": [
+      0,
+      3
+    ],
+    "targets": "Both original scalar and raised occupied-line mixed-medium targets, unchanged",
+    "initial_dimension": "13/2"
+  },
+  "deformation": {
+    "choice": "All uncut physical quadratic denominators shifted by common +eta in Euclidean convention, -eta in native convention, subject to full region audit",
+    "fixed": "physical cut shells, positive-energy support, occupation regions, physical-point inverse-propagator target indices and coefficients",
+    "physical_raising": "Independent physical masses differentiated at fixed original momentum polynomial and chemical potentials, including conversion coefficient and Fermi-surface derivatives",
+    "reference_answers_used_in_construction": false
+  },
+  "coefficient_budget": {
+    "pilot_max_coefficients": 24,
+    "pilot_wall_seconds": 180,
+    "max_coefficients_per_branch": 64,
+    "total_generation_wall_seconds": 900,
+    "max_retained_monomials": 200000,
+    "max_retained_expression_bytes": 134217728,
+    "cap_excludes": "internal CAS scratch and one indivisible operation; external process time limit remains mandatory",
+    "existing_native_limits_must_be_respected": true,
+    "no_topology_or_single_invariant_dispatch": true
+  },
+  "reconstruction_budget": {
+    "training_coefficients": 48,
+    "heldout_coefficients": 16,
+    "recurrence_max_shift": 4,
+    "recurrence_max_polynomial_degree": 4,
+    "theta_ode_max_order": 4,
+    "theta_ode_max_z_degree": 4,
+    "max_unknown_coefficients": 25,
+    "minimum_excess_training_equations": 8,
+    "cumulative_fit_wall_seconds": 300,
+    "certificate_wall_seconds": 300,
+    "selection": "deterministic training-only; freeze candidate and hash before holdout access; no tuning using holdout or numerical references",
+    "equation_statuses": [
+      "fitted_candidate",
+      "heldout_validated_candidate",
+      "independently_certified_equation"
+    ],
+    "certificate": "Exact all-index recurrence identity or telescoping/other analytic identity for the integrated kernel, with every boundary term; finite agreement alone is insufficient"
+  },
+  "transport_budget": {
+    "max_working_digits": 80,
+    "profiles": {
+      "digits": [
+        30,
+        50
+      ],
+      "series_terms": [
+        32,
+        48,
+        64
+      ],
+      "positive_start_eta": [
+        16,
+        32
+      ]
+    },
+    "max_steps": 128,
+    "wall_seconds": 300,
+    "fixed_dimension_relative_target": "1e-12",
+    "small_value_absolute_target": "1e-25",
+    "candidate_transport_is_acceptance": false,
+    "reference_only_finite_eta": [
+      16,
+      8,
+      4,
+      2,
+      1
+    ],
+    "fallback": "Assess direct continuation of exactly the same integrated coefficients with explicit truncation/error control; Pade agreement alone is not a bound; no auxiliary occupation-aware closure"
+  },
+  "original_gate": {
+    "three_loop_complete_fixed_and_laurent_before_four_loop_numerical_scaleup": true,
+    "four_loop_targets_and_chemical_assignments_unchanged": true,
+    "occupation_aware_closure_attempts": "remain paused",
+    "prior_implementation": "preserved"
+  },
+  "sources": [
+    {
+      "url": "https://arxiv.org/abs/2009.07987",
+      "role": "AMF with phase-space integration; not a proof of fixed independent occupied-domain closure"
+    },
+    {
+      "url": "https://www.algebra.uni-linz.ac.at/people/mkauers/publications/kauers18a.pdf",
+      "role": "Guess-and-prove distinction"
+    },
+    {
+      "url": "https://www.ricam.oeaw.ac.at/files/reports/20/rep20-44.pdf",
+      "role": "Holonomic integration needs a telescoper/certificate and boundary terms"
+    }
+  ]
+}
