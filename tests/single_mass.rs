@@ -31,6 +31,53 @@ struct CountLoops {
     max_loops: AtomicUsize,
     peeled_children: AtomicUsize,
 }
+
+#[test]
+fn one_mass_five_line_bubble_product_needs_no_reduction_and_has_the_wick_sign() {
+    struct NoReduction(AtomicUsize);
+    impl ReductionBackend for NoReduction {
+        fn identity(&self) -> String {
+            "E1-exact-terminal-must-not-reduce".into()
+        }
+        fn reduce(
+            &self,
+            _: &IntegralFamily,
+            _: &[Integral],
+            _: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            self.0.fetch_add(1, Ordering::Relaxed);
+            Err(Error::Unsupported("E1 entered numerical reduction".into()))
+        }
+        fn reduce_at_epsilon(
+            &self,
+            family: &IntegralFamily,
+            targets: &[Integral],
+            _: &Rational,
+            context: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            self.reduce(family, targets, context)
+        }
+    }
+    let mut family = six_line();
+    family.name = "one_mass_five_line_bubble_product".into();
+    family.propagators[0].constant = Atom::num(-1);
+    family.physical_propagators = 5;
+    let target = Integral(vec![1, 1, 1, 1, 1, 0]);
+    let p = Precision::decimal(100).unwrap();
+    let backend = NoReduction(AtomicUsize::new(0));
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let provider = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let epsilon = Rational::from((1, 2));
+    let actual = provider.evaluate(&family, &target, &epsilon, p).unwrap();
+    assert_eq!(backend.0.load(Ordering::Relaxed), 0);
+    let pi = ComplexFloat::new(p.log(&p.i(-1)).im, p.real(0));
+    let expected = p.neg(&p.scale(&p.pow(&pi, &p.rational(&Rational::from((7, 2)))), 2, 1));
+    assert!(p.close(&actual, &expected, 70));
+    let tadpole = vacuum::tadpole(1, &p.i(1), &Rational::from(3), p).unwrap();
+    let ratio = p.div(&actual, &p.powi(&tadpole, 3));
+    assert!(p.close(&ratio, &p.neg(&p.scale(&p.powi(&pi, 2), 1, 4)), 70));
+}
 impl CountLoops {
     fn new() -> Self {
         Self {
@@ -228,6 +275,22 @@ fn complex_mass_boundaries_reuse_the_real_child_and_respect_cut_sides() {
 #[test]
 fn public_complex_mass_amf_matches_homogeneity_and_precision_refinement() {
     use symbolica::domains::float::Complex;
+    struct ObservePeeledChildren(AtomicUsize);
+    impl recursive::TerminalProvider for ObservePeeledChildren {
+        fn evaluate(
+            &self,
+            family: &IntegralFamily,
+            _: &Integral,
+            _: &Rational,
+            _: Precision,
+        ) -> Result<Option<ComplexFloat>> {
+            if family.name.ends_with("_single_mass_child") && family.loops.len() == 2 {
+                self.0.fetch_add(1, Ordering::Relaxed);
+            }
+            // Observe visits before native terminals without supplying a value.
+            Ok(None)
+        }
+    }
     let original = six_line();
     let epsilon = Rational::from((1, 10));
     let targets = [Integral(vec![1; 6]), Integral(vec![2, 1, 1, 1, 1, 1])];
@@ -261,7 +324,9 @@ fn public_complex_mass_amf_matches_homogeneity_and_precision_refinement() {
                 &context,
             )
             .unwrap();
-            let provider = recursive::RecursiveBoundary::new(&backend, &options, &context);
+            let observed_children = ObservePeeledChildren(AtomicUsize::new(0));
+            let provider = recursive::RecursiveBoundary::new(&backend, &options, &context)
+                .with_terminal(&observed_children);
             let values = evaluate_samples(
                 &prepared,
                 std::slice::from_ref(&epsilon),
@@ -280,7 +345,7 @@ fn public_complex_mass_amf_matches_homogeneity_and_precision_refinement() {
             );
             assert!(p.close(&values[1], &p.mul(&p.div(&degree, &mass), &expected), 20));
             assert_eq!(backend.max_loops.load(Ordering::Relaxed), 3);
-            assert!(backend.peeled_children.load(Ordering::Relaxed) > 0);
+            assert!(observed_children.0.load(Ordering::Relaxed) > 0);
             results.push(values);
         }
         if let Some(old) = previous {

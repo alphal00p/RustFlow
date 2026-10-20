@@ -46,6 +46,65 @@ fn canonical(loops: usize) -> (IntegralFamily, Integral) {
     lines.push(Propagator::quadratic(&vec![1; loops], &[1], Atom::new(), &gram).unwrap());
     family_from_active(lines, loops)
 }
+
+fn double_bubble(routes: [([i64; 2], [i64; 1]); 4]) -> (IntegralFamily, Integral) {
+    let gram = vec![vec![Atom::num(-1)]];
+    family_from_active(
+        routes
+            .into_iter()
+            .map(|(route, offset)| {
+                Propagator::quadratic(&route, &offset, Atom::new(), &gram).unwrap()
+            })
+            .collect(),
+        2,
+    )
+}
+
+#[test]
+fn independent_bubbles_use_native_affine_maps_and_the_one_loop_terminal() {
+    let p = Precision::decimal(100).unwrap();
+    for routes in [
+        [([1, 0], [0]), ([1, 0], [-1]), ([0, 1], [0]), ([0, 1], [-1])],
+        [([1, 0], [1]), ([1, 0], [0]), ([0, 1], [-2]), ([0, 1], [-3])],
+        [([1, 1], [0]), ([1, 1], [-1]), ([1, 2], [0]), ([1, 2], [-1])],
+    ] {
+        let (mut family, integral) = double_bubble(routes);
+        family.propagators.swap(0, 3);
+        assert!(Plan::find(&family, &integral).unwrap().is_none());
+        assert!(double_bubble_plan(&family, &integral).unwrap().is_some());
+        for epsilon in [Rational::from((1, 100)), Rational::from((2, 5))] {
+            let expected = p.powi(&convolution(1, &epsilon, p), 2);
+            strict(
+                p,
+                &evaluate(&family, &integral, &epsilon, p).unwrap().unwrap(),
+                &expected,
+            );
+        }
+    }
+}
+
+#[test]
+fn independent_bubble_recognition_keeps_nonproducts_and_domain_changes_in_fallback() {
+    let routes = [([1, 0], [0]), ([1, 0], [-1]), ([0, 1], [0]), ([0, 1], [-1])];
+    let (family, integral) = double_bubble(routes);
+    for power in [-1, 2] {
+        let mut changed = integral.clone();
+        changed.0[0] = power;
+        assert!(double_bubble_plan(&family, &changed).unwrap().is_none());
+    }
+    let mut massive = family.clone();
+    massive.propagators[0].constant -= Atom::one();
+    assert!(double_bubble_plan(&massive, &integral).unwrap().is_none());
+    let (connected, target) =
+        double_bubble([([1, 0], [0]), ([0, 1], [0]), ([1, 1], [1]), ([1, 0], [1])]);
+    assert!(double_bubble_plan(&connected, &target).unwrap().is_none());
+    let (nonunit, target) =
+        double_bubble([([2, 0], [0]), ([2, 0], [-1]), ([0, 1], [0]), ([0, 1], [-1])]);
+    assert!(double_bubble_plan(&nonunit, &target).unwrap().is_none());
+    let mut timelike = family.clone();
+    timelike.external_gram[0][0] = Atom::one();
+    assert!(double_bubble_plan(&timelike, &integral).unwrap().is_none());
+}
 fn strict(p: Precision, a: &C, b: &C) {
     assert!(!p.norm(b).is_zero());
     assert!(

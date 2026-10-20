@@ -1,8 +1,10 @@
-//! Unit-power massless two-point bananas, recognized from full affine sources.
+//! Unit-power massless two-point bananas and independent bubble products.
 //!
 //! All routing, reconstruction and Gamma operations use existing native owners.
 //! Unsupported topology, sheet or Gamma-pole cases retain recursive AMF.
 use crate::{ComplexFloat as C, Error, Integral, IntegralFamily, Precision, Propagator, Result};
+use feynkit_graph::{IntegralFamily as NativeFamily, IntegralFamilyError};
+use feynkit_kinematics::Kinematics;
 use symbolica::prelude::*;
 
 struct Line {
@@ -238,6 +240,128 @@ impl Plan {
     }
 }
 
+/// Reuse the one-loop terminal for an exactly mapped product of two bubbles.
+/// The native affine map replays all four active sources and proves a real,
+/// unit-absolute-determinant Jacobian; inactive ISP coordinates do not enter.
+fn double_bubble_plan(family: &IntegralFamily, target: &Integral) -> Result<Option<Plan>> {
+    family.validate_integral(target)?;
+    if family.loops.len() != 2
+        || family.external.len() != 1
+        || target.0.iter().any(|&n| n != 0 && n != 1)
+    {
+        return Ok(None);
+    }
+    let active = target
+        .0
+        .iter()
+        .enumerate()
+        .filter_map(|(i, &n)| (n == 1).then_some(i))
+        .collect::<Vec<_>>();
+    if active.len() != 4 {
+        return Ok(None);
+    }
+    family.validate()?;
+    let Some(gram) = rational(&family.external_gram[0][0]) else {
+        return Ok(None);
+    };
+    if gram >= Rational::zero()
+        || active.iter().any(|&i| {
+            family.propagators[i]
+                .scalar_products
+                .iter()
+                .chain([&family.propagators[i].constant])
+                .any(|a| rational(a).is_none())
+        })
+    {
+        return Ok(None);
+    }
+    let dimension = (0..)
+        .map(|i| symbol!(format!("symbolica_amflow::bubble_product_dimension_{i}")))
+        .find(|&symbol| symbol != family.epsilon)
+        .unwrap();
+    let loops = (0..2)
+        .map(|i| symbol!("symbolica_amflow::bubble_product_loop").call(i))
+        .collect::<Vec<_>>();
+    let external = symbol!("symbolica_amflow::bubble_product_external").call(0);
+    let kin = Kinematics::in_dimension(&Atom::var(dimension))
+        .map_err(|e| Error::InvalidInput(e.to_string()))?
+        .with_momenta(
+            loops
+                .iter()
+                .cloned()
+                .chain(std::iter::once(external.clone())),
+        )
+        .and_then(|k| k.with_mass_squared(&external, Atom::num(gram.clone())))
+        .map_err(|e| Error::InvalidInput(e.to_string()))?;
+    let mut products = Vec::new();
+    for (i, left) in loops.iter().enumerate() {
+        for right in &loops[i..] {
+            products.push(
+                kin.scalar_product(left, right)
+                    .map_err(|e| Error::InvalidInput(e.to_string()))?,
+            );
+        }
+    }
+    for momentum in &loops {
+        products.push(
+            kin.scalar_product(momentum, &external)
+                .map_err(|e| Error::InvalidInput(e.to_string()))?,
+        );
+    }
+    let expression = |d: &Propagator| {
+        d.scalar_products
+            .iter()
+            .zip(&products)
+            .fold(d.constant.clone(), |sum, (c, product)| sum + c * product)
+            .expand()
+    };
+    let source = NativeFamily::new(
+        loops.clone(),
+        vec![external.clone()],
+        active
+            .iter()
+            .map(|&i| expression(&family.propagators[i]))
+            .collect(),
+        &kin,
+    )
+    .map_err(|e| Error::InvalidInput(e.to_string()))?;
+    let canonical = [([1, 0], [0]), ([1, 0], [-1]), ([0, 1], [0]), ([0, 1], [-1])]
+        .into_iter()
+        .map(|(route, offset)| {
+            Propagator::quadratic(&route, &offset, Atom::new(), &family.external_gram)
+                .map(|d| expression(&d))
+        })
+        .collect::<Result<Vec<_>>>()?;
+    let canonical = NativeFamily::new(loops, vec![external], canonical, &kin)
+        .map_err(|e| Error::InvalidInput(e.to_string()))?;
+    let mapped = match source.find_mapping(&canonical, 4096) {
+        Ok(mapping) => mapping.is_some(),
+        Err(IntegralFamilyError::NoQuadraticBasis | IntegralFamilyError::MappingSearchLimit(_)) => {
+            false
+        }
+        Err(error) => return Err(Error::InvalidInput(error.to_string())),
+    };
+    if !mapped {
+        return Ok(None);
+    }
+    let bubble = IntegralFamily {
+        name: "recognized_massless_bubble_product_factor".into(),
+        loops: vec!["k".into()],
+        external: family.external.clone(),
+        external_gram: family.external_gram.clone(),
+        propagators: [([1], [0]), ([1], [-1])]
+            .into_iter()
+            .map(|(route, offset)| {
+                Propagator::quadratic(&route, &offset, Atom::new(), &family.external_gram)
+            })
+            .collect::<Result<_>>()?,
+        physical_propagators: 2,
+        epsilon: family.epsilon,
+        dimension: family.dimension,
+    };
+    Plan::find(&bubble, &Integral(vec![1, 1]))
+}
+
 pub(crate) fn evaluate(
     family: &IntegralFamily,
     target: &Integral,
@@ -246,7 +370,21 @@ pub(crate) fn evaluate(
 ) -> Result<Option<C>> {
     match Plan::find(family, target)? {
         Some(plan) => plan.evaluate(epsilon, p),
-        None => Ok(None),
+        None => match double_bubble_plan(family, target)? {
+            Some(plan) => {
+                let Some(value) = plan.evaluate(epsilon, p)? else {
+                    return Ok(None);
+                };
+                let value = p.powi(&value, 2);
+                if !p.finite(&value) {
+                    return Err(Error::Numerical(
+                        "nonfinite independent massless bubble product".into(),
+                    ));
+                }
+                Ok(Some(value))
+            }
+            None => Ok(None),
+        },
     }
 }
 
