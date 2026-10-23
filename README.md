@@ -50,15 +50,15 @@ the original Mathematica package with Kira and the university license server.
 
 ## Build
 
-Requires Rust 1.96 or newer. The standalone lock pins Symbolica and its companion
-crates to community commit
-[`6defcca968ca8411977fb1f641a9dee49ee7b7a7`](https://github.com/symbolica-dev/symbolica/commit/6defcca968ca8411977fb1f641a9dee49ee7b7a7)
-(package version 3.0.1), including the root convergence, exact division and complex
-C++ export fixes. The embedding host owns its corresponding shared dependency
+Requires Rust 1.96 or newer. The standalone manifest and lock pin Symbolica,
+Numerica and Graphica 3.0.1 together to main-based revision
+[`a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299`](https://github.com/ValentinHirschi/symbolica/commit/a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299),
+which includes the zero-test APIs required by current FeynKit and depends on
+[Symbolica PR #127](https://github.com/symbolica-dev/symbolica/pull/127). The embedding host owns its corresponding shared dependency
 graph; the frozen notebook wheel retains its recorded revision. See
 [embedding and source fingerprints](docs/dependency-embedding.md).
 
-RustRed is a Git dependency, locked to `7c1ed037`; its experimental
+RustRed is a Git dependency, pinned to `f6139d5f`; its experimental
 reconstruction feature is disabled. The high-level multiloop solver defaults to
 exact rational epsilon specialization before IBP elimination;
 `sampled_reduction: false` selects fully symbolic epsilon reduction. Upstream
@@ -71,7 +71,7 @@ Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 
 The manifest fetches the public HEPKit/Linnet/Spenso/Idenso owner at
-[`635d3a1feb44067583a668c7d18f67405fe144e1`](https://github.com/alphal00p/gammaloop/commit/635d3a1feb44067583a668c7d18f67405fe144e1),
+[`4ae30bd6e00b33784d0c3c98dd619029c910d08d`](https://github.com/alphal00p/gammaloop/commit/4ae30bd6e00b33784d0c3c98dd619029c910d08d),
 including its native rendering components. Normal builds need no sibling checkout
 or local patch configuration. The community host keeps Vakint at its separate
 [`6203c6cbba6ae5e90329ba5081fad55319e678db`](https://github.com/ValentinHirschi/gammaloop/commit/6203c6cbba6ae5e90329ba5081fad55319e678db)

@@ -113,9 +113,14 @@ impl TensorProjector {
                             a * dot(&hard_head.call(hard), &external_head.call(external))?,
                         )
                     })?;
+            let numerator = idenso::tensor::SymbolicTensor::<
+                spenso::structure::partial::PartialStructure,
+            >::infer(numerator)
+            .map_err(TensorReductionError::from)
+            .map_err(native_error)?;
             let reduced = TensorReducer::new(dimension.clone())
                 .with_integrated_head(hard_head)
-                .reduce(numerator.as_view())
+                .reduce(&numerator)
                 .map_err(native_error)?;
             if !reduced.is_fully_contracted() {
                 return Err(Error::Unsupported(
@@ -126,6 +131,11 @@ impl TensorProjector {
                 .terms()
                 .iter()
                 .map(|term| {
+                    if !term.tensor().is_scalar() {
+                        return Err(Error::Unsupported(
+                            "native vacuum projector retained a non-scalar tensor".into(),
+                        ));
+                    }
                     let coefficient: RationalPolynomial<IntegerRing, u16> = term
                         .coefficient()
                         .try_to_rational_polynomial(&Q, &Z, None)
@@ -135,7 +145,7 @@ impl TensorProjector {
                     Ok((
                         coefficient.numerator.to_expression(),
                         coefficient.denominator.to_expression(),
-                        term.tensor().clone(),
+                        term.tensor().expression().clone(),
                     ))
                 })
                 .collect::<Result<Projection>>()?;

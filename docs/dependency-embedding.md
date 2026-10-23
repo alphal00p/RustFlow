@@ -11,17 +11,20 @@ native owners directly from public Git pins. They require no local patch
 application or sibling checkout. The community manifest and lock select its
 RustFlow runtime revision.
 
-The standalone root and community host each own their Cargo patch tables;
-Cargo ignores a dependency's patch table. Both source HEPKit, Linnet, Spenso,
-Idenso and the lean Typst components from the canonical
-`https://github.com/alphal00p/gammaloop` repository, branch `feynkit`. The current
-standalone lock records `635d3a1feb44067583a668c7d18f67405fe144e1`; the former
-fork-based package overrides have been removed. Historical validation reports
+The standalone root and embedding hosts each own their Cargo patch tables;
+Cargo ignores a dependency's patch table. The standalone manifest sources
+HEPKit, Linnet, Spenso, Idenso and lean Typst components from the canonical
+`https://github.com/alphal00p/gammaloop` repository at
+`4ae30bd6e00b33784d0c3c98dd619029c910d08d`. The manifest and lock pin that
+revision; the former fork-based package overrides have been removed. Historical validation reports
 retain their original owner revisions.
 
-The current lock selects Symbolica, Numerica and Graphica 3.0.1 from official
-community revision `ed2374f1d880d52c3a7ca48cd7c22f4baad5c020`, and RustRed main
-`acc92b0dad27b11fd194a4c284765fb6a93cbc94`. RustRed's core Cargo package is
+The current manifest and lock select Symbolica, Numerica and Graphica 3.0.1
+together from `ValentinHirschi/symbolica` revision
+`a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299`, based on upstream main
+`170ba932d0cf73508da34cc78fbe82361158147e`, and RustRed
+`f6139d5f5137cb2a20c912f7f576a275406e50d1`. The arithmetic revision includes
+the zero-test APIs required by current FeynKit; the old `ed2374f` pin does not. RustRed's core Cargo package is
 `rustred`; its experimental `reconstruction` feature remains disabled. Native
 and Pyodide consumers select one shared arithmetic backend. `python` enables
 the native automatic evaluator; `python_wasm` enables its serial portable
@@ -36,27 +39,27 @@ root-scaling regression when changing the numerical dependency graph:
 cargo test --locked --test symbolica_root_scaling
 ```
 
-## Shared upstream Symbolica revision
+## Shared Symbolica revision
 
 Physical nonplanar boundary preparation exposed an exact-zero-policy bug in
 Symbolica's checked division and inversion. The [minimal reproducer and
 validation](symbolica-exact-division-mre.md) explain the failure. The correction
 is now in official community commit `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`.
-The current shared revision retains that fix and the earlier polynomial
-root-convergence correction, and adds the generic C++ complex-constant export
-fix. The owning manifests keep all three algebra crates on the same source:
+The selected main-based revision retains the upstream fixes. The owning
+manifest keeps all three algebra crates on the same immutable source, matching
+the locally supplied native owner:
 
 ```toml
 [patch.crates-io]
-symbolica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
-numerica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
-graphica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
+symbolica = { git = "https://github.com/ValentinHirschi/symbolica", rev = "a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299" }
+numerica = { git = "https://github.com/ValentinHirschi/symbolica", rev = "a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299" }
+graphica = { git = "https://github.com/ValentinHirschi/symbolica", rev = "a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299" }
 ```
 
 Each checked-in lock selects its recorded immutable commit above. Once dependencies are
 fetched, `cargo metadata --locked --offline --format-version 1` checks the graph
 without rebuilding. Exactly one instance of each of these three packages must
-resolve from that upstream revision. The two-line local patch and isolated
+resolve from that revision. The two-line local patch and isolated
 `1fbdb0a` checkout are retained only as diagnostic history; neither is an active
 dependency override. Normal builds use the public manifest patch tables and
 checked-in locks. Remove stale development overrides from a publication build;
@@ -109,7 +112,7 @@ through the host's patch table. Replacing Vakint with the crate from the HEPKit
 owner revision would discard that distinct implementation.
 
 For a custom embedding workspace, carry this crate's crates.io patch table
-into the owning workspace and use the same canonical FeynKit branch for every
+into the owning workspace and use the same pinned FeynKit revision for every
 companion crate. Verify the resolved graph and lock contain one source and
 revision per owner. The community host's package checks validate native and
 browser dependency ownership, including disabled RustRed reconstruction.

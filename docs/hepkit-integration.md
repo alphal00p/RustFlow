@@ -2,25 +2,22 @@
 
 RustFlow accepts HEPKit's model JSON and native compact or serialized DOT directly through `FeynmanDiagram::from_dot`. HEPKit/Linnet own parsing, edge identities, graph validation, routing, denominator construction and partial fractions. Spenso/Idenso own scalar numerator contraction. This crate translates the resulting complete denominator basis into `IntegralFamily` and exact `LinearCombination` values. The application owns one loaded UFO model at a time and shares its `Arc<Model>` with all graph inputs; RustFlow does not maintain a competing model registry. Python bindings are optional modules in this crate, registered by the shared community extension under `symbolica.community.hep.integration`; the library and CLI remain usable without Python. See [dependency-embedding.md](dependency-embedding.md) for the current shared dependency graph and source fingerprint configuration.
 
-The standalone build selects public native owner
-[`b96600b0085d9ddfa9e6acbc11fa72ec6163253c`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c),
-based on upstream HEPKit `6c707c6b77a437256eb1180da13d4d327b371d13`, and official
-Symbolica/Numerica/Graphica community `6defcca968ca8411977fb1f641a9dee49ee7b7a7`.
-The standalone and community manifests each own their shared-owner patch tables.
-Community `main` now aligns with the standalone `b96600b` owner and official
-Symbolica community `6defcca9` after PR #19.
-The frozen publication runtime retains native owner
-`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` and Symbolica community
-`c3408e4ba1d3bdd4ea55678fad50e27009be13d4`; its acceptance data keep those original
-pins. The [published-input build recipe](clean-community-build.md) needs no
-private checkout or patch application.
+The standalone build pins the public native owner to
+[`4ae30bd6e00b33784d0c3c98dd619029c910d08d`](https://github.com/alphal00p/gammaloop/commit/4ae30bd6e00b33784d0c3c98dd619029c910d08d),
+Symbolica/Numerica/Graphica together to main-based
+[`a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299`](https://github.com/ValentinHirschi/symbolica/commit/a5f94e6550d78b3c5fd4ce9b1d442ad6daefd299),
+and RustRed to `f6139d5f5137cb2a20c912f7f576a275406e50d1`.
+The native graph adapter composes typed numerators and projectors, retaining
+free ports and dimension metadata even when momentum routing produces zero.
+The standalone and embedding manifests each own their shared-owner patch tables;
+a host must align all companion crates to the same revisions.
 
-Both resolve RustRed from official main `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
-The community host preserves its separate Vakint implementation at
-`6203c6cbba6ae5e90329ba5081fad55319e678db`. See
-[native boundary integration](native-boundary-integrands.md) for the newer
-Gaussian coefficient support. The native owner changes are proposed upstream in
-[GammaLoop PR #125](https://github.com/alphal00p/gammaloop/pull/125).
+Earlier community and frozen publication runtimes retain their original owner
+pins and acceptance evidence; they do not establish validation of this graph.
+The community host also owns its separate Vakint implementation. See
+[dependency embedding](dependency-embedding.md) for source ownership and
+[native boundary integration](native-boundary-integrands.md) for Gaussian
+coefficient support.
 
 The native owner supplies:
 
