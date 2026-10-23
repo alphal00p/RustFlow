@@ -100,7 +100,7 @@ elif operation == 'automatic':
     let snapshot = || {
         symbolica_amflow::python::get_citations()
             .into_iter()
-            .map(|c| (c.id, c.reference, c.bibtex, c.reasons, c.description))
+            .map(|c| (c.id, c.reference, c.bibtex, c.reasons, c.description, c.url))
             .collect::<Vec<_>>()
     };
     let first = snapshot();
@@ -128,10 +128,14 @@ elif operation == 'automatic':
         assert_ne!(amflow2.3, diffexp.3, "method-specific citation reasons");
         assert_ne!(amflow2.4, diffexp.4, "paper-specific descriptions");
     }
-    for (_, reference, bibtex, reasons, description) in first {
+    for (id, reference, bibtex, reasons, description, url) in first {
         assert!(!reference.is_empty() && bibtex.starts_with("@article{"));
         assert!(!reasons.is_empty());
         assert!(!description.is_empty());
+        assert_eq!(
+            url,
+            format!("https://arxiv.org/abs/{}", id.strip_prefix("arXiv:").unwrap())
+        );
     }
 }
 
