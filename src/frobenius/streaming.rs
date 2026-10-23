@@ -201,6 +201,35 @@ impl PreparedFrobenius {
                 "streamed Frobenius matching dimension or finiteness".into(),
             ));
         }
+        let matrix =
+            self.evaluate_matrix_with_winding(p, parameters, order, point, winding, context)?;
+        solve(p, matrix, values.to_vec())
+    }
+
+    /// Evaluate the fundamental matrix at one nonzero local point, streaming
+    /// long Frobenius columns rather than retaining their coefficient arrays.
+    ///
+    /// Entry `[i][j]` is component `i` of basis column `j`, in exactly the same
+    /// column order as [`Self::evaluate`] and [`Self::evaluate_solution`]. The
+    /// logarithm branch is `log(point) + 2*pi*i*winding`, including both powers
+    /// and logarithms. This retains the generic parameter and resource checks
+    /// of [`Self::match_values_with_winding`].
+    ///
+    /// The returned small matrix can be reused with [`crate::numeric::solve`]
+    /// for several right-hand sides at this same precision, parameter choice,
+    /// point, winding and truncation order. It does not certify truncation,
+    /// input accuracy or matching conditioning, and is not a long local series.
+    #[allow(clippy::too_many_arguments)]
+    pub fn evaluate_matrix_with_winding(
+        &self,
+        p: Precision,
+        parameters: &ahash::HashMap<Atom, C>,
+        order: usize,
+        point: &C,
+        winding: i32,
+        context: &RunContext,
+    ) -> Result<Vec<Vec<C>>> {
+        let n = self.source.matrix.len();
         let mut matrix: Vec<Vec<C>> = Vec::new();
         self.visit_values(
             p,
@@ -223,7 +252,7 @@ impl PreparedFrobenius {
                 Ok(())
             },
         )?;
-        solve(p, matrix, values.to_vec())
+        Ok(matrix)
     }
 
     #[allow(clippy::too_many_arguments)]

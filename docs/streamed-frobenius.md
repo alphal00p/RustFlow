@@ -20,6 +20,15 @@ branch explicitly. These methods use the generic parameter policy of
 `PreparedFrobenius::evaluate`; they do not automatically replace the engine's
 separate strict endpoint admission path.
 
+`PreparedFrobenius::evaluate_matrix_with_winding` exposes that streamed matrix
+of values without retaining long coefficient columns. Its rows are physical
+components and its columns have the same integration-constant order as full
+basis evaluation. Reuse the matrix with `numeric::solve(p, matrix.clone(), rhs)`
+for several right-hand sides at the same precision, parameters, matching point,
+winding and local order. Pass winding zero for the principal branch. Each solve
+still performs the existing elimination; this API avoids regenerating the
+Frobenius columns, without adding a factorization or accuracy guarantee.
+
 The new path changes retention, not algebra:
 
 - The existing coefficient-domain recurrence emits one column at a time.
