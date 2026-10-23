@@ -297,6 +297,34 @@ impl CompiledEpsilonSystem {
         )
     }
 
+    /// Estimate boundary-error amplification along an explicit piecewise-linear
+    /// path containing both its start and end. All legs use the same positive
+    /// coefficient weights. Explicit short legs can tighten otherwise valid but
+    /// loose disk bounds; this method does not select or change the path.
+    ///
+    /// Integrated norms are accumulated before applying the global exponential
+    /// or finite Dyson bound. In particular, a zero epsilon0 block retains its
+    /// global nilpotent structure instead of multiplying truncated scalar bounds
+    /// for individual legs. The MPFR and source-evidence qualifications of
+    /// [`Self::error_amplification_weighted`] remain unchanged.
+    pub fn error_amplification_weighted_path(
+        &self,
+        points: &[C],
+        weights: &[Float],
+    ) -> Result<Float> {
+        if points.len() < 2 {
+            return Err(Error::InvalidInput(
+                "error amplification path requires at least two points".into(),
+            ));
+        }
+        let p = self.rows.p;
+        let mut integral = p.real(0);
+        for leg in points.windows(2) {
+            integral += self.error_norm_integral_weighted(&leg[0], &leg[1], weights)?;
+        }
+        amplification_from_integral(p, &integral, self.epsilon_product_limit())
+    }
+
     /// Every product of this many connection matrices vanishes exactly.
     /// Physical blocks may be noncommuting; each factor raises epsilon order.
     pub(crate) fn epsilon_product_limit(&self) -> Option<usize> {

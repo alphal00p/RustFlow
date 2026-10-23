@@ -65,6 +65,17 @@ criterion below unit magnitude and a relative criterion above it; it does not
 claim `d` significant digits for every small nonzero coefficient. Returned
 component error estimates allow applications to impose relative tolerances on
 projected form factors or amplitudes after their exact normalization.
+
+Low-level epsilon-system callers can use
+`CompiledEpsilonSystem::error_amplification_weighted_path` with explicit path
+points and one fixed weight vector. Short legs can tighten valid but loose
+disk estimates on a long segment; for positive endpoints spanning many scales,
+caller-selected geometric nodes can be useful. Construct nodes at the working
+precision, preserve the intended path and keep all epsilon modes. The helper
+sums integrated norms and applies the global bound once, retaining the finite
+Dyson optimization when the epsilon-zero block vanishes exactly. It does not
+choose nodes or strengthen the source's known accuracy. The original
+`error_amplification_weighted` method remains the single-segment interface.
 The weights retain separate physical-component and epsilon-order scales: a large
 higher-order coefficient cannot inject its absolute uncertainty into an uncoupled
 lower-order coefficient.

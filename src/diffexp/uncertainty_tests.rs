@@ -133,6 +133,13 @@ fn whole_path_integral_is_subdivision_independent_for_constant_kernels() -> Resu
     let subdivided =
         crate::diffexp::amplification_from_integral(p, &integral, system.epsilon_product_limit())?;
     assert_eq!(whole, subdivided);
+    let points = (0..=16)
+        .map(|index| p.rational(&Rational::from((index, 16))))
+        .collect::<Vec<_>>();
+    assert_eq!(
+        whole,
+        system.error_amplification_weighted_path(&points, &weights)?
+    );
     assert!(p.close(
         &ComplexFloat::new(whole.clone(), p.real(0)),
         &p.rational(&Rational::from((13_015_303, 3))),
