@@ -428,3 +428,145 @@ fn native_projector_rank_twenty_replaces_the_old_rank_fourteen_limit() {
         Err(Error::Numerical(_))
     ));
 }
+
+#[test]
+fn native_tensor_projector_contracts_routed_free_ports_and_preserves_scalar_factors() {
+    let kin = kinematics(Atom::num(-1));
+    let plain = GraphIntegral::from_dot(model(), BUBBLE, &kin).unwrap();
+    let ds = denominators(&groups(&plain, &KinematicPoint::default())[0].0);
+    let vector =
+        idenso::tensor::SymbolicTensor::infer(scalar("gammalooprs::Q(3,spenso::mink(D_,mu))"))
+            .unwrap();
+    let diagram = plain
+        .diagram()
+        .as_ref()
+        .clone()
+        .with_numerator(vector.clone())
+        .unwrap();
+    let free = GraphIntegral::new(Arc::new(diagram.clone()), &kin).unwrap();
+    let result = free.integral_groups(
+        &KinematicPoint::default(),
+        symbol!("feynkit_graph::eps"),
+        4,
+        1000,
+        &RunContext::default(),
+    );
+    assert!(matches!(result, Err(Error::Unsupported(message))
+        if message.contains("free tensor indices")));
+    let diagram = diagram
+        .with_projector(vector)
+        .with_numerator_prefactor(idenso::tensor::SymbolicTensor::infer(Atom::num(3)).unwrap())
+        .with_overall_factor(Atom::num(2));
+    let graph = GraphIntegral::new(Arc::new(diagram), &kin).unwrap();
+    exact(
+        &integrand(&groups(&graph, &KinematicPoint::default())),
+        &(Atom::num(6) / &ds[0]),
+    );
+}
+
+#[test]
+fn native_fixed_dimension_projector_ports_are_not_promoted() {
+    let kin = kinematics(Atom::num(-1));
+    let plain = GraphIntegral::from_dot(model(), BUBBLE, &kin).unwrap();
+    let vector =
+        idenso::tensor::SymbolicTensor::infer(scalar("gammalooprs::Q(3,spenso::mink(4,mu))"))
+            .unwrap();
+    let diagram = plain
+        .diagram()
+        .as_ref()
+        .clone()
+        .with_numerator(vector.clone())
+        .unwrap()
+        .with_projector(vector);
+    let graph = GraphIntegral::new(Arc::new(diagram), &kin).unwrap();
+    let result = graph.integral_groups(
+        &KinematicPoint::default(),
+        symbol!("feynkit_graph::eps"),
+        4,
+        1000,
+        &RunContext::default(),
+    );
+    assert!(matches!(result, Err(Error::Unsupported(message))
+        if message.contains("fixed-dimensional")));
+}
+
+#[test]
+fn native_routing_to_zero_preserves_free_ports_until_projected() {
+    let kin = kinematics(Atom::num(-1));
+    let plain = GraphIntegral::from_dot(model(), BUBBLE, &kin).unwrap();
+    let vector = idenso::tensor::SymbolicTensor::infer(scalar(
+        "gammalooprs::Q(2,spenso::mink(D_,mu))-gammalooprs::K(0,spenso::mink(D_,mu))",
+    ))
+    .unwrap();
+    assert!(!vector.expression().is_zero());
+    assert!(
+        plain
+            .diagram()
+            .loop_momentum_basis()
+            .route_expression(vector.expression())
+            .is_zero()
+    );
+    let diagram = plain
+        .diagram()
+        .as_ref()
+        .clone()
+        .with_numerator(vector)
+        .unwrap();
+    let graph = GraphIntegral::new(Arc::new(diagram.clone()), &kin).unwrap();
+    let result = graph.integral_groups(
+        &KinematicPoint::default(),
+        symbol!("feynkit_graph::eps"),
+        4,
+        1000,
+        &RunContext::default(),
+    );
+    assert!(matches!(result, Err(Error::Unsupported(message))
+        if message.contains("free tensor indices")));
+    let projector =
+        idenso::tensor::SymbolicTensor::infer(scalar("gammalooprs::K(0,spenso::mink(D_,mu))"))
+            .unwrap();
+    let graph = GraphIntegral::new(Arc::new(diagram.with_projector(projector)), &kin).unwrap();
+    let result = groups(&graph, &KinematicPoint::default());
+    assert_eq!(result.len(), 1);
+    assert!(result[0].1.is_empty());
+}
+
+#[test]
+fn native_ranked_zero_keeps_free_ports_and_fixed_dimension_rejection() {
+    let kin = kinematics(Atom::num(-1));
+    let plain = GraphIntegral::from_dot(model(), BUBBLE, &kin).unwrap();
+    for dimension in ["D_", "4"] {
+        let vector = idenso::tensor::SymbolicTensor::infer(scalar(&format!(
+            "gammalooprs::K(0,spenso::mink({dimension},mu))",
+        )))
+        .unwrap();
+        // Scalar algebra may cancel a tensor payload without changing its interface.
+        let zero = vector.with_algebra_result(Atom::new()).unwrap();
+        assert!(zero.expression().is_zero());
+        let diagram = plain
+            .diagram()
+            .as_ref()
+            .clone()
+            .with_numerator(zero)
+            .unwrap();
+        let graph = GraphIntegral::new(Arc::new(diagram), &kin).unwrap();
+        let result = graph.integral_groups(
+            &KinematicPoint::default(),
+            symbol!("feynkit_graph::eps"),
+            4,
+            1000,
+            &RunContext::default(),
+        );
+        let Err(Error::Unsupported(message)) = result else {
+            panic!("ranked zero must not become a scalar integral");
+        };
+        assert!(
+            message.contains(if dimension == "4" {
+                "fixed-dimensional"
+            } else {
+                "free tensor indices"
+            }),
+            "{message}"
+        );
+    }
+}
