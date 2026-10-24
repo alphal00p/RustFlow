@@ -174,8 +174,10 @@ fn exact_duplicate_rows_do_not_hide_inconsistent_right_hand_sides() {
 
 #[test]
 fn tautological_rows_leave_all_amplitudes_free_but_distinct_rows_keep_the_guard() {
+    // The original conservative elimination profile bounds coefficient growth
+    // across distinct rows; compacted tautologies never enter that elimination.
     let limits = ExactFrobeniusLimits {
-        max_dimension: Some(64),
+        max_coefficient_bits: Some(65_536),
         ..Default::default()
     };
     let context = RunContext::default();
