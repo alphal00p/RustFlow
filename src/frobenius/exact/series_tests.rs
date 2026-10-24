@@ -143,6 +143,19 @@ fn disabled_height_estimates_preserve_compact_native_integer_power_series() {
         coefficients,
         vec![domain.integer(1), domain.integer(i64::MAX)]
     );
+    for power in [
+        Integer::from(i64::MIN),
+        -(Integer::from(u64::MAX) + Integer::one()),
+    ] {
+        let negative = (Atom::one() + Atom::var(x)).pow(Atom::num(power.clone()));
+        assert_eq!(
+            domain.series(&negative, x, 1).unwrap(),
+            vec![
+                domain.integer(1),
+                Gaussian::new(Rational::from(power), Rational::zero())
+            ]
+        );
+    }
     let diagnostic = ExactFrobeniusLimits {
         max_coefficient_bits: Some(u64::MAX),
         ..limits.clone()

@@ -564,20 +564,18 @@ impl<'a> ExactDomain<'a> {
                     ));
                 }
                 let negative = power.re < Rational::zero();
-                let magnitude =
-                    power.re.abs().to_string().parse::<u64>().map_err(|_| {
-                        Error::Limit("exact Frobenius source power exceeds u64".into())
-                    })?;
-                // Native integer series powers convert their magnitude to i64.
-                i64::try_from(magnitude).map_err(|_| {
-                    Error::Limit(
+                let magnitude = power.re.abs().to_string().parse::<u64>().ok();
+                // Only native nonnegative integer series powers convert to i64;
+                // negative rational powers retain arbitrary exact numerators.
+                if !negative && magnitude.is_none_or(|n| i64::try_from(n).is_err()) {
+                    return Err(Error::Limit(
                         "exact Frobenius native integer power exceeds i64 representation".into(),
-                    )
-                })?;
+                    ));
+                }
                 coefficient_bits(
                     self.series_bound(base, variable, order, nodes)?
                         .checked_add(1)
-                        .and_then(|v| v.checked_mul(magnitude))
+                        .and_then(|v| v.checked_mul(magnitude?))
                         .and_then(|v| {
                             v.checked_mul(if negative {
                                 series_terms(order).ok()?.try_into().ok()?
