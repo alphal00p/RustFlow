@@ -566,7 +566,7 @@ impl<'a> ExactDomain<'a> {
                 let negative = power.re < Rational::zero();
                 let magnitude = power.re.abs().to_string().parse::<u64>().ok();
                 // Only native nonnegative integer series powers convert to i64;
-                // negative rational powers retain arbitrary exact numerators.
+                // negative powers retain their native rational-power validation.
                 if !negative
                     && magnitude
                         .is_none_or(|n| i64::try_from(n).is_err() || usize::try_from(n).is_err())

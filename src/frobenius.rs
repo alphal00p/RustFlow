@@ -899,14 +899,33 @@ mod high_order_memory_tests {
     fn normalization_span_above_256_preserves_the_exact_power_solution() -> Result<()> {
         let x = symbol!("frobenius_normalization_resource::x");
         let context = RunContext::default();
-        let prepared = DifferentialSystem {
+        let source = DifferentialSystem {
             variable: x,
             matrix: vec![
                 vec![Atom::new(), Atom::var(x).pow(-301)],
                 vec![Atom::new(), Atom::new()],
             ],
-        }
-        .prepare_frobenius(&context)?;
+        };
+        let transformation = vec![
+            vec![Atom::one(), -Atom::var(x).pow(-300) / Atom::num(300)],
+            vec![Atom::new(), Atom::one()],
+        ];
+        let normal = source.change_basis(&transformation)?;
+        assert!(normal.matrix.iter().flatten().all(Atom::is_zero));
+        let mut prepared = normal.prepare_frobenius(&context)?;
+        prepared.source = source;
+        prepared.transformation = transformation;
+        let shifts = prepared
+            .transformation
+            .iter()
+            .flatten()
+            .filter(|entry| !entry.is_zero())
+            .map(|entry| valuation(entry, x))
+            .collect::<Result<Vec<_>>>()?;
+        assert_eq!(
+            shifts.iter().max().unwrap() - shifts.iter().min().unwrap(),
+            300
+        );
         let p = Precision::decimal(80)?;
         let basis = prepared.evaluate(p, &Default::default(), 8, &context)?;
         assert!(

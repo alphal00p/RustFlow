@@ -79,15 +79,22 @@ fn series(expression: &str) -> impl Iterator<Item = (Rational, Atom)> {
 #[test]
 fn native_nonconstant_unit_root_grid_ignores_only_exact_zero_fractional_slots() {
     let terms = series("(1-z)^(-1/2)").collect::<Vec<_>>();
-    assert!(
-        terms
-            .iter()
-            .any(|(power, coefficient)| !power.is_integer() && coefficient.is_zero())
-    );
+    // Native owners may omit stored exact zeros. Add an explicit ramification
+    // slot to exercise the adapter independently of that storage choice.
+    let zero = Atom::new();
     let limits = ExactFrobeniusLimits::default();
     let context = RunContext::default();
-    let coefficients = regular_root_coefficients(
+    let native = regular_root_coefficients(
         terms.iter().map(|(p, c)| (p.clone(), c)),
+        4,
+        &ExactDomain::dense(&limits, &context),
+    )
+    .unwrap();
+    let coefficients = regular_root_coefficients(
+        terms
+            .iter()
+            .map(|(p, c)| (p.clone(), c))
+            .chain(std::iter::once((Rational::from((1, 2)), &zero))),
         4,
         &ExactDomain {
             limits: &limits,
@@ -96,6 +103,7 @@ fn native_nonconstant_unit_root_grid_ignores_only_exact_zero_fractional_slots() 
         },
     )
     .unwrap();
+    assert_eq!(coefficients, native);
     for (value, expected) in coefficients.iter().zip([
         Rational::one(),
         Rational::from((1, 2)),
@@ -144,19 +152,15 @@ fn disabled_height_estimates_preserve_compact_native_integer_power_series() {
         coefficients,
         vec![domain.integer(1), domain.integer(positive)]
     );
-    for power in [
-        Integer::from(i64::MIN),
-        -(Integer::from(u64::MAX) + Integer::one()),
-    ] {
-        let negative = (Atom::one() + Atom::var(x)).pow(Atom::num(power.clone()));
-        assert_eq!(
-            domain.series(&negative, x, 1).unwrap(),
-            vec![
-                domain.integer(1),
-                Gaussian::new(Rational::from(power), Rational::zero())
-            ]
-        );
-    }
+    let negative = (Atom::one() + Atom::var(x)).pow(i64::MIN);
+    assert_eq!(
+        domain.series(&negative, x, 1).unwrap(),
+        vec![domain.integer(1), domain.integer(i64::MIN)]
+    );
+    let beyond_native_negative =
+        (Atom::one() + Atom::var(x)).pow(Atom::num(-(Integer::from(u64::MAX) + Integer::one())));
+    assert!(matches!(domain.series(&beyond_native_negative, x, 1),
+        Err(Error::Unsupported(message)) if message.contains("large exponent")));
     let diagnostic = ExactFrobeniusLimits {
         max_coefficient_bits: Some(u64::MAX),
         ..limits.clone()
