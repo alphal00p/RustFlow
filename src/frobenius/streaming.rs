@@ -275,12 +275,9 @@ impl PreparedFrobenius {
             StreamingAdmission::new(p, order, source_values, self.identity_transformation());
         let mut index = 0;
         self.numerical_recurrence_visit(
-            p,
-            parameters,
+            recurrence::NumericalDomain::streaming(p, parameters, &prepared_rows, &admission),
             order,
             context,
-            &prepared_rows,
-            &admission,
             constants,
             |indices, column| {
                 context.cancellation.check()?;

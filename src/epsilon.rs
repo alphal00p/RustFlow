@@ -321,7 +321,7 @@ mod tests {
         let radius = Rational::one() / Rational::from(Integer::from(10).pow(1000));
         let samples = symmetric_epsilon_samples(32, &radius).unwrap();
         assert_eq!(samples.len(), 32);
-        for pair in samples.chunks_exact(2) {
+        for pair in samples.as_chunks::<2>().0 {
             assert_eq!(pair[0], -pair[1].clone());
             assert!(pair[0] > Rational::zero() && pair[0] <= radius);
         }

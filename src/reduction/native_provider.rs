@@ -6,7 +6,8 @@
 //! proof engine, limits, serializer and evidence policy all belong in that identity.
 //! None means unsupported, never zero. Errors and cancellation are not swallowed.
 use super::{
-    NativeIdentityBank, Reduction, ReductionBackend, RustRedBackend, SeededRustRedBackend,
+    NativeIdentityBank, NativeReductionScope, Reduction, ReductionBackend, RustRedBackend,
+    SeededRustRedBackend,
 };
 use crate::{Error, Integral, IntegralFamily, Result, RunContext};
 use std::sync::Arc;
@@ -88,9 +89,11 @@ impl ReductionBackend for ProvidedRustRedBackend {
             targets,
             None,
             context,
-            None,
-            self.seed.as_deref(),
-            Some(self.provider.as_ref()),
+            NativeReductionScope {
+                cuts: None,
+                seed: self.seed.as_deref(),
+                provider: Some(self.provider.as_ref()),
+            },
         )
     }
     fn reduce_at_epsilon(

@@ -72,13 +72,31 @@ pub(super) trait CoefficientDomain {
     }
 }
 
-struct NumericalDomain<'a> {
+pub(super) struct NumericalDomain<'a> {
     p: Precision,
     values: &'a ahash::HashMap<Atom, C>,
     strict: bool,
     prepared_rows: &'a crate::ode::prepared::PreparedRows,
     streaming: Option<&'a super::streaming::StreamingAdmission>,
 }
+
+impl<'a> NumericalDomain<'a> {
+    pub(super) fn streaming(
+        p: Precision,
+        values: &'a ahash::HashMap<Atom, C>,
+        prepared_rows: &'a crate::ode::prepared::PreparedRows,
+        admission: &'a super::streaming::StreamingAdmission,
+    ) -> Self {
+        Self {
+            p,
+            values,
+            strict: false,
+            prepared_rows,
+            streaming: Some(admission),
+        }
+    }
+}
+
 impl CoefficientDomain for NumericalDomain<'_> {
     type Scalar = C;
     type Solver = crate::numeric::BlockSolve;
@@ -259,22 +277,12 @@ impl PreparedFrobenius {
 
     pub(super) fn numerical_recurrence_visit(
         &self,
-        p: Precision,
-        values: &ahash::HashMap<Atom, C>,
+        domain: NumericalDomain<'_>,
         order: usize,
         context: &RunContext,
-        prepared_rows: &crate::ode::prepared::PreparedRows,
-        admission: &super::streaming::StreamingAdmission,
         constants: Option<&[C]>,
         mut visitor: impl FnMut(std::ops::Range<usize>, FrobeniusColumn) -> Result<()>,
     ) -> Result<()> {
-        let domain = NumericalDomain {
-            p,
-            values,
-            strict: false,
-            prepared_rows,
-            streaming: Some(admission),
-        };
         self.recurrence_normal_visit(
             &domain,
             order,

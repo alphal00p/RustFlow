@@ -21,6 +21,14 @@ pub struct Reduction {
     pub nonzero_conditions: Vec<Atom>,
 }
 
+/// Cut measure and optional exact-identity sources for one native reduction.
+/// `Seed` distinguishes supplied banks from their resolved symbolic/sample scope.
+pub(crate) struct NativeReductionScope<'a, Seed> {
+    pub cuts: Option<&'a crate::cuts::CutFamily>,
+    pub seed: Option<&'a Seed>,
+    pub provider: Option<&'a dyn NativeIdentityProvider>,
+}
+
 /// Preflight stored keys and encoded expressions before copying/admitting a
 /// table. Cooperative checkpoints also observe actual process RSS.
 pub(super) fn check_table_storage(reduction: &Reduction) -> Result<()> {
@@ -290,7 +298,17 @@ impl RustRedBackend {
         context: &RunContext,
         cuts: Option<&crate::cuts::CutFamily>,
     ) -> Result<Reduction> {
-        self.reduce_native_with_seed(family, targets, epsilon, context, cuts, None, None)
+        self.reduce_native_with_seed(
+            family,
+            targets,
+            epsilon,
+            context,
+            NativeReductionScope {
+                cuts,
+                seed: None,
+                provider: None,
+            },
+        )
     }
     fn reduce_native_with_seed(
         &self,
@@ -298,10 +316,13 @@ impl RustRedBackend {
         targets: &[Integral],
         epsilon: Option<&Rational>,
         context: &RunContext,
-        cuts: Option<&crate::cuts::CutFamily>,
-        seed: Option<&NativeIdentityBank>,
-        provider: Option<&dyn NativeIdentityProvider>,
+        scope: NativeReductionScope<'_, NativeIdentityBank>,
     ) -> Result<Reduction> {
+        let NativeReductionScope {
+            cuts,
+            seed,
+            provider,
+        } = scope;
         context.cancellation.check()?;
         if (seed.is_some() || provider.is_some()) && (cuts.is_some() || !self.factorized) {
             return Err(Error::Unsupported(
@@ -364,9 +385,11 @@ impl RustRedBackend {
                 &targets,
                 self,
                 context,
-                cuts,
-                resolved_seed.as_ref(),
-                provider,
+                NativeReductionScope {
+                    cuts,
+                    seed: resolved_seed.as_ref(),
+                    provider,
+                },
             );
         }
         let cut_constraint = if let Some(cuts) = cuts {

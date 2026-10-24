@@ -5,7 +5,7 @@ mod parametric;
 mod symmetry;
 
 use crate::family::{ConvertedFamily, substitute};
-use crate::reduction::{LinearCombination, Reduction, RustRedBackend};
+use crate::reduction::{LinearCombination, NativeReductionScope, Reduction, RustRedBackend};
 use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
 use rayon::prelude::*;
 use rustred::sector::{
@@ -25,12 +25,10 @@ pub(crate) fn reduce(
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
-    cuts: Option<&crate::cuts::CutFamily>,
-    seed: Option<&crate::reduction::ResolvedIdentityBank>,
-    provider: Option<&dyn crate::reduction::NativeIdentityProvider>,
+    scope: NativeReductionScope<'_, crate::reduction::ResolvedIdentityBank>,
 ) -> Result<Reduction> {
     let cut_options;
-    let options = if cuts.is_some() {
+    let options = if scope.cuts.is_some() {
         cut_options = RustRedBackend {
             bubble_subloops: false,
             parametric_rules: false,
@@ -44,7 +42,7 @@ pub(crate) fn reduce(
     let arity = family.family.denominator_count();
     let mut result = rustred::dispatch_solver_capacity!(
         family.family.denominator_count(),
-        solve(family, original, dimension, targets, options, context, cuts, seed, provider),
+        solve(family, original, dimension, targets, options, context, scope),
         n => Err(Error::Unsupported(format!(
             "native runtime was compiled for {:?} scalar-product slots; received {n}",
             rustred::compiled_runtime_arities()
@@ -204,16 +202,16 @@ fn validate_identity_order<const N: usize>(
         let sector = powers.map(|p| p > 0);
         if let std::collections::btree_map::Entry::Vacant(entry) = orders.entry(sector) {
             let mut order = rustred::solver::IntegralOrder::new(sector, [false; N]);
-            if options.bubble_subloops {
-                if let Some(pattern) = crate::bubble::Bubble::find(
+            if options.bubble_subloops
+                && let Some(pattern) = crate::bubble::Bubble::find(
                     original,
                     &sector[..original.propagators.len()],
                     dimension.clone(),
-                )? {
-                    order = order
-                        .with_permutation(capacity_permutation::<N>(pattern.permutation()))
-                        .map_err(native_error)?;
-                }
+                )?
+            {
+                order = order
+                    .with_permutation(capacity_permutation::<N>(pattern.permutation()))
+                    .map_err(native_error)?;
             }
             entry.insert(order);
         }
@@ -237,18 +235,29 @@ fn validate_identity_order<const N: usize>(
     }
     Ok(supplied)
 }
+
+struct SeedFrontier<'a, const N: usize> {
+    result: &'a mut Reduction,
+    cache: &'a mut FrontierCache,
+    visited: &'a mut BTreeSet<[i16; N]>,
+    pending: &'a mut BTreeSet<[i16; N]>,
+}
+
 fn admit_identity_seed<const N: usize>(
     seed: &crate::reduction::ResolvedIdentityBank,
     original: &IntegralFamily,
     dimension: &Atom,
     options: &RustRedBackend,
     context: &RunContext,
-    result: &mut Reduction,
-    cache: &mut FrontierCache,
-    visited: &mut BTreeSet<[i16; N]>,
-    pending: &mut BTreeSet<[i16; N]>,
+    frontier: SeedFrontier<'_, N>,
     targets: &[Vec<i16>],
 ) -> Result<()> {
+    let SeedFrontier {
+        result,
+        cache,
+        visited,
+        pending,
+    } = frontier;
     let supplied = validate_identity_order::<N>(seed, original, dimension, options, context)?;
     result
         .nonzero_conditions
@@ -426,10 +435,13 @@ fn solve<const N: usize>(
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
-    cuts: Option<&crate::cuts::CutFamily>,
-    seed: Option<&crate::reduction::ResolvedIdentityBank>,
-    provider: Option<&dyn crate::reduction::NativeIdentityProvider>,
+    scope: NativeReductionScope<'_, crate::reduction::ResolvedIdentityBank>,
 ) -> Result<Reduction> {
+    let NativeReductionScope {
+        cuts,
+        seed,
+        provider,
+    } = scope;
     let arity = family.family.denominator_count();
     if arity == 0 || arity > N {
         return Err(Error::InvalidInput("native solver capacity".into()));
@@ -714,10 +726,12 @@ fn solve<const N: usize>(
             dimension,
             options,
             context,
-            &mut result,
-            &mut frontier_cache,
-            &mut visited,
-            &mut pending,
+            SeedFrontier {
+                result: &mut result,
+                cache: &mut frontier_cache,
+                visited: &mut visited,
+                pending: &mut pending,
+            },
             targets,
         )?;
     }

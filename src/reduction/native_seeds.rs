@@ -4,7 +4,9 @@
 //! The evidence digest binds that external proof receipt; it is not itself a
 //! proof. Scope, coefficient domains, graph validity, native order and budgets
 //! are checked here and by the existing native search owner.
-use super::{Reduction, ReductionBackend, RustRedBackend, ScopedTableBackend};
+use super::{
+    NativeReductionScope, Reduction, ReductionBackend, RustRedBackend, ScopedTableBackend,
+};
 use crate::{Error, Integral, IntegralFamily, Result, RunContext};
 use std::{collections::BTreeSet, sync::Arc};
 use symbolica::prelude::*;
@@ -182,9 +184,11 @@ impl ReductionBackend for SeededRustRedBackend {
             targets,
             None,
             context,
-            None,
-            Some(&self.bank),
-            None,
+            NativeReductionScope {
+                cuts: None,
+                seed: Some(&self.bank),
+                provider: None,
+            },
         )
     }
     fn reduce_at_epsilon(
@@ -199,9 +203,11 @@ impl ReductionBackend for SeededRustRedBackend {
             targets,
             Some(epsilon),
             context,
-            None,
-            Some(&self.bank),
-            None,
+            NativeReductionScope {
+                cuts: None,
+                seed: Some(&self.bank),
+                provider: None,
+            },
         )
     }
     // ReductionBackend's explicit Unsupported defaults retain the cut measure.

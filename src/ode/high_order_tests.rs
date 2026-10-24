@@ -21,7 +21,7 @@ fn extended_taylor_order_transports_a_nonpolynomial_solution() -> Result<()> {
             point: p.zero(),
             values: vec![p.i(1)],
         },
-        &[end.clone()],
+        std::slice::from_ref(&end),
         &options,
         &RunContext::default(),
     )?;
