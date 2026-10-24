@@ -42,6 +42,11 @@ pub struct LiteRedBackendOptions {
     pub lines_dots_rank: bool,
     pub seed: u64,
     pub max_primes: usize,
+    /// Generate candidates with the coordinate priority "first ISP first,
+    /// remaining ISPs last" (`rustred::solver::litered::isps_at_ends_priority`).
+    /// On P14 spoke the default ISPs-last order stalls in the sector solver's
+    /// exceptional geometry (sector 217); this priority generates in ~1 min.
+    pub isps_at_ends: bool,
 }
 
 impl Default for LiteRedBackendOptions {
@@ -52,6 +57,7 @@ impl Default for LiteRedBackendOptions {
             lines_dots_rank: true,
             seed: 0x5eed_1173,
             max_primes: 256,
+            isps_at_ends: true,
         }
     }
 }
@@ -116,12 +122,18 @@ impl LiteRedRustRedBackend {
             .collect();
         // RustRed families are not Clone: convert once more for the lane.
         let rustred_family = Arc::new(family.convert()?.family);
+        let priority = self
+            .options
+            .isps_at_ends
+            .then(|| rustred::solver::litered::isps_at_ends_priority(&root))
+            .flatten();
         let (mut lane, _report) = DynamicLiteRedSession::generate(
             rustred_family,
             &root,
             self.options.workers,
             true,
             self.lane_options(),
+            priority.as_deref(),
         )
         .map_err(|e| Error::Reduction(format!("RustRed LiteRed lane: {e}")))?;
         let compression = lane
@@ -300,7 +312,7 @@ fn rational_function(function: &RationalFunction, x: &Atom) -> (Atom, Option<Ato
 impl ReductionBackend for LiteRedRustRedBackend {
     fn identity(&self) -> String {
         format!(
-            "rustred-litered:{}:{}:rows={}:order={}:seed={}:arities={:?}",
+            "rustred-litered:{}:{}:rows={}:order={}:seed={}:isps-at-ends={}:arities={:?}",
             env!("RUSTRED_SOURCE_DIGEST"),
             env!("DEPENDENCY_SOURCE_DIGEST"),
             if self.options.group_orbit_rows {
@@ -314,6 +326,7 @@ impl ReductionBackend for LiteRedRustRedBackend {
                 "program"
             },
             self.options.seed,
+            self.options.isps_at_ends,
             rustred::compiled_runtime_arities(),
         )
     }
