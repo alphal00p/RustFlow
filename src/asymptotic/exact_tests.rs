@@ -143,7 +143,7 @@ fn redundant_analytic_origin_selectors_preserve_the_exact_affine_space() {
     }
     // Compaction does not waive the allocation bound on the original input.
     let too_small = ExactFrobeniusLimits {
-        max_scalar_cells: constraints.relations.len() * 8 - 1,
+        max_scalar_cells: Some(constraints.relations.len() * 8 - 1),
         ..limits
     };
     assert!(matches!(
