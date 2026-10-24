@@ -7,6 +7,14 @@ use crate::algebra::{determinant, inverse, matmul};
 use crate::{Error, Integral, IntegralFamily, Propagator, Result};
 use std::collections::BTreeSet;
 use symbolica::prelude::*;
+use symbolica::utils::resources;
+
+fn check_region_allocation<T>(count: usize) -> Result<()> {
+    resources::check_allocation(
+        u64::try_from(count.saturating_mul(std::mem::size_of::<T>())).unwrap_or(u64::MAX),
+    )?;
+    Ok(())
+}
 
 #[derive(Clone, Debug)]
 pub struct LoopRegion {
@@ -53,6 +61,7 @@ fn transpose(a: &[Vec<Atom>]) -> Vec<Vec<Atom>> {
 }
 
 pub(crate) fn branch(p: &Propagator, loops: usize) -> Result<Vec<Atom>> {
+    check_region_allocation::<Atom>(loops.saturating_mul(loops))?;
     let q = quadratic_matrix(p, loops);
     let pivot = (0..loops)
         .find(|&i| !q[i][i].is_zero())
@@ -62,6 +71,7 @@ pub(crate) fn branch(p: &Propagator, loops: usize) -> Result<Vec<Atom>> {
         .map(|a| (a / &q[pivot][pivot]).together().cancel())
         .collect::<Vec<_>>();
     for i in 0..loops {
+        resources::checkpoint()?;
         for j in 0..loops {
             if !(&q[i][j] - &q[pivot][pivot] * &vector[i] * &vector[j])
                 .together()
@@ -77,19 +87,26 @@ pub(crate) fn branch(p: &Propagator, loops: usize) -> Result<Vec<Atom>> {
     Ok(vector)
 }
 
+/// Enumerate loop regions, with an optional diagnostic cap on routing/assignment
+/// candidates. `None` leaves the count unrestricted; active resource budgets
+/// still apply to the whole enumeration.
 pub fn enumerate_regions(
     family: &IntegralFamily,
-    max_candidates: usize,
+    max_candidates: Option<usize>,
 ) -> Result<Vec<LoopRegion>> {
+    resources::checkpoint()?;
     family.validate()?;
     let loops = family.loops.len();
-    let assignments = 1_usize
-        .checked_shl(loops as u32)
+    let assignments = u32::try_from(loops)
+        .ok()
+        .and_then(|loops| 1_usize.checked_shl(loops))
         .ok_or_else(|| Error::Limit("too many hard/soft assignments".into()))?;
     let mut branches = Vec::new();
     for p in &family.propagators[..family.physical_propagators] {
+        resources::checkpoint()?;
         let b = branch(p, loops)?;
         if !branches.contains(&b) {
+            check_region_allocation::<Vec<Atom>>(1)?;
             branches.push(b);
         }
     }
@@ -100,23 +117,29 @@ pub fn enumerate_regions(
         start: usize,
         current: &mut Vec<usize>,
         out: &mut Vec<Vec<usize>>,
-        limit: usize,
+        limit: Option<usize>,
     ) -> Result<()> {
-        if current.len() == k {
-            if out.len() >= limit {
-                return Err(Error::Limit("region routing budget exhausted".into()));
+        crate::stack_resources::run(|| {
+            resources::checkpoint()?;
+            if current.len() == k {
+                if limit.is_some_and(|limit| out.len() >= limit) {
+                    return Err(Error::Limit("region routing budget exhausted".into()));
+                }
+                check_region_allocation::<Vec<usize>>(1)?;
+                check_region_allocation::<usize>(current.len())?;
+                out.push(current.clone());
+                return Ok(());
             }
-            out.push(current.clone());
-            return Ok(());
-        }
-        for i in start..n {
-            current.push(i);
-            choose(n, k, i + 1, current, out, limit)?;
-            current.pop();
-        }
-        Ok(())
+            for i in start..n {
+                check_region_allocation::<usize>(1)?;
+                current.push(i);
+                choose(n, k, i + 1, current, out, limit)?;
+                current.pop();
+            }
+            Ok(())
+        })
     }
-    if assignments > max_candidates {
+    if max_candidates.is_some_and(|max_candidates| assignments > max_candidates) {
         return Err(Error::Limit("hard/soft assignment budget exhausted".into()));
     }
     choose(
@@ -125,11 +148,13 @@ pub fn enumerate_regions(
         0,
         &mut Vec::new(),
         &mut choices,
-        max_candidates / assignments,
+        max_candidates.map(|max_candidates| max_candidates / assignments),
     )?;
     let mut seen = BTreeSet::new();
     let mut regions = Vec::new();
     for choice in choices {
+        resources::checkpoint()?;
+        check_region_allocation::<Atom>(loops.saturating_mul(loops))?;
         let routing = choice
             .iter()
             .map(|&i| branches[i].clone())
@@ -140,12 +165,16 @@ pub fn enumerate_regions(
         let transformation = inverse(&routing)?;
         let transformed = matmul(&branches, &transformation);
         for mask in 0..assignments {
+            resources::checkpoint()?;
+            check_region_allocation::<bool>(loops.saturating_add(transformed.len()))?;
             let hard = (0..loops).map(|i| mask & (1 << i) != 0).collect::<Vec<_>>();
             let signature = transformed
                 .iter()
                 .map(|r| r.iter().zip(&hard).any(|(a, h)| *h && !a.is_zero()))
                 .collect::<Vec<_>>();
             if seen.insert(signature.clone()) {
+                check_region_allocation::<LoopRegion>(1)?;
+                check_region_allocation::<Atom>(loops.saturating_mul(loops))?;
                 regions.push(LoopRegion {
                     jacobian_determinant: determinant(transformation.clone()),
                     transformation: transformation.clone(),
@@ -160,11 +189,13 @@ pub fn enumerate_regions(
             "loop branch momenta do not span loop space".into(),
         ));
     }
+    resources::checkpoint()?;
     Ok(regions)
 }
 
 impl IntegralFamily {
     pub fn transform_loops(&self, transformation: &[Vec<Atom>]) -> Result<Self> {
+        resources::checkpoint()?;
         let loops = self.loops.len();
         if transformation.len() != loops
             || transformation.iter().any(|r| r.len() != loops)
@@ -173,9 +204,12 @@ impl IntegralFamily {
             return Err(Error::InvalidInput("singular loop transformation".into()));
         }
         let transposed = transpose(transformation);
+        check_region_allocation::<Propagator>(self.propagators.len())?;
         let mut out = self.clone();
         let offset = loops * (loops + 1) / 2;
         for (old, new) in self.propagators.iter().zip(&mut out.propagators) {
+            resources::checkpoint()?;
+            check_region_allocation::<Atom>(loops.saturating_mul(loops).saturating_mul(3))?;
             let q = matmul(
                 &matmul(&transposed, &quadratic_matrix(old, loops)),
                 transformation,
@@ -212,13 +246,17 @@ pub fn expand_region(
     region: &LoopRegion,
     order: usize,
 ) -> Result<RegionExpansion> {
+    resources::checkpoint()?;
     family.validate_integral(integral)?;
     if shifted.len() != family.propagators.len() || region.hard.len() != family.loops.len() {
         return Err(Error::InvalidInput("region mask dimensions".into()));
     }
-    if order > 100 {
-        return Err(Error::Limit("boundary integrand order exceeds 100".into()));
-    }
+    let coefficient_count = order
+        .checked_add(1)
+        .ok_or_else(|| Error::Limit("boundary integrand order overflow".into()))?;
+    let series_order = i64::try_from(coefficient_count)
+        .map_err(|_| Error::Limit("boundary integrand order exceeds i64".into()))?;
+    check_region_allocation::<Atom>(coefficient_count)?;
     let transformed = family.transform_loops(&region.transformation)?;
     let loops = family.loops.len();
     let mut coordinate_powers = Vec::new();
@@ -239,6 +277,7 @@ pub fn expand_region(
     let mut integrand = Atom::num(1);
     let mut scaling = 0_i64;
     for ((p, &nu), &q) in transformed.propagators.iter().zip(&integral.0).zip(shifted) {
+        resources::checkpoint()?;
         if nu == 0 {
             continue;
         }
@@ -266,8 +305,9 @@ pub fn expand_region(
         scaling += degree as i64 * nu as i64;
     }
     let expanded = integrand
-        .series(t, 0, (order + 1) as i64)
+        .series(t, 0, series_order)
         .map_err(|e| Error::Unsupported(e.to_string()))?;
+    resources::checkpoint()?;
     let hard = region.hard.iter().filter(|&&h| h).count() as i64;
     let eta_power = (Atom::num(hard)
         * (Atom::num((family.dimension, 2)) - Atom::var(family.epsilon))
@@ -277,13 +317,14 @@ pub fn expand_region(
     Ok(RegionExpansion {
         eta_power,
         coordinates,
-        coefficients: (0..=order)
+        coefficients: (0..coefficient_count)
             .map(|i| {
-                expanded
+                resources::checkpoint()?;
+                Ok(expanded
                     .coefficient(Rational::from(i as i64))
-                    .unwrap_or_default()
+                    .unwrap_or_default())
             })
-            .collect(),
+            .collect::<Result<_>>()?,
         jacobian_determinant: region.jacobian_determinant.clone(),
     })
 }

@@ -143,7 +143,7 @@ fn evaluate(digits: u32, order: usize, denominator: i64) -> Result<Vec<Vec<Compl
         digits: 20,
         guard_digits: digits - 20,
         series_order: order,
-        max_steps: 20000,
+        max_steps: Some(20000),
         ..Default::default()
     };
     let context = RunContext {

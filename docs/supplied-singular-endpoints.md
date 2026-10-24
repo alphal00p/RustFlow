@@ -15,6 +15,11 @@ same winding enters every fractional power and explicit logarithm. The caller
 must admit the physical approach; a local convergence disk does not establish
 global monodromy.
 
+`EndpointOptions::max_lift_dimension` is an optional diagnostic cap, defaulting
+to `None`. `series_order` remains the requested truncation order and must be at
+least eight. Process-memory and elapsed-time limits come from `FlowOptions` and
+remain shared across matching, endpoint preparation and refinement.
+
 The chart is pulled back exactly, with its Jacobian. The existing registered-root
 restriction of scalars and rational `PreparedFrobenius` produce the local basis.
 For a rational connection the root list is empty. Native Symbolica matrices

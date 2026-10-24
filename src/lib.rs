@@ -5,6 +5,7 @@ compile_error!(
     "`wasm` cannot be combined with `native` or the native `python` feature; use --no-default-features --features python_wasm"
 );
 pub use symbolica;
+pub use symbolica::utils::resources::{ResourceBudget, ResourceLimitError, ResourceLimits};
 mod algebra;
 pub mod algebraic;
 pub mod asymptotic;
@@ -86,6 +87,7 @@ mod root_path;
 mod sample_checkpoint;
 mod series_limits;
 pub mod singular_endpoint;
+mod stack_resources;
 #[cfg(feature = "automatic")]
 pub mod tensor;
 pub mod transport_cache;

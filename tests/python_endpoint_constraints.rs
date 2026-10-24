@@ -63,8 +63,8 @@ assert (select.component, select.power, select.log_power) == (0, zero, 1)
 assert relation.value == zero and relation.terms[0][1] == one
 constraints = Constraints([relation], 'explicit absence of the logarithmic mode')
 assert constraints.provenance == 'explicit absence of the logarithmic mode'
-assert constraints.max_dimension == 64 and constraints.max_order == 256
-assert constraints.max_coefficient_bits == 65536 and constraints.max_scalar_cells == 4000000
+assert constraints.max_dimension is None and constraints.max_order is None
+assert constraints.max_coefficient_bits is None and constraints.max_scalar_cells is None
 assert constraints.relations[0].terms[0][0].log_power == 1
 opts = integration.EvaluationOptions(digits=20, guard_digits=30, series_order=48)
 route = integration.EndpointRoute(z, {s:z}, half, homotopy='positive radial endpoint')
@@ -248,7 +248,7 @@ fn constrained_endpoint_stubs_use_native_exact_expression_types() {
         "constraints: typing.Optional[EndpointConstraints] = None",
         "power: Expression",
         "value: Expression",
-        "max_coefficient_bits: builtins.int = 65536",
+        "max_coefficient_bits: typing.Optional[builtins.int] = None",
         "terms: typing.Sequence[tuple[AsymptoticCoefficient, Expression]]",
     ] {
         assert!(text.contains(needle), "missing {needle}");

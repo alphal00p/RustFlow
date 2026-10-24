@@ -87,7 +87,7 @@ fn request(range: EpsilonRange, sheet: Option<RootSheet>) -> EndpointRequest {
         },
         range,
         options: EndpointOptions {
-            max_lift_dimension: 32,
+            max_lift_dimension: Some(32),
             series_order: 32,
         },
     }
@@ -682,7 +682,7 @@ fn wrong_root_germ_and_lift_limit_cannot_reuse_an_endpoint() {
     assert_eq!(cache.endpoint_entries().len(), 1);
     let mut limited = good;
     limited.chart.homotopy = "distinct request requiring preparation".into();
-    limited.options.max_lift_dimension = 1;
+    limited.options.max_lift_dimension = Some(1);
     assert!(matches!(
         flow.evaluate_endpoint(
             &mut cache,

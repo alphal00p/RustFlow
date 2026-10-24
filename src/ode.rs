@@ -114,9 +114,9 @@ pub(crate) fn polynomial_coefficient_terms(
                 "non-polynomial monomial {monomial}"
             )));
         };
-        if degree > 100_000 {
-            return Err(Error::Limit("polynomial degree exceeds 100000".into()));
-        }
+        degree
+            .checked_add(1)
+            .ok_or_else(|| Error::Limit("polynomial degree overflow".into()))?;
         terms.push((degree, coefficient));
     }
     Ok(terms)
@@ -130,7 +130,17 @@ pub(crate) fn polynomial_coefficients(
 ) -> Result<Vec<C>> {
     let mut result = vec![p.zero()];
     for (degree, coefficient) in polynomial_coefficient_terms(a, variable)? {
-        result.resize(result.len().max(degree + 1), p.zero());
+        symbolica::utils::resources::checkpoint()?;
+        let size = degree
+            .checked_add(1)
+            .ok_or_else(|| Error::Limit("polynomial degree overflow".into()))?;
+        let additional = size.saturating_sub(result.len());
+        symbolica::utils::resources::check_allocation(
+            (additional as u64).saturating_mul(
+                std::mem::size_of::<C>() as u64 + 2 * u64::from(p.bits).div_ceil(8),
+            ),
+        )?;
+        result.resize(result.len().max(size), p.zero());
         result[degree] = p.add(&result[degree], &p.eval(&coefficient, values)?);
     }
     while result.len() > 1 && result.last() == Some(&p.zero()) {
@@ -623,6 +633,7 @@ impl CompiledSystem {
         y[0] = values.to_vec();
         // With D_0 normalized to one, match each channel of D y' = A y.
         for k in 0..order {
+            symbolica::utils::resources::checkpoint()?;
             for e in 0..channels {
                 for (i, row) in rows.iter().enumerate() {
                     let index = e * n + i;
@@ -656,6 +667,18 @@ impl CompiledSystem {
     /// opposite side. The choice fixes the continuation homotopy.
     pub fn plan_path(&self, start: &C, end: &C, side: i64) -> Result<Vec<C>> {
         plan_path(self.p, &self.poles, start, end, side)
+    }
+
+    /// The ordinary planner has no subdivision-count ceiling. This optional
+    /// diagnostic does not replace exclusion or arithmetic-resolution checks.
+    pub fn plan_path_with_limit(
+        &self,
+        start: &C,
+        end: &C,
+        side: i64,
+        max_subdivisions: Option<usize>,
+    ) -> Result<Vec<C>> {
+        plan_path_with_limit(self.p, &self.poles, start, end, side, max_subdivisions)
     }
 
     pub fn transport(
@@ -724,12 +747,12 @@ pub(crate) trait SeriesSystem {
     fn precision(&self) -> Precision;
     fn dimension(&self) -> usize;
     fn poles(&self) -> &[C];
-    /// Owners with a bounded high-order chart implementation provide its
-    /// conservative workspace estimate. Other owners retain the former cap.
-    fn extended_order_workspace_bytes(&self, _order: usize) -> Result<u128> {
-        Err(Error::Unsupported(
-            "series orders above 10000 require an allocation estimate from this chart owner".into(),
-        ))
+    /// Owners may refine the generic coefficient-storage estimate with their
+    /// chart workspace. This estimate enforces only an explicit shared budget.
+    fn extended_order_workspace_bytes(&self, order: usize) -> Result<u128> {
+        Ok((order as u128 + 1)
+            .saturating_mul(self.dimension() as u128)
+            .saturating_mul(crate::series_limits::complex_bytes(self.precision())))
     }
     fn local_chart(
         &self,
@@ -1092,15 +1115,31 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         rejection: &mut String,
         diagnostics: &mut FlowDiagnostics,
     ) -> Result<CheckedStep<S::State>> {
+        symbolica::utils::resources::checkpoint()?;
         if let Some(candidate) = self.pade {
-            diagnostics.pade_trials += 1;
+            diagnostics.pade_trials = diagnostics
+                .pade_trials
+                .checked_add(1)
+                .ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
             match self.evaluate_candidate(step, rejection, Some(candidate)) {
                 Ok(Some(accepted)) => return Ok(Some(accepted)),
-                Err(Error::Cancelled) => return Err(Error::Cancelled),
+                Err(
+                    error @ (Error::Cancelled
+                    | Error::Resource(_)
+                    | Error::InvalidInput(_)
+                    | Error::Reduction(_)
+                    | Error::IncompleteReduction(_)
+                    | Error::Cache(_)
+                    | Error::Io(_)),
+                ) => return Err(error),
                 Err(error) => *rejection = error.to_string(),
                 Ok(None) => {}
             }
-            diagnostics.pade_fallbacks += 1;
+            symbolica::utils::resources::checkpoint()?;
+            diagnostics.pade_fallbacks = diagnostics
+                .pade_fallbacks
+                .checked_add(1)
+                .ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
             diagnostics.last_pade_fallback = Some(rejection.clone());
         }
         self.evaluate_candidate(step, rejection, None)
@@ -1271,14 +1310,11 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
     mut saved: Option<&mut Vec<TaylorSegment>>,
     mut observe: impl FnMut(&S::Chart, &S::State),
 ) -> Result<(FlowResult, S::State)> {
+    options.run_with_resources(|| {
     options.validate()?;
     context.cancellation.check()?;
     let p = system.precision();
-    let extended_workspace = if options.series_order > crate::series_limits::LEGACY_MAX_ORDER {
-        Some(system.extended_order_workspace_bytes(options.series_order)?)
-    } else {
-        None
-    };
+    let extended_workspace = system.extended_order_workspace_bytes(options.series_order)?;
     let mut retained_bytes = saved.as_ref().map_or(0, |segments| {
         segments
             .iter()
@@ -1291,13 +1327,11 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
             })
             .fold(0_u128, u128::saturating_add)
     });
-    if let Some(workspace) = extended_workspace {
-        crate::series_limits::admit_bytes(
-            options.series_order,
-            workspace.saturating_add(retained_bytes),
-            "Taylor transport with retained segments",
-        )?;
-    }
+    crate::series_limits::admit_bytes(
+        options.series_order,
+        extended_workspace.saturating_add(retained_bytes),
+        "Taylor transport with retained segments",
+    )?;
     if boundary.values.len() != system.dimension()
         || !p.finite(&boundary.point)
         || boundary.values.iter().any(|v| !p.finite(v))
@@ -1316,17 +1350,18 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
     for target in waypoints {
         let mut previous_step: Option<C> = None;
         while center != *target {
-            if let Some(workspace) = extended_workspace {
-                crate::series_limits::admit_bytes(
-                    options.series_order,
-                    workspace.saturating_add(retained_bytes),
-                    "Taylor transport with retained segments",
-                )?;
-            }
+            crate::series_limits::admit_bytes(
+                options.series_order,
+                extended_workspace.saturating_add(retained_bytes),
+                "Taylor transport with retained segments",
+            )?;
             context.emit(Progress::Step {
                 index: diagnostics.steps,
             })?;
-            if diagnostics.predicate_evaluations >= options.max_steps {
+            if options
+                .max_steps
+                .is_some_and(|limit| diagnostics.predicate_evaluations >= limit)
+            {
                 return Err(Error::Limit(
                     "Taylor continuation step budget exhausted".into(),
                 ));
@@ -1441,9 +1476,10 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                     context,
                 ) {
                     Ok(Some(candidate)) => Some(Arc::new(candidate)),
-                    Err(Error::Cancelled) => return Err(Error::Cancelled),
+                    Err(error @ (Error::Cancelled | Error::Resource(_) | Error::InvalidInput(_) | Error::Reduction(_) | Error::IncompleteReduction(_) | Error::Cache(_) | Error::Io(_))) => return Err(error),
                     result => {
-                        diagnostics.pade_fallbacks += 1;
+                        context.cancellation.check()?;
+                        diagnostics.pade_fallbacks = diagnostics.pade_fallbacks.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
                         diagnostics.last_pade_fallback = Some(match result {
                             Err(error) => error.to_string(),
                             _ => "source owner supports Taylor candidates only".into(),
@@ -1468,29 +1504,31 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                 pade: pade.as_deref(),
             };
             let bracketed = options.step_size_strategy == StepSizeStrategy::Bracketed;
-            let mut accepted = None;
             let mut failed_upper = None;
             let mut rejection = String::new();
-            let mut first_rejection = None;
-            for _ in 0..32 {
+            let mut accepted = loop {
                 context.cancellation.check()?;
-                if diagnostics.predicate_evaluations >= options.max_steps {
+                if options
+                    .max_steps
+                    .is_some_and(|limit| diagnostics.predicate_evaluations >= limit)
+                {
                     return Err(Error::Limit(
                         "Taylor continuation predicate budget exhausted".into(),
                     ));
                 }
-                diagnostics.predicate_evaluations += 1;
+                diagnostics.predicate_evaluations = diagnostics.predicate_evaluations.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
                 if let Some(candidate) = trial.evaluate(&step, &mut rejection, &mut diagnostics)? {
-                    accepted = Some(candidate);
-                    break;
+                    break candidate;
                 }
-                first_rejection.get_or_insert_with(|| rejection.clone());
                 if bracketed {
                     failed_upper = Some(step.clone());
                 }
                 step = p.scale(&step, 1, 2);
-                diagnostics.rejected_steps += 1;
-                if diagnostics.predicate_evaluations >= options.max_steps {
+                diagnostics.rejected_steps = diagnostics.rejected_steps.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
+                if options
+                    .max_steps
+                    .is_some_and(|limit| diagnostics.predicate_evaluations >= limit)
+                {
                     return Err(Error::Limit(format!(
                         "Taylor continuation step budget exhausted ({} accepted, {} rejected, {} predicates) at {center} toward {target}",
                         diagnostics.steps,
@@ -1498,41 +1536,39 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                         diagnostics.predicate_evaluations,
                     )));
                 }
-            }
-            let mut accepted = accepted.ok_or_else(|| Error::Accuracy(format!(
-                "Taylor tail or local chart did not meet tolerance after 32 local rejections ({} accepted, {} rejected, {} predicates overall) at {center} toward {target}; first rejection: {}; last rejection: {rejection}",
-                diagnostics.steps, diagnostics.rejected_steps, diagnostics.predicate_evaluations,
-                first_rejection.as_deref().unwrap_or("unavailable"),
-            )))?;
+            };
             if let Some(mut upper) = failed_upper {
                 // This is only a bounded proposal search, not a monotonicity
                 // assumption. Every selected trial independently passes all checks.
                 for _ in 0..2 {
                     context.cancellation.check()?;
-                    if diagnostics.predicate_evaluations >= options.max_steps {
+                    if options
+                        .max_steps
+                        .is_some_and(|limit| diagnostics.predicate_evaluations >= limit)
+                    {
                         break;
                     }
                     let proposal = p.scale(&p.add(&step, &upper), 1, 2);
                     if proposal == step || proposal == upper {
                         break;
                     }
-                    diagnostics.predicate_evaluations += 1;
+                    diagnostics.predicate_evaluations = diagnostics.predicate_evaluations.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
                     if let Some(candidate) =
                         trial.evaluate(&proposal, &mut rejection, &mut diagnostics)?
                     {
                         accepted = candidate;
                         step = proposal;
-                        diagnostics.superseded_successes += 1;
+                        diagnostics.superseded_successes = diagnostics.superseded_successes.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
                     } else {
                         upper = proposal;
-                        diagnostics.rejected_steps += 1;
+                        diagnostics.rejected_steps = diagnostics.rejected_steps.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
                     }
                 }
             }
             context.cancellation.check()?;
             let (next, next_values, next_state, conditioning_digits, used_pade) = accepted;
             if used_pade {
-                diagnostics.pade_steps += 1;
+                diagnostics.pade_steps = diagnostics.pade_steps.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
             }
             diagnostics.conditioning_digits = Some(
                 diagnostics
@@ -1559,7 +1595,7 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
             }
             previous_step = Some(step);
             center = next;
-            diagnostics.steps += 1;
+            diagnostics.steps = diagnostics.steps.checked_add(1).ok_or_else(|| Error::Limit("continuation diagnostic counter overflow".into()))?;
         }
     }
     Ok((
@@ -1570,6 +1606,8 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
         },
         state,
     ))
+
+    })
 }
 
 pub(crate) fn plan_path(
@@ -1579,6 +1617,18 @@ pub(crate) fn plan_path(
     end: &C,
     side: i64,
 ) -> Result<Vec<C>> {
+    plan_path_with_limit(p, poles, start, end, side, None)
+}
+
+fn plan_path_with_limit(
+    p: Precision,
+    poles: &[C],
+    start: &C,
+    end: &C,
+    side: i64,
+    max_subdivisions: Option<usize>,
+) -> Result<Vec<C>> {
+    symbolica::utils::resources::checkpoint()?;
     if ![-1, 1].contains(&side) || !p.finite(start) || !p.finite(end) {
         return Err(Error::InvalidInput(
             "invalid contour endpoints or side".into(),
@@ -1606,13 +1656,18 @@ pub(crate) fn plan_path(
     }
     let mut segments = vec![(start.clone(), end.clone())];
     let mut output = Vec::new();
-    let mut iterations = 0;
+    let mut iterations = 0_usize;
     while let Some((a, b)) = segments.pop() {
-        iterations += 1;
-        if iterations > 4096 {
-            return Err(Error::Limit(
-                "contour planning exceeds 4096 subdivisions".into(),
-            ));
+        symbolica::utils::resources::checkpoint()?;
+        if let Some(limit) = max_subdivisions {
+            if iterations >= limit {
+                return Err(Error::Limit(
+                    "contour subdivision diagnostic exhausted".into(),
+                ));
+            }
+            iterations = iterations
+                .checked_add(1)
+                .ok_or_else(|| Error::Limit("contour diagnostic count overflow".into()))?;
         }
         let delta = p.sub(&b, &a);
         let length = p.norm(&delta);
@@ -1640,6 +1695,18 @@ pub(crate) fn plan_path(
                 pole,
                 &p.mul(&normal, &C::new(radius.clone() * 2, p.real(0))),
             );
+            if !p.finite(&waypoint) {
+                return Err(Error::Numerical("nonfinite contour waypoint".into()));
+            }
+            if waypoint == a || waypoint == b {
+                return Err(Error::InsufficientPrecision {
+                    minimum_bits: p.bits.saturating_mul(2),
+                    context: "contour subdivision cannot resolve a new waypoint".into(),
+                });
+            }
+            symbolica::utils::resources::check_allocation(
+                2 * std::mem::size_of::<(C, C)>() as u64,
+            )?;
             segments.push((waypoint.clone(), b));
             segments.push((a, waypoint));
         } else {
@@ -1930,3 +1997,6 @@ mod prepared_tests;
 #[cfg(test)]
 #[path = "ode/high_order_tests.rs"]
 mod high_order_tests;
+#[cfg(test)]
+#[path = "ode/step_size_tests.rs"]
+mod step_size_tests;

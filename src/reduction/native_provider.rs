@@ -6,7 +6,8 @@
 //! proof engine, limits, serializer and evidence policy all belong in that identity.
 //! None means unsupported, never zero. Errors and cancellation are not swallowed.
 use super::{
-    NativeIdentityBank, Reduction, ReductionBackend, RustRedBackend, SeededRustRedBackend,
+    NativeIdentityBank, NativeReductionScope, Reduction, ReductionBackend, RustRedBackend,
+    SeededRustRedBackend,
 };
 use crate::{Error, Integral, IntegralFamily, Result, RunContext};
 use std::sync::Arc;
@@ -14,8 +15,9 @@ use symbolica::prelude::*;
 
 pub trait NativeIdentityProvider: Send + Sync {
     fn identity(&self) -> &str;
-    /// A per-call budget, separate from visited/search accounting. Exhaustion falls
-    /// back to ordinary reduction; persistent producer caches have their own bounds.
+    /// Finite optional-query budget, separate from visited/search accounting.
+    /// Exhaustion falls back to ordinary reduction rather than aborting it;
+    /// persistent producer caches have their own bounds.
     fn max_calls(&self) -> usize;
     fn provide(
         &self,
@@ -53,6 +55,7 @@ impl ProvidedRustRedBackend {
         seed: Option<Arc<NativeIdentityBank>>,
         provider: Arc<dyn NativeIdentityProvider>,
     ) -> Result<Self> {
+        symbolica::utils::resources::checkpoint()?;
         if provider.identity().is_empty() || provider.max_calls() == 0 {
             return Err(Error::InvalidInput(
                 "provider identity and positive call budget required".into(),
@@ -86,9 +89,11 @@ impl ReductionBackend for ProvidedRustRedBackend {
             targets,
             None,
             context,
-            None,
-            self.seed.as_deref(),
-            Some(self.provider.as_ref()),
+            NativeReductionScope {
+                cuts: None,
+                seed: self.seed.as_deref(),
+                provider: Some(self.provider.as_ref()),
+            },
         )
     }
     fn reduce_at_epsilon(

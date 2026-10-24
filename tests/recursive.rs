@@ -580,7 +580,7 @@ fn physical_paper_subsector_closes_with_deeper_ibps_and_stable_phase() {
     let target = Integral(vec![1, 0, 1, 0, 1, 0, 1, 0, 0]);
     let backend = RustRedBackend {
         max_depth: 3,
-        max_targets: 32768,
+        max_targets: Some(32768),
         max_sector_batch: 32,
         ..Default::default()
     };

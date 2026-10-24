@@ -27,10 +27,10 @@ pub fn fit_epsilon(
     last: i32,
     p: Precision,
 ) -> Result<LaurentExpansion> {
-    if last < leading
-        || samples.len() != values.len()
-        || samples.len() < (last as i64 - leading as i64 + 1) as usize
-    {
+    symbolica::utils::resources::checkpoint()?;
+    let requested = usize::try_from(i64::from(last) - i64::from(leading) + 1)
+        .map_err(|_| Error::InvalidInput("epsilon fit power range".into()))?;
+    if last < leading || samples.len() != values.len() || samples.len() < requested {
         return Err(Error::InvalidInput(
             "epsilon fit dimensions or power range".into(),
         ));
@@ -40,6 +40,16 @@ pub fn fit_epsilon(
             "epsilon samples must be nonzero".into(),
         ));
     }
+    let degree = samples.len() - 1;
+    u16::try_from(degree).map_err(|_| {
+        Error::Limit("epsilon interpolation degree exceeds u16 representation".into())
+    })?;
+    crate::series_limits::admit_complex(
+        p,
+        degree,
+        (samples.len() as u128).saturating_mul(4),
+        "epsilon interpolation workspace",
+    )?;
     let mut sorted = samples.to_vec();
     sorted.sort();
     sorted.dedup();
@@ -50,11 +60,6 @@ pub fn fit_epsilon(
     }
     if values.iter().any(|v| !p.finite(v)) {
         return Err(Error::InvalidInput("nonfinite epsilon sample".into()));
-    }
-    if samples.len() > 10000 {
-        return Err(Error::Limit(
-            "epsilon reconstruction exceeds 10000 samples".into(),
-        ));
     }
     // Normalize exact coordinates before converting to the numerical field.
     // Small regulator radii must not create a badly scaled interpolation basis.
@@ -71,8 +76,11 @@ pub fn fit_epsilon(
         .unwrap();
     let coordinates = samples
         .iter()
-        .map(|r| p.rational(&(r / &radius)))
-        .collect::<Vec<_>>();
+        .map(|r| {
+            symbolica::utils::resources::checkpoint()?;
+            Ok(p.rational(&(r / &radius)))
+        })
+        .collect::<Result<Vec<_>>>()?;
     if coordinates.iter().any(|value| !p.finite(value)) {
         return Err(Error::Numerical(
             "nonfinite normalized epsilon interpolation coordinate".into(),
@@ -110,9 +118,10 @@ pub fn fit_epsilon(
         .iter()
         .zip(values)
         .map(|(eps, value)| {
-            prototype.constant(p.mul(value, &p.powi(&p.rational(eps), -i64::from(leading))))
+            symbolica::utils::resources::checkpoint()?;
+            Ok(prototype.constant(p.mul(value, &p.powi(&p.rational(eps), -i64::from(leading)))))
         })
-        .collect::<Vec<_>>();
+        .collect::<Result<Vec<_>>>()?;
     if regular_values
         .iter()
         .flat_map(|polynomial| polynomial.coefficients.iter())
@@ -123,10 +132,12 @@ pub fn fit_epsilon(
         ));
     }
     let fitted = MultivariatePolynomial::newton_interpolation(&coordinates, &regular_values, 0);
+    symbolica::utils::resources::checkpoint()?;
     let mut coefficients = (leading..=last)
         .map(|k| (k, p.zero()))
         .collect::<BTreeMap<_, _>>();
     for term in &fitted {
+        symbolica::utils::resources::checkpoint()?;
         let offset = i32::from(term.exponents[0]);
         if i64::from(offset) <= i64::from(last) - i64::from(leading) {
             let coefficient = p.div(
@@ -141,6 +152,7 @@ pub fn fit_epsilon(
             coefficients.insert(leading + offset, coefficient);
         }
     }
+    symbolica::utils::resources::checkpoint()?;
     Ok(LaurentExpansion {
         coefficients,
         verified_digits: None,
@@ -153,15 +165,27 @@ pub fn fit_epsilon(
 }
 
 pub fn epsilon_samples(count: usize, denominator: i64) -> Result<Vec<Rational>> {
-    if count == 0 || count > 10000 || denominator <= 0 {
+    if count == 0 || denominator <= 0 {
         return Err(Error::InvalidInput("epsilon sampling parameters".into()));
     }
+    symbolica::utils::resources::checkpoint()?;
+    let count_i64 =
+        i64::try_from(count).map_err(|_| Error::Limit("epsilon count overflow".into()))?;
     let total = denominator
-        .checked_mul(count as i64)
+        .checked_mul(count_i64)
         .ok_or_else(|| Error::InvalidInput("epsilon denominator overflow".into()))?;
-    Ok((1..=count)
+    let bytes = count
+        .checked_mul(std::mem::size_of::<Rational>())
+        .and_then(|bytes| u64::try_from(bytes).ok())
+        .ok_or_else(|| Error::Limit("epsilon sample storage overflow".into()))?;
+    symbolica::utils::resources::check_allocation(bytes)?;
+    (1..=count)
         .map(|i| Rational::from((i as i64, total)))
-        .collect())
+        .map(|sample| {
+            symbolica::utils::resources::checkpoint()?;
+            Ok(sample)
+        })
+        .collect()
 }
 
 /// Balanced real nodes within an arbitrary exact positive regulator radius.
@@ -169,14 +193,22 @@ pub fn epsilon_samples(count: usize, denominator: i64) -> Result<Vec<Rational>> 
 /// analytic regulator samples, not different physical i0 prescriptions. Avoid
 /// zero and retain exact rational coordinates for reduction and independent fits.
 pub fn symmetric_epsilon_samples(count: usize, radius: &Rational) -> Result<Vec<Rational>> {
-    if count == 0 || count > 10000 || *radius <= Rational::zero() {
+    if count == 0 || *radius <= Rational::zero() {
         return Err(Error::InvalidInput("epsilon sampling parameters".into()));
     }
-    let half = count.div_ceil(2) as i64;
-    Ok((0..count)
+    symbolica::utils::resources::checkpoint()?;
+    let half = i64::try_from(count.div_ceil(2))
+        .map_err(|_| Error::Limit("epsilon count overflow".into()))?;
+    let bytes = count
+        .checked_mul(std::mem::size_of::<Rational>())
+        .and_then(|bytes| u64::try_from(bytes).ok())
+        .ok_or_else(|| Error::Limit("epsilon sample storage overflow".into()))?;
+    symbolica::utils::resources::check_allocation(bytes)?;
+    (0..count)
         .map(|index| {
+            symbolica::utils::resources::checkpoint()?;
             let magnitude = (index / 2 + 1) as i64;
-            radius
+            Ok(radius
                 * &Rational::from((
                     if index % 2 == 0 {
                         magnitude
@@ -184,12 +216,12 @@ pub fn symmetric_epsilon_samples(count: usize, radius: &Rational) -> Result<Vec<
                         -magnitude
                     },
                     half,
-                ))
+                )))
         })
-        .collect())
+        .collect()
 }
 
-/// A bounded-size proposal for independently refined numerical Laurent fits.
+/// A sample-size proposal for independently refined numerical Laurent fits.
 /// The radius balances omitted-order suppression against the guard precision
 /// needed to extract the requested coefficients. It is not an accuracy claim.
 #[derive(Clone, Debug)]
@@ -207,31 +239,49 @@ impl EpsilonFitProfile {
         last: i32,
         refinement: usize,
     ) -> Result<Self> {
-        if digits == 0 || last < leading || refinement > 16 {
+        if digits == 0 || last < leading {
             return Err(Error::InvalidInput("epsilon fit profile parameters".into()));
         }
+        symbolica::utils::resources::checkpoint()?;
+        let overflow = || Error::Limit("epsilon fit profile arithmetic overflow".into());
+        let refinement = u64::try_from(refinement).map_err(|_| overflow())?;
         let width = (i64::from(last) - i64::from(leading) + 1) as u64;
-        let initial_count = (2 * width).max(32);
-        let count = initial_count + 4 * refinement as u64;
-        if count > 10000 {
-            return Err(Error::Limit(
-                "epsilon reconstruction exceeds 10000 samples".into(),
-            ));
-        }
+        let initial_count = width.checked_mul(2).ok_or_else(overflow)?.max(32);
+        let count = refinement
+            .checked_mul(4)
+            .and_then(|extra| initial_count.checked_add(extra))
+            .ok_or_else(overflow)?;
+        u16::try_from(count - 1).map_err(|_| {
+            Error::Limit("epsilon interpolation degree exceeds u16 representation".into())
+        })?;
         let radius_digits = (u64::from(digits) + 64)
             .div_ceil(initial_count - width)
             .max(3)
-            + refinement as u64;
-        let fit_guard = (width - 1) * radius_digits + 64 + 32 * refinement as u64;
-        let working_digits = u64::from(digits) + fit_guard.max(u64::from(guard_digits));
+            .checked_add(refinement)
+            .ok_or_else(overflow)?;
+        let fit_guard = (width - 1)
+            .checked_mul(radius_digits)
+            .and_then(|guard| guard.checked_add(64))
+            .and_then(|guard| guard.checked_add(refinement.checked_mul(32)?))
+            .ok_or_else(overflow)?;
+        let working_digits = u64::from(digits)
+            .checked_add(fit_guard.max(u64::from(guard_digits)))
+            .ok_or_else(overflow)?;
         let working_digits = u32::try_from(working_digits)
             .map_err(|_| Error::Limit("epsilon fit precision overflow".into()))?;
         // Validate the backend's representable bit count before constructing
         // a potentially large exact denominator.
         Precision::decimal(working_digits)?;
+        let bytes = radius_digits
+            .checked_mul(4)
+            .map(|bits| bits.div_ceil(8))
+            .and_then(|bytes| bytes.checked_add(64))
+            .ok_or_else(overflow)?;
+        symbolica::utils::resources::check_allocation(bytes)?;
         let radius = Rational::one() / Rational::from(Integer::from(10).pow(radius_digits));
+        let count = usize::try_from(count).map_err(|_| overflow())?;
         Ok(Self {
-            samples: symmetric_epsilon_samples(count as usize, &radius)?,
+            samples: symmetric_epsilon_samples(count, &radius)?,
             radius,
             working_digits,
         })
@@ -243,11 +293,35 @@ mod tests {
     use super::*;
 
     #[test]
+    fn sampling_and_profiles_use_resources_instead_of_retired_counts() -> Result<()> {
+        let radius = Rational::from((1, 100));
+        assert_eq!(symmetric_epsilon_samples(10_001, &radius)?.len(), 10_001);
+        let profile = EpsilonFitProfile::new(20, 40, 0, 0, 17)?;
+        assert_eq!(profile.samples.len(), 100);
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(1),
+                ..Default::default()
+            },
+            || Ok(0),
+        );
+        assert!(matches!(
+            budget.run(|| symmetric_epsilon_samples(10_001, &radius)),
+            Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+        ));
+        assert!(matches!(
+            EpsilonFitProfile::new(20, 40, 0, 32_768, 0),
+            Err(Error::Limit(_))
+        ));
+        Ok(())
+    }
+
+    #[test]
     fn arbitrary_rational_sampling_preserves_tiny_distinct_balanced_nodes() {
         let radius = Rational::one() / Rational::from(Integer::from(10).pow(1000));
         let samples = symmetric_epsilon_samples(32, &radius).unwrap();
         assert_eq!(samples.len(), 32);
-        for pair in samples.chunks_exact(2) {
+        for pair in samples.as_chunks::<2>().0 {
             assert_eq!(pair[0], -pair[1].clone());
             assert!(pair[0] > Rational::zero() && pair[0] <= radius);
         }

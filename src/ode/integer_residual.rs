@@ -17,16 +17,16 @@ use symbolica::prelude::*;
 type ExactPolynomial = UnivariatePolynomial<FloatField<Gaussian>>;
 type IntegerPolynomial = UnivariatePolynomial<Z>;
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Default)]
 pub(crate) struct Limits {
-    input_bits: u64,
-    integer_bits: u64,
-    work: u64,
-    bytes: u64,
-    shifted_degree: usize,
-    degree: usize,
-    components: usize,
-    order: usize,
+    input_bits: Option<u64>,
+    integer_bits: Option<u64>,
+    work: Option<u64>,
+    bytes: Option<u64>,
+    shifted_degree: Option<usize>,
+    degree: Option<usize>,
+    components: Option<usize>,
+    order: Option<usize>,
 }
 
 #[cfg(test)]
@@ -36,20 +36,6 @@ mod tests;
 #[cfg(test)]
 #[path = "integer_residual_bench.rs"]
 mod bench;
-impl Default for Limits {
-    fn default() -> Self {
-        Self {
-            input_bits: 4096,
-            integer_bits: 131072,
-            work: 100_000_000,
-            bytes: 256 * 1024 * 1024,
-            shifted_degree: 24,
-            degree: 1024,
-            components: 4096,
-            order: 1024,
-        }
-    }
-}
 fn limit(message: &str) -> Error {
     Error::Limit(format!("integer residual trial: {message}"))
 }
@@ -83,7 +69,7 @@ struct Budget<'a> {
 impl Budget<'_> {
     fn charge(&mut self, terms: usize, bits: u64, operations: u64) -> Result<()> {
         self.cancellation.check()?;
-        if bits > self.limits.integer_bits {
+        if self.limits.integer_bits.is_some_and(|limit| bits > limit) {
             return Err(limit("intermediate coefficient height"));
         }
         let words = bits.div_ceil(64).max(1);
@@ -92,17 +78,20 @@ impl Budget<'_> {
         self.bytes = self
             .bytes
             .saturating_add((terms as u64).saturating_mul(bits.div_ceil(8).saturating_add(64)));
-        if self.work > self.limits.work {
+        if self.limits.work.is_some_and(|limit| self.work > limit) {
             return Err(limit("cumulative native work estimate"));
         }
-        if self.bytes > self.limits.bytes {
+        if self.limits.bytes.is_some_and(|limit| self.bytes > limit) {
             return Err(limit("cumulative allocation estimate"));
         }
+        symbolica::utils::resources::check_allocation(
+            (terms as u64).saturating_mul(bits.div_ceil(8).saturating_add(64)),
+        )?;
         Ok(())
     }
     fn check(&self, bits: u64) -> Result<()> {
         self.cancellation.check()?;
-        if bits > self.limits.integer_bits {
+        if self.limits.integer_bits.is_some_and(|limit| bits > limit) {
             Err(limit("observed coefficient height"))
         } else {
             Ok(())
@@ -311,15 +300,25 @@ fn selected(
     cancellation: &CancellationToken,
 ) -> Result<()> {
     cancellation.check()?;
-    if coefficients.len() > limits.order || size > limits.components {
+    if limits.order.is_some_and(|limit| coefficients.len() > limit)
+        || limits.components.is_some_and(|limit| size > limit)
+    {
         return Err(limit("solution dimensions"));
     }
     for value in std::iter::once(center).chain(coefficients.iter().flatten()) {
         cancellation.check()?;
-        if [&value.re, &value.im]
+        // Rationalizing a stored Float materializes its exponent as integer
+        // limbs. Check headroom before conversion when diagnostics are off too.
+        let bytes = [&value.re, &value.im]
             .into_iter()
-            .any(|a| float_height(a) > limits.input_bits)
-        {
+            .map(|value| float_height(value).div_ceil(8).saturating_mul(2))
+            .fold(0_u64, u64::saturating_add);
+        symbolica::utils::resources::check_allocation(bytes)?;
+        if [&value.re, &value.im].into_iter().any(|a| {
+            limits
+                .input_bits
+                .is_some_and(|limit| float_height(a) > limit)
+        }) {
             return Err(limit("stored dyadic representation"));
         }
     }
@@ -330,16 +329,18 @@ fn selected(
             .chain(row.denominator_factors.iter().map(|(a, _)| a))
         {
             cancellation.check()?;
-            if a.len().saturating_sub(1)
-                > if shifted {
-                    limits.shifted_degree
-                } else {
-                    limits.degree
-                }
+            if (if shifted {
+                limits.shifted_degree
+            } else {
+                limits.degree
+            })
+            .is_some_and(|limit| a.len().saturating_sub(1) > limit)
             {
                 return Err(limit("source shift degree"));
             }
-            if a.iter().any(|a| height(a) > limits.input_bits) {
+            if a.iter()
+                .any(|a| limits.input_bits.is_some_and(|limit| height(a) > limit))
+            {
                 return Err(limit("exact source coefficient height"));
             }
         }

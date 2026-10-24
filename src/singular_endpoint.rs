@@ -94,26 +94,22 @@ impl EndpointChart {
 /// Explicit resource limits; these do not declare achieved accuracy.
 #[derive(Clone, Debug)]
 pub struct EndpointOptions {
-    pub max_lift_dimension: usize,
+    pub max_lift_dimension: Option<usize>,
     pub series_order: usize,
 }
 impl Default for EndpointOptions {
     fn default() -> Self {
         Self {
-            max_lift_dimension: 256,
+            max_lift_dimension: None,
             series_order: 64,
         }
     }
 }
 impl EndpointOptions {
     pub(crate) fn validate(&self) -> Result<()> {
-        if self.max_lift_dimension == 0
-            || self.max_lift_dimension > 4096
-            || self.series_order < 8
-            || self.series_order > 10000
-        {
+        if self.max_lift_dimension == Some(0) || self.series_order < 8 {
             return Err(Error::InvalidInput(
-                "endpoint limits require dimension 1..4096 and order 8..10000".into(),
+                "endpoint diagnostic dimension must be positive and series order at least 8".into(),
             ));
         }
         Ok(())
@@ -284,12 +280,19 @@ impl EndpointRequest {
             .dimension()
             .checked_mul(count)
             .ok_or_else(|| Error::Limit("endpoint physical hierarchy dimension overflow".into()))?;
-        if physical > self.options.max_lift_dimension {
+        if let Some(limit) = self.options.max_lift_dimension
+            && physical > limit
+        {
             return Err(Error::Limit(format!(
-                "endpoint physical hierarchy dimension {physical} exceeds lift limit {} before source pullback",
-                self.options.max_lift_dimension
+                "endpoint physical hierarchy dimension {physical} exceeds lift limit {limit} before source pullback"
             )));
         }
+        let bytes = physical
+            .checked_mul(physical)
+            .and_then(|cells| cells.checked_mul(std::mem::size_of::<Atom>()))
+            .and_then(|bytes| u64::try_from(bytes).ok())
+            .ok_or_else(|| Error::Limit("endpoint hierarchy storage overflow".into()))?;
+        symbolica::utils::resources::check_allocation(bytes)?;
         Ok(count)
     }
 }
@@ -333,12 +336,13 @@ impl PreparedEndpoint {
         if let Some(constraints) = constraints {
             constraints.preflight(identity, request.range, context)?;
         }
-        let max_dimension = constraints.map_or(request.options.max_lift_dimension, |constraints| {
-            request
-                .options
-                .max_lift_dimension
-                .min(constraints.limits.max_dimension)
-        });
+        let max_dimension = match (
+            request.options.max_lift_dimension,
+            constraints.and_then(|constraints| constraints.limits.max_dimension),
+        ) {
+            (Some(left), Some(right)) => Some(left.min(right)),
+            (left, right) => left.or(right),
+        };
         let prepared = source.prepare_frobenius(max_dimension, context)?;
         if constraints.is_none() {
             prepared.rational_preparation().admit_endpoint_support(
@@ -442,7 +446,14 @@ impl PreparedEndpoint {
         let mut profiles = Vec::new();
         let mut last =
             "endpoint precision/order profiles did not establish requested accuracy".to_owned();
-        for attempt in 0..=options.max_precision_attempts {
+        for attempt in 0_usize.. {
+            symbolica::utils::resources::checkpoint()?;
+            if options
+                .max_precision_attempts
+                .is_some_and(|limit| attempt > limit)
+            {
+                break;
+            }
             context.cancellation.check()?;
             let p = Precision::decimal(digits)?;
             let order = self
@@ -454,8 +465,7 @@ impl PreparedEndpoint {
                         .checked_mul(32)
                         .ok_or_else(|| Error::Limit("endpoint refinement order overflow".into()))?,
                 )
-                .filter(|order| *order <= 10000)
-                .ok_or_else(|| Error::Limit("endpoint refinement order exceeds 10000".into()))?;
+                .ok_or_else(|| Error::Limit("endpoint refinement order overflow".into()))?;
             let parameter = CachedPoint::Exact(BTreeMap::from([(
                 self.request.chart.path.parameter,
                 self.request.chart.matching_parameter.clone(),

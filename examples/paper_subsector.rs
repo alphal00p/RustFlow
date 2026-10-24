@@ -36,8 +36,7 @@ fn main() -> Result<()> {
                 .parse::<usize>()
                 .map_err(|e| Error::InvalidInput(e.to_string()))
         })
-        .transpose()?
-        .unwrap_or(32768);
+        .transpose()?;
     let max_backward_frontier = args
         .iter()
         .position(|s| s == "--max-backward-frontier")

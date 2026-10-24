@@ -17,26 +17,27 @@ use std::collections::BTreeMap;
 use std::sync::Arc;
 use symbolica::prelude::*;
 
-const SYSTEMS: &str = include_str!("../../fixtures/gg-hg/integral-systems.json");
-const CONFIGURATIONS: &str = include_str!("../../fixtures/gg-hg/physical-configurations.json");
-const PHYSICAL_MAP: &str = include_str!("../../fixtures/gg-hg/plugin-physical-map.json");
 // Version mathematical conventions explicitly: changes to normalization,
 // basis interpretation or root sheets must change this tag or the schema.
 const MATHEMATICS_SCHEMA: &str = "symbolica-hep-integration:higgs-jet-mathematics:v1";
 const MATHEMATICS_CONVENTIONS: &str = "D=4-2*eps;+i0;measure=exp(2*eps*EulerGamma);mV2=mu2=1;basis=ordered-plugin-canonical;root-sheets=principal-or-opposite";
 
 fn mathematical_fingerprint(kind: PluginFamilyKind) -> String {
+    let systems = super::data::get("integral-systems.json").expect("loaded canonical system");
+    let physical_map = super::data::get("plugin-physical-map.json").expect("loaded physical map");
+    let configurations =
+        super::data::get("physical-configurations.json").expect("loaded configurations");
     let mut digest = blake3::Hasher::new();
     for field in [
         MATHEMATICS_SCHEMA,
         kind.id(),
         MATHEMATICS_CONVENTIONS,
         "integral-systems.json",
-        SYSTEMS,
+        &systems,
         "plugin-physical-map.json",
-        PHYSICAL_MAP,
+        &physical_map,
         "physical-configurations.json",
-        CONFIGURATIONS,
+        &configurations,
     ] {
         digest.update(&(field.len() as u64).to_le_bytes());
         digest.update(field.as_bytes());
@@ -141,9 +142,10 @@ impl HiggsJetIntegralSystem {
     }
 
     pub fn load(kind: PluginFamilyKind, namespace: &str) -> Result<Self> {
+        super::data::get("physical-configurations.json")?;
         let map = PluginBasisMap::load(kind, namespace)?;
-        let document: Systems =
-            serde_json::from_str(SYSTEMS).map_err(|e| Error::InvalidInput(e.to_string()))?;
+        let document: Systems = serde_json::from_str(&super::data::get("integral-systems.json")?)
+            .map_err(|e| Error::InvalidInput(e.to_string()))?;
         if document.schema != "higgs-jet-integral-systems-v1" {
             return Err(Error::InvalidInput(
                 "incompatible Higgs-jet system data".into(),
@@ -232,7 +234,8 @@ impl HiggsJetIntegralSystem {
     /// W/Z mass ratios at one common physical point. No numerical seeds are read.
     pub fn configurations(&self, namespace: &str) -> Result<Vec<HiggsJetConfiguration>> {
         let document: Configurations =
-            serde_json::from_str(CONFIGURATIONS).map_err(|e| Error::InvalidInput(e.to_string()))?;
+            serde_json::from_str(&super::data::get("physical-configurations.json")?)
+                .map_err(|e| Error::InvalidInput(e.to_string()))?;
         if document.schema != "higgs-jet-physical-configurations-v1" {
             return Err(Error::InvalidInput(
                 "incompatible physical configurations".into(),

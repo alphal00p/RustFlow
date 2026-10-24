@@ -7,7 +7,7 @@ use crate::cuts::{CutDefinition, CutFamily, FutureTimelikeChannel, LoopPrescript
 use crate::family::substitute;
 use crate::{
     ComplexFloat as C, Error, FlowOptions, Integral, KinematicPoint, LaurentExpansion, Precision,
-    Progress, ReductionBackend, Result, RunContext,
+    Progress, ReductionBackend, ResourceBudget, Result, RunContext,
 };
 use feynkit_kinematics::Kinematics;
 use rayon::prelude::*;
@@ -481,6 +481,7 @@ impl PreparedPhaseSpaceTerminal {
         context: &RunContext,
     ) -> Result<Self> {
         options.validate()?;
+        options.run_with_resources(|| {
         context.cancellation.check()?;
         if targets.is_empty() {
             return Err(Error::InvalidInput("empty phase-space target list".into()));
@@ -564,6 +565,8 @@ impl PreparedPhaseSpaceTerminal {
             geometry,
             leading,
         })
+
+        })
     }
     fn evaluate(
         &self,
@@ -572,52 +575,54 @@ impl PreparedPhaseSpaceTerminal {
         context: &RunContext,
     ) -> Result<Vec<C>> {
         options.validate()?;
-        context.cancellation.check()?;
-        if options.dimension != self.family.family().dimension {
-            return Err(Error::InvalidInput(
-                "prepared phase-space dimension differs from evaluation options".into(),
-            ));
-        }
-        if epsilon.is_zero() {
-            return Err(Error::InvalidInput(
-                "epsilon samples must be nonzero".into(),
-            ));
-        }
-        let p = Precision::decimal(options.digits + options.guard_digits)?;
-        let rules = BTreeMap::from([(
-            Atom::var(self.family.family().epsilon),
-            Atom::num(epsilon.clone()),
-        )]);
-        for condition in &self.nonzero_conditions {
-            let condition = substitute(condition, &rules).together().cancel();
-            if condition.is_zero() {
-                return Err(Error::Numerical(
-                    "cut reduction nonzero condition vanishes at the epsilon sample".into(),
+        options.run_with_resources(|| {
+            context.cancellation.check()?;
+            if options.dimension != self.family.family().dimension {
+                return Err(Error::InvalidInput(
+                    "prepared phase-space dimension differs from evaluation options".into(),
                 ));
             }
-            let value = p.eval(&condition, &Default::default())?;
-            if !p.finite(&value) || value == p.zero() {
-                return Err(Error::Numerical(
-                    "unresolved cut reduction nonzero condition".into(),
+            if epsilon.is_zero() {
+                return Err(Error::InvalidInput(
+                    "epsilon samples must be nonzero".into(),
                 ));
             }
-        }
-        let dimension =
-            Rational::from(self.family.family().dimension) - Rational::from(2) * epsilon;
-        let volume = self.geometry.value(&dimension, p)?;
-        self.coefficients
-            .iter()
-            .map(|coefficient| {
-                let coefficient = substitute(coefficient, &rules).together().cancel();
-                let value = p.mul(&p.eval(&coefficient, &Default::default())?, &volume);
-                if !p.finite(&value) {
+            let p = Precision::decimal(options.digits + options.guard_digits)?;
+            let rules = BTreeMap::from([(
+                Atom::var(self.family.family().epsilon),
+                Atom::num(epsilon.clone()),
+            )]);
+            for condition in &self.nonzero_conditions {
+                let condition = substitute(condition, &rules).together().cancel();
+                if condition.is_zero() {
                     return Err(Error::Numerical(
-                        "nonfinite reduced phase-space sample".into(),
+                        "cut reduction nonzero condition vanishes at the epsilon sample".into(),
                     ));
                 }
-                Ok(value)
-            })
-            .collect()
+                let value = p.eval(&condition, &Default::default())?;
+                if !p.finite(&value) || value == p.zero() {
+                    return Err(Error::Numerical(
+                        "unresolved cut reduction nonzero condition".into(),
+                    ));
+                }
+            }
+            let dimension =
+                Rational::from(self.family.family().dimension) - Rational::from(2) * epsilon;
+            let volume = self.geometry.value(&dimension, p)?;
+            self.coefficients
+                .iter()
+                .map(|coefficient| {
+                    let coefficient = substitute(coefficient, &rules).together().cancel();
+                    let value = p.mul(&p.eval(&coefficient, &Default::default())?, &volume);
+                    if !p.finite(&value) {
+                        return Err(Error::Numerical(
+                            "nonfinite reduced phase-space sample".into(),
+                        ));
+                    }
+                    Ok(value)
+                })
+                .collect()
+        })
     }
 
     fn evaluate_samples(
@@ -627,22 +632,27 @@ impl PreparedPhaseSpaceTerminal {
         context: &RunContext,
     ) -> Result<Vec<Vec<C>>> {
         options.validate()?;
-        let evaluate = |(index, epsilon): (usize, &Rational)| {
-            context.emit(Progress::Sample {
-                index,
-                total: samples.len(),
-            })?;
-            self.evaluate(epsilon, options, context)
-        };
-        if options.workers == 1 {
-            samples.iter().enumerate().map(evaluate).collect()
-        } else {
-            rayon::ThreadPoolBuilder::new()
-                .num_threads(options.workers)
-                .build()
-                .map_err(|e| Error::InvalidInput(e.to_string()))?
-                .install(|| samples.par_iter().enumerate().map(evaluate).collect())
-        }
+        options.run_with_resources(|| {
+            let budget = ResourceBudget::capture_current();
+            let evaluate = |(index, epsilon): (usize, &Rational)| {
+                budget.run_captured(|| {
+                    context.emit(Progress::Sample {
+                        index,
+                        total: samples.len(),
+                    })?;
+                    self.evaluate(epsilon, options, context)
+                })
+            };
+            if options.workers == 1 {
+                samples.iter().enumerate().map(evaluate).collect()
+            } else {
+                rayon::ThreadPoolBuilder::new()
+                    .num_threads(options.workers)
+                    .build()
+                    .map_err(|e| Error::InvalidInput(e.to_string()))?
+                    .install(|| samples.par_iter().enumerate().map(evaluate).collect())
+            }
+        })
     }
 
     // Both terminal classes use the same independent-grid/precision fit.
@@ -652,13 +662,15 @@ impl PreparedPhaseSpaceTerminal {
         options: &FlowOptions,
         context: &RunContext,
     ) -> Result<Vec<LaurentExpansion>> {
-        crate::engine::fit_samples_refined_leading(
-            self.coefficients.len(),
-            self.leading,
-            last,
-            options,
-            |samples, refined| self.evaluate_samples(samples, refined, context),
-        )
+        options.run_with_resources(|| {
+            crate::engine::fit_samples_refined_leading(
+                self.coefficients.len(),
+                self.leading,
+                last,
+                options,
+                |samples, refined| self.evaluate_samples(samples, refined, context),
+            )
+        })
     }
 }
 
@@ -802,8 +814,10 @@ pub fn solve_two_body_phase_space(
     backend: &dyn ReductionBackend,
     context: &RunContext,
 ) -> Result<Vec<LaurentExpansion>> {
-    PreparedTwoBodyPhaseSpace::new(family, channel, targets, point, backend, options, context)?
-        .solve(last, options, context)
+    options.run_with_resources(|| {
+        PreparedTwoBodyPhaseSpace::new(family, channel, targets, point, backend, options, context)?
+            .solve(last, options, context)
+    })
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -817,6 +831,8 @@ pub fn solve_massless_phase_space(
     backend: &dyn ReductionBackend,
     context: &RunContext,
 ) -> Result<Vec<LaurentExpansion>> {
-    PreparedMasslessPhaseSpace::new(family, channel, targets, point, backend, options, context)?
-        .solve(last, options, context)
+    options.run_with_resources(|| {
+        PreparedMasslessPhaseSpace::new(family, channel, targets, point, backend, options, context)?
+            .solve(last, options, context)
+    })
 }

@@ -23,13 +23,13 @@ pub struct PyEvaluationOptions {
 #[pymethods]
 impl PyEvaluationOptions {
     #[new]
-    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode=None, deformed_propagator_slots=None, refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None, residual_arithmetic="ball", boundary_error_strategy="automatic"))]
+    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=None, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode=None, deformed_propagator_slots=None, refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=None, max_boundary_attempts=None, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None, residual_arithmetic="ball", boundary_error_strategy="automatic", max_process_rss_bytes=None, max_elapsed_seconds=None, pade_max_work=None, max_recursion_depth=None))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         digits: u32,
         guard_digits: u32,
         series_order: usize,
-        max_steps: usize,
+        max_steps: Option<usize>,
         workers: usize,
         dimension: i64,
         recursion: &str,
@@ -39,8 +39,8 @@ impl PyEvaluationOptions {
         refine_basis: bool,
         skip_reduction: bool,
         sampled_reduction: bool,
-        max_precision_attempts: usize,
-        max_boundary_attempts: usize,
+        max_precision_attempts: Option<usize>,
+        max_boundary_attempts: Option<usize>,
         cache_directory: Option<PathBuf>,
         local_coordinate: &str,
         sample_cache_directory: Option<PathBuf>,
@@ -48,15 +48,37 @@ impl PyEvaluationOptions {
         pade_degree: Option<usize>,
         residual_arithmetic: &str,
         boundary_error_strategy: &str,
+        max_process_rss_bytes: Option<u64>,
+        max_elapsed_seconds: Option<f64>,
+        pade_max_work: Option<u64>,
+        max_recursion_depth: Option<usize>,
     ) -> PyResult<Self> {
+        if pade_max_work.is_some() && pade_degree.is_none() {
+            return Err(InvalidInputError::new_err(
+                "pade_max_work requires pade_degree",
+            ));
+        }
+        let max_elapsed = max_elapsed_seconds
+            .map(std::time::Duration::try_from_secs_f64)
+            .transpose()
+            .map_err(|_| {
+                InvalidInputError::new_err(
+                    "max_elapsed_seconds must be finite, nonnegative and representable",
+                )
+            })?;
         let inner = crate::FlowOptions {
             digits,
             guard_digits,
             series_order,
             pade: pade_degree.map(|degree| crate::PadeOptions {
                 degree,
+                max_work: pade_max_work,
                 ..Default::default()
             }),
+            resource_limits: symbolica::utils::resources::ResourceLimits {
+                max_process_rss_bytes,
+                max_elapsed,
+            },
             residual_arithmetic: residual_arithmetic.parse().map_err(error)?,
             boundary_error_strategy: boundary_error_strategy.parse().map_err(error)?,
             max_steps,
@@ -96,6 +118,7 @@ impl PyEvaluationOptions {
             sampled_reduction,
             max_precision_attempts,
             max_boundary_attempts,
+            max_recursion_depth,
             cache_directory,
             sample_cache_directory,
             reuse_samples,
@@ -115,6 +138,42 @@ impl PyEvaluationOptions {
     #[getter]
     fn series_order(&self) -> usize {
         self.inner.series_order
+    }
+    /// Optional diagnostic proposal cap; None leaves the count unrestricted.
+    #[getter]
+    fn max_steps(&self) -> Option<usize> {
+        self.inner.max_steps
+    }
+    #[getter]
+    fn max_precision_attempts(&self) -> Option<usize> {
+        self.inner.max_precision_attempts
+    }
+    #[getter]
+    fn max_boundary_attempts(&self) -> Option<usize> {
+        self.inner.max_boundary_attempts
+    }
+    /// Optional recursive-depth diagnostic; zero admits no recursive depth.
+    #[getter]
+    fn max_recursion_depth(&self) -> Option<usize> {
+        self.inner.max_recursion_depth
+    }
+    /// Whole-process RSS ceiling in bytes, shared by nested work.
+    #[getter]
+    fn max_process_rss_bytes(&self) -> Option<u64> {
+        self.inner.resource_limits.max_process_rss_bytes
+    }
+    /// Cooperative elapsed-time ceiling for one request, in seconds.
+    #[getter]
+    fn max_elapsed_seconds(&self) -> Option<f64> {
+        self.inner
+            .resource_limits
+            .max_elapsed
+            .map(|duration| duration.as_secs_f64())
+    }
+    /// Optional diagnostic work cap for an explicitly selected Padé proposal.
+    #[getter]
+    fn pade_max_work(&self) -> Option<u64> {
+        self.inner.pade.as_ref().and_then(|pade| pade.max_work)
     }
     /// Optional rational approximation degree; absent means Taylor transport.
     #[getter]
@@ -210,7 +269,7 @@ impl PyComputationControl {
     }
     #[getter]
     fn cancelled(&self) -> bool {
-        self.cancellation.check().is_err()
+        self.cancellation.is_cancelled()
     }
     /// Drain queued progress events. Cancellation remains set for this control.
     fn poll(&self) -> PyResult<Vec<String>> {
@@ -863,6 +922,70 @@ impl PyTransportResult {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn python_resource_options_are_optional_and_validated() {
+        Python::initialize();
+        Python::attach(|py| -> PyResult<()> {
+            let module = PyModule::new(py, "symbolica.community.hep.integration")?;
+            super::super::register(&module)?;
+            let locals = pyo3::types::PyDict::new(py);
+            locals.set_item("integration", module)?;
+            py.run(
+                c"
+options = integration.EvaluationOptions()
+for field in ('max_steps', 'max_precision_attempts', 'max_boundary_attempts',
+              'max_recursion_depth', 'max_process_rss_bytes', 'max_elapsed_seconds', 'pade_max_work'):
+    assert getattr(options, field) is None
+options = integration.EvaluationOptions(max_steps=7, max_precision_attempts=5,
+    max_boundary_attempts=3, max_recursion_depth=0, max_process_rss_bytes=1048576,
+    max_elapsed_seconds=0.125, pade_degree=8, pade_max_work=99)
+assert (options.max_steps, options.max_precision_attempts, options.max_boundary_attempts) == (7, 5, 3)
+assert options.max_recursion_depth == 0
+assert options.max_process_rss_bytes == 1048576 and options.max_elapsed_seconds == 0.125
+assert options.pade_max_work == 99
+for value in (-1.0, float('inf'), float('nan')):
+    try:
+        integration.EvaluationOptions(max_elapsed_seconds=value)
+    except integration.InvalidInputError:
+        pass
+    else:
+        raise AssertionError('invalid duration accepted')
+if integration.automatic_boundary_generation_available:
+    integration.IntegralEvaluator(reduction_targets=None)
+    integration.IntegralEvaluator(reduction_depth=2, reduction_targets=4096)
+    try:
+        integration.IntegralEvaluator(reduction_targets=0)
+    except integration.InvalidInputError:
+        pass
+    else:
+        raise AssertionError('zero target diagnostic accepted')
+",
+                Some(&locals),
+                Some(&locals),
+            )
+        })
+        .unwrap();
+    }
+
+    #[test]
+    fn python_resource_failures_do_not_report_cancellation() {
+        let control = PyComputationControl::default();
+        let options = crate::FlowOptions {
+            resource_limits: crate::ResourceLimits {
+                max_elapsed: Some(std::time::Duration::ZERO),
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let failure = options.run_with_resources(|| Ok(())).unwrap_err();
+        assert!(matches!(&failure, crate::Error::Resource(_)));
+        assert!(!control.cancelled());
+        Python::initialize();
+        Python::attach(|py| assert!(error(failure).is_instance_of::<ResourceLimitError>(py)));
+        control.cancel();
+        assert!(control.cancelled());
+    }
 
     #[test]
     fn transport_elapsed_nanoseconds_retains_full_duration_range() {

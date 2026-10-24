@@ -89,11 +89,11 @@ impl PreparedPhysicalFamily {
         };
         let mut closed = if options.skip_reduction {
             crate::reduction::build_retained_system(
-                backend, &family, targets, 32, context, derivative,
+                backend, &family, targets, None, context, derivative,
             )?
         } else {
             crate::reduction::build_differential_system(
-                backend, &family, targets, 32, context, derivative,
+                backend, &family, targets, None, context, derivative,
             )?
         };
         // Native rational reduction represents i as a formal coefficient.
@@ -156,7 +156,7 @@ impl PreparedPhysicalFamily {
             let first_variable = *derivatives.keys().next().unwrap();
             closed.matrix = matrices[&first_variable].clone();
             let report =
-                crate::refine::refine_basis(&mut closed, first_variable, family.epsilon, 32)?;
+                crate::refine::refine_basis(&mut closed, first_variable, family.epsilon, None)?;
             // A basis change depends on every coordinate. Apply the same
             // ordered transformations with each coordinate's own derivative.
             for (&variable, matrix) in &mut matrices {

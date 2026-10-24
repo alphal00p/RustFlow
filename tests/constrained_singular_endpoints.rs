@@ -87,7 +87,7 @@ fn request(range: EpsilonRange, sheet: Option<RootSheet>) -> EndpointRequest {
         },
         range,
         options: EndpointOptions {
-            max_lift_dimension: 32,
+            max_lift_dimension: Some(32),
             series_order: 32,
         },
     }
@@ -529,7 +529,7 @@ fn constrained_admission_cancellation_and_resource_refusal_are_transactional() {
         Err(Error::Limit(_))
     ));
     let mut limited = declared.clone();
-    limited.limits.max_dimension = 1;
+    limited.limits.max_dimension = Some(1);
     assert!(matches!(
         run(&flow, &mut cache, &req, &limited),
         Err(Error::Limit(_))
@@ -1026,7 +1026,7 @@ fn constrained_root_lift_dimension_and_cancellation_preserve_the_bank() {
     );
     let req = request(range, Some(RootSheet::Principal));
     let mut limited = constraints(&[(0, "-1", 0, "0")]);
-    limited.limits.max_dimension = 1;
+    limited.limits.max_dimension = Some(1);
     let mut cache = original.clone();
     assert!(matches!(
         flow.evaluate_constrained_endpoint(
@@ -1071,7 +1071,7 @@ fn rational_coefficient_height_limit_does_not_limit_working_precision() {
     let range = EpsilonRange::new(0, 0).unwrap();
     let mut cache = bank(flow.identity(), range, "1/16", None, vec![vec![p.i(3)]], 60);
     let mut declared = constraints(&[(0, "-1", 0, "0")]);
-    declared.limits.max_coefficient_bits = 32;
+    declared.limits.max_coefficient_bits = Some(32);
     let mut opts = options();
     opts.guard_digits = 80;
     let result = flow

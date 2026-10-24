@@ -21,7 +21,7 @@ fn extended_taylor_order_transports_a_nonpolynomial_solution() -> Result<()> {
             point: p.zero(),
             values: vec![p.i(1)],
         },
-        &[end.clone()],
+        std::slice::from_ref(&end),
         &options,
         &RunContext::default(),
     )?;
@@ -40,15 +40,22 @@ fn extended_taylor_allocation_refuses_precision_or_channel_growth_before_arrays(
         matrix: vec![vec![Atom::one()]],
     }
     .compile(p, &Default::default())?;
+    let budget = crate::ResourceBudget::with_memory_monitor(
+        crate::ResourceLimits {
+            max_process_rss_bytes: Some(1024),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
     compiled.p = Precision { bits: u32::MAX };
     assert!(matches!(
-        compiled.taylor(&p.zero(), &[p.i(1)], 10_001),
-        Err(Error::Limit(_))
+        budget.run(|| compiled.taylor(&p.zero(), &[p.i(1)], 10_001)),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
     ));
     compiled.p = p;
     assert!(matches!(
-        compiled.taylor(&p.zero(), &[p.i(1)], 200_001),
-        Err(Error::Limit(_))
+        budget.run(|| compiled.taylor(&p.zero(), &[p.i(1)], 200_001)),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
         compiled.taylor_channels(&p.zero(), &[p.i(1)], 10_001, usize::MAX),
@@ -102,8 +109,15 @@ fn extended_transport_counts_retained_segment_storage_before_the_next_chart() ->
         series_order: 10_001,
         ..Default::default()
     };
+    let budget = crate::ResourceBudget::with_memory_monitor(
+        crate::ResourceLimits {
+            max_process_rss_bytes: Some(1024 * 1024 * 1024),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
     assert!(matches!(
-        transport_series(
+        budget.run(|| transport_series(
             &system,
             &BoundaryData {
                 point: p.zero(),
@@ -113,15 +127,15 @@ fn extended_transport_counts_retained_segment_storage_before_the_next_chart() ->
             &options,
             &RunContext::default(),
             Some(&mut saved)
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
     ));
     assert_eq!(saved.len(), 1);
     Ok(())
 }
 
 #[test]
-fn algebraic_transport_keeps_the_previous_order_limit_without_an_owner_estimate() -> Result<()> {
+fn algebraic_transport_uses_generic_estimates_with_explicit_resource_limits() -> Result<()> {
     use crate::algebraic::AlgebraicSystem;
     let p = Precision::decimal(40)?;
     let system = AlgebraicSystem::ordinary(
@@ -136,8 +150,15 @@ fn algebraic_transport_keeps_the_previous_order_limit_without_an_owner_estimate(
         series_order: 10_001,
         ..Default::default()
     };
+    let budget = crate::ResourceBudget::with_memory_monitor(
+        crate::ResourceLimits {
+            max_process_rss_bytes: Some(1024),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
     assert!(matches!(
-        system.transport_ordinary(
+        budget.run(|| system.transport_ordinary(
             &BoundaryData {
                 point: p.zero(),
                 values: vec![p.i(1)]
@@ -147,8 +168,8 @@ fn algebraic_transport_keeps_the_previous_order_limit_without_an_owner_estimate(
             &options,
             &RunContext::default(),
             false
-        ),
-        Err(Error::Unsupported(_))
+        )),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
     ));
     Ok(())
 }

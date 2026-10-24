@@ -81,7 +81,7 @@ fn fixed_precision_and_exhausted_refinement_are_typed_failures() -> Result<()> {
         .unwrap_err();
     assert!(matches!(error,Error::InsufficientPrecision{minimum_bits,..} if minimum_bits>p.bits));
     let mut o = options();
-    o.max_precision_attempts = 1;
+    o.max_precision_attempts = Some(1);
     let error = transport_epsilon(
         &source(),
         boundary,
@@ -390,7 +390,7 @@ fn cancellation_and_step_limits_are_not_precision_retries() -> Result<()> {
         Err(Error::Cancelled)
     ));
     let mut o = options();
-    o.max_steps = 1;
+    o.max_steps = Some(1);
     o.series_order = 8;
     let x = symbol!("conditioning_limit::x");
     let system = EpsilonSystem {

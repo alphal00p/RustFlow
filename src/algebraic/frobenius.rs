@@ -39,7 +39,7 @@ mod endpoint_map_tests {
             Vec::new(),
         );
         let context = RunContext::default();
-        let prepared = source.prepare_frobenius(4, &context).unwrap();
+        let prepared = source.prepare_frobenius(Some(4), &context).unwrap();
         let p = Precision::decimal(80).unwrap();
         let point = p.rational(&Rational::from((1, 16)));
         assert!(
@@ -169,14 +169,14 @@ impl AlgebraicSystem {
         Ok(result)
     }
 
-    /// Exact restriction of scalars. `max_dimension` bounds the dense lifted
+    /// Exact restriction of scalars. Optional `max_dimension` bounds the dense lifted
     /// matrix dimension n * epsilon_orders * generated_monomials before
     /// allocation. The number of generated monomials is at most 2^roots. This
     /// adapter is intended for local singular charts; regular transport retains
     /// its sparse native-root representation.
     pub fn rational_lift(
         &self,
-        max_dimension: usize,
+        max_dimension: Option<usize>,
         context: &RunContext,
     ) -> Result<RationalAlgebraicSystem> {
         context.cancellation.check()?;
@@ -192,14 +192,23 @@ impl AlgebraicSystem {
             .checked_mul(count)
             .ok_or_else(|| Error::Limit("epsilon lift dimension overflows".into()))?;
         let checked_dimension = |monomials: usize| {
-            stride
-                .checked_mul(monomials)
-                .filter(|&n| n <= max_dimension && n.checked_mul(n).is_some())
-                .ok_or_else(|| {
-                    Error::Limit(format!(
-                        "algebraic Frobenius lift exceeds dimension limit {max_dimension}"
-                    ))
-                })
+            let dimension = stride.checked_mul(monomials).ok_or_else(|| {
+                Error::Limit("algebraic Frobenius lift dimension overflow".into())
+            })?;
+            if let Some(limit) = max_dimension
+                && dimension > limit
+            {
+                return Err(Error::Limit(format!(
+                    "algebraic Frobenius lift exceeds dimension limit {limit}"
+                )));
+            }
+            let bytes = dimension
+                .checked_mul(dimension)
+                .and_then(|cells| cells.checked_mul(std::mem::size_of::<Atom>()))
+                .and_then(|bytes| u64::try_from(bytes).ok())
+                .ok_or_else(|| Error::Limit("algebraic Frobenius lift storage overflow".into()))?;
+            symbolica::utils::resources::check_allocation(bytes)?;
+            Ok(dimension)
         };
         checked_dimension(1)?;
         let mut allowed = BTreeSet::from([
@@ -289,7 +298,7 @@ impl AlgebraicSystem {
     /// remain explicit typed errors; irregular exponential sectors are rejected.
     pub fn prepare_frobenius(
         &self,
-        max_dimension: usize,
+        max_dimension: Option<usize>,
         context: &RunContext,
     ) -> Result<PreparedAlgebraicFrobenius> {
         let lifted = self.rational_lift(max_dimension, context)?;

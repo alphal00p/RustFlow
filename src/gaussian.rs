@@ -13,6 +13,7 @@ pub fn terminal(
     epsilon: &Rational,
     p: Precision,
 ) -> Result<ComplexFloat> {
+    symbolica::utils::resources::checkpoint()?;
     let positive = integral
         .0
         .iter()
@@ -131,6 +132,7 @@ pub fn terminal(
     for (monomial, coefficient) in
         crate::coefficient::exact_coefficient_list(&numerator.expand(), &variables)?
     {
+        symbolica::utils::resources::checkpoint()?;
         let mut loops = Vec::new();
         let mut links = Vec::new();
         let mut external = Vec::new();
@@ -152,11 +154,6 @@ pub fn terminal(
         }
         if loops.len() % 2 != 0 {
             continue;
-        }
-        if loops.len() > 8 {
-            return Err(Error::Limit(
-                "Gaussian numerator tensor rank exceeds eight".into(),
-            ));
         }
         let r = loops.len() / 2;
         let moment = wick(
@@ -195,27 +192,32 @@ fn wick(
     gram: &[Vec<Atom>],
     dimension: &Atom,
 ) -> Result<Atom> {
-    fn pairings(indices: &[usize]) -> Vec<Vec<(usize, usize)>> {
-        if indices.is_empty() {
-            return vec![vec![]];
-        }
-        let mut out = Vec::new();
-        for j in 1..indices.len() {
-            let rest = indices[1..]
-                .iter()
-                .copied()
-                .filter(|&i| i != indices[j])
-                .collect::<Vec<_>>();
-            for mut pairs in pairings(&rest) {
-                pairs.push((indices[0], indices[j]));
-                out.push(pairs);
+    fn pairings(indices: &[usize]) -> Result<Vec<Vec<(usize, usize)>>> {
+        crate::stack_resources::run(|| {
+            symbolica::utils::resources::checkpoint()?;
+            if indices.is_empty() {
+                return Ok(vec![vec![]]);
             }
-        }
-        out
+            let mut out = Vec::new();
+            for j in 1..indices.len() {
+                let rest = indices[1..]
+                    .iter()
+                    .copied()
+                    .filter(|&i| i != indices[j])
+                    .collect::<Vec<_>>();
+                for mut pairs in pairings(&rest)? {
+                    symbolica::utils::resources::checkpoint()?;
+                    pairs.push((indices[0], indices[j]));
+                    out.push(pairs);
+                }
+            }
+            Ok(out)
+        })
     }
     let mut sum = Atom::new();
     let n = loops.len();
-    for pairs in pairings(&(0..n).collect::<Vec<_>>()) {
+    for pairs in pairings(&(0..n).collect::<Vec<_>>())? {
+        symbolica::utils::resources::checkpoint()?;
         let mut components = linnet::union_find::UnionFind::new(
             external
                 .iter()

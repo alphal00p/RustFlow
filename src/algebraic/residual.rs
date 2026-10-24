@@ -455,7 +455,7 @@ mod tests {
         let seeds = BTreeMap::from([(r, RootSeed::Principal)]);
         let options = FlowOptions {
             series_order: 80,
-            max_steps: 1000,
+            max_steps: Some(1000),
             ..Default::default()
         };
         let answer = c

@@ -20,6 +20,51 @@ use symbolica::domains::rational::RationalField;
 use symbolica::domains::rational_polynomial::FromNumeratorAndDenominator;
 use symbolica::prelude::*;
 use symbolica::tensors::matrix::Matrix;
+use symbolica::utils::resources;
+
+fn verification_failure(error: symmetry::Error) -> crate::Result<()> {
+    if let Some(resource) = crate::error::preserve_resource(&error) {
+        return Err(resource);
+    }
+    match error {
+        symmetry::Error::SingularLoopMap
+        | symmetry::Error::SingularExternalMap
+        | symmetry::Error::ExternalGramMismatch { .. }
+        | symmetry::Error::DenominatorReplayMismatch { .. }
+        | symmetry::Error::ResourceLimit { .. } => Ok(()),
+        error => Err(super::native_error(error)),
+    }
+}
+
+fn transport_failure(error: integral_transport::Error) -> crate::Result<()> {
+    if let Some(resource) = crate::error::preserve_resource(&error) {
+        return Err(resource);
+    }
+    use integral_transport::{Error as Transport, ExpansionError as Expansion};
+    use rustred::algebra::ExactAlgebraError as Algebra;
+    match error {
+        Transport::NonUnitJacobian
+        | Transport::AnalyticPowerShift { .. }
+        | Transport::UnresolvedCondition { .. }
+        | Transport::NonconstantCoefficient { .. }
+        | Transport::NonUnitActiveRow { .. }
+        | Transport::ActiveBijection
+        | Transport::PositiveOutsideRoot { .. }
+        | Transport::Expansion(
+            Expansion::ResourceLimit { .. }
+            | Expansion::NativeExponentLimit { .. }
+            | Expansion::NativePolynomialSupportExceeded { .. }
+            | Expansion::PowerShiftUnderflow { .. }
+            | Expansion::NativeExponentDegreeOverflow { .. }
+            | Expansion::ExactAlgebra(
+                Algebra::ResourceLimit { .. }
+                | Algebra::ExponentLimit { .. }
+                | Algebra::ExponentArithmeticOverflow { .. },
+            ),
+        ) => Ok(()),
+        error => Err(super::native_error(error)),
+    }
+}
 
 /// Bounds for an optional accelerator, not limits on integral evaluation.
 #[derive(Clone, Copy)]
@@ -79,7 +124,12 @@ pub(super) struct Bank {
 impl Bank {
     /// Discovery is deliberately incomplete. Symbolic Gram entries, non-square
     /// branches, and missing independent branch anchors simply give no maps.
-    pub fn discover(family: &IntegralFamily, physical: usize, limits: Limits) -> Self {
+    pub fn discover(
+        family: &IntegralFamily,
+        physical: usize,
+        limits: Limits,
+    ) -> crate::Result<Self> {
+        resources::checkpoint()?;
         let mut bank = Self {
             fingerprint: family.fingerprint().to_owned(),
             arity: family.denominator_count(),
@@ -93,18 +143,18 @@ impl Bank {
             || family.external_count() > limits.max_momenta
         {
             bank.statistics.search_limited = true;
-            return bank;
+            return Ok(bank);
         }
         if family.loop_count() == 0 || family.external_count() == 0 {
-            return bank;
+            return Ok(bank);
         }
-        let Some(candidates) = candidates(family, physical, limits) else {
-            return bank;
+        let Some(candidates) = candidates(family, physical, limits)? else {
+            return Ok(bank);
         };
         bank.statistics.search_limited = candidates.limited;
         // IntegralFamily intentionally is not Clone. Rebuild through its public
         // validator while retaining the exact coefficient context and ordering.
-        let Ok(target) = IntegralFamily::new(
+        let target = IntegralFamily::new(
             family.name().to_owned(),
             family.loop_momenta().to_vec(),
             family.external_momenta().to_vec(),
@@ -113,17 +163,20 @@ impl Bank {
             family.denominators().to_vec(),
             family.external_gram().to_vec(),
             family.power_shifts().to_vec(),
-        ) else {
-            return bank;
-        };
+        )
+        .map_err(super::native_error)?;
         let target = Arc::new(target);
-        let Ok(root) = Mask::try_new((0..bank.arity).map(|i| i < physical)) else {
-            return bank;
-        };
+        let root =
+            Mask::try_new((0..bank.arity).map(|i| i < physical)).map_err(super::native_error)?;
         for candidate in candidates.maps {
+            resources::checkpoint()?;
             bank.statistics.candidates += 1;
-            let Ok(map) = symmetry::verify(family, &target, candidate, limits.verification) else {
-                continue;
+            let map = match symmetry::verify(family, &target, candidate, limits.verification) {
+                Ok(map) => map,
+                Err(error) => {
+                    verification_failure(error)?;
+                    continue;
+                }
             };
             // A momentum symmetry that fixes every denominator cannot yield a
             // strictly descending integral. Discard it before concrete calls.
@@ -137,7 +190,7 @@ impl Bank {
             // ALL physical denominators, rational affine numerator rows, and
             // every nonzero condition. Unresolved symbolic guards are rejected;
             // no condition is discarded when a transport is returned below.
-            if let Ok(prepared) = integral_transport::compile(
+            match integral_transport::compile(
                 family,
                 Arc::clone(&target),
                 Arc::new(map),
@@ -145,11 +198,12 @@ impl Bank {
                 root.clone(),
                 limits.expansion,
             ) {
-                bank.maps.push(prepared);
+                Ok(prepared) => bank.maps.push(prepared),
+                Err(error) => transport_failure(error)?,
             }
         }
         bank.statistics.automorphisms = bank.maps.len();
-        bank
+        Ok(bank)
     }
 
     /// Return a complete exact identity or no rule. Partial transport results,
@@ -159,14 +213,14 @@ impl Bank {
         family: &IntegralFamily,
         powers: [i16; N],
         order: &IntegralOrder<N>,
-    ) -> Option<Vec<Term<N, Coefficient>>> {
-        let result = self.apply_inner(family, powers, order);
+    ) -> crate::Result<Option<Vec<Term<N, Coefficient>>>> {
+        let result = self.apply_inner(family, powers, order)?;
         if result.is_some() {
             self.statistics.applied += 1;
         } else {
             self.statistics.missed += 1;
         }
-        result
+        Ok(result)
     }
 
     fn apply_inner<const N: usize>(
@@ -174,44 +228,69 @@ impl Bank {
         family: &IntegralFamily,
         powers: [i16; N],
         order: &IntegralOrder<N>,
-    ) -> Option<Vec<Term<N, Coefficient>>> {
-        if self.arity != N || self.fingerprint != family.fingerprint() {
-            return None;
+    ) -> crate::Result<Option<Vec<Term<N, Coefficient>>>> {
+        resources::checkpoint()?;
+        if self.arity > N
+            || powers[self.arity..].iter().any(|&value| value != 0)
+            || self.fingerprint != family.fingerprint()
+        {
+            return Ok(None);
         }
-        let lhs = Integral::numeric(powers).ok()?;
-        let key = IntegralKey::try_new(powers.map(i64::from)).ok()?;
+        // Compact-key admission is representation-only (PowerError), not a
+        // fallible resource operation. Unsupported powers retain the fallback.
+        let Ok(lhs) = Integral::numeric(powers) else {
+            return Ok(None);
+        };
+        let key = IntegralKey::try_new(powers[..self.arity].iter().copied().map(i64::from))
+            .map_err(super::native_error)?;
         for map in &self.maps {
+            resources::checkpoint()?;
             let transported = match map.transport(&key, self.expansion) {
                 Ok(value) => value,
-                Err(_) => {
+                Err(error) => {
+                    transport_failure(error)?;
                     self.statistics.transport_failures += 1;
                     continue;
                 }
             };
-            let terms = transported
-                .terms()
-                .iter()
-                .map(|term| {
-                    let values = term
-                        .key()
-                        .powers()
-                        .iter()
-                        .copied()
-                        .map(i16::try_from)
-                        .collect::<Result<Vec<_>, _>>()
-                        .ok()?;
-                    let integral = Integral::numeric(values.try_into().ok()?).ok()?;
-                    (order.compare(&lhs, &integral) == Ordering::Less).then(|| Term {
-                        integral,
-                        coefficient: term.coefficient().clone(),
-                    })
-                })
-                .collect::<Option<Vec<_>>>();
-            if let Some(terms) = terms {
-                return Some(terms);
+            let mut terms = Vec::new();
+            let mut admitted = true;
+            for term in transported.terms() {
+                let Some(mut values) = term
+                    .key()
+                    .powers()
+                    .iter()
+                    .copied()
+                    .map(i16::try_from)
+                    .collect::<Result<Vec<_>, _>>()
+                    .ok()
+                else {
+                    admitted = false;
+                    break;
+                };
+                values.resize(N, 0);
+                let Ok(values) = values.try_into() else {
+                    admitted = false;
+                    break;
+                };
+                let Ok(integral) = Integral::numeric(values) else {
+                    admitted = false;
+                    break;
+                };
+                if order.compare(&lhs, &integral) != Ordering::Less {
+                    admitted = false;
+                    break;
+                }
+                terms.push(Term {
+                    integral,
+                    coefficient: term.coefficient().clone(),
+                });
+            }
+            if admitted {
+                return Ok(Some(terms));
             }
         }
-        None
+        Ok(None)
     }
 }
 
@@ -240,7 +319,7 @@ fn constant(value: &Coefficient) -> Option<Rational> {
 fn native_matrix(
     context: &CoefficientContext,
     matrix: RationalMatrix,
-) -> Option<CoefficientMatrix> {
+) -> crate::Result<CoefficientMatrix> {
     let rows = matrix.nrows();
     let columns = matrix.ncols();
     let template = context.one();
@@ -256,7 +335,7 @@ fn native_matrix(
             )
         }),
     )
-    .ok()
+    .map_err(super::native_error)
 }
 
 /// For D = scale * (v.l + w.p)^2 + constant, the sign convention is
@@ -322,27 +401,38 @@ fn branches(family: &IntegralFamily, physical: usize) -> Option<Vec<Branch>> {
     Some(groups)
 }
 
-fn candidates(family: &IntegralFamily, physical: usize, limits: Limits) -> Option<Candidates> {
+fn candidates(
+    family: &IntegralFamily,
+    physical: usize,
+    limits: Limits,
+) -> crate::Result<Option<Candidates>> {
+    resources::checkpoint()?;
     let mut result = Candidates {
         maps: Vec::new(),
         limited: false,
     };
     if limits.max_candidates == 0 || limits.max_external_maps == 0 {
         result.limited = true;
-        return Some(result);
+        return Ok(Some(result));
     }
     let loops = family.loop_count();
     let external = family.external_count();
-    let groups = branches(family, physical)?;
-    let gram = family
+    let Some(groups) = branches(family, physical) else {
+        return Ok(None);
+    };
+    let Some(gram) = family
         .external_gram()
         .iter()
         .map(|row| row.iter().map(constant).collect::<Option<Vec<_>>>())
-        .collect::<Option<Vec<_>>>()?;
+        .collect::<Option<Vec<_>>>()
+    else {
+        return Ok(None);
+    };
     let mut external_maps = vec![Matrix::identity(external as u32, Q)];
     for group in &groups {
         for (i, left) in group.displacements.iter().enumerate() {
             for right in group.displacements.iter().skip(i + 1) {
+                resources::checkpoint()?;
                 let difference = left
                     .iter()
                     .zip(right)
@@ -377,7 +467,7 @@ fn candidates(family: &IntegralFamily, physical: usize, limits: Limits) -> Optio
                         .collect(),
                     Q,
                 )
-                .ok()?;
+                .map_err(crate::Error::Reduction)?;
                 if !external_maps.contains(&reflected) {
                     if external_maps.len() == limits.max_external_maps {
                         result.limited = true;
@@ -390,12 +480,17 @@ fn candidates(family: &IntegralFamily, physical: usize, limits: Limits) -> Optio
     }
     let mut anchors: Vec<&Branch> = Vec::new();
     for group in &groups {
+        resources::checkpoint()?;
         let rows = anchors
             .iter()
             .map(|b| b.direction.clone())
             .chain(std::iter::once(group.direction.clone()))
             .collect::<Vec<_>>();
-        if Matrix::from_nested_vec(rows, Q).ok()?.rank() > anchors.len() {
+        if Matrix::from_nested_vec(rows, Q)
+            .map_err(crate::Error::Reduction)?
+            .rank()
+            > anchors.len()
+        {
             anchors.push(group);
         }
         if anchors.len() == loops {
@@ -403,24 +498,25 @@ fn candidates(family: &IntegralFamily, physical: usize, limits: Limits) -> Optio
         }
     }
     if anchors.len() != loops {
-        return None;
+        return Ok(None);
     }
-    let basis =
-        Matrix::from_nested_vec(anchors.iter().map(|b| b.direction.clone()).collect(), Q).ok()?;
-    let inverse = basis.inv().ok()?;
+    let basis = Matrix::from_nested_vec(anchors.iter().map(|b| b.direction.clone()).collect(), Q)
+        .map_err(crate::Error::Reduction)?;
+    let inverse = basis.inv().map_err(super::native_error)?;
     let source = Matrix::from_nested_vec(
         anchors.iter().map(|b| b.displacements[0].clone()).collect(),
         Q,
     )
-    .ok()?;
+    .map_err(crate::Error::Reduction)?;
     let context = family.coefficient_context();
     for external_map in external_maps {
         let mapped = &source * &external_map;
         let mut destinations = vec![0; loops];
         loop {
+            resources::checkpoint()?;
             if result.maps.len() == limits.max_candidates {
                 result.limited = true;
-                return Some(result);
+                return Ok(Some(result));
             }
             let target = Matrix::from_nested_vec(
                 anchors
@@ -430,7 +526,7 @@ fn candidates(family: &IntegralFamily, physical: usize, limits: Limits) -> Optio
                     .collect(),
                 Q,
             )
-            .ok()?;
+            .map_err(crate::Error::Reduction)?;
             let translation = &inverse * &(&target - &mapped);
             let candidate = MomentumMap::new(
                 native_matrix(context, Matrix::identity(loops as u32, Q))?,
@@ -454,13 +550,55 @@ fn candidates(family: &IntegralFamily, physical: usize, limits: Limits) -> Optio
             }
         }
     }
-    Some(result)
+    Ok(Some(result))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use std::collections::BTreeMap;
+
+    #[test]
+    fn shared_resource_causes_survive_discovery_and_transport_failures() {
+        let expected = crate::ResourceLimitError::Memory {
+            rss_bytes: 2,
+            additional_bytes: 3,
+            limit_bytes: 4,
+        };
+        let verification = symmetry::Error::ExactAlgebra(
+            rustred::algebra::ExactAlgebraError::Resource(expected.clone()),
+        );
+        assert!(matches!(
+            verification_failure(verification),
+            Err(crate::Error::Resource(error)) if error == expected
+        ));
+        let transport =
+            integral_transport::Error::Expansion(integral_transport::ExpansionError::ExactAlgebra(
+                rustred::algebra::ExactAlgebraError::Resource(expected.clone()),
+            ));
+        assert!(matches!(
+            transport_failure(transport),
+            Err(crate::Error::Resource(error)) if error == expected
+        ));
+    }
+
+    #[test]
+    fn invalid_exact_algebra_is_not_an_optional_accelerator_miss() {
+        assert!(matches!(
+            verification_failure(symmetry::Error::ExactAlgebra(
+                rustred::algebra::ExactAlgebraError::ZeroDenominator,
+            )),
+            Err(crate::Error::Reduction(_))
+        ));
+        assert!(matches!(
+            transport_failure(integral_transport::Error::Expansion(
+                integral_transport::ExpansionError::ExactAlgebra(
+                    rustred::algebra::ExactAlgebraError::ZeroDenominator,
+                ),
+            )),
+            Err(crate::Error::Reduction(_))
+        ));
+    }
 
     fn paper(shifted: Vec<usize>) -> IntegralFamily {
         let (family, _) = crate::benchmarks::paper_two_loop().unwrap();
@@ -504,23 +642,33 @@ mod tests {
             vec![context.zero(); 2],
         )
         .unwrap();
-        let mut bank = Bank::discover(&family, 2, Limits::default());
+        let mut bank = Bank::discover(&family, 2, Limits::default()).unwrap();
         assert_eq!(bank.statistics.automorphisms, 1);
-        let terms = bank.apply(&family, [2, 0], &order([2, 0])).unwrap();
+        let terms = bank
+            .apply(&family, [2, 0], &order([2, 0]))
+            .unwrap()
+            .unwrap();
         assert_eq!(terms.len(), 1);
         assert_eq!(terms[0].integral, Integral::numeric([0, 2]).unwrap());
         assert_eq!(terms[0].coefficient, context.one());
-        assert!(bank.apply(&family, [0, 2], &order([0, 2])).is_none());
+        assert!(
+            bank.apply(&family, [0, 2], &order([0, 2]))
+                .unwrap()
+                .is_none()
+        );
     }
 
     #[test]
     fn discovers_routing_and_transports_the_exact_numerator_square() {
         let family = paper(vec![4]);
-        let mut bank = Bank::discover(&family, 7, Limits::default());
+        let mut bank = Bank::discover(&family, 7, Limits::default()).unwrap();
         assert_eq!(bank.statistics.candidates, 36);
         assert_eq!(bank.statistics.automorphisms, 1);
         let powers = [1, 0, 0, 0, 1, 0, 1, 0, -2];
-        let terms = bank.apply(&family, powers, &order(powers)).unwrap();
+        let terms = bank
+            .apply(&family, powers, &order(powers))
+            .unwrap()
+            .unwrap();
         let found = terms
             .into_iter()
             .map(|t| {
@@ -545,7 +693,7 @@ mod tests {
     #[test]
     fn exact_transport_composed_twice_is_the_identity() {
         let family = paper(vec![4]);
-        let bank = Bank::discover(&family, 7, Limits::default());
+        let bank = Bank::discover(&family, 7, Limits::default()).unwrap();
         let key = IntegralKey::try_new([1, -1, 0, -1, 2, 0, 1, -1, -3]).unwrap();
         let map = &bank.maps[0];
         let first = map.transport(&key, bank.expansion).unwrap();
@@ -569,16 +717,21 @@ mod tests {
     #[test]
     fn noninvariant_eta_and_gram_and_foreign_family_are_rejected() {
         let family = paper(vec![4]);
-        let mut bank = Bank::discover(&family, 7, Limits::default());
+        let mut bank = Bank::discover(&family, 7, Limits::default()).unwrap();
         let changed_eta = paper(vec![0]);
         assert_eq!(
             Bank::discover(&changed_eta, 7, Limits::default())
+                .unwrap()
                 .statistics
                 .automorphisms,
             0
         );
         let powers = [1, 0, 0, 0, 1, 0, 1, 0, 0];
-        assert!(bank.apply(&changed_eta, powers, &order(powers)).is_none());
+        assert!(
+            bank.apply(&changed_eta, powers, &order(powers))
+                .unwrap()
+                .is_none()
+        );
         let mut gram = family.external_gram().to_vec();
         gram[0][0] = family.coefficient_context().integer(2);
         let changed_gram = IntegralFamily::new(
@@ -606,13 +759,17 @@ mod tests {
     #[test]
     fn positive_affine_denominators_and_nondescending_rules_are_never_used() {
         let family = paper(vec![4]);
-        let mut bank = Bank::discover(&family, 7, Limits::default());
+        let mut bank = Bank::discover(&family, 7, Limits::default()).unwrap();
         for powers in [
             [0, 0, 1, 0, 1, 0, 1, 0, 0], // reverse sector direction
             [0, 1, 0, 0, 1, 0, 1, 0, 0], // unchanged integral
             [1, 0, 0, 0, 1, 0, 1, 0, 1], // positive affine ISP
         ] {
-            assert!(bank.apply(&family, powers, &order(powers)).is_none());
+            assert!(
+                bank.apply(&family, powers, &order(powers))
+                    .unwrap()
+                    .is_none()
+            );
         }
         assert_eq!(bank.statistics.transport_failures, 1);
         assert_eq!(bank.statistics.applied, 0);
@@ -628,26 +785,37 @@ mod tests {
                 max_candidates: 0,
                 ..Limits::default()
             },
-        );
+        )
+        .unwrap();
         assert!(none.statistics.search_limited);
         assert!(none.maps.is_empty());
         let limits = Limits {
             expansion: ExpansionLimits {
+                diagnostics_enabled: true,
                 max_endpoints: 1,
                 ..Limits::default().expansion
             },
             ..Limits::default()
         };
-        let mut bank = Bank::discover(&family, 7, limits);
+        let mut bank = Bank::discover(&family, 7, limits).unwrap();
         assert_eq!(bank.statistics.automorphisms, 1);
         let powers = [1, 0, 0, 0, 1, 0, 1, 0, -2];
-        assert!(bank.apply(&family, powers, &order(powers)).is_none());
+        assert!(
+            bank.apply(&family, powers, &order(powers))
+                .unwrap()
+                .is_none()
+        );
         assert_eq!(bank.statistics.transport_failures, 1);
         bank.expansion = ExpansionLimits {
+            diagnostics_enabled: true,
             max_total_power: 128,
             ..Limits::default().expansion
         };
         let overflow = [1, 0, 0, -64, 1, 0, 1, 0, -1];
-        assert!(bank.apply(&family, overflow, &order(overflow)).is_none());
+        assert!(
+            bank.apply(&family, overflow, &order(overflow))
+                .unwrap()
+                .is_none()
+        );
     }
 }

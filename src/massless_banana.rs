@@ -7,6 +7,11 @@ use feynkit_graph::{IntegralFamily as NativeFamily, IntegralFamilyError};
 use feynkit_kinematics::Kinematics;
 use symbolica::prelude::*;
 
+fn native_error(error: impl std::error::Error + 'static) -> Error {
+    crate::error::preserve_resource(&error)
+        .unwrap_or_else(|| Error::InvalidInput(error.to_string()))
+}
+
 struct Line {
     index: usize,
     route: Vec<Atom>,
@@ -284,7 +289,7 @@ fn double_bubble_plan(family: &IntegralFamily, target: &Integral) -> Result<Opti
         .collect::<Vec<_>>();
     let external = symbol!("symbolica_amflow::bubble_product_external").call(0);
     let kin = Kinematics::in_dimension(&Atom::var(dimension))
-        .map_err(|e| Error::InvalidInput(e.to_string()))?
+        .map_err(native_error)?
         .with_momenta(
             loops
                 .iter()
@@ -292,20 +297,17 @@ fn double_bubble_plan(family: &IntegralFamily, target: &Integral) -> Result<Opti
                 .chain(std::iter::once(external.clone())),
         )
         .and_then(|k| k.with_mass_squared(&external, Atom::num(gram.clone())))
-        .map_err(|e| Error::InvalidInput(e.to_string()))?;
+        .map_err(native_error)?;
     let mut products = Vec::new();
     for (i, left) in loops.iter().enumerate() {
         for right in &loops[i..] {
-            products.push(
-                kin.scalar_product(left, right)
-                    .map_err(|e| Error::InvalidInput(e.to_string()))?,
-            );
+            products.push(kin.scalar_product(left, right).map_err(native_error)?);
         }
     }
     for momentum in &loops {
         products.push(
             kin.scalar_product(momentum, &external)
-                .map_err(|e| Error::InvalidInput(e.to_string()))?,
+                .map_err(native_error)?,
         );
     }
     let expression = |d: &Propagator| {
@@ -324,7 +326,7 @@ fn double_bubble_plan(family: &IntegralFamily, target: &Integral) -> Result<Opti
             .collect(),
         &kin,
     )
-    .map_err(|e| Error::InvalidInput(e.to_string()))?;
+    .map_err(native_error)?;
     let canonical = [([1, 0], [0]), ([1, 0], [-1]), ([0, 1], [0]), ([0, 1], [-1])]
         .into_iter()
         .map(|(route, offset)| {
@@ -332,14 +334,17 @@ fn double_bubble_plan(family: &IntegralFamily, target: &Integral) -> Result<Opti
                 .map(|d| expression(&d))
         })
         .collect::<Result<Vec<_>>>()?;
-    let canonical = NativeFamily::new(loops, vec![external], canonical, &kin)
-        .map_err(|e| Error::InvalidInput(e.to_string()))?;
-    let mapped = match source.find_mapping(&canonical, 4096) {
+    let canonical =
+        NativeFamily::new(loops, vec![external], canonical, &kin).map_err(native_error)?;
+    // This finite proposal search only recognizes an optional terminal; a miss
+    // continues through the ordinary AMF owner. Shared resource failures are fatal.
+    let mapped = match source.find_mapping(&canonical, Some(4096), crate::ResourceLimits::default())
+    {
         Ok(mapping) => mapping.is_some(),
         Err(IntegralFamilyError::NoQuadraticBasis | IntegralFamilyError::MappingSearchLimit(_)) => {
             false
         }
-        Err(error) => return Err(Error::InvalidInput(error.to_string())),
+        Err(error) => return Err(native_error(error)),
     };
     if !mapped {
         return Ok(None);

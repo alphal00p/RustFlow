@@ -53,6 +53,7 @@ impl ScopedTableBackend {
     /// denominator restrictions are retained before coefficient cancellation.
     /// All rule leaves must be declared residuals, and reachable cycles fail.
     pub fn insert(&mut self, family: &IntegralFamily, mut reduction: Reduction) -> Result<()> {
+        super::check_table_storage(&reduction)?;
         let expressions = family_expressions(family)?;
         let key = scope_key(family)?;
         if self.tables.contains_key(&key) {
@@ -64,13 +65,16 @@ impl ScopedTableBackend {
         let variables = family_variables(family, &expressions)?;
         let mut coefficients = expressions;
         for (target, terms) in &reduction.rules {
+            symbolica::utils::resources::checkpoint()?;
             family.validate_integral(target)?;
             for (integral, coefficient) in terms {
+                symbolica::utils::resources::checkpoint()?;
                 family.validate_integral(integral)?;
                 coefficients.push(coefficient.clone());
             }
         }
         for integral in &reduction.residuals {
+            symbolica::utils::resources::checkpoint()?;
             family.validate_integral(integral)?;
         }
         let mut conditions = reduction.nonzero_conditions.clone();
@@ -89,6 +93,7 @@ impl ScopedTableBackend {
         // The same native sparse graph planner used by every public Reduction
         // call validates the complete immutable supplied table once at admission.
         super::table_graph::validate(&reduction, &targets)?;
+        symbolica::utils::resources::checkpoint()?;
         self.tables.insert(
             key,
             TableBackend {
@@ -107,6 +112,7 @@ impl ScopedTableBackend {
     }
 
     pub(super) fn table(&self, family: &IntegralFamily) -> Result<&TableBackend> {
+        symbolica::utils::resources::checkpoint()?;
         let key = scope_key(family)?;
         self.tables.get(&key).ok_or_else(|| Error::IncompleteReduction(format!(
             "no supplied reduction table for exact family {} ({key}); auxiliary deformations, specializations and recursive boundary families require separate entries",
@@ -137,6 +143,7 @@ impl ReductionBackend for ScopedTableBackend {
     ) -> Result<Reduction> {
         context.cancellation.check()?;
         for target in targets {
+            context.cancellation.check()?;
             family.validate_integral(target)?;
         }
         self.table(family)?.reduce(family, targets, context)
@@ -151,11 +158,13 @@ impl ReductionBackend for ScopedTableBackend {
     ) -> Result<Reduction> {
         context.cancellation.check()?;
         for target in targets {
+            context.cancellation.check()?;
             family.validate_integral(target)?;
         }
         let table = self.table(family)?;
         let replacement = BTreeMap::from([(Atom::var(family.epsilon), Atom::num(epsilon.clone()))]);
         for condition in &table.reduction.nonzero_conditions {
+            context.cancellation.check()?;
             if crate::family::substitute(condition, &replacement)
                 .together()
                 .cancel()
@@ -166,11 +175,13 @@ impl ReductionBackend for ScopedTableBackend {
                 )));
             }
         }
+        context.cancellation.check()?;
         table.reduce_at_epsilon(family, targets, epsilon, context)
     }
 }
 
 fn scope_key(family: &IntegralFamily) -> Result<String> {
+    symbolica::utils::resources::checkpoint()?;
     let expressions = family_expressions(family)?;
     let variables = family_variables(family, &expressions)?;
     // Retain the original domain before normalization can cancel denominators.
@@ -180,12 +191,15 @@ fn scope_key(family: &IntegralFamily) -> Result<String> {
         crate::physical_conditions::rational_denominator_conditions(&expressions, &variables)?;
     let mut normalized = family.clone();
     for propagator in &mut normalized.propagators {
+        symbolica::utils::resources::checkpoint()?;
         propagator.constant = propagator.constant.together().cancel();
         for coefficient in &mut propagator.scalar_products {
+            symbolica::utils::resources::checkpoint()?;
             *coefficient = coefficient.together().cancel();
         }
     }
     for coefficient in normalized.external_gram.iter_mut().flatten() {
+        symbolica::utils::resources::checkpoint()?;
         *coefficient = coefficient.together().cancel();
     }
     // Reuse the existing exact original-family identity owner. Its metadata
@@ -197,6 +211,7 @@ fn scope_key(family: &IntegralFamily) -> Result<String> {
 fn family_variables(family: &IntegralFamily, expressions: &[Atom]) -> Result<BTreeSet<Symbol>> {
     let mut symbols = BTreeSet::new();
     for atom in expressions {
+        symbolica::utils::resources::checkpoint()?;
         crate::family::scalar_symbols(atom.as_view(), &mut symbols)?;
     }
     symbols.insert(Atom::var(family.epsilon));
@@ -211,6 +226,7 @@ fn family_variables(family: &IntegralFamily, expressions: &[Atom]) -> Result<BTr
 }
 
 fn family_expressions(family: &IntegralFamily) -> Result<Vec<Atom>> {
+    symbolica::utils::resources::checkpoint()?;
     let loops = family.loops.len();
     let external = family.external.len();
     let products = loops
@@ -239,6 +255,7 @@ fn family_expressions(family: &IntegralFamily) -> Result<Vec<Atom>> {
     }
     for i in 0..external {
         for j in 0..i {
+            symbolica::utils::resources::checkpoint()?;
             if (&family.external_gram[i][j] - &family.external_gram[j][i])
                 .together()
                 .cancel()
@@ -250,6 +267,18 @@ fn family_expressions(family: &IntegralFamily) -> Result<Vec<Atom>> {
             }
         }
     }
+    let bytes = products
+        .checked_add(1)
+        .and_then(|count| count.checked_mul(family.propagators.len()))
+        .and_then(|count| {
+            external
+                .checked_mul(external)
+                .and_then(|n| count.checked_add(n))
+        })
+        .and_then(|count| count.checked_mul(std::mem::size_of::<Atom>()))
+        .and_then(|bytes| u64::try_from(bytes).ok())
+        .ok_or_else(|| Error::Limit("supplied family expression storage overflow".into()))?;
+    symbolica::utils::resources::check_allocation(bytes)?;
     Ok(family
         .propagators
         .iter()

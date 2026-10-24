@@ -48,7 +48,10 @@ fn principal_root(
         ));
     }
     let bits = crate::frobenius::exact::height(value);
-    if bits.saturating_add(1).saturating_mul(64) > limits.max_coefficient_bits {
+    if limits
+        .max_coefficient_bits
+        .is_some_and(|limit| bits.saturating_add(1).saturating_mul(64) > limit)
+    {
         return Err(Error::Limit(
             "exact quadratic root isolation height estimate exceeds limit".into(),
         ));
@@ -69,7 +72,8 @@ fn principal_root(
     context.cancellation.check()?;
     for (mut root, _) in roots {
         let location = root.classify_location();
-        for attempt in 0..12 {
+        let mut bits = 16_u32;
+        loop {
             context.cancellation.check()?;
             let disk = root.enclosure();
             let coordinate = if location == RootLocation::Imaginary {
@@ -83,9 +87,16 @@ fn principal_root(
             if coordinate + disk.radius() < Rational::zero() {
                 break;
             }
-            let bits = 32_u32.checked_shl(attempt).unwrap_or(u32::MAX);
-            if u64::from(bits) > limits.max_coefficient_bits {
-                break;
+            bits = bits.checked_mul(2).ok_or_else(|| {
+                Error::Limit("principal root refinement precision overflow".into())
+            })?;
+            if limits
+                .max_coefficient_bits
+                .is_some_and(|limit| u64::from(bits) > limit)
+            {
+                return Err(Error::Limit(
+                    "principal root refinement bit diagnostic exhausted".into(),
+                ));
             }
             let tolerance = Rational::one() / Rational::from(Integer::from(2).pow(u64::from(bits)));
             root = root.refined(&tolerance);
@@ -125,7 +136,10 @@ pub(super) fn matching_root_balls(
     if lifted.source.roots.is_empty() {
         return Ok(Vec::new());
     }
-    if u64::from(p.bits) > limits.max_coefficient_bits {
+    if limits
+        .max_coefficient_bits
+        .is_some_and(|limit| u64::from(p.bits) > limit)
+    {
         return Err(Error::Limit(
             "matching root refinement exceeds exact work limit".into(),
         ));
@@ -182,7 +196,7 @@ pub(super) fn valuation(
         .iter()
         .position(|a| !a.is_zero())
         .ok_or_else(|| Error::InvalidInput("zero root denominator".into()))?;
-    if n.max(d) > limits.max_order {
+    if limits.max_order.is_some_and(|limit| n.max(d) > limit) {
         return Err(Error::Limit(
             "exact root valuation exceeds order limit".into(),
         ));
@@ -234,11 +248,12 @@ pub(super) fn selected_germ(
     let z = lifted.rational.variable;
     let radicand = monomial_radicand(lifted, mask, limits, context)?;
     let (v, leading) = valuation(&radicand, z, limits, context)?;
-    if crate::frobenius::exact::height(&leading)
-        .saturating_add(1)
-        .saturating_mul(16)
-        > limits.max_coefficient_bits
-    {
+    if limits.max_coefficient_bits.is_some_and(|limit| {
+        crate::frobenius::exact::height(&leading)
+            .saturating_add(1)
+            .saturating_mul(16)
+            > limit
+    }) {
         return Err(Error::Limit(
             "exact leading square-root height estimate exceeds limit".into(),
         ));
@@ -293,11 +308,19 @@ pub(super) fn selected_germ(
         let value = gaussian_bounded(&substitute(&root.radicand, &rules), limits, context)?;
         physical_roots.push(principal_root(&value, limits, context)?);
     }
-    for attempt in 0..10 {
+    let mut bits = 32_u32;
+    loop {
         context.cancellation.check()?;
-        let bits = 64_u32.checked_shl(attempt).unwrap_or(u32::MAX);
-        if u64::from(bits) > limits.max_coefficient_bits {
-            break;
+        bits = bits.checked_mul(2).ok_or_else(|| {
+            Error::Limit("root product sheet refinement precision overflow".into())
+        })?;
+        if limits
+            .max_coefficient_bits
+            .is_some_and(|limit| u64::from(bits) > limit)
+        {
+            return Err(Error::Limit(
+                "root product sheet refinement bit diagnostic exhausted".into(),
+            ));
         }
         let p = Precision { bits };
         let tolerance = Rational::one() / Rational::from(Integer::from(2).pow(u64::from(bits)));
@@ -339,5 +362,4 @@ pub(super) fn selected_germ(
             ));
         }
     }
-    Err(Error::Accuracy("native root disks could not separate the exact product/phase sheet signs within resource limits".into()))
 }

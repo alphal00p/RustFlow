@@ -50,7 +50,7 @@ fn hidden_system_never_receives_false_verified_digits() {
             digits: 20,
             guard_digits: 40,
             series_order: 80,
-            max_steps: 1000,
+            max_steps: Some(1000),
             step_size_strategy: strategy,
             ..Default::default()
         };

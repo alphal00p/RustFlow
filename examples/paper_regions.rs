@@ -8,7 +8,7 @@ fn main() -> Result<()> {
     let mut symmetry_rules = false;
     let mut max_exact_frontier = 0;
     let mut max_backward_frontier = RustRedBackend::default().max_backward_frontier;
-    let mut max_targets = 32768;
+    let mut max_targets = None;
     let mut arguments = std::env::args().skip(1);
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
@@ -23,7 +23,7 @@ fn main() -> Result<()> {
                 match argument.as_str() {
                     "--max-exact-frontier" => max_exact_frontier = value,
                     "--max-backward-frontier" => max_backward_frontier = value,
-                    _ => max_targets = value,
+                    _ => max_targets = Some(value),
                 }
             }
             "--help" => {
@@ -61,7 +61,7 @@ fn main() -> Result<()> {
     };
     let evaluator = recursive::RecursiveBoundary::new(&backend, &options, &context);
     let (_, shifted) = family.deform(symbol!("paper_regions_eta"), &options.mass_mode)?;
-    let regions = regions::enumerate_regions(&family, 10000)?;
+    let regions = regions::enumerate_regions(&family, Some(10000))?;
     let epsilon = Rational::from((1, 2700));
     for (index, target) in targets.iter().enumerate() {
         for region in &regions {
@@ -72,7 +72,7 @@ fn main() -> Result<()> {
                     &expansion.coordinates,
                     &family,
                     &region.hard,
-                    10000,
+                    Some(10000),
                 )?;
                 let mut values = Vec::new();
                 for digits in [60, 80] {

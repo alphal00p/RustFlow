@@ -18,15 +18,7 @@ use symbolica::prelude::*;
 type BallMatrix = Matrix<FloatField<ComplexBall>>;
 type PolynomialMatrix = Matrix<UnivariatePolynomialRing<FloatField<ComplexBall>>>;
 
-// Admission estimates, not a hard allocator/time quota. A full epsilon
-// hierarchy must not be silently flattened into this dense owner.
-const MAX_DIMENSION: usize = 16;
-const MAX_ORDER: usize = 256;
-const MAX_BITS: u32 = 4096;
-const MAX_COEFFICIENTS: u64 = 1_000_000;
-const MAX_WORK: u64 = 100_000_000;
-const MAX_STORAGE_ESTIMATE: u64 = 256 * 1024 * 1024;
-const MAX_EXACT_BITS: u64 = 65_536;
+// Allocation estimates are checked against the caller's shared process budget.
 
 #[derive(Debug)]
 pub(crate) struct FundamentalErrors {
@@ -180,13 +172,16 @@ fn preflight(
     context: &RunContext,
 ) -> Result<()> {
     let n = system.dimension();
-    if n == 0 || n > MAX_DIMENSION || order > MAX_ORDER || system.p.bits > MAX_BITS {
-        return Err(Error::Limit(format!(
-            "fundamental proof admits dimension <= {MAX_DIMENSION}, order <= {MAX_ORDER}, precision <= {MAX_BITS} bits"
-        )));
+    context.cancellation.check()?;
+    if n == 0 || u32::try_from(n).is_err() {
+        return Err(Error::Unsupported(
+            "fundamental matrix dimensions exceed the native u32 representation".into(),
+        ));
     }
     let n = n as u64;
-    let order = order as u64 + 1;
+    let order = (order as u64)
+        .checked_add(1)
+        .ok_or_else(|| Error::Limit("fundamental order overflow".into()))?;
     let source_degree = system
         .exact_source_rows
         .iter()
@@ -197,18 +192,11 @@ fn preflight(
         .unwrap_or(1) as u64;
     // Transposition can combine n distinct original row denominators.
     let source_degree = source_degree.saturating_mul(n);
-    let guard_cells = (system.pole_polynomials.len() as u64).checked_mul(MAX_ORDER as u64 + 1);
+    let guard_cells = (system.pole_polynomials.len() as u64).checked_mul(order);
     let coefficients = n
         .checked_mul(n)
         .and_then(|a| a.checked_mul(8 * order + 4 * source_degree))
         .and_then(|a| a.checked_add(guard_cells?.checked_mul(4)?));
-    let work = n
-        .checked_pow(3)
-        .and_then(|a| a.checked_mul(order))
-        .and_then(|a| a.checked_mul(order + source_degree))
-        .and_then(|a| a.checked_mul(8))
-        .and_then(|a| a.checked_add(guard_cells?.checked_mul(4 * (MAX_ORDER as u64 + 1))?))
-        .and_then(|a| a.checked_mul(charts as u64));
     // Four MPFR values per rectangular complex ball, plus headers/limb slack.
     let bytes_per_coefficient =
         std::mem::size_of::<ComplexBall>() as u64 + 4 * (u64::from(system.p.bits).div_ceil(8) + 32);
@@ -222,8 +210,20 @@ fn preflight(
         });
     // Include the newly compiled transpose's exact coefficient arrays, whose
     // rational limb storage can exceed that of the working-precision balls.
-    let exact_coefficient_bytes = std::mem::size_of::<super::source::Gaussian>() as u64
-        + 4 * (MAX_EXACT_BITS.div_ceil(8) + 32);
+    let exact_bits = system
+        .exact_source_rows
+        .iter()
+        .flat_map(|row| {
+            std::iter::once(&row.denominator)
+                .chain(row.entries.iter().map(|(_, a)| a))
+                .chain(row.denominator_factors.iter().map(|(a, _)| a))
+        })
+        .flatten()
+        .map(crate::frobenius::exact::height)
+        .max()
+        .unwrap_or(0);
+    let exact_coefficient_bytes =
+        std::mem::size_of::<super::source::Gaussian>() as u64 + 4 * (exact_bits.div_ceil(8) + 32);
     let exact_storage = n
         .checked_mul(n)
         .and_then(|a| a.checked_mul(2 * source_degree))
@@ -232,29 +232,16 @@ fn preflight(
         .and_then(|a| a.checked_mul(bytes_per_coefficient))
         .and_then(|a| a.checked_add(endpoint_storage?))
         .and_then(|a| a.checked_add(exact_storage?));
-    if coefficients.is_none_or(|a| a > MAX_COEFFICIENTS)
-        || endpoint_cells.is_none_or(|a| a > MAX_COEFFICIENTS)
-        || work.is_none_or(|a| a > MAX_WORK)
-        || storage.is_none_or(|a| a > MAX_STORAGE_ESTIMATE)
-    {
-        return Err(Error::Limit(
-            "fundamental proof coefficient/work/storage estimate exhausted".into(),
-        ));
-    }
+    let storage =
+        storage.ok_or_else(|| Error::Limit("fundamental allocation estimate overflow".into()))?;
+    symbolica::utils::resources::check_allocation(storage)?;
     // Reuse the shared metadata-only rational-operation admission before the
     // native transpose compilation and guard conversion. It bounds exponent,
     // source height/depth and polynomial growth without performing arithmetic.
-    let limits = crate::frobenius::exact::ExactFrobeniusLimits {
-        max_dimension: MAX_DIMENSION,
-        max_order: MAX_ORDER,
-        max_coefficient_bits: MAX_EXACT_BITS,
-        max_scalar_cells: MAX_COEFFICIENTS as usize,
-    };
-    let mut source_bytes = 0_usize;
-    if system.pole_polynomials.len() > 256 || !system.source.values.is_empty() {
+    let limits = crate::frobenius::exact::ExactFrobeniusLimits::default();
+    if !system.source.values.is_empty() {
         return Err(Error::Unsupported(
-            "fundamental proof requires a specialized rational source and at most 256 guards"
-                .into(),
+            "fundamental proof requires a specialized rational source".into(),
         ));
     }
     for expression in system
@@ -265,12 +252,7 @@ fn preflight(
         .chain(&system.pole_polynomials)
     {
         context.cancellation.check()?;
-        source_bytes = source_bytes.saturating_add(expression.as_view().get_byte_size());
-        if source_bytes > MAX_COEFFICIENTS as usize {
-            return Err(Error::Limit(
-                "fundamental source expression budget exhausted".into(),
-            ));
-        }
+        symbolica::utils::resources::check_allocation(expression.as_view().get_byte_size() as u64)?;
         crate::frobenius::exact::preflight_operation(
             &[expression],
             system.source.variable,
@@ -352,15 +334,10 @@ pub(crate) fn propagate(
             .chain(row.denominator_factors.iter().map(|(a, _)| a))
         {
             context.cancellation.check()?;
-            if polynomial.len() > MAX_ORDER + 1
-                || polynomial
-                    .iter()
-                    .any(|a| crate::frobenius::exact::height(a) > MAX_EXACT_BITS)
-            {
-                return Err(Error::Limit(
-                    "fundamental observed transpose degree/height exceeds admission".into(),
-                ));
-            }
+            symbolica::utils::resources::check_allocation(
+                (polynomial.len() as u64)
+                    .saturating_mul(std::mem::size_of::<super::source::Gaussian>() as u64),
+            )?;
         }
     }
     let specialization = ExactSpecialization::new(p, &system.source.values)?;
@@ -370,11 +347,10 @@ pub(crate) fn propagate(
         .map(|a| {
             context.cancellation.check()?;
             let coefficients = specialization.polynomial(a, system.source.variable)?;
-            if coefficients.len() > MAX_ORDER + 1 {
-                return Err(Error::Limit(
-                    "fundamental source guard degree exceeded".into(),
-                ));
-            }
+            symbolica::utils::resources::check_allocation(
+                (coefficients.len() as u64)
+                    .saturating_mul(std::mem::size_of::<ComplexBall>() as u64),
+            )?;
             Ok(arithmetic.polynomial(coefficients.iter().map(|a| exact_ball(a, p)).collect()))
         })
         .collect::<Result<Vec<_>>>()?;
@@ -599,16 +575,23 @@ mod tests {
             ),
             Err(Error::InvalidInput(_))
         ));
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(1),
+                ..Default::default()
+            },
+            || Ok(0),
+        );
         assert!(matches!(
-            propagate(
+            budget.run(|| propagate(
                 &system,
                 &segments,
                 &[p.tolerance(30)],
                 &[p.real(1)],
                 257,
                 &RunContext::default()
-            ),
-            Err(Error::Limit(_))
+            )),
+            Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
         ));
         let context = RunContext::default();
         context.cancellation.cancel();
@@ -661,34 +644,55 @@ mod tests {
     }
 
     #[test]
-    fn transpose_growth_is_admitted_before_native_preparation() {
+    fn transpose_growth_uses_the_shared_budget_before_native_preparation() {
         let p = Precision { bits: 160 };
         let source = system(&[&["x^130", "0"], &["x^130", "0"]], p);
-        let result = propagate(
-            &source,
-            &[segment(p, p.zero(), p.i(1))],
-            &[p.tolerance(30), p.tolerance(30)],
-            &[p.real(1), p.real(1)],
-            24,
-            &RunContext::default(),
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(1),
+                ..Default::default()
+            },
+            || Ok(0),
         );
-        assert!(
-            matches!(result,Err(Error::Limit(ref message)) if message.contains("rational-operation"))
-        );
+        let result = budget.run(|| {
+            propagate(
+                &source,
+                &[segment(p, p.zero(), p.i(1))],
+                &[p.tolerance(30), p.tolerance(30)],
+                &[p.real(1), p.real(1)],
+                24,
+                &RunContext::default(),
+            )
+        });
+        assert!(matches!(
+            result,
+            Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+        ));
     }
 
     #[test]
     fn retained_endpoints_are_charged_at_their_storage_precision() {
         let ordinary = system(&[&["0"]], Precision { bits: 160 });
         let large = system(&[&["0"]], Precision { bits: 4096 });
-        assert!(preflight(&ordinary, 1, 600_000, &RunContext::default()).is_ok());
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(128 * 1024 * 1024),
+                ..Default::default()
+            },
+            || Ok(0),
+        );
+        assert!(
+            budget
+                .run(|| preflight(&ordinary, 1, 600_000, &RunContext::default()))
+                .is_ok()
+        );
         assert!(matches!(
-            preflight(&large, 1, 600_000, &RunContext::default()),
-            Err(Error::Limit(_))
+            budget.run(|| preflight(&large, 1, 600_000, &RunContext::default())),
+            Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
         ));
         assert!(matches!(
-            preflight(&ordinary, 1, 2_000_000, &RunContext::default()),
-            Err(Error::Limit(_))
+            budget.run(|| preflight(&ordinary, 1, 2_000_000, &RunContext::default())),
+            Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
         ));
     }
 }

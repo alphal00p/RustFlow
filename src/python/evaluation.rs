@@ -155,19 +155,19 @@ impl PyIntegralEvaluator {
         .map_err(error)
     }
     #[new]
-    #[pyo3(signature=(*, options=None, reductions=None, reduction_depth=2, reduction_targets=4096, reduction_batch_size=32))]
+    #[pyo3(signature=(*, options=None, reductions=None, reduction_depth=2, reduction_targets=None, reduction_batch_size=32))]
     fn new(
         options: Option<&PyEvaluationOptions>,
         reductions: Option<&PyReductionTables>,
         reduction_depth: u32,
-        reduction_targets: usize,
+        reduction_targets: Option<usize>,
         reduction_batch_size: usize,
     ) -> PyResult<Self> {
         let options = super::options(options);
         options.validate().map_err(error)?;
-        if reduction_targets == 0 || reduction_batch_size == 0 {
+        if reduction_targets == Some(0) || reduction_batch_size == 0 {
             return Err(InvalidInputError::new_err(
-                "reduction_targets and reduction_batch_size must be positive",
+                "reduction_targets must be absent or positive, and reduction_batch_size must be positive",
             ));
         }
         let backend: Arc<dyn ReductionBackend> = match reductions {
@@ -260,41 +260,56 @@ impl PyIntegralEvaluator {
         let context = context(control);
         let values = py
             .detach(|| {
-                let boundary = crate::recursive::RecursiveBoundary::new(
-                    self.backend.as_ref(),
-                    &self.options,
-                    &context,
-                );
-                let evaluate = |(index, epsilon): (usize, &Rational)| {
-                    context.emit(crate::Progress::Sample {
-                        index,
-                        total: samples.len(),
-                    })?;
-                    crate::PreparedFlow::new_at_epsilon(
-                        &family,
-                        &targets,
-                        &point,
+                self.options.run_with_resources(|| {
+                    let boundary = crate::recursive::RecursiveBoundary::new(
                         self.backend.as_ref(),
                         &self.options,
                         &context,
-                        epsilon,
-                    )?
-                    .evaluate(epsilon, &self.options, &boundary, &context)
-                };
-                if self.options.workers == 1 {
-                    samples
-                        .iter()
-                        .enumerate()
-                        .map(evaluate)
-                        .collect::<crate::Result<Vec<_>>>()
-                } else {
-                    use rayon::prelude::*;
-                    rayon::ThreadPoolBuilder::new()
-                        .num_threads(self.options.workers)
-                        .build()
-                        .map_err(|e| crate::Error::InvalidInput(e.to_string()))?
-                        .install(|| samples.par_iter().enumerate().map(evaluate).collect())
-                }
+                    );
+                    let evaluate = |(index, epsilon): (usize, &Rational)| {
+                        context.emit(crate::Progress::Sample {
+                            index,
+                            total: samples.len(),
+                        })?;
+                        crate::PreparedFlow::new_at_epsilon(
+                            &family,
+                            &targets,
+                            &point,
+                            self.backend.as_ref(),
+                            &self.options,
+                            &context,
+                            epsilon,
+                        )?
+                        .evaluate(
+                            epsilon,
+                            &self.options,
+                            &boundary,
+                            &context,
+                        )
+                    };
+                    if self.options.workers == 1 {
+                        samples
+                            .iter()
+                            .enumerate()
+                            .map(evaluate)
+                            .collect::<crate::Result<Vec<_>>>()
+                    } else {
+                        use rayon::prelude::*;
+                        let resources =
+                            symbolica::utils::resources::ResourceBudget::capture_current();
+                        rayon::ThreadPoolBuilder::new()
+                            .num_threads(self.options.workers)
+                            .build()
+                            .map_err(|e| crate::Error::InvalidInput(e.to_string()))?
+                            .install(|| {
+                                samples
+                                    .par_iter()
+                                    .enumerate()
+                                    .map(|sample| resources.run_captured(|| evaluate(sample)))
+                                    .collect()
+                            })
+                    }
+                })
             })
             .map_err(error)?;
         Ok(values
@@ -303,7 +318,7 @@ impl PyIntegralEvaluator {
             .collect())
     }
     /// Contract the native diagram numerator, decompose it, then integrate the exact weighted sum.
-    #[pyo3(signature=(diagram, kinematics, point, epsilon, *, last=0, max_partial_fraction_states=10000, control=None))]
+    #[pyo3(signature=(diagram, kinematics, point, epsilon, *, last=0, max_partial_fraction_states=None, control=None))]
     #[allow(clippy::too_many_arguments)]
     fn evaluate_diagram(
         &self,
@@ -313,7 +328,7 @@ impl PyIntegralEvaluator {
         point: Expressions,
         epsilon: PythonExpression,
         last: i32,
-        max_partial_fraction_states: usize,
+        max_partial_fraction_states: Option<usize>,
         control: Option<&PyComputationControl>,
     ) -> PyResult<PyLaurentExpansion> {
         let diagram = diagram.as_shared_diagram()?.clone();
@@ -323,24 +338,27 @@ impl PyIntegralEvaluator {
         let context = context(control);
         let inner = py
             .detach(|| {
-                let graph = crate::hepkit::GraphIntegral::new(diagram, &kinematics)?;
-                let groups = graph.integral_groups(
-                    &point,
-                    epsilon,
-                    self.options.dimension,
-                    max_partial_fraction_states,
-                    &context,
-                )?;
-                crate::solve_integral_combinations(
-                    &groups,
-                    // integral_groups has already applied these substitutions
-                    // simultaneously. Applying a -> b, b -> 3 twice changes a.
-                    &crate::KinematicPoint::default(),
-                    last,
-                    &self.options,
-                    self.backend.as_ref(),
-                    &context,
-                )
+                self.options.run_with_resources(|| {
+                    let graph = crate::hepkit::GraphIntegral::new(diagram, &kinematics)?;
+                    let groups = graph.integral_groups(
+                        &point,
+                        epsilon,
+                        self.options.dimension,
+                        max_partial_fraction_states,
+                        self.options.resource_limits,
+                        &context,
+                    )?;
+                    crate::solve_integral_combinations(
+                        &groups,
+                        // integral_groups has already applied these substitutions
+                        // simultaneously. Applying a -> b, b -> 3 twice changes a.
+                        &crate::KinematicPoint::default(),
+                        last,
+                        &self.options,
+                        self.backend.as_ref(),
+                        &context,
+                    )
+                })
             })
             .map_err(error)?;
         Ok(PyLaurentExpansion::from(inner))

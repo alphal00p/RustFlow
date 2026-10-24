@@ -4,28 +4,21 @@
 //! The evidence digest binds that external proof receipt; it is not itself a
 //! proof. Scope, coefficient domains, graph validity, native order and budgets
 //! are checked here and by the existing native search owner.
-use super::{Reduction, ReductionBackend, RustRedBackend, ScopedTableBackend};
+use super::{
+    NativeReductionScope, Reduction, ReductionBackend, RustRedBackend, ScopedTableBackend,
+};
 use crate::{Error, Integral, IntegralFamily, Result, RunContext};
 use std::{collections::BTreeSet, sync::Arc};
 use symbolica::prelude::*;
 
-/// Supplied equations have a separate bounded budget from solver searches.
-#[derive(Clone, Copy, Debug)]
+/// Optional diagnostic limits on supplied-table admission, separate from solver
+/// searches. Ordinary admission uses the caller's shared resource budget.
+#[derive(Clone, Copy, Debug, Default)]
 pub struct NativeIdentityLimits {
-    pub max_rules: usize,
-    pub max_terms: usize,
-    pub max_residuals: usize,
-    pub max_conditions: usize,
-}
-impl Default for NativeIdentityLimits {
-    fn default() -> Self {
-        Self {
-            max_rules: 65_536,
-            max_terms: 262_144,
-            max_residuals: 65_536,
-            max_conditions: 131_072,
-        }
-    }
+    pub max_rules: Option<usize>,
+    pub max_terms: Option<usize>,
+    pub max_residuals: Option<usize>,
+    pub max_conditions: Option<usize>,
 }
 
 /// Immutable exact-family table with an authenticated content/domain identity.
@@ -48,6 +41,7 @@ impl NativeIdentityBank {
         evidence_sha256: &str,
         limits: NativeIdentityLimits,
     ) -> Result<Self> {
+        symbolica::utils::resources::checkpoint()?;
         if evidence_sha256.len() != 64 || !evidence_sha256.bytes().all(|b| b.is_ascii_hexdigit()) {
             return Err(Error::InvalidInput(
                 "identity-bank evidence must be a SHA256 digest".into(),
@@ -56,8 +50,11 @@ impl NativeIdentityBank {
         let terms = reduction
             .rules
             .values()
-            .try_fold(0usize, |n, r| n.checked_add(r.len()))
-            .ok_or_else(|| Error::Limit("identity-bank term count overflow".into()))?;
+            .try_fold(0usize, |n, r| -> Result<usize> {
+                symbolica::utils::resources::checkpoint()?;
+                n.checked_add(r.len())
+                    .ok_or_else(|| Error::Limit("identity-bank term count overflow".into()))
+            })?;
         for (name, actual, limit) in [
             ("rules", reduction.rules.len(), limits.max_rules),
             ("terms", terms, limits.max_terms),
@@ -68,12 +65,15 @@ impl NativeIdentityBank {
                 limits.max_conditions,
             ),
         ] {
-            if actual > limit {
+            if let Some(limit) = limit
+                && actual > limit
+            {
                 return Err(Error::Limit(format!(
                     "identity-bank {name} requires {actual}; limit {limit}"
                 )));
             }
         }
+        super::check_table_storage(&reduction)?;
         let rules = reduction.rules.len();
         let targets = reduction
             .rules
@@ -85,12 +85,13 @@ impl NativeIdentityBank {
             .collect();
         let table = ScopedTableBackend::from_table(name, family, reduction)?;
         // Scope admission infers restrictions from every rational denominator.
-        // Those conditions also consume the advertised bank-domain budget.
+        // Explicit admission diagnostics also cover those inferred conditions.
         let admitted_conditions = table.table(family)?.reduction.nonzero_conditions.len();
-        if admitted_conditions > limits.max_conditions {
+        if let Some(limit) = limits.max_conditions
+            && admitted_conditions > limit
+        {
             return Err(Error::Limit(format!(
-                "identity-bank admitted conditions requires {admitted_conditions}; limit {}",
-                limits.max_conditions
+                "identity-bank admitted conditions requires {admitted_conditions}; limit {limit}"
             )));
         }
 
@@ -99,6 +100,7 @@ impl NativeIdentityBank {
             table.identity(),
             evidence_sha256.to_ascii_lowercase()
         );
+        symbolica::utils::resources::checkpoint()?;
         Ok(Self {
             table,
             targets,
@@ -123,6 +125,7 @@ impl NativeIdentityBank {
         epsilon: Option<&Rational>,
         context: &RunContext,
     ) -> Result<ResolvedIdentityBank> {
+        context.cancellation.check()?;
         let reduction = if let Some(epsilon) = epsilon {
             self.table
                 .reduce_at_epsilon(family, &self.targets, epsilon, context)?
@@ -132,6 +135,7 @@ impl NativeIdentityBank {
         // Explicitly distinguish symbolic and sampled domains even if a
         // specialized family's remaining affine coefficients happen to agree.
         let identity = format!("{}:epsilon={epsilon:?}", self.identity);
+        context.cancellation.check()?;
         Ok(ResolvedIdentityBank {
             identity,
             reduction,
@@ -180,9 +184,11 @@ impl ReductionBackend for SeededRustRedBackend {
             targets,
             None,
             context,
-            None,
-            Some(&self.bank),
-            None,
+            NativeReductionScope {
+                cuts: None,
+                seed: Some(&self.bank),
+                provider: None,
+            },
         )
     }
     fn reduce_at_epsilon(
@@ -197,9 +203,11 @@ impl ReductionBackend for SeededRustRedBackend {
             targets,
             Some(epsilon),
             context,
-            None,
-            Some(&self.bank),
-            None,
+            NativeReductionScope {
+                cuts: None,
+                seed: Some(&self.bank),
+                provider: None,
+            },
         )
     }
     // ReductionBackend's explicit Unsupported defaults retain the cut measure.

@@ -5,7 +5,11 @@ use symbolica::tensors::sparse::{LuLMode, SparseRowReducer};
 impl ExactDomain<'_> {
     fn observe_reducer(&self, reducer: &SparseRowReducer<FloatField<Gaussian>>) -> Result<()> {
         self.context.cancellation.check()?;
-        if reducer.u().nvalues() > self.limits.max_scalar_cells {
+        if self
+            .limits
+            .max_scalar_cells
+            .is_some_and(|limit| reducer.u().nvalues() > limit)
+        {
             return Err(Error::Limit(
                 "exact sparse elimination stored cells exceed limit".into(),
             ));
@@ -28,12 +32,14 @@ impl ExactDomain<'_> {
                 "exact sparse elimination dimensions".into(),
             ));
         }
+        let native_columns = u32::try_from(columns)
+            .map_err(|_| Error::Limit("exact sparse column count exceeds u32".into()))?;
         self.preflight_matrix(rows.len().max(columns))?;
         self.check_rows(&rows)?;
         let matrix = ExactMatrix::from_nested_vec(rows, field())
             .map_err(Error::Numerical)?
             .to_sparse();
-        let mut reducer = SparseRowReducer::new(columns as u32, field(), LuLMode::None);
+        let mut reducer = SparseRowReducer::new(native_columns, field(), LuLMode::None);
         for (_, indices, values) in matrix.row_iter() {
             self.context.cancellation.check()?;
             reducer.add_row(values, indices);
@@ -45,8 +51,12 @@ impl ExactDomain<'_> {
         // exact RHS pivots by each caller, including nonzero RHS-only rows.
         reducer.back_substitute();
         self.observe_reducer(&reducer)?;
+        self.check_allocation(reducer.u().nvalues())?;
         let mut reduced = reducer.u().clone();
         reduced.sort_rows_by_pivot(reducer.pivots());
+        let reduced_rows = usize::try_from(reduced.nrows())
+            .map_err(|_| Error::Limit("exact sparse row count exceeds usize".into()))?;
+        self.check_allocation(scalar_count(reduced_rows.checked_mul(columns))?)?;
         let rows = reduced
             .to_dense()
             .into_vec()
@@ -68,6 +78,8 @@ impl ExactDomain<'_> {
                 "exact sparse recurrence dimensions".into(),
             ));
         }
+        self.context.cancellation.check()?;
+        process_resources::check_allocation(allocation_bytes(n, std::mem::size_of::<usize>())?)?;
         let mut owners = vec![usize::MAX; n];
         for (block, indices) in blocks.iter().enumerate() {
             if indices.is_empty() {
@@ -112,6 +124,8 @@ impl ExactDomain<'_> {
                 "exact sparse inverse dimensions".into(),
             ));
         }
+        let native_dimension = u32::try_from(n)
+            .map_err(|_| Error::Limit("exact sparse inverse dimension exceeds u32".into()))?;
         // The native inverse augments by an identity. Retain the same scalar
         // allocation admission as the row-observed augmented-matrix path.
         self.preflight_matrix(
@@ -122,11 +136,14 @@ impl ExactDomain<'_> {
         let matrix = ExactMatrix::from_nested_vec(rows, field()).map_err(Error::Numerical)?;
         // Reuse the existing owner inverse. Its internal elimination arithmetic
         // is not exposed to this caller: only inputs and outputs are observed.
-        let inverse = matrix
-            .to_sparse()
-            .inv()
-            .map_err(|e| Error::Numerical(format!("exact sparse recurrence inverse: {e}")))?
-            .to_dense();
+        let inverse = matrix.to_sparse().inv().map_err(|e| {
+            crate::error::preserve_resource(&e).unwrap_or_else(|| {
+                Error::Numerical(format!("exact sparse recurrence inverse: {e}"))
+            })
+        })?;
+        context.cancellation.check()?;
+        self.check_allocation(scalar_count(n.checked_mul(n))?)?;
+        let inverse = inverse.to_dense();
         context.cancellation.check()?;
         let inverse_rows = inverse
             .clone()
@@ -135,7 +152,7 @@ impl ExactDomain<'_> {
             .map(<[Gaussian]>::to_vec)
             .collect::<Vec<_>>();
         self.check_rows(&inverse_rows)?;
-        if &matrix * &inverse != ExactMatrix::identity(n as u32, field()) {
+        if &matrix * &inverse != ExactMatrix::identity(native_dimension, field()) {
             return Err(Error::Numerical(
                 "exact sparse recurrence inverse identity failed".into(),
             ));
@@ -156,6 +173,20 @@ impl ExactDomain<'_> {
                 "exact sparse resonant dimensions".into(),
             ));
         }
+        context.cancellation.check()?;
+        let native_dimension = u32::try_from(n)
+            .map_err(|_| Error::Limit("exact sparse resonant dimension exceeds u32".into()))?;
+        self.preflight_matrix(rows.len().max(series_terms(n)?))?;
+        let cells = scalar_count(
+            rows.len()
+                .checked_mul(n)
+                .and_then(|v| v.checked_mul(2))
+                .and_then(|v| v.checked_add(rhs.len().checked_mul(2)?)),
+        )?;
+        process_resources::check_allocation(allocation_bytes(
+            cells,
+            std::mem::size_of::<Gaussian>(),
+        )?)?;
         let matrix =
             ExactMatrix::from_nested_vec(rows.clone(), field()).map_err(Error::Numerical)?;
         let rhs_matrix =
@@ -179,18 +210,22 @@ impl ExactDomain<'_> {
             ));
         }
         let result = if reduced.is_empty() {
-            ExactMatrix::new(n as u32, 1, field())
+            ExactMatrix::new(native_dimension, 1, field())
         } else {
             let native =
                 ExactMatrix::from_nested_vec(reduced, field()).map_err(Error::Numerical)?;
             let (a, b) = native
-                .split_col(n as u32)
+                .split_col(native_dimension)
                 .map_err(|e| Error::Numerical(e.to_string()))?;
             // Native solve_any chooses a representative of the reduced affine
             // solution set; no new elimination or nullspace algorithm here.
-            a.solve_any(&b)
-                .map_err(|e| Error::Numerical(format!("exact sparse resonant solve: {e}")))?
+            a.solve_any(&b).map_err(|e| {
+                crate::error::preserve_resource(&e).unwrap_or_else(|| {
+                    Error::Numerical(format!("exact sparse resonant solve: {e}"))
+                })
+            })?
         };
+        context.cancellation.check()?;
         if &matrix * &result != rhs_matrix {
             return Err(Error::Numerical(
                 "exact sparse resonant residual failed".into(),

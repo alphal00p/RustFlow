@@ -52,12 +52,14 @@ fn valuation(entry: &Atom, epsilon: Symbol) -> Result<Option<i64>> {
 
 fn range_count(leading: i32, last: i32) -> Result<usize> {
     let count = i64::from(last) - i64::from(leading) + 1;
-    if !(1..=1024).contains(&count) {
-        return Err(Error::Limit(
-            "epsilon shearing requires 1 through 1024 Laurent coefficients".into(),
-        ));
-    }
-    Ok(count as usize)
+    let count = usize::try_from(count)
+        .ok()
+        .filter(|count| *count > 0)
+        .ok_or_else(|| {
+            Error::Limit("epsilon shearing requires a nonempty representable Laurent range".into())
+        })?;
+    symbolica::utils::resources::checkpoint()?;
+    Ok(count)
 }
 
 impl EpsilonShearing {
@@ -66,6 +68,15 @@ impl EpsilonShearing {
     /// it does not assert that every nondiagonal gauge is impossible.
     pub fn regularize(
         system: &KinematicSystem,
+        context: &RunContext,
+    ) -> Result<(KinematicSystem, Self)> {
+        Self::regularize_with_span_limit(system, None, context)
+    }
+
+    /// An explicit diagnostic span limit; the ordinary path has no work-count cap.
+    pub fn regularize_with_span_limit(
+        system: &KinematicSystem,
+        max_span: Option<i64>,
         context: &RunContext,
     ) -> Result<(KinematicSystem, Self)> {
         system.validate()?;
@@ -104,7 +115,7 @@ impl EpsilonShearing {
                 }
             }
         }
-        let result = Self::from_orders(system.epsilon, &orders, conditions, context)?;
+        let result = Self::from_orders(system.epsilon, &orders, max_span, conditions, context)?;
         let transform = result.transformation();
         let mut derivatives = std::collections::BTreeMap::new();
         for (&variable, matrix) in &system.derivatives {
@@ -135,16 +146,18 @@ impl EpsilonShearing {
     fn from_orders(
         epsilon: Symbol,
         orders: &[Vec<Option<i64>>],
+        max_span: Option<i64>,
         conditions: Vec<Atom>,
         context: &RunContext,
     ) -> Result<Self> {
-        let weights = crate::integer_shearing::integer_potentials(orders, 0, 10000, Some(context))?
-            .into_iter()
-            .map(|w| {
-                i32::try_from(w)
-                    .map_err(|_| Error::Limit("epsilon shearing weight overflow".into()))
-            })
-            .collect::<Result<Vec<_>>>()?;
+        let weights =
+            crate::integer_shearing::integer_potentials(orders, 0, max_span, Some(context))?
+                .into_iter()
+                .map(|w| {
+                    i32::try_from(w)
+                        .map_err(|_| Error::Limit("epsilon shearing weight overflow".into()))
+                })
+                .collect::<Result<Vec<_>>>()?;
         Ok(Self {
             epsilon,
             weights,
@@ -224,7 +237,7 @@ impl EpsilonShearing {
         }
         conditions.extend(generic);
         conditions = crate::physical_conditions::canonical_conditions(&conditions, &variables)?;
-        let result = Self::from_orders(system.epsilon, &orders, conditions, context)?;
+        let result = Self::from_orders(system.epsilon, &orders, None, conditions, context)?;
         let transform = result.transformation();
         for (&variable, matrix) in &mut normalized.derivatives {
             context.cancellation.check()?;
@@ -297,14 +310,34 @@ impl EpsilonShearing {
     /// Required rectangular J range to restore every original component through
     /// `last`. The original common pole bound must already be justified.
     pub fn required_sheared_range(&self, leading: i32, last: i32) -> Result<(i32, i32)> {
-        range_count(leading, last)?;
+        self.required_sheared_range_with_limit(leading, last, None)
+    }
+
+    /// Optional diagnostic coefficient count, applied before and after shearing.
+    pub fn required_sheared_range_with_limit(
+        &self,
+        leading: i32,
+        last: i32,
+        limit: Option<usize>,
+    ) -> Result<(i32, i32)> {
+        let count = range_count(leading, last)?;
+        if limit.is_some_and(|limit| count > limit) {
+            return Err(Error::Limit(
+                "epsilon shearing diagnostic coefficient count".into(),
+            ));
+        }
         let last = self.weights.iter().try_fold(last, |high, &w| {
             let next = last
                 .checked_sub(w)
                 .ok_or_else(|| Error::Limit("epsilon shearing Laurent order overflow".into()))?;
             Ok::<_, Error>(high.max(next))
         })?;
-        range_count(leading, last)?;
+        let count = range_count(leading, last)?;
+        if limit.is_some_and(|limit| count > limit) {
+            return Err(Error::Limit(
+                "epsilon shearing diagnostic coefficient count".into(),
+            ));
+        }
         Ok((leading, last))
     }
 

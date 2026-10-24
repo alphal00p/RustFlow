@@ -70,7 +70,7 @@ pub fn refine_basis(
     system: &mut ReducedSystem,
     variable: Symbol,
     epsilon: Symbol,
-    max_changes: usize,
+    max_changes: Option<usize>,
 ) -> Result<RefinementReport> {
     let n = system.basis.len();
     if n == 0 {
@@ -82,6 +82,7 @@ pub fn refine_basis(
     let mut visited = BTreeSet::new();
     let mut changes = 0;
     loop {
+        symbolica::utils::resources::checkpoint()?;
         if !visited.insert(system.basis.clone()) {
             return Ok(RefinementReport {
                 basis_changes: changes,
@@ -114,7 +115,7 @@ pub fn refine_basis(
                 factorized,
             });
         };
-        if changes >= max_changes {
+        if max_changes.is_some_and(|limit| changes >= limit) {
             return Ok(RefinementReport {
                 basis_changes: changes,
                 factorized: false,
@@ -182,7 +183,7 @@ mod tests {
                 BTreeMap::from([(old, parse!("1/(eps+x)"))]),
             )]),
         };
-        let report = refine_basis(&mut system, symbol!("x"), symbol!("eps"), 10).unwrap();
+        let report = refine_basis(&mut system, symbol!("x"), symbol!("eps"), Some(10)).unwrap();
         assert!(report.factorized);
         assert_eq!(report.basis_changes, 1);
         assert_eq!(system.transformations.len(), 1);
@@ -251,7 +252,7 @@ mod complex_denominator_tests {
             )]),
             transformations: vec![],
         };
-        let report = refine_basis(&mut system, x, epsilon, 4).unwrap();
+        let report = refine_basis(&mut system, x, epsilon, Some(4)).unwrap();
         assert_eq!(report.basis_changes, 1);
         assert!(report.factorized);
         assert_eq!(system.basis, vec![new.clone()]);

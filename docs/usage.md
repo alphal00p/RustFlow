@@ -179,3 +179,25 @@ Increasing it can help when individual checkpoints are several gigabytes;
 cancellation and search completion still force a save. The `paper_subsector`
 diagnostic also accepts `--depth N`, `--max-targets N`, and
 `--max-exact-frontier N`.
+
+## External Higgs-plus-jet mathematics
+
+Published Higgs-plus-jet inputs are fetched separately from the library. Before
+constructing the published system or form-factor objects in a notebook, use:
+
+```python
+from symbolica.community.hep.integration import load_higgs_jet_data
+await load_higgs_jet_data(form_factors=True)
+```
+
+Native Python and browser/WASM use the same asynchronous API. Downloads use an
+immutable Git revision; the library verifies BLAKE3 hashes before accepting any
+payload. Validated files are cached by hash. With `form_factors=False`, the large
+coefficient document is not downloaded. General reduction and transport do not
+need these example inputs.
+
+Rust callers can provide documents with `gg_hg::data::install`, or explicitly set
+`RUSTFLOW_HIGGS_JET_DATA_DIR` to a directory containing the matching JSON files.
+Mathematical fingerprints retain their existing values; authenticated inputs
+protect boundary-cache identities. Tests read repository fixtures; production
+builds do not embed them.

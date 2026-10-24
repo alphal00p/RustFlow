@@ -54,7 +54,7 @@ fn fifteen_slot_five_loop_tadpole_product_obeys_exact_euler_ibp() -> Result<()> 
             parametric_rules: false,
             symmetry_rules: false,
             max_depth: 1,
-            max_targets: 1024,
+            max_targets: Some(1024),
             ..Default::default()
         };
         let result = backend.reduce(

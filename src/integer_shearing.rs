@@ -8,11 +8,13 @@ use linnet::half_edge::{HedgeGraph, builder::HedgeGraphBuilder, involution::Hedg
 pub(crate) fn integer_potentials(
     orders: &[Vec<Option<i64>>],
     allowed_pole: i64,
-    max_span: i64,
+    max_span: Option<i64>,
     context: Option<&RunContext>,
 ) -> Result<Vec<i64>> {
+    symbolica::utils::resources::checkpoint()?;
     let n = orders.len();
-    if n == 0 || orders.iter().any(|row| row.len() != n) || max_span < 0 {
+    if n == 0 || orders.iter().any(|row| row.len() != n) || max_span.is_some_and(|limit| limit < 0)
+    {
         return Err(Error::InvalidInput(
             "integer shearing dimensions or limit".into(),
         ));
@@ -85,12 +87,12 @@ pub(crate) fn integer_potentials(
     }
     let maximum = *shifts.iter().max().unwrap();
     let minimum = *shifts.iter().min().unwrap();
-    if maximum
+    let span = maximum
         .checked_sub(minimum)
-        .is_none_or(|span| span > max_span)
-    {
+        .ok_or_else(|| Error::Limit("integer shearing span overflow".into()))?;
+    if max_span.is_some_and(|limit| span > limit) {
         return Err(Error::Limit(format!(
-            "integer shearing exceeds {max_span} powers"
+            "integer shearing exceeds diagnostic span {max_span:?}"
         )));
     }
     for shift in &mut shifts {

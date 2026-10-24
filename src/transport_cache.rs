@@ -20,8 +20,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 8;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x08";
+const VERSION: u32 = 9;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x09";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -45,9 +45,9 @@ pub struct EpsilonRange {
 impl EpsilonRange {
     pub fn new(leading: i32, last: i32) -> Result<Self> {
         let count = i64::from(last) - i64::from(leading) + 1;
-        if !(1..=1024).contains(&count) {
+        if count <= 0 || usize::try_from(count).is_err() {
             return Err(Error::InvalidInput(
-                "boundary cache requires 1 through 1024 epsilon coefficients".into(),
+                "boundary cache requires a nonempty representable epsilon range".into(),
             ));
         }
         Ok(Self { leading, last })

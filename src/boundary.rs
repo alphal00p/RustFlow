@@ -390,7 +390,7 @@ impl FrobeniusBasis {
     pub(crate) fn region_orders(
         &self,
         powers: &[Vec<Atom>],
-        max_half_order: usize,
+        max_half_order: Option<usize>,
     ) -> Result<Vec<Vec<Option<usize>>>> {
         use std::collections::BTreeMap;
         let p = self.precision;
@@ -447,7 +447,9 @@ impl FrobeniusBasis {
                     })
                     .collect::<Vec<_>>();
                 let cost = required.iter().flatten().copied().max().unwrap_or(0);
-                (cost <= max_half_order).then_some((cost, i, exponent, required))
+                max_half_order
+                    .is_none_or(|limit| cost <= limit)
+                    .then_some((cost, i, exponent, required))
             })
             .collect::<Vec<_>>();
         candidates.sort_by(|a, b| (a.0, a.1, &a.2).cmp(&(b.0, b.1, &b.2)));
@@ -495,7 +497,7 @@ impl FrobeniusBasis {
             Ok(orders)
         } else {
             Err(Error::IncompleteReduction(format!(
-                "boundary coefficients through half-order {max_half_order} fix {} of {n} constants; increase the Frobenius order or boundary limit",
+                "boundary coefficients within half-order diagnostic {max_half_order:?} fix {} of {n} constants; increase the Frobenius order or boundary limit",
                 independent.rows.len()
             )))
         }
@@ -577,7 +579,7 @@ mod planning_tests {
         };
         let powers = vec![vec![Atom::new()]; 2];
         assert_eq!(
-            basis.region_orders(&powers, 0).unwrap(),
+            basis.region_orders(&powers, Some(0)).unwrap(),
             vec![vec![Some(0)]; 2]
         );
         let values = basis
@@ -608,11 +610,11 @@ mod planning_tests {
         };
         let powers = vec![vec![Atom::new(), Atom::num(1)]];
         assert!(matches!(
-            basis.region_orders(&powers, 1),
+            basis.region_orders(&powers, Some(1)),
             Err(Error::IncompleteReduction(_))
         ));
         assert_eq!(
-            basis.region_orders(&powers, 2).unwrap(),
+            basis.region_orders(&powers, Some(2)).unwrap(),
             vec![vec![Some(2), Some(0)]]
         );
         let values = basis
@@ -663,7 +665,7 @@ mod planning_tests {
         };
         let powers = vec![vec![Atom::new()]; 2];
         assert_eq!(
-            basis.region_orders(&powers, 0).unwrap(),
+            basis.region_orders(&powers, Some(0)).unwrap(),
             vec![vec![Some(0)], vec![None]]
         );
         let values = basis
@@ -700,7 +702,7 @@ mod planning_tests {
         };
         let powers = vec![vec![Atom::new()], vec![parse!("component_eps")]];
         assert_eq!(
-            basis.region_orders(&powers, 0).unwrap(),
+            basis.region_orders(&powers, Some(0)).unwrap(),
             vec![vec![None], vec![Some(0)]]
         );
         let values = basis
@@ -737,7 +739,7 @@ mod planning_tests {
         };
         let powers = vec![vec![Atom::new()], vec![Atom::num(100)]];
         assert_eq!(
-            basis.region_orders(&powers, 0).unwrap(),
+            basis.region_orders(&powers, Some(0)).unwrap(),
             vec![vec![Some(0)], vec![None]]
         );
         let values = basis
@@ -774,7 +776,7 @@ mod planning_tests {
         };
         let powers = vec![vec![Atom::new()]; 2];
         assert_eq!(
-            basis.region_orders(&powers, 1).unwrap(),
+            basis.region_orders(&powers, Some(1)).unwrap(),
             vec![vec![Some(1)], vec![None]]
         );
         let values = basis

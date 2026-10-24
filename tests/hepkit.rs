@@ -32,7 +32,8 @@ fn groups(
             point,
             symbol!("feynkit_graph::eps"),
             4,
-            1000,
+            Some(1000),
+            Default::default(),
             &RunContext::default(),
         )
         .unwrap()
@@ -163,8 +164,9 @@ fn signed_numerators_and_native_tensor_contractions_reconstruct_the_integrand() 
             &KinematicPoint::default(),
             symbol!("feynkit_graph::eps"),
             4,
-            0,
-            &RunContext::default()
+            Some(0),
+            Default::default(),
+            &RunContext::default(),
         ),
         Err(Error::Limit(_))
     ));
@@ -288,8 +290,9 @@ fn native_fixed_dimensional_traces_are_literal_and_surviving_mixed_dimensions_ar
             &KinematicPoint::default(),
             symbol!("feynkit_graph::eps"),
             4,
-            1000,
-            &RunContext::default()
+            Some(1000),
+            Default::default(),
+            &RunContext::default(),
         ),
         Err(Error::Unsupported(_))
     ));
@@ -334,8 +337,9 @@ fn loop_constraints_inexact_substitutions_and_unsupported_model_denominators_fai
             &KinematicPoint::default(),
             symbol!("feynkit_graph::eps"),
             4,
-            100,
-            &RunContext::default()
+            Some(100),
+            Default::default(),
+            &RunContext::default(),
         ),
         Err(Error::InvalidInput(_))
     ));
@@ -349,8 +353,9 @@ fn loop_constraints_inexact_substitutions_and_unsupported_model_denominators_fai
             &point,
             symbol!("feynkit_graph::eps"),
             4,
-            100,
-            &RunContext::default()
+            Some(100),
+            Default::default(),
+            &RunContext::default(),
         ),
         Err(Error::InvalidInput(_))
     ));
@@ -367,8 +372,9 @@ fn loop_constraints_inexact_substitutions_and_unsupported_model_denominators_fai
             &KinematicPoint::default(),
             symbol!("feynkit_graph::eps"),
             4,
-            100,
-            &RunContext::default()
+            Some(100),
+            Default::default(),
+            &RunContext::default(),
         ),
         Err(Error::Unsupported(_))
     ));
@@ -415,9 +421,16 @@ fn native_projector_rank_twenty_replaces_the_old_rank_fourteen_limit() {
                 .collect()
         })
         .collect::<Vec<Vec<_>>>();
+    let budget = ResourceBudget::with_memory_monitor(
+        ResourceLimits {
+            max_process_rss_bytes: Some(1),
+            ..Default::default()
+        },
+        || Ok(2),
+    );
     assert!(matches!(
-        projector.project(&mixed, &vec![vec![scalar("p2"); 22]; 22]),
-        Err(Error::Limit(_))
+        budget.run(|| projector.project(&mixed, &vec![vec![scalar("p2"); 22]; 22])),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     let mut singular = tensor::TensorProjector::new(Atom::new());
     assert!(matches!(
