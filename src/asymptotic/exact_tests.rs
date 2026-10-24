@@ -174,7 +174,10 @@ fn exact_duplicate_rows_do_not_hide_inconsistent_right_hand_sides() {
 
 #[test]
 fn tautological_rows_leave_all_amplitudes_free_but_distinct_rows_keep_the_guard() {
-    let limits = ExactFrobeniusLimits::default();
+    let limits = ExactFrobeniusLimits {
+        max_dimension: Some(64),
+        ..Default::default()
+    };
     let context = RunContext::default();
     let basis = prepared(&[&["0", "1/z"], &["0", "0"]])
         .exact_coefficients(2, &limits, &context)
