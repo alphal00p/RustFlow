@@ -567,9 +567,13 @@ impl<'a> ExactDomain<'a> {
                 let magnitude = power.re.abs().to_string().parse::<u64>().ok();
                 // Only native nonnegative integer series powers convert to i64;
                 // negative rational powers retain arbitrary exact numerators.
-                if !negative && magnitude.is_none_or(|n| i64::try_from(n).is_err()) {
+                if !negative
+                    && magnitude
+                        .is_none_or(|n| i64::try_from(n).is_err() || usize::try_from(n).is_err())
+                {
                     return Err(Error::Limit(
-                        "exact Frobenius native integer power exceeds i64 representation".into(),
+                        "exact Frobenius native integer power exceeds i64 or usize representation"
+                            .into(),
                     ));
                 }
                 coefficient_bits(

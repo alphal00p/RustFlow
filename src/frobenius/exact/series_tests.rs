@@ -137,11 +137,12 @@ fn disabled_height_estimates_preserve_compact_native_integer_power_series() {
     let context = RunContext::default();
     let domain = ExactDomain::dense(&limits, &context);
     let x = symbol!("exact_compact_height::x");
-    let expression = (Atom::one() + Atom::var(x)).pow(i64::MAX);
+    let positive = i64::try_from(usize::MAX).unwrap_or(i64::MAX);
+    let expression = (Atom::one() + Atom::var(x)).pow(positive);
     let coefficients = domain.series(&expression, x, 1).unwrap();
     assert_eq!(
         coefficients,
-        vec![domain.integer(1), domain.integer(i64::MAX)]
+        vec![domain.integer(1), domain.integer(positive)]
     );
     for power in [
         Integer::from(i64::MIN),
@@ -161,12 +162,16 @@ fn disabled_height_estimates_preserve_compact_native_integer_power_series() {
         ..limits.clone()
     };
     assert!(matches!(
-        ExactDomain::dense(&diagnostic, &context).series(&expression, x, 1),
+        ExactDomain::dense(&diagnostic, &context).series(
+            &(Atom::one() + Atom::var(x)).pow(i64::MIN),
+            x,
+            1
+        ),
         Err(Error::Limit(_))
     ));
     let beyond_native = (Atom::one() + Atom::var(x)).pow(Atom::num(Integer::from(i64::MAX) + 1));
     assert!(
-        matches!(domain.preflight_series(&beyond_native, x, 1), Err(Error::Limit(message)) if message.contains("i64 representation"))
+        matches!(domain.preflight_series(&beyond_native, x, 1), Err(Error::Limit(message)) if message.contains("representation"))
     );
     let budget = crate::ResourceBudget::with_memory_monitor(
         crate::ResourceLimits {
