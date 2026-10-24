@@ -24,7 +24,7 @@ fn bracketed_identity_uses_fewer_charts_for_polynomial_solution() -> Result<()> 
                 digits: 40,
                 guard_digits: 20,
                 series_order: 12,
-                max_steps: 3000,
+                max_steps: Some(3000),
                 ..Default::default()
             },
             &RunContext::default(),
