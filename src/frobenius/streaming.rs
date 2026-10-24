@@ -35,9 +35,9 @@ impl StreamingAdmission {
     ) -> u128 {
         let n = dimension as u128;
         // Only a nonidentity transformation needs a replacement coefficient
-        // buffer. Retain the same conservative normalization-span padding and
-        // workspace estimate on both branches. No order-long solver cache is
-        // retained on this path.
+        // buffer. Reserve the same initial window on both branches; the exact
+        // transformed length is admitted before its replacement allocation.
+        // No order-long solver cache is retained on this path.
         let series = (order as u128 + 257)
             .saturating_mul(n)
             .saturating_mul(logs as u128)

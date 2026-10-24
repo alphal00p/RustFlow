@@ -435,7 +435,8 @@ impl PreparedFrobenius {
             .iter()
             .map(|space| space.leading.len() as u128)
             .sum::<u128>();
-        // Basis normalization can extend a column by at most 256 powers.
+        // Reserve an initial normalization window. The resolved transformation
+        // span is admitted again before each replacement column is allocated.
         let length = (order as u128).saturating_add(257);
         let coefficients = length
             .saturating_mul(n)
