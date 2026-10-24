@@ -914,6 +914,7 @@ mod high_order_memory_tests {
         let normal = source.change_basis(&transformation)?;
         assert!(normal.matrix.iter().flatten().all(Atom::is_zero));
         let mut prepared = normal.prepare_frobenius(&context)?;
+        prepared.nonzero_conditions = source.prepare_frobenius(&context)?.nonzero_conditions;
         prepared.source = source;
         prepared.transformation = transformation;
         let shifts = prepared
