@@ -79,6 +79,43 @@ fn partial_constraints_report_missing_constants_and_inconsistency() {
 }
 
 #[test]
+fn consistency_is_judged_relative_to_the_size_of_each_equation() {
+    let basis = logarithmic_basis();
+    let p = basis.precision;
+    let data = |log_power: usize, value: &str| AsymptoticConstraint {
+        component: 0,
+        power: Atom::new(),
+        log_power,
+        coefficient: p.parse(value, "0").unwrap(),
+    };
+    // Redundant data of size 1e45 that agree to 50 significant digits: the
+    // absolute residual (about 1e-5) exceeds 10^(-bits/5), the relative one does not.
+    let constants = basis
+        .match_constraints(&[
+            data(0, "2e45"),
+            data(1, "3e45"),
+            data(0, "2.00000000000000000000000000000000000000000000000002e45"),
+        ])
+        .unwrap();
+    let point = p.rational(&Rational::from((1, 4)));
+    let actual = evaluate(&basis, &constants, &point);
+    let expected = p.mul(
+        &p.add(&p.i(2), &p.scale(&p.log(&point), 3, 1)),
+        &p.parse("1e45", "0").unwrap(),
+    );
+    assert!(p.close(&actual[0], &expected, 45));
+    // The same magnitude with a relative disagreement of 1e-20 is inconsistent.
+    assert!(matches!(
+        basis.match_constraints(&[
+            data(0, "2e45"),
+            data(1, "3e45"),
+            data(0, "2.00000000000000000002e45"),
+        ]),
+        Err(Error::Numerical(_))
+    ));
+}
+
+#[test]
 fn fractional_powers_remain_distinct_exact_sectors() {
     let p = Precision::decimal(60).unwrap();
     let basis = DifferentialSystem {
