@@ -1,3 +1,7 @@
+#[cfg(feature = "automatic")]
+mod litered_backend;
+#[cfg(feature = "automatic")]
+pub use litered_backend::{LiteRedBackendOptions, LiteRedRustRedBackend};
 mod native_provider;
 mod native_seeds;
 pub use native_provider::{NativeIdentityProvider, ProvidedRustRedBackend};
