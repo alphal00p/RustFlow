@@ -224,7 +224,7 @@ fn exact_relations_reject_contradictions_missing_orders_and_resource_excess() {
         prepared.exact_coefficients(
             8,
             &ExactFrobeniusLimits {
-                max_dimension: 1,
+                max_dimension: Some(1),
                 ..limits.clone()
             },
             &context
@@ -276,7 +276,7 @@ fn exact_complex_relations_share_native_gaussian_arithmetic_and_bound_input_heig
     assert!(directions[0].iter().any(|value| !value.is_zero()));
     assert!(directions[1].iter().all(Gaussian::is_zero));
     let low = ExactFrobeniusLimits {
-        max_coefficient_bits: 128,
+        max_coefficient_bits: Some(128),
         ..limits
     };
     assert!(matches!(

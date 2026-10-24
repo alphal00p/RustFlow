@@ -141,7 +141,7 @@ fn negative_isp_powers_and_inherited_domains_survive_reduction_closure() {
         },
     };
     let system = derivative
-        .differential_system(&backend, &[target], 3, &RunContext::default())
+        .differential_system(&backend, &[target], Some(3), &RunContext::default())
         .unwrap();
     equal(&system.matrix[0][0], &(Atom::num(1) / s));
     for variable in [u_symbol, s_symbol] {
@@ -182,7 +182,7 @@ fn native_massless_bubble_system_has_the_physical_scaling_derivative() {
         .differential_system(
             &RustRedBackend::default(),
             std::slice::from_ref(&target),
-            8,
+            Some(8),
             &RunContext::default(),
         )
         .unwrap();

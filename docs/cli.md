@@ -85,6 +85,20 @@ refinement, initial-reduction skipping and symbolic caching. The default values
 match `FlowOptions`. Persistent numerical snapshots and symbolic reduction caches
 serve different purposes and use separate paths.
 
+`options.max_process_rss_bytes` and `options.max_elapsed_seconds` are optional
+RAM and elapsed-time ceilings. Omitted or `null` values impose no ceiling.
+Symbolica's cooperative budget shares each configured limit and clock across
+nested work and dispatched workers. RSS covers the whole process. Checks occur
+at interruptible boundaries; opaque native calls complete before a limit can be
+reported. These ceilings are separate from optional work-count caps and requested
+numerical accuracy.
+
+`options.pade_max_work` is an optional diagnostic work cap for Padé construction
+and requires `options.pade_degree`. An omitted or `null` cap is unbounded.
+
+`options.max_recursion_depth` optionally caps admitted recursive depth. An
+omitted or `null` value is unbounded; `0` admits no recursive depth.
+
 `options.mass_mode` accepts `"automatic"` (the default), `"all"`, `"mass"`,
 `"propagator"`, `"branch"`, or `"loop"`. To select particular physical
 propagators, set `"deformed_propagator_slots": [2]`. Slots are zero-based
@@ -203,7 +217,8 @@ same schema-5 binary bank can retain both representations.
 
 `options.max_boundary_attempts` controls how many compatible cached sources may
 be tried when propagated uncertainty or numerical refinement fails the requested
-accuracy. Its default is 8 and it must be positive. Sources retain the existing
+accuracy. An omitted or `null` value allows all compatible sources to be tried;
+an explicit count must be positive. Sources retain the existing
 cost-policy order. Only accuracy failures trigger another source; cancellation,
 invalid inputs, unsupported domains and other numerical errors propagate.
 
@@ -334,8 +349,10 @@ halving, reusing that Taylor chart. It is opt-in while broader performance
 coverage is gathered; its measured improvement on one five-point leg is not a
 general speed guarantee.
 
-`options.max_steps` limits all acceptance-predicate evaluations, including
-successful candidates later superseded by a larger successful step. Transport
+An explicit `options.max_steps` limits all acceptance-predicate evaluations,
+including successful candidates later superseded by a larger successful step.
+`options.max_steps` and `options.max_precision_attempts` default to no count cap
+when omitted or `null`; explicit counts must be positive. Transport
 output includes `predicate_evaluations`, `steps` (committed segments),
 `rejected_steps`, and `superseded_successes`. An exact cache hit has zero transport
 counts. Cache identity and accuracy requirements are unchanged; either strategy

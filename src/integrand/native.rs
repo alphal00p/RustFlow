@@ -8,6 +8,7 @@ use super::*;
 use feynkit_graph::{IntegralFamily as NativeFamily, IntegralFamilyError};
 use feynkit_kinematics::Kinematics;
 use std::collections::BTreeSet;
+use symbolica::utils::resources::ResourceLimits;
 
 pub(super) fn validate_coordinates(variables: &[Atom], template: &IntegralFamily) -> Result<()> {
     let loops = template.loops.len();
@@ -61,6 +62,7 @@ pub(super) fn supports(denominators: &[Propagator]) -> bool {
 
 fn native_error(error: IntegralFamilyError) -> Error {
     match error {
+        IntegralFamilyError::Resource(error) => Error::Resource(error),
         IntegralFamilyError::PartialFractionLimit(_) | IntegralFamilyError::PowerOverflow => {
             Error::Limit(format!("native boundary partial fractions: {error}"))
         }
@@ -74,13 +76,22 @@ pub(super) fn to_integrals(
     numerator: &Atom,
     variables: &[Atom],
     template: &IntegralFamily,
-    budget: usize,
+    budget: Option<usize>,
 ) -> Result<Vec<IntegralTerm>> {
-    if budget == 0 {
+    resources::checkpoint()?;
+    if budget == Some(0) {
         return Err(Error::Limit(
             "native boundary partial fractions: zero state budget".into(),
         ));
     }
+    check_boundary_allocation::<Atom>(
+        template
+            .loops
+            .len()
+            .saturating_add(template.external.len())
+            .saturating_add(variables.len())
+            .saturating_add(denominators.len()),
+    )?;
     let sources = boundary_sources(numerator, denominators, variables);
     let loops = (0..template.loops.len())
         .map(|i| {
@@ -145,14 +156,16 @@ pub(super) fn to_integrals(
         .collect();
     let native =
         NativeFamily::new(loops, external, expressions, &kinematics).map_err(native_error)?;
+    check_boundary_allocation::<i32>(indices.len())?;
     let powers = indices.iter().map(|&n| i32::from(n)).collect::<Vec<_>>();
     let parts = native
-        .partial_fraction(&powers, budget)
+        .partial_fraction(&powers, budget, ResourceLimits::default())
         .map_err(native_error)?;
     let numerator = substitute(numerator, &to_native);
     let labels = denominator_labels(&numerator, denominators, variables)?;
     let mut out = Vec::new();
     for (coefficient, powers) in parts {
+        resources::checkpoint()?;
         if products
             .iter()
             .any(|product| coefficient.contains(product.as_view()))
@@ -166,6 +179,7 @@ pub(super) fn to_integrals(
             .sector(&powers)
             .and_then(|f| f.complete(&products))
             .map_err(native_error)?;
+        check_boundary_allocation::<Propagator>(completed.denominators().len())?;
         let mut family = template.clone();
         family.propagators = completed
             .denominators()
@@ -188,5 +202,6 @@ pub(super) fn to_integrals(
             .map_err(native_error)?;
         append_numerator_terms(&rewritten, &labels, &family, &active, &mut out)?;
     }
+    resources::checkpoint()?;
     Ok(out)
 }

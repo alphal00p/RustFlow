@@ -7,6 +7,14 @@ fn degree_bounds(
     variable: Symbol,
     context: &RunContext,
 ) -> Result<(usize, usize)> {
+    crate::stack_resources::run(|| degree_bounds_inner(view, variable, context))
+}
+
+fn degree_bounds_inner(
+    view: AtomView<'_>,
+    variable: Symbol,
+    context: &RunContext,
+) -> Result<(usize, usize)> {
     context.cancellation.check()?;
     Ok(match view {
         AtomView::Num(_) => (0, 0),
@@ -14,15 +22,18 @@ fn degree_bounds(
         AtomView::Add(sum) => sum.iter().try_fold((0_usize, 0_usize), |(n, d), term| {
             let (a, b) = degree_bounds(term, variable, context)?;
             Ok::<_, Error>((
-                n.saturating_add(b).max(a.saturating_add(d)),
-                d.saturating_add(b),
+                scalar_count(n.checked_add(b))?.max(scalar_count(a.checked_add(d))?),
+                scalar_count(d.checked_add(b))?,
             ))
         })?,
         AtomView::Mul(product) => product
             .iter()
             .try_fold((0_usize, 0_usize), |(n, d), term| {
                 let (a, b) = degree_bounds(term, variable, context)?;
-                Ok::<_, Error>((n.saturating_add(a), d.saturating_add(b)))
+                Ok::<_, Error>((
+                    scalar_count(n.checked_add(a))?,
+                    scalar_count(d.checked_add(b))?,
+                ))
             })?,
         AtomView::Pow(power) => {
             let (base, exponent) = power.get_base_exp();
@@ -40,9 +51,12 @@ fn degree_bounds(
                 .abs()
                 .to_string()
                 .parse::<usize>()
-                .unwrap_or(usize::MAX);
+                .map_err(|_| Error::Limit("exact rational degree exponent exceeds usize".into()))?;
             let (n, d) = degree_bounds(base, variable, context)?;
-            let (n, d) = (n.saturating_mul(magnitude), d.saturating_mul(magnitude));
+            let (n, d) = (
+                scalar_count(n.checked_mul(magnitude))?,
+                scalar_count(d.checked_mul(magnitude))?,
+            );
             if value.re < Rational::zero() {
                 (d, n)
             } else {
@@ -55,8 +69,8 @@ fn degree_bounds(
 
 /// `factor` covers the known products/derivatives/common-denominator additions
 /// in the upcoming operation. `copies` is its matrix-entry work multiplier.
-/// Estimates deliberately ignore cancellations. They are work admission, not
-/// allocator quotas or a claim about interrupting a native operation mid-call.
+/// Estimates deliberately ignore cancellations. Explicit caps are diagnostic;
+/// shared RAM/time checks do not interrupt a native operation mid-call.
 pub(crate) fn preflight_operation(
     expressions: &[&Atom],
     variable: Symbol,
@@ -66,47 +80,61 @@ pub(crate) fn preflight_operation(
     context: &RunContext,
 ) -> Result<()> {
     limits.validate()?;
+    if factor == 0 || copies == 0 {
+        return Err(Error::InvalidInput(
+            "exact operation multipliers must be positive".into(),
+        ));
+    }
+    process_resources::checkpoint()?;
     let domain = ExactDomain { limits, context };
     let mut degree = 0_usize;
     let mut height = 0_u64;
     let mut bytes = 0_usize;
     for expression in expressions {
         context.cancellation.check()?;
-        // This rejects unsupported syntax and bounds recursion before the
-        // metadata-only degree traversal, including every integer exponent.
+        // Validate exact syntax before the metadata-only degree traversal.
         domain.preflight_series(expression, variable, 0)?;
         let mut nodes = 0;
-        height = height
-            .saturating_add(domain.series_bound(
-                expression.as_view(),
-                variable,
-                0,
-                0,
-                &mut nodes,
-            )?)
-            .saturating_add(2);
+        height = coefficient_bits(
+            height
+                .checked_add(domain.series_bound(expression.as_view(), variable, 0, &mut nodes)?)
+                .and_then(|v| v.checked_add(2)),
+        )?;
         let (n, d) = degree_bounds(expression.as_view(), variable, context)?;
-        degree = degree.saturating_add(n).saturating_add(d);
-        bytes = bytes.saturating_add(expression.as_view().get_byte_size());
+        degree = scalar_count(degree.checked_add(n).and_then(|v| v.checked_add(d)))?;
+        bytes = scalar_count(bytes.checked_add(expression.as_view().get_byte_size()))?;
     }
-    let predicted_degree = degree.saturating_mul(factor);
-    let coefficient_bits = height
-        .saturating_add(2)
-        .saturating_mul(degree.saturating_add(1) as u64)
-        .saturating_mul(factor as u64);
-    let cells = predicted_degree.saturating_add(1).saturating_mul(copies);
-    let work = cells.saturating_mul(predicted_degree.saturating_add(1));
-    if factor == 0
-        || copies == 0
-        || predicted_degree > limits.max_order
-        || coefficient_bits > limits.max_coefficient_bits
-        || cells > limits.max_scalar_cells
-        || work > limits.max_scalar_cells.saturating_mul(16)
-        || bytes.saturating_mul(factor).saturating_mul(copies) > limits.max_scalar_cells
+    let predicted_degree = scalar_count(degree.checked_mul(factor))?;
+    let coefficient_bits = coefficient_bits(
+        height
+            .checked_add(2)
+            .and_then(|v| v.checked_mul(degree.checked_add(1)?.try_into().ok()?))
+            .and_then(|v| v.checked_mul(factor.try_into().ok()?)),
+    )?;
+    let cells = scalar_count(
+        predicted_degree
+            .checked_add(1)
+            .and_then(|v| v.checked_mul(copies)),
+    )?;
+    if limits
+        .max_order
+        .is_some_and(|limit| predicted_degree > limit)
+        || limits
+            .max_coefficient_bits
+            .is_some_and(|limit| coefficient_bits > limit)
+        || limits.max_scalar_cells.is_some_and(|limit| cells > limit)
     {
         return Err(Error::Limit(
-            "exact root rational-operation degree/height/work estimate exceeds limit".into(),
+            "exact root rational-operation degree/height/cell estimate exceeds diagnostic cap"
+                .into(),
         ));
     }
+    domain.check_allocation(cells)?;
+    let expression_bytes = allocation_bytes(bytes, scalar_count(factor.checked_mul(copies))?)?;
+    let scalar_bytes = allocation_bytes(cells, std::mem::size_of::<Gaussian>())?;
+    let additional_bytes = expression_bytes
+        .checked_add(scalar_bytes)
+        .ok_or_else(|| Error::Limit("exact rational-operation allocation size overflow".into()))?;
+    process_resources::check_allocation(additional_bytes)?;
     Ok(())
 }

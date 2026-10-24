@@ -815,6 +815,7 @@ fn evaluate_physical_with<T>(
         PhysicalResult,
     ) -> Result<(T, Vec<crate::singular_endpoint::EndpointBoundary>)>,
 ) -> Result<T> {
+    options.run_with_resources(|| {
     options.validate()?;
     if mode.is_prescribed() != identity.physical_continuation().is_some() {
         return Err(Error::InvalidInput("prescribed identities require evaluate_prescribed_to with explicit homotopy admission; ordinary identities require evaluate_to".into()));
@@ -838,7 +839,8 @@ fn evaluate_physical_with<T>(
     let mut excluded = std::collections::BTreeSet::new();
     let mut attempts = Vec::new();
     let mut last_accuracy = None;
-    for _ in 0..options.max_boundary_attempts {
+    for attempt in 0_usize.. {
+        if options.max_boundary_attempts.is_some_and(|limit| attempt >= limit) { break; }
         context.cancellation.check()?;
         let Some((index, matched)) = cache.best_excluding_with_germ_policy(
             &query,
@@ -907,10 +909,12 @@ fn evaluate_physical_with<T>(
         }
     }
     Err(Error::Limit(format!(
-        "physical boundary attempt budget {} exhausted after accuracy failures; last attempt: {}",
+        "physical boundary attempt budget {:?} exhausted after accuracy failures; last attempt: {}",
         options.max_boundary_attempts,
         last_accuracy.unwrap_or_default()
     )))
+
+    })
 }
 
 #[allow(clippy::too_many_arguments)] // One already selected source and the shared physical transport inputs.

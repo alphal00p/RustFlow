@@ -166,7 +166,7 @@ fn mapping_preserves_errors_and_requires_extra_positive_orders() {
         Err(Error::Limit(_))
     ));
     assert!(matches!(
-        shear.required_sheared_range(-1023, 0),
+        shear.required_sheared_range_with_limit(-1023, 0, Some(1024)),
         Err(Error::Limit(_))
     ));
 }
@@ -275,11 +275,12 @@ fn covariance_cancellation_and_large_span_are_exact() {
     assert_eq!(shear.weights(), &[0]);
     assert!(regular.derivatives[&coordinate][0][0].is_zero());
     assert!(matches!(
-        EpsilonShearing::regularize(
+        EpsilonShearing::regularize_with_span_limit(
             &system(vec![
                 vec![Atom::new(), parse("1/eps^10001")],
                 vec![Atom::new(), Atom::new()]
             ]),
+            Some(10000),
             &RunContext::default()
         ),
         Err(Error::Limit(_))

@@ -236,7 +236,7 @@ fn evaluate_impl(
         digits: 20,
         guard_digits: digits - 20,
         series_order: order,
-        max_steps: if canonical { 20000 } else { 5000 },
+        max_steps: Some(if canonical { 20000 } else { 5000 }),
         ..Default::default()
     };
     let context = RunContext {
@@ -266,11 +266,15 @@ fn evaluate_impl(
             let mut local_options = options.clone();
             local_options.max_steps = options
                 .max_steps
-                .checked_sub(attempts)
-                .filter(|&remaining| remaining > 0)
-                .ok_or_else(|| {
-                    Error::Limit("aggregate planar continuation budget exhausted".into())
-                })?;
+                .map(|limit| {
+                    limit
+                        .checked_sub(attempts)
+                        .filter(|remaining| *remaining > 0)
+                        .ok_or_else(|| {
+                            Error::Limit("aggregate planar continuation budget exhausted".into())
+                        })
+                })
+                .transpose()?;
             let answer = compiled.transport(
                 &current,
                 std::slice::from_ref(target),

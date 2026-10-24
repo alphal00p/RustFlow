@@ -3,19 +3,21 @@
 RustFlow first tries the cheapest admissible cached source that covers the
 requested epsilon range and has sufficient recorded input evidence. That
 initial evidence may still be insufficient after propagation along the path.
-When an attempt returns an accuracy failure or exhausts its bounded arithmetic
+When an attempt returns an accuracy failure or exhausts its configured arithmetic
 precision retries, RustFlow tries the next compatible source under the same cost
 policy. Rational, registered-root and canonical
 connections use this one selection and transport implementation.
 
-`FlowOptions::max_boundary_attempts` limits attempted sources and defaults to 8.
-It must be positive. Each attempt retains the existing independent precision
-and order checks, weighted propagation of supplied errors and exact domain/germ
-checks. Source uncertainty is never improved merely by increasing working
-precision. A successful result includes `boundary_attempts`, recording each
-actual source point, its MPFR cost, supplied verified digits, and accepted or
-accuracy-rejected outcome. An exact cache hit records one accepted attempt and
-performs no numerical transport.
+`FlowOptions::max_boundary_attempts` optionally limits attempted sources and
+defaults to `None`, allowing all compatible sources to be tried. A configured
+count must be positive. `max_precision_attempts` likewise defaults to `None`;
+an explicit count bounds arithmetic refinement retries. Each attempt retains
+the independent precision and order checks, weighted propagation of supplied
+errors and exact domain/germ checks. Source uncertainty is never improved merely
+by increasing working precision. A successful result includes
+`boundary_attempts`, recording each actual source point, its MPFR cost, supplied
+verified digits, and accepted or accuracy-rejected outcome. An exact cache hit
+records one accepted attempt and performs no numerical transport.
 
 Failed attempts do not insert intermediate points or change existing entries.
 Only the final successful attempt commits its validated batch. Selection skips

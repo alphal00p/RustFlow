@@ -157,7 +157,7 @@ fn error(e: crate::Error) -> PyErr {
         crate::Error::Numerical(_) => NumericalError::new_err(message),
         crate::Error::Accuracy(_) => AccuracyError::new_err(message),
         crate::Error::InsufficientPrecision { .. } => PrecisionError::new_err(message),
-        crate::Error::Limit(_) => ResourceLimitError::new_err(message),
+        crate::Error::Limit(_) | crate::Error::Resource(_) => ResourceLimitError::new_err(message),
         crate::Error::Cancelled => CalculationCancelled::new_err(message),
         crate::Error::Cache(_) => BoundaryCacheError::new_err(message),
         crate::Error::Io(e) => pyo3::exceptions::PyOSError::new_err(e.to_string()),

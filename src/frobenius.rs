@@ -134,15 +134,12 @@ impl DifferentialSystem {
                     .collect::<Result<Vec<_>>>()
             })
             .collect::<Result<Vec<_>>>()?;
-        let mut shifts = crate::integer_shearing::integer_potentials(&orders, 1, 10000, None)?;
+        let mut shifts = crate::integer_shearing::integer_potentials(&orders, 1, None, None)?;
         let minimum = *shifts.iter().min().unwrap();
         for s in &mut shifts {
-            *s -= minimum;
-        }
-        if shifts.iter().any(|&s| s > 10000) {
-            return Err(Error::Limit(
-                "Fuchsian shearing exceeds 10000 powers".into(),
-            ));
+            *s = s
+                .checked_sub(minimum)
+                .ok_or_else(|| Error::Limit("Fuchsian shift overflow".into()))?;
         }
         let x = Atom::var(self.variable);
         let transformation = (0..n)
@@ -278,7 +275,7 @@ impl DifferentialSystem {
         // Collect before normalization so cancellable factors retain their domain.
         let nonzero_conditions =
             crate::physical_conditions::rational_denominator_conditions(&expressions, &variables)?;
-        let (normal, transformation) = self.fuchsian_form(32)?;
+        let (normal, transformation) = self.fuchsian_form(None)?;
         phase(context, "extracting the exact Frobenius residue")?;
         let residue = normal.residue_with_context(context)?;
         let n = residue.len();
@@ -454,11 +451,6 @@ impl PreparedFrobenius {
         strict: bool,
     ) -> Result<FrobeniusBasis> {
         phase(context, "evaluating the prepared Frobenius recurrence")?;
-        if order > 10_000 {
-            return Err(Error::Limit(
-                "Frobenius expansion exceeds 10000 terms".into(),
-            ));
-        }
         for condition in &self.nonzero_conditions {
             context.cancellation.check()?;
             let coefficients = polynomial_coefficients(condition, self.source.variable, p, values)?;
@@ -731,11 +723,6 @@ pub(crate) fn project_limit(
                 .map_err(|_| Error::Limit("endpoint exponent exceeds index range".into()))?;
             if through < valuation {
                 continue;
-            }
-            if through.saturating_sub(valuation) > 10000 {
-                return Err(Error::Limit(
-                    "endpoint target expansion exceeds 10000 terms".into(),
-                ));
             }
             let key = (i, through);
             if let std::collections::btree_map::Entry::Vacant(entry) = expansions.entry(key) {

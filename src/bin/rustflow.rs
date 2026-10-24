@@ -26,13 +26,17 @@ struct Settings {
     guard_digits: u32,
     series_order: usize,
     pade_degree: Option<usize>,
+    pade_max_work: Option<u64>,
     residual_arithmetic: String,
     boundary_error_strategy: String,
-    max_steps: usize,
+    max_steps: Option<usize>,
     step_size_strategy: String,
     local_coordinate: String,
-    max_precision_attempts: usize,
-    max_boundary_attempts: usize,
+    max_precision_attempts: Option<usize>,
+    max_boundary_attempts: Option<usize>,
+    max_recursion_depth: Option<usize>,
+    max_process_rss_bytes: Option<u64>,
+    max_elapsed_seconds: Option<f64>,
     workers: usize,
     dimension: i64,
     recursion: String,
@@ -53,6 +57,7 @@ impl Default for Settings {
             guard_digits: f.guard_digits,
             series_order: f.series_order,
             pade_degree: None,
+            pade_max_work: None,
             residual_arithmetic: "ball".into(),
             boundary_error_strategy: "automatic".into(),
             max_steps: f.max_steps,
@@ -60,6 +65,12 @@ impl Default for Settings {
             local_coordinate: "identity".into(),
             max_precision_attempts: f.max_precision_attempts,
             max_boundary_attempts: f.max_boundary_attempts,
+            max_recursion_depth: f.max_recursion_depth,
+            max_process_rss_bytes: f.resource_limits.max_process_rss_bytes,
+            max_elapsed_seconds: f
+                .resource_limits
+                .max_elapsed
+                .map(|duration| duration.as_secs_f64()),
             workers: f.workers,
             dimension: f.dimension,
             recursion: "amf".into(),
@@ -76,14 +87,27 @@ impl Default for Settings {
 }
 impl Settings {
     fn options(&self, directory: &Path) -> CliResult<FlowOptions> {
+        if self.pade_max_work.is_some() && self.pade_degree.is_none() {
+            return Err("pade_max_work requires pade_degree".into());
+        }
+        let max_elapsed = self
+            .max_elapsed_seconds
+            .map(std::time::Duration::try_from_secs_f64)
+            .transpose()
+            .map_err(|_| "max_elapsed_seconds must be finite, nonnegative and representable")?;
         let options = FlowOptions {
             digits: self.digits,
             guard_digits: self.guard_digits,
             series_order: self.series_order,
             pade: self.pade_degree.map(|degree| PadeOptions {
                 degree,
+                max_work: self.pade_max_work,
                 ..Default::default()
             }),
+            resource_limits: symbolica::utils::resources::ResourceLimits {
+                max_process_rss_bytes: self.max_process_rss_bytes,
+                max_elapsed,
+            },
             residual_arithmetic: self.residual_arithmetic.parse()?,
             boundary_error_strategy: self.boundary_error_strategy.parse()?,
             max_steps: self.max_steps,
@@ -99,6 +123,7 @@ impl Settings {
             },
             max_precision_attempts: self.max_precision_attempts,
             max_boundary_attempts: self.max_boundary_attempts,
+            max_recursion_depth: self.max_recursion_depth,
             workers: self.workers,
             dimension: self.dimension,
             recursion: match self.recursion.as_str() {
@@ -145,9 +170,6 @@ fn tensor_dimension() -> String {
 }
 fn one() -> String {
     "1".into()
-}
-fn partial_fraction_limit() -> usize {
-    10000
 }
 fn parse(text: &str, namespace: &str) -> CliResult<Atom> {
     Atom::parse(text, namespace.to_owned(), Default::default())
@@ -238,8 +260,8 @@ struct GraphRequest {
     cut: Option<CutSelection>,
     #[serde(default)]
     last_epsilon_power: i32,
-    #[serde(default = "partial_fraction_limit")]
-    max_partial_fraction_states: usize,
+    #[serde(default)]
+    max_partial_fraction_states: Option<usize>,
     #[serde(default)]
     options: Settings,
 }
@@ -336,6 +358,7 @@ fn graph(request: GraphRequest, directory: &Path) -> CliResult<Value> {
             symbol(&request.epsilon, ns)?,
             options.dimension,
             request.max_partial_fraction_states,
+            options.resource_limits,
             &context,
         )?;
         let result = solve_integral_combinations(
@@ -1093,8 +1116,42 @@ fn run() -> CliResult<()> {
     let directory = path.parent().unwrap_or_else(|| Path::new("."));
     let text = fs::read_to_string(path)?;
     let output = match arguments[0].as_str() {
-        "graph" => graph(serde_json::from_str(&text)?, directory)?,
-        "transport" => transport(serde_json::from_str(&text)?, directory)?,
+        "graph" => {
+            let request: GraphRequest = serde_json::from_str(&text)?;
+            let options = request.options.options(directory)?;
+            symbolica::utils::resources::ResourceBudget::new(options.resource_limits).run(
+                || -> CliResult<Value> {
+                    symbolica::utils::resources::checkpoint()?;
+                    let output = graph(request, directory);
+                    let checkpoint = symbolica::utils::resources::checkpoint();
+                    match output {
+                        Err(error) => Err(error),
+                        Ok(output) => {
+                            checkpoint?;
+                            Ok(output)
+                        }
+                    }
+                },
+            )?
+        }
+        "transport" => {
+            let request: TransportRequest = serde_json::from_str(&text)?;
+            let options = request.options.options(directory)?;
+            symbolica::utils::resources::ResourceBudget::new(options.resource_limits).run(
+                || -> CliResult<Value> {
+                    symbolica::utils::resources::checkpoint()?;
+                    let output = transport(request, directory);
+                    let checkpoint = symbolica::utils::resources::checkpoint();
+                    match output {
+                        Err(error) => Err(error),
+                        Ok(output) => {
+                            checkpoint?;
+                            Ok(output)
+                        }
+                    }
+                },
+            )?
+        }
         _ => return Err("unknown command; expected graph or transport".into()),
     };
     println!("{}", serde_json::to_string_pretty(&output)?);
@@ -1110,6 +1167,54 @@ fn main() {
 #[cfg(test)]
 mod step_size_settings_tests {
     use super::*;
+    #[test]
+    fn resource_limits_and_count_diagnostics_are_explicit() {
+        for input in [
+            json!({}),
+            json!({"max_steps":null,"max_precision_attempts":null,"max_boundary_attempts":null,
+                "max_recursion_depth":null,"max_process_rss_bytes":null,"max_elapsed_seconds":null}),
+        ] {
+            let settings: Settings = serde_json::from_value(input).unwrap();
+            let options = settings.options(Path::new(".")).unwrap();
+            assert_eq!(options.max_steps, None);
+            assert_eq!(options.max_precision_attempts, None);
+            assert_eq!(options.max_boundary_attempts, None);
+            assert_eq!(options.max_recursion_depth, None);
+            assert_eq!(options.resource_limits, ResourceLimits::default());
+        }
+        let settings: Settings = serde_json::from_value(json!({
+            "max_steps":7,"max_precision_attempts":5,"max_boundary_attempts":3,
+            "max_recursion_depth":0,"max_process_rss_bytes":1048576,"max_elapsed_seconds":0.125,
+            "pade_degree":8,"pade_max_work":99,
+        }))
+        .unwrap();
+        let options = settings.options(Path::new(".")).unwrap();
+        assert_eq!(options.max_steps, Some(7));
+        assert_eq!(options.max_precision_attempts, Some(5));
+        assert_eq!(options.max_boundary_attempts, Some(3));
+        assert_eq!(options.max_recursion_depth, Some(0));
+        assert_eq!(options.resource_limits.max_process_rss_bytes, Some(1048576));
+        assert_eq!(
+            options.resource_limits.max_elapsed,
+            Some(std::time::Duration::from_millis(125))
+        );
+        assert_eq!(options.pade.unwrap().max_work, Some(99));
+        for seconds in [-1.0, f64::INFINITY, f64::NAN] {
+            let invalid = Settings {
+                max_elapsed_seconds: Some(seconds),
+                ..Default::default()
+            };
+            assert!(invalid.options(Path::new(".")).is_err());
+        }
+        let invalid: Settings = serde_json::from_value(json!({"pade_max_work":1})).unwrap();
+        assert!(invalid.options(Path::new(".")).is_err());
+        let graph: GraphRequest = serde_json::from_value(json!({
+            "schema_version":1,"model":"model.json","diagram":"diagram.dot",
+        }))
+        .unwrap();
+        assert_eq!(graph.max_partial_fraction_states, None);
+    }
+
     #[test]
     fn automatic_boundary_errors_are_default_and_validated() {
         assert_eq!(
@@ -1169,20 +1274,21 @@ mod step_size_settings_tests {
                 .pade
                 .is_none()
         );
-        let requested: Settings = serde_json::from_value(json!({"pade_degree":8})).unwrap();
-        assert_eq!(
-            requested
-                .options(Path::new("."))
-                .unwrap()
-                .pade
-                .unwrap()
-                .degree,
-            8
-        );
-        for degree in [0, 33] {
-            let invalid: Settings = serde_json::from_value(json!({"pade_degree":degree})).unwrap();
-            assert!(invalid.options(Path::new(".")).is_err());
+        for degree in [8, 33] {
+            let requested: Settings =
+                serde_json::from_value(json!({"pade_degree":degree})).unwrap();
+            assert_eq!(
+                requested
+                    .options(Path::new("."))
+                    .unwrap()
+                    .pade
+                    .unwrap()
+                    .degree,
+                degree
+            );
         }
+        let invalid: Settings = serde_json::from_value(json!({"pade_degree":0})).unwrap();
+        assert!(invalid.options(Path::new(".")).is_err());
     }
     #[test]
     fn step_strategy_is_explicit_and_unknown_values_are_rejected() {

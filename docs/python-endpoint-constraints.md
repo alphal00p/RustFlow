@@ -52,9 +52,13 @@ Relations and their provenance are retained in `EndpointResult.constraints`,
 including results returned by `BoundaryCache.endpoint_entries()`. Binary
 restart preserves them, and constrained terminal reuse requires the same exact
 epsilon range and mathematical declarations. Different provenance is a distinct
-assertion. Work limits (`max_dimension`, `max_order`, `max_coefficient_bits`,
-`max_scalar_cells`) are validated but do not change a completed record's
-mathematical identity. Source-sensitive compatibility remains owned by the
+assertion. Diagnostic limits (`max_dimension`, `max_order`, `max_coefficient_bits`,
+`max_scalar_cells`) default to `None`. Explicit positive counts opt into those
+checks without changing a completed record's mathematical identity. Shared
+process-memory and elapsed-time budgets govern resource checks. Endpoint
+evaluation's `max_lift_dimension` also defaults to `None`; its `series_order`
+remains the requested numerical truncation order. Source-sensitive
+compatibility remains owned by the
 [versioned binary cache](browser-transport.md). Computation releases the GIL, and cancellation or failed admission does
 not publish partial endpoint records.
 

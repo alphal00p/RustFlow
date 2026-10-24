@@ -37,50 +37,100 @@ impl PreparedFlow {
         options: &FlowOptions,
         context: &RunContext,
     ) -> Result<Self> {
-        context.cancellation.check()?;
-        options.validate()?;
-        if options.recursion != RecursionMode::Amf {
-            return Err(Error::Unsupported(
-                "PreparedFlow prepares AMF systems; use solve_integrals for FT recursion".into(),
-            ));
-        }
-        if targets.is_empty() {
-            return Err(Error::InvalidInput("empty target list".into()));
-        }
-        let mut family = family.at(point);
-        family.dimension = options.dimension;
-        family.validate()?;
-        for target in targets {
-            family.validate_integral(target)?;
-        }
-        let principal_mass_constraints =
-            crate::vacuum_peel::principal_mass_constraints(&family, targets)?;
-        crate::vacuum_peel::validate_principal_mass_constraints(
-            &principal_mass_constraints,
-            options.prescription,
-        )?;
-        let eta = symbol!("symbolica_amflow::eta");
-        let (auxiliary, mask) = family.deform(eta, &options.mass_mode)?;
-        let positive_mass_contour =
-            euclidean::positive_mass_contour(&auxiliary, eta)?.then(|| format!("{family:?}"));
-        let cache = options
-            .cache_directory
-            .as_ref()
-            .map(|directory| -> Result<_> {
-                Ok((
-                    directory,
-                    crate::cache::system_key(&family, targets, backend, options)?,
-                ))
-            })
-            .transpose()?;
-        if let Some((directory, key)) = &cache
-            && let Some((reduced, basis_refinement)) = crate::cache::read_system(directory, key)?
-        {
+        options.run_with_resources(|| {
+            context.cancellation.check()?;
+            options.validate()?;
+            if options.recursion != RecursionMode::Amf {
+                return Err(Error::Unsupported(
+                    "PreparedFlow prepares AMF systems; use solve_integrals for FT recursion"
+                        .into(),
+                ));
+            }
+            if targets.is_empty() {
+                return Err(Error::InvalidInput("empty target list".into()));
+            }
+            let mut family = family.at(point);
+            family.dimension = options.dimension;
+            family.validate()?;
+            for target in targets {
+                family.validate_integral(target)?;
+            }
+            let principal_mass_constraints =
+                crate::vacuum_peel::principal_mass_constraints(&family, targets)?;
+            crate::vacuum_peel::validate_principal_mass_constraints(
+                &principal_mass_constraints,
+                options.prescription,
+            )?;
+            let eta = symbol!("symbolica_amflow::eta");
+            let (auxiliary, mask) = family.deform(eta, &options.mass_mode)?;
+            let positive_mass_contour =
+                euclidean::positive_mass_contour(&auxiliary, eta)?.then(|| format!("{family:?}"));
+            let cache = options
+                .cache_directory
+                .as_ref()
+                .map(|directory| -> Result<_> {
+                    Ok((
+                        directory,
+                        crate::cache::system_key(&family, targets, backend, options)?,
+                    ))
+                })
+                .transpose()?;
+            if let Some((directory, key)) = &cache
+                && let Some((reduced, basis_refinement)) =
+                    crate::cache::read_system(directory, key)?
+            {
+                let system = DifferentialSystem {
+                    variable: eta,
+                    matrix: reduced.matrix.clone(),
+                };
+                return Ok(Self {
+                    family,
+                    reduced,
+                    system,
+                    basis_refinement,
+                    frobenius_preparations: Default::default(),
+                    epsilon_sample: None,
+                    deformation_mask: mask,
+                    supplied: None,
+                    principal_mass_constraints,
+                    positive_mass_contour,
+                });
+            }
+            let session = crate::reduction::ReductionSession::new(backend);
+            let backend = &session as &dyn ReductionBackend;
+            let mut reduced = if options.skip_reduction {
+                crate::reduction::differential_system_skip_initial(
+                    backend, &auxiliary, targets, &mask, None, context,
+                )?
+            } else {
+                differential_system(backend, &auxiliary, targets, &mask, None, context)?
+            };
+            let basis_refinement = if options.refine_basis {
+                Some(crate::refine::refine_basis(
+                    &mut reduced,
+                    eta,
+                    family.epsilon,
+                    None,
+                )?)
+            } else {
+                None
+            };
+            if let Some((directory, key)) = cache {
+                crate::cache::write_system(directory, &key, &reduced, &basis_refinement)?;
+            }
             let system = DifferentialSystem {
                 variable: eta,
                 matrix: reduced.matrix.clone(),
             };
-            return Ok(Self {
+            context.emit(Progress::Prepared {
+                basis_size: reduced.basis.len(),
+                blocks: if reduced.basis.is_empty() {
+                    vec![]
+                } else {
+                    system.blocks()?.iter().map(Vec::len).collect()
+                },
+            })?;
+            Ok(Self {
                 family,
                 reduced,
                 system,
@@ -91,53 +141,7 @@ impl PreparedFlow {
                 supplied: None,
                 principal_mass_constraints,
                 positive_mass_contour,
-            });
-        }
-        let session = crate::reduction::ReductionSession::new(backend);
-        let backend = &session as &dyn ReductionBackend;
-        let mut reduced = if options.skip_reduction {
-            crate::reduction::differential_system_skip_initial(
-                backend, &auxiliary, targets, &mask, 12, context,
-            )?
-        } else {
-            differential_system(backend, &auxiliary, targets, &mask, 12, context)?
-        };
-        let basis_refinement = if options.refine_basis {
-            Some(crate::refine::refine_basis(
-                &mut reduced,
-                eta,
-                family.epsilon,
-                32,
-            )?)
-        } else {
-            None
-        };
-        if let Some((directory, key)) = cache {
-            crate::cache::write_system(directory, &key, &reduced, &basis_refinement)?;
-        }
-        let system = DifferentialSystem {
-            variable: eta,
-            matrix: reduced.matrix.clone(),
-        };
-        context.emit(Progress::Prepared {
-            basis_size: reduced.basis.len(),
-            blocks: if reduced.basis.is_empty() {
-                vec![]
-            } else {
-                system.blocks()?.iter().map(Vec::len).collect()
-            },
-        })?;
-        Ok(Self {
-            family,
-            reduced,
-            system,
-            basis_refinement,
-            frobenius_preparations: Default::default(),
-            epsilon_sample: None,
-            deformation_mask: mask,
-            supplied: None,
-            principal_mass_constraints,
-            positive_mass_contour,
+            })
         })
     }
     /// Prepare at an exact regulator sample. Dimension-factorizing refinement
@@ -151,16 +155,18 @@ impl PreparedFlow {
         context: &RunContext,
         epsilon: &Rational,
     ) -> Result<Self> {
-        if options.refine_basis {
-            return Self::new(family, targets, point, backend, options, context);
-        }
-        let sampled = crate::reduction::SampledBackend {
-            backend,
-            epsilon: epsilon.clone(),
-        };
-        let mut flow = Self::new(family, targets, point, &sampled, options, context)?;
-        flow.epsilon_sample = Some(epsilon.clone());
-        Ok(flow)
+        options.run_with_resources(|| {
+            if options.refine_basis {
+                return Self::new(family, targets, point, backend, options, context);
+            }
+            let sampled = crate::reduction::SampledBackend {
+                backend,
+                epsilon: epsilon.clone(),
+            };
+            let mut flow = Self::new(family, targets, point, &sampled, options, context)?;
+            flow.epsilon_sample = Some(epsilon.clone());
+            Ok(flow)
+        })
     }
 
     fn lift_exponents(&self, basis: &mut frobenius::FrobeniusBasis) -> Result<()> {
@@ -215,167 +221,169 @@ impl PreparedFlow {
         boundary: &dyn BoundaryProvider,
         context: &RunContext,
     ) -> Result<Vec<ComplexFloat>> {
-        self.validate_supplied_contract(options)?;
-        crate::vacuum_peel::validate_principal_mass_constraints(
-            &self.principal_mass_constraints,
-            options.prescription,
-        )?;
-        if self
-            .epsilon_sample
-            .as_ref()
-            .is_some_and(|sample| sample != eps)
-        {
-            return Err(Error::InvalidInput(
-                "prepared system belongs to a different epsilon sample".into(),
-            ));
-        }
-        options.validate()?;
-        context.cancellation.check()?;
-        let digits = options
-            .digits
-            .checked_add(options.guard_digits)
-            .ok_or_else(|| Error::InvalidInput("precision overflow".into()))?;
-        let p = Precision::decimal(digits)?;
-        let parameters =
-            ahash::HashMap::from_iter([(Atom::var(self.family.epsilon), p.rational(eps))]);
-        // Preserve original rational denominator domains before cancellation,
-        // then specialize epsilon exactly. Floating substitution can miss an
-        // identically zero eta-dependent condition at a rational sample.
-        let epsilon_rule =
-            BTreeMap::from([(Atom::var(self.family.epsilon), Atom::num(eps.clone()))]);
-        let guards = crate::physical_conditions::canonical_conditions(
-            &self.reduced.nonzero_conditions,
-            &std::collections::BTreeSet::from([
-                self.system.variable,
-                self.family.epsilon,
-                crate::family::imaginary_parameter(),
-            ]),
-        )?
-        .iter()
-        .map(|condition| {
-            let specialized = crate::family::substitute(condition, &epsilon_rule)
-                .together()
-                .cancel();
-            if specialized.is_zero() {
-                return Err(Error::Reduction(format!(
-                    "a reduction nonzero condition vanishes identically at epsilon={eps}"
-                )));
+        options.run_with_resources(|| {
+            self.validate_supplied_contract(options)?;
+            crate::vacuum_peel::validate_principal_mass_constraints(
+                &self.principal_mass_constraints,
+                options.prescription,
+            )?;
+            if self
+                .epsilon_sample
+                .as_ref()
+                .is_some_and(|sample| sample != eps)
+            {
+                return Err(Error::InvalidInput(
+                    "prepared system belongs to a different epsilon sample".into(),
+                ));
             }
-            Ok(specialized)
-        })
-        .collect::<Result<Vec<_>>>()?;
-        if self.reduced.basis.is_empty() {
-            return Ok(vec![p.zero(); self.reduced.targets.len()]);
-        }
-        let stage = |name: &str| {
-            context.emit(Progress::Stage {
-                name: format!(
-                    "{name} ({} masters, {} loops)",
-                    self.reduced.basis.len(),
-                    self.family.loops.len()
-                ),
-            })
-        };
-        stage("compiling the auxiliary-mass differential equation")?;
-        let mut compiled = self.system.compile(p, &parameters)?;
-        compiled.exclude_polynomials(&guards)?;
-        stage("constructing the expansion at auxiliary-mass infinity")?;
-        let mut infinity = self
-            .frobenius_preparations
-            .get(&self.system, true, context)?
-            .evaluate(p, &parameters, options.series_order, context)?;
-        self.lift_exponents(&mut infinity)?;
-        ensure_generic_indicial(&infinity, &parameters)?;
-        stage("generating and matching native asymptotic boundary regions")?;
-        let constants = boundary.constants_with_deformation(
-            &self.family,
-            &self.reduced.basis,
-            &self.deformation_mask,
-            eps,
-            p,
-            &infinity,
-        )?;
-        let maximum = compiled
-            .poles
-            .iter()
-            .map(|v| p.norm(v))
-            .fold(p.real(1), |a, b| if a > b { a } else { b });
-        let direction = if options.prescription == Prescription::PlusI0 {
-            -1
-        } else {
-            1
-        };
-        let positive_mass_contour = self
-            .positive_mass_contour
-            .as_ref()
-            .is_some_and(|original| original == &format!("{:?}", self.family));
-        let start = if positive_mass_contour {
-            ComplexFloat::new(maximum * 8, p.real(0))
-        } else {
-            ComplexFloat::new(p.real(0), maximum * (8 * direction))
-        };
-        let at_start = infinity.evaluate(&p.div(&p.i(1), &start), &parameters)?;
-        let initial = at_start
-            .iter()
-            .map(|row| {
-                row.iter()
-                    .zip(&constants)
-                    .fold(p.zero(), |s, (v, c)| p.add(&s, &p.mul(v, c)))
-            })
-            .collect();
-        let minimum = compiled
-            .poles
-            .iter()
-            .map(|v| p.norm(v))
-            .filter(|v| *v > p.real(0))
-            .fold(p.real(1), |a, b| if a < b { a } else { b });
-        let end = if positive_mass_contour {
-            ComplexFloat::new(minimum / 8, p.real(0))
-        } else {
-            ComplexFloat::new(p.real(0), (minimum / 8) * direction)
-        };
-        let path = compiled.plan_path(&start, &end, -direction)?;
-        stage("transporting the auxiliary-mass solution")?;
-        let transported = compiled.transport(
-            &BoundaryData {
-                point: start,
-                values: initial,
-            },
-            &path,
-            options,
-            context,
-        )?;
-        stage("constructing the physical endpoint expansion")?;
-        let mut endpoint = self
-            .frobenius_preparations
-            .get(&self.system, false, context)?
-            .evaluate(p, &parameters, options.series_order, context)?;
-        self.lift_exponents(&mut endpoint)?;
-        ensure_generic_indicial(&endpoint, &parameters)?;
-        let constants = endpoint.match_values(&end, &transported.values, &parameters)?;
-        stage("extracting the dimensionally regulated physical limit")?;
-        // Reduction coefficients are multiplied into endpoint series before
-        // selecting the physical constant; poles in these coefficients matter.
-        self.reduced
-            .targets
-            .iter()
-            .map(|target| {
-                let weights = self
-                    .reduced
-                    .basis
-                    .iter()
-                    .map(|i| target.get(i).cloned().unwrap_or_default())
-                    .collect::<Vec<_>>();
-                project_limit(
-                    &endpoint,
-                    &constants,
-                    &weights,
-                    self.family.epsilon,
+            options.validate()?;
+            context.cancellation.check()?;
+            let digits = options
+                .digits
+                .checked_add(options.guard_digits)
+                .ok_or_else(|| Error::InvalidInput("precision overflow".into()))?;
+            let p = Precision::decimal(digits)?;
+            let parameters =
+                ahash::HashMap::from_iter([(Atom::var(self.family.epsilon), p.rational(eps))]);
+            // Preserve original rational denominator domains before cancellation,
+            // then specialize epsilon exactly. Floating substitution can miss an
+            // identically zero eta-dependent condition at a rational sample.
+            let epsilon_rule =
+                BTreeMap::from([(Atom::var(self.family.epsilon), Atom::num(eps.clone()))]);
+            let guards = crate::physical_conditions::canonical_conditions(
+                &self.reduced.nonzero_conditions,
+                &std::collections::BTreeSet::from([
                     self.system.variable,
-                    &parameters,
-                )
+                    self.family.epsilon,
+                    crate::family::imaginary_parameter(),
+                ]),
+            )?
+            .iter()
+            .map(|condition| {
+                let specialized = crate::family::substitute(condition, &epsilon_rule)
+                    .together()
+                    .cancel();
+                if specialized.is_zero() {
+                    return Err(Error::Reduction(format!(
+                        "a reduction nonzero condition vanishes identically at epsilon={eps}"
+                    )));
+                }
+                Ok(specialized)
             })
-            .collect()
+            .collect::<Result<Vec<_>>>()?;
+            if self.reduced.basis.is_empty() {
+                return Ok(vec![p.zero(); self.reduced.targets.len()]);
+            }
+            let stage = |name: &str| {
+                context.emit(Progress::Stage {
+                    name: format!(
+                        "{name} ({} masters, {} loops)",
+                        self.reduced.basis.len(),
+                        self.family.loops.len()
+                    ),
+                })
+            };
+            stage("compiling the auxiliary-mass differential equation")?;
+            let mut compiled = self.system.compile(p, &parameters)?;
+            compiled.exclude_polynomials(&guards)?;
+            stage("constructing the expansion at auxiliary-mass infinity")?;
+            let mut infinity = self
+                .frobenius_preparations
+                .get(&self.system, true, context)?
+                .evaluate(p, &parameters, options.series_order, context)?;
+            self.lift_exponents(&mut infinity)?;
+            ensure_generic_indicial(&infinity, &parameters)?;
+            stage("generating and matching native asymptotic boundary regions")?;
+            let constants = boundary.constants_with_deformation(
+                &self.family,
+                &self.reduced.basis,
+                &self.deformation_mask,
+                eps,
+                p,
+                &infinity,
+            )?;
+            let maximum = compiled
+                .poles
+                .iter()
+                .map(|v| p.norm(v))
+                .fold(p.real(1), |a, b| if a > b { a } else { b });
+            let direction = if options.prescription == Prescription::PlusI0 {
+                -1
+            } else {
+                1
+            };
+            let positive_mass_contour = self
+                .positive_mass_contour
+                .as_ref()
+                .is_some_and(|original| original == &format!("{:?}", self.family));
+            let start = if positive_mass_contour {
+                ComplexFloat::new(maximum * 8, p.real(0))
+            } else {
+                ComplexFloat::new(p.real(0), maximum * (8 * direction))
+            };
+            let at_start = infinity.evaluate(&p.div(&p.i(1), &start), &parameters)?;
+            let initial = at_start
+                .iter()
+                .map(|row| {
+                    row.iter()
+                        .zip(&constants)
+                        .fold(p.zero(), |s, (v, c)| p.add(&s, &p.mul(v, c)))
+                })
+                .collect();
+            let minimum = compiled
+                .poles
+                .iter()
+                .map(|v| p.norm(v))
+                .filter(|v| *v > p.real(0))
+                .fold(p.real(1), |a, b| if a < b { a } else { b });
+            let end = if positive_mass_contour {
+                ComplexFloat::new(minimum / 8, p.real(0))
+            } else {
+                ComplexFloat::new(p.real(0), (minimum / 8) * direction)
+            };
+            let path = compiled.plan_path(&start, &end, -direction)?;
+            stage("transporting the auxiliary-mass solution")?;
+            let transported = compiled.transport(
+                &BoundaryData {
+                    point: start,
+                    values: initial,
+                },
+                &path,
+                options,
+                context,
+            )?;
+            stage("constructing the physical endpoint expansion")?;
+            let mut endpoint = self
+                .frobenius_preparations
+                .get(&self.system, false, context)?
+                .evaluate(p, &parameters, options.series_order, context)?;
+            self.lift_exponents(&mut endpoint)?;
+            ensure_generic_indicial(&endpoint, &parameters)?;
+            let constants = endpoint.match_values(&end, &transported.values, &parameters)?;
+            stage("extracting the dimensionally regulated physical limit")?;
+            // Reduction coefficients are multiplied into endpoint series before
+            // selecting the physical constant; poles in these coefficients matter.
+            self.reduced
+                .targets
+                .iter()
+                .map(|target| {
+                    let weights = self
+                        .reduced
+                        .basis
+                        .iter()
+                        .map(|i| target.get(i).cloned().unwrap_or_default())
+                        .collect::<Vec<_>>();
+                    project_limit(
+                        &endpoint,
+                        &constants,
+                        &weights,
+                        self.family.epsilon,
+                        self.system.variable,
+                        &parameters,
+                    )
+                })
+                .collect()
+        })
     }
 }
 
@@ -403,41 +411,48 @@ pub fn evaluate_samples(
     boundary: &dyn BoundaryProvider,
     context: &RunContext,
 ) -> Result<Vec<Vec<ComplexFloat>>> {
-    options.validate()?;
-    if samples.iter().any(|v| v.is_zero()) {
-        return Err(Error::InvalidInput(
-            "epsilon samples must be nonzero".into(),
-        ));
-    }
-    if options.workers == 1 {
-        return samples
-            .iter()
-            .enumerate()
-            .map(|(index, eps)| {
-                context.emit(Progress::Sample {
-                    index,
-                    total: samples.len(),
-                })?;
-                prepared.evaluate(eps, options, boundary, context)
-            })
-            .collect();
-    }
-    let pool = rayon::ThreadPoolBuilder::new()
-        .num_threads(options.workers)
-        .build()
-        .map_err(|e| Error::InvalidInput(e.to_string()))?;
-    pool.install(|| {
-        samples
-            .par_iter()
-            .enumerate()
-            .map(|(index, eps)| {
-                context.emit(Progress::Sample {
-                    index,
-                    total: samples.len(),
-                })?;
-                prepared.evaluate(eps, options, boundary, context)
-            })
-            .collect()
+    options.run_with_resources(|| {
+        let resource_context = crate::ResourceBudget::capture_current();
+        options.validate()?;
+        if samples.iter().any(|v| v.is_zero()) {
+            return Err(Error::InvalidInput(
+                "epsilon samples must be nonzero".into(),
+            ));
+        }
+        if options.workers == 1 {
+            return samples
+                .iter()
+                .enumerate()
+                .map(|(index, eps)| {
+                    resource_context.run_captured(|| {
+                        context.emit(Progress::Sample {
+                            index,
+                            total: samples.len(),
+                        })?;
+                        prepared.evaluate(eps, options, boundary, context)
+                    })
+                })
+                .collect();
+        }
+        let pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(options.workers)
+            .build()
+            .map_err(|e| Error::InvalidInput(e.to_string()))?;
+        pool.install(|| {
+            samples
+                .par_iter()
+                .enumerate()
+                .map(|(index, eps)| {
+                    resource_context.run_captured(|| {
+                        context.emit(Progress::Sample {
+                            index,
+                            total: samples.len(),
+                        })?;
+                        prepared.evaluate(eps, options, boundary, context)
+                    })
+                })
+                .collect()
+        })
     })
 }
 
@@ -465,109 +480,146 @@ pub fn solve_integrals(
     backend: &dyn ReductionBackend,
     context: &RunContext,
 ) -> Result<Vec<LaurentExpansion>> {
-    options.validate()?;
-    if targets.is_empty() {
-        return Err(Error::InvalidInput("empty target list".into()));
-    }
-    // FT combines denominators directly, including linear ones. Its Schwinger
-    // polynomial check below certifies the parameter domain before recursion;
-    // it does not need the rank-one quadratic deformation used by AMF.
-    if options.recursion == RecursionMode::Amf && has_linear_propagators(&family.at(point)) {
-        let prepared = crate::linear::PreparedLinearFlow::new(
-            family, targets, point, backend, options, context,
-        )?;
-        return fit_samples_refined(
-            targets.len(),
-            family.loops.len(),
-            last,
-            options,
-            |samples, refined| {
-                let evaluate = |(index, epsilon): (usize, &Rational)| {
-                    context.emit(Progress::Sample {
-                        index,
-                        total: samples.len(),
-                    })?;
-                    Ok(prepared
-                        .evaluate(epsilon, refined, backend, context)?
-                        .values)
-                };
-                if refined.workers == 1 {
-                    samples.iter().enumerate().map(evaluate).collect()
-                } else {
-                    rayon::ThreadPoolBuilder::new()
-                        .num_threads(refined.workers)
-                        .build()
-                        .map_err(|e| Error::InvalidInput(e.to_string()))?
-                        .install(|| samples.par_iter().enumerate().map(evaluate).collect())
-                }
-            },
-        );
-    }
-    if options.recursion == RecursionMode::Ft {
-        let mut family = family.at(point);
-        family.dimension = options.dimension;
-        let evaluator = crate::ft::FtEvaluator::new(backend, context);
-        return fit_samples_refined(
-            targets.len(),
-            family.loops.len(),
-            last,
-            options,
-            |samples, refined| {
-                let evaluate = |(index, eps): (usize, &Rational)| {
-                    context.emit(Progress::Sample {
-                        index,
-                        total: samples.len(),
-                    })?;
-                    targets
-                        .iter()
-                        .map(|target| evaluator.evaluate(&family, target, eps, refined))
-                        .collect::<Result<Vec<_>>>()
-                };
-                if refined.workers == 1 {
-                    samples.iter().enumerate().map(evaluate).collect()
-                } else {
-                    let pool = rayon::ThreadPoolBuilder::new()
-                        .num_threads(refined.workers)
-                        .build()
-                        .map_err(|e| Error::InvalidInput(e.to_string()))?;
-                    pool.install(|| samples.par_iter().enumerate().map(evaluate).collect())
-                }
-            },
-        );
-    }
-    if options.sampled_reduction && !options.refine_basis && family.loops.len() > 1 {
+    options.run_with_resources(|| {
+        let resource_context = crate::ResourceBudget::capture_current();
+        options.validate()?;
+        if targets.is_empty() {
+            return Err(Error::InvalidInput("empty target list".into()));
+        }
+        // FT combines denominators directly, including linear ones. Its Schwinger
+        // polynomial check below certifies the parameter domain before recursion;
+        // it does not need the rank-one quadratic deformation used by AMF.
+        if options.recursion == RecursionMode::Amf && has_linear_propagators(&family.at(point)) {
+            let prepared = crate::linear::PreparedLinearFlow::new(
+                family, targets, point, backend, options, context,
+            )?;
+            return fit_samples_refined(
+                targets.len(),
+                family.loops.len(),
+                last,
+                options,
+                |samples, refined| {
+                    let evaluate = |(index, epsilon): (usize, &Rational)| {
+                        context.emit(Progress::Sample {
+                            index,
+                            total: samples.len(),
+                        })?;
+                        Ok(prepared
+                            .evaluate(epsilon, refined, backend, context)?
+                            .values)
+                    };
+                    if refined.workers == 1 {
+                        samples
+                            .iter()
+                            .enumerate()
+                            .map(|sample| resource_context.run_captured(|| evaluate(sample)))
+                            .collect()
+                    } else {
+                        rayon::ThreadPoolBuilder::new()
+                            .num_threads(refined.workers)
+                            .build()
+                            .map_err(|e| Error::InvalidInput(e.to_string()))?
+                            .install(|| {
+                                samples
+                                    .par_iter()
+                                    .enumerate()
+                                    .map(|sample| {
+                                        resource_context.run_captured(|| evaluate(sample))
+                                    })
+                                    .collect()
+                            })
+                    }
+                },
+            );
+        }
+        if options.recursion == RecursionMode::Ft {
+            let mut family = family.at(point);
+            family.dimension = options.dimension;
+            let evaluator = crate::ft::FtEvaluator::new(backend, context);
+            return fit_samples_refined(
+                targets.len(),
+                family.loops.len(),
+                last,
+                options,
+                |samples, refined| {
+                    let evaluate = |(index, eps): (usize, &Rational)| {
+                        context.emit(Progress::Sample {
+                            index,
+                            total: samples.len(),
+                        })?;
+                        targets
+                            .iter()
+                            .map(|target| evaluator.evaluate(&family, target, eps, refined))
+                            .collect::<Result<Vec<_>>>()
+                    };
+                    if refined.workers == 1 {
+                        samples
+                            .iter()
+                            .enumerate()
+                            .map(|sample| resource_context.run_captured(|| evaluate(sample)))
+                            .collect()
+                    } else {
+                        let pool = rayon::ThreadPoolBuilder::new()
+                            .num_threads(refined.workers)
+                            .build()
+                            .map_err(|e| Error::InvalidInput(e.to_string()))?;
+                        pool.install(|| {
+                            samples
+                                .par_iter()
+                                .enumerate()
+                                .map(|sample| resource_context.run_captured(|| evaluate(sample)))
+                                .collect()
+                        })
+                    }
+                },
+            );
+        }
+        if options.sampled_reduction && !options.refine_basis && family.loops.len() > 1 {
+            let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
+            return fit_samples_refined(
+                targets.len(),
+                family.loops.len(),
+                last,
+                options,
+                |samples, refined| {
+                    let evaluate = |(index, epsilon): (usize, &Rational)| {
+                        context.emit(Progress::Sample {
+                            index,
+                            total: samples.len(),
+                        })?;
+                        let prepared = PreparedFlow::new_at_epsilon(
+                            family, targets, point, backend, refined, context, epsilon,
+                        )?;
+                        prepared.evaluate(epsilon, refined, &boundary, context)
+                    };
+                    if options.workers == 1 {
+                        samples
+                            .iter()
+                            .enumerate()
+                            .map(|sample| resource_context.run_captured(|| evaluate(sample)))
+                            .collect()
+                    } else {
+                        rayon::ThreadPoolBuilder::new()
+                            .num_threads(options.workers)
+                            .build()
+                            .map_err(|e| Error::InvalidInput(e.to_string()))?
+                            .install(|| {
+                                samples
+                                    .par_iter()
+                                    .enumerate()
+                                    .map(|sample| {
+                                        resource_context.run_captured(|| evaluate(sample))
+                                    })
+                                    .collect()
+                            })
+                    }
+                },
+            );
+        }
+        let prepared = PreparedFlow::new(family, targets, point, backend, options, context)?;
         let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
-        return fit_samples_refined(
-            targets.len(),
-            family.loops.len(),
-            last,
-            options,
-            |samples, refined| {
-                let evaluate = |(index, epsilon): (usize, &Rational)| {
-                    context.emit(Progress::Sample {
-                        index,
-                        total: samples.len(),
-                    })?;
-                    let prepared = PreparedFlow::new_at_epsilon(
-                        family, targets, point, backend, refined, context, epsilon,
-                    )?;
-                    prepared.evaluate(epsilon, refined, &boundary, context)
-                };
-                if options.workers == 1 {
-                    samples.iter().enumerate().map(evaluate).collect()
-                } else {
-                    rayon::ThreadPoolBuilder::new()
-                        .num_threads(options.workers)
-                        .build()
-                        .map_err(|e| Error::InvalidInput(e.to_string()))?
-                        .install(|| samples.par_iter().enumerate().map(evaluate).collect())
-                }
-            },
-        );
-    }
-    let prepared = PreparedFlow::new(family, targets, point, backend, options, context)?;
-    let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
-    solve_prepared(&prepared, last, options, &boundary, context)
+        solve_prepared(&prepared, last, options, &boundary, context)
+    })
 }
 
 pub fn solve_prepared(
@@ -577,13 +629,15 @@ pub fn solve_prepared(
     boundary: &dyn BoundaryProvider,
     context: &RunContext,
 ) -> Result<Vec<LaurentExpansion>> {
-    fit_samples_refined(
-        prepared.reduced.targets.len(),
-        prepared.family.loops.len(),
-        last,
-        options,
-        |samples, refined| evaluate_samples(prepared, samples, refined, boundary, context),
-    )
+    options.run_with_resources(|| {
+        fit_samples_refined(
+            prepared.reduced.targets.len(),
+            prepared.family.loops.len(),
+            last,
+            options,
+            |samples, refined| evaluate_samples(prepared, samples, refined, boundary, context),
+        )
+    })
 }
 
 /// Evaluate a sum of exact integral combinations, potentially from different
@@ -598,12 +652,15 @@ pub fn solve_integral_combinations(
     backend: &dyn ReductionBackend,
     context: &RunContext,
 ) -> Result<LaurentExpansion> {
-    let groups = groups
-        .iter()
-        .map(|(family, terms)| (family.clone(), vec![terms.clone()]))
-        .collect::<Vec<_>>();
-    let mut values = solve_integral_projections(&groups, point, last, options, backend, context)?;
-    Ok(values.remove(0))
+    options.run_with_resources(|| {
+        let groups = groups
+            .iter()
+            .map(|(family, terms)| (family.clone(), vec![terms.clone()]))
+            .collect::<Vec<_>>();
+        let mut values =
+            solve_integral_projections(&groups, point, last, options, backend, context)?;
+        Ok(values.remove(0))
+    })
 }
 
 /// Evaluate several exact linear projections together. Every family contributes
@@ -619,15 +676,17 @@ pub fn solve_integral_projections(
     backend: &dyn ReductionBackend,
     context: &RunContext,
 ) -> Result<Vec<LaurentExpansion>> {
-    solve_integral_projections_normalized(
-        groups,
-        point,
-        last,
-        options,
-        backend,
-        context,
-        &Default::default(),
-    )
+    options.run_with_resources(|| {
+        solve_integral_projections_normalized(
+            groups,
+            point,
+            last,
+            options,
+            backend,
+            context,
+            &Default::default(),
+        )
+    })
 }
 
 /// Batched projections with explicitly registered algebraic roots and a common
@@ -643,9 +702,11 @@ pub fn solve_integral_projections_normalized(
     context: &RunContext,
     factors: &crate::ProjectionFactors,
 ) -> Result<Vec<LaurentExpansion>> {
-    solve_integral_projections_with_preparer(
-        groups, point, last, options, backend, context, factors, None,
-    )
+    options.run_with_resources(|| {
+        solve_integral_projections_with_preparer(
+            groups, point, last, options, backend, context, factors, None,
+        )
+    })
 }
 
 /// Preparation is replaceable by a supplied closed connection; projection,
@@ -664,195 +725,208 @@ pub(crate) fn solve_integral_projections_with_preparer(
     factors: &crate::ProjectionFactors,
     supplied_preparer: Option<&ProjectionPreparer<'_>>,
 ) -> Result<Vec<LaurentExpansion>> {
-    options.validate()?;
-    context.cancellation.check()?;
-    if supplied_preparer.is_some() && options.recursion != RecursionMode::Amf {
-        return Err(Error::Unsupported(
-            "a supplied auxiliary-mass connection requires AMF recursion".into(),
-        ));
-    }
-    let factors = factors.at(point)?;
-    let outputs = groups.first().map_or(0, |(_, rows)| rows.len());
-    if outputs == 0 || groups.iter().any(|(_, rows)| rows.len() != outputs) {
-        return Err(Error::InvalidInput(
-            "integral projections require equal, nonzero output row counts".into(),
-        ));
-    }
-    enum Preparation {
-        Amf(PreparedFlow),
-        Linear(crate::linear::PreparedLinearFlow),
-        Sampled,
-        Ft,
-    }
-    let mut prepared = Vec::new();
-    let mut leading = 0i32;
-    for (family, rows) in groups {
-        if supplied_preparer.is_some() && family.dimension != options.dimension {
-            return Err(Error::InvalidInput(
-                "supplied projection family dimension differs from evaluation dimension".into(),
+    options.run_with_resources(|| {
+        let resource_context = crate::ResourceBudget::capture_current();
+        options.validate()?;
+        context.cancellation.check()?;
+        if supplied_preparer.is_some() && options.recursion != RecursionMode::Amf {
+            return Err(Error::Unsupported(
+                "a supplied auxiliary-mass connection requires AMF recursion".into(),
             ));
         }
-        let mut family = family.at(point);
-        family.dimension = options.dimension;
-        family.validate()?;
-        if factors.roots.iter().any(|r| r.symbol == family.epsilon) {
+        let factors = factors.at(point)?;
+        let outputs = groups.first().map_or(0, |(_, rows)| rows.len());
+        if outputs == 0 || groups.iter().any(|(_, rows)| rows.len() != outputs) {
             return Err(Error::InvalidInput(
-                "projection root cannot be epsilon".into(),
+                "integral projections require equal, nonzero output row counts".into(),
             ));
         }
-        let allowed = factors
-            .roots
-            .iter()
-            .map(|r| Atom::var(r.symbol))
-            .chain([
-                Atom::var(family.epsilon),
-                Atom::var(crate::family::imaginary_parameter()),
-            ])
-            .collect::<std::collections::BTreeSet<_>>();
-        let mut targets = std::collections::BTreeSet::new();
-        let mut coefficients = Vec::with_capacity(outputs);
-        let bound = i32::try_from(family.loops.len())
-            .ok()
-            .and_then(|n| n.checked_mul(-2))
-            .ok_or_else(|| Error::Limit("Laurent pole bound overflow".into()))?;
-        leading = leading.min(bound);
-        for terms in rows {
-            let mut row = BTreeMap::new();
-            for (integral, coefficient) in terms {
-                family.validate_integral(integral)?;
-                let coefficient = point.apply(coefficient).together().cancel();
-                if coefficient.is_zero() {
-                    continue;
-                }
-                let valuation =
-                    projection_weight_valuation(&coefficient, family.epsilon, &allowed)?;
-                leading = leading.min(
-                    bound
-                        .checked_add(valuation)
-                        .ok_or_else(|| Error::Limit("weighted Laurent bound overflow".into()))?,
-                );
-                targets.insert(integral.clone());
-                row.insert(integral.clone(), coefficient);
+        enum Preparation {
+            Amf(PreparedFlow),
+            Linear(crate::linear::PreparedLinearFlow),
+            Sampled,
+            Ft,
+        }
+        let mut prepared = Vec::new();
+        let mut leading = 0i32;
+        for (family, rows) in groups {
+            if supplied_preparer.is_some() && family.dimension != options.dimension {
+                return Err(Error::InvalidInput(
+                    "supplied projection family dimension differs from evaluation dimension".into(),
+                ));
             }
-            coefficients.push(row);
-        }
-        let integrals = targets.into_iter().collect::<Vec<_>>();
-        if integrals.is_empty() {
-            continue;
-        }
-        let coefficients = coefficients
-            .into_iter()
-            .map(|row| {
-                integrals
-                    .iter()
-                    .map(|integral| row.get(integral).cloned().unwrap_or_default())
-                    .collect::<Vec<_>>()
-            })
-            .collect::<Vec<_>>();
-        let preparation = if let Some(prepare) = supplied_preparer {
-            Preparation::Amf(prepare(&family, &integrals, options, context)?)
-        } else if options.recursion == RecursionMode::Ft {
-            Preparation::Ft
-        } else if has_linear_propagators(&family) {
-            Preparation::Linear(crate::linear::PreparedLinearFlow::new(
-                &family,
-                &integrals,
-                &KinematicPoint::default(),
-                backend,
-                options,
-                context,
-            )?)
-        } else if options.sampled_reduction && !options.refine_basis && family.loops.len() > 1 {
-            Preparation::Sampled
-        } else {
-            Preparation::Amf(PreparedFlow::new(
-                &family,
-                &integrals,
-                &KinematicPoint::default(),
-                backend,
-                options,
-                context,
-            )?)
-        };
-        if let Preparation::Amf(flow) = &preparation {
-            // The immutable prepared flow is shared by every sample below.
-            // Validate its sealed declaration even when all samples are hits.
-            flow.validate_supplied_contract(options)?;
-        }
-        prepared.push((family, integrals, coefficients, preparation));
-    }
-    let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
-    let ft = crate::ft::FtEvaluator::new(backend, context);
-    fit_samples_refined_leading(outputs, leading, last, options, |samples, refined| {
-        let p = Precision::decimal(refined.digits + refined.guard_digits)?;
-        let root_parameters = factors.parameters(p)?;
-        let evaluate = |(index, epsilon): (usize, &Rational)| {
-            context.emit(Progress::Sample {
-                index,
-                total: samples.len(),
-            })?;
-            let mut sums = vec![p.zero(); outputs];
-            for (family, integrals, coefficients, preparation) in &prepared {
-                let values = crate::sample_checkpoint::evaluate(
-                    family,
-                    integrals,
-                    epsilon,
-                    refined,
+            let mut family = family.at(point);
+            family.dimension = options.dimension;
+            family.validate()?;
+            if factors.roots.iter().any(|r| r.symbol == family.epsilon) {
+                return Err(Error::InvalidInput(
+                    "projection root cannot be epsilon".into(),
+                ));
+            }
+            let allowed = factors
+                .roots
+                .iter()
+                .map(|r| Atom::var(r.symbol))
+                .chain([
+                    Atom::var(family.epsilon),
+                    Atom::var(crate::family::imaginary_parameter()),
+                ])
+                .collect::<std::collections::BTreeSet<_>>();
+            let mut targets = std::collections::BTreeSet::new();
+            let mut coefficients = Vec::with_capacity(outputs);
+            let bound = i32::try_from(family.loops.len())
+                .ok()
+                .and_then(|n| n.checked_mul(-2))
+                .ok_or_else(|| Error::Limit("Laurent pole bound overflow".into()))?;
+            leading = leading.min(bound);
+            for terms in rows {
+                let mut row = BTreeMap::new();
+                for (integral, coefficient) in terms {
+                    family.validate_integral(integral)?;
+                    let coefficient = point.apply(coefficient).together().cancel();
+                    if coefficient.is_zero() {
+                        continue;
+                    }
+                    let valuation =
+                        projection_weight_valuation(&coefficient, family.epsilon, &allowed)?;
+                    leading =
+                        leading.min(bound.checked_add(valuation).ok_or_else(|| {
+                            Error::Limit("weighted Laurent bound overflow".into())
+                        })?);
+                    targets.insert(integral.clone());
+                    row.insert(integral.clone(), coefficient);
+                }
+                coefficients.push(row);
+            }
+            let integrals = targets.into_iter().collect::<Vec<_>>();
+            if integrals.is_empty() {
+                continue;
+            }
+            let coefficients = coefficients
+                .into_iter()
+                .map(|row| {
+                    integrals
+                        .iter()
+                        .map(|integral| row.get(integral).cloned().unwrap_or_default())
+                        .collect::<Vec<_>>()
+                })
+                .collect::<Vec<_>>();
+            let preparation = if let Some(prepare) = supplied_preparer {
+                Preparation::Amf(prepare(&family, &integrals, options, context)?)
+            } else if options.recursion == RecursionMode::Ft {
+                Preparation::Ft
+            } else if has_linear_propagators(&family) {
+                Preparation::Linear(crate::linear::PreparedLinearFlow::new(
+                    &family,
+                    &integrals,
+                    &KinematicPoint::default(),
                     backend,
-                    match preparation {
-                        Preparation::Amf(flow) => flow.source_identity(),
-                        _ => None,
-                    },
-                    || {
-                        Ok(match preparation {
-                            Preparation::Amf(flow) => {
-                                flow.evaluate(epsilon, refined, &boundary, context)?
+                    options,
+                    context,
+                )?)
+            } else if options.sampled_reduction && !options.refine_basis && family.loops.len() > 1 {
+                Preparation::Sampled
+            } else {
+                Preparation::Amf(PreparedFlow::new(
+                    &family,
+                    &integrals,
+                    &KinematicPoint::default(),
+                    backend,
+                    options,
+                    context,
+                )?)
+            };
+            if let Preparation::Amf(flow) = &preparation {
+                // The immutable prepared flow is shared by every sample below.
+                // Validate its sealed declaration even when all samples are hits.
+                flow.validate_supplied_contract(options)?;
+            }
+            prepared.push((family, integrals, coefficients, preparation));
+        }
+        let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
+        let ft = crate::ft::FtEvaluator::new(backend, context);
+        fit_samples_refined_leading(outputs, leading, last, options, |samples, refined| {
+            let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+            let root_parameters = factors.parameters(p)?;
+            let evaluate = |(index, epsilon): (usize, &Rational)| {
+                context.emit(Progress::Sample {
+                    index,
+                    total: samples.len(),
+                })?;
+                let mut sums = vec![p.zero(); outputs];
+                for (family, integrals, coefficients, preparation) in &prepared {
+                    let values = crate::sample_checkpoint::evaluate(
+                        family,
+                        integrals,
+                        epsilon,
+                        refined,
+                        backend,
+                        match preparation {
+                            Preparation::Amf(flow) => flow.source_identity(),
+                            _ => None,
+                        },
+                        || {
+                            Ok(match preparation {
+                                Preparation::Amf(flow) => {
+                                    flow.evaluate(epsilon, refined, &boundary, context)?
+                                }
+                                Preparation::Linear(flow) => {
+                                    flow.evaluate(epsilon, refined, backend, context)?.values
+                                }
+                                Preparation::Sampled => PreparedFlow::new_at_epsilon(
+                                    family,
+                                    integrals,
+                                    &KinematicPoint::default(),
+                                    backend,
+                                    refined,
+                                    context,
+                                    epsilon,
+                                )?
+                                .evaluate(epsilon, refined, &boundary, context)?,
+                                Preparation::Ft => integrals
+                                    .iter()
+                                    .map(|i| ft.evaluate(family, i, epsilon, refined))
+                                    .collect::<Result<Vec<_>>>()?,
+                            })
+                        },
+                    )?;
+                    let mut parameters = root_parameters.clone();
+                    parameters.insert(Atom::var(family.epsilon), p.rational(epsilon));
+                    for (sum, row) in sums.iter_mut().zip(coefficients) {
+                        for (coefficient, value) in row.iter().zip(&values) {
+                            if !coefficient.is_zero() {
+                                *sum =
+                                    p.add(sum, &p.mul(&p.eval(coefficient, &parameters)?, value));
                             }
-                            Preparation::Linear(flow) => {
-                                flow.evaluate(epsilon, refined, backend, context)?.values
-                            }
-                            Preparation::Sampled => PreparedFlow::new_at_epsilon(
-                                family,
-                                integrals,
-                                &KinematicPoint::default(),
-                                backend,
-                                refined,
-                                context,
-                                epsilon,
-                            )?
-                            .evaluate(epsilon, refined, &boundary, context)?,
-                            Preparation::Ft => integrals
-                                .iter()
-                                .map(|i| ft.evaluate(family, i, epsilon, refined))
-                                .collect::<Result<Vec<_>>>()?,
-                        })
-                    },
-                )?;
-                let mut parameters = root_parameters.clone();
-                parameters.insert(Atom::var(family.epsilon), p.rational(epsilon));
-                for (sum, row) in sums.iter_mut().zip(coefficients) {
-                    for (coefficient, value) in row.iter().zip(&values) {
-                        if !coefficient.is_zero() {
-                            *sum = p.add(sum, &p.mul(&p.eval(coefficient, &parameters)?, value));
                         }
                     }
                 }
+                let normalization = factors.evaluate(epsilon, p)?;
+                Ok(sums
+                    .iter()
+                    .map(|value| p.mul(value, &normalization))
+                    .collect())
+            };
+            if refined.workers == 1 {
+                samples
+                    .iter()
+                    .enumerate()
+                    .map(|sample| resource_context.run_captured(|| evaluate(sample)))
+                    .collect()
+            } else {
+                rayon::ThreadPoolBuilder::new()
+                    .num_threads(refined.workers)
+                    .build()
+                    .map_err(|e| Error::InvalidInput(e.to_string()))?
+                    .install(|| {
+                        samples
+                            .par_iter()
+                            .enumerate()
+                            .map(|sample| resource_context.run_captured(|| evaluate(sample)))
+                            .collect()
+                    })
             }
-            let normalization = factors.evaluate(epsilon, p)?;
-            Ok(sums
-                .iter()
-                .map(|value| p.mul(value, &normalization))
-                .collect())
-        };
-        if refined.workers == 1 {
-            samples.iter().enumerate().map(evaluate).collect()
-        } else {
-            rayon::ThreadPoolBuilder::new()
-                .num_threads(refined.workers)
-                .build()
-                .map_err(|e| Error::InvalidInput(e.to_string()))?
-                .install(|| samples.par_iter().enumerate().map(evaluate).collect())
-        }
+        })
     })
 }
 
@@ -924,15 +998,15 @@ pub(crate) fn fit_samples_refined_leading(
     // A smaller regulator radius and balanced nodes reduce the extrapolation
     // order and conditioning cost. This is an initial proposal only: the
     // independent higher-order, smaller-radius fit still admits every result.
-    let count = width + (options.digits as usize).div_ceil(3) + 2;
+    let count = width
+        .checked_add((options.digits as usize).div_ceil(3))
+        .and_then(|count| count.checked_add(2))
+        .ok_or_else(|| Error::Limit("epsilon sample count overflow".into()))?;
     // Use complete +/- pairs. An unpaired positive node adds a flow solve
     // without the even/odd cancellation of a balanced interpolation grid.
-    let count = count + count % 2;
-    if count > 10000 {
-        return Err(Error::Limit(
-            "epsilon reconstruction exceeds 10000 samples".into(),
-        ));
-    }
+    let count = count
+        .checked_add(count % 2)
+        .ok_or_else(|| Error::Limit("epsilon sample count overflow".into()))?;
     let mut previous: Option<Vec<LaurentExpansion>> = None;
     // Reserve digits for extracting positive powers from a pole-subtracted
     // polynomial at |epsilon| <= 1e-3. Starting an underresolved Vandermonde
@@ -947,18 +1021,40 @@ pub(crate) fn fit_samples_refined_leading(
         .digits
         .checked_add(options.guard_digits.max(fit_guard))
         .ok_or_else(|| Error::Limit("epsilon fit precision overflow".into()))?;
-    for attempt in 0..=options.max_precision_attempts {
+    for attempt in 0_usize.. {
+        symbolica::utils::resources::checkpoint()?;
+        if options
+            .max_precision_attempts
+            .is_some_and(|limit| attempt > limit)
+        {
+            break;
+        }
         let mut refined = options.clone();
         refined.guard_digits = working_digits - options.digits;
-        refined.series_order += attempt * 16;
+        refined.series_order = refined
+            .series_order
+            .checked_add(
+                attempt
+                    .checked_mul(16)
+                    .ok_or_else(|| Error::Limit("epsilon fit order overflow".into()))?,
+            )
+            .ok_or_else(|| Error::Limit("epsilon fit order overflow".into()))?;
         refined.refine_rational_order(attempt);
         refined.validate()?;
-        let samples = epsilon::symmetric_epsilon_samples(
-            count + attempt * 4,
-            1000 * (1_i64
-                .checked_shl(attempt as u32)
-                .ok_or_else(|| Error::Limit("too many precision attempts".into()))?),
-        )?;
+        let count = count
+            .checked_add(
+                attempt
+                    .checked_mul(4)
+                    .ok_or_else(|| Error::Limit("epsilon sample count overflow".into()))?,
+            )
+            .ok_or_else(|| Error::Limit("epsilon sample count overflow".into()))?;
+        let denominator = u32::try_from(attempt)
+            .ok()
+            .and_then(|attempt| 1_i64.checked_shl(attempt))
+            .and_then(|scale| scale.checked_mul(1000))
+            .filter(|scale| *scale > 0)
+            .ok_or_else(|| Error::Limit("epsilon sampling denominator overflow".into()))?;
+        let samples = epsilon::symmetric_epsilon_samples(count, denominator)?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
         let current_digits = working_digits;
         // Nodes are normalized to the unit interval before solving the fit;
@@ -971,14 +1067,18 @@ pub(crate) fn fit_samples_refined_leading(
             .ok_or_else(|| Error::Limit("epsilon fit precision overflow".into()))?;
         let values = match evaluate(&samples, &refined) {
             Err(Error::InsufficientPrecision { minimum_bits, .. })
-                if attempt < options.max_precision_attempts =>
+                if options
+                    .max_precision_attempts
+                    .is_none_or(|limit| attempt < limit) =>
             {
                 working_digits = Precision::refinement_digits(current_digits, minimum_bits)?;
                 previous = None;
                 continue;
             }
             Err(Error::Accuracy(_) | Error::Numerical(_))
-                if attempt < options.max_precision_attempts =>
+                if options
+                    .max_precision_attempts
+                    .is_none_or(|limit| attempt < limit) =>
             {
                 previous = None;
                 continue;
@@ -998,7 +1098,9 @@ pub(crate) fn fit_samples_refined_leading(
             .collect::<Result<Vec<_>>>();
         let mut fits = match fits {
             Err(Error::Accuracy(_) | Error::Numerical(_))
-                if attempt < options.max_precision_attempts =>
+                if options
+                    .max_precision_attempts
+                    .is_none_or(|limit| attempt < limit) =>
             {
                 previous = None;
                 continue;
@@ -1126,6 +1228,7 @@ mod tests {
         let options = FlowOptions {
             digits: 20,
             guard_digits: 24,
+            max_precision_attempts: Some(3),
             ..Default::default()
         };
         let outcome = fit_samples_refined_leading(1, 0, 0, &options, |samples, refined| {

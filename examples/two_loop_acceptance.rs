@@ -52,7 +52,9 @@ fn main() -> Result<()> {
                         .into(),
                 )
             }
-            "--max-targets" => native.max_targets = integer_argument(&mut arguments, &argument)?,
+            "--max-targets" => {
+                native.max_targets = Some(integer_argument(&mut arguments, &argument)?)
+            }
             "--native-workers" => {
                 native.native_workers = integer_argument(&mut arguments, &argument)?
             }

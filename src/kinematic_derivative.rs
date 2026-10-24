@@ -255,7 +255,7 @@ impl KinematicDerivative {
         &self,
         backend: &dyn ReductionBackend,
         targets: &[Integral],
-        max_rounds: usize,
+        max_rounds: Option<usize>,
         context: &RunContext,
     ) -> Result<ReducedSystem> {
         let mut system = crate::reduction::build_differential_system(

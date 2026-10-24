@@ -9,7 +9,10 @@ use crate::cuts::{
     CutDefinition, CutFamily, CutLine, CutMetadata, LoopPrescription, MomentumRouting,
 };
 use crate::reduction::LinearCombination;
-use crate::{Error, Integral, IntegralFamily, KinematicPoint, Propagator, Result, RunContext};
+use crate::{
+    Error, Integral, IntegralFamily, KinematicPoint, Propagator, ResourceBudget, ResourceLimits,
+    Result, RunContext,
+};
 use feynkit_graph::{DiagramEndpoint, EdgeId, FeynmanDiagram, IntegralFamily as NativeFamily};
 use feynkit_kinematics::Kinematics;
 use feynkit_model::Model;
@@ -18,9 +21,17 @@ use spenso::structure::TensorStructure;
 use std::{collections::BTreeMap, sync::Arc};
 use symbolica::domains::float::Complex;
 use symbolica::prelude::*;
+use symbolica::utils::resources;
 
-fn input_error(error: impl std::fmt::Display) -> Error {
-    Error::InvalidInput(format!("HEPKit: {error}"))
+fn input_error(error: impl std::error::Error + 'static) -> Error {
+    let source: &(dyn std::error::Error + 'static) = &error;
+    if let Some(feynkit_graph::IntegralFamilyError::Resource(resource)) =
+        source.downcast_ref::<feynkit_graph::IntegralFamilyError>()
+    {
+        return Error::Resource(resource.clone());
+    }
+    crate::error::preserve_resource(source)
+        .unwrap_or_else(|| Error::InvalidInput(format!("HEPKit: {error}")))
 }
 
 /// A native physical graph and the integral powers absent from DOT metadata.
@@ -155,17 +166,29 @@ impl GraphIntegral {
         point: &KinematicPoint,
         epsilon: Symbol,
         dimension: i64,
-        max_partial_fraction_states: usize,
+        max_partial_fraction_states: Option<usize>,
+        resource_limits: ResourceLimits,
         context: &RunContext,
     ) -> Result<Vec<(IntegralFamily, LinearCombination)>> {
-        self.integral_groups_impl(
-            point,
-            epsilon,
-            dimension,
-            max_partial_fraction_states,
-            context,
-            false,
-        )
+        ResourceBudget::new(resource_limits).run(|| {
+            context.cancellation.check()?;
+            let groups = self.integral_groups_impl(
+                point,
+                epsilon,
+                dimension,
+                max_partial_fraction_states,
+                context,
+                false,
+            );
+            let checkpoint = resources::checkpoint();
+            match groups {
+                Err(error) => Err(error),
+                Ok(groups) => {
+                    checkpoint?;
+                    Ok(groups)
+                }
+            }
+        })
     }
 
     /// Convert one selected native physical cut without changing denominator
@@ -194,7 +217,8 @@ impl GraphIntegral {
             self.diagram.cuts().get(cut_index).ok_or_else(|| {
                 Error::InvalidInput("native physical cut index out of range".into())
             })?;
-        let mut groups = self.integral_groups_impl(point, epsilon, dimension, 0, context, true)?;
+        let mut groups =
+            self.integral_groups_impl(point, epsilon, dimension, None, context, true)?;
         if groups.len() != 1 {
             return Err(Error::Unsupported(
                 "native cut decomposition must preserve one complete denominator family".into(),
@@ -279,23 +303,25 @@ impl GraphIntegral {
         options: &crate::FlowOptions,
         context: &RunContext,
     ) -> Result<crate::PreparedCutProjections<'a>> {
-        let (family, weights) = self.cut_integral_group(
-            cut_index,
-            point,
-            epsilon,
-            options.dimension,
-            loop_prescriptions,
-            context,
-        )?;
-        crate::PreparedCutProjections::new(
-            &family,
-            channel,
-            &[weights],
-            &KinematicPoint::default(),
-            backend,
-            options,
-            context,
-        )
+        options.run_with_resources(|| {
+            let (family, weights) = self.cut_integral_group(
+                cut_index,
+                point,
+                epsilon,
+                options.dimension,
+                loop_prescriptions,
+                context,
+            )?;
+            crate::PreparedCutProjections::new(
+                &family,
+                channel,
+                &[weights],
+                &KinematicPoint::default(),
+                backend,
+                options,
+                context,
+            )
+        })
     }
 
     #[allow(clippy::too_many_arguments)] // Shared ordinary/cut conversion avoids a second tensor or routing implementation.
@@ -304,7 +330,7 @@ impl GraphIntegral {
         point: &KinematicPoint,
         epsilon: Symbol,
         dimension: i64,
-        max_partial_fraction_states: usize,
+        max_partial_fraction_states: Option<usize>,
         context: &RunContext,
         keep_cut_measure: bool,
     ) -> Result<Vec<(IntegralFamily, LinearCombination)>> {
@@ -381,6 +407,7 @@ impl GraphIntegral {
             &kinematics,
         )
         .map_err(input_error)?;
+        context.cancellation.check()?;
         let overall =
             SymbolicTensor::infer(self.diagram.overall_factor().clone()).map_err(input_error)?;
         let projected = self
@@ -413,6 +440,7 @@ impl GraphIntegral {
             .simplify_algebra(&self.algebra)
             .and_then(|t| t.to_dots())
             .map_err(input_error)?;
+        context.cancellation.check()?;
         if !tensor.structure().canonical().is_scalar() {
             return Err(Error::Unsupported(
                 "graph numerator retains free tensor indices; supply a scalar projector".into(),
@@ -431,8 +459,13 @@ impl GraphIntegral {
             vec![(Atom::one(), powers)]
         } else {
             native
-                .partial_fraction(&powers, max_partial_fraction_states)
+                .partial_fraction(
+                    &powers,
+                    max_partial_fraction_states,
+                    ResourceLimits::default(),
+                )
                 .map_err(|error| match error {
+                    feynkit_graph::IntegralFamilyError::Resource(error) => Error::Resource(error),
                     feynkit_graph::IntegralFamilyError::PartialFractionLimit(_)
                     | feynkit_graph::IntegralFamilyError::PowerOverflow => {
                         Error::Limit(error.to_string())
@@ -443,6 +476,9 @@ impl GraphIntegral {
         let mut groups = Vec::new();
         for (index, (factor, powers)) in parts.into_iter().enumerate() {
             context.cancellation.check()?;
+            resources::check_allocation(
+                std::mem::size_of::<(IntegralFamily, LinearCombination)>() as u64,
+            )?;
             let mut numerator = &numerator * factor;
             for (denominator, &power) in native.denominators().iter().zip(&powers) {
                 if !keep_cut_measure && power < 0 {

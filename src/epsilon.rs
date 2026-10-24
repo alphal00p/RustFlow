@@ -93,11 +93,14 @@ pub fn fit_epsilon(
 }
 
 pub fn epsilon_samples(count: usize, denominator: i64) -> Result<Vec<Rational>> {
-    if count == 0 || count > 10000 || denominator <= 0 {
+    if count == 0 || denominator <= 0 {
         return Err(Error::InvalidInput("epsilon sampling parameters".into()));
     }
+    symbolica::utils::resources::checkpoint()?;
+    let count_i64 =
+        i64::try_from(count).map_err(|_| Error::Limit("epsilon count overflow".into()))?;
     let total = denominator
-        .checked_mul(count as i64)
+        .checked_mul(count_i64)
         .ok_or_else(|| Error::InvalidInput("epsilon denominator overflow".into()))?;
     Ok((1..=count)
         .map(|i| Rational::from((i as i64, total)))
@@ -109,10 +112,12 @@ pub fn epsilon_samples(count: usize, denominator: i64) -> Result<Vec<Rational>> 
 /// zero and retain exact rational coordinates for reduction and independent fits.
 #[cfg(feature = "automatic")]
 pub(crate) fn symmetric_epsilon_samples(count: usize, denominator: i64) -> Result<Vec<Rational>> {
-    if count == 0 || count > 10000 || denominator <= 0 {
+    if count == 0 || denominator <= 0 {
         return Err(Error::InvalidInput("epsilon sampling parameters".into()));
     }
-    let half = count.div_ceil(2) as i64;
+    symbolica::utils::resources::checkpoint()?;
+    let half = i64::try_from(count.div_ceil(2))
+        .map_err(|_| Error::Limit("epsilon count overflow".into()))?;
     let total = denominator
         .checked_mul(half)
         .ok_or_else(|| Error::InvalidInput("epsilon denominator overflow".into()))?;

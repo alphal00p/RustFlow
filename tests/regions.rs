@@ -19,7 +19,7 @@ fn sunset() -> IntegralFamily {
 #[test]
 fn sunset_has_five_regions_including_alternative_routings() {
     let family = sunset();
-    let regions = regions::enumerate_regions(&family, 1000).unwrap();
+    let regions = regions::enumerate_regions(&family, Some(1000)).unwrap();
     assert_eq!(regions.len(), 5);
     for signature in [
         vec![false, false, false],

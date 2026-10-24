@@ -65,7 +65,9 @@ let kinematics = feynkit_kinematics::Kinematics::in_dimension(&dimension)?
 let graph = symbolica_amflow::hepkit::GraphIntegral::from_dot(
     model, &dot, &kinematics,
 )?.with_powers(&edge_powers)?;
-let groups = graph.integral_groups(&exact_point, epsilon, 4, 10_000, &context)?;
+let groups = graph.integral_groups(
+    &exact_point, epsilon, 4, None, options.resource_limits, &context,
+)?;
 let result = symbolica_amflow::solve_integral_combinations(
     &groups, &Default::default(), 0, &options, &backend, &context,
 )?;
@@ -117,6 +119,17 @@ evaluator = IntegralEvaluator(
 
 The evaluator accepts native HEPKit `IntegralFamily`, `FeynmanDiagram` and `Kinematics` objects; `HiggsJetAmplitude` reuses the supplied native `Model` for generation, diagram display and scalar assembly. Inputs and outputs use the shared Symbolica `Expression`, `Float` and `ComplexFloat` classes. Exact kinematic substitutions remain simultaneous, and arbitrary-precision values are never converted through binary64.
 
+`IntegralEvaluator` keeps `reduction_depth=2` as the finite IBP seed-query
+resolution. The query returns valid rules and any remaining uncertified residuals;
+depth does not impose an operational abort cap. `reduction_targets` is an optional
+diagnostic cap and defaults to `None`. Batch size controls scheduling separately.
+
+The `EvaluationOptions` constructor arguments `max_steps`, `max_precision_attempts` and `max_boundary_attempts` are optional work caps and default to `None`. The `evaluate_diagram` argument `max_partial_fraction_states` also defaults to `None`. Explicit count caps must be positive; requested digits, guard digits and series order retain their numerical meaning.
+
+The optional `pade_max_work` constructor argument is a diagnostic cap for Padé construction and requires `pade_degree`. Its default `None` leaves that work unbounded.
+
+The optional `max_recursion_depth` constructor argument defaults to `None`, leaving recursive depth unbounded. Explicit `0` admits no recursive depth.
+
 `IntegralEvaluator` exposes automatic evaluation, shared linear projections, prescribed nonzero rational epsilon samples and physical-family preparation. `PreparedIntegralFamily` exposes automatic boundary generation, physical transport, basis definitions, reduction conditions and target projection. `ReductionTables` are scoped to native families. `LaurentExpansion.fit` performs a supplied-sample fit, whose evidence is explicitly unverified until independent checks are provided by a higher-level evaluation. Exact and completed-sample caches are configured separately through `EvaluationOptions`; verified physical boundary values belong to `BoundaryCache`.
 
 `BoundaryCache.load`, `save`, `entries` and `extend` preserve native binary entries, identity and provenance. Passing the same cache through successive transports retains intermediate points for subsequent source selection. `extend` merges seed data into an existing growing cache without discarding those points; self-merges are idempotent and source/destination locks are never held together. Transport results expose the selected source, attempted sources, timing, propagated uncertainty and exact cache-hit diagnostics.
@@ -126,6 +139,8 @@ The standalone Python `DifferentialSystem` currently exposes rational regular-po
 `evaluate_diagram` covers the ordinary scalar graph workflow. A graph carrying cut metadata raises `UnsupportedInputError`; the Rust `cut_integral_group` workflow has not yet been exposed to Python. This preserves the distinction between a cut measure and an ordinary propagator.
 
 Computation releases the GIL. `ComputationControl.poll()` drains native progress events and `cancel()` requests cooperative cancellation. The Python reducer defaults to batches of 32 targets, configurable with `reduction_batch_size`; cancellation is checked between reducer batches and native algorithm stages. A running HEPKit/Idenso tensor operation finishes before acknowledging cancellation. No Python callback runs while a cache lock is held.
+
+`EvaluationOptions(max_process_rss_bytes=None, max_elapsed_seconds=None)` leaves RAM and elapsed time unbounded by default. Explicit limits use Symbolica's cooperative resource budget, shared by nested work and dispatched workers. RSS measures the whole process, and elapsed time uses the same clock throughout the operation. Checks occur at interruptible boundaries; an active opaque native call completes before a limit can be reported. Native resource failures raise the existing Python `ResourceLimitError`; cancellation raises `CalculationCancelled`.
 
 The Higgs-jet scalar kernel delegates exact internal-parameter expansion to native `Model::expand_parameters`, including the owner's dependency ordering and typed cycle detection. This API is included in the public owner pin; [hepkit-exact-parameters.patch](../scripts/patches/hepkit-exact-parameters.patch) preserves the earlier isolated-owner change. Model numeric defaults and reference integral boundaries are not inputs to this kernel. Form-factor kinematics and W/Z masses must match the explicit model parameters; the notebook constructs both from one set of exact physical inputs.
 

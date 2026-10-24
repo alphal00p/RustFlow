@@ -61,7 +61,7 @@ fn check_float(a: &Float, options: &PadeOptions) -> Result<()> {
         .get_exp()
         .ok_or_else(|| limit("missing binary exponent"))?;
     let bits = u64::from(exponent.unsigned_abs()).saturating_add(u64::from(a.prec()));
-    if bits > options.max_input_bits {
+    if options.max_input_bits.is_some_and(|limit| bits > limit) {
         return Err(limit("stored dyadic exceeds input bit limit"));
     }
     Ok(())
@@ -80,19 +80,32 @@ struct Budget<'a> {
 impl Budget<'_> {
     fn charge(&mut self, degree: usize, bits: u64) -> Result<()> {
         self.context.cancellation.check()?;
-        if bits > self.options.max_coefficient_bits {
+        if self
+            .options
+            .max_coefficient_bits
+            .is_some_and(|limit| bits > limit)
+        {
             return Err(limit("predicted coefficient growth exceeds bit limit"));
         }
         self.work = self
             .work
             .saturating_add((degree as u64 + 1).saturating_mul(bits.max(1)));
-        if self.work > self.options.max_work {
+        if self.options.max_work.is_some_and(|limit| self.work > limit) {
             return Err(limit("native polynomial work estimate exhausted"));
         }
+        let bytes = (degree as u64)
+            .saturating_add(1)
+            .saturating_mul(bits.div_ceil(8).saturating_add(64));
+        symbolica::utils::resources::check_allocation(bytes)?;
         Ok(())
     }
     fn check(&self, a: &Polynomial) -> Result<()> {
-        if polynomial_height(a) > self.options.max_coefficient_bits {
+        symbolica::utils::resources::checkpoint()?;
+        if self
+            .options
+            .max_coefficient_bits
+            .is_some_and(|limit| polynomial_height(a) > limit)
+        {
             return Err(limit("coefficient bit limit"));
         }
         Ok(())
@@ -208,7 +221,15 @@ impl RationalCandidate {
             ));
         }
         let degree = options.degree.min((coefficients.len() - 1) / 2);
-        let count = 2 * degree + 1;
+        let count = degree
+            .checked_mul(2)
+            .and_then(|degree| degree.checked_add(1))
+            .ok_or_else(|| limit("approximant coefficient count overflow"))?;
+        if u16::try_from(count - 1).is_err() {
+            return Err(limit(
+                "approximant source exceeds native u16 polynomial exponent representation",
+            ));
+        }
         for a in std::iter::once(center).chain(coefficients.iter().take(count).flatten()) {
             check_float(&a.re, options)?;
             check_float(&a.im, options)?;
@@ -221,8 +242,14 @@ impl RationalCandidate {
                 .chain(row.entries.iter().map(|(_, a)| a))
             {
                 if a.is_empty()
-                    || a.len() > options.max_work as usize
-                    || a.iter().any(|a| height(a) > options.max_input_bits)
+                    || options
+                        .max_work
+                        .is_some_and(|limit| a.len() as u128 > u128::from(limit))
+                    || a.iter().any(|a| {
+                        options
+                            .max_input_bits
+                            .is_some_and(|limit| height(a) > limit)
+                    })
                 {
                     return Err(limit("exact source representation exceeds input limits"));
                 }
@@ -243,7 +270,15 @@ impl RationalCandidate {
         budget.charge(
             size.checked_mul(count)
                 .ok_or_else(|| limit("conversion dimensions overflow"))?,
-            options.max_input_bits,
+            std::iter::once(center)
+                .chain(coefficients.iter().take(count).flatten())
+                .flat_map(|a| [&a.re, &a.im])
+                .map(|a| {
+                    u64::from(a.prec())
+                        .saturating_add(u64::from(a.as_raw().get_exp().unwrap_or(0).unsigned_abs()))
+                })
+                .max()
+                .unwrap_or(0),
         )?;
         let mut fractions = Vec::with_capacity(size);
         for i in 0..size {
@@ -313,7 +348,10 @@ impl RationalCandidate {
             let factor = budget.quotient(q, &gcd)?;
             let constant = factor.get_constant();
             let factor = budget.normalize(factor, &constant)?;
-            if denominator.degree() + factor.degree() > options.max_common_degree {
+            if options
+                .max_common_degree
+                .is_some_and(|limit| denominator.degree().saturating_add(factor.degree()) > limit)
+            {
                 return Err(limit("common denominator degree limit"));
             }
             denominator = budget.multiply(&denominator, &factor)?;
@@ -614,13 +652,16 @@ mod tests {
                 &p.zero(),
                 &coefficients,
                 1,
-                &PadeOptions::default(),
+                &PadeOptions {
+                    max_input_bits: Some(4096),
+                    ..Default::default()
+                },
                 &RunContext::default()
             ),
             Err(Error::Limit(_))
         ));
         let tiny_budget = PadeOptions {
-            max_work: 1,
+            max_work: Some(1),
             ..Default::default()
         };
         let coefficients = vec![vec![p.i(1)], vec![p.i(-1)], vec![p.i(1)]];

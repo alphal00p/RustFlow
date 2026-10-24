@@ -36,7 +36,7 @@ impl CountLoops {
         Self {
             inner: RustRedBackend {
                 max_depth: 3,
-                max_targets: 65536,
+                max_targets: Some(65536),
                 max_sector_batch: 32,
                 max_backward_frontier: 1024,
                 parametric_rules: true,
@@ -95,7 +95,7 @@ fn single_mass_six_line_reuses_lower_loop_child_and_matches_parent_ft_with_refin
             let options = FlowOptions {
                 guard_digits: digits - 20,
                 series_order: order,
-                max_steps: 1000,
+                max_steps: Some(1000),
                 workers: 1,
                 ..Default::default()
             };
@@ -206,7 +206,7 @@ fn complex_mass_boundaries_reuse_the_real_child_and_respect_cut_sides() {
             results.push(values);
         }
         assert_eq!(backend.max_loops.load(Ordering::Relaxed), 2);
-        for pair in results.chunks_exact(2) {
+        for pair in results.as_chunks::<2>().0 {
             for (upper, lower) in pair[0].iter().zip(&pair[1]) {
                 let conjugate = ComplexFloat::new(upper.re.clone(), -upper.im.clone());
                 assert!(p.close(&conjugate, lower, 20));
@@ -362,8 +362,8 @@ fn single_mass_public_laurent_matches_independent_ft_and_mass_derivative() {
             digits: 20,
             guard_digits: working - 20,
             series_order: order,
-            max_steps: 1000,
-            max_precision_attempts: 3,
+            max_steps: Some(1000),
+            max_precision_attempts: Some(3),
             workers: 1,
             recursion,
             cache_directory: Some(directory.join(name).join("systems")),

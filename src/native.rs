@@ -91,8 +91,8 @@ fn cut_stage_key(key: String, cuts: Option<&str>) -> String {
         },
     )
 }
-fn native_error(error: impl std::fmt::Display) -> Error {
-    Error::Reduction(error.to_string())
+fn native_error(error: impl std::error::Error + 'static) -> Error {
+    crate::error::preserve_resource(&error).unwrap_or_else(|| Error::Reduction(error.to_string()))
 }
 fn family_stage_key<const N: usize>(
     family: &ConvertedFamily,
@@ -481,7 +481,7 @@ fn solve<const N: usize>(
             &family.family,
             original.physical_propagators,
             symmetry::Limits::default(),
-        );
+        )?;
         context.emit(Progress::SymmetryReduction {
             candidates: bank.statistics.candidates,
             automorphisms: bank.statistics.automorphisms,
@@ -511,10 +511,11 @@ fn solve<const N: usize>(
     let mut saved_before_exact = BTreeSet::new();
     let search: Result<()> = (|| {
         while !pending.is_empty() {
-            if visited.len() + pending.len() > options.max_targets {
+            if let Some(limit) = options.max_targets
+                && visited.len().saturating_add(pending.len()) > limit
+            {
                 return Err(Error::Limit(format!(
-                    "Laporta RHS closure exceeds max_targets={}",
-                    options.max_targets
+                    "Laporta RHS closure exceeds max_targets={limit}"
                 )));
             }
             // Finish higher sectors before introducing their descendants into
@@ -651,7 +652,7 @@ fn solve<const N: usize>(
                     for case in cases {
                         context.cancellation.check()?;
                         let target = std::array::from_fn(|i| case.integral().powers()[i].value());
-                        let Some(terms) = bank.apply(&family.family, target, solver.ordering())
+                        let Some(terms) = bank.apply(&family.family, target, solver.ordering())?
                         else {
                             uncovered.push(case);
                             continue;
@@ -724,9 +725,8 @@ fn solve<const N: usize>(
                     for case in cases {
                         context.cancellation.check()?;
                         let target = std::array::from_fn(|i| case.integral().powers()[i].value());
-                        let Some(applied) = bank
-                            .try_reduce(target, &sources, solver, options.max_depth)
-                            .map_err(native_error)?
+                        let Some(applied) =
+                            bank.try_reduce(target, &sources, solver, options.max_depth)?
                         else {
                             uncovered.push(case);
                             continue;
@@ -805,24 +805,27 @@ fn solve<const N: usize>(
             // Merge in stable order, preserving deterministic exact rules and
             // the same restart semantics as the sequential implementation.
             for wave in jobs.chunks(options.native_workers) {
+                let caller_budget = crate::ResourceBudget::capture_current();
                 let solve = |(sector, cases): &([bool; N], Vec<CoordinateCase<N>>)| {
-                    context.emit(Progress::SectorReduction {
-                        active_lines: sector.iter().filter(|&&v| v).count(),
-                        integrals: cases.len(),
-                        visited: visited.len(),
-                    })?;
-                    // A progress callback may request cancellation itself.
-                    context.cancellation.check()?;
-                    solvers[sector]
-                        .solve_numeric_cases(
-                            cases.to_vec(),
-                            SearchOptions {
-                                max_depth: Some(options.max_depth),
-                                ..Default::default()
-                            },
-                        )
-                        .map_err(native_error)
-                        .and_then(|solved| convert_batch(solved, family))
+                    caller_budget.run_captured(|| {
+                        context.emit(Progress::SectorReduction {
+                            active_lines: sector.iter().filter(|&&v| v).count(),
+                            integrals: cases.len(),
+                            visited: visited.len(),
+                        })?;
+                        // A progress callback may request cancellation itself.
+                        context.cancellation.check()?;
+                        solvers[sector]
+                            .solve_numeric_cases(
+                                cases.to_vec(),
+                                SearchOptions {
+                                    max_depth: Some(options.max_depth),
+                                    ..Default::default()
+                                },
+                            )
+                            .map_err(native_error)
+                            .and_then(|solved| convert_batch(solved, family))
+                    })
                 };
                 let solutions = if let Some(pool) = &pool {
                     pool.install(|| wave.par_iter().map(solve).collect::<Vec<_>>())

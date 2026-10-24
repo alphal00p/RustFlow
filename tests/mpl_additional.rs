@@ -90,7 +90,7 @@ fn evaluate(kind: &str, digits: u32, order: usize) -> Result<Vec<ComplexFloat>> 
         digits: requested,
         guard_digits: digits - requested,
         series_order: order,
-        max_steps: 20000,
+        max_steps: Some(20000),
         ..Default::default()
     };
     let result = compiled.transport(&boundary, &waypoints, &options, &RunContext::default())?;

@@ -113,19 +113,27 @@ impl ExactAsymptoticConstraints {
         }
         let cells = dimension
             .checked_add(1)
-            .and_then(|n| self.relations.len().checked_mul(n));
+            .and_then(|n| self.relations.len().checked_mul(n))
+            .ok_or_else(|| Error::Limit("exact asymptotic relation allocation overflow".into()))?;
         let terms = self
             .relations
             .iter()
-            .try_fold(0usize, |sum, row| sum.checked_add(row.terms.len()));
-        if dimension > limits.max_dimension
-            || cells.is_none_or(|v| v > limits.max_scalar_cells)
-            || terms.is_none_or(|v| v > limits.max_scalar_cells)
+            .try_fold(0usize, |sum, row| sum.checked_add(row.terms.len()))
+            .ok_or_else(|| Error::Limit("exact asymptotic relation term count overflow".into()))?;
+        if limits.max_dimension.is_some_and(|limit| dimension > limit)
+            || limits
+                .max_scalar_cells
+                .is_some_and(|limit| cells > limit || terms > limit)
         {
             return Err(Error::Limit(
                 "exact asymptotic relation allocation exceeds limit".into(),
             ));
         }
+        let bytes = cells
+            .checked_mul(std::mem::size_of::<Gaussian>())
+            .and_then(|bytes| u64::try_from(bytes).ok())
+            .ok_or_else(|| Error::Limit("exact asymptotic relation storage overflow".into()))?;
+        symbolica::utils::resources::check_allocation(bytes)?;
         for relation in &self.relations {
             context.cancellation.check()?;
             if relation.terms.is_empty() {
@@ -147,15 +155,20 @@ impl ExactAsymptoticConstraints {
                     ));
                 }
                 for value in [power, gaussian_bounded(weight, limits, context)?] {
-                    if crate::frobenius::exact::height(&value) > limits.max_coefficient_bits {
+                    if limits
+                        .max_coefficient_bits
+                        .is_some_and(|limit| crate::frobenius::exact::height(&value) > limit)
+                    {
                         return Err(Error::Limit(
                             "exact asymptotic input height exceeds limit".into(),
                         ));
                     }
                 }
             }
-            if crate::frobenius::exact::height(&gaussian_bounded(&relation.value, limits, context)?)
-                > limits.max_coefficient_bits
+            let value = gaussian_bounded(&relation.value, limits, context)?;
+            if limits
+                .max_coefficient_bits
+                .is_some_and(|limit| crate::frobenius::exact::height(&value) > limit)
             {
                 return Err(Error::Limit(
                     "exact asymptotic value height exceeds limit".into(),
@@ -225,21 +238,30 @@ impl ExactFrobeniusBasis {
     ) -> Result<ExactAsymptoticSpace> {
         context.cancellation.check()?;
         let n = self.dimension();
+        let width = n
+            .checked_add(1)
+            .ok_or_else(|| Error::Limit("exact asymptotic equation width overflow".into()))?;
         constraints.validate(n, limits, context)?;
-        if equations.iter().any(|row| row.len() != n + 1)
-            || equations
-                .len()
-                .checked_add(constraints.relations.len())
-                .and_then(|rows| rows.checked_mul(n + 1))
-                .is_none_or(|cells| cells > limits.max_scalar_cells)
+        let cells = equations
+            .len()
+            .checked_add(constraints.relations.len())
+            .and_then(|rows| rows.checked_mul(width))
+            .ok_or_else(|| Error::Limit("exact asymptotic equation allocation overflow".into()))?;
+        if equations.iter().any(|row| row.len() != width)
+            || limits.max_scalar_cells.is_some_and(|limit| cells > limit)
         {
             return Err(Error::Limit(
                 "exact sheet/asymptotic equation allocation exceeds limit".into(),
             ));
         }
+        let bytes = cells
+            .checked_mul(std::mem::size_of::<Gaussian>())
+            .and_then(|bytes| u64::try_from(bytes).ok())
+            .ok_or_else(|| Error::Limit("exact asymptotic equation storage overflow".into()))?;
+        symbolica::utils::resources::check_allocation(bytes)?;
         for relation in &constraints.relations {
             context.cancellation.check()?;
-            let mut row = vec![zero(); n + 1];
+            let mut row = vec![zero(); width];
             for (selector, weight) in &relation.terms {
                 context.cancellation.check()?;
                 let weight = gaussian(weight)?;
@@ -248,7 +270,10 @@ impl ExactFrobeniusBasis {
                 }
                 for (value, coefficient) in row.iter_mut().zip(self.coefficient_row(selector)?) {
                     *value = &*value + &(&weight * &coefficient);
-                    if crate::frobenius::exact::height(value) > limits.max_coefficient_bits {
+                    if limits
+                        .max_coefficient_bits
+                        .is_some_and(|limit| crate::frobenius::exact::height(value) > limit)
+                    {
                         return Err(Error::Limit(
                             "exact asymptotic accumulated relation height exceeds limit".into(),
                         ));

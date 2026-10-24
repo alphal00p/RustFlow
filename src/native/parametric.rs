@@ -27,12 +27,59 @@ pub(super) struct Bank<'a, const N: usize> {
     pub missed: usize,
 }
 
+/// Bounded search misses and unsupported optimizer geometry use the concrete
+/// solver. Invalid algebra/certificates and shared resources remain failures.
+fn optimizer_miss<const N: usize>(error: &SectorSolveError<N>) -> bool {
+    if let SectorSolveError::Intersection(error) = error {
+        return matches!(
+            &error.failure,
+            rustred::solver::CaseIntersectionFailure::UnsupportedGeometry
+                | rustred::solver::CaseIntersectionFailure::Budget { .. }
+                | rustred::solver::CaseIntersectionFailure::Admission(
+                    rustred::solver::AffineGeometryError::UnsupportedNonlinear { .. }
+                )
+        );
+    }
+    matches!(
+        error,
+        SectorSolveError::CaseBudget { .. }
+            | SectorSolveError::Geometry {
+                source: rustred::solver::AffineGeometryError::UnsupportedNonlinear { .. },
+                ..
+            }
+            | SectorSolveError::Search {
+                source: SolverError::SearchExhausted { .. } | SolverError::UnluckySample,
+                ..
+            }
+            | SectorSolveError::Numeric(
+                SolverError::SearchExhausted { .. } | SolverError::UnluckySample
+            )
+    )
+}
+
+fn sector_error<const N: usize>(error: SectorSolveError<N>) -> crate::Error {
+    let resource = crate::error::preserve_resource(&error).or_else(|| match &error {
+        SectorSolveError::Search { source, .. } | SectorSolveError::Numeric(source) => {
+            crate::error::preserve_resource(source)
+        }
+        SectorSolveError::Geometry { source, .. } => crate::error::preserve_resource(source),
+        SectorSolveError::Intersection(source) => crate::error::preserve_resource(source.as_ref()),
+        SectorSolveError::Exceptions { source, .. } => crate::error::preserve_resource(source),
+        SectorSolveError::FiniteRetention { source, .. } => crate::error::preserve_resource(source),
+        _ => None,
+    });
+    resource.unwrap_or_else(|| {
+        crate::Error::Reduction(format!("native parametric rule search: {error}"))
+    })
+}
+
 fn generic_rules<const N: usize>(
     solver: &SectorSolver<'_, N>,
     sources: &SourceSystem<N>,
     depth: u32,
     max_cases: usize,
-) -> Vec<SectorRule<N>> {
+) -> crate::Result<Vec<SectorRule<N>>> {
+    symbolica::utils::resources::checkpoint()?;
     let mut admitted = Vec::new();
     let result = solver.solve_domains_with_observer(
         vec![
@@ -68,12 +115,15 @@ fn generic_rules<const N: usize>(
             }
         },
     );
-    match result {
+    let rules = match result {
         Ok(_) | Err(SectorSolveError::CaseBudget { .. }) => admitted,
-        // Other failures do not install a partially searched domain. Neither
-        // successful nor exhausted searches promote finite residuals to rules.
-        Err(_) => Vec::new(),
-    }
+        Err(error) if optimizer_miss(&error) => Vec::new(),
+        Err(error) => return Err(sector_error(error)),
+    };
+    // A fatal native cause predates this poll. Successful or incomplete
+    // exploratory queries must still poll before choosing the concrete solver.
+    symbolica::utils::resources::checkpoint()?;
+    Ok(rules)
 }
 
 fn specialize<const N: usize>(
@@ -247,12 +297,13 @@ impl<'a, const N: usize> Bank<'a, N> {
         sources: &SourceSystem<N>,
         solver: &SectorSolver<'_, N>,
         depth: u32,
-    ) -> Result<Option<Applied<N>>, SolverError> {
+    ) -> crate::Result<Option<Applied<N>>> {
+        symbolica::utils::resources::checkpoint()?;
         if !std::ptr::eq(self.sources, sources)
             || &self.order != solver.ordering()
             || self.visit_order.as_ref() != solver.source_visit_order()
         {
-            return Err(SolverError::InvalidInput(
+            return Err(crate::Error::InvalidInput(
                 "parametric bank source/order mismatch".into(),
             ));
         }
@@ -261,12 +312,14 @@ impl<'a, const N: usize> Bank<'a, N> {
         // rays, so retain that strategy outside this measured tier.
         if self.generic.is_none() && solver.ordering().sector().iter().filter(|&&v| v).count() == 4
         {
-            self.generic = Some(generic_rules(solver, sources, depth, 32));
+            self.generic = Some(generic_rules(solver, sources, depth, 32)?);
             self.domains += 1;
         }
         if let Some(rules) = &self.generic {
             for rule in rules {
-                if let Some(result) = apply(rule, target, sources, solver)? {
+                if let Some(result) =
+                    apply(rule, target, sources, solver).map_err(super::native_error)?
+                {
                     self.domain_hits += 1;
                     self.hits += 1;
                     return Ok(Some(result));
@@ -275,8 +328,13 @@ impl<'a, const N: usize> Bank<'a, N> {
         }
         let ray = std::array::from_fn(|i| (!solver.ordering().sector()[i]).then_some(target[i]));
         if let std::collections::btree_map::Entry::Vacant(entry) = self.rays.entry(ray) {
+            symbolica::utils::resources::checkpoint()?;
             let result = solver.solve_domains(
-                vec![CoordinateCase::new(ray)?.into()],
+                vec![
+                    CoordinateCase::new(ray)
+                        .map_err(super::native_error)?
+                        .into(),
+                ],
                 SectorSolveOptions {
                     symbolic: SearchOptions {
                         max_depth: Some(depth),
@@ -287,13 +345,21 @@ impl<'a, const N: usize> Bank<'a, N> {
                     ..Default::default()
                 },
             );
+            // A bounded search miss leaves the original concrete solver responsible;
+            // invalid algebra/certificates and resource failures are never misses.
+            let rules = match result {
+                Ok(result) => result.rules,
+                Err(error) if optimizer_miss(&error) => Vec::new(),
+                Err(error) => return Err(sector_error(error)),
+            };
+            symbolica::utils::resources::checkpoint()?;
             self.generated += 1;
-            // No finite search residual is installed as a master or rule.
-            // A failed ray leaves the original concrete solver responsible.
-            entry.insert(result.map_or_else(|_| Vec::new(), |r| r.rules));
+            entry.insert(rules);
         }
         for rule in &self.rays[&ray] {
-            if let Some(result) = apply(rule, target, sources, solver)? {
+            if let Some(result) =
+                apply(rule, target, sources, solver).map_err(super::native_error)?
+            {
                 self.hits += 1;
                 return Ok(Some(result));
             }

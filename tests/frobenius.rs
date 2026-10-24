@@ -190,7 +190,7 @@ fn successive_nilpotent_balances_remove_a_cubic_pole() {
         ],
     };
     assert!(system.diagonal_fuchsian_form().is_err());
-    let (normal, transformation) = system.fuchsian_form(16).unwrap();
+    let (normal, transformation) = system.fuchsian_form(Some(16)).unwrap();
     normal.residue().unwrap();
     assert_eq!(
         normal.matrix,
@@ -266,7 +266,7 @@ fn moser_projector_mixes_jordan_chains() {
             vec![parse!("-1/x"), Atom::new(), parse!("-1/x"), Atom::new()],
         ],
     };
-    let (normal, transform) = system.fuchsian_form(32).unwrap();
+    let (normal, transform) = system.fuchsian_form(Some(32)).unwrap();
     let restored = system.change_basis(&transform).unwrap();
     assert_eq!(normal.matrix, restored.matrix);
     assert!(normal.diagonal_fuchsian_form().is_ok());

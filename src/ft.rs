@@ -1,6 +1,7 @@
 //! Feynman-parameter propagator combination and Euclidean series integration.
 use crate::*;
 use symbolica::prelude::*;
+use symbolica::utils::resources;
 
 /// x D_left + (1-x) D_right, kept exact including its quadratic form.
 pub fn combine(left: &Propagator, right: &Propagator, x: Symbol) -> Result<Propagator> {
@@ -23,6 +24,16 @@ pub fn combine(left: &Propagator, right: &Propagator, x: Symbol) -> Result<Propa
 /// Exact FT terminal reduction for a one-loop two-denominator family. The
 /// parameter integral is propagated and integrated as power/log series.
 pub fn evaluate_bubble(
+    family: &IntegralFamily,
+    target: &Integral,
+    epsilon: &Rational,
+    options: &FlowOptions,
+    context: &RunContext,
+) -> Result<ComplexFloat> {
+    options.run_with_resources(|| evaluate_bubble_inner(family, target, epsilon, options, context))
+}
+
+fn evaluate_bubble_inner(
     family: &IntegralFamily,
     target: &Integral,
     epsilon: &Rational,
@@ -198,6 +209,23 @@ impl<'a> FtEvaluator<'a> {
         epsilon: &Rational,
         options: &FlowOptions,
     ) -> Result<ComplexFloat> {
+        let evaluate = || {
+            crate::stack_resources::run(|| self.evaluate_inner(family, integral, epsilon, options))
+        };
+        if self.ancestry.is_empty() {
+            options.run_with_resources(evaluate)
+        } else {
+            evaluate()
+        }
+    }
+
+    fn evaluate_inner(
+        &self,
+        family: &IntegralFamily,
+        integral: &Integral,
+        epsilon: &Rational,
+        options: &FlowOptions,
+    ) -> Result<ComplexFloat> {
         options.validate()?;
         self.context.cancellation.check()?;
         family.validate_integral(integral)?;
@@ -228,8 +256,11 @@ impl<'a> FtEvaluator<'a> {
         if self.ancestry.contains(&problem) {
             return Err(Error::Limit("FT recursion cycle".into()));
         }
-        if self.ancestry.len() >= 32 {
-            return Err(Error::Limit("FT recursion exceeds 32 levels".into()));
+        if options
+            .max_recursion_depth
+            .is_some_and(|limit| self.ancestry.len() >= limit)
+        {
+            return Err(Error::Limit("FT recursion diagnostic exhausted".into()));
         }
         let parameters =
             ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
@@ -311,13 +342,13 @@ impl<'a> FtEvaluator<'a> {
                     } else {
                         crate::reduction::parameter_differential_system
                     };
-                    let mut reduced = build(&session, &combined, &[target], x, 12, self.context)?;
+                    let mut reduced = build(&session, &combined, &[target], x, None, self.context)?;
                     let refinement = if options.refine_basis {
                         Some(crate::refine::refine_basis(
                             &mut reduced,
                             x,
                             family.epsilon,
-                            32,
+                            None,
                         )?)
                     } else {
                         None
@@ -377,16 +408,56 @@ impl<'a> FtEvaluator<'a> {
             // Apparent singularities can lie at 1/2 even for a Euclidean
             // integral. Choose an exact interior boundary point satisfying
             // every inherited reduction condition before evaluating children.
-            let mut reference = None;
-            'denominators: for denominator in 2..=32i64 {
+            let epsilon_rule =
+                BTreeMap::from([(Atom::var(family.epsilon), Atom::num(epsilon.clone()))]);
+            let conditions = system
+                .reduced
+                .nonzero_conditions
+                .iter()
+                .map(|condition| {
+                    crate::family::substitute(condition, &epsilon_rule)
+                        .together()
+                        .cancel()
+                })
+                .collect::<Vec<_>>();
+            for condition in &conditions {
+                self.context.cancellation.check()?;
+                if condition.is_zero() {
+                    return Err(Error::Reduction(
+                        "FT boundary domain vanishes at the requested epsilon".into(),
+                    ));
+                }
+                let mut symbols = Default::default();
+                crate::family::scalar_symbols(condition.as_view(), &mut symbols)?;
+                for symbol in symbols {
+                    if symbol != z {
+                        // Unbound parameters are permanent failures, not more
+                        // excluded rational points in the FT coordinate.
+                        p.eval(&symbol, &parameters)?;
+                    }
+                }
+                if condition.derivative(x).is_zero() {
+                    let value = p.eval(condition, &parameters)?;
+                    if value == p.zero() {
+                        return Err(Error::Reduction(
+                            "FT boundary domain is identically zero".into(),
+                        ));
+                    }
+                }
+            }
+            let mut denominator = 2_i64;
+            let (exact_reference, reference) = 'denominators: loop {
+                resources::checkpoint()?;
                 'points: for numerator in 1..denominator {
+                    self.context.cancellation.check()?;
                     let exact = Rational::from((numerator, denominator));
                     let value = p.rational(&exact);
                     let mut at_point = parameters.clone();
                     at_point.insert(z.clone(), value.clone());
-                    for condition in &system.reduced.nonzero_conditions {
+                    for condition in &conditions {
                         match p.eval(condition, &at_point) {
                             Ok(v) if p.finite(&v) && v != p.zero() => {}
+                            Err(error @ Error::Resource(_)) => return Err(error),
                             _ => continue 'points,
                         }
                     }
@@ -397,13 +468,12 @@ impl<'a> FtEvaluator<'a> {
                     {
                         continue;
                     }
-                    reference = Some((exact, value));
-                    break 'denominators;
+                    break 'denominators (exact, value);
                 }
-            }
-            let (exact_reference, reference) = reference.ok_or_else(|| {
-                Error::Reduction("FT found no regular rational interior boundary point".into())
-            })?;
+                denominator = denominator.checked_add(1).ok_or_else(|| {
+                    Error::Limit("FT rational boundary denominator overflow".into())
+                })?;
+            };
             let boundary_family = system.child.at(&KinematicPoint(BTreeMap::from([(
                 z.clone(),
                 Atom::num(exact_reference),
@@ -469,6 +539,7 @@ impl<'a> FtEvaluator<'a> {
             );
             p.mul(&prefactor, &p.sub(&ends[1], &ends[0]))
         };
+        self.context.cancellation.check()?;
         self.memo
             .lock()
             .map_err(|_| Error::Numerical("FT memo poisoned".into()))?
@@ -489,7 +560,9 @@ fn check_euclidean(
         &converted.family,
         Default::default(),
     )
-    .map_err(|e| Error::InvalidInput(e.to_string()))?;
+    .map_err(|e| {
+        crate::error::preserve_resource(&e).unwrap_or_else(|| Error::InvalidInput(e.to_string()))
+    })?;
     for (polynomial, sign) in [(symanzik.u(), 1), (symanzik.f(), -1)] {
         for (coefficient, powers) in polynomial.terms() {
             if powers

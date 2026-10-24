@@ -19,7 +19,7 @@ fn entire_system_reaches_a_real_endpoint_after_complex_waypoints() -> Result<()>
             digits: 20,
             guard_digits: 30,
             series_order: 16,
-            max_steps: 4,
+            max_steps: Some(4),
             ..Default::default()
         },
         &RunContext::default(),
@@ -47,7 +47,7 @@ fn entire_nonzero_kernel_is_checked_across_complex_waypoints() -> Result<()> {
             digits: 20,
             guard_digits: 30,
             series_order: 64,
-            max_steps: 4,
+            max_steps: Some(4),
             ..Default::default()
         },
         &RunContext::default(),
@@ -77,7 +77,7 @@ fn entire_polynomial_preserves_accuracy_across_complex_direction_changes() -> Re
             digits: 20,
             guard_digits: 30,
             series_order: 24,
-            max_steps: 1000,
+            max_steps: Some(1000),
             ..Default::default()
         },
         &RunContext::default(),
@@ -107,7 +107,7 @@ fn entire_exponential_reverses_direction_after_rejected_steps() -> Result<()> {
             digits: 20,
             guard_digits: 20,
             series_order: 24,
-            max_steps: 1000,
+            max_steps: Some(1000),
             ..Default::default()
         },
         &RunContext::default(),

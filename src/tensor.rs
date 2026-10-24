@@ -30,6 +30,7 @@ fn vector_classes(gram: &[Vec<Atom>]) -> (Vec<usize>, Vec<usize>) {
 
 fn native_error(error: TensorReductionError) -> Error {
     match error {
+        TensorReductionError::Resource(resource) => Error::Resource(resource),
         TensorReductionError::UnsupportedRank { .. }
         | TensorReductionError::PairingLimit { .. }
         | TensorReductionError::PairingProductLimit { .. }
@@ -42,9 +43,8 @@ fn native_error(error: TensorReductionError) -> Error {
 
 /// Project a product `(hard_vector[i] . external_vector[i])` inside a
 /// rotationally invariant vacuum integral. Gram rows identify repeated
-/// vectors. Odd rank vanishes. Native HEPKit supports general rank 20 and
-/// fully contracted single-hard-vector tensors through rank 32, with bounded
-/// invariant output. Symbolic dimensions are substituted after projection.
+/// vectors. Odd rank vanishes. Native HEPKit owns rank-dependent projection
+/// and shared resource checks. Symbolic dimensions are substituted after projection.
 #[derive(Clone, Debug)]
 pub struct TensorProjector {
     dimension: Atom,
@@ -62,6 +62,7 @@ impl TensorProjector {
         hard_gram: &[Vec<Atom>],
         external_gram: &[Vec<Atom>],
     ) -> Result<Atom> {
+        symbolica::utils::resources::checkpoint()?;
         let rank = hard_gram.len();
         if external_gram.len() != rank
             || hard_gram
@@ -85,11 +86,6 @@ impl TensorProjector {
         }
         if rank == 0 {
             return Ok(Atom::one());
-        }
-        if rank > 32 {
-            return Err(Error::Limit(format!(
-                "vacuum tensor rank {rank} exceeds 32"
-            )));
         }
         let (hard_classes, hard_representatives) = vector_classes(hard_gram);
         let (external_classes, external_representatives) = vector_classes(external_gram);
@@ -161,6 +157,7 @@ impl TensorProjector {
         let dimension = BTreeMap::from([(dimension, self.dimension.clone())]);
         let mut value = Atom::new();
         for (numerator, denominator, tensor) in &self.projections[&key] {
+            symbolica::utils::resources::checkpoint()?;
             let denominator = crate::family::substitute(denominator, &dimension)
                 .together()
                 .cancel();

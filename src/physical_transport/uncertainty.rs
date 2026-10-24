@@ -212,9 +212,12 @@ pub(super) fn admit(
             Ok(candidate) => (candidate, 0, None, None),
             Err(original @ Error::Accuracy(_)) => {
                 let retry = original.to_string();
+                context.cancellation.check()?;
                 match problem.fundamental(solution) {
                     Ok((candidate, charts)) => (candidate, charts, Some(retry), None),
-                    Err(error @ (Error::Cancelled | Error::InvalidInput(_))) => return Err(error),
+                    Err(
+                        error @ (Error::Cancelled | Error::Resource(_) | Error::InvalidInput(_)),
+                    ) => return Err(error),
                     Err(proof) => return Err(proof_unavailable(original, proof)),
                 }
             }
@@ -222,8 +225,11 @@ pub(super) fn admit(
         },
         BoundaryErrorStrategy::FundamentalMatrix => match problem.fundamental(solution) {
             Ok((candidate, charts)) => (candidate, charts, None, None),
-            Err(error @ (Error::Cancelled | Error::InvalidInput(_))) => return Err(error),
+            Err(error @ (Error::Cancelled | Error::Resource(_) | Error::InvalidInput(_))) => {
+                return Err(error);
+            }
             Err(proof) => {
+                context.cancellation.check()?;
                 let fallback = proof.to_string();
                 match problem.scalar(solution) {
                     Ok(candidate) => (candidate, 0, None, Some(fallback)),

@@ -20,8 +20,10 @@ coordinate rationalizes the roots. Only the subgroup of root monomials generated
 by the exact normalized connection is included. Unused radicals do not enlarge
 the system; a product of several roots can require only two monomials. The
 matrix dimension is `components * epsilon_orders * generated_monomials`, at
-most `components * epsilon_orders * 2^registered_roots`. The caller's dimension
-limit is checked before dense allocation and as the subgroup grows. The current
+most `components * epsilon_orders * 2^registered_roots`. An explicit `Some`
+dimension diagnostic is checked before dense allocation and as the subgroup
+grows; `None` leaves that count unrestricted. Shared process-memory and elapsed-time
+checks still apply. The current
 bit-mask representation allows fewer than `usize::BITS` registered roots.
 
 `rational_lift` exposes this exact connection for reuse with existing solvers.

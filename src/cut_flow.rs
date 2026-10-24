@@ -21,6 +21,7 @@ use rayon::prelude::*;
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::Mutex;
 use symbolica::prelude::*;
+use symbolica::utils::resources;
 
 /// A prepared positive-energy cut system with automatic virtual vacuum
 /// boundaries. Current leaves are massive two-body and massless N-body phase
@@ -39,6 +40,20 @@ pub struct PreparedCutFlow<'a> {
 
 impl<'a> PreparedCutFlow<'a> {
     pub fn new(
+        family: &CutFamily,
+        channel: &FutureTimelikeChannel,
+        targets: &[Integral],
+        point: &KinematicPoint,
+        backend: &'a dyn ReductionBackend,
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<Self> {
+        options.run_with_resources(|| {
+            Self::new_inner(family, channel, targets, point, backend, options, context)
+        })
+    }
+
+    fn new_inner(
         family: &CutFamily,
         channel: &FutureTimelikeChannel,
         targets: &[Integral],
@@ -143,6 +158,15 @@ impl<'a> PreparedCutFlow<'a> {
         options: &FlowOptions,
         context: &RunContext,
     ) -> Result<Vec<ComplexFloat>> {
+        options.run_with_resources(|| self.evaluate_inner(epsilon, options, context))
+    }
+
+    fn evaluate_inner(
+        &self,
+        epsilon: &Rational,
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<Vec<ComplexFloat>> {
         options.validate()?;
         validate_options(options)?;
         validate_placement(options, &self.shifted)?;
@@ -182,6 +206,20 @@ impl<'a> PreparedCutFlow<'a> {
         ancestry: &BTreeSet<String>,
         memo: &Mutex<BTreeMap<String, ComplexFloat>>,
     ) -> Result<Vec<ComplexFloat>> {
+        crate::stack_resources::run(|| {
+            self.evaluate_recursive_inner(epsilon, options, context, ordinary, ancestry, memo)
+        })
+    }
+
+    fn evaluate_recursive_inner(
+        &self,
+        epsilon: &Rational,
+        options: &FlowOptions,
+        context: &RunContext,
+        ordinary: &recursive::RecursiveBoundary<'_>,
+        ancestry: &BTreeSet<String>,
+        memo: &Mutex<BTreeMap<String, ComplexFloat>>,
+    ) -> Result<Vec<ComplexFloat>> {
         context.cancellation.check()?;
         let Some(flow) = &self.flow else {
             return Ok(vec![
@@ -196,9 +234,12 @@ impl<'a> PreparedCutFlow<'a> {
         if ancestry.contains(&key) {
             return Err(Error::Unsupported("recursive cut boundary cycle".into()));
         }
-        if ancestry.len() >= 32 {
+        if options
+            .max_recursion_depth
+            .is_some_and(|limit| ancestry.len() >= limit)
+        {
             return Err(Error::Limit(
-                "cut boundary recursion exceeds 32 levels".into(),
+                "cut boundary recursion diagnostic exhausted".into(),
             ));
         }
         let mut ancestry = ancestry.clone();
@@ -223,13 +264,25 @@ impl<'a> PreparedCutFlow<'a> {
         options: &FlowOptions,
         context: &RunContext,
     ) -> Result<Vec<Vec<ComplexFloat>>> {
+        options.run_with_resources(|| self.evaluate_samples_inner(samples, options, context))
+    }
+
+    fn evaluate_samples_inner(
+        &self,
+        samples: &[Rational],
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<Vec<Vec<ComplexFloat>>> {
         options.validate()?;
+        let budget = ResourceBudget::capture_current();
         let evaluate = |(index, epsilon): (usize, &Rational)| {
-            context.emit(Progress::Sample {
-                index,
-                total: samples.len(),
-            })?;
-            self.evaluate(epsilon, options, context)
+            budget.run_captured(|| {
+                context.emit(Progress::Sample {
+                    index,
+                    total: samples.len(),
+                })?;
+                self.evaluate(epsilon, options, context)
+            })
         };
         if options.workers == 1 {
             samples.iter().enumerate().map(evaluate).collect()
@@ -253,13 +306,15 @@ impl<'a> PreparedCutFlow<'a> {
         let leading = loops
             .checked_mul(-2)
             .ok_or_else(|| Error::Limit("cut Laurent pole bound overflow".into()))?;
-        engine::fit_samples_refined_leading(
-            self.targets,
-            leading,
-            last,
-            options,
-            |samples, refined| self.evaluate_samples(samples, refined, context),
-        )
+        options.run_with_resources(|| {
+            engine::fit_samples_refined_leading(
+                self.targets,
+                leading,
+                last,
+                options,
+                |samples, refined| self.evaluate_samples(samples, refined, context),
+            )
+        })
     }
 }
 
@@ -473,7 +528,7 @@ impl CutProvenance {
                     .fold(d.constant.clone(), |sum, (x, c)| sum + x * c)
         });
         let mut terms =
-            integrand::to_integrals(&expression, &self.coordinates, &self.template, 10000)?;
+            integrand::to_integrals(&expression, &self.coordinates, &self.template, None)?;
         if terms.len() != 1 {
             return Err(Error::Unsupported(
                 "unit cut shells do not define an independent leaf".into(),
@@ -820,7 +875,7 @@ impl BoundaryProvider for CutBoundary<'_, '_> {
                     .collect::<Result<Vec<_>>>()
             })
             .collect::<Result<Vec<_>>>()?;
-        let orders = solutions.region_orders(&powers, 32)?;
+        let orders = solutions.region_orders(&powers, None)?;
         self.context.emit(Progress::BoundaryPlan {
             basis_size: basis.len(),
             region_series: orders
@@ -876,7 +931,7 @@ impl BoundaryProvider for CutBoundary<'_, '_> {
                         &expansion.coordinates,
                         family,
                         &region.hard,
-                        10000,
+                        None,
                     )?;
                     let mut products = Vec::new();
                     for term in terms {
@@ -926,11 +981,7 @@ impl BoundaryProvider for CutBoundary<'_, '_> {
                                 })
                                 .targets
                                 .insert(integral);
-                            if requests.len() > 10000 {
-                                return Err(Error::Limit(
-                                    "cut boundary family budget exhausted".into(),
-                                ));
-                            }
+                            resources::checkpoint()?;
                         }
                         products.push(product);
                     }
@@ -1023,14 +1074,16 @@ fn cut_scaleless(family: &CutFamily, integral: &Integral) -> Result<bool> {
         zero::{Analyzer, Decision},
     };
     let converted = family.family().convert()?;
-    let analyzer = Analyzer::try_new(&converted.family, family.native_restrictions()?)
-        .map_err(|e| Error::Reduction(e.to_string()))?;
+    let analyzer =
+        Analyzer::try_new(&converted.family, family.native_restrictions()?).map_err(|e| {
+            crate::error::preserve_resource(&e).unwrap_or_else(|| Error::Reduction(e.to_string()))
+        })?;
     let mask = Mask::try_new(integral.0.iter().map(|&n| n > 0))
         .map_err(|e| Error::InvalidInput(e.to_string()))?;
     Ok(matches!(
-        analyzer
-            .analyze(&mask)
-            .map_err(|e| Error::Reduction(e.to_string()))?,
+        analyzer.analyze(&mask).map_err(|e| {
+            crate::error::preserve_resource(&e).unwrap_or_else(|| Error::Reduction(e.to_string()))
+        })?,
         Decision::ProvedZero(_)
     ))
 }
@@ -1117,15 +1170,7 @@ impl CutBoundary<'_, '_> {
             };
             self.context.cancellation.check()?;
             let mut memo = self.memo.lock().map_err(lock_error)?;
-            if memo
-                .len()
-                .checked_add(missing.len())
-                .is_none_or(|size| size > 10000)
-            {
-                return Err(Error::Limit(
-                    "cut boundary value memo budget exhausted".into(),
-                ));
-            }
+            resources::checkpoint()?;
             for (target, value) in missing.into_iter().zip(evaluated) {
                 memo.insert(format!("{prefix}:{:?}", target.0), value);
             }
@@ -1232,7 +1277,7 @@ mod tests {
             &(d1.clone().pow(-2) / &d2),
             &provenance.coordinates,
             &provenance.template,
-            100,
+            Some(100),
         )?;
         assert_eq!(terms.len(), 1);
         let mut term = terms.remove(0);
@@ -1245,7 +1290,7 @@ mod tests {
             &(&d1 / (&d1 * &d2)),
             &provenance.coordinates,
             &provenance.template,
-            100,
+            Some(100),
         )?;
         assert_eq!(terms.len(), 1);
         assert!(provenance.restore(&mut terms.remove(0))?.is_none());
@@ -1254,7 +1299,7 @@ mod tests {
             &((&d1 + Atom::one()).pow(-1)),
             &provenance.coordinates,
             &provenance.template,
-            100,
+            Some(100),
         )?;
         assert!(
             matches!(provenance.restore(&mut terms.remove(0)), Err(Error::Unsupported(message))
