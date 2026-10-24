@@ -388,6 +388,7 @@ pub(crate) fn solve_constraints(
     if a.len() != b.len() || a.iter().any(|r| r.len() != columns) {
         return Err(Error::InvalidInput("constraint dimensions".into()));
     }
+    let equations = (a.clone(), b.clone());
     let mut row = 0;
     let mut pivots = Vec::new();
     let tolerance = p.tolerance(p.bits / 5);
@@ -425,16 +426,90 @@ pub(crate) fn solve_constraints(
             pivots.len()
         )));
     }
-    if b.iter().skip(row).any(|v| p.norm(v) > tolerance) {
-        return Err(Error::Numerical(
-            "inconsistent asymptotic boundary constraints".into(),
-        ));
-    }
     let mut out = vec![p.zero(); columns];
     for (i, &j) in pivots.iter().enumerate() {
         out[j] = b[i].clone();
     }
+    let check = ConstraintResiduals::new(p, &equations.0, &equations.1, &out);
+    if check.violated(&tolerance) > 0 {
+        return Err(Error::Numerical(format!(
+            "inconsistent asymptotic boundary constraints ({} of {} equations violated; \
+             max relative residual {:.3e}, tolerance {:.3e}, max absolute residual {:.3e}, \
+             max |constant| {:.3e}, {columns} constants, {} bits)",
+            check.violated(&tolerance),
+            equations.0.len(),
+            check.max_relative().to_f64(),
+            tolerance.to_f64(),
+            check.max_absolute().to_f64(),
+            check.max_constant(&out).to_f64(),
+            p.bits
+        )));
+    }
     Ok(out)
+}
+
+/// Residuals of a solved constraint system, one per equation.
+///
+/// Consistency is judged per equation relative to the size of the terms that
+/// cancel in it: |b_k - a_k x| <= tolerance * max(1, |b_k|, max_j |a_kj x_j|).
+/// Equations of size at most one keep the absolute test. Large data, such as
+/// boundary values carrying inverse powers of a small regulator, are compared
+/// at the working precision instead of against an absolute threshold that
+/// becomes stricter as their magnitude grows; the test is scale invariant.
+struct ConstraintResiduals {
+    p: Precision,
+    absolute: Vec<Float>,
+    relative: Vec<Float>,
+}
+impl ConstraintResiduals {
+    fn new(
+        p: Precision,
+        a: &[Vec<ComplexFloat>],
+        b: &[ComplexFloat],
+        x: &[ComplexFloat],
+    ) -> Self {
+        let one = p.real(1);
+        let mut absolute = Vec::with_capacity(b.len());
+        let mut relative = Vec::with_capacity(b.len());
+        for (coefficients, value) in a.iter().zip(b) {
+            let mut scale = p.norm(value);
+            let mut residual = value.clone();
+            for (c, v) in coefficients.iter().zip(x) {
+                let term = p.mul(c, v);
+                let size = p.norm(&term);
+                if size > scale {
+                    scale = size;
+                }
+                residual = p.sub(&residual, &term);
+            }
+            let scale = if scale > one { scale } else { one.clone() };
+            let size = p.norm(&residual);
+            relative.push(p.norm(&p.div(&residual, &ComplexFloat::new(scale, p.real(0)))));
+            absolute.push(size);
+        }
+        Self {
+            p,
+            absolute,
+            relative,
+        }
+    }
+    fn violated(&self, tolerance: &Float) -> usize {
+        self.relative.iter().filter(|r| *r > tolerance).count()
+    }
+    fn maximum(&self, values: &[Float]) -> Float {
+        values
+            .iter()
+            .fold(self.p.real(0), |m, v| if *v > m { v.clone() } else { m })
+    }
+    fn max_relative(&self) -> Float {
+        self.maximum(&self.relative)
+    }
+    fn max_absolute(&self) -> Float {
+        self.maximum(&self.absolute)
+    }
+    fn max_constant(&self, x: &[ComplexFloat]) -> Float {
+        self.maximum(&x.iter().map(|v| self.p.norm(v)).collect::<Vec<_>>())
+    }
 }
 
 /// Reusable block-triangular LU factorization for Frobenius recurrences.
