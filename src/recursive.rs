@@ -58,18 +58,7 @@ impl<'a> RecursiveBoundary<'a> {
         self
     }
     fn numerical_options(&self, p: Precision) -> FlowOptions {
-        let mut options = self.options.clone();
-        // Extra arithmetic digits are not an accuracy target: children keep
-        // the parent's targets and receive the same extra digits themselves.
-        let working_digits = (((u64::from(p.bits.saturating_sub(16)) * 1000) / 3322) as u32)
-            .saturating_sub(options.arithmetic_guard_digits);
-        let extra = working_digits.saturating_sub(options.digits + options.guard_digits);
-        options.guard_digits = options
-            .guard_digits
-            .max(working_digits.saturating_sub(options.digits));
-        options.series_order += extra as usize * 4 / 5;
-        options.refine_rational_order(extra.div_ceil(20) as usize);
-        options
+        child_numerical_options(self.options, p)
     }
     fn child(&self, keys: BTreeSet<String>) -> Self {
         let mut ancestry = self.ancestry.clone();
@@ -618,5 +607,77 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                 p.mul(&value, &coefficient.jacobian);
         }
         solutions.match_regions(&data)
+    }
+}
+
+/// Options for boundary children that are evaluated in the parent's working
+/// precision `p`.
+fn child_numerical_options(parent: &FlowOptions, p: Precision) -> FlowOptions {
+    let mut options = parent.clone();
+    // Extra arithmetic digits are not an accuracy target: children keep
+    // the parent's targets and receive the same extra digits themselves.
+    let working_digits = (((u64::from(p.bits.saturating_sub(16)) * 1000) / 3322) as u32)
+        .saturating_sub(options.arithmetic_guard_digits);
+    let extra = working_digits.saturating_sub(options.digits + options.guard_digits);
+    options.guard_digits = options
+        .guard_digits
+        .max(working_digits.saturating_sub(options.digits));
+    options.series_order += extra as usize * 4 / 5;
+    options.refine_rational_order(extra.div_ceil(20) as usize);
+    options
+}
+
+#[cfg(test)]
+mod arithmetic_guard_tests {
+    use super::*;
+
+    fn targets(options: &FlowOptions) -> String {
+        let mut options = options.clone();
+        options.arithmetic_guard_digits = 0;
+        format!("{options:?}")
+    }
+
+    #[test]
+    fn arithmetic_guard_digits_are_opt_in() {
+        let options = FlowOptions::default();
+        assert_eq!(options.arithmetic_guard_digits, 0);
+        assert!(options.validate().is_ok());
+        let overflow = FlowOptions {
+            arithmetic_guard_digits: u32::MAX,
+            ..FlowOptions::default()
+        };
+        assert!(overflow.validate().is_err());
+    }
+
+    #[test]
+    fn children_keep_targets_and_extra_arithmetic_digits() {
+        for (digits, guard, extra_precision) in [(20, 40, 0), (20, 116, 0), (20, 116, 37)] {
+            let plain = FlowOptions {
+                digits,
+                guard_digits: guard,
+                ..FlowOptions::default()
+            };
+            let p = Precision::decimal(digits + guard + extra_precision).unwrap();
+            let reference = child_numerical_options(&plain, p);
+            for arithmetic in [1, 16, 64] {
+                let guarded = FlowOptions {
+                    arithmetic_guard_digits: arithmetic,
+                    ..plain.clone()
+                };
+                // The parent evaluates `arithmetic` digits above its targets.
+                let q = Precision::decimal(digits + guard + extra_precision + arithmetic).unwrap();
+                let child = child_numerical_options(&guarded, q);
+                assert_eq!(child.arithmetic_guard_digits, arithmetic);
+                assert_eq!(targets(&child), targets(&reference));
+                // Recursing again neither inflates nor loses the targets.
+                let grandchild_precision = Precision::decimal(
+                    child.digits + child.guard_digits + child.arithmetic_guard_digits,
+                )
+                .unwrap();
+                let grandchild = child_numerical_options(&child, grandchild_precision);
+                assert_eq!(grandchild.digits + grandchild.guard_digits, child.digits + child.guard_digits);
+                assert_eq!(grandchild.arithmetic_guard_digits, arithmetic);
+            }
+        }
     }
 }
