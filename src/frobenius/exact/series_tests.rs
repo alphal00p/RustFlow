@@ -130,3 +130,40 @@ fn nonzero_fractional_power_is_not_discarded_as_a_ramification_slot() {
         Err(Error::Unsupported(_))
     ));
 }
+
+#[test]
+fn disabled_height_estimates_preserve_compact_native_integer_power_series() {
+    let limits = ExactFrobeniusLimits::default();
+    let context = RunContext::default();
+    let domain = ExactDomain::dense(&limits, &context);
+    let x = symbol!("exact_compact_height::x");
+    let expression = (Atom::one() + Atom::var(x)).pow(i64::MAX);
+    let coefficients = domain.series(&expression, x, 1).unwrap();
+    assert_eq!(
+        coefficients,
+        vec![domain.integer(1), domain.integer(i64::MAX)]
+    );
+    let diagnostic = ExactFrobeniusLimits {
+        max_coefficient_bits: Some(u64::MAX),
+        ..limits.clone()
+    };
+    assert!(matches!(
+        ExactDomain::dense(&diagnostic, &context).series(&expression, x, 1),
+        Err(Error::Limit(_))
+    ));
+    let beyond_native = (Atom::one() + Atom::var(x)).pow(Atom::num(Integer::from(i64::MAX) + 1));
+    assert!(
+        matches!(domain.preflight_series(&beyond_native, x, 1), Err(Error::Limit(message)) if message.contains("i64 representation"))
+    );
+    let budget = crate::ResourceBudget::with_memory_monitor(
+        crate::ResourceLimits {
+            max_process_rss_bytes: Some(1),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
+    assert!(matches!(
+        budget.run(|| domain.series(&expression, x, 1)),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+    ));
+}

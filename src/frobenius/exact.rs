@@ -59,8 +59,17 @@ fn scalar_count(count: Option<usize>) -> Result<usize> {
     count.ok_or_else(|| Error::Limit("exact Frobenius scalar count overflow".into()))
 }
 
-fn coefficient_bits(bits: Option<u64>) -> Result<u64> {
-    bits.ok_or_else(|| Error::Limit("exact Frobenius coefficient-height estimate overflow".into()))
+fn coefficient_bits(bits: Option<u64>, limits: &ExactFrobeniusLimits) -> Result<u64> {
+    match bits {
+        Some(bits) => Ok(bits),
+        // This is a conservative admission estimate, not an index or a size
+        // consumed by the exact algorithm. Disabled diagnostics cannot reject
+        // compact truncated output because the estimate exceeds its counter.
+        None if limits.max_coefficient_bits.is_none() => Ok(u64::MAX),
+        None => Err(Error::Limit(
+            "exact Frobenius coefficient-height estimate overflow".into(),
+        )),
+    }
 }
 
 fn allocation_bytes(count: usize, item_bytes: usize) -> Result<u64> {
@@ -221,6 +230,7 @@ pub(crate) fn normalized_root_series(
             .and_then(|v| v.checked_add(4))
             .and_then(|v| v.checked_mul(series_terms(order).ok()?.try_into().ok()?))
             .and_then(|v| v.checked_mul(2)),
+        limits,
     )?;
     if limits
         .max_coefficient_bits
@@ -328,6 +338,7 @@ pub(crate) fn polynomial_product(
             .and_then(|v| v.checked_add(1))
             .and_then(|v| v.checked_mul(terms.try_into().ok()?))
             .and_then(|v| v.checked_mul(2)),
+        limits,
     )?;
     let cells = scalar_count(a.len().checked_mul(b.len()))?;
     if limits.max_scalar_cells.is_some_and(|limit| cells > limit)
@@ -423,6 +434,7 @@ pub(crate) fn multiply(
             .and_then(|v| v.checked_add(1))
             .and_then(|v| v.checked_mul(inner.try_into().ok()?))
             .and_then(|v| v.checked_mul(2)),
+        limits,
     )?;
     if limits
         .max_coefficient_bits
@@ -520,11 +532,17 @@ impl<'a> ExactDomain<'a> {
             }
             AtomView::Add(v) => v.iter().try_fold(0_u64, |sum, a| {
                 let bound = self.series_bound(a, variable, order, nodes)?;
-                coefficient_bits(sum.checked_add(bound).and_then(|v| v.checked_add(1)))
+                coefficient_bits(
+                    sum.checked_add(bound).and_then(|v| v.checked_add(1)),
+                    self.limits,
+                )
             })?,
             AtomView::Mul(v) => v.iter().try_fold(0_u64, |sum, a| {
                 let bound = self.series_bound(a, variable, order, nodes)?;
-                coefficient_bits(sum.checked_add(bound).and_then(|v| v.checked_add(2)))
+                coefficient_bits(
+                    sum.checked_add(bound).and_then(|v| v.checked_add(2)),
+                    self.limits,
+                )
             })?,
             AtomView::Pow(v) => {
                 let (base, power) = v.get_base_exp();
@@ -550,6 +568,12 @@ impl<'a> ExactDomain<'a> {
                     power.re.abs().to_string().parse::<u64>().map_err(|_| {
                         Error::Limit("exact Frobenius source power exceeds u64".into())
                     })?;
+                // Native integer series powers convert their magnitude to i64.
+                i64::try_from(magnitude).map_err(|_| {
+                    Error::Limit(
+                        "exact Frobenius native integer power exceeds i64 representation".into(),
+                    )
+                })?;
                 coefficient_bits(
                     self.series_bound(base, variable, order, nodes)?
                         .checked_add(1)
@@ -561,6 +585,7 @@ impl<'a> ExactDomain<'a> {
                                 1
                             })
                         }),
+                    self.limits,
                 )?
             }
             _ => {
@@ -595,6 +620,7 @@ impl<'a> ExactDomain<'a> {
                 .and_then(|v| v.checked_mul(n))
                 .and_then(|v| v.checked_mul(n))
                 .and_then(|v| v.checked_mul(4)),
+            self.limits,
         )?;
         if self
             .limits

@@ -99,6 +99,7 @@ pub(crate) fn preflight_operation(
             height
                 .checked_add(domain.series_bound(expression.as_view(), variable, 0, &mut nodes)?)
                 .and_then(|v| v.checked_add(2)),
+            limits,
         )?;
         let (n, d) = degree_bounds(expression.as_view(), variable, context)?;
         degree = scalar_count(degree.checked_add(n).and_then(|v| v.checked_add(d)))?;
@@ -110,6 +111,7 @@ pub(crate) fn preflight_operation(
             .checked_add(2)
             .and_then(|v| v.checked_mul(degree.checked_add(1)?.try_into().ok()?))
             .and_then(|v| v.checked_mul(factor.try_into().ok()?)),
+        limits,
     )?;
     let cells = scalar_count(
         predicted_degree
