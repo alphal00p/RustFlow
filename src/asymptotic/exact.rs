@@ -1,8 +1,10 @@
 //! Explicit exact relations among generalized-series coefficients.
-use crate::frobenius::exact::{Gaussian, gaussian, gaussian_bounded, multiply, row_reduce};
+use crate::frobenius::exact::{
+    Gaussian, gaussian, gaussian_bounded, multiply, row_reduce_with_mode,
+};
 use crate::frobenius::{ExactFrobeniusBasis, ExactFrobeniusLimits};
 use crate::{Error, Result, RunContext};
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, HashMap};
 use symbolica::prelude::*;
 
 #[cfg(test)]
@@ -283,7 +285,31 @@ impl ExactFrobeniusBasis {
             row[n] = gaussian(&relation.value)?;
             equations.push(row);
         }
-        let reduced = row_reduce(equations, n, limits, context)?;
+        // The elimination guard must see the equations that will be solved,
+        // rather than count repeated assertions or exact 0 = 0 rows as new
+        // pivots. Keep the complete augmented row as the key so contradictions
+        // are retained, and preserve first-occurrence order without cloning
+        // Gaussian coefficients. All algebra remains in Symbolica's solver.
+        let mut unique = HashMap::new();
+        for (index, row) in equations.into_iter().enumerate() {
+            context.cancellation.check()?;
+            if row.iter().any(|value| !value.is_zero()) {
+                unique.entry(row).or_insert(index);
+            }
+        }
+        let mut equations = unique.into_iter().collect::<Vec<_>>();
+        equations.sort_unstable_by_key(|(_, index)| *index);
+        let reduced = if equations.is_empty() {
+            Vec::new()
+        } else {
+            row_reduce_with_mode(
+                equations.into_iter().map(|(row, _)| row).collect(),
+                n,
+                limits,
+                context,
+                self.elimination_mode,
+            )?
+        };
         let mut pivots = Vec::new();
         let mut offset = vec![zero(); n];
         for row in &reduced {

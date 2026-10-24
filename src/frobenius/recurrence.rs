@@ -6,6 +6,13 @@ pub(crate) struct RecurrenceColumn<S> {
     pub(crate) coefficients: Vec<Vec<Vec<S>>>,
 }
 
+/// Finite polynomial rows for x D_i(x) y'_i = sum_j P_ij(x) y_j.
+/// The constant coefficient of each D_i is normalized to one.
+pub(super) struct RecurrenceRow<S> {
+    denominator: Vec<S>,
+    entries: Vec<(usize, Vec<S>)>,
+}
+
 pub(super) trait CoefficientDomain {
     type Scalar: Clone + PartialEq;
     type Solver;
@@ -38,10 +45,20 @@ pub(super) trait CoefficientDomain {
         rhs: Vec<Self::Scalar>,
         context: &RunContext,
     ) -> Result<Vec<Self::Scalar>>;
+    fn polynomial_rows(
+        &self,
+        _system: &DifferentialSystem,
+        _context: &RunContext,
+    ) -> Result<Option<Vec<RecurrenceRow<Self::Scalar>>>> {
+        Ok(None)
+    }
     fn preflight(&self, _dimension: usize, _order: usize) -> Result<()> {
         Ok(())
     }
     fn preflight_matrix(&self, _dimension: usize) -> Result<()> {
+        Ok(())
+    }
+    fn preflight_column(&self, _dimension: usize, _order: usize, _logs: usize) -> Result<()> {
         Ok(())
     }
     fn preflight_series(&self, _expression: &Atom, _variable: Symbol, _order: usize) -> Result<()> {
@@ -59,12 +76,44 @@ struct NumericalDomain<'a> {
     p: Precision,
     values: &'a ahash::HashMap<Atom, C>,
     strict: bool,
+    prepared_rows: &'a crate::ode::prepared::PreparedRows,
+    streaming: Option<&'a super::streaming::StreamingAdmission>,
 }
 impl CoefficientDomain for NumericalDomain<'_> {
     type Scalar = C;
     type Solver = crate::numeric::BlockSolve;
     fn zero(&self) -> C {
         self.p.zero()
+    }
+    fn preflight(&self, _dimension: usize, order: usize) -> Result<()> {
+        crate::series_limits::admit_complex(self.p, order, 0, "Frobenius recurrence")
+    }
+    fn preflight_column(&self, dimension: usize, order: usize, logs: usize) -> Result<()> {
+        if let Some(admission) = self.streaming {
+            admission.column(dimension, order, logs)?;
+        } else {
+            crate::series_limits::admit_bytes(
+                order,
+                super::streaming::StreamingAdmission::estimated_column_bytes(
+                    self.p, dimension, order, logs, false,
+                ),
+                "Frobenius column workspace",
+            )?;
+        }
+        Ok(())
+    }
+    fn preflight_matrix(&self, dimension: usize) -> Result<()> {
+        if let Some(admission) = self.streaming {
+            admission.matrix(dimension)?;
+        } else {
+            crate::series_limits::admit_complex(
+                self.p,
+                0,
+                (dimension as u128).saturating_pow(2).saturating_mul(8),
+                "Frobenius matrix workspace",
+            )?;
+        }
+        Ok(())
     }
     fn integer(&self, value: i64) -> C {
         self.p.i(value)
@@ -135,6 +184,46 @@ impl CoefficientDomain for NumericalDomain<'_> {
     ) -> Result<Vec<C>> {
         solve_any(self.p, matrix, rhs, context, self.strict)
     }
+    fn polynomial_rows(
+        &self,
+        _system: &DifferentialSystem,
+        context: &RunContext,
+    ) -> Result<Option<Vec<RecurrenceRow<C>>>> {
+        // Reuse the ordinary Taylor solver's exact row-denominator owner.
+        // Expanding x M(x) into a long geometric series would make the
+        // Frobenius convolution quadratic in the requested expansion order.
+        let rows = self
+            .prepared_rows
+            .compile_polynomial_rows(self.p, self.values, context)?
+            .into_iter()
+            .map(|row| {
+                let divisor = &row.denominator[0];
+                if divisor == &self.p.zero() {
+                    return Err(Error::Numerical(
+                        "Frobenius row denominator vanishes at expansion center".into(),
+                    ));
+                }
+                Ok(RecurrenceRow {
+                    denominator: row
+                        .denominator
+                        .iter()
+                        .map(|v| self.p.div(v, divisor))
+                        .collect(),
+                    entries: row
+                        .entries
+                        .into_iter()
+                        .map(|(column, values)| {
+                            (
+                                column,
+                                values.iter().map(|v| self.p.div(v, divisor)).collect(),
+                            )
+                        })
+                        .collect(),
+                })
+            })
+            .collect::<Result<Vec<_>>>()?;
+        Ok(Some(rows))
+    }
 }
 
 impl PreparedFrobenius {
@@ -145,8 +234,15 @@ impl PreparedFrobenius {
         order: usize,
         context: &RunContext,
         strict: bool,
+        prepared_rows: &crate::ode::prepared::PreparedRows,
     ) -> Result<FrobeniusBasis> {
-        let domain = NumericalDomain { p, values, strict };
+        let domain = NumericalDomain {
+            p,
+            values,
+            strict,
+            prepared_rows,
+            streaming: None,
+        };
         let normal = self.recurrence_normal(&domain, order, context)?;
         let columns = self.transform_recurrence(&domain, normal, order, context)?;
         Ok(FrobeniusBasis {
@@ -160,6 +256,51 @@ impl PreparedFrobenius {
             precision: p,
         })
     }
+
+    pub(super) fn numerical_recurrence_visit(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        order: usize,
+        context: &RunContext,
+        prepared_rows: &crate::ode::prepared::PreparedRows,
+        admission: &super::streaming::StreamingAdmission,
+        constants: Option<&[C]>,
+        mut visitor: impl FnMut(std::ops::Range<usize>, FrobeniusColumn) -> Result<()>,
+    ) -> Result<()> {
+        let domain = NumericalDomain {
+            p,
+            values,
+            strict: false,
+            prepared_rows,
+            streaming: Some(admission),
+        };
+        self.recurrence_normal_visit(
+            &domain,
+            order,
+            context,
+            false,
+            constants,
+            |indices, normal| {
+                let column = if self.identity_transformation() {
+                    // The native column already has the physical coefficients and
+                    // exponent. Move it without allocating a duplicate long series.
+                    normal
+                } else {
+                    let mut transformed =
+                        self.transform_recurrence(&domain, vec![normal], order, context)?;
+                    transformed.pop().expect("one transformed Frobenius column")
+                };
+                visitor(
+                    indices,
+                    FrobeniusColumn {
+                        exponent: column.exponent,
+                        coefficients: column.coefficients,
+                    },
+                )
+            },
+        )
+    }
 }
 
 impl PreparedFrobenius {
@@ -169,17 +310,55 @@ impl PreparedFrobenius {
         order: usize,
         context: &RunContext,
     ) -> Result<Vec<RecurrenceColumn<D::Scalar>>> {
+        let mut columns = Vec::new();
+        self.recurrence_normal_visit(domain, order, context, true, None, |_, column| {
+            columns.push(column);
+            Ok(())
+        })?;
+        Ok(columns)
+    }
+
+    fn recurrence_normal_visit<D: CoefficientDomain>(
+        &self,
+        domain: &D,
+        order: usize,
+        context: &RunContext,
+        retain_solvers: bool,
+        constants: Option<&[D::Scalar]>,
+        mut visitor: impl FnMut(std::ops::Range<usize>, RecurrenceColumn<D::Scalar>) -> Result<()>,
+    ) -> Result<()> {
         let n = self.normal.matrix.len();
+        let orders = order
+            .checked_add(1)
+            .ok_or_else(|| Error::Limit("Frobenius recurrence order overflow".into()))?;
+        i64::try_from(orders).map_err(|_| {
+            Error::Limit("Frobenius recurrence order exceeds i64 representation".into())
+        })?;
+        if constants.is_some_and(|values| values.len() != n) {
+            return Err(Error::InvalidInput("Frobenius constants dimension".into()));
+        }
         domain.preflight(n, order)?;
-        let mut a = vec![vec![vec![domain.zero(); n]; n]; order + 1];
-        for (i, row) in self.normal.matrix.iter().enumerate() {
-            context.cancellation.check()?;
-            for (j, expr) in row.iter().enumerate() {
-                domain.preflight_series(expr, self.source.variable, order)?;
-                let expr = (expr * Atom::var(self.source.variable)).together().cancel();
-                let series = domain.series(&expr, self.source.variable, order)?;
-                for k in 0..=order {
-                    a[k][i][j] = series[k].clone();
+        let polynomial_rows = domain.polynomial_rows(&self.normal, context)?;
+        let mut a = vec![
+            vec![vec![domain.zero(); n]; n];
+            if polynomial_rows.is_some() { 1 } else { orders }
+        ];
+        if let Some(rows) = &polynomial_rows {
+            for (i, row) in rows.iter().enumerate() {
+                for (column, coefficients) in &row.entries {
+                    a[0][i][*column] = coefficients[0].clone();
+                }
+            }
+        } else {
+            for (i, row) in self.normal.matrix.iter().enumerate() {
+                context.cancellation.check()?;
+                for (j, expr) in row.iter().enumerate() {
+                    domain.preflight_series(expr, self.source.variable, order)?;
+                    let expr = (expr * Atom::var(self.source.variable)).together().cancel();
+                    let series = domain.series(&expr, self.source.variable, order)?;
+                    for k in 0..=order {
+                        a[k][i][j] = series[k].clone();
+                    }
                 }
             }
         }
@@ -199,27 +378,68 @@ impl PreparedFrobenius {
                     .collect::<Vec<_>>()
             })
             .collect::<Vec<_>>();
-        let mut columns = Vec::new();
+        let mut first_column = 0;
         for space in &self.eigenspaces {
             context.cancellation.check()?;
             let lambda = &space.exponent;
             let exponent = domain.evaluate(lambda)?;
+            // Numerical constants can be combined before recurrence only when
+            // no positive-order singular solve can be reached. Use precisely
+            // the original exact-or-near predicate, including all exponents.
+            let mut contracted = constants.is_some() && space.leading.len() > 1;
+            if contracted {
+                'orders: for k in 1..=order {
+                    context.cancellation.check()?;
+                    if self.recurrence_resonance(domain, lambda, k)? {
+                        contracted = false;
+                        break 'orders;
+                    }
+                }
+            }
             let mut solvers = (0..=order)
                 .map(|_| None)
                 .collect::<Vec<Option<D::Solver>>>();
-            for vector in &space.leading {
+            let emitted = if contracted { 1 } else { space.leading.len() };
+            for column in 0..emitted {
                 context.cancellation.check()?;
-                let mut leading = vector
-                    .iter()
-                    .map(|log| {
-                        log.iter()
-                            .map(|x| domain.evaluate(x))
-                            .collect::<Result<Vec<_>>>()
-                    })
-                    .collect::<Result<Vec<_>>>()?;
+                let indices = if contracted {
+                    first_column..first_column + space.leading.len()
+                } else {
+                    first_column + column..first_column + column + 1
+                };
+                let mut leading = if contracted {
+                    let logs = space.leading.iter().map(Vec::len).max().unwrap_or(1);
+                    // Admit before the temporary combined seed is allocated.
+                    domain.preflight_column(n, order, logs)?;
+                    let mut combined = vec![vec![domain.zero(); n]; logs];
+                    for (offset, vector) in space.leading.iter().enumerate() {
+                        context.cancellation.check()?;
+                        let weight =
+                            &constants.expect("contracted constants")[first_column + offset];
+                        for (destination, row) in combined.iter_mut().zip(vector) {
+                            for (sum, entry) in destination.iter_mut().zip(row) {
+                                *sum =
+                                    domain.add(sum, &domain.mul(weight, &domain.evaluate(entry)?));
+                                domain.check_value(sum)?;
+                            }
+                        }
+                    }
+                    combined
+                } else {
+                    space.leading[column]
+                        .iter()
+                        .map(|log| {
+                            log.iter()
+                                .map(|x| domain.evaluate(x))
+                                .collect::<Result<Vec<_>>>()
+                        })
+                        .collect::<Result<Vec<_>>>()?
+                };
                 while leading.len() > 1 && leading.last().unwrap().iter().all(|v| v == &zero) {
                     leading.pop();
                 }
+                let mut logs = leading.len();
+                domain.preflight_column(n, order, logs)?;
                 let mut coefficients = vec![leading];
                 for k in 1..=order {
                     context.cancellation.check()?;
@@ -231,23 +451,58 @@ impl PreparedFrobenius {
                         row[i] =
                             domain.add(&row[i], &domain.add(&exponent, &domain.integer(k as i64)));
                     }
-                    let mut resonance = false;
-                    for other in self.eigenspaces.iter().map(|space| &space.exponent) {
-                        let difference = (lambda + Atom::num(k as i64) - other).together().cancel();
-                        if difference.is_zero() || domain.near_resonance(&difference)? {
-                            resonance = true;
-                            break;
-                        }
+                    let resonance = self.recurrence_resonance(domain, lambda, k)?;
+                    if contracted && resonance {
+                        return Err(Error::Numerical(
+                            "contracted Frobenius group reached a singular recurrence".into(),
+                        ));
                     }
-                    let logs = coefficients.iter().map(|c| c.len()).max().unwrap();
                     let mut rhs = vec![vec![domain.zero(); n]; logs];
-                    for j in 1..=k {
-                        for (l, previous) in coefficients[k - j].iter().enumerate() {
-                            for &(i, column, value) in &sparse[j] {
-                                if previous[column] != zero {
-                                    rhs[l][i] = domain
-                                        .add(&rhs[l][i], &domain.mul(value, &previous[column]));
-                                    domain.check_value(&rhs[l][i])?;
+                    if let Some(rows) = &polynomial_rows {
+                        for (i, row) in rows.iter().enumerate() {
+                            for (column, polynomial) in &row.entries {
+                                for (j, value) in polynomial.iter().enumerate().skip(1).take(k) {
+                                    if value == &zero {
+                                        continue;
+                                    }
+                                    for (l, previous) in coefficients[k - j].iter().enumerate() {
+                                        if previous[*column] != zero {
+                                            rhs[l][i] = domain.add(
+                                                &rhs[l][i],
+                                                &domain.mul(value, &previous[*column]),
+                                            );
+                                        }
+                                    }
+                                }
+                            }
+                            for (j, value) in row.denominator.iter().enumerate().skip(1).take(k) {
+                                if value == &zero {
+                                    continue;
+                                }
+                                let previous = &coefficients[k - j];
+                                let weight = domain.add(&exponent, &domain.integer((k - j) as i64));
+                                for (l, previous_row) in previous.iter().enumerate() {
+                                    let mut derivative = domain.mul(&weight, &previous_row[i]);
+                                    if let Some(next_log) = previous.get(l + 1) {
+                                        derivative = domain.add(
+                                            &derivative,
+                                            &domain.scale(&next_log[i], (l + 1) as i64, 1),
+                                        );
+                                    }
+                                    rhs[l][i] =
+                                        domain.sub(&rhs[l][i], &domain.mul(value, &derivative));
+                                }
+                            }
+                        }
+                    } else {
+                        for j in 1..=k {
+                            for (l, previous) in coefficients[k - j].iter().enumerate() {
+                                for &(i, column, value) in &sparse[j] {
+                                    if previous[column] != zero {
+                                        rhs[l][i] = domain
+                                            .add(&rhs[l][i], &domain.mul(value, &previous[column]));
+                                        domain.check_value(&rhs[l][i])?;
+                                    }
                                 }
                             }
                         }
@@ -296,9 +551,19 @@ impl PreparedFrobenius {
                             )
                         })?;
                     } else {
-                        if solvers[k].is_none() {
-                            solvers[k] = Some(domain.solver(m.clone(), &self.blocks, context)?);
-                        }
+                        // Retain a factorization only if another leading vector
+                        // will reuse it. At very high precision a long sequence
+                        // of single-use factorizations is otherwise substantial.
+                        let fresh_solver;
+                        let solver = if !retain_solvers || space.leading.len() == 1 {
+                            fresh_solver = domain.solver(m, &self.blocks, context)?;
+                            &fresh_solver
+                        } else {
+                            if solvers[k].is_none() {
+                                solvers[k] = Some(domain.solver(m, &self.blocks, context)?);
+                            }
+                            solvers[k].as_ref().unwrap()
+                        };
                         for l in (0..logs).rev() {
                             if l + 1 < logs {
                                 for i in 0..n {
@@ -308,24 +573,57 @@ impl PreparedFrobenius {
                                     );
                                 }
                             }
-                            next[l] = domain.solve(solvers[k].as_ref().unwrap(), &rhs[l])?;
+                            next[l] = domain.solve(solver, &rhs[l])?;
                         }
                     }
                     while next.len() > 1
-                        && next.last().unwrap().iter().all(|v| domain.insignificant(v))
+                        && next.last().unwrap().iter().all(|v| {
+                            if contracted {
+                                v == &zero
+                            } else {
+                                domain.insignificant(v)
+                            }
+                        })
                     {
                         next.pop();
                     }
                     domain.check_rows(&next)?;
+                    logs = logs.max(next.len());
+                    domain.preflight_column(n, order, logs)?;
                     coefficients.push(next);
                 }
-                columns.push(RecurrenceColumn {
-                    exponent: lambda.clone(),
-                    coefficients,
-                });
+                visitor(
+                    indices,
+                    RecurrenceColumn {
+                        exponent: lambda.clone(),
+                        coefficients,
+                    },
+                )?;
+            }
+            first_column += space.leading.len();
+        }
+        if first_column != n {
+            return Err(Error::Numerical("incomplete Frobenius eigenspaces".into()));
+        }
+        Ok(())
+    }
+
+    fn recurrence_resonance<D: CoefficientDomain>(
+        &self,
+        domain: &D,
+        lambda: &Atom,
+        order: usize,
+    ) -> Result<bool> {
+        for other in self.eigenspaces.iter().map(|space| &space.exponent) {
+            let order = i64::try_from(order).map_err(|_| {
+                Error::Limit("Frobenius recurrence order exceeds i64 representation".into())
+            })?;
+            let difference = (lambda + Atom::num(order) - other).together().cancel();
+            if difference.is_zero() || domain.near_resonance(&difference)? {
+                return Ok(true);
             }
         }
-        Ok(columns)
+        Ok(false)
     }
 }
 impl PreparedFrobenius {
@@ -336,6 +634,12 @@ impl PreparedFrobenius {
         order: usize,
         context: &RunContext,
     ) -> Result<Vec<RecurrenceColumn<D::Scalar>>> {
+        let series_depth = order
+            .checked_add(1)
+            .and_then(|depth| i64::try_from(depth).ok())
+            .ok_or_else(|| {
+                Error::Limit("Frobenius transformation depth exceeds i64 representation".into())
+            })?;
         let mut terms = Vec::new();
         let mut low = 0_i64;
         let mut high = 0_i64;
@@ -347,7 +651,7 @@ impl PreparedFrobenius {
                 }
                 domain.preflight_series(entry, self.source.variable, order)?;
                 let series = entry
-                    .series(self.source.variable, 0, order as i64 + 1)
+                    .series(self.source.variable, 0, series_depth)
                     .map_err(|e| Error::Unsupported(e.to_string()))?;
                 for (power, coefficient) in series.terms() {
                     let shift = power.to_string().parse::<i64>().map_err(|_| {
@@ -359,25 +663,40 @@ impl PreparedFrobenius {
                 }
             }
         }
-        if high - low > 256 {
-            return Err(Error::Limit("normalization power span exceeds 256".into()));
-        }
+        let span = high
+            .checked_sub(low)
+            .and_then(|span| usize::try_from(span).ok())
+            .ok_or_else(|| Error::Limit("Frobenius normalization span overflow".into()))?;
         domain.preflight(
             self.source.matrix.len(),
             order
-                .checked_add((high - low) as usize)
+                .checked_add(span)
                 .ok_or_else(|| Error::Limit("Frobenius normalization order overflow".into()))?,
         )?;
         for column in &mut columns {
             context.cancellation.check()?;
-            let mut transformed = vec![
-                vec![vec![domain.zero(); self.source.matrix.len()]];
-                column.coefficients.len() + (high - low) as usize
-            ];
+            let length = column.coefficients.len().checked_add(span).ok_or_else(|| {
+                Error::Limit("Frobenius normalized column length overflow".into())
+            })?;
+            let logs = column.coefficients.iter().map(Vec::len).max().unwrap_or(1);
+            let transformed_order = length.checked_sub(1).ok_or_else(|| {
+                Error::InvalidInput("empty Frobenius normalization column".into())
+            })?;
+            domain.preflight_column(self.source.matrix.len(), transformed_order, logs)?;
+            let mut transformed = vec![vec![vec![domain.zero(); self.source.matrix.len()]]; length];
             for (k, logs) in column.coefficients.iter().enumerate() {
                 for (l, row) in logs.iter().enumerate() {
                     for (i, j, shift, coefficient) in &terms {
-                        let destination = &mut transformed[(k as i64 + shift - low) as usize];
+                        let offset = shift
+                            .checked_sub(low)
+                            .and_then(|offset| usize::try_from(offset).ok())
+                            .ok_or_else(|| {
+                                Error::Limit("Frobenius transformation offset overflow".into())
+                            })?;
+                        let index = k.checked_add(offset).ok_or_else(|| {
+                            Error::Limit("Frobenius transformation index overflow".into())
+                        })?;
+                        let destination = &mut transformed[index];
                         destination.resize(
                             destination.len().max(l + 1),
                             vec![domain.zero(); self.source.matrix.len()],

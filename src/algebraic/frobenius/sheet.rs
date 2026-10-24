@@ -353,6 +353,7 @@ impl PreparedAlgebraicFrobenius {
             columns,
             known_order: order,
             limits: limits.clone(),
+            elimination_mode: basis.elimination_mode,
         })
     }
 }

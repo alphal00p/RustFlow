@@ -1,4 +1,9 @@
+mod native_provider;
+mod native_seeds;
+pub use native_provider::{NativeIdentityProvider, ProvidedRustRedBackend};
 mod scoped_tables;
+pub(crate) use native_seeds::ResolvedIdentityBank;
+pub use native_seeds::{NativeIdentityBank, NativeIdentityLimits, SeededRustRedBackend};
 mod table_graph;
 pub use scoped_tables::ScopedTableBackend;
 
@@ -14,6 +19,50 @@ pub struct Reduction {
     pub rules: BTreeMap<Integral, LinearCombination>,
     pub residuals: Vec<Integral>,
     pub nonzero_conditions: Vec<Atom>,
+}
+
+/// Preflight stored keys and encoded expressions before copying/admitting a
+/// table. Cooperative checkpoints also observe actual process RSS.
+pub(super) fn check_table_storage(reduction: &Reduction) -> Result<()> {
+    let overflow = || Error::Limit("reduction table storage size overflow".into());
+    let mut bytes = reduction
+        .nonzero_conditions
+        .len()
+        .checked_mul(std::mem::size_of::<Atom>())
+        .ok_or_else(overflow)?;
+    for condition in &reduction.nonzero_conditions {
+        symbolica::utils::resources::checkpoint()?;
+        bytes = bytes
+            .checked_add(condition.as_view().get_byte_size())
+            .ok_or_else(overflow)?;
+    }
+    let mut add_key = |key: &Integral, entry_bytes: usize| -> Result<()> {
+        symbolica::utils::resources::checkpoint()?;
+        let powers = key
+            .0
+            .len()
+            .checked_mul(std::mem::size_of::<i16>())
+            .ok_or_else(overflow)?;
+        bytes = bytes
+            .checked_add(entry_bytes)
+            .and_then(|bytes| bytes.checked_add(powers))
+            .ok_or_else(overflow)?;
+        Ok(())
+    };
+    for (lhs, terms) in &reduction.rules {
+        add_key(lhs, std::mem::size_of::<(Integral, LinearCombination)>())?;
+        for (rhs, coefficient) in terms {
+            let entry_bytes = std::mem::size_of::<(Integral, Atom)>()
+                .checked_add(coefficient.as_view().get_byte_size())
+                .ok_or_else(overflow)?;
+            add_key(rhs, entry_bytes)?;
+        }
+    }
+    for residual in &reduction.residuals {
+        add_key(residual, std::mem::size_of::<Integral>())?;
+    }
+    symbolica::utils::resources::check_allocation(u64::try_from(bytes).map_err(|_| overflow())?)?;
+    Ok(())
 }
 
 pub trait ReductionBackend: Send + Sync {
@@ -46,12 +95,15 @@ pub trait ReductionBackend: Send + Sync {
         )]);
         for terms in result.rules.values_mut() {
             for coefficient in terms.values_mut() {
+                context.cancellation.check()?;
                 *coefficient = substitute(coefficient, &rules).together().cancel();
             }
         }
         for condition in &mut result.nonzero_conditions {
+            context.cancellation.check()?;
             *condition = substitute(condition, &rules).together().cancel();
         }
+        context.cancellation.check()?;
         Ok(result)
     }
     fn reduce_at_epsilon(
@@ -65,12 +117,15 @@ pub trait ReductionBackend: Send + Sync {
         let rules = BTreeMap::from([(Atom::var(family.epsilon), Atom::num(epsilon.clone()))]);
         for terms in result.rules.values_mut() {
             for coefficient in terms.values_mut() {
+                context.cancellation.check()?;
                 *coefficient = substitute(coefficient, &rules).together().cancel();
             }
         }
         for condition in &mut result.nonzero_conditions {
+            context.cancellation.check()?;
             *condition = substitute(condition, &rules).together().cancel();
         }
+        context.cancellation.check()?;
         Ok(result)
     }
 
@@ -235,9 +290,35 @@ impl RustRedBackend {
         context: &RunContext,
         cuts: Option<&crate::cuts::CutFamily>,
     ) -> Result<Reduction> {
+        self.reduce_native_with_seed(family, targets, epsilon, context, cuts, None, None)
+    }
+    fn reduce_native_with_seed(
+        &self,
+        family: &IntegralFamily,
+        targets: &[Integral],
+        epsilon: Option<&Rational>,
+        context: &RunContext,
+        cuts: Option<&crate::cuts::CutFamily>,
+        seed: Option<&NativeIdentityBank>,
+        provider: Option<&dyn NativeIdentityProvider>,
+    ) -> Result<Reduction> {
+        context.cancellation.check()?;
+        if (seed.is_some() || provider.is_some()) && (cuts.is_some() || !self.factorized) {
+            return Err(Error::Unsupported(
+                "supplied native identities require the uncut factorized backend".into(),
+            ));
+        }
+        if provider.is_some() && epsilon.is_some() {
+            return Err(Error::Unsupported(
+                "on-demand identities currently require symbolic epsilon".into(),
+            ));
+        }
         if let Some(cuts) = cuts {
             cuts.validate()?;
         }
+        let resolved_seed = seed
+            .map(|seed| seed.resolve(family, epsilon, context))
+            .transpose()?;
         if self.max_sector_batch == 0 {
             return Err(Error::InvalidInput(
                 "max_sector_batch must be positive".into(),
@@ -257,6 +338,7 @@ impl RustRedBackend {
             integrals: targets.len(),
         })?;
         for i in targets {
+            context.cancellation.check()?;
             family.validate_integral(i)?;
         }
         let converted = family.convert_at_epsilon(epsilon)?;
@@ -276,7 +358,15 @@ impl RustRedBackend {
                 family
             };
             return crate::native::reduce(
-                &converted, original, &dimension, &targets, self, context, cuts,
+                &converted,
+                original,
+                &dimension,
+                &targets,
+                self,
+                context,
+                cuts,
+                resolved_seed.as_ref(),
+                provider,
             );
         }
         let cut_constraint = if let Some(cuts) = cuts {
@@ -385,6 +475,7 @@ impl ReductionBackend for TableBackend {
     ) -> Result<Reduction> {
         context.cancellation.check()?;
         for t in targets {
+            context.cancellation.check()?;
             if !self.reduction.rules.contains_key(t) && !self.reduction.residuals.contains(t) {
                 return Err(Error::IncompleteReduction(format!(
                     "no table rule for {:?}",
@@ -392,6 +483,7 @@ impl ReductionBackend for TableBackend {
                 )));
             }
         }
+        check_table_storage(&self.reduction)?;
         Ok(self.reduction.clone())
     }
 }

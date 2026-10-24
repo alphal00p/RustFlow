@@ -119,10 +119,33 @@ impl EpsilonSystem {
                 // In particular, do not accept floating coefficients or
                 // fractional epsilon powers as an ordinary Taylor series.
                 let a = crate::family::encode_complex(a);
-                let _: RationalPolynomial<IntegerRing, u16> =
+                let rational: RationalPolynomial<IntegerRing, u16> =
                     a.try_to_rational_polynomial(&Q, &Z, None).map_err(|e| {
                         Error::Unsupported(format!("rational epsilon system required: {e}"))
                     })?;
+                // Polynomial conversion can promote a function or fractional
+                // power to an indeterminate. Inspect its epsilon dependence
+                // before truncation, including powers above the requested order.
+                // Exact epsilon-independent coefficient expressions stay valid.
+                if rational
+                    .numerator
+                    .variables()
+                    .iter()
+                    .enumerate()
+                    .any(|(index, variable)| match variable {
+                        PolyVariable::Function(_, expression) | PolyVariable::Power(expression) => {
+                            expression.contains_symbol(epsilon)
+                                && (rational.numerator.degree_bounds(index).1 != 0
+                                    || rational.denominator.degree_bounds(index).1 != 0)
+                        }
+                        _ => false,
+                    })
+                {
+                    return Err(Error::Unsupported(
+                        "matrix must have rational epsilon dependence; compound epsilon indeterminate"
+                            .into(),
+                    ));
+                }
                 let expansion = a
                     .series(epsilon, 0, series_depth)
                     .map_err(|e| Error::Unsupported(e.to_string()))?;
@@ -294,6 +317,34 @@ impl CompiledEpsilonSystem {
             &self.error_norm_integral_weighted(start, end, weights)?,
             self.epsilon_product_limit(),
         )
+    }
+
+    /// Estimate boundary-error amplification along an explicit piecewise-linear
+    /// path containing both its start and end. All legs use the same positive
+    /// coefficient weights. Explicit short legs can tighten otherwise valid but
+    /// loose disk bounds; this method does not select or change the path.
+    ///
+    /// Integrated norms are accumulated before applying the global exponential
+    /// or finite Dyson bound. In particular, a zero epsilon0 block retains its
+    /// global nilpotent structure instead of multiplying truncated scalar bounds
+    /// for individual legs. The MPFR and source-evidence qualifications of
+    /// [`Self::error_amplification_weighted`] remain unchanged.
+    pub fn error_amplification_weighted_path(
+        &self,
+        points: &[C],
+        weights: &[Float],
+    ) -> Result<Float> {
+        if points.len() < 2 {
+            return Err(Error::InvalidInput(
+                "error amplification path requires at least two points".into(),
+            ));
+        }
+        let p = self.rows.p;
+        let mut integral = p.real(0);
+        for leg in points.windows(2) {
+            integral += self.error_norm_integral_weighted(&leg[0], &leg[1], weights)?;
+        }
+        amplification_from_integral(p, &integral, self.epsilon_product_limit())
     }
 
     /// Every product of this many connection matrices vanishes exactly.
@@ -537,6 +588,9 @@ impl SeriesSystem for CompiledEpsilonSystem {
     }
     fn poles(&self) -> &[C] {
         self.poles()
+    }
+    fn extended_order_workspace_bytes(&self, order: usize) -> Result<u128> {
+        Ok(self.rows.taylor_workspace_bytes(order, self.count))
     }
 
     fn local_chart(

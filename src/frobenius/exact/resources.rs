@@ -86,7 +86,7 @@ pub(crate) fn preflight_operation(
         ));
     }
     process_resources::checkpoint()?;
-    let domain = ExactDomain { limits, context };
+    let domain = ExactDomain::dense(limits, context);
     let mut degree = 0_usize;
     let mut height = 0_u64;
     let mut bytes = 0_usize;

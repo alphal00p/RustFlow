@@ -56,6 +56,8 @@ pub mod kinematics;
 pub mod linear;
 pub mod local_coordinates;
 #[cfg(feature = "automatic")]
+mod massless_banana;
+#[cfg(feature = "automatic")]
 mod native;
 pub mod normalize;
 pub mod numeric;
@@ -83,6 +85,7 @@ pub mod regions;
 mod root_path;
 #[cfg(feature = "automatic")]
 mod sample_checkpoint;
+mod series_limits;
 pub mod singular_endpoint;
 mod stack_resources;
 #[cfg(feature = "automatic")]
@@ -121,5 +124,8 @@ pub use physical_targets::ProjectedLaurentExpansion;
 pub use physical_transport::RustFlow;
 pub use projections::{ProjectionFactors, SampleNormalization};
 #[cfg(feature = "automatic")]
-pub use reduction::{ReductionBackend, RustRedBackend, ScopedTableBackend, TableBackend};
+pub use reduction::{
+    NativeIdentityBank, NativeIdentityLimits, NativeIdentityProvider, ProvidedRustRedBackend,
+    ReductionBackend, RustRedBackend, ScopedTableBackend, SeededRustRedBackend, TableBackend,
+};
 pub use transport_cache::RustFlowCache;

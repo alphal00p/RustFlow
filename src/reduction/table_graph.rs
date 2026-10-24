@@ -20,9 +20,17 @@ pub(super) fn expand_many(
     reduction: &Reduction,
     targets: &[Integral],
 ) -> Result<BTreeMap<Integral, LinearCombination>> {
+    symbolica::utils::resources::checkpoint()?;
     if targets.is_empty() {
         return Ok(BTreeMap::new());
     }
+    let bytes = reduction
+        .residuals
+        .len()
+        .checked_mul(std::mem::size_of::<&Integral>())
+        .and_then(|bytes| u64::try_from(bytes).ok())
+        .ok_or_else(|| Error::Limit("reduction residual storage overflow".into()))?;
+    symbolica::utils::resources::check_allocation(bytes)?;
     let residuals = reduction.residuals.iter().collect::<BTreeSet<_>>();
     // Native final tables are already flat. A direct row has no dependency
     // graph to traverse; retain its algebraic normalization and authenticate
@@ -37,16 +45,21 @@ pub(super) fn expand_many(
         return targets
             .iter()
             .map(|target| {
+                symbolica::utils::resources::checkpoint()?;
+                check_term_storage(target, &Atom::one())?;
                 let terms = if let Some(terms) = reduction.rules.get(target) {
                     let mut result = LinearCombination::new();
                     for (child, coefficient) in terms {
+                        symbolica::utils::resources::checkpoint()?;
                         if !residuals.contains(child) {
                             return Err(Error::IncompleteReduction(format!(
                                 "uncovered integral {:?}",
                                 child.0
                             )));
                         }
+                        check_term_storage(child, coefficient)?;
                         let coefficient = coefficient.together().cancel();
+                        symbolica::utils::resources::checkpoint()?;
                         if !coefficient.is_zero() {
                             result.insert(child.clone(), coefficient);
                         }
@@ -64,28 +77,140 @@ pub(super) fn expand_many(
             })
             .collect();
     }
+    let Plan {
+        graph,
+        nodes,
+        roots,
+        order,
+        mut uses,
+    } = plan(reduction, targets)?;
+    let mut expanded = BTreeMap::<NodeIndex, LinearCombination>::new();
+    for &node in &order {
+        symbolica::utils::resources::checkpoint()?;
+        let mut value = LinearCombination::new();
+        if let Some(terms) = reduction.rules.get(graph[node]) {
+            for (child, coefficient) in terms {
+                symbolica::utils::resources::checkpoint()?;
+                let child_node = nodes[child];
+                let child_value = expanded.get(&child_node).ok_or_else(|| {
+                    Error::IncompleteReduction("native reduction graph lost a dependency".into())
+                })?;
+                for (terminal, weight) in child_value {
+                    symbolica::utils::resources::checkpoint()?;
+                    check_term_storage(terminal, weight)?;
+                    let old = value.remove(terminal).unwrap_or_default();
+                    value.insert(
+                        terminal.clone(),
+                        (old + coefficient * weight).together().cancel(),
+                    );
+                    symbolica::utils::resources::checkpoint()?;
+                }
+                uses[child_node.0] -= 1;
+                if uses[child_node.0] == 0 {
+                    expanded.remove(&child_node);
+                }
+            }
+            value.retain(|_, coefficient| !coefficient.is_zero());
+        } else {
+            check_term_storage(graph[node], &Atom::one())?;
+            value.insert(graph[node].clone(), Atom::one());
+        }
+        expanded.insert(node, value);
+    }
+    roots
+        .into_iter()
+        .map(|root| {
+            symbolica::utils::resources::checkpoint()?;
+            expanded
+                .remove(&root)
+                .map(|value| (graph[root].clone(), value))
+                .ok_or_else(|| {
+                    Error::IncompleteReduction(
+                        "native reduction graph lost a requested root".into(),
+                    )
+                })
+        })
+        .collect()
+}
+
+fn check_term_storage(integral: &Integral, coefficient: &Atom) -> Result<()> {
+    let bytes = integral
+        .0
+        .len()
+        .checked_mul(std::mem::size_of::<i16>())
+        .and_then(|bytes| bytes.checked_add(std::mem::size_of::<(Integral, Atom)>()))
+        .and_then(|bytes| bytes.checked_add(coefficient.as_view().get_byte_size()))
+        .and_then(|bytes| u64::try_from(bytes).ok())
+        .ok_or_else(|| Error::Limit("reduction term storage overflow".into()))?;
+    symbolica::utils::resources::check_allocation(bytes)?;
+    Ok(())
+}
+
+/// The existing sparse native dependency plan, separated from coefficient
+/// arithmetic so table admission need not expand every declared root.
+struct Plan<'a> {
+    graph: Graph<'a>,
+    nodes: BTreeMap<&'a Integral, NodeIndex>,
+    roots: BTreeSet<NodeIndex>,
+    order: Vec<NodeIndex>,
+    uses: Vec<usize>,
+}
+
+pub(super) fn validate(reduction: &Reduction, targets: &[Integral]) -> Result<()> {
+    symbolica::utils::resources::checkpoint()?;
+    if targets.is_empty() {
+        return Ok(());
+    }
+    let _ = plan(reduction, targets)?;
+    Ok(())
+}
+
+fn plan<'a>(reduction: &'a Reduction, targets: &'a [Integral]) -> Result<Plan<'a>> {
+    super::check_table_storage(reduction)?;
+    let residuals = reduction.residuals.iter().collect::<BTreeSet<_>>();
     let keys = reduction
         .rules
         .iter()
         .flat_map(|(key, terms)| std::iter::once(key).chain(terms.keys()))
         .chain(targets)
         .collect::<BTreeSet<_>>();
+    let edges = reduction
+        .rules
+        .values()
+        .try_fold(0usize, |count, terms| count.checked_add(terms.len()));
+    // Preflight the native graph's node/edge payload and traversal arrays.
+    // Checked host-size arithmetic is a representation condition, not a work cap.
+    let bytes = edges
+        .and_then(|edges| edges.checked_mul(2 * std::mem::size_of::<usize>()))
+        .and_then(|edge_bytes| {
+            keys.len()
+                .checked_mul(4 * std::mem::size_of::<usize>() + std::mem::size_of::<bool>())
+                .and_then(|node_bytes| edge_bytes.checked_add(node_bytes))
+        })
+        .and_then(|bytes| u64::try_from(bytes).ok())
+        .ok_or_else(|| Error::Limit("reduction dependency storage overflow".into()))?;
+    symbolica::utils::resources::check_allocation(bytes)?;
     let mut builder = HedgeGraphBuilder::<(), &Integral>::new();
     let nodes = keys
         .into_iter()
         .map(|key| (key, builder.add_node(key)))
         .collect::<BTreeMap<_, _>>();
     for (key, terms) in &reduction.rules {
+        symbolica::utils::resources::checkpoint()?;
         for child in terms.keys() {
+            symbolica::utils::resources::checkpoint()?;
             builder.add_edge(nodes[key], nodes[child], (), true);
         }
     }
     // The default bitset-per-node store is quadratic in large dependency DAGs;
     // the owner's sparse forest store keeps incidence proportional to edges.
     let graph: Graph<'_> = builder.build();
+    symbolica::utils::resources::checkpoint()?;
     let components = graph.strongly_connected_components(DirectionBasis::Underlying);
+    symbolica::utils::resources::checkpoint()?;
     let mut component_of = vec![usize::MAX; nodes.len()];
     for (index, component) in components.iter().enumerate() {
+        symbolica::utils::resources::checkpoint()?;
         for &node in component {
             component_of[node.0] = index;
         }
@@ -102,6 +227,7 @@ pub(super) fn expand_many(
     // membership without a second bespoke recursive traversal. Unrelated cyclic
     // components are ignored, as they were by the root-based table expander.
     for (index, component) in components.iter().enumerate().rev() {
+        symbolica::utils::resources::checkpoint()?;
         if !reached[index] {
             continue;
         }
@@ -113,6 +239,7 @@ pub(super) fn expand_many(
             .iter_crown(node)
             .filter(|&h| graph.flow(h) == Flow::Source)
         {
+            symbolica::utils::resources::checkpoint()?;
             let child = graph.node_id(graph.inv(hedge));
             if child == node {
                 return Err(Error::IncompleteReduction("cyclic reduction table".into()));
@@ -133,6 +260,7 @@ pub(super) fn expand_many(
     // Check every reachable leaf before arithmetic, including branches whose
     // incoming coefficient is zero or may cancel against another branch.
     for &node in &order {
+        symbolica::utils::resources::checkpoint()?;
         if !reduction.rules.contains_key(graph[node]) && !residuals.contains(graph[node]) {
             return Err(Error::IncompleteReduction(format!(
                 "uncovered integral {:?}",
@@ -143,50 +271,18 @@ pub(super) fn expand_many(
             .iter_crown(node)
             .filter(|&h| graph.flow(h) == Flow::Source)
         {
+            symbolica::utils::resources::checkpoint()?;
             let child = graph.node_id(graph.inv(hedge));
             uses[child.0] = uses[child.0]
                 .checked_add(1)
                 .ok_or_else(|| Error::Limit("reduction dependency use count overflow".into()))?;
         }
     }
-    let mut expanded = BTreeMap::<NodeIndex, LinearCombination>::new();
-    for &node in &order {
-        let mut value = LinearCombination::new();
-        if let Some(terms) = reduction.rules.get(graph[node]) {
-            for (child, coefficient) in terms {
-                let child_node = nodes[child];
-                let child_value = expanded.get(&child_node).ok_or_else(|| {
-                    Error::IncompleteReduction("native reduction graph lost a dependency".into())
-                })?;
-                for (terminal, weight) in child_value {
-                    let old = value.remove(terminal).unwrap_or_default();
-                    value.insert(
-                        terminal.clone(),
-                        (old + coefficient * weight).together().cancel(),
-                    );
-                }
-                uses[child_node.0] -= 1;
-                if uses[child_node.0] == 0 {
-                    expanded.remove(&child_node);
-                }
-            }
-            value.retain(|_, coefficient| !coefficient.is_zero());
-        } else {
-            value.insert(graph[node].clone(), Atom::one());
-        }
-        expanded.insert(node, value);
-    }
-    roots
-        .into_iter()
-        .map(|root| {
-            expanded
-                .remove(&root)
-                .map(|value| (graph[root].clone(), value))
-                .ok_or_else(|| {
-                    Error::IncompleteReduction(
-                        "native reduction graph lost a requested root".into(),
-                    )
-                })
-        })
-        .collect()
+    Ok(Plan {
+        graph,
+        nodes,
+        roots,
+        order,
+        uses,
+    })
 }

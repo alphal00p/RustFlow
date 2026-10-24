@@ -65,6 +65,17 @@ criterion below unit magnitude and a relative criterion above it; it does not
 claim `d` significant digits for every small nonzero coefficient. Returned
 component error estimates allow applications to impose relative tolerances on
 projected form factors or amplitudes after their exact normalization.
+
+Low-level epsilon-system callers can use
+`CompiledEpsilonSystem::error_amplification_weighted_path` with explicit path
+points and one fixed weight vector. Short legs can tighten valid but loose
+disk estimates on a long segment; for positive endpoints spanning many scales,
+caller-selected geometric nodes can be useful. Construct nodes at the working
+precision, preserve the intended path and keep all epsilon modes. The helper
+sums integrated norms and applies the global bound once, retaining the finite
+Dyson optimization when the epsilon-zero block vanishes exactly. It does not
+choose nodes or strengthen the source's known accuracy. The original
+`error_amplification_weighted` method remains the single-segment interface.
 The weights retain separate physical-component and epsilon-order scales: a large
 higher-order coefficient cannot inject its absolute uncertainty into an uncoupled
 lower-order coefficient.
@@ -148,3 +159,31 @@ and transporting masters: cancellations or large reduction coefficients can
 otherwise exhaust the target accuracy. An `Accuracy` error asks for more accurate
 master data. The native bubble regression transports at 28 digits and projects
 the scalar and squared-propagator targets at 20 digits.
+
+### Verified state compression for finite-point transport
+
+`DifferentialSystem::compress_states(Q, selected, conditions, context)` accepts an
+exact rectangular embedding `old_y = Q * selected_y`. It checks `Q[selected]=I`
+and the full differential identity, then derives the reduced connection from
+selected rows of `A_old * Q`. Symbolica owns the exact matrix arithmetic. The
+method does not discover an integral basis or validate an IBP reduction's origin.
+
+The resulting opaque `StateCompression` compiles through the existing rational
+ODE machinery. All declared nonzero conditions and original/map denominators
+remain excluded even if they cancel in the reduced matrix. Supply assumptions
+that were discarded before constructing the input Atoms explicitly.
+
+Use `project_boundary` to select a full ordinary-point boundary after a numerical
+subspace-consistency check, transport through `reduced_system()`, then call
+`reconstruct` at the regular finite matching point. Reconstruction returns every
+old component for the original singular-endpoint matching. It does not evaluate
+singular limits or prove boundary/transport accuracy; independent numerical
+refinement is still required. A map may introduce an excluded point even when
+the original differential system is regular there.
+
+The projection check uses the existing component-wise bound
+`norm(full[i]-restored[i]) <= 10^-checked_digits * max(1,norm(full[i]))`.
+It does not claim significant digits for small nonzero components or exact-zero
+evidence. Callers can reconstruct the selected initial state to record residuals;
+physical qualification still needs proper relative comparisons and source-proved
+zeros.

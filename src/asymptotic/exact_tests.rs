@@ -75,6 +75,131 @@ fn exact_log_constraint_preserves_free_amplitude_and_rejects_any_nonzero_log() {
 }
 
 #[test]
+fn redundant_analytic_origin_selectors_preserve_the_exact_affine_space() {
+    let limits = ExactFrobeniusLimits::default();
+    let context = RunContext::default();
+    let basis = prepared(&[
+        &["0", "1/z", "0", "0", "0", "0", "0"],
+        &[
+            "-(z+3)/((z+1)*(z+9))",
+            "-2*(z+5)/((z+1)*(z+9))",
+            "0",
+            "0",
+            "0",
+            "0",
+            "6/((z+1)*(z+9))",
+        ],
+        &["0", "0", "-(z+2)/(z*(z+4))", "0", "0", "0", "2/(z*(z+4))"],
+        &["2/(z*(z+4))", "0", "0", "-(z+2)/(z*(z+4))", "1/z", "0", "0"],
+        &[
+            "0",
+            "2/(z*(z+4))",
+            "6/((z+1)*(z+9))",
+            "-(z+3)/((z+1)*(z+9))",
+            "-(z+2)/(z*(z+4))-2*(z+5)/((z+1)*(z+9))",
+            "0",
+            "0",
+        ],
+        &["0", "0", "0", "1/(1+z)", "0", "0", "0"],
+        &["0", "0", "0", "0", "0", "0", "0"],
+    ])
+    .exact_coefficients(2, &limits, &context)
+    .unwrap();
+    let mut relations = Vec::new();
+    for component in 0..7 {
+        for log in 0..7 {
+            relations.push(coefficient(component, "-1/2", log, "0"));
+        }
+        for log in 1..7 {
+            relations.push(coefficient(component, "0", log, "0"));
+        }
+    }
+    for (component, value) in [(1, "0"), (2, "1"), (4, "0"), (5, "0"), (6, "1")] {
+        relations.push(coefficient(component, "0", 0, value));
+    }
+    relations.push(ExactAsymptoticRelation {
+        terms: vec![
+            (selector(3, "0", 0), atom("1")),
+            (selector(0, "0", 0), atom("-1")),
+        ],
+        value: Atom::new(),
+    });
+    assert_eq!(relations.len(), 97);
+    let constraints = constraints(relations);
+    let space = basis.constrain(&constraints, &limits, &context).unwrap();
+    assert_eq!(space.free_amplitudes(), 1);
+    let (offset, directions) = basis.finite_projection(&space, 7, &context).unwrap();
+    for component in [1, 4, 5] {
+        assert!(offset[component].is_zero());
+    }
+    for component in [2, 6] {
+        assert_eq!(offset[component], one());
+    }
+    assert_eq!(offset[0], offset[3]);
+    assert_eq!(directions[0], directions[3]);
+    assert!(!directions[0][0].is_zero());
+    for component in [1, 2, 4, 5, 6] {
+        assert!(directions[component].iter().all(Gaussian::is_zero));
+    }
+    // Compaction does not waive the allocation bound on the original input.
+    let too_small = ExactFrobeniusLimits {
+        max_scalar_cells: constraints.relations.len() * 8 - 1,
+        ..limits
+    };
+    assert!(matches!(
+        basis.constrain(&constraints, &too_small, &context),
+        Err(Error::Limit(_))
+    ));
+}
+
+#[test]
+fn exact_duplicate_rows_do_not_hide_inconsistent_right_hand_sides() {
+    let limits = ExactFrobeniusLimits::default();
+    let context = RunContext::default();
+    let basis = prepared(&[&["0", "1/z"], &["0", "0"]])
+        .exact_coefficients(2, &limits, &context)
+        .unwrap();
+    for contradiction in [
+        coefficient(0, "0", 1, "1/10^300"),
+        coefficient(1, "0", 1, "1/10^300"),
+    ] {
+        let mut relations = vec![coefficient(0, "0", 1, "0"); 97];
+        relations.push(contradiction);
+        assert!(matches!(
+            basis.constrain(&constraints(relations), &limits, &context),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+}
+
+#[test]
+fn tautological_rows_leave_all_amplitudes_free_but_distinct_rows_keep_the_guard() {
+    let limits = ExactFrobeniusLimits::default();
+    let context = RunContext::default();
+    let basis = prepared(&[&["0", "1/z"], &["0", "0"]])
+        .exact_coefficients(2, &limits, &context)
+        .unwrap();
+    let space = basis
+        .constrain(
+            &constraints(vec![coefficient(1, "0", 1, "0"); 97]),
+            &limits,
+            &context,
+        )
+        .unwrap();
+    assert_eq!(space.free_amplitudes(), 2);
+    let distinct = (1..=97)
+        .map(|weight| ExactAsymptoticRelation {
+            terms: vec![(selector(0, "0", 1), Atom::num(weight))],
+            value: Atom::new(),
+        })
+        .collect();
+    assert!(matches!(
+        basis.constrain(&constraints(distinct), &limits, &context),
+        Err(Error::Limit(_))
+    ));
+}
+
+#[test]
 fn correlated_negative_power_identity_cancels_only_the_asserted_subspace() {
     let limits = ExactFrobeniusLimits::default();
     let context = RunContext::default();

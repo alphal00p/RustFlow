@@ -1,5 +1,69 @@
 use super::*;
 
+#[test]
+fn explicit_cell_caps_preserve_requested_admission_without_default_ceilings() {
+    let defaults = ExactFrobeniusLimits::default();
+    assert_eq!(
+        (
+            defaults.max_dimension,
+            defaults.max_order,
+            defaults.max_coefficient_bits,
+            defaults.max_scalar_cells,
+        ),
+        (None, None, None, None)
+    );
+    for (cells, accepted) in [
+        (0, false),
+        (16_000_000, true),
+        (16_000_001, true),
+        (32_000_000, true),
+        (32_000_001, true),
+    ] {
+        let limits = ExactFrobeniusLimits {
+            max_dimension: Some(128),
+            max_coefficient_bits: Some(1_048_576),
+            max_scalar_cells: Some(cells),
+            ..Default::default()
+        };
+        assert_eq!(limits.validate().is_ok(), accepted);
+    }
+    let context = RunContext::default();
+    let old = ExactFrobeniusLimits {
+        max_dimension: Some(128),
+        max_coefficient_bits: Some(1_048_576),
+        max_scalar_cells: Some(16_000_000),
+        ..Default::default()
+    };
+    let larger = ExactFrobeniusLimits {
+        max_scalar_cells: Some(32_000_000),
+        ..old.clone()
+    };
+    // PR15: requested order7 plus the independently proved gauge span5.
+    assert_eq!(127usize * 127 * 128 * (7 + 5 + 1), 26_838_656);
+    let old_domain = ExactDomain {
+        limits: &old,
+        context: &context,
+        elimination_mode: ExactEliminationMode::ObservedSparse,
+    };
+    let domain = ExactDomain {
+        limits: &larger,
+        context: &context,
+        elimination_mode: ExactEliminationMode::ObservedSparse,
+    };
+    assert!(matches!(
+        old_domain.preflight(127, 12),
+        Err(Error::Limit(_))
+    ));
+    assert!(domain.preflight(127, 12).is_ok());
+    assert!(matches!(domain.preflight(127, 15), Err(Error::Limit(_))));
+    assert!(matches!(domain.preflight(129, 1), Err(Error::Limit(_))));
+    let excess_bits = ExactFrobeniusLimits {
+        max_coefficient_bits: Some(1_048_577),
+        ..larger
+    };
+    assert!(excess_bits.validate().is_ok());
+}
+
 fn series(expression: &str) -> impl Iterator<Item = (Rational, Atom)> {
     let z = symbol!("exact_root_series_grid::z");
     Atom::parse(expression, "exact_root_series_grid", Default::default())
@@ -28,6 +92,7 @@ fn native_nonconstant_unit_root_grid_ignores_only_exact_zero_fractional_slots() 
         &ExactDomain {
             limits: &limits,
             context: &context,
+            elimination_mode: ExactEliminationMode::ConservativeDense,
         },
     )
     .unwrap();
@@ -58,7 +123,8 @@ fn nonzero_fractional_power_is_not_discarded_as_a_ramification_slot() {
             4,
             &ExactDomain {
                 limits: &limits,
-                context: &context
+                context: &context,
+                elimination_mode: ExactEliminationMode::ConservativeDense
             }
         ),
         Err(Error::Unsupported(_))
