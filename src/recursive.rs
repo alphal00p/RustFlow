@@ -59,7 +59,10 @@ impl<'a> RecursiveBoundary<'a> {
     }
     fn numerical_options(&self, p: Precision) -> FlowOptions {
         let mut options = self.options.clone();
-        let working_digits = ((u64::from(p.bits.saturating_sub(16)) * 1000) / 3322) as u32;
+        // Extra arithmetic digits are not an accuracy target: children keep
+        // the parent's targets and receive the same extra digits themselves.
+        let working_digits = (((u64::from(p.bits.saturating_sub(16)) * 1000) / 3322) as u32)
+            .saturating_sub(options.arithmetic_guard_digits);
         let extra = working_digits.saturating_sub(options.digits + options.guard_digits);
         options.guard_digits = options
             .guard_digits
