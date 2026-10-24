@@ -234,6 +234,7 @@ impl PreparedFlow {
         let digits = options
             .digits
             .checked_add(options.guard_digits)
+            .and_then(|v| v.checked_add(options.arithmetic_guard_digits))
             .ok_or_else(|| Error::InvalidInput("precision overflow".into()))?;
         let p = Precision::decimal(digits)?;
         let parameters =

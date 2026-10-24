@@ -194,6 +194,14 @@ impl Default for PadeOptions {
 pub struct FlowOptions {
     pub digits: u32,
     pub guard_digits: u32,
+    /// Extra decimal digits of arithmetic precision for PreparedFlow::evaluate
+    /// that do NOT raise any accuracy target (transport truncation and local
+    /// error budgets stay derived from digits + guard_digits). Use it when the
+    /// exact-source defect check reports InsufficientPrecision because the
+    /// system amplifies rounding by more than the fixed gap between the
+    /// working precision and the local budget. Recursive boundaries keep the
+    /// same accuracy targets and the same extra digits at every level.
+    pub arithmetic_guard_digits: u32,
     pub series_order: usize,
     pub pade: Option<PadeOptions>,
     pub residual_arithmetic: ResidualArithmetic,
@@ -231,6 +239,7 @@ impl Default for FlowOptions {
         Self {
             digits: 20,
             guard_digits: 40,
+            arithmetic_guard_digits: 0,
             series_order: 80,
             pade: None,
             residual_arithmetic: ResidualArithmetic::Ball,
@@ -299,7 +308,12 @@ impl FlowOptions {
                 "positive digits, workers, limits and series_order >= 8 required".into(),
             ));
         }
-        if self.digits.checked_add(self.guard_digits).is_none() {
+        if self
+            .digits
+            .checked_add(self.guard_digits)
+            .and_then(|v| v.checked_add(self.arithmetic_guard_digits))
+            .is_none()
+        {
             return Err(Error::InvalidInput("working precision overflow".into()));
         }
         if self.series_order > crate::series_limits::MAX_ORDER
