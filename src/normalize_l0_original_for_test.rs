@@ -7,7 +7,7 @@ fn original_projector_l0(
     let n = subleading.len();
     let m = chains.len();
     let lengths = chains.iter().map(Vec::len).collect::<Vec<_>>();
-    let l0 = (0..m)
+    (0..m)
         .map(|i| {
             (0..m)
                 .map(|j| {
@@ -23,6 +23,5 @@ fn original_projector_l0(
                 })
                 .collect()
         })
-        .collect::<Vec<Vec<_>>>();
-    l0
+        .collect::<Vec<Vec<_>>>()
 }

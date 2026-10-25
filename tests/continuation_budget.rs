@@ -19,7 +19,7 @@ fn attempt(digits: u32, guard_digits: u32, max_steps: usize) -> Result<()> {
             digits,
             guard_digits,
             series_order: 8,
-            max_steps,
+            max_steps: Some(max_steps),
             ..Default::default()
         },
         &RunContext::default(),
@@ -36,9 +36,9 @@ fn rejected_step_exhaustion_is_a_limit_not_an_accuracy_failure() {
 }
 
 #[test]
-fn unresolved_tail_with_available_budget_remains_an_accuracy_failure() {
+fn unresolved_tail_respects_the_explicit_diagnostic_budget() {
     match attempt(300, 50, 1000) {
-        Err(Error::Accuracy(message)) => assert!(message.contains("32 local rejections")),
-        other => panic!("expected a truncation accuracy failure, got {other:?}"),
+        Err(Error::Limit(_)) => {}
+        other => panic!("expected the explicit continuation diagnostic limit, got {other:?}"),
     }
 }

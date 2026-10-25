@@ -4,6 +4,7 @@ use crate::cuts::{CutDefinition, CutFamily, LoopPrescription};
 use crate::regions::LoopRegion;
 use crate::*;
 use symbolica::prelude::*;
+use symbolica::utils::resources;
 
 /// Keep the native branch enumeration, then choose an equivalent basis for
 /// each admitted hard space which fixes every original real loop coordinate.
@@ -19,7 +20,8 @@ pub(crate) fn enumerate(family: &CutFamily, context: &RunContext) -> Result<Vec<
         .filter_map(|(i, p)| (*p == LoopPrescription::PlusI0).then_some(i))
         .collect::<Vec<_>>();
     let mut out = Vec::new();
-    for region in regions::enumerate_regions(ordinary, 10000)? {
+    for region in regions::enumerate_regions(ordinary, None)? {
+        resources::checkpoint()?;
         context.cancellation.check()?;
         let hard_columns = (0..count).filter(|&i| region.hard[i]).collect::<Vec<_>>();
         let mut admitted = true;

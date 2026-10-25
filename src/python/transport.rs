@@ -84,7 +84,7 @@ impl PyKinematicTransport {
     /// contour and admit_matching_path admits its declared global homotopy.
     /// Recorded input errors and independent precision/order profiles determine
     /// reusable evidence; this is not symbolic dimensional-sector projection.
-    #[pyo3(signature=(cache, route, leading, last, *, admit_matching_path=false, admit_endpoint=false, scales=None, max_lift_dimension=256, series_order=64, constraints=None, control=None))]
+    #[pyo3(signature=(cache, route, leading, last, *, admit_matching_path=false, admit_endpoint=false, scales=None, max_lift_dimension=None, series_order=64, constraints=None, control=None))]
     #[allow(clippy::too_many_arguments)]
     fn evaluate_endpoint(
         &self,
@@ -96,7 +96,7 @@ impl PyKinematicTransport {
         admit_matching_path: bool,
         admit_endpoint: bool,
         scales: Option<Expressions>,
-        max_lift_dimension: usize,
+        max_lift_dimension: Option<usize>,
         series_order: usize,
         constraints: Option<&PyEndpointConstraints>,
         control: Option<&PyComputationControl>,

@@ -12,6 +12,15 @@ fn one() -> Gaussian {
     Gaussian::new(Rational::one(), Rational::zero())
 }
 
+fn selector_rows<T>(first: Result<T>, second: Result<T>) -> Result<Option<(T, T)>> {
+    match (first, second) {
+        (Err(error), _) if !matches!(&error, Error::Accuracy(_)) => Err(error),
+        (_, Err(error)) if !matches!(&error, Error::Accuracy(_)) => Err(error),
+        (Ok(first), Ok(second)) => Ok(Some((first, second))),
+        _ => Ok(None),
+    }
+}
+
 impl PreparedAlgebraicFrobenius {
     /// After the last positive integral indicial difference all future
     /// recurrence matrices are invertible. Prefix rank then certifies that
@@ -103,16 +112,24 @@ impl PreparedAlgebraicFrobenius {
                     ));
                 }
             }
-            if equations
+            let width = n
+                .checked_add(1)
+                .ok_or_else(|| Error::Limit("sheet equation width overflow".into()))?;
+            let cells = equations
                 .len()
                 .checked_add(n)
-                .and_then(|rows| rows.checked_mul(n + 1))
-                .is_none_or(|cells| cells > limits.max_scalar_cells)
-            {
+                .and_then(|rows| rows.checked_mul(width))
+                .ok_or_else(|| Error::Limit("sheet equation allocation overflow".into()))?;
+            if limits.max_scalar_cells.is_some_and(|limit| cells > limit) {
                 return Err(Error::Limit(
                     "sheet equation allocation exceeds limit".into(),
                 ));
             }
+            let bytes = cells
+                .checked_mul(std::mem::size_of::<Gaussian>())
+                .and_then(|bytes| u64::try_from(bytes).ok())
+                .ok_or_else(|| Error::Limit("sheet equation storage overflow".into()))?;
+            symbolica::utils::resources::check_allocation(bytes)?;
             for (i, source) in action.iter().enumerate() {
                 let mut row = source.clone();
                 row[i] = &row[i] - &one();
@@ -132,14 +149,22 @@ impl PreparedAlgebraicFrobenius {
     ) -> Result<()> {
         let lift = &self.lifted;
         let n = lift.rational.matrix.len();
-        if n.checked_mul(n)
+        n.checked_mul(n)
             .and_then(|v| v.checked_mul(n))
-            .is_none_or(|v| v > limits.max_scalar_cells.saturating_mul(16))
-        {
+            .ok_or_else(|| Error::Limit("root covariance matrix work overflow".into()))?;
+        let cells = n
+            .checked_mul(n)
+            .ok_or_else(|| Error::Limit("root covariance matrix allocation overflow".into()))?;
+        if limits.max_scalar_cells.is_some_and(|limit| cells > limit) {
             return Err(Error::Limit(
-                "root covariance matrix work exceeds limit".into(),
+                "root covariance matrix allocation exceeds limit".into(),
             ));
         }
+        let bytes = cells
+            .checked_mul(std::mem::size_of::<Atom>())
+            .and_then(|bytes| u64::try_from(bytes).ok())
+            .ok_or_else(|| Error::Limit("root covariance matrix storage overflow".into()))?;
+        symbolica::utils::resources::check_allocation(bytes)?;
         let z = lift.rational.variable;
         let stride = lift.size * lift.count;
         let mut multiplication = vec![vec![Atom::new(); n]; n];
@@ -264,16 +289,27 @@ impl PreparedAlgebraicFrobenius {
                 .map(Vec::len)
                 .max()
                 .unwrap_or(1);
-            if n.checked_mul(n)
+            let orders = order
+                .checked_add(1)
+                .ok_or_else(|| Error::Limit("root action order overflow".into()))?;
+            let cells = n
+                .checked_mul(n)
                 .and_then(|v| v.checked_mul(logs))
-                .and_then(|v| v.checked_mul(order + 1))
-                .is_none_or(|v| v > limits.max_scalar_cells)
-            {
+                .and_then(|v| v.checked_mul(orders))
+                .ok_or_else(|| {
+                    Error::Limit("root action coefficient allocation overflow".into())
+                })?;
+            if limits.max_scalar_cells.is_some_and(|limit| cells > limit) {
                 return Err(Error::Limit(
                     "root action coefficient allocation exceeds limit".into(),
                 ));
             }
-            let mut values = vec![vec![vec![zero(); n]; logs]; order + 1];
+            let bytes = cells
+                .checked_mul(std::mem::size_of::<Gaussian>())
+                .and_then(|bytes| u64::try_from(bytes).ok())
+                .ok_or_else(|| Error::Limit("root action coefficient storage overflow".into()))?;
+            symbolica::utils::resources::check_allocation(bytes)?;
+            let mut values = vec![vec![vec![zero(); n]; logs]; orders];
             for (block, &monomial) in lift.monomials.iter().enumerate() {
                 let target = lift
                     .monomials
@@ -341,31 +377,45 @@ fn recover_action(
             for (log, values) in logs.iter().enumerate() {
                 for (i, value) in values.iter().enumerate() {
                     if !value.is_zero() {
-                        if selectors
+                        let cells = selectors
                             .len()
                             .checked_add(1)
                             .and_then(|rows: usize| rows.checked_mul(n))
-                            .is_none_or(|cells| cells > limits.max_scalar_cells)
-                        {
+                            .ok_or_else(|| {
+                                Error::Limit("common sheet selector allocation overflow".into())
+                            })?;
+                        if limits.max_scalar_cells.is_some_and(|limit| cells > limit) {
                             return Err(Error::Limit(
                                 "common sheet selector allocation exceeds limit".into(),
                             ));
                         }
+                        let bytes = cells
+                            .checked_mul(std::mem::size_of::<Gaussian>())
+                            .and_then(|bytes| u64::try_from(bytes).ok())
+                            .ok_or_else(|| {
+                                Error::Limit("common sheet selector storage overflow".into())
+                            })?;
+                        symbolica::utils::resources::check_allocation(bytes)?;
                         selectors.insert((&exponent + &Rational::from(k), log, i));
                     }
                 }
             }
         }
     }
-    if selectors
+    let cells = selectors
         .len()
         .checked_mul(n)
-        .is_none_or(|v| v > limits.max_scalar_cells)
-    {
+        .ok_or_else(|| Error::Limit("common sheet selector allocation overflow".into()))?;
+    if limits.max_scalar_cells.is_some_and(|limit| cells > limit) {
         return Err(Error::Limit(
             "common sheet selector allocation exceeds limit".into(),
         ));
     }
+    let bytes = cells
+        .checked_mul(std::mem::size_of::<Gaussian>())
+        .and_then(|bytes| u64::try_from(bytes).ok())
+        .ok_or_else(|| Error::Limit("common sheet selector storage overflow".into()))?;
+    symbolica::utils::resources::check_allocation(bytes)?;
     let mut rows = Vec::new();
     let mut images = Vec::new();
     for (power, log_power, component) in selectors {
@@ -375,13 +425,12 @@ fn recover_action(
             power: Atom::num(power),
             log_power,
         };
-        let (row, image_row) = match (
+        let Some((row, image_row)) = selector_rows(
             basis.coefficient_row(&selector),
             image.coefficient_row(&selector),
-        ) {
-            (Ok(a), Ok(b)) => (a, b),
-            (Err(Error::Accuracy(_)), _) | (_, Err(Error::Accuracy(_))) => continue,
-            (Err(e), _) | (_, Err(e)) => return Err(e),
+        )?
+        else {
+            continue;
         };
         rows.push(row);
         if exact::rank(&rows, limits, context)? < rows.len() {
@@ -400,4 +449,47 @@ fn recover_action(
         }
     }
     Ok(None)
+}
+
+#[cfg(test)]
+mod resource_tests {
+    use super::*;
+
+    #[test]
+    fn an_uncertified_selector_never_hides_another_rows_resource_or_structural_error() {
+        let resource = crate::ResourceLimitError::Memory {
+            rss_bytes: 2,
+            additional_bytes: 0,
+            limit_bytes: 1,
+        };
+        for resource_first in [false, true] {
+            let uncertain = Err::<(), _>(Error::Accuracy("uncertified selector".into()));
+            let exhausted = Err(Error::Resource(resource.clone()));
+            let result = if resource_first {
+                selector_rows(exhausted, uncertain)
+            } else {
+                selector_rows(uncertain, exhausted)
+            };
+            assert!(matches!(result, Err(Error::Resource(error)) if error == resource));
+        }
+        assert!(matches!(
+            selector_rows::<()>(
+                Err(Error::Accuracy("uncertified selector".into())),
+                Err(Error::Cancelled)
+            ),
+            Err(Error::Cancelled)
+        ));
+        assert!(matches!(
+            selector_rows::<()>(
+                Err(Error::Accuracy("uncertified selector".into())),
+                Err(Error::InvalidInput("invalid formal row".into()))
+            ),
+            Err(Error::InvalidInput(_))
+        ));
+        assert!(
+            selector_rows::<()>(Err(Error::Accuracy("uncertified selector".into())), Ok(()))
+                .unwrap()
+                .is_none()
+        );
+    }
 }

@@ -117,16 +117,16 @@ pub struct PyEndpointConstraints {
 #[pymethods]
 impl PyEndpointConstraints {
     #[new]
-    #[pyo3(signature=(relations, provenance, *, max_dimension=64, max_order=256, max_coefficient_bits=65536, max_scalar_cells=4000000))]
+    #[pyo3(signature=(relations, provenance, *, max_dimension=None, max_order=None, max_coefficient_bits=None, max_scalar_cells=None))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         py: Python<'_>,
         relations: Vec<PyAsymptoticRelation>,
         provenance: &str,
-        max_dimension: usize,
-        max_order: usize,
-        max_coefficient_bits: u64,
-        max_scalar_cells: usize,
+        max_dimension: Option<usize>,
+        max_order: Option<usize>,
+        max_coefficient_bits: Option<u64>,
+        max_scalar_cells: Option<usize>,
     ) -> PyResult<Self> {
         let constraints = EndpointConstraints {
             asymptotic: ExactAsymptoticConstraints {
@@ -177,19 +177,19 @@ impl PyEndpointConstraints {
         &self.constraints.asymptotic.provenance
     }
     #[getter]
-    fn max_dimension(&self) -> usize {
+    fn max_dimension(&self) -> Option<usize> {
         self.constraints.limits.max_dimension
     }
     #[getter]
-    fn max_order(&self) -> usize {
+    fn max_order(&self) -> Option<usize> {
         self.constraints.limits.max_order
     }
     #[getter]
-    fn max_coefficient_bits(&self) -> u64 {
+    fn max_coefficient_bits(&self) -> Option<u64> {
         self.constraints.limits.max_coefficient_bits
     }
     #[getter]
-    fn max_scalar_cells(&self) -> usize {
+    fn max_scalar_cells(&self) -> Option<usize> {
         self.constraints.limits.max_scalar_cells
     }
 }

@@ -152,7 +152,7 @@ fn budget_and_exhausted_accuracy_leave_the_original_bank_unchanged() -> Result<(
     let mut bank = bank(&flow, 60)?;
     let old = bank.clone();
     let limited = FlowOptions {
-        max_boundary_attempts: 1,
+        max_boundary_attempts: Some(1),
         ..options()
     };
     assert!(
@@ -166,7 +166,7 @@ fn budget_and_exhausted_accuracy_leave_the_original_bank_unchanged() -> Result<(
     );
     assert_unchanged(&weak, &old)?;
     let invalid = FlowOptions {
-        max_boundary_attempts: 0,
+        max_boundary_attempts: Some(0),
         ..options()
     };
     assert!(matches!(invalid.validate(), Err(Error::InvalidInput(_))));

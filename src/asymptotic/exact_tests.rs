@@ -143,7 +143,7 @@ fn redundant_analytic_origin_selectors_preserve_the_exact_affine_space() {
     }
     // Compaction does not waive the allocation bound on the original input.
     let too_small = ExactFrobeniusLimits {
-        max_scalar_cells: constraints.relations.len() * 8 - 1,
+        max_scalar_cells: Some(constraints.relations.len() * 8 - 1),
         ..limits
     };
     assert!(matches!(
@@ -174,7 +174,12 @@ fn exact_duplicate_rows_do_not_hide_inconsistent_right_hand_sides() {
 
 #[test]
 fn tautological_rows_leave_all_amplitudes_free_but_distinct_rows_keep_the_guard() {
-    let limits = ExactFrobeniusLimits::default();
+    // The original conservative elimination profile bounds coefficient growth
+    // across distinct rows; compacted tautologies never enter that elimination.
+    let limits = ExactFrobeniusLimits {
+        max_coefficient_bits: Some(65_536),
+        ..Default::default()
+    };
     let context = RunContext::default();
     let basis = prepared(&[&["0", "1/z"], &["0", "0"]])
         .exact_coefficients(2, &limits, &context)
@@ -349,7 +354,7 @@ fn exact_relations_reject_contradictions_missing_orders_and_resource_excess() {
         prepared.exact_coefficients(
             8,
             &ExactFrobeniusLimits {
-                max_dimension: 1,
+                max_dimension: Some(1),
                 ..limits.clone()
             },
             &context
@@ -401,7 +406,7 @@ fn exact_complex_relations_share_native_gaussian_arithmetic_and_bound_input_heig
     assert!(directions[0].iter().any(|value| !value.is_zero()));
     assert!(directions[1].iter().all(Gaussian::is_zero));
     let low = ExactFrobeniusLimits {
-        max_coefficient_bits: 128,
+        max_coefficient_bits: Some(128),
         ..limits
     };
     assert!(matches!(

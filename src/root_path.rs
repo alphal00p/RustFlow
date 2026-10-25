@@ -103,7 +103,7 @@ fn interior_interval(
     context: &RunContext,
 ) -> Result<Option<(Rational, Rational)>> {
     let mut tolerance = Rational::from((1, 16));
-    for _ in 0..64 {
+    loop {
         context.cancellation.check()?;
         if interval.1 <= 0 || interval.0 >= 1 {
             return Ok(None);
@@ -119,9 +119,6 @@ fn interior_interval(
         interval = polynomial.refine_root_interval(interval, &tolerance);
         tolerance *= Rational::from((1, 16));
     }
-    Err(Error::Accuracy(
-        "root interval could not be separated from path endpoints".into(),
-    ))
 }
 
 fn has_unit_interval_zero(polynomial: &RealPolynomial, context: &RunContext) -> Result<bool> {
@@ -138,7 +135,7 @@ fn has_unit_interval_zero(polynomial: &RealPolynomial, context: &RunContext) -> 
     }
     context.cancellation.check()?;
     // The native isolator itself is synchronous; cancellation is checked before
-    // and after each native call and during bounded certificate refinement.
+    // and after each native call and during resource-checked certificate refinement.
     let intervals = polynomial.isolate_real_root_intervals();
     context.cancellation.check()?;
     for (lower, upper, _) in intervals {
@@ -161,7 +158,7 @@ fn negative_at_root(
     let value_poly = real.rem(imaginary);
     let mut tolerance = Rational::from((1, 16));
     let mut bits = p.bits;
-    for _ in 0..64 {
+    loop {
         context.cancellation.check()?;
         let center = (&interval.0 + &interval.1) / Rational::from(2);
         let radius = (&interval.1 - &interval.0) / Rational::from(2);
@@ -190,9 +187,6 @@ fn negative_at_root(
             .checked_add(32)
             .ok_or_else(|| Error::Limit("root-sheet sign precision overflow".into()))?;
     }
-    Err(Error::Accuracy(
-        "could not certify the real sign at a principal-cut intersection".into(),
-    ))
 }
 
 fn lower_side_at_endpoint(imaginary: &RealPolynomial, endpoint: i64) -> bool {

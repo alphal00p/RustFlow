@@ -40,7 +40,7 @@ fn boundary(p: Precision, values: Vec<Vec<ComplexFloat>>) -> EpsilonBoundary {
 fn puiseux_endpoint_matches_both_sheets_and_refines() {
     let system = ordinary(&[&["1/r"]], &[("r", "x")]);
     let prepared = system
-        .prepare_frobenius(16, &RunContext::default())
+        .prepare_frobenius(Some(16), &RunContext::default())
         .unwrap();
     assert_eq!(
         prepared.lifted_system().system().matrix,
@@ -101,7 +101,7 @@ fn resonant_coupled_blocks_produce_half_power_logarithms() {
         &[("r", "x")],
     );
     let prepared = system
-        .prepare_frobenius(16, &RunContext::default())
+        .prepare_frobenius(Some(16), &RunContext::default())
         .unwrap();
     let p = Precision::decimal(70).unwrap();
     let x = p.rational(&Rational::from((1, 16)));
@@ -156,7 +156,7 @@ fn epsilon_hierarchy_keeps_laurent_leading_power_and_endpoint() {
         ],
     };
     let prepared = system
-        .prepare_frobenius(16, &RunContext::default())
+        .prepare_frobenius(Some(16), &RunContext::default())
         .unwrap();
     let p = Precision::decimal(60).unwrap();
     let mut start = boundary(p, vec![vec![p.i(1)], vec![p.zero()], vec![p.zero()]]);
@@ -188,7 +188,9 @@ fn epsilon_hierarchy_keeps_laurent_leading_power_and_endpoint() {
 #[test]
 fn dependent_roots_retain_independent_sheet_constraints() {
     let system = ordinary(&[&["1/r+1/s"]], &[("r", "x"), ("s", "4*x")]);
-    let prepared = system.prepare_frobenius(8, &RunContext::default()).unwrap();
+    let prepared = system
+        .prepare_frobenius(Some(8), &RunContext::default())
+        .unwrap();
     let p = Precision::decimal(60).unwrap();
     for (seed, exponent) in [(RootSeed::Principal, 3), (RootSeed::Opposite, 1)] {
         let mut choices = seeds();
@@ -209,7 +211,7 @@ fn dependent_roots_retain_independent_sheet_constraints() {
     }
     let nonunit = ordinary(&[&["1/(r-s)"]], &[("r", "x"), ("s", "x")]);
     assert!(matches!(
-        nonunit.rational_lift(8, &RunContext::default()),
+        nonunit.rational_lift(Some(8), &RunContext::default()),
         Err(Error::Unsupported(_) | Error::InvalidInput(_))
     ));
 }
@@ -223,7 +225,7 @@ fn root_poles_and_infinity_use_the_same_projection() {
         .pullback_coordinate(system.system.variable, &atom("1/x"))
         .unwrap();
     let prepared = transformed
-        .prepare_frobenius(8, &RunContext::default())
+        .prepare_frobenius(Some(8), &RunContext::default())
         .unwrap();
     let p = Precision::decimal(60).unwrap();
     let start = boundary(p, vec![vec![p.rational(&Rational::from((5, 4)))]]);
@@ -245,27 +247,31 @@ fn root_poles_and_infinity_use_the_same_projection() {
 fn domain_cancellation_limits_and_cancellation_are_explicit() {
     let system = ordinary(&[&["(x^2-1)/(r*(x-1))"]], &[("r", "x")]);
     assert!(matches!(
-        system.rational_lift(1, &RunContext::default()),
+        system.rational_lift(Some(1), &RunContext::default()),
         Err(Error::Limit(_))
     ));
     let context = RunContext::default();
     context.cancellation.cancel();
     assert!(matches!(
-        system.prepare_frobenius(8, &context),
+        system.prepare_frobenius(Some(8), &context),
         Err(Error::Cancelled)
     ));
     let p = Precision::decimal(40).unwrap();
     let shifted = system
         .pullback_coordinate(system.system.variable, &atom("x+2"))
         .unwrap();
-    let lifted = shifted.rational_lift(8, &RunContext::default()).unwrap();
+    let lifted = shifted
+        .rational_lift(Some(8), &RunContext::default())
+        .unwrap();
     let at_hole = EpsilonBoundary {
         point: p.i(-1),
         leading: 0,
         coefficients: vec![vec![p.i(1)]],
     };
     assert!(lifted.lift_boundary(&at_hole, &seeds(), p).is_err());
-    let prepared_hole = system.prepare_frobenius(8, &RunContext::default()).unwrap();
+    let prepared_hole = system
+        .prepare_frobenius(Some(8), &RunContext::default())
+        .unwrap();
     let expansion_hole = prepared_hole
         .match_boundary(
             &boundary(p, vec![vec![p.i(1)]]),
@@ -282,7 +288,7 @@ fn domain_cancellation_limits_and_cancellation_are_explicit() {
     ));
     let divergent = ordinary(&[&["-1/(2*x)"]], &[("r", "x")]);
     let prepared = divergent
-        .prepare_frobenius(8, &RunContext::default())
+        .prepare_frobenius(Some(8), &RunContext::default())
         .unwrap();
     let expansion = prepared
         .match_boundary(
@@ -306,7 +312,9 @@ fn root_product_subgroup_avoids_unused_radicals_and_full_extension_growth() {
         &[&["1/(r*s)"]],
         &[("r", "x"), ("s", "1+x"), ("unused", "2+x")],
     );
-    let prepared = system.prepare_frobenius(2, &RunContext::default()).unwrap();
+    let prepared = system
+        .prepare_frobenius(Some(2), &RunContext::default())
+        .unwrap();
     assert_eq!(prepared.lifted_system().system().matrix.len(), 2);
     let p = Precision::decimal(70).unwrap();
     let mut choices = seeds();
@@ -362,7 +370,9 @@ fn lower_lip_matching_agrees_with_regular_algebraic_continuation() {
         leading: 0,
         coefficients: vec![vec![p.exp(&p.scale(&p.complex(0, -1), 1, 2))]],
     };
-    let prepared = system.prepare_frobenius(8, &RunContext::default()).unwrap();
+    let prepared = system
+        .prepare_frobenius(Some(8), &RunContext::default())
+        .unwrap();
     let expansion = prepared
         .match_boundary(&start, &choices, p, 52, -1, &RunContext::default())
         .unwrap();
@@ -402,7 +412,9 @@ fn exact_complex_radicands_keep_their_branch_and_precision() {
     // The reserved exact imaginary coefficient is also accepted by the public
     // algebraic transport input. The rational owner must receive native i.
     system.roots[0].radicand = Atom::var(symbol!("symbolica_amflow::imaginary_unit")) * atom("2*x");
-    let prepared = system.prepare_frobenius(8, &RunContext::default()).unwrap();
+    let prepared = system
+        .prepare_frobenius(Some(8), &RunContext::default())
+        .unwrap();
     let p = Precision::decimal(70).unwrap();
     // sqrt(2 i x)=(1+i)sqrt(x), integral dx/sqrt(2 i x)=(1-i)sqrt(x).
     let start = boundary(p, vec![vec![p.exp(&p.scale(&p.complex(1, -1), 1, 4))]]);
@@ -423,7 +435,9 @@ fn exact_complex_radicands_keep_their_branch_and_precision() {
 #[test]
 fn lifted_boundaries_roundtrip_through_the_existing_rational_solver() {
     let system = ordinary(&[&["1/r"]], &[("r", "x")]);
-    let lifted = system.rational_lift(2, &RunContext::default()).unwrap();
+    let lifted = system
+        .rational_lift(Some(2), &RunContext::default())
+        .unwrap();
     assert_eq!(lifted.root_monomials(), vec![atom("1"), atom("r")]);
     let p = Precision::decimal(60).unwrap();
     let mut start = boundary(p, vec![vec![p.i(1)]]);
@@ -467,7 +481,9 @@ fn lifted_boundaries_roundtrip_through_the_existing_rational_solver() {
 fn expanded_epsilon_sectors_are_not_misidentified_as_dimensional_limits() {
     let mut system = ordinary(&[&["0"]], &[]);
     system.system.matrices.push(vec![vec![atom("1/x")]]);
-    let prepared = system.prepare_frobenius(2, &RunContext::default()).unwrap();
+    let prepared = system
+        .prepare_frobenius(Some(2), &RunContext::default())
+        .unwrap();
     let p = Precision::decimal(60).unwrap();
     let start = boundary(p, vec![vec![p.i(1)], vec![p.zero()]]);
     let expansion = prepared

@@ -281,3 +281,29 @@ fn zero_transfer_and_missing_loop_direction_fall_back() {
     let (f, i) = family_from_active(active, 3);
     assert!(Plan::find(&f, &i).unwrap().is_none());
 }
+
+#[test]
+fn native_recognition_resources_remain_fatal_and_typed() {
+    let original = crate::ResourceLimitError::Memory {
+        rss_bytes: 7,
+        additional_bytes: 2,
+        limit_bytes: 8,
+    };
+    assert!(
+        matches!(native_error(IntegralFamilyError::Resource(original.clone())),
+        Error::Resource(error) if error == original)
+    );
+    let (family, target) =
+        double_bubble([([1, 0], [0]), ([1, 0], [-1]), ([0, 1], [0]), ([0, 1], [-1])]);
+    let budget = crate::ResourceBudget::with_memory_monitor(
+        crate::ResourceLimits {
+            max_process_rss_bytes: Some(1),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
+    assert!(matches!(
+        budget.run(|| double_bubble_plan(&family, &target)),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+    ));
+}

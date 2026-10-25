@@ -5,7 +5,7 @@ mod parametric;
 mod symmetry;
 
 use crate::family::{ConvertedFamily, substitute};
-use crate::reduction::{LinearCombination, Reduction, RustRedBackend};
+use crate::reduction::{LinearCombination, NativeReductionScope, Reduction, RustRedBackend};
 use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
 use rayon::prelude::*;
 use rustred::sector::{
@@ -25,12 +25,10 @@ pub(crate) fn reduce(
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
-    cuts: Option<&crate::cuts::CutFamily>,
-    seed: Option<&crate::reduction::ResolvedIdentityBank>,
-    provider: Option<&dyn crate::reduction::NativeIdentityProvider>,
+    scope: NativeReductionScope<'_, crate::reduction::ResolvedIdentityBank>,
 ) -> Result<Reduction> {
     let cut_options;
-    let options = if cuts.is_some() {
+    let options = if scope.cuts.is_some() {
         cut_options = RustRedBackend {
             bubble_subloops: false,
             parametric_rules: false,
@@ -41,15 +39,48 @@ pub(crate) fn reduce(
     } else {
         options
     };
-    rustred::dispatch_arity!(
+    let arity = family.family.denominator_count();
+    let mut result = rustred::dispatch_solver_capacity!(
         family.family.denominator_count(),
-        solve(family, original, dimension, targets, options, context, cuts, seed, provider),
+        solve(family, original, dimension, targets, options, context, scope),
         n => Err(Error::Unsupported(format!(
             "native runtime was compiled for {:?} scalar-product slots; received {n}",
             rustred::compiled_runtime_arities()
         )))
-    )
+    )?;
+    result.rules = result
+        .rules
+        .into_iter()
+        .map(|(key, terms)| {
+            Ok((
+                physical_key(key, arity)?,
+                terms
+                    .into_iter()
+                    .map(|(key, value)| Ok((physical_key(key, arity)?, value)))
+                    .collect::<Result<_>>()?,
+            ))
+        })
+        .collect::<Result<_>>()?;
+    result.residuals = result
+        .residuals
+        .into_iter()
+        .map(|key| physical_key(key, arity))
+        .collect::<Result<_>>()?;
+    Ok(result)
 }
+
+fn physical_key(mut key: Integral, arity: usize) -> Result<Integral> {
+    if key.0.len() < arity || key.0[arity..].iter().any(|&power| power != 0) {
+        return Err(Error::Reduction("nonzero or invalid solver padding".into()));
+    }
+    key.0.truncate(arity);
+    Ok(key)
+}
+
+fn capacity_permutation<const N: usize>(physical: Vec<usize>) -> [usize; N] {
+    std::array::from_fn(|axis| physical.get(axis).copied().unwrap_or(axis))
+}
+
 fn cut_stage_key(key: String, cuts: Option<&str>) -> String {
     cuts.map_or_else(
         || key.clone(),
@@ -60,8 +91,19 @@ fn cut_stage_key(key: String, cuts: Option<&str>) -> String {
         },
     )
 }
-fn native_error(error: impl std::fmt::Display) -> Error {
-    Error::Reduction(error.to_string())
+fn native_error(error: impl std::error::Error + 'static) -> Error {
+    crate::error::preserve_resource(&error).unwrap_or_else(|| Error::Reduction(error.to_string()))
+}
+
+/// Interrupted searches may persist useful work while resources remain, but a
+/// cleanup failure must never replace the already observed search failure.
+fn preserve_search_failure(error: Error, save: impl FnOnce() -> Result<()>) -> Error {
+    if !matches!(&error, Error::Io(_) | Error::Cache(_) | Error::Resource(_))
+        && symbolica::utils::resources::checkpoint().is_ok()
+    {
+        let _ = save();
+    }
+    error
 }
 fn provider_key(
     key: String,
@@ -86,9 +128,61 @@ fn identity_seed_key(key: String, seed: Option<&crate::reduction::ResolvedIdenti
     )
 }
 
+/// Identity banks and providers use the original family slots. Only the native
+/// solver and its checkpoints use the compiled solver's zero-padded capacity.
+fn capacity_identity_seed<const N: usize>(
+    seed: &crate::reduction::ResolvedIdentityBank,
+    arity: usize,
+) -> Result<crate::reduction::ResolvedIdentityBank> {
+    crate::reduction::check_table_storage(&seed.reduction)?;
+    let padded = |key: &Integral| -> Result<Integral> {
+        symbolica::utils::resources::checkpoint()?;
+        if key.0.len() != arity || arity > N {
+            return Err(Error::InvalidInput("supplied native identity arity".into()));
+        }
+        let bytes = N
+            .checked_mul(std::mem::size_of::<i16>())
+            .and_then(|bytes| u64::try_from(bytes).ok())
+            .ok_or_else(|| Error::Limit("identity padding allocation overflow".into()))?;
+        symbolica::utils::resources::check_allocation(bytes)?;
+        let mut powers = key.0.clone();
+        powers.resize(N, 0);
+        Ok(Integral(powers))
+    };
+    let rules = seed
+        .reduction
+        .rules
+        .iter()
+        .map(|(lhs, terms)| {
+            Ok((
+                padded(lhs)?,
+                terms
+                    .iter()
+                    .map(|(rhs, coefficient)| Ok((padded(rhs)?, coefficient.clone())))
+                    .collect::<Result<_>>()?,
+            ))
+        })
+        .collect::<Result<_>>()?;
+    let residuals = seed
+        .reduction
+        .residuals
+        .iter()
+        .map(padded)
+        .collect::<Result<_>>()?;
+    symbolica::utils::resources::checkpoint()?;
+    Ok(crate::reduction::ResolvedIdentityBank {
+        identity: seed.identity.clone(),
+        reduction: Reduction {
+            rules,
+            residuals,
+            nonzero_conditions: seed.reduction.nonzero_conditions.clone(),
+        },
+    })
+}
+
 /// Reuse verified equations before counting solver searches. Supplied residuals
 /// are only declarations for table admission; they never establish that a leaf
-/// has been searched. The bank has its own independent, immutable budget.
+/// has been searched. Admission diagnostics belong to the immutable bank scope.
 fn validate_identity_order<const N: usize>(
     seed: &crate::reduction::ResolvedIdentityBank,
     original: &IntegralFamily,
@@ -108,21 +202,22 @@ fn validate_identity_order<const N: usize>(
         let sector = powers.map(|p| p > 0);
         if let std::collections::btree_map::Entry::Vacant(entry) = orders.entry(sector) {
             let mut order = rustred::solver::IntegralOrder::new(sector, [false; N]);
-            if options.bubble_subloops {
-                if let Some(pattern) =
-                    crate::bubble::Bubble::find(original, &sector, dimension.clone())?
-                {
-                    order = order
-                        .with_permutation(pattern.permutation().try_into().map_err(|_| {
-                            Error::InvalidInput("supplied identity bubble permutation arity".into())
-                        })?)
-                        .map_err(native_error)?;
-                }
+            if options.bubble_subloops
+                && let Some(pattern) = crate::bubble::Bubble::find(
+                    original,
+                    &sector[..original.propagators.len()],
+                    dimension.clone(),
+                )?
+            {
+                order = order
+                    .with_permutation(capacity_permutation::<N>(pattern.permutation()))
+                    .map_err(native_error)?;
             }
             entry.insert(order);
         }
         let left = rustred::solver::Integral::numeric(powers).map_err(native_error)?;
         for rhs in terms.keys() {
+            context.cancellation.check()?;
             let right: [i16; N] = rhs
                 .0
                 .as_slice()
@@ -140,25 +235,36 @@ fn validate_identity_order<const N: usize>(
     }
     Ok(supplied)
 }
+
+struct SeedFrontier<'a, const N: usize> {
+    result: &'a mut Reduction,
+    cache: &'a mut FrontierCache,
+    visited: &'a mut BTreeSet<[i16; N]>,
+    pending: &'a mut BTreeSet<[i16; N]>,
+}
+
 fn admit_identity_seed<const N: usize>(
     seed: &crate::reduction::ResolvedIdentityBank,
     original: &IntegralFamily,
     dimension: &Atom,
     options: &RustRedBackend,
     context: &RunContext,
-    result: &mut Reduction,
-    cache: &mut FrontierCache,
-    visited: &mut BTreeSet<[i16; N]>,
-    pending: &mut BTreeSet<[i16; N]>,
+    frontier: SeedFrontier<'_, N>,
     targets: &[Vec<i16>],
 ) -> Result<()> {
+    let SeedFrontier {
+        result,
+        cache,
+        visited,
+        pending,
+    } = frontier;
     let supplied = validate_identity_order::<N>(seed, original, dimension, options, context)?;
     result
         .nonzero_conditions
         .extend(seed.reduction.nonzero_conditions.iter().cloned());
     cache.insert_rules(result, seed.reduction.rules.clone());
     // A reusable family bank labels every stored LHS as done. Supplied LHSs
-    // belong to the separately bounded equation bank, not the search budget.
+    // belong to the supplied equation bank, not the search budget.
     // No unrelated searched index is removed, and unknown leaves stay pending.
     visited.retain(|powers| !supplied.contains(powers));
     *pending = structural_frontier(result, targets, context)?
@@ -174,14 +280,14 @@ fn admit_identity_seed<const N: usize>(
     pending.retain(|powers| !visited.contains(powers));
     Ok(())
 }
-fn family_stage_key(
+fn family_stage_key<const N: usize>(
     family: &ConvertedFamily,
     physical_propagators: usize,
     options: &RustRedBackend,
 ) -> String {
     let digest = blake3::hash(
         format!(
-            "native-family-v1/native-factorized-v5/bubble-subloops-v2/symmetry-v1:{}:{:?}:{}:{}:{}:{}:{}:{}:{}:{}",
+            "native-family-v1/capacity-{N}/native-factorized-v5/bubble-subloops-v2/symmetry-v1:{}:{:?}:{}:{}:{}:{}:{}:{}:{}:{}",
             family.family.fingerprint(),
             family.reverse,
             physical_propagators,
@@ -329,10 +435,33 @@ fn solve<const N: usize>(
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
-    cuts: Option<&crate::cuts::CutFamily>,
-    seed: Option<&crate::reduction::ResolvedIdentityBank>,
-    provider: Option<&dyn crate::reduction::NativeIdentityProvider>,
+    scope: NativeReductionScope<'_, crate::reduction::ResolvedIdentityBank>,
 ) -> Result<Reduction> {
+    let NativeReductionScope {
+        cuts,
+        seed,
+        provider,
+    } = scope;
+    let arity = family.family.denominator_count();
+    if arity == 0 || arity > N {
+        return Err(Error::InvalidInput("native solver capacity".into()));
+    }
+    let seed = seed
+        .map(|seed| capacity_identity_seed::<N>(seed, arity))
+        .transpose()?;
+    let seed = seed.as_ref();
+    let targets = targets
+        .iter()
+        .map(|key| {
+            if key.len() != arity {
+                return Err(Error::InvalidInput("native integral arity".into()));
+            }
+            let mut key = key.clone();
+            key.resize(N, 0);
+            Ok(key)
+        })
+        .collect::<Result<Vec<_>>>()?;
+    let targets = targets.as_slice();
     let mut pending = targets
         .iter()
         .map(|t| {
@@ -343,9 +472,10 @@ fn solve<const N: usize>(
         .collect::<Result<BTreeSet<[i16; N]>>>()?;
     let initial = pending.iter().map(|p| p.map(|n| n > 0)).collect::<Vec<_>>();
     let sources =
-        SourceSystem::<N>::from_family_with_lorentz(&family.family, options.include_lorentz)
+        SourceSystem::<N>::from_family_with_capacity(&family.family, options.include_lorentz)
             .map_err(native_error)?;
-    let deltas: [bool; N] = std::array::from_fn(|slot| cuts.is_some_and(|c| c.cuts().is_cut(slot)));
+    let deltas: [bool; N] =
+        std::array::from_fn(|slot| slot < arity && cuts.is_some_and(|c| c.cuts().is_cut(slot)));
     let cut_key = cuts.map(crate::cuts::CutFamily::fingerprint).transpose()?;
     let analyzer = if let Some(cuts) = cuts {
         Analyzer::try_new(&family.family, cuts.native_restrictions()?)
@@ -353,18 +483,18 @@ fn solve<const N: usize>(
         Analyzer::try_unrestricted(&family.family)
     }
     .map_err(native_error)?;
-    let sector_count = u32::try_from(N)
+    let sector_count = u32::try_from(arity)
         .ok()
         .and_then(|bits| 1usize.checked_shl(bits))
         .ok_or_else(|| {
             Error::Limit(format!(
-                "native sector enumeration cannot represent {N} scalar-product slots on this host"
+                "native sector enumeration cannot represent {arity} scalar-product slots on this host"
             ))
         })?;
     let mut zero = Vec::new();
     for bits in 0..sector_count {
         context.cancellation.check()?;
-        let sector = std::array::from_fn(|i| bits & (1 << i) != 0);
+        let sector = std::array::from_fn(|i| i < arity && bits & (1 << i) != 0);
         // A verified automorphism may route a target into another physical
         // sector, so that lane needs zero certificates outside the initial
         // top sectors too. Positive irreducible numerators remain excluded.
@@ -391,7 +521,7 @@ fn solve<const N: usize>(
             zero.push(sector);
             continue;
         }
-        let mask = Mask::try_new(sector).map_err(native_error)?;
+        let mask = Mask::try_new(sector[..arity].iter().copied()).map_err(native_error)?;
         if matches!(
             analyzer.analyze(&mask).map_err(native_error)?,
             Decision::ProvedZero(_)
@@ -418,7 +548,7 @@ fn solve<const N: usize>(
     let legacy_key_for_depth = |depth| {
         let raw = blake3::hash(
             format!(
-                "native-factorized-v5:{}:{:?}:{targets:?}:{}:{}:{}:{}:{}",
+                "native-factorized-v5/capacity-{N}:{}:{:?}:{targets:?}:{}:{}:{}:{}:{}",
                 family.family.fingerprint(),
                 family.reverse,
                 depth,
@@ -458,7 +588,7 @@ fn solve<const N: usize>(
     let family_key = provider_key(
         identity_seed_key(
             cut_stage_key(
-                family_stage_key(family, original.physical_propagators, options),
+                family_stage_key::<N>(family, original.physical_propagators, options),
                 cut_key.as_deref(),
             ),
             seed,
@@ -508,7 +638,7 @@ fn solve<const N: usize>(
             if let std::collections::btree_map::Entry::Vacant(entry) = patterns.entry(sector) {
                 entry.insert(crate::bubble::Bubble::find(
                     original,
-                    &sector,
+                    &sector[..arity],
                     dimension.clone(),
                 )?);
             }
@@ -562,7 +692,7 @@ fn solve<const N: usize>(
             &family.family,
             original.physical_propagators,
             symmetry::Limits::default(),
-        );
+        )?;
         context.emit(Progress::SymmetryReduction {
             candidates: bank.statistics.candidates,
             automorphisms: bank.statistics.automorphisms,
@@ -596,10 +726,12 @@ fn solve<const N: usize>(
             dimension,
             options,
             context,
-            &mut result,
-            &mut frontier_cache,
-            &mut visited,
-            &mut pending,
+            SeedFrontier {
+                result: &mut result,
+                cache: &mut frontier_cache,
+                visited: &mut visited,
+                pending: &mut pending,
+            },
             targets,
         )?;
     }
@@ -620,26 +752,25 @@ fn solve<const N: usize>(
                     && provider_calls < provider.max_calls()
                 {
                     provider_calls += 1;
-                    if let Some(bank) =
-                        provider.provide(original, &Integral(target.to_vec()), context)?
-                    {
-                        context.cancellation.check()?;
+                    let physical_target = physical_key(Integral(target.to_vec()), arity)?;
+                    let provided = provider.provide(original, &physical_target, context)?;
+                    context.cancellation.check()?;
+                    if let Some(bank) = provided {
                         let supplied = bank.resolve(original, None, context)?;
                         if supplied.reduction.rules.len() != 1
-                            || !supplied
-                                .reduction
-                                .rules
-                                .contains_key(&Integral(target.to_vec()))
+                            || !supplied.reduction.rules.contains_key(&physical_target)
                         {
                             return Err(Error::InvalidInput(
                                 "provider must return exactly the requested identity".into(),
                             ));
                         }
+                        let supplied = capacity_identity_seed::<N>(&supplied, arity)?;
                         validate_identity_order::<N>(
                             &supplied, original, dimension, options, context,
                         )?;
                         for terms in supplied.reduction.rules.values() {
                             for rhs in terms.keys() {
+                                context.cancellation.check()?;
                                 let powers: [i16; N] =
                                     rhs.0.as_slice().try_into().map_err(|_| {
                                         Error::InvalidInput("provider RHS arity".into())
@@ -671,10 +802,11 @@ fn solve<const N: usize>(
             if pending.is_empty() {
                 break;
             }
-            if visited.len() + pending.len() > options.max_targets {
+            if let Some(limit) = options.max_targets
+                && visited.len().saturating_add(pending.len()) > limit
+            {
                 return Err(Error::Limit(format!(
-                    "Laporta RHS closure exceeds max_targets={}",
-                    options.max_targets
+                    "Laporta RHS closure exceeds max_targets={limit}"
                 )));
             }
             // Finish higher sectors before introducing their descendants into
@@ -717,20 +849,22 @@ fn solve<const N: usize>(
                     {
                         entry.insert(crate::bubble::Bubble::find(
                             original,
-                            &sector,
+                            &sector[..arity],
                             dimension.clone(),
                         )?);
                     }
                     if let Some(pattern) = &patterns[&sector]
-                        && let Some(terms) = pattern.reduce(&Integral(target.to_vec()))?
+                        && let Some(terms) = pattern.reduce(&Integral(target[..arity].to_vec()))?
                     {
+                        let terms: LinearCombination = terms
+                            .into_iter()
+                            .map(|(mut key, value)| {
+                                key.0.resize(N, 0);
+                                (key, value)
+                            })
+                            .collect();
                         let order = rustred::solver::IntegralOrder::new(sector, [false; N])
-                            .with_permutation(
-                                pattern
-                                    .permutation()
-                                    .try_into()
-                                    .expect("bubble permutation arity"),
-                            )
+                            .with_permutation(capacity_permutation::<N>(pattern.permutation()))
                             .map_err(native_error)?;
                         let lhs =
                             rustred::solver::Integral::numeric(target).map_err(native_error)?;
@@ -790,13 +924,10 @@ fn solve<const N: usize>(
                             SectorConfig {
                                 deltas,
                                 zero_sectors: zero.clone(),
-                                permutation: patterns.get(&sector).and_then(|p| p.as_ref()).map(
-                                    |p| {
-                                        p.permutation()
-                                            .try_into()
-                                            .expect("bubble permutation arity")
-                                    },
-                                ),
+                                permutation: patterns
+                                    .get(&sector)
+                                    .and_then(|p| p.as_ref())
+                                    .map(|p| capacity_permutation::<N>(p.permutation())),
                                 numerical_exact_backend: NumericalExactBackend::SparseFactorized,
                                 ..Default::default()
                             },
@@ -812,7 +943,7 @@ fn solve<const N: usize>(
                     for case in cases {
                         context.cancellation.check()?;
                         let target = std::array::from_fn(|i| case.integral().powers()[i].value());
-                        let Some(terms) = bank.apply(&family.family, target, solver.ordering())
+                        let Some(terms) = bank.apply(&family.family, target, solver.ordering())?
                         else {
                             uncovered.push(case);
                             continue;
@@ -885,9 +1016,8 @@ fn solve<const N: usize>(
                     for case in cases {
                         context.cancellation.check()?;
                         let target = std::array::from_fn(|i| case.integral().powers()[i].value());
-                        let Some(applied) = bank
-                            .try_reduce(target, &sources, solver, options.max_depth)
-                            .map_err(native_error)?
+                        let Some(applied) =
+                            bank.try_reduce(target, &sources, solver, options.max_depth)?
                         else {
                             uncovered.push(case);
                             continue;
@@ -952,12 +1082,7 @@ fn solve<const N: usize>(
                 let order = rustred::solver::IntegralOrder::new(sector, deltas);
                 let order = if let Some(pattern) = patterns.get(&sector).and_then(|p| p.as_ref()) {
                     order
-                        .with_permutation(
-                            pattern
-                                .permutation()
-                                .try_into()
-                                .expect("bubble permutation arity"),
-                        )
+                        .with_permutation(capacity_permutation::<N>(pattern.permutation()))
                         .map_err(native_error)?
                 } else {
                     order
@@ -971,24 +1096,27 @@ fn solve<const N: usize>(
             // Merge in stable order, preserving deterministic exact rules and
             // the same restart semantics as the sequential implementation.
             for wave in jobs.chunks(options.native_workers) {
+                let caller_budget = crate::ResourceBudget::capture_current();
                 let solve = |(sector, cases): &([bool; N], Vec<CoordinateCase<N>>)| {
-                    context.emit(Progress::SectorReduction {
-                        active_lines: sector.iter().filter(|&&v| v).count(),
-                        integrals: cases.len(),
-                        visited: visited.len(),
-                    })?;
-                    // A progress callback may request cancellation itself.
-                    context.cancellation.check()?;
-                    solvers[sector]
-                        .solve_numeric_cases(
-                            cases.to_vec(),
-                            SearchOptions {
-                                max_depth: Some(options.max_depth),
-                                ..Default::default()
-                            },
-                        )
-                        .map_err(native_error)
-                        .and_then(|solved| convert_batch(solved, family))
+                    caller_budget.run_captured(|| {
+                        context.emit(Progress::SectorReduction {
+                            active_lines: sector.iter().filter(|&&v| v).count(),
+                            integrals: cases.len(),
+                            visited: visited.len(),
+                        })?;
+                        // A progress callback may request cancellation itself.
+                        context.cancellation.check()?;
+                        solvers[sector]
+                            .solve_numeric_cases(
+                                cases.to_vec(),
+                                SearchOptions {
+                                    max_depth: Some(options.max_depth),
+                                    ..Default::default()
+                                },
+                            )
+                            .map_err(native_error)
+                            .and_then(|solved| convert_batch(solved, family))
+                    })
                 };
                 let solutions = if let Some(pool) = &pool {
                     pool.install(|| wave.par_iter().map(solve).collect::<Vec<_>>())
@@ -1153,10 +1281,9 @@ fn solve<const N: usize>(
         Ok(())
     })();
     if let Err(error) = search {
-        if !matches!(&error, Error::Io(_) | Error::Cache(_)) {
-            save_stage(options, &stage_key, &mut result, &visited, &pending)?;
-        }
-        return Err(error);
+        return Err(preserve_search_failure(error, || {
+            save_stage(options, &stage_key, &mut result, &visited, &pending)
+        }));
     }
     result.residuals.sort();
     result.residuals.dedup();
@@ -1737,6 +1864,84 @@ fn coefficient_atom(c: &Coefficient) -> Atom {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn checkpoint_cleanup_preserves_cancelled_diagnostic_and_structural_causes() {
+        for original in [
+            Error::Cancelled,
+            Error::Limit("explicit target diagnostic".into()),
+            Error::IncompleteReduction("invalid supplied graph".into()),
+        ] {
+            let expected = original.to_string();
+            let expected_kind = std::mem::discriminant(&original);
+            let attempted = std::cell::Cell::new(false);
+            let actual = preserve_search_failure(original, || {
+                attempted.set(true);
+                Err(Error::Cache("later checkpoint failure".into()))
+            });
+            assert!(attempted.get());
+            assert_eq!(std::mem::discriminant(&actual), expected_kind);
+            assert_eq!(actual.to_string(), expected);
+        }
+    }
+
+    #[test]
+    fn checkpoint_cleanup_never_starts_after_resource_exhaustion() {
+        let observed = crate::ResourceLimitError::Memory {
+            rss_bytes: 17,
+            additional_bytes: 5,
+            limit_bytes: 20,
+        };
+        assert!(matches!(
+            preserve_search_failure(Error::Resource(observed.clone()), || {
+                panic!("resource exhaustion must not start cleanup")
+            }),
+            Error::Resource(actual) if actual == observed
+        ));
+        let expired = crate::ResourceBudget::new(crate::ResourceLimits {
+            max_elapsed: Some(std::time::Duration::ZERO),
+            ..Default::default()
+        });
+        let actual = expired.run(|| {
+            preserve_search_failure(Error::Cancelled, || {
+                panic!("an expired request must not start cleanup")
+            })
+        });
+        assert!(matches!(actual, Error::Cancelled));
+    }
+
+    #[test]
+    fn supplied_identity_capacity_padding_preserves_physical_keys_and_scope() {
+        let lhs = Integral(vec![2]);
+        let leaf = Integral(vec![1]);
+        let seed = crate::reduction::ResolvedIdentityBank {
+            identity: "physical-one-slot-proof".into(),
+            reduction: Reduction {
+                rules: BTreeMap::from([(
+                    lhs.clone(),
+                    BTreeMap::from([(leaf.clone(), Atom::num(7))]),
+                )]),
+                residuals: vec![leaf.clone()],
+                nonzero_conditions: vec![Atom::num(3)],
+            },
+        };
+        let padded = capacity_identity_seed::<3>(&seed, 1).unwrap();
+        assert_eq!(padded.identity, seed.identity);
+        assert_eq!(
+            padded.reduction.nonzero_conditions,
+            seed.reduction.nonzero_conditions
+        );
+        let (key, terms) = padded.reduction.rules.first_key_value().unwrap();
+        assert_eq!(key.0, [2, 0, 0]);
+        assert_eq!(physical_key(key.clone(), 1).unwrap(), lhs);
+        let (key, coefficient) = terms.first_key_value().unwrap();
+        assert_eq!(key.0, [1, 0, 0]);
+        assert_eq!(physical_key(key.clone(), 1).unwrap(), leaf);
+        assert_eq!(coefficient, &Atom::num(7));
+        assert_eq!(padded.reduction.residuals, [Integral(vec![1, 0, 0])]);
+        assert!(capacity_identity_seed::<3>(&padded, 1).is_err());
+        assert!(physical_key(Integral(vec![1, 0, 1]), 1).is_err());
+    }
 
     #[test]
     fn family_bank_prunes_unreachable_equations_preserves_guards_and_validates_the_dag() {

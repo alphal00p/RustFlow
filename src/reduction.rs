@@ -21,6 +21,58 @@ pub struct Reduction {
     pub nonzero_conditions: Vec<Atom>,
 }
 
+/// Cut measure and optional exact-identity sources for one native reduction.
+/// `Seed` distinguishes supplied banks from their resolved symbolic/sample scope.
+pub(crate) struct NativeReductionScope<'a, Seed> {
+    pub cuts: Option<&'a crate::cuts::CutFamily>,
+    pub seed: Option<&'a Seed>,
+    pub provider: Option<&'a dyn NativeIdentityProvider>,
+}
+
+/// Preflight stored keys and encoded expressions before copying/admitting a
+/// table. Cooperative checkpoints also observe actual process RSS.
+pub(super) fn check_table_storage(reduction: &Reduction) -> Result<()> {
+    let overflow = || Error::Limit("reduction table storage size overflow".into());
+    let mut bytes = reduction
+        .nonzero_conditions
+        .len()
+        .checked_mul(std::mem::size_of::<Atom>())
+        .ok_or_else(overflow)?;
+    for condition in &reduction.nonzero_conditions {
+        symbolica::utils::resources::checkpoint()?;
+        bytes = bytes
+            .checked_add(condition.as_view().get_byte_size())
+            .ok_or_else(overflow)?;
+    }
+    let mut add_key = |key: &Integral, entry_bytes: usize| -> Result<()> {
+        symbolica::utils::resources::checkpoint()?;
+        let powers = key
+            .0
+            .len()
+            .checked_mul(std::mem::size_of::<i16>())
+            .ok_or_else(overflow)?;
+        bytes = bytes
+            .checked_add(entry_bytes)
+            .and_then(|bytes| bytes.checked_add(powers))
+            .ok_or_else(overflow)?;
+        Ok(())
+    };
+    for (lhs, terms) in &reduction.rules {
+        add_key(lhs, std::mem::size_of::<(Integral, LinearCombination)>())?;
+        for (rhs, coefficient) in terms {
+            let entry_bytes = std::mem::size_of::<(Integral, Atom)>()
+                .checked_add(coefficient.as_view().get_byte_size())
+                .ok_or_else(overflow)?;
+            add_key(rhs, entry_bytes)?;
+        }
+    }
+    for residual in &reduction.residuals {
+        add_key(residual, std::mem::size_of::<Integral>())?;
+    }
+    symbolica::utils::resources::check_allocation(u64::try_from(bytes).map_err(|_| overflow())?)?;
+    Ok(())
+}
+
 pub trait ReductionBackend: Send + Sync {
     fn identity(&self) -> String;
 
@@ -51,12 +103,15 @@ pub trait ReductionBackend: Send + Sync {
         )]);
         for terms in result.rules.values_mut() {
             for coefficient in terms.values_mut() {
+                context.cancellation.check()?;
                 *coefficient = substitute(coefficient, &rules).together().cancel();
             }
         }
         for condition in &mut result.nonzero_conditions {
+            context.cancellation.check()?;
             *condition = substitute(condition, &rules).together().cancel();
         }
+        context.cancellation.check()?;
         Ok(result)
     }
     fn reduce_at_epsilon(
@@ -70,12 +125,15 @@ pub trait ReductionBackend: Send + Sync {
         let rules = BTreeMap::from([(Atom::var(family.epsilon), Atom::num(epsilon.clone()))]);
         for terms in result.rules.values_mut() {
             for coefficient in terms.values_mut() {
+                context.cancellation.check()?;
                 *coefficient = substitute(coefficient, &rules).together().cancel();
             }
         }
         for condition in &mut result.nonzero_conditions {
+            context.cancellation.check()?;
             *condition = substitute(condition, &rules).together().cancel();
         }
+        context.cancellation.check()?;
         Ok(result)
     }
 
@@ -89,8 +147,10 @@ pub trait ReductionBackend: Send + Sync {
 
 #[derive(Clone, Debug)]
 pub struct RustRedBackend {
+    /// Finite IBP seed-query depth. Returned residuals are not certified master integrals.
     pub max_depth: u32,
-    pub max_targets: usize,
+    /// Optional diagnostic cap on the complete reachable target closure.
+    pub max_targets: Option<usize>,
     pub include_lorentz: bool,
     /// Above this frontier size, search a conservative dependency superset
     /// instead of materializing large temporary coefficients. Zero disables
@@ -131,7 +191,7 @@ impl Default for RustRedBackend {
     fn default() -> Self {
         Self {
             max_depth: 2,
-            max_targets: 4096,
+            max_targets: None,
             include_lorentz: false,
             max_exact_frontier: 512,
             max_backward_frontier: 128,
@@ -173,7 +233,7 @@ impl ReductionBackend for RustRedBackend {
     }
     fn identity(&self) -> String {
         let mut identity = format!(
-            "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}",
+            "rustred-exact:{}:{}:{}:{:?}:{}:{}:{}:{}:{}:{}",
             env!("RUSTRED_SOURCE_DIGEST"),
             env!("DEPENDENCY_SOURCE_DIGEST"),
             self.max_depth,
@@ -238,7 +298,17 @@ impl RustRedBackend {
         context: &RunContext,
         cuts: Option<&crate::cuts::CutFamily>,
     ) -> Result<Reduction> {
-        self.reduce_native_with_seed(family, targets, epsilon, context, cuts, None, None)
+        self.reduce_native_with_seed(
+            family,
+            targets,
+            epsilon,
+            context,
+            NativeReductionScope {
+                cuts,
+                seed: None,
+                provider: None,
+            },
+        )
     }
     fn reduce_native_with_seed(
         &self,
@@ -246,10 +316,14 @@ impl RustRedBackend {
         targets: &[Integral],
         epsilon: Option<&Rational>,
         context: &RunContext,
-        cuts: Option<&crate::cuts::CutFamily>,
-        seed: Option<&NativeIdentityBank>,
-        provider: Option<&dyn NativeIdentityProvider>,
+        scope: NativeReductionScope<'_, NativeIdentityBank>,
     ) -> Result<Reduction> {
+        let NativeReductionScope {
+            cuts,
+            seed,
+            provider,
+        } = scope;
+        context.cancellation.check()?;
         if (seed.is_some() || provider.is_some()) && (cuts.is_some() || !self.factorized) {
             return Err(Error::Unsupported(
                 "supplied native identities require the uncut factorized backend".into(),
@@ -285,6 +359,7 @@ impl RustRedBackend {
             integrals: targets.len(),
         })?;
         for i in targets {
+            context.cancellation.check()?;
             family.validate_integral(i)?;
         }
         let converted = family.convert_at_epsilon(epsilon)?;
@@ -310,9 +385,11 @@ impl RustRedBackend {
                 &targets,
                 self,
                 context,
-                cuts,
-                resolved_seed.as_ref(),
-                provider,
+                NativeReductionScope {
+                    cuts,
+                    seed: resolved_seed.as_ref(),
+                    provider,
+                },
             );
         }
         let cut_constraint = if let Some(cuts) = cuts {
@@ -330,25 +407,27 @@ impl RustRedBackend {
                 max_depth: self.max_depth,
                 max_targets: self.max_targets,
                 include_lorentz: self.include_lorentz,
-                // Keep the bounded search contract. Stable residual sets are
-                // not a certificate of independent master integrals.
+                // Stable residual sets are not a certificate of independent
+                // master integrals, regardless of diagnostic search caps.
                 until_stable: false,
             },
         )
-        .map_err(|e| match e {
-            rustred::solver::SolverError::SearchExhausted { .. } => Error::Limit(e.to_string()),
-            rustred::solver::SolverError::InvalidInput(ref message)
-                if message.starts_with("Laporta RHS closure exceeds") =>
-            {
-                Error::Limit(e.to_string())
-            }
-            rustred::solver::SolverError::InvalidInput(ref message)
-                if message.starts_with("the runtime bridge supports")
-                    || message.starts_with("runtime bridge was compiled for arities") =>
-            {
-                Error::Unsupported(e.to_string())
-            }
-            _ => Error::Reduction(e.to_string()),
+        .map_err(|e| {
+            crate::error::preserve_resource(&e).unwrap_or_else(|| match e {
+                rustred::solver::SolverError::SearchExhausted { .. } => Error::Limit(e.to_string()),
+                rustred::solver::SolverError::InvalidInput(ref message)
+                    if message.starts_with("Laporta RHS closure exceeds") =>
+                {
+                    Error::Limit(e.to_string())
+                }
+                rustred::solver::SolverError::InvalidInput(ref message)
+                    if message.starts_with("the runtime bridge supports")
+                        || message.starts_with("runtime bridge was compiled for arities") =>
+                {
+                    Error::Unsupported(e.to_string())
+                }
+                _ => Error::Reduction(e.to_string()),
+            })
         })?;
         context.cancellation.check()?;
         let mut out = Reduction {
@@ -419,6 +498,7 @@ impl ReductionBackend for TableBackend {
     ) -> Result<Reduction> {
         context.cancellation.check()?;
         for t in targets {
+            context.cancellation.check()?;
             if !self.reduction.rules.contains_key(t) && !self.reduction.residuals.contains(t) {
                 return Err(Error::IncompleteReduction(format!(
                     "no table rule for {:?}",
@@ -426,6 +506,7 @@ impl ReductionBackend for TableBackend {
                 )));
             }
         }
+        check_table_storage(&self.reduction)?;
         Ok(self.reduction.clone())
     }
 }
@@ -474,7 +555,7 @@ pub fn differential_system(
     family: &IntegralFamily,
     targets: &[Integral],
     shifted: &[bool],
-    max_rounds: usize,
+    max_rounds: Option<usize>,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
     build_differential_system(backend, family, targets, max_rounds, context, |i| {
@@ -548,7 +629,7 @@ pub fn parameter_differential_system(
     family: &IntegralFamily,
     targets: &[Integral],
     variable: Symbol,
-    max_rounds: usize,
+    max_rounds: Option<usize>,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
     build_differential_system(backend, family, targets, max_rounds, context, |i| {
@@ -560,14 +641,17 @@ pub(crate) fn build_differential_system(
     backend: &dyn ReductionBackend,
     family: &IntegralFamily,
     targets: &[Integral],
-    max_rounds: usize,
+    max_rounds: Option<usize>,
     context: &RunContext,
     derivative: impl Fn(&Integral) -> Result<Vec<(Integral, Atom)>>,
 ) -> Result<ReducedSystem> {
     let mut conditions = BTreeMap::new();
     let mut requested = targets.iter().cloned().collect::<BTreeSet<_>>();
     let mut previous = Vec::new();
-    for round in 0..max_rounds {
+    for round in 0_usize.. {
+        if max_rounds.is_some_and(|limit| round >= limit) {
+            break;
+        }
         context.cancellation.check()?;
         let requested_targets = requested.iter().cloned().collect::<Vec<_>>();
         let reduction = backend.reduce(family, &requested_targets, context)?;
@@ -628,7 +712,7 @@ pub(crate) fn build_differential_system(
         requested.extend(derivatives);
     }
     Err(Error::IncompleteReduction(format!(
-        "no stable derivative-closed basis after {max_rounds} rounds"
+        "no stable derivative-closed basis after {max_rounds:?} diagnostic rounds"
     )))
 }
 
@@ -639,7 +723,7 @@ pub fn differential_system_skip_initial(
     family: &IntegralFamily,
     targets: &[Integral],
     shifted: &[bool],
-    max_rounds: usize,
+    max_rounds: Option<usize>,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
     build_retained_system(backend, family, targets, max_rounds, context, |i| {
@@ -652,7 +736,7 @@ pub fn parameter_differential_system_skip_initial(
     family: &IntegralFamily,
     targets: &[Integral],
     variable: Symbol,
-    max_rounds: usize,
+    max_rounds: Option<usize>,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
     build_retained_system(backend, family, targets, max_rounds, context, |i| {
@@ -664,13 +748,16 @@ pub(crate) fn build_retained_system(
     backend: &dyn ReductionBackend,
     family: &IntegralFamily,
     targets: &[Integral],
-    max_rounds: usize,
+    max_rounds: Option<usize>,
     context: &RunContext,
     derivative: impl Fn(&Integral) -> Result<Vec<(Integral, Atom)>>,
 ) -> Result<ReducedSystem> {
     let mut conditions = BTreeMap::new();
     let mut basis = targets.iter().cloned().collect::<BTreeSet<_>>();
-    for _ in 0..max_rounds {
+    for round in 0_usize.. {
+        if max_rounds.is_some_and(|limit| round >= limit) {
+            break;
+        }
         context.cancellation.check()?;
         let derivatives = basis
             .iter()

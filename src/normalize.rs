@@ -229,30 +229,35 @@ impl DifferentialSystem {
     /// Return (Fuchsian system, T) with old_y=T*new_y. First attempt diagonal
     /// shearing, then exact nilpotent rank-reducing balances. A search that does
     /// not find a decreasing balance reports an unsupported normalization.
-    pub fn fuchsian_form(&self, max_balances: usize) -> Result<(Self, Vec<Vec<Atom>>)> {
+    pub fn fuchsian_form(&self, max_balances: Option<usize>) -> Result<(Self, Vec<Vec<Atom>>)> {
         self.validate()?;
         let n = self.matrix.len();
         let x = Atom::var(self.variable);
         let mut system = self.clone();
         let mut transformation = identity(n);
-        for iteration in 0..=max_balances {
-            if let Ok((normal, shifts)) = system.diagonal_fuchsian_form() {
-                let diagonal = (0..n)
-                    .map(|i| {
-                        (0..n)
-                            .map(|j| {
-                                if i == j {
-                                    x.clone().pow(shifts[i])
-                                } else {
-                                    Atom::new()
-                                }
-                            })
-                            .collect()
-                    })
-                    .collect::<Vec<_>>();
-                return Ok((normal, algebra::matmul(&transformation, &diagonal)));
+        for iteration in 0_usize.. {
+            symbolica::utils::resources::checkpoint()?;
+            match system.diagonal_fuchsian_form() {
+                Err(error @ (Error::Cancelled | Error::Resource(_))) => return Err(error),
+                Ok((normal, shifts)) => {
+                    let diagonal = (0..n)
+                        .map(|i| {
+                            (0..n)
+                                .map(|j| {
+                                    if i == j {
+                                        x.clone().pow(shifts[i])
+                                    } else {
+                                        Atom::new()
+                                    }
+                                })
+                                .collect()
+                        })
+                        .collect::<Vec<_>>();
+                    return Ok((normal, algebra::matmul(&transformation, &diagonal)));
+                }
+                Err(_) => {}
             }
-            if iteration == max_balances {
+            if max_balances.is_some_and(|limit| iteration == limit) {
                 break;
             }
             let (order, coefficient) = leading(&system)?;

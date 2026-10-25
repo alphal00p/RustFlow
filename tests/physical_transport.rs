@@ -199,7 +199,7 @@ fn bracketed_transport_preserves_verified_cache_reuse_across_strategies() {
         digits: 20,
         guard_digits: 20,
         series_order: 24,
-        max_steps: 3000,
+        max_steps: Some(3000),
         step_size_strategy: StepSizeStrategy::Bracketed,
         ..Default::default()
     };

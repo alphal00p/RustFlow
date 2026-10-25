@@ -150,7 +150,7 @@ fn high_storage_target_matches_rhs_state_and_saved_polynomial() -> Result<()> {
             digits: 20,
             guard_digits: 40,
             series_order: 16,
-            max_steps: 8,
+            max_steps: Some(8),
             ..Default::default()
         },
         &RunContext::default(),

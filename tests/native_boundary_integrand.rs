@@ -42,7 +42,7 @@ fn native_completion_preserves_interleaved_products_and_exact_family_metadata() 
     ];
     let family = template(2, 1);
     let expression = parse!("(b+2*d-3*e)^2/((a-1)^2*(c-2)*(a+c-3))");
-    let terms = integrand::to_integrals(&expression, &variables, &family, 100).unwrap();
+    let terms = integrand::to_integrals(&expression, &variables, &family, Some(100)).unwrap();
     assert!(!terms.is_empty());
     for term in &terms {
         term.family.validate_integral(&term.integral).unwrap();
@@ -72,7 +72,7 @@ fn native_partial_fractions_preserve_symbolic_degeneracy_and_gaussian_numerators
         parse!("(x+1)^2/(x-2)^2"),
         (Atom::one() + &i) * parse!("x^3"),
     ] {
-        let terms = integrand::to_integrals(&expression, &variables, &family, 100).unwrap();
+        let terms = integrand::to_integrals(&expression, &variables, &family, Some(100)).unwrap();
         assert!(
             (reconstruct(&terms, &variables) - expression)
                 .together()
@@ -80,8 +80,8 @@ fn native_partial_fractions_preserve_symbolic_degeneracy_and_gaussian_numerators
                 .is_zero()
         );
     }
-    let error =
-        integrand::to_integrals(&parse!("1/((x-1)*(x-2))"), &variables, &family, 1).unwrap_err();
+    let error = integrand::to_integrals(&parse!("1/((x-1)*(x-2))"), &variables, &family, Some(1))
+        .unwrap_err();
     assert!(
         matches!(error, Error::Limit(ref message) if message.contains("native boundary partial fractions"))
     );
@@ -97,7 +97,8 @@ fn native_gaussian_affine_dependencies_remain_exact_without_formal_imaginary_ran
     // The rows are proportional over Q(i), but independent if i is encoded as
     // a free parameter t (their determinant would be 1+t^2).
     let limited =
-        integrand::to_integrals(&(Atom::one() / (&d1 * &d2)), &variables, &family, 1).unwrap_err();
+        integrand::to_integrals(&(Atom::one() / (&d1 * &d2)), &variables, &family, Some(1))
+            .unwrap_err();
     assert!(
         matches!(limited, Error::Limit(ref message) if message.contains("native boundary partial fractions"))
     );
@@ -105,7 +106,7 @@ fn native_gaussian_affine_dependencies_remain_exact_without_formal_imaginary_ran
         Atom::one() / (&d1 * &d2),
         (&variables[0] + &i * &variables[1]).pow(2) / (d1.pow(2) * &d2),
     ] {
-        let terms = integrand::to_integrals(&expression, &variables, &family, 100).unwrap();
+        let terms = integrand::to_integrals(&expression, &variables, &family, Some(100)).unwrap();
         assert!(!terms.is_empty());
         assert!(terms.iter().all(|t| t.family.physical_propagators == 1));
         assert!(
@@ -116,7 +117,7 @@ fn native_gaussian_affine_dependencies_remain_exact_without_formal_imaginary_ran
         );
     }
     let expression = Atom::one() / ((&variables[0] - &i) * (&variables[0] - 2));
-    let terms = integrand::to_integrals(&expression, &variables, &family, 100).unwrap();
+    let terms = integrand::to_integrals(&expression, &variables, &family, Some(100)).unwrap();
     assert!(
         (reconstruct(&terms, &variables) - expression)
             .together()
@@ -131,11 +132,12 @@ fn outside_gaussian_field_coefficients_retain_exact_atom_field_fallback() {
     let family = template(1, 0);
     for mass in [parse!("sin(a)"), parse!("2^(1/2)")] {
         let expression = Atom::one() / ((&variables[0] - &mass) * (&variables[0] - 2));
-        let limited = integrand::to_integrals(&expression, &variables, &family, 1).unwrap_err();
+        let limited =
+            integrand::to_integrals(&expression, &variables, &family, Some(1)).unwrap_err();
         assert!(
             matches!(limited, Error::Limit(ref message) if message == "boundary partial fraction budget exhausted")
         );
-        let terms = integrand::to_integrals(&expression, &variables, &family, 100).unwrap();
+        let terms = integrand::to_integrals(&expression, &variables, &family, Some(100)).unwrap();
         assert!(
             (reconstruct(&terms, &variables) - expression)
                 .together()
@@ -149,7 +151,7 @@ fn outside_gaussian_field_coefficients_retain_exact_atom_field_fallback() {
 fn invalid_boundary_coordinates_return_typed_errors_before_native_conversion() {
     for variables in [vec![parse!("x+y")], vec![], vec![parse!("x"), parse!("x")]] {
         assert!(matches!(
-            integrand::to_integrals(&Atom::one(), &variables, &template(1, 0), 100),
+            integrand::to_integrals(&Atom::one(), &variables, &template(1, 0), Some(100)),
             Err(Error::InvalidInput(_))
         ));
     }
@@ -163,9 +165,13 @@ fn internal_denominator_labels_cannot_capture_scalar_parameters() {
     let i = Atom::num(Complex::new(Rational::zero(), Rational::one()));
     for mass in [Atom::num(2), i] {
         let expression = (&parameter + &nested * &x) / (&x - mass);
-        let terms =
-            integrand::to_integrals(&expression, std::slice::from_ref(&x), &template(1, 0), 100)
-                .unwrap();
+        let terms = integrand::to_integrals(
+            &expression,
+            std::slice::from_ref(&x),
+            &template(1, 0),
+            Some(100),
+        )
+        .unwrap();
         assert!(
             (reconstruct(&terms, std::slice::from_ref(&x)) - expression)
                 .together()
@@ -191,7 +197,8 @@ fn internal_momenta_cannot_capture_scalar_parameters_or_coordinates() {
     let dimension = Atom::var(symbol!("symbolica_amflow::boundary_native_dimension"));
     let expression =
         (&scalar * &variables[1] + dimension) / ((&variables[0] - mass) * (&variables[1] - 3));
-    let terms = integrand::to_integrals(&expression, &variables, &template(1, 1), 100).unwrap();
+    let terms =
+        integrand::to_integrals(&expression, &variables, &template(1, 1), Some(100)).unwrap();
     assert!(
         (reconstruct(&terms, &variables) - expression)
             .together()
@@ -217,7 +224,8 @@ fn native_extreme_symbolic_coefficients_stay_scalar_and_reconstruct_exactly() {
         parse!("(a+𝑖*b)/10^1000"),
     ] {
         let expression = Atom::one() / ((x + q * y - 1) * (x - 2) * (y - 3));
-        let terms = integrand::to_integrals(&expression, &variables, &template(1, 1), 100).unwrap();
+        let terms =
+            integrand::to_integrals(&expression, &variables, &template(1, 1), Some(100)).unwrap();
         assert!(terms.iter().all(|term| {
             variables
                 .iter()

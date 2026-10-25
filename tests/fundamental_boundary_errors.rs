@@ -214,27 +214,33 @@ fn multiple_rational_charts_keep_verified_intermediates_and_source_cap() -> Resu
 }
 
 #[test]
-fn unsupported_hierarchy_and_dense_limits_retain_scalar_fallback() -> Result<()> {
+fn shared_resources_and_unsupported_hierarchies_preserve_cache() -> Result<()> {
     let p = Precision::decimal(90)?;
     let n = 17;
     let (engine, mut cache) = problem(vec![vec![Atom::new(); n]; n], vec![p.i(1); n], 40)?;
-    let result = engine.evaluate_to(
-        &mut cache,
-        &destination(Atom::one()),
-        EpsilonRange::new(0, 0)?,
-        &options(),
-        &RunContext::default(),
-        &policy(),
-    )?;
-    let diagnostics = &result.transport.as_ref().unwrap().diagnostics;
-    assert_eq!(diagnostics.fundamental_boundary_charts, 0);
-    assert!(
-        diagnostics
-            .fundamental_boundary_fallback
-            .as_ref()
-            .unwrap()
-            .contains("dimension")
+    let original = format!("{cache:?}");
+    let budget = ResourceBudget::with_memory_monitor(
+        ResourceLimits {
+            max_process_rss_bytes: Some(1),
+            ..Default::default()
+        },
+        || Ok(2),
     );
+    let result = budget.run(|| {
+        engine.evaluate_to(
+            &mut cache,
+            &destination(Atom::one()),
+            EpsilonRange::new(0, 0)?,
+            &options(),
+            &RunContext::default(),
+            &policy(),
+        )
+    });
+    assert!(matches!(
+        result,
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
+    ));
+    assert_eq!(format!("{cache:?}"), original);
     let (engine, original) = problem(vec![vec![Atom::new()]], vec![p.i(1)], 40)?;
     let mut entry = original.entries()[0].clone();
     entry.range = EpsilonRange::new(0, 1)?;
@@ -535,7 +541,7 @@ fn automatic_handles_nonfinite_scalar_amplification() -> Result<()> {
 }
 
 #[test]
-fn automatic_optional_limit_and_real_instability_preserve_failure_and_cache() -> Result<()> {
+fn automatic_resources_and_real_instability_preserve_failure_and_cache() -> Result<()> {
     let p = Precision::decimal(90)?;
     for n in [2, 17] {
         let mut matrix = vec![vec![Atom::new(); n]; n];
@@ -553,23 +559,43 @@ fn automatic_optional_limit_and_real_instability_preserve_failure_and_cache() ->
             values[0] = p.i(1);
         }
         let (engine, mut cache) = problem(matrix, values, 25)?;
-        let result = engine.evaluate_to(
-            &mut cache,
-            &destination(Atom::one()),
-            EpsilonRange::new(0, 0)?,
-            &FlowOptions::default(),
-            &RunContext::default(),
-            &policy(),
-        );
-        assert!(
-            matches!(&result, Err(Error::Accuracy(_))),
-            "{:?}",
-            result.as_ref().err()
-        );
+        let original = format!("{cache:?}");
+        let evaluate = |cache: &mut BoundaryCache| {
+            engine.evaluate_to(
+                cache,
+                &destination(Atom::one()),
+                EpsilonRange::new(0, 0)?,
+                &FlowOptions::default(),
+                &RunContext::default(),
+                &policy(),
+            )
+        };
+        let result = if n == 17 {
+            ResourceBudget::with_memory_monitor(
+                ResourceLimits {
+                    max_process_rss_bytes: Some(1),
+                    ..Default::default()
+                },
+                || Ok(2),
+            )
+            .run(|| evaluate(&mut cache))
+        } else {
+            evaluate(&mut cache)
+        };
         if n == 17 {
-            assert!(result.err().unwrap().to_string().contains("dimension"));
+            assert!(matches!(
+                result,
+                Err(Error::Resource(ResourceLimitError::Memory { .. }))
+            ));
+        } else {
+            assert!(
+                matches!(&result, Err(Error::Accuracy(_))),
+                "{:?}",
+                result.as_ref().err()
+            );
         }
         assert_eq!(cache.len(), 1);
+        assert_eq!(format!("{cache:?}"), original);
     }
     Ok(())
 }
@@ -634,7 +660,7 @@ fn automatic_does_not_retry_central_domain_or_step_failures() -> Result<()> {
             ..Default::default()
         };
         let selected = FlowOptions {
-            max_steps: 1,
+            max_steps: Some(1),
             ..Default::default()
         };
         let result = engine.evaluate_to(

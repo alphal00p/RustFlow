@@ -456,7 +456,7 @@ mod tests {
         all.extend(optimized.residuals.iter().cloned());
         let reduced = RustRedBackend {
             factorized: false,
-            max_targets: 4096,
+            max_targets: Some(4096),
             ..Default::default()
         }
         .reduce(family, &all, &RunContext::default())

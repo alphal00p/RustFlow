@@ -15,7 +15,7 @@ fn options(working: u32, order: usize, mapped: bool) -> FlowOptions {
         } else {
             LocalCoordinate::Identity
         },
-        max_steps: 10000,
+        max_steps: Some(10000),
         ..Default::default()
     }
 }
@@ -238,7 +238,7 @@ fn original_source_holes_and_budget_cancellation_survive_mapping() -> Result<()>
     );
     let compiled = scalar().compile(p, &Default::default())?;
     let mut limited = options(50, 8, true);
-    limited.max_steps = 1;
+    limited.max_steps = Some(1);
     assert!(matches!(
         compiled.transport(
             &BoundaryData {
@@ -431,7 +431,7 @@ fn mapped_full_degree_residual_rejects_a_sparse_collocation_alias() -> Result<()
     let compiled = system.compile(p, &Default::default())?;
     for strategy in [StepSizeStrategy::Halving, StepSizeStrategy::Bracketed] {
         let mut opts = options(50, 16, true);
-        opts.max_steps = 1;
+        opts.max_steps = Some(1);
         opts.step_size_strategy = strategy;
         let answer = compiled.transport(
             &BoundaryData {

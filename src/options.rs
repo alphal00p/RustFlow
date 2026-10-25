@@ -173,19 +173,20 @@ pub enum StepSizeStrategy {
 #[derive(Debug, Clone)]
 pub struct PadeOptions {
     pub degree: usize,
-    pub max_common_degree: usize,
-    pub max_input_bits: u64,
-    pub max_coefficient_bits: u64,
-    pub max_work: u64,
+    pub max_common_degree: Option<usize>,
+    pub max_input_bits: Option<u64>,
+    pub max_coefficient_bits: Option<u64>,
+    /// Optional diagnostic work estimate; ordinary execution has no count ceiling.
+    pub max_work: Option<u64>,
 }
 impl Default for PadeOptions {
     fn default() -> Self {
         Self {
             degree: 16,
-            max_common_degree: 128,
-            max_input_bits: 4096,
-            max_coefficient_bits: 1_000_000,
-            max_work: 100_000_000,
+            max_common_degree: None,
+            max_input_bits: None,
+            max_coefficient_bits: None,
+            max_work: None,
         }
     }
 }
@@ -200,14 +201,18 @@ pub struct FlowOptions {
     pub boundary_error_strategy: BoundaryErrorStrategy,
     /// Regular boundary-centered Taylor coordinates; physical paths remain unchanged.
     pub local_coordinate: crate::local_coordinates::LocalCoordinate,
-    /// Maximum physical proposals per continuation call. A rejected Padé
+    /// Optional diagnostic maximum physical proposals per continuation call. A rejected Padé
     /// candidate may also try Taylor at the same proposal. Includes committed,
     /// rejected and successful superseded proposals.
-    pub max_steps: usize,
+    pub max_steps: Option<usize>,
     pub step_size_strategy: StepSizeStrategy,
-    pub max_precision_attempts: usize,
-    /// Maximum compatible source boundaries tried after physical transport accuracy failures.
-    pub max_boundary_attempts: usize,
+    pub max_precision_attempts: Option<usize>,
+    /// Optional diagnostic maximum compatible source boundaries tried after accuracy failures.
+    pub max_boundary_attempts: Option<usize>,
+    /// Optional diagnostic depth; recursive execution grows its stack cooperatively.
+    pub max_recursion_depth: Option<usize>,
+    /// Shared process RAM and elapsed-time limits for the entire request.
+    pub resource_limits: crate::ResourceLimits,
     pub workers: usize,
     pub dimension: i64,
     pub recursion: RecursionMode,
@@ -236,10 +241,12 @@ impl Default for FlowOptions {
             residual_arithmetic: ResidualArithmetic::Ball,
             boundary_error_strategy: BoundaryErrorStrategy::Automatic,
             local_coordinate: crate::local_coordinates::LocalCoordinate::Identity,
-            max_steps: 1000,
+            max_steps: None,
             step_size_strategy: StepSizeStrategy::Halving,
-            max_precision_attempts: 3,
-            max_boundary_attempts: 8,
+            max_precision_attempts: None,
+            max_boundary_attempts: None,
+            max_recursion_depth: None,
+            resource_limits: crate::ResourceLimits::default(),
             workers: 1,
             dimension: 4,
             recursion: RecursionMode::Amf,
@@ -255,8 +262,23 @@ impl Default for FlowOptions {
     }
 }
 impl FlowOptions {
+    pub(crate) fn run_with_resources<T>(&self, operation: impl FnOnce() -> Result<T>) -> Result<T> {
+        crate::ResourceBudget::new(self.resource_limits).run(|| {
+            symbolica::utils::resources::checkpoint()?;
+            let result = operation();
+            let checkpoint = symbolica::utils::resources::checkpoint();
+            match result {
+                Err(error) => Err(error),
+                Ok(value) => {
+                    checkpoint?;
+                    Ok(value)
+                }
+            }
+        })
+    }
     /// An independent transport profile must change rational order as well as
-    /// precision. Beyond the native degree cap the reference uses Taylor.
+    /// precision. Beyond degree 32 the reference uses Taylor as an independent
+    /// method. This is a proposal-quality choice, not an execution ceiling.
     pub(crate) fn refine_rational_order(&mut self, increment: usize) {
         if let Some(pade) = &mut self.pade {
             match pade
@@ -277,23 +299,23 @@ impl FlowOptions {
         }
         if let Some(pade) = &self.pade
             && (pade.degree == 0
-                || pade.degree > 32
-                || pade.max_common_degree == 0
-                || pade.max_common_degree > 256
-                || pade.max_input_bits == 0
-                || pade.max_input_bits > 16384
-                || pade.max_coefficient_bits < pade.max_input_bits
-                || pade.max_coefficient_bits > 8_000_000
-                || pade.max_work == 0)
+                || pade.max_common_degree == Some(0)
+                || pade.max_input_bits == Some(0)
+                || pade.max_coefficient_bits == Some(0)
+                || pade.max_work == Some(0)
+                || pade
+                    .max_coefficient_bits
+                    .zip(pade.max_input_bits)
+                    .is_some_and(|(coefficient, input)| coefficient < input))
         {
-            return Err(Error::InvalidInput("Padé resource bounds require degree 1..32, common degree 1..256, input bits 1..16384, coefficient bits between input bits and 8000000, and positive work".into()));
+            return Err(Error::InvalidInput("positive Padé degree and explicit diagnostic limits required; coefficient limit must cover input limit".into()));
         }
         if self.digits == 0
             || self.workers == 0
             || self.series_order < 8
-            || self.max_steps == 0
-            || self.max_precision_attempts == 0
-            || self.max_boundary_attempts == 0
+            || self.max_steps == Some(0)
+            || self.max_precision_attempts == Some(0)
+            || self.max_boundary_attempts == Some(0)
         {
             return Err(Error::InvalidInput(
                 "positive digits, workers, limits and series_order >= 8 required".into(),
@@ -302,14 +324,6 @@ impl FlowOptions {
         if self.digits.checked_add(self.guard_digits).is_none() {
             return Err(Error::InvalidInput("working precision overflow".into()));
         }
-        if self.series_order > crate::series_limits::MAX_ORDER
-            || self.max_precision_attempts > 16
-            || self.workers > 256
-        {
-            return Err(Error::Limit(
-                "limits are 200000 series terms, 16 refinement attempts, and 256 workers; numerical series allocations are admitted separately".into(),
-            ));
-        }
         Ok(())
     }
 }
@@ -317,11 +331,15 @@ impl FlowOptions {
 #[derive(Clone, Debug, Default)]
 pub struct CancellationToken(Arc<AtomicBool>);
 impl CancellationToken {
+    pub fn is_cancelled(&self) -> bool {
+        self.0.load(Ordering::Relaxed)
+    }
     pub fn cancel(&self) {
         self.0.store(true, Ordering::Relaxed);
     }
     pub fn check(&self) -> Result<()> {
-        if self.0.load(Ordering::Relaxed) {
+        symbolica::utils::resources::checkpoint()?;
+        if self.is_cancelled() {
             Err(Error::Cancelled)
         } else {
             Ok(())
@@ -421,6 +439,47 @@ impl RunContext {
         if let Some(f) = &self.progress {
             f(event);
         }
-        Ok(())
+        self.cancellation.check()
+    }
+}
+
+#[cfg(test)]
+mod resource_scope_tests {
+    use super::*;
+    use std::sync::atomic::AtomicUsize;
+
+    #[test]
+    fn a_failed_operation_keeps_its_original_cause_after_the_post_poll() {
+        let exhausted = Arc::new(AtomicBool::new(false));
+        let monitor = Arc::clone(&exhausted);
+        let polls = Arc::new(AtomicUsize::new(0));
+        let observed_polls = Arc::clone(&polls);
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(1),
+                ..Default::default()
+            },
+            move || {
+                observed_polls.fetch_add(1, Ordering::Relaxed);
+                Ok(if monitor.load(Ordering::Relaxed) {
+                    2
+                } else {
+                    0
+                })
+            },
+        );
+        let result = budget.run(|| {
+            FlowOptions::default().run_with_resources(|| -> Result<()> {
+                exhausted.store(true, Ordering::Relaxed);
+                Err(Error::Accuracy("failed scientific trial".into()))
+            })
+        });
+        assert!(
+            matches!(result, Err(Error::Accuracy(ref message)) if message == "failed scientific trial")
+        );
+        assert!(
+            polls.load(Ordering::Relaxed) >= 2,
+            "failed returns still perform their post-work poll"
+        );
     }
 }

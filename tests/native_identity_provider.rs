@@ -184,7 +184,7 @@ fn supplied_native_identity_searches_its_unknown_leaf_and_survives_restart() {
     let directory =
         std::env::temp_dir().join(format!("rustflow-provider-{}-{stamp}", std::process::id()));
     let provided = RustRedBackend {
-        max_targets: 1,
+        max_targets: Some(1),
         checkpoints: Some(directory.clone()),
         checkpoint_interval: std::time::Duration::ZERO,
         ..raw
@@ -231,4 +231,50 @@ fn supplied_native_identity_searches_its_unknown_leaf_and_survives_restart() {
     assert_eq!(actual.residuals, restarted.residuals);
     assert_eq!(actual.nonzero_conditions, restarted.nonzero_conditions);
     std::fs::remove_dir_all(directory).unwrap();
+}
+
+struct ResourceFailure;
+impl NativeIdentityProvider for ResourceFailure {
+    fn identity(&self) -> &str {
+        "provider-resource-negative-control"
+    }
+    fn max_calls(&self) -> usize {
+        1
+    }
+    fn provide(
+        &self,
+        family: &IntegralFamily,
+        target: &Integral,
+        _: &RunContext,
+    ) -> Result<Option<NativeIdentityBank>> {
+        assert_eq!(target.0.len(), family.propagators.len());
+        // Preserve the producer's original observation even after its local
+        // allocation has been released and a later poll would see lower RSS.
+        Err(Error::Resource(ResourceLimitError::Memory {
+            rss_bytes: 17,
+            additional_bytes: 5,
+            limit_bytes: 20,
+        }))
+    }
+}
+
+#[test]
+fn provider_resource_failure_does_not_fall_back_or_become_search_exhaustion() {
+    let backend = RustRedBackend {
+        max_targets: Some(0),
+        parametric_rules: false,
+        symmetry_rules: false,
+        bubble_subloops: false,
+        ..Default::default()
+    }
+    .with_identity_provider(Arc::new(ResourceFailure))
+    .unwrap();
+    assert!(matches!(
+        backend.reduce(&family(), &[Integral(vec![2])], &RunContext::default()),
+        Err(Error::Resource(ResourceLimitError::Memory {
+            rss_bytes: 17,
+            additional_bytes: 5,
+            limit_bytes: 20,
+        }))
+    ));
 }

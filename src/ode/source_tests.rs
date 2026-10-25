@@ -36,7 +36,7 @@ fn options(working: u32) -> FlowOptions {
         digits: 20,
         guard_digits: working - 20,
         series_order: 80,
-        max_steps: 100,
+        max_steps: Some(100),
         ..Default::default()
     }
 }
@@ -226,7 +226,7 @@ fn genuine_truncation_subdivides_and_preserves_an_analytic_result() {
                 digits: 15,
                 guard_digits: 10,
                 series_order: 16,
-                max_steps: 3000,
+                max_steps: Some(3000),
                 ..Default::default()
             },
             &RunContext::default(),
@@ -362,7 +362,10 @@ fn nondyadic_severe_cancellation_fails_boundedly_without_false_metadata() {
         &large_system(Rational::from((1, 3))),
         |p| Ok(boundary(p)),
         &[atom("1")],
-        &options(120),
+        &FlowOptions {
+            max_precision_attempts: Some(3),
+            ..options(120)
+        },
         &RunContext::default(),
         true,
     )

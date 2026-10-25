@@ -33,8 +33,9 @@ rules, shared precision checks and schema-5 compatibility policy are documented
 in [Registered roots in the physical boundary cache](algebraic-cache.md).
 
 A candidate that passes the initial evidence filter can still fail after its
-uncertainty is propagated. RustFlow now tries compatible alternatives within
-`max_boundary_attempts`, preserving this selector's cost bounds and tie rules.
+uncertainty is propagated. RustFlow tries compatible alternatives, preserving
+this selector's cost bounds and tie rules. `max_boundary_attempts` is an optional
+cap; its default `None` allows all compatible sources to be tried.
 See [Accuracy-aware cached boundary selection](accuracy-fallback.md).
 
 Planner-generated threshold routes use this same selection/fallback loop with a

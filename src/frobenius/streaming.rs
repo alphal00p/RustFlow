@@ -35,9 +35,9 @@ impl StreamingAdmission {
     ) -> u128 {
         let n = dimension as u128;
         // Only a nonidentity transformation needs a replacement coefficient
-        // buffer. Retain the same conservative normalization-span padding and
-        // workspace estimate on both branches. No order-long solver cache is
-        // retained on this path.
+        // buffer. Reserve the same initial window on both branches; the exact
+        // transformed length is admitted before its replacement allocation.
+        // No order-long solver cache is retained on this path.
         let series = (order as u128 + 257)
             .saturating_mul(n)
             .saturating_mul(logs as u128)
@@ -275,12 +275,9 @@ impl PreparedFrobenius {
             StreamingAdmission::new(p, order, source_values, self.identity_transformation());
         let mut index = 0;
         self.numerical_recurrence_visit(
-            p,
-            parameters,
+            recurrence::NumericalDomain::streaming(p, parameters, &prepared_rows, &admission),
             order,
             context,
-            &prepared_rows,
-            &admission,
             constants,
             |indices, column| {
                 context.cancellation.check()?;
@@ -325,29 +322,43 @@ mod tests {
     #[test]
     fn streaming_admission_counts_log_growth_source_and_resonant_workspace() -> Result<()> {
         let p = Precision::decimal(24_756)?;
-        let admission = StreamingAdmission::new(p, 30_000, 1_000, false);
-        admission.column(18, 30_000, 1)?;
-        admission.matrix(36)?;
-        assert!(matches!(
-            admission.column(18, 30_000, 2),
-            Err(Error::Limit(_))
-        ));
-        assert!(matches!(admission.matrix(10_000), Err(Error::Limit(_))));
-        let identity = StreamingAdmission::new(p, 30_000, 1_000, true);
-        identity.column(18, 30_000, 2)?;
-        assert!(matches!(
-            identity.column(18, 30_000, 3),
-            Err(Error::Limit(_))
-        ));
-        let oversized_source = StreamingAdmission::new(p, 30_000, u128::MAX, true);
-        assert!(matches!(
-            oversized_source.column(18, 30_000, 1),
-            Err(Error::Limit(_))
-        ));
-        assert!(matches!(
-            admission.column(18, 200_001, 1),
-            Err(Error::Limit(_))
-        ));
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(32 * 1024_u64.pow(3)),
+                ..Default::default()
+            },
+            || Ok(0),
+        );
+        budget.run(|| -> Result<()> {
+            let admission = StreamingAdmission::new(p, 30_000, 1_000, false);
+            admission.column(18, 30_000, 1)?;
+            admission.matrix(36)?;
+            assert!(matches!(
+                admission.column(18, 30_000, 2),
+                Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+            ));
+            assert!(matches!(
+                admission.matrix(10_000),
+                Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+            ));
+            let identity = StreamingAdmission::new(p, 30_000, 1_000, true);
+            identity.column(18, 30_000, 2)?;
+            assert!(matches!(
+                identity.column(18, 30_000, 3),
+                Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+            ));
+            let oversized_source = StreamingAdmission::new(p, 30_000, u128::MAX, true);
+            assert!(matches!(
+                oversized_source.column(18, 30_000, 1),
+                Err(Error::Limit(_))
+            ));
+            assert!(matches!(
+                admission.column(18, 200_001, 1),
+                Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+            ));
+            Ok(())
+        })?;
+        StreamingAdmission::new(p, 200_001, 1_000, false).column(18, 200_001, 1)?;
         Ok(())
     }
 }

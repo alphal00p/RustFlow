@@ -232,7 +232,7 @@ impl PreparedLinearFlow {
                 &deformation.family,
                 targets,
                 variable,
-                12,
+                None,
                 context,
             )?
         } else {
@@ -241,7 +241,7 @@ impl PreparedLinearFlow {
                 &deformation.family,
                 targets,
                 variable,
-                12,
+                None,
                 context,
             )?
         };
@@ -251,7 +251,7 @@ impl PreparedLinearFlow {
         reduced.nonzero_conditions.sort();
         reduced.nonzero_conditions.dedup();
         if options.refine_basis {
-            crate::refine::refine_basis(&mut reduced, variable, family.epsilon, 32)?;
+            crate::refine::refine_basis(&mut reduced, variable, family.epsilon, None)?;
         }
         let system = DifferentialSystem {
             variable,
@@ -273,129 +273,136 @@ impl PreparedLinearFlow {
         backend: &dyn ReductionBackend,
         context: &RunContext,
     ) -> Result<LinearEvaluation> {
-        options.validate()?;
-        context.cancellation.check()?;
-        if epsilon.is_zero() {
-            return Err(Error::InvalidInput(
-                "linear-flow epsilon sample must be nonzero".into(),
-            ));
-        }
-        if options.recursion != RecursionMode::Amf
-            || options.dimension != self.deformation.family.dimension
-        {
-            return Err(Error::InvalidInput(
-                "linear-flow recursion or dimension differs from preparation".into(),
-            ));
-        }
-        let p = Precision::decimal(options.digits + options.guard_digits)?;
-        if self.reduced.basis.is_empty() {
-            return Ok(LinearEvaluation {
-                values: vec![p.zero(); self.reduced.targets.len()],
-                reference_point: Rational::from(1),
-                reference_basis_size: 0,
-            });
-        }
-        let eps_symbol = self.deformation.family.epsilon;
-        let parameters = ahash::HashMap::from_iter([(Atom::var(eps_symbol), p.rational(epsilon))]);
-        let exact_epsilon = BTreeMap::from([(Atom::var(eps_symbol), Atom::num(epsilon.clone()))]);
-        let conditions = self
-            .reduced
-            .nonzero_conditions
-            .iter()
-            .map(|a| substitute(a, &exact_epsilon).together().cancel())
-            .collect::<Vec<_>>();
-        if conditions.iter().any(Atom::is_zero) {
-            return Err(Error::Reduction(
-                "linear-flow nonzero condition vanishes at this epsilon sample".into(),
-            ));
-        }
-        let compiled = self.system.compile(p, &parameters)?;
-        let radius = compiled
-            .poles
-            .iter()
-            .map(|z| p.norm(z))
-            .filter(|r| *r > p.real(0))
-            .fold(
-                p.real(1),
-                |left, right| if left < right { left } else { right },
-            );
-        let mut reference_point = Rational::from(1);
-        let mut reference = None;
-        for _ in 0..options.max_steps {
+        options.run_with_resources(|| {
+            options.validate()?;
             context.cancellation.check()?;
-            reference_point = &reference_point / &Rational::from(2);
-            if p.rational(&reference_point).re >= radius.clone() / 8 {
-                continue;
+            if epsilon.is_zero() {
+                return Err(Error::InvalidInput(
+                    "linear-flow epsilon sample must be nonzero".into(),
+                ));
             }
-            let point = KinematicPoint(BTreeMap::from([(
-                Atom::var(self.system.variable),
-                Atom::num(reference_point.clone()),
-            )]));
-            if conditions
-                .iter()
-                .any(|a| point.apply(a).together().cancel().is_zero())
+            if options.recursion != RecursionMode::Amf
+                || options.dimension != self.deformation.family.dimension
             {
-                continue;
+                return Err(Error::InvalidInput(
+                    "linear-flow recursion or dimension differs from preparation".into(),
+                ));
             }
-            // Check every remaining scalar condition numerically before any
-            // reference IBP solve, including external Gram/input domains.
-            for condition in &conditions {
-                if p.eval(&point.apply(condition), &parameters)? == p.zero() {
-                    return Err(Error::Reduction(
-                        "vanishing linear reference-point condition".into(),
-                    ));
+            let p = Precision::decimal(options.digits + options.guard_digits)?;
+            if self.reduced.basis.is_empty() {
+                return Ok(LinearEvaluation {
+                    values: vec![p.zero(); self.reduced.targets.len()],
+                    reference_point: Rational::from(1),
+                    reference_basis_size: 0,
+                });
+            }
+            let eps_symbol = self.deformation.family.epsilon;
+            let parameters =
+                ahash::HashMap::from_iter([(Atom::var(eps_symbol), p.rational(epsilon))]);
+            let exact_epsilon =
+                BTreeMap::from([(Atom::var(eps_symbol), Atom::num(epsilon.clone()))]);
+            let conditions = self
+                .reduced
+                .nonzero_conditions
+                .iter()
+                .map(|a| substitute(a, &exact_epsilon).together().cancel())
+                .collect::<Vec<_>>();
+            if conditions.iter().any(Atom::is_zero) {
+                return Err(Error::Reduction(
+                    "linear-flow nonzero condition vanishes at this epsilon sample".into(),
+                ));
+            }
+            let compiled = self.system.compile(p, &parameters)?;
+            let radius = compiled
+                .poles
+                .iter()
+                .map(|z| p.norm(z))
+                .filter(|r| *r > p.real(0))
+                .fold(
+                    p.real(1),
+                    |left, right| if left < right { left } else { right },
+                );
+            let mut reference_point = Rational::from(1);
+            let mut reference = None;
+            for attempt in 0_usize.. {
+                if options.max_steps.is_some_and(|limit| attempt >= limit) {
+                    break;
                 }
-            }
-            let family = self.deformation.family.at(&point);
-            family.validate()?;
-            reference = Some(family);
-            break;
-        }
-        let family = reference
-            .ok_or_else(|| Error::Limit("linear reference-point search exhausted".into()))?;
-        let endpoint = self
-            .system
-            .frobenius(p, &parameters, options.series_order)?;
-        crate::engine::ensure_generic_indicial(&endpoint, &parameters)?;
-        // Keeping epsilon symbolic in the inner reference solve also supports
-        // rational regulator values for which sampled exponents are ambiguous.
-        let flow = crate::PreparedFlow::new(
-            &family,
-            &self.reduced.basis,
-            &KinematicPoint::default(),
-            backend,
-            options,
-            context,
-        )?;
-        let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
-        let values = flow.evaluate(epsilon, options, &boundary, context)?;
-        let constants =
-            endpoint.match_values(&p.rational(&reference_point), &values, &parameters)?;
-        let values = self
-            .reduced
-            .targets
-            .iter()
-            .map(|target| {
-                let weights = self
-                    .reduced
-                    .basis
+                context.cancellation.check()?;
+                reference_point = &reference_point / &Rational::from(2);
+                if p.rational(&reference_point).re >= radius.clone() / 8 {
+                    continue;
+                }
+                let point = KinematicPoint(BTreeMap::from([(
+                    Atom::var(self.system.variable),
+                    Atom::num(reference_point.clone()),
+                )]));
+                if conditions
                     .iter()
-                    .map(|integral| target.get(integral).cloned().unwrap_or_default())
-                    .collect::<Vec<_>>();
-                crate::engine::project_limit(
-                    &endpoint,
-                    &constants,
-                    &weights,
-                    eps_symbol,
-                    self.system.variable,
-                    &parameters,
-                )
+                    .any(|a| point.apply(a).together().cancel().is_zero())
+                {
+                    continue;
+                }
+                // Check every remaining scalar condition numerically before any
+                // reference IBP solve, including external Gram/input domains.
+                for condition in &conditions {
+                    if p.eval(&point.apply(condition), &parameters)? == p.zero() {
+                        return Err(Error::Reduction(
+                            "vanishing linear reference-point condition".into(),
+                        ));
+                    }
+                }
+                let family = self.deformation.family.at(&point);
+                family.validate()?;
+                reference = Some(family);
+                break;
+            }
+            let family = reference
+                .ok_or_else(|| Error::Limit("linear reference-point search exhausted".into()))?;
+            let endpoint = self
+                .system
+                .frobenius(p, &parameters, options.series_order)?;
+            crate::engine::ensure_generic_indicial(&endpoint, &parameters)?;
+            // Keeping epsilon symbolic in the inner reference solve also supports
+            // rational regulator values for which sampled exponents are ambiguous.
+            let flow = crate::PreparedFlow::new(
+                &family,
+                &self.reduced.basis,
+                &KinematicPoint::default(),
+                backend,
+                options,
+                context,
+            )?;
+            let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
+            let values = flow.evaluate(epsilon, options, &boundary, context)?;
+            let constants =
+                endpoint.match_values(&p.rational(&reference_point), &values, &parameters)?;
+            let values = self
+                .reduced
+                .targets
+                .iter()
+                .map(|target| {
+                    let weights = self
+                        .reduced
+                        .basis
+                        .iter()
+                        .map(|integral| target.get(integral).cloned().unwrap_or_default())
+                        .collect::<Vec<_>>();
+                    crate::engine::project_limit(
+                        &endpoint,
+                        &constants,
+                        &weights,
+                        eps_symbol,
+                        self.system.variable,
+                        &parameters,
+                    )
+                })
+                .collect::<Result<_>>()?;
+            Ok(LinearEvaluation {
+                values,
+                reference_point,
+                reference_basis_size: flow.reduced.basis.len(),
             })
-            .collect::<Result<_>>()?;
-        Ok(LinearEvaluation {
-            values,
-            reference_point,
-            reference_basis_size: flow.reduced.basis.len(),
         })
     }
 }

@@ -263,7 +263,7 @@ fn budget_exhausted_domain_preserves_exact_rules_and_fallbacks() {
         },
     );
     assert!(matches!(bounded, Err(SectorSolveError::CaseBudget { .. })));
-    let partial = generic_rules(&solver, 3, 1);
+    let partial = generic_rules(&solver, &sources, 3, 1).unwrap();
     assert_eq!(partial.len(), 1);
     assert!(!partial[0].candidate.sources.is_empty());
 
@@ -371,4 +371,37 @@ fn four_line_domains_are_reused_while_three_line_sectors_keep_rays() {
             .is_some()
     );
     assert_eq!((bank.domains, bank.domain_hits, bank.generated), (0, 0, 1));
+}
+
+#[test]
+fn resources_and_invalid_certificates_are_not_optimizer_misses() {
+    use rustred::solver::AffineGeometryError;
+    let case = || CoordinateCase::new([None; 1]).unwrap().into();
+    let resource = SectorSolveError::Geometry {
+        case: case(),
+        source: AffineGeometryError::Resources(crate::ResourceLimitError::Memory {
+            rss_bytes: 2,
+            additional_bytes: 0,
+            limit_bytes: 1,
+        }),
+    };
+    assert!(!optimizer_miss(&resource));
+    assert!(matches!(
+        sector_error(resource),
+        crate::Error::Resource(crate::ResourceLimitError::Memory { .. })
+    ));
+    let corruption = SectorSolveError::Search {
+        case: case(),
+        source: SolverError::Certification("invalid exact certificate".into()),
+    };
+    assert!(!optimizer_miss(&corruption));
+    assert!(matches!(
+        sector_error(corruption),
+        crate::Error::Reduction(_)
+    ));
+    let exhausted = SectorSolveError::Search {
+        case: case(),
+        source: SolverError::SearchExhausted { depth: 2, rows: 0 },
+    };
+    assert!(optimizer_miss(&exhausted));
 }

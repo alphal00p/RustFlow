@@ -309,7 +309,7 @@ fn native_reduction_restarts_after_increasing_the_target_budget() {
     let backend = RustRedBackend {
         factorized: true,
         bubble_subloops: false,
-        max_targets: 1,
+        max_targets: Some(1),
         checkpoints: Some(directory.clone()),
         ..Default::default()
     };
@@ -329,7 +329,7 @@ fn native_reduction_restarts_after_increasing_the_target_budget() {
         ..Default::default()
     };
     let resumed = RustRedBackend {
-        max_targets: 16,
+        max_targets: Some(16),
         bubble_subloops: true,
         ..backend
     }

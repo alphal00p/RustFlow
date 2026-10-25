@@ -156,7 +156,7 @@ fn full13_ph1_to_ph6_through_the_prescribed_physical_cache() -> Result<()> {
         digits: 20,
         guard_digits: 30,
         series_order: 64,
-        max_steps: 5000,
+        max_steps: Some(5000),
         ..Default::default()
     };
     let context = RunContext {

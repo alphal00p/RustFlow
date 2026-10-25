@@ -445,27 +445,34 @@ fn zero_constants_still_enforce_source_point_cancellation_and_resource_guards() 
         ),
         Err(Error::InvalidInput(_))
     ));
+    let budget = crate::ResourceBudget::with_memory_monitor(
+        crate::ResourceLimits {
+            max_process_rss_bytes: Some(1024),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
     assert!(matches!(
-        prepared.evaluate_solution(
+        budget.run(|| prepared.evaluate_solution(
             p,
             &parameters,
             200_001,
             &constants,
             &point,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
-        prepared.evaluate_solution(
+        budget.run(|| prepared.evaluate_solution(
             Precision { bits: u32::MAX },
             &parameters,
             8,
             &constants,
             &point,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
     ));
     let context = RunContext::default();
     context.cancellation.cancel();
@@ -485,7 +492,10 @@ fn zero_constants_still_enforce_source_point_cancellation_and_resource_guards() 
     let admission = StreamingAdmission::new(p, 8, u128::MAX, true);
     assert!(matches!(admission.column(2, 8, 2), Err(Error::Limit(_))));
     let admission = StreamingAdmission::new(p, 8, 0, true);
-    assert!(matches!(admission.matrix(1_000_000), Err(Error::Limit(_))));
+    assert!(matches!(
+        budget.run(|| admission.matrix(1_000_000)),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+    ));
     Ok(())
 }
 

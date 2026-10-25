@@ -351,7 +351,7 @@ fn unresolved_search_residuals_do_not_bypass_closure_and_cancellation() {
             &deformed,
             &[Integral(vec![1])],
             &mask,
-            3,
+            Some(3),
             &RunContext::default()
         ),
         Err(Error::IncompleteReduction(_))
@@ -438,7 +438,7 @@ fn sparse_ode_does_not_mistake_a_zero_taylor_tail_for_convergence() {
         digits: 20,
         guard_digits: 20,
         series_order: 16,
-        max_steps: 10000,
+        max_steps: Some(10000),
         ..Default::default()
     };
     let result = system

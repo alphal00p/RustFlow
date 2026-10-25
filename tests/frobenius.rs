@@ -82,18 +82,25 @@ fn extended_frobenius_order_obeys_allocation_admission() -> Result<()> {
     let p = Precision::decimal(40)?;
     let result = prepared.evaluate(p, &Default::default(), 10_001, &RunContext::default())?;
     assert_eq!(result.columns[0].coefficients.len(), 10_002);
+    let budget = ResourceBudget::with_memory_monitor(
+        ResourceLimits {
+            max_process_rss_bytes: Some(1024),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
     assert!(matches!(
-        prepared.evaluate(p, &Default::default(), 200_001, &RunContext::default()),
-        Err(Error::Limit(_))
+        budget.run(|| prepared.evaluate(p, &Default::default(), 200_001, &RunContext::default())),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
-        prepared.evaluate(
+        budget.run(|| prepared.evaluate(
             Precision { bits: u32::MAX },
             &Default::default(),
             10_001,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     Ok(())
 }
@@ -287,7 +294,7 @@ fn successive_nilpotent_balances_remove_a_cubic_pole() {
         ],
     };
     assert!(system.diagonal_fuchsian_form().is_err());
-    let (normal, transformation) = system.fuchsian_form(16).unwrap();
+    let (normal, transformation) = system.fuchsian_form(Some(16)).unwrap();
     normal.residue().unwrap();
     assert_eq!(
         normal.matrix,
@@ -363,7 +370,7 @@ fn moser_projector_mixes_jordan_chains() {
             vec![parse!("-1/x"), Atom::new(), parse!("-1/x"), Atom::new()],
         ],
     };
-    let (normal, transform) = system.fuchsian_form(32).unwrap();
+    let (normal, transform) = system.fuchsian_form(Some(32)).unwrap();
     let restored = system.change_basis(&transform).unwrap();
     assert_eq!(normal.matrix, restored.matrix);
     assert!(normal.diagonal_fuchsian_form().is_ok());

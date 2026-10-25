@@ -100,7 +100,7 @@ fn sparse_policy_preserves_default_and_matches_small_exact_bases() {
 fn sparse_policy_observes_input_growth_cells_cancellation_and_blocks() {
     let context = RunContext::default();
     let limits = ExactFrobeniusLimits {
-        max_coefficient_bits: 10,
+        max_coefficient_bits: Some(10),
         ..Default::default()
     };
     let d = domain(&limits, &context);
@@ -113,7 +113,7 @@ fn sparse_policy_observes_input_growth_cells_cancellation_and_blocks() {
         Err(Error::Limit(_))
     ));
     let small = ExactFrobeniusLimits {
-        max_scalar_cells: 3,
+        max_scalar_cells: Some(3),
         ..Default::default()
     };
     assert!(matches!(
@@ -142,7 +142,7 @@ fn sparse_policy_observes_input_growth_cells_cancellation_and_blocks() {
 fn sparse_policy_dense_height_cap_is_still_default_only() {
     let context = RunContext::default();
     let limits = ExactFrobeniusLimits {
-        max_coefficient_bits: 128,
+        max_coefficient_bits: Some(128),
         ..Default::default()
     };
     let rows = (0..8)
@@ -158,4 +158,37 @@ fn sparse_policy_dense_height_cap_is_still_default_only() {
             .solver(rows, &blocks, &context)
             .is_ok()
     );
+}
+
+#[test]
+fn sparse_policy_fatal_resources_remain_typed_for_every_native_path() {
+    let limits = ExactFrobeniusLimits::default();
+    let context = RunContext::default();
+    let d = domain(&limits, &context);
+    for budget in [
+        crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(1),
+                ..Default::default()
+            },
+            || Ok(2),
+        ),
+        crate::ResourceBudget::new(crate::ResourceLimits {
+            max_elapsed: Some(std::time::Duration::ZERO),
+            ..Default::default()
+        }),
+    ] {
+        let reduced = budget.run(|| d.sparse_reduced_rows(vec![vec![g(1), g(1)]]));
+        assert!(matches!(reduced, Err(Error::Resource(_))));
+        let inverse = budget.run(|| d.sparse_inverse(vec![vec![g(1)]], &context));
+        assert!(matches!(inverse, Err(Error::Resource(_))));
+        let solved = budget.run(|| d.sparse_solve_any(vec![vec![g(1)]], vec![g(1)], &context));
+        assert!(matches!(solved, Err(Error::Resource(_))));
+        let blocks = budget.run(|| d.validate_sparse_blocks(&[vec![g(1)]], &[vec![0]]));
+        assert!(matches!(blocks, Err(Error::Resource(_))));
+    }
+    assert!(matches!(
+        d.sparse_inverse(vec![vec![g(0)]], &context),
+        Err(Error::Numerical(_))
+    ));
 }

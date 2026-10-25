@@ -1,32 +1,41 @@
 use super::*;
 
 #[test]
-fn explicit_32m_ceiling_keeps_default_and_other_admission_bounds() {
-    assert_eq!(ExactFrobeniusLimits::default().max_scalar_cells, 4_000_000);
+fn explicit_cell_caps_preserve_requested_admission_without_default_ceilings() {
+    let defaults = ExactFrobeniusLimits::default();
+    assert_eq!(
+        (
+            defaults.max_dimension,
+            defaults.max_order,
+            defaults.max_coefficient_bits,
+            defaults.max_scalar_cells,
+        ),
+        (None, None, None, None)
+    );
     for (cells, accepted) in [
         (0, false),
         (16_000_000, true),
         (16_000_001, true),
         (32_000_000, true),
-        (32_000_001, false),
+        (32_000_001, true),
     ] {
         let limits = ExactFrobeniusLimits {
-            max_dimension: 128,
-            max_coefficient_bits: 1_048_576,
-            max_scalar_cells: cells,
+            max_dimension: Some(128),
+            max_coefficient_bits: Some(1_048_576),
+            max_scalar_cells: Some(cells),
             ..Default::default()
         };
         assert_eq!(limits.validate().is_ok(), accepted);
     }
     let context = RunContext::default();
     let old = ExactFrobeniusLimits {
-        max_dimension: 128,
-        max_coefficient_bits: 1_048_576,
-        max_scalar_cells: 16_000_000,
+        max_dimension: Some(128),
+        max_coefficient_bits: Some(1_048_576),
+        max_scalar_cells: Some(16_000_000),
         ..Default::default()
     };
     let larger = ExactFrobeniusLimits {
-        max_scalar_cells: 32_000_000,
+        max_scalar_cells: Some(32_000_000),
         ..old.clone()
     };
     // PR15: requested order7 plus the independently proved gauge span5.
@@ -49,10 +58,10 @@ fn explicit_32m_ceiling_keeps_default_and_other_admission_bounds() {
     assert!(matches!(domain.preflight(127, 15), Err(Error::Limit(_))));
     assert!(matches!(domain.preflight(129, 1), Err(Error::Limit(_))));
     let excess_bits = ExactFrobeniusLimits {
-        max_coefficient_bits: 1_048_577,
+        max_coefficient_bits: Some(1_048_577),
         ..larger
     };
-    assert!(excess_bits.validate().is_err());
+    assert!(excess_bits.validate().is_ok());
 }
 
 fn series(expression: &str) -> impl Iterator<Item = (Rational, Atom)> {
@@ -70,15 +79,22 @@ fn series(expression: &str) -> impl Iterator<Item = (Rational, Atom)> {
 #[test]
 fn native_nonconstant_unit_root_grid_ignores_only_exact_zero_fractional_slots() {
     let terms = series("(1-z)^(-1/2)").collect::<Vec<_>>();
-    assert!(
-        terms
-            .iter()
-            .any(|(power, coefficient)| !power.is_integer() && coefficient.is_zero())
-    );
+    // Native owners may omit stored exact zeros. Add an explicit ramification
+    // slot to exercise the adapter independently of that storage choice.
+    let zero = Atom::new();
     let limits = ExactFrobeniusLimits::default();
     let context = RunContext::default();
-    let coefficients = regular_root_coefficients(
+    let native = regular_root_coefficients(
         terms.iter().map(|(p, c)| (p.clone(), c)),
+        4,
+        &ExactDomain::dense(&limits, &context),
+    )
+    .unwrap();
+    let coefficients = regular_root_coefficients(
+        terms
+            .iter()
+            .map(|(p, c)| (p.clone(), c))
+            .chain(std::iter::once((Rational::from((1, 2)), &zero))),
         4,
         &ExactDomain {
             limits: &limits,
@@ -87,6 +103,7 @@ fn native_nonconstant_unit_root_grid_ignores_only_exact_zero_fractional_slots() 
         },
     )
     .unwrap();
+    assert_eq!(coefficients, native);
     for (value, expected) in coefficients.iter().zip([
         Rational::one(),
         Rational::from((1, 2)),
@@ -119,5 +136,56 @@ fn nonzero_fractional_power_is_not_discarded_as_a_ramification_slot() {
             }
         ),
         Err(Error::Unsupported(_))
+    ));
+}
+
+#[test]
+fn disabled_height_estimates_preserve_compact_native_integer_power_series() {
+    let limits = ExactFrobeniusLimits::default();
+    let context = RunContext::default();
+    let domain = ExactDomain::dense(&limits, &context);
+    let x = symbol!("exact_compact_height::x");
+    let positive = i64::try_from(usize::MAX).unwrap_or(i64::MAX);
+    let expression = (Atom::one() + Atom::var(x)).pow(positive);
+    let coefficients = domain.series(&expression, x, 1).unwrap();
+    assert_eq!(
+        coefficients,
+        vec![domain.integer(1), domain.integer(positive)]
+    );
+    let negative = (Atom::one() + Atom::var(x)).pow(i64::MIN);
+    assert_eq!(
+        domain.series(&negative, x, 1).unwrap(),
+        vec![domain.integer(1), domain.integer(i64::MIN)]
+    );
+    let beyond_native_negative =
+        (Atom::one() + Atom::var(x)).pow(Atom::num(-(Integer::from(u64::MAX) + Integer::one())));
+    assert!(matches!(domain.series(&beyond_native_negative, x, 1),
+        Err(Error::Unsupported(message)) if message.contains("large exponent")));
+    let diagnostic = ExactFrobeniusLimits {
+        max_coefficient_bits: Some(u64::MAX),
+        ..limits.clone()
+    };
+    assert!(matches!(
+        ExactDomain::dense(&diagnostic, &context).series(
+            &(Atom::one() + Atom::var(x)).pow(i64::MIN),
+            x,
+            1
+        ),
+        Err(Error::Limit(_))
+    ));
+    let beyond_native = (Atom::one() + Atom::var(x)).pow(Atom::num(Integer::from(i64::MAX) + 1));
+    assert!(
+        matches!(domain.preflight_series(&beyond_native, x, 1), Err(Error::Limit(message)) if message.contains("representation"))
+    );
+    let budget = crate::ResourceBudget::with_memory_monitor(
+        crate::ResourceLimits {
+            max_process_rss_bytes: Some(1),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
+    assert!(matches!(
+        budget.run(|| domain.series(&expression, x, 1)),
+        Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
     ));
 }

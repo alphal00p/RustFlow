@@ -5,6 +5,8 @@ use crate::{Error, Result};
 use rustred::algebra::{Coefficient, CoefficientContext};
 use std::collections::{BTreeMap, BTreeSet};
 use symbolica::prelude::*;
+#[cfg(feature = "automatic")]
+use symbolica::utils::resources;
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Integral(pub Vec<i16>);
@@ -366,45 +368,48 @@ impl IntegralFamily {
                     .ok_or_else(|| Error::InvalidInput("zero-loop family".into()))?;
                 let mut choices = vec![Vec::<usize>::new()];
                 for _ in 0..rank {
+                    resources::checkpoint()?;
                     let mut next = Vec::new();
                     for choice in choices {
                         let start = choice.last().map_or(0, |i| i + 1);
                         for i in start..branches.len() {
+                            resources::checkpoint()?;
                             let mut candidate = choice.clone();
                             candidate.push(i);
                             let matrix = candidate.iter().map(|&j| branches[j].0.clone()).collect();
                             if crate::algebra::rref(matrix).1.len() == candidate.len() {
+                                resources::checkpoint()?;
                                 next.push(candidate);
-                                if next.len() > 10000 {
-                                    return Err(Error::Limit(
-                                        "loop-placement routing budget exhausted".into(),
-                                    ));
-                                }
                             }
                         }
                     }
                     choices = next;
                 }
-                choices
-                    .into_iter()
-                    .filter_map(|choice| {
-                        let matrix: Vec<_> =
-                            choice.iter().map(|&i| branches[i].0.clone()).collect();
-                        let mut selected = Vec::new();
-                        for (direction, indices) in &branches {
-                            let mut trial = matrix.clone();
-                            trial.push(direction.clone());
-                            if crate::algebra::rref(trial).1.len() > rank {
-                                selected.extend(indices);
-                            }
+                let mut best: Option<Vec<usize>> = None;
+                for choice in choices {
+                    resources::checkpoint()?;
+                    let matrix: Vec<_> = choice.iter().map(|&i| branches[i].0.clone()).collect();
+                    let mut selected = Vec::new();
+                    for (direction, indices) in &branches {
+                        resources::checkpoint()?;
+                        let mut trial = matrix.clone();
+                        trial.push(direction.clone());
+                        if crate::algebra::rref(trial).1.len() > rank {
+                            selected.extend(indices);
                         }
-                        selected.sort();
-                        (!selected.is_empty()).then_some(selected)
-                    })
-                    .min_by_key(|indices| (indices.len(), indices.clone()))
-                    .ok_or_else(|| {
-                        Error::Unsupported("topology does not span its loop momenta".into())
-                    })
+                    }
+                    selected.sort();
+                    if !selected.is_empty()
+                        && best
+                            .as_ref()
+                            .is_none_or(|old| (selected.len(), &selected) < (old.len(), old))
+                    {
+                        best = Some(selected);
+                    }
+                }
+                best.ok_or_else(|| {
+                    Error::Unsupported("topology does not span its loop momenta".into())
+                })
             }
             _ => unreachable!(),
         }
@@ -445,8 +450,10 @@ impl IntegralFamily {
         let names = (0..symbols.len())
             .map(|i| format!("amflow_parameter_{i}"))
             .collect::<Vec<_>>();
-        let ctx = CoefficientContext::try_new(names.clone())
-            .map_err(|e| Error::InvalidInput(e.to_string()))?;
+        let ctx = CoefficientContext::try_new(names.clone()).map_err(|e| {
+            crate::error::preserve_resource(&e)
+                .unwrap_or_else(|| Error::InvalidInput(e.to_string()))
+        })?;
         let forward = symbols
             .into_iter()
             .zip(
@@ -505,7 +512,10 @@ impl IntegralFamily {
             gram,
             shifts,
         )
-        .map_err(|e| Error::InvalidInput(e.to_string()))?;
+        .map_err(|e| {
+            crate::error::preserve_resource(&e)
+                .unwrap_or_else(|| Error::InvalidInput(e.to_string()))
+        })?;
         Ok(ConvertedFamily {
             family,
             reverse: forward.into_iter().map(|(a, b)| (b, a)).collect(),

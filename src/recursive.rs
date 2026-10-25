@@ -103,6 +103,23 @@ impl<'a> RecursiveBoundary<'a> {
         epsilon: &Rational,
         p: Precision,
     ) -> Result<Vec<ComplexFloat>> {
+        let evaluate = || {
+            crate::stack_resources::run(|| self.evaluate_many_inner(family, targets, epsilon, p))
+        };
+        if self.ancestry.is_empty() {
+            self.options.run_with_resources(evaluate)
+        } else {
+            evaluate()
+        }
+    }
+
+    fn evaluate_many_inner(
+        &self,
+        family: &IntegralFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        p: Precision,
+    ) -> Result<Vec<ComplexFloat>> {
         self.context.cancellation.check()?;
         if targets.is_empty() {
             return Ok(vec![]);
@@ -135,8 +152,14 @@ impl<'a> RecursiveBoundary<'a> {
             if self.ancestry.iter().any(|frame| frame.contains(&problem)) {
                 return Err(Error::Limit("recursive boundary cycle detected".into()));
             }
-            if self.ancestry.len() >= 32 {
-                return Err(Error::Limit("boundary recursion exceeds 32 levels".into()));
+            if self
+                .options
+                .max_recursion_depth
+                .is_some_and(|limit| self.ancestry.len() >= limit)
+            {
+                return Err(Error::Limit(
+                    "boundary recursion diagnostic exhausted".into(),
+                ));
             }
             let custom = if let Some(provider) = self.terminal {
                 provider.evaluate(family, &target, epsilon, p)?
@@ -342,14 +365,15 @@ pub fn scaleless(family: &IntegralFamily, integral: &Integral) -> Result<bool> {
         zero::{Analyzer, Decision},
     };
     let converted = family.convert()?;
-    let analyzer = Analyzer::try_unrestricted(&converted.family)
-        .map_err(|e| Error::Reduction(e.to_string()))?;
+    let analyzer = Analyzer::try_unrestricted(&converted.family).map_err(|e| {
+        crate::error::preserve_resource(&e).unwrap_or_else(|| Error::Reduction(e.to_string()))
+    })?;
     let mask = Mask::try_new(integral.0.iter().map(|&n| n > 0))
         .map_err(|e| Error::InvalidInput(e.to_string()))?;
     Ok(matches!(
-        analyzer
-            .analyze(&mask)
-            .map_err(|e| Error::Reduction(e.to_string()))?,
+        analyzer.analyze(&mask).map_err(|e| {
+            crate::error::preserve_resource(&e).unwrap_or_else(|| Error::Reduction(e.to_string()))
+        })?,
         Decision::ProvedZero(_)
     ))
 }
@@ -466,7 +490,7 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
         {
             return solutions.match_leading(&self.leading(family, basis, epsilon, p)?);
         }
-        let regions = crate::regions::enumerate_regions(family, 10000)?;
+        let regions = crate::regions::enumerate_regions(family, None)?;
         let parameters =
             ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
         let powers = basis
@@ -481,7 +505,7 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                     .collect::<Result<Vec<_>>>()
             })
             .collect::<Result<Vec<_>>>()?;
-        let orders = solutions.region_orders(&powers, 32)?;
+        let orders = solutions.region_orders(&powers, None)?;
         self.context.emit(Progress::BoundaryPlan {
             basis_size: basis.len(),
             region_series: orders
@@ -537,7 +561,7 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                         &expansion.coordinates,
                         family,
                         &region.hard,
-                        10000,
+                        None,
                     )?;
                     let mut products = Vec::new();
                     for term in factors {

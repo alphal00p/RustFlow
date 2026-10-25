@@ -72,28 +72,64 @@ pub(super) trait CoefficientDomain {
     }
 }
 
-struct NumericalDomain<'a> {
+pub(super) struct NumericalDomain<'a> {
     p: Precision,
     values: &'a ahash::HashMap<Atom, C>,
     strict: bool,
     prepared_rows: &'a crate::ode::prepared::PreparedRows,
     streaming: Option<&'a super::streaming::StreamingAdmission>,
 }
+
+impl<'a> NumericalDomain<'a> {
+    pub(super) fn streaming(
+        p: Precision,
+        values: &'a ahash::HashMap<Atom, C>,
+        prepared_rows: &'a crate::ode::prepared::PreparedRows,
+        admission: &'a super::streaming::StreamingAdmission,
+    ) -> Self {
+        Self {
+            p,
+            values,
+            strict: false,
+            prepared_rows,
+            streaming: Some(admission),
+        }
+    }
+}
+
 impl CoefficientDomain for NumericalDomain<'_> {
     type Scalar = C;
     type Solver = crate::numeric::BlockSolve;
     fn zero(&self) -> C {
         self.p.zero()
     }
+    fn preflight(&self, _dimension: usize, order: usize) -> Result<()> {
+        crate::series_limits::admit_complex(self.p, order, 0, "Frobenius recurrence")
+    }
     fn preflight_column(&self, dimension: usize, order: usize, logs: usize) -> Result<()> {
         if let Some(admission) = self.streaming {
             admission.column(dimension, order, logs)?;
+        } else {
+            crate::series_limits::admit_bytes(
+                order,
+                super::streaming::StreamingAdmission::estimated_column_bytes(
+                    self.p, dimension, order, logs, false,
+                ),
+                "Frobenius column workspace",
+            )?;
         }
         Ok(())
     }
     fn preflight_matrix(&self, dimension: usize) -> Result<()> {
         if let Some(admission) = self.streaming {
             admission.matrix(dimension)?;
+        } else {
+            crate::series_limits::admit_complex(
+                self.p,
+                0,
+                (dimension as u128).saturating_pow(2).saturating_mul(8),
+                "Frobenius matrix workspace",
+            )?;
         }
         Ok(())
     }
@@ -241,22 +277,12 @@ impl PreparedFrobenius {
 
     pub(super) fn numerical_recurrence_visit(
         &self,
-        p: Precision,
-        values: &ahash::HashMap<Atom, C>,
+        domain: NumericalDomain<'_>,
         order: usize,
         context: &RunContext,
-        prepared_rows: &crate::ode::prepared::PreparedRows,
-        admission: &super::streaming::StreamingAdmission,
         constants: Option<&[C]>,
         mut visitor: impl FnMut(std::ops::Range<usize>, FrobeniusColumn) -> Result<()>,
     ) -> Result<()> {
-        let domain = NumericalDomain {
-            p,
-            values,
-            strict: false,
-            prepared_rows,
-            streaming: Some(admission),
-        };
         self.recurrence_normal_visit(
             &domain,
             order,
@@ -310,6 +336,12 @@ impl PreparedFrobenius {
         mut visitor: impl FnMut(std::ops::Range<usize>, RecurrenceColumn<D::Scalar>) -> Result<()>,
     ) -> Result<()> {
         let n = self.normal.matrix.len();
+        let orders = order
+            .checked_add(1)
+            .ok_or_else(|| Error::Limit("Frobenius recurrence order overflow".into()))?;
+        i64::try_from(orders).map_err(|_| {
+            Error::Limit("Frobenius recurrence order exceeds i64 representation".into())
+        })?;
         if constants.is_some_and(|values| values.len() != n) {
             return Err(Error::InvalidInput("Frobenius constants dimension".into()));
         }
@@ -317,11 +349,7 @@ impl PreparedFrobenius {
         let polynomial_rows = domain.polynomial_rows(&self.normal, context)?;
         let mut a = vec![
             vec![vec![domain.zero(); n]; n];
-            if polynomial_rows.is_some() {
-                1
-            } else {
-                order + 1
-            }
+            if polynomial_rows.is_some() { 1 } else { orders }
         ];
         if let Some(rows) = &polynomial_rows {
             for (i, row) in rows.iter().enumerate() {
@@ -595,9 +623,10 @@ impl PreparedFrobenius {
         order: usize,
     ) -> Result<bool> {
         for other in self.eigenspaces.iter().map(|space| &space.exponent) {
-            let difference = (lambda + Atom::num(order as i64) - other)
-                .together()
-                .cancel();
+            let order = i64::try_from(order).map_err(|_| {
+                Error::Limit("Frobenius recurrence order exceeds i64 representation".into())
+            })?;
+            let difference = (lambda + Atom::num(order) - other).together().cancel();
             if difference.is_zero() || domain.near_resonance(&difference)? {
                 return Ok(true);
             }
@@ -613,6 +642,12 @@ impl PreparedFrobenius {
         order: usize,
         context: &RunContext,
     ) -> Result<Vec<RecurrenceColumn<D::Scalar>>> {
+        let series_depth = order
+            .checked_add(1)
+            .and_then(|depth| i64::try_from(depth).ok())
+            .ok_or_else(|| {
+                Error::Limit("Frobenius transformation depth exceeds i64 representation".into())
+            })?;
         let mut terms = Vec::new();
         let mut low = 0_i64;
         let mut high = 0_i64;
@@ -624,7 +659,7 @@ impl PreparedFrobenius {
                 }
                 domain.preflight_series(entry, self.source.variable, order)?;
                 let series = entry
-                    .series(self.source.variable, 0, order as i64 + 1)
+                    .series(self.source.variable, 0, series_depth)
                     .map_err(|e| Error::Unsupported(e.to_string()))?;
                 for (power, coefficient) in series.terms() {
                     let shift = power.to_string().parse::<i64>().map_err(|_| {
@@ -636,25 +671,40 @@ impl PreparedFrobenius {
                 }
             }
         }
-        if high - low > 256 {
-            return Err(Error::Limit("normalization power span exceeds 256".into()));
-        }
+        let span = high
+            .checked_sub(low)
+            .and_then(|span| usize::try_from(span).ok())
+            .ok_or_else(|| Error::Limit("Frobenius normalization span overflow".into()))?;
         domain.preflight(
             self.source.matrix.len(),
             order
-                .checked_add((high - low) as usize)
+                .checked_add(span)
                 .ok_or_else(|| Error::Limit("Frobenius normalization order overflow".into()))?,
         )?;
         for column in &mut columns {
             context.cancellation.check()?;
-            let mut transformed = vec![
-                vec![vec![domain.zero(); self.source.matrix.len()]];
-                column.coefficients.len() + (high - low) as usize
-            ];
+            let length = column.coefficients.len().checked_add(span).ok_or_else(|| {
+                Error::Limit("Frobenius normalized column length overflow".into())
+            })?;
+            let logs = column.coefficients.iter().map(Vec::len).max().unwrap_or(1);
+            let transformed_order = length.checked_sub(1).ok_or_else(|| {
+                Error::InvalidInput("empty Frobenius normalization column".into())
+            })?;
+            domain.preflight_column(self.source.matrix.len(), transformed_order, logs)?;
+            let mut transformed = vec![vec![vec![domain.zero(); self.source.matrix.len()]]; length];
             for (k, logs) in column.coefficients.iter().enumerate() {
                 for (l, row) in logs.iter().enumerate() {
                     for (i, j, shift, coefficient) in &terms {
-                        let destination = &mut transformed[(k as i64 + shift - low) as usize];
+                        let offset = shift
+                            .checked_sub(low)
+                            .and_then(|offset| usize::try_from(offset).ok())
+                            .ok_or_else(|| {
+                                Error::Limit("Frobenius transformation offset overflow".into())
+                            })?;
+                        let index = k.checked_add(offset).ok_or_else(|| {
+                            Error::Limit("Frobenius transformation index overflow".into())
+                        })?;
+                        let destination = &mut transformed[index];
                         destination.resize(
                             destination.len().max(l + 1),
                             vec![domain.zero(); self.source.matrix.len()],

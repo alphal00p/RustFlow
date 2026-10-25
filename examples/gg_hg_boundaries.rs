@@ -35,8 +35,8 @@ const HELP: &str = "Native verified ggHg canonical boundary generation
   --order N                    Initial series order (default 80)
   --workers N                  Independent epsilon workers (default 1)
   --last-epsilon N              Last fitted canonical power (default 4)
-  --max-precision-attempts N    Refinement limit (default 3)
-  --max-steps N                Continuation acceptance budget (default 1000)
+  --max-precision-attempts N    Optional refinement cap (default unbounded)
+  --max-steps N                Optional continuation cap (default unbounded)
   --case-batch N               Native reducer batch size (default 16)
   --cache-directory PATH        Bank, samples, exact cache, reports
                                (default target/gg-hg-boundaries)
@@ -123,8 +123,8 @@ impl Arguments {
                 "--guard-digits" => out.options.guard_digits = u32_value()?,
                 "--order" => out.options.series_order = integer()?,
                 "--workers" => out.options.workers = integer()?,
-                "--max-steps" => out.options.max_steps = integer()?,
-                "--max-precision-attempts" => out.options.max_precision_attempts = integer()?,
+                "--max-steps" => out.options.max_steps = Some(integer()?),
+                "--max-precision-attempts" => out.options.max_precision_attempts = Some(integer()?),
                 "--case-batch" => out.batch = integer()?,
                 "--last-epsilon" => {
                     out.last = i32::try_from(integer()?)

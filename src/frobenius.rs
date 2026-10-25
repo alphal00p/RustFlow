@@ -62,74 +62,6 @@ fn phase(context: &RunContext, name: impl Into<String>) -> Result<()> {
     context.cancellation.check()
 }
 
-#[cfg(test)]
-mod high_order_memory_tests {
-    use super::*;
-
-    #[test]
-    fn exact_log_width_admits_semisimple_high_precision_but_bounds_resonances() -> Result<()> {
-        let x = symbol!("frobenius_memory::x");
-        let prepare = |matrix| {
-            DifferentialSystem {
-                variable: x,
-                matrix,
-            }
-            .prepare_frobenius(&RunContext::default())
-        };
-        let p = Precision::decimal(24_000)?;
-        let simple = prepare(vec![vec![Atom::new(); 4]; 4])?;
-        assert!(
-            simple.estimated_numerical_peak_bytes(p, 27_000, false)
-                < crate::series_limits::MAX_ESTIMATED_BYTES
-        );
-        assert!(
-            simple.estimated_numerical_peak_bytes(p, 27_000, true)
-                > crate::series_limits::MAX_ESTIMATED_BYTES
-        );
-        let mut resonant = vec![vec![Atom::new(); 4]; 4];
-        for (i, row) in resonant.iter_mut().enumerate() {
-            row[i] = Atom::num(i as i64) / Atom::var(x);
-        }
-        let resonant = prepare(resonant)?;
-        assert!(
-            resonant.estimated_numerical_peak_bytes(p, 27_000, false)
-                > crate::series_limits::MAX_ESTIMATED_BYTES
-        );
-        let mut jordan = vec![vec![Atom::new(); 4]; 4];
-        for (i, row) in jordan.iter_mut().enumerate().take(3) {
-            row[i + 1] = Atom::one() / Atom::var(x);
-        }
-        let jordan = prepare(jordan)?;
-        assert!(
-            jordan.estimated_numerical_peak_bytes(p, 27_000, false)
-                > crate::series_limits::MAX_ESTIMATED_BYTES
-        );
-        Ok(())
-    }
-
-    #[test]
-    fn sparse_high_degree_source_is_admitted_before_dense_float_conversion() -> Result<()> {
-        let x = symbol!("frobenius_source_memory::x");
-        let prepared = DifferentialSystem {
-            variable: x,
-            matrix: vec![vec![Atom::var(x).pow(60000); 4]; 4],
-        }
-        .prepare_frobenius(&RunContext::default())?;
-        let p = Precision::decimal(24_000)?;
-        // The solution/solver estimate fits, but the dense connection would
-        // exceed the budget. Refuse before allocating those float vectors.
-        assert!(
-            prepared.estimated_numerical_peak_bytes(p, 27_000, false)
-                < crate::series_limits::MAX_ESTIMATED_BYTES
-        );
-        assert!(matches!(
-            prepared.evaluate(p, &Default::default(), 27_000, &RunContext::default()),
-            Err(Error::Limit(_))
-        ));
-        Ok(())
-    }
-}
-
 /// Reject parameter specialization that changes the symbolic resonance pattern.
 pub(crate) fn ensure_generic_exponents(
     exponents: &[&Atom],
@@ -203,15 +135,12 @@ impl DifferentialSystem {
                     .collect::<Result<Vec<_>>>()
             })
             .collect::<Result<Vec<_>>>()?;
-        let mut shifts = crate::integer_shearing::integer_potentials(&orders, 1, 10000, None)?;
+        let mut shifts = crate::integer_shearing::integer_potentials(&orders, 1, None, None)?;
         let minimum = *shifts.iter().min().unwrap();
         for s in &mut shifts {
-            *s -= minimum;
-        }
-        if shifts.iter().any(|&s| s > 10000) {
-            return Err(Error::Limit(
-                "Fuchsian shearing exceeds 10000 powers".into(),
-            ));
+            *s = s
+                .checked_sub(minimum)
+                .ok_or_else(|| Error::Limit("Fuchsian shift overflow".into()))?;
         }
         let x = Atom::var(self.variable);
         let transformation = (0..n)
@@ -347,7 +276,7 @@ impl DifferentialSystem {
         // Collect before normalization so cancellable factors retain their domain.
         let nonzero_conditions =
             crate::physical_conditions::rational_denominator_conditions(&expressions, &variables)?;
-        let (normal, transformation) = self.fuchsian_form(32)?;
+        let (normal, transformation) = self.fuchsian_form(None)?;
         phase(context, "extracting the exact Frobenius residue")?;
         let residue = normal.residue_with_context(context)?;
         let n = residue.len();
@@ -506,7 +435,8 @@ impl PreparedFrobenius {
             .iter()
             .map(|space| space.leading.len() as u128)
             .sum::<u128>();
-        // Basis normalization can extend a column by at most 256 powers.
+        // Reserve an initial normalization window. The resolved transformation
+        // span is admitted again before each replacement column is allocated.
         let length = (order as u128).saturating_add(257);
         let coefficients = length
             .saturating_mul(n)
@@ -915,11 +845,6 @@ pub(crate) fn project_limit(
             if through < valuation {
                 continue;
             }
-            if through.saturating_sub(valuation) > 10000 {
-                return Err(Error::Limit(
-                    "endpoint target expansion exceeds 10000 terms".into(),
-                ));
-            }
             let key = (i, through);
             if let std::collections::btree_map::Entry::Vacant(entry) = expansions.entry(key) {
                 let expansion = weight
@@ -963,4 +888,138 @@ pub(crate) fn project_limit(
     Ok(terms
         .remove(&(Rational::zero(), 0))
         .unwrap_or_else(|| p.zero()))
+}
+
+#[cfg(test)]
+mod high_order_memory_tests {
+    use super::*;
+
+    const REFERENCE_ESTIMATE_BYTES: u128 = 32 * 1024_u128.pow(3);
+
+    #[test]
+    fn normalization_span_above_256_preserves_the_exact_power_solution() -> Result<()> {
+        let x = symbol!("frobenius_normalization_resource::x");
+        let context = RunContext::default();
+        let source = DifferentialSystem {
+            variable: x,
+            matrix: vec![
+                vec![Atom::new(), Atom::var(x).pow(-301)],
+                vec![Atom::new(), Atom::new()],
+            ],
+        };
+        let transformation = vec![
+            vec![Atom::one(), -Atom::var(x).pow(-300) / Atom::num(300)],
+            vec![Atom::new(), Atom::one()],
+        ];
+        let normal = source.change_basis(&transformation)?;
+        assert!(normal.matrix.iter().flatten().all(Atom::is_zero));
+        let mut prepared = normal.prepare_frobenius(&context)?;
+        prepared.nonzero_conditions = source.prepare_frobenius(&context)?.nonzero_conditions;
+        prepared.source = source;
+        prepared.transformation = transformation;
+        let shifts = prepared
+            .transformation
+            .iter()
+            .flatten()
+            .filter(|entry| !entry.is_zero())
+            .map(|entry| valuation(entry, x))
+            .collect::<Result<Vec<_>>>()?;
+        assert_eq!(
+            shifts.iter().max().unwrap() - shifts.iter().min().unwrap(),
+            300
+        );
+        let p = Precision::decimal(80)?;
+        let basis = prepared.evaluate(p, &Default::default(), 8, &context)?;
+        assert!(
+            basis
+                .columns
+                .iter()
+                .any(|column| column.coefficients.len() > 256)
+        );
+        let constants = solve(
+            p,
+            basis.evaluate(&p.i(1), &Default::default())?,
+            vec![p.rational(&Rational::from((-1, 300))), p.i(1)],
+        )?;
+        let point = p.rational(&Rational::from((1, 2)));
+        let values = basis.evaluate(&point, &Default::default())?;
+        let actual = values
+            .iter()
+            .map(|row| {
+                row.iter()
+                    .zip(&constants)
+                    .fold(p.zero(), |sum, (value, constant)| {
+                        p.add(&sum, &p.mul(value, constant))
+                    })
+            })
+            .collect::<Vec<_>>();
+        let expected = p.scale(&p.powi(&point, -300), -1, 300);
+        assert!(p.close(&actual[0], &expected, 50));
+        assert!(p.close(&actual[1], &p.i(1), 50));
+        Ok(())
+    }
+
+    #[test]
+    fn exact_log_width_admits_semisimple_high_precision_but_bounds_resonances() -> Result<()> {
+        let x = symbol!("frobenius_memory::x");
+        let prepare = |matrix| {
+            DifferentialSystem {
+                variable: x,
+                matrix,
+            }
+            .prepare_frobenius(&RunContext::default())
+        };
+        let p = Precision::decimal(24_000)?;
+        let simple = prepare(vec![vec![Atom::new(); 4]; 4])?;
+        assert!(simple.estimated_numerical_peak_bytes(p, 27_000, false) < REFERENCE_ESTIMATE_BYTES);
+        assert!(simple.estimated_numerical_peak_bytes(p, 27_000, true) > REFERENCE_ESTIMATE_BYTES);
+        let mut resonant = vec![vec![Atom::new(); 4]; 4];
+        for (i, row) in resonant.iter_mut().enumerate() {
+            row[i] = Atom::num(i as i64) / Atom::var(x);
+        }
+        let resonant = prepare(resonant)?;
+        assert!(
+            resonant.estimated_numerical_peak_bytes(p, 27_000, false) > REFERENCE_ESTIMATE_BYTES
+        );
+        let mut jordan = vec![vec![Atom::new(); 4]; 4];
+        for (i, row) in jordan.iter_mut().enumerate().take(3) {
+            row[i + 1] = Atom::one() / Atom::var(x);
+        }
+        let jordan = prepare(jordan)?;
+        assert!(jordan.estimated_numerical_peak_bytes(p, 27_000, false) > REFERENCE_ESTIMATE_BYTES);
+        Ok(())
+    }
+
+    #[test]
+    fn sparse_high_degree_source_is_admitted_before_dense_float_conversion() -> Result<()> {
+        let x = symbol!("frobenius_source_memory::x");
+        let prepared = DifferentialSystem {
+            variable: x,
+            matrix: vec![vec![Atom::var(x).pow(60000); 4]; 4],
+        }
+        .prepare_frobenius(&RunContext::default())?;
+        let p = Precision::decimal(24_000)?;
+        // The solution/solver estimate fits, but the dense connection would
+        // exceed the explicit memory budget. Refuse before allocating those float vectors.
+        assert!(
+            prepared.estimated_numerical_peak_bytes(p, 27_000, false) < REFERENCE_ESTIMATE_BYTES
+        );
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(REFERENCE_ESTIMATE_BYTES as u64),
+                ..Default::default()
+            },
+            || Ok(0),
+        );
+        assert!(matches!(
+            budget.run(|| prepared.evaluate(
+                p,
+                &Default::default(),
+                27_000,
+                &RunContext::default()
+            )),
+            Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+        ));
+        Ok(())
+    }
 }

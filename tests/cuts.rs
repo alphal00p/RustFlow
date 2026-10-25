@@ -89,7 +89,7 @@ fn cut_backend_reduces_raised_and_pinched_two_body_integrals_exactly() {
     for factorized in [true, false] {
         let backend = RustRedBackend {
             max_depth: 3,
-            max_targets: 256,
+            max_targets: Some(256),
             factorized,
             ..Default::default()
         };
@@ -150,7 +150,7 @@ fn cut_cache_separates_orientation_and_epsilon_and_supports_restart() {
         backend: Counted {
             backend: RustRedBackend {
                 max_depth: 3,
-                max_targets: 256,
+                max_targets: Some(256),
                 ..Default::default()
             },
             calls: AtomicUsize::new(0),

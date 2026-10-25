@@ -88,7 +88,7 @@ fn exact_seed_matches_fresh_native_result_and_avoids_a_search() {
         .reduce_at_epsilon(&f, &target, &point, &RunContext::default())
         .unwrap();
     let mut native = backend();
-    native.max_targets = 1;
+    native.max_targets = Some(1);
     let seeded = native.with_identity_bank(bank(&f, rule(coefficient(Atom::num(2)))));
     let (ctx, count) = counted();
     let result = seeded.reduce_at_epsilon(&f, &target, &point, &ctx).unwrap();
@@ -103,7 +103,7 @@ fn exact_seed_matches_fresh_native_result_and_avoids_a_search() {
 fn supplied_residuals_remain_unsearched_and_limited() {
     let f = family(Atom::one());
     let mut native = backend();
-    native.max_targets = 0;
+    native.max_targets = Some(0);
     let seeded = native.with_identity_bank(bank(&f, rule(coefficient(Atom::one()))));
     assert!(matches!(
         seeded.reduce(&f, &[Integral(vec![2])], &RunContext::default()),
@@ -119,7 +119,7 @@ fn supplied_zero_is_distinct_from_an_unknown_leaf() {
         nonzero_conditions: vec![],
     };
     let mut native = backend();
-    native.max_targets = 0;
+    native.max_targets = Some(0);
     let out = native
         .with_identity_bank(bank(&f, r))
         .reduce(&f, &[Integral(vec![2])], &RunContext::default())
@@ -239,7 +239,7 @@ fn bank_budget_scope_domain_and_evidence_are_bound() {
             r.clone(),
             EVIDENCE,
             NativeIdentityLimits {
-                max_rules: 0,
+                max_rules: Some(0),
                 ..Default::default()
             }
         ),
@@ -252,7 +252,7 @@ fn bank_budget_scope_domain_and_evidence_are_bound() {
             r.clone(),
             EVIDENCE,
             NativeIdentityLimits {
-                max_terms: 0,
+                max_terms: Some(0),
                 ..Default::default()
             }
         ),
@@ -301,7 +301,7 @@ fn seeded_checkpoints_restart_and_never_reuse_no_bank_scope() {
         .map(|p| p.unwrap().file_name())
         .collect::<std::collections::BTreeSet<_>>();
     let mut one = raw.clone();
-    one.max_targets = 1;
+    one.max_targets = Some(1);
     let seeded = one.with_identity_bank(bank(&f, rule(coefficient(Atom::num(2)))));
     let (ctx, count) = counted();
     let actual = seeded
@@ -378,7 +378,7 @@ fn interrupted_seeded_checkpoint_restarts_with_unknown_leaf_still_unsearched() {
     let directory = directory("interrupted_checkpoint");
     let mut raw = backend();
     raw.checkpoints = Some(directory.clone());
-    raw.max_targets = 1;
+    raw.max_targets = Some(1);
     let seeded = raw.with_identity_bank(bank(&f, rule(coefficient(Atom::num(2)))));
     let token = CancellationToken::default();
     let child_token = token.clone();
@@ -424,11 +424,70 @@ fn inferred_denominator_conditions_obey_the_final_budget() {
         r,
         EVIDENCE,
         NativeIdentityLimits {
-            max_conditions: 0,
+            max_conditions: Some(0),
             ..Default::default()
         },
     );
     assert!(
         matches!(result, Err(Error::Limit(ref message)) if message.contains("admitted conditions"))
     );
+}
+
+#[test]
+fn ordinary_identity_admission_uses_shared_resources_without_default_count_limits() {
+    let f = family(Atom::one());
+    let limits = NativeIdentityLimits::default();
+    assert_eq!(limits.max_rules, None);
+    assert_eq!(limits.max_terms, None);
+    assert_eq!(limits.max_residuals, None);
+    assert_eq!(limits.max_conditions, None);
+    let r = rule(coefficient(Atom::one()));
+    let budget = ResourceBudget::with_memory_monitor(
+        ResourceLimits {
+            max_process_rss_bytes: Some(0),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
+    assert!(matches!(
+        budget.run(|| NativeIdentityBank::new("memory", &f, r.clone(), EVIDENCE, limits)),
+        Err(Error::Resource(ResourceLimitError::Memory {
+            rss_bytes: 0,
+            additional_bytes: 1..,
+            limit_bytes: 0,
+        }))
+    ));
+    let admitted = bank(&f, r.clone());
+    let diagnostic = NativeIdentityBank::new(
+        "proved_tadpole",
+        &f,
+        r,
+        EVIDENCE,
+        NativeIdentityLimits {
+            max_rules: Some(1),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert_ne!(admitted.identity(), diagnostic.identity());
+}
+
+#[test]
+fn supplied_table_resource_failure_does_not_commit_a_scope() {
+    let f = family(Atom::one());
+    let mut table = ScopedTableBackend::new("resource_admission");
+    let budget = ResourceBudget::with_memory_monitor(
+        ResourceLimits {
+            max_process_rss_bytes: Some(0),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
+    assert!(matches!(
+        budget.run(|| table.insert(&f, rule(coefficient(Atom::one())))),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
+    ));
+    assert!(table.is_empty());
+    table.insert(&f, rule(coefficient(Atom::one()))).unwrap();
+    assert_eq!(table.len(), 1);
 }

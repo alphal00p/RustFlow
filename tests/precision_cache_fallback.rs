@@ -78,8 +78,8 @@ fn options() -> FlowOptions {
         digits: 20,
         guard_digits: 40,
         series_order: 16,
-        max_steps: 100,
-        max_precision_attempts: 1,
+        max_steps: Some(100),
+        max_precision_attempts: Some(1),
         ..Default::default()
     }
 }
@@ -239,7 +239,7 @@ fn precision_fallback_respects_attempt_cap_and_preserves_failed_cache() -> Resul
     let mut bank = bank(&flow)?;
     let old = bank.clone();
     let limited = FlowOptions {
-        max_boundary_attempts: 1,
+        max_boundary_attempts: Some(1),
         ..options()
     };
     let error = flow

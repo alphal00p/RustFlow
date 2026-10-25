@@ -257,27 +257,34 @@ fn streamed_point_matrix_keeps_domain_order_precision_and_cancellation_guards() 
         ),
         Err(Error::InvalidInput(_))
     ));
+    let budget = ResourceBudget::with_memory_monitor(
+        ResourceLimits {
+            max_process_rss_bytes: Some(1024),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
     assert!(matches!(
-        prepared.evaluate_matrix_with_winding(
+        budget.run(|| prepared.evaluate_matrix_with_winding(
             Precision { bits: u32::MAX },
             &parameters,
             8,
             &point,
             0,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
-        prepared.evaluate_matrix_with_winding(
+        budget.run(|| prepared.evaluate_matrix_with_winding(
             p,
             &parameters,
             200_001,
             &point,
             0,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
         prepared.match_values(p, &parameters, 8, &point, &[], &RunContext::default()),

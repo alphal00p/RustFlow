@@ -222,41 +222,48 @@ fn streaming_retains_domain_cancellation_and_allocation_guards() -> Result<()> {
         Err(Error::Numerical(_))
     ));
     let parameters = ahash::HashMap::from_iter([(e, p.i(2))]);
-    // Refuse impossible precision before allocating a matrix, result vector,
-    // or a rounded logarithm at that precision.
+    // Refuse explicitly budgeted precision before allocating a matrix, result
+    // vector, or a rounded logarithm at that precision.
+    let budget = ResourceBudget::with_memory_monitor(
+        ResourceLimits {
+            max_process_rss_bytes: Some(1024),
+            ..Default::default()
+        },
+        || Ok(0),
+    );
     let oversized = Precision { bits: u32::MAX };
     assert!(matches!(
-        prepared.evaluate_solution(
+        budget.run(|| prepared.evaluate_solution(
             oversized,
             &parameters,
             8,
             &constants,
             &point,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
-        prepared.match_values(
+        budget.run(|| prepared.match_values(
             oversized,
             &parameters,
             8,
             &point,
             &constants,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
-        prepared.evaluate_solution(
+        budget.run(|| prepared.evaluate_solution(
             p,
             &parameters,
             200_001,
             &constants,
             &point,
             &RunContext::default()
-        ),
-        Err(Error::Limit(_))
+        )),
+        Err(Error::Resource(ResourceLimitError::Memory { .. }))
     ));
     assert!(matches!(
         prepared.evaluate_solution(p, &parameters, 8, &[], &point, &RunContext::default()),

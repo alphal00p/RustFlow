@@ -14,7 +14,7 @@ fn options(degree: usize, order: usize, working: u32) -> FlowOptions {
             degree,
             ..Default::default()
         }),
-        max_steps: 10000,
+        max_steps: Some(10000),
         ..Default::default()
     }
 }
@@ -155,7 +155,7 @@ fn resource_fallback_retains_taylor_and_cancellation_commits_nothing() -> Result
         coefficients: vec![vec![p.i(1)]],
     };
     let mut opts = options(4, 64, 60);
-    opts.pade.as_mut().unwrap().max_work = 2;
+    opts.pade.as_mut().unwrap().max_work = Some(2);
     let result = compiled.transport(&boundary, &[p.i(1)], &opts, &RunContext::default(), true)?;
     assert_eq!(result.diagnostics.pade_steps, 0);
     assert!(result.diagnostics.pade_fallbacks > 0);

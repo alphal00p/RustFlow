@@ -28,7 +28,7 @@ fn system(entries: &[&[&str]], roots: Vec<SquareRoot>) -> AlgebraicSystem {
 }
 fn prepared(entries: &[&[&str]], roots: Vec<SquareRoot>) -> PreparedAlgebraicFrobenius {
     system(entries, roots)
-        .prepare_frobenius(32, &RunContext::default())
+        .prepare_frobenius(Some(32), &RunContext::default())
         .unwrap()
 }
 fn root(symbol: Symbol, radicand: &str) -> SquareRoot {
@@ -97,7 +97,7 @@ fn complex_phase_and_winding_use_power_of_principal_coordinate_root() {
         ("-z", "𝑖/16", 0, "-𝑖"),
     ] {
         let lifted = system(&[&["r"]], vec![root(r(), radicand)])
-            .rational_lift(8, &context)
+            .rational_lift(Some(8), &context)
             .unwrap();
         let (_, leading, _) = super::sheet_germ::selected_germ(
             &lifted,
@@ -295,14 +295,29 @@ fn nonconstant_normalized_root_series_has_exact_constant_sheet_action() {
 
 #[test]
 fn aggregate_growth_is_refused_before_root_conversion_and_sign_selection() {
-    let limits = ExactFrobeniusLimits::default();
     let context = RunContext::default();
+    assert_eq!(
+        super::sheet_germ::valuation(
+            &a("1+z^257"),
+            z(),
+            &ExactFrobeniusLimits::default(),
+            &context,
+        )
+        .unwrap()
+        .0,
+        0
+    );
+    let limits = ExactFrobeniusLimits {
+        max_order: Some(256),
+        max_coefficient_bits: Some(65_536),
+        ..Default::default()
+    };
     assert!(matches!(
         super::sheet_germ::valuation(&a("1+z^257"), z(), &limits, &context),
         Err(Error::Limit(_))
     ));
     let source = system(&[&["r"]], vec![root(r(), "z")])
-        .rational_lift(8, &context)
+        .rational_lift(Some(8), &context)
         .unwrap();
     let p = Precision::decimal(70).unwrap();
     assert!(matches!(

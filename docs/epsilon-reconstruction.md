@@ -57,19 +57,20 @@ was introduced by this change.
 ## Long numerical series
 
 Ordinary rational and direct-epsilon Taylor transport, numerical Frobenius
-expansions, and native fixed-series adapters admit orders up to 200,000. Each
-allocation is checked against a conservative 32 GiB workspace estimate using
+expansions, and native fixed-series adapters check integer and storage
+representation at the requested order. Each allocation is estimated for any
+explicitly configured shared RSS budget using
 working precision, component/channel count, polynomial degree, and retained
 segments. Frobenius admission includes cached block factorizations and basis
 transformations. Exact prepared logarithmic widths sharpen that estimate when
 the generic exponents have no integer resonance; resonant and strict endpoint
 evaluation retain a dimension-based logarithm bound.
 
-The consumed infinity basis is released before Taylor continuation. Algebraic
-chart owners retain the 10,000-order limit until their additional root and
-kernel storage has an explicit high-order estimate. These checks are admission
-estimates, not process memory caps; campaign jobs still require the external
-CPU/RSS supervisor and independent numerical refinements.
+The consumed infinity basis is released before Taylor continuation. Chart
+owners refine the generic coefficient-storage estimate with their own workspace
+when available. Estimates do not replace process monitoring or the independent
+numerical refinements required for an accepted result. Unconfigured shared
+resource limits impose no allocation or order ceiling.
 
 Repeated real-Gamma evaluations in recursive boundaries reuse the existing
 per-thread LRU at all working precisions. Each thread retains at most 64 entries

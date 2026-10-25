@@ -318,7 +318,7 @@ fn compatible_six_line_sides_match_principal_homogeneity_with_refinement() {
     let targets = [Integral(vec![1; 6]), Integral(vec![2, 1, 1, 1, 1, 1])];
     let backend = RustRedBackend {
         max_depth: 3,
-        max_targets: 65536,
+        max_targets: Some(65536),
         max_sector_batch: 32,
         max_backward_frontier: 1024,
         parametric_rules: true,

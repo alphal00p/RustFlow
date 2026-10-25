@@ -12,8 +12,7 @@ fn main() -> Result<()> {
         .nth(2)
         .map(|s| s.parse::<usize>())
         .transpose()
-        .map_err(|e| Error::InvalidInput(e.to_string()))?
-        .unwrap_or(4096);
+        .map_err(|e| Error::InvalidInput(e.to_string()))?;
     let (family, targets) = benchmarks::paper_two_loop()?;
     let backend = cache::CachedBackend {
         backend: RustRedBackend {

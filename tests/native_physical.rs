@@ -23,7 +23,14 @@ fn native_graph_amf_seed_drives_a_progressively_filled_physical_cache() {
     .unwrap();
     let context = RunContext::default();
     let groups = graph
-        .integral_groups(&KinematicPoint::default(), epsilon, 4, 1000, &context)
+        .integral_groups(
+            &KinematicPoint::default(),
+            epsilon,
+            4,
+            Some(1000),
+            Default::default(),
+            &context,
+        )
         .unwrap();
     assert_eq!(groups.len(), 1);
     let (family, weights) = &groups[0];

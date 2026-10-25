@@ -70,6 +70,7 @@ pub struct CompiledEpsilonSystem {
 
 impl EpsilonSystem {
     pub fn validate(&self) -> Result<()> {
+        symbolica::utils::resources::checkpoint()?;
         let n = self.matrices.first().map_or(0, Vec::len);
         if n == 0
             || self
@@ -80,9 +81,6 @@ impl EpsilonSystem {
             return Err(Error::InvalidInput(
                 "epsilon matrices must be nonempty and square with equal dimensions".into(),
             ));
-        }
-        if self.matrices.len() > 1024 {
-            return Err(Error::Limit("at most 1024 epsilon orders supported".into()));
         }
         Ok(())
     }
@@ -100,13 +98,24 @@ impl EpsilonSystem {
                 "epsilon and path parameter must differ".into(),
             ));
         }
-        if order >= 1024 {
-            return Err(Error::Limit("at most 1024 epsilon orders supported".into()));
-        }
+        symbolica::utils::resources::checkpoint()?;
+        let count = order
+            .checked_add(1)
+            .ok_or_else(|| Error::Limit("epsilon series order overflow".into()))?;
+        let series_depth = i64::try_from(count)
+            .map_err(|_| Error::Limit("epsilon series depth exceeds i64 representation".into()))?;
         let n = system.matrix.len();
-        let mut matrices = vec![vec![vec![Atom::new(); n]; n]; order + 1];
+        let bytes = n
+            .checked_mul(n)
+            .and_then(|cells| cells.checked_mul(count))
+            .and_then(|cells| cells.checked_mul(std::mem::size_of::<Atom>()))
+            .and_then(|bytes| u64::try_from(bytes).ok())
+            .ok_or_else(|| Error::Limit("epsilon matrix storage overflow".into()))?;
+        symbolica::utils::resources::check_allocation(bytes)?;
+        let mut matrices = vec![vec![vec![Atom::new(); n]; n]; count];
         for (i, row) in system.matrix.iter().enumerate() {
             for (j, a) in row.iter().enumerate() {
+                symbolica::utils::resources::checkpoint()?;
                 // In particular, do not accept floating coefficients or
                 // fractional epsilon powers as an ordinary Taylor series.
                 let a = crate::family::encode_complex(a);
@@ -138,7 +147,7 @@ impl EpsilonSystem {
                     ));
                 }
                 let expansion = a
-                    .series(epsilon, 0, order as i64 + 1)
+                    .series(epsilon, 0, series_depth)
                     .map_err(|e| Error::Unsupported(e.to_string()))?;
                 if !expansion.is_zero() && expansion.get_trailing_exponent() < 0 {
                     return Err(Error::Unsupported(
@@ -154,6 +163,7 @@ impl EpsilonSystem {
                 }
             }
         }
+        symbolica::utils::resources::checkpoint()?;
         Ok(Self {
             variable: system.variable,
             matrices,
@@ -170,6 +180,15 @@ impl EpsilonSystem {
         // Reuse these finite polynomials at every coefficient order; there is
         // no repeated (n*orders)^2 matrix allocation or pole finding.
         let n = self.matrices[0].len();
+        let columns = n
+            .checked_mul(self.matrices.len())
+            .ok_or_else(|| Error::Limit("epsilon row dimension overflow".into()))?;
+        let bytes = columns
+            .checked_mul(n)
+            .and_then(|cells| cells.checked_mul(std::mem::size_of::<Atom>()))
+            .and_then(|bytes| u64::try_from(bytes).ok())
+            .ok_or_else(|| Error::Limit("epsilon row storage overflow".into()))?;
+        symbolica::utils::resources::check_allocation(bytes)?;
         let rows = (0..n)
             .map(|i| {
                 self.matrices
@@ -237,9 +256,12 @@ impl CompiledEpsilonSystem {
         {
             return Err(Error::InvalidInput("epsilon boundary dimensions".into()));
         }
+        let trailing_offset = i32::try_from(self.count - 1).map_err(|_| {
+            Error::InvalidInput("epsilon power range exceeds i32 representation".into())
+        })?;
         boundary
             .leading
-            .checked_add(self.count as i32 - 1)
+            .checked_add(trailing_offset)
             .ok_or_else(|| Error::InvalidInput("epsilon power range overflows".into()))?;
         let flat = BoundaryData {
             point: boundary.point.clone(),
@@ -833,28 +855,31 @@ pub fn transport_epsilon(
     context: &RunContext,
     save_segments: bool,
 ) -> Result<EpsilonSolution> {
-    refine_epsilon_transport(options, context, save_segments, |p, refined| {
-        let compiled = system.compile(p, &Default::default())?;
-        let points = waypoints
-            .iter()
-            .map(|a| p.eval(a, &Default::default()))
-            .collect::<Result<Vec<_>>>()?;
-        let boundary = boundary_provider(p)?;
-        let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
-            p,
-            &boundary.point,
-            waypoints,
-            &points,
-            options.digits,
-        )?;
-        let mut result = compiled.transport(&boundary, &points, refined, context, save_segments)?;
-        result.diagnostics.conditioning_digits = Some(
-            result
-                .diagnostics
-                .conditioning_digits
-                .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
-        );
-        Ok(result)
+    options.run_with_resources(|| {
+        refine_epsilon_transport(options, context, save_segments, |p, refined| {
+            let compiled = system.compile(p, &Default::default())?;
+            let points = waypoints
+                .iter()
+                .map(|a| p.eval(a, &Default::default()))
+                .collect::<Result<Vec<_>>>()?;
+            let boundary = boundary_provider(p)?;
+            let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
+                p,
+                &boundary.point,
+                waypoints,
+                &points,
+                options.digits,
+            )?;
+            let mut result =
+                compiled.transport(&boundary, &points, refined, context, save_segments)?;
+            result.diagnostics.conditioning_digits = Some(
+                result
+                    .diagnostics
+                    .conditioning_digits
+                    .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
+            );
+            Ok(result)
+        })
     })
 }
 
@@ -882,6 +907,7 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
     mut run: impl FnMut(Precision, &FlowOptions) -> Result<(EpsilonSolution, M)>,
     mut compatible: impl FnMut(&EpsilonSolution, &M, &EpsilonSolution, &M, usize) -> Result<bool>,
 ) -> Result<(EpsilonSolution, M)> {
+    options.run_with_resources(|| {
     options.validate()?;
     let mut previous: Option<(EpsilonSolution, M)> = None;
     let mut working_digits = options
@@ -889,7 +915,14 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
         .checked_add(options.guard_digits)
         .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
     let mut last_precision_failure = None;
-    for attempt in 0..=options.max_precision_attempts {
+    for attempt in 0_usize.. {
+        symbolica::utils::resources::checkpoint()?;
+        if options
+            .max_precision_attempts
+            .is_some_and(|limit| attempt > limit)
+        {
+            break;
+        }
         context.cancellation.check()?;
         let mut refined = options.clone();
         refined.guard_digits = working_digits - options.digits;
@@ -1010,8 +1043,58 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
     Err(Error::Accuracy(
         "epsilon transport did not stabilize under precision/order refinement".into(),
     ))
+
+    })
 }
 
 #[cfg(test)]
 #[path = "diffexp/uncertainty_tests.rs"]
 mod uncertainty_tests;
+
+#[cfg(test)]
+mod resource_tests {
+    use super::*;
+
+    #[test]
+    fn representable_epsilon_orders_above_1023_keep_the_exact_coefficient() -> Result<()> {
+        let epsilon = symbol!("epsilon_resource_orders::epsilon");
+        let system = DifferentialSystem {
+            variable: symbol!("epsilon_resource_orders::x"),
+            matrix: vec![vec![Atom::var(epsilon).pow(1024)]],
+        };
+        let expanded = EpsilonSystem::from_differential_system(&system, epsilon, 1024)?;
+        expanded.validate()?;
+        assert_eq!(expanded.matrices.len(), 1025);
+        assert!(
+            expanded.matrices[..1024]
+                .iter()
+                .all(|matrix| matrix[0][0].is_zero())
+        );
+        assert_eq!(expanded.matrices[1024][0][0], Atom::one());
+        Ok(())
+    }
+
+    #[test]
+    fn epsilon_storage_uses_shared_resources_and_checked_representation() {
+        let epsilon = symbol!("epsilon_resource_storage::epsilon");
+        let system = DifferentialSystem {
+            variable: symbol!("epsilon_resource_storage::x"),
+            matrix: vec![vec![Atom::one()]],
+        };
+        let budget = crate::ResourceBudget::with_memory_monitor(
+            crate::ResourceLimits {
+                max_process_rss_bytes: Some(1),
+                ..Default::default()
+            },
+            || Ok(0),
+        );
+        assert!(matches!(
+            budget.run(|| EpsilonSystem::from_differential_system(&system, epsilon, 1024)),
+            Err(Error::Resource(crate::ResourceLimitError::Memory { .. }))
+        ));
+        assert!(matches!(
+            EpsilonSystem::from_differential_system(&system, epsilon, usize::MAX),
+            Err(Error::Limit(_))
+        ));
+    }
+}

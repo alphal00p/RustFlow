@@ -258,36 +258,56 @@ fn metadata_and_cumulative_limits_fall_back_without_changing_support() {
     let p = Precision::decimal(60).unwrap();
     let cancellation = CancellationToken::default();
     let values = vec![vec![p.i(1)]];
+    let diagnostics = Limits {
+        input_bits: Some(4096),
+        integer_bits: Some(131072),
+        work: Some(100_000_000),
+        bytes: Some(256 * 1024 * 1024),
+        shifted_degree: Some(24),
+        degree: Some(1024),
+        components: Some(4096),
+        order: Some(1024),
+    };
     let ordinary = rows(p, &[&["1/(1-x)^64"]]);
     assert!(matches!(
-        AdaptiveResidual::new(
+        AdaptiveResidual::with_limits(
             p,
             &ordinary,
             &p.rational(&Rational::from((1, 10))),
             &values,
             1,
-            &cancellation
+            &cancellation,
+            diagnostics
         )
         .unwrap(),
         AdaptiveResidual::Ball { .. }
     ));
     let sparse = rows(p, &[&["1/(1-x^257)"]]);
     assert!(matches!(
-        AdaptiveResidual::new(p, &sparse, &p.zero(), &values, 1, &cancellation).unwrap(),
+        AdaptiveResidual::with_limits(
+            p,
+            &sparse,
+            &p.zero(),
+            &values,
+            1,
+            &cancellation,
+            diagnostics
+        )
+        .unwrap(),
         AdaptiveResidual::Integer { .. }
     ));
     let simple = rows(p, &[&["1/(1-x)"]]);
     for limits in [
         Limits {
-            work: 1,
+            work: Some(1),
             ..Default::default()
         },
         Limits {
-            bytes: 1,
+            bytes: Some(1),
             ..Default::default()
         },
         Limits {
-            integer_bits: 8,
+            integer_bits: Some(8),
             ..Default::default()
         },
     ] {
@@ -300,7 +320,8 @@ fn metadata_and_cumulative_limits_fall_back_without_changing_support() {
     let mut huge = simple.clone();
     huge[0].entries[0].1[0].re = Rational::from(Integer::from(2).pow(5000));
     assert!(matches!(
-        AdaptiveResidual::new(p, &huge, &p.zero(), &values, 1, &cancellation).unwrap(),
+        AdaptiveResidual::with_limits(p, &huge, &p.zero(), &values, 1, &cancellation, diagnostics)
+            .unwrap(),
         AdaptiveResidual::Ball { .. }
     ));
     // A modest-precision Float with a huge binary exponent is rejected BEFORE
@@ -310,7 +331,16 @@ fn metadata_and_cumulative_limits_fall_back_without_changing_support() {
         let a = if reciprocal { p.real(1) / large } else { large };
         let values = vec![vec![C::new(a, p.real(0))]];
         assert!(matches!(
-            AdaptiveResidual::new(p, &simple, &p.zero(), &values, 1, &cancellation).unwrap(),
+            AdaptiveResidual::with_limits(
+                p,
+                &simple,
+                &p.zero(),
+                &values,
+                1,
+                &cancellation,
+                diagnostics
+            )
+            .unwrap(),
             AdaptiveResidual::Ball { .. }
         ));
     }

@@ -5,8 +5,16 @@ use crate::family::substitute;
 use crate::*;
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
+use symbolica::utils::resources;
 
 mod native;
+
+fn check_boundary_allocation<T>(count: usize) -> Result<()> {
+    resources::check_allocation(
+        u64::try_from(count.saturating_mul(std::mem::size_of::<T>())).unwrap_or(u64::MAX),
+    )?;
+    Ok(())
+}
 
 #[derive(Clone, Debug)]
 pub struct IntegralTerm {
@@ -18,11 +26,13 @@ pub struct IntegralTerm {
 pub(crate) use crate::coefficient::{factors, powers};
 
 fn affine(a: &Atom, variables: &[Atom]) -> Result<Propagator> {
+    check_boundary_allocation::<Atom>(variables.len())?;
     let mut out = Propagator {
         constant: Atom::new(),
         scalar_products: vec![Atom::new(); variables.len()],
     };
     for (m, c) in crate::coefficient::exact_coefficient_list(a, variables)? {
+        resources::checkpoint()?;
         if m.is_one() {
             out.constant += c;
         } else if let Some(j) = variables.iter().position(|v| v == &m) {
@@ -36,12 +46,15 @@ fn affine(a: &Atom, variables: &[Atom]) -> Result<Propagator> {
 
 /// Exact multivariate partial fractions, ISP completion, and numerator conversion.
 /// `template` supplies the loop/external space; its propagators are replaced.
+/// `budget` optionally bounds partial-fraction states for diagnostics; `None`
+/// leaves their count unrestricted. Enclosing resource budgets remain active.
 pub fn to_integrals(
     expression: &Atom,
     variables: &[Atom],
     template: &IntegralFamily,
-    budget: usize,
+    budget: Option<usize>,
 ) -> Result<Vec<IntegralTerm>> {
+    resources::checkpoint()?;
     native::validate_coordinates(variables, template)?;
     if expression.is_zero() {
         return Ok(vec![]);
@@ -50,6 +63,7 @@ pub fn to_integrals(
     let mut denominators = Vec::new();
     let mut indices = Vec::new();
     for (base, power) in factors(&expression.together().factor()) {
+        resources::checkpoint()?;
         let depends = variables.iter().any(|v| {
             !base
                 .derivative(match v.as_view() {
@@ -72,6 +86,8 @@ pub fn to_integrals(
                 *c = (&*c / &scale).together().cancel();
             }
             numerator *= scale.pow(power);
+            check_boundary_allocation::<Propagator>(1)?;
+            check_boundary_allocation::<i16>(1)?;
             denominators.push(propagator);
             indices.push(
                 i16::try_from(-power)
@@ -105,6 +121,7 @@ pub fn to_integrals(
         &mut remaining,
         &mut out,
     )?;
+    resources::checkpoint()?;
     Ok(out)
 }
 
@@ -114,17 +131,44 @@ fn atom_field_partial_fraction(
     numerator: Atom,
     variables: &[Atom],
     template: &IntegralFamily,
-    remaining: &mut usize,
+    remaining: &mut Option<usize>,
     out: &mut Vec<IntegralTerm>,
 ) -> Result<()> {
-    *remaining = remaining
-        .checked_sub(1)
-        .ok_or_else(|| Error::Limit("boundary partial fraction budget exhausted".into()))?;
+    crate::stack_resources::run(|| {
+        atom_field_partial_fraction_inner(
+            denominators,
+            indices,
+            numerator,
+            variables,
+            template,
+            remaining,
+            out,
+        )
+    })
+}
+
+fn atom_field_partial_fraction_inner(
+    denominators: Vec<Propagator>,
+    indices: Vec<i16>,
+    numerator: Atom,
+    variables: &[Atom],
+    template: &IntegralFamily,
+    remaining: &mut Option<usize>,
+    out: &mut Vec<IntegralTerm>,
+) -> Result<()> {
+    resources::checkpoint()?;
+    if let Some(remaining) = remaining {
+        *remaining = remaining
+            .checked_sub(1)
+            .ok_or_else(|| Error::Limit("boundary partial fraction budget exhausted".into()))?;
+    }
+    check_boundary_allocation::<usize>(indices.len())?;
     let active = indices
         .iter()
         .enumerate()
         .filter_map(|(i, &n)| (n > 0).then_some(i))
         .collect::<Vec<_>>();
+    check_boundary_allocation::<Atom>(variables.len().saturating_mul(active.len()))?;
     let transpose = (0..variables.len())
         .map(|j| {
             active
@@ -143,9 +187,12 @@ fn atom_field_partial_fraction(
             .cancel();
         if !constant.is_zero() {
             for (&i, c) in active.iter().zip(relation) {
+                resources::checkpoint()?;
                 if c.is_zero() {
                     continue;
                 }
+                check_boundary_allocation::<i16>(indices.len())?;
+                check_boundary_allocation::<Propagator>(denominators.len())?;
                 let mut next = indices.clone();
                 next[i] -= 1;
                 atom_field_partial_fraction(
@@ -161,9 +208,12 @@ fn atom_field_partial_fraction(
         } else {
             let pivot = relation.iter().rposition(|c| !c.is_zero()).unwrap();
             for (j, (&i, c)) in active.iter().zip(relation).enumerate() {
+                resources::checkpoint()?;
                 if j == pivot || c.is_zero() {
                     continue;
                 }
+                check_boundary_allocation::<i16>(indices.len())?;
+                check_boundary_allocation::<Propagator>(denominators.len())?;
                 let mut next = indices.clone();
                 next[i] -= 1;
                 next[active[pivot]] = next[active[pivot]]
@@ -190,6 +240,8 @@ fn atom_field_partial_fraction(
     let mut indices = active.iter().map(|&i| indices[i]).collect::<Vec<_>>();
     let n = variables.len();
     for j in 0..n {
+        resources::checkpoint()?;
+        check_boundary_allocation::<Atom>(n.saturating_mul(propagators.len().saturating_add(2)))?;
         let mut row = vec![Atom::new(); n];
         row[j] = Atom::num(1);
         let mut matrix = propagators
@@ -262,6 +314,7 @@ fn boundary_sources<'a>(
 fn fresh_boundary_symbol(stem: &str, sources: &[&Atom]) -> Result<Atom> {
     let mut suffix = 0_usize;
     loop {
+        resources::checkpoint()?;
         let label = Atom::var(symbol!(if suffix == 0 {
             stem.to_owned()
         } else {
@@ -284,6 +337,7 @@ fn append_numerator_terms(
     out: &mut Vec<IntegralTerm>,
 ) -> Result<()> {
     for (m, c) in crate::coefficient::exact_coefficient_list(numerator, d)? {
+        resources::checkpoint()?;
         if c.is_zero() {
             continue;
         }
@@ -298,6 +352,8 @@ fn append_numerator_terms(
                 })
                 .collect::<Result<_>>()?,
         );
+        check_boundary_allocation::<IntegralTerm>(1)?;
+        check_boundary_allocation::<Propagator>(family.propagators.len())?;
         out.push(IntegralTerm {
             coefficient: c,
             family: family.clone(),
@@ -315,19 +371,27 @@ pub struct FactorizedTerm {
 
 /// Integrate out mixed hard/soft tensor structure and split the resulting
 /// scalar integrands into vacuum and soft families. Equivalent integral products
-/// are combined exactly before applying `budget` to the number of output terms.
-/// The same budget bounds each partial-fraction decomposition.
+/// are combined exactly before applying the optional diagnostic `budget` to the
+/// number of output terms. The same cap bounds each partial-fraction decomposition;
+/// `None` leaves both counts unrestricted. Enclosing resource budgets remain active.
 pub fn factor_region(
     expression: &Atom,
     coordinates: &[Atom],
     family: &IntegralFamily,
     hard: &[bool],
-    budget: usize,
+    budget: Option<usize>,
 ) -> Result<Vec<FactorizedTerm>> {
+    resources::checkpoint()?;
     let loops = family.loops.len();
     if hard.len() != loops {
         return Err(Error::InvalidInput("hard mask dimensions".into()));
     }
+    check_boundary_allocation::<(usize, usize)>(
+        loops
+            .saturating_mul(loops.saturating_add(1))
+            .saturating_div(2)
+            .saturating_add(loops.saturating_mul(family.external.len())),
+    )?;
     let mut labels = Vec::new();
     for i in 0..loops {
         for j in i..loops {
@@ -354,6 +418,7 @@ pub fn factor_region(
         })
         .collect::<Result<Vec<_>>>()?;
     for (base, power) in factors(&expression.together().factor()) {
+        resources::checkpoint()?;
         if power >= 0 {
             numerator *= base.pow(power);
             continue;
@@ -394,6 +459,7 @@ pub fn factor_region(
     );
     let mut projected = Atom::new();
     for (m, c) in crate::coefficient::exact_coefficient_list(&numerator.expand(), coordinates)? {
+        resources::checkpoint()?;
         let mut h = Vec::new();
         let mut s = Vec::new();
         let mut unmixed = c;
@@ -404,6 +470,7 @@ pub fn factor_region(
                 if n < 0 {
                     return Err(Error::Unsupported("nonpolynomial mixed numerator".into()));
                 }
+                check_boundary_allocation::<usize>((n as usize).saturating_mul(2))?;
                 h.extend(std::iter::repeat_n(a, n as usize));
                 s.extend(std::iter::repeat_n(b, n as usize));
             } else {
@@ -415,6 +482,11 @@ pub fn factor_region(
                 .map(|&i| v.iter().map(|&j| scalar(i, j)).collect())
                 .collect::<Vec<Vec<_>>>()
         };
+        check_boundary_allocation::<Atom>(
+            h.len()
+                .saturating_mul(h.len())
+                .saturating_add(s.len().saturating_mul(s.len())),
+        )?;
         projected += unmixed * projector.project(&gram(&h), &gram(&s))?;
     }
     let mut pieces = Vec::new();
@@ -459,6 +531,7 @@ pub fn factor_region(
     for (monomial, polynomial) in
         crate::coefficient::exact_coefficient_list(&projected.expand(), &pieces[split_side].0)?
     {
+        resources::checkpoint()?;
         let mut expressions = [denominator_h.clone(), denominator_s.clone()];
         expressions[split_side] *= monomial;
         expressions[1 - split_side] *= polynomial;
@@ -474,8 +547,12 @@ pub fn factor_region(
                 continue;
             }
             let terms = to_integrals(&expressions[side], vars, template, budget)?;
+            check_boundary_allocation::<FactorizedTerm>(
+                products.len().saturating_mul(terms.len()),
+            )?;
             let mut next = Vec::new();
             for product in &products {
+                resources::checkpoint()?;
                 for term in &terms {
                     let mut p = product.clone();
                     p.coefficient *= &term.coefficient;
@@ -488,6 +565,7 @@ pub fn factor_region(
             products = next;
         }
         for product in products {
+            resources::checkpoint()?;
             // All families on a side use the same loop/external coordinates.
             // Ignore unused completion slots and denominator ordering so that
             // partial fractions with different active sets share an exact key.
@@ -512,23 +590,29 @@ pub fn factor_region(
                     entry.get_mut().coefficient += product.coefficient;
                 }
                 std::collections::btree_map::Entry::Vacant(entry) => {
+                    check_boundary_allocation::<FactorizedTerm>(1)?;
                     entry.insert(product);
                 }
             }
         }
     }
-    let out = combined
-        .into_values()
-        .filter_map(|mut term| {
-            term.coefficient = term.coefficient.together().cancel();
-            (!term.coefficient.is_zero()).then_some(term)
-        })
-        .collect::<Vec<_>>();
-    if out.len() > budget {
+    check_boundary_allocation::<FactorizedTerm>(combined.len())?;
+    let mut out = Vec::new();
+    for mut term in combined.into_values() {
+        resources::checkpoint()?;
+        term.coefficient = term.coefficient.together().cancel();
+        if !term.coefficient.is_zero() {
+            out.push(term);
+        }
+    }
+    if let Some(budget) = budget
+        && out.len() > budget
+    {
         return Err(Error::Limit(format!(
             "factorized boundary term budget exhausted: {} distinct terms exceed {budget}",
             out.len()
         )));
     }
+    resources::checkpoint()?;
     Ok(out)
 }

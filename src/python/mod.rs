@@ -6,6 +6,7 @@ mod amplitude;
 mod citations;
 mod constraints;
 mod continuation;
+mod data;
 mod endpoint;
 #[cfg(feature = "automatic")]
 mod evaluation;
@@ -156,7 +157,7 @@ fn error(e: crate::Error) -> PyErr {
         crate::Error::Numerical(_) => NumericalError::new_err(message),
         crate::Error::Accuracy(_) => AccuracyError::new_err(message),
         crate::Error::InsufficientPrecision { .. } => PrecisionError::new_err(message),
-        crate::Error::Limit(_) => ResourceLimitError::new_err(message),
+        crate::Error::Limit(_) | crate::Error::Resource(_) => ResourceLimitError::new_err(message),
         crate::Error::Cancelled => CalculationCancelled::new_err(message),
         crate::Error::Cache(_) => BoundaryCacheError::new_err(message),
         crate::Error::Io(e) => pyo3::exceptions::PyOSError::new_err(e.to_string()),
@@ -206,6 +207,14 @@ fn options(value: Option<&PyEvaluationOptions>) -> crate::FlowOptions {
 /// Add integration classes to `symbolica.community.hep.integration`.
 /// The community host owns module creation and the shared Symbolica runtime.
 pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_function(pyo3::wrap_pyfunction!(
+        data::higgs_jet_data_manifest,
+        module
+    )?)?;
+    module.add_function(pyo3::wrap_pyfunction!(
+        data::install_higgs_jet_data,
+        module
+    )?)?;
     // CPython's WASM object allocator guarantees eight-byte alignment, whereas
     // Rust's u128 (and any aggregate containing it) requires sixteen. Checking
     // every registered wrapper here also covers nested numerical payloads and
@@ -273,6 +282,8 @@ pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add(
         "__all__",
         [
+            "higgs_jet_data_manifest",
+            "install_higgs_jet_data",
             "automatic_boundary_generation_available",
             "HiggsJetIntegralSystem",
             "HiggsJetConfiguration",
