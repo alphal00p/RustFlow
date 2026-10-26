@@ -247,6 +247,16 @@ impl<'a, const N: usize> Bank<'a, N> {
         solver: &SectorSolver<'_, N>,
         depth: u32,
     ) -> Result<Option<Applied<N>>, SolverError> {
+        self.try_reduce_with_observer(target, sources, solver, depth, |_, _| {})
+    }
+    pub fn try_reduce_with_observer(
+        &mut self,
+        target: [i16; N],
+        sources: &SourceSystem<N>,
+        solver: &SectorSolver<'_, N>,
+        depth: u32,
+        mut observe: impl FnMut(&SectorRule<N>, &Applied<N>),
+    ) -> Result<Option<Applied<N>>, SolverError> {
         if !std::ptr::eq(self.sources, sources)
             || &self.order != solver.ordering()
             || self.visit_order.as_ref() != solver.source_visit_order()
@@ -266,6 +276,7 @@ impl<'a, const N: usize> Bank<'a, N> {
         if let Some(rules) = &self.generic {
             for rule in rules {
                 if let Some(result) = apply(rule, target, sources, solver)? {
+                    observe(rule, &result);
                     self.domain_hits += 1;
                     self.hits += 1;
                     return Ok(Some(result));
@@ -293,6 +304,7 @@ impl<'a, const N: usize> Bank<'a, N> {
         }
         for rule in &self.rays[&ray] {
             if let Some(result) = apply(rule, target, sources, solver)? {
+                observe(rule, &result);
                 self.hits += 1;
                 return Ok(Some(result));
             }

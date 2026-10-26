@@ -329,6 +329,58 @@ impl CancellationToken {
     }
 }
 
+/// The actual winning lane and normalized RustRed case, not the requested ray.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum NativeRuleKind {
+    /// At least one index is symbolic in the normalized winning case. Fixed
+    /// coordinates, affine equalities and guards still restrict its coverage.
+    BankSymbolicIndices,
+    BankFixedCase,
+    ConcreteDirect,
+    ConcreteElimination,
+}
+
+/// Guarded rule identity in the caller's coefficient chart. Index symbols are
+/// ordered by integral axis and use provenance names disjoint from caller
+/// symbols. Excluded branches are an OR of ANDs of zero
+/// equalities; source conditions and denominators must each be nonzero.
+/// The identity covers the exact equation, domain, caller-chart family and
+/// native order, independently of application target and timing statistics.
+/// Rational pairs use caller-name variable order; guard polynomials are
+/// identified up to nonzero rational constants, with conjunction/disjunction
+/// ordering ignored. General equivalence of guarded domains is not claimed.
+#[derive(Clone, Debug)]
+pub struct NativeRuleProvenance {
+    pub identity: String,
+    pub family_scope: String,
+    pub kind: NativeRuleKind,
+    pub fixed_indices: Vec<Option<i16>>,
+    pub index_symbols: Vec<symbolica::atom::Atom>,
+    pub affine_equalities: Vec<symbolica::atom::Atom>,
+    pub excluded_zero_branches: Vec<Vec<symbolica::atom::Atom>>,
+    pub source_conditions: Vec<symbolica::atom::Atom>,
+    pub denominators: Vec<symbolica::atom::Atom>,
+    /// Winning search strategy; symbolic-index bank rules can also be direct.
+    pub direct_hit: bool,
+    /// Winning candidate's reported trace size. Concrete direct hits report
+    /// one even when the batch union replay trace is zero. Replay candidates
+    /// may share a trace, so these values must not be summed as unique rows.
+    pub exact_trace_rows: usize,
+    /// Number of sector-local source references attached to this candidate.
+    pub source_rows: usize,
+}
+
+#[derive(Clone, Debug)]
+pub enum NativeReductionOutcome {
+    Rule {
+        provenance: Arc<NativeRuleProvenance>,
+        rhs: Vec<crate::Integral>,
+        nonzero_conditions: Vec<symbolica::atom::Atom>,
+    },
+    /// An exhausted concrete search, not a certificate of master independence.
+    Residual { max_depth: u32 },
+}
+
 #[derive(Clone, Debug)]
 pub enum Progress {
     /// A coarse native-owner operation, useful before a long contraction or preparation.
@@ -373,6 +425,14 @@ pub enum Progress {
         domains: usize,
         domain_applied: usize,
         elapsed_ms: u128,
+    },
+    /// Per-target bank application or completed concrete search. Existing
+    /// checkpoint/table reuse is not relabeled as a new rule application.
+    /// Detailed domains and rule hashes are built only with progress enabled.
+    NativeReduction {
+        target: crate::Integral,
+        sector: Vec<bool>,
+        outcome: NativeReductionOutcome,
     },
     SymmetryReduction {
         candidates: usize,
