@@ -328,7 +328,7 @@ impl RustRedBackend {
             &[],
             rustred::solver::bridge::DynamicSolveOptions {
                 max_depth: self.max_depth,
-                max_targets: self.max_targets,
+                max_targets: Some(self.max_targets),
                 include_lorentz: self.include_lorentz,
                 // Keep the bounded search contract. Stable residual sets are
                 // not a certificate of independent master integrals.

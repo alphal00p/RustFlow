@@ -41,6 +41,8 @@ fn main() {
     let standalone = host_manifest == own_manifest.canonicalize().unwrap();
     if standalone {
         let features = [
+            "capacity-dispatch",
+            "runtime-arity-selection",
             "native",
             "automatic",
             "wasm",
@@ -51,7 +53,11 @@ fn main() {
         ]
         .into_iter()
         .filter(|feature| {
-            env::var_os(format!("CARGO_FEATURE_{}", feature.to_uppercase())).is_some()
+            env::var_os(format!(
+                "CARGO_FEATURE_{}",
+                feature.to_uppercase().replace('-', "_")
+            ))
+            .is_some()
         })
         .collect::<Vec<_>>();
         if !features.is_empty() {

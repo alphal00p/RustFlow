@@ -10,6 +10,9 @@ license = "MIT"
 default = ["native", "automatic"]
 native = ["symbolica/integer-gmp", "symbolica/float-mpfr", "dep:rug", "rustred?/native", "feynkit-amplitude/native", "feynkit-generator/native", "feynkit-py?/native"]
 automatic = ["dep:rustred", "dep:rayon"]
+# Let embedding workspaces select the same dispatch policy for both bridges.
+capacity-dispatch = ["rustred?/capacity-dispatch"]
+runtime-arity-selection = ["rustred?/runtime-arity-selection"]
 wasm = ["symbolica/wasm", "rustred?/wasm", "feynkit-amplitude/wasm", "feynkit-generator/wasm", "feynkit-py?/wasm"]
 python_api = ["dep:pyo3", "dep:feynkit-py", "symbolica/python_export"]
 # Preserve the existing full native Python feature and add a browser entry.
