@@ -1,5 +1,6 @@
 //! Published gg → Hg integral definitions, certified basis maps and amplitudes.
 pub mod amplitude;
+pub mod data;
 mod form_factors;
 mod plugin_basis;
 mod published;

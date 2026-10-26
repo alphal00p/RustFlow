@@ -93,10 +93,9 @@ impl HiggsJetAmplitude {
         }
         let mut definition: serde_json::Value =
             serde_json::from_str(&model.to_json().map_err(native_error)?).map_err(native_error)?;
-        let mut additions: serde_json::Value = serde_json::from_str(include_str!(
-            "../../fixtures/gg-hg/form-factor-vertices.json"
-        ))
-        .map_err(native_error)?;
+        let mut additions: serde_json::Value =
+            serde_json::from_str(&super::data::get("form-factor-vertices.json")?)
+                .map_err(native_error)?;
         for vertex in additions["vertex_rules"]
             .as_array_mut()
             .ok_or_else(|| native_error("invalid form-factor vertex declarations"))?
