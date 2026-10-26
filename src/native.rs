@@ -703,6 +703,12 @@ fn solve<const N: usize>(
             let mut sectors = BTreeMap::<[bool; N], Vec<CoordinateCase<N>>>::new();
             for target in selected {
                 context.cancellation.check()?;
+                // A later provider RHS can requeue an already admitted LHS.
+                // Its unresolved descendants still receive ordinary searches.
+                if result.rules.contains_key(&Integral(target.to_vec())) {
+                    pending.remove(&target);
+                    continue;
+                }
                 let sector = target.map(|n| n > 0);
                 if zero.contains(&sector) {
                     frontier_cache
@@ -1802,6 +1808,233 @@ fn coefficient_atom(c: &Coefficient) -> Atom {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::reduction::{NativeIdentityBank, NativeIdentityProvider, ReductionBackend};
+    use std::sync::Mutex;
+
+    struct RequeuedIdentityProvider {
+        banks: BTreeMap<Integral, NativeIdentityBank>,
+        calls: Mutex<Vec<Integral>>,
+    }
+    impl NativeIdentityProvider for RequeuedIdentityProvider {
+        fn identity(&self) -> &str {
+            "ordered-tadpole-identities-v1"
+        }
+        fn max_calls(&self) -> usize {
+            4
+        }
+        fn provide(
+            &self,
+            _: &IntegralFamily,
+            target: &Integral,
+            _: &RunContext,
+        ) -> Result<Option<NativeIdentityBank>> {
+            self.calls.lock().unwrap().push(target.clone());
+            Ok(self.banks.get(target).cloned())
+        }
+    }
+
+    fn requeued_identity_fixture() -> (
+        IntegralFamily,
+        RustRedBackend,
+        Arc<RequeuedIdentityProvider>,
+    ) {
+        let mass = parse!("provided_requeue::m2");
+        let epsilon = symbol!("provided_requeue::eps");
+        let eps = Atom::var(epsilon);
+        let family = IntegralFamily {
+            name: "provided_requeue_tadpole".into(),
+            loops: vec!["k".into()],
+            external: vec![],
+            external_gram: vec![],
+            propagators: vec![crate::Propagator {
+                constant: -&mass,
+                scalar_products: vec![Atom::one()],
+            }],
+            physical_propagators: 1,
+            epsilon,
+            dimension: 4,
+        };
+        // Exact tadpole IBP: I(n+1) = (D-2n)/(2n*m2) I(n).
+        // BTree order offers I(3) first; I(4)'s later RHS requeues it.
+        let banks = [
+            (3, 2, -&eps / (Atom::num(2) * &mass), eps.clone()),
+            (
+                4,
+                3,
+                -(Atom::one() + &eps) / (Atom::num(3) * &mass),
+                Atom::one() + &eps,
+            ),
+        ]
+        .into_iter()
+        .map(|(lhs, rhs, coefficient, condition)| {
+            let target = Integral(vec![lhs]);
+            let bank = NativeIdentityBank::new(
+                format!("tadpole-{lhs}"),
+                &family,
+                Reduction {
+                    rules: BTreeMap::from([(
+                        target.clone(),
+                        BTreeMap::from([(Integral(vec![rhs]), coefficient)]),
+                    )]),
+                    residuals: vec![Integral(vec![rhs])],
+                    nonzero_conditions: vec![condition],
+                },
+                "1111111111111111111111111111111111111111111111111111111111111111",
+                Default::default(),
+            )
+            .unwrap();
+            (target, bank)
+        })
+        .collect();
+        let backend = RustRedBackend {
+            max_targets: 4,
+            max_sector_batch: 2,
+            bubble_subloops: false,
+            parametric_rules: false,
+            symmetry_rules: false,
+            ..Default::default()
+        };
+        let provider = Arc::new(RequeuedIdentityProvider {
+            banks,
+            calls: Mutex::new(Vec::new()),
+        });
+        (family, backend, provider)
+    }
+
+    #[test]
+    fn provided_identity_requeue_preserves_equations_and_searches_unresolved_rhs() {
+        let (family, mut backend, provider) = requeued_identity_fixture();
+        let targets = [Integral(vec![3]), Integral(vec![4])];
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let directory = std::env::temp_dir().join(format!(
+            "rustflow-provided-requeue-{}-{stamp}",
+            std::process::id()
+        ));
+        backend.checkpoints = Some(directory.clone());
+        backend.checkpoint_interval = std::time::Duration::ZERO;
+        let events = Arc::new(Mutex::new(Vec::new()));
+        let observed = events.clone();
+        let context = RunContext {
+            progress: Some(Arc::new(move |event| observed.lock().unwrap().push(event))),
+            ..Default::default()
+        };
+        let actual = backend
+            .clone()
+            .with_identity_provider(provider.clone())
+            .unwrap()
+            .reduce(&family, &targets, &context)
+            .unwrap();
+        assert_eq!(
+            *provider.calls.lock().unwrap(),
+            [3, 4, 1].map(|n| Integral(vec![n]))
+        );
+        let events = events.lock().unwrap();
+        let searches = events
+            .iter()
+            .filter_map(|event| match event {
+                Progress::SectorReduction {
+                    integrals, visited, ..
+                } => Some((*integrals, *visited)),
+                _ => None,
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(searches, vec![(1, 0), (1, 1)]);
+        let native_targets = events
+            .iter()
+            .filter_map(|event| match event {
+                Progress::NativeReduction { target, .. } => Some(target.clone()),
+                _ => None,
+            })
+            .collect::<BTreeSet<_>>();
+        assert_eq!(
+            native_targets,
+            BTreeSet::from([Integral(vec![1]), Integral(vec![2])])
+        );
+
+        // The returned reduction is flattened. Inspect the existing raw family
+        // bank to ensure neither original provider equation was replaced.
+        let key = provider_key(
+            family_stage_key(&family.convert().unwrap(), 1, &backend),
+            Some(provider.as_ref()),
+        );
+        let (stored, _, remaining) = crate::cache::read_native_stage(&directory, &key)
+            .unwrap()
+            .unwrap();
+        assert!(remaining.is_empty());
+        assert!(stored.rules.contains_key(&Integral(vec![2])));
+        assert_eq!(actual.residuals, vec![Integral(vec![1])]);
+        for (target, bank) in &provider.banks {
+            let supplied = bank.resolve(&family, None, &RunContext::default()).unwrap();
+            assert_eq!(stored.rules[target], supplied.reduction.rules[target]);
+            for condition in &supplied.reduction.nonzero_conditions {
+                assert!(stored.nonzero_conditions.contains(condition));
+                assert!(actual.nonzero_conditions.contains(condition));
+            }
+        }
+        let mass = parse!("provided_requeue::m2");
+        let eps = Atom::var(family.epsilon);
+        let i2 = (Atom::one() - &eps) / &mass;
+        let i3 = -&eps / (Atom::num(2) * &mass) * i2;
+        let i4 = -(Atom::one() + &eps) / (Atom::num(3) * &mass) * &i3;
+        for (target, expected) in targets.iter().zip([i3, i4]) {
+            let expanded = actual.expand(target).unwrap();
+            assert_eq!(expanded.len(), 1);
+            assert!(
+                (&expanded[&Integral(vec![1])] - expected)
+                    .together()
+                    .cancel()
+                    .is_zero()
+            );
+        }
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+
+    #[test]
+    fn provided_identity_requeue_keeps_unresolved_search_cancellable() {
+        let (family, backend, provider) = requeued_identity_fixture();
+        let events = Arc::new(Mutex::new(Vec::new()));
+        let observed = events.clone();
+        let mut context = RunContext::default();
+        let cancellation = context.cancellation.clone();
+        context.progress = Some(Arc::new(move |event| {
+            if matches!(&event, Progress::SectorReduction { .. }) {
+                cancellation.cancel();
+            }
+            observed.lock().unwrap().push(event);
+        }));
+        let result = backend
+            .with_identity_provider(provider.clone())
+            .unwrap()
+            .reduce(&family, &[Integral(vec![3]), Integral(vec![4])], &context);
+        assert!(matches!(result, Err(Error::Cancelled)));
+        assert_eq!(
+            *provider.calls.lock().unwrap(),
+            [3, 4].map(|n| Integral(vec![n]))
+        );
+        let events = events.lock().unwrap();
+        assert_eq!(
+            events
+                .iter()
+                .filter(|event| matches!(event, Progress::SectorReduction { .. }))
+                .count(),
+            1
+        );
+        assert!(events.iter().any(|event| matches!(
+            event,
+            Progress::SectorReduction {
+                integrals: 1,
+                visited: 0,
+                ..
+            }
+        )));
+        assert!(!events.iter().any(|event| matches!(
+            event,
+            Progress::NativeReduction { .. } | Progress::SectorReduced { .. }
+        )));
+    }
 
     #[test]
     fn family_bank_prunes_unreachable_equations_preserves_guards_and_validates_the_dag() {
