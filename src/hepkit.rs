@@ -13,8 +13,8 @@ use crate::{Error, Integral, IntegralFamily, KinematicPoint, Propagator, Result,
 use feynkit_graph::{DiagramEndpoint, EdgeId, FeynmanDiagram, IntegralFamily as NativeFamily};
 use feynkit_kinematics::Kinematics;
 use feynkit_model::Model;
-use idenso::tensor::{AlgebraContraction, AlgebraSettings, SymbolicTensor};
-use spenso::{network::parsing::AtomStructureExt, structure::TensorStructure};
+use idenso::tensor::{AlgebraContraction, AlgebraSettings};
+use spenso::structure::representation::{LibraryRep, Minkowski};
 use std::{collections::BTreeMap, sync::Arc};
 use symbolica::domains::float::Complex;
 use symbolica::prelude::*;
@@ -381,27 +381,53 @@ impl GraphIntegral {
             &kinematics,
         )
         .map_err(input_error)?;
-        let projected = self.diagram.numerator()
-            * self.diagram.projector()
-            * self.diagram.numerator_prefactor()
-            * self.diagram.overall_factor();
+        let projected = self
+            .diagram
+            .numerator()
+            .multiply(self.diagram.projector())
+            .and_then(|t| t.multiply(self.diagram.numerator_prefactor()))
+            .map_err(input_error)?;
+        let factor = feynkit_graph::expressions::evaluate_overall_factor(
+            self.diagram.overall_factor().as_view(),
+        );
+        let expression = self
+            .diagram
+            .model()
+            .expand_couplings(&(projected.expression() * factor));
+        let projected = projected
+            .with_checked_expression(expression)
+            .map_err(input_error)?;
         // Dimension labels are input data. Native parsing can already turn a
         // literal four-dimensional metric trace into the scalar 4, so rewriting
         // only the surviving slots would give inconsistent dimensional algebra.
-        if projected.with_lorentz_dimension(tensor_dimension.as_view()) != projected {
+        let mut mismatched_dimension = false;
+        projected
+            .map_representation_dimensions(|representation, current| {
+                if representation == LibraryRep::from(Minkowski {})
+                    && current != tensor_dimension.as_view()
+                {
+                    mismatched_dimension = true;
+                }
+                current.to_owned()
+            })
+            .map_err(input_error)?;
+        if mismatched_dimension {
             return Err(Error::Unsupported(
                 "numerator Lorentz indices must use the symbolic Kinematics dimension; fixed-dimensional tensor slots cannot be promoted after native parsing".into(),
             ));
         }
-        let routed = self
-            .diagram
-            .loop_momentum_basis()
-            .route_expression(&projected);
-        let tensor = SymbolicTensor::infer(routed)
-            .and_then(|t| t.simplify_algebra(&self.algebra))
+        let routed = projected
+            .with_checked_expression(
+                self.diagram
+                    .loop_momentum_basis()
+                    .route_expression(projected.expression()),
+            )
+            .map_err(input_error)?;
+        let tensor = routed
+            .simplify_algebra(&self.algebra)
             .and_then(|t| t.to_dots())
             .map_err(input_error)?;
-        if !tensor.structure().canonical().is_scalar() {
+        if !tensor.is_scalar() {
             return Err(Error::Unsupported(
                 "graph numerator retains free tensor indices; supply a scalar projector".into(),
             ));
