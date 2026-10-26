@@ -1,5 +1,20 @@
 use symbolica::prelude::*;
 use symbolica_amflow::*;
+
+#[test]
+fn rank_two_projector_keeps_symbolic_dimension_and_refreshes_gram_values() {
+    let mut projector = tensor::TensorProjector::new(parse!("D"));
+    for (hard, external, expected) in [
+        (parse!("k2"), parse!("p2"), parse!("k2*p2/D")),
+        (Atom::num(7), Atom::num(11), parse!("77/D")),
+    ] {
+        let value = projector
+            .project(&vec![vec![hard; 2]; 2], &vec![vec![external; 2]; 2])
+            .unwrap();
+        assert!((value - expected).together().cancel().is_zero());
+    }
+}
+
 #[test]
 fn isotropic_projection_through_rank_eight() {
     let d = parse!("D");
