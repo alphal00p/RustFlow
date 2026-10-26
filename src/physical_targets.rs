@@ -163,7 +163,7 @@ impl PreparedPhysicalFamily {
             .map(|(column, integral)| (integral, column))
             .collect::<BTreeMap<_, _>>();
         let mut result = Vec::with_capacity(self.target_reductions().len());
-        for target in self.target_reductions() {
+        for (target_index, target) in self.target_reductions().iter().enumerate() {
             let mut rows = Vec::new();
             for (integral, weight) in target {
                 let column = *columns.get(integral).ok_or_else(|| {
@@ -282,7 +282,22 @@ impl PreparedPhysicalFamily {
                 );
                 let scale = maximum(p.norm(value), p.real(1));
                 if !error.is_finite() || error > p.tolerance(digits) * scale {
-                    return Err(Error::Accuracy("target reduction amplifies cached master uncertainty beyond the requested accuracy".into()));
+                    let diagnostic = projection_rejection_evidence(
+                        target_index,
+                        power,
+                        boundary,
+                        &rows,
+                        value,
+                        high,
+                        &input_errors[index].re,
+                        &error,
+                        digits,
+                        p,
+                        refined,
+                    );
+                    return Err(Error::Accuracy(format!(
+                        "target reduction amplifies cached master uncertainty beyond the requested accuracy\nprojection-rejection-v1={diagnostic}"
+                    )));
                 }
                 coefficients.insert(power, value.clone());
                 absolute_errors.insert(power, error);
@@ -300,4 +315,190 @@ impl PreparedPhysicalFamily {
 
 fn maximum(a: Float, b: Float) -> Float {
     if a > b { a } else { b }
+}
+
+/// Diagnostic-only recomputation on the existing failing branch. The original
+/// fixed-series convolution and checked aggregate error remain authoritative.
+/// No caller receives accepted partial targets or an alternate admission gate.
+#[allow(clippy::too_many_arguments)]
+fn projection_rejection_evidence(
+    target_index: usize,
+    power: i32,
+    boundary: &CachedBoundary,
+    rows: &[(usize, i32, ExactSeries)],
+    value: &ComplexFloat,
+    high: &ComplexFloat,
+    propagated: &Float,
+    checked_error: &Float,
+    digits: u32,
+    p: Precision,
+    refined: Precision,
+) -> serde_json::Value {
+    let mut diagnostic = serde_json::json!({
+        "schema": "projection-rejection-v1",
+        "target_index_zero_based": target_index,
+        "epsilon_order": power,
+        "requested_digits": digits,
+        "inherited_verified_digits": boundary.accuracy.verified_digits(),
+        "working_bits": p.bits,
+        "refined_bits": refined.bits,
+        "central_low": [value.re.to_string(), value.im.to_string()],
+        "central_refined": [high.re.to_string(), high.im.to_string()],
+        "propagated_inherited_error": propagated.to_string(),
+        "refinement_difference": refined.norm(&refined.sub(high, value)).to_string(),
+        "checked_total_absolute_error": checked_error.to_string(),
+        "checked_error_is_finite": checked_error.is_finite(),
+        "allowance": (p.tolerance(digits) * maximum(p.norm(value), p.real(1))).to_string(),
+        "term_products_are_diagnostic": true,
+        "aggregate_authority": "original fixed-series convolution and original rounded error, not a sum of displayed terms"
+    });
+    let terms = (|| -> Result<Vec<serde_json::Value>> {
+        let mut terms = Vec::new();
+        for (column, leading, series) in rows {
+            for (master_index, master_row) in boundary.coefficients.iter().enumerate() {
+                let master_power = i64::from(boundary.range.leading)
+                    + i64::try_from(master_index)
+                        .map_err(|_| Error::Limit("diagnostic master order overflow".into()))?;
+                let weight_power = i64::from(power) - master_power;
+                if weight_power < i64::from(*leading) {
+                    continue;
+                }
+                let weight = series
+                    .coefficient(Rational::from(weight_power))
+                    .ok_or_else(|| {
+                        Error::Accuracy(
+                            "diagnostic weight coefficient lies in unknown series remainder".into(),
+                        )
+                    })?;
+                let evaluated_weight = refined.eval(&weight, &Default::default())?;
+                let weight_norm = refined.norm(&evaluated_weight);
+                let master = &master_row[*column];
+                let master_norm = refined.norm(master);
+                let floor = refined.tolerance(boundary.accuracy.verified_digits())
+                    * maximum(master_norm.clone(), refined.real(1));
+                let comparison =
+                    boundary.accuracy.comparison_errors()[master_index][*column].clone();
+                let effective = maximum(comparison.clone(), floor.clone());
+                let term = refined.mul(
+                    &ComplexFloat::new(weight_norm.clone(), refined.real(0)),
+                    &ComplexFloat::new(effective.clone(), refined.real(0)),
+                );
+                terms.push(serde_json::json!({
+                    "basis_column_zero_based": column,
+                    "master_epsilon_order": master_power,
+                    "weight_epsilon_order": weight_power,
+                    "exact_specialized_weight_coefficient": weight.to_canonical_string(),
+                    "weight_norm_refined": weight_norm.to_string(),
+                    "master": [master.re.to_string(), master.im.to_string()],
+                    "master_norm_refined": master_norm.to_string(),
+                    "stored_comparison_error": comparison.to_string(),
+                    "mandatory_verified_digit_floor": floor.to_string(),
+                    "effective_master_uncertainty": effective.to_string(),
+                    "individual_rounded_product": term.re.to_string()
+                }));
+            }
+        }
+        Ok(terms)
+    })();
+    match terms {
+        Ok(terms) => diagnostic["terms"] = serde_json::Value::Array(terms),
+        Err(error) => {
+            diagnostic["term_detail_error"] = serde_json::json!(error.to_string());
+        }
+    }
+    diagnostic
+}
+
+#[cfg(test)]
+mod projection_diagnostic_tests {
+    use super::*;
+    use crate::Prescription;
+    use crate::kinematics::KinematicSystem;
+    use crate::transport_cache::{BoundaryAccuracy, BoundaryIdentity, PointKind};
+
+    #[test]
+    fn unknown_weight_remainder_retains_aggregate_refusal_evidence() {
+        // Public projection computes the required weight depth before refusal;
+        // a shorter series cannot be injected through that public API. Exercise
+        // only the private diagnostic fallback with an adversarial short series.
+        // The integration regression separately exercises the actual public gate.
+        let epsilon = symbol!("projection_detail_failure::eps");
+        let variable = symbol!("projection_detail_failure::s");
+        let p = Precision::decimal(100).unwrap();
+        let refined = Precision { bits: p.bits + 64 };
+        let system = KinematicSystem {
+            epsilon,
+            derivatives: BTreeMap::from([(variable, vec![vec![Atom::new()]])]),
+        };
+        let boundary = CachedBoundary {
+            identity: BoundaryIdentity::new(
+                &system,
+                &[parse!("projection_detail_failure::I")],
+                &Atom::one(),
+                Prescription::PlusI0,
+                "entire synthetic diagnostic fixture",
+            )
+            .unwrap(),
+            point: CachedPoint::Exact(BTreeMap::from([(variable, Atom::num(1))])),
+            kind: PointKind::Physical,
+            range: EpsilonRange::new(-2, 0).unwrap(),
+            coefficients: vec![vec![p.zero()]; 3],
+            accuracy: BoundaryAccuracy::supplied(
+                30,
+                p.bits,
+                vec![vec![p.real(0)]; 3],
+                "synthetic zero polynomial; private diagnostic robustness only",
+            )
+            .unwrap(),
+        };
+        boundary.validate().unwrap();
+        let short = expansion(
+            &parse!("1/(1-projection_detail_failure::eps)"),
+            epsilon,
+            SeriesDepth::absolute(1),
+        )
+        .unwrap();
+        assert!(short.coefficient(Rational::from(0)).is_some());
+        assert!(short.coefficient(Rational::from(2)).is_none());
+        let propagated = refined.real(2);
+        let checked = p.real(2);
+        let diagnostic = projection_rejection_evidence(
+            7,
+            0,
+            &boundary,
+            &[(0, 0, short)],
+            &p.zero(),
+            &refined.zero(),
+            &propagated,
+            &checked,
+            20,
+            p,
+            refined,
+        );
+        assert_eq!(diagnostic["schema"], "projection-rejection-v1");
+        assert_eq!(diagnostic["target_index_zero_based"], 7);
+        assert_eq!(diagnostic["epsilon_order"], 0);
+        assert_eq!(
+            diagnostic["propagated_inherited_error"],
+            propagated.to_string()
+        );
+        assert_eq!(
+            diagnostic["checked_total_absolute_error"],
+            checked.to_string()
+        );
+        assert_eq!(diagnostic["checked_error_is_finite"], true);
+        assert_eq!(
+            diagnostic["refinement_difference"],
+            refined.real(0).to_string()
+        );
+        assert_eq!(diagnostic["allowance"], p.tolerance(20).to_string());
+        assert!(diagnostic.get("terms").is_none());
+        assert!(
+            diagnostic["term_detail_error"]
+                .as_str()
+                .unwrap()
+                .contains("diagnostic weight coefficient lies in unknown series remainder")
+        );
+        assert_eq!(diagnostic["term_products_are_diagnostic"], true);
+    }
 }
