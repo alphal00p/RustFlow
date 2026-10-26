@@ -112,8 +112,9 @@ pub use local_coordinates::LocalCoordinate;
 pub use numeric::{ComplexFloat, Precision};
 pub use ode::{BoundaryData, DifferentialSystem, FlowDiagnostics, FlowResult};
 pub use options::{
-    BoundaryErrorStrategy, CancellationToken, FlowOptions, MassMode, PadeOptions, Prescription,
-    Progress, RecursionMode, ResidualArithmetic, RunContext, StepSizeStrategy,
+    BoundaryErrorStrategy, CancellationToken, FlowOptions, MassMode, NativeReductionOutcome,
+    NativeRuleKind, NativeRuleProvenance, PadeOptions, Prescription, Progress, RecursionMode,
+    ResidualArithmetic, RunContext, StepSizeStrategy,
 };
 #[cfg(feature = "automatic")]
 pub use physical_family::PreparedPhysicalFamily;

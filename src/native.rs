@@ -2,6 +2,7 @@
 //! factorized coefficient field. Source derivation, zero certificates, seed
 //! search and exact replay remain entirely in RustRed.
 mod parametric;
+mod provenance;
 mod symmetry;
 
 use crate::family::{ConvertedFamily, substitute};
@@ -465,6 +466,13 @@ fn solve<const N: usize>(
         ),
         provider,
     );
+    let provenance_scope = context.progress.as_ref().map(|_| {
+        provenance::family_scope(
+            family,
+            original.physical_propagators,
+            cuts.map(crate::cuts::CutFamily::cuts),
+        )
+    });
     let mut patterns = BTreeMap::<[bool; N], Option<crate::bubble::Bubble>>::new();
     let mut restart = if let Some(directory) = &options.checkpoints {
         crate::cache::read_native_stage(directory, &stage_key)?
@@ -885,10 +893,29 @@ fn solve<const N: usize>(
                     for case in cases {
                         context.cancellation.check()?;
                         let target = std::array::from_fn(|i| case.integral().powers()[i].value());
-                        let Some(applied) = bank
-                            .try_reduce(target, &sources, solver, options.max_depth)
-                            .map_err(native_error)?
-                        else {
+                        let mut winning_rule = None;
+                        let applied = if context.progress.is_some() {
+                            bank.try_reduce_with_observer(
+                                target,
+                                &sources,
+                                solver,
+                                options.max_depth,
+                                |rule, _| {
+                                    winning_rule = Some(
+                                        provenance::Attribution::new(
+                                            &sources,
+                                            solver.ordering(),
+                                            provenance_scope.as_deref().unwrap(),
+                                            &family.reverse,
+                                        )
+                                        .bank_rule(rule),
+                                    );
+                                },
+                            )
+                        } else {
+                            bank.try_reduce(target, &sources, solver, options.max_depth)
+                        };
+                        let Some(applied) = applied.map_err(native_error)? else {
                             uncovered.push(case);
                             continue;
                         };
@@ -907,6 +934,26 @@ fn solve<const N: usize>(
                             },
                             family,
                         )?;
+                        let event =
+                            winning_rule.map(|provenance| Progress::NativeReduction {
+                                target: Integral(target.to_vec()),
+                                sector: sector.to_vec(),
+                                outcome: crate::NativeReductionOutcome::Rule {
+                                    provenance,
+                                    rhs: batch.rules[&Integral(target.to_vec())]
+                                        .keys()
+                                        .cloned()
+                                        .collect(),
+                                    nonzero_conditions: batch
+                                        .nonzero_conditions
+                                        .iter()
+                                        .cloned()
+                                        .chain(applied.conditions.iter().map(|p| {
+                                            substitute(&p.to_expression(), &family.reverse)
+                                        }))
+                                        .collect(),
+                                },
+                            });
                         for terms in batch.rules.values() {
                             for integral in terms.keys() {
                                 let powers: [i16; N] =
@@ -928,6 +975,9 @@ fn solve<const N: usize>(
                         );
                         pending.remove(&target);
                         visited.insert(target);
+                        if let Some(event) = event {
+                            context.emit(event)?;
+                        }
                         save_if_due(
                             options,
                             &stage_key,
@@ -979,7 +1029,7 @@ fn solve<const N: usize>(
                     })?;
                     // A progress callback may request cancellation itself.
                     context.cancellation.check()?;
-                    solvers[sector]
+                    let solved = solvers[sector]
                         .solve_numeric_cases(
                             cases.to_vec(),
                             SearchOptions {
@@ -987,8 +1037,20 @@ fn solve<const N: usize>(
                                 ..Default::default()
                             },
                         )
-                        .map_err(native_error)
-                        .and_then(|solved| convert_batch(solved, family))
+                        .map_err(native_error)?;
+                    let events = if context.progress.is_some() {
+                        provenance::Attribution::new(
+                            &sources,
+                            solvers[sector].ordering(),
+                            provenance_scope.as_deref().unwrap(),
+                            &family.reverse,
+                        )
+                        .numeric_events(&solved, options.max_depth)
+                    } else {
+                        Vec::new()
+                    };
+                    convert_batch(solved, family)
+                        .map(|(batch, completed)| (batch, completed, events))
                 };
                 let solutions = if let Some(pool) = &pool {
                     pool.install(|| wave.par_iter().map(solve).collect::<Vec<_>>())
@@ -997,7 +1059,7 @@ fn solve<const N: usize>(
                 };
                 for ((_, cases), solved) in wave.iter().zip(solutions) {
                     let solved = solved?;
-                    let (batch, completed) = solved;
+                    let (batch, completed, events) = solved;
                     for terms in batch.rules.values() {
                         for integral in terms.keys() {
                             let powers: [i16; N] = integral
@@ -1019,6 +1081,9 @@ fn solve<const N: usize>(
                         let powers = std::array::from_fn(|i| case.integral().powers()[i].value());
                         pending.remove(&powers);
                         visited.insert(powers);
+                    }
+                    for event in events {
+                        context.emit(event)?;
                     }
                     context.emit(completed)?;
                     save_if_due(
