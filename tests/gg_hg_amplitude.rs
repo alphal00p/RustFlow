@@ -1,4 +1,6 @@
 //! Component validation; recorded form factors are not used by production seed generation.
+#[path = "support/higgs_jet_data.rs"]
+mod higgs_jet_data;
 use std::{collections::BTreeMap, sync::Arc};
 use symbolica_amflow::symbolica::prelude::*;
 use symbolica_amflow::{
@@ -12,6 +14,7 @@ fn atom(s: &str) -> Atom {
 
 #[test]
 fn native_coherent_amplitude_and_reused_kinematic_kernel() {
+    higgs_jet_data::install();
     let input: serde_json::Value =
         serde_json::from_str(include_str!("../fixtures/gg-hg/amplitude-validation.json")).unwrap();
     let model = Arc::new(
@@ -172,6 +175,7 @@ fn native_coherent_amplitude_and_reused_kinematic_kernel() {
 
 #[test]
 fn form_factor_extension_preserves_standard_model_and_rejects_name_collisions() {
+    higgs_jet_data::install();
     let model = feynkit_model::Model::standard_model();
     let original = model.to_json().unwrap();
     let before: serde_json::Value = serde_json::from_str(&original).unwrap();

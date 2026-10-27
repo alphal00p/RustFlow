@@ -1,6 +1,8 @@
 use feynkit_graph::{EdgeId, IntegralFamily as NativeFamily, symbols};
 use feynkit_kinematics::Kinematics;
 use feynkit_model::Model;
+use idenso::tensor::SymbolicTensor;
+use spenso::structure::representation::{Minkowski, RepName};
 use std::{collections::BTreeMap, sync::Arc};
 use symbolica::prelude::*;
 use symbolica_amflow::{hepkit::GraphIntegral, *};
@@ -171,6 +173,68 @@ fn signed_numerators_and_native_tensor_contractions_reconstruct_the_integrand() 
 }
 
 #[test]
+fn typed_projector_routes_edge_momenta_and_preserves_dimension_and_scalar_factors() {
+    let mut json: serde_json::Value = serde_json::from_str(MODEL).unwrap();
+    json["couplings"] = serde_json::json!([{
+        "name": "GC_test", "expression": "2*UFO::g", "orders": []
+    }]);
+    let model = Arc::new(Model::from_json(&json.to_string()).unwrap());
+    let kin = kinematics(Atom::num(-1));
+    let plain = GraphIntegral::from_dot(model, BUBBLE, &kin).unwrap();
+    let ds = denominators(&groups(&plain, &KinematicPoint::default())[0].0);
+    // Edge 3 is not the selected loop-basis edge: its momentum must be routed
+    // before contraction and reconstruction in the denominator basis.
+    let slot = Minkowski {}
+        .new_rep(kin.dimension())
+        .to_symbolic([scalar("mu")]);
+    let vector = SymbolicTensor::infer(function!(symbols::momentum(), 3, slot)).unwrap();
+    assert!(!vector.is_scalar());
+    let diagram = plain
+        .diagram()
+        .as_ref()
+        .clone()
+        .with_numerator(vector.clone())
+        .unwrap()
+        .with_projector(vector)
+        .with_numerator_prefactor(
+            SymbolicTensor::infer(scalar("UFO::GC_test*(D_-2)")).unwrap(),
+        )
+        .with_overall_factor(scalar(
+            "gammalooprs::InternalFermionLoopSign(-1)*gammalooprs::CouplingsMultiplicity(3)/gammalooprs::AutG(2)",
+        ));
+    let graph = GraphIntegral::new(Arc::new(diagram), &kin).unwrap();
+    let point = KinematicPoint(BTreeMap::from([(
+        scalar("UFO::g"),
+        Atom::num(Rational::from((3, 5))),
+    )]));
+    exact(
+        &integrand(&groups(&graph, &point)),
+        &(scalar("-9/5*(2-2*eps)") / &ds[0]),
+    );
+    let unprojected = GraphIntegral::new(
+        Arc::new(
+            graph
+                .diagram()
+                .as_ref()
+                .clone()
+                .with_projector(SymbolicTensor::infer(Atom::one()).unwrap()),
+        ),
+        &kin,
+    )
+    .unwrap();
+    assert!(matches!(
+        unprojected.integral_groups(
+            &point,
+            symbol!("feynkit_graph::eps"),
+            4,
+            1000,
+            &RunContext::default()
+        ),
+        Err(Error::Unsupported(_))
+    ));
+}
+
+#[test]
 fn exact_complex_native_bubble_reaches_the_automatic_solver_and_refines() {
     let s = Atom::num(symbolica::domains::float::Complex::new(
         Rational::from(-2),
@@ -278,21 +342,29 @@ fn native_fixed_dimensional_traces_are_literal_and_surviving_mixed_dimensions_ar
         &groups(&graph, &KinematicPoint::default())[0].1[&Integral(vec![1, 1])],
         &Atom::num(4),
     );
-    let surviving = BUBBLE.replace(
-        "digraph massless_bubble {",
-        "digraph massless_bubble {\n num=\"gammalooprs::K(0,spenso::mink(4,mu))*gammalooprs::K(0,spenso::mink(4,mu))\";",
-    );
-    let graph = GraphIntegral::from_dot(model(), &surviving, &kinematics(Atom::num(-1))).unwrap();
-    assert!(matches!(
-        graph.integral_groups(
-            &KinematicPoint::default(),
-            symbol!("feynkit_graph::eps"),
-            4,
-            1000,
-            &RunContext::default()
-        ),
-        Err(Error::Unsupported(_))
-    ));
+    // Refuse every mismatched retained Lorentz dimension, including symbolic
+    // dimensions that the old 4 -> D promotion check did not visit.
+    for dimension in ["4", "6", "other_dimension"] {
+        let surviving = BUBBLE.replace(
+            "digraph massless_bubble {",
+            &format!("digraph massless_bubble {{\n num=\"gammalooprs::K(0,spenso::mink({dimension},mu))*gammalooprs::K(0,spenso::mink({dimension},mu))\";"),
+        );
+        let graph =
+            GraphIntegral::from_dot(model(), &surviving, &kinematics(Atom::num(-1))).unwrap();
+        assert!(
+            matches!(
+                graph.integral_groups(
+                    &KinematicPoint::default(),
+                    symbol!("feynkit_graph::eps"),
+                    4,
+                    1000,
+                    &RunContext::default()
+                ),
+                Err(Error::Unsupported(_))
+            ),
+            "accepted mismatched Lorentz dimension {dimension}"
+        );
+    }
 }
 
 #[test]

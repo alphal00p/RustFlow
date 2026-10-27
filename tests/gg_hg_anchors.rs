@@ -1,6 +1,8 @@
 //! Reference-loading checks only; neither reference is an AMF seed provider.
 #[path = "support/gg_hg_anchors.rs"]
 mod anchors;
+#[path = "support/higgs_jet_data.rs"]
+mod higgs_jet_data;
 use anchors::{EuclideanAnchor, first_planar_canonical};
 use symbolica_amflow::gg_hg::{HiggsJetIntegralSystem, PluginFamilyKind};
 use symbolica_amflow::symbolica::prelude::*;
@@ -8,6 +10,7 @@ use symbolica_amflow::{Precision, Result};
 
 #[test]
 fn euclidean_anchor_conventions_and_unknown_taylor_remainder_are_explicit() -> Result<()> {
+    higgs_jet_data::install();
     let p = Precision::decimal(70)?;
     for kind in [PluginFamilyKind::Planar, PluginFamilyKind::Nonplanar] {
         let input = HiggsJetIntegralSystem::load(kind, "gg_hg_anchor_test")?;
@@ -26,6 +29,7 @@ fn euclidean_anchor_conventions_and_unknown_taylor_remainder_are_explicit() -> R
 #[test]
 fn first_planar_all_epsilon_formula_matches_fourth_order_anchor_with_expected_remainder()
 -> Result<()> {
+    higgs_jet_data::install();
     let p = Precision::decimal(70)?;
     let input = HiggsJetIntegralSystem::load(PluginFamilyKind::Planar, "gg_hg_analytic_check")?;
     let anchor = EuclideanAnchor::load(&input, p)?;
