@@ -27,7 +27,7 @@ required-features = ["automatic"]
 
 [dependencies]
 symbolica = { version = "=3.0.1", default-features = false, features = ["bincode", "serde", "tracing_max_level_info"] }
-rustred = { git = "https://github.com/alphal00p/rustred", rev = "b209adb1e774242bcbe0417fed223317566561bd", default-features = false, optional = true }
+rustred = { git = "https://github.com/alphal00p/rustred", rev = "c2ca815cc906bdeaf7cb8c63b637e81a80fba917", default-features = false, optional = true }
 rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational"], optional = true }
 rayon = { version = "1.11", optional = true }
 thiserror = "2"
@@ -40,18 +40,18 @@ bincode = { version = "2.0.1", features = ["serde"] }
 
 # Match the host source identities; Cargo.lock pins standalone builds.
 # Required owner-level HEPKit fixes: docs/hepkit-integration.md.
-feynkit-amplitude = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
-feynkit-generator = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
-feynkit-graph = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
-feynkit-model = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
-feynkit-kinematics = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
-feynkit-tensor = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
-linnet = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false, features = ["serde", "bincode", "nodestore-vec"] }
-spenso = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false, features = ["shadowing"] }
-idenso = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
+feynkit-amplitude = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false }
+feynkit-generator = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false }
+feynkit-graph = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false }
+feynkit-model = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false }
+feynkit-kinematics = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false }
+feynkit-tensor = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false }
+linnet = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false, features = ["serde", "bincode", "nodestore-vec"] }
+spenso = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false, features = ["shadowing"] }
+idenso = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", default-features = false }
 
 pyo3 = { version = "0.28", optional = true, features = ["multiple-pymethods"] }
-feynkit-py = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", optional = true, default-features = false }
+feynkit-py = { git = "https://github.com/alphal00p/gammaloop", rev = "03e80d538c6e470220ac2f07e32e0b7cefb17662", optional = true, default-features = false }
 pyo3-stub-gen = { version = "0.17", optional = true, default-features = false, features = ["infer_signature"] }
 
 [build-dependencies]
