@@ -1,4 +1,6 @@
 #![cfg(feature = "python_api")]
+#[path = "support/higgs_jet_data.rs"]
+mod higgs_jet_data;
 use pyo3::{
     prelude::*,
     types::{PyDict, PyModule},
@@ -41,6 +43,7 @@ fn numerical_method_citations_are_process_isolated_and_cumulative() {
         }
         return;
     };
+    higgs_jet_data::install();
     assert!(symbolica_amflow::python::get_citations().is_empty());
     Python::initialize();
     Python::attach(|py| -> PyResult<()> {
@@ -137,6 +140,7 @@ elif operation == 'automatic':
 
 #[test]
 fn higgs_form_factor_extension_returns_the_shared_native_model() {
+    higgs_jet_data::install();
     Python::initialize();
     Python::attach(|py| -> PyResult<()> {
         let core = PyModule::new(py, "symbolica.core")?;
@@ -207,6 +211,7 @@ assert json.loads(restored.to_json()) == json.loads(extended_json)
 
 #[test]
 fn portable_higgs_connections_preserve_supplied_evidence_and_restart() {
+    higgs_jet_data::install();
     Python::initialize();
     Python::attach(|py| -> PyResult<()> {
         let core = PyModule::new(py, "symbolica.core")?;
@@ -306,6 +311,7 @@ fn portable_higgs_adapter_has_native_generated_stubs() {
 #[test]
 #[ignore = "requires the independently generated community notebook loader and scientific bundle"]
 fn all_packaged_higgs_values_enter_the_current_native_evidence_path() {
+    higgs_jet_data::install();
     let loader = std::env::var("RUSTFLOW_PORTABLE_BUNDLE_LOADER").expect("loader path");
     let bundle = std::env::var("RUSTFLOW_PORTABLE_BUNDLE_DIRECTORY").expect("bundle directory");
     let origin = std::env::var("RUSTFLOW_PORTABLE_ORIGIN_CACHE").expect("origin cache directory");

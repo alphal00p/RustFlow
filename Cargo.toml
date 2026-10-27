@@ -60,9 +60,6 @@ serde_json = "1"
 # Standalone default; an embedding workspace owns its own patch table.
 # The community revision retains the scale-independent root-convergence fix.
 [patch.crates-io]
-# The native HEPKit renderer uses its maintained lean Typst components.
-typst-library = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit" }
-typst-svg = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit" }
 symbolica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
 numerica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
 graphica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }

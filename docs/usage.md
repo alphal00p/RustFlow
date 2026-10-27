@@ -199,5 +199,5 @@ need these example inputs.
 Rust callers can provide documents with `gg_hg::data::install`, or explicitly set
 `RUSTFLOW_HIGGS_JET_DATA_DIR` to a directory containing the matching JSON files.
 Mathematical fingerprints retain their existing values; authenticated inputs
-protect boundary-cache identities. Tests read repository fixtures; production
-builds do not embed them.
+protect boundary-cache identities. Integration tests install repository fixtures
+through the same authenticated API; production builds do not embed them.

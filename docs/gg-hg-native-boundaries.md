@@ -6,9 +6,11 @@ independently refined finite-epsilon fits. It requires neither Python nor
 Mathematica. This is a long numerical acceptance runner; a successful exact
 connection certificate alone does not establish successful boundary generation.
 
-Build once, then run the exact Euclidean planar anchor:
+From the repository root, select the authenticated input fixtures, build once,
+then run the exact Euclidean planar anchor:
 
 ```sh
+export RUSTFLOW_HIGGS_JET_DATA_DIR="$PWD/fixtures/gg-hg"
 cargo build --release --example gg_hg_boundaries
 target/release/examples/gg_hg_boundaries \
   --family pl --digits 20 --guard-digits 40 --order 80 --workers 1 \
@@ -28,6 +30,7 @@ fingerprints without loading numerical caches or starting a calculation.
 topology. A physical source run uses its exact published point and root germ:
 
 ```sh
+export RUSTFLOW_HIGGS_JET_DATA_DIR="$PWD/fixtures/gg-hg"
 target/release/examples/gg_hg_boundaries --family pl --list-configurations
 target/release/examples/gg_hg_boundaries \
   --family pl --configuration W-Planar_EW1-1 \
