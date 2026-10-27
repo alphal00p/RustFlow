@@ -4,6 +4,7 @@ use super::recurrence::*;
 use super::*;
 use symbolica::domains::float::FloatField;
 use symbolica::tensors::matrix::Matrix;
+mod product_height;
 mod resources;
 mod sparse_policy;
 #[cfg(test)]
@@ -401,7 +402,12 @@ pub(crate) fn multiply(
         .saturating_add(1)
         .saturating_mul(inner as u64)
         .saturating_mul(2);
-    if bits > limits.max_coefficient_bits {
+    if bits > limits.max_coefficient_bits
+        && product_height::bound(&left, &right, limits.max_coefficient_bits, &mut || {
+            context.cancellation.check()
+        })?
+        .is_none()
+    {
         return Err(Error::Limit(
             "exact asymptotic product height estimate exceeds limit".into(),
         ));
