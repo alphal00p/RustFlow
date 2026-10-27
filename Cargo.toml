@@ -40,18 +40,18 @@ bincode = { version = "2.0.1", features = ["serde"] }
 
 # Match the host source identities; Cargo.lock pins standalone builds.
 # Required owner-level HEPKit fixes: docs/hepkit-integration.md.
-feynkit-amplitude = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false }
-feynkit-generator = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false }
-feynkit-graph = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false }
-feynkit-model = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false }
-feynkit-kinematics = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false }
-feynkit-tensor = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false }
-linnet = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false, features = ["serde", "bincode", "nodestore-vec"] }
-spenso = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false, features = ["shadowing"] }
-idenso = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", default-features = false }
+feynkit-amplitude = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
+feynkit-generator = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
+feynkit-graph = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
+feynkit-model = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
+feynkit-kinematics = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
+feynkit-tensor = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
+linnet = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false, features = ["serde", "bincode", "nodestore-vec"] }
+spenso = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false, features = ["shadowing"] }
+idenso = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", default-features = false }
 
 pyo3 = { version = "0.28", optional = true, features = ["multiple-pymethods"] }
-feynkit-py = { git = "https://github.com/alphal00p/gammaloop", rev = "e90e78ae9b05c2813b462157a83073b0740419f4", optional = true, default-features = false }
+feynkit-py = { git = "https://github.com/alphal00p/gammaloop", rev = "ea50b6ae9c8e0dc07d2ebc4df2055c87982dc6f3", optional = true, default-features = false }
 pyo3-stub-gen = { version = "0.17", optional = true, default-features = false, features = ["infer_signature"] }
 
 [build-dependencies]
