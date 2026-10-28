@@ -322,18 +322,12 @@ impl ExactSourceResidual {
             }
             let mut upper = p.real(0);
             let mut width = p.real(0);
-            let mut central = p.real(0);
             // All coefficients and the radius are nonnegative. Horner's rule
             // with upward rounding encloses the same polynomial disk bound.
-            for (coefficient_upper, coefficient_width, coefficient_central) in
-                coefficients.iter().rev()
-            {
+            for (coefficient_upper, coefficient_width, _) in coefficients.iter().rev() {
                 upper = upper
                     .mul_round(&radius, p.bits, RoundingDirection::Up)
                     .add_round(coefficient_upper, p.bits, RoundingDirection::Up);
-                central = central
-                    .mul_round(&radius, p.bits, RoundingDirection::Up)
-                    .add_round(coefficient_central, p.bits, RoundingDirection::Up);
                 width = width
                     .mul_round(&radius, p.bits, RoundingDirection::Up)
                     .add_round(coefficient_width, p.bits, RoundingDirection::Up);
@@ -342,9 +336,6 @@ impl ExactSourceResidual {
                 .div_round(lower, p.bits, RoundingDirection::Up)
                 .mul_round(&radius, p.bits, RoundingDirection::Up);
             let width = width
-                .div_round(lower, p.bits, RoundingDirection::Up)
-                .mul_round(&radius, p.bits, RoundingDirection::Up);
-            let central = central
                 .div_round(lower, p.bits, RoundingDirection::Up)
                 .mul_round(&radius, p.bits, RoundingDirection::Up);
             if !bound.is_finite() || !width.is_finite() {
@@ -371,7 +362,21 @@ impl ExactSourceResidual {
                         context: "exact-source local error budget underflows".into(),
                     });
                 }
-                if width > threshold && width >= central {
+                if width > threshold && {
+                    // The central bound is used only to distinguish enclosure
+                    // width from a resolved defect after width exceeds budget.
+                    // Preserve its directed operation order when it is needed.
+                    let mut central = p.real(0);
+                    for (_, _, coefficient_central) in coefficients.iter().rev() {
+                        central = central
+                            .mul_round(&radius, p.bits, RoundingDirection::Up)
+                            .add_round(coefficient_central, p.bits, RoundingDirection::Up);
+                    }
+                    let central = central
+                        .div_round(lower, p.bits, RoundingDirection::Up)
+                        .mul_round(&radius, p.bits, RoundingDirection::Up);
+                    width >= central
+                } {
                     let ratio = width.to_rational() / threshold.to_rational();
                     let extra = ratio
                         .numerator_ref()
@@ -686,3 +691,7 @@ mod factor_tests {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "source/lazy_central_tests.rs"]
+mod lazy_central_tests;
