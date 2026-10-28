@@ -264,6 +264,7 @@ impl KinematicDerivative {
             targets,
             max_rounds,
             context,
+            true,
             |integral| Ok(self.integral(integral)?.into_iter().collect()),
         )?;
         system
