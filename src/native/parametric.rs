@@ -255,13 +255,13 @@ impl<'a, const N: usize> Bank<'a, N> {
                 "parametric bank source/order mismatch".into(),
             ));
         }
-        // Two-slot tadpole sectors also need a shared numerator domain: a
-        // fixed inactive index otherwise forces a numerical exceptional leaf
-        // during massive-bubble derivative closure. Keep the measured ray
-        // strategy for other sectors, including three-line paper sectors.
+        // Small pinched families need a shared numerator domain: fixing the
+        // inactive indices forces numerical exceptional leaves in bubble and
+        // triangle derivative closure. Larger three-line paper sectors keep
+        // their measured ray strategy.
         if self.generic.is_none() && {
             let active = solver.ordering().sector().iter().filter(|&&v| v).count();
-            active == 4 || (N == 2 && active == 1)
+            active == 4 || (N <= 3 && active > 0 && active < N)
         } {
             self.generic = Some(generic_rules(solver, depth, 32));
             self.domains += 1;

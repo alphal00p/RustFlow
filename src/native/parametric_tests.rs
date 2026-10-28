@@ -437,3 +437,101 @@ fn pinched_bubble_numerator_uses_reusable_symbolic_domain() {
         assert!((actual - expected).together().cancel().is_zero());
     }
 }
+
+#[test]
+fn triangle_pinched_numerators_use_symbolic_domains() {
+    use crate::ReductionBackend;
+    use std::collections::BTreeSet;
+    let (s, eps) = symbol!(
+        "triangle_parametric_test::s",
+        "triangle_parametric_test::eps"
+    );
+    let h2 = Atom::num(Rational::from((1_562_500, 3_003_289)));
+    let t = (Atom::var(s) + 1 - h2) / 2;
+    let gram = vec![vec![Atom::var(s), t.clone()], vec![t, Atom::one()]];
+    let family = crate::IntegralFamily {
+        name: "on_shell_yukawa_triangle".into(),
+        loops: vec!["l".into()],
+        external: vec!["q1".into(), "q2".into()],
+        external_gram: gram.clone(),
+        propagators: vec![
+            crate::Propagator::quadratic(&[1], &[0, 0], Atom::zero(), &gram).unwrap(),
+            crate::Propagator::quadratic(&[1], &[1, 0], Atom::one(), &gram).unwrap(),
+            crate::Propagator::quadratic(&[1], &[0, 1], Atom::one(), &gram).unwrap(),
+        ],
+        physical_propagators: 3,
+        epsilon: eps,
+        dimension: 4,
+    };
+    let converted = family.convert_at_epsilon(None).unwrap();
+    let sources = SourceSystem::<3>::from_family_with_lorentz(&converted.family, false).unwrap();
+    let mut identities = Vec::new();
+    let mut targets = BTreeSet::new();
+    // Every fixed-index exceptional application observed in the GL009 physical
+    // derivative closure, including both two- and one-propagator sectors.
+    for target in [
+        [-1, 1, 1],
+        [1, 1, -1],
+        [-1, 0, 1],
+        [0, -1, 1],
+        [-1, 1, 0],
+        [0, 1, -1],
+    ] {
+        let sector = target.map(|n| n > 0);
+        let solver = SectorSolver::new(&sources, sector, SectorConfig::default()).unwrap();
+        let mut bank = Bank::new(&sources, &solver);
+        let applied = bank
+            .try_reduce(target, &sources, &solver, 3)
+            .unwrap()
+            .unwrap();
+        assert!(
+            bank.generic.as_ref().unwrap().iter().any(|rule| {
+                rule.candidate
+                    .target
+                    .powers()
+                    .iter()
+                    .any(|p| p.is_symbolic())
+                    && apply(rule, target, &sources, &solver).unwrap().is_some()
+            }),
+            "target {target:?} requires a genuinely symbolic-index rule"
+        );
+        assert_eq!(
+            bank.generated, 0,
+            "no fixed-index ray should supply this reduction"
+        );
+        targets.insert(crate::Integral(target.to_vec()));
+        targets.extend(applied.terms.iter().map(|term| {
+            crate::Integral(term.integral.powers().iter().map(|p| p.value()).collect())
+        }));
+        identities.push((target, applied));
+    }
+    // Check the specialized equations against a separate finite-index solve,
+    // while keeping epsilon and the physical invariant symbolic.
+    let reference = crate::RustRedBackend {
+        parametric_rules: false,
+        bubble_subloops: false,
+        ..Default::default()
+    }
+    .reduce(
+        &family,
+        &targets.into_iter().collect::<Vec<_>>(),
+        &crate::RunContext::default(),
+    )
+    .unwrap();
+    for (lhs, applied) in identities {
+        let mut residual = reference.expand(&crate::Integral(lhs.to_vec())).unwrap();
+        for term in applied.terms {
+            let coefficient =
+                crate::family::substitute(&term.coefficient.to_expression(), &converted.reverse);
+            let child = crate::Integral(term.integral.powers().iter().map(|p| p.value()).collect());
+            for (master, reduced) in reference.expand(&child).unwrap() {
+                let old = residual.remove(&master).unwrap_or_default();
+                residual.insert(master, old - &coefficient * reduced);
+            }
+        }
+        assert!(
+            residual.values().all(|c| c.together().cancel().is_zero()),
+            "specialization mismatch at {lhs:?}"
+        );
+    }
+}
