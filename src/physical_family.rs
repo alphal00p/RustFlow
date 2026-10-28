@@ -301,15 +301,33 @@ impl PreparedPhysicalFamily {
             .checked_add(extra_seed_digits)
             .ok_or_else(|| Error::Limit("physical seed precision overflow".into()))?;
         options.validate()?;
-        let expansions = solve_integrals(
-            &self.family,
-            &self.basis,
-            &point,
-            last,
-            &options,
-            backend,
-            context,
-        )?;
+        let expansions = if options.sample_cache_directory.is_some() {
+            // Unit rows preserve the original master order and normalization;
+            // projections checkpoint primitive samples before independent fits.
+            let rows = self
+                .basis
+                .iter()
+                .map(|integral| LinearCombination::from([(integral.clone(), Atom::one())]))
+                .collect();
+            solve_integral_projections(
+                &[(self.family.clone(), rows)],
+                &point,
+                last,
+                &options,
+                backend,
+                context,
+            )?
+        } else {
+            solve_integrals(
+                &self.family,
+                &self.basis,
+                &point,
+                last,
+                &options,
+                backend,
+                context,
+            )?
+        };
         if expansions.len() != self.basis.len() {
             return Err(Error::Numerical(
                 "automatic seed returned the wrong number of master values".into(),
