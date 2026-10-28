@@ -19,6 +19,7 @@ pub(super) struct Bank<'a, const N: usize> {
     order: IntegralOrder<N>,
     visit_order: Option<SourceVisitOrder>,
     generic: Option<Vec<SectorRule<N>>>,
+    small_one_loop: bool,
     rays: BTreeMap<[Option<i16>; N], Vec<SectorRule<N>>>,
     pub domains: usize,
     pub domain_hits: usize,
@@ -232,6 +233,7 @@ impl<'a, const N: usize> Bank<'a, N> {
             order: solver.ordering().clone(),
             visit_order: solver.source_visit_order().cloned(),
             generic: None,
+            small_one_loop: false,
             rays: BTreeMap::new(),
             domains: 0,
             domain_hits: 0,
@@ -239,6 +241,15 @@ impl<'a, const N: usize> Bank<'a, N> {
             hits: 0,
             missed: 0,
         }
+    }
+    pub fn for_family(
+        sources: &'a SourceSystem<N>,
+        solver: &SectorSolver<'_, N>,
+        loop_count: usize,
+    ) -> Self {
+        let mut bank = Self::new(sources, solver);
+        bank.small_one_loop = loop_count == 1 && N <= 5;
+        bank
     }
     pub fn try_reduce(
         &mut self,
@@ -255,13 +266,14 @@ impl<'a, const N: usize> Bank<'a, N> {
                 "parametric bank source/order mismatch".into(),
             ));
         }
-        // Small pinched families need a shared numerator domain: fixing the
-        // inactive indices forces numerical exceptional leaves in bubble and
-        // triangle derivative closure. Larger three-line paper sectors keep
-        // their measured ray strategy.
+        // Small one-loop pinches need a shared numerator domain: fixing the
+        // inactive indices forces numerical exceptional leaves in derivative
+        // closure. SourceSystem does not retain loop count, so production opts
+        // in using family metadata. Preserve the legacy small-slot policy and
+        // the measured ray strategy of larger three-line paper sectors.
         if self.generic.is_none() && {
             let active = solver.ordering().sector().iter().filter(|&&v| v).count();
-            active == 4 || (N <= 3 && active > 0 && active < N)
+            active == 4 || ((N <= 3 || self.small_one_loop) && active > 0 && active < N)
         } {
             self.generic = Some(generic_rules(solver, depth, 32));
             self.domains += 1;
