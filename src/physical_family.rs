@@ -78,7 +78,7 @@ impl PreparedPhysicalFamily {
             .map(|&s| Ok((s, KinematicDerivative::new(&family, s)?)))
             .collect::<Result<BTreeMap<_, _>>>()?;
         // The shared closure builder sees every derivative target separately.
-        // Its summed matrix is unused: each coordinate matrix below is formed
+        // Skip its unused summed matrix: each coordinate matrix below is formed
         // from the same returned reductions in the same ordered basis.
         let derivative = |integral: &Integral| {
             let mut terms = Vec::new();
@@ -89,11 +89,11 @@ impl PreparedPhysicalFamily {
         };
         let mut closed = if options.skip_reduction {
             crate::reduction::build_retained_system(
-                backend, &family, targets, 32, context, derivative,
+                backend, &family, targets, 32, context, false, derivative,
             )?
         } else {
             crate::reduction::build_differential_system(
-                backend, &family, targets, 32, context, derivative,
+                backend, &family, targets, 32, context, false, derivative,
             )?
         };
         // Native rational reduction represents i as a formal coefficient.

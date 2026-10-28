@@ -364,13 +364,175 @@ fn four_line_domains_are_reused_while_three_line_sectors_keep_rays() {
     assert_eq!((bank.domains, bank.domain_hits, bank.generated), (1, 2, 0));
 
     let solver = SectorSolver::new(&sources, sector(), SectorConfig::default()).unwrap();
-    let mut bank = Bank::new(&sources, &solver);
+    let mut bank = Bank::for_family(&sources, &solver, native_family().loop_count());
     assert!(
         bank.try_reduce([-3, 2, 0, 0, 2, 0, 2, 0, 0], &sources, &solver, 3)
             .unwrap()
             .is_some()
     );
     assert_eq!((bank.domains, bank.domain_hits, bank.generated), (0, 0, 1));
+}
+
+#[test]
+fn one_loop_pentagon_pinches_reuse_symbolic_numerator_domains() {
+    use crate::ReductionBackend;
+    use std::collections::BTreeSet;
+
+    let s = symbol!("pentagon_parametric_test::s");
+    let higgs2 = Atom::num(Rational::from((1_562_500, 3_003_289)));
+    // GL002 routing and masses, with x01 symbolic and the other four
+    // invariants fixed rationally. H=P0+P1-P2-P3 has H^2=higgs2.
+    let [a, b, c, d, e] = [
+        Atom::var(s),
+        Atom::num(2),
+        Atom::num(3),
+        Atom::num(5),
+        Atom::num(7),
+    ];
+    let f = higgs2 / Atom::num(2) - 1 - &a + &b + &c + &d + &e;
+    let gram = vec![
+        vec![Atom::zero(), a.clone(), b.clone(), c.clone()],
+        vec![a, Atom::zero(), d.clone(), e.clone()],
+        vec![b, d, Atom::one(), f.clone()],
+        vec![c, e, f, Atom::one()],
+    ];
+    let shifts = [
+        [0, 0, 0, 0],
+        [0, 1, 0, 0],
+        [1, 1, -1, -1],
+        [0, 1, -1, -1],
+        [0, 1, 0, -1],
+    ];
+    let family = crate::IntegralFamily {
+        name: "GL002_pinched_pentagon".into(),
+        loops: vec!["k".into()],
+        external: vec!["P0".into(), "P1".into(), "P2".into(), "P3".into()],
+        external_gram: gram.clone(),
+        propagators: shifts
+            .iter()
+            .enumerate()
+            .map(|(i, shift)| {
+                crate::Propagator::quadratic(
+                    &[1],
+                    shift,
+                    Atom::num(if i == 4 { 0 } else { 1 }),
+                    &gram,
+                )
+                .unwrap()
+            })
+            .collect(),
+        physical_propagators: 5,
+        epsilon: symbol!("pentagon_parametric_test::eps"),
+        dimension: 4,
+    };
+    // Neither D nor the remaining invariant is evaluated at a point.
+    let converted = family.convert_at_epsilon(None).unwrap();
+    let sources = SourceSystem::<5>::from_family_with_lorentz(&converted.family, false).unwrap();
+    let depth = crate::RustRedBackend::default().max_depth;
+    let mut identities = Vec::new();
+    let mut targets = BTreeSet::new();
+    for group in [
+        [
+            [-1, 0, 1, 1, 1],
+            [0, -1, 1, 1, 1],
+            [-2, 0, 1, 1, 1],
+            [-1, -1, 1, 1, 1],
+        ],
+        [
+            [-1, 1, 1, 0, 1],
+            [0, 1, 1, -1, 1],
+            [-2, 1, 1, 0, 1],
+            [-1, 1, 1, -1, 1],
+        ],
+        [
+            [-1, 0, 1, 0, 1],
+            [0, -1, 1, 0, 1],
+            [0, -2, 1, 0, 1],
+            [-1, -1, 1, 0, 1],
+        ],
+    ] {
+        let sector = group[0].map(|n| n > 0);
+        let solver = SectorSolver::new(&sources, sector, SectorConfig::default()).unwrap();
+        // SourceSystem alone cannot distinguish one and two loops. Both the
+        // legacy constructor and non-one-loop metadata retain the ray policy.
+        assert!(!Bank::new(&sources, &solver).small_one_loop);
+        assert!(!Bank::for_family(&sources, &solver, 2).small_one_loop);
+        let mut bank = Bank::for_family(&sources, &solver, converted.family.loop_count());
+        for target in group {
+            let applied = bank
+                .try_reduce(target, &sources, &solver, depth)
+                .unwrap()
+                .unwrap_or_else(|| panic!("no numerator-domain rule at {target:?}"));
+            // Check the first dispatched rule itself: a symbolic denominator
+            // alone, or a fully fixed exceptional leaf, is insufficient.
+            let rule = bank
+                .generic
+                .as_ref()
+                .unwrap()
+                .iter()
+                .find(|rule| apply(rule, target, &sources, &solver).unwrap().is_some())
+                .unwrap();
+            assert!(
+                rule.candidate
+                    .target
+                    .powers()
+                    .iter()
+                    .zip(target)
+                    .any(|(power, n)| n < 0 && power.is_symbolic()),
+                "the applied rule fixes every numerator index at {target:?}"
+            );
+            assert!(!rule.candidate.sources.is_empty());
+            targets.insert(crate::Integral(target.to_vec()));
+            targets.extend(applied.terms.iter().map(|term| {
+                crate::Integral(term.integral.powers().iter().map(|p| p.value()).collect())
+            }));
+            identities.push((target, applied));
+        }
+        assert_eq!((bank.domains, bank.domain_hits, bank.generated), (1, 4, 0));
+    }
+    // Independently solve the finite-index identities with all formula-bank
+    // and bubble shortcuts disabled, retaining symbolic epsilon and s.
+    let reference = crate::RustRedBackend {
+        max_depth: 4,
+        parametric_rules: false,
+        bubble_subloops: false,
+        ..Default::default()
+    }
+    .reduce(
+        &family,
+        &targets.into_iter().collect::<Vec<_>>(),
+        &crate::RunContext::default(),
+    )
+    .unwrap();
+    for (lhs, applied) in identities {
+        let mut residual = reference.expand(&crate::Integral(lhs.to_vec())).unwrap();
+        for term in applied.terms {
+            let coefficient =
+                crate::family::substitute(&term.coefficient.to_expression(), &converted.reverse);
+            let child = crate::Integral(term.integral.powers().iter().map(|p| p.value()).collect());
+            for (master, reduced) in reference.expand(&child).unwrap() {
+                let old = residual.remove(&master).unwrap_or_default();
+                residual.insert(master, old - &coefficient * reduced);
+            }
+        }
+        // The finite solver retains a spanning basis with distinct tadpoles
+        // on different lines. The first four propagators all have m^2=1:
+        // translating k makes their scalar one-line integrals identical.
+        // Combine only these known equal masters before the exact comparison.
+        let mut tadpole = Atom::zero();
+        for axis in 0..4 {
+            let mut powers = vec![0; 5];
+            powers[axis] = 1;
+            tadpole += residual
+                .remove(&crate::Integral(powers))
+                .unwrap_or_default();
+        }
+        residual.insert(crate::Integral(vec![1, 0, 0, 0, 0]), tadpole);
+        assert!(
+            residual.values().all(|c| c.together().cancel().is_zero()),
+            "specialization mismatch at {lhs:?}: {residual:?}"
+        );
+    }
 }
 
 #[test]

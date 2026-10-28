@@ -477,7 +477,7 @@ pub fn differential_system(
     max_rounds: usize,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
-    build_differential_system(backend, family, targets, max_rounds, context, |i| {
+    build_differential_system(backend, family, targets, max_rounds, context, true, |i| {
         eta_derivative(i, shifted)
     })
 }
@@ -551,7 +551,7 @@ pub fn parameter_differential_system(
     max_rounds: usize,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
-    build_differential_system(backend, family, targets, max_rounds, context, |i| {
+    build_differential_system(backend, family, targets, max_rounds, context, true, |i| {
         parameter_derivative(family, i, variable)
     })
 }
@@ -562,6 +562,7 @@ pub(crate) fn build_differential_system(
     targets: &[Integral],
     max_rounds: usize,
     context: &RunContext,
+    assemble_matrix: bool,
     derivative: impl Fn(&Integral) -> Result<Vec<(Integral, Atom)>>,
 ) -> Result<ReducedSystem> {
     let mut conditions = BTreeMap::new();
@@ -599,19 +600,24 @@ pub(crate) fn build_differential_system(
                 .len(),
         })?;
         if derivatives_covered && basis == previous {
+            // Physical-family preparation builds separate coordinate matrices instead.
             let mut matrix = vec![vec![Atom::new(); basis.len()]; basis.len()];
-            for (row, i) in basis.iter().enumerate() {
-                for (j, c) in derivative(i)? {
-                    let terms = candidates.get(&j).ok_or_else(|| {
-                        Error::IncompleteReduction(
-                            "derivative changed after differential closure planning".into(),
-                        )
-                    })?;
-                    for (k, d) in terms {
-                        let col = basis.binary_search(k).map_err(|_| {
-                            Error::IncompleteReduction("derivative introduced new residual".into())
+            if assemble_matrix {
+                for (row, i) in basis.iter().enumerate() {
+                    for (j, c) in derivative(i)? {
+                        let terms = candidates.get(&j).ok_or_else(|| {
+                            Error::IncompleteReduction(
+                                "derivative changed after differential closure planning".into(),
+                            )
                         })?;
-                        matrix[row][col] = (&matrix[row][col] + &c * d).together().cancel();
+                        for (k, d) in terms {
+                            let col = basis.binary_search(k).map_err(|_| {
+                                Error::IncompleteReduction(
+                                    "derivative introduced new residual".into(),
+                                )
+                            })?;
+                            matrix[row][col] = (&matrix[row][col] + &c * d).together().cancel();
+                        }
                     }
                 }
             }
@@ -642,7 +648,7 @@ pub fn differential_system_skip_initial(
     max_rounds: usize,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
-    build_retained_system(backend, family, targets, max_rounds, context, |i| {
+    build_retained_system(backend, family, targets, max_rounds, context, true, |i| {
         eta_derivative(i, shifted)
     })
 }
@@ -655,7 +661,7 @@ pub fn parameter_differential_system_skip_initial(
     max_rounds: usize,
     context: &RunContext,
 ) -> Result<ReducedSystem> {
-    build_retained_system(backend, family, targets, max_rounds, context, |i| {
+    build_retained_system(backend, family, targets, max_rounds, context, true, |i| {
         parameter_derivative(family, i, variable)
     })
 }
@@ -666,6 +672,7 @@ pub(crate) fn build_retained_system(
     targets: &[Integral],
     max_rounds: usize,
     context: &RunContext,
+    assemble_matrix: bool,
     derivative: impl Fn(&Integral) -> Result<Vec<(Integral, Atom)>>,
 ) -> Result<ReducedSystem> {
     let mut conditions = BTreeMap::new();
@@ -705,13 +712,15 @@ pub(crate) fn build_retained_system(
         }
         let basis = basis.into_iter().collect::<Vec<_>>();
         let mut matrix = vec![vec![Atom::new(); basis.len()]; basis.len()];
-        for (i, integral) in basis.iter().enumerate() {
-            for (derivative, c) in derivative(integral)? {
-                for (j, a) in &expansions[&derivative] {
-                    let col = basis
-                        .binary_search(j)
-                        .map_err(|_| Error::IncompleteReduction("unclosed derivative".into()))?;
-                    matrix[i][col] = (&matrix[i][col] + &c * a).together().cancel();
+        if assemble_matrix {
+            for (i, integral) in basis.iter().enumerate() {
+                for (derivative, c) in derivative(integral)? {
+                    for (j, a) in &expansions[&derivative] {
+                        let col = basis.binary_search(j).map_err(|_| {
+                            Error::IncompleteReduction("unclosed derivative".into())
+                        })?;
+                        matrix[i][col] = (&matrix[i][col] + &c * a).together().cancel();
+                    }
                 }
             }
         }
