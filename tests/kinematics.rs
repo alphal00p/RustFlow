@@ -54,6 +54,145 @@ fn multivariate_pullback_obeys_the_exact_chain_rule() {
 }
 
 #[test]
+fn affine_complex_pullback_preserves_polynomial_numerators_and_all_epsilon_orders() {
+    use symbolica::domains::float::Complex;
+    use symbolica_amflow::diffexp::EpsilonSystem;
+
+    let (s, t, x, epsilon) = symbol!(
+        "affine_polynomial::s",
+        "affine_polynomial::t",
+        "affine_polynomial::x",
+        "affine_polynomial::eps"
+    );
+    let potential =
+        (Atom::var(s) + Atom::num(2) * Atom::var(t)).pow(8) / (Atom::var(s) - Atom::var(t));
+    let regulator = Atom::one() + Atom::var(epsilon) + Atom::var(epsilon).pow(7);
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: [s, t]
+            .into_iter()
+            .map(|v| (v, vec![vec![&regulator * potential.derivative(v)]]))
+            .collect(),
+    };
+    let imaginary = Atom::num(Complex::new(Rational::zero(), Rational::one()));
+    let path = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, 2 + &imaginary * Atom::var(x)), (t, 1 - Atom::var(x))]),
+    };
+    let rules = path
+        .coordinates
+        .iter()
+        .map(|(&s, a)| (Atom::var(s), a.clone()))
+        .collect();
+    let expected = substitute(&potential, &rules).derivative(x);
+    let pulled = system.pullback(&path).unwrap();
+    equal(&pulled.matrix[0][0], &(&regulator * &expected));
+    let expanded = EpsilonSystem::from_differential_system(&pulled, epsilon, 7).unwrap();
+    let complex_coefficient = BTreeMap::from([(
+        Atom::var(symbol!("symbolica_amflow::imaginary_unit")),
+        imaginary,
+    )]);
+    for (k, matrix) in expanded.matrices.iter().enumerate() {
+        if [0, 1, 7].contains(&k) {
+            equal(&substitute(&matrix[0][0], &complex_coefficient), &expected);
+        } else {
+            assert!(matrix[0][0].is_zero());
+        }
+    }
+}
+
+#[test]
+fn affine_pullback_keeps_weighted_epsilon_pole_cancellation() {
+    use symbolica_amflow::diffexp::EpsilonSystem;
+    let (s, t, x, epsilon) = symbol!(
+        "affine_cancel::s",
+        "affine_cancel::t",
+        "affine_cancel::x",
+        "affine_cancel::eps"
+    );
+    let eps = Atom::var(epsilon);
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([
+            (
+                s,
+                vec![vec![Atom::one() / (&eps * (1 - &eps * Atom::var(s)))]],
+            ),
+            (t, vec![vec![-Atom::one() / (2 * &eps)]]),
+        ]),
+    };
+    let path = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, 1 + Atom::var(x)), (t, 3 + 2 * Atom::var(x))]),
+    };
+    let pulled = system.pullback(&path).unwrap();
+    let expanded = EpsilonSystem::from_differential_system(&pulled, epsilon, 3).unwrap();
+    for (k, matrix) in expanded.matrices.iter().enumerate() {
+        equal(
+            &matrix[0][0],
+            &(Atom::one() + Atom::var(x)).pow(k as i64 + 1),
+        );
+    }
+}
+
+#[test]
+fn affine_stationary_coordinates_keep_original_poles_even_at_high_epsilon_order() {
+    let (s, t, x, epsilon) = symbol!(
+        "affine_stationary::s",
+        "affine_stationary::t",
+        "affine_stationary::x",
+        "affine_stationary::eps"
+    );
+    let path = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, Atom::zero()), (t, 1 + Atom::var(x))]),
+    };
+    for numerator in [Atom::one(), Atom::var(epsilon).pow(8)] {
+        let system = KinematicSystem {
+            epsilon,
+            derivatives: BTreeMap::from([
+                (s, vec![vec![numerator / Atom::var(s)]]),
+                (t, vec![vec![Atom::var(epsilon) / (1 + Atom::var(t))]]),
+            ]),
+        };
+        assert!(matches!(
+            system.pullback(&path),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+}
+
+#[test]
+fn affine_expansion_does_not_truncate_or_accept_nonregular_epsilon_dependence() {
+    use symbolica_amflow::diffexp::EpsilonSystem;
+    let (s, x, epsilon) = symbol!(
+        "affine_epsilon::s",
+        "affine_epsilon::x",
+        "affine_epsilon::eps"
+    );
+    let eps = Atom::var(epsilon);
+    let path = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, 1 + Atom::var(x))]),
+    };
+    for dependence in [
+        eps.pow(-1),
+        eps.pow(Atom::num((-1, 2))),
+        Atom::one() / (1 - &eps) + eps.pow(Atom::num((101, 2))),
+    ] {
+        let system = KinematicSystem {
+            epsilon,
+            derivatives: BTreeMap::from([(s, vec![vec![dependence / (1 + Atom::var(s))]])]),
+        };
+        let pulled = system.pullback(&path).unwrap();
+        assert!(matches!(
+            EpsilonSystem::from_differential_system(&pulled, epsilon, 0),
+            Err(Error::Unsupported(_))
+        ));
+    }
+}
+
+#[test]
 fn straight_line_retains_exact_complex_endpoints_and_orientation() {
     let (s, x, epsilon) = symbol!("path_line::s", "path_line::x", "path_line::eps");
     let start = BTreeMap::from([(s, Atom::num((1, 3)))]);
