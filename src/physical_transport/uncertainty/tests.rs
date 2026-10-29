@@ -190,11 +190,13 @@ fn positive_loose_disks_admit_the_same_polynomial_chart_after_refinement() -> Re
         };
         let problem = problem(&prepared, &source, &options, &context);
         assert!(matches!(
-            problem.scalar_disks(&before, false),
+            problem.scalar_disks(&before, 1),
             Err(Error::Accuracy(_))
         ));
+        let four = problem.scalar_disks(&before, 4)?;
         solution = before.clone();
         admit(&prepared, &source, &mut solution, &options, &context)?;
+        assert_eq!(solution.comparison_errors, four.errors);
         assert_eq!(solution.coefficients, before.coefficients);
         assert_eq!(solution.point, before.point);
         assert_eq!(solution.leading, before.leading);
@@ -241,6 +243,63 @@ fn positive_loose_disks_admit_the_same_polynomial_chart_after_refinement() -> Re
 }
 
 #[test]
+fn sixteen_disks_admit_when_four_fail_without_changing_the_central_chart() -> Result<()> {
+    let x = Atom::var(symbol!("boundary_disks::x"));
+    // The same exact linear solutions, with less source evidence: the positive
+    // four-disk bound is still too loose, while sixteen disks admit the source.
+    let (prepared, source) = fixture(
+        Atom::num(-99) / (100 - 99 * x),
+        Atom::new(),
+        [1, 2, 3, 4, 5],
+        20,
+    )?;
+    let p = Precision {
+        bits: source.accuracy.working_bits(),
+    };
+    let slopes = (1..=5)
+        .map(|i| p.rational(&Rational::from((-99 * i, 100))))
+        .collect::<Vec<_>>();
+    let original = linear_solution(&source, &slopes, false);
+    let source_before = format!("{source:?}");
+    let context = RunContext::default();
+    for strategy in [
+        BoundaryErrorStrategy::ScalarNorm,
+        BoundaryErrorStrategy::Automatic,
+    ] {
+        let options = FlowOptions {
+            digits: 12,
+            boundary_error_strategy: strategy,
+            ..Default::default()
+        };
+        let problem = problem(&prepared, &source, &options, &context);
+        for subdivisions in [1, 4] {
+            assert!(matches!(
+                problem.scalar_disks(&original, subdivisions),
+                Err(Error::Accuracy(_))
+            ));
+        }
+        let sixteen = problem.scalar_disks(&original, 16)?;
+        let mut expected = original.clone();
+        expected.comparison_errors = sixteen.errors;
+        expected.checkpoints = sixteen.checkpoints;
+        let mut solution = original.clone();
+        admit(&prepared, &source, &mut solution, &options, &context)?;
+        // Every central field, segment and checkpoint value remains identical;
+        // only the admitted source-error candidate replaces comparison errors.
+        assert_eq!(format!("{solution:?}"), format!("{expected:?}"));
+        assert_eq!(solution.checkpoints.len(), original.checkpoints.len());
+        assert!(errors_meet(
+            p,
+            &solution.coefficients,
+            &solution.comparison_errors,
+            12
+        ));
+        assert_eq!(format!("{source:?}"), source_before);
+    }
+    Ok(())
+}
+
+#[test]
 fn constant_nilpotent_hierarchy_keeps_one_global_dyson_bound() -> Result<()> {
     let (prepared, source) = fixture(Atom::new(), Atom::num(100), [0; 5], 24)?;
     let p = Precision {
@@ -253,17 +312,19 @@ fn constant_nilpotent_hierarchy_keeps_one_global_dyson_bound() -> Result<()> {
     };
     let context = RunContext::default();
     let problem = problem(&prepared, &source, &options, &context);
-    let coarse = problem.scalar_disks(&solution, false)?;
-    let refined = problem.scalar_disks(&solution, true)?;
-    assert_eq!(coarse.errors, refined.errors);
+    let coarse = problem.scalar_disks(&solution, 1)?;
     let expected =
         p.rational(&Rational::from((13_015_303, 3))).re * &problem.relative_error + p.tolerance(70);
-    assert!(p.close(
-        &C::new(refined.errors[4][0].clone(), p.real(0)),
-        &C::new(expected, p.real(0)),
-        70
-    ));
-    assert_eq!(refined.checkpoints.len(), 2);
+    for subdivisions in [4, 16] {
+        let refined = problem.scalar_disks(&solution, subdivisions)?;
+        assert_eq!(coarse.errors, refined.errors);
+        assert!(p.close(
+            &C::new(refined.errors[4][0].clone(), p.real(0)),
+            &C::new(expected.clone(), p.real(0)),
+            70
+        ));
+        assert_eq!(refined.checkpoints.len(), 2);
+    }
     Ok(())
 }
 
@@ -287,9 +348,11 @@ fn constant_growth_retains_the_source_floor_failure_and_transaction() -> Result<
             ..Default::default()
         };
         let problem = problem(&prepared, &source, &options, &context);
-        let coarse = problem.scalar_disks(&original, false).err().unwrap();
-        let refined = problem.scalar_disks(&original, true).err().unwrap();
-        assert_eq!(coarse.to_string(), refined.to_string());
+        let coarse = problem.scalar_disks(&original, 1).err().unwrap();
+        for subdivisions in [4, 16] {
+            let refined = problem.scalar_disks(&original, subdivisions).err().unwrap();
+            assert_eq!(coarse.to_string(), refined.to_string());
+        }
         let mut solution = original.clone();
         let error = admit(&prepared, &source, &mut solution, &options, &context).unwrap_err();
         assert!(matches!(error, Error::Accuracy(_)));

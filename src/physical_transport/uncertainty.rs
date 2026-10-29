@@ -108,31 +108,38 @@ impl Problem<'_> {
     }
 
     fn scalar(&self, solution: &EpsilonSolution) -> Result<Admission> {
-        match self.scalar_disks(solution, false) {
-            Err(original @ Error::Accuracy(_)) => match self.scalar_disks(solution, true) {
-                Ok(candidate) => Ok(candidate),
-                Err(error @ (Error::Cancelled | Error::InvalidInput(_))) => Err(error),
-                // Retain the original failure and automatic fundamental route.
-                Err(_) => Err(original),
-            },
-            result => result,
+        let original = match self.scalar_disks(solution, 1) {
+            Err(error @ Error::Accuracy(_)) => error,
+            result => return result,
+        };
+        for subdivisions in [4, 16] {
+            match self.scalar_disks(solution, subdivisions) {
+                Ok(candidate) => return Ok(candidate),
+                Err(Error::Accuracy(_)) => {}
+                Err(error @ (Error::Cancelled | Error::InvalidInput(_))) => return Err(error),
+                // Only accuracy failures try another disk size. Retain the
+                // original failure and automatic fundamental route otherwise.
+                Err(_) => return Err(original),
+            }
         }
+        Err(original)
     }
 
-    fn scalar_disks(&self, solution: &EpsilonSolution, subdivide: bool) -> Result<Admission> {
+    fn scalar_disks(&self, solution: &EpsilonSolution, subdivisions: i64) -> Result<Admission> {
         let mut integrated_norm = self.p.real(0);
         let result = self.candidate(solution, |_, segment| {
-            if subdivide {
+            if subdivisions > 1 {
                 // Tighten only the supplied-error disks, keeping the central
                 // trajectory, fixed source weights and original checkpoints.
                 let delta = self.p.sub(&segment.end, &segment.center);
                 let mut start = segment.center.clone();
-                for part in 1..=4 {
+                for part in 1..=subdivisions {
                     self.context.cancellation.check()?;
-                    let end = if part == 4 {
+                    let end = if part == subdivisions {
                         segment.end.clone()
                     } else {
-                        self.p.add(&segment.center, &self.p.scale(&delta, part, 4))
+                        self.p
+                            .add(&segment.center, &self.p.scale(&delta, part, subdivisions))
                     };
                     integrated_norm +=
                         self.prepared
