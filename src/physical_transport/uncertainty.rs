@@ -9,6 +9,9 @@ use crate::{BoundaryErrorStrategy, Error, FlowOptions, Precision, Result, RunCon
 use symbolica::domains::float::{RealBall, RoundingDirection};
 use symbolica::prelude::*;
 
+#[cfg(test)]
+mod tests;
+
 struct Admission {
     errors: Vec<Vec<Float>>,
     checkpoints: Vec<VerifiedCheckpoint>,
@@ -105,13 +108,54 @@ impl Problem<'_> {
     }
 
     fn scalar(&self, solution: &EpsilonSolution) -> Result<Admission> {
+        let original = match self.scalar_disks(solution, 1) {
+            Err(error @ Error::Accuracy(_)) => error,
+            result => return result,
+        };
+        for subdivisions in [4, 16] {
+            match self.scalar_disks(solution, subdivisions) {
+                Ok(candidate) => return Ok(candidate),
+                Err(Error::Accuracy(_)) => {}
+                Err(error @ (Error::Cancelled | Error::InvalidInput(_))) => return Err(error),
+                // Only accuracy failures try another disk size. Retain the
+                // original failure and automatic fundamental route otherwise.
+                Err(_) => return Err(original),
+            }
+        }
+        Err(original)
+    }
+
+    fn scalar_disks(&self, solution: &EpsilonSolution, subdivisions: i64) -> Result<Admission> {
         let mut integrated_norm = self.p.real(0);
         let result = self.candidate(solution, |_, segment| {
-            integrated_norm += self.prepared.error_norm_integral_weighted(
-                &segment.center,
-                &segment.end,
-                &self.weights,
-            )?;
+            if subdivisions > 1 {
+                // Tighten only the supplied-error disks, keeping the central
+                // trajectory, fixed source weights and original checkpoints.
+                let delta = self.p.sub(&segment.end, &segment.center);
+                let mut start = segment.center.clone();
+                for part in 1..=subdivisions {
+                    self.context.cancellation.check()?;
+                    let end = if part == subdivisions {
+                        segment.end.clone()
+                    } else {
+                        self.p
+                            .add(&segment.center, &self.p.scale(&delta, part, subdivisions))
+                    };
+                    integrated_norm +=
+                        self.prepared
+                            .error_norm_integral_weighted(&start, &end, &self.weights)?;
+                    start = end;
+                }
+            } else {
+                // Preserve the original scalar attempt's arithmetic and rounding.
+                integrated_norm += self.prepared.error_norm_integral_weighted(
+                    &segment.center,
+                    &segment.end,
+                    &self.weights,
+                )?;
+            }
+            // Accumulate the whole path before amplification, including the
+            // finite Dyson bound when the epsilon hierarchy is nilpotent.
             Ok(Increment::Scalar(
                 crate::diffexp::amplification_from_integral(
                     self.p,
