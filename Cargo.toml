@@ -26,7 +26,7 @@ path = "src/bin/rustflow.rs"
 required-features = ["automatic"]
 
 [dependencies]
-symbolica = { version = "=3.0.1", default-features = false, features = ["bincode", "serde", "tracing_max_level_info"] }
+symbolica = { version = "3.0.2", default-features = false, features = ["bincode", "serde", "tracing_max_level_info"] }
 rustred = { git = "https://github.com/alphal00p/rustred", branch = "main", default-features = false, optional = true }
 rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational"], optional = true }
 rayon = { version = "1.11", optional = true }
