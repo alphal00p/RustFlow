@@ -31,6 +31,7 @@ struct Problem<'a> {
 enum Increment<'a> {
     Scalar(Float),
     Fundamental(&'a [Float]),
+    Components(&'a [Float]),
 }
 impl Increment<'_> {
     fn add(&self, problem: &Problem<'_>, errors: &mut [Vec<Float>]) {
@@ -44,6 +45,9 @@ impl Increment<'_> {
                 // Retain the original scalar operation order and rounding.
                 Self::Scalar(amplification) => {
                     *error += weight.clone() * &problem.relative_error * amplification;
+                }
+                Self::Components(increments) => {
+                    *error += &increments[component];
                 }
                 Self::Fundamental(increments) => {
                     *error = error.add_round(
@@ -216,6 +220,17 @@ pub(super) fn admit(
     options: &FlowOptions,
     context: &RunContext,
 ) -> Result<()> {
+    admit_with_gauge(prepared, source, solution, options, context, None).map(|_| ())
+}
+
+pub(super) fn admit_with_gauge(
+    prepared: &CompiledConnection,
+    source: &CachedBoundary,
+    solution: &mut EpsilonSolution,
+    options: &FlowOptions,
+    context: &RunContext,
+    gauge: Option<&super::diagonal_gauge::PreparedGauge>,
+) -> Result<Option<String>> {
     let p = Precision {
         bits: solution.diagnostics.working_bits,
     };
@@ -250,6 +265,44 @@ pub(super) fn admit(
         weights,
         relative_error,
     };
+    if let Some(gauge) = gauge {
+        // Only input uncertainty changes. Borrow this already-refined central
+        // trajectory and retain the existing mixed-scale candidate checks.
+        let mut first_accuracy = None;
+        for subdivisions in [1, 4, 16] {
+            context.cancellation.check()?;
+            let attempt = gauge
+                .increments(
+                    solution,
+                    &problem.weights,
+                    &problem.relative_error,
+                    source.accuracy.verified_digits(),
+                    subdivisions,
+                    context,
+                )
+                .and_then(|(increments, report)| {
+                    let candidate = problem.candidate(solution, |index, _| {
+                        Ok(Increment::Components(&increments[index]))
+                    })?;
+                    Ok((candidate, report))
+                });
+            match attempt {
+                Ok((candidate, report)) => {
+                    context.cancellation.check()?;
+                    solution.comparison_errors = candidate.errors;
+                    solution.checkpoints = candidate.checkpoints;
+                    return Ok(Some(report));
+                }
+                Err(error @ Error::Accuracy(_)) => {
+                    if first_accuracy.is_none() {
+                        first_accuracy = Some(error);
+                    }
+                }
+                Err(error) => return Err(error),
+            }
+        }
+        return Err(first_accuracy.unwrap());
+    }
     let (candidate, charts, retry, fallback) = match options.boundary_error_strategy {
         BoundaryErrorStrategy::ScalarNorm => (problem.scalar(solution)?, 0, None, None),
         BoundaryErrorStrategy::Automatic => match problem.scalar(solution) {
@@ -284,5 +337,5 @@ pub(super) fn admit(
     solution.diagnostics.fundamental_boundary_charts = charts;
     solution.diagnostics.fundamental_boundary_retry = retry;
     solution.diagnostics.fundamental_boundary_fallback = fallback;
-    Ok(())
+    Ok(None)
 }

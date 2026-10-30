@@ -198,6 +198,9 @@ pub struct FlowOptions {
     pub pade: Option<PadeOptions>,
     pub residual_arithmetic: ResidualArithmetic,
     pub boundary_error_strategy: BoundaryErrorStrategy,
+    /// Optional exact mathematical gauge for a numerical incoming-error estimate.
+    /// Supplies no source credit, numerical error bound or central solver setting.
+    pub diagonal_gauge_estimate: Option<crate::physical_transport::DiagonalGaugeEstimate>,
     /// Regular boundary-centered Taylor coordinates; physical paths remain unchanged.
     pub local_coordinate: crate::local_coordinates::LocalCoordinate,
     /// Maximum physical proposals per continuation call. A rejected Padé
@@ -235,6 +238,7 @@ impl Default for FlowOptions {
             pade: None,
             residual_arithmetic: ResidualArithmetic::Ball,
             boundary_error_strategy: BoundaryErrorStrategy::Automatic,
+            diagonal_gauge_estimate: None,
             local_coordinate: crate::local_coordinates::LocalCoordinate::Identity,
             max_steps: 1000,
             step_size_strategy: StepSizeStrategy::Halving,
