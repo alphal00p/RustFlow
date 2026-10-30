@@ -1,6 +1,124 @@
 //! Immutable native rational-row algebra, before any numerical specialization.
 use super::*;
 
+type ExactPolePolynomial = UnivariatePolynomial<FloatField<source::Gaussian>>;
+
+/// Only the pole scan discards multiplicities. Row denominators and their
+/// enclosure certificates continue to use the original factors and content.
+fn square_free_pole_polynomial(
+    coefficients: Vec<source::Gaussian>,
+    variable: Symbol,
+) -> Result<ExactPolePolynomial> {
+    let ring = FloatField::from_rep(source::Gaussian::new(Rational::zero(), Rational::zero()));
+    let polynomial = ExactPolePolynomial::from_coefficients(
+        &ring,
+        coefficients,
+        Arc::new(PolyVariable::Symbol(variable)),
+    );
+    // A vanished factor is a domain failure, not a constant with no poles.
+    if polynomial.is_zero() {
+        return Err(Error::Numerical(
+            "identically zero specialized pole factor".into(),
+        ));
+    }
+    let content = polynomial.lcoeff();
+    let monic = polynomial.clone().div_coeff(&content);
+    let derivative = monic.derivative();
+    // FloatField's blanket PolynomialGCD implementation returns one, even for
+    // exact Gaussian rationals. Explicit Euclidean GCD stays in this field and
+    // avoids the u16 exponent conversion performed by ordinary .gcd().
+    let repeated = monic.gcd_euclidean(&derivative);
+    let square_free = monic
+        .try_div(&repeated)
+        .ok_or_else(|| Error::Numerical("exact square-free pole division failed".into()))?;
+    if monic.clone().mul_coeff(&content) != polynomial
+        || &repeated * &square_free != monic
+        || derivative.try_div(&repeated).is_none()
+        || repeated.degree().checked_add(square_free.degree()) != Some(monic.degree())
+        || !square_free
+            .gcd_euclidean(&square_free.derivative())
+            .is_one()
+    {
+        return Err(Error::Numerical(
+            "exact square-free pole verification failed".into(),
+        ));
+    }
+    Ok(square_free)
+}
+
+/// Remove exactly shared roots before numerical enumeration. Previously solved
+/// pieces are monic, square-free and pairwise coprime; no numerical GCD or
+/// assumption about irreducibility is involved.
+fn unscanned_pole_polynomial(
+    original: &ExactPolePolynomial,
+    previous: &[(ExactPolePolynomial, Vec<C>)],
+) -> Result<ExactPolePolynomial> {
+    let mut remaining = original.clone();
+    let mut common_product = original.one();
+    for (scanned, _) in previous {
+        let common = remaining.gcd_euclidean(scanned);
+        if common.is_zero() {
+            return Err(Error::Numerical("zero common pole factor".into()));
+        }
+        // Ordinary quot_rem handles constants and degree collapse; never use
+        // quot_rem_field, whose degree assumptions do not cover these cases.
+        let (next, remainder) = remaining.quot_rem(&common);
+        let scanned_quotient = scanned
+            .try_div(&common)
+            .ok_or_else(|| Error::Numerical("exact common pole factor division failed".into()))?;
+        if !remainder.is_zero()
+            || &common * &next != remaining
+            || &common * &scanned_quotient != *scanned
+            || common.degree().checked_add(next.degree()) != Some(remaining.degree())
+            || common.degree().checked_add(scanned_quotient.degree()) != Some(scanned.degree())
+        {
+            return Err(Error::Numerical(
+                "exact common pole factor verification failed".into(),
+            ));
+        }
+        common_product = &common_product * &common;
+        remaining = next;
+    }
+    if remaining.is_zero()
+        || !remaining.lcoeff().is_one()
+        || &common_product * &remaining != *original
+        || common_product.degree().checked_add(remaining.degree()) != Some(original.degree())
+        || !remaining.gcd_euclidean(&remaining.derivative()).is_one()
+        || previous
+            .iter()
+            .any(|(scanned, _)| !remaining.gcd_euclidean(scanned).is_one())
+    {
+        return Err(Error::Numerical(
+            "exact unscanned pole verification failed".into(),
+        ));
+    }
+    Ok(remaining)
+}
+
+/// Exact common factors have already been removed. Numerical overlap between
+/// these coprime pieces is unresolved, so reject it instead of merging poles.
+fn check_coprime_pole_separation(
+    p: Precision,
+    roots: &[C],
+    previous: &[(ExactPolePolynomial, Vec<C>)],
+) -> Result<()> {
+    for (_, other_roots) in previous {
+        for root in roots {
+            for other in other_roots {
+                let a = p.norm(root);
+                let b = p.norm(other);
+                let scale = if a < b { a } else { b };
+                if p.norm(&p.sub(root, other)) <= p.tolerance(p.bits / 5) * scale {
+                    return Err(Error::Numerical(
+                        "ambiguous nearby poles from coprime specialized factors".into(),
+                    ));
+                }
+            }
+        }
+    }
+    Ok(())
+}
+
 #[derive(Clone, Debug)]
 struct PreparedRational {
     numerator: Atom,
@@ -139,8 +257,8 @@ impl PreparedRows {
         })
     }
 
-    /// Preserve the previous numerical operation order and fresh stored-dyadic
-    /// specialization, including independent numeric/exact sparse-zero decisions.
+    /// Preserve row arithmetic and fresh stored-dyadic specialization. Only the
+    /// pole scan uses an exactly specialized square-free polynomial.
     pub(crate) fn compile(
         &self,
         p: Precision,
@@ -152,6 +270,7 @@ impl PreparedRows {
         let exact_values = source::ExactSpecialization::new(p, values)?;
         let mut matrix = Vec::with_capacity(self.rows.len());
         let mut poles = Vec::new();
+        let mut scanned_poles = Vec::new();
         let mut pole_polynomials = Vec::new();
         let mut polynomial_rows = Vec::with_capacity(self.rows.len());
         let mut exact_source_rows = Vec::with_capacity(self.rows.len());
@@ -170,16 +289,44 @@ impl PreparedRows {
                 }
                 for factor in &rational.new_pole_factors {
                     context.cancellation.check()?;
-                    let coefficients = polynomial_coefficients(factor, variable, p, values)?;
-                    if coefficients.len() <= 1 {
+                    // Specialize J=i and stored parameter dyadics before any
+                    // rounding: specialization can create exact multiplicities
+                    // invisible to the formal multivariate factorization.
+                    let square_free = square_free_pole_polynomial(
+                        exact_values.polynomial(factor, variable)?,
+                        variable,
+                    )?;
+                    context.cancellation.check()?;
+                    if square_free.is_constant() {
                         continue;
                     }
+                    // Retain every original nonconstant factor for source-domain
+                    // recompilation, even when its poles were already scanned.
                     pole_polynomials.push(factor.clone());
+                    let remaining = unscanned_pole_polynomial(&square_free, &scanned_poles)?;
+                    context.cancellation.check()?;
+                    if remaining.is_constant() {
+                        continue;
+                    }
+                    let coefficients = remaining
+                        .coefficients()
+                        .iter()
+                        .map(|coefficient| {
+                            let mut rounded = p.rational(&coefficient.re);
+                            rounded.im = p.rational(&coefficient.im).re;
+                            rounded
+                        })
+                        .collect::<Vec<_>>();
+                    if coefficients.iter().any(|c| !p.finite(c)) {
+                        return Err(Error::Numerical("nonfinite pole polynomial".into()));
+                    }
                     let roots = polynomial_roots(p, &coefficients, variable)?;
                     context.cancellation.check()?;
-                    for root in roots {
-                        retain_distinct_pole(p, &mut poles, root);
-                    }
+                    check_coprime_pole_separation(p, &roots, &scanned_poles)?;
+                    // Exact coprimality and numerical separation were checked;
+                    // no tolerance-based collector is needed for these pieces.
+                    poles.extend(roots.iter().cloned());
+                    scanned_poles.push((remaining, roots));
                 }
                 out.push(NumericRational {
                     numerator,
@@ -340,3 +487,7 @@ mod polynomial_rows_tests {
         Ok(())
     }
 }
+
+#[cfg(test)]
+#[path = "repeated_poles_tests.rs"]
+mod repeated_poles_tests;

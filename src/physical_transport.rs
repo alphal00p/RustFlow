@@ -6,7 +6,9 @@
 //! prescribed interface reuses the same engine for threshold detours. Explicit
 //! singular endpoint requests retain regular matching anchors and separately
 //! validated terminal evidence.
+mod diagonal_gauge;
 mod uncertainty;
+pub use diagonal_gauge::DiagonalGaugeEstimate;
 
 use crate::algebraic::{
     AlgebraicKinematicSystem, AlgebraicSystem, CanonicalAlgebraicSystem, CompiledAlgebraicSystem,
@@ -986,6 +988,19 @@ fn evaluate_from_source(
         })
     };
     let path = &route.physical.path;
+    let gauge =
+        match &options.diagonal_gauge_estimate {
+            None => None,
+            Some(hint) => match system {
+                Connection::Rational(original) => Some(diagonal_gauge::prepare(
+                    hint, original, path, count, context,
+                )?),
+                _ => return Err(Error::Unsupported(
+                    "diagonal gauge estimate currently supports ordinary rational connections only"
+                        .into(),
+                )),
+            },
+        };
     let system = &route.system;
     let RefinedTransport {
         mut solution,
@@ -1009,7 +1024,14 @@ fn evaluate_from_source(
     context.cancellation.check()?;
     // Retry only supplied-error admission; both proofs borrow this one centrally
     // refined trajectory, and commit their error/checkpoint candidate atomically.
-    uncertainty::admit(&prepared, &source, &mut solution, options, context)?;
+    let gauge_provenance = uncertainty::admit_with_gauge(
+        &prepared,
+        &source,
+        &mut solution,
+        options,
+        context,
+        gauge.as_ref(),
+    )?;
     let evidence_cap = source
         .accuracy
         .verified_digits()
@@ -1027,7 +1049,10 @@ fn evaluate_from_source(
         options.digits,
         evidence_cap,
     ));
-    let propagation_provenance = if solution.diagnostics.fundamental_boundary_charts > 0 {
+    let gauge_text = gauge_provenance.map(|text| format!("; {text}"));
+    let propagation_provenance = if let Some(text) = gauge_text.as_deref() {
+        text
+    } else if solution.diagnostics.fundamental_boundary_charts > 0 {
         "; signed fundamental matrices with outward whole-chart inverse, differential-defect and rounding-jump bounds"
     } else {
         ""
