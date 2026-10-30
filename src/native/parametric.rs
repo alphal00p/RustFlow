@@ -255,11 +255,14 @@ impl<'a, const N: usize> Bank<'a, N> {
                 "parametric bank source/order mismatch".into(),
             ));
         }
-        // Four-line paper sectors benefit from shared numerator domains as
-        // well as shorter RHSs. Three-line measurements instead favored fixed
-        // rays, so retain that strategy outside this measured tier.
-        if self.generic.is_none() && solver.ordering().sector().iter().filter(|&&v| v).count() == 4
-        {
+        // Two-slot tadpole sectors also need a shared numerator domain: a
+        // fixed inactive index otherwise forces a numerical exceptional leaf
+        // during massive-bubble derivative closure. Keep the measured ray
+        // strategy for other sectors, including three-line paper sectors.
+        if self.generic.is_none() && {
+            let active = solver.ordering().sector().iter().filter(|&&v| v).count();
+            active == 4 || (N == 2 && active == 1)
+        } {
             self.generic = Some(generic_rules(solver, depth, 32));
             self.domains += 1;
         }

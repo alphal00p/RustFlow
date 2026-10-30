@@ -372,3 +372,68 @@ fn four_line_domains_are_reused_while_three_line_sectors_keep_rays() {
     );
     assert_eq!((bank.domains, bank.domain_hits, bank.generated), (0, 0, 1));
 }
+
+#[test]
+fn pinched_bubble_numerator_uses_reusable_symbolic_domain() {
+    let s = symbol!("pinched_parametric_test::s");
+    let eps = symbol!("pinched_parametric_test::eps");
+    let gram = vec![vec![Atom::var(s)]];
+    let family = crate::IntegralFamily {
+        name: "massive_pinched_bubble".into(),
+        loops: vec!["k".into()],
+        external: vec!["p".into()],
+        external_gram: gram.clone(),
+        propagators: vec![
+            crate::Propagator::quadratic(&[1], &[0], Atom::one(), &gram).unwrap(),
+            crate::Propagator::quadratic(&[1], &[-1], Atom::one(), &gram).unwrap(),
+        ],
+        physical_propagators: 2,
+        epsilon: eps,
+        dimension: 4,
+    };
+    let converted = family.convert_at_epsilon(None).unwrap();
+    let sources = SourceSystem::<2>::from_family_with_lorentz(&converted.family, false).unwrap();
+    let solver = SectorSolver::new(&sources, [false, true], SectorConfig::default()).unwrap();
+    let mut bank = Bank::new(&sources, &solver);
+    // Independent shifted-tadpole identity at m^2=1:
+    // I(-1,n) = T(n-1) + s*T(n), T(n)/T(1) follows from Gamma functions.
+    let tadpole = |n: i16| {
+        if n == 0 {
+            return Atom::Zero;
+        }
+        (2..=n).fold(Atom::one(), |r, j| {
+            r * (Atom::num(3 - j) - Atom::var(eps)) / Atom::num(j - 1)
+        })
+    };
+    for n in 2..=6 {
+        let target = [-1, n];
+        let applied = bank
+            .try_reduce(target, &sources, &solver, 3)
+            .unwrap()
+            .unwrap();
+        // Check genuine index-parametric coverage, not the aggregate bank count:
+        // a fully numerical exceptional rule must not supply this identity.
+        assert!(bank.generic.as_ref().unwrap().iter().any(|rule| {
+            rule.candidate
+                .target
+                .powers()
+                .iter()
+                .any(|p| p.is_symbolic())
+                && apply(rule, target, &sources, &solver).unwrap().is_some()
+        }));
+        let mut actual = Atom::Zero;
+        for term in applied.terms {
+            let powers = term.integral.powers();
+            assert_eq!(
+                powers[0].value(),
+                0,
+                "numerator must be eliminated without a fixed exceptional leaf"
+            );
+            actual +=
+                crate::family::substitute(&term.coefficient.to_expression(), &converted.reverse)
+                    * tadpole(powers[1].value());
+        }
+        let expected = tadpole(n - 1) + Atom::var(s) * tadpole(n);
+        assert!((actual - expected).together().cancel().is_zero());
+    }
+}
