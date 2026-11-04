@@ -311,7 +311,7 @@ impl PreparedGauge {
             .collect::<Vec<_>>();
         let compiled = self
             .system
-            .prepare_with_context(context)?
+            .prepare_norm_with_context(context)?
             .compile_with_context(p, context)?;
         let mut integral = p.real(0);
         let mut endpoints = Vec::new();
