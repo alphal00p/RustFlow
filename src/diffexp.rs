@@ -888,18 +888,21 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
         .digits
         .checked_add(options.guard_digits)
         .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
+    // Local truncation and arithmetic precision refine independently. A
+    // precision hint applies to the current local budget, not a tighter one.
+    let mut local_guard_digits = options.guard_digits;
     let mut last_precision_failure = None;
     for attempt in 0..=options.max_precision_attempts {
         context.cancellation.check()?;
         let mut refined = options.clone();
-        refined.guard_digits = working_digits - options.digits;
+        refined.guard_digits = local_guard_digits;
         refined.series_order = refined
             .series_order
             .checked_add(32 * attempt)
             .ok_or_else(|| Error::Limit("series order overflow".into()))?;
         refined.refine_rational_order(attempt);
         refined.validate()?;
-        let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+        let p = Precision::decimal(working_digits)?;
         let (mut result, metadata) = match run(p, &refined) {
             Ok(result) => result,
             Err(Error::InsufficientPrecision {
@@ -917,6 +920,11 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
         working_digits = working_digits
             .checked_add(20)
             .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
+        // Only a successful profile earns a tighter independent local check.
+        // Failed arithmetic retries retain the last declared local budget.
+        local_guard_digits = local_guard_digits
+            .checked_add(20)
+            .ok_or_else(|| Error::Limit("local guard precision overflow".into()))?;
         if let Some((old, old_metadata)) = &previous {
             if old.leading != result.leading {
                 return Err(Error::InvalidInput(
@@ -1015,3 +1023,7 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
 #[cfg(test)]
 #[path = "diffexp/uncertainty_tests.rs"]
 mod uncertainty_tests;
+
+#[cfg(test)]
+#[path = "diffexp/refinement_tests.rs"]
+mod refinement_tests;
