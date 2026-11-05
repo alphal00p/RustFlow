@@ -264,6 +264,18 @@ impl PreparedKinematicEpsilon {
             PhysicalPhaseTiming::start("transport.pullback.guard_restriction", 0, 0, None);
         let field = gaussian_field();
         let ring = PolynomialRing::new(field.clone());
+        // An affine coordinate's constant term is its exact value at path
+        // parameter zero. Keep epsilon last, as in each retained guard.
+        let witness_points = coordinates.map(|coordinates| {
+            let mut point = coordinates
+                .iter()
+                .map(|p| p.get_constant())
+                .collect::<Vec<_>>();
+            point.push(field.zero());
+            let mut alternate = point.clone();
+            *alternate.last_mut().unwrap() = field.one();
+            [point, alternate]
+        });
         // The coefficient pullback stays univariate. Only the guards need a
         // second variable so epsilon remains independent of the path parameter.
         let guard_coordinates = if let Some(coordinates) = coordinates {
@@ -325,13 +337,42 @@ impl PreparedKinematicEpsilon {
                 let is_zero = if let (Some(polynomial), Some(coordinates)) =
                     (&pole.polynomial, &guard_coordinates)
                 {
-                    polynomial
-                        .evaluate_with_coeff_map(
-                            |c| coordinates[0].constant(c.clone()),
-                            coordinates,
-                            &ring,
-                        )
-                        .is_zero()
+                    let witnessed_nonzero = {
+                        let _timing = PhysicalPhaseTiming::start(
+                            "transport.pullback.native_guard_witness",
+                            index,
+                            usize::from(expansion),
+                            None,
+                        );
+                        witness_points.as_ref().unwrap().iter().any(|point| {
+                            !field.is_zero(&polynomial.evaluate_with_coeff_map(
+                                |c| c.clone(),
+                                point,
+                                &field,
+                            ))
+                        })
+                    };
+                    // One exact nonzero value proves the formal (parameter,
+                    // epsilon) restriction is not identically zero. Zero at
+                    // both points proves nothing: a source may be on a guard
+                    // while its line leaves it. Preserve the full exact check.
+                    if witnessed_nonzero {
+                        false
+                    } else {
+                        let _timing = PhysicalPhaseTiming::start(
+                            "transport.pullback.native_guard_fallback",
+                            index,
+                            usize::from(expansion),
+                            None,
+                        );
+                        polynomial
+                            .evaluate_with_coeff_map(
+                                |c| coordinates[0].constant(c.clone()),
+                                coordinates,
+                                &ring,
+                            )
+                            .is_zero()
+                    }
                 } else {
                     let _timing = PhysicalPhaseTiming::start(
                         "transport.pullback.symbolic_guard_fallback",

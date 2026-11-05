@@ -210,6 +210,135 @@ fn old_symbolic_prepared_guards(
 }
 
 #[test]
+fn prepared_guard_witness_nonzero_source_matches_legacy() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let (sv, tv, eps) = (Atom::var(s), Atom::var(t), Atom::var(epsilon));
+    let q =
+        parse!("123456789012345678901234567890123456789/987654321098765432109876543210987654319");
+    let r =
+        parse!("314159265358979323846264338327950288419/271828182845904523536028747135266249777");
+    let original = &sv - &tv + &eps * (&sv + &tv);
+    let expansion = &sv - &tv;
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([
+            (s, vec![vec![&eps / &original]]),
+            (t, vec![vec![Atom::i() * &eps / (2 * &original)]]),
+        ]),
+    };
+    let prepared = system.prepare_epsilon(2)?;
+    let complex = BTreeMap::from([(s, &q + Atom::i() * &r), (t, &r - Atom::i() * &q)]);
+    let physical = BTreeMap::from([(s, Atom::num(3)), (t, Atom::one())]);
+    // At either source, both guards have a nonzero exact epsilon=0 witness.
+    for (start, end) in [(&complex, &physical), (&physical, &complex)] {
+        let path = KinematicPath::straight_line(x, start, end)?;
+        old_symbolic_prepared_guards(
+            &path,
+            std::slice::from_ref(&original),
+            std::slice::from_ref(&expansion),
+        )?;
+        equal_coefficients(
+            &EpsilonSystem::from_differential_system(&system.pullback(&path)?, epsilon, 2)?,
+            &prepared.pullback(&path, 2)?,
+        );
+    }
+    Ok(())
+}
+
+#[test]
+fn prepared_guard_witness_misses_still_allow_nonconstant_restrictions() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let (sv, tv, eps, xv) = (Atom::var(s), Atom::var(t), Atom::var(epsilon), Atom::var(x));
+    let path = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, xv.clone()), (t, 1 + &xv)]),
+    };
+    for original in [
+        // The source is an original guard root for every epsilon, but the
+        // restriction x is nonconstant. Direct pullback must allow this line.
+        sv.clone(),
+        // At the source both chosen epsilon values vanish, yet the formal
+        // restriction x+epsilon*(epsilon-1)*(1+x) is not identically zero.
+        &sv + &eps * (&eps - 1) * &tv,
+        // epsilon=0 misses; epsilon=1 alone witnesses the original guard.
+        &sv + &eps * &tv,
+    ] {
+        let system = KinematicSystem {
+            epsilon,
+            derivatives: BTreeMap::from([
+                (s, vec![vec![&eps / &original]]),
+                (t, vec![vec![Atom::zero()]]),
+            ]),
+        };
+        old_symbolic_prepared_guards(
+            &path,
+            std::slice::from_ref(&original),
+            std::slice::from_ref(&sv),
+        )?;
+        let pulled = system.prepare_epsilon(3)?.pullback(&path, 3)?;
+        equal_coefficients(
+            &EpsilonSystem::from_differential_system(&system.pullback(&path)?, epsilon, 3)?,
+            &pulled,
+        );
+        assert!(!pulled.matrices[1][0][0].is_zero());
+    }
+    Ok(())
+}
+
+#[test]
+fn prepared_guard_witness_misses_keep_stationary_and_exceptional_errors() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let (sv, tv, eps) = (Atom::var(s), Atom::var(t), Atom::var(epsilon));
+    let original = &sv + &eps * (&eps - 1) * &tv;
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([
+            // Above the retained order, and its coordinate is stationary.
+            (s, vec![vec![eps.pow(8) / &original]]),
+            (t, vec![vec![Atom::zero()]]),
+        ]),
+    };
+    let prepared = system.prepare_epsilon(0)?;
+    let exceptional = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, Atom::zero()), (t, 1 + Atom::var(x))]),
+    };
+    // Both witnesses vanish, but the original guard is the nonzero formal
+    // polynomial epsilon*(epsilon-1)*(1+x). Only the expansion guard is zero.
+    assert!(matches!(
+        old_symbolic_prepared_guards(
+            &exceptional,
+            std::slice::from_ref(&original),
+            std::slice::from_ref(&sv),
+        ),
+        Err(Error::Unsupported(_))
+    ));
+    assert!(matches!(
+        prepared.pullback(&exceptional, 0),
+        Err(Error::Unsupported(message))
+            if message == "path has an exceptional epsilon specialization; use the legacy pullback"
+    ));
+    let contained = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, Atom::zero()), (t, Atom::zero())]),
+    };
+    assert!(matches!(
+        old_symbolic_prepared_guards(
+            &contained,
+            std::slice::from_ref(&original),
+            std::slice::from_ref(&sv),
+        ),
+        Err(Error::InvalidInput(_))
+    ));
+    assert!(matches!(
+        prepared.pullback(&contained, 0),
+        Err(Error::InvalidInput(message))
+            if message == "path lies in an original kinematic matrix pole"
+    ));
+    Ok(())
+}
+
+#[test]
 fn prepared_native_guards_keep_epsilon_independent_on_large_gaussian_affine_paths() -> Result<()> {
     let (s, t, x, epsilon) = symbols();
     let (sv, eps, xv) = (Atom::var(s), Atom::var(epsilon), Atom::var(x));
