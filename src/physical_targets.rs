@@ -436,7 +436,8 @@ impl PreparedKinematicTargetProjection {
 /// conservative generic demand, evaluating only during projection. Absolute
 /// weight series are retained through the ordinary master pole bound's depth. A boundary starting below that
 /// bound is supported by expanding full point-bound weights more deeply. Plans
-/// made by `prepare_target_projection` retain those weights; plans made by
+/// made by `prepare_target_projection` or `prepare_target_combinations` retain
+/// those weights (including exact target combinations); plans made by
 /// `PreparedKinematicTargetProjection::at_point` rebind them on that exceptional
 /// path through the legacy API.
 pub struct PreparedTargetProjection<'a> {
@@ -662,6 +663,97 @@ impl PreparedPhysicalFamily {
         })
     }
 
+    /// Prepare exact linear combinations of the retained targets at one point.
+    /// `weights[h][t]` multiplies target `t` in `target_reductions()` order;
+    /// the matrix must have at least one row and exactly one column per target.
+    /// Weights must be exact rational/Gaussian rational functions of epsilon
+    /// and the supplied kinematics. Numerical factors must be lifted exactly
+    /// by the caller; this does not grant them additional source accuracy.
+    ///
+    /// Bind reductions and weights once, then sum and cancel by ordered cached
+    /// master column before valuation, Laurent expansion or uncertainty norms.
+    /// Thus targets sharing a master retain that common dependency; different
+    /// master coefficients still use the ordinary error bounds without any
+    /// assumed covariance.
+    /// The returned plan has one output per matrix row and uses the existing
+    /// point, basis, depth, source-floor and arithmetic-refinement checks.
+    /// `required_master_range()` reports the ordinary master pole bound and
+    /// the depth needed after cancellation; it does not assume omitted poles
+    /// vanish or certify a stronger physical pole bound for these combinations.
+    /// For a nonzero combined row its natural output bound is the ordinary
+    /// master leading order plus its smallest surviving coefficient valuation.
+    /// Request those earlier output orders explicitly to check stronger poles.
+    pub fn prepare_target_combinations(
+        &self,
+        point: &BTreeMap<Symbol, Atom>,
+        weights: &[Vec<Atom>],
+        range: EpsilonRange,
+    ) -> Result<PreparedTargetProjection<'_>> {
+        EpsilonRange::new(range.leading, range.last)?;
+        let targets = self.target_reductions().len();
+        if weights.is_empty() || targets == 0 || weights.iter().any(|row| row.len() != targets) {
+            return Err(Error::InvalidInput(
+                "target combination weights require a nonempty matrix with one column per retained target".into(),
+            ));
+        }
+        let cached_point = CachedPoint::Exact(point.clone());
+        self.flow().identity().validate_point(&cached_point)?;
+        let leading = self.ordinary_master_leading()?;
+        // Do not determine individual target valuations: poles and whole
+        // master dependencies can disappear only after the exact sum below.
+        let reductions = self.bind_target_coefficients(point)?;
+        let substitutions = point
+            .iter()
+            .map(|(&s, a)| (Atom::var(s), a.clone()))
+            .collect();
+        let variables = point
+            .keys()
+            .copied()
+            .chain(std::iter::once(self.family().epsilon))
+            .collect();
+        let mut combined = Vec::with_capacity(weights.len());
+        for row in weights {
+            // Reuse the owner's exact rational-domain checks, including
+            // denominators of weights multiplying an empty or cancelled target.
+            let conditions =
+                crate::physical_conditions::rational_denominator_conditions(row, &variables)?;
+            crate::physical_conditions::validate_conditions_at(
+                &conditions,
+                self.family().epsilon,
+                point,
+            )?;
+            let mut columns = BTreeMap::<usize, Atom>::new();
+            for (weight, target) in row.iter().zip(&reductions) {
+                let weight = crate::family::substitute(weight, &substitutions)
+                    .together()
+                    .cancel();
+                for (column, reduction) in target {
+                    *columns.entry(*column).or_default() += &weight * reduction;
+                }
+            }
+            combined.push(bind_row(
+                columns
+                    .into_iter()
+                    .map(|(column, coefficient)| (column, coefficient.together().cancel())),
+                self.family().epsilon,
+            )?);
+        }
+        let required = master_range(&combined, leading, range)?;
+        let rows = combined
+            .iter()
+            .map(|row| expand_row(row, self.family().epsilon, range, leading))
+            .collect::<Result<_>>()?;
+        Ok(PreparedTargetProjection {
+            family: self,
+            point: cached_point,
+            range,
+            required,
+            weights: Some(combined),
+            rows: Arc::new(rows),
+            numeric: None,
+        })
+    }
+
     /// Determine how far masters must be known before reducing targets. A pole
     /// in a reduction coefficient requires additional positive epsilon orders;
     /// a cache truncated at the target's last order is not sufficient in general.
@@ -679,6 +771,16 @@ impl PreparedPhysicalFamily {
     }
 
     fn bind_target_weights(&self, point: &BTreeMap<Symbol, Atom>) -> Result<Vec<Vec<BoundWeight>>> {
+        self.bind_target_coefficients(point)?
+            .into_iter()
+            .map(|row| bind_row(row, self.family().epsilon))
+            .collect()
+    }
+
+    fn bind_target_coefficients(
+        &self,
+        point: &BTreeMap<Symbol, Atom>,
+    ) -> Result<Vec<Vec<(usize, Atom)>>> {
         let substitutions = point
             .iter()
             .map(|(&s, a)| (Atom::var(s), a.clone()))
@@ -703,13 +805,7 @@ impl PreparedPhysicalFamily {
                     let coefficient = crate::family::substitute(&weight, &substitutions)
                         .together()
                         .cancel();
-                    if let Some(leading) = valuation(&coefficient, self.family().epsilon)? {
-                        row.push(BoundWeight {
-                            column,
-                            coefficient,
-                            leading,
-                        });
-                    }
+                    row.push((column, coefficient));
                 }
                 Ok(row)
             })
@@ -773,6 +869,23 @@ impl PreparedPhysicalFamily {
         }
         Ok(result)
     }
+}
+
+fn bind_row(
+    coefficients: impl IntoIterator<Item = (usize, Atom)>,
+    epsilon: Symbol,
+) -> Result<Vec<BoundWeight>> {
+    let mut row = Vec::new();
+    for (column, coefficient) in coefficients {
+        if let Some(leading) = valuation(&coefficient, epsilon)? {
+            row.push(BoundWeight {
+                column,
+                coefficient,
+                leading,
+            });
+        }
+    }
+    Ok(row)
 }
 
 fn target_denominator(coefficient: &Atom) -> Result<Atom> {
