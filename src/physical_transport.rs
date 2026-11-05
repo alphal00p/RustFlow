@@ -15,7 +15,7 @@ use crate::algebraic::{
     PreparedAlgebraicSystem,
 };
 use crate::diffexp::{EpsilonSolution, EpsilonSystem, transport_epsilon};
-use crate::kinematics::{KinematicPath, KinematicSystem};
+use crate::kinematics::{KinematicPath, KinematicSystem, PreparedKinematicEpsilon};
 use crate::physical_conditions::PhysicalPhaseTiming;
 use crate::transport_cache::{
     BoundaryAccuracy, BoundaryIdentity, BoundaryQuery, CachedBoundary, CachedPoint, EpsilonRange,
@@ -72,6 +72,7 @@ impl RouteMode<'_> {
 pub struct RustFlow<S = KinematicSystem> {
     system: S,
     identity: BoundaryIdentity,
+    prepared_epsilon: Option<PreparedKinematicEpsilon>,
 }
 
 /// Outcome of an actually attempted compatible cached source.
@@ -101,7 +102,7 @@ pub struct PhysicalResult {
 }
 
 macro_rules! endpoint_api {
-    ($system:ty, $kind:ident) => {
+    ($system:ty) => {
         impl RustFlow<$system> {
             /// Evaluate a finite coefficientwise singular limit through a
             /// regular matching anchor. The caller explicitly admits the final
@@ -117,7 +118,7 @@ macro_rules! endpoint_api {
                 admission: &dyn crate::singular_endpoint::EndpointAdmission,
             ) -> Result<crate::singular_endpoint::EndpointResult> {
                 evaluate_endpoint(
-                    Connection::$kind(&self.system),
+                    self.connection(),
                     &self.identity,
                     cache,
                     request,
@@ -144,7 +145,7 @@ macro_rules! endpoint_api {
                 endpoint_admission: &dyn crate::singular_endpoint::EndpointAdmission,
             ) -> Result<crate::singular_endpoint::EndpointResult> {
                 evaluate_endpoint(
-                    Connection::$kind(&self.system),
+                    self.connection(),
                     &self.identity,
                     cache,
                     request,
@@ -171,7 +172,7 @@ macro_rules! endpoint_api {
                 admission: &dyn crate::singular_endpoint::EndpointAdmission,
             ) -> Result<crate::singular_endpoint::EndpointResult> {
                 evaluate_endpoint(
-                    Connection::$kind(&self.system),
+                    self.connection(),
                     &self.identity,
                     cache,
                     request,
@@ -199,7 +200,7 @@ macro_rules! endpoint_api {
                 endpoint_admission: &dyn crate::singular_endpoint::EndpointAdmission,
             ) -> Result<crate::singular_endpoint::EndpointResult> {
                 evaluate_endpoint(
-                    Connection::$kind(&self.system),
+                    self.connection(),
                     &self.identity,
                     cache,
                     request,
@@ -214,9 +215,9 @@ macro_rules! endpoint_api {
         }
     };
 }
-endpoint_api!(KinematicSystem, Rational);
-endpoint_api!(AlgebraicKinematicSystem, Algebraic);
-endpoint_api!(CanonicalAlgebraicSystem, Canonical);
+endpoint_api!(KinematicSystem);
+endpoint_api!(AlgebraicKinematicSystem);
+endpoint_api!(CanonicalAlgebraicSystem);
 
 #[allow(clippy::too_many_arguments)]
 fn evaluate_endpoint(
@@ -234,6 +235,7 @@ fn evaluate_endpoint(
     use crate::singular_endpoint::{EndpointResult, PreparedEndpoint};
     options.validate()?;
     request.preflight(identity)?;
+    system.check_range(request.range)?;
     if let Some(constraints) = constraints {
         constraints.preflight(identity, request.range, context)?;
     }
@@ -305,6 +307,28 @@ fn evaluate_endpoint(
 }
 
 impl RustFlow {
+    fn connection(&self) -> Connection<'_> {
+        Connection::Rational(&self.system, self.prepared_epsilon.as_ref())
+    }
+
+    /// Retain an exact rational epsilon expansion outside point requests.
+    /// Prepare at least `range.last - range.leading`, including any master
+    /// depth needed for later target convolutions. The returned flow keeps the
+    /// same original system, identity, domain guards and uncertainty policy.
+    /// Requests beyond this depth fail, including exact cache hits. Each partial
+    /// matrix must be epsilon-regular; exceptional lines reject explicitly.
+    /// The original flow continues to use the legacy route.
+    /// This prepares central rational transport; the optional diagonal-gauge
+    /// uncertainty estimator retains its existing independent preparation.
+    pub fn prepare_epsilon(&self, max_order: usize) -> Result<Self> {
+        let prepared_epsilon = self.system.prepare_epsilon(max_order)?;
+        Ok(Self {
+            system: self.system.clone(),
+            identity: self.identity.clone(),
+            prepared_epsilon: Some(prepared_epsilon),
+        })
+    }
+
     /// Regularize rational physical matrices with exact diagonal epsilon
     /// powers. The returned adapter preserves the original identity for
     /// checked boundary conversion and uses this same transport/cache engine.
@@ -313,7 +337,11 @@ impl RustFlow {
         let identity = self.identity.epsilon_sheared(&system, &shearing)?;
         Ok(crate::EpsilonShearedFlow {
             original_identity: self.identity.clone(),
-            flow: Self { system, identity },
+            flow: Self {
+                system,
+                identity,
+                prepared_epsilon: None,
+            },
             shearing,
         })
     }
@@ -333,7 +361,7 @@ impl RustFlow {
     ) -> Result<PhysicalResult> {
         let target = CachedPoint::Exact(destination.clone());
         evaluate_physical(
-            Connection::Rational(&self.system),
+            self.connection(),
             &self.identity,
             cache,
             target,
@@ -379,7 +407,11 @@ impl RustFlow {
             branch_domain,
             conditions,
         )?;
-        Ok(Self { system, identity })
+        Ok(Self {
+            system,
+            identity,
+            prepared_epsilon: None,
+        })
     }
 
     /// Select a verified cached boundary and transport to this exact point.
@@ -396,7 +428,7 @@ impl RustFlow {
         policy: &dyn TransportCost,
     ) -> Result<PhysicalResult> {
         evaluate_physical(
-            Connection::Rational(&self.system),
+            self.connection(),
             &self.identity,
             cache,
             CachedPoint::Exact(destination.clone()),
@@ -429,6 +461,10 @@ impl<S> RustFlow<S> {
 }
 
 impl RustFlow<AlgebraicKinematicSystem> {
+    fn connection(&self) -> Connection<'_> {
+        Connection::Algebraic(&self.system)
+    }
+
     /// Apply the shared exact epsilon gauge after native root normalization.
     pub fn regularize_epsilon(
         &self,
@@ -441,7 +477,11 @@ impl RustFlow<AlgebraicKinematicSystem> {
             .epsilon_sheared_algebraic(&system, &shearing)?;
         Ok(crate::EpsilonShearedFlow {
             original_identity: self.identity.clone(),
-            flow: Self { system, identity },
+            flow: Self {
+                system,
+                identity,
+                prepared_epsilon: None,
+            },
             shearing,
         })
     }
@@ -462,7 +502,7 @@ impl RustFlow<AlgebraicKinematicSystem> {
     ) -> Result<PhysicalResult> {
         let target = CachedPoint::Exact(destination.clone()).with_root_germ(germ.clone())?;
         evaluate_physical(
-            Connection::Algebraic(&self.system),
+            self.connection(),
             &self.identity,
             cache,
             target,
@@ -512,7 +552,11 @@ impl RustFlow<AlgebraicKinematicSystem> {
             branch_domain,
             conditions,
         )?;
-        Ok(Self { system, identity })
+        Ok(Self {
+            system,
+            identity,
+            prepared_epsilon: None,
+        })
     }
     /// Transport along a regular affine path with exact rational-complex coordinates.
     /// Every radicand must remain nonzero; the requested local root germ is explicit. The caller's
@@ -529,7 +573,7 @@ impl RustFlow<AlgebraicKinematicSystem> {
         policy: &dyn TransportCost,
     ) -> Result<PhysicalResult> {
         evaluate_physical(
-            Connection::Algebraic(&self.system),
+            self.connection(),
             &self.identity,
             cache,
             CachedPoint::Exact(destination.clone()).with_root_germ(germ.clone())?,
@@ -543,6 +587,10 @@ impl RustFlow<AlgebraicKinematicSystem> {
 }
 
 impl RustFlow<CanonicalAlgebraicSystem> {
+    fn connection(&self) -> Connection<'_> {
+        Connection::Canonical(&self.system)
+    }
+
     /// Continue through planner-generated threshold detours. The identity must
     /// be bound to exact prescriptions and the caller must admit its homotopy.
     #[allow(clippy::too_many_arguments)]
@@ -569,7 +617,7 @@ impl RustFlow<CanonicalAlgebraicSystem> {
             }
         };
         evaluate_physical(
-            Connection::Canonical(&self.system),
+            self.connection(),
             &self.identity,
             cache,
             target,
@@ -614,7 +662,11 @@ impl RustFlow<CanonicalAlgebraicSystem> {
             branch_domain,
             conditions,
         )?;
-        Ok(Self { system, identity })
+        Ok(Self {
+            system,
+            identity,
+            prepared_epsilon: None,
+        })
     }
     /// Use an explicit germ when roots are registered, and None otherwise.
     /// The same regular affine path and caller monodromy contract as the dense
@@ -641,7 +693,7 @@ impl RustFlow<CanonicalAlgebraicSystem> {
             }
         };
         evaluate_physical(
-            Connection::Canonical(&self.system),
+            self.connection(),
             &self.identity,
             cache,
             point,
@@ -656,19 +708,40 @@ impl RustFlow<CanonicalAlgebraicSystem> {
 
 #[derive(Clone, Copy)]
 enum Connection<'a> {
-    Rational(&'a KinematicSystem),
+    Rational(&'a KinematicSystem, Option<&'a PreparedKinematicEpsilon>),
     Algebraic(&'a AlgebraicKinematicSystem),
     Canonical(&'a CanonicalAlgebraicSystem),
 }
 impl Connection<'_> {
+    fn check_range(&self, range: EpsilonRange) -> Result<()> {
+        EpsilonRange::new(range.leading, range.last)?;
+        if let Self::Rational(_, Some(prepared)) = self {
+            prepared.check_order((i64::from(range.last) - i64::from(range.leading)) as usize)?;
+        }
+        Ok(())
+    }
+
     fn pullback(&self, path: &KinematicPath, order: usize) -> Result<PulledConnection> {
         Ok(match self {
-            Self::Rational(system) => {
-                PulledConnection::Rational(EpsilonSystem::from_differential_system(
-                    &system.pullback(path)?,
-                    system.epsilon,
-                    order,
-                )?)
+            Self::Rational(system, prepared) => {
+                let coefficients = if let Some(prepared) = prepared {
+                    let _timing =
+                        PhysicalPhaseTiming::start("transport.pullback.coefficients", 0, 0, None);
+                    prepared.pullback(path, order)?
+                } else {
+                    let timing =
+                        PhysicalPhaseTiming::start("transport.pullback.kinematics", 0, 0, None);
+                    let raw = system.pullback(path)?;
+                    drop(timing);
+                    let _timing = PhysicalPhaseTiming::start(
+                        "transport.pullback.epsilon_conversion",
+                        0,
+                        0,
+                        None,
+                    );
+                    EpsilonSystem::from_differential_system(&raw, system.epsilon, order)?
+                };
+                PulledConnection::Rational(coefficients)
             }
             Self::Algebraic(system) => PulledConnection::Algebraic(system.pullback(path, order)?),
             Self::Canonical(system) => PulledConnection::Algebraic(system.pullback(path, order)?),
@@ -826,6 +899,7 @@ fn evaluate_physical_with<T>(
     context.cancellation.check()?;
     let p = Precision::decimal(options.digits + options.guard_digits)?;
     let query = BoundaryQuery::new(identity, &target, range, options.digits)?;
+    system.check_range(range)?;
     // Reduction domains are enforced independently of the caller's sheet
     // policy. Reject unsafe sources before ranking, so another valid source
     // can be selected rather than failing after a nearest-source choice.
@@ -1002,7 +1076,7 @@ fn evaluate_from_source(
         match &options.diagonal_gauge_estimate {
             None => None,
             Some(hint) => match system {
-                Connection::Rational(original) => Some(diagonal_gauge::prepare(
+                Connection::Rational(original, _) => Some(diagonal_gauge::prepare(
                     hint, original, path, count, context,
                 )?),
                 _ => return Err(Error::Unsupported(

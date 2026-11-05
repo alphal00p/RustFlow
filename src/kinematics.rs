@@ -8,6 +8,9 @@ use std::collections::{BTreeMap, BTreeSet};
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
+mod prepared_epsilon;
+pub use prepared_epsilon::PreparedKinematicEpsilon;
+
 /// Partial-derivative matrices `dY/ds = A_s Y` in a common ordered basis.
 ///
 /// Every physical variable appearing in an entry must have a matrix, including
@@ -108,6 +111,11 @@ impl KinematicSystem {
     /// that coordinate is stationary; a limiting prescription is then required.
     pub fn pullback(&self, path: &KinematicPath) -> Result<DifferentialSystem> {
         self.validate()?;
+        self.validate_path(path)?;
+        self.pullback_validated(path)
+    }
+
+    fn validate_path(&self, path: &KinematicPath) -> Result<()> {
         path.validate()?;
         if path.parameter == self.epsilon || path.coordinates.contains_key(&self.epsilon) {
             return Err(Error::InvalidInput(
@@ -119,6 +127,10 @@ impl KinematicSystem {
                 "path coordinates must match all physical derivative variables exactly".into(),
             ));
         }
+        Ok(())
+    }
+
+    fn pullback_validated(&self, path: &KinematicPath) -> Result<DifferentialSystem> {
         let substitutions = path
             .coordinates
             .iter()
