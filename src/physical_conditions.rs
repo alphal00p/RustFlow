@@ -284,7 +284,30 @@ pub(crate) fn conditions_admit_path(
     p: Precision,
     digits: u32,
 ) -> Result<bool> {
+    // The common-zero polynomial has native exact integer coefficients, up to
+    // a nonzero constant denominator. Triangle inequality proves no complex
+    // zero in |z| <= radius when |a0| > sum_{k>0} |ak| radius^k.
+    fn no_roots_in_disk(common: &Atom, parameter: Symbol, radius: &Rational) -> Result<bool> {
+        let rational: RationalPolynomial<IntegerRing, u16> = common
+            .try_to_rational_polynomial(
+                &Q,
+                &Z,
+                Some(Arc::new(vec![PolyVariable::Symbol(parameter)])),
+            )
+            .map_err(|e| Error::Unsupported(format!("polynomial physical path required: {e}")))?;
+        let polynomial = rational.numerator.to_univariate_from_univariate(0);
+        let coefficients = polynomial.coefficients();
+        let constant = Rational::from(&coefficients[0].abs());
+        let mut tail = Rational::zero();
+        for coefficient in coefficients[1..].iter().rev() {
+            tail = (tail + Rational::from(&coefficient.abs())) * radius;
+        }
+        Ok(constant > tail)
+    }
+
     let _timing = PhysicalPhaseTiming::start("conditions.path", 0, 0, Some(p.bits));
+    let mut proofs = 0usize;
+    let mut fallbacks = 0usize;
     path.validate()?;
     if conditions.is_empty() {
         return Ok(true);
@@ -345,6 +368,40 @@ pub(crate) fn conditions_admit_path(
                         return Ok(false);
                     }
                 }
+                let tolerance = p.tolerance(
+                    digits
+                        .checked_add(8)
+                        .ok_or_else(|| Error::Limit("condition precision overflow".into()))?,
+                );
+                // This exact radius contains the entire existing exclusion
+                // rectangle [-tol, 1+tol] + i[-tol, tol], not just [0,1].
+                let radius = Rational::one() + Rational::from(2) * tolerance.to_rational();
+                let timing = PhysicalPhaseTiming::start(
+                    "conditions.no_root_bound",
+                    index,
+                    2 * candidate_index + part_index,
+                    Some(p.bits),
+                );
+                let proven = no_roots_in_disk(&common, path.parameter, &radius)?;
+                if proven {
+                    proofs += 1;
+                } else {
+                    fallbacks += 1;
+                }
+                if let Some(start) = timing.start {
+                    use std::io::Write;
+                    let _ = writeln!(
+                        std::io::stderr().lock(),
+                        "RUSTFLOW_PHYSICAL_PHASE event=decision phase=conditions.no_root_bound index={index} subindex={} bits={} proofs={proofs} fallbacks={fallbacks} elapsed_seconds={:.6}",
+                        2 * candidate_index + part_index,
+                        p.bits,
+                        start.elapsed().as_secs_f64(),
+                    );
+                }
+                drop(timing);
+                if proven {
+                    continue;
+                }
                 let denominator_probe = DifferentialSystem {
                     variable: path.parameter,
                     matrix: vec![vec![Atom::one() / common]],
@@ -357,11 +414,6 @@ pub(crate) fn conditions_admit_path(
                 );
                 let compiled = denominator_probe.compile(p, &Default::default())?;
                 drop(timing);
-                let tolerance = p.tolerance(
-                    digits
-                        .checked_add(8)
-                        .ok_or_else(|| Error::Limit("condition precision overflow".into()))?,
-                );
                 if compiled.poles.iter().any(|root| {
                     root.re >= -tolerance.clone()
                         && root.re <= p.real(1) + &tolerance
