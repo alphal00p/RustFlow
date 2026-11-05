@@ -22,6 +22,169 @@ fn compile(p: Precision, polynomial: Atom) -> Result<Vec<ComplexFloat>> {
         .poles)
 }
 
+#[test]
+fn coprime_far_linear_poles_retain_the_exact_unit_gap() -> Result<()> {
+    let p = Precision { bits: 256 };
+    let t = Atom::var(variable());
+    for n in [1, 20, 40, 80, 100] {
+        let h = ten_power(n);
+        let next = &h + &Rational::one();
+        let compiled = DifferentialSystem {
+            variable: variable(),
+            matrix: vec![
+                vec![Atom::one() / (&t - Atom::num(h.clone())), Atom::new()],
+                vec![Atom::new(), Atom::one() / (&t - Atom::num(next.clone()))],
+            ],
+        }
+        .compile(p, &Default::default())?;
+        assert_eq!(compiled.poles.len(), 2);
+        // Exact integer comparison, even when H+1 cannot be stored at p bits.
+        let actual = compiled
+            .poles
+            .iter()
+            .map(|root| {
+                assert!(root.im.is_zero());
+                root.re.to_rational()
+            })
+            .collect::<Vec<_>>();
+        assert!(actual.contains(&h));
+        assert!(actual.contains(&next));
+    }
+    Ok(())
+}
+
+#[test]
+fn exact_coprime_gap_beyond_geometry_budget_still_fails_closed() {
+    let p = Precision { bits: 256 };
+    let t = Atom::var(variable());
+    let delta = Rational::from((Integer::one(), Integer::from(2).pow(5000)));
+    let system = DifferentialSystem {
+        variable: variable(),
+        matrix: vec![
+            vec![Atom::one() / (&t - 2), Atom::new()],
+            vec![
+                Atom::new(),
+                Atom::one() / (&t - Atom::num(Rational::from(2) + delta)),
+            ],
+        ],
+    };
+    assert!(
+        matches!(system.compile(p, &Default::default()), Err(Error::Numerical(message))
+        if message.contains("degree-1 geometry at 4352 bits")
+            && message.contains("overlapping exact-coefficient isolation disks")
+            && message.contains("bounded extra precision exhausted"))
+    );
+}
+
+#[test]
+fn extra_domains_share_exact_poles_without_merging_close_coprime_ones() -> Result<()> {
+    let p = Precision { bits: 256 };
+    let t = Atom::var(variable());
+    let h = ten_power(100);
+    let first = &t - Atom::num(h.clone());
+    let second = &t - Atom::num(h + Rational::one());
+    let mut compiled = DifferentialSystem {
+        variable: variable(),
+        matrix: vec![vec![Atom::one() / &first]],
+    }
+    .compile(p, &Default::default())?;
+    compiled.exclude_polynomials(&[second.clone()])?;
+    assert_eq!(compiled.poles.len(), 2);
+    assert_ne!(compiled.poles[0], compiled.poles[1]);
+    compiled.exclude_polynomials(&[first.pow(2), second.pow(3)])?;
+    assert_eq!(compiled.poles.len(), 2);
+    Ok(())
+}
+
+#[test]
+fn scaled_far_pole_physical_transport_preserves_finite_source_floors() -> Result<()> {
+    use std::collections::BTreeMap;
+    use symbolica_amflow::kinematics::KinematicSystem;
+    use symbolica_amflow::physical_transport::PhysicalTransport;
+    use symbolica_amflow::transport_cache::*;
+    use symbolica_amflow::{FlowOptions, Prescription, RunContext};
+
+    let s = symbol!("pole_scale::s");
+    let x = Atom::var(s);
+    let h = ten_power(100);
+    let next = &h + &Rational::one();
+    // Y'_i = H_i/(H_i-s) Y_i, Y_i(0)=1. Both solutions change by O(1)
+    // on [0,1], despite poles at H and H+1. Their exact endpoints are
+    // exp(sum_{k>=1} 1/(k H_i^(k-1))); 0 < log(Y_i(1))-1 < 1/H_i.
+    // Thus exp(1) is an independent oracle within 3/H_i, far below every
+    // requested comparison here; no subtraction of nearly equal logs is used.
+    let engine = PhysicalTransport::new(
+        KinematicSystem {
+            epsilon: symbol!("pole_scale::eps"),
+            derivatives: BTreeMap::from([(
+                s,
+                vec![
+                    vec![Atom::num(h.clone()) / (Atom::num(h) - &x), Atom::new()],
+                    vec![
+                        Atom::new(),
+                        Atom::num(next.clone()) / (Atom::num(next) - &x),
+                    ],
+                ],
+            )]),
+        },
+        &[parse!("pole_scale::I1"), parse!("pole_scale::I2")],
+        &Atom::one(),
+        Prescription::PlusI0,
+        "real regular interval [0,1] below both far poles",
+    )?;
+    for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+        let storage = Precision { bits };
+        let mut cache = RustFlowCache::default();
+        cache.insert(CachedBoundary {
+            identity: engine.identity().clone(),
+            point: CachedPoint::Exact(BTreeMap::from([(s, Atom::new())])),
+            kind: PointKind::Physical,
+            range: EpsilonRange::new(0, 0)?,
+            coefficients: vec![vec![storage.i(1), storage.i(1)]],
+            accuracy: BoundaryAccuracy::supplied(
+                verified,
+                bits,
+                vec![vec![storage.real(0); 2]],
+                "analytic unit seed with finite declared source evidence",
+            )?,
+        })?;
+        let result = engine.evaluate_to(
+            &mut cache,
+            &BTreeMap::from([(s, Atom::one())]),
+            EpsilonRange::new(0, 0)?,
+            &FlowOptions {
+                digits,
+                guard_digits: 20,
+                series_order: 64,
+                ..Default::default()
+            },
+            &RunContext::default(),
+            &ScaledDistance {
+                scales: BTreeMap::new(),
+                admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
+            },
+        )?;
+        let accuracy = &result.boundary.accuracy;
+        assert_eq!(accuracy.input_verified_digits(), verified);
+        assert!(accuracy.verified_digits() <= verified);
+        let p = Precision {
+            bits: accuracy.working_bits(),
+        };
+        for value in &result.boundary.coefficients[0] {
+            assert!(p.close(value, &p.exp(&p.i(1)), digits));
+            assert!(value.re > p.real(2));
+        }
+        assert!(
+            accuracy
+                .comparison_errors()
+                .iter()
+                .flatten()
+                .all(|error| *error >= p.tolerance(verified))
+        );
+    }
+    Ok(())
+}
+
 /// Relative comparison even below unit scale; each expected physical pole
 /// must occur exactly once. A fixed absolute comparison would miss this bug.
 fn expect_roots(p: Precision, polynomial: Atom, expected: &[ComplexFloat]) -> Result<()> {
@@ -54,10 +217,8 @@ fn irreducible_cubic_reproduces_the_multiscale_failure() -> Result<()> {
         let h = ten_power(n);
         // Frozen e732 passes N1/20/40 and fails N80/100 here. This cubic
         // itself is irreducible; no auxiliary parameter is needed.
-        let polynomial = t.pow(3) / Atom::num(h.clone())
-            - Atom::num(3) * t.pow(2)
-            + Atom::num(2) * &t
-            - 1;
+        let polynomial =
+            t.pow(3) / Atom::num(h.clone()) - Atom::num(3) * t.pow(2) + Atom::num(2) * &t - 1;
         let actual = DifferentialSystem {
             variable: variable(),
             matrix: vec![vec![Atom::one() / polynomial]],
@@ -211,4 +372,31 @@ fn extreme_root_spread_hits_a_bounded_precision_error() {
     let result = compile(p, (&t - 1) * (&t - 2) * (&t / huge - 1));
     assert!(matches!(result, Err(Error::Numerical(message))
         if message.contains("bounded extra precision")));
+}
+
+#[test]
+fn exact_zero_and_tiny_linear_poles_need_no_absolute_radius_floor() -> Result<()> {
+    let p = Precision { bits: 256 };
+    let t = Atom::var(variable());
+    let tiny = Rational::from((Integer::one(), Integer::from(2).pow(5000)));
+    let compiled = DifferentialSystem {
+        variable: variable(),
+        matrix: vec![
+            vec![Atom::one() / &t, Atom::new()],
+            vec![Atom::new(), Atom::one() / (&t - Atom::num(tiny.clone()))],
+        ],
+    }
+    .compile(p, &Default::default())?;
+    assert_eq!(compiled.poles.len(), 2);
+    let roots = compiled
+        .poles
+        .iter()
+        .map(|root| {
+            assert!(root.im.is_zero());
+            root.re.to_rational()
+        })
+        .collect::<Vec<_>>();
+    assert!(roots.contains(&Rational::zero()));
+    assert!(roots.contains(&tiny));
+    Ok(())
 }

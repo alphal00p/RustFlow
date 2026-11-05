@@ -1,5 +1,9 @@
 //! Immutable native rational-row algebra, before any numerical specialization.
 use super::*;
+use symbolica::domains::float::{
+    ComplexBall,
+    RoundingDirection::{Down, Up},
+};
 
 type ExactPolePolynomial = UnivariatePolynomial<FloatField<source::Gaussian>>;
 
@@ -95,28 +99,199 @@ fn unscanned_pole_polynomial(
     Ok(remaining)
 }
 
-/// Exact common factors have already been removed. Numerical overlap between
-/// these coprime pieces is unresolved, so reject it instead of merging poles.
-fn check_coprime_pole_separation(
+fn rounded_pole_coefficients(p: Precision, polynomial: &ExactPolePolynomial) -> Vec<C> {
+    polynomial
+        .coefficients()
+        .iter()
+        .map(|coefficient| {
+            let mut rounded = p.rational(&coefficient.re);
+            rounded.im = p.rational(&coefficient.im).re;
+            rounded
+        })
+        .collect()
+}
+
+/// Lower modulus using directed component intervals, without a square root.
+fn pole_modulus_lower(value: &ComplexBall, p: Precision) -> Float {
+    let lower = |component: &symbolica::domains::float::RealBall| {
+        let lo = component.lower_bound();
+        let hi = component.upper_bound();
+        if lo > p.real(0) {
+            lo
+        } else if hi < p.real(0) {
+            -hi
+        } else {
+            p.real(0)
+        }
+    };
+    let re = lower(&value.re);
+    let im = lower(&value.im);
+    if re > im { re } else { im }
+}
+
+/// P(c+w)=sum b_k w^k, with every b_k enclosed from the exact Gaussian
+/// polynomial. Rouché's strict inequality |b_1|r > |b_0|+sum_{k>=2}|b_k|r^k
+/// proves exactly one root in this disk. Neither a Newton correction alone nor
+/// the precision attached to the center is used as an error certificate.
+fn isolated_pole_radius(
     p: Precision,
-    roots: &[C],
-    previous: &[(ExactPolePolynomial, Vec<C>)],
+    polynomial: &source::BallPolynomial,
+    root: &C,
+    zero_root_exponent: i32,
+) -> Option<Float> {
+    if !p.finite(root) {
+        return None;
+    }
+    let shifted = polynomial.shift_var(&source::dyadic_ball(p, root));
+    let coefficients = shifted.coefficients();
+    let derivative = pole_modulus_lower(&coefficients[1], p);
+    if !derivative.is_finite() || derivative <= p.real(0) {
+        return None;
+    }
+    let residual = source::complex_upper(&coefficients[0], p);
+    // A small positive disk even for exactly representable roots. The radius
+    // is a proposal only; the outward-rounded inequality below is mandatory.
+    let exponent = [root.re.as_raw().get_exp(), root.im.as_raw().get_exp()]
+        .into_iter()
+        .flatten()
+        .max()
+        .unwrap_or(zero_root_exponent);
+    let ulp = p.powi(&p.i(2), i64::from(exponent) - i64::from(p.bits)).re;
+    let correction = residual.div_round(&derivative, p.bits, Up);
+    let radius = if correction > ulp { correction } else { ulp }.mul_round(&p.real(4), p.bits, Up);
+    let mut tail = p.real(0);
+    for coefficient in coefficients[2..].iter().rev() {
+        tail = tail.mul_round(&radius, p.bits, Up).add_round(
+            &source::complex_upper(coefficient, p),
+            p.bits,
+            Up,
+        );
+    }
+    let remainder = tail
+        .mul_round(&radius, p.bits, Up)
+        .mul_round(&radius, p.bits, Up)
+        .add_round(&residual, p.bits, Up);
+    let linear = derivative.mul_round(&radius, p.bits, Down);
+    (radius.is_finite()
+        && radius > p.real(0)
+        && remainder.is_finite()
+        && linear.is_finite()
+        && linear > remainder)
+        .then_some(radius)
+}
+
+/// Exact common roots have already been removed. Certify the remaining union
+/// with disjoint local isolation disks, refining only pieces whose disks are
+/// inconclusive or overlap. All retry coefficients come from the retained exact
+/// specialization, never a lift of the p-bit row arrays. Root-solver cluster
+/// checks remain mandatory, including on each higher-precision solve.
+fn resolve_coprime_pole_geometry(
+    p: Precision,
+    pieces: &mut [(ExactPolePolynomial, Vec<C>)],
+    variable: Symbol,
+    context: &RunContext,
 ) -> Result<()> {
-    for (_, other_roots) in previous {
-        for root in roots {
-            for other in other_roots {
-                let a = p.norm(root);
-                let b = p.norm(other);
-                let scale = if a < b { a } else { b };
-                if p.norm(&p.sub(root, other)) <= p.tolerance(p.bits / 5) * scale {
-                    return Err(Error::Numerical(
-                        "ambiguous nearby poles from coprime specialized factors".into(),
-                    ));
+    let mut bits = vec![p.bits; pieces.len()];
+    let mut retry = vec![false; pieces.len()];
+    let mut reason = "inconclusive exact-coefficient isolation disk";
+    // At most six additional solves per affected piece. polynomial_roots also
+    // has its own bounded scaling guard; none of these bits enter ODE arithmetic.
+    for extra in [0_u32, 128, 256, 512, 1024, 2048, 4096] {
+        context.cancellation.check()?;
+        let geometry = Precision {
+            bits: p
+                .bits
+                .checked_add(extra)
+                .ok_or_else(|| Error::Limit("pole geometry precision overflow".into()))?,
+        };
+        for (i, (polynomial, roots)) in pieces.iter_mut().enumerate() {
+            if retry[i] {
+                context.cancellation.check()?;
+                let coefficients = rounded_pole_coefficients(geometry, polynomial);
+                *roots = polynomial_roots(geometry, &coefficients, variable).map_err(|error| {
+                    // Only static numerical reasons, degree and precision; no
+                    // source expressions, parameters or master values.
+                    Error::Numerical(format!(
+                        "degree-{} pole geometry at {} bits: {error}",
+                        polynomial.degree(),
+                        geometry.bits
+                    ))
+                })?;
+                bits[i] = geometry.bits;
+                context.cancellation.check()?;
+            }
+        }
+        retry.fill(false);
+        // An exact zero has no exponent of its own. Use the smallest
+        // nonzero root scale for its radius proposal, so a tiny neighboring
+        // pole does not introduce an artificial absolute precision demand.
+        // The directed Rouché inequality still verifies every proposed disk.
+        let zero_root_exponent = pieces
+            .iter()
+            .flat_map(|(_, roots)| roots)
+            .filter_map(|root| {
+                [root.re.as_raw().get_exp(), root.im.as_raw().get_exp()]
+                    .into_iter()
+                    .flatten()
+                    .max()
+            })
+            .min()
+            .unwrap_or(0);
+        let mut disks = Vec::new();
+        for (i, (polynomial, roots)) in pieces.iter().enumerate() {
+            context.cancellation.check()?;
+            let q = Precision { bits: bits[i] };
+            let ball_polynomial = source::BallPolynomial::from_coefficients(
+                &FloatField::from_rep(source::dyadic_ball(q, &q.zero())),
+                polynomial
+                    .coefficients()
+                    .iter()
+                    .map(|c| source::exact_ball(c, q))
+                    .collect(),
+                Arc::new(PolyVariable::Symbol(variable)),
+            );
+            for root in roots {
+                context.cancellation.check()?;
+                if let Some(radius) =
+                    isolated_pole_radius(q, &ball_polynomial, root, zero_root_exponent)
+                {
+                    disks.push((i, root, radius));
+                } else {
+                    retry[i] = true;
+                    reason = "inconclusive exact-coefficient isolation disk";
                 }
             }
         }
+        for (j, (i, root, radius)) in disks.iter().enumerate() {
+            context.cancellation.check()?;
+            for (other_i, other, other_radius) in &disks[..j] {
+                let distance = pole_modulus_lower(
+                    &(source::dyadic_ball(geometry, root) - source::dyadic_ball(geometry, other)),
+                    geometry,
+                );
+                let required = radius.add_round(other_radius, geometry.bits, Up);
+                if !distance.is_finite() || distance <= required {
+                    retry[*i] = true;
+                    retry[*other_i] = true;
+                    reason = "overlapping exact-coefficient isolation disks";
+                }
+            }
+        }
+        if !retry.iter().any(|r| *r) {
+            return Ok(());
+        }
     }
-    Ok(())
+    let degree = pieces
+        .iter()
+        .zip(&retry)
+        .filter(|(_, retry)| **retry)
+        .map(|((polynomial, _), _)| polynomial.degree())
+        .max()
+        .unwrap_or(0);
+    Err(Error::Numerical(format!(
+        "ambiguous nearby poles: degree-{degree} geometry at {} bits: {reason}; bounded extra precision exhausted",
+        p.bits.saturating_add(4096)
+    )))
 }
 
 #[derive(Clone, Debug)]
@@ -269,7 +444,6 @@ impl PreparedRows {
         let variable = self.variable;
         let exact_values = source::ExactSpecialization::new(p, values)?;
         let mut matrix = Vec::with_capacity(self.rows.len());
-        let mut poles = Vec::new();
         let mut scanned_poles = Vec::new();
         let mut pole_polynomials = Vec::new();
         let mut polynomial_rows = Vec::with_capacity(self.rows.len());
@@ -308,24 +482,22 @@ impl PreparedRows {
                     if remaining.is_constant() {
                         continue;
                     }
-                    let coefficients = remaining
-                        .coefficients()
-                        .iter()
-                        .map(|coefficient| {
-                            let mut rounded = p.rational(&coefficient.re);
-                            rounded.im = p.rational(&coefficient.im).re;
-                            rounded
-                        })
-                        .collect::<Vec<_>>();
+                    let coefficients = rounded_pole_coefficients(p, &remaining);
                     if coefficients.iter().any(|c| !p.finite(c)) {
-                        return Err(Error::Numerical("nonfinite pole polynomial".into()));
+                        return Err(Error::Numerical(format!(
+                            "degree-{} pole geometry at {} bits: nonfinite pole polynomial",
+                            remaining.degree(),
+                            p.bits
+                        )));
                     }
-                    let roots = polynomial_roots(p, &coefficients, variable)?;
+                    let roots = polynomial_roots(p, &coefficients, variable).map_err(|error| {
+                        Error::Numerical(format!(
+                            "degree-{} pole geometry at {} bits: {error}",
+                            remaining.degree(),
+                            p.bits
+                        ))
+                    })?;
                     context.cancellation.check()?;
-                    check_coprime_pole_separation(p, &roots, &scanned_poles)?;
-                    // Exact coprimality and numerical separation were checked;
-                    // no tolerance-based collector is needed for these pieces.
-                    poles.extend(roots.iter().cloned());
                     scanned_poles.push((remaining, roots));
                 }
                 out.push(NumericRational {
@@ -340,6 +512,14 @@ impl PreparedRows {
             matrix.push(out);
         }
         context.cancellation.check()?;
+        resolve_coprime_pole_geometry(p, &mut scanned_poles, variable, context)?;
+        // Keep geometrically refined centers: rounding them back to p can
+        // collapse distinct exact poles. SeriesSystem still returns p for all
+        // row/chart arithmetic and for source/boundary accuracy accounting.
+        let poles = scanned_poles
+            .into_iter()
+            .flat_map(|(_, roots)| roots)
+            .collect();
         Ok(CompiledSystem {
             source: Arc::new(ExactRows {
                 variable,

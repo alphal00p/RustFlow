@@ -383,6 +383,7 @@ fn verify_pole_roots(p: Precision, q: Precision, scaled: &[C], roots: &[C]) -> R
     Ok(())
 }
 
+#[cfg(test)] // Frozen legacy compiler oracle only; production uses exact GCD/isolation.
 fn retain_distinct_pole(p: Precision, poles: &mut Vec<C>, root: C) {
     if !poles.iter().any(|v| {
         let a = p.norm(v);
@@ -585,8 +586,13 @@ impl CompiledSystem {
         if guards.is_empty() {
             return Ok(());
         }
-        let guard_rows = guards
+        // Reuse the exact collector for the complete union. A numerical
+        // proximity merge here would silently discard distinct source domains
+        // (including refined geometric poles that round together at self.p).
+        let guard_rows = self
+            .pole_polynomials
             .iter()
+            .chain(guards)
             .map(|g| {
                 if g.is_zero() {
                     return Err(Error::InvalidInput(
@@ -602,10 +608,8 @@ impl CompiledSystem {
             self.p,
             &self.source.values,
         )?;
-        for root in exclusions.poles {
-            retain_distinct_pole(self.p, &mut self.poles, root);
-        }
-        self.pole_polynomials.extend(exclusions.pole_polynomials);
+        self.poles = exclusions.poles;
+        self.pole_polynomials = exclusions.pole_polynomials;
         Ok(())
     }
 

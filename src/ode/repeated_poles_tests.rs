@@ -395,8 +395,7 @@ fn declared_zero_source_guard_survives_numerator_cancellation() -> Result<()> {
 }
 
 #[test]
-fn specialized_identical_factors_share_a_pole_but_nearby_distinct_factors_fail_closed() -> Result<()>
-{
+fn specialized_factors_keep_shared_roots_and_isolated_nearby_roots() -> Result<()> {
     let p = Precision { bits: 482 };
     let t = Atom::var(variable());
     let a = parameter("repeated_poles_tests::nearby_a");
@@ -406,23 +405,76 @@ fn specialized_identical_factors_share_a_pole_but_nearby_distinct_factors_fail_c
         &[vec![Atom::one() / (&t - &a), Atom::one() / (&t - &b)]],
         &RunContext::default(),
     )?;
-    for (delta_bits, expected_poles) in [(None, Some(1)), (Some(60), Some(2)), (Some(360), None)] {
+    for (delta_bits, expected_poles) in [(None, 1), (Some(60), 2), (Some(360), 2)] {
         let delta = delta_bits
             .map(|b| p.powi(&p.i(2), -b))
             .unwrap_or_else(|| p.zero());
         let values = [(a.clone(), p.i(1)), (b.clone(), p.add(&p.i(1), &delta))]
             .into_iter()
             .collect();
-        let result = prepared.compile(p, &values, &RunContext::default());
-        if let Some(count) = expected_poles {
-            assert_eq!(result?.poles.len(), count);
-        } else {
-            // Precision::tolerance uses decimal digits: 2^-360 is nonzero
-            // at 482 bits, but smaller than the collector's 10^-96 threshold.
+        let compiled = prepared.compile(p, &values, &RunContext::default())?;
+        assert_eq!(compiled.poles.len(), expected_poles);
+        assert_eq!(compiled.p.bits, p.bits);
+        if delta_bits == Some(360) {
+            // This representable gap is below the old 10^-96 collector cutoff.
+            // Its isolation disks are instead O(2^-478): their disjointness
+            // verifies the two exact specialized roots independently.
             assert_ne!(delta, p.zero());
             assert!(p.norm(&delta) < p.tolerance(p.bits / 5));
-            assert!(matches!(result, Err(Error::Numerical(message))
-                if message.contains("ambiguous nearby poles")));
+            assert!(compiled.poles.contains(&p.i(1)));
+            assert!(compiled.poles.contains(&p.add(&p.i(1), &delta)));
+        }
+        for entry in compiled.matrix.iter().flatten() {
+            for coefficient in entry.numerator.iter().chain(&entry.denominator) {
+                assert_eq!(coefficient.re.prec(), p.bits);
+                assert_eq!(coefficient.im.prec(), p.bits);
+            }
+        }
+    }
+    Ok(())
+}
+
+#[test]
+fn refined_far_geometry_preserves_working_rows_and_stored_sources() -> Result<()> {
+    let storage = Precision { bits: 700 };
+    let a = parameter("repeated_poles_tests::far_a");
+    let values = [(a.clone(), storage.rational(&Rational::from((1, 3))))]
+        .into_iter()
+        .collect();
+    let t = Atom::var(variable());
+    let h = Rational::from(Integer::from(10).pow(100));
+    let rows = vec![vec![
+        &a / (&t - Atom::num(h.clone())),
+        Atom::one() / (&t - Atom::num(&h + &Rational::one())),
+    ]];
+    let context = RunContext::default();
+    let prepared = PreparedRows::new(variable(), &rows, &context)?;
+    for bits in [80, 201] {
+        let p = Precision { bits };
+        let compiled = prepared.compile(p, &values, &context)?;
+        assert_eq!(compiled.p.bits, bits);
+        assert_eq!(compiled.source.rows, rows);
+        assert_eq!(compiled.source.values, values);
+        assert_eq!(compiled.poles.len(), 2);
+        assert!(compiled.poles.iter().all(|root| root.re.prec() > bits));
+        for (actual, expected) in compiled.matrix[0].iter().zip(&prepared.rows[0].matrix) {
+            assert_eq!(
+                actual.numerator,
+                polynomial_coefficients(&expected.numerator, variable(), p, &values)?
+            );
+            assert_eq!(
+                actual.denominator,
+                polynomial_coefficients(&expected.denominator, variable(), p, &values)?
+            );
+        }
+        let exact = source::ExactSpecialization::new(p, &values)?;
+        for ((column, original), (actual_column, actual)) in prepared.rows[0]
+            .cleared
+            .iter()
+            .zip(&compiled.exact_source_rows[0].entries)
+        {
+            assert_eq!(column, actual_column);
+            assert_eq!(*actual, exact.polynomial(original, variable())?);
         }
     }
     Ok(())
