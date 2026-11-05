@@ -2,6 +2,7 @@
 use crate::transport_cache::{CachedBoundary, CachedPoint, EpsilonRange};
 use crate::{ComplexFloat, Error, Precision, PreparedPhysicalFamily, Result};
 use std::collections::BTreeMap;
+use symbolica::domains::float::FloatField;
 use symbolica::poly::series::{Series, SeriesDepth};
 use symbolica::prelude::*;
 
@@ -17,6 +18,143 @@ pub struct ProjectedLaurentExpansion {
 }
 
 type ExactSeries = Series<symbolica::domains::atom::AtomField>;
+
+#[derive(Clone, Copy)]
+struct ExactTargetFraction {
+    numerator: usize,
+    denominator: usize,
+}
+
+/// Symbolica owns both rational normalization and the shared evaluation graph.
+/// Only polynomials enter the graph: specialize every denominator/guard before
+/// any inversion, including at complex points where the formal i satisfies i²=-1.
+struct ExactTargetBinding {
+    parameters: Vec<Symbol>,
+    evaluator: ExpressionEvaluator<Complex<Rational>>,
+    outputs: usize,
+    coefficients: BTreeMap<Atom, ExactTargetFraction>,
+    guards: Vec<ExactTargetFraction>,
+}
+
+impl ExactTargetBinding {
+    fn new(rows: &[Vec<SeriesWeight>], guards: &[Atom]) -> Result<Option<Self>> {
+        // A zero output also makes the all-zero target table an ordinary graph.
+        let mut polynomials = vec![Atom::new()];
+        let mut indices = BTreeMap::from([(Atom::new(), 0)]);
+        let mut parameters = std::collections::BTreeSet::new();
+        let mut fractions = BTreeMap::new();
+        for coefficient in rows
+            .iter()
+            .flatten()
+            .flat_map(|w| w.series.terms().map(|(_, a)| a))
+            .chain(guards)
+        {
+            if fractions.contains_key(coefficient) {
+                continue;
+            }
+            let rational: RationalPolynomial<IntegerRing, u16> =
+                crate::family::encode_complex(coefficient)
+                    .try_to_rational_polynomial(&Q, &Z, None)
+                    .map_err(|e| {
+                        Error::Unsupported(format!("rational target coefficient required: {e}"))
+                    })?;
+            for variable in rational.get_variables().iter() {
+                let PolyVariable::Symbol(symbol) = variable else {
+                    // Nonpolynomial atoms retain the legacy specialization path.
+                    return Ok(None);
+                };
+                parameters.insert(*symbol);
+            }
+            let mut intern = |polynomial: MultivariatePolynomial<IntegerRing, u16>| {
+                let expression = polynomial.to_expression();
+                *indices.entry(expression.clone()).or_insert_with(|| {
+                    let index = polynomials.len();
+                    polynomials.push(expression);
+                    index
+                })
+            };
+            fractions.insert(
+                coefficient.clone(),
+                ExactTargetFraction {
+                    numerator: intern(rational.numerator),
+                    denominator: intern(rational.denominator),
+                },
+            );
+        }
+        let parameters = parameters.into_iter().collect::<Vec<_>>();
+        let atoms = parameters
+            .iter()
+            .copied()
+            .map(Atom::var)
+            .collect::<Vec<_>>();
+        let evaluator = Atom::evaluator_multiple(&polynomials, &atoms)
+            .horner_iterations(0)
+            .cpe_iterations(Some(1))
+            .build()
+            .map_err(|e| Error::Unsupported(format!("exact target binding evaluator: {e}")))?;
+        Ok(Some(Self {
+            parameters,
+            evaluator,
+            outputs: polynomials.len(),
+            guards: guards.iter().map(|a| fractions[a]).collect(),
+            coefficients: fractions,
+        }))
+    }
+
+    /// None requests legacy preparation, never a zero coefficient or a rounded
+    /// coordinate. Normalize coordinates once; all remaining arithmetic is Q(i).
+    fn at_point(&self, point: &BTreeMap<Symbol, Atom>) -> Result<Option<BTreeMap<Atom, Atom>>> {
+        let mut parameters = Vec::with_capacity(self.parameters.len());
+        for symbol in &self.parameters {
+            if *symbol == crate::family::imaginary_parameter() {
+                parameters.push(Complex::new(Rational::from(0), Rational::from(1)));
+                continue;
+            }
+            let Some(value) = point.get(symbol) else {
+                return Ok(None);
+            };
+            let value = value.together().cancel();
+            let AtomView::Num(n) = value.as_view() else {
+                return Ok(None);
+            };
+            let Coefficient::Complex(value) = n.get_coeff_view().to_owned() else {
+                return Ok(None);
+            };
+            parameters.push(value);
+        }
+        let ring = FloatField::from_rep(Complex::new(Rational::from(1), Rational::from(0)));
+        let mut values = vec![ring.zero(); self.outputs];
+        // Each point owns its scratch stack; the retained graph remains reusable.
+        self.evaluator
+            .clone()
+            .try_evaluate_in_ring(&parameters, &mut values, &ring)
+            .map_err(|e| Error::Unsupported(format!("exact target binding evaluation: {e}")))?;
+        if self
+            .guards
+            .iter()
+            .any(|g| ring.is_zero(&values[g.numerator]) || ring.is_zero(&values[g.denominator]))
+            || self
+                .coefficients
+                .values()
+                .any(|c| ring.is_zero(&values[c.denominator]))
+        {
+            return Ok(None);
+        }
+        let mut inverses = BTreeMap::new();
+        let mut coefficients = BTreeMap::new();
+        for (coefficient, fraction) in &self.coefficients {
+            let inverse = inverses
+                .entry(fraction.denominator)
+                .or_insert_with(|| ring.try_inv(&values[fraction.denominator]).unwrap());
+            let value = ring.mul(&values[fraction.numerator], &*inverse);
+            coefficients.insert(
+                coefficient.clone(),
+                crate::family::encode_complex(&Atom::num(value)),
+            );
+        }
+        Ok(Some(coefficients))
+    }
+}
 
 fn expansion(coefficient: &Atom, epsilon: Symbol, depth: SeriesDepth) -> Result<ExactSeries> {
     crate::family::scalar_symbols(coefficient.as_view(), &mut Default::default())?;
@@ -55,15 +193,15 @@ fn series_leading(series: &ExactSeries) -> Result<i32> {
 /// beside its family without a self-reference. No master values are retained.
 ///
 /// Bind a new point with `at_point` before transporting and projecting masters.
-/// Away from specialization singularities this only substitutes exact Laurent
-/// coefficients; it does not expand the full specialized rational weights.
+/// Away from specialization singularities this evaluates a retained native
+/// exact polynomial graph; it does not re-expand specialized rational weights.
 pub struct PreparedKinematicTargetProjection {
     identity_key: String,
     targets: Vec<crate::reduction::LinearCombination>,
     range: EpsilonRange,
     required: EpsilonRange,
     rows: Vec<Vec<SeriesWeight>>,
-    specialization_guards: Vec<Atom>,
+    binding: Option<ExactTargetBinding>,
 }
 
 impl PreparedKinematicTargetProjection {
@@ -79,7 +217,9 @@ impl PreparedKinematicTargetProjection {
     /// point plan borrows only `family`, so this table can be moved or dropped.
     /// Zeros can lower demand. A vanishing denominator leading coefficient or
     /// removable series-coefficient singularity uses legacy exact preparation;
-    /// generic valuations are never assumed at such a point.
+    /// generic valuations are never assumed at such a point. Rational and
+    /// rational-complex coordinates use the same exact evaluator. Unsupported
+    /// atoms or coordinates use legacy preparation without rounding.
     pub fn at_point<'a>(
         &self,
         family: &'a PreparedPhysicalFamily,
@@ -95,35 +235,20 @@ impl PreparedKinematicTargetProjection {
         }
         let cached_point = CachedPoint::Exact(point.clone());
         family.flow().identity().validate_point(&cached_point)?;
-        let mut substitutions = point
-            .iter()
-            .map(|(&s, a)| (Atom::var(s), a.clone()))
-            .collect::<BTreeMap<_, _>>();
-        // Test specialization in Q(i), not with i as an independent symbol.
-        substitutions.insert(
-            Atom::var(crate::family::imaginary_parameter()),
-            Atom::num(Complex::new(Rational::from(0), Rational::from(1))),
-        );
-        for guard in &self.specialization_guards {
-            if crate::family::substitute(guard, &substitutions)
-                .together()
-                .cancel()
-                .is_zero()
-            {
-                return family.prepare_target_projection(point, self.range);
-            }
-        }
+        let Some(binding) = &self.binding else {
+            return family.prepare_target_projection(point, self.range);
+        };
+        let Some(coefficients) = binding.at_point(point)? else {
+            return family.prepare_target_projection(point, self.range);
+        };
         let mut last = self.required.leading;
         let mut rows = Vec::with_capacity(self.rows.len());
         for row in &self.rows {
             let mut bound = Vec::with_capacity(row.len());
             for weight in row {
-                let series = weight.series.map_coeff(|coefficient| {
-                    let coefficient = crate::family::substitute(coefficient, &substitutions)
-                        .together()
-                        .cancel();
-                    crate::family::encode_complex(&coefficient)
-                });
+                let series = weight
+                    .series
+                    .map_coeff(|coefficient| coefficients[coefficient].clone());
                 if series.is_zero() {
                     // Only the retained orders vanish. Earlier master poles
                     // require legacy re-expansion, handled by the point plan.
@@ -305,13 +430,14 @@ impl PreparedPhysicalFamily {
         guards.retain(|a| !matches!(a.as_view(), AtomView::Num(_)));
         guards.sort_by_cached_key(AtomCore::to_canonical_string);
         guards.dedup();
+        let binding = ExactTargetBinding::new(&rows, &guards)?;
         Ok(PreparedKinematicTargetProjection {
             identity_key: self.flow().identity().key().to_owned(),
             targets: self.target_reductions().to_vec(),
             range,
             required,
             rows,
-            specialization_guards: guards,
+            binding,
         })
     }
 

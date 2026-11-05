@@ -517,6 +517,136 @@ fn kinematic_projection_matches_exact_complex_values_and_errors_at_80_and_201_bi
 }
 
 #[test]
+fn retained_exact_binding_preserves_long_rational_and_complex_coordinates() {
+    let (s, eps) = symbol!("target_projection::s", "target_projection::eps");
+    let s_atom = Atom::var(s);
+    let epsilon = Atom::var(eps);
+    let complex = Atom::num(Complex::new(
+        Rational::from((2, 7)),
+        Rational::from((3, 11)),
+    ));
+    let weight = (&s_atom - Atom::one()) / epsilon.pow(2)
+        + (s_atom.pow(3) + complex)
+            / ((s_atom.pow(2) + Atom::num(2))
+                * (Atom::one() - &epsilon)
+                * (&s_atom + Atom::num(3)));
+    let family = prepared(weight);
+    let range = EpsilonRange::new(-4, 1).unwrap();
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let almost_one = parse!("1+1/10^100");
+    let points = [
+        almost_one.clone(),
+        Atom::num(Complex::new(
+            Rational::from((5, 7)),
+            Rational::from((2, 11)),
+        )),
+        almost_one + Atom::num(Complex::new(Rational::from(0), Rational::from((2, 11)))),
+    ];
+    for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+        for coordinate in &points {
+            let point = BTreeMap::from([(s, coordinate.clone())]);
+            let plan = retained.at_point(&family, &point).unwrap();
+            let legacy = family.prepare_target_projection(&point, range).unwrap();
+            // Rounding almost_one to either working precision would erase its
+            // double pole. Exact binding must retain it and its master demand.
+            assert_eq!(
+                plan.required_master_range(),
+                EpsilonRange::new(-2, 3).unwrap()
+            );
+            assert_eq!(plan.required_master_range(), legacy.required_master_range());
+            let source = complex_projection_boundary(&family, &point, 3, bits, verified);
+            let expected = family.project_targets(&source, range, digits).unwrap();
+            assert_same_projection(&legacy.project_targets(&source, digits).unwrap(), &expected);
+            let found = plan.project_targets(&source, digits).unwrap();
+            assert_same_projection(&found, &expected);
+            assert_ne!(found[0].coefficients[&-4], Precision { bits }.zero());
+            assert_same_projection(
+                &retained
+                    .at_point(&family, &point)
+                    .unwrap()
+                    .project_targets(&source, digits)
+                    .unwrap(),
+                &expected,
+            );
+            let short = complex_projection_boundary(&family, &point, 2, bits, verified);
+            assert_eq!(
+                plan.project_targets(&short, digits)
+                    .unwrap_err()
+                    .to_string(),
+                family
+                    .project_targets(&short, range, digits)
+                    .unwrap_err()
+                    .to_string(),
+            );
+        }
+    }
+    for invalid in [parse!("1.25`80"), Atom::var(s)] {
+        assert!(matches!(
+            retained.at_point(&family, &BTreeMap::from([(s, invalid)])),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+}
+
+#[test]
+fn retained_exact_binding_checks_complex_denominators_before_inversion() {
+    let s = Atom::var(symbol!("target_projection::s"));
+    let epsilon = Atom::var(symbol!("target_projection::eps"));
+    let root = Atom::num(Complex::new(Rational::from((1, 3)), Rational::from((2, 7))));
+    let vanishing = (&s - &root).pow(2);
+    let point = BTreeMap::from([(symbol!("target_projection::s"), root)]);
+    let range = EpsilonRange::new(0, 0).unwrap();
+    // The generic denominator leading coefficient vanishes in Q(i). Include a
+    // retained pole weight, an omitted weight acquiring a pole, and a removable
+    // coefficient singularity whose original weight specializes to 1/2.
+    for (weight, generic_last, point_last) in [
+        (Atom::one() / (&vanishing + &epsilon), 0, 1),
+        (epsilon.pow(3) / (&vanishing + epsilon.pow(4)), -2, 1),
+        ((&vanishing + &epsilon) / (&vanishing + 2 * &epsilon), 0, 0),
+    ] {
+        let family = prepared(weight);
+        let retained = family.prepare_kinematic_target_projection(range).unwrap();
+        assert_eq!(retained.required_master_range().last, generic_last);
+        for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+            let plan = retained.at_point(&family, &point).unwrap();
+            assert_eq!(plan.required_master_range().last, point_last);
+            let source = complex_projection_boundary(&family, &point, point_last, bits, verified);
+            assert_same_projection(
+                &plan.project_targets(&source, digits).unwrap(),
+                &family.project_targets(&source, range, digits).unwrap(),
+            );
+        }
+    }
+    // A true denominator zero must retain the legacy rejection, including when
+    // the singularity can only be seen after exact complex specialization.
+    let singular = prepared(Atom::one() / vanishing);
+    assert!(singular.prepare_target_projection(&point, range).is_err());
+    assert!(
+        singular
+            .prepare_kinematic_target_projection(range)
+            .unwrap()
+            .at_point(&singular, &point)
+            .is_err()
+    );
+}
+
+#[test]
+fn retained_exact_binding_uses_legacy_for_algebraic_coordinates() {
+    let family = prepared(parse!("target_projection::s"));
+    let range = EpsilonRange::new(0, 0).unwrap();
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let point = BTreeMap::from([(symbol!("target_projection::s"), parse!("2^(1/2)"))]);
+    for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+        let plan = retained.at_point(&family, &point).unwrap();
+        let source = complex_projection_boundary(&family, &point, 0, bits, verified);
+        assert_same_projection(
+            &plan.project_targets(&source, digits).unwrap(),
+            &family.project_targets(&source, range, digits).unwrap(),
+        );
+    }
+}
+
+#[test]
 fn kinematic_projection_is_owned_and_rejects_other_family_target_maps() {
     struct Session {
         family: PreparedPhysicalFamily,
