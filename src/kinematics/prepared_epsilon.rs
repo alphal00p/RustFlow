@@ -13,8 +13,8 @@ pub struct PreparedKinematicEpsilon {
     coefficients: Vec<KinematicSystem>,
     // Parsed once, before any path or numerical precision is selected.
     polynomial_coefficients: Vec<BTreeMap<Symbol, Vec<Vec<ExactRational>>>>,
-    original_poles: Vec<Atom>,
-    expansion_poles: Vec<Atom>,
+    original_poles: Vec<PreparedPole>,
+    expansion_poles: Vec<PreparedPole>,
 }
 
 fn decode_complex(value: &Atom) -> Atom {
@@ -28,6 +28,16 @@ fn decode_complex(value: &Atom) -> Atom {
 type GaussianField = FloatField<Complex<Rational>>;
 type ExactPolynomial = MultivariatePolynomial<GaussianField, u16>;
 type ExactRational = RationalPolynomial<GaussianField, u16>;
+
+#[derive(Clone, Debug)]
+struct PreparedPole {
+    // Retain the checked symbolic guard for non-affine paths or a polynomial
+    // conversion the native owner cannot represent.
+    expression: Atom,
+    // Physical coordinates in the same order as polynomial_coefficients,
+    // followed by formal epsilon. Never specialize epsilon in an original pole.
+    polynomial: Option<ExactPolynomial>,
+}
 
 fn gaussian_field() -> GaussianField {
     FloatField::from_rep(Complex::new(Rational::from(0), Rational::from(0)))
@@ -133,17 +143,18 @@ impl KinematicSystem {
         }
         expansion_poles.sort_by_cached_key(AtomCore::to_canonical_string);
         expansion_poles.dedup();
+        let polynomial_variables = Arc::new(
+            self.derivatives
+                .keys()
+                .copied()
+                .map(PolyVariable::Symbol)
+                .collect::<Vec<_>>(),
+        );
         let polynomial_coefficients = {
             let _timing =
                 PhysicalPhaseTiming::start("transport.epsilon_prepare.polynomials", 0, 0, None);
             let field = gaussian_field();
-            let variables = Arc::new(
-                self.derivatives
-                    .keys()
-                    .copied()
-                    .map(PolyVariable::Symbol)
-                    .collect::<Vec<_>>(),
-            );
+            let variables = polynomial_variables.clone();
             let mut polynomials = Vec::with_capacity(coefficients.len());
             for coefficient in &coefficients {
                 let mut partials = BTreeMap::new();
@@ -173,6 +184,33 @@ impl KinematicSystem {
                 polynomials.push(partials);
             }
             polynomials
+        };
+        let (original_poles, expansion_poles) = {
+            let _timing =
+                PhysicalPhaseTiming::start("transport.epsilon_prepare.guards", 0, 0, None);
+            let field = gaussian_field();
+            let mut variables = polynomial_variables.as_ref().clone();
+            variables.push(PolyVariable::Symbol(self.epsilon));
+            let variables = Arc::new(variables);
+            let prepare_poles = |poles: Vec<Atom>| {
+                poles
+                    .into_iter()
+                    .map(|expression| {
+                        let polynomial: Option<ExactPolynomial> = expression
+                            .try_to_polynomial(&field, variables.clone())
+                            .ok()
+                            .filter(|p: &ExactPolynomial| p.variables() == &variables);
+                        PreparedPole {
+                            expression,
+                            polynomial,
+                        }
+                    })
+                    .collect()
+            };
+            (
+                prepare_poles(original_poles),
+                prepare_poles(expansion_poles),
+            )
         };
         Ok(PreparedKinematicEpsilon {
             coefficients,
@@ -215,6 +253,106 @@ impl PreparedKinematicEpsilon {
                     .then_some(polynomial)
             })
             .collect()
+    }
+
+    fn check_poles(
+        &self,
+        path: &KinematicPath,
+        coordinates: Option<&[ExactPolynomial]>,
+    ) -> Result<()> {
+        let _timing =
+            PhysicalPhaseTiming::start("transport.pullback.guard_restriction", 0, 0, None);
+        let field = gaussian_field();
+        let ring = PolynomialRing::new(field.clone());
+        // The coefficient pullback stays univariate. Only the guards need a
+        // second variable so epsilon remains independent of the path parameter.
+        let guard_coordinates = if let Some(coordinates) = coordinates {
+            let variables = Arc::new(vec![
+                PolyVariable::Symbol(path.parameter),
+                PolyVariable::Symbol(self.coefficients[0].epsilon),
+            ]);
+            let parameter: ExactPolynomial = Atom::var(path.parameter)
+                .try_to_polynomial(&field, variables.clone())
+                .map_err(|e| {
+                    Error::Unsupported(format!("polynomial path parameter required: {e}"))
+                })?;
+            let epsilon: ExactPolynomial = Atom::var(self.coefficients[0].epsilon)
+                .try_to_polynomial(&field, variables)
+                .map_err(|e| Error::Unsupported(format!("polynomial epsilon required: {e}")))?;
+            let mut lifted = coordinates
+                .iter()
+                .map(|p| {
+                    p.evaluate_with_coeff_map(
+                        |c| parameter.constant(c.clone()),
+                        std::slice::from_ref(&parameter),
+                        &ring,
+                    )
+                })
+                .collect::<Vec<_>>();
+            lifted.push(epsilon);
+            Some(lifted)
+        } else {
+            None
+        };
+        // Allocate symbolic substitutions only for a path or guard that needs
+        // the fallback. Ordinary affine requests never substitute/expand Atoms.
+        let substitutions = (coordinates.is_none()
+            || self
+                .original_poles
+                .iter()
+                .chain(&self.expansion_poles)
+                .any(|pole| pole.polynomial.is_none()))
+        .then(|| {
+            path.coordinates
+                .iter()
+                .map(|(&s, a)| (Atom::var(s), a.clone()))
+                .collect()
+        });
+        for (poles, expansion, phase) in [
+            (
+                &self.original_poles,
+                false,
+                "transport.pullback.original_guard_restriction",
+            ),
+            (
+                &self.expansion_poles,
+                true,
+                "transport.pullback.expansion_guard_restriction",
+            ),
+        ] {
+            for (index, pole) in poles.iter().enumerate() {
+                let _timing = PhysicalPhaseTiming::start(phase, index, 0, None);
+                let is_zero = if let (Some(polynomial), Some(coordinates)) =
+                    (&pole.polynomial, &guard_coordinates)
+                {
+                    polynomial
+                        .evaluate_with_coeff_map(
+                            |c| coordinates[0].constant(c.clone()),
+                            coordinates,
+                            &ring,
+                        )
+                        .is_zero()
+                } else {
+                    let _timing = PhysicalPhaseTiming::start(
+                        "transport.pullback.symbolic_guard_fallback",
+                        index,
+                        usize::from(expansion),
+                        None,
+                    );
+                    substitute(&pole.expression, substitutions.as_ref().unwrap())
+                        .expand()
+                        .is_zero()
+                };
+                if is_zero {
+                    return Err(if expansion {
+                        Error::Unsupported("path has an exceptional epsilon specialization; use the legacy pullback".into())
+                    } else {
+                        Error::InvalidInput("path lies in an original kinematic matrix pole".into())
+                    });
+                }
+            }
+        }
+        Ok(())
     }
 
     fn pullback_affine(
@@ -323,26 +461,18 @@ impl PreparedKinematicEpsilon {
     /// explicitly try the legacy route to obtain their specialized expansion.
     pub fn pullback(&self, path: &KinematicPath, order: usize) -> Result<EpsilonSystem> {
         self.check_order(order)?;
-        self.coefficients[0].validate_path(path)?;
-        let substitutions = path
-            .coordinates
-            .iter()
-            .map(|(&s, a)| (Atom::var(s), a.clone()))
-            .collect();
-        for (poles, expansion) in [(&self.original_poles, false), (&self.expansion_poles, true)] {
-            for pole in poles {
-                // These are retained polynomials: expansion suffices, with no
-                // rational (epsilon,parameter) GCD or epsilon series per path.
-                if substitute(pole, &substitutions).expand().is_zero() {
-                    return Err(if expansion {
-                        Error::Unsupported("path has an exceptional epsilon specialization; use the legacy pullback".into())
-                    } else {
-                        Error::InvalidInput("path lies in an original kinematic matrix pole".into())
-                    });
-                }
-            }
+        {
+            let _timing =
+                PhysicalPhaseTiming::start("transport.pullback.path_validation", 0, 0, None);
+            self.coefficients[0].validate_path(path)?;
         }
-        if let Some(coordinates) = self.affine_coordinates(path) {
+        let coordinates = {
+            let _timing =
+                PhysicalPhaseTiming::start("transport.pullback.affine_classification", 0, 0, None);
+            self.affine_coordinates(path)
+        };
+        self.check_poles(path, coordinates.as_deref())?;
+        if let Some(coordinates) = coordinates {
             return self.pullback_affine(path, order, &coordinates);
         }
         // Explicit non-affine fallback: preserve the legacy symbolic behavior.

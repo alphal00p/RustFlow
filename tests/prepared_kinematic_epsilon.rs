@@ -183,6 +183,145 @@ fn prepared_native_affine_big_gaussian_rationals_and_weighted_cancellations() ->
     Ok(())
 }
 
+// The pre-native-guard check, retained here as an exact rejection oracle for
+// explicitly supplied original denominators and epsilon-constant denominators.
+fn old_symbolic_prepared_guards(
+    path: &KinematicPath,
+    original: &[Atom],
+    expansion: &[Atom],
+) -> Result<()> {
+    let substitutions = path
+        .coordinates
+        .iter()
+        .map(|(&s, a)| (Atom::var(s), a.clone()))
+        .collect();
+    for (poles, expansion) in [(original, false), (expansion, true)] {
+        for pole in poles {
+            if family::substitute(pole, &substitutions).expand().is_zero() {
+                return Err(if expansion {
+                    Error::Unsupported("exceptional epsilon specialization".into())
+                } else {
+                    Error::InvalidInput("original kinematic matrix pole".into())
+                });
+            }
+        }
+    }
+    Ok(())
+}
+
+#[test]
+fn prepared_native_guards_keep_epsilon_independent_on_large_gaussian_affine_paths() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let (sv, eps, xv) = (Atom::var(s), Atom::var(epsilon), Atom::var(x));
+    let q =
+        parse!("123456789012345678901234567890123456789/987654321098765432109876543210987654319");
+    let r =
+        parse!("314159265358979323846264338327950288419/271828182845904523536028747135266249777");
+    let shift = &q + Atom::i() * &r;
+    let scale = &r - Atom::i() * &q;
+    let original = &sv - &shift - &scale * &eps;
+    let expansion = &sv - &shift;
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([
+            (s, vec![vec![Atom::zero()]]),
+            (t, vec![vec![&eps / &original]]),
+        ]),
+    };
+    let prepared = system.prepare_epsilon(3)?;
+    let affine = &shift + &scale * &xv;
+    let path = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, affine.clone()), (t, affine.clone())]),
+    };
+    old_symbolic_prepared_guards(
+        &path,
+        std::slice::from_ref(&original),
+        std::slice::from_ref(&expansion),
+    )?;
+    // The restricted original guard is scale*(x-epsilon), not zero. In
+    // particular epsilon must not be identified with the path parameter.
+    for order in [0, 1, 3] {
+        let pulled = prepared.pullback(&path, order)?;
+        equal_coefficients(
+            &EpsilonSystem::from_differential_system(&system.pullback(&path)?, epsilon, order)?,
+            &pulled,
+        );
+        let expected = EpsilonSystem {
+            variable: x,
+            matrices: (0..=order)
+                .map(|k| {
+                    vec![vec![if k == 0 {
+                        Atom::zero()
+                    } else {
+                        xv.pow(-(k as i64))
+                    }]]
+                })
+                .collect(),
+        };
+        equal_coefficients(&expected, &pulled);
+    }
+    // At s=shift the original guard is -scale*epsilon, which is generically
+    // nonzero. The expansion guard vanishes: preserve Unsupported rather than
+    // incorrectly classifying this as an original pole by setting epsilon=0.
+    // Exercise the same semantics in the checked non-affine fallback too.
+    for moving in [affine, &shift + &scale * (&xv + xv.pow(2))] {
+        let exceptional_path = KinematicPath {
+            parameter: x,
+            coordinates: BTreeMap::from([(s, shift.clone()), (t, moving.clone())]),
+        };
+        assert!(matches!(
+            old_symbolic_prepared_guards(
+                &exceptional_path,
+                std::slice::from_ref(&original),
+                std::slice::from_ref(&expansion),
+            ),
+            Err(Error::Unsupported(_))
+        ));
+        assert!(matches!(
+            prepared.pullback(&exceptional_path, 0),
+            Err(Error::Unsupported(message)) if message.contains("exceptional epsilon specialization")
+        ));
+        // Legacy specializes first and succeeds, giving -dt/dx/scale exactly.
+        let legacy = EpsilonSystem::from_differential_system(
+            &system.pullback(&exceptional_path)?,
+            epsilon,
+            0,
+        )?;
+        equal_coefficients(
+            &EpsilonSystem {
+                variable: x,
+                matrices: vec![vec![vec![-moving.derivative(x) / &scale]]],
+            },
+            &legacy,
+        );
+        // A stationary original pole, including formal epsilon and an entry
+        // above the retained order, must still reject before its zero Jacobian.
+        let stationary_guard = &expansion + &eps * expansion.pow(2);
+        let stationary = KinematicSystem {
+            epsilon,
+            derivatives: BTreeMap::from([
+                (s, vec![vec![eps.pow(8) / &stationary_guard]]),
+                (t, vec![vec![Atom::zero()]]),
+            ]),
+        };
+        assert!(matches!(
+            old_symbolic_prepared_guards(
+                &exceptional_path,
+                std::slice::from_ref(&stationary_guard),
+                std::slice::from_ref(&expansion),
+            ),
+            Err(Error::InvalidInput(_))
+        ));
+        assert!(stationary.pullback(&exceptional_path).is_err());
+        assert!(matches!(
+            stationary.prepare_epsilon(0)?.pullback(&exceptional_path, 0),
+            Err(Error::InvalidInput(message)) if message.contains("original kinematic matrix pole")
+        ));
+    }
+    Ok(())
+}
+
 #[test]
 fn prepared_non_affine_fallback_matches_legacy() -> Result<()> {
     let (s, _, x, epsilon) = symbols();
