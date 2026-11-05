@@ -754,6 +754,87 @@ impl PreparedPhysicalFamily {
         })
     }
 
+    /// Prepare linear combinations already expressed in `basis()` order.
+    ///
+    /// This is the projection entry point for coefficients reduced and compiled
+    /// during application setup. Unlike target combinations, it performs no
+    /// target reduction binding. Columns multiply the ordinary integral masters;
+    /// the owner applies its epsilon shearing before reading cached columns.
+    /// Exact rational/Gaussian weights may depend on epsilon and kinematics.
+    /// Lifting a numerical weight exactly preserves its representation, not its
+    /// input accuracy: callers must refine their complete weights independently.
+    ///
+    /// The ordinary identity, point, domain, epsilon depth, inherited source
+    /// floor and arithmetic-refinement checks are unchanged. Repeated terms of
+    /// each master must be summed before supplying its one column; no covariance
+    /// between different master coefficients is assumed. Earlier master poles
+    /// retain the same deeper-series handling as other exact projection plans.
+    pub fn prepare_master_combinations(
+        &self,
+        point: &BTreeMap<Symbol, Atom>,
+        coefficients: &[Vec<Atom>],
+        range: EpsilonRange,
+    ) -> Result<PreparedTargetProjection<'_>> {
+        EpsilonRange::new(range.leading, range.last)?;
+        if coefficients.is_empty()
+            || self.basis().is_empty()
+            || coefficients
+                .iter()
+                .any(|row| row.len() != self.basis().len())
+        {
+            return Err(Error::InvalidInput(
+                "master combination coefficients require a nonempty matrix in ordinary basis order"
+                    .into(),
+            ));
+        }
+        let cached_point = CachedPoint::Exact(point.clone());
+        self.flow().identity().validate_point(&cached_point)?;
+        let leading = self.ordinary_master_leading()?;
+        let substitutions = point
+            .iter()
+            .map(|(&s, a)| (Atom::var(s), a.clone()))
+            .collect();
+        let variables = point
+            .keys()
+            .copied()
+            .chain(std::iter::once(self.family().epsilon))
+            .collect();
+        let mut weights = Vec::with_capacity(coefficients.len());
+        for row in coefficients {
+            let conditions =
+                crate::physical_conditions::rational_denominator_conditions(row, &variables)?;
+            crate::physical_conditions::validate_conditions_at(
+                &conditions,
+                self.family().epsilon,
+                point,
+            )?;
+            let bound = row.iter().enumerate().map(|(column, coefficient)| {
+                let cached = self.cache_target_weight(column, coefficient);
+                (
+                    column,
+                    crate::family::substitute(&cached, &substitutions)
+                        .together()
+                        .cancel(),
+                )
+            });
+            weights.push(bind_row(bound, self.family().epsilon)?);
+        }
+        let required = master_range(&weights, leading, range)?;
+        let rows = weights
+            .iter()
+            .map(|row| expand_row(row, self.family().epsilon, range, leading))
+            .collect::<Result<_>>()?;
+        Ok(PreparedTargetProjection {
+            family: self,
+            point: cached_point,
+            range,
+            required,
+            weights: Some(weights),
+            rows: Arc::new(rows),
+            numeric: None,
+        })
+    }
+
     /// Determine how far masters must be known before reducing targets. A pole
     /// in a reduction coefficient requires additional positive epsilon orders;
     /// a cache truncated at the target's last order is not sufficient in general.

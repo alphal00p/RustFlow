@@ -1953,3 +1953,225 @@ fn target_combinations_use_cached_column_order_and_epsilon_shearing() {
         }
     }
 }
+
+#[test]
+fn master_combinations_match_reduced_target_sum_and_keep_source_floors() {
+    let (j1, j2) = (Integral(vec![0, 1]), Integral(vec![1, 0]));
+    let family = combination_family(
+        BTreeMap::from([(j1.clone(), parse!("10^20")), (j2.clone(), Atom::one())]),
+        BTreeMap::from([(j1, parse!("-10^20"))]),
+    );
+    let (s, eps) = symbol!("target_projection::s", "target_projection::eps");
+    let point = BTreeMap::from([(s, parse!("1+1/10^100"))]);
+    let gaussian = Atom::num(Complex::new(
+        Rational::from((2, 7)),
+        Rational::from((3, 11)),
+    ));
+    let weight: Atom = gaussian * (Atom::var(s) - Atom::one()) * parse!("10^100")
+        / (Atom::var(eps) * (Atom::one() - Atom::var(eps)));
+    let range = EpsilonRange::new(-3, 0).unwrap();
+    let direct = family
+        .prepare_master_combinations(&point, &[vec![Atom::zero(), weight.clone()]], range)
+        .unwrap();
+    let reduced = family
+        .prepare_target_combinations(&point, &[vec![weight.clone(), weight]], range)
+        .unwrap();
+    assert_eq!(
+        direct.required_master_range(),
+        EpsilonRange::new(-2, 1).unwrap()
+    );
+    assert_eq!(
+        direct.required_master_range(),
+        reduced.required_master_range()
+    );
+    for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+        let source = complex_projection_boundary(&family, &point, 1, bits, verified);
+        let found = direct.project_targets(&source, digits).unwrap();
+        assert_same_projection(&found, &reduced.project_targets(&source, digits).unwrap());
+        assert!(
+            found[0]
+                .absolute_errors
+                .values()
+                .any(|e| *e > Precision { bits }.real(0))
+        );
+        let short = complex_projection_boundary(&family, &point, 0, bits, verified);
+        assert!(matches!(
+            direct.project_targets(&short, digits),
+            Err(Error::InvalidInput(_))
+        ));
+        let mut wrong = source.clone();
+        wrong.point = CachedPoint::Exact(BTreeMap::from([(s, Atom::one())]));
+        assert!(matches!(
+            direct.project_targets(&wrong, digits),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+}
+
+#[test]
+fn master_combinations_reject_invalid_shapes_domains_and_insufficient_credit() {
+    let family = prepared(Atom::one());
+    let s = symbol!("target_projection::s");
+    let point = BTreeMap::from([(s, Atom::one())]);
+    let range = EpsilonRange::new(-2, 0).unwrap();
+    for rows in [vec![], vec![vec![]], vec![vec![Atom::one(), Atom::one()]]] {
+        assert!(matches!(
+            family.prepare_master_combinations(&point, &rows, range),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+    assert!(matches!(
+        family.prepare_master_combinations(
+            &point,
+            &[vec![parse!("1/(target_projection::s-1)")]],
+            range
+        ),
+        Err(Error::InvalidInput(_))
+    ));
+    assert!(
+        family
+            .prepare_master_combinations(&BTreeMap::new(), &[vec![Atom::one()]], range)
+            .is_err()
+    );
+    assert!(
+        family
+            .prepare_master_combinations(
+                &point,
+                &[vec![parse!("sin(target_projection::eps)")]],
+                range
+            )
+            .is_err()
+    );
+    let plan = family
+        .prepare_master_combinations(&point, &[vec![Atom::one()]], range)
+        .unwrap();
+    assert!(matches!(
+        plan.project_targets(&boundary(&family, 0, 16), 24),
+        Err(Error::Accuracy(_))
+    ));
+    let p = Precision::decimal(100).unwrap();
+    let mut early = boundary(&family, 0, 80);
+    early.range = EpsilonRange::new(-3, 0).unwrap();
+    early.coefficients = vec![
+        vec![p.complex(1, 2)],
+        vec![p.zero()],
+        vec![p.zero()],
+        vec![p.zero()],
+    ];
+    early.accuracy = BoundaryAccuracy::supplied(
+        80,
+        p.bits,
+        vec![vec![p.real(0)]; 4],
+        "explicit earlier master pole",
+    )
+    .unwrap();
+    let weight = parse!("1/(1-target_projection::eps)");
+    let direct = family
+        .prepare_master_combinations(&point, &[vec![weight.clone()]], range)
+        .unwrap();
+    let reference = family
+        .prepare_target_combinations(&point, &[vec![weight]], range)
+        .unwrap();
+    assert_same_projection(
+        &direct.project_targets(&early, 20).unwrap(),
+        &reference.project_targets(&early, 20).unwrap(),
+    );
+}
+
+#[test]
+fn master_combinations_apply_owner_epsilon_shearing_in_basis_order() {
+    // Same supplied evanescent bubble as the existing shearing regressions.
+    let (s, eps) = symbol!("target_projection::s", "target_projection::eps");
+    let mass = Atom::var(s);
+    let epsilon = Atom::var(eps);
+    let family = IntegralFamily {
+        name: "projection_evanescent_bubble".into(),
+        loops: vec!["k".into()],
+        external: vec!["p".into()],
+        external_gram: vec![vec![Atom::num(-1)]],
+        propagators: vec![
+            Propagator {
+                constant: -&mass,
+                scalar_products: vec![Atom::one(), Atom::new()],
+            },
+            Propagator {
+                constant: -&mass - Atom::one(),
+                scalar_products: vec![Atom::one(), Atom::num(2)],
+            },
+        ],
+        physical_propagators: 2,
+        epsilon: eps,
+        dimension: 4,
+    };
+    let (bubble, t3) = (Integral(vec![1, 1]), Integral(vec![3, 0]));
+    let denominator = 4 * &mass + Atom::one();
+    let mixed = BTreeMap::from([
+        (bubble.clone(), (Atom::one() - 2 * &epsilon) / &denominator),
+        (t3.clone(), 2 * &mass / (&epsilon * &denominator)),
+    ]);
+    let backend = TableBackend {
+        name: "supplied bubble shearing fixture".into(),
+        reduction: Reduction {
+            rules: BTreeMap::from([
+                (Integral(vec![2, 1]), mixed.clone()),
+                (Integral(vec![1, 2]), mixed),
+                (
+                    Integral(vec![4, 0]),
+                    BTreeMap::from([(t3.clone(), -(Atom::one() + &epsilon) / (3 * &mass))]),
+                ),
+            ]),
+            residuals: vec![bubble.clone(), t3.clone()],
+            ..Default::default()
+        },
+    };
+    let context = RunContext::default();
+    let prepared = PreparedPhysicalFamily::new(
+        &family,
+        &[bubble.clone(), t3.clone(), Integral(vec![2, 1])],
+        &[s],
+        &backend,
+        &FlowOptions::default(),
+        "Euclidean projection fixture",
+        &context,
+    )
+    .unwrap()
+    .with_epsilon_shearing(&context)
+    .unwrap();
+    assert_eq!(prepared.basis(), &[bubble, t3]);
+    assert_eq!(prepared.epsilon_shearing().unwrap().weights(), &[-1, 0]);
+
+    let range = EpsilonRange::new(-3, 0).unwrap();
+    let ordinary = vec![
+        vec![epsilon.clone(), Atom::zero()],
+        vec![Atom::zero(), Atom::one()],
+        vec![
+            (Atom::one() - 2 * &epsilon) / &denominator,
+            2 * &mass / (&epsilon * &denominator),
+        ],
+    ];
+    let target_weights = vec![
+        vec![epsilon.clone(), Atom::zero(), Atom::zero()],
+        vec![Atom::zero(), Atom::one(), Atom::zero()],
+        vec![Atom::zero(), Atom::zero(), Atom::one()],
+    ];
+    for coordinate in [1, 2] {
+        let point = BTreeMap::from([(s, Atom::num(coordinate))]);
+        let direct = prepared
+            .prepare_master_combinations(&point, &ordinary, range)
+            .unwrap();
+        let reference = prepared
+            .prepare_target_combinations(&point, &target_weights, range)
+            .unwrap();
+        assert_eq!(
+            direct.required_master_range(),
+            reference.required_master_range()
+        );
+        for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+            let source = complex_projection_boundary(&prepared, &point, 1, bits, verified);
+            assert_same_projection(
+                &direct.project_targets(&source, digits).unwrap(),
+                &reference.project_targets(&source, digits).unwrap(),
+            );
+        }
+    }
+}
