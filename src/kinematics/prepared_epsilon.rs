@@ -1,6 +1,7 @@
 use super::*;
 use crate::diffexp::EpsilonSystem;
 use crate::physical_conditions::{PhysicalPhaseTiming, rational_denominator_conditions};
+use std::collections::HashMap;
 use std::sync::Arc;
 use symbolica::domains::{float::FloatField, rational_polynomial::FromNumeratorAndDenominator};
 
@@ -11,8 +12,10 @@ use symbolica::domains::{float::FloatField, rational_polynomial::FromNumeratorAn
 #[derive(Clone, Debug)]
 pub struct PreparedKinematicEpsilon {
     coefficients: Vec<KinematicSystem>,
-    // Parsed once, before any path or numerical precision is selected.
-    polynomial_coefficients: Vec<BTreeMap<Symbol, Vec<Vec<ExactRational>>>>,
+    // One denominator per coefficient/entry, shared by all derivative variables.
+    // Only kernel indices are repeated across rows and epsilon orders.
+    polynomial_coefficients: Vec<Vec<Vec<PreparedEntry>>>,
+    polynomial_kernels: Vec<Arc<ExactPolynomial>>,
     original_poles: Vec<PreparedPole>,
     expansion_poles: Vec<PreparedPole>,
 }
@@ -28,6 +31,104 @@ fn decode_complex(value: &Atom) -> Atom {
 type GaussianField = FloatField<Complex<Rational>>;
 type ExactPolynomial = MultivariatePolynomial<GaussianField, u16>;
 type ExactRational = RationalPolynomial<GaussianField, u16>;
+
+type IntegerPolynomial = MultivariatePolynomial<IntegerRing, u16>;
+type IntegerRational = RationalPolynomial<IntegerRing, u16>;
+
+#[derive(Clone, Debug)]
+struct PreparedEntry {
+    denominator: usize,
+    // Same BTreeMap order as the physical coordinates and their Jacobians.
+    numerators: Vec<usize>,
+}
+
+fn intern_polynomial<P: Eq + std::hash::Hash>(
+    polynomial: P,
+    polynomials: &mut Vec<Arc<P>>,
+    indices: &mut HashMap<Arc<P>, usize>,
+) -> usize {
+    if let Some(&index) = indices.get(&polynomial) {
+        return index;
+    }
+    let index = polynomials.len();
+    let polynomial = Arc::new(polynomial);
+    indices.insert(polynomial.clone(), index);
+    polynomials.push(polynomial);
+    index
+}
+
+fn exact_quotient(
+    numerator: &IntegerPolynomial,
+    denominator: &IntegerPolynomial,
+) -> Result<IntegerPolynomial> {
+    let (quotient, remainder) = numerator.quot_rem(denominator, true);
+    if !remainder.is_zero() {
+        return Err(Error::Unsupported(
+            "native prepared denominator quotient was not exact".into(),
+        ));
+    }
+    Ok(quotient)
+}
+
+// Preparation-only native forms. Integer contents (including cleared rational
+// constants) participate in LCMs, so every cofactor is an exact Z quotient.
+// Never form a*b before dividing by gcd(a,b). All these tables are dropped
+// before returning the prepared connection; only the Gaussian kernels survive.
+#[derive(Default)]
+struct DenominatorPreparation {
+    polynomials: Vec<Arc<IntegerPolynomial>>,
+    indices: HashMap<Arc<IntegerPolynomial>, usize>,
+    lcms: HashMap<(usize, usize), usize>,
+    cofactors: HashMap<(usize, usize), usize>,
+}
+
+impl DenominatorPreparation {
+    fn intern(&mut self, polynomial: IntegerPolynomial) -> usize {
+        intern_polynomial(polynomial, &mut self.polynomials, &mut self.indices)
+    }
+
+    fn lcm(&mut self, a: usize, b: usize) -> Result<usize> {
+        if a == b {
+            return Ok(a);
+        }
+        let key = (a.min(b), a.max(b));
+        if let Some(&index) = self.lcms.get(&key) {
+            return Ok(index);
+        }
+        let a = &*self.polynomials[key.0];
+        let b = &*self.polynomials[key.1];
+        let gcd = a.gcd(b);
+        let common = exact_quotient(a, &gcd)? * b;
+        let index = self.intern(common);
+        self.lcms.insert(key, index);
+        Ok(index)
+    }
+
+    fn cofactor(&mut self, common: usize, partial: usize) -> Result<usize> {
+        let key = (common, partial);
+        if let Some(&index) = self.cofactors.get(&key) {
+            return Ok(index);
+        }
+        let quotient = exact_quotient(&self.polynomials[common], &self.polynomials[partial])?;
+        let index = self.intern(quotient);
+        self.cofactors.insert(key, index);
+        Ok(index)
+    }
+}
+
+// Specialize only formal_i at setup, using the owner's native polynomial map.
+// Physical variables stay independent until a path is requested.
+fn gaussian_polynomial(
+    polynomial: &IntegerPolynomial,
+    coordinates: &[ExactPolynomial],
+) -> ExactPolynomial {
+    let field = gaussian_field();
+    polynomial.evaluate_with_coeff_map(
+        |c| coordinates[0].constant(Complex::new(Rational::from(c.clone()), Rational::from(0))),
+        coordinates,
+        &PolynomialRing::new(field),
+    )
+}
 
 #[derive(Clone, Debug)]
 struct PreparedPole {
@@ -150,40 +251,114 @@ impl KinematicSystem {
                 .map(PolyVariable::Symbol)
                 .collect::<Vec<_>>(),
         );
-        let polynomial_coefficients = {
-            let _timing =
-                PhysicalPhaseTiming::start("transport.epsilon_prepare.polynomials", 0, 0, None);
+        let (polynomial_coefficients, polynomial_kernels) = {
+            let _timing = PhysicalPhaseTiming::start(
+                "transport.epsilon_prepare.kernel_preparation",
+                0,
+                0,
+                None,
+            );
             let field = gaussian_field();
-            let variables = polynomial_variables.clone();
+            let template = ExactPolynomial::new(&field, None, polynomial_variables.clone());
+            let mut native_variables = polynomial_variables.as_ref().clone();
+            native_variables.push(PolyVariable::Symbol(crate::family::imaginary_parameter()));
+            let native_variables = Arc::new(native_variables);
+            let mut native_coordinates = polynomial_variables
+                .iter()
+                .map(|variable| template.variable(variable).map_err(Error::Unsupported))
+                .collect::<Result<Vec<_>>>()?;
+            native_coordinates
+                .push(template.constant(Complex::new(Rational::from(0), Rational::from(1))));
+            let mut denominators = DenominatorPreparation::default();
+            let mut kernels = Vec::new();
+            let mut kernel_indices = HashMap::new();
+            let mut denominator_kernels = HashMap::new();
             let mut polynomials = Vec::with_capacity(coefficients.len());
-            for coefficient in &coefficients {
-                let mut partials = BTreeMap::new();
-                for (&variable, matrix) in &coefficient.derivatives {
-                    let mut polynomial_matrix = Vec::with_capacity(matrix.len());
-                    for row in matrix {
-                        let mut polynomial_row = Vec::with_capacity(row.len());
-                        for entry in row {
-                            let rational: ExactRational = entry
-                                .try_to_rational_polynomial(&field, &field, variables.clone())
-                                .map_err(|e| {
-                                    Error::Unsupported(format!(
-                                        "rational prepared coefficient required: {e}"
-                                    ))
-                                })?;
-                            if rational.get_variables() != &variables {
+            for (order, coefficient) in coefficients.iter().enumerate() {
+                let n = coefficient.derivatives.values().next().unwrap().len();
+                let mut matrix = Vec::with_capacity(n);
+                for row in 0..n {
+                    let _timing = PhysicalPhaseTiming::start(
+                        "transport.epsilon_prepare.coefficient_row_kernels",
+                        order,
+                        row,
+                        None,
+                    );
+                    let mut entries = Vec::with_capacity(n);
+                    for column in 0..n {
+                        // Parse one matrix entry across partials at a time, not
+                        // another full collection of all coefficient matrices.
+                        let mut partials = Vec::with_capacity(coefficient.derivatives.len());
+                        for partial in coefficient.derivatives.values() {
+                            // The Q -> Z conversion clears nonzero constant
+                            // rational denominators into the native quotient.
+                            let rational: IntegerRational =
+                                crate::family::encode_complex(&partial[row][column])
+                                    .try_to_rational_polynomial(&Q, &Z, native_variables.clone())
+                                    .map_err(|e| {
+                                        Error::Unsupported(format!(
+                                            "rational prepared coefficient required: {e}"
+                                        ))
+                                    })?;
+                            if rational.get_variables() != &native_variables {
                                 return Err(Error::Unsupported(
                                     "unexpected variable in prepared polynomial coefficient".into(),
                                 ));
                             }
-                            polynomial_row.push(rational);
+                            let denominator = denominators.intern(rational.denominator);
+                            partials.push((rational.numerator, denominator));
                         }
-                        polynomial_matrix.push(polynomial_row);
+                        let common = {
+                            let _timing = PhysicalPhaseTiming::start(
+                                "transport.epsilon_prepare.common_denominator_lcm",
+                                order,
+                                row * n + column,
+                                None,
+                            );
+                            let mut common = partials[0].1;
+                            for &(_, denominator) in &partials[1..] {
+                                common = denominators.lcm(common, denominator)?;
+                            }
+                            common
+                        };
+                        let denominator = if let Some(&kernel) = denominator_kernels.get(&common) {
+                            kernel
+                        } else {
+                            let polynomial = gaussian_polynomial(
+                                &denominators.polynomials[common],
+                                &native_coordinates,
+                            );
+                            if polynomial.is_zero() {
+                                return Err(Error::Unsupported(
+                                    "prepared common denominator vanishes at formal i".into(),
+                                ));
+                            }
+                            let kernel =
+                                intern_polynomial(polynomial, &mut kernels, &mut kernel_indices);
+                            denominator_kernels.insert(common, kernel);
+                            kernel
+                        };
+                        let mut numerators = Vec::with_capacity(partials.len());
+                        for (numerator, partial_denominator) in partials {
+                            let cofactor = denominators.cofactor(common, partial_denominator)?;
+                            let cleared = numerator * &*denominators.polynomials[cofactor];
+                            let polynomial = gaussian_polynomial(&cleared, &native_coordinates);
+                            numerators.push(intern_polynomial(
+                                polynomial,
+                                &mut kernels,
+                                &mut kernel_indices,
+                            ));
+                        }
+                        entries.push(PreparedEntry {
+                            denominator,
+                            numerators,
+                        });
                     }
-                    partials.insert(variable, polynomial_matrix);
+                    matrix.push(entries);
                 }
-                polynomials.push(partials);
+                polynomials.push(matrix);
             }
-            polynomials
+            (polynomials, kernels)
         };
         let (original_poles, expansion_poles) = {
             let _timing =
@@ -215,6 +390,7 @@ impl KinematicSystem {
         Ok(PreparedKinematicEpsilon {
             coefficients,
             polynomial_coefficients,
+            polynomial_kernels,
             original_poles,
             expansion_poles,
         })
@@ -396,6 +572,23 @@ impl PreparedKinematicEpsilon {
         Ok(())
     }
 
+    fn restrict_kernel<'a>(
+        &self,
+        index: usize,
+        coordinates: &[ExactPolynomial],
+        restrictions: &'a mut [Option<ExactPolynomial>],
+        unique_count: &mut usize,
+    ) -> &'a ExactPolynomial {
+        restrictions[index].get_or_insert_with(|| {
+            *unique_count += 1;
+            self.polynomial_kernels[index].evaluate_with_coeff_map(
+                |c| coordinates[0].constant(c.clone()),
+                coordinates,
+                &PolynomialRing::new(gaussian_field()),
+            )
+        })
+    }
+
     fn pullback_affine(
         &self,
         path: &KinematicPath,
@@ -403,7 +596,6 @@ impl PreparedKinematicEpsilon {
         coordinates: &[ExactPolynomial],
     ) -> Result<EpsilonSystem> {
         let field = gaussian_field();
-        let ring = PolynomialRing::new(field.clone());
         let template = &coordinates[0];
         let jacobians = coordinates
             .iter()
@@ -415,10 +607,11 @@ impl PreparedKinematicEpsilon {
             .next()
             .unwrap()
             .len();
+        let mut restrictions = vec![None; self.polynomial_kernels.len()];
+        let mut unique_count = 0;
         let mut matrices = Vec::with_capacity(order + 1);
-        for (coefficient, partials) in self.polynomial_coefficients[..=order].iter().enumerate() {
-            let mut rows =
-                vec![vec![ExactRational::new(&field, template.variables().clone()); n]; n];
+        for (coefficient, entries) in self.polynomial_coefficients[..=order].iter().enumerate() {
+            let mut rows = Vec::with_capacity(n);
             {
                 let _timing = PhysicalPhaseTiming::start(
                     "transport.pullback.precomputed_restriction",
@@ -426,38 +619,49 @@ impl PreparedKinematicEpsilon {
                     0,
                     None,
                 );
-                for (partials, jacobian) in partials.values().zip(&jacobians) {
-                    for (row, partial_row) in rows.iter_mut().zip(partials) {
-                        for (entry, partial) in row.iter_mut().zip(partial_row) {
-                            let compose = |p: &ExactPolynomial| {
-                                p.evaluate_with_coeff_map(
-                                    |c| template.constant(c.clone()),
-                                    coordinates,
-                                    &ring,
-                                )
-                            };
-                            // Always restrict the denominator, even for zero Jacobians.
-                            let denominator = compose(&partial.denominator);
-                            if denominator.is_zero() {
-                                return Err(Error::InvalidInput(
-                                    "path lies in a prepared coefficient pole".into(),
-                                ));
-                            }
-                            if field.is_zero(jacobian) || partial.is_zero() {
+                for prepared_row in entries {
+                    let mut row = Vec::with_capacity(n);
+                    for entry in prepared_row {
+                        // The common denominator contains every partial's
+                        // denominator, including stationary coordinates. Check
+                        // it before skipping any zero Jacobian or numerator.
+                        if self
+                            .restrict_kernel(
+                                entry.denominator,
+                                coordinates,
+                                &mut restrictions,
+                                &mut unique_count,
+                            )
+                            .is_zero()
+                        {
+                            return Err(Error::InvalidInput(
+                                "path lies in a prepared coefficient pole".into(),
+                            ));
+                        }
+                        let mut numerator = template.zero();
+                        for (&kernel, jacobian) in entry.numerators.iter().zip(&jacobians) {
+                            if field.is_zero(jacobian) || self.polynomial_kernels[kernel].is_zero()
+                            {
                                 continue;
                             }
-                            let numerator = compose(&partial.numerator).mul_coeff(jacobian.clone());
-                            let restricted =
-                                ExactRational::from_num_den(numerator, denominator, &field, false);
-                            // Native rational addition combines equal denominators directly.
-                            // Defer polynomial cancellation until the weighted sum is complete.
-                            *entry = if entry.is_zero() {
-                                restricted
-                            } else {
-                                &*entry + &restricted
-                            };
+                            let partial = self.restrict_kernel(
+                                kernel,
+                                coordinates,
+                                &mut restrictions,
+                                &mut unique_count,
+                            );
+                            numerator = numerator + partial.clone().mul_coeff(jacobian.clone());
                         }
+                        // Exactly one fraction; no per-request fraction algebra
+                        // can multiply repeated Gram factors across partials.
+                        row.push(ExactRational::from_num_den(
+                            numerator,
+                            restrictions[entry.denominator].as_ref().unwrap().clone(),
+                            &field,
+                            false,
+                        ));
                     }
+                    rows.push(row);
                 }
             }
             let mut matrix = Vec::with_capacity(n);
@@ -488,6 +692,14 @@ impl PreparedKinematicEpsilon {
             pulled.validate()?;
             matrices.push(pulled.matrix);
         }
+        // Timing metadata only: index is the number actually restricted on
+        // this line, subindex is the number retained across all epsilon orders.
+        let _counts = PhysicalPhaseTiming::start(
+            "transport.pullback.unique_restriction_count",
+            unique_count,
+            self.polynomial_kernels.len(),
+            None,
+        );
         Ok(EpsilonSystem {
             variable: path.parameter,
             matrices,

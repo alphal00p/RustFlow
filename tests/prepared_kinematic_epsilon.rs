@@ -183,6 +183,159 @@ fn prepared_native_affine_big_gaussian_rationals_and_weighted_cancellations() ->
     Ok(())
 }
 
+#[test]
+fn prepared_common_denominator_repeated_factors_across_partials_rows_and_orders() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let (sv, tv, eps, xv) = (Atom::var(s), Atom::var(t), Atom::var(epsilon), Atom::var(x));
+    let gram: Atom = &sv + &tv;
+    let other: Atom = &sv - &tv;
+    let weight: Atom = 1 + &eps + eps.pow(2);
+    // LCM is 6*gram^3*other^2, rather than a product containing
+    // gram^5*other^3. Repeat kernels across both rows and epsilon orders.
+    let a: Atom = &weight / (2 * gram.pow(3) * &other);
+    let b: Atom = &weight / (3 * gram.pow(2) * other.pow(2));
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([
+            (s, vec![vec![a.clone(), a.clone()], vec![a.clone(), a]]),
+            (t, vec![vec![b.clone(), b.clone()], vec![b.clone(), b]]),
+        ]),
+    };
+    let prepared = system.prepare_epsilon(3)?;
+    // Two lines through the same prepared snapshot also exercise per-path
+    // restriction storage: restrictions from the first line must not survive.
+    for slope in [1, 3] {
+        let path = KinematicPath {
+            parameter: x,
+            coordinates: BTreeMap::from([(s, 3 + &xv), (t, 1 + slope * &xv)]),
+        };
+        for order in [0, 2, 3] {
+            let pulled = prepared.pullback(&path, order)?;
+            equal_coefficients(
+                &EpsilonSystem::from_differential_system(&system.pullback(&path)?, epsilon, order)?,
+                &pulled,
+            );
+            let g = &path.coordinates[&s] + &path.coordinates[&t];
+            let h = &path.coordinates[&s] - &path.coordinates[&t];
+            let expected: Atom = (3 * &h + 2 * slope * &g) / (6 * g.pow(3) * h.pow(2));
+            for (k, matrix) in pulled.matrices.iter().enumerate() {
+                for entry in matrix.iter().flatten() {
+                    if k < 3 {
+                        assert!((decode(entry) - &expected).together().cancel().is_zero());
+                    } else {
+                        assert!(entry.is_zero());
+                    }
+                }
+            }
+        }
+    }
+    Ok(())
+}
+
+#[test]
+fn prepared_common_denominator_cancels_repeated_factors_only_after_affine_restriction() -> Result<()>
+{
+    let (s, t, x, epsilon) = symbols();
+    let (sv, tv, eps, xv) = (Atom::var(s), Atom::var(t), Atom::var(epsilon), Atom::var(x));
+    let factor: Atom = &sv - 4;
+    let denominator: Atom = factor.pow(3);
+    let a: Atom = (1 + &eps) / &denominator;
+    let b: Atom =
+        (1 + &eps) * (-1 + &tv - 2 * &sv - 1 + &denominator * (&tv + 1)) / (2 * &denominator);
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([(s, vec![vec![a]]), (t, vec![vec![b]])]),
+    };
+    let path = KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, 1 + &xv), (t, 3 + 2 * &xv)]),
+    };
+    let pulled = system.prepare_epsilon(2)?.pullback(&path, 2)?;
+    equal_coefficients(
+        &EpsilonSystem::from_differential_system(&system.pullback(&path)?, epsilon, 2)?,
+        &pulled,
+    );
+    for k in [0, 1] {
+        // Polynomial equality without rational cancellation: all three factors
+        // of x-3 must already have disappeared from the returned expression.
+        assert!(
+            (decode(&pulled.matrices[k][0][0]) - (Atom::num(4) + Atom::num(2) * &xv))
+                .expand()
+                .is_zero()
+        );
+        assert!(
+            (decode(&pulled.matrices[k][0][0])
+                .replace(xv.clone())
+                .with(Atom::num(3))
+                - 10)
+                .is_zero()
+        );
+    }
+    assert!(pulled.matrices[2][0][0].is_zero());
+    Ok(())
+}
+
+#[test]
+fn prepared_common_denominator_preserves_rational_complex_coefficients_and_paths() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let (sv, tv, eps) = (Atom::var(s), Atom::var(t), Atom::var(epsilon));
+    let q: Atom =
+        parse!("123456789012345678901234567890123456789/987654321098765432109876543210987654319");
+    let r: Atom =
+        parse!("314159265358979323846264338327950288419/271828182845904523536028747135266249777");
+    let shared: Atom = &sv + Atom::i() * &tv + &q;
+    let other: Atom = &sv - &tv + &r;
+    let c: Atom = &q + Atom::i() * &r;
+    let a: Atom = &c * (1 + &eps + eps.pow(2)) / (2 * shared.pow(3) * &other);
+    let b: Atom =
+        (1 - Atom::i() * &q) * (1 + &eps + eps.pow(2)) / (3 * shared.pow(2) * other.pow(2));
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([(s, vec![vec![a]]), (t, vec![vec![b]])]),
+    };
+    let prepared = system.prepare_epsilon(3)?;
+    let complex = BTreeMap::from([(s, &q + Atom::i() * &r), (t, &r - Atom::i() * &q)]);
+    let physical = BTreeMap::from([(s, Atom::num(3)), (t, Atom::one())]);
+    for (start, end) in [(&complex, &physical), (&physical, &complex)] {
+        let path = KinematicPath::straight_line(x, start, end)?;
+        let pulled = prepared.pullback(&path, 3)?;
+        equal_coefficients(
+            &EpsilonSystem::from_differential_system(&system.pullback(&path)?, epsilon, 3)?,
+            &pulled,
+        );
+        for entry in pulled.matrices.iter().flatten().flatten() {
+            assert_formal_complex_coefficients(entry.as_view());
+        }
+    }
+    Ok(())
+}
+
+#[test]
+fn prepared_common_denominator_keeps_original_poles_when_all_jacobians_are_zero() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let sv: Atom = Atom::var(s);
+    let system = KinematicSystem {
+        epsilon,
+        derivatives: BTreeMap::from([
+            (s, vec![vec![Atom::var(epsilon).pow(8) / sv.pow(3)]]),
+            (t, vec![vec![Atom::one() / sv.pow(2)]]),
+        ]),
+    };
+    let prepared = system.prepare_epsilon(0)?;
+    for t_coordinate in [Atom::one(), 1 + Atom::var(x)] {
+        let path = KinematicPath {
+            parameter: x,
+            coordinates: BTreeMap::from([(s, Atom::zero()), (t, t_coordinate)]),
+        };
+        assert!(system.pullback(&path).is_err());
+        assert!(matches!(
+            prepared.pullback(&path, 0),
+            Err(Error::InvalidInput(message)) if message == "path lies in an original kinematic matrix pole"
+        ));
+    }
+    Ok(())
+}
+
 // The pre-native-guard check, retained here as an exact rejection oracle for
 // explicitly supplied original denominators and epsilon-constant denominators.
 fn old_symbolic_prepared_guards(
