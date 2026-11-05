@@ -16,6 +16,7 @@ use crate::algebraic::{
 };
 use crate::diffexp::{EpsilonSolution, EpsilonSystem, transport_epsilon};
 use crate::kinematics::{KinematicPath, KinematicSystem};
+use crate::physical_conditions::PhysicalPhaseTiming;
 use crate::transport_cache::{
     BoundaryAccuracy, BoundaryIdentity, BoundaryQuery, CachedBoundary, CachedPoint, EpsilonRange,
     PhysicalContinuation, PointKind, RootGerm, RootSheet, RustFlowCache, TransportCost,
@@ -700,6 +701,7 @@ struct RefinedTransport {
 }
 impl PreparedConnection {
     fn compile(&self, p: Precision, context: &RunContext) -> Result<CompiledConnection> {
+        let _timing = PhysicalPhaseTiming::start("transport.compile", 0, 0, Some(p.bits));
         context.cancellation.check()?;
         let compiled = match self {
             Self::Rational(system) => {
@@ -957,18 +959,26 @@ fn evaluate_from_source(
             &coordinates,
             &destination,
         )?;
-        if !identity.conditions_admit_straight_path_with_context(
+        let timing = PhysicalPhaseTiming::start("transport.path_conditions", 0, 0, Some(p.bits));
+        let admitted = identity.conditions_admit_straight_path_with_context(
             &source.point,
             &target,
             p,
             options.digits,
             context,
-        )? {
+        )?;
+        drop(timing);
+        if !admitted {
             return Err(Error::Unsupported(
                 "selected physical path leaves the reduction domain".into(),
             ));
         }
-        let system = system.pullback(&path, count - 1)?.prepare(context)?;
+        let timing = PhysicalPhaseTiming::start("transport.pullback", 0, 0, Some(p.bits));
+        let system = system.pullback(&path, count - 1)?;
+        drop(timing);
+        let timing = PhysicalPhaseTiming::start("transport.prepare", 0, 0, Some(p.bits));
+        let system = system.prepare(context)?;
+        drop(timing);
         let prepared = system.compile(p, context)?;
         if prepared.poles().iter().any(|pole| {
             pole.re >= p.real(0)
@@ -1002,6 +1012,7 @@ fn evaluate_from_source(
             },
         };
     let system = &route.system;
+    let timing = PhysicalPhaseTiming::start("transport.central", 0, 0, Some(p.bits));
     let RefinedTransport {
         mut solution,
         checkpoint_germs,
@@ -1014,6 +1025,7 @@ fn evaluate_from_source(
         options,
         context,
     )?;
+    drop(timing);
     let p = Precision {
         bits: solution.diagnostics.working_bits,
     };
@@ -1024,6 +1036,7 @@ fn evaluate_from_source(
     context.cancellation.check()?;
     // Retry only supplied-error admission; both proofs borrow this one centrally
     // refined trajectory, and commit their error/checkpoint candidate atomically.
+    let timing = PhysicalPhaseTiming::start("transport.incoming_errors", 0, 0, Some(p.bits));
     let gauge_provenance = uncertainty::admit_with_gauge(
         &prepared,
         &source,
@@ -1032,6 +1045,7 @@ fn evaluate_from_source(
         context,
         gauge.as_ref(),
     )?;
+    drop(timing);
     let evidence_cap = source
         .accuracy
         .verified_digits()
@@ -1178,13 +1192,21 @@ impl TransportCost for GuardedCost<'_> {
         self.context.cancellation.check()?;
         match self.mode {
             RouteMode::Straight => {
-                if !self.identity.conditions_admit_straight_path_with_context(
+                let timing = PhysicalPhaseTiming::start(
+                    "transport.cost_path_conditions",
+                    0,
+                    0,
+                    Some(p.bits),
+                );
+                let admitted = self.identity.conditions_admit_straight_path_with_context(
                     &source.point,
                     target,
                     p,
                     self.digits,
                     self.context,
-                )? {
+                )?;
+                drop(timing);
+                if !admitted {
                     return Ok(None);
                 }
             }
