@@ -16,6 +16,7 @@ pub struct PreparedKinematicEpsilon {
     // Only kernel indices are repeated across rows and epsilon orders.
     polynomial_coefficients: Vec<Vec<Vec<PreparedEntry>>>,
     polynomial_kernels: Vec<Arc<ExactPolynomial>>,
+    affine_monomials: PreparedAffineMonomials,
     original_poles: Vec<PreparedPole>,
     expansion_poles: Vec<PreparedPole>,
 }
@@ -40,6 +41,126 @@ struct PreparedEntry {
     denominator: usize,
     // Same BTreeMap order as the physical coordinates and their Jacobians.
     numerators: Vec<usize>,
+}
+
+// Symbolica's evaluate_with_coeff_map has no shared substitution workspace.
+// The generic ring evaluator has no native polynomial coefficient-mapping
+// bridge (PolynomialRing lacks ConvertToRing; polynomials lack EvaluationDomain).
+// Retain only term indices and coefficient-free monomials; all arithmetic below
+// is still owned by ExactPolynomial. Preparation's interning table is dropped.
+#[derive(Clone, Debug)]
+struct PreparedAffineMonomials {
+    factors: Vec<Vec<(usize, u16)>>,
+    kernels: Vec<Vec<usize>>,
+}
+
+impl PreparedAffineMonomials {
+    fn new(kernels: &[Arc<ExactPolynomial>]) -> Self {
+        let mut indices: HashMap<Vec<u16>, usize> = HashMap::new();
+        let mut factors = Vec::new();
+        let kernels = kernels
+            .iter()
+            .map(|kernel| {
+                kernel
+                    .as_ref()
+                    .into_iter()
+                    .map(|term| {
+                        if let Some(&index) = indices.get(term.exponents) {
+                            return index;
+                        }
+                        let index = factors.len();
+                        factors.push(
+                            term.exponents
+                                .iter()
+                                .enumerate()
+                                .filter_map(|(coordinate, &power)| {
+                                    (power != 0).then_some((coordinate, power))
+                                })
+                                .collect(),
+                        );
+                        indices.insert(term.exponents.to_vec(), index);
+                        index
+                    })
+                    .collect()
+            })
+            .collect();
+        Self { factors, kernels }
+    }
+}
+
+// One line only. Coordinate powers are lazy and shared even by distinct
+// monomials. Cache a monomial product only if another active kernel needs it,
+// then release it at its last use. Unrequested orders and stationary numerators
+// do not keep products alive. Zero is a valid cached result, never a sentinel.
+struct AffineMonomialRestriction<'a> {
+    prepared: &'a PreparedAffineMonomials,
+    coordinates: &'a [ExactPolynomial],
+    powers: HashMap<(usize, u16), ExactPolynomial>,
+    products: Vec<Option<ExactPolynomial>>,
+    remaining: Vec<usize>,
+    product_count: usize,
+}
+
+impl<'a> AffineMonomialRestriction<'a> {
+    fn new(
+        prepared: &'a PreparedAffineMonomials,
+        coordinates: &'a [ExactPolynomial],
+        active: &[bool],
+    ) -> Self {
+        let mut remaining = vec![0; prepared.factors.len()];
+        for (terms, &active) in prepared.kernels.iter().zip(active) {
+            if active {
+                for &monomial in terms {
+                    remaining[monomial] += 1;
+                }
+            }
+        }
+        Self {
+            prepared,
+            coordinates,
+            powers: HashMap::new(),
+            products: vec![None; prepared.factors.len()],
+            remaining,
+            product_count: 0,
+        }
+    }
+
+    fn restrict(&mut self, kernel: usize, polynomial: &ExactPolynomial) -> ExactPolynomial {
+        let mut result = self.coordinates[0].zero();
+        for (term, &monomial) in polynomial.into_iter().zip(&self.prepared.kernels[kernel]) {
+            let remaining = &mut self.remaining[monomial];
+            debug_assert!(*remaining > 0);
+            *remaining -= 1;
+            let product = if *remaining == 0 && self.products[monomial].is_some() {
+                self.products[monomial].take().unwrap()
+            } else if let Some(product) = &self.products[monomial] {
+                product.clone()
+            } else {
+                let mut product: Option<ExactPolynomial> = None;
+                let factors = &self.prepared.factors[monomial];
+                for &(coordinate, power) in factors {
+                    let value = self
+                        .powers
+                        .entry((coordinate, power))
+                        .or_insert_with(|| self.coordinates[coordinate].pow(usize::from(power)));
+                    product = Some(match product {
+                        None => value.clone(),
+                        Some(product) => product * &*value,
+                    });
+                }
+                let product = product.unwrap_or_else(|| self.coordinates[0].one());
+                if factors.len() > 1 {
+                    self.product_count += 1;
+                    if *remaining != 0 {
+                        self.products[monomial] = Some(product.clone());
+                    }
+                }
+                product
+            };
+            result = result + product.mul_coeff(term.coefficient.clone());
+        }
+        result
+    }
 }
 
 fn intern_polynomial<P: Eq + std::hash::Hash>(
@@ -145,19 +266,36 @@ fn gaussian_field() -> GaussianField {
 }
 
 // FloatField's generic PolynomialGCD is a stub returning one, and its
-// from_num_den ignores do_gcd. Use the owner's explicit univariate Euclidean
-// GCD only on the completed row entries, never on expanded Atom expressions.
+// from_num_den ignores do_gcd. Real physical lines can use the native rational
+// polynomial GCD, avoiding exact Euclidean coefficient swell. Retain the
+// Gaussian Euclidean route for genuinely complex coefficients.
 fn normalize_line_entry(mut entry: ExactRational) -> ExactRational {
     let field = gaussian_field();
     if entry.is_zero() {
         return ExactRational::new(&field, entry.get_variables().clone());
     }
     if !entry.numerator.is_constant() && !entry.denominator.is_constant() {
-        let numerator = entry.numerator.to_univariate_from_univariate(0);
-        let denominator = entry.denominator.to_univariate_from_univariate(0);
-        let gcd = numerator.gcd_euclidean(&denominator);
+        let real = entry
+            .numerator
+            .coefficients
+            .iter()
+            .chain(&entry.denominator.coefficients)
+            .all(|c| c.im.is_zero());
+        let gcd = if real {
+            let numerator = entry.numerator.map_coeff(|c| c.re.clone(), Q);
+            let denominator = entry.denominator.map_coeff(|c| c.re.clone(), Q);
+            numerator.gcd(&denominator).map_coeff(
+                |c| Complex::new(c.clone(), Rational::from(0)),
+                field.clone(),
+            )
+        } else {
+            let numerator = entry.numerator.to_univariate_from_univariate(0);
+            let denominator = entry.denominator.to_univariate_from_univariate(0);
+            numerator
+                .gcd_euclidean(&denominator)
+                .to_multivariate::<u16>()
+        };
         if !gcd.is_constant() {
-            let gcd = gcd.to_multivariate::<u16>();
             entry.numerator = &entry.numerator / &gcd;
             entry.denominator = &entry.denominator / &gcd;
         }
@@ -387,10 +525,20 @@ impl KinematicSystem {
                 prepare_poles(expansion_poles),
             )
         };
+        let affine_monomials = {
+            let _timing = PhysicalPhaseTiming::start(
+                "transport.epsilon_prepare.affine_monomials",
+                0,
+                0,
+                None,
+            );
+            PreparedAffineMonomials::new(&polynomial_kernels)
+        };
         Ok(PreparedKinematicEpsilon {
             coefficients,
             polynomial_coefficients,
             polynomial_kernels,
+            affine_monomials,
             original_poles,
             expansion_poles,
         })
@@ -575,17 +723,13 @@ impl PreparedKinematicEpsilon {
     fn restrict_kernel<'a>(
         &self,
         index: usize,
-        coordinates: &[ExactPolynomial],
+        monomials: &mut AffineMonomialRestriction<'_>,
         restrictions: &'a mut [Option<ExactPolynomial>],
         unique_count: &mut usize,
     ) -> &'a ExactPolynomial {
         restrictions[index].get_or_insert_with(|| {
             *unique_count += 1;
-            self.polynomial_kernels[index].evaluate_with_coeff_map(
-                |c| coordinates[0].constant(c.clone()),
-                coordinates,
-                &PolynomialRing::new(gaussian_field()),
-            )
+            monomials.restrict(index, &self.polynomial_kernels[index])
         })
     }
 
@@ -608,6 +752,28 @@ impl PreparedKinematicEpsilon {
             .unwrap()
             .len();
         let mut restrictions = vec![None; self.polynomial_kernels.len()];
+        let mut monomials = {
+            let _timing = PhysicalPhaseTiming::start(
+                "transport.pullback.affine_monomial_setup",
+                order,
+                0,
+                None,
+            );
+            let mut active = vec![false; self.polynomial_kernels.len()];
+            for entry in self.polynomial_coefficients[..=order]
+                .iter()
+                .flatten()
+                .flatten()
+            {
+                active[entry.denominator] = true;
+                for (&kernel, jacobian) in entry.numerators.iter().zip(&jacobians) {
+                    if !field.is_zero(jacobian) && !self.polynomial_kernels[kernel].is_zero() {
+                        active[kernel] = true;
+                    }
+                }
+            }
+            AffineMonomialRestriction::new(&self.affine_monomials, coordinates, &active)
+        };
         let mut unique_count = 0;
         let mut matrices = Vec::with_capacity(order + 1);
         for (coefficient, entries) in self.polynomial_coefficients[..=order].iter().enumerate() {
@@ -628,7 +794,7 @@ impl PreparedKinematicEpsilon {
                         if self
                             .restrict_kernel(
                                 entry.denominator,
-                                coordinates,
+                                &mut monomials,
                                 &mut restrictions,
                                 &mut unique_count,
                             )
@@ -646,7 +812,7 @@ impl PreparedKinematicEpsilon {
                             }
                             let partial = self.restrict_kernel(
                                 kernel,
-                                coordinates,
+                                &mut monomials,
                                 &mut restrictions,
                                 &mut unique_count,
                             );
@@ -700,6 +866,13 @@ impl PreparedKinematicEpsilon {
             self.polynomial_kernels.len(),
             None,
         );
+        // Counts only; no coordinate or coefficient values enter timings.
+        let _monomial_counts = PhysicalPhaseTiming::start(
+            "transport.pullback.affine_power_product_count",
+            monomials.powers.len(),
+            monomials.product_count,
+            None,
+        );
         Ok(EpsilonSystem {
             variable: path.parameter,
             matrices,
@@ -746,5 +919,54 @@ impl PreparedKinematicEpsilon {
             variable: path.parameter,
             matrices,
         })
+    }
+}
+
+#[cfg(test)]
+mod affine_monomial_tests {
+    use super::*;
+
+    #[test]
+    fn distinct_kernels_share_exact_powers_and_products_until_last_use() {
+        let (s, t, x) = symbol!(
+            "affine_monomial_test::s",
+            "affine_monomial_test::t",
+            "affine_monomial_test::x"
+        );
+        let (sv, tv, xv) = (Atom::var(s), Atom::var(t), Atom::var(x));
+        let field = gaussian_field();
+        let variables = Arc::new(vec![PolyVariable::Symbol(s), PolyVariable::Symbol(t)]);
+        let m = sv.pow(3) * tv.pow(2);
+        let n = sv.pow(2) * tv.pow(3);
+        let expressions: [Atom; 2] = [m.clone() + 2 * &n + 3, 5 * &m - &n + sv.pow(3)];
+        let kernels = expressions
+            .iter()
+            .map(|a| Arc::new(a.try_to_polynomial(&field, variables.clone()).unwrap()))
+            .collect::<Vec<Arc<ExactPolynomial>>>();
+        let prepared = PreparedAffineMonomials::new(&kernels);
+        for source in [3 + &xv / 7, Atom::zero()] {
+            let variables = Arc::new(vec![PolyVariable::Symbol(x)]);
+            let coordinates = [source, 2 - &xv / 11]
+                .iter()
+                .map(|a| a.try_to_polynomial(&field, variables.clone()).unwrap())
+                .collect::<Vec<ExactPolynomial>>();
+            let mut line = AffineMonomialRestriction::new(&prepared, &coordinates, &[true, true]);
+            for (index, kernel) in kernels.iter().enumerate() {
+                assert_eq!(
+                    line.restrict(index, kernel),
+                    kernel.evaluate_with_coeff_map(
+                        |c| coordinates[0].constant(c.clone()),
+                        &coordinates,
+                        &PolynomialRing::new(field.clone()),
+                    )
+                );
+                // Both full products and all four coordinate powers are
+                // computed once, including when their exact value is zero.
+                assert_eq!(line.product_count, 2);
+                assert_eq!(line.powers.len(), 4);
+            }
+            assert!(line.products.iter().all(Option::is_none));
+            assert!(line.remaining.iter().all(|&uses| uses == 0));
+        }
     }
 }
