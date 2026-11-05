@@ -39,13 +39,115 @@ fn valuation(coefficient: &Atom, epsilon: Symbol) -> Result<Option<i32>> {
             "nonzero target weight has no leading series coefficient".into(),
         ));
     }
-    Ok(Some(
-        series
-            .get_trailing_exponent()
-            .to_string()
-            .parse()
-            .map_err(|_| Error::Limit("target weight epsilon valuation exceeds i32".into()))?,
-    ))
+    Ok(Some(series_leading(&series)?))
+}
+
+fn series_leading(series: &ExactSeries) -> Result<i32> {
+    series
+        .get_trailing_exponent()
+        .to_string()
+        .parse()
+        .map_err(|_| Error::Limit("target weight epsilon valuation exceeds i32".into()))
+}
+
+/// Target weights expanded once over symbolic kinematics, in the owner's cached
+/// master basis (including epsilon shearing). This owned table can be stored
+/// beside its family without a self-reference. No master values are retained.
+///
+/// Bind a new point with `at_point` before transporting and projecting masters.
+/// Away from specialization singularities this only substitutes exact Laurent
+/// coefficients; it does not expand the full specialized rational weights.
+pub struct PreparedKinematicTargetProjection {
+    identity_key: String,
+    targets: Vec<crate::reduction::LinearCombination>,
+    range: EpsilonRange,
+    required: EpsilonRange,
+    rows: Vec<Vec<SeriesWeight>>,
+    specialization_guards: Vec<Atom>,
+}
+
+impl PreparedKinematicTargetProjection {
+    /// Generic demand, valid when the retained specialization guards hold.
+    /// At exceptional points use the range returned by `at_point` instead:
+    /// denominator valuations can increase the required master depth.
+    pub fn required_master_range(&self) -> EpsilonRange {
+        self.required
+    }
+
+    /// Validate the original family identity and target map, then bind retained
+    /// coefficients, preserving exact input and source accuracy. The returned
+    /// point plan borrows only `family`, so this table can be moved or dropped.
+    /// Zeros can lower demand. A vanishing denominator leading coefficient or
+    /// removable series-coefficient singularity uses legacy exact preparation;
+    /// generic valuations are never assumed at such a point.
+    pub fn at_point<'a>(
+        &self,
+        family: &'a PreparedPhysicalFamily,
+        point: &BTreeMap<Symbol, Atom>,
+    ) -> Result<PreparedTargetProjection<'a>> {
+        if family.flow().identity().key() != self.identity_key.as_str()
+            || family.target_reductions() != self.targets.as_slice()
+        {
+            return Err(Error::InvalidInput(
+                "kinematic target projection has a different physical basis identity or target map"
+                    .into(),
+            ));
+        }
+        let cached_point = CachedPoint::Exact(point.clone());
+        family.flow().identity().validate_point(&cached_point)?;
+        let mut substitutions = point
+            .iter()
+            .map(|(&s, a)| (Atom::var(s), a.clone()))
+            .collect::<BTreeMap<_, _>>();
+        // Test specialization in Q(i), not with i as an independent symbol.
+        substitutions.insert(
+            Atom::var(crate::family::imaginary_parameter()),
+            Atom::num(Complex::new(Rational::from(0), Rational::from(1))),
+        );
+        for guard in &self.specialization_guards {
+            if crate::family::substitute(guard, &substitutions)
+                .together()
+                .cancel()
+                .is_zero()
+            {
+                return family.prepare_target_projection(point, self.range);
+            }
+        }
+        let mut last = self.required.leading;
+        let mut rows = Vec::with_capacity(self.rows.len());
+        for row in &self.rows {
+            let mut bound = Vec::with_capacity(row.len());
+            for weight in row {
+                let series = weight.series.map_coeff(|coefficient| {
+                    let coefficient = crate::family::substitute(coefficient, &substitutions)
+                        .together()
+                        .cancel();
+                    crate::family::encode_complex(&coefficient)
+                });
+                if series.is_zero() {
+                    // Only the retained orders vanish. Earlier master poles
+                    // require legacy re-expansion, handled by the point plan.
+                    continue;
+                }
+                let leading = series_leading(&series)?;
+                last = last.max(required_last(leading, self.range)?);
+                bound.push(SeriesWeight {
+                    column: weight.column,
+                    leading,
+                    series,
+                });
+            }
+            rows.push(bound);
+        }
+        Ok(PreparedTargetProjection {
+            family,
+            point: cached_point,
+            range: self.range,
+            required: EpsilonRange::new(self.required.leading, last)?,
+            weights: None,
+            rows,
+        })
+    }
 }
 
 /// Exact target weights bound to one physical point and target epsilon range.
@@ -58,14 +160,18 @@ fn valuation(coefficient: &Atom, epsilon: Symbol) -> Result<Option<i32>> {
 /// Coordinate substitution, cancellation and epsilon valuation happen only at
 /// preparation. Absolute weight series are also retained through the depth
 /// needed for the ordinary master pole bound. A boundary starting below that
-/// bound is supported by expanding the retained exact weights more deeply;
-/// that exceptional path repeats the absolute series expansion, not binding.
+/// bound is supported by expanding full point-bound weights more deeply. Plans
+/// made by `prepare_target_projection` retain those weights; plans made by
+/// `PreparedKinematicTargetProjection::at_point` rebind them on that exceptional
+/// path through the legacy API.
 pub struct PreparedTargetProjection<'a> {
     family: &'a PreparedPhysicalFamily,
     point: CachedPoint,
     range: EpsilonRange,
     required: EpsilonRange,
-    weights: Vec<Vec<BoundWeight>>,
+    // Legacy plans keep full point-bound rational weights for deeper poles.
+    // Kinematic plans bind only retained coefficients and rebind on that path.
+    weights: Option<Vec<Vec<BoundWeight>>>,
     rows: Vec<Vec<SeriesWeight>>,
 }
 
@@ -87,7 +193,8 @@ impl PreparedTargetProjection<'_> {
         self.required
     }
 
-    /// Project a boundary at the plan's point without rebinding target weights.
+    /// Project a boundary at the plan's point using its retained weight series.
+    /// A kinematic plan rebinds only for earlier-than-ordinary master poles.
     /// The same accuracy, missing-order and pole guards as `project_targets`
     /// on the retained family apply, including support for earlier master poles.
     pub fn project_targets(
@@ -103,17 +210,30 @@ impl PreparedTargetProjection<'_> {
                 "target projection plan has different physical point coordinates".into(),
             ));
         }
+        if boundary.range.leading < master_leading && self.weights.is_none() {
+            return self.family.project_targets(boundary, self.range, digits);
+        }
         let (p, refined) = projection_precision(boundary)?;
         let mut result = Vec::with_capacity(self.rows.len());
-        for (weights, rows) in self.weights.iter().zip(&self.rows) {
-            validate_master_depth(weights, self.range, boundary)?;
+        for (index, rows) in self.rows.iter().enumerate() {
+            if let Some(weights) = &self.weights {
+                validate_master_depth(
+                    weights[index].iter().map(|w| w.leading),
+                    self.range,
+                    boundary,
+                )?;
+            } else {
+                validate_master_depth(rows.iter().map(|w| w.leading), self.range, boundary)?;
+            }
             // The old API uses the boundary's actual leading order. Do not
             // truncate earlier coefficients merely because the ordinary bound
             // used to prepare the default series is less negative.
             let deeper;
-            let rows = if boundary.range.leading < master_leading {
+            let rows = if let Some(weights) = &self.weights
+                && boundary.range.leading < master_leading
+            {
                 deeper = expand_row(
-                    weights,
+                    &weights[index],
                     self.family.family().epsilon,
                     self.range,
                     boundary.range.leading,
@@ -137,6 +257,64 @@ impl PreparedTargetProjection<'_> {
 }
 
 impl PreparedPhysicalFamily {
+    /// Retain exact Laurent target weights over symbolic kinematics once for
+    /// this target range. The generic demand can be conservative; always use
+    /// the point plan's demand after specialization. Full exact preparation is
+    /// repeated only at exceptional denominator specializations or for masters
+    /// with poles earlier than the ordinary bound.
+    pub fn prepare_kinematic_target_projection(
+        &self,
+        range: EpsilonRange,
+    ) -> Result<PreparedKinematicTargetProjection> {
+        EpsilonRange::new(range.leading, range.last)?;
+        let leading = self.ordinary_master_leading()?;
+        let weights = self.bind_target_weights(&BTreeMap::new())?;
+        let required = master_range(&weights, leading, range)?;
+        let mut rows = weights
+            .iter()
+            .map(|row| expand_row(row, self.family().epsilon, range, leading))
+            .collect::<Result<Vec<_>>>()?;
+        let mut guards = Vec::new();
+        // Even a weight beyond the retained orders can acquire a pole after
+        // specialization, e.g. eps^3/(s+eps^4) at s=0.
+        for weight in weights.iter().flatten() {
+            let denominator = target_denominator(&weight.coefficient)?;
+            let denominator = expansion(
+                &denominator,
+                self.family().epsilon,
+                SeriesDepth::relative(1),
+            )?;
+            guards.push(
+                denominator
+                    .coefficient(denominator.get_trailing_exponent())
+                    .ok_or_else(|| {
+                        Error::Numerical("missing target denominator leading coefficient".into())
+                    })?,
+            );
+        }
+        for row in &mut rows {
+            for weight in row {
+                weight.series = weight.series.map_coeff(|a| a.together().cancel());
+                // Native series expressions may have removable coefficient
+                // poles beyond those of the original rational denominator.
+                for (_, coefficient) in weight.series.terms() {
+                    guards.push(target_denominator(coefficient)?);
+                }
+            }
+        }
+        guards.retain(|a| !matches!(a.as_view(), AtomView::Num(_)));
+        guards.sort_by_cached_key(AtomCore::to_canonical_string);
+        guards.dedup();
+        Ok(PreparedKinematicTargetProjection {
+            identity_key: self.flow().identity().key().to_owned(),
+            targets: self.target_reductions().to_vec(),
+            range,
+            required,
+            rows,
+            specialization_guards: guards,
+        })
+    }
+
     pub(crate) fn ordinary_master_leading(&self) -> Result<i32> {
         let family = self.family();
         let mut symbols = std::collections::BTreeSet::new();
@@ -182,7 +360,7 @@ impl PreparedPhysicalFamily {
             point: cached_point,
             range,
             required,
-            weights,
+            weights: Some(weights),
             rows,
         })
     }
@@ -283,7 +461,7 @@ impl PreparedPhysicalFamily {
         let weights = self.bind_target_weights(&coordinates)?;
         let mut result = Vec::with_capacity(weights.len());
         for row in &weights {
-            validate_master_depth(row, range, boundary)?;
+            validate_master_depth(row.iter().map(|w| w.leading), range, boundary)?;
             let rows = expand_row(row, self.family().epsilon, range, boundary.range.leading)?;
             result.push(project_row(
                 &rows,
@@ -299,6 +477,13 @@ impl PreparedPhysicalFamily {
     }
 }
 
+fn target_denominator(coefficient: &Atom) -> Result<Atom> {
+    let rational: RationalPolynomial<IntegerRing, u16> = crate::family::encode_complex(coefficient)
+        .try_to_rational_polynomial(&Q, &Z, None)
+        .map_err(|e| Error::Unsupported(format!("rational target coefficient required: {e}")))?;
+    Ok(rational.denominator.to_expression())
+}
+
 fn master_range(
     weights: &[Vec<BoundWeight>],
     leading: i32,
@@ -306,20 +491,20 @@ fn master_range(
 ) -> Result<EpsilonRange> {
     let mut last = leading;
     for weight in weights.iter().flatten() {
-        last = last.max(required_last(weight, range)?);
+        last = last.max(required_last(weight.leading, range)?);
     }
     EpsilonRange::new(leading, last)
 }
 
-fn required_last(weight: &BoundWeight, range: EpsilonRange) -> Result<i32> {
+fn required_last(leading: i32, range: EpsilonRange) -> Result<i32> {
     range
         .last
-        .checked_sub(weight.leading)
+        .checked_sub(leading)
         .ok_or_else(|| Error::Limit("target Laurent order overflow".into()))
 }
 
 fn validate_master_depth(
-    weights: &[BoundWeight],
+    weights: impl IntoIterator<Item = i32>,
     range: EpsilonRange,
     boundary: &CachedBoundary,
 ) -> Result<()> {
