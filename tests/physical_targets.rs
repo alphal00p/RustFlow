@@ -991,3 +991,470 @@ fn kinematic_projection_uses_owner_epsilon_shearing_and_master_column_order() {
         assert_eq!(projected[1].coefficients[&0], source.coefficients[2][1]);
     }
 }
+
+fn assert_numeric_projection_covered(
+    found: &[ProjectedLaurentExpansion],
+    exact: &[ProjectedLaurentExpansion],
+) {
+    assert_eq!(found.len(), exact.len());
+    for (found, exact) in found.iter().zip(exact) {
+        assert_eq!(found.verified_digits, exact.verified_digits);
+        assert_eq!(found.working_bits, exact.working_bits);
+        assert_eq!(
+            found.coefficients.keys().collect::<Vec<_>>(),
+            exact.coefficients.keys().collect::<Vec<_>>()
+        );
+        let p = Precision {
+            bits: found.working_bits + 64,
+        };
+        for (power, value) in &found.coefficients {
+            let difference = p.norm(&p.sub(value, &exact.coefficients[power]));
+            let allowance = found.absolute_errors[power].add_round(
+                &exact.absolute_errors[power],
+                p.bits,
+                symbolica::domains::float::RoundingDirection::Up,
+            );
+            assert!(
+                difference <= allowance,
+                "epsilon^{power}: difference {difference} exceeds reported errors {allowance}"
+            );
+        }
+    }
+}
+
+#[test]
+fn numeric_binding_covers_exact_long_rational_and_complex_results_at_80_and_201_bits() {
+    let family = prepared(
+        parse!(
+            "(target_projection::s-1)/target_projection::eps^2+(target_projection::s^3+2/7)/(3*(target_projection::s^2+2)*(1-target_projection::eps))"
+        ) + Atom::num(Complex::new(
+            Rational::from((2, 7)),
+            Rational::from((3, 11)),
+        )),
+    );
+    let range = EpsilonRange::new(-4, 1).unwrap();
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let s = symbol!("target_projection::s");
+    let almost_one = parse!("1+1/10^100");
+    let points = [
+        almost_one.clone(),
+        Atom::num(Complex::new(
+            Rational::from((5, 7)),
+            Rational::from((2, 11)),
+        )),
+        almost_one + Atom::num(Complex::new(Rational::from(0), Rational::from((2, 11)))),
+    ];
+    for (bits, verified, digits) in [(80, 18, 16), (201, 48, 32)] {
+        for coordinate in &points {
+            let point = BTreeMap::from([(s, coordinate.clone())]);
+            let plan: PreparedTargetProjection<'_> =
+                retained.at_point_numeric(&family, &point).unwrap();
+            assert_eq!(
+                plan.required_master_range(),
+                retained.required_master_range()
+            );
+            let mut source = complex_projection_boundary(&family, &point, 3, bits, verified);
+            let exact = retained
+                .at_point(&family, &point)
+                .unwrap()
+                .project_targets(&source, digits)
+                .unwrap();
+            let found = plan.project_targets(&source, digits).unwrap();
+            assert_numeric_projection_covered(&found, &exact);
+            assert_numeric_projection_covered(
+                &plan.project_targets(&source, digits).unwrap(),
+                &exact,
+            );
+            source.point = CachedPoint::Derived {
+                coordinates: point.clone(),
+                working_bits: bits,
+                provenance: "same exact numeric-plan coordinates".into(),
+            };
+            assert_numeric_projection_covered(
+                &plan.project_targets(&source, digits).unwrap(),
+                &exact,
+            );
+            // A coordinate which rounds identically at both working precisions
+            // is still a different exact point, even if its effect is tiny.
+            source.point =
+                CachedPoint::Exact(BTreeMap::from([(s, coordinate + parse!("1/10^120"))]));
+            assert!(matches!(
+                plan.project_targets(&source, digits),
+                Err(Error::InvalidInput(_))
+            ));
+        }
+    }
+    let point = BTreeMap::from([(s, Atom::num(2))]);
+    let plan = retained.at_point_numeric(&family, &point).unwrap();
+    drop(retained);
+    let source = complex_projection_boundary(&family, &point, 3, 201, 48);
+    assert_numeric_projection_covered(
+        &plan.project_targets(&source, 32).unwrap(),
+        &family.project_targets(&source, range, 32).unwrap(),
+    );
+}
+
+#[test]
+fn numeric_binding_accounts_for_cancellation_lost_at_both_precisions() {
+    let family = prepared(parse!("10^100*(target_projection::s-1)"));
+    let range = EpsilonRange::new(0, 0).unwrap();
+    let point = BTreeMap::from([(symbol!("target_projection::s"), parse!("1+1/10^100"))]);
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let numeric = retained.at_point_numeric(&family, &point).unwrap();
+    for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+        let source = complex_projection_boundary(&family, &point, 0, bits, verified);
+        // The true weight is one, while center-only evaluation can see zero at
+        // both p and p+64. Coefficient radii must prevent false source credit.
+        assert!(family.project_targets(&source, range, digits).is_ok());
+        assert!(matches!(
+            numeric.project_targets(&source, digits),
+            Err(Error::Accuracy(_))
+        ));
+    }
+    // Resolved cancellation is usable; it need not be rejected categorically.
+    let family = prepared(parse!("10^10*(target_projection::s-1)"));
+    let point = BTreeMap::from([(symbol!("target_projection::s"), parse!("1+1/10^15"))]);
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let numeric = retained.at_point_numeric(&family, &point).unwrap();
+    for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+        let source = complex_projection_boundary(&family, &point, 0, bits, verified);
+        assert_numeric_projection_covered(
+            &numeric.project_targets(&source, digits).unwrap(),
+            &family.project_targets(&source, range, digits).unwrap(),
+        );
+    }
+}
+
+#[test]
+fn numeric_binding_retains_source_floors_comparison_errors_and_credit() {
+    let range = EpsilonRange::new(2, 2).unwrap();
+    let family = prepared(parse!(
+        "10^50*(target_projection::eps^2-1)+target_projection::eps^2"
+    ));
+    let mut source = boundary(&family, 2, 30);
+    let p = Precision {
+        bits: source.accuracy.working_bits(),
+    };
+    source.coefficients[4][0] = p.i(1);
+    let point = source.point.restart_coordinates().unwrap();
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let plan = retained.at_point_numeric(&family, &point).unwrap();
+    assert!(matches!(
+        plan.project_targets(&source, 20),
+        Err(Error::Accuracy(_))
+    ));
+    source.accuracy = BoundaryAccuracy::supplied(
+        90,
+        p.bits,
+        vec![vec![p.real(0)]; 5],
+        "higher accuracy cancellation fixture",
+    )
+    .unwrap();
+    assert_numeric_projection_covered(
+        &plan.project_targets(&source, 20).unwrap(),
+        &family.project_targets(&source, range, 20).unwrap(),
+    );
+    source.accuracy = BoundaryAccuracy::supplied(
+        90,
+        p.bits,
+        vec![vec![p.real(1)]; 5],
+        "explicit nonzero master errors",
+    )
+    .unwrap();
+    assert!(matches!(
+        plan.project_targets(&source, 20),
+        Err(Error::Accuracy(_))
+    ));
+    for digits in [0, 91] {
+        assert!(matches!(
+            plan.project_targets(&source, digits),
+            Err(Error::Accuracy(_))
+        ));
+    }
+}
+
+#[test]
+fn numeric_binding_uses_exact_fallback_for_short_or_earlier_master_series() {
+    let range = EpsilonRange::new(-2, 1).unwrap();
+    let family = prepared(parse!(
+        "(target_projection::s-1)/target_projection::eps^2+1/(3*target_projection::eps*(1-target_projection::eps))"
+    ));
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    for coordinate in [1, 2] {
+        let point = BTreeMap::from([(symbol!("target_projection::s"), Atom::num(coordinate))]);
+        let numeric = retained.at_point_numeric(&family, &point).unwrap();
+        assert_eq!(numeric.required_master_range().last, 3);
+        for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+            let source = complex_projection_boundary(&family, &point, 2, bits, verified);
+            if coordinate == 1 {
+                // Only exact specialization may establish that order 3 is unnecessary.
+                assert_same_projection(
+                    &numeric.project_targets(&source, digits).unwrap(),
+                    &family.project_targets(&source, range, digits).unwrap(),
+                );
+            } else {
+                assert!(matches!(
+                    numeric.project_targets(&source, digits),
+                    Err(Error::InvalidInput(_))
+                ));
+            }
+        }
+    }
+    for weight in [
+        parse!("1/(1-target_projection::eps)"),
+        parse!("target_projection::eps^3"),
+        parse!("(target_projection::s-1)*target_projection::eps^3"),
+    ] {
+        let family = prepared(weight);
+        let range = EpsilonRange::new(0, 0).unwrap();
+        let point = BTreeMap::from([(symbol!("target_projection::s"), Atom::num(1))]);
+        let retained = family.prepare_kinematic_target_projection(range).unwrap();
+        let numeric = retained.at_point_numeric(&family, &point).unwrap();
+        for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+            let p = Precision { bits };
+            let mut source = complex_projection_boundary(&family, &point, 0, bits, verified);
+            source.range = EpsilonRange::new(-3, 0).unwrap();
+            source.coefficients = vec![
+                vec![p.complex(1, 2)],
+                vec![p.zero()],
+                vec![p.zero()],
+                vec![p.zero()],
+            ];
+            source.accuracy = BoundaryAccuracy::supplied(
+                verified,
+                bits,
+                vec![vec![p.real(0)]; 4],
+                "earlier master pole",
+            )
+            .unwrap();
+            assert_same_projection(
+                &numeric.project_targets(&source, digits).unwrap(),
+                &family.project_targets(&source, range, digits).unwrap(),
+            );
+        }
+    }
+}
+
+#[test]
+fn numeric_binding_checks_exact_exceptional_and_unresolved_denominators() {
+    let (s, eps) = symbol!("target_projection::s", "target_projection::eps");
+    let root = Atom::num(Complex::new(Rational::from((1, 3)), Rational::from((2, 7))));
+    let vanishing = (Atom::var(s) - &root).pow(2);
+    let epsilon = Atom::var(eps);
+    let point = BTreeMap::from([(s, root)]);
+    let range = EpsilonRange::new(0, 0).unwrap();
+    for (weight, point_last) in [
+        (Atom::one() / (&vanishing + &epsilon), 1),
+        (epsilon.pow(3) / (&vanishing + epsilon.pow(4)), 1),
+        ((&vanishing + &epsilon) / (&vanishing + 2 * &epsilon), 0),
+    ] {
+        let family = prepared(weight);
+        let retained = family.prepare_kinematic_target_projection(range).unwrap();
+        let numeric = retained.at_point_numeric(&family, &point).unwrap();
+        assert_eq!(numeric.required_master_range().last, point_last);
+        for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+            let source = complex_projection_boundary(&family, &point, point_last, bits, verified);
+            assert_same_projection(
+                &numeric.project_targets(&source, digits).unwrap(),
+                &family.project_targets(&source, range, digits).unwrap(),
+            );
+            if point_last > 0 {
+                let short =
+                    complex_projection_boundary(&family, &point, point_last - 1, bits, verified);
+                assert!(matches!(
+                    numeric.project_targets(&short, digits),
+                    Err(Error::InvalidInput(_))
+                ));
+            }
+        }
+    }
+    let singular = prepared(Atom::one() / vanishing);
+    assert!(
+        singular
+            .prepare_kinematic_target_projection(range)
+            .unwrap()
+            .at_point_numeric(&singular, &point)
+            .is_err()
+    );
+
+    // Guard vanishing requires exact Q(i), with i^2=-1.
+    let family = prepared(parse!(
+        "1/(target_projection::s^2+1+target_projection::eps)"
+    ));
+    let point = BTreeMap::from([(
+        s,
+        Atom::num(Complex::new(Rational::from(0), Rational::from(1))),
+    )]);
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let numeric = retained.at_point_numeric(&family, &point).unwrap();
+    assert_eq!(numeric.required_master_range().last, 1);
+    let source = complex_projection_boundary(&family, &point, 1, 201, 48);
+    assert_same_projection(
+        &numeric.project_targets(&source, 32).unwrap(),
+        &family.project_targets(&source, range, 32).unwrap(),
+    );
+
+    // Nonzero exact guard, but its numerical enclosure contains zero at both
+    // working precisions. Projection falls back instead of using an inverse.
+    let family = prepared(parse!("1/(target_projection::s-1)"));
+    let point = BTreeMap::from([(s, parse!("1+1/10^100"))]);
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let numeric = retained.at_point_numeric(&family, &point).unwrap();
+    for (bits, verified, digits) in [(80, 16, 10), (201, 48, 32)] {
+        let source = complex_projection_boundary(&family, &point, 0, bits, verified);
+        assert_same_projection(
+            &numeric.project_targets(&source, digits).unwrap(),
+            &family.project_targets(&source, range, digits).unwrap(),
+        );
+    }
+}
+
+#[test]
+fn numeric_binding_preserves_family_point_basis_and_domain_guards() {
+    let range = EpsilonRange::new(0, 0).unwrap();
+    let family = prepared(parse!("target_projection::s"));
+    let retained = family.prepare_kinematic_target_projection(range).unwrap();
+    let point = BTreeMap::from([(symbol!("target_projection::s"), Atom::num(1))]);
+    for other in [
+        prepared(Atom::num(2)),
+        prepared_with_constant(Atom::one(), Atom::num(-2)),
+    ] {
+        assert!(matches!(
+            retained.at_point_numeric(&other, &point),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+    for invalid in [
+        BTreeMap::new(),
+        BTreeMap::from([(symbol!("target_projection::s"), parse!("1.25`80"))]),
+    ] {
+        assert!(matches!(
+            retained.at_point_numeric(&family, &invalid),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+    let plan = retained.at_point_numeric(&family, &point).unwrap();
+    let mut source = boundary(&family, 0, 80);
+    let other = prepared_with_constant(Atom::one(), Atom::num(-2));
+    source.identity = other.flow().identity().clone();
+    assert!(matches!(
+        plan.project_targets(&source, 20),
+        Err(Error::InvalidInput(_))
+    ));
+    let mut source = boundary(&family, 0, 80);
+    source.range = EpsilonRange::new(0, 0).unwrap();
+    source.coefficients.drain(..2);
+    let p = Precision {
+        bits: source.accuracy.working_bits(),
+    };
+    source.accuracy =
+        BoundaryAccuracy::supplied(80, p.bits, vec![vec![p.real(0)]], "missing ordinary poles")
+            .unwrap();
+    assert!(matches!(
+        plan.project_targets(&source, 20),
+        Err(Error::InvalidInput(_))
+    ));
+    let domain = prepared_with_constant(
+        parse!("1/target_projection::s"),
+        parse!("-target_projection::s"),
+    );
+    let zero = BTreeMap::from([(symbol!("target_projection::s"), Atom::num(0))]);
+    assert!(matches!(
+        domain
+            .prepare_kinematic_target_projection(range)
+            .unwrap()
+            .at_point_numeric(&domain, &zero),
+        Err(Error::InvalidInput(_))
+    ));
+    // Algebraic coordinates preserve the legacy evaluator and error semantics.
+    let point = BTreeMap::from([(symbol!("target_projection::s"), parse!("2^(1/2)"))]);
+    let plan = retained.at_point_numeric(&family, &point).unwrap();
+    let source = complex_projection_boundary(&family, &point, 0, 201, 48);
+    assert_same_projection(
+        &plan.project_targets(&source, 32).unwrap(),
+        &family.project_targets(&source, range, 32).unwrap(),
+    );
+}
+
+#[test]
+fn numeric_projection_uses_owner_epsilon_shearing_and_master_column_order() {
+    // The same two-master bubble relations used by epsilon_physical_family,
+    // with a supplied boundary: no AMF calculation is needed for projection.
+    let (s, eps) = symbol!("target_projection::s", "target_projection::eps");
+    let mass = Atom::var(s);
+    let epsilon = Atom::var(eps);
+    let family = IntegralFamily {
+        name: "projection_evanescent_bubble".into(),
+        loops: vec!["k".into()],
+        external: vec!["p".into()],
+        external_gram: vec![vec![Atom::num(-1)]],
+        propagators: vec![
+            Propagator {
+                constant: -&mass,
+                scalar_products: vec![Atom::one(), Atom::new()],
+            },
+            Propagator {
+                constant: -&mass - Atom::one(),
+                scalar_products: vec![Atom::one(), Atom::num(2)],
+            },
+        ],
+        physical_propagators: 2,
+        epsilon: eps,
+        dimension: 4,
+    };
+    let (bubble, t3) = (Integral(vec![1, 1]), Integral(vec![3, 0]));
+    let denominator = 4 * &mass + Atom::one();
+    let mixed = BTreeMap::from([
+        (bubble.clone(), (Atom::one() - 2 * &epsilon) / &denominator),
+        (t3.clone(), 2 * &mass / (&epsilon * &denominator)),
+    ]);
+    let backend = TableBackend {
+        name: "supplied bubble shearing fixture".into(),
+        reduction: Reduction {
+            rules: BTreeMap::from([
+                (Integral(vec![2, 1]), mixed.clone()),
+                (Integral(vec![1, 2]), mixed),
+                (
+                    Integral(vec![4, 0]),
+                    BTreeMap::from([(t3.clone(), -(Atom::one() + &epsilon) / (3 * &mass))]),
+                ),
+            ]),
+            residuals: vec![bubble.clone(), t3.clone()],
+            ..Default::default()
+        },
+    };
+    let targets = [bubble, t3, Integral(vec![2, 1])];
+    let context = RunContext::default();
+    let prepared = PreparedPhysicalFamily::new(
+        &family,
+        &targets,
+        &[s],
+        &backend,
+        &FlowOptions::default(),
+        "Euclidean projection fixture",
+        &context,
+    )
+    .unwrap()
+    .with_epsilon_shearing(&context)
+    .unwrap();
+    assert_eq!(prepared.epsilon_shearing().unwrap().weights(), &[-1, 0]);
+    let range = EpsilonRange::new(-2, 0).unwrap();
+    let kinematic = prepared.prepare_kinematic_target_projection(range).unwrap();
+    assert_eq!(
+        kinematic.required_master_range(),
+        EpsilonRange::new(-2, 1).unwrap()
+    );
+    for coordinate in [1, 2] {
+        let point = BTreeMap::from([(s, Atom::num(coordinate))]);
+        let plan = kinematic.at_point_numeric(&prepared, &point).unwrap();
+        let source = complex_projection_boundary(&prepared, &point, 1, 201, 48);
+        assert_numeric_projection_covered(
+            &plan.project_targets(&source, 32).unwrap(),
+            &prepared.project_targets(&source, range, 32).unwrap(),
+        );
+        // Original B=epsilon^-1 J_B; t3 is the unshifted second column.
+        let projected = plan.project_targets(&source, 32).unwrap();
+        assert_eq!(projected[0].coefficients[&0], source.coefficients[3][0]);
+        assert_eq!(projected[1].coefficients[&0], source.coefficients[2][1]);
+    }
+}

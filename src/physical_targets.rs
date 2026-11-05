@@ -1,8 +1,8 @@
 //! Exact target reductions applied to cached Laurent master coefficients.
 use crate::transport_cache::{CachedBoundary, CachedPoint, EpsilonRange};
 use crate::{ComplexFloat, Error, Precision, PreparedPhysicalFamily, Result};
-use std::collections::BTreeMap;
-use symbolica::domains::float::FloatField;
+use std::{collections::BTreeMap, sync::Arc};
+use symbolica::domains::float::{ComplexBall, FloatField, RoundingDirection};
 use symbolica::poly::series::{Series, SeriesDepth};
 use symbolica::prelude::*;
 
@@ -103,7 +103,10 @@ impl ExactTargetBinding {
 
     /// None requests legacy preparation, never a zero coefficient or a rounded
     /// coordinate. Normalize coordinates once; all remaining arithmetic is Q(i).
-    fn at_point(&self, point: &BTreeMap<Symbol, Atom>) -> Result<Option<BTreeMap<Atom, Atom>>> {
+    fn parameters_at_point(
+        &self,
+        point: &BTreeMap<Symbol, Atom>,
+    ) -> Option<Vec<Complex<Rational>>> {
         let mut parameters = Vec::with_capacity(self.parameters.len());
         for symbol in &self.parameters {
             if *symbol == crate::family::imaginary_parameter() {
@@ -111,17 +114,24 @@ impl ExactTargetBinding {
                 continue;
             }
             let Some(value) = point.get(symbol) else {
-                return Ok(None);
+                return None;
             };
             let value = value.together().cancel();
             let AtomView::Num(n) = value.as_view() else {
-                return Ok(None);
+                return None;
             };
             let Coefficient::Complex(value) = n.get_coeff_view().to_owned() else {
-                return Ok(None);
+                return None;
             };
             parameters.push(value);
         }
+        Some(parameters)
+    }
+
+    fn at_point(&self, point: &BTreeMap<Symbol, Atom>) -> Result<Option<BTreeMap<Atom, Atom>>> {
+        let Some(parameters) = self.parameters_at_point(point) else {
+            return Ok(None);
+        };
         let ring = FloatField::from_rep(Complex::new(Rational::from(1), Rational::from(0)));
         let mut values = vec![ring.zero(); self.outputs];
         // Each point owns its scratch stack; the retained graph remains reusable.
@@ -153,6 +163,93 @@ impl ExactTargetBinding {
             );
         }
         Ok(Some(coefficients))
+    }
+}
+
+/// Only exact parameters are retained at a point. Both numerical evaluations
+/// map the shared native polynomial graph afresh at the owner's precision.
+struct NumericPointBinding {
+    graph: Arc<ExactTargetBinding>,
+    parameters: Vec<Complex<Rational>>,
+}
+
+struct NumericCoefficient {
+    low: ComplexFloat,
+    high: ComplexFloat,
+    // Refined coefficient roundoff, including exact-coordinate conversion.
+    error: Float,
+}
+
+type NumericCoefficients = BTreeMap<Atom, NumericCoefficient>;
+
+impl NumericPointBinding {
+    fn evaluate(&self, p: Precision) -> Result<Option<BTreeMap<Atom, ComplexBall>>> {
+        let convert =
+            |c: &Complex<Rational>| ComplexBall::from_rational_ball(c, &Rational::from(0), p.bits);
+        let parameters = self.parameters.iter().map(&convert).collect::<Vec<_>>();
+        let mut evaluator = self
+            .graph
+            .evaluator
+            .clone()
+            .map_coeff_with_prec(&convert, p.bits);
+        let zero = convert(&Complex::new(Rational::from(0), Rational::from(0)));
+        let mut values = vec![zero; self.graph.outputs];
+        evaluator
+            .try_evaluate(&parameters, &mut values)
+            .map_err(|e| Error::Numerical(format!("numerical target binding evaluation: {e}")))?;
+        let mut coefficients = BTreeMap::new();
+        for (coefficient, fraction) in &self.graph.coefficients {
+            let denominator = &values[fraction.denominator];
+            if denominator.contains_zero() {
+                // Exact guards passed, but this precision cannot resolve the
+                // denominator. Reuse legacy exact specialization, not its
+                // rounded inverse or a silently vanishing weight.
+                return Ok(None);
+            }
+            let value = values[fraction.numerator].clone() / denominator;
+            if !value.re.center.is_finite()
+                || !value.im.center.is_finite()
+                || !value.re.radius.is_finite()
+                || !value.im.radius.is_finite()
+            {
+                return Ok(None);
+            }
+            coefficients.insert(coefficient.clone(), value);
+        }
+        Ok(Some(coefficients))
+    }
+
+    fn coefficients(
+        &self,
+        p: Precision,
+        refined: Precision,
+    ) -> Result<Option<NumericCoefficients>> {
+        let Some(low) = self.evaluate(p)? else {
+            return Ok(None);
+        };
+        let Some(high) = self.evaluate(refined)? else {
+            return Ok(None);
+        };
+        Ok(Some(
+            low.into_iter()
+                .map(|(coefficient, low)| {
+                    let high = &high[&coefficient];
+                    let error = high.re.radius.add_round(
+                        &high.im.radius,
+                        refined.bits,
+                        RoundingDirection::Up,
+                    );
+                    (
+                        coefficient,
+                        NumericCoefficient {
+                            low: ComplexFloat::new(low.re.center, low.im.center),
+                            high: ComplexFloat::new(high.re.center.clone(), high.im.center.clone()),
+                            error,
+                        },
+                    )
+                })
+                .collect(),
+        ))
     }
 }
 
@@ -200,8 +297,9 @@ pub struct PreparedKinematicTargetProjection {
     targets: Vec<crate::reduction::LinearCombination>,
     range: EpsilonRange,
     required: EpsilonRange,
-    rows: Vec<Vec<SeriesWeight>>,
-    binding: Option<ExactTargetBinding>,
+    rows: Arc<Vec<Vec<SeriesWeight>>>,
+    binding: Option<Arc<ExactTargetBinding>>,
+    numeric_guards: Option<ExactTargetBinding>,
 }
 
 impl PreparedKinematicTargetProjection {
@@ -243,7 +341,7 @@ impl PreparedKinematicTargetProjection {
         };
         let mut last = self.required.leading;
         let mut rows = Vec::with_capacity(self.rows.len());
-        for row in &self.rows {
+        for row in self.rows.iter() {
             let mut bound = Vec::with_capacity(row.len());
             for weight in row {
                 let series = weight
@@ -270,21 +368,73 @@ impl PreparedKinematicTargetProjection {
             range: self.range,
             required: EpsilonRange::new(self.required.leading, last)?,
             weights: None,
-            rows,
+            rows: Arc::new(rows),
+            numeric: None,
+        })
+    }
+
+    /// Opt in to numerical evaluation of the retained symbolic coefficients.
+    /// The exact point is preserved. Original denominator/epsilon guards are
+    /// checked exactly without specializing coefficient numerators. Generic
+    /// master demand is conservative, including weights that vanish here.
+    ///
+    /// Projection evaluates the shared Symbolica graph independently at the
+    /// boundary's working precision and its refined precision. Native ball
+    /// radii account for coefficient/coordinate roundoff in addition to the
+    /// usual refinement estimate and inherited master uncertainty. No source
+    /// credit is added. Exceptional/unsupported specializations, unresolved
+    /// numerical denominators and earlier master poles use the exact route.
+    /// Like `at_point`, the result borrows only `family`.
+    pub fn at_point_numeric<'a>(
+        &self,
+        family: &'a PreparedPhysicalFamily,
+        point: &BTreeMap<Symbol, Atom>,
+    ) -> Result<PreparedTargetProjection<'a>> {
+        if family.flow().identity().key() != self.identity_key.as_str()
+            || family.target_reductions() != self.targets.as_slice()
+        {
+            return Err(Error::InvalidInput(
+                "kinematic target projection has a different physical basis identity or target map"
+                    .into(),
+            ));
+        }
+        let cached_point = CachedPoint::Exact(point.clone());
+        family.flow().identity().validate_point(&cached_point)?;
+        let (Some(graph), Some(guards)) = (&self.binding, &self.numeric_guards) else {
+            return family.prepare_target_projection(point, self.range);
+        };
+        let Some(parameters) = graph.parameters_at_point(point) else {
+            return family.prepare_target_projection(point, self.range);
+        };
+        if guards.at_point(point)?.is_none() {
+            return family.prepare_target_projection(point, self.range);
+        }
+        Ok(PreparedTargetProjection {
+            family,
+            point: cached_point,
+            range: self.range,
+            required: self.required,
+            weights: None,
+            rows: Arc::clone(&self.rows),
+            numeric: Some(NumericPointBinding {
+                graph: Arc::clone(graph),
+                parameters,
+            }),
         })
     }
 }
 
-/// Exact target weights bound to one physical point and target epsilon range.
+/// Target weights bound to one exact physical point and target epsilon range.
 ///
 /// Borrow the retained family while transporting the requested master range,
 /// then project the resulting boundary with this same plan. No numerical values
 /// or source accuracy are retained or upgraded by preparation. A boundary at a
 /// different point or with a different physical basis identity is rejected.
 ///
-/// Coordinate substitution, cancellation and epsilon valuation happen only at
-/// preparation. Absolute weight series are also retained through the depth
-/// needed for the ordinary master pole bound. A boundary starting below that
+/// Exact plans substitute coordinates, cancel and determine epsilon valuation
+/// at preparation. Opt-in numerical plans retain symbolic coefficients and
+/// conservative generic demand, evaluating only during projection. Absolute
+/// weight series are retained through the ordinary master pole bound's depth. A boundary starting below that
 /// bound is supported by expanding full point-bound weights more deeply. Plans
 /// made by `prepare_target_projection` retain those weights; plans made by
 /// `PreparedKinematicTargetProjection::at_point` rebind them on that exceptional
@@ -297,7 +447,8 @@ pub struct PreparedTargetProjection<'a> {
     // Legacy plans keep full point-bound rational weights for deeper poles.
     // Kinematic plans bind only retained coefficients and rebind on that path.
     weights: Option<Vec<Vec<BoundWeight>>>,
-    rows: Vec<Vec<SeriesWeight>>,
+    rows: Arc<Vec<Vec<SeriesWeight>>>,
+    numeric: Option<NumericPointBinding>,
 }
 
 struct BoundWeight {
@@ -313,13 +464,14 @@ struct SeriesWeight {
 }
 
 impl PreparedTargetProjection<'_> {
-    /// Master orders required by these exact point-bound target weights.
+    /// Master orders required by these weights (conservative for numerical plans).
     pub fn required_master_range(&self) -> EpsilonRange {
         self.required
     }
 
     /// Project a boundary at the plan's point using its retained weight series.
-    /// A kinematic plan rebinds only for earlier-than-ordinary master poles.
+    /// Kinematic plans rebind for earlier-than-ordinary master poles; numerical
+    /// plans also fall back when generic demand or denominators are inconclusive.
     /// The same accuracy, missing-order and pole guards as `project_targets`
     /// on the retained family apply, including support for earlier master poles.
     pub fn project_targets(
@@ -338,7 +490,20 @@ impl PreparedTargetProjection<'_> {
         if boundary.range.leading < master_leading && self.weights.is_none() {
             return self.family.project_targets(boundary, self.range, digits);
         }
+        if self.numeric.is_some() && boundary.range.last < self.required.last {
+            // A specialized zero may lower demand. Only exact preparation may
+            // establish that; a numerical zero cannot invent missing orders.
+            return self.family.project_targets(boundary, self.range, digits);
+        }
         let (p, refined) = projection_precision(boundary)?;
+        let numeric = if let Some(binding) = &self.numeric {
+            let Some(coefficients) = binding.coefficients(p, refined)? else {
+                return self.family.project_targets(boundary, self.range, digits);
+            };
+            Some(coefficients)
+        } else {
+            None
+        };
         let mut result = Vec::with_capacity(self.rows.len());
         for (index, rows) in self.rows.iter().enumerate() {
             if let Some(weights) = &self.weights {
@@ -375,6 +540,7 @@ impl PreparedTargetProjection<'_> {
                 digits,
                 p,
                 refined,
+                numeric.as_ref(),
             )?);
         }
         Ok(result)
@@ -430,14 +596,18 @@ impl PreparedPhysicalFamily {
         guards.retain(|a| !matches!(a.as_view(), AtomView::Num(_)));
         guards.sort_by_cached_key(AtomCore::to_canonical_string);
         guards.dedup();
-        let binding = ExactTargetBinding::new(&rows, &guards)?;
+        let binding = ExactTargetBinding::new(&rows, &guards)?.map(Arc::new);
+        // A separate graph contains only original leading-denominator guards
+        // and unique series denominators, never the coefficient numerators.
+        let numeric_guards = ExactTargetBinding::new(&[], &guards)?;
         Ok(PreparedKinematicTargetProjection {
             identity_key: self.flow().identity().key().to_owned(),
             targets: self.target_reductions().to_vec(),
             range,
             required,
-            rows,
+            rows: Arc::new(rows),
             binding,
+            numeric_guards,
         })
     }
 
@@ -487,7 +657,8 @@ impl PreparedPhysicalFamily {
             range,
             required,
             weights: Some(weights),
-            rows,
+            rows: Arc::new(rows),
+            numeric: None,
         })
     }
 
@@ -597,6 +768,7 @@ impl PreparedPhysicalFamily {
                 digits,
                 p,
                 refined,
+                None,
             )?);
         }
         Ok(result)
@@ -692,6 +864,7 @@ fn project_row(
     digits: u32,
     p: Precision,
     refined: Precision,
+    numeric: Option<&NumericCoefficients>,
 ) -> Result<ProjectedLaurentExpansion> {
     let count = (i64::from(range.last) - i64::from(range.leading) + 1) as usize;
     let mut values = vec![p.zero(); count];
@@ -721,6 +894,8 @@ fn project_row(
         let mut weights_low = Vec::with_capacity(length);
         let mut weights_high = Vec::with_capacity(length);
         let mut weights_norm = Vec::with_capacity(length);
+        let mut coefficient_errors = Vec::with_capacity(length);
+        let mut master_norms = Vec::with_capacity(length);
         let mut masters = Vec::with_capacity(length);
         let mut errors = Vec::with_capacity(length);
         for index in 0..length {
@@ -730,9 +905,34 @@ fn project_row(
                     "target weight coefficient lies in the unknown series remainder".into(),
                 )
             })?;
-            let low = p.eval(&weight, &Default::default())?;
-            let high = refined.eval(&weight, &Default::default())?;
-            weights_norm.push(ComplexFloat::new(refined.norm(&high), refined.real(0)));
+            let (low, high, coefficient_error) = if let Some(coefficients) = numeric {
+                if weight.is_zero() {
+                    (p.zero(), refined.zero(), refined.real(0))
+                } else {
+                    let coefficient = &coefficients[&weight];
+                    (
+                        coefficient.low.clone(),
+                        coefficient.high.clone(),
+                        coefficient.error.clone(),
+                    )
+                }
+            } else {
+                (
+                    p.eval(&weight, &Default::default())?,
+                    refined.eval(&weight, &Default::default())?,
+                    refined.real(0),
+                )
+            };
+            let mut norm = refined.norm(&high);
+            if numeric.is_some() {
+                norm = norm.add_round(&coefficient_error, refined.bits, RoundingDirection::Up);
+                coefficient_errors.push(ComplexFloat::new(coefficient_error, refined.real(0)));
+                master_norms.push(ComplexFloat::new(
+                    refined.norm(&boundary.coefficients[index][*column]),
+                    refined.real(0),
+                ));
+            }
+            weights_norm.push(ComplexFloat::new(norm, refined.real(0)));
             weights_low.push(low);
             weights_high.push(high);
             let master = &boundary.coefficients[index][*column];
@@ -752,7 +952,16 @@ fn project_row(
         };
         let low = multiply(p, &weights_low, &masters)?;
         let high = multiply(refined, &weights_high, &masters)?;
-        let propagated = multiply(refined, &weights_norm, &errors)?;
+        let mut propagated = multiply(refined, &weights_norm, &errors)?;
+        if numeric.is_some() {
+            // |w|*delta_m + delta_w*(|m|+delta_m). The first
+            // product already uses |w_high|+delta_w, so only
+            // delta_w*|m| remains. Keep the same native convolution.
+            let roundoff = multiply(refined, &coefficient_errors, &master_norms)?;
+            for (error, roundoff) in propagated.iter_mut().zip(roundoff) {
+                *error = refined.add(error, &roundoff);
+            }
+        }
         for (index, power) in (range.leading..=range.last).enumerate() {
             let source = i64::from(power) - offset;
             if source < 0 {
