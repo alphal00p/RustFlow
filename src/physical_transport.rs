@@ -14,7 +14,9 @@ use crate::algebraic::{
     AlgebraicKinematicSystem, AlgebraicSystem, CanonicalAlgebraicSystem, CompiledAlgebraicSystem,
     PreparedAlgebraicSystem,
 };
-use crate::diffexp::{EpsilonSolution, EpsilonSystem, transport_epsilon};
+use crate::diffexp::{
+    CompiledEpsilonSystem, EpsilonSolution, EpsilonSystem, PreparedEpsilonSystem,
+};
 use crate::kinematics::{KinematicPath, KinematicSystem, PreparedKinematicEpsilon};
 use crate::physical_conditions::PhysicalPhaseTiming;
 use crate::transport_cache::{
@@ -756,7 +758,9 @@ impl PulledConnection {
     fn prepare(self, context: &RunContext) -> Result<PreparedConnection> {
         context.cancellation.check()?;
         Ok(match self {
-            Self::Rational(system) => PreparedConnection::Rational(system),
+            Self::Rational(system) => {
+                PreparedConnection::Rational(system.prepare_with_context(context)?)
+            }
             Self::Algebraic(system) => {
                 PreparedConnection::Algebraic(Box::new(system.prepare_with_context(context)?))
             }
@@ -764,31 +768,33 @@ impl PulledConnection {
     }
 }
 enum PreparedConnection {
-    Rational(EpsilonSystem),
+    Rational(PreparedEpsilonSystem),
     Algebraic(Box<PreparedAlgebraicSystem>),
 }
 struct RefinedTransport {
     solution: EpsilonSolution,
     checkpoint_germs: BTreeMap<usize, RootGerm>,
-    compiled: Option<CompiledConnection>,
+    compiled: CompiledConnection,
 }
 impl PreparedConnection {
     fn compile(&self, p: Precision, context: &RunContext) -> Result<CompiledConnection> {
         let _timing = PhysicalPhaseTiming::start("transport.compile", 0, 0, Some(p.bits));
         context.cancellation.check()?;
-        let compiled = match self {
-            Self::Rational(system) => {
-                CompiledConnection::Rational(system.compile(p, &Default::default())?)
-            }
-            Self::Algebraic(system) => {
-                CompiledConnection::Algebraic(system.compile_with_context(p, context)?)
-            }
-        };
+        let compiled =
+            match self {
+                Self::Rational(system) => CompiledConnection::Rational(
+                    system.compile_with_context(p, &Default::default(), context)?,
+                ),
+                Self::Algebraic(system) => {
+                    CompiledConnection::Algebraic(system.compile_with_context(p, context)?)
+                }
+            };
         context.cancellation.check()?;
         Ok(compiled)
     }
     fn transport(
         &self,
+        initial_rational: Option<CompiledEpsilonSystem>,
         source: &CachedBoundary,
         target: &CachedPoint,
         range: EpsilonRange,
@@ -797,18 +803,21 @@ impl PreparedConnection {
         context: &RunContext,
     ) -> Result<RefinedTransport> {
         match self {
-            Self::Rational(system) => Ok(RefinedTransport {
-                solution: transport_epsilon(
-                    system,
+            Self::Rational(system) => {
+                let (solution, compiled) = system.transport_with_compiled(
+                    initial_rational,
                     |p| source.as_epsilon_boundary(&Atom::new(), range, p),
                     waypoints,
                     options,
                     context,
                     true,
-                )?,
-                checkpoint_germs: BTreeMap::new(),
-                compiled: None,
-            }),
+                )?;
+                Ok(RefinedTransport {
+                    solution,
+                    checkpoint_germs: BTreeMap::new(),
+                    compiled: CompiledConnection::Rational(compiled),
+                })
+            }
             Self::Algebraic(system) => transport_algebraic_checked(
                 system, source, target, range, waypoints, options, context,
             ),
@@ -820,6 +829,13 @@ enum CompiledConnection {
     Algebraic(CompiledAlgebraicSystem),
 }
 impl CompiledConnection {
+    fn into_rational(self) -> Option<CompiledEpsilonSystem> {
+        match self {
+            Self::Rational(compiled) => Some(compiled),
+            Self::Algebraic(_) => None,
+        }
+    }
+
     fn poles(&self) -> &[crate::ComplexFloat] {
         match self {
             Self::Rational(c) => c.poles(),
@@ -1069,6 +1085,7 @@ fn evaluate_from_source(
                 crossings: Vec::new(),
             },
             system,
+            initial_rational: RefCell::new(prepared.into_rational()),
         })
     };
     let path = &route.physical.path;
@@ -1092,6 +1109,7 @@ fn evaluate_from_source(
         checkpoint_germs,
         compiled,
     } = system.transport(
+        route.initial_rational.borrow_mut().take(),
         &source,
         &target,
         range,
@@ -1103,10 +1121,7 @@ fn evaluate_from_source(
     let p = Precision {
         bits: solution.diagnostics.working_bits,
     };
-    let prepared = match compiled {
-        Some(compiled) => compiled,
-        None => system.compile(p, context)?,
-    };
+    let prepared = compiled;
     context.cancellation.check()?;
     // Retry only supplied-error admission; both proofs borrow this one centrally
     // refined trajectory, and commit their error/checkpoint candidate atomically.
@@ -1339,6 +1354,9 @@ impl TransportCost for GuardedCost<'_> {
 struct PreparedRoute {
     physical: PhysicalRoute,
     system: PreparedConnection,
+    // Only this request-local route owns a numerical profile, moved once into
+    // refinement. Public retained kinematic systems stay immutable and Send + Sync.
+    initial_rational: RefCell<Option<CompiledEpsilonSystem>>,
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -1407,6 +1425,7 @@ fn prepare_prescribed_route(
             crossings: contour.crossings,
         },
         system,
+        initial_rational: RefCell::new(compiled.into_rational()),
     })
 }
 
@@ -1551,6 +1570,6 @@ fn transport_algebraic_checked(
     Ok(RefinedTransport {
         solution,
         checkpoint_germs: germs,
-        compiled: Some(CompiledConnection::Algebraic(trace.compiled)),
+        compiled: CompiledConnection::Algebraic(trace.compiled),
     })
 }

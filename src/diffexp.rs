@@ -7,7 +7,8 @@
 //! regular in epsilon at zero. A common Laurent prefactor of the solution is
 //! allowed and is carried explicitly.
 use crate::ode::{
-    CompiledSystem, SeriesSystem, TaylorSegment, compile_rows, shift_polynomial, transport_series,
+    CompiledSystem, SeriesSystem, TaylorSegment, prepared::PreparedRows, shift_polynomial,
+    transport_series,
 };
 use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowDiagnostics, FlowOptions,
@@ -65,6 +66,16 @@ pub struct CompiledEpsilonSystem {
     rows: CompiledSystem,
     count: usize,
     // Established on the exact input, never inferred from rounded coefficients.
+    strictly_positive_epsilon: bool,
+}
+
+/// Immutable exact row preparation for repeated numerical precision profiles.
+/// Each compilation freshly specializes parameter values and pole geometry;
+/// subsequent mutations of the original system do not affect this snapshot.
+#[derive(Clone, Debug)]
+pub struct PreparedEpsilonSystem {
+    rows: PreparedRows,
+    count: usize,
     strictly_positive_epsilon: bool,
 }
 
@@ -165,10 +176,26 @@ impl EpsilonSystem {
         p: Precision,
         values: &ahash::HashMap<Atom, C>,
     ) -> Result<CompiledEpsilonSystem> {
+        self.compile_with_context(p, values, &RunContext::default())
+    }
+
+    /// Compile a fresh exact snapshot with cancellation checks.
+    pub fn compile_with_context(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        context: &RunContext,
+    ) -> Result<CompiledEpsilonSystem> {
+        self.prepare_with_context(context)?
+            .compile_with_context(p, values, context)
+    }
+
+    /// Snapshot exact rows once, sharing denominator clearing and factorization
+    /// across numerical precision profiles without retaining substitutions.
+    pub fn prepare_with_context(&self, context: &RunContext) -> Result<PreparedEpsilonSystem> {
+        context.cancellation.check()?;
         self.validate()?;
         // One denominator LCM per physical row across all epsilon orders.
-        // Reuse these finite polynomials at every coefficient order; there is
-        // no repeated (n*orders)^2 matrix allocation or pole finding.
         let n = self.matrices[0].len();
         let rows = (0..n)
             .map(|i| {
@@ -178,10 +205,42 @@ impl EpsilonSystem {
                     .collect()
             })
             .collect::<Vec<_>>();
-        Ok(CompiledEpsilonSystem {
-            rows: compile_rows(self.variable, &rows, p, values)?,
+        Ok(PreparedEpsilonSystem {
+            rows: PreparedRows::new(self.variable, &rows, context)?,
             count: self.matrices.len(),
             strictly_positive_epsilon: self.matrices[0].iter().flatten().all(Atom::is_zero),
+        })
+    }
+}
+
+impl PreparedEpsilonSystem {
+    pub fn compile(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+    ) -> Result<CompiledEpsilonSystem> {
+        self.compile_with_context(p, values, &RunContext::default())
+    }
+
+    /// Specialize all numerical coefficients freshly at the requested precision.
+    pub fn compile_with_context(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        context: &RunContext,
+    ) -> Result<CompiledEpsilonSystem> {
+        if p.bits < 2 {
+            return Err(Error::InvalidInput(
+                "epsilon precision must be at least two bits".into(),
+            ));
+        }
+        context.cancellation.check()?;
+        let rows = self.rows.compile(p, values, context)?;
+        context.cancellation.check()?;
+        Ok(CompiledEpsilonSystem {
+            rows,
+            count: self.count,
+            strictly_positive_epsilon: self.strictly_positive_epsilon,
         })
     }
 }
@@ -833,29 +892,67 @@ pub fn transport_epsilon(
     context: &RunContext,
     save_segments: bool,
 ) -> Result<EpsilonSolution> {
-    refine_epsilon_transport(options, context, save_segments, |p, refined| {
-        let compiled = system.compile(p, &Default::default())?;
-        let points = waypoints
-            .iter()
-            .map(|a| p.eval(a, &Default::default()))
-            .collect::<Result<Vec<_>>>()?;
-        let boundary = boundary_provider(p)?;
-        let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
-            p,
-            &boundary.point,
+    options.validate()?;
+    let prepared = system.prepare_with_context(context)?;
+    Ok(prepared
+        .transport_with_compiled(
+            None,
+            boundary_provider,
             waypoints,
-            &points,
-            options.digits,
-        )?;
-        let mut result = compiled.transport(&boundary, &points, refined, context, save_segments)?;
-        result.diagnostics.conditioning_digits = Some(
-            result
-                .diagnostics
-                .conditioning_digits
-                .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
-        );
-        Ok(result)
-    })
+            options,
+            context,
+            save_segments,
+        )?
+        .0)
+}
+
+impl PreparedEpsilonSystem {
+    /// Move the path-check compilation into the first matching profile, then
+    /// return the accepted profile for incoming-error propagation. This cache is
+    /// local to one transport; it never retains interpoint numerical values.
+    pub(crate) fn transport_with_compiled(
+        &self,
+        mut initial: Option<CompiledEpsilonSystem>,
+        boundary_provider: impl Fn(Precision) -> Result<EpsilonBoundary>,
+        waypoints: &[Atom],
+        options: &FlowOptions,
+        context: &RunContext,
+        save_segments: bool,
+    ) -> Result<(EpsilonSolution, CompiledEpsilonSystem)> {
+        refine_epsilon_transport_with_metadata(
+            options,
+            context,
+            save_segments,
+            |p, refined| {
+                let compiled = match initial.take() {
+                    Some(compiled) if compiled.rows.p.bits == p.bits => compiled,
+                    _ => self.compile_with_context(p, &Default::default(), context)?,
+                };
+                let points = waypoints
+                    .iter()
+                    .map(|a| p.eval(a, &Default::default()))
+                    .collect::<Result<Vec<_>>>()?;
+                let boundary = boundary_provider(p)?;
+                let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
+                    p,
+                    &boundary.point,
+                    waypoints,
+                    &points,
+                    options.digits,
+                )?;
+                let mut result =
+                    compiled.transport(&boundary, &points, refined, context, save_segments)?;
+                result.diagnostics.conditioning_digits = Some(
+                    result
+                        .diagnostics
+                        .conditioning_digits
+                        .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
+                );
+                Ok((result, compiled))
+            },
+            |_, _, _, _, _| Ok(true),
+        )
+    }
 }
 
 pub(crate) fn refine_epsilon_transport(
