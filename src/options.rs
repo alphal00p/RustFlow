@@ -54,7 +54,7 @@ impl std::str::FromStr for BoundaryErrorStrategy {
     }
 }
 
-/// Arithmetic for source-defect enclosures in rational Taylor charts.
+/// Arithmetic for local differential defects in rational Taylor charts.
 /// Registered-root charts and Padé candidates retain their own arithmetic.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum ResidualArithmetic {
@@ -62,12 +62,18 @@ pub enum ResidualArithmetic {
     Ball,
     /// Bounded native integer products, with conservative ball fallback.
     AdaptiveInteger,
+    /// Explicit finite-MPFR local differential-defect estimate. Source
+    /// conversion and residual rounding are unenclosed. This is not a directed
+    /// exact-source enclosure; independent refinement and input-error admission
+    /// remain the caller's responsibility. Never selected as a fallback.
+    NumericalEstimate,
 }
 impl ResidualArithmetic {
     pub fn as_str(self) -> &'static str {
         match self {
             Self::Ball => "ball",
             Self::AdaptiveInteger => "adaptive_integer",
+            Self::NumericalEstimate => "numerical_estimate",
         }
     }
 }
@@ -77,8 +83,9 @@ impl std::str::FromStr for ResidualArithmetic {
         match value {
             "ball" => Ok(Self::Ball),
             "adaptive_integer" => Ok(Self::AdaptiveInteger),
+            "numerical_estimate" => Ok(Self::NumericalEstimate),
             _ => Err(Error::InvalidInput(
-                "residual_arithmetic must be ball or adaptive_integer".into(),
+                "residual_arithmetic must be ball, adaptive_integer or numerical_estimate".into(),
             )),
         }
     }

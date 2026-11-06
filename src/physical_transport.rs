@@ -1160,6 +1160,13 @@ fn evaluate_from_source(
     } else {
         ""
     };
+    let residual_provenance = if options.residual_arithmetic
+        == crate::ResidualArithmetic::NumericalEstimate
+    {
+        "; finite-MPFR numerical local-defect estimate (source conversion and residual rounding unenclosed)"
+    } else {
+        ""
+    };
     let boundary = CachedBoundary {
         identity: identity.clone(),
         point: target,
@@ -1170,7 +1177,7 @@ fn evaluate_from_source(
             &solution,
             source.accuracy.verified_digits(),
             &format!(
-                "independently refined physical transport including propagated cached input uncertainty{propagation_provenance}; source: {}",
+                "independently refined physical transport including propagated cached input uncertainty{propagation_provenance}{residual_provenance}; source: {}",
                 source.accuracy.provenance(),
             ),
         )?,
@@ -1200,7 +1207,7 @@ fn evaluate_from_source(
                 p.bits,
                 checkpoint.comparison_errors.clone(),
                 &format!(
-                    "independent precision/order check at trajectory endpoint, with propagated cached input uncertainty{propagation_provenance}; source: {}",
+                    "independent precision/order check at trajectory endpoint, with propagated cached input uncertainty{propagation_provenance}{residual_provenance}; source: {}",
                     source.accuracy.provenance(),
                 ),
             )?;
