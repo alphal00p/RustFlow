@@ -150,6 +150,93 @@ fn prepared_real_line_normalizes_large_rational_factors_created_by_restriction()
 }
 
 #[test]
+fn prepared_gaussian_line_normalization_preserves_exact_reduced_fractions() -> Result<()> {
+    let (s, t, x, epsilon) = symbols();
+    let (sv, tv, xv) = (Atom::var(s), Atom::var(t), Atom::var(x));
+    let i = Atom::i();
+    let q =
+        parse!("123456789012345678901234567890123456789/987654321098765432109876543210987654319");
+    let r =
+        parse!("314159265358979323846264338327950288419/271828182845904523536028747135266249777");
+    let a: Atom = &q + &i * &r;
+    let b: Atom = &r + 2 * &i * &q;
+    let c: Atom = -&q + 3 * &i * &r;
+    for (label, entry, expected, removable_value) in [
+        (
+            "coprime norms",
+            (&sv + &i) / (&sv + 2 * &i),
+            (&xv + &i) / (&xv + 2 * &i),
+            None,
+        ),
+        (
+            // The shared nonreal factor appears only after t=s restriction.
+            "shared nonreal factor",
+            ((&tv + &i) * (&sv + 2 * &i)) / ((&sv + &i) * (&sv + 3 * &i)),
+            (&xv + 2 * &i) / (&xv + 3 * &i),
+            Some((-&i, Atom::num((1, 2)))),
+        ),
+        (
+            // Equal norms are inconclusive: neither Gaussian factor cancels.
+            "conjugate factors with equal norms",
+            (&sv - &i) / (&sv + &i),
+            (&xv - &i) / (&xv + &i),
+            None,
+        ),
+        (
+            "large exact coefficients with coprime norms",
+            (&sv + &a) / (&sv + &b),
+            (&xv + &a) / (&xv + &b),
+            None,
+        ),
+        (
+            "large exact coefficients with a shared nonreal factor",
+            ((&tv + &a) * (&sv + &b)) / ((&sv + &a) * (&sv + &c)),
+            (&xv + &b) / (&xv + &c),
+            Some((-&a, (&b - &a) / (&c - &a))),
+        ),
+        (
+            "real common factor",
+            (&tv + 1) / (&sv + 1),
+            Atom::one(),
+            Some((Atom::num(-1), Atom::one())),
+        ),
+        ("zero numerator", Atom::zero(), Atom::zero(), None),
+        ("constant numerator", &i / (&sv + &i), &i / (&xv + &i), None),
+        (
+            "constant denominator",
+            (&sv + &i) / (2 + &i),
+            (&xv + &i) / (2 + &i),
+            None,
+        ),
+    ] {
+        let system = KinematicSystem {
+            epsilon,
+            derivatives: BTreeMap::from([(s, vec![vec![entry]]), (t, vec![vec![Atom::zero()]])]),
+        };
+        let path = KinematicPath {
+            parameter: x,
+            coordinates: BTreeMap::from([(s, xv.clone()), (t, xv.clone())]),
+        };
+        let pulled = system.prepare_epsilon(1)?.pullback(&path, 1)?;
+        let actual = decode(&pulled.matrices[0][0][0]);
+        // Compare already reduced expressions, without a rational cancellation
+        // in the assertion that could hide a retained removable denominator.
+        assert_eq!(actual.expand(), expected.expand(), "{label}");
+        if let Some((point, value)) = removable_value {
+            assert!(
+                (actual.replace(xv.clone()).with(point) - value)
+                    .together()
+                    .cancel()
+                    .is_zero(),
+                "{label}: removable point must remain evaluable"
+            );
+        }
+        assert!(pulled.matrices[1][0][0].is_zero(), "{label}");
+    }
+    Ok(())
+}
+
+#[test]
 fn prepared_native_affine_big_gaussian_rationals_and_weighted_cancellations() -> Result<()> {
     let (s, t, x, epsilon) = symbols();
     let (sv, tv, eps) = (Atom::var(s), Atom::var(t), Atom::var(epsilon));

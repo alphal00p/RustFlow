@@ -265,10 +265,35 @@ fn gaussian_field() -> GaussianField {
     FloatField::from_rep(Complex::new(Rational::from(0), Rational::from(0)))
 }
 
+// A common nonconstant h over Q(i) would make h*conj(h) a nonconstant
+// rational divisor of both norms. Thus coprime norms certify coprime inputs.
+// The converse is false: t-i and t+i have equal norms but are coprime.
+fn gaussian_norms_are_coprime(numerator: &ExactPolynomial, denominator: &ExactPolynomial) -> bool {
+    // These are univariate line polynomials. If a norm would overflow the
+    // exponent representation, retain the original Gaussian GCD route.
+    if numerator.degree(0).checked_mul(2).is_none()
+        || denominator.degree(0).checked_mul(2).is_none()
+    {
+        return false;
+    }
+    let norm = |polynomial: &ExactPolynomial| {
+        let conjugate = polynomial.map_coeff(Complex::conj, gaussian_field());
+        let product = polynomial * &conjugate;
+        product.map_coeff(
+            |c| {
+                assert!(c.im.is_zero(), "exact Gaussian norm must be real");
+                c.re.clone()
+            },
+            Q,
+        )
+    };
+    norm(numerator).gcd(&norm(denominator)).is_constant()
+}
+
 // FloatField's generic PolynomialGCD is a stub returning one, and its
 // from_num_den ignores do_gcd. Real physical lines can use the native rational
-// polynomial GCD, avoiding exact Euclidean coefficient swell. Retain the
-// Gaussian Euclidean route for genuinely complex coefficients.
+// polynomial GCD, avoiding exact Euclidean coefficient swell. Complex lines
+// retain Gaussian Euclid unless coprime rational norms certify a constant GCD.
 fn normalize_line_entry(mut entry: ExactRational) -> ExactRational {
     let field = gaussian_field();
     if entry.is_zero() {
@@ -288,6 +313,8 @@ fn normalize_line_entry(mut entry: ExactRational) -> ExactRational {
                 |c| Complex::new(c.clone(), Rational::from(0)),
                 field.clone(),
             )
+        } else if gaussian_norms_are_coprime(&entry.numerator, &entry.denominator) {
+            entry.numerator.one()
         } else {
             let numerator = entry.numerator.to_univariate_from_univariate(0);
             let denominator = entry.denominator.to_univariate_from_univariate(0);
