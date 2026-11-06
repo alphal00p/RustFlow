@@ -377,8 +377,7 @@ mod residual_compile_tests {
                 matrices: vec![
                     vec![
                         vec![
-                            (Atom::one() + &i * &t) * &root
-                                / (Atom::num(3) * (&t - 1).pow(2)),
+                            (Atom::one() + &i * &t) * &root / (Atom::num(3) * (&t - 1).pow(2)),
                             Atom::one() / (&t + &i),
                             Atom::new(),
                         ],
@@ -460,17 +459,32 @@ mod residual_compile_tests {
             {
                 assert_eq!(
                     (term.shift, term.row, term.column, &term.roots),
-                    (normalized.shift, normalized.row, normalized.column, &normalized.roots)
+                    (
+                        normalized.shift,
+                        normalized.row,
+                        normalized.column,
+                        &normalized.roots
+                    )
                 );
                 assert_eq!(term.coefficient.numerator, values[0].numerator);
                 assert_eq!(term.coefficient.denominator, values[0].denominator);
             }
-            let expected_roots = prepared.root_matrix.as_ref().unwrap()
-                .compile(p, &Default::default(), &context)?;
+            let expected_roots =
+                prepared
+                    .root_matrix
+                    .as_ref()
+                    .unwrap()
+                    .compile(p, &Default::default(), &context)?;
             let actual_roots = actual.root_system.as_ref().unwrap();
             assert_same_multiset(&actual_roots.poles, &expected_roots.poles);
-            assert_same_multiset(&actual_roots.pole_polynomials, &expected_roots.pole_polynomials);
-            assert_eq!(actual_roots.polynomial_rows.len(), expected_roots.polynomial_rows.len());
+            assert_same_multiset(
+                &actual_roots.pole_polynomials,
+                &expected_roots.pole_polynomials,
+            );
+            assert_eq!(
+                actual_roots.polynomial_rows.len(),
+                expected_roots.polynomial_rows.len()
+            );
             for (actual, expected) in actual_roots
                 .polynomial_rows
                 .iter()
@@ -494,7 +508,10 @@ mod residual_compile_tests {
                 variable: x,
                 matrices: vec![vec![vec![(root.clone().pow(2) - &t) / (&root - 1)]]],
             },
-            roots: vec![SquareRoot { symbol: r, radicand: t.clone() }],
+            roots: vec![SquareRoot {
+                symbol: r,
+                radicand: t.clone(),
+            }],
             nonzero_conditions: vec![&t - 3],
         }
         .prepare()?;
@@ -518,20 +535,24 @@ mod residual_compile_tests {
         let entries = prepared.entries.compile(p, &Default::default(), &context)?;
         assert_same_multiset(&compiled.poles, &entries.poles);
         assert_same_multiset(&compiled.pole_polynomials, &entries.pole_polynomials);
-        let roots = prepared.root_matrix.as_ref().unwrap()
-            .compile(p, &Default::default(), &context)?;
+        let roots =
+            prepared
+                .root_matrix
+                .as_ref()
+                .unwrap()
+                .compile(p, &Default::default(), &context)?;
         assert!(roots.poles.contains(&p.i(0)));
         Ok(())
     }
 
-    #[test]
-    fn entry_and_root_compilers_keep_pole_failures_and_cancellation() -> Result<()> {
+    fn prepared_pole_source(gap_bits: u64) -> Result<PreparedAlgebraicSystem> {
         let x = symbol!("algebraic_residual_failures::x");
         let r = symbol!("algebraic_residual_failures::r");
         let t = Atom::var(x);
         let first = &t - 1;
-        let second = &first - Atom::num(Rational::from((1, 1_i64 << 60)));
-        let prepared = AlgebraicSystem::ordinary(
+        let gap = Rational::from((Integer::one(), Integer::from(2).pow(gap_bits)));
+        let second = &first - Atom::num(gap);
+        AlgebraicSystem::ordinary(
             DifferentialSystem {
                 variable: x,
                 matrix: vec![
@@ -539,9 +560,104 @@ mod residual_compile_tests {
                     vec![Atom::new(), Atom::new()],
                 ],
             },
-            vec![SquareRoot { symbol: r, radicand: &first * &second }],
+            vec![SquareRoot {
+                symbol: r,
+                radicand: &first * &second,
+            }],
         )
-        .prepare()?;
+        .prepare()
+    }
+
+    #[test]
+    fn entry_and_root_compilers_keep_resolvable_nearby_poles() -> Result<()> {
+        // The retained Git79 public probe also accepts the original 2^-60 gap.
+        let prepared = prepared_pole_source(60)?;
+        let context = RunContext::default();
+        let p = Precision { bits: 80 };
+        let gap = Rational::from((Integer::one(), Integer::from(2).pow(60)));
+        let expected = [p.i(1), p.rational(&(Rational::one() + gap))];
+        assert_ne!(expected[0], expected[1]);
+        let entries = prepared.entries.compile(p, &Default::default(), &context)?;
+        let roots =
+            prepared
+                .root_matrix
+                .as_ref()
+                .unwrap()
+                .compile(p, &Default::default(), &context)?;
+        let full = prepared.compile_with_context(p, &context)?;
+        assert_same_multiset(&entries.poles, &expected);
+        assert_same_multiset(&roots.poles, &expected);
+        assert_same_multiset(full.singularities(), &expected);
+        Ok(())
+    }
+
+    #[test]
+    fn row_factor_reuse_lcm_then_whole_entry_keeps_specialized_shared_poles() -> Result<()> {
+        let x = symbol!("algebraic_row_factor_cache::x");
+        let a = Atom::var(symbol!("algebraic_row_factor_cache::a"));
+        let t = Atom::var(x);
+        let f = &t - &a;
+        let g = &t + &a;
+        let h = &t + 3;
+        let denominator = Atom::num(6) * f.clone().pow(2) * g.clone().pow(3) * h.clone().pow(2);
+        // Row zero certifies a multi-entry LCM. Later entries encounter that
+        // entire denominator in the same factor cache, including its content.
+        let rows = PreparedRows::new(
+            x,
+            &[
+                vec![
+                    Atom::one() / (Atom::num(2) * f.clone().pow(2) * &h),
+                    Atom::one() / (Atom::num(3) * g.clone().pow(3) * h.clone().pow(2)),
+                ],
+                vec![Atom::one() / &denominator, Atom::num(5) / &denominator],
+            ],
+            &RunContext::default(),
+        )?;
+        let context = RunContext::default();
+        let p = Precision { bits: 80 };
+        for value in [0, 1, 0] {
+            let values = [(a.clone(), p.i(value))].into_iter().collect();
+            let compiled = rows.compile(p, &values, &context)?;
+            let expected = if value == 0 {
+                vec![p.i(0), p.i(-3)]
+            } else {
+                vec![p.i(-1), p.i(1), p.i(-3)]
+            };
+            assert_same_multiset(&compiled.poles, &expected);
+            // Specialization merges f and g at zero; all five powers survive.
+            let expected_denominator = if value == 0 {
+                Atom::num(6) * t.clone().pow(5) * h.clone().pow(2)
+            } else {
+                Atom::num(6) * (&t - 1).pow(2) * (&t + 1).pow(3) * h.clone().pow(2)
+            };
+            let reference = PreparedRows::new(
+                x,
+                &[vec![
+                    Atom::one() / &expected_denominator,
+                    Atom::num(5) / &expected_denominator,
+                ]],
+                &context,
+            )?
+            .compile(p, &Default::default(), &context)?;
+            assert_eq!(
+                compiled.polynomial_rows[1].denominator,
+                reference.polynomial_rows[0].denominator
+            );
+            assert_eq!(
+                compiled.polynomial_rows[1].entries,
+                reference.polynomial_rows[0].entries
+            );
+            assert_eq!(
+                compiled.polynomial_rows[0].denominator,
+                compiled.polynomial_rows[1].denominator
+            );
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn entry_and_root_compilers_keep_pole_failures_and_cancellation() -> Result<()> {
+        let prepared = prepared_pole_source(5000)?;
         let context = RunContext::default();
         let p = Precision { bits: 80 };
         // Finite residual polynomials do not waive unresolved-pole rejection.

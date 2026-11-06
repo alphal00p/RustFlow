@@ -222,14 +222,14 @@ fn norm_only_keeps_cancelled_domain_and_root_rejections() -> Result<()> {
     Ok(())
 }
 
-#[test]
-fn norm_only_keeps_unresolved_pole_precision_and_cancellation_rejections() -> Result<()> {
+fn norm_only_pole_source(gap_bits: u64) -> AlgebraicSystem {
     let x = symbol!("algebraic_norm_only_poles::x");
     let r = symbol!("algebraic_norm_only_poles::r");
     let t = Atom::var(x);
     let first = &t - 1;
-    let second = &first - Atom::num(Rational::from((1, 1_i64 << 60)));
-    let source = AlgebraicSystem::ordinary(
+    let gap = Rational::from((Integer::one(), Integer::from(2).pow(gap_bits)));
+    let second = &first - Atom::num(gap);
+    AlgebraicSystem::ordinary(
         DifferentialSystem {
             variable: x,
             matrix: vec![
@@ -241,7 +241,41 @@ fn norm_only_keeps_unresolved_pole_precision_and_cancellation_rejections() -> Re
             symbol: r,
             radicand: &first * &second,
         }],
-    );
+    )
+}
+
+#[test]
+fn norm_only_keeps_resolvable_nearby_poles() -> Result<()> {
+    // Paired public API probes against retained Git79 and the changed owner
+    // both resolve this original fixture. Keep exact values, not just success.
+    let source = norm_only_pole_source(60);
+    let context = RunContext::default();
+    let p = Precision { bits: 80 };
+    let expected = [
+        p.i(1),
+        p.rational(&Rational::from((
+            Integer::from(2).pow(60) + Integer::one(),
+            Integer::from(2).pow(60),
+        ))),
+    ];
+    assert_ne!(expected[0], expected[1]);
+    let full = source
+        .prepare_with_context(&context)?
+        .compile_with_context(p, &context)?;
+    let norm = source
+        .prepare_norm_with_context(&context)?
+        .compile_with_context(p, &context)?;
+    assert_same_multiset(full.singularities(), &expected);
+    assert_same_multiset(norm.inner.singularities(), &expected);
+    assert_same_multiset(&full.root_system.as_ref().unwrap().poles, &expected);
+    assert_same_multiset(&norm.inner.root_system.as_ref().unwrap().poles, &expected);
+    Ok(())
+}
+
+#[test]
+fn norm_only_keeps_unresolved_pole_precision_and_cancellation_rejections() -> Result<()> {
+    // Beyond the bounded extra precision budget near a nonzero pole.
+    let source = norm_only_pole_source(5000);
     let context = RunContext::default();
     let full = source.prepare_with_context(&context)?;
     let norm = source.prepare_norm_with_context(&context)?;
