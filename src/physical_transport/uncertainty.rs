@@ -1,6 +1,6 @@
 //! Transactional admission of supplied uncertainty after central refinement.
 //!
-//! Retrying a proof never repeats transport or mutates its central solution.
+//! Retrying an estimate never repeats transport or mutates its central solution.
 use super::{CompiledConnection, errors_meet};
 use crate::diffexp::{EpsilonSolution, VerifiedCheckpoint};
 use crate::ode::TaylorSegment;
@@ -15,6 +15,7 @@ mod tests;
 struct Admission {
     errors: Vec<Vec<Float>>,
     checkpoints: Vec<VerifiedCheckpoint>,
+    provenance: Option<String>,
 }
 
 struct Problem<'a> {
@@ -75,11 +76,11 @@ fn proof_unavailable(original: Error, proof: Error) -> Error {
     }
 }
 
-impl Problem<'_> {
-    fn candidate<'a>(
+impl<'a> Problem<'a> {
+    fn candidate<'b>(
         &self,
         solution: &EpsilonSolution,
-        mut increment: impl FnMut(usize, &TaylorSegment) -> Result<Increment<'a>>,
+        mut increment: impl FnMut(usize, &TaylorSegment) -> Result<Increment<'b>>,
     ) -> Result<Admission> {
         let mut last = Increment::Scalar(self.p.real(1));
         let mut checkpoints = Vec::new();
@@ -108,10 +109,13 @@ impl Problem<'_> {
         Ok(Admission {
             errors,
             checkpoints,
+            provenance: None,
         })
     }
 
     fn scalar(&self, solution: &EpsilonSolution) -> Result<Admission> {
+        // Preserve every successful source-only attempt, including operation
+        // order and early failure returns, before trying one fixed norm.
         let original = match self.scalar_disks(solution, 1) {
             Err(error @ Error::Accuracy(_)) => error,
             result => return result,
@@ -126,7 +130,100 @@ impl Problem<'_> {
                 Err(_) => return Err(original),
             }
         }
+        self.context.cancellation.check()?;
+        let balanced = self.balanced(solution)?;
+        for subdivisions in [1, 4, 16] {
+            match balanced.scalar_disks(solution, subdivisions) {
+                Ok(mut candidate) => {
+                    candidate.provenance = Some(format!(
+                        "finite-MPFR scalar input-error estimate in fixed balanced weights max(1,|source|,|refined endpoint|)*10^epsilon_offset; {subdivisions} disks per segment"
+                    ));
+                    return Ok(candidate);
+                }
+                Err(Error::Accuracy(_)) => {}
+                Err(error @ (Error::Cancelled | Error::InvalidInput(_))) => return Err(error),
+                Err(_) => return Err(original),
+            }
+        }
         Err(original)
+    }
+
+    fn balanced(&self, solution: &EpsilonSolution) -> Result<Problem<'a>> {
+        if solution.coefficients.len() != self.count
+            || self.source.coefficients.len() < self.count
+            || self.source.accuracy.comparison_errors().len() < self.count
+            || self.source.coefficients[..self.count]
+                .iter()
+                .zip(&solution.coefficients)
+                .zip(&self.source.accuracy.comparison_errors()[..self.count])
+                .any(|((source, endpoint), errors)| {
+                    source.len() != endpoint.len() || source.len() != errors.len()
+                })
+        {
+            return Err(Error::InvalidInput("balanced norm dimensions".into()));
+        }
+        let mut weights = Vec::with_capacity(self.weights.len());
+        let mut epsilon_scale = self.p.real(1);
+        for (source, endpoint) in self.source.coefficients[..self.count]
+            .iter()
+            .zip(&solution.coefficients)
+        {
+            self.context.cancellation.check()?;
+            for (source, endpoint) in source.iter().zip(endpoint) {
+                if !self.p.finite(source) || !self.p.finite(endpoint) {
+                    return Err(Error::InvalidInput(
+                        "nonfinite balanced norm coefficient".into(),
+                    ));
+                }
+                let mut weight = self.p.norm(source);
+                let endpoint_norm = self.p.norm(endpoint);
+                if endpoint_norm > weight {
+                    weight = endpoint_norm;
+                }
+                if weight < self.p.real(1) {
+                    weight = self.p.real(1);
+                }
+                weight *= &epsilon_scale;
+                if !weight.is_finite() || weight <= self.p.real(0) {
+                    return Err(Error::InvalidInput("invalid balanced norm weight".into()));
+                }
+                weights.push(weight);
+            }
+            epsilon_scale *= self.p.real(10);
+        }
+        if weights.len() != self.weights.len() {
+            return Err(Error::InvalidInput("balanced norm dimensions".into()));
+        }
+        let mut relative_error = self.p.real(0);
+        for (error, weight) in self.source.accuracy.comparison_errors()[..self.count]
+            .iter()
+            .flatten()
+            .zip(&weights)
+        {
+            let relative = error.clone() / weight;
+            if relative > relative_error {
+                relative_error = relative;
+            }
+        }
+        // Exactly the source-only floor: endpoint working precision supplies
+        // no accuracy credit. Every enlarged weight also enlarges its absolute
+        // evidence floor; the maximum covers each recorded comparison error.
+        relative_error += self.p.tolerance(self.source.accuracy.verified_digits());
+        if !relative_error.is_finite() || relative_error <= self.p.real(0) {
+            return Err(Error::InvalidInput(
+                "invalid balanced norm source error".into(),
+            ));
+        }
+        Ok(Problem {
+            prepared: self.prepared,
+            source: self.source,
+            options: self.options,
+            context: self.context,
+            p: self.p,
+            count: self.count,
+            weights,
+            relative_error,
+        })
     }
 
     fn scalar_disks(&self, solution: &EpsilonSolution, subdivisions: i64) -> Result<Admission> {
@@ -235,6 +332,45 @@ pub(super) fn admit_with_gauge(
         bits: solution.diagnostics.working_bits,
     };
     let count = solution.coefficients.len();
+    context.cancellation.check()?;
+    let dimension = source.identity.dimension();
+    let shape = |rows: &[Vec<_>]| rows.len() == count && rows.iter().all(|r| r.len() == dimension);
+    if count == 0
+        || dimension == 0
+        || source.coefficients.len() < count
+        || source.accuracy.comparison_errors().len() < count
+        || !shape(&source.coefficients[..count])
+        || !shape(&solution.coefficients)
+        || source.accuracy.comparison_errors()[..count]
+            .iter()
+            .any(|r| r.len() != dimension)
+        || solution.comparison_errors.len() != count
+        || solution
+            .comparison_errors
+            .iter()
+            .any(|r| r.len() != dimension)
+        || solution.checkpoints.iter().any(|c| {
+            !shape(&c.coefficients)
+                || c.comparison_errors.len() != count
+                || c.comparison_errors.iter().any(|r| r.len() != dimension)
+        })
+    {
+        return Err(Error::InvalidInput("input uncertainty dimensions".into()));
+    }
+    if source.coefficients[..count]
+        .iter()
+        .flatten()
+        .chain(solution.coefficients.iter().flatten())
+        .any(|v| !p.finite(v))
+        || source.accuracy.comparison_errors()[..count]
+            .iter()
+            .flatten()
+            .any(|e| !e.is_finite() || *e < p.real(0))
+    {
+        return Err(Error::InvalidInput(
+            "nonfinite input uncertainty or negative source error".into(),
+        ));
+    }
     let weights = source.coefficients[..count]
         .iter()
         .flatten()
@@ -337,5 +473,5 @@ pub(super) fn admit_with_gauge(
     solution.diagnostics.fundamental_boundary_charts = charts;
     solution.diagnostics.fundamental_boundary_retry = retry;
     solution.diagnostics.fundamental_boundary_fallback = fallback;
-    Ok(None)
+    Ok(candidate.provenance)
 }

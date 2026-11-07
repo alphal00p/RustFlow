@@ -65,12 +65,16 @@ fn linear_solution(source: &CachedBoundary, slope: &[C], split: bool) -> Epsilon
         .flatten()
         .cloned()
         .collect::<Vec<_>>();
+    let dimension = source.identity.dimension();
+    let count = source.coefficients.len();
     let values = |point: &C| {
         initial
             .iter()
             .zip(slope)
             .map(|(a, b)| p.add(a, &p.mul(b, point)))
-            .map(|v| vec![v])
+            .collect::<Vec<_>>()
+            .chunks(dimension)
+            .map(|row| row.to_vec())
             .collect::<Vec<_>>()
     };
     let endpoints = if split {
@@ -98,7 +102,7 @@ fn linear_solution(source: &CachedBoundary, slope: &[C], split: bool) -> Epsilon
             segment,
             point: end.clone(),
             coefficients: values(&end),
-            comparison_errors: vec![vec![p.tolerance(70)]; 5],
+            comparison_errors: vec![vec![p.tolerance(70); dimension]; count],
         });
         start = end;
     }
@@ -114,7 +118,7 @@ fn linear_solution(source: &CachedBoundary, slope: &[C], split: bool) -> Epsilon
         },
         segments,
         verified_digits: Some(12),
-        comparison_errors: vec![vec![p.tolerance(70)]; 5],
+        comparison_errors: vec![vec![p.tolerance(70); dimension]; count],
         checkpoints,
     }
 }
@@ -152,7 +156,7 @@ fn problem<'a>(
         options,
         context,
         p,
-        count: 5,
+        count: source.coefficients.len(),
         weights,
         relative_error: relative + p.tolerance(source.accuracy.verified_digits()),
     }
@@ -397,5 +401,341 @@ fn cancellation_and_invalid_bound_inputs_do_not_commit() -> Result<()> {
         Err(Error::InvalidInput(_))
     ));
     assert_eq!(format!("{solution:?}"), before);
+    Ok(())
+}
+
+// Ordinary constant 2x2 nilpotent coupling: a large off-diagonal entry
+// defeats exp(||A||), although the independent exact transfer is I + x*A.
+fn coupled_fixture(
+    count: usize,
+    digits: u32,
+    complex: bool,
+) -> Result<(CompiledConnection, CachedBoundary)> {
+    let p = Precision::decimal(90)?;
+    let x = symbol!("boundary_balanced::x");
+    let epsilon = symbol!("boundary_balanced::epsilon");
+    let coupling = if complex {
+        Atom::num(100) * Atom::i()
+    } else {
+        Atom::num(100)
+    };
+    let first = vec![
+        vec![Atom::new(), coupling.clone()],
+        vec![Atom::new(), Atom::new()],
+    ];
+    let zero = vec![vec![Atom::new(); 2]; 2];
+    let mut matrices = vec![zero.clone(); count];
+    matrices[0] = first.clone();
+    if complex && count > 1 {
+        matrices[1][0][1] = Atom::num(30);
+    }
+    let mut derivative = first;
+    if complex && count > 1 {
+        derivative[0][1] += Atom::num(30) * Atom::var(epsilon);
+    }
+    let flow = RustFlow::new(
+        KinematicSystem {
+            epsilon,
+            derivatives: BTreeMap::from([(x, derivative)]),
+        },
+        &[
+            Atom::var(symbol!("boundary_balanced::I")),
+            Atom::var(symbol!("boundary_balanced::J")),
+        ],
+        &Atom::one(),
+        Prescription::PlusI0,
+        "regular constant nilpotent interval",
+    )?;
+    let compiled = EpsilonSystem {
+        variable: x,
+        matrices,
+    }
+    .compile(p, &Default::default())?;
+    let source = CachedBoundary {
+        identity: flow.identity().clone(),
+        point: CachedPoint::Exact(BTreeMap::from([(x, Atom::new())])),
+        kind: PointKind::Physical,
+        range: EpsilonRange::new(-2, -2 + count as i32 - 1)?,
+        coefficients: vec![vec![p.zero(), p.i(1)]; count],
+        accuracy: BoundaryAccuracy::supplied(
+            digits,
+            p.bits,
+            vec![vec![p.tolerance(49); 2]; count],
+            "independent finite source comparison",
+        )?,
+    };
+    source.validate()?;
+    Ok((CompiledConnection::Rational(compiled), source))
+}
+
+#[test]
+fn balanced_constant_coupling_admits_nonzero_uncertainty_at_unchanged_24_digits() -> Result<()> {
+    let (prepared, source) = coupled_fixture(1, 48, false)?;
+    let p = Precision {
+        bits: source.accuracy.working_bits(),
+    };
+    // y(0)=(0,1), y(x)=(100*x,1); the source perturbation
+    // (delta,delta) independently transfers to (101*delta,delta).
+    let before = linear_solution(&source, &[p.i(100), p.zero()], true);
+    let source_before = format!("{source:?}");
+    let context = RunContext::default();
+    for strategy in [
+        BoundaryErrorStrategy::ScalarNorm,
+        BoundaryErrorStrategy::Automatic,
+    ] {
+        let options = FlowOptions {
+            digits: 24,
+            boundary_error_strategy: strategy,
+            ..Default::default()
+        };
+        let problem = problem(&prepared, &source, &options, &context);
+        for disks in [1, 4, 16] {
+            assert!(matches!(
+                problem.scalar_disks(&before, disks),
+                Err(Error::Accuracy(_))
+            ));
+        }
+        let mut solution = before.clone();
+        let provenance =
+            admit_with_gauge(&prepared, &source, &mut solution, &options, &context, None)?.unwrap();
+        assert!(
+            provenance.contains("fixed balanced weights")
+                && provenance.contains("1 disks per segment")
+        );
+        assert_eq!(solution.coefficients, vec![vec![p.i(100), p.i(1)]]);
+        assert!(errors_meet(
+            p,
+            &solution.coefficients,
+            &solution.comparison_errors,
+            24
+        ));
+        assert!(solution.comparison_errors[0][0] > p.real(101) * p.tolerance(49));
+        assert!(solution.comparison_errors[0][1] > p.tolerance(48));
+        let mut expected = before.clone();
+        expected.comparison_errors = solution.comparison_errors.clone();
+        expected.checkpoints = solution.checkpoints.clone();
+        assert_eq!(format!("{solution:?}"), format!("{expected:?}"));
+        assert_eq!(solution.checkpoints.len(), 2);
+        for (a, b) in solution.checkpoints.iter().zip(&before.checkpoints) {
+            assert_eq!(a.coefficients, b.coefficients);
+            assert_eq!(a.point, b.point);
+            assert!(errors_meet(p, &a.coefficients, &a.comparison_errors, 24));
+        }
+        assert_eq!(format!("{source:?}"), source_before);
+    }
+    // FundamentalMatrix still tries its existing proof before scalar fallback.
+    let options = FlowOptions {
+        digits: 24,
+        boundary_error_strategy: BoundaryErrorStrategy::FundamentalMatrix,
+        ..Default::default()
+    };
+    let mut solution = before;
+    assert!(
+        admit_with_gauge(&prepared, &source, &mut solution, &options, &context, None)?.is_none()
+    );
+    assert!(solution.diagnostics.fundamental_boundary_charts > 0);
+    Ok(())
+}
+
+#[test]
+fn balanced_multi_epsilon_complex_weights_cover_source_evidence() -> Result<()> {
+    let (prepared, mut source) = coupled_fixture(3, 48, true)?;
+    let p = Precision {
+        bits: source.accuracy.working_bits(),
+    };
+    source.coefficients = vec![
+        vec![p.zero(), C::new(p.real(0), p.real(1))],
+        vec![C::new(p.real(3), p.real(4)), p.zero()],
+        vec![p.zero(), p.i(1)],
+    ];
+    // y0=(-100*x,i), y1=(3+i*(4+30*x),0), y2=(100*i*x,1).
+    // These follow directly from J'_k=0, I'_k=100*i*J_k+30*J_(k-1).
+    let slopes = vec![
+        p.i(-100),
+        p.zero(),
+        C::new(p.real(0), p.real(30)),
+        p.zero(),
+        C::new(p.real(0), p.real(100)),
+        p.zero(),
+    ];
+    let before = linear_solution(&source, &slopes, true);
+    assert_eq!(
+        before.coefficients,
+        vec![
+            vec![p.i(-100), C::new(p.real(0), p.real(1))],
+            vec![C::new(p.real(3), p.real(34)), p.zero()],
+            vec![C::new(p.real(0), p.real(100)), p.i(1)]
+        ]
+    );
+    let options = FlowOptions {
+        digits: 24,
+        boundary_error_strategy: BoundaryErrorStrategy::ScalarNorm,
+        ..Default::default()
+    };
+    let context = RunContext::default();
+    let problem = problem(&prepared, &source, &options, &context);
+    let balanced = problem.balanced(&before)?;
+    // Independent epsilon-major row expectations, including zero entries.
+    assert_eq!(balanced.weights[0], p.real(100));
+    assert_eq!(balanced.weights[1], p.real(1));
+    assert!(balanced.weights[2] > p.real(340) && balanced.weights[2] < p.real(350));
+    assert_eq!(balanced.weights[3], p.real(10));
+    assert_eq!(balanced.weights[4], p.real(10000));
+    assert_eq!(balanced.weights[5], p.real(100));
+    for ((weight, base), error) in balanced
+        .weights
+        .iter()
+        .zip(&problem.weights)
+        .zip(source.accuracy.comparison_errors().iter().flatten())
+    {
+        assert!(weight >= base);
+        let envelope = weight.clone() * &balanced.relative_error;
+        assert!(envelope >= error.clone() + base.clone() * p.tolerance(48));
+    }
+    for strategy in [
+        BoundaryErrorStrategy::ScalarNorm,
+        BoundaryErrorStrategy::Automatic,
+        BoundaryErrorStrategy::FundamentalMatrix,
+    ] {
+        let options = FlowOptions {
+            boundary_error_strategy: strategy,
+            ..options.clone()
+        };
+        let mut solution = before.clone();
+        assert!(
+            admit_with_gauge(&prepared, &source, &mut solution, &options, &context, None)?
+                .is_some()
+        );
+        assert_eq!(solution.coefficients, before.coefficients);
+        assert_eq!(
+            format!("{:?}", solution.segments),
+            format!("{:?}", before.segments)
+        );
+        assert!(errors_meet(
+            p,
+            &solution.coefficients,
+            &solution.comparison_errors,
+            24
+        ));
+        assert_eq!(solution.diagnostics.fundamental_boundary_charts, 0);
+        assert!(solution.diagnostics.fundamental_boundary_retry.is_none());
+        assert_eq!(
+            solution.diagnostics.fundamental_boundary_fallback.is_some(),
+            strategy == BoundaryErrorStrategy::FundamentalMatrix
+        );
+        // Analytic independent perturbation propagation: |delta I0|=sqrt(10001)*delta,
+        // |delta I1|=sqrt(31^2+100^2)*delta < 105*delta.
+        assert!(solution.comparison_errors[1][0] > p.real(105) * p.tolerance(49));
+    }
+    Ok(())
+}
+
+#[test]
+fn balanced_rejects_inaccurate_source_and_floor_without_committing() -> Result<()> {
+    for (digits, comparison_digits) in [(24, 24), (24, 90)] {
+        let (prepared, mut source) = coupled_fixture(5, digits, false)?;
+        let p = Precision {
+            bits: source.accuracy.working_bits(),
+        };
+        // The first case is finite actual source error too large after transfer;
+        // the second has tiny comparisons but insufficient verified source digits.
+        source.accuracy = BoundaryAccuracy::supplied(
+            digits,
+            p.bits,
+            vec![vec![p.tolerance(comparison_digits); 2]; 5],
+            "finite source error/floor rejection control",
+        )?;
+        source.validate()?;
+        let slopes = (0..5)
+            .flat_map(|_| [p.i(100), p.zero()])
+            .collect::<Vec<_>>();
+        let before = linear_solution(&source, &slopes, true);
+        let context = RunContext::default();
+        for strategy in [
+            BoundaryErrorStrategy::ScalarNorm,
+            BoundaryErrorStrategy::Automatic,
+            BoundaryErrorStrategy::FundamentalMatrix,
+        ] {
+            let options = FlowOptions {
+                digits: 24,
+                boundary_error_strategy: strategy,
+                ..Default::default()
+            };
+            let problem = problem(&prepared, &source, &options, &context);
+            let original = problem.scalar_disks(&before, 1).err().unwrap();
+            let balanced = problem.balanced(&before)?;
+            for disks in [1, 4, 16] {
+                assert!(matches!(
+                    balanced.scalar_disks(&before, disks),
+                    Err(Error::Accuracy(_))
+                ));
+            }
+            let mut solution = before.clone();
+            let error = admit(&prepared, &source, &mut solution, &options, &context).unwrap_err();
+            assert!(matches!(error, Error::Accuracy(_)));
+            assert!(error.to_string().starts_with(&original.to_string()));
+            assert_eq!(format!("{solution:?}"), format!("{before:?}"));
+        }
+    }
+    Ok(())
+}
+
+#[test]
+fn balanced_zero_constant_and_malformed_inputs_keep_guards() -> Result<()> {
+    let (prepared, mut source) = coupled_fixture(1, 48, false)?;
+    let p = Precision {
+        bits: source.accuracy.working_bits(),
+    };
+    source.coefficients[0] = vec![p.zero(); 2];
+    let before = linear_solution(&source, &[p.zero(), p.zero()], false);
+    let context = RunContext::default();
+    let options = FlowOptions {
+        digits: 24,
+        boundary_error_strategy: BoundaryErrorStrategy::ScalarNorm,
+        ..Default::default()
+    };
+    let problem = problem(&prepared, &source, &options, &context);
+    let balanced = problem.balanced(&before)?;
+    assert_eq!(balanced.weights, vec![p.real(1); 2]);
+    assert_eq!(balanced.relative_error, problem.relative_error);
+    let mut solution = before.clone();
+    assert!(matches!(
+        admit(&prepared, &source, &mut solution, &options, &context),
+        Err(Error::Accuracy(_))
+    ));
+    assert_eq!(format!("{solution:?}"), format!("{before:?}"));
+    for variant in 0..5 {
+        let mut source = source.clone();
+        let mut solution = before.clone();
+        match variant {
+            0 => source.coefficients.clear(),
+            1 => solution.coefficients.clear(),
+            2 => solution.coefficients[0].pop().map(|_| ()).unwrap(),
+            3 => solution.comparison_errors[0].clear(),
+            _ => solution.checkpoints[0].coefficients[0].clear(),
+        }
+        let saved = format!("{solution:?}");
+        assert!(matches!(
+            admit(&prepared, &source, &mut solution, &options, &context),
+            Err(Error::InvalidInput(_))
+        ));
+        assert_eq!(format!("{solution:?}"), saved);
+    }
+    let mut bad = before.clone();
+    bad.coefficients[0][0].re = p.real(0) / p.real(0);
+    let saved = format!("{bad:?}");
+    assert!(matches!(
+        admit(&prepared, &source, &mut bad, &options, &context),
+        Err(Error::InvalidInput(_))
+    ));
+    assert_eq!(format!("{bad:?}"), saved);
+    context.cancellation.cancel();
+    assert!(matches!(balanced.balanced(&before), Err(Error::Cancelled)));
+    let mut solution = before.clone();
+    assert!(matches!(
+        admit(&prepared, &source, &mut solution, &options, &context),
+        Err(Error::Cancelled)
+    ));
+    assert_eq!(format!("{solution:?}"), format!("{before:?}"));
     Ok(())
 }
