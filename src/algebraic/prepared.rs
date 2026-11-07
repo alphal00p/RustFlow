@@ -624,7 +624,8 @@ mod residual_compile_tests {
                 vec![p.i(-1), p.i(1), p.i(-3)]
             };
             assert_same_multiset(&compiled.poles, &expected);
-            // Specialization merges f and g at zero; all five powers survive.
+            // Specialization merges f and g at zero. The whole-denominator
+            // entry still needs all five powers, independently of row zero.
             let expected_denominator = if value == 0 {
                 Atom::num(6) * t.clone().pow(5) * h.clone().pow(2)
             } else {
@@ -647,9 +648,27 @@ mod residual_compile_tests {
                 compiled.polynomial_rows[1].entries,
                 reference.polynomial_rows[0].entries
             );
+            // Prepare row zero independently after specialization. At a=0 its
+            // true LCM has t^3, while the whole-entry row retains t^5. Cache
+            // reuse must preserve both fractions and their original poles.
+            let specialized_f = &t - Atom::num(value);
+            let specialized_g = &t + Atom::num(value);
+            let multi_reference = PreparedRows::new(
+                x,
+                &[vec![
+                    Atom::one() / (Atom::num(2) * specialized_f.pow(2) * &h),
+                    Atom::one() / (Atom::num(3) * specialized_g.pow(3) * h.clone().pow(2)),
+                ]],
+                &context,
+            )?
+            .compile(p, &Default::default(), &context)?;
             assert_eq!(
                 compiled.polynomial_rows[0].denominator,
-                compiled.polynomial_rows[1].denominator
+                multi_reference.polynomial_rows[0].denominator
+            );
+            assert_eq!(
+                compiled.polynomial_rows[0].entries,
+                multi_reference.polynomial_rows[0].entries
             );
         }
         Ok(())

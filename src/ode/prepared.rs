@@ -8,8 +8,8 @@ use symbolica::domains::float::{
 
 type ExactPolePolynomial = UnivariatePolynomial<FloatField<source::Gaussian>>;
 
-/// Only the pole scan discards multiplicities. Row denominators and their
-/// enclosure certificates continue to use the original factors and content.
+/// Only the pole scan discards multiplicities. Compiled row factors retain
+/// multiplicities and content after exact common-row cancellation.
 fn square_free_pole_polynomial(
     coefficients: Vec<source::Gaussian>,
     variable: Symbol,
@@ -162,9 +162,211 @@ fn unscanned_pole_polynomial(
     Ok(remaining)
 }
 
+/// Cancel row content only after specialization and all original domain checks.
+/// Trial divisors come from the certified denominator factors, not the expanded
+/// row denominator. A formal irreducible factor can split over Q(i) or at a
+/// parameter value: on a failed full trial, Euclid sees only that factor and a
+/// remainder of smaller degree. No GCD is taken between the full D and an N.
+fn normalize_specialized_row(
+    row: &mut source::ExactPolynomialRow,
+    variable: Symbol,
+    context: &RunContext,
+) -> Result<bool> {
+    context.cancellation.check()?;
+    let ring = FloatField::from_rep(source::Gaussian::new(Rational::zero(), Rational::zero()));
+    let variable = Arc::new(PolyVariable::Symbol(variable));
+    let polynomial = |a: &[source::Gaussian]| {
+        ExactPolePolynomial::from_coefficients(&ring, a.to_vec(), variable.clone())
+    };
+    let mut denominator = polynomial(&row.denominator);
+    if denominator.is_zero() {
+        return Err(Error::Numerical(
+            "identically zero specialized row denominator".into(),
+        ));
+    }
+    let factors = row
+        .denominator_factors
+        .iter()
+        .map(|(a, m)| (polynomial(a), *m))
+        .collect::<Vec<_>>();
+    let mut product = denominator.one();
+    let factor_product_timing = PhysicalPhaseTiming::start(
+        "ode.prepared.compile.row_normalization.original_factor_product",
+        denominator.degree(),
+        factors.len(),
+        None,
+    );
+    for (factor, multiplicity) in &factors {
+        context.cancellation.check()?;
+        if factor.is_zero() || *multiplicity == 0 {
+            return Err(Error::Numerical(
+                "invalid specialized row denominator factor".into(),
+            ));
+        }
+        product = &product * &factor.pow(*multiplicity);
+    }
+    if product != denominator {
+        return Err(Error::Numerical(
+            "exact specialized row factor product mismatch".into(),
+        ));
+    }
+    drop(factor_product_timing);
+    // This must follow the original entry and factor guards, even if every
+    // numerator became zero at specialization. Constants otherwise stay intact.
+    if row.entries.is_empty() {
+        row.denominator = denominator.one().coefficients().to_vec();
+        row.denominator_factors.clear();
+        return Ok(true);
+    }
+    if denominator.is_constant() {
+        return Ok(false);
+    }
+    let mut entries = row
+        .entries
+        .iter()
+        .map(|(column, a)| (*column, polynomial(a)))
+        .collect::<Vec<_>>();
+    let mut reduced_factors: Vec<(ExactPolePolynomial, usize)> = Vec::new();
+    let mut content = denominator.one();
+    let mut cancelled = false;
+    for (factor, multiplicity) in factors {
+        context.cancellation.check()?;
+        // Cancel monic factors only: Gaussian content and sign must survive
+        // exactly once in the reconstructed product, with their original power.
+        content = &content * &factor.one().mul_coeff(&factor.lcoeff()).pow(multiplicity);
+        if factor.is_constant() {
+            continue;
+        }
+        let monic = factor.make_monic();
+        for power in 0..multiplicity {
+            context.cancellation.check()?;
+            let mut common = monic.clone();
+            let mut trial_quotients = vec![None; entries.len()];
+            for (entry_index, (column, numerator)) in entries.iter().enumerate() {
+                context.cancellation.check()?;
+                // One exact full-factor trial also supplies the bounded
+                // remainder if specialization made only part of it common.
+                let (quotient, remainder) = {
+                    let _timing = PhysicalPhaseTiming::start(
+                        "ode.prepared.compile.row_normalization.remainder",
+                        *column,
+                        common.degree(),
+                        None,
+                    );
+                    numerator.quot_rem(&common)
+                };
+                if remainder.is_zero() {
+                    trial_quotients[entry_index] = Some(quotient);
+                } else {
+                    common = {
+                        let _timing = PhysicalPhaseTiming::start(
+                            "ode.prepared.compile.row_normalization.gcd",
+                            common.degree(),
+                            remainder.degree(),
+                            None,
+                        );
+                        common.gcd_euclidean(&remainder)
+                    };
+                    // Earlier quotients used a larger divisor. Only quotients
+                    // from trials with the final common divisor may be reused.
+                    trial_quotients.fill(None);
+                    if common.is_constant() {
+                        break;
+                    }
+                }
+            }
+            if common.is_constant() {
+                // Further copies cannot become common when later divisions only
+                // remove factors from the numerators.
+                reduced_factors.push((monic.clone(), multiplicity - power));
+                break;
+            }
+            denominator = {
+                let _timing = PhysicalPhaseTiming::start(
+                    "ode.prepared.compile.row_normalization.denominator_division",
+                    denominator.degree(),
+                    common.degree(),
+                    None,
+                );
+                denominator.try_div(&common).ok_or_else(|| {
+                    Error::Numerical("exact common row denominator division failed".into())
+                })?
+            };
+            for ((column, numerator), trial_quotient) in entries.iter_mut().zip(trial_quotients) {
+                context.cancellation.check()?;
+                if let Some(quotient) = trial_quotient {
+                    let _timing = PhysicalPhaseTiming::start(
+                        "ode.prepared.compile.row_normalization.reused_quotient",
+                        *column,
+                        common.degree(),
+                        None,
+                    );
+                    *numerator = quotient;
+                    continue;
+                }
+                let _timing = PhysicalPhaseTiming::start(
+                    "ode.prepared.compile.row_normalization.numerator_division",
+                    *column,
+                    common.degree(),
+                    None,
+                );
+                *numerator = numerator.try_div(&common).ok_or_else(|| {
+                    Error::Numerical("exact common row numerator division failed".into())
+                })?;
+            }
+            let quotient = monic.try_div(&common).ok_or_else(|| {
+                Error::Numerical("exact common row factor division failed".into())
+            })?;
+            if !quotient.is_one() {
+                reduced_factors.push((quotient, 1));
+            }
+            cancelled = true;
+        }
+    }
+    if !cancelled {
+        // Keep the existing factor order, content representation and numerical
+        // operation order for rows that require no reduction.
+        return Ok(false);
+    }
+    if !content.is_one() {
+        reduced_factors.push((content, 1));
+    }
+    let mut product = denominator.one();
+    let factor_product_timing = PhysicalPhaseTiming::start(
+        "ode.prepared.compile.row_normalization.reduced_factor_product",
+        denominator.degree(),
+        reduced_factors.len(),
+        None,
+    );
+    for (factor, multiplicity) in &reduced_factors {
+        context.cancellation.check()?;
+        product = &product * &factor.pow(*multiplicity);
+    }
+    if product != denominator {
+        return Err(Error::Numerical(
+            "exact reduced row factor product mismatch".into(),
+        ));
+    }
+    drop(factor_product_timing);
+    row.denominator = denominator.coefficients().to_vec();
+    row.denominator_factors = reduced_factors
+        .into_iter()
+        .map(|(a, m)| (a.coefficients().to_vec(), m))
+        .collect();
+    row.entries = entries
+        .into_iter()
+        .map(|(column, a)| (column, a.coefficients().to_vec()))
+        .collect();
+    context.cancellation.check()?;
+    Ok(true)
+}
+
 fn rounded_pole_coefficients(p: Precision, polynomial: &ExactPolePolynomial) -> Vec<C> {
-    polynomial
-        .coefficients()
+    rounded_gaussian_coefficients(p, polynomial.coefficients())
+}
+
+fn rounded_gaussian_coefficients(p: Precision, coefficients: &[source::Gaussian]) -> Vec<C> {
+    coefficients
         .iter()
         .map(|coefficient| {
             let mut rounded = p.rational(&coefficient.re);
@@ -680,8 +882,8 @@ impl PreparedRows {
         })
     }
 
-    /// Preserve row arithmetic and fresh stored-dyadic specialization. Only the
-    /// pole scan uses an exactly specialized square-free polynomial.
+    /// Preserve fresh stored-dyadic specialization and original pole domains.
+    /// Common-row content is cancelled exactly; only the pole scan is square-free.
     pub(crate) fn compile(
         &self,
         p: Precision,
@@ -909,7 +1111,7 @@ impl PreparedRows {
 
     /// One coefficient-extraction owner for full transport and rows-only
     /// consumers. Exact stored-dyadic source values and sparse-zero decisions
-    /// remain identical to the full compiler's original operation order.
+    /// remain shared by the full and polynomial-row-only compilers.
     fn compile_polynomial_row(
         &self,
         row: &PreparedRow,
@@ -972,17 +1174,47 @@ impl PreparedRows {
                 entries.push((*column, coefficients));
             }
         }
-        Ok((
+        let mut exact_source = source::ExactPolynomialRow {
+            denominator: exact_denominator,
+            denominator_factors: exact_denominator_factors,
+            entries: exact_entries,
+        };
+        let original_degree = exact_source.denominator.len().saturating_sub(1);
+        let reduced = {
+            let _timing = PhysicalPhaseTiming::start(
+                "ode.prepared.compile.row_normalization",
+                exact_source.denominator.len().saturating_sub(1),
+                exact_source.entries.len(),
+                None,
+            );
+            normalize_specialized_row(&mut exact_source, variable, context)?
+        };
+        // Value-free degree counts only; the enclosing row phase supplies its index.
+        drop(PhysicalPhaseTiming::start(
+            "ode.prepared.compile.row_normalized_degrees",
+            original_degree,
+            exact_source.denominator.len().saturating_sub(1),
+            None,
+        ));
+        // Original extraction above retains its domain/error checks. Only the
+        // reduced exact coefficients feed recurrence and residual arithmetic;
+        // never divide rounded polynomials to remove specialized row content.
+        let polynomial = if reduced {
+            PolynomialRow {
+                denominator: rounded_gaussian_coefficients(p, &exact_source.denominator),
+                entries: exact_source
+                    .entries
+                    .iter()
+                    .map(|(column, a)| (*column, rounded_gaussian_coefficients(p, a)))
+                    .collect(),
+            }
+        } else {
             PolynomialRow {
                 denominator,
                 entries,
-            },
-            source::ExactPolynomialRow {
-                denominator: exact_denominator,
-                denominator_factors: exact_denominator_factors,
-                entries: exact_entries,
-            },
-        ))
+            }
+        };
+        Ok((polynomial, exact_source))
     }
 }
 
@@ -1023,6 +1255,433 @@ mod polynomial_rows_tests {
         ));
         context.cancellation.cancel();
         assert!(rows.compile_polynomial_rows(p, &values, &context).is_err());
+        Ok(())
+    }
+
+    fn normalization_variable() -> Symbol {
+        symbol!("polynomial_rows_tests::normalization_x")
+    }
+
+    fn gaussian_polynomial(a: &[source::Gaussian]) -> ExactPolePolynomial {
+        ExactPolePolynomial::from_coefficients(
+            &FloatField::from_rep(source::Gaussian::new(Rational::zero(), Rational::zero())),
+            a.to_vec(),
+            Arc::new(PolyVariable::Symbol(normalization_variable())),
+        )
+    }
+
+    fn specialized_polynomial(
+        exact: &source::ExactSpecialization,
+        a: &Atom,
+    ) -> Result<ExactPolePolynomial> {
+        Ok(gaussian_polynomial(
+            &exact.polynomial(a, normalization_variable())?,
+        ))
+    }
+
+    /// Small-test oracle: reconstruct every entry against its original rational
+    /// source, and compute the full row GCD here only (never in production).
+    fn assert_normalized_row(
+        row: &source::ExactPolynomialRow,
+        original: &PreparedRow,
+        exact: &source::ExactSpecialization,
+    ) -> Result<()> {
+        let denominator = gaussian_polynomial(&row.denominator);
+        let mut product = denominator.one();
+        for (a, power) in &row.denominator_factors {
+            assert!(*power > 0);
+            product = &product * &gaussian_polynomial(a).pow(*power);
+        }
+        assert_eq!(product, denominator);
+        let mut common = denominator.clone();
+        for (column, entry) in original.matrix.iter().enumerate() {
+            let numerator = row
+                .entries
+                .iter()
+                .find(|(j, _)| *j == column)
+                .map(|(_, a)| gaussian_polynomial(a))
+                .unwrap_or_else(|| denominator.zero());
+            assert_eq!(
+                &numerator * &specialized_polynomial(exact, &entry.denominator)?,
+                &denominator * &specialized_polynomial(exact, &entry.numerator)?,
+            );
+            if !numerator.is_zero() {
+                common = common.gcd_euclidean(&numerator);
+            }
+        }
+        assert!(common.is_one());
+        Ok(())
+    }
+
+    fn compile_normalized_pair(
+        prepared: &PreparedRows,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        context: &RunContext,
+    ) -> Result<CompiledSystem> {
+        let snapshot = format!("{prepared:?}");
+        let full = prepared.compile(p, values, context)?;
+        let finite = prepared.compile_polynomial_rows(p, values, context)?;
+        let exact = source::ExactSpecialization::new(p, values)?;
+        assert_eq!(full.source.rows, prepared.source_rows);
+        for (index, original) in prepared.rows.iter().enumerate() {
+            assert_eq!(
+                finite[index].denominator,
+                full.polynomial_rows[index].denominator
+            );
+            assert_eq!(finite[index].entries, full.polynomial_rows[index].entries);
+            let (_, row_only_exact) =
+                prepared.compile_polynomial_row(original, p, values, &exact, context)?;
+            let expected = &full.exact_source_rows[index];
+            assert_eq!(row_only_exact.denominator, expected.denominator);
+            assert_eq!(
+                row_only_exact.denominator_factors,
+                expected.denominator_factors
+            );
+            assert_eq!(row_only_exact.entries, expected.entries);
+            assert_normalized_row(expected, original, &exact)?;
+            for (column, entry) in original.matrix.iter().enumerate() {
+                assert_eq!(
+                    full.matrix[index][column].numerator,
+                    polynomial_coefficients(&entry.numerator, prepared.variable, p, values)?,
+                );
+                assert_eq!(
+                    full.matrix[index][column].denominator,
+                    polynomial_coefficients(&entry.denominator, prepared.variable, p, values)?,
+                );
+            }
+        }
+        assert_eq!(format!("{prepared:?}"), snapshot);
+        Ok(full)
+    }
+
+    #[test]
+    fn specialized_row_content_trial_quotients_follow_shrinking_divisor() -> Result<()> {
+        let p = Precision::decimal(50)?;
+        let context = RunContext::default();
+        let exact = source::ExactSpecialization::new(p, &Default::default())?;
+        let x = Atom::var(normalization_variable());
+        let j = Atom::var(crate::family::imaginary_parameter());
+        let f = &x + &j;
+        let g = &x - &j;
+        let h = &x - 2;
+        let quadratic = x.clone().pow(2) + 1;
+        let coefficients = |a: &Atom| -> Result<Vec<source::Gaussian>> {
+            Ok(specialized_polynomial(&exact, a)?.coefficients().to_vec())
+        };
+        let original_denominator = specialized_polynomial(&exact, &(&quadratic * &h))?;
+        let original_entries = [&quadratic * (&x - 3), &f * (&x + 4), &f * (&x - 5)];
+        let mut row = source::ExactPolynomialRow {
+            denominator: original_denominator.coefficients().to_vec(),
+            denominator_factors: vec![(coefficients(&quadratic)?, 1), (coefficients(&h)?, 1)],
+            entries: original_entries
+                .iter()
+                .enumerate()
+                .map(|(column, a)| Ok((column, coefficients(a)?)))
+                .collect::<Result<_>>()?,
+        };
+        assert!(normalize_specialized_row(
+            &mut row,
+            normalization_variable(),
+            &context
+        )?);
+        let denominator = gaussian_polynomial(&row.denominator);
+        assert_eq!(denominator, specialized_polynomial(&exact, &(&g * &h))?);
+        // The first trial succeeds for the quadratic. The second entry shrinks
+        // it to x+i, invalidating that saved quotient. Later trials can be reused.
+        for (column, numerator) in &row.entries {
+            assert_eq!(
+                &gaussian_polynomial(numerator) * &original_denominator,
+                &specialized_polynomial(&exact, &original_entries[*column])? * &denominator,
+            );
+        }
+        assert_eq!(
+            gaussian_polynomial(&row.entries[0].1),
+            specialized_polynomial(&exact, &(&g * (&x - 3)))?,
+        );
+        Ok(())
+    }
+
+    #[test]
+    fn specialized_row_content_reserved_j_counterexample() -> Result<()> {
+        let context = RunContext::default();
+        let p = Precision::decimal(50)?;
+        let x = Atom::var(normalization_variable());
+        let j = Atom::var(crate::family::imaginary_parameter());
+        let prepared = PreparedRows::new(
+            normalization_variable(),
+            &[vec![
+                Atom::one() / (&x + &j),
+                Atom::one() / (x.clone().pow(2) + 1),
+            ]],
+            &context,
+        )?;
+        let exact = source::ExactSpecialization::new(p, &Default::default())?;
+        assert_eq!(
+            specialized_polynomial(&exact, &prepared.rows[0].denominator)?.degree(),
+            3
+        );
+        let compiled = compile_normalized_pair(&prepared, p, &Default::default(), &context)?;
+        let row = &compiled.exact_source_rows[0];
+        assert_eq!(
+            gaussian_polynomial(&row.denominator),
+            specialized_polynomial(&exact, &(x.clone().pow(2) + 1))?
+        );
+        assert_eq!(gaussian_polynomial(&row.denominator).degree(), 2);
+        assert_eq!(row.entries.len(), 2);
+        assert_eq!(
+            gaussian_polynomial(&row.entries[0].1),
+            specialized_polynomial(&exact, &(&x - &j))?
+        );
+        assert!(gaussian_polynomial(&row.entries[1].1).is_one());
+        assert_eq!(compiled.poles.len(), 2);
+        assert!(
+            compiled
+                .poles
+                .iter()
+                .any(|z| p.close(z, &p.complex(0, 1), 30))
+        );
+        assert!(
+            compiled
+                .poles
+                .iter()
+                .any(|z| p.close(z, &p.complex(0, -1), 30))
+        );
+        // A second specialization cannot inherit the previous reduced row.
+        compile_normalized_pair(
+            &prepared,
+            Precision::decimal(65)?,
+            &Default::default(),
+            &context,
+        )?;
+        Ok(())
+    }
+
+    #[test]
+    fn specialized_row_content_powers_mixed_overlaps_and_gaussian_sign() -> Result<()> {
+        let context = RunContext::default();
+        let p = Precision::decimal(50)?;
+        let x = Atom::var(normalization_variable());
+        let j = Atom::var(crate::family::imaginary_parameter());
+        let f = &x + &j;
+        let quadratic = x.clone().pow(2) + 1;
+        let h = &x - 2;
+        let content = Atom::num(3) * &j - 2;
+        let prepared = PreparedRows::new(
+            normalization_variable(),
+            &[vec![
+                Atom::one() / (&content * f.pow(3) * &h),
+                (&j - 3) / (Atom::num(2) * quadratic.pow(2) * h.pow(2)),
+                Atom::Zero,
+            ]],
+            &context,
+        )?;
+        let exact = source::ExactSpecialization::new(p, &Default::default())?;
+        let before = specialized_polynomial(&exact, &prepared.rows[0].denominator)?;
+        let compiled = compile_normalized_pair(&prepared, p, &Default::default(), &context)?;
+        let row = &compiled.exact_source_rows[0];
+        let after = gaussian_polynomial(&row.denominator);
+        assert_eq!(before.degree(), 9);
+        assert_eq!(after.degree(), 7);
+        assert_eq!(before.lcoeff(), after.lcoeff());
+        assert!(!after.lcoeff().im.is_zero());
+        assert_eq!(
+            after,
+            specialized_polynomial(
+                &exact,
+                &((&x + &j).pow(3) * (&x - &j).pow(2) * (&x - 2).pow(2))
+            )?
+            .mul_coeff(&before.lcoeff()),
+        );
+        assert_eq!(
+            row.entries.iter().map(|(j, _)| *j).collect::<Vec<_>>(),
+            vec![0, 1]
+        );
+        assert_eq!(
+            row.denominator_factors
+                .iter()
+                .filter(|(a, _)| a.len() == 1)
+                .count(),
+            1
+        );
+        Ok(())
+    }
+
+    #[test]
+    fn specialized_row_content_parameter_overlap_and_invalid_values() -> Result<()> {
+        let context = RunContext::default();
+        let p = Precision::decimal(50)?;
+        let x = Atom::var(normalization_variable());
+        let a = Atom::var(symbol!("polynomial_rows_tests::normalization_a"));
+        let prepared = PreparedRows::new(
+            normalization_variable(),
+            &[vec![
+                Atom::one() / (&x - 1),
+                Atom::one() / (x.clone().pow(2) - Atom::num(3) * &x + 2 + &a),
+            ]],
+            &context,
+        )?;
+        for (value, degree) in [(0, 2), (1, 3)] {
+            let values = ahash::HashMap::from_iter([(a.clone(), p.i(value))]);
+            let compiled = compile_normalized_pair(&prepared, p, &values, &context)?;
+            assert_eq!(compiled.exact_source_rows[0].denominator.len(), degree + 1);
+        }
+        assert!(
+            prepared
+                .compile_polynomial_rows(p, &Default::default(), &context)
+                .is_err()
+        );
+        let exact = source::ExactSpecialization::new(p, &Default::default())?;
+        assert!(matches!(
+            exact.polynomial(&prepared.rows[0].denominator, normalization_variable()),
+            Err(Error::Unsupported(_))
+        ));
+        let nonfinite = ahash::HashMap::from_iter([(a.clone(), p.parse("inf", "0")?)]);
+        assert!(matches!(
+            prepared.compile(p, &nonfinite, &context),
+            Err(Error::InvalidInput(_))
+        ));
+        assert!(matches!(
+            prepared.compile_polynomial_rows(p, &nonfinite, &context),
+            Err(Error::InvalidInput(_))
+        ));
+        let invalid = PreparedRows::new(
+            normalization_variable(),
+            &[vec![Atom::one() / (&a * (&x - 1))]],
+            &context,
+        )?;
+        let values = ahash::HashMap::from_iter([(a, p.zero())]);
+        assert!(matches!(
+            invalid.compile(p, &values, &context),
+            Err(Error::Numerical(_))
+        ));
+        assert!(matches!(
+            invalid.compile_polynomial_rows(p, &values, &context),
+            Err(Error::Numerical(_))
+        ));
+        Ok(())
+    }
+
+    #[test]
+    fn specialized_row_content_zero_rows_preserve_original_guards() -> Result<()> {
+        let context = RunContext::default();
+        let p = Precision::decimal(50)?;
+        let x = Atom::var(normalization_variable());
+        let a = Atom::var(symbol!("polynomial_rows_tests::zero_a"));
+        let b = Atom::var(symbol!("polynomial_rows_tests::zero_b"));
+        let j = Atom::var(crate::family::imaginary_parameter());
+        let values = ahash::HashMap::from_iter([(a.clone(), p.zero()), (b.clone(), p.zero())]);
+        let prepared = PreparedRows::new(
+            normalization_variable(),
+            &[vec![&a / (&x + 1), Atom::Zero]],
+            &context,
+        )?;
+        let full = compile_normalized_pair(&prepared, p, &values, &context)?;
+        assert_eq!(full.polynomial_rows[0].denominator, vec![p.i(1)]);
+        assert!(full.polynomial_rows[0].entries.is_empty());
+        assert!(full.exact_source_rows[0].denominator_factors.is_empty());
+        assert_eq!(full.poles, vec![p.i(-1)]);
+        for entry in [&b / (&a * (&x + 1)), &b / ((j.pow(2) + 1) * (&x + 1))] {
+            let invalid = PreparedRows::new(normalization_variable(), &[vec![entry]], &context)?;
+            assert!(invalid.compile(p, &values, &context).is_err());
+            assert!(
+                invalid
+                    .compile_polynomial_rows(p, &values, &context)
+                    .is_err()
+            );
+            // Directly exercise the exact factor guard ahead of zero-row
+            // canonicalization, independently of the entry-wise guard.
+            let exact = source::ExactSpecialization::new(p, &values)?;
+            assert!(
+                invalid
+                    .compile_polynomial_row(&invalid.rows[0], p, &values, &exact, &context)
+                    .is_err()
+            );
+        }
+        let missing =
+            PreparedRows::new(normalization_variable(), &[vec![&b / (&x + 1)]], &context)?;
+        assert!(
+            missing
+                .compile_polynomial_rows(p, &Default::default(), &context)
+                .is_err()
+        );
+        context.cancellation.cancel();
+        assert!(matches!(
+            prepared.compile_polynomial_rows(p, &values, &context),
+            Err(Error::Cancelled)
+        ));
+        Ok(())
+    }
+
+    #[test]
+    fn specialized_row_content_includes_every_epsilon_shift() -> Result<()> {
+        let context = RunContext::default();
+        let p = Precision::decimal(50)?;
+        let x = Atom::var(normalization_variable());
+        let j = Atom::var(crate::family::imaginary_parameter());
+        let f = &x + &j;
+        let q = x.pow(2) + 1;
+        // One physical row; columns 0,1,2 represent epsilon shifts 0,1,2.
+        for (entries, degree, columns) in [
+            (
+                vec![Atom::one() / &f, Atom::Zero, Atom::one() / &q],
+                2,
+                vec![0, 2],
+            ),
+            // The final shift forbids the cancellation allowed by the first two.
+            (
+                vec![Atom::one() / &f, Atom::one() / &q, Atom::one() / (&f * &q)],
+                3,
+                vec![0, 1, 2],
+            ),
+        ] {
+            let prepared = PreparedRows::new(normalization_variable(), &[entries], &context)?;
+            let compiled = compile_normalized_pair(&prepared, p, &Default::default(), &context)?;
+            let row = &compiled.exact_source_rows[0];
+            assert_eq!(row.denominator.len(), degree + 1);
+            assert_eq!(
+                row.entries.iter().map(|(j, _)| *j).collect::<Vec<_>>(),
+                columns
+            );
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn specialized_row_content_known_linear_solution_and_exact_residual() -> Result<()> {
+        let context = RunContext::default();
+        let p = Precision::decimal(50)?;
+        let x = Atom::var(normalization_variable());
+        let j = Atom::var(crate::family::imaginary_parameter());
+        // After J=i, (x-J)/(x^2+1) = 1/(x+i). The solution with y(0)=1
+        // is exactly y=1-i*x. Both original poles must remain excluded.
+        let prepared = PreparedRows::new(
+            normalization_variable(),
+            &[vec![(&x - &j) / (x.pow(2) + 1)]],
+            &context,
+        )?;
+        let compiled = compile_normalized_pair(&prepared, p, &Default::default(), &context)?;
+        assert_eq!(compiled.exact_source_rows[0].denominator.len(), 2);
+        assert_eq!(compiled.poles.len(), 2);
+        let coefficients = compiled.taylor(&p.zero(), &[p.i(1)], 4)?;
+        assert_eq!(
+            coefficients,
+            vec![
+                vec![p.i(1)],
+                vec![p.complex(0, -1)],
+                vec![p.zero()],
+                vec![p.zero()],
+                vec![p.zero()]
+            ]
+        );
+        let residual = source::ExactSourceResidual::new(
+            p,
+            &compiled.exact_source_rows,
+            &p.zero(),
+            &coefficients,
+            1,
+        )?;
+        assert!(residual.residuals[0].is_zero());
         Ok(())
     }
 }
