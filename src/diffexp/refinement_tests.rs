@@ -509,6 +509,48 @@ fn prepared_epsilon_refinement_returns_accepted_profile_and_checks_checkpoints()
 }
 
 #[test]
+fn public_retained_profile_matches_central_route_for_complex_two_epsilon_orders() -> Result<()> {
+    let system = EpsilonSystem {
+        variable: symbol!("public_retained_complex::x"),
+        matrices: vec![vec![vec![Atom::zero()]], vec![vec![Atom::one()]]],
+    };
+    let context = RunContext::default();
+    let prepared = system.prepare_with_context(&context)?;
+    for bits in [80, 201] {
+        let initial = prepared.compile(Precision { bits }, &Default::default())?;
+        let options = FlowOptions {
+            digits: 12,
+            guard_digits: 20,
+            series_order: 16,
+            ..Default::default()
+        };
+        let boundary = |p: Precision| {
+            Ok(EpsilonBoundary {
+                point: p.zero(),
+                leading: -1,
+                coefficients: vec![vec![p.complex(1, 2)], vec![p.complex(-3, 1)]],
+            })
+        };
+        let (actual, accepted) = prepared.transport_with_compiled(
+            Some(initial),
+            boundary,
+            &[Atom::one()],
+            &options,
+            &context,
+            true,
+        )?;
+        let reference =
+            transport_epsilon(&system, boundary, &[Atom::one()], &options, &context, true)?;
+        assert_eq!(accepted.rows.p.bits, actual.diagnostics.working_bits);
+        assert_eq!(actual.coefficients, reference.coefficients);
+        assert_eq!(actual.comparison_errors, reference.comparison_errors);
+        assert_eq!(actual.verified_digits, reference.verified_digits);
+        assert_eq!(actual.checkpoints.len(), reference.checkpoints.len());
+    }
+    Ok(())
+}
+
+#[test]
 fn prepared_rational_physical_transport_keeps_complex_source_and_finite_floor() -> Result<()> {
     use crate::physical_transport::PhysicalTransport;
     use crate::transport_cache::*;

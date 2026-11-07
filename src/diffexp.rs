@@ -910,7 +910,13 @@ impl PreparedEpsilonSystem {
     /// Move the path-check compilation into the first matching profile, then
     /// return the accepted profile for incoming-error propagation. This cache is
     /// local to one transport; it never retains interpoint numerical values.
-    pub(crate) fn transport_with_compiled(
+    ///
+    /// If supplied, `initial` must have been compiled from this same prepared
+    /// system with the same parameter values. A matching precision is reused;
+    /// other profiles compile afresh with default parameter values. The returned
+    /// profile is the one accepted by central precision/order refinement; input
+    /// boundary uncertainty still requires separate propagation and assessment.
+    pub fn transport_with_compiled(
         &self,
         mut initial: Option<CompiledEpsilonSystem>,
         boundary_provider: impl Fn(Precision) -> Result<EpsilonBoundary>,

@@ -28,19 +28,23 @@ pub struct PreparedAlgebraicSystem {
     domain_guards: Vec<Atom>,
 }
 
-// Only the full public preparation may expose transport compilation. These
-// wrappers never expose their inner preparations/compiled systems: omitted
-// defect residuals are valid only for weighted norm evaluation.
-pub(crate) struct PreparedAlgebraicNorm {
+/// Exact preparation restricted to weighted matrix-norm estimates.
+///
+/// Original root, pole and domain checks remain enabled. Central-defect rows
+/// are omitted, so this wrapper deliberately exposes no transport operation or
+/// access to its inner full-system representation.
+pub struct PreparedAlgebraicNorm {
     inner: PreparedAlgebraicSystem,
 }
 
-pub(crate) struct CompiledAlgebraicNorm {
+/// Numerical weighted-norm evaluator without central transport or residuals.
+pub struct CompiledAlgebraicNorm {
     inner: CompiledAlgebraicSystem,
 }
 
 impl PreparedAlgebraicNorm {
-    pub(crate) fn compile_with_context(
+    /// Specialize the retained norm kernels at the requested precision.
+    pub fn compile_with_context(
         &self,
         p: Precision,
         context: &RunContext,
@@ -54,7 +58,12 @@ impl PreparedAlgebraicNorm {
 }
 
 impl CompiledAlgebraicNorm {
-    pub(crate) fn error_norm_integral_weighted(
+    /// Integrate the existing finite-MPFR weighted matrix-norm estimate.
+    ///
+    /// Weights must be finite and positive in epsilon-major component order.
+    /// This estimates matrix amplification; it supplies neither arithmetic-error
+    /// enclosure nor boundary accuracy credit or physical-path admission.
+    pub fn error_norm_integral_weighted(
         &self,
         start: &C,
         end: &C,
@@ -78,10 +87,7 @@ impl AlgebraicSystem {
 
     /// Keep all normalized entries, roots and domain/pole checks, but omit
     /// central-defect row LCMs. The result permits only norm compilation.
-    pub(crate) fn prepare_norm_with_context(
-        &self,
-        context: &RunContext,
-    ) -> Result<PreparedAlgebraicNorm> {
+    pub fn prepare_norm_with_context(&self, context: &RunContext) -> Result<PreparedAlgebraicNorm> {
         Ok(PreparedAlgebraicNorm {
             inner: self.prepare_internal(context, false)?,
         })
