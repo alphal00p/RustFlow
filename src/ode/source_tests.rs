@@ -338,9 +338,9 @@ fn denominator_enclosure_is_inconclusive_instead_of_requesting_precision() {
 }
 
 #[test]
-fn nondyadic_severe_cancellation_fails_boundedly_without_false_metadata() {
-    // Under the existing working-derived local tolerance, source roundoff and
-    // tolerance tighten together. Preserve that conservative limitation.
+fn nondyadic_severe_cancellation_with_a_moving_local_budget_still_fails() {
+    // Low-level transport obeys its declared working-derived local tolerance.
+    // Raising both arithmetic and that local target still cannot resolve this.
     for working in [120, 140, 160] {
         let p = Precision::decimal(working).unwrap();
         let error = large_system(Rational::from((1, 3)))
@@ -356,16 +356,48 @@ fn nondyadic_severe_cancellation_fails_boundedly_without_false_metadata() {
             .unwrap_err();
         assert!(matches!(error, Error::InsufficientPrecision { .. }));
     }
-    // The shared refinement wrapper retries this arithmetic failure, but the
-    // moving local tolerance remains unresolved within its finite budget.
-    let error = transport_epsilon(
-        &large_system(Rational::from((1, 3))),
-        |p| Ok(boundary(p)),
-        &[atom("1")],
-        &options(120),
-        &RunContext::default(),
-        true,
-    )
-    .unwrap_err();
-    assert!(matches!(error, Error::InsufficientPrecision { .. }));
+}
+
+#[test]
+fn nondyadic_source_precision_recovery_requires_two_fresh_successful_profiles() {
+    for arithmetic in [ResidualArithmetic::Ball, ResidualArithmetic::AdaptiveInteger] {
+        let calls = std::cell::RefCell::new(Vec::new());
+        let opts = FlowOptions {
+            residual_arithmetic: arithmetic,
+            max_precision_attempts: 2,
+            ..options(120)
+        };
+        let result = transport_epsilon(
+            &large_system(Rational::from((1, 3))),
+            |p| {
+                calls.borrow_mut().push(p.bits);
+                Ok(boundary(p))
+            },
+            &[atom("1")],
+            &opts,
+            &RunContext::default(),
+            true,
+        )
+        .unwrap();
+        let calls = calls.into_inner();
+        // The first profile fails; neither one successful retry nor an old
+        // failed trajectory can supply the independent comparison.
+        assert_eq!(calls.len(), 3);
+        assert!(calls[0] < calls[1] && calls[1] < calls[2]);
+        assert_eq!(result.diagnostics.working_bits, calls[2]);
+        assert_eq!(result.verified_digits, Some(opts.digits));
+        let p = Precision { bits: calls[2] };
+        assert!(p.close(
+            &result.coefficients[0][0],
+            &p.rational(&Rational::from((1, 3))),
+            opts.digits,
+        ));
+        assert_eq!(result.coefficients[0][1], p.i(1));
+        assert!(result.comparison_errors[0][0] < p.tolerance(opts.digits));
+        assert_eq!(result.comparison_errors[0][1], p.real(0));
+        assert_eq!(result.diagnostics.steps, 1);
+        assert!(result.segments.iter().all(|s| s.working_bits == p.bits));
+        assert_eq!(result.checkpoints.len(), 1);
+        assert_eq!(result.checkpoints[0].comparison_errors, result.comparison_errors);
+    }
 }

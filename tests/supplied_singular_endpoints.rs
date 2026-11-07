@@ -432,6 +432,78 @@ fn divergent_finite_epsilon_coefficients_and_unstable_zero_sectors_are_refused_a
 }
 
 #[test]
+fn prepared_rational_endpoint_keeps_admission_depth_and_terminal_cache_guards() {
+    let legacy = ordinary(&[&["1/(2*s)"]]);
+    let flow = legacy.prepare_epsilon(0).unwrap();
+    assert_eq!(flow.identity().key(), legacy.identity().key());
+    let range = EpsilonRange::new(0, 0).unwrap();
+    let p = Precision::decimal(90).unwrap();
+    let mut cache = bank(
+        flow.identity(),
+        range,
+        "1/16",
+        None,
+        vec![vec![p.rational(&Rational::from((1, 4)))]],
+        70,
+    );
+    let request = request(range, None);
+    let deny = |_: &CachedBoundary, _: &EndpointChart| Ok(false);
+    assert!(
+        flow.evaluate_endpoint(
+            &mut cache,
+            &request,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &deny
+        )
+        .is_err()
+    );
+    assert_eq!(cache.len(), 1);
+    assert!(cache.endpoint_entries().is_empty());
+    let result = flow
+        .evaluate_endpoint(
+            &mut cache,
+            &request,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &admit,
+        )
+        .unwrap();
+    assert!(p.close(&result.boundary.coefficients[0][0], &p.zero(), 30));
+    let hit = flow
+        .evaluate_endpoint(
+            &mut cache,
+            &request,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &admit,
+        )
+        .unwrap();
+    assert!(hit.cache_hit);
+    assert_eq!(result.boundary.coefficients, hit.boundary.coefficients);
+    assert!(
+        flow.evaluate_endpoint(
+            &mut cache,
+            &request,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &deny
+        )
+        .is_err()
+    );
+    let mut deeper = request;
+    deeper.range = EpsilonRange::new(0, 1).unwrap();
+    assert!(
+        matches!(flow.evaluate_endpoint(&mut cache, &deeper, &options(), &RunContext::default(), &cost(), &admit), Err(Error::InvalidInput(message)) if message.contains("prepared epsilon depth"))
+    );
+    assert_eq!(cache.endpoint_entries().len(), 1);
+}
+
+#[test]
 fn endpoint_admission_and_cancellation_roll_back_regular_transport() {
     let flow = ordinary(&[&["1/(2*s)"]]);
     let range = EpsilonRange::new(0, 0).unwrap();

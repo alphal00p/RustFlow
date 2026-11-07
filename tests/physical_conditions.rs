@@ -209,6 +209,130 @@ fn complex_guard_coefficients_use_common_real_path_zeros() {
 }
 
 #[test]
+fn tiny_leading_terms_admit_a_nearby_exact_rational_path() {
+    let (s, epsilon) = symbols();
+    let s = Atom::var(s);
+    let scale = Integer::from(10).pow(100);
+    let small = Atom::num(Rational::from((Integer::one(), scale.clone())));
+    // Widely separated far-root scales become a cluster under numeric root
+    // scaling. The exact constant-dominance bound needs no root enumeration.
+    let polynomial = Atom::one()
+        + &small * &s
+        + small.clone().pow(2) * s.clone().pow(2)
+        + small.pow(6) * s.pow(3);
+    let imaginary = Atom::num(Complex::new(Rational::zero(), Rational::one()));
+    let start = point(Atom::num(Rational::from((
+        &scale + Integer::from(7),
+        scale.clone(),
+    ))));
+    let end = point(Atom::num(Rational::from((
+        &scale + Integer::from(11),
+        scale,
+    ))));
+    let p = Precision::decimal(90).unwrap();
+    for guard in [
+        polynomial.clone(),
+        // Hide the visible factor to exercise the common real/imaginary and
+        // formal-epsilon coefficient GCD before applying the bound.
+        (polynomial * (Atom::var(epsilon) + imaginary)).expand(),
+    ] {
+        assert!(
+            flow(&[guard])
+                .identity()
+                .conditions_admit_straight_path(&start, &end, p, 20)
+                .unwrap()
+        );
+    }
+}
+
+#[test]
+fn inconclusive_no_root_bound_retains_numeric_admission_and_rejection() {
+    let s = Atom::var(symbols().0);
+    let p = Precision::decimal(90).unwrap();
+    // Both have |a0| <= sum_{k>0} |ak| R^k. The first has only distant
+    // complex roots; the second has an interior real root at 1/2.
+    for (guard, expected) in [
+        (s.clone().pow(2) - &s + Atom::one(), true),
+        (Atom::one() - Atom::num(2) * &s, false),
+    ] {
+        assert_eq!(
+            flow(&[guard])
+                .identity()
+                .conditions_admit_straight_path(&point(Atom::new()), &point(Atom::one()), p, 20,)
+                .unwrap(),
+            expected
+        );
+    }
+}
+
+#[test]
+fn no_root_bound_preserves_endpoints_and_the_tolerance_rectangle() {
+    let s = Atom::var(symbols().0);
+    let p = Precision::decimal(100).unwrap();
+    let digits = 12;
+    let tolerance = p.tolerance(digits + 8).to_rational();
+    let half_tolerance = &tolerance * &Rational::from((1, 2));
+    let near_right = Atom::num(Rational::one() + &half_tolerance);
+    let near_left = Atom::num(-half_tolerance);
+    let near_imaginary = Atom::num(tolerance * Rational::from((99, 100)));
+    // The public entry point rejects excluded endpoints during point
+    // validation, before reaching the interval guard.
+    for guard in [s.clone(), &s - Atom::one()] {
+        assert!(matches!(
+            flow(&[guard]).identity().conditions_admit_straight_path(
+                &point(Atom::new()),
+                &point(Atom::one()),
+                p,
+                digits,
+            ),
+            Err(Error::InvalidInput(_))
+        ));
+    }
+    for guard in [
+        // A unit-disk-only proof would wrongly admit this real root > 1.
+        &near_right - &s,
+        &s - near_left,
+        // Conjugate roots just inside the old rectangle, beyond Re=1 and
+        // with |Im|=0.99*tol, must still be rejected by root enumeration.
+        (&s - near_right).pow(2) + near_imaginary.pow(2),
+    ] {
+        assert!(
+            !flow(&[guard])
+                .identity()
+                .conditions_admit_straight_path(
+                    &point(Atom::new()),
+                    &point(Atom::one()),
+                    p,
+                    digits,
+                )
+                .unwrap()
+        );
+    }
+}
+
+#[test]
+fn no_root_proof_keeps_formal_epsilon_and_original_rational_domains() {
+    let (s, epsilon) = symbols();
+    let s = Atom::var(s);
+    let epsilon = Atom::var(epsilon);
+    let safe = Atom::num(10) + &s;
+    let p = Precision::decimal(90).unwrap();
+    for (guard, expected) in [
+        (&safe * &epsilon, true),
+        (&safe / (&s - &epsilon), true),
+        (&safe / (&s - Atom::num((1, 2))), false),
+    ] {
+        assert_eq!(
+            flow(&[guard])
+                .identity()
+                .conditions_admit_straight_path(&point(Atom::new()), &point(Atom::one()), p, 20,)
+                .unwrap(),
+            expected
+        );
+    }
+}
+
+#[test]
 fn stationary_coordinates_do_not_hide_original_matrix_poles() {
     let (s, epsilon) = symbols();
     let t = symbol!("physical_conditions_test::t");

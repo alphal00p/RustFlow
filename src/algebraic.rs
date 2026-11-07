@@ -17,7 +17,7 @@ pub(crate) use frobenius::EndpointLinearMap;
 pub use frobenius::{
     AlgebraicEndpointExpansion, PreparedAlgebraicFrobenius, RationalAlgebraicSystem,
 };
-pub use prepared::PreparedAlgebraicSystem;
+pub use prepared::{CompiledAlgebraicNorm, PreparedAlgebraicNorm, PreparedAlgebraicSystem};
 use residual::AlgebraicResidualChart;
 
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution, EpsilonSystem};

@@ -20,6 +20,9 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
+#[path = "transport_cache_dense_key.rs"]
+mod dense_key;
+
 const VERSION: u32 = 8;
 const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x08";
 const FILE: &str = "physical-boundaries.bin";
@@ -398,16 +401,20 @@ impl IdentitySystem {
                     .derivatives
                     .iter()
                     .map(|(&s, m)| {
-                        (
+                        Ok((
                             Atom::var(s).to_canonical_string(),
                             m.iter()
-                                .map(|row| row.iter().map(expression).collect::<Vec<_>>())
-                                .collect::<Vec<_>>(),
-                        )
+                                .map(|row| {
+                                    row.iter()
+                                        .map(dense_key::coefficient)
+                                        .collect::<Result<Vec<_>>>()
+                                })
+                                .collect::<Result<Vec<_>>>()?,
+                        ))
                     })
-                    .collect::<Vec<_>>();
+                    .collect::<Result<Vec<_>>>()?;
                 derivatives.sort_by(|a, b| a.0.cmp(&b.0));
-                fingerprint(&("dense", derivatives))?
+                fingerprint(&("dense-rational-v1", derivatives))?
             }
             Self::Canonical(system) => fingerprint(&(
                 "canonical-dlog",

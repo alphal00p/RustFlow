@@ -8,6 +8,9 @@ use std::collections::{BTreeMap, BTreeSet};
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
+mod prepared_epsilon;
+pub use prepared_epsilon::PreparedKinematicEpsilon;
+
 /// Partial-derivative matrices `dY/ds = A_s Y` in a common ordered basis.
 ///
 /// Every physical variable appearing in an entry must have a matrix, including
@@ -108,6 +111,11 @@ impl KinematicSystem {
     /// that coordinate is stationary; a limiting prescription is then required.
     pub fn pullback(&self, path: &KinematicPath) -> Result<DifferentialSystem> {
         self.validate()?;
+        self.validate_path(path)?;
+        self.pullback_validated(path)
+    }
+
+    fn validate_path(&self, path: &KinematicPath) -> Result<()> {
         path.validate()?;
         if path.parameter == self.epsilon || path.coordinates.contains_key(&self.epsilon) {
             return Err(Error::InvalidInput(
@@ -119,6 +127,10 @@ impl KinematicSystem {
                 "path coordinates must match all physical derivative variables exactly".into(),
             ));
         }
+        Ok(())
+    }
+
+    fn pullback_validated(&self, path: &KinematicPath) -> Result<DifferentialSystem> {
         let substitutions = path
             .coordinates
             .iter()
@@ -127,6 +139,11 @@ impl KinematicSystem {
         let n = self.derivatives.values().next().unwrap().len();
         let mut matrix = vec![vec![Atom::new(); n]; n];
         let symbols = BTreeSet::from([path.parameter, self.epsilon]);
+        let affine = path.coordinates.values().all(|coordinate| {
+            !coordinate
+                .derivative(path.parameter)
+                .contains_symbol(path.parameter)
+        });
         for (variable, derivative) in &self.derivatives {
             let jacobian = path.coordinates[variable].derivative(path.parameter);
             exact_expression(jacobian.as_view(), &symbols)?;
@@ -134,6 +151,18 @@ impl KinematicSystem {
                 for (entry, partial) in row.iter_mut().zip(partial_row) {
                     let restricted = substitute(partial, &substitutions);
                     exact_expression(restricted.as_view(), &symbols)?;
+                    // Collect the polynomial terms created by affine substitution
+                    // before combining rational functions. Otherwise rational GCDs
+                    // repeatedly process large unevaluated products of coordinates.
+                    // Check the original partial first, including stationary ones:
+                    // neither expansion nor a zero Jacobian may hide its poles.
+                    let restricted = if affine {
+                        let expanded = restricted.expand();
+                        exact_expression(expanded.as_view(), &symbols)?;
+                        expanded
+                    } else {
+                        restricted
+                    };
                     *entry += &jacobian * restricted;
                 }
             }

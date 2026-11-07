@@ -118,7 +118,9 @@ pub use options::{
 #[cfg(feature = "automatic")]
 pub use physical_family::PreparedPhysicalFamily;
 #[cfg(feature = "automatic")]
-pub use physical_targets::ProjectedLaurentExpansion;
+pub use physical_targets::{
+    PreparedKinematicTargetProjection, PreparedTargetProjection, ProjectedLaurentExpansion,
+};
 pub use physical_transport::RustFlow;
 pub use projections::{ProjectionFactors, SampleNormalization};
 #[cfg(feature = "automatic")]

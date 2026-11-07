@@ -871,9 +871,9 @@ fn solve<const N: usize>(
                 if options.parametric_rules {
                     let started = std::time::Instant::now();
                     let solver = &solvers[&sector];
-                    let bank = parametric_banks
-                        .entry(sector)
-                        .or_insert_with(|| parametric::Bank::new(&sources, solver));
+                    let bank = parametric_banks.entry(sector).or_insert_with(|| {
+                        parametric::Bank::for_family(&sources, solver, family.family.loop_count())
+                    });
                     let before = (
                         bank.generated,
                         bank.hits,

@@ -175,15 +175,10 @@ pub(crate) fn quotient_series(
     Ok(out)
 }
 
-fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Result<Vec<C>> {
+/// A power-of-two Fujiwara upper bound, also used on the reversed polynomial
+/// to bound the smallest nonzero root. No coefficient is discarded.
+fn pole_bound_exponent(p: Precision, coefficients: &[C]) -> Result<i64> {
     let degree = coefficients.len() - 1;
-    if degree == 1 {
-        return Ok(vec![p.neg(&p.div(&coefficients[0], &coefficients[1]))]);
-    }
-    // Fujiwara's bound, rounded upward to a power of two. With x = scale*z,
-    // every root lies in the unit disk and the monic coefficients stay bounded.
-    // Symbolica's Aberth solver uses an absolute polynomial residual; passing
-    // raw integer coefficients can make its stopping tolerance unattainable.
     let leading = &coefficients[degree];
     let mut exponent = None;
     for (i, coefficient) in coefficients[..degree].iter().enumerate() {
@@ -197,71 +192,198 @@ fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Resul
             exponent = Some(exponent.map_or(bound, |old: i64| old.max(bound)));
         }
     }
-    let scale = p.powi(&p.i(2), exponent.unwrap_or(0));
-    if !p.finite(&scale) || scale == p.zero() {
+    Ok(exponent.unwrap_or(0))
+}
+
+fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Result<Vec<C>> {
+    let degree = coefficients.len() - 1;
+    if degree == 1 {
+        return Ok(vec![p.neg(&p.div(&coefficients[0], &coefficients[1]))]);
+    }
+    // With x = scale*z all roots lie in the unit disk. One very large pole
+    // can nevertheless put well-separated physical poles into a tiny z-disk.
+    let exponent = pole_bound_exponent(p, coefficients)?;
+    let first_nonzero = coefficients
+        .iter()
+        .position(|c| *c != p.zero())
+        .ok_or_else(|| Error::Numerical("identically zero pole polynomial".into()))?;
+    let reversed = coefficients[first_nonzero..]
+        .iter()
+        .rev()
+        .cloned()
+        .collect::<Vec<_>>();
+    let inverse_exponent = pole_bound_exponent(p, &reversed)?;
+    // Every nonzero scaled root has |z| >= 2^-small_bits. Exact zero roots
+    // are handled by Symbolica itself, independently of the tolerance.
+    let small_bits = (exponent + inverse_exponent).max(0);
+    // Only the root solver gets guard precision. In particular these bits do
+    // not change row arithmetic, boundary/source floors or transport credit.
+    const MAX_ROOT_EXTRA_BITS: i64 = 4096;
+    let extra_bits = small_bits + 32;
+    if extra_bits > MAX_ROOT_EXTRA_BITS {
+        return Err(Error::Numerical(
+            "pole root scale exceeds bounded extra precision".into(),
+        ));
+    }
+    let q = Precision {
+        bits: p
+            .bits
+            .checked_add(extra_bits as u32)
+            .ok_or_else(|| Error::Limit("pole root precision overflow".into()))?,
+    };
+    let scale = q.powi(&q.i(2), exponent);
+    if !q.finite(&scale) || scale == q.zero() {
         return Err(Error::Numerical(
             "pole scaling exceeds numerical range".into(),
         ));
     }
+    // Lift stored dyadics, never invent additional source digits. PreparedRows
+    // has already specialized and square-free reduced the exact polynomial.
+    let coefficients = coefficients
+        .iter()
+        .map(|c| q.round(c))
+        .collect::<Vec<_>>();
+    let leading = &coefficients[degree];
     let mut scaled = coefficients
         .iter()
         .enumerate()
-        .map(|(i, c)| p.div(&p.div(c, leading), &p.powi(&scale, (degree - i) as i64)))
+        .map(|(i, c)| q.div(&q.div(c, leading), &q.powi(&scale, (degree - i) as i64)))
         .collect::<Vec<_>>();
-    scaled[degree] = p.i(1);
+    scaled[degree] = q.i(1);
+    if scaled.iter().any(|c| !q.finite(c)) {
+        return Err(Error::Numerical(
+            "nonfinite scaled pole polynomial".into(),
+        ));
+    }
     let poly = UnivariatePolynomial::from_coefficients(
-        &FloatField::from_rep(p.zero()),
+        &FloatField::from_rep(q.zero()),
         scaled.clone(),
         Arc::new(PolyVariable::Symbol(variable)),
     );
-    let roots = poly.roots(1000, &p.tolerance(p.bits / 4)).map_err(|_| {
+    // Pinned Symbolica bounds the Newton step by tol*max(1, |z|), not by
+    // tol*|z|. Tighten that absolute tolerance to resolve the smallest pole.
+    let solver_tolerance = q
+        .mul(
+            &C::new(q.tolerance(p.bits / 4), q.real(0)),
+            &q.powi(&q.i(2), -small_bits),
+        )
+        .re;
+    let roots = poly.roots(1000, &solver_tolerance).map_err(|_| {
         Error::Numerical(format!(
             "degree-{degree} scaled pole root finding did not converge"
         ))
     })?;
-    if roots.len() != degree || roots.iter().any(|root| !p.finite(root)) {
+    if roots.len() != degree || roots.iter().any(|root| !q.finite(root)) {
         return Err(Error::Numerical("incomplete pole root set".into()));
     }
-    // Verify Newton corrections as well as the polynomial reconstructed from
-    // all roots. A small residual alone is weak near clustered roots.
-    let tolerance = p.tolerance(p.bits / 5);
-    let mut reconstructed = vec![p.i(1)];
+    let physical = roots
+        .iter()
+        .map(|root| p.round(&q.mul(root, &scale)))
+        .collect::<Vec<_>>();
+    // Check the actual returned p-bit poles, not just the guarded iterates.
+    let returned = physical
+        .iter()
+        .map(|root| q.div(&q.round(root), &scale))
+        .collect::<Vec<_>>();
+    verify_pole_roots(p, q, &scaled, &returned)?;
+    Ok(physical)
+}
+
+fn verify_pole_roots(p: Precision, q: Precision, scaled: &[C], roots: &[C]) -> Result<()> {
+    let degree = scaled.len() - 1;
+    if roots.len() != degree || roots.iter().any(|root| !q.finite(root)) {
+        return Err(Error::Numerical("incomplete pole root set".into()));
+    }
+    let tolerance = C::new(q.tolerance(p.bits / 5), q.real(0));
+    // A higher-precision solve cannot restore coefficients rounded at p bits.
+    // Estimate their effect using sum |a_k| |z|^k / |P'(z)|, in addition to
+    // the Newton correction. The allowance also covers guarded Horner roundoff.
+    let roundoff = q.powi(&q.i(2), 4 - i64::from(p.bits));
+    let mut errors = Vec::with_capacity(degree);
+    let mut reconstructed = vec![q.i(1)];
+    let mut envelope = vec![q.i(1)];
     for (i, root) in roots.iter().enumerate() {
-        let mut value = p.i(1);
-        let mut derivative = p.zero();
+        let radius = C::new(q.norm(root), q.real(0));
+        let mut value = q.i(1);
+        let mut derivative = q.zero();
+        let mut weight = q.i(1);
         for coefficient in scaled[..degree].iter().rev() {
-            derivative = p.add(&p.mul(&derivative, root), &value);
-            value = p.add(&p.mul(&value, root), coefficient);
+            derivative = q.add(&q.mul(&derivative, root), &value);
+            value = q.add(&q.mul(&value, root), coefficient);
+            weight = q.add(
+                &q.mul(&weight, &radius),
+                &C::new(q.norm(coefficient), q.real(0)),
+            );
         }
-        if derivative == p.zero()
-            || p.norm(&p.div(&value, &derivative)) > tolerance
-            || roots[..i]
-                .iter()
-                .any(|other| p.norm(&p.sub(root, other)) <= tolerance)
-        {
+        if !q.finite(&value) || !q.finite(&derivative) || derivative == q.zero() {
             return Err(Error::Numerical(
                 "unresolved or ill-conditioned pole roots".into(),
             ));
         }
-        let mut next = vec![p.zero(); reconstructed.len() + 1];
+        let error = q.add(
+            &C::new(q.norm(&q.div(&value, &derivative)), q.real(0)),
+            &q.div(
+                &q.mul(&roundoff, &weight),
+                &C::new(q.norm(&derivative), q.real(0)),
+            ),
+        );
+        if !q.finite(&error) || error.re > q.mul(&tolerance, &radius).re {
+            return Err(Error::Numerical(
+                "unresolved or ill-conditioned pole roots".into(),
+            ));
+        }
+        for (other, other_error) in roots[..i].iter().zip(&errors) {
+            let other_radius = q.norm(other);
+            let local_scale = if radius.re < other_radius {
+                radius.clone()
+            } else {
+                C::new(other_radius, q.real(0))
+            };
+            let separation = q.norm(&q.sub(root, other));
+            if separation <= q.mul(&tolerance, &local_scale).re
+                || separation <= q.scale(&q.add(&error, other_error), 4, 1).re
+            {
+                return Err(Error::Numerical(
+                    "unresolved or ill-conditioned pole roots".into(),
+                ));
+            }
+        }
+        errors.push(error);
+        let mut next = vec![q.zero(); reconstructed.len() + 1];
+        let mut next_envelope = next.clone();
         for (j, coefficient) in reconstructed.iter().enumerate() {
-            next[j] = p.sub(&next[j], &p.mul(root, coefficient));
-            next[j + 1] = p.add(&next[j + 1], coefficient);
+            next[j] = q.sub(&next[j], &q.mul(root, coefficient));
+            next[j + 1] = q.add(&next[j + 1], coefficient);
+            next_envelope[j] = q.add(&next_envelope[j], &q.mul(&radius, &envelope[j]));
+            next_envelope[j + 1] = q.add(&next_envelope[j + 1], &envelope[j]);
         }
         reconstructed = next;
+        envelope = next_envelope;
     }
+    // Keep the absolute reconstruction gate and add a componentwise gate,
+    // allowing cancellation in a coefficient. The latter also checks the tiny
+    // coefficients which encode small roots after a very large rescaling.
     if reconstructed
         .iter()
-        .zip(&scaled)
-        .any(|(a, b)| p.norm(&p.sub(a, b)) > tolerance)
+        .zip(scaled)
+        .zip(&envelope)
+        .any(|((a, b), size)| {
+            let discrepancy = q.norm(&q.sub(a, b));
+            !q.finite(a)
+                || !q.finite(size)
+                || !discrepancy.is_finite()
+                || discrepancy > tolerance.re
+                || discrepancy > q.mul(&tolerance, size).re
+        })
     {
         return Err(Error::Numerical(
             "pole roots fail polynomial reconstruction".into(),
         ));
     }
-    Ok(roots.iter().map(|root| p.mul(root, &scale)).collect())
+    Ok(())
 }
 
+#[cfg(test)] // Frozen legacy compiler oracle only; production uses exact GCD/isolation.
 fn retain_distinct_pole(p: Precision, poles: &mut Vec<C>, root: C) {
     if !poles.iter().any(|v| {
         let a = p.norm(v);
@@ -464,8 +586,13 @@ impl CompiledSystem {
         if guards.is_empty() {
             return Ok(());
         }
-        let guard_rows = guards
+        // Reuse the exact collector for the complete union. A numerical
+        // proximity merge here would silently discard distinct source domains
+        // (including refined geometric poles that round together at self.p).
+        let guard_rows = self
+            .pole_polynomials
             .iter()
+            .chain(guards)
             .map(|g| {
                 if g.is_zero() {
                     return Err(Error::InvalidInput(
@@ -481,10 +608,8 @@ impl CompiledSystem {
             self.p,
             &self.source.values,
         )?;
-        for root in exclusions.poles {
-            retain_distinct_pole(self.p, &mut self.poles, root);
-        }
-        self.pole_polynomials.extend(exclusions.pole_polynomials);
+        self.poles = exclusions.poles;
+        self.pole_polynomials = exclusions.pole_polynomials;
         Ok(())
     }
 

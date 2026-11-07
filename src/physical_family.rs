@@ -78,7 +78,7 @@ impl PreparedPhysicalFamily {
             .map(|&s| Ok((s, KinematicDerivative::new(&family, s)?)))
             .collect::<Result<BTreeMap<_, _>>>()?;
         // The shared closure builder sees every derivative target separately.
-        // Its summed matrix is unused: each coordinate matrix below is formed
+        // Skip its unused summed matrix: each coordinate matrix below is formed
         // from the same returned reductions in the same ordered basis.
         let derivative = |integral: &Integral| {
             let mut terms = Vec::new();
@@ -89,11 +89,11 @@ impl PreparedPhysicalFamily {
         };
         let mut closed = if options.skip_reduction {
             crate::reduction::build_retained_system(
-                backend, &family, targets, 32, context, derivative,
+                backend, &family, targets, 32, context, false, derivative,
             )?
         } else {
             crate::reduction::build_differential_system(
-                backend, &family, targets, 32, context, derivative,
+                backend, &family, targets, 32, context, false, derivative,
             )?
         };
         // Native rational reduction represents i as a formal coefficient.
@@ -301,15 +301,33 @@ impl PreparedPhysicalFamily {
             .checked_add(extra_seed_digits)
             .ok_or_else(|| Error::Limit("physical seed precision overflow".into()))?;
         options.validate()?;
-        let expansions = solve_integrals(
-            &self.family,
-            &self.basis,
-            &point,
-            last,
-            &options,
-            backend,
-            context,
-        )?;
+        let expansions = if options.sample_cache_directory.is_some() {
+            // Unit rows preserve the original master order and normalization;
+            // projections checkpoint primitive samples before independent fits.
+            let rows = self
+                .basis
+                .iter()
+                .map(|integral| LinearCombination::from([(integral.clone(), Atom::one())]))
+                .collect();
+            solve_integral_projections(
+                &[(self.family.clone(), rows)],
+                &point,
+                last,
+                &options,
+                backend,
+                context,
+            )?
+        } else {
+            solve_integrals(
+                &self.family,
+                &self.basis,
+                &point,
+                last,
+                &options,
+                backend,
+                context,
+            )?
+        };
         if expansions.len() != self.basis.len() {
             return Err(Error::Numerical(
                 "automatic seed returned the wrong number of master values".into(),

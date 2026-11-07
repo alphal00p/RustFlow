@@ -7,7 +7,8 @@
 //! regular in epsilon at zero. A common Laurent prefactor of the solution is
 //! allowed and is carried explicitly.
 use crate::ode::{
-    CompiledSystem, SeriesSystem, TaylorSegment, compile_rows, shift_polynomial, transport_series,
+    CompiledSystem, SeriesSystem, TaylorSegment, prepared::PreparedRows, shift_polynomial,
+    transport_series,
 };
 use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowDiagnostics, FlowOptions,
@@ -65,6 +66,16 @@ pub struct CompiledEpsilonSystem {
     rows: CompiledSystem,
     count: usize,
     // Established on the exact input, never inferred from rounded coefficients.
+    strictly_positive_epsilon: bool,
+}
+
+/// Immutable exact row preparation for repeated numerical precision profiles.
+/// Each compilation freshly specializes parameter values and pole geometry;
+/// subsequent mutations of the original system do not affect this snapshot.
+#[derive(Clone, Debug)]
+pub struct PreparedEpsilonSystem {
+    rows: PreparedRows,
+    count: usize,
     strictly_positive_epsilon: bool,
 }
 
@@ -165,10 +176,26 @@ impl EpsilonSystem {
         p: Precision,
         values: &ahash::HashMap<Atom, C>,
     ) -> Result<CompiledEpsilonSystem> {
+        self.compile_with_context(p, values, &RunContext::default())
+    }
+
+    /// Compile a fresh exact snapshot with cancellation checks.
+    pub fn compile_with_context(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        context: &RunContext,
+    ) -> Result<CompiledEpsilonSystem> {
+        self.prepare_with_context(context)?
+            .compile_with_context(p, values, context)
+    }
+
+    /// Snapshot exact rows once, sharing denominator clearing and factorization
+    /// across numerical precision profiles without retaining substitutions.
+    pub fn prepare_with_context(&self, context: &RunContext) -> Result<PreparedEpsilonSystem> {
+        context.cancellation.check()?;
         self.validate()?;
         // One denominator LCM per physical row across all epsilon orders.
-        // Reuse these finite polynomials at every coefficient order; there is
-        // no repeated (n*orders)^2 matrix allocation or pole finding.
         let n = self.matrices[0].len();
         let rows = (0..n)
             .map(|i| {
@@ -178,10 +205,42 @@ impl EpsilonSystem {
                     .collect()
             })
             .collect::<Vec<_>>();
-        Ok(CompiledEpsilonSystem {
-            rows: compile_rows(self.variable, &rows, p, values)?,
+        Ok(PreparedEpsilonSystem {
+            rows: PreparedRows::new(self.variable, &rows, context)?,
             count: self.matrices.len(),
             strictly_positive_epsilon: self.matrices[0].iter().flatten().all(Atom::is_zero),
+        })
+    }
+}
+
+impl PreparedEpsilonSystem {
+    pub fn compile(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+    ) -> Result<CompiledEpsilonSystem> {
+        self.compile_with_context(p, values, &RunContext::default())
+    }
+
+    /// Specialize all numerical coefficients freshly at the requested precision.
+    pub fn compile_with_context(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        context: &RunContext,
+    ) -> Result<CompiledEpsilonSystem> {
+        if p.bits < 2 {
+            return Err(Error::InvalidInput(
+                "epsilon precision must be at least two bits".into(),
+            ));
+        }
+        context.cancellation.check()?;
+        let rows = self.rows.compile(p, values, context)?;
+        context.cancellation.check()?;
+        Ok(CompiledEpsilonSystem {
+            rows,
+            count: self.count,
+            strictly_positive_epsilon: self.strictly_positive_epsilon,
         })
     }
 }
@@ -833,29 +892,73 @@ pub fn transport_epsilon(
     context: &RunContext,
     save_segments: bool,
 ) -> Result<EpsilonSolution> {
-    refine_epsilon_transport(options, context, save_segments, |p, refined| {
-        let compiled = system.compile(p, &Default::default())?;
-        let points = waypoints
-            .iter()
-            .map(|a| p.eval(a, &Default::default()))
-            .collect::<Result<Vec<_>>>()?;
-        let boundary = boundary_provider(p)?;
-        let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
-            p,
-            &boundary.point,
+    options.validate()?;
+    let prepared = system.prepare_with_context(context)?;
+    Ok(prepared
+        .transport_with_compiled(
+            None,
+            boundary_provider,
             waypoints,
-            &points,
-            options.digits,
-        )?;
-        let mut result = compiled.transport(&boundary, &points, refined, context, save_segments)?;
-        result.diagnostics.conditioning_digits = Some(
-            result
-                .diagnostics
-                .conditioning_digits
-                .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
-        );
-        Ok(result)
-    })
+            options,
+            context,
+            save_segments,
+        )?
+        .0)
+}
+
+impl PreparedEpsilonSystem {
+    /// Move the path-check compilation into the first matching profile, then
+    /// return the accepted profile for incoming-error propagation. This cache is
+    /// local to one transport; it never retains interpoint numerical values.
+    ///
+    /// If supplied, `initial` must have been compiled from this same prepared
+    /// system with the same parameter values. A matching precision is reused;
+    /// other profiles compile afresh with default parameter values. The returned
+    /// profile is the one accepted by central precision/order refinement; input
+    /// boundary uncertainty still requires separate propagation and assessment.
+    pub fn transport_with_compiled(
+        &self,
+        mut initial: Option<CompiledEpsilonSystem>,
+        boundary_provider: impl Fn(Precision) -> Result<EpsilonBoundary>,
+        waypoints: &[Atom],
+        options: &FlowOptions,
+        context: &RunContext,
+        save_segments: bool,
+    ) -> Result<(EpsilonSolution, CompiledEpsilonSystem)> {
+        refine_epsilon_transport_with_metadata(
+            options,
+            context,
+            save_segments,
+            |p, refined| {
+                let compiled = match initial.take() {
+                    Some(compiled) if compiled.rows.p.bits == p.bits => compiled,
+                    _ => self.compile_with_context(p, &Default::default(), context)?,
+                };
+                let points = waypoints
+                    .iter()
+                    .map(|a| p.eval(a, &Default::default()))
+                    .collect::<Result<Vec<_>>>()?;
+                let boundary = boundary_provider(p)?;
+                let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
+                    p,
+                    &boundary.point,
+                    waypoints,
+                    &points,
+                    options.digits,
+                )?;
+                let mut result =
+                    compiled.transport(&boundary, &points, refined, context, save_segments)?;
+                result.diagnostics.conditioning_digits = Some(
+                    result
+                        .diagnostics
+                        .conditioning_digits
+                        .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
+                );
+                Ok((result, compiled))
+            },
+            |_, _, _, _, _| Ok(true),
+        )
+    }
 }
 
 pub(crate) fn refine_epsilon_transport(
@@ -888,18 +991,21 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
         .digits
         .checked_add(options.guard_digits)
         .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
+    // Local truncation and arithmetic precision refine independently. A
+    // precision hint applies to the current local budget, not a tighter one.
+    let mut local_guard_digits = options.guard_digits;
     let mut last_precision_failure = None;
     for attempt in 0..=options.max_precision_attempts {
         context.cancellation.check()?;
         let mut refined = options.clone();
-        refined.guard_digits = working_digits - options.digits;
+        refined.guard_digits = local_guard_digits;
         refined.series_order = refined
             .series_order
             .checked_add(32 * attempt)
             .ok_or_else(|| Error::Limit("series order overflow".into()))?;
         refined.refine_rational_order(attempt);
         refined.validate()?;
-        let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+        let p = Precision::decimal(working_digits)?;
         let (mut result, metadata) = match run(p, &refined) {
             Ok(result) => result,
             Err(Error::InsufficientPrecision {
@@ -917,6 +1023,11 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
         working_digits = working_digits
             .checked_add(20)
             .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
+        // Only a successful profile earns a tighter independent local check.
+        // Failed arithmetic retries retain the last declared local budget.
+        local_guard_digits = local_guard_digits
+            .checked_add(20)
+            .ok_or_else(|| Error::Limit("local guard precision overflow".into()))?;
         if let Some((old, old_metadata)) = &previous {
             if old.leading != result.leading {
                 return Err(Error::InvalidInput(
@@ -1015,3 +1126,7 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
 #[cfg(test)]
 #[path = "diffexp/uncertainty_tests.rs"]
 mod uncertainty_tests;
+
+#[cfg(test)]
+#[path = "diffexp/refinement_tests.rs"]
+mod refinement_tests;
