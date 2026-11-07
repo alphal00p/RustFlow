@@ -1,6 +1,7 @@
 //! Immutable native rational-row algebra, before any numerical specialization.
 use super::*;
 use crate::physical_conditions::PhysicalPhaseTiming;
+use std::sync::OnceLock;
 use symbolica::domains::float::{
     ComplexBall,
     RoundingDirection::{Down, Up},
@@ -573,12 +574,70 @@ struct PreparedRational {
     new_pole_factors: Vec<Atom>,
 }
 
+/// One completed, precision-independent normalization for an empty values map.
+/// Clones share the cell; independent prepared lines never share it. No numeric
+/// parameters, precision profiles, or failed/partial computations are retained.
+#[derive(Default)]
+struct EmptyRowNormalization {
+    completed: OnceLock<(source::ExactPolynomialRow, bool)>,
+    #[cfg(test)]
+    computations: std::sync::atomic::AtomicUsize,
+}
+
+// PreparedRows is a logical source snapshot. Runtime memo state, including its
+// coefficients and whether it is warm, must not appear in that snapshot's Debug.
+impl std::fmt::Debug for EmptyRowNormalization {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str("EmptyRowNormalization")
+    }
+}
+
+impl EmptyRowNormalization {
+    fn normalize(
+        &self,
+        mut row: source::ExactPolynomialRow,
+        variable: Symbol,
+        p: Precision,
+        context: &RunContext,
+    ) -> Result<(source::ExactPolynomialRow, bool)> {
+        context.cancellation.check()?;
+        if let Some(completed) = self.completed.get() {
+            let _timing = PhysicalPhaseTiming::start(
+                "ode.prepared.compile.row_normalization.empty_cache_hit",
+                row.denominator.len().saturating_sub(1),
+                row.entries.len(),
+                Some(p.bits),
+            );
+            let result = completed.clone();
+            context.cancellation.check()?;
+            return Ok(result);
+        }
+        let _timing = PhysicalPhaseTiming::start(
+            "ode.prepared.compile.row_normalization.empty_cache_miss",
+            row.denominator.len().saturating_sub(1),
+            row.entries.len(),
+            Some(p.bits),
+        );
+        #[cfg(test)]
+        self.computations
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+        // Do the exact work outside publication: concurrent cold misses may
+        // duplicate it, but cannot wait on one another or publish partial rows.
+        let reduced = normalize_specialized_row(&mut row, variable, context)?;
+        let completed = (row.clone(), reduced);
+        context.cancellation.check()?;
+        let _ = self.completed.set(completed);
+        Ok((row, reduced))
+    }
+}
+
 #[derive(Clone, Debug)]
 struct PreparedRow {
     matrix: Vec<PreparedRational>,
     denominator: Atom,
     denominator_factors: Vec<(Atom, usize)>,
     cleared: Vec<(usize, Atom)>,
+    empty_normalization: Arc<EmptyRowNormalization>,
 }
 
 /// Certify the actual LCM using already checked entry factors. Exact division
@@ -872,6 +931,7 @@ impl PreparedRows {
                 denominator: common_denominator.to_expression(),
                 denominator_factors,
                 cleared,
+                empty_normalization: Arc::default(),
             });
         }
         context.cancellation.check()?;
@@ -1174,20 +1234,32 @@ impl PreparedRows {
                 entries.push((*column, coefficients));
             }
         }
-        let mut exact_source = source::ExactPolynomialRow {
+        let exact_source = source::ExactPolynomialRow {
             denominator: exact_denominator,
             denominator_factors: exact_denominator_factors,
             entries: exact_entries,
         };
         let original_degree = exact_source.denominator.len().saturating_sub(1);
-        let reduced = {
+        let (exact_source, reduced) = {
             let _timing = PhysicalPhaseTiming::start(
                 "ode.prepared.compile.row_normalization",
                 exact_source.denominator.len().saturating_sub(1),
                 exact_source.entries.len(),
                 None,
             );
-            normalize_specialized_row(&mut exact_source, variable, context)?
+            // With no supplied values, admitted coefficients are exact Gaussian
+            // rationals (including the reserved J=i), independent of p. Keep all
+            // extraction/domain checks above this decision on every profile.
+            if values.is_empty() {
+                row.empty_normalization
+                    .normalize(exact_source, variable, p, context)?
+            } else {
+                // Stored Float dyadics must always be specialized afresh. Even
+                // an unused supplied parameter bypasses the empty-values cell.
+                let mut exact_source = exact_source;
+                let reduced = normalize_specialized_row(&mut exact_source, variable, context)?;
+                (exact_source, reduced)
+            }
         };
         // Value-free degree counts only; the enclosing row phase supplies its index.
         drop(PhysicalPhaseTiming::start(
@@ -1355,6 +1427,400 @@ mod polynomial_rows_tests {
         Ok(full)
     }
 
+    mod empty_normalization_cache_tests {
+        use super::*;
+        use std::sync::atomic::Ordering;
+
+        fn computations(prepared: &PreparedRows) -> usize {
+            prepared.rows[0]
+                .empty_normalization
+                .computations
+                .load(Ordering::Relaxed)
+        }
+
+        fn assert_exact_eq(a: &source::ExactPolynomialRow, b: &source::ExactPolynomialRow) {
+            assert_eq!(a.denominator, b.denominator);
+            assert_eq!(a.denominator_factors, b.denominator_factors);
+            assert_eq!(a.entries, b.entries);
+        }
+
+        fn assert_compiled_eq(a: &CompiledSystem, b: &CompiledSystem) {
+            assert_eq!(a.source.rows, b.source.rows);
+            assert_eq!(a.source.values, b.source.values);
+            assert_eq!(a.pole_polynomials, b.pole_polynomials);
+            assert_eq!(a.polynomial_rows.len(), b.polynomial_rows.len());
+            for (a, b) in a.polynomial_rows.iter().zip(&b.polynomial_rows) {
+                assert_eq!(a.denominator, b.denominator);
+                assert_eq!(a.entries, b.entries);
+            }
+            for (a, b) in a.exact_source_rows.iter().zip(&b.exact_source_rows) {
+                assert_exact_eq(a, b);
+            }
+            for (a, b) in a.matrix.iter().zip(&b.matrix) {
+                for (a, b) in a.iter().zip(b) {
+                    assert_eq!(a.numerator, b.numerator);
+                    assert_eq!(a.denominator, b.denominator);
+                }
+            }
+            assert_eq!(a.poles.len(), b.poles.len());
+            // Pole enumeration order has no meaning. Require a bijection.
+            let mut unmatched = b.poles.clone();
+            for pole in &a.poles {
+                let i = unmatched
+                    .iter()
+                    .position(|other| a.p.close(pole, other, 12))
+                    .expect("matching original-domain pole");
+                unmatched.swap_remove(i);
+            }
+        }
+
+        fn complex_rows(context: &RunContext) -> Result<PreparedRows> {
+            let x = Atom::var(normalization_variable());
+            let j = Atom::var(crate::family::imaginary_parameter());
+            PreparedRows::new(
+                normalization_variable(),
+                &[vec![Atom::one() / (&x + &j), Atom::one() / (x.pow(2) + 1)]],
+                context,
+            )
+        }
+
+        #[test]
+        fn profiles_and_warm_clone_match_fresh_complex_rows() -> Result<()> {
+            let context = RunContext::default();
+            let prepared = complex_rows(&context)?;
+            let clone = prepared.clone();
+            let snapshot = format!("{prepared:?}");
+            let source = prepared.source_rows.clone();
+            assert!(Arc::ptr_eq(
+                &prepared.rows[0].empty_normalization,
+                &clone.rows[0].empty_normalization,
+            ));
+            for bits in [80, 201] {
+                let p = Precision { bits };
+                let cached = compile_normalized_pair(&clone, p, &Default::default(), &context)?;
+                let fresh = complex_rows(&context)?;
+                assert!(!Arc::ptr_eq(
+                    &prepared.rows[0].empty_normalization,
+                    &fresh.rows[0].empty_normalization,
+                ));
+                assert!(fresh.rows[0].empty_normalization.completed.get().is_none());
+                let ordinary = fresh.compile(p, &Default::default(), &context)?;
+                assert_compiled_eq(&cached, &ordinary);
+                assert_eq!(computations(&fresh), 1);
+                assert_eq!(cached.exact_source_rows[0].denominator.len(), 3);
+                assert_eq!(cached.poles.len(), 2);
+            }
+            let (_, reduced) = prepared.rows[0]
+                .empty_normalization
+                .completed
+                .get()
+                .unwrap();
+            assert!(*reduced);
+            assert_eq!(computations(&prepared), 1);
+            assert_eq!(prepared.source_rows, source);
+            assert_eq!(format!("{prepared:?}"), snapshot);
+            assert_eq!(format!("{clone:?}"), snapshot);
+
+            // A separately prepared line at a different point has a fresh cell.
+            let x = Atom::var(normalization_variable());
+            let j = Atom::var(crate::family::imaginary_parameter());
+            let other = PreparedRows::new(
+                normalization_variable(),
+                &[vec![Atom::one() / (&x + &j + 2)]],
+                &context,
+            )?;
+            assert!(other.rows[0].empty_normalization.completed.get().is_none());
+            let other = other.compile(Precision { bits: 201 }, &Default::default(), &context)?;
+            assert_ne!(
+                other.exact_source_rows[0].denominator,
+                prepared.rows[0]
+                    .empty_normalization
+                    .completed
+                    .get()
+                    .unwrap()
+                    .0
+                    .denominator,
+            );
+            Ok(())
+        }
+
+        #[test]
+        fn parameter_dyadics_are_fresh_and_never_seed_empty_cell() -> Result<()> {
+            let context = RunContext::default();
+            let x = Atom::var(normalization_variable());
+            let a = Atom::var(symbol!("polynomial_rows_tests::cache_a"));
+            let rows = vec![vec![Atom::one() / (&x - &a)]];
+            let prepared = PreparedRows::new(normalization_variable(), &rows, &context)?;
+            let mut previous = None;
+            for bits in [80, 201] {
+                let p = Precision { bits };
+                let values = ahash::HashMap::from_iter([(
+                    a.clone(),
+                    p.parse("0.123456789012345678901234567890123456789", "0.2")?,
+                )]);
+                let actual = compile_normalized_pair(&prepared, p, &values, &context)?;
+                let fresh = PreparedRows::new(normalization_variable(), &rows, &context)?;
+                assert_compiled_eq(&actual, &fresh.compile(p, &values, &context)?);
+                let exact = source::ExactSpecialization::new(p, &values)?;
+                assert_normalized_row(&actual.exact_source_rows[0], &prepared.rows[0], &exact)?;
+                if let Some(previous) = previous {
+                    assert_ne!(actual.exact_source_rows[0].denominator, previous);
+                }
+                previous = Some(actual.exact_source_rows[0].denominator.clone());
+                assert!(
+                    prepared.rows[0]
+                        .empty_normalization
+                        .completed
+                        .get()
+                        .is_none()
+                );
+                assert_eq!(computations(&prepared), 0);
+            }
+            // A missing parameter is an error, not a cacheable empty specialization.
+            assert!(
+                prepared
+                    .compile(Precision { bits: 80 }, &Default::default(), &context)
+                    .is_err()
+            );
+            assert!(
+                prepared.rows[0]
+                    .empty_normalization
+                    .completed
+                    .get()
+                    .is_none()
+            );
+            Ok(())
+        }
+
+        #[test]
+        fn even_unused_values_bypass_cold_and_warm_empty_cell() -> Result<()> {
+            let context = RunContext::default();
+            let p = Precision { bits: 80 };
+            let prepared = complex_rows(&context)?;
+            let a = Atom::var(symbol!("polynomial_rows_tests::cache_unused_a"));
+            let values = ahash::HashMap::from_iter([(a, p.parse("0.1", "0.3")?)]);
+            let parameterized = prepared.compile(p, &values, &context)?;
+            assert!(
+                prepared.rows[0]
+                    .empty_normalization
+                    .completed
+                    .get()
+                    .is_none()
+            );
+            assert_eq!(computations(&prepared), 0);
+            let empty = prepared.compile(p, &Default::default(), &context)?;
+            let completed = prepared.rows[0]
+                .empty_normalization
+                .completed
+                .get()
+                .unwrap();
+            let again = prepared.compile(p, &values, &context)?;
+            assert_compiled_eq(&parameterized, &again);
+            assert_exact_eq(&empty.exact_source_rows[0], &again.exact_source_rows[0]);
+            assert!(std::ptr::eq(
+                completed,
+                prepared.rows[0]
+                    .empty_normalization
+                    .completed
+                    .get()
+                    .unwrap()
+            ));
+            assert_eq!(computations(&prepared), 1);
+            Ok(())
+        }
+
+        #[test]
+        fn cancellation_and_errors_do_not_publish_or_bypass_guards() -> Result<()> {
+            let context = RunContext::default();
+            let p = Precision { bits: 80 };
+            let prepared = complex_rows(&context)?;
+            let cancelled = RunContext::default();
+            cancelled.cancellation.cancel();
+            for warm in [false, true] {
+                assert!(matches!(
+                    prepared.compile(p, &Default::default(), &cancelled),
+                    Err(Error::Cancelled)
+                ));
+                assert!(matches!(
+                    prepared.compile_polynomial_rows(p, &Default::default(), &cancelled),
+                    Err(Error::Cancelled)
+                ));
+                let exact = source::ExactSpecialization::new(p, &Default::default())?;
+                assert!(matches!(
+                    prepared.compile_polynomial_row(
+                        &prepared.rows[0],
+                        p,
+                        &Default::default(),
+                        &exact,
+                        &cancelled
+                    ),
+                    Err(Error::Cancelled)
+                ));
+                assert_eq!(
+                    prepared.rows[0]
+                        .empty_normalization
+                        .completed
+                        .get()
+                        .is_some(),
+                    warm
+                );
+                if !warm {
+                    prepared.compile(p, &Default::default(), &context)?;
+                }
+            }
+            let invalid = ahash::HashMap::from_iter([(
+                Atom::var(symbol!("polynomial_rows_tests::cache_unused_a")),
+                p.parse("inf", "0")?,
+            )]);
+            assert!(matches!(
+                prepared.compile(p, &invalid, &context),
+                Err(Error::InvalidInput(_))
+            ));
+            assert!(matches!(
+                prepared.compile_polynomial_rows(p, &invalid, &context),
+                Err(Error::InvalidInput(_))
+            ));
+            assert_eq!(computations(&prepared), 1);
+
+            let x = Atom::var(normalization_variable());
+            let j = Atom::var(crate::family::imaginary_parameter());
+            let invalid = PreparedRows::new(
+                normalization_variable(),
+                &[vec![Atom::one() / ((j.pow(2) + 1) * (&x + 1))]],
+                &context,
+            )?;
+            assert!(invalid.compile(p, &Default::default(), &context).is_err());
+            assert!(
+                invalid
+                    .compile_polynomial_rows(p, &Default::default(), &context)
+                    .is_err()
+            );
+            assert!(
+                invalid.rows[0]
+                    .empty_normalization
+                    .completed
+                    .get()
+                    .is_none()
+            );
+
+            // An error inside normalization itself must not publish a partial row.
+            let one = source::Gaussian::new(Rational::one(), Rational::zero());
+            let invalid_row = source::ExactPolynomialRow {
+                denominator: vec![one.clone(), one.clone()],
+                denominator_factors: vec![(vec![one.clone()], 1)],
+                entries: vec![(0, vec![one])],
+            };
+            let memo = EmptyRowNormalization::default();
+            assert!(matches!(
+                memo.normalize(invalid_row, normalization_variable(), p, &context),
+                Err(Error::Numerical(_))
+            ));
+            assert!(memo.completed.get().is_none());
+            Ok(())
+        }
+
+        #[test]
+        fn nonreduced_rows_keep_legacy_numeric_extraction() -> Result<()> {
+            let context = RunContext::default();
+            let x = Atom::var(normalization_variable());
+            let j = Atom::var(crate::family::imaginary_parameter());
+            let prepared = PreparedRows::new(
+                normalization_variable(),
+                &[vec![
+                    (Atom::num(1) / 3 + &j / 7) / (Atom::num(2) * &x + 5),
+                    Atom::num(2) / 11,
+                    Atom::Zero,
+                ]],
+                &context,
+            )?;
+            for bits in [80, 201] {
+                let p = Precision { bits };
+                let full = compile_normalized_pair(&prepared, p, &Default::default(), &context)?;
+                let original = &prepared.rows[0];
+                let numeric = &full.polynomial_rows[0];
+                assert_eq!(
+                    numeric.denominator,
+                    polynomial_coefficients(
+                        &original.denominator,
+                        normalization_variable(),
+                        p,
+                        &Default::default()
+                    )?
+                );
+                let expected = original
+                    .cleared
+                    .iter()
+                    .map(|(column, a)| {
+                        Ok((
+                            *column,
+                            polynomial_coefficients(
+                                a,
+                                normalization_variable(),
+                                p,
+                                &Default::default(),
+                            )?,
+                        ))
+                    })
+                    .collect::<Result<Vec<_>>>()?;
+                assert_eq!(numeric.entries, expected);
+                let fresh =
+                    PreparedRows::new(normalization_variable(), &prepared.source_rows, &context)?;
+                assert_compiled_eq(&full, &fresh.compile(p, &Default::default(), &context)?);
+                assert!(
+                    !prepared.rows[0]
+                        .empty_normalization
+                        .completed
+                        .get()
+                        .unwrap()
+                        .1
+                );
+            }
+            assert_eq!(computations(&prepared), 1);
+            Ok(())
+        }
+
+        #[test]
+        fn concurrent_clones_publish_one_complete_send_sync_row() -> Result<()> {
+            fn assert_send_sync<T: Send + Sync>() {}
+            assert_send_sync::<PreparedRows>();
+            assert_send_sync::<EmptyRowNormalization>();
+            let prepared = complex_rows(&RunContext::default())?;
+            let barrier = Arc::new(std::sync::Barrier::new(2));
+            let results = std::thread::scope(|scope| {
+                let handles = [80, 201].map(|bits| {
+                    let clone = prepared.clone();
+                    let barrier = barrier.clone();
+                    scope.spawn(move || {
+                        barrier.wait();
+                        let p = Precision { bits };
+                        let exact = source::ExactSpecialization::new(p, &Default::default())?;
+                        clone.compile_polynomial_row(
+                            &clone.rows[0],
+                            p,
+                            &Default::default(),
+                            &exact,
+                            &RunContext::default(),
+                        )
+                    })
+                });
+                handles.map(|handle| handle.join().expect("normalization worker"))
+            });
+            let [a, b] = results;
+            let (_, a) = a?;
+            let (_, b) = b?;
+            assert_exact_eq(&a, &b);
+            let completed = prepared.rows[0]
+                .empty_normalization
+                .completed
+                .get()
+                .unwrap();
+            assert!(completed.1);
+            assert_exact_eq(&completed.0, &a);
+            assert!((1..=2).contains(&computations(&prepared)));
+            Ok(())
+        }
+    }
+
     #[test]
     fn specialized_row_content_trial_quotients_follow_shrinking_divisor() -> Result<()> {
         let p = Precision::decimal(50)?;
@@ -1447,7 +1913,7 @@ mod polynomial_rows_tests {
                 .iter()
                 .any(|z| p.close(z, &p.complex(0, -1), 30))
         );
-        // A second specialization cannot inherit the previous reduced row.
+        // A second precision must reproduce the same exact reduced row.
         compile_normalized_pair(
             &prepared,
             Precision::decimal(65)?,
