@@ -169,8 +169,15 @@ pub fn parse_coefficient(text: &str, var: &str) -> Result<(QPoly, QPoly), String
     Ok((parse_sum(n, var)?, parse_sum(d, var)?))
 }
 
+pub type CoefParser<'a> = &'a (dyn Fn(&str) -> Result<(QPoly, QPoly), String> + Sync);
+
 impl EBlockSystem {
     pub fn from_rules(rs: &RuleSet, e_slot: usize) -> Result<EBlockSystem, String> {
+        Self::from_rules_with(rs, e_slot, &|c: &str| parse_coefficient(c, "eta"))
+    }
+
+    /// as `from_rules` with a caller-supplied coefficient parser (RustFlow: fast parser, Symbolica fallback)
+    pub fn from_rules_with(rs: &RuleSet, e_slot: usize, parse: CoefParser) -> Result<EBlockSystem, String> {
         let all: HashMap<&Vec<i64>, usize> = rs.masters.iter().enumerate().map(|(i, m)| (m, i)).collect();
         let emast: Vec<Vec<i64>> = rs.masters.iter().filter(|m| m[e_slot] > 0).cloned().collect();
         let eidx: HashMap<&Vec<i64>, usize> = emast.iter().enumerate().map(|(i, m)| (m, i)).collect();
@@ -191,7 +198,7 @@ impl EBlockSystem {
                     continue; // e-free: no discontinuity
                 }
                 let j = *eidx.get(ti).ok_or_else(|| format!("rule term {ti:?} is not an e-block master"))?;
-                let (n, d) = parse_coefficient(c, "eta")?;
+                let (n, d) = parse(c)?;
                 entries.entry((im, j)).or_default().push((poly::scale(&n, &Rational::from(a)), d));
             }
         }

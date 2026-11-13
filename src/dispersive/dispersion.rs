@@ -243,3 +243,45 @@ pub fn prefactor(d0: &Rational, prec: u32) -> Float {
     let s = x.sin();
     -Float::with_val(prec, &s / &pi)
 }
+
+/// residual of the Frobenius recursion (lam + m) c_m - sum_k B_k c_{m-k} on the kept rows of every basis column:
+/// log10 of max |residual| / max |terms| over the checked orders (m + pole rank <= k_stable)
+pub fn family_residual(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usize, prec: u32) -> f64 {
+    let r = -*b.keys().next().unwrap();
+    let lam = Float::with_val(prec, &fam.spec.lam);
+    let n_lo = fam.spec.n_lo;
+    let nrow = (fam.basis.len() / e) as i64;
+    let mut worst = -1e9f64;
+    for a in 0..fam.spec.dim {
+        let coef = |n: i64, j: usize| -> Option<&Float> { if n < n_lo || n - n_lo >= nrow { None } else { Some(&fam.basis[((n - n_lo) as usize) * e + j][a]) } };
+        for m in n_lo..(n_lo + nrow - r) {
+            let mut res = vec![Float::new(prec); e];
+            let mut mag = Float::new(prec);
+            for i in 0..e {
+                if let Some(c) = coef(m, i) {
+                    res[i] = Float::with_val(prec, c * Float::with_val(prec, &lam + m));
+                    let t = res[i].clone().abs();
+                    if t > mag { mag = t; }
+                }
+            }
+            for (k, bk) in b {
+                let jb = m - k;
+                for (i, j, v) in bk {
+                    if let Some(c) = coef(jb, *j) {
+                        let t = Float::with_val(prec, v * c);
+                        let ta = t.clone().abs();
+                        if ta > mag { mag = ta; }
+                        res[*i] -= t;
+                    }
+                }
+            }
+            if mag.is_zero() { continue; }
+            for x in &res {
+                if !x.is_zero() {
+                    worst = worst.max(log10abs(x) - log10abs(&mag));
+                }
+            }
+        }
+    }
+    worst
+}

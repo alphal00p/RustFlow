@@ -13,6 +13,8 @@ pub mod frobenius;
 pub mod laurent;
 pub mod boundary;
 pub mod dispersion;
+#[cfg(all(feature = "native", feature = "automatic"))]
+pub mod harness;
 pub mod run;
 pub mod transport;
 #[cfg(test)]
