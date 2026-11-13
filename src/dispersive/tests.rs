@@ -100,6 +100,14 @@ fn modp_and_mpfr_ranks_agree_on_a_small_system() {
     let of = frobenius::frobenius::<Float>(&bs, 2, &Float::with_val(200, &lam), -2, 12, Some(&spec.ranks), 200, 1);
     assert!(of.diag.min_rank_gap_log10 > 40.0, "rank gap {}", of.diag.min_rank_gap_log10);
     let basis = frobenius::stable_basis(&of, &spec, 2, 200).unwrap();
+    // structural pivoting (the exact run's pivot sequence) gives the same basis
+    let os = frobenius::frobenius_with::<Float>(&bs, 2, &Float::with_val(200, &lam), -2, 12, Some(&spec.ranks), Some(&spec.pivots), frobenius::Pivoting::Structural, 200, 1);
+    let bs2 = frobenius::stable_basis(&os, &spec, 2, 200).unwrap();
+    for (r1, r2) in basis.iter().zip(&bs2) {
+        for (x, y) in r1.iter().zip(r2) {
+            assert!(Float::with_val(200, x - y).abs() <= Float::with_val(200, x.clone().abs()) * 1e-50 + 1e-55);
+        }
+    }
     // D1 = z^lam (1 - z)^(-3): c_1 / c_0 = 3 (scaled by rho = 1/4)
     let row_c0 = ((0 - spec.n_lo) as usize) * 2;
     let row_c1 = ((1 - spec.n_lo) as usize) * 2;

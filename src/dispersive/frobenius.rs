@@ -25,19 +25,59 @@ pub struct FrobDiag {
     pub min_pivot_log10: f64,
     pub t_nnz_max: usize,
     pub seconds: f64,
+    /// structural pivoting: smallest pivot relative to the largest entry of its row, and the sum of these (log10)
+    pub min_structural_pivot_rel_log10: f64,
+    pub sum_structural_pivot_rel_log10: f64,
 }
 
 pub struct FrobOut<S> {
     pub t: Vec<SparseRow<S>>,
     pub q: usize,
     pub ranks: Vec<usize>,
+    /// pivot (row of G, column of T) sequence of every step
+    pub pivots: Vec<Vec<(u32, u32)>>,
     pub diag: FrobDiag,
+}
+
+/// pivot strategy of the MPFR run
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Pivoting {
+    /// largest entry (oracle default)
+    Complete,
+    /// oracle DISP_MARK: sparsest among the entries within 2^-tau of the largest
+    Threshold(i32),
+    /// the exact run's pivot sequence: T keeps the exact sparsity; small (near-resonant) pivots cost rounding digits, paid by guard bits
+    Structural,
+}
+
+impl Pivoting {
+    pub fn from_env() -> Pivoting {
+        match std::env::var("DISPERSIVE_PIVOTING").as_deref() {
+            Ok("complete") => Pivoting::Complete,
+            Ok("structural") | Err(_) => Pivoting::Structural,
+            Ok(x) if x.starts_with("threshold:") => Pivoting::Threshold(x[10..].parse().expect("threshold:<bits>")),
+            Ok(x) => panic!("DISPERSIVE_PIVOTING={x}: complete | structural | threshold:<bits>"),
+        }
+    }
 }
 
 /// run the Frobenius recursion; `ranks = None` measures the ranks (exact types only)
 #[allow(clippy::too_many_arguments)]
 pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, prec: u32, nthreads: usize) -> FrobOut<S> {
+    let pv = match Pivoting::from_env() {
+        Pivoting::Structural => Pivoting::Complete, // no pivot sequence given
+        x => x,
+    };
+    frobenius_with(b, e, lam, n_lo, mm, ranks, None, pv, prec, nthreads)
+}
+
+/// as `frobenius`; `pivots` = the exact run's pivot sequence (needed for Pivoting::Structural)
+#[allow(clippy::too_many_arguments)]
+pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, pivots: Option<&[Vec<(u32, u32)>]>, pivoting: Pivoting, prec: u32, nthreads: usize) -> FrobOut<S> {
     assert!(ranks.is_some() || S::EXACT, "MPFR Frobenius needs the ranks of the exact run");
+    let pivoting = if S::EXACT { Pivoting::Complete } else { pivoting };
+    assert!(pivoting != Pivoting::Structural || pivots.is_some(), "structural pivoting needs the exact pivot sequence");
+    let mut pivots_out: Vec<Vec<(u32, u32)>> = Vec::new();
     let clock = Instant::now();
     let r = -*b.keys().next().unwrap();
     let keep = prec as i32 - 40;
@@ -46,7 +86,7 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
     let mut top = n_lo - 1;
     let mut step = 0usize;
     let mut ranks_out = Vec::new();
-    let mut diag = FrobDiag { pole_rank: r, min_rank_gap_log10: f64::INFINITY, min_pivot_log10: f64::INFINITY, ..Default::default() };
+    let mut diag = FrobDiag { pole_rank: r, min_rank_gap_log10: f64::INFINITY, min_pivot_log10: f64::INFINITY, min_structural_pivot_rel_log10: f64::INFINITY, ..Default::default() };
     let nt = nthreads.max(1);
     for m in (n_lo - r)..(n_lo + mm) {
         let nb = m + r;
@@ -128,7 +168,7 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
         let mut pcol: Vec<usize> = Vec::new();
         let mut tmp = S::zero(prec);
         let mut last = f64::INFINITY;
-        let markowitz: Option<i32> = if S::EXACT { None } else { std::env::var("DISPERSIVE_MARKOWITZ_BITS").ok().and_then(|v| v.parse().ok()) };
+        let markowitz: Option<i32> = if let Pivoting::Threshold(t) = pivoting { Some(t) } else { None };
         let tcol: Vec<u64> = if markowitz.is_some() {
             let mut v = vec![0u64; q];
             for row in &t {
@@ -147,7 +187,23 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
                 }
             }
             let (mut bi, mut bc) = (usize::MAX, usize::MAX);
-            if S::EXACT {
+            if pivoting == Pivoting::Structural {
+                let (r, c) = pivots.unwrap()[step - 1][prow.len()];
+                (bi, bc) = (r as usize, c as usize);
+                if g[bi][bc].is_zero() {
+                    panic!("structural pivot ({bi}, {bc}) of step {step} vanished numerically: raise the precision");
+                }
+                // pivot size relative to the largest entry of its G row: the rounding loss this pivot can cause
+                let mut rowmax = S::zero(prec);
+                for c in 0..q {
+                    if !used_c[c] && g[bi][c].cmp_mag(&rowmax) == std::cmp::Ordering::Greater {
+                        rowmax = g[bi][c].clone();
+                    }
+                }
+                let rel = g[bi][bc].log10_abs() - rowmax.log10_abs();
+                diag.min_structural_pivot_rel_log10 = diag.min_structural_pivot_rel_log10.min(rel);
+                diag.sum_structural_pivot_rel_log10 += rel.min(0.0);
+            } else if S::EXACT {
                 'outer: for i in 0..e {
                     if used_r[i] {
                         continue;
@@ -271,6 +327,7 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
             pcol.push(bc);
         }
         ranks_out.push(prow.len());
+        pivots_out.push(prow.iter().zip(&pcol).map(|(&r, &c)| (r as u32, c as u32)).collect());
         if !S::EXACT && !prow.is_empty() {
             let mut left = -1e9f64;
             for i in 0..e {
@@ -375,7 +432,7 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
     diag.q_final = q;
     diag.top = top;
     diag.seconds = clock.elapsed().as_secs_f64();
-    FrobOut { t, q, ranks: ranks_out, diag }
+    FrobOut { t, q, ranks: ranks_out, pivots: pivots_out, diag }
 }
 
 /// structure of a family from the exact run (oracle prep5 family_spec + greedy)
@@ -392,6 +449,8 @@ pub struct FamilySpec {
     pub first_order: i64,
     pub pivot_rows: Vec<(usize, i64)>,
     pub pole_rank: i64,
+    /// pivot sequence of the exact run (structural pivoting of the MPFR run)
+    pub pivots: Vec<Vec<(u32, u32)>>,
 }
 
 impl FamilySpec {
@@ -479,6 +538,7 @@ pub fn family_spec(out: &FrobOut<ModP>, e: usize, n_lo: i64, mm: i64, lam: &Rati
         first_order: first,
         pivot_rows: piv,
         pole_rank: out.diag.pole_rank,
+        pivots: out.pivots.clone(),
     })
 }
 

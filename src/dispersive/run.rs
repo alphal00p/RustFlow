@@ -95,10 +95,12 @@ pub fn plan(sys: &EBlockSystem, cfg: &Config) -> Result<Plan, String> {
 pub fn family_num(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &FamilySpec, prec: u32, nthreads: usize) -> Result<(FamilyNum, Value), String> {
     let bs = laurent::scaled(b, &spec.rho, prec);
     let lam = Float::with_val(prec, &spec.lam);
-    let out = frobenius::frobenius::<Float>(&bs, sys.dim(), &lam, spec.n_lo, spec.mm, Some(&spec.ranks), prec, nthreads);
+    let pivoting = frobenius::Pivoting::from_env();
+    let out = frobenius::frobenius_with::<Float>(&bs, sys.dim(), &lam, spec.n_lo, spec.mm, Some(&spec.ranks), Some(&spec.pivots), pivoting, prec, nthreads);
     let basis = frobenius::stable_basis(&out, spec, sys.dim(), prec)?;
     let d = &out.diag;
-    let diag = json!({"name": spec.name, "dim": spec.dim, "pole_rank": d.pole_rank, "steps": d.steps, "q_final": d.q_final, "top": d.top,
+    let diag = json!({"name": spec.name, "dim": spec.dim, "pivoting": format!("{pivoting:?}"),
+        "min_structural_pivot_rel_log10": d.min_structural_pivot_rel_log10, "sum_structural_pivot_rel_log10": d.sum_structural_pivot_rel_log10, "pole_rank": d.pole_rank, "steps": d.steps, "q_final": d.q_final, "top": d.top,
         "min_rank_gap_log10": d.min_rank_gap_log10, "min_pivot_log10": d.min_pivot_log10, "T_nnz_max": d.t_nnz_max, "seconds": d.seconds, "rows_kept": basis.len()});
     Ok((FamilyNum { spec: spec.clone(), basis }, diag))
 }
