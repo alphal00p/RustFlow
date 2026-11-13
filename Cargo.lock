@@ -1565,7 +1565,7 @@ dependencies = [
 [[package]]
 name = "graphica"
 version = "3.0.1"
-source = "git+https://github.com/symbolica-dev/symbolica?branch=community#f514a7fe1b19e851207f9421ef9a4a4157d5f0e5"
+source = "git+https://github.com/symbolica-dev/symbolica?branch=community#4b15efef7baa286e41eddf02f72b1088eed0a26b"
 dependencies = [
  "ahash 0.8.12",
  "dyn-clone",
@@ -2311,8 +2311,8 @@ dependencies = [
 
 [[package]]
 name = "numerica"
-version = "3.0.1"
-source = "git+https://github.com/symbolica-dev/symbolica?branch=community#f514a7fe1b19e851207f9421ef9a4a4157d5f0e5"
+version = "3.0.2"
+source = "git+https://github.com/symbolica-dev/symbolica?branch=community#4b15efef7baa286e41eddf02f72b1088eed0a26b"
 dependencies = [
  "ahash 0.8.12",
  "astro-float",
@@ -3125,22 +3125,38 @@ dependencies = [
 [[package]]
 name = "rustred"
 version = "0.1.0"
-source = "git+https://github.com/alphal00p/rustred?branch=main#42bae6e0a4031203db71a052975ebab0bd66eeb1"
+source = "git+https://github.com/alphal00p/rustred?branch=main#7142e80ed8b5cd7eeaf5b7ddde5ae1e6080a51fa"
 dependencies = [
  "bincode",
  "blake3",
  "hashbrown 0.17.1",
+ "libc",
  "once_cell",
  "rand 0.9.5",
  "rayon",
  "rustred-order",
+ "rustred-topology",
+ "serde",
+ "serde_json",
+ "smallvec",
  "symbolica",
 ]
 
 [[package]]
 name = "rustred-order"
 version = "0.1.0"
-source = "git+https://github.com/alphal00p/rustred?branch=main#42bae6e0a4031203db71a052975ebab0bd66eeb1"
+source = "git+https://github.com/alphal00p/rustred?branch=main#7142e80ed8b5cd7eeaf5b7ddde5ae1e6080a51fa"
+
+[[package]]
+name = "rustred-topology"
+version = "0.1.0"
+source = "git+https://github.com/alphal00p/rustred?branch=main#7142e80ed8b5cd7eeaf5b7ddde5ae1e6080a51fa"
+dependencies = [
+ "graphica",
+ "serde",
+ "serde_json",
+ "smallvec",
+]
 
 [[package]]
 name = "rustversion"
@@ -3612,8 +3628,8 @@ dependencies = [
 
 [[package]]
 name = "symbolica"
-version = "3.0.1"
-source = "git+https://github.com/symbolica-dev/symbolica?branch=community#f514a7fe1b19e851207f9421ef9a4a4157d5f0e5"
+version = "3.0.2"
+source = "git+https://github.com/symbolica-dev/symbolica?branch=community#4b15efef7baa286e41eddf02f72b1088eed0a26b"
 dependencies = [
  "ahash 0.8.12",
  "append-only-vec",
