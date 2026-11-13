@@ -63,7 +63,6 @@ impl Default for LiteRedBackendOptions {
 }
 
 struct FamilyLane {
-    converted: ConvertedFamily,
     lane: DynamicLiteRedSession,
     /// Position of the epsilon parameter in the RustRed parameter order.
     epsilon: Option<usize>,
@@ -73,10 +72,18 @@ struct FamilyLane {
     nodes: BTreeMap<Integral, u32>,
 }
 
+/// Generated lane of one family, or the structural reason why generation failed.
+type LaneSlot = Option<std::result::Result<Arc<Mutex<FamilyLane>>, String>>;
+
 /// UNCERTIFIED RustRed LiteRed-lane backend.
+///
+/// Lane generation is the expensive, epsilon-independent part. It runs once
+/// per family: concurrent first requests for one family wait for it instead of
+/// generating the same program again, and a generation failure is structural,
+/// so it is remembered and returned again without a new attempt.
 pub struct LiteRedRustRedBackend {
     pub options: LiteRedBackendOptions,
-    families: Mutex<BTreeMap<String, Arc<Mutex<FamilyLane>>>>,
+    families: Mutex<BTreeMap<String, Arc<Mutex<LaneSlot>>>>,
 }
 
 impl LiteRedRustRedBackend {
@@ -113,9 +120,42 @@ impl LiteRedRustRedBackend {
     ) -> Result<Arc<Mutex<FamilyLane>>> {
         let converted = family.convert()?;
         let key = converted.family.fingerprint().to_owned();
-        if let Some(lane) = self.families.lock().expect("family map").get(&key) {
-            return Ok(Arc::clone(lane));
+        let slot = Arc::clone(
+            self.families
+                .lock()
+                .expect("family map")
+                .entry(key)
+                .or_default(),
+        );
+        // Holding the family slot is the generation gate.
+        let mut slot = slot.lock().expect("family lane slot");
+        if let Some(known) = slot.as_ref() {
+            return known.clone().map_err(Error::Reduction);
         }
+        match self.generate_lane(family, converted, context) {
+            Ok(lane) => {
+                let lane = Arc::new(Mutex::new(lane));
+                *slot = Some(Ok(Arc::clone(&lane)));
+                Ok(lane)
+            }
+            Err(Error::Cancelled) => Err(Error::Cancelled),
+            Err(error) => {
+                let reason = match error {
+                    Error::Reduction(reason) => reason,
+                    other => other.to_string(),
+                };
+                *slot = Some(Err(reason.clone()));
+                Err(Error::Reduction(reason))
+            }
+        }
+    }
+
+    fn generate_lane(
+        &self,
+        family: &IntegralFamily,
+        converted: ConvertedFamily,
+        context: &RunContext,
+    ) -> Result<FamilyLane> {
         context.cancellation.check()?;
         let root: Vec<bool> = (0..family.propagators.len())
             .map(|slot| slot < family.physical_propagators)
@@ -162,16 +202,13 @@ impl LiteRedRustRedBackend {
             .iter()
             .map(|key| integral(key))
             .collect::<Result<Vec<_>>>()?;
-        let state = Arc::new(Mutex::new(FamilyLane {
-            converted,
+        Ok(FamilyLane {
             lane,
             epsilon,
             parameters,
             basis,
             nodes: BTreeMap::new(),
-        }));
-        let mut families = self.families.lock().expect("family map");
-        Ok(Arc::clone(families.entry(key).or_insert(state)))
+        })
     }
 
     fn reduce_with(
@@ -190,7 +227,6 @@ impl LiteRedRustRedBackend {
         let lane = self.family_lane(family, context)?;
         let mut lane = lane.lock().expect("family lane");
         let FamilyLane {
-            converted: _,
             lane: session,
             epsilon: epsilon_position,
             parameters,

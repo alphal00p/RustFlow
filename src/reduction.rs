@@ -1,6 +1,6 @@
-#[cfg(feature = "automatic")]
+mod fallback;
 mod litered_backend;
-#[cfg(feature = "automatic")]
+pub use fallback::FallbackBackend;
 pub use litered_backend::{LiteRedBackendOptions, LiteRedRustRedBackend};
 mod native_provider;
 mod native_seeds;

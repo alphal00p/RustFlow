@@ -123,7 +123,7 @@ pub use physical_transport::RustFlow;
 pub use projections::{ProjectionFactors, SampleNormalization};
 #[cfg(feature = "automatic")]
 pub use reduction::{
-    LiteRedBackendOptions, LiteRedRustRedBackend, NativeIdentityBank, NativeIdentityLimits,
+    FallbackBackend, LiteRedBackendOptions, LiteRedRustRedBackend, NativeIdentityBank, NativeIdentityLimits,
     NativeIdentityProvider, ProvidedRustRedBackend, ReductionBackend, RustRedBackend,
     ScopedTableBackend, SeededRustRedBackend, TableBackend,
 };
