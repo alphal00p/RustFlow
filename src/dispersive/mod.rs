@@ -19,3 +19,4 @@ pub mod run;
 pub mod transport;
 #[cfg(test)]
 mod tests;
+pub mod softplan;

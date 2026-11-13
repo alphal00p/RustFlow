@@ -128,6 +128,18 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
         let mut pcol: Vec<usize> = Vec::new();
         let mut tmp = S::zero(prec);
         let mut last = f64::INFINITY;
+        let markowitz: Option<i32> = if S::EXACT { None } else { std::env::var("DISPERSIVE_MARKOWITZ_BITS").ok().and_then(|v| v.parse().ok()) };
+        let tcol: Vec<u64> = if markowitz.is_some() {
+            let mut v = vec![0u64; q];
+            for row in &t {
+                for (c, _) in row {
+                    v[*c as usize] += 1;
+                }
+            }
+            v
+        } else {
+            Vec::new()
+        };
         loop {
             if let Some(rk) = target {
                 if prow.len() == rk {
@@ -149,16 +161,65 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
                     }
                 }
             } else {
-                let mut best = S::zero(prec);
-                for i in 0..e {
-                    if used_r[i] {
-                        continue;
+                // largest |G| among unused rows/columns; ties -> first in row-major order (thread-count independent)
+                let chunk = e.div_ceil(nt);
+                let (gr, ur, uc) = (&g, &used_r, &used_c);
+                let scan = move |lo: usize| -> Option<(usize, usize)> {
+                    let mut best: Option<(usize, usize)> = None;
+                    for i in lo..(lo + chunk).min(e) {
+                        if ur[i] {
+                            continue;
+                        }
+                        for c in 0..q {
+                            if !uc[c] && !gr[i][c].is_zero() && best.is_none_or(|(x, y)| gr[i][c].cmp_mag(&gr[x][y]) == std::cmp::Ordering::Greater) {
+                                best = Some((i, c));
+                            }
+                        }
                     }
-                    for c in 0..q {
-                        if !used_c[c] && !g[i][c].is_zero() && g[i][c].cmp_mag(&best) == std::cmp::Ordering::Greater {
-                            best = g[i][c].clone();
-                            bi = i;
-                            bc = c;
+                    best
+                };
+                let cands: Vec<Option<(usize, usize)>> = if nt > 1 {
+                    std::thread::scope(|sc| {
+                        let hs: Vec<_> = (0..e).step_by(chunk).map(|lo| sc.spawn(move || scan(lo))).collect();
+                        hs.into_iter().map(|h| h.join().unwrap()).collect()
+                    })
+                } else {
+                    vec![scan(0)]
+                };
+                for (x, y) in cands.into_iter().flatten() {
+                    if bi == usize::MAX || g[x][y].cmp_mag(&g[bi][bc]) == std::cmp::Ordering::Greater {
+                        bi = x;
+                        bc = y;
+                    }
+                }
+                if let (Some(tau), true) = (markowitz, bi != usize::MAX) {
+                    // oracle DISP_MARK: threshold pivoting keeps T sparse (complete pivoting fills it); the basis is invariant
+                    let lim = g[bi][bc].exponent().saturating_sub(tau);
+                    let rc: Vec<u64> = (0..e).map(|i| if used_r[i] { 0 } else { (0..q).filter(|&c| !used_c[c] && !g[i][c].is_zero()).count() as u64 }).collect();
+                    let mut cc = vec![0u64; q];
+                    for i in 0..e {
+                        if !used_r[i] {
+                            for c in 0..q {
+                                if !used_c[c] && !g[i][c].is_zero() {
+                                    cc[c] += 1;
+                                }
+                            }
+                        }
+                    }
+                    let mut bcost = u64::MAX;
+                    for i in 0..e {
+                        if used_r[i] {
+                            continue;
+                        }
+                        for c in 0..q {
+                            if !used_c[c] && !g[i][c].is_zero() && g[i][c].exponent() >= lim {
+                                let cost = (rc[i] - 1) * (tcol[c] + cc[c] - 1);
+                                if cost < bcost {
+                                    bcost = cost;
+                                    bi = i;
+                                    bc = c;
+                                }
+                            }
                         }
                     }
                 }
@@ -178,17 +239,33 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
                     prow_v.push((c, g[bi][c].clone()));
                 }
             }
-            for i in 0..e {
-                if i == bi || g[i][bc].is_zero() {
-                    continue;
+            let elim = |lo: usize, gch: &mut [Vec<S>], tmp: &mut S| {
+                for (ii, grow) in gch.iter_mut().enumerate() {
+                    if lo + ii == bi || grow[bc].is_zero() {
+                        continue;
+                    }
+                    let f = grow[bc].clone();
+                    for (c, pvv) in &prow_v {
+                        let e0 = grow[*c].exponent();
+                        let ex = grow[*c].sub_mul(pvv, &f, tmp).max(e0);
+                        grow[*c].snap(ex, keep);
+                    }
+                    grow[bc].set_zero();
                 }
-                let f = g[i][bc].clone();
-                for (c, pvv) in &prow_v {
-                    let e0 = g[i][*c].exponent();
-                    let ex = g[i][*c].sub_mul(pvv, &f, &mut tmp).max(e0);
-                    g[i][*c].snap(ex, keep);
-                }
-                g[i][bc].set_zero();
+            };
+            if nt > 1 && !S::EXACT {
+                let chunk = e.div_ceil(nt);
+                let el = &elim;
+                std::thread::scope(|sc| {
+                    for (ci, gch) in g.chunks_mut(chunk).enumerate() {
+                        sc.spawn(move || {
+                            let mut t2 = S::zero(prec);
+                            el(ci * chunk, gch, &mut t2)
+                        });
+                    }
+                });
+            } else {
+                elim(0, &mut g, &mut tmp);
             }
             prow.push(bi);
             pcol.push(bc);
@@ -290,6 +367,9 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
             });
         }
         q = nfu;
+        if !S::EXACT && std::env::var_os("DISPERSIVE_VERBOSE").is_some() {
+            eprintln!("  frobenius step {step} m {m}: rank {} q {q} T nnz {} ({:.1} s)", prow.len(), t.iter().map(|x| x.len()).sum::<usize>(), clock.elapsed().as_secs_f64());
+        }
     }
     diag.steps = step;
     diag.q_final = q;
