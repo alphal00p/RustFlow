@@ -81,6 +81,8 @@ pub mod reduction;
 pub mod refine;
 #[cfg(feature = "automatic")]
 pub mod regions;
+#[cfg(feature = "automatic")]
+pub mod rustred_harness;
 mod root_path;
 #[cfg(feature = "automatic")]
 mod sample_checkpoint;
