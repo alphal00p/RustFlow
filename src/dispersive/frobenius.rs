@@ -28,6 +28,8 @@ pub struct FrobDiag {
     /// structural pivoting: smallest pivot relative to the largest entry of its row, and the sum of these (log10)
     pub min_structural_pivot_rel_log10: f64,
     pub sum_structural_pivot_rel_log10: f64,
+    /// structural pivoting fell back to complete pivoting from this step on (pivot unresolvable at the working precision)
+    pub structural_fallback_step: Option<usize>,
 }
 
 pub struct FrobOut<S> {
@@ -75,7 +77,7 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
 #[allow(clippy::too_many_arguments)]
 pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, pivots: Option<&[Vec<(u32, u32)>]>, pivoting: Pivoting, prec: u32, nthreads: usize) -> FrobOut<S> {
     assert!(ranks.is_some() || S::EXACT, "MPFR Frobenius needs the ranks of the exact run");
-    let pivoting = if S::EXACT { Pivoting::Complete } else { pivoting };
+    let mut pivoting = if S::EXACT { Pivoting::Complete } else { pivoting };
     assert!(pivoting != Pivoting::Structural || pivots.is_some(), "structural pivoting needs the exact pivot sequence");
     let mut pivots_out: Vec<Vec<(u32, u32)>> = Vec::new();
     let clock = Instant::now();
@@ -190,9 +192,6 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
             if pivoting == Pivoting::Structural {
                 let (r, c) = pivots.unwrap()[step - 1][prow.len()];
                 (bi, bc) = (r as usize, c as usize);
-                if g[bi][bc].is_zero() {
-                    panic!("structural pivot ({bi}, {bc}) of step {step} vanished numerically: raise the precision");
-                }
                 // pivot size relative to the largest entry of its G row: the rounding loss this pivot can cause
                 let mut rowmax = S::zero(prec);
                 for c in 0..q {
@@ -201,8 +200,19 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                     }
                 }
                 let rel = g[bi][bc].log10_abs() - rowmax.log10_abs();
-                diag.min_structural_pivot_rel_log10 = diag.min_structural_pivot_rel_log10.min(rel);
-                diag.sum_structural_pivot_rel_log10 += rel.min(0.0);
+                if g[bi][bc].is_zero() || rel < -(prec as f64 * 0.30103) + 20.0 {
+                    // unresolvable at this precision: the remaining pivots of this family are chosen by complete pivoting (the
+                    // structural sequence no longer applies once a pivot differs); recorded in the diagnostics
+                    diag.structural_fallback_step = Some(step);
+                    pivoting = Pivoting::Complete;
+                    bi = usize::MAX;
+                    bc = usize::MAX;
+                } else {
+                    diag.min_structural_pivot_rel_log10 = diag.min_structural_pivot_rel_log10.min(rel);
+                    diag.sum_structural_pivot_rel_log10 += rel.min(0.0);
+                }
+            }
+            if bi != usize::MAX {
             } else if S::EXACT {
                 'outer: for i in 0..e {
                     if used_r[i] {
