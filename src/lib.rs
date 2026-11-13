@@ -86,6 +86,8 @@ mod root_path;
 mod sample_checkpoint;
 mod series_limits;
 pub mod singular_endpoint;
+#[cfg(feature = "native")]
+pub mod spectral;
 #[cfg(feature = "automatic")]
 pub mod tensor;
 pub mod transport_cache;
