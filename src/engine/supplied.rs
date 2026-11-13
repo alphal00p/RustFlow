@@ -168,6 +168,74 @@ impl PreparedFlow {
         Ok(flow)
     }
 
+    /// Prepare a supplied system that is exact only at one regulator sample.
+    ///
+    /// External providers (e.g. RustRed harness solutions) often reduce at a
+    /// fixed rational dimension `d0 = dimension - 2 epsilon`. Such a connection
+    /// must not contain the epsilon symbol; the sample is recorded so that
+    /// numeric indicial roots are lifted to `base + slope * epsilon` exactly as
+    /// for [`PreparedFlow::new_at_epsilon`], and `evaluate` only accepts this
+    /// sample. The sample is part of the declaration identity.
+    #[allow(clippy::too_many_arguments)]
+    pub fn from_supplied_at_epsilon(
+        family: &IntegralFamily,
+        targets: &[Integral],
+        point: &KinematicPoint,
+        supplied: SuppliedAuxiliarySystem,
+        options: &FlowOptions,
+        context: &RunContext,
+        epsilon: &Rational,
+    ) -> Result<Self> {
+        if epsilon.is_zero() {
+            return Err(Error::InvalidInput(
+                "a fixed-dimension supplied system needs a nonzero epsilon sample".into(),
+            ));
+        }
+        let epsilon_atom = Atom::var(family.epsilon);
+        let reduced = &supplied.reduced;
+        if reduced
+            .matrix
+            .iter()
+            .flatten()
+            .chain(reduced.targets.iter().flat_map(|row| row.values()))
+            .chain(reduced.candidates.values().flat_map(|row| row.values()))
+            .chain(&reduced.nonzero_conditions)
+            .any(|value| {
+                let mut symbols = BTreeSet::new();
+                crate::family::scalar_symbols(value.as_view(), &mut symbols).is_err()
+                    || symbols.contains(&epsilon_atom)
+            })
+        {
+            return Err(Error::InvalidInput(
+                "a fixed-dimension supplied system must not depend on epsilon".into(),
+            ));
+        }
+        let mut flow = Self::from_supplied(family, targets, point, supplied, options, context)?;
+        flow.epsilon_sample = Some(epsilon.clone());
+        let seal = flow
+            .supplied
+            .take()
+            .ok_or_else(|| Error::InvalidInput("supplied seal missing".into()))?;
+        let identity = declaration_identity(&flow, &seal.targets, &seal.provenance)?;
+        flow.supplied = Some(SuppliedSeal { identity, ..seal });
+        Ok(flow)
+    }
+
+    /// The ordinary integral basis of the prepared connection.
+    pub fn basis(&self) -> &[Integral] {
+        &self.reduced.basis
+    }
+
+    /// The prepared auxiliary-mass connection `d basis / d variable = A basis`.
+    pub fn system(&self) -> &DifferentialSystem {
+        &self.system
+    }
+
+    /// The exact regulator sample a fixed-dimension preparation belongs to.
+    pub fn epsilon_sample(&self) -> Option<&Rational> {
+        self.epsilon_sample.as_ref()
+    }
+
     /// Content identity for caller-declared systems, retained in sample caches.
     pub(crate) fn source_identity(&self) -> Option<&str> {
         self.supplied.as_ref().map(|seal| seal.identity.as_str())
