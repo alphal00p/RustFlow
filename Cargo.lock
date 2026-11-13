@@ -3690,6 +3690,7 @@ dependencies = [
  "rustred",
  "serde",
  "serde_json",
+ "signal-hook",
  "spenso",
  "symbolica",
  "thiserror 2.0.20",
