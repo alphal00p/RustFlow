@@ -13,13 +13,16 @@ use symbolica::prelude::*;
 
 pub const SYSTEM_SCHEMA: &str = "rustflow.patch-kernel.system.v1";
 
-/// One nonzero matrix entry `N/D` (indices into [`RationalSystem::polys`]).
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+/// One nonzero matrix entry `scale * N / D` (indices into
+/// [`RationalSystem::polys`]; N and D primitive, D with positive leading
+/// coefficient, so proportional denominators are shared).
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Entry {
     pub row: usize,
     pub col: usize,
     pub num: usize,
     pub den: usize,
+    pub scale: rug::Rational,
 }
 
 #[derive(Clone, Debug)]
@@ -40,7 +43,7 @@ struct SystemFile {
     dim: usize,
     variable: String,
     polys: Vec<Vec<String>>,
-    entries: Vec<[usize; 4]>,
+    entries: Vec<(usize, usize, usize, usize, String)>,
 }
 
 fn trim(p: &mut Vec<Integer>) {
@@ -86,8 +89,9 @@ fn clear_denominators(
 }
 
 impl RationalSystem {
-    /// Build from raw entries; normalises (common integer content removed,
-    /// positive leading denominator coefficient), sorts and deduplicates.
+    /// Build from raw entries `N/D`; normalises to `scale * N' / D'` with
+    /// primitive N', D' (positive leading coefficient of D'), sorts and
+    /// deduplicates polynomials.
     pub fn from_entries(
         dim: usize,
         variable: &str,
@@ -117,14 +121,22 @@ impl RationalSystem {
             if d.iter().all(|c| *c == 0) {
                 return Err(Error::InvalidInput(format!("zero denominator at ({i}, {j})")));
             }
-            let g = n.iter().chain(d.iter()).fold(Integer::new(), |g, c| g.gcd(c));
-            let negate = d.last().is_some_and(|c| *c < 0);
-            for c in n.iter_mut().chain(d.iter_mut()) {
-                c.div_exact_mut(&g);
-                if negate {
-                    *c = -std::mem::take(c);
-                }
+            let content = |p: &[Integer]| p.iter().fold(Integer::new(), |g, c| g.gcd(c));
+            let mut cn = content(&n);
+            let mut cd = content(&d);
+            if d.last().is_some_and(|c| *c < 0) {
+                cd = -cd;
             }
+            if n.last().is_some_and(|c| *c < 0) {
+                cn = -cn;
+            }
+            for c in n.iter_mut() {
+                c.div_exact_mut(&cn);
+            }
+            for c in d.iter_mut() {
+                c.div_exact_mut(&cd);
+            }
+            let scale = rug::Rational::from((cn, cd));
             let mut id = |p: Vec<Integer>| -> usize {
                 if let Some(&k) = index.get(&p) {
                     return k;
@@ -135,7 +147,7 @@ impl RationalSystem {
             };
             let num = id(n);
             let den = id(d);
-            entries.push(Entry { row: i, col: j, num, den });
+            entries.push(Entry { row: i, col: j, num, den, scale });
         }
         Ok(Self { dim, variable: variable.to_string(), polys, entries })
     }
@@ -198,7 +210,11 @@ impl RationalSystem {
             dim: self.dim,
             variable: self.variable.clone(),
             polys: self.polys.iter().map(|p| p.iter().map(|c| c.to_string()).collect()).collect(),
-            entries: self.entries.iter().map(|e| [e.row, e.col, e.num, e.den]).collect(),
+            entries: self
+                .entries
+                .iter()
+                .map(|e| (e.row, e.col, e.num, e.den, e.scale.to_string()))
+                .collect(),
         })
         .expect("system serialises")
     }
@@ -225,7 +241,11 @@ impl RationalSystem {
                 let get = |k: usize| {
                     polys.get(k).cloned().ok_or_else(|| Error::InvalidInput("poly index".into()))
                 };
-                Ok((e[0], e[1], get(e[2])?, get(e[3])?))
+                let scale = parse_rational(&e.4)?;
+                // N/D = scale * N' / D'
+                let n = get(e.2)?.into_iter().map(|c| c * scale.numer()).collect();
+                let d = get(e.3)?.into_iter().map(|c| c * scale.denom()).collect();
+                Ok((e.0, e.1, n, d))
             })
             .collect::<Result<Vec<_>>>()?;
         let s = Self::from_entries(f.dim, &f.variable, raw)?;
@@ -241,6 +261,8 @@ impl RationalSystem {
         for e in &self.entries {
             h.update(&(e.row as u64).to_le_bytes());
             h.update(&(e.col as u64).to_le_bytes());
+            h.update(e.scale.to_string().as_bytes());
+            h.update(b";");
             for p in [&self.polys[e.num], &self.polys[e.den]] {
                 h.update(&(p.len() as u64).to_le_bytes());
                 for c in p {
@@ -269,19 +291,23 @@ impl RationalSystem {
     /// permutation `perm[i]` = index in `other` of this system's component i:
     /// returns the entries (i, j) where N1 D2 != N2 D1 or presence differs.
     pub fn differences(&self, other: &Self, perm: &[usize]) -> Vec<(usize, usize)> {
-        let map = |s: &Self| -> BTreeMap<(usize, usize), (usize, usize)> {
-            s.entries.iter().map(|e| ((e.row, e.col), (e.num, e.den))).collect()
+        let map = |s: &Self| -> BTreeMap<(usize, usize), (usize, usize, rug::Rational)> {
+            s.entries.iter().map(|e| ((e.row, e.col), (e.num, e.den, e.scale.clone()))).collect()
         };
         let (a, b) = (map(self), map(other));
         let mut out = Vec::new();
         let mut seen = std::collections::BTreeSet::new();
-        for (&(i, j), &(n1, d1)) in &a {
+        for (&(i, j), (n1, d1, s1)) in &a {
             let key = (perm[i], perm[j]);
             seen.insert(key);
             match b.get(&key) {
-                Some(&(n2, d2)) => {
-                    let lhs = poly_mul(&self.polys[n1], &other.polys[d2]);
-                    let rhs = poly_mul(&other.polys[n2], &self.polys[d1]);
+                Some((n2, d2, s2)) => {
+                    // s1 N1 D2 == s2 N2 D1
+                    let f1 = Integer::from(s1.numer() * s2.denom());
+                    let f2 = Integer::from(s2.numer() * s1.denom());
+                    let scale = |p: Vec<Integer>, f: &Integer| p.into_iter().map(|c| c * f).collect::<Vec<_>>();
+                    let lhs = scale(poly_mul(&self.polys[*n1], &other.polys[*d2]), &f1);
+                    let rhs = scale(poly_mul(&other.polys[*n2], &self.polys[*d1]), &f2);
                     if lhs != rhs {
                         out.push((i, j));
                     }

@@ -193,7 +193,15 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         let e = &system.entries[t];
         let s = shift_guarded(&system.polys[e.num], &centre, gbits);
         let d0 = &den_data[plan.den_slot[&e.den]].0;
-        s.iter().map(|c| S::quotient(c, d0, bits)).collect()
+        if e.scale == 1 {
+            s.iter().map(|c| S::quotient(c, d0, bits)).collect()
+        } else {
+            // scale * N[k] / D(0): the guarded scale enters the guarded numerator
+            let f = rug::Float::with_val(gbits, &e.scale);
+            s.iter()
+                .map(|c| S::quotient(&Complex::with_val(gbits, c * &f), d0, bits))
+                .collect()
+        }
     });
     let seconds_setup = t_setup.elapsed().as_secs_f64();
     job.cancel.check()?;
