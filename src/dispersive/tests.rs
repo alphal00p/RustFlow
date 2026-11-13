@@ -103,6 +103,16 @@ fn modp_and_mpfr_ranks_agree_on_a_small_system() {
     // structural pivoting (the exact run's pivot sequence) gives the same basis
     let os = frobenius::frobenius_with::<Float>(&bs, 2, &Float::with_val(200, &lam), -2, 12, Some(&spec.ranks), Some(&spec.pivots), frobenius::Pivoting::Structural, 200, 1);
     let bs2 = frobenius::stable_basis(&os, &spec, 2, 200).unwrap();
+    // shadowed run (2^61 - 1 shadow decides the exact zeros; exact pivots) gives the same basis
+    let bsh = laurent::scaled(&laurent::laurent::<super::field::Shadowed>(&sys, Point::Zero, 20, 200, 1), &spec.rho, 200);
+    let osh = frobenius::frobenius_with::<super::field::Shadowed>(&bsh, 2, &super::field::Shadowed::from_rational(&lam, 200), -2, 12, None, None, frobenius::Pivoting::Complete, 200, 1);
+    assert_eq!(osh.ranks, spec.ranks);
+    let bs3 = frobenius::stable_basis(&frobenius::shadowed_to_float(osh), &spec, 2, 200).unwrap();
+    for (r1, r3) in basis.iter().zip(&bs3) {
+        for (x, y) in r1.iter().zip(r3) {
+            assert!(Float::with_val(200, x - y).abs() <= Float::with_val(200, x.clone().abs()) * 1e-50 + 1e-55);
+        }
+    }
     for (r1, r2) in basis.iter().zip(&bs2) {
         for (x, y) in r1.iter().zip(r2) {
             assert!(Float::with_val(200, x - y).abs() <= Float::with_val(200, x.clone().abs()) * 1e-50 + 1e-55);

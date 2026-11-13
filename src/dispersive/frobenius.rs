@@ -56,7 +56,7 @@ impl Pivoting {
     pub fn from_env() -> Pivoting {
         match std::env::var("DISPERSIVE_PIVOTING").as_deref() {
             Ok("complete") => Pivoting::Complete,
-            Ok("structural") | Err(_) => Pivoting::Structural,
+            Ok("structural") | Ok("shadow") | Err(_) => Pivoting::Structural, // shadow: handled by run::family_num
             Ok(x) if x.starts_with("threshold:") => Pivoting::Threshold(x[10..].parse().expect("threshold:<bits>")),
             Ok(x) => panic!("DISPERSIVE_PIVOTING={x}: complete | structural | threshold:<bits>"),
         }
@@ -137,7 +137,7 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                             if pr[i].is_empty() {
                                 continue;
                             }
-                            if !S::EXACT {
+                            if S::SNAP {
                                 for c in 0..q {
                                     emax[c] = grow[c].exponent();
                                 }
@@ -151,7 +151,7 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                                     }
                                 }
                             }
-                            if !S::EXACT {
+                            if S::SNAP {
                                 for c in 0..q {
                                     grow[c].snap(emax[c], keep);
                                 }
@@ -225,6 +225,18 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                             break 'outer;
                         }
                     }
+                }
+                if S::SNAP && bi != usize::MAX {
+                    // shadowed run: the exact pivot's size relative to its row (rounding growth diagnostic)
+                    let mut rowmax = S::zero(prec);
+                    for c in 0..q {
+                        if !used_c[c] && g[bi][c].cmp_mag(&rowmax) == std::cmp::Ordering::Greater {
+                            rowmax = g[bi][c].clone();
+                        }
+                    }
+                    let rel = g[bi][bc].log10_abs() - rowmax.log10_abs();
+                    diag.min_structural_pivot_rel_log10 = diag.min_structural_pivot_rel_log10.min(rel);
+                    diag.sum_structural_pivot_rel_log10 += rel.min(0.0);
                 }
             } else {
                 // largest |G| among unused rows/columns; ties -> first in row-major order (thread-count independent)
@@ -319,7 +331,7 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                     grow[bc].set_zero();
                 }
             };
-            if nt > 1 && !S::EXACT {
+            if nt > 1 && S::SNAP {
                 let chunk = e.div_ceil(nt);
                 let el = &elim;
                 std::thread::scope(|sc| {
@@ -434,7 +446,7 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
             });
         }
         q = nfu;
-        if !S::EXACT && std::env::var_os("DISPERSIVE_VERBOSE").is_some() {
+        if S::SNAP && std::env::var_os("DISPERSIVE_VERBOSE").is_some() {
             eprintln!("  frobenius step {step} m {m}: rank {} q {q} T nnz {} ({:.1} s)", prow.len(), t.iter().map(|x| x.len()).sum::<usize>(), clock.elapsed().as_secs_f64());
         }
     }
@@ -443,6 +455,17 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
     diag.top = top;
     diag.seconds = clock.elapsed().as_secs_f64();
     FrobOut { t, q, ranks: ranks_out, pivots: pivots_out, diag }
+}
+
+/// the MPFR values of a shadowed run
+pub fn shadowed_to_float(out: FrobOut<super::field::Shadowed>) -> FrobOut<Float> {
+    FrobOut {
+        t: out.t.into_iter().map(|row| row.into_iter().map(|(c, x)| (c, x.f)).collect()).collect(),
+        q: out.q,
+        ranks: out.ranks,
+        pivots: out.pivots,
+        diag: out.diag,
+    }
 }
 
 /// structure of a family from the exact run (oracle prep5 family_spec + greedy)
