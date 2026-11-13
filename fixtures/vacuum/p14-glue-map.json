@@ -1,0 +1,2263 @@
+{
+ "schema": "sgw4-map-v1",
+ "family_4l": "fixtures/vacuum/p14-family.json; eta on slot 1 (a W4 spoke), mass^2 = 1 + eta = z",
+ "conventions": "SG-W4' step 0: exact 5L -> (bubble x 4L W4-spoke eta-family) map.  Pure python, exact (fractions).\n\nFor each pilot master: reconstruct the 5L vacuum graph from the 15-slot family 44b030da, glue the chosen\nbubble pair (a, b) into ONE line of mass^2 z = 1 + eta (Kallen-Lehmann), contract a series chain line if\npresent, match the 4L core by explicit vertex isomorphism to W4 (P14/PR11 native RustFlow family, eta on\nslot 1 = spoke) or to W4 with one edge contracted (subsector), solve the exact loop-momentum map\nk_5L = A (K_0..K_3, l), and rewrite numerators (rank-1 bubble rule, l^2 pinch -> T1 x product).\n\nOutput (map.json), per master, a list of terms; value (raw = Minkowski, measure d^dk/(i pi^(d/2)) per loop,\nno exp(gamma eps)):\n  I_raw = sum_terms coeff * X_term, where for kind 'spectral':\n     X = (-1)^(na+nb+1) (1/2 pi i) int_Gamma dz W_E^{(na,nb)}(z) * (z-1)^(-chain_n) * poly_eta(z-1) * V_T(z)\n     V_T(z) = RustFlow raw value of 4L family integral T (eta line slot 1, mass^2 = 1 + eta = z)\n  kind 'chain_const': X = (-1)^(na+nb+1) (1/2 pi i) int_Gamma W_E(z) (z-1)^(-m) dz * V_T(eta=0)\n  kind 'product_T1': X = T1_raw * V_T (T has slot-1 power 0: eta independent).\n",
+ "w4": {
+  "ends": [
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    3
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    1,
+    3
+   ],
+   [
+    0,
+    4
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    2,
+    0
+   ]
+  ],
+  "hub": 2,
+  "spokes": [
+   1,
+   3,
+   6,
+   7
+  ],
+  "rim": [
+   0,
+   2,
+   4,
+   5
+  ]
+ },
+ "source_sha256": "b69c0ee5e409d6bacb1a78bb47135f9620e206a71f30ee3828b7c7071bec2526",
+ "masters": {
+  "P480": {
+   "class": 3023,
+   "powers": [
+    1,
+    2,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    11
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P379": {
+   "class": 3023,
+   "powers": [
+    1,
+    1,
+    0,
+    0,
+    2,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    11
+   ],
+   "bubble_powers": [
+    2,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      2,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P360": {
+   "class": 3023,
+   "powers": [
+    1,
+    1,
+    -1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    11
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P367": {
+   "class": 3023,
+   "powers": [
+    1,
+    1,
+    0,
+    -1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    11
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P366": {
+   "class": 3023,
+   "powers": [
+    1,
+    1,
+    0,
+    -1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    -1,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    11
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "product_T1",
+     "coeff": "1",
+     "eta_power_at_eta0": 0,
+     "target": [
+      1,
+      -1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "note": "l^2-1 pinch of bubble line a: T1_raw x V_T (T has no eta line)"
+    },
+    {
+     "kind": "product_T1",
+     "coeff": "1",
+     "eta_power_at_eta0": 0,
+     "target": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "note": "l^2-1 pinch of bubble line a: T1_raw x V_T (T has no eta line)"
+    },
+    {
+     "kind": "product_T1",
+     "coeff": "-1",
+     "eta_power_at_eta0": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "note": "l^2-1 pinch of bubble line a: T1_raw x V_T (T has no eta line)"
+    },
+    {
+     "kind": "product_T1",
+     "coeff": "-2",
+     "eta_power_at_eta0": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ],
+     "note": "l^2-1 pinch of bubble line a: T1_raw x V_T (T has no eta line)"
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      -1
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -2
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1/2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P550": {
+   "class": 3055,
+   "powers": [
+    2,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    7
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": {
+    "line": 0,
+    "power": 2
+   },
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 2,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 2,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 1,
+     "target": [
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    }
+   ]
+  },
+  "P397": {
+   "class": 1014,
+   "powers": [
+    1,
+    1,
+    1,
+    -1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1
+   ],
+   "pair": [
+    1,
+    10
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1
+     ]
+    }
+   ]
+  },
+  "P416": {
+   "class": 1014,
+   "powers": [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    2,
+    1,
+    0,
+    1
+   ],
+   "pair": [
+    1,
+    10
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      2,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P133": {
+   "class": 2806,
+   "powers": [
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    -2,
+    0
+   ],
+   "pair": [
+    2,
+    5
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "4",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      -1,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "4",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-2",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-4",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -2,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "4",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P370": {
+   "class": 2814,
+   "powers": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    2,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    7,
+    11
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": {
+    "line": 5,
+    "power": 2
+   },
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 2,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 2,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 1,
+     "target": [
+      0,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    }
+   ]
+  },
+  "P533": {
+   "class": 1014,
+   "powers": [
+    2,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1
+   ],
+   "pair": [
+    1,
+    10
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P536": {
+   "class": 1015,
+   "powers": [
+    2,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1
+   ],
+   "pair": [
+    11,
+    12
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": {
+    "line": 14,
+    "power": 1
+   },
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 1,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      2,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 1,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      2,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    }
+   ]
+  },
+  "P29": {
+   "class": 2806,
+   "powers": [
+    -1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "pair": [
+    2,
+    5
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 1,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P314": {
+   "class": 2806,
+   "powers": [
+    0,
+    3,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "pair": [
+    2,
+    5
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      3,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P375": {
+   "class": 3023,
+   "powers": [
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    11
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P436": {
+   "class": 3055,
+   "powers": [
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    4,
+    7
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": {
+    "line": 0,
+    "power": 1
+   },
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 1,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 1,
+     "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    }
+   ]
+  },
+  "P413": {
+   "class": 1014,
+   "powers": [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1
+   ],
+   "pair": [
+    1,
+    10
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P424": {
+   "class": 1015,
+   "powers": [
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1
+   ],
+   "pair": [
+    11,
+    12
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": {
+    "line": 14,
+    "power": 1
+   },
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 1,
+     "eta_power": 0,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 1,
+     "target": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    }
+   ]
+  },
+  "P134": {
+   "class": 2806,
+   "powers": [
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "pair": [
+    2,
+    5
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": null,
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 0,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "P368": {
+   "class": 2814,
+   "powers": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "pair": [
+    7,
+    11
+   ],
+   "bubble_powers": [
+    1,
+    1
+   ],
+   "chain": {
+    "line": 5,
+    "power": 1
+   },
+   "terms": [
+    {
+     "kind": "spectral",
+     "coeff": "-1",
+     "weight": [
+      1,
+      1
+     ],
+     "chain_n": 1,
+     "eta_power": 0,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "chain_const",
+     "coeff": "1",
+     "weight": [
+      1,
+      1
+     ],
+     "m": 1,
+     "target": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     "eta0": true
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,179 @@
+{
+ "name": "vakint_4L_P14_PR11",
+ "source": "vakint-external-data 4L/masters/P14 (PR11), routed by FeynKit GraphIntegral; slots 0-7 unit-mass lines, 8-9 ISPs",
+ "epsilon": "feynkit_graph::eps",
+ "dimension": 4,
+ "loops": [
+  "k0",
+  "k1",
+  "k2",
+  "k3"
+ ],
+ "physical_propagators": 8,
+ "denominators": [
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "0",
+    "0"
+   ]
+  },
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "1",
+    "-2",
+    "0",
+    "-2",
+    "1",
+    "0",
+    "2",
+    "0",
+    "0",
+    "1"
+   ]
+  },
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "2",
+    "2",
+    "1",
+    "2",
+    "1"
+   ]
+  },
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "1"
+   ]
+  },
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "1",
+    "-2",
+    "-2",
+    "-2",
+    "1",
+    "2",
+    "2",
+    "1",
+    "2",
+    "1"
+   ]
+  },
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "2",
+    "0",
+    "1",
+    "0",
+    "0"
+   ]
+  },
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ]
+  },
+  {
+   "constant": "-1",
+   "scalar_products": [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ]
+  },
+  {
+   "constant": "0",
+   "scalar_products": [
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ]
+  },
+  {
+   "constant": "0",
+   "scalar_products": [
+    "0",
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ]
+  }
+ ],
+ "targets": [
+  [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   0,
+   0
+  ]
+ ]
+}
