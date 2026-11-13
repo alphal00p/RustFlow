@@ -100,7 +100,7 @@ pub use cut_flow::PreparedCutFlow;
 pub use cut_projection::PreparedCutProjections;
 #[cfg(feature = "automatic")]
 pub use engine::{
-    PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integral_projections,
+    PreparedFlow, SpectralExpansion, SpectralSample, evaluate_samples, solve_integral_combinations, solve_integral_projections,
     solve_integral_projections_normalized, solve_integrals, solve_prepared,
 };
 pub use epsilon::{LaurentExpansion, fit_epsilon};

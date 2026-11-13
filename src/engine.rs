@@ -10,6 +10,9 @@ mod euclidean;
 mod frobenius_cache;
 mod supplied;
 pub use supplied::SuppliedAuxiliarySystem;
+mod spectral;
+use spectral::{SpectralArmValues, SpectralRequest};
+pub use spectral::{SpectralExpansion, SpectralSample};
 
 pub struct PreparedFlow {
     pub family: IntegralFamily,
@@ -215,6 +218,21 @@ impl PreparedFlow {
         boundary: &dyn BoundaryProvider,
         context: &RunContext,
     ) -> Result<Vec<ComplexFloat>> {
+        Ok(self.evaluate_with(eps, options, boundary, context, None)?.0)
+    }
+
+    /// The sample pipeline of [`PreparedFlow::evaluate`]. With a spectral
+    /// request it also returns the `eta -> infinity` target expansions and the
+    /// target values transported along an extra arm (see `evaluate_spectral`);
+    /// the endpoint values are computed by exactly the same operations.
+    fn evaluate_with(
+        &self,
+        eps: &Rational,
+        options: &FlowOptions,
+        boundary: &dyn BoundaryProvider,
+        context: &RunContext,
+        spectral: Option<SpectralRequest<'_>>,
+    ) -> Result<(Vec<ComplexFloat>, Option<SpectralArmValues>)> {
         self.validate_supplied_contract(options)?;
         crate::vacuum_peel::validate_principal_mass_constraints(
             &self.principal_mass_constraints,
@@ -266,7 +284,12 @@ impl PreparedFlow {
         })
         .collect::<Result<Vec<_>>>()?;
         if self.reduced.basis.is_empty() {
-            return Ok(vec![p.zero(); self.reduced.targets.len()]);
+            if spectral.is_some() {
+                return Err(Error::Unsupported(
+                    "spectral evaluation needs a nonempty master basis".into(),
+                ));
+            }
+            return Ok((vec![p.zero(); self.reduced.targets.len()], None));
         }
         let stage = |name: &str| {
             context.emit(Progress::Stage {
@@ -316,7 +339,7 @@ impl PreparedFlow {
             ComplexFloat::new(p.real(0), maximum * (8 * direction))
         };
         let at_start = infinity.evaluate(&p.div(&p.i(1), &start), &parameters)?;
-        let initial = at_start
+        let initial: Vec<ComplexFloat> = at_start
             .iter()
             .map(|row| {
                 row.iter()
@@ -324,6 +347,19 @@ impl PreparedFlow {
                     .fold(p.zero(), |s, (v, c)| p.add(&s, &p.mul(v, c)))
             })
             .collect();
+        let spectral = spectral
+            .map(|request| {
+                self.spectral_prepare(
+                    request,
+                    p,
+                    &infinity,
+                    &constants,
+                    &parameters,
+                    &start,
+                    &initial,
+                )
+            })
+            .transpose()?;
         // A long infinity basis is no longer needed once its initial values
         // have been formed. Release it before allocating Taylor chart buffers.
         drop(infinity);
@@ -360,7 +396,8 @@ impl PreparedFlow {
         stage("extracting the dimensionally regulated physical limit")?;
         // Reduction coefficients are multiplied into endpoint series before
         // selecting the physical constant; poles in these coefficients matter.
-        self.reduced
+        let values = self
+            .reduced
             .targets
             .iter()
             .map(|target| {
@@ -379,7 +416,14 @@ impl PreparedFlow {
                     &parameters,
                 )
             })
-            .collect()
+            .collect::<Result<Vec<_>>>()?;
+        let arm = spectral
+            .map(|prepared| {
+                stage("transporting along the spectral arm")?;
+                prepared.transport(p, &compiled, options, context)
+            })
+            .transpose()?;
+        Ok((values, arm))
     }
 }
 
