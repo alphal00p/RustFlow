@@ -6,13 +6,13 @@
 //! with `nv = N / D(0)`, `dv = D / D(0)` (coefficients at the patch centre), and
 //! `y_i[n + 1] = (sum_{g of row i} u_g[n]) / (n + 1)`.
 //!
-//! Determinism: every row is owned by exactly one worker. A worker processes
-//! the groups of its rows in canonical group order, and row `i` of order
-//! `n + 1` receives: zero, one addition per group in canonical order, one
-//! division by `n + 1`. Orders are separated by a barrier, during order `n`
-//! only orders `<= n` are read and only the owner writes row `i` of order
-//! `n + 1`. The operations on each value are therefore the same for every
-//! thread count and every assignment of rows to workers.
+//! Determinism: per order, phase A computes every group value `u_g[n]`
+//! (fixed operation sequence per group) into the group's own ring, phase B
+//! gives row `i` of order `n + 1`: zero, one addition of `u_g[n]` per group in
+//! canonical order, one division by `n + 1`. Work is taken dynamically in
+//! fixed chunks (fast threads take more, so a contended CPU does not stall the
+//! others), but which thread computes a value never changes its operations.
+//! Phases are separated by barriers, so every read sees completed values.
 use super::scalar::KernelScalar;
 use super::shift::{Centre, shift_guarded};
 use super::system::RationalSystem;
@@ -38,6 +38,11 @@ pub struct KernelPlan {
     den_slot: std::collections::BTreeMap<usize, usize>,
     /// Cost of each row per order at full depth (for the worker assignment).
     pub row_cost: Vec<usize>,
+    /// Groups of row i: `row_groups[i].0 .. row_groups[i].1` (groups are row-sorted).
+    pub row_groups: Vec<(usize, usize)>,
+    /// Work chunks of phase A (group ranges of similar cost) and phase B (row ranges).
+    pub group_chunks: Vec<(usize, usize)>,
+    pub row_chunks: Vec<(usize, usize)>,
 }
 
 impl KernelPlan {
@@ -68,26 +73,52 @@ impl KernelPlan {
                 .sum::<usize>()
                 + system.polys[*den].len();
         }
+        let mut row_groups = vec![(0usize, 0usize); system.dim];
+        let mut g = 0;
+        for (i, rg) in row_groups.iter_mut().enumerate() {
+            let start = g;
+            while g < groups.len() && groups[g].0 == i {
+                g += 1;
+            }
+            *rg = (start, g);
+        }
+        let gcost: Vec<usize> = groups
+            .iter()
+            .map(|(_, den, ts)| {
+                ts.iter()
+                    .map(|&t| system.polys[system.entries[t].num].len())
+                    .sum::<usize>()
+                    + system.polys[*den].len()
+            })
+            .collect();
+        let total: usize = gcost.iter().sum();
+        let target = (total / 2048).max(1);
+        let mut group_chunks = Vec::new();
+        let (mut start, mut acc) = (0usize, 0usize);
+        for (k, c) in gcost.iter().enumerate() {
+            acc += c;
+            if acc >= target {
+                group_chunks.push((start, k + 1));
+                start = k + 1;
+                acc = 0;
+            }
+        }
+        if start < groups.len() {
+            group_chunks.push((start, groups.len()));
+        }
+        let row_chunks = (0..system.dim)
+            .step_by(8)
+            .map(|i| (i, (i + 8).min(system.dim)))
+            .collect();
         Self {
             groups,
             dens,
             den_slot,
             row_cost,
+            row_groups,
+            group_chunks,
+            row_chunks,
         }
-    }
-
-    /// Rows per worker: longest-processing-time assignment (affects speed only).
-    fn assignment(&self, workers: usize) -> Vec<usize> {
-        let mut rows: Vec<usize> = (0..self.row_cost.len()).collect();
-        rows.sort_by(|&a, &b| self.row_cost[b].cmp(&self.row_cost[a]).then(a.cmp(&b)));
-        let mut load = vec![0usize; workers];
-        let mut owner = vec![0usize; self.row_cost.len()];
-        for i in rows {
-            let w = (0..workers).min_by_key(|&w| (load[w], w)).unwrap();
-            owner[i] = w;
-            load[w] += self.row_cost[i] + 1;
-        }
-        owner
     }
 }
 
@@ -283,17 +314,13 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
     let seconds_setup = t_setup.elapsed().as_secs_f64();
     job.cancel.check()?;
     // ---- recurrence ----
+    // Two phases per order, both dynamically scheduled over fixed chunks:
+    // (A) every group g computes u_g[n] into its own ring slot; (B) every row i
+    // sums u_g[n] over its groups in canonical order and divides by n + 1.
+    // Each value receives the same operations in the same order whichever
+    // thread computes it, so the result does not depend on the threads.
     let t_rec = Instant::now();
-    let workers = threads.min(dim).max(1);
-    let owner = plan.assignment(workers);
-    let mut worker_groups: Vec<Vec<usize>> = vec![Vec::new(); workers];
-    for (g, grp) in plan.groups.iter().enumerate() {
-        worker_groups[owner[grp.0]].push(g);
-    }
-    let mut worker_rows: Vec<Vec<usize>> = vec![Vec::new(); workers];
-    for i in 0..dim {
-        worker_rows[owner[i]].push(i);
-    }
+    let workers = threads.min(plan.group_chunks.len()).max(1);
     // Component-major storage y[j][m]: the inner loops walk the orders of one
     // component, whose values (and limbs) are allocated contiguously.
     let mut y: Vec<Vec<S>> = y0
@@ -307,17 +334,26 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
             col
         })
         .collect();
+    // ring of the D-recurrence per group; after phase A of order n, slot
+    // n % dd (slot 0 if dd = 0) holds u_g[n]
+    let mut rings: Vec<Vec<S>> = plan
+        .groups
+        .iter()
+        .map(|(_, den, _)| vec![S::zero(bits); den_data[plan.den_slot[den]].1.len().max(1)])
+        .collect();
     let (cancelled, worker_busy) = {
         let ptrs: Vec<SPtr<S>> = y.iter_mut().map(|v| SPtr(v.as_mut_ptr())).collect();
+        let rptrs: Vec<SPtr<S>> = rings.iter_mut().map(|v| SPtr(v.as_mut_ptr())).collect();
+        let counters_a: Vec<AtomicUsize> = (0..nord).map(|_| AtomicUsize::new(0)).collect();
+        let counters_b: Vec<AtomicUsize> = (0..nord).map(|_| AtomicUsize::new(0)).collect();
         let barrier = Barrier::new(workers);
         let stop = AtomicBool::new(false);
-        let (ptrs, barrier, stop, nv, den_data) = (&ptrs, &barrier, &stop, &nv, &den_data);
+        let (ptrs, rptrs, ca, cb, barrier, stop, nv, den_data) = (
+            &ptrs, &rptrs, &counters_a, &counters_b, &barrier, &stop, &nv, &den_data,
+        );
         std::thread::scope(|sc| {
-            let handles: Vec<_> = worker_groups
-                .iter()
-                .zip(&worker_rows)
-                .enumerate()
-                .map(|(w, (gs, rows))| {
+            let handles: Vec<_> = (0..workers)
+                .map(|w| {
                     let pin = pins.get(w).copied();
                     sc.spawn(move || -> (bool, f64) {
                         if let Some(c) = pin {
@@ -325,50 +361,65 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                         }
                         let mut busy = 0.0f64;
                         let mut t_busy = Instant::now();
-                        let gl: Vec<(usize, &[S], &[usize])> = gs
-                            .iter()
-                            .map(|&g| {
-                                let (row, den, ts) = &plan.groups[g];
-                                (*row, &den_data[plan.den_slot[den]].1[..], &ts[..])
-                            })
-                            .collect();
-                        let mut rings: Vec<Vec<S>> = gl
-                            .iter()
-                            .map(|(_, dv, _)| vec![S::zero(bits); dv.len().max(1)])
-                            .collect();
                         let mut a = S::zero(bits);
                         let mut b = S::zero(bits);
                         let mut tmp = S::zero(bits);
                         for n in 0..nord - 1 {
-                            // SAFETY: orders m <= n are complete (written before the
-                            // previous barrier or before the spawn) and nobody writes
-                            // them during this order; entry (n + 1, i) is written only
-                            // by the owner of row i.
+                            // SAFETY (phase A): y orders m <= n are complete and not
+                            // written in this phase; ring g is touched only by the
+                            // thread that took the chunk containing g.
                             let yv = |m: usize, j: usize| -> &S { unsafe { &*ptrs[j].0.add(m) } };
-                            for (gi, (i, dv, ts)) in gl.iter().enumerate() {
-                                a.set_zero();
-                                for &t in ts.iter() {
-                                    let c = &nv[t];
-                                    let j = system.entries[t].col;
-                                    for k in 0..c.len().min(n + 1) {
-                                        a.add_prod(&c[k], yv(n - k, j), &mut tmp);
+                            loop {
+                                let c = ca[n].fetch_add(1, Ordering::Relaxed);
+                                let Some(&(g0, g1)) = plan.group_chunks.get(c) else {
+                                    break;
+                                };
+                                for g in g0..g1 {
+                                    let (_, den, ts) = &plan.groups[g];
+                                    let dv = &den_data[plan.den_slot[den]].1[..];
+                                    let dd = dv.len();
+                                    let ring = unsafe {
+                                        std::slice::from_raw_parts_mut(rptrs[g].0, dd.max(1))
+                                    };
+                                    a.set_zero();
+                                    for &t in ts.iter() {
+                                        let c = &nv[t];
+                                        let j = system.entries[t].col;
+                                        for k in 0..c.len().min(n + 1) {
+                                            a.add_prod(&c[k], yv(n - k, j), &mut tmp);
+                                        }
                                     }
-                                }
-                                let dd = dv.len();
-                                if dd > 0 && n > 0 {
-                                    b.set_zero();
-                                    for k in 1..=dd.min(n) {
-                                        b.add_prod(&dv[k - 1], &rings[gi][(n - k) % dd], &mut tmp);
+                                    if dd > 0 && n > 0 {
+                                        b.set_zero();
+                                        for k in 1..=dd.min(n) {
+                                            b.add_prod(&dv[k - 1], &ring[(n - k) % dd], &mut tmp);
+                                        }
+                                        a.sub_ref(&b);
                                     }
-                                    a.sub_ref(&b);
-                                }
-                                unsafe { (*ptrs[*i].0.add(n + 1)).add_ref(&a) };
-                                if dd > 0 {
-                                    std::mem::swap(&mut rings[gi][n % dd], &mut a);
+                                    let slot = if dd > 0 { n % dd } else { 0 };
+                                    std::mem::swap(&mut ring[slot], &mut a);
                                 }
                             }
-                            for &i in rows.iter() {
-                                unsafe { (*ptrs[i].0.add(n + 1)).div_u32((n + 1) as u32) };
+                            busy += t_busy.elapsed().as_secs_f64();
+                            barrier.wait();
+                            t_busy = Instant::now();
+                            // SAFETY (phase B): rings are only read; y[i][n + 1] is
+                            // written only by the thread that took row i's chunk.
+                            loop {
+                                let c = cb[n].fetch_add(1, Ordering::Relaxed);
+                                let Some(&(r0, r1)) = plan.row_chunks.get(c) else {
+                                    break;
+                                };
+                                for i in r0..r1 {
+                                    let target = unsafe { &mut *ptrs[i].0.add(n + 1) };
+                                    let (g0, g1) = plan.row_groups[i];
+                                    for g in g0..g1 {
+                                        let dd = den_data[plan.den_slot[&plan.groups[g].1]].1.len();
+                                        let slot = if dd > 0 { n % dd } else { 0 };
+                                        target.add_ref(unsafe { &*rptrs[g].0.add(slot) });
+                                    }
+                                    target.div_u32((n + 1) as u32);
+                                }
                             }
                             busy += t_busy.elapsed().as_secs_f64();
                             let leader = barrier.wait().is_leader();
@@ -376,7 +427,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                                 // One consistent stop decision: written by the leader
                                 // between two barriers, read by all after the second.
                                 if leader {
-                                    stop.store(job.cancel.check().is_err(), Ordering::Relaxed);
+                                    stop.store(job.cancel.is_cancelled(), Ordering::Relaxed);
                                 }
                                 barrier.wait();
                                 if stop.load(Ordering::Relaxed) {
