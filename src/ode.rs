@@ -175,7 +175,7 @@ pub(crate) fn quotient_series(
     Ok(out)
 }
 
-fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Result<Vec<C>> {
+pub(crate) fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Result<Vec<C>> {
     let degree = coefficients.len() - 1;
     if degree == 1 {
         return Ok(vec![p.neg(&p.div(&coefficients[0], &coefficients[1]))]);
@@ -357,6 +357,21 @@ pub struct CompiledSystem {
     pub(crate) pole_polynomials: Vec<Atom>,
     pub(crate) polynomial_rows: Vec<PolynomialRow>,
     pub(crate) exact_source_rows: Vec<source::ExactPolynomialRow>,
+}
+
+#[cfg(feature = "native")]
+impl CompiledSystem {
+    /// The exact rows of this system as a patch-kernel system: the solver's
+    /// planned-path FIXED-PRECISION transport ([`crate::patch_kernel`]), next to
+    /// this type's adaptive certified transport ([`CompiledSystem::transport`]).
+    pub fn patch_kernel_system(&self) -> Result<crate::patch_kernel::RationalSystem> {
+        if !self.source.values.is_empty() {
+            return Err(Error::Unsupported(
+                "patch kernel: rows with numerically valued parameters are not exact".into(),
+            ));
+        }
+        crate::patch_kernel::RationalSystem::from_matrix_atoms(&self.source.rows, self.source.variable)
+    }
 }
 
 impl DifferentialSystem {
