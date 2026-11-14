@@ -321,16 +321,17 @@ fn run(a: &Args) -> R<()> {
             .unwrap_or(0.0);
         p
     });
-    if let Some(p) = &policy {
-        if a.flag("--fresh") && p.file.exists() {
-            let secs = std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .map(|d| d.as_secs())
-                .unwrap_or(0);
-            let aside = format!("{}.aside-{secs}", p.file.display());
-            std::fs::rename(&p.file, &aside)?;
-            eprintln!("--fresh: moved the old checkpoint to {aside}");
-        }
+    if let Some(p) = &policy
+        && a.flag("--fresh")
+        && p.file.exists()
+    {
+        let secs = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_secs())
+            .unwrap_or(0);
+        let aside = format!("{}.aside-{secs}", p.file.display());
+        std::fs::rename(&p.file, &aside)?;
+        eprintln!("--fresh: moved the old checkpoint to {aside}");
     }
     let mut state = match &policy {
         Some(p) if p.file.exists() => {

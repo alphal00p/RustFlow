@@ -9,11 +9,15 @@ use super::boundary;
 use super::softplan;
 use super::system::parse_coefficient;
 use rug::{Float, Rational};
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::collections::{BTreeMap, HashMap};
 
 fn vi(x: &Value) -> Vec<i64> {
-    x.as_array().unwrap().iter().map(|a| a.as_i64().unwrap()).collect()
+    x.as_array()
+        .unwrap()
+        .iter()
+        .map(|a| a.as_i64().unwrap())
+        .collect()
 }
 
 fn t_e(d0: &Rational, prec: u32) -> Float {
@@ -21,9 +25,25 @@ fn t_e(d0: &Rational, prec: u32) -> Float {
 }
 
 /// 3L masters {M5, B4, S3} from the W4-class soft system and the P14 endpoints (only the non-'PR' rows are used)
-pub fn values3l(fam5: &Value, plan: &Value, sol: &Value, sample: &Value, e_slot: usize, prec: u32) -> Result<(BTreeMap<String, Float>, Value), String> {
-    let d0: Rational = sol["fixed"]["d"].as_str().ok_or("no fixed d")?.parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
-    let masters: Vec<Vec<i64>> = sol["masters"].as_array().ok_or("no masters")?.iter().map(vi).collect();
+pub fn values3l(
+    fam5: &Value,
+    plan: &Value,
+    sol: &Value,
+    sample: &Value,
+    e_slot: usize,
+    prec: u32,
+) -> Result<(BTreeMap<String, Float>, Value), String> {
+    let d0: Rational = sol["fixed"]["d"]
+        .as_str()
+        .ok_or("no fixed d")?
+        .parse()
+        .map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+    let masters: Vec<Vec<i64>> = sol["masters"]
+        .as_array()
+        .ok_or("no masters")?
+        .iter()
+        .map(vi)
+        .collect();
     // unit soft rows: V(m) = the E-value of engine master m (embed sets the e slot to 1: give nu with the e slot at 0)
     let mut unit = serde_json::Map::new();
     for m in &masters {
@@ -36,13 +56,28 @@ pub fn values3l(fam5: &Value, plan: &Value, sol: &Value, sample: &Value, e_slot:
     }
     let plan_u = json!({"endpoint_polys": plan["endpoint_polys"], "soft_polys": unit});
     let mut ep = Vec::new();
-    for x in sample["endpoint"].as_array().ok_or("sample has no endpoints")? {
-        if x.get("family").and_then(|f| f.as_str()).unwrap_or("") != "" {
+    for x in sample["endpoint"]
+        .as_array()
+        .ok_or("sample has no endpoints")?
+    {
+        if !x
+            .get("family")
+            .and_then(|f| f.as_str())
+            .unwrap_or("")
+            .is_empty()
+        {
             continue; // P14 rows only
         }
         let t = vi(&x["target"]);
         let key = serde_json::to_string(&t).unwrap().replace(',', ", ");
-        ep.push((key, t, Float::with_val(prec, Float::parse(x["value"]["re"].as_str().unwrap()).map_err(|e| e.to_string())?)));
+        ep.push((
+            key,
+            t,
+            Float::with_val(
+                prec,
+                Float::parse(x["value"]["re"].as_str().unwrap()).map_err(|e| e.to_string())?,
+            ),
+        ));
     }
     let (vals, diag) = boundary::solve_v(&plan_u, sol, &ep, e_slot, prec)?;
     let q = softplan::slot_momenta(fam5);
@@ -50,12 +85,17 @@ pub fn values3l(fam5: &Value, plan: &Value, sol: &Value, sample: &Value, e_slot:
     let mut by_type: BTreeMap<String, Float> = BTreeMap::new();
     let mut found = serde_json::Map::new();
     for m in &masters {
-        let Some(vs) = vals.get(&serde_json::to_string(m).unwrap()) else { continue };
+        let Some(vs) = vals.get(&serde_json::to_string(m).unwrap()) else {
+            continue;
+        };
         if !m.iter().all(|&p| p == 0 || p == 1) {
             continue;
         }
         let lines: Vec<usize> = (0..m.len()).filter(|&s| m[s] > 0 && s != e_slot).collect();
-        let vecs: Vec<Vec<Rational>> = lines.iter().map(|&s| q[s].clone().ok_or("slot without momentum")).collect::<Result<_, _>>()?;
+        let vecs: Vec<Vec<Rational>> = lines
+            .iter()
+            .map(|&s| q[s].clone().ok_or("slot without momentum"))
+            .collect::<Result<_, _>>()?;
         let comps = softplan::components(&vecs);
         let v = Float::with_val(prec, Float::parse(vs).map_err(|e| e.to_string())?);
         let (name, tpow) = match comps.as_slice() {
@@ -73,25 +113,50 @@ pub fn values3l(fam5: &Value, plan: &Value, sol: &Value, sample: &Value, e_slot:
     }
     for t in ["M5", "B4", "S3"] {
         if !by_type.contains_key(t) {
-            return Err(format!("3L master {t} not found among the soft engine masters"));
+            return Err(format!(
+                "3L master {t} not found among the soft engine masters"
+            ));
         }
     }
-    Ok((by_type, json!({"endpoint_system": diag, "p14_rows": ep.len(), "masters_used": found})))
+    Ok((
+        by_type,
+        json!({"endpoint_system": diag, "p14_rows": ep.len(), "masters_used": found}),
+    ))
 }
 
 /// the lane's soft V from its soft plan, its soft reduction and the known 3L masters
-pub fn lane_v(lane_plan: &Value, lane_config: &Value, sol: &Value, by_type: &BTreeMap<String, Float>, prec: u32) -> Result<BTreeMap<String, String>, String> {
+pub fn lane_v(
+    lane_plan: &Value,
+    lane_config: &Value,
+    sol: &Value,
+    by_type: &BTreeMap<String, Float>,
+    prec: u32,
+) -> Result<BTreeMap<String, String>, String> {
     let e_slot = lane_config["e"].as_u64().ok_or("lane config has no e")? as usize;
-    let d0: Rational = sol["fixed"]["d"].as_str().ok_or("no fixed d")?.parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+    let d0: Rational = sol["fixed"]["d"]
+        .as_str()
+        .ok_or("no fixed d")?
+        .parse()
+        .map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
     let te = t_e(&d0, prec);
-    let masters: Vec<Vec<i64>> = sol["masters"].as_array().ok_or("no masters")?.iter().map(vi).collect();
+    let masters: Vec<Vec<i64>> = sol["masters"]
+        .as_array()
+        .ok_or("no masters")?
+        .iter()
+        .map(vi)
+        .collect();
     let mut mval: HashMap<Vec<i64>, Float> = HashMap::new();
     for m in &masters {
         let key = serde_json::to_string(m).unwrap().replace(',', ", ");
-        let k = lane_config["soft_masters"].get(&key).ok_or_else(|| format!("lane soft master {key} has no known value"))?;
+        let k = lane_config["soft_masters"]
+            .get(&key)
+            .ok_or_else(|| format!("lane soft master {key} has no known value"))?;
         let mut v = match k["type"].as_str() {
             Some("1") => Float::with_val(prec, 1),
-            Some(t) => by_type.get(t).ok_or_else(|| format!("no value of type {t}"))?.clone(),
+            Some(t) => by_type
+                .get(t)
+                .ok_or_else(|| format!("no value of type {t}"))?
+                .clone(),
             None => return Err("soft master without type".into()),
         };
         for _ in 0..k.get("T").and_then(|x| x.as_u64()).unwrap_or(0) {
@@ -116,20 +181,31 @@ pub fn lane_v(lane_plan: &Value, lane_config: &Value, sol: &Value, by_type: &BTr
             return Ok(v.clone());
         }
         let mut tot = Float::new(prec);
-        for (mu, c) in rules.get(x).ok_or_else(|| format!("no reduction rule for {x:?}"))? {
-            let sgn = if (mu.iter().sum::<i64>() - x.iter().sum::<i64>()).rem_euclid(2) == 1 { -1 } else { 1 };
+        for (mu, c) in rules
+            .get(x)
+            .ok_or_else(|| format!("no reduction rule for {x:?}"))?
+        {
+            let sgn = if (mu.iter().sum::<i64>() - x.iter().sum::<i64>()).rem_euclid(2) == 1 {
+                -1
+            } else {
+                1
+            };
             tot += Float::with_val(prec, &mval[mu] * Float::with_val(prec, c)) * sgn;
         }
         Ok(tot)
     };
-    let digits = (prec as f64 * 0.30103) as usize;
+    let digits = (prec as f64 * super::DIGITS_PER_BIT) as usize;
     let mut out = BTreeMap::new();
     for (key, poly) in lane_plan["soft_polys"].as_object().ok_or("no soft_polys")? {
         let mut val = Float::new(prec);
         for term in poly.as_array().unwrap() {
             let mut nu = vi(&term[0]);
             let dp = term[1].as_i64().unwrap();
-            let mut c: Rational = term[2].as_str().unwrap().parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+            let mut c: Rational = term[2]
+                .as_str()
+                .unwrap()
+                .parse()
+                .map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
             for _ in 0..dp {
                 c /= &d0;
             }

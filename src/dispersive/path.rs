@@ -101,17 +101,44 @@ pub fn radii(r0: f64, rmax: f64) -> (Rational, Rational) {
 }
 
 /// s0 from the soft stable range (n_st0 orders), S from the infinity stable ranges (n_inf orders)
-pub fn endpoints(rho0: &Rational, rmax: f64, w: u32, n_st0: i64, n_inf: i64) -> (Rational, Rational) {
+pub fn endpoints(
+    rho0: &Rational,
+    rmax: f64,
+    w: u32,
+    n_st0: i64,
+    n_inf: i64,
+) -> (Rational, Rational) {
     let w = w as f64;
-    let s0 = ratround_sig(qf(rho0) * 10f64.powf(-(w + 5.0) / n_st0 as f64) * 0.9, 1 << 24, 64.0);
-    let s = Rational::from(rug::Integer::from_f64((rmax * 1.05 * 10f64.powf((w + 5.0) / n_inf as f64)).ceil()).unwrap());
+    let s0 = ratround_sig(
+        qf(rho0) * 10f64.powf(-(w + 5.0) / n_st0 as f64) * 0.9,
+        1 << 24,
+        64.0,
+    );
+    let s = Rational::from(
+        rug::Integer::from_f64((rmax * 1.05 * 10f64.powf((w + 5.0) / n_inf as f64)).ceil())
+            .unwrap(),
+    );
     (s0, s)
 }
 
 /// zplan.py: patches z = -s0 -> -S
-pub fn plan(points: &[(f64, f64)], axis: &[f64], s0: &Rational, s_end: &Rational, w: u32, ratio: f64) -> Vec<Patch> {
-    let radius = |zr: f64, zi: f64| -> f64 { points.iter().map(|&(a, b)| (zr - a).hypot(zi - b)).fold(f64::INFINITY, f64::min) };
-    let nord = |r: f64, h: f64| -> usize { ((w as f64 + 8.0) / (r / h.abs()).log10()).ceil() as usize + 4 };
+pub fn plan(
+    points: &[(f64, f64)],
+    axis: &[f64],
+    s0: &Rational,
+    s_end: &Rational,
+    w: u32,
+    ratio: f64,
+) -> Vec<Patch> {
+    let radius = |zr: f64, zi: f64| -> f64 {
+        points
+            .iter()
+            .map(|&(a, b)| (zr - a).hypot(zi - b))
+            .fold(f64::INFINITY, f64::min)
+    };
+    let nord = |r: f64, h: f64| -> usize {
+        ((w as f64 + 8.0) / (r / h.abs()).log10()).ceil() as usize + 4
+    };
     let mut patches = Vec::new();
     let step_real = |zq: Rational, target: &Rational, patches: &mut Vec<Patch>| -> Rational {
         let mut zq = zq;
@@ -119,8 +146,16 @@ pub fn plan(points: &[(f64, f64)], axis: &[f64], s0: &Rational, s_end: &Rational
             let zc = qf(&zq);
             let r = radius(zc, 0.0);
             let h = r / ratio;
-            let hq = if zc - h * 1.5 <= qf(target) { Rational::from(target - &zq) } else { -rr(h) };
-            patches.push(Patch { centre: (zq.clone(), Rational::new()), step: (hq.clone(), Rational::new()), order: nord(r, qf(&hq)) });
+            let hq = if zc - h * 1.5 <= qf(target) {
+                Rational::from(target - &zq)
+            } else {
+                -rr(h)
+            };
+            patches.push(Patch {
+                centre: (zq.clone(), Rational::new()),
+                step: (hq.clone(), Rational::new()),
+                order: nord(r, qf(&hq)),
+            });
             zq += hq;
         }
         zq
@@ -155,7 +190,10 @@ pub fn plan(points: &[(f64, f64)], axis: &[f64], s0: &Rational, s_end: &Rational
             while (&cr, &ci) != (&vr, &vi) {
                 let (fr, fi) = (qf(&cr), qf(&ci));
                 let r = radius(fr, fi);
-                let (dr, di) = (qf(&Rational::from(&vr - &cr)), qf(&Rational::from(&vi - &ci)));
+                let (dr, di) = (
+                    qf(&Rational::from(&vr - &cr)),
+                    qf(&Rational::from(&vi - &ci)),
+                );
                 let dn = dr.hypot(di);
                 let hq = if dn <= 1.5 * r / ratio {
                     (Rational::from(&vr - &cr), Rational::from(&vi - &ci))
@@ -163,7 +201,11 @@ pub fn plan(points: &[(f64, f64)], axis: &[f64], s0: &Rational, s_end: &Rational
                     (rr(dr / dn * r / ratio), rr(di / dn * r / ratio))
                 };
                 let hn = qf(&hq.0).hypot(qf(&hq.1));
-                patches.push(Patch { centre: (cr.clone(), ci.clone()), step: hq.clone(), order: nord(r, hn) });
+                patches.push(Patch {
+                    centre: (cr.clone(), ci.clone()),
+                    step: hq.clone(),
+                    order: nord(r, hn),
+                });
                 cr += &hq.0;
                 ci += &hq.1;
             }
@@ -189,7 +231,13 @@ mod tests {
     #[test]
     fn small_path_detours_and_ends() {
         // singular points 0, -1, -3 (+ a complex pair)
-        let pts = vec![(0.0, 0.0), (-1.0, 0.0), (-3.0, 0.0), (-2.0, 2.0), (-2.0, -2.0)];
+        let pts = vec![
+            (0.0, 0.0),
+            (-1.0, 0.0),
+            (-3.0, 0.0),
+            (-2.0, 2.0),
+            (-2.0, -2.0),
+        ];
         let axis = vec![-1.0, -3.0];
         let s0 = Rational::from((1, 1 << 20));
         let s = Rational::from(10);
@@ -200,8 +248,14 @@ mod tests {
             z.0 += &q.step.0;
             z.1 += &q.step.1;
             // every patch stays inside its convergence disk with margin
-            let r = pts.iter().map(|&(a, b)| (q.centre.0.to_f64() - a).hypot(q.centre.1.to_f64() - b)).fold(f64::INFINITY, f64::min);
-            assert!(q.step.0.to_f64().hypot(q.step.1.to_f64()) <= 0.51 * r, "patch too long");
+            let r = pts
+                .iter()
+                .map(|&(a, b)| (q.centre.0.to_f64() - a).hypot(q.centre.1.to_f64() - b))
+                .fold(f64::INFINITY, f64::min);
+            assert!(
+                q.step.0.to_f64().hypot(q.step.1.to_f64()) <= 0.51 * r,
+                "patch too long"
+            );
         }
         assert_eq!(z, (Rational::from(-10), Rational::new()));
         assert!(p.iter().filter(|q| !q.is_real()).count() >= 2 * 11);

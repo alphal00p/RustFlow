@@ -10,7 +10,7 @@
 //! Polynomials map (index vector over 15 slots, power of 1/D) -> rational coefficient. Output: the plan JSON of soft_gen.py
 //! (endpoint_polys, soft_polys) and the RustRed demand (integrals embedded with a q_e tadpole).
 use rug::Rational;
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
 
 pub type Poly = BTreeMap<(Vec<i64>, i64), Rational>;
@@ -31,7 +31,16 @@ fn rat(v: &Value) -> Rational {
 
 fn invert(m: &[Vec<Rational>]) -> Option<Vec<Vec<Rational>>> {
     let n = m.len();
-    let mut a: Vec<Vec<Rational>> = m.iter().enumerate().map(|(i, r)| r.iter().cloned().chain((0..n).map(|j| q((i == j) as i64))).collect()).collect();
+    let mut a: Vec<Vec<Rational>> = m
+        .iter()
+        .enumerate()
+        .map(|(i, r)| {
+            r.iter()
+                .cloned()
+                .chain((0..n).map(|j| q((i == j) as i64)))
+                .collect()
+        })
+        .collect();
     for i in 0..n {
         let piv = (i..n).find(|&r| a[r][i] != 0)?;
         a.swap(i, piv);
@@ -57,7 +66,9 @@ fn det(m: &[Vec<Rational>]) -> Rational {
     let n = m.len();
     let mut d = q(1);
     for i in 0..n {
-        let Some(piv) = (i..n).find(|&r| m[r][i] != 0) else { return q(0) };
+        let Some(piv) = (i..n).find(|&r| m[r][i] != 0) else {
+            return q(0);
+        };
         if piv != i {
             m.swap(i, piv);
             d = -d;
@@ -76,14 +87,33 @@ fn det(m: &[Vec<Rational>]) -> Rational {
 
 /// slot -> 5x5 symmetric G with q^2 = k^T G k
 fn n_loops(fam: &Value) -> usize {
-    fam["loop_momenta"].as_array().map(|v| v.len()).unwrap_or_else(|| {
-        1 + fam["coordinates"].as_array().unwrap().iter().map(|c| c["right"].as_u64().unwrap() as usize).max().unwrap()
-    })
+    fam["loop_momenta"]
+        .as_array()
+        .map(|v| v.len())
+        .unwrap_or_else(|| {
+            1 + fam["coordinates"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(|c| c["right"].as_u64().unwrap() as usize)
+                .max()
+                .unwrap()
+        })
 }
 
 fn quad_forms(fam: &Value) -> Vec<Vec<Vec<Rational>>> {
     let nl = n_loops(fam);
-    let co: Vec<(usize, usize)> = fam["coordinates"].as_array().unwrap().iter().map(|c| (c["left"].as_u64().unwrap() as usize, c["right"].as_u64().unwrap() as usize)).collect();
+    let co: Vec<(usize, usize)> = fam["coordinates"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|c| {
+            (
+                c["left"].as_u64().unwrap() as usize,
+                c["right"].as_u64().unwrap() as usize,
+            )
+        })
+        .collect();
     fam["denominators"]
         .as_array()
         .unwrap()
@@ -130,7 +160,8 @@ fn momenta4(rows: &[(Vec<Rational>, bool)]) -> Vec<Option<Vq>> {
             if !square {
                 return None;
             }
-            let cm: BTreeMap<(usize, usize), Rational> = pairs.iter().cloned().zip(c.iter().cloned()).collect();
+            let cm: BTreeMap<(usize, usize), Rational> =
+                pairs.iter().cloned().zip(c.iter().cloned()).collect();
             let lead = (0..4).find(|&a| cm[&(a, a)] != 0).unwrap();
             let mut v = vec![q(0); 4];
             v[lead] = q(1);
@@ -141,7 +172,11 @@ fn momenta4(rows: &[(Vec<Rational>, bool)]) -> Vec<Option<Vq>> {
             }
             for a in 0..4 {
                 for b in a..4 {
-                    let want = if a == b { Rational::from(&v[a] * &v[a]) } else { Rational::from(&v[a] * &v[b]) * 2 };
+                    let want = if a == b {
+                        Rational::from(&v[a] * &v[a])
+                    } else {
+                        Rational::from(&v[a] * &v[b]) * 2
+                    };
                     assert!(want == cm[&(a, b)], "not a rank-1 propagator");
                 }
             }
@@ -166,15 +201,27 @@ struct Cfg {
 
 impl Cfg {
     fn new(g: &[Vec<Vec<Rational>>], e: usize, j: usize) -> Cfg {
-        let qm: Vec<Vq> = g.iter().map(|x| momentum_any(x).expect("slot without a rank-1 momentum")).collect();
+        let qm: Vec<Vq> = g
+            .iter()
+            .map(|x| momentum_any(x).expect("slot without a rank-1 momentum"))
+            .collect();
         let qe = qm[e].clone();
         let cj = qe[j].clone();
         assert!(cj == 1 || cj == -1);
         let (nl, ns) = (qe.len(), qm.len());
         let loops: Vec<usize> = (0..nl).filter(|&i| i != j).collect();
         let sub: Vec<usize> = (0..ns).filter(|&s| qm[s][j] == 0).collect();
-        assert_eq!(sub.len(), (nl - 1) * nl / 2, "SUB is not a complete (L-1)-loop family");
-        let (mut pdep, mut kvec, mut bco, mut pd) = (Vec::new(), BTreeMap::new(), BTreeMap::new(), BTreeMap::new());
+        assert_eq!(
+            sub.len(),
+            (nl - 1) * nl / 2,
+            "SUB is not a complete (L-1)-loop family"
+        );
+        let (mut pdep, mut kvec, mut bco, mut pd) = (
+            Vec::new(),
+            BTreeMap::new(),
+            BTreeMap::new(),
+            BTreeMap::new(),
+        );
         for s in 0..ns {
             if s == e || qm[s][j] == 0 {
                 continue;
@@ -194,15 +241,50 @@ impl Cfg {
             bco.insert(s, b);
         }
         // scalar products of L as linear forms in (Q_s - 1), s in SUB
-        let pairs: Vec<(usize, usize)> = loops.iter().enumerate().flat_map(|(i, &a)| loops[i..].iter().map(move |&b| (a, b))).collect();
-        let m: Vec<Vec<Rational>> = sub.iter().map(|&s| pairs.iter().map(|&(a, b)| if a == b { g[s][a][b].clone() } else { Rational::from(&g[s][a][b] * 2) }).collect()).collect();
+        let pairs: Vec<(usize, usize)> = loops
+            .iter()
+            .enumerate()
+            .flat_map(|(i, &a)| loops[i..].iter().map(move |&b| (a, b)))
+            .collect();
+        let m: Vec<Vec<Rational>> = sub
+            .iter()
+            .map(|&s| {
+                pairs
+                    .iter()
+                    .map(|&(a, b)| {
+                        if a == b {
+                            g[s][a][b].clone()
+                        } else {
+                            Rational::from(&g[s][a][b] * 2)
+                        }
+                    })
+                    .collect()
+            })
+            .collect();
         let minv = invert(&m).expect("SUB family is not complete");
         let mut inv = BTreeMap::new();
         for (k, ab) in pairs.iter().enumerate() {
-            let row: BTreeMap<usize, Rational> = sub.iter().enumerate().filter(|(si, _)| minv[k][*si] != 0).map(|(si, &s)| (s, minv[k][si].clone())).collect();
+            let row: BTreeMap<usize, Rational> = sub
+                .iter()
+                .enumerate()
+                .filter(|(si, _)| minv[k][*si] != 0)
+                .map(|(si, &s)| (s, minv[k][si].clone()))
+                .collect();
             inv.insert(*ab, row);
         }
-        Cfg { nl, ns, e, loops, sub, pdep, kvec, bco, pd, qm, inv }
+        Cfg {
+            nl,
+            ns,
+            e,
+            loops,
+            sub,
+            pdep,
+            kvec,
+            bco,
+            pd,
+            qm,
+            inv,
+        }
     }
 
     /// u.v for 5-vectors supported on the loops -> linear form in Q_slot (None = constant)
@@ -214,7 +296,13 @@ impl Cfg {
                 if c == 0 {
                     continue;
                 }
-                let ab = if self.loops.iter().position(|&x| x == a) <= self.loops.iter().position(|&x| x == b) { (a, b) } else { (b, a) };
+                let ab = if self.loops.iter().position(|&x| x == a)
+                    <= self.loops.iter().position(|&x| x == b)
+                {
+                    (a, b)
+                } else {
+                    (b, a)
+                };
                 for (s, x) in &self.inv[&ab] {
                     let cx = Rational::from(&c * x);
                     *out.entry(Some(*s)).or_default() += &cx;
@@ -230,7 +318,10 @@ impl Cfg {
         if let Some(&t) = self.pd.get(&s) {
             return p_shift(poly, t, m);
         }
-        assert!(m <= 0, "positive power on a p-dependent slot without a SUB image");
+        assert!(
+            m <= 0,
+            "positive power on a p-dependent slot without a SUB image"
+        );
         let k = &self.kvec[&s];
         let mut lin = self.sp(k, k);
         *lin.entry(None).or_default() += 1;
@@ -248,7 +339,12 @@ impl Cfg {
             nu[s] = master[s];
         }
         let base: Poly = BTreeMap::from([((nu, 0), q(1))]);
-        let act: Vec<(usize, i64)> = self.pdep.iter().filter(|&&s| master[s] != 0).map(|&s| (s, master[s])).collect();
+        let act: Vec<(usize, i64)> = self
+            .pdep
+            .iter()
+            .filter(|&&s| master[s] != 0)
+            .map(|&s| (s, master[s]))
+            .collect();
         if n == 0 {
             let mut b0 = base;
             for &(s, a) in &act {
@@ -266,11 +362,19 @@ impl Cfg {
                     rest = self.p_qpow(&rest, s2, a2);
                 }
             }
-            tot = p_add(&tot, &self.p_qpow(&rest, s, a + 1), &(Rational::from(-a) * &b2));
+            tot = p_add(
+                &tot,
+                &self.p_qpow(&rest, s, a + 1),
+                &(Rational::from(-a) * &b2),
+            );
             if a * (a + 1) != 0 {
                 let k = &self.kvec[&s];
                 let t = p_mul_lin(&self.p_qpow(&rest, s, a + 2), &self.sp(k, k));
-                tot = p_add(&tot, &p_dpow(&t, 1), &(Rational::from(2 * a * (a + 1)) * &b2));
+                tot = p_add(
+                    &tot,
+                    &p_dpow(&t, 1),
+                    &(Rational::from(2 * a * (a + 1)) * &b2),
+                );
             }
         }
         for x in 0..act.len() {
@@ -338,7 +442,9 @@ fn p_add(a: &Poly, b: &Poly, f: &Rational) -> Poly {
 }
 
 fn p_dpow(poly: &Poly, k: i64) -> Poly {
-    poly.iter().map(|((nu, dp), c)| ((nu.clone(), dp + k), c.clone())).collect()
+    poly.iter()
+        .map(|((nu, dp), c)| ((nu.clone(), dp + k), c.clone()))
+        .collect()
 }
 
 /// A (4x4, |det| 1) with lane momenta K = A L, and the propagator permutation lane -> W4 line
@@ -350,7 +456,8 @@ fn find_map(nat_q: &[Option<Vq>], sub_q: &[Vq]) -> (Vec<Vec<Rational>>, BTreeMap
             for c in b + 1..idx.len() {
                 for d in c + 1..idx.len() {
                     let cand = [idx[a], idx[b], idx[c], idx[d]];
-                    let m: Vec<Vec<Rational>> = cand.iter().map(|&i| nat_q[i].clone().unwrap()).collect();
+                    let m: Vec<Vec<Rational>> =
+                        cand.iter().map(|&i| nat_q[i].clone().unwrap()).collect();
                     if det(&m) != 0 {
                         basis = Some(cand);
                         break 'b;
@@ -360,7 +467,14 @@ fn find_map(nat_q: &[Option<Vq>], sub_q: &[Vq]) -> (Vec<Vec<Rational>>, BTreeMap
         }
     }
     let basis = basis.expect("no momentum basis");
-    let bt: Vec<Vec<Rational>> = (0..4).map(|r| basis.iter().map(|&i| nat_q[i].as_ref().unwrap()[r].clone()).collect()).collect();
+    let bt: Vec<Vec<Rational>> = (0..4)
+        .map(|r| {
+            basis
+                .iter()
+                .map(|&i| nat_q[i].as_ref().unwrap()[r].clone())
+                .collect()
+        })
+        .collect();
     let binv = invert(&bt).unwrap();
     let n = sub_q.len();
     // permutations of 4 out of n in lexicographic order (as itertools.permutations), signs in product order (1, -1)
@@ -379,9 +493,25 @@ fn find_map(nat_q: &[Option<Vq>], sub_q: &[Vq]) -> (Vec<Vec<Rational>>, BTreeMap
     }
     for img in perms {
         for sm in 0..16 {
-            let signs: Vec<i64> = (0..4).map(|k| if (sm >> (3 - k)) & 1 == 1 { -1 } else { 1 }).collect();
-            let s: Vec<Vec<Rational>> = (0..4).map(|r| (0..4).map(|k| Rational::from(&sub_q[img[k]][r] * signs[k])).collect()).collect();
-            let at: Vec<Vec<Rational>> = (0..4).map(|r| (0..4).map(|c| (0..4).fold(q(0), |acc, k| acc + Rational::from(&s[r][k] * &binv[k][c]))).collect()).collect();
+            let signs: Vec<i64> = (0..4)
+                .map(|k| if (sm >> (3 - k)) & 1 == 1 { -1 } else { 1 })
+                .collect();
+            let s: Vec<Vec<Rational>> = (0..4)
+                .map(|r| {
+                    (0..4)
+                        .map(|k| Rational::from(&sub_q[img[k]][r] * signs[k]))
+                        .collect()
+                })
+                .collect();
+            let at: Vec<Vec<Rational>> = (0..4)
+                .map(|r| {
+                    (0..4)
+                        .map(|c| {
+                            (0..4).fold(q(0), |acc, k| acc + Rational::from(&s[r][k] * &binv[k][c]))
+                        })
+                        .collect()
+                })
+                .collect();
             let dd = det(&at);
             if dd != 1 && dd != -1 {
                 continue;
@@ -391,7 +521,9 @@ fn find_map(nat_q: &[Option<Vq>], sub_q: &[Vq]) -> (Vec<Vec<Rational>>, BTreeMap
             let mut ok = true;
             for &i in &idx {
                 let nq = nat_q[i].as_ref().unwrap();
-                let v: Vq = (0..4).map(|r| (0..4).fold(q(0), |acc, c| acc + Rational::from(&at[r][c] * &nq[c]))).collect();
+                let v: Vq = (0..4)
+                    .map(|r| (0..4).fold(q(0), |acc, c| acc + Rational::from(&at[r][c] * &nq[c])))
+                    .collect();
                 let neg: Vq = v.iter().map(|x| Rational::from(-x)).collect();
                 match (0..n).find(|j| !used.contains(j) && (sub_q[*j] == v || sub_q[*j] == neg)) {
                     Some(h) => {
@@ -405,7 +537,9 @@ fn find_map(nat_q: &[Option<Vq>], sub_q: &[Vq]) -> (Vec<Vec<Rational>>, BTreeMap
                 }
             }
             if ok {
-                let a: Vec<Vec<Rational>> = (0..4).map(|r| (0..4).map(|c| at[c][r].clone()).collect()).collect();
+                let a: Vec<Vec<Rational>> = (0..4)
+                    .map(|r| (0..4).map(|c| at[c][r].clone()).collect())
+                    .collect();
                 return (a, perm);
             }
         }
@@ -420,16 +554,32 @@ pub struct SoftPlan {
 
 /// inputs: 5L family JSON, class config, e-block masters, P14 native family + its endpoint targets, prism family + targets (optional)
 #[allow(clippy::too_many_arguments)]
-pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_targets: &[Vec<i64>], prism: Option<(&Value, &[Vec<i64>])>) -> SoftPlan {
+pub fn build(
+    fam: &Value,
+    config: &Value,
+    emast: &[Vec<i64>],
+    p14: &Value,
+    p14_targets: &[Vec<i64>],
+    prism: Option<(&Value, &[Vec<i64>])>,
+) -> SoftPlan {
     let g = quad_forms(fam);
     let e = config["e"].as_u64().unwrap() as usize;
     let j = config["j"].as_u64().unwrap() as usize;
     let cfg = Cfg::new(&g, e, j);
-    let top: Vec<i64> = config["top_powers"].as_array().unwrap().iter().map(|x| x.as_i64().unwrap()).collect();
+    let top: Vec<i64> = config["top_powers"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|x| x.as_i64().unwrap())
+        .collect();
     let mut w4: BTreeSet<usize> = cfg.sub.iter().filter(|&&s| top[s] > 0).cloned().collect();
     for &s in &cfg.pdep {
         if top[s] > 0 {
-            w4.insert(*cfg.pd.get(&s).expect("p-dependent top line without SUB image"));
+            w4.insert(
+                *cfg.pd
+                    .get(&s)
+                    .expect("p-dependent top line without SUB image"),
+            );
         }
     }
     if let Some(x) = config.get("w4_extra").and_then(|v| v.as_u64()) {
@@ -437,11 +587,36 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
     }
     let w4: Vec<usize> = w4.into_iter().collect();
     // a 9-line soft graph is the prism lane (soft_gen.py: config 'prism' defaults to the PR endpoint targets)
-    assert!(w4.len() == 8 || w4.len() == 9, "soft graph is not an 8- or 9-line 4L graph: {w4:?}");
-    let prism = if w4.len() == 9 { Some(prism.expect("9-line soft graph needs the prism lane inputs")) } else { None };
-    let sub_q: Vec<Vq> = w4.iter().map(|&s| cfg.loops.iter().map(|&l| cfg.qm[s][l].clone()).collect()).collect();
+    assert!(
+        w4.len() == 8 || w4.len() == 9,
+        "soft graph is not an 8- or 9-line 4L graph: {w4:?}"
+    );
+    let prism = if w4.len() == 9 {
+        Some(prism.expect("9-line soft graph needs the prism lane inputs"))
+    } else {
+        None
+    };
+    let sub_q: Vec<Vq> = w4
+        .iter()
+        .map(|&s| cfg.loops.iter().map(|&l| cfg.qm[s][l].clone()).collect())
+        .collect();
     // P14 lane
-    let p14_rows: Vec<(Vec<Rational>, bool)> = p14["denominators"].as_array().unwrap().iter().map(|d| (d["scalar_products"].as_array().unwrap().iter().map(rat).collect(), d["constant"] == "-1")).collect();
+    let p14_rows: Vec<(Vec<Rational>, bool)> = p14["denominators"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|d| {
+            (
+                d["scalar_products"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .map(rat)
+                    .collect(),
+                d["constant"] == "-1",
+            )
+        })
+        .collect();
     let p14_pairs: Vec<Vec<Rational>> = p14_rows.iter().map(|r| r.0.clone()).collect();
     let nq = momenta4(&p14_rows);
     let (a14, perm14) = find_map(&nq, &sub_q);
@@ -470,7 +645,12 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
         }
         let mut poly: Poly = BTreeMap::from([((nu, 0), q(1))]);
         for (i, k) in isps {
-            let nz: Vec<(usize, usize)> = pairs4.iter().zip(&p14_pairs[i]).filter(|(_, x)| **x != 0).map(|(p, _)| *p).collect();
+            let nz: Vec<(usize, usize)> = pairs4
+                .iter()
+                .zip(&p14_pairs[i])
+                .filter(|(_, x)| **x != 0)
+                .map(|(p, _)| *p)
+                .collect();
             assert!(nz.len() == 1 && nz[0].0 != nz[0].1);
             let (a, b) = nz[0];
             let lin = cfg.sp(&lift(&a14, a), &lift(&a14, b));
@@ -481,7 +661,22 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
         ep.insert(serde_json::to_string(t).unwrap().replace(',', ", "), poly);
     }
     if let Some((prf, prt)) = prism {
-        let rows: Vec<(Vec<Rational>, bool)> = prf["denominators"].as_array().unwrap().iter().map(|d| (d["coefficients"].as_array().unwrap().iter().map(rat).collect(), true)).collect();
+        let rows: Vec<(Vec<Rational>, bool)> = prf["denominators"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|d| {
+                (
+                    d["coefficients"]
+                        .as_array()
+                        .unwrap()
+                        .iter()
+                        .map(rat)
+                        .collect(),
+                    true,
+                )
+            })
+            .collect();
         let mut prq = momenta4(&rows);
         let q9 = prq[9].clone().unwrap();
         prq[9] = None;
@@ -498,7 +693,8 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
                 assert!(t[9] < 0);
                 let mut kk = vec![q(0); cfg.nl];
                 for l in 0..4 {
-                    kk[cfg.loops[l]] = (0..4).fold(q(0), |acc, a| acc + Rational::from(&q9[a] * &apr[a][l]));
+                    kk[cfg.loops[l]] =
+                        (0..4).fold(q(0), |acc, a| acc + Rational::from(&q9[a] * &apr[a][l]));
                 }
                 let mut lin = cfg.sp(&kk, &kk);
                 *lin.entry(None).or_default() += 1;
@@ -507,7 +703,10 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
                     poly = p_mul_lin(&poly, &lin);
                 }
             }
-            ep.insert(format!("PR{}", serde_json::to_string(t).unwrap().replace(',', ", ")), poly);
+            ep.insert(
+                format!("PR{}", serde_json::to_string(t).unwrap().replace(',', ", ")),
+                poly,
+            );
         }
     }
     let n1 = config.get("n1").cloned().unwrap_or(json!("a2"));
@@ -518,7 +717,11 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
         let take1 = match &n1 {
             Value::String(s) if s == "all" => true,
             Value::String(s) if s == "a2" => m[e] >= 2,
-            Value::Array(list) => list.iter().any(|x| x.as_array().map(|v| v.iter().map(|y| y.as_i64().unwrap()).collect::<Vec<_>>()) == Some(m.clone())),
+            Value::Array(list) => list.iter().any(|x| {
+                x.as_array()
+                    .map(|v| v.iter().map(|y| y.as_i64().unwrap()).collect::<Vec<_>>())
+                    == Some(m.clone())
+            }),
             _ => false,
         };
         if take1 {
@@ -531,7 +734,13 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
             ints.insert(cfg.embed(nu));
         }
     }
-    let ser = |p: &Poly| -> Value { json!(p.iter().map(|((nu, dp), c)| json!([nu, dp, c.to_string()])).collect::<Vec<_>>()) };
+    let ser = |p: &Poly| -> Value {
+        json!(
+            p.iter()
+                .map(|((nu, dp), c)| json!([nu, dp, c.to_string()]))
+                .collect::<Vec<_>>()
+        )
+    };
     let plan = json!({"config": config, "derived": {"loops": cfg.loops, "sub": cfg.sub, "pdep": cfg.pdep, "w4lines": w4},
         "A_P14_from_L": a14.iter().map(|r| r.iter().map(|x| x.to_string()).collect::<Vec<_>>()).collect::<Vec<_>>(),
         "perm_P14_to_W4line": perm14.iter().map(|(k, v)| (k.to_string(), json!(v))).collect::<serde_json::Map<_, _>>(),
@@ -552,7 +761,13 @@ pub fn build_soft_only(fam: &Value, config: &Value, emast: &[Vec<i64>]) -> Value
     let cfg = Cfg::new(&g, e, j);
     let n1 = config.get("n1").cloned().unwrap_or(json!("a2"));
     let mut soft = serde_json::Map::new();
-    let ser = |p: &Poly| -> Value { json!(p.iter().map(|((nu, dp), c)| json!([nu, dp, c.to_string()])).collect::<Vec<_>>()) };
+    let ser = |p: &Poly| -> Value {
+        json!(
+            p.iter()
+                .map(|((nu, dp), c)| json!([nu, dp, c.to_string()]))
+                .collect::<Vec<_>>()
+        )
+    };
     for m in emast {
         let key = serde_json::to_string(m).unwrap().replace(',', ", ");
         soft.insert(format!("{key}|0"), ser(&cfg.soft_terms(m, 0)));
@@ -595,7 +810,7 @@ pub fn components(vecs: &[Vq]) -> Vec<(usize, usize)> {
     }
     let rank = basis.len();
     let mut parent: Vec<usize> = (0..n).collect();
-    fn find(p: &mut Vec<usize>, x: usize) -> usize {
+    fn find(p: &mut [usize], x: usize) -> usize {
         let mut x = x;
         while p[x] != x {
             p[x] = p[p[x]];
@@ -610,11 +825,21 @@ pub fn components(vecs: &[Vq]) -> Vec<(usize, usize)> {
         }
         // solve sum_k x_k b_k = v by exact Gauss on the rank x dim system
         let dimv = vecs[i].len();
-        let mut a: Vec<Vec<Rational>> = (0..dimv).map(|r| basis.iter().map(|&b| vecs[b][r].clone()).chain([vecs[i][r].clone()]).collect()).collect();
+        let mut a: Vec<Vec<Rational>> = (0..dimv)
+            .map(|r| {
+                basis
+                    .iter()
+                    .map(|&b| vecs[b][r].clone())
+                    .chain([vecs[i][r].clone()])
+                    .collect()
+            })
+            .collect();
         let mut row = 0;
         let mut pivc = Vec::new();
         for c in 0..rank {
-            let Some(p) = (row..dimv).find(|&r| a[r][c] != 0) else { continue };
+            let Some(p) = (row..dimv).find(|&r| a[r][c] != 0) else {
+                continue;
+            };
             a.swap(row, p);
             let pv = a[row][c].clone();
             for x in a[row].iter_mut() {
@@ -669,13 +894,32 @@ pub fn slot_momenta(fam: &Value) -> Vec<Option<Vq>> {
 /// exact comparison of two plans' polynomial maps: (number of keys compared, mismatching keys)
 pub fn compare(a: &Value, b: &Value) -> (usize, Vec<String>) {
     let norm = |v: &Value| -> BTreeMap<(Vec<i64>, i64), Rational> {
-        v.as_array().unwrap().iter().map(|t| ((t[0].as_array().unwrap().iter().map(|x| x.as_i64().unwrap()).collect(), t[1].as_i64().unwrap()), rat(&t[2]))).collect()
+        v.as_array()
+            .unwrap()
+            .iter()
+            .map(|t| {
+                (
+                    (
+                        t[0].as_array()
+                            .unwrap()
+                            .iter()
+                            .map(|x| x.as_i64().unwrap())
+                            .collect(),
+                        t[1].as_i64().unwrap(),
+                    ),
+                    rat(&t[2]),
+                )
+            })
+            .collect()
     };
     let mut n = 0;
     let mut bad = Vec::new();
     for sect in ["endpoint_polys", "soft_polys"] {
         let empty = serde_json::Map::new();
-        let (ma, mb) = (a[sect].as_object().unwrap_or(&empty), b[sect].as_object().unwrap_or(&empty));
+        let (ma, mb) = (
+            a[sect].as_object().unwrap_or(&empty),
+            b[sect].as_object().unwrap_or(&empty),
+        );
         for k in ma.keys().chain(mb.keys()).collect::<BTreeSet<_>>() {
             n += 1;
             match (ma.get(k), mb.get(k)) {

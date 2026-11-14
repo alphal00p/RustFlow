@@ -71,13 +71,19 @@ impl ZPoly {
         for c in p {
             den.lcm_mut(c.denom());
         }
-        let mut ints: Vec<Integer> = p.iter().map(|c| Integer::from(c.numer() * Integer::from(&den / c.denom()))).collect();
+        let mut ints: Vec<Integer> = p
+            .iter()
+            .map(|c| c.numer() * Integer::from(&den / c.denom()))
+            .collect();
         let mut g = Integer::new();
         for x in &ints {
             g.gcd_mut(x);
         }
         if g == 0 {
-            return ZPoly { content: Rational::new(), prim: vec![Integer::new()] };
+            return ZPoly {
+                content: Rational::new(),
+                prim: vec![Integer::new()],
+            };
         }
         for x in ints.iter_mut() {
             x.div_exact_mut(&g);
@@ -85,11 +91,17 @@ impl ZPoly {
         while ints.len() > 1 && *ints.last().unwrap() == 0 {
             ints.pop();
         }
-        ZPoly { content: Rational::from((g, den)), prim: ints }
+        ZPoly {
+            content: Rational::from((g, den)),
+            prim: ints,
+        }
     }
 
     pub fn to_q(&self) -> QPoly {
-        self.prim.iter().map(|x| Rational::from(x * &self.content.clone())).collect()
+        self.prim
+            .iter()
+            .map(|x| Rational::from(x * &self.content.clone()))
+            .collect()
     }
 
     pub fn degree(&self) -> usize {
@@ -127,7 +139,11 @@ impl AssignMul for Integer {
 }
 
 /// p(x + m) for a Gaussian integer m = mr + i mi, exact; returns (re, im) coefficient vectors
-pub fn taylor_shift_gauss(p: &[Integer], mr: &Integer, mi: &Integer) -> (Vec<Integer>, Vec<Integer>) {
+pub fn taylor_shift_gauss(
+    p: &[Integer],
+    mr: &Integer,
+    mi: &Integer,
+) -> (Vec<Integer>, Vec<Integer>) {
     if *mi == 0 {
         let re = taylor_shift_int(p, mr);
         let im = vec![Integer::new(); re.len()];
@@ -172,14 +188,20 @@ pub fn shift_complex(p: &ZPoly, cr: &Rational, ci: &Rational) -> (QPoly, QPoly) 
         let mr = mr << (e - er);
         let mi = mi << (e - ei);
         // b_k = a_k 2^(e (deg - k));  sum b_k (m + w)^k = 2^(e deg) p(c + w / 2^e)
-        let b: Vec<Integer> = p.prim.iter().enumerate().map(|(k, a)| Integer::from(a << (e as usize * (deg - k)) as u32)).collect();
+        let b: Vec<Integer> = p
+            .prim
+            .iter()
+            .enumerate()
+            .map(|(k, a)| Integer::from(a << (e as usize * (deg - k)) as u32))
+            .collect();
         let (re, im) = taylor_shift_gauss(&b, &mr, &mi);
         // coefficient of t^n: 2^(-e deg) * 2^(e n) * shifted[n] = shifted[n] / 2^(e (deg - n))
         let conv = |v: Vec<Integer>| -> QPoly {
             v.into_iter()
                 .enumerate()
                 .map(|(n, x)| {
-                    let mut r = Rational::from((x, Integer::from(1) << (e as usize * (deg - n)) as u32));
+                    let mut r =
+                        Rational::from((x, Integer::from(1) << (e as usize * (deg - n)) as u32));
                     r *= &p.content;
                     r
                 })
@@ -211,7 +233,9 @@ pub fn shift_complex(p: &ZPoly, cr: &Rational, ci: &Rational) -> (QPoly, QPoly) 
 /// p(x - 1) exact, as rationals
 pub fn shift_minus_one(p: &ZPoly) -> QPoly {
     let s = taylor_shift_int(&p.prim, &Integer::from(-1));
-    s.into_iter().map(|x| Rational::from(x) * &p.content).collect()
+    s.into_iter()
+        .map(|x| Rational::from(x) * &p.content)
+        .collect()
 }
 
 /// exact remainder test / division over Q of primitive integer polynomials: Some(a / b) primitive when b | a
@@ -220,7 +244,7 @@ pub fn exact_div(a: &[Integer], b: &[Integer]) -> Option<Vec<Integer>> {
     if a.len() < b.len() {
         return None;
     }
-    let mut r: Vec<Rational> = a.iter().map(|x| Rational::from(x)).collect();
+    let mut r: Vec<Rational> = a.iter().map(Rational::from).collect();
     let mut q = vec![Rational::new(); a.len() - db];
     let lead = Rational::from(b[db].clone());
     for i in (db..a.len()).rev() {
@@ -309,11 +333,13 @@ pub fn cx(prec: u32, re: &Rational, im: &Rational) -> Complex {
 /// parse "a/b" or "a" (also accepts a JSON number)
 pub fn parse_rational(v: &serde_json::Value) -> Result<Rational, String> {
     match v {
-        serde_json::Value::String(s) => s.trim().parse::<Rational>().map_err(|e| format!("rational {s:?}: {e}")),
-        serde_json::Value::Number(n) => n
-            .as_i64()
-            .map(Rational::from)
-            .ok_or_else(|| format!("non-integer JSON number {n} where a rational string was expected")),
+        serde_json::Value::String(s) => s
+            .trim()
+            .parse::<Rational>()
+            .map_err(|e| format!("rational {s:?}: {e}")),
+        serde_json::Value::Number(n) => n.as_i64().map(Rational::from).ok_or_else(|| {
+            format!("non-integer JSON number {n} where a rational string was expected")
+        }),
         _ => Err(format!("not a rational: {v}")),
     }
 }
@@ -327,13 +353,20 @@ mod tests {
     #[test]
     fn shifts_are_exact() {
         // p = 3 - 2x + x^3 / 4
-        let p: QPoly = vec![Rational::from(3), Rational::from(-2), Rational::new(), Rational::from((1, 4))];
+        let p: QPoly = vec![
+            Rational::from(3),
+            Rational::from(-2),
+            Rational::new(),
+            Rational::from((1, 4)),
+        ];
         let z = ZPoly::from_q(&p);
         assert_eq!(z.to_q(), p);
         // p(x - 1)
         let s = shift_minus_one(&z);
         let x = Rational::from((5, 7));
-        let ev = |c: &[Rational], x: &Rational| c.iter().rev().fold(Rational::new(), |acc, a| acc * x + a);
+        let ev = |c: &[Rational], x: &Rational| {
+            c.iter().rev().fold(Rational::new(), |acc, a| acc * x + a)
+        };
         assert_eq!(ev(&s, &x), ev(&p, &(x.clone() - 1)));
         // complex dyadic centre c = 3/8 + i 5/16: p(c + t) at t = 1/3 against direct complex evaluation
         let (cr, ci) = (Rational::from((3, 8)), Rational::from((5, 16)));
@@ -360,7 +393,10 @@ mod tests {
         let a = vec![Integer::from(-2), Integer::from(-1), Integer::from(1)]; // (x - 2)(x + 1)
         let b = vec![Integer::from(1), Integer::from(1)];
         assert!(divides_mod_p(&a, &b, 1048573));
-        assert_eq!(exact_div(&a, &b).unwrap(), vec![Integer::from(-2), Integer::from(1)]);
+        assert_eq!(
+            exact_div(&a, &b).unwrap(),
+            vec![Integer::from(-2), Integer::from(1)]
+        );
         assert!(exact_div(&a, &[Integer::from(3), Integer::from(1)]).is_none());
     }
 }

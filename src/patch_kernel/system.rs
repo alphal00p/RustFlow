@@ -79,7 +79,7 @@ fn clear_denominators(
     // N/D = (ln num / ln) / (ld den / ld) = (ld * (ln num)) / (ln * (ld den))
     let scale = |p: &[rug::Rational], l: &Integer, other: &Integer| {
         p.iter()
-            .map(|c| Integer::from(c.numer() * Integer::from(l / c.denom())) * other)
+            .map(|c| (c.numer() * Integer::from(l / c.denom())) * other)
             .collect::<Vec<_>>()
     };
     (scale(num, &ln, &ld), scale(den, &ld, &ln))

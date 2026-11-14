@@ -22,10 +22,17 @@ pub struct SingularSet {
 
 impl SingularSet {
     pub fn r0(&self) -> f64 {
-        self.points.iter().map(|&(a, b)| a.hypot(b)).filter(|&r| r > 1e-9).fold(f64::INFINITY, f64::min)
+        self.points
+            .iter()
+            .map(|&(a, b)| a.hypot(b))
+            .filter(|&r| r > 1e-9)
+            .fold(f64::INFINITY, f64::min)
     }
     pub fn rmax(&self) -> f64 {
-        self.points.iter().map(|&(a, b)| a.hypot(b)).fold(0.0, f64::max)
+        self.points
+            .iter()
+            .map(|&(a, b)| a.hypot(b))
+            .fold(0.0, f64::max)
     }
     /// singular points on the negative real axis (z < 0), descending (closest to 0 first)
     pub fn axis(&self) -> Vec<f64> {
@@ -80,12 +87,13 @@ pub fn factor_base(dens: &[Vec<Integer>]) -> Vec<Vec<Integer>> {
         while p.len() > 1 && moved {
             moved = false;
             for f in &base {
-                if f.len() <= p.len() && poly::divides_mod_p(&p, f, PREFILTER_PRIME) {
-                    if let Some(q) = poly::exact_div(&p, f) {
-                        p = q;
-                        moved = true;
-                        break;
-                    }
+                if f.len() <= p.len()
+                    && poly::divides_mod_p(&p, f, PREFILTER_PRIME)
+                    && let Some(q) = poly::exact_div(&p, f)
+                {
+                    p = q;
+                    moved = true;
+                    break;
                 }
             }
         }
@@ -116,7 +124,9 @@ pub fn roots(p: &[Integer], prec0: u32) -> Vec<Complex> {
 fn aberth(p: &[Integer], prec: u32, maxit: usize) -> Option<Vec<Complex>> {
     let deg = p.len() - 1;
     let c: Vec<Complex> = p.iter().map(|x| Complex::with_val(prec, (x, 0))).collect();
-    let dc: Vec<Complex> = (1..=deg).map(|k| Complex::with_val(prec, &c[k] * k as u32)).collect();
+    let dc: Vec<Complex> = (1..=deg)
+        .map(|k| Complex::with_val(prec, &c[k] * k as u32))
+        .collect();
     // Fujiwara bound for the initial radius
     let lead = Float::with_val(prec, c[deg].real());
     let mut rad = 0f64;
@@ -128,7 +138,11 @@ fn aberth(p: &[Integer], prec: u32, maxit: usize) -> Option<Vec<Complex>> {
         let r = (v.to_f64().ln() / (deg - k) as f64).exp();
         rad = rad.max(2.0 * r);
     }
-    let rad = if rad.is_finite() && rad > 0.0 { rad } else { 1.0 };
+    let rad = if rad.is_finite() && rad > 0.0 {
+        rad
+    } else {
+        1.0
+    };
     let mut z: Vec<Complex> = (0..deg)
         .map(|k| {
             let th = 2.0 * std::f64::consts::PI * (k as f64 + 0.25) / deg as f64 + 0.4;
@@ -166,7 +180,9 @@ fn aberth(p: &[Integer], prec: u32, maxit: usize) -> Option<Vec<Complex>> {
             }
             let den = Complex::with_val(prec, 1 - Complex::with_val(prec, &w * &s));
             let corr = Complex::with_val(prec, &w / &den);
-            let rel = Float::with_val(prec, corr.clone().abs().real()) / Float::with_val(prec, z[i].clone().abs().real()).max(&Float::with_val(prec, 1e-300));
+            let rel = Float::with_val(prec, corr.clone().abs().real())
+                / Float::with_val(prec, z[i].clone().abs().real())
+                    .max(&Float::with_val(prec, 1e-300));
             if rel > tol {
                 done = false;
             }
@@ -192,12 +208,20 @@ pub fn singular_points(dens: &[Vec<Integer>], prec: u32) -> SingularSet {
     let mut hp: Vec<Complex> = Vec::new();
     for s in sing {
         let (a, b) = (s.real().to_f64(), s.imag().to_f64());
-        if pts.iter().all(|&(x, y)| (a - x).hypot(b - y) > 1e-9 * (1.0 + a.hypot(b))) {
+        if pts
+            .iter()
+            .all(|&(x, y)| (a - x).hypot(b - y) > 1e-9 * (1.0 + a.hypot(b)))
+        {
             pts.push((a, b));
             hp.push(s);
         }
     }
-    SingularSet { points: pts, points_hp: hp, base, n_distinct_denominators: dens.len() }
+    SingularSet {
+        points: pts,
+        points_hp: hp,
+        base,
+        n_distinct_denominators: dens.len(),
+    }
 }
 
 #[cfg(test)]
@@ -214,10 +238,19 @@ mod tests {
         let d3 = zp(&[1, 3]);
         let s = singular_points(&[d1, d2, d3], 128);
         // z = eta + 1: 0, 3, 1 +- i, 2/3
-        let mut want = vec![(0.0, 0.0), (3.0, 0.0), (1.0, 1.0), (1.0, -1.0), (2.0 / 3.0, 0.0)];
+        let mut want = vec![
+            (0.0, 0.0),
+            (3.0, 0.0),
+            (1.0, 1.0),
+            (1.0, -1.0),
+            (2.0 / 3.0, 0.0),
+        ];
         assert_eq!(s.points.len(), want.len(), "{:?}", s.points);
         for p in &s.points {
-            let k = want.iter().position(|w| (w.0 - p.0).hypot(w.1 - p.1) < 1e-12).expect("unexpected point");
+            let k = want
+                .iter()
+                .position(|w| (w.0 - p.0).hypot(w.1 - p.1) < 1e-12)
+                .expect("unexpected point");
             want.remove(k);
         }
         assert_eq!(s.base.len(), 3);

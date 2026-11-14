@@ -40,16 +40,36 @@ impl RuleSet {
         if v["schema"] != "rustred-harness-solution.v1" {
             return Err(format!("unsupported schema {}", v["schema"]));
         }
-        let d0 = v["fixed"]["d"].as_str().ok_or("no fixed d")?.parse::<Rational>().map_err(|e| e.to_string())?;
-        let vec_i = |x: &serde_json::Value| -> Vec<i64> { x.as_array().unwrap().iter().map(|a| a.as_i64().unwrap()).collect() };
-        let masters = v["masters"].as_array().ok_or("no masters")?.iter().map(vec_i).collect();
+        let d0 = v["fixed"]["d"]
+            .as_str()
+            .ok_or("no fixed d")?
+            .parse::<Rational>()
+            .map_err(|e| e.to_string())?;
+        let vec_i = |x: &serde_json::Value| -> Vec<i64> {
+            x.as_array()
+                .unwrap()
+                .iter()
+                .map(|a| a.as_i64().unwrap())
+                .collect()
+        };
+        let masters = v["masters"]
+            .as_array()
+            .ok_or("no masters")?
+            .iter()
+            .map(vec_i)
+            .collect();
         let mut rules = HashMap::new();
         for r in v["rules"].as_array().ok_or("no rules")? {
             let terms = r["terms"]
                 .as_array()
                 .unwrap()
                 .iter()
-                .map(|t| (vec_i(&t["integral"]), t["coefficient"].as_str().unwrap().to_string()))
+                .map(|t| {
+                    (
+                        vec_i(&t["integral"]),
+                        t["coefficient"].as_str().unwrap().to_string(),
+                    )
+                })
                 .collect();
             rules.insert(vec_i(&r["target"]), terms);
         }
@@ -102,7 +122,10 @@ fn strip_parens(mut s: &str) -> &str {
 
 /// a sum of monomials [+-] [a[/b]] [*] [var[^k]] -> ascending coefficients
 pub fn parse_sum(text: &str, var: &str) -> Result<QPoly, String> {
-    let s: String = strip_parens(text).chars().filter(|c| !c.is_whitespace()).collect();
+    let s: String = strip_parens(text)
+        .chars()
+        .filter(|c| !c.is_whitespace())
+        .collect();
     let b = s.as_bytes();
     let mut out: BTreeMap<usize, Rational> = BTreeMap::new();
     let mut i = 0;
@@ -123,7 +146,9 @@ pub fn parse_sum(text: &str, var: &str) -> Result<QPoly, String> {
             i += 1;
         }
         let mut coef = if i > st {
-            s[st..i].parse::<Rational>().map_err(|e| format!("coefficient {:?} in {text:?}: {e}", &s[st..i]))?
+            s[st..i]
+                .parse::<Rational>()
+                .map_err(|e| format!("coefficient {:?} in {text:?}: {e}", &s[st..i]))?
         } else {
             Rational::from(1)
         };
@@ -140,10 +165,15 @@ pub fn parse_sum(text: &str, var: &str) -> Result<QPoly, String> {
                 while i < b.len() && b[i].is_ascii_digit() {
                     i += 1;
                 }
-                k = s[st2..i].parse().map_err(|e| format!("exponent in {text:?}: {e}"))?;
+                k = s[st2..i]
+                    .parse()
+                    .map_err(|e| format!("exponent in {text:?}: {e}"))?;
             }
         } else if i == st {
-            return Err(format!("cannot parse monomial at {:?} in {text:?}", &s[st..]));
+            return Err(format!(
+                "cannot parse monomial at {:?} in {text:?}",
+                &s[st..]
+            ));
         }
         if i < b.len() && b[i] == b'*' {
             // trailing "*eta" after "var^k" is not expected
@@ -152,7 +182,7 @@ pub fn parse_sum(text: &str, var: &str) -> Result<QPoly, String> {
         if sign < 0 {
             coef = -coef;
         }
-        *out.entry(k).or_insert_with(Rational::new) += coef;
+        *out.entry(k).or_default() += coef;
     }
     let n = out.keys().max().copied().unwrap_or(0);
     let mut p = vec![Rational::new(); n + 1];
@@ -177,10 +207,21 @@ impl EBlockSystem {
     }
 
     /// as `from_rules` with a caller-supplied coefficient parser (RustFlow: fast parser, Symbolica fallback)
-    pub fn from_rules_with(rs: &RuleSet, e_slot: usize, parse: CoefParser) -> Result<EBlockSystem, String> {
-        let all: HashMap<&Vec<i64>, usize> = rs.masters.iter().enumerate().map(|(i, m)| (m, i)).collect();
-        let emast: Vec<Vec<i64>> = rs.masters.iter().filter(|m| m[e_slot] > 0).cloned().collect();
-        let eidx: HashMap<&Vec<i64>, usize> = emast.iter().enumerate().map(|(i, m)| (m, i)).collect();
+    pub fn from_rules_with(
+        rs: &RuleSet,
+        e_slot: usize,
+        parse: CoefParser,
+    ) -> Result<EBlockSystem, String> {
+        let all: HashMap<&Vec<i64>, usize> =
+            rs.masters.iter().enumerate().map(|(i, m)| (m, i)).collect();
+        let emast: Vec<Vec<i64>> = rs
+            .masters
+            .iter()
+            .filter(|m| m[e_slot] > 0)
+            .cloned()
+            .collect();
+        let eidx: HashMap<&Vec<i64>, usize> =
+            emast.iter().enumerate().map(|(i, m)| (m, i)).collect();
         let mut entries: BTreeMap<(usize, usize), Vec<(QPoly, QPoly)>> = BTreeMap::new();
         for m in &emast {
             let a = m[e_slot];
@@ -189,17 +230,28 @@ impl EBlockSystem {
             let im = eidx[m];
             if all.contains_key(&r) {
                 let jr = *eidx.get(&r).ok_or("raised master is not in the e-block")?;
-                entries.entry((im, jr)).or_default().push((vec![Rational::from(a)], vec![Rational::from(1)]));
+                entries
+                    .entry((im, jr))
+                    .or_default()
+                    .push((vec![Rational::from(a)], vec![Rational::from(1)]));
                 continue;
             }
-            let terms = rs.rules.get(&r).ok_or_else(|| format!("missing derivative rule for {m:?}"))?;
+            let terms = rs
+                .rules
+                .get(&r)
+                .ok_or_else(|| format!("missing derivative rule for {m:?}"))?;
             for (ti, c) in terms {
                 if ti[e_slot] <= 0 {
                     continue; // e-free: no discontinuity
                 }
-                let j = *eidx.get(ti).ok_or_else(|| format!("rule term {ti:?} is not an e-block master"))?;
+                let j = *eidx
+                    .get(ti)
+                    .ok_or_else(|| format!("rule term {ti:?} is not an e-block master"))?;
                 let (n, d) = parse(c)?;
-                entries.entry((im, j)).or_default().push((poly::scale(&n, &Rational::from(a)), d));
+                entries
+                    .entry((im, j))
+                    .or_default()
+                    .push((poly::scale(&n, &Rational::from(a)), d));
             }
         }
         let mut terms = Vec::new();
@@ -213,9 +265,19 @@ impl EBlockSystem {
             if poly::is_zero(&n) {
                 continue;
             }
-            terms.push(Term { i, j, num: ZPoly::from_q(&n), den: ZPoly::from_q(&d) });
+            terms.push(Term {
+                i,
+                j,
+                num: ZPoly::from_q(&n),
+                den: ZPoly::from_q(&d),
+            });
         }
-        Ok(EBlockSystem { d0: rs.d0.clone(), e_slot, masters: emast, terms })
+        Ok(EBlockSystem {
+            d0: rs.d0.clone(),
+            e_slot,
+            masters: emast,
+            terms,
+        })
     }
 
     pub fn dim(&self) -> usize {
@@ -250,7 +312,15 @@ mod tests {
         assert_eq!(n[1], Rational::from((-17, 3)));
         assert_eq!(n[2], Rational::from(1));
         assert_eq!(n[4], Rational::from(-1));
-        assert_eq!(parse_coefficient("1", "eta").unwrap().0, vec![Rational::from(1)]);
-        assert_eq!(parse_coefficient("(eta-3/2*eta^2)/(2-eta)", "eta").unwrap().1, vec![Rational::from(2), Rational::from(-1)]);
+        assert_eq!(
+            parse_coefficient("1", "eta").unwrap().0,
+            vec![Rational::from(1)]
+        );
+        assert_eq!(
+            parse_coefficient("(eta-3/2*eta^2)/(2-eta)", "eta")
+                .unwrap()
+                .1,
+            vec![Rational::from(2), Rational::from(-1)]
+        );
     }
 }

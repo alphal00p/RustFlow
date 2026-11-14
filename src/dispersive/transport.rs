@@ -28,7 +28,13 @@ pub struct TransportOutput {
 
 /// the kernel interface (W2 implements it with checkpoints and row parallelism)
 pub trait Transport {
-    fn transport(&self, sys: &EBlockSystem, y0: &[Complex], patches: &[Patch], prec: u32) -> Result<TransportOutput, String>;
+    fn transport(
+        &self,
+        sys: &EBlockSystem,
+        y0: &[Complex],
+        patches: &[Patch],
+        prec: u32,
+    ) -> Result<TransportOutput, String>;
     /// kernel identity (algorithm + version), part of the checkpoint fingerprint
     fn id(&self) -> String;
     /// the production kernel (checkpointed per patch); the stage driver then runs the whole path through it
@@ -202,10 +208,22 @@ impl TaylorRecurrence {
             groups[g].2.push(t);
         }
         groups.sort_by_key(|g| g.0); // stable: rows in order, groups of a row in first-appearance order
-        TaylorRecurrence { nthreads, polys, tn, td, groups }
+        TaylorRecurrence {
+            nthreads,
+            polys,
+            tn,
+            td,
+            groups,
+        }
     }
 
-    fn patch<T: Ts>(&self, sys: &EBlockSystem, y0: &[T], p: &Patch, prec: u32) -> Result<(Vec<T>, Vec<T>, f64), String> {
+    fn patch<T: Ts>(
+        &self,
+        sys: &EBlockSystem,
+        y0: &[T],
+        p: &Patch,
+        prec: u32,
+    ) -> Result<(Vec<T>, Vec<T>, f64), String> {
         let ts = Instant::now();
         let e = sys.dim();
         let nord = p.order;
@@ -223,31 +241,46 @@ impl TaylorRecurrence {
             let (re, im) = poly::shift_complex(&self.polys[q], &ecr, ci);
             // oracle: assert(patch centre on a pole): an exactly vanishing denominator at the centre
             let pole = is_den[q] && re[0] == 0 && im[0] == 0;
-            (pole, re.iter().zip(&im).map(|(a, b)| T::from_q(a, b, prec)).collect())
+            (
+                pole,
+                re.iter()
+                    .zip(&im)
+                    .map(|(a, b)| T::from_q(a, b, prec))
+                    .collect(),
+            )
         });
         if shifted.iter().any(|x| x.0) {
-            return Err(format!("patch centre ({}, {}) is a pole of the system", p.centre.0, p.centre.1));
+            return Err(format!(
+                "patch centre ({}, {}) is a pole of the system",
+                p.centre.0, p.centre.1
+            ));
         }
         let shifted: Vec<Vec<T>> = shifted.into_iter().map(|x| x.1).collect();
         // normalised numerators N/D[0] per term and denominators D[1..]/D[0] per group
         let nv: Vec<Vec<T>> = par_map(sys.terms.len(), self.nthreads, |t| {
             let d0 = &shifted[self.td[t]][0];
-            shifted[self.tn[t]].iter().map(|x| {
-                let mut v = x.clone();
-                v.divr(d0);
-                v
-            }).collect()
+            shifted[self.tn[t]]
+                .iter()
+                .map(|x| {
+                    let mut v = x.clone();
+                    v.divr(d0);
+                    v
+                })
+                .collect()
         });
         let dn: Vec<Vec<T>> = self
             .groups
             .iter()
             .map(|g| {
                 let d = &shifted[g.1];
-                d[1..].iter().map(|x| {
-                    let mut v = x.clone();
-                    v.divr(&d[0]);
-                    v
-                }).collect()
+                d[1..]
+                    .iter()
+                    .map(|x| {
+                        let mut v = x.clone();
+                        v.divr(&d[0]);
+                        v
+                    })
+                    .collect()
             })
             .collect();
         let setup = ts.elapsed().as_secs_f64();
@@ -255,7 +288,12 @@ impl TaylorRecurrence {
         let nt = self.nthreads.max(1);
         let mut bounds = vec![0usize];
         {
-            let cost: Vec<usize> = self.groups.iter().zip(&dn).map(|(g, d)| g.2.iter().map(|&t| nv[t].len()).sum::<usize>() + d.len() + 1).collect();
+            let cost: Vec<usize> = self
+                .groups
+                .iter()
+                .zip(&dn)
+                .map(|(g, d)| g.2.iter().map(|&t| nv[t].len()).sum::<usize>() + d.len() + 1)
+                .collect();
             let total: usize = cost.iter().sum();
             let mut acc = 0;
             for (k, g) in self.groups.iter().enumerate() {
@@ -272,7 +310,12 @@ impl TaylorRecurrence {
         // PERSISTENT workers for the whole patch (one barrier per order): scoped threads spawned per order are too short-lived for the
         // scheduler to spread them over far-apart allotted CPUs (measured: 4 workers packed on one core). Every row is owned by one
         // worker (rows never cross a bound) and receives its groups' contributions in group order -> identical for any thread count.
-        let mut rings: Vec<Vec<T>> = self.groups.iter().zip(&dn).map(|(_, d)| vec![T::zero(prec); d.len().max(1)]).collect();
+        let mut rings: Vec<Vec<T>> = self
+            .groups
+            .iter()
+            .zip(&dn)
+            .map(|(_, d)| vec![T::zero(prec); d.len().max(1)])
+            .collect();
         let mut y: Vec<Vec<T>> = Vec::with_capacity(nord);
         y.push(y0.to_vec());
         for _ in 1..nord {
@@ -297,7 +340,8 @@ impl TaylorRecurrence {
                 ring_chunks.push(a);
                 rest = b;
             }
-            let (ypr, bar, groups, nvr, dnr, terms) = (&yp, &barrier, &self.groups, &nv, &dn, &sys.terms);
+            let (ypr, bar, groups, nvr, dnr, terms) =
+                (&yp, &barrier, &self.groups, &nv, &dn, &sys.terms);
             std::thread::scope(|sc| {
                 for ((w, rg), rows) in bounds.windows(2).zip(ring_chunks).zip(&rows_of) {
                     let (lo, hi) = (w[0], w[1]);
@@ -344,7 +388,11 @@ impl TaylorRecurrence {
             });
         }
         let hh = T::from_q(&p.step.0, &p.step.1, prec);
-        let u = T::from_q(&Rational::from(&one - &p.centre.0), &Rational::from(-ci), prec);
+        let u = T::from_q(
+            &Rational::from(&one - &p.centre.0),
+            &Rational::from(-ci),
+            prec,
+        );
         let vi: Vec<(T, T)> = par_map(e, self.nthreads, |j| {
             let mut acc = T::zero(prec);
             for n in (0..nord).rev() {
@@ -377,9 +425,16 @@ impl TaylorRecurrence {
 
 impl Transport for TaylorRecurrence {
     fn id(&self) -> String {
-        "w3a-TaylorRecurrence-v2 (exact dyadic shifts, row-grouped recurrence, persistent workers)".into()
+        "w3a-TaylorRecurrence-v2 (exact dyadic shifts, row-grouped recurrence, persistent workers)"
+            .into()
     }
-    fn transport(&self, sys: &EBlockSystem, y0: &[Complex], patches: &[Patch], prec: u32) -> Result<TransportOutput, String> {
+    fn transport(
+        &self,
+        sys: &EBlockSystem,
+        y0: &[Complex],
+        patches: &[Patch],
+        prec: u32,
+    ) -> Result<TransportOutput, String> {
         let e = sys.dim();
         let mut ycur: Vec<Complex> = y0.to_vec();
         let mut mid = vec![Complex::new(prec); e];
@@ -393,14 +448,19 @@ impl Transport for TaylorRecurrence {
                     .map(|z| {
                         let re = Float::with_val(prec, z.real());
                         if !re.is_zero() && !z.imag().is_zero() {
-                            let r = z.imag().clone().abs().log10().to_f64() - re.clone().abs().log10().to_f64();
+                            let r = z.imag().clone().abs().log10().to_f64()
+                                - re.clone().abs().log10().to_f64();
                             dropped = dropped.max(r);
                         }
                         re
                     })
                     .collect();
                 let (v, ig, s) = self.patch::<Float>(sys, &y0r, p, prec)?;
-                (s, v.iter().map(|x| x.to_c()).collect(), ig.iter().map(|x| x.to_c()).collect())
+                (
+                    s,
+                    v.iter().map(|x| x.to_c()).collect(),
+                    ig.iter().map(|x| x.to_c()).collect(),
+                )
             } else {
                 let (v, ig, s) = self.patch::<Complex>(sys, &ycur, p, prec)?;
                 (s, v, ig)
@@ -409,8 +469,16 @@ impl Transport for TaylorRecurrence {
             for (m, x) in mid.iter_mut().zip(&ig) {
                 *m += x;
             }
-            diags.push(PatchDiag { seconds: tp.elapsed().as_secs_f64(), setup_seconds: setup, dropped_im_over_re_log10: dropped });
+            diags.push(PatchDiag {
+                seconds: tp.elapsed().as_secs_f64(),
+                setup_seconds: setup,
+                dropped_im_over_re_log10: dropped,
+            });
         }
-        Ok(TransportOutput { end: ycur, weighted_integral: mid, patches: diags })
+        Ok(TransportOutput {
+            end: ycur,
+            weighted_integral: mid,
+            patches: diags,
+        })
     }
 }

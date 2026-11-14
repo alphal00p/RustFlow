@@ -3,7 +3,7 @@
 //!   point inf: x = w = 1/z, theta_x D = C(x) D, C = -(1/w) A(1/w)
 //! Exact rational shifts (eta = z - 1) and reversals, then the series of every entry in the scalar type S
 //! (mod p or MPFR) to kmax orders. Scaling x = rho x' multiplies B_k by rho^k (applied per family).
-use super::field::{series_div, Scalar};
+use super::field::{Scalar, series_div};
 use super::poly::{self, QPoly};
 use super::system::EBlockSystem;
 use rug::Rational;
@@ -47,7 +47,13 @@ fn local_entry(num: &poly::ZPoly, den: &poly::ZPoly, point: Point) -> Option<(QP
 }
 
 /// unscaled Laurent matrices B_k, k <= kmax, in S
-pub fn laurent<S: Scalar>(sys: &EBlockSystem, point: Point, kmax: i64, prec: u32, nthreads: usize) -> Lmat<S> {
+pub fn laurent<S: Scalar>(
+    sys: &EBlockSystem,
+    point: Point,
+    kmax: i64,
+    prec: u32,
+    nthreads: usize,
+) -> Lmat<S> {
     let nt = nthreads.max(1);
     let chunk = sys.terms.len().div_ceil(nt).max(1);
     let parts: Vec<Vec<(i64, usize, usize, S)>> = std::thread::scope(|sc| {
@@ -58,7 +64,9 @@ pub fn laurent<S: Scalar>(sys: &EBlockSystem, point: Point, kmax: i64, prec: u32
                 sc.spawn(move || {
                     let mut out = Vec::new();
                     for t in tch {
-                        let Some((n, d, shift)) = local_entry(&t.num, &t.den, point) else { continue };
+                        let Some((n, d, shift)) = local_entry(&t.num, &t.den, point) else {
+                            continue;
+                        };
                         let kk = (kmax - shift).max(1) as usize;
                         let nf: Vec<S> = n.iter().map(|x| S::from_rational(x, prec)).collect();
                         let df: Vec<S> = d.iter().map(|x| S::from_rational(x, prec)).collect();
@@ -102,14 +110,23 @@ pub fn scaled<S: Scalar>(b: &Lmat<S>, rho: &Rational, prec: u32) -> Lmat<S> {
     b.iter()
         .map(|(&k, v)| {
             let rk = S::from_rational(&pow_q(rho, k), prec);
-            (k, v.iter().map(|(i, j, x)| (*i, *j, x.mul_s(&rk, prec))).collect())
+            (
+                k,
+                v.iter()
+                    .map(|(i, j, x)| (*i, *j, x.mul_s(&rk, prec)))
+                    .collect(),
+            )
         })
         .collect()
 }
 
 pub fn pow_q(x: &Rational, k: i64) -> Rational {
     let mut r = Rational::from(1);
-    let b = if k >= 0 { x.clone() } else { Rational::from(1) / x };
+    let b = if k >= 0 {
+        x.clone()
+    } else {
+        Rational::from(1) / x
+    };
     for _ in 0..k.unsigned_abs() {
         r *= &b;
     }

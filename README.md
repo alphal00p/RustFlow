@@ -47,6 +47,11 @@ An executable [performance comparison](docs/performance.md) measures the Rust
 and original AMFlow 2.0 differential-equation solvers on identical inputs.
 The [Bern Wolfram setup](docs/wolfram-setup.md) also enables live checks against
 the original Mathematica package with Kira and the university license server.
+The [dispersive mode](docs/dispersive.md) evaluates fixed-dimension masters from
+the discontinuity of one line's auxiliary-mass equation, transported by a
+fixed-precision, thread-count-independent, checkpointed patch kernel; at a
+five-loop vacuum validation node it agrees with the reference tool to 59-64
+digits on the target masters at 0.57x its CPU time.
 
 ## Build
 
@@ -175,6 +180,16 @@ supports persistent transport caches across processes.
   Linnet/Spenso interfaces. `solve_integral_combinations` evaluates the resulting
   exact weighted integral groups before Laurent fitting. Its cut interface
   preserves native `DiagramCut` orientation and denominator slots.
+- `dispersive` (feature `native`) evaluates masters at fixed `D` from the
+  discontinuity across one line's tachyonic cut: exact e-block from a RustRed
+  DE, mod-p plus MPFR Frobenius families at zero and infinity, soft boundary
+  from lower-loop samples, transport with `patch_kernel::Transport`, matching
+  and dispersion integral; resumable from every stage. See
+  [the dispersive mode](docs/dispersive.md) and `examples/dispersive.rs`.
+- `patch_kernel::Transport` is a planned-path fixed-precision transport of
+  exact rational systems: exact per-patch shifts, row-parallel recurrence with
+  bit-identical output for any thread count, exact checkpoints after every
+  patch; `TransportConfig::dispersive` / `generic`.
 - `FrobeniusBasis::match_constraints` fixes integration constants from partial
   asymptotic coefficients, including resonant powers and logarithms. The full
   [equal-mass banana regression](docs/banana-equal.md) uses an analytic infinity

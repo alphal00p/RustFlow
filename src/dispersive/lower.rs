@@ -14,23 +14,29 @@
 //!  3. LANE: the soft plan of the lane family (softplan::build_soft_only), the lane's RustRed soft reduction, and its soft masters
 //!     factorised the same way (T^k x prod of known components): every soft master must be fully determined, and a declared
 //!     config "soft_masters" classification (in-house) is only CROSS-CHECKED, never used.
+//!
 //! No number in this chain comes from a dispersive run: the inputs are the P14 endpoint values (RustFlow eta-flows + spectral gluing),
 //! RustRed reductions, Gamma functions.
 use super::boundary;
 use super::softplan;
 use super::system::parse_coefficient;
 use rug::{Float, Rational};
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 type Vq = Vec<Rational>;
 
 fn vi(x: &Value) -> Vec<i64> {
-    x.as_array().unwrap().iter().map(|a| a.as_i64().unwrap()).collect()
+    x.as_array()
+        .unwrap()
+        .iter()
+        .map(|a| a.as_i64().unwrap())
+        .collect()
 }
 
 fn rd(p: &str) -> Result<Value, String> {
-    serde_json::from_slice(&std::fs::read(p).map_err(|e| format!("{p}: {e}"))?).map_err(|e| format!("{p}: {e}"))
+    serde_json::from_slice(&std::fs::read(p).map_err(|e| format!("{p}: {e}"))?)
+        .map_err(|e| format!("{p}: {e}"))
 }
 
 /// exact row echelon: (pivot column, row) list of a set of vectors
@@ -87,7 +93,12 @@ pub fn component_groups(vecs: &[Vq]) -> Result<Vec<Vec<usize>>, String> {
         }
         // basis element b is in the fundamental circuit of i iff removing b from the basis drops i out of the span
         for &b in &basis {
-            let s: Vec<&Vq> = basis.iter().filter(|&&x| x != b).map(|&x| &vecs[x]).chain([&vecs[i]]).collect();
+            let s: Vec<&Vq> = basis
+                .iter()
+                .filter(|&&x| x != b)
+                .map(|&x| &vecs[x])
+                .chain([&vecs[i]])
+                .collect();
             if rank(&s) == basis.len() {
                 let (x, y) = (find(&mut parent, i), find(&mut parent, b));
                 parent[x] = y;
@@ -110,7 +121,9 @@ pub fn component_groups(vecs: &[Vq]) -> Result<Vec<Vec<usize>>, String> {
 pub fn canonical_matroid(vecs: &[Vq]) -> Result<String, String> {
     let n = vecs.len();
     if n > 8 {
-        return Err(format!("component with {n} lines: canonical form not implemented above 8"));
+        return Err(format!(
+            "component with {n} lines: canonical form not implemented above 8"
+        ));
     }
     let all: Vec<&Vq> = vecs.iter().collect();
     let ech = echelon(&all);
@@ -118,11 +131,16 @@ pub fn canonical_matroid(vecs: &[Vq]) -> Result<String, String> {
     let cols: Vec<usize> = ech.iter().map(|(c, _)| *c).collect();
     // minors on the pivot coordinates (the projection onto them is an isomorphism on the span)
     let minor = |sub: &[usize]| -> Rational {
-        let mut m: Vec<Vec<Rational>> = sub.iter().map(|&i| cols.iter().map(|&c| vecs[i][c].clone()).collect()).collect();
+        let mut m: Vec<Vec<Rational>> = sub
+            .iter()
+            .map(|&i| cols.iter().map(|&c| vecs[i][c].clone()).collect())
+            .collect();
         let k = m.len();
         let mut d = Rational::from(1);
         for i in 0..k {
-            let Some(p) = (i..k).find(|&rr| m[rr][i] != 0) else { return Rational::new() };
+            let Some(p) = (i..k).find(|&rr| m[rr][i] != 0) else {
+                return Rational::new();
+            };
             if p != i {
                 m.swap(i, p);
                 d = -d;
@@ -153,7 +171,11 @@ pub fn canonical_matroid(vecs: &[Vq]) -> Result<String, String> {
             match &absdet {
                 None => absdet = Some(d),
                 Some(a) if *a == d => {}
-                Some(a) => return Err(format!("minors {a} and {d} differ: not a unimodular line set")),
+                Some(a) => {
+                    return Err(format!(
+                        "minors {a} and {d} differ: not a unimodular line set"
+                    ));
+                }
             }
             bases.push(mask);
         }
@@ -162,13 +184,26 @@ pub fn canonical_matroid(vecs: &[Vq]) -> Result<String, String> {
     let mut perm: Vec<usize> = (0..n).collect();
     let mut best: Option<Vec<u32>> = None;
     loop {
-        let mut img: Vec<u32> = bases.iter().map(|&b| (0..n).filter(|i| b >> i & 1 == 1).map(|i| 1u32 << perm[i]).sum()).collect();
+        let mut img: Vec<u32> = bases
+            .iter()
+            .map(|&b| {
+                (0..n)
+                    .filter(|i| b >> i & 1 == 1)
+                    .map(|i| 1u32 << perm[i])
+                    .sum()
+            })
+            .collect();
         img.sort();
         if best.as_ref().is_none_or(|b| img < *b) {
             best = Some(img);
         }
         // next permutation
-        let Some(i) = (0..n.saturating_sub(1)).rev().find(|&i| perm[i] < perm[i + 1]) else { break };
+        let Some(i) = (0..n.saturating_sub(1))
+            .rev()
+            .find(|&i| perm[i] < perm[i + 1])
+        else {
+            break;
+        };
         let j = (i + 1..n).rev().find(|&j| perm[j] > perm[i]).unwrap();
         perm.swap(i, j);
         perm[i + 1..].reverse();
@@ -189,7 +224,12 @@ pub fn label(canon: &str) -> String {
 }
 
 /// factorisation of a 0/1-power master (eta line excluded): (power of T, canonical forms of the other components)
-pub fn factorise(m: &[i64], e_slot: usize, mom: &[Option<Vq>], allowed: &BTreeSet<usize>) -> Result<(u32, Vec<String>), String> {
+pub fn factorise(
+    m: &[i64],
+    e_slot: usize,
+    mom: &[Option<Vq>],
+    allowed: &BTreeSet<usize>,
+) -> Result<(u32, Vec<String>), String> {
     if m.iter().any(|&p| p != 0 && p != 1) {
         return Err(format!("{m:?}: dots or numerators"));
     }
@@ -197,7 +237,14 @@ pub fn factorise(m: &[i64], e_slot: usize, mom: &[Option<Vq>], allowed: &BTreeSe
     if let Some(s) = lines.iter().find(|s| !allowed.contains(s)) {
         return Err(format!("{m:?}: line {s} is not a slot of the soft family"));
     }
-    let vecs: Vec<Vq> = lines.iter().map(|&s| mom[s].clone().ok_or_else(|| format!("slot {s} has no momentum"))).collect::<Result<_, _>>()?;
+    let vecs: Vec<Vq> = lines
+        .iter()
+        .map(|&s| {
+            mom[s]
+                .clone()
+                .ok_or_else(|| format!("slot {s} has no momentum"))
+        })
+        .collect::<Result<_, _>>()?;
     let mut t = 0;
     let mut parts = Vec::new();
     for g in component_groups(&vecs)? {
@@ -219,17 +266,41 @@ fn t_e(d0: &Rational, prec: u32) -> Float {
 fn digits(a: &Float, b: &Float) -> f64 {
     let p = a.prec().max(b.prec());
     if b.is_zero() {
-        return if a.is_zero() { 99.0 } else { -Float::with_val(p, a.abs_ref()).log10().to_f64() };
+        return if a.is_zero() {
+            99.0
+        } else {
+            -Float::with_val(p, a.abs_ref()).log10().to_f64()
+        };
     }
     let d = Float::with_val(p, Float::with_val(p, a - b) / b).abs();
-    if d.is_zero() { 99.0 } else { -d.log10().to_f64() }
+    if d.is_zero() {
+        99.0
+    } else {
+        -d.log10().to_f64()
+    }
 }
 
 /// lower-loop vacuum masters (by canonical matroid) from the lower system's soft plan + RustRed soft reduction + the P14 endpoint rows
 /// (rows whose 'family' is empty) of a 4L sample
-pub fn lower_values(fam: &Value, plan: &Value, sol: &Value, sample: &Value, e_slot: usize, prec: u32) -> Result<(BTreeMap<String, Float>, Value), String> {
-    let d0: Rational = sol["fixed"]["d"].as_str().ok_or("no fixed d")?.parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
-    let masters: Vec<Vec<i64>> = sol["masters"].as_array().ok_or("no masters")?.iter().map(vi).collect();
+pub fn lower_values(
+    fam: &Value,
+    plan: &Value,
+    sol: &Value,
+    sample: &Value,
+    e_slot: usize,
+    prec: u32,
+) -> Result<(BTreeMap<String, Float>, Value), String> {
+    let d0: Rational = sol["fixed"]["d"]
+        .as_str()
+        .ok_or("no fixed d")?
+        .parse()
+        .map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+    let masters: Vec<Vec<i64>> = sol["masters"]
+        .as_array()
+        .ok_or("no masters")?
+        .iter()
+        .map(vi)
+        .collect();
     let mut unit = serde_json::Map::new();
     for m in &masters {
         if m[e_slot] != 1 {
@@ -241,23 +312,47 @@ pub fn lower_values(fam: &Value, plan: &Value, sol: &Value, sample: &Value, e_sl
     }
     let plan_u = json!({"endpoint_polys": plan["endpoint_polys"], "soft_polys": unit});
     let mut ep = Vec::new();
-    for x in sample["endpoint"].as_array().ok_or("sample has no endpoints")? {
-        if x.get("family").and_then(|f| f.as_str()).unwrap_or("") != "" {
+    for x in sample["endpoint"]
+        .as_array()
+        .ok_or("sample has no endpoints")?
+    {
+        if !x
+            .get("family")
+            .and_then(|f| f.as_str())
+            .unwrap_or("")
+            .is_empty()
+        {
             continue;
         }
         let t = vi(&x["target"]);
         let key = serde_json::to_string(&t).unwrap().replace(',', ", ");
-        ep.push((key, t, Float::with_val(prec, Float::parse(x["value"]["re"].as_str().unwrap()).map_err(|e| e.to_string())?)));
+        ep.push((
+            key,
+            t,
+            Float::with_val(
+                prec,
+                Float::parse(x["value"]["re"].as_str().unwrap()).map_err(|e| e.to_string())?,
+            ),
+        ));
     }
     let (vals, diag) = boundary::solve_v(&plan_u, sol, &ep, e_slot, prec)?;
     let mom = softplan::slot_momenta(fam);
-    let allowed: BTreeSet<usize> = plan["derived"]["sub"].as_array().ok_or("lower plan has no derived.sub")?.iter().map(|x| x.as_u64().unwrap() as usize).collect();
+    let allowed: BTreeSet<usize> = plan["derived"]["sub"]
+        .as_array()
+        .ok_or("lower plan has no derived.sub")?
+        .iter()
+        .map(|x| x.as_u64().unwrap() as usize)
+        .collect();
     let te = t_e(&d0, prec);
     let mut out: BTreeMap<String, Float> = BTreeMap::new();
     let mut used = Vec::new();
     for m in &masters {
-        let Some(vs) = vals.get(&serde_json::to_string(m).unwrap()) else { continue };
-        let Ok((t, parts)) = factorise(m, e_slot, &mom, &allowed) else { continue };
+        let Some(vs) = vals.get(&serde_json::to_string(m).unwrap()) else {
+            continue;
+        };
+        let Ok((t, parts)) = factorise(m, e_slot, &mom, &allowed) else {
+            continue;
+        };
         if parts.len() != 1 {
             continue;
         }
@@ -274,24 +369,52 @@ pub fn lower_values(fam: &Value, plan: &Value, sol: &Value, sample: &Value, e_sl
         }
         used.push(rec);
     }
-    Ok((out, json!({"endpoint_system": diag, "p14_rows": ep.len(), "masters_used": used})))
+    Ok((
+        out,
+        json!({"endpoint_system": diag, "p14_rows": ep.len(), "masters_used": used}),
+    ))
 }
 
 /// the lane's soft V (soft_V_euclid_nogamma keys) from its soft plan, its RustRed soft reduction and the known lower-loop masters
-pub fn lane_v(lane_plan: &Value, lane_fam: &Value, lane_config: &Value, sol: &Value, lower: &BTreeMap<String, Float>, prec: u32) -> Result<(BTreeMap<String, String>, Value), String> {
+pub fn lane_v(
+    lane_plan: &Value,
+    lane_fam: &Value,
+    lane_config: &Value,
+    sol: &Value,
+    lower: &BTreeMap<String, Float>,
+    prec: u32,
+) -> Result<(BTreeMap<String, String>, Value), String> {
     let e_slot = lane_config["e"].as_u64().ok_or("lane config has no e")? as usize;
-    let d0: Rational = sol["fixed"]["d"].as_str().ok_or("no fixed d")?.parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+    let d0: Rational = sol["fixed"]["d"]
+        .as_str()
+        .ok_or("no fixed d")?
+        .parse()
+        .map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
     let te = t_e(&d0, prec);
     let mom = softplan::slot_momenta(lane_fam);
-    let allowed: BTreeSet<usize> = lane_plan["derived"]["sub"].as_array().ok_or("lane plan has no derived.sub")?.iter().map(|x| x.as_u64().unwrap() as usize).collect();
-    let masters: Vec<Vec<i64>> = sol["masters"].as_array().ok_or("no masters")?.iter().map(vi).collect();
+    let allowed: BTreeSet<usize> = lane_plan["derived"]["sub"]
+        .as_array()
+        .ok_or("lane plan has no derived.sub")?
+        .iter()
+        .map(|x| x.as_u64().unwrap() as usize)
+        .collect();
+    let masters: Vec<Vec<i64>> = sol["masters"]
+        .as_array()
+        .ok_or("no masters")?
+        .iter()
+        .map(vi)
+        .collect();
     let mut mval: HashMap<Vec<i64>, Float> = HashMap::new();
     let mut cls = Vec::new();
     for m in &masters {
         if m[e_slot] != 1 {
-            return Err(format!("lane soft master {m:?} has e-slot power {} (expected the 1L tadpole, power 1)", m[e_slot]));
+            return Err(format!(
+                "lane soft master {m:?} has e-slot power {} (expected the 1L tadpole, power 1)",
+                m[e_slot]
+            ));
         }
-        let (t, parts) = factorise(m, e_slot, &mom, &allowed).map_err(|e| format!("lane soft master: {e}"))?;
+        let (t, parts) =
+            factorise(m, e_slot, &mom, &allowed).map_err(|e| format!("lane soft master: {e}"))?;
         let mut v = Float::with_val(prec, 1);
         for _ in 0..t {
             v *= &te;
@@ -308,9 +431,12 @@ pub fn lane_v(lane_plan: &Value, lane_fam: &Value, lane_config: &Value, sol: &Va
                 let ty = k["type"].as_str().unwrap_or("?");
                 let tp = k.get("T").and_then(|x| x.as_u64()).unwrap_or(0) as u32;
                 let mine: Vec<String> = parts.iter().map(|c| label(c)).collect();
-                let ok = tp == t && ((ty == "1" && mine.is_empty()) || mine == vec![ty.to_string()]);
+                let ok =
+                    tp == t && ((ty == "1" && mine.is_empty()) || mine == vec![ty.to_string()]);
                 if !ok {
-                    return Err(format!("lane soft master {key}: native factorisation T^{t} x {mine:?} disagrees with the config ({ty}, T^{tp})"));
+                    return Err(format!(
+                        "lane soft master {key}: native factorisation T^{t} x {mine:?} disagrees with the config ({ty}, T^{tp})"
+                    ));
                 }
                 json!("agrees")
             }
@@ -335,20 +461,31 @@ pub fn lane_v(lane_plan: &Value, lane_fam: &Value, lane_config: &Value, sol: &Va
             return Ok(v.clone());
         }
         let mut tot = Float::new(prec);
-        for (mu, c) in rules.get(x).ok_or_else(|| format!("no reduction rule for {x:?}"))? {
-            let sgn = if (mu.iter().sum::<i64>() - x.iter().sum::<i64>()).rem_euclid(2) == 1 { -1 } else { 1 };
+        for (mu, c) in rules
+            .get(x)
+            .ok_or_else(|| format!("no reduction rule for {x:?}"))?
+        {
+            let sgn = if (mu.iter().sum::<i64>() - x.iter().sum::<i64>()).rem_euclid(2) == 1 {
+                -1
+            } else {
+                1
+            };
             tot += Float::with_val(prec, &mval[mu] * Float::with_val(prec, c)) * sgn;
         }
         Ok(tot)
     };
-    let dg = (prec as f64 * 0.30103) as usize;
+    let dg = (prec as f64 * super::DIGITS_PER_BIT) as usize;
     let mut out = BTreeMap::new();
     for (key, poly) in lane_plan["soft_polys"].as_object().ok_or("no soft_polys")? {
         let mut val = Float::new(prec);
         for term in poly.as_array().unwrap() {
             let mut nu = vi(&term[0]);
             let dp = term[1].as_i64().unwrap();
-            let mut c: Rational = term[2].as_str().unwrap().parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+            let mut c: Rational = term[2]
+                .as_str()
+                .unwrap()
+                .parse()
+                .map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
             for _ in 0..dp {
                 c /= &d0;
             }
@@ -365,7 +502,11 @@ pub fn lane_v(lane_plan: &Value, lane_fam: &Value, lane_config: &Value, sol: &Va
 }
 
 fn d0_of(sol: &Value) -> Result<Rational, String> {
-    sol["fixed"]["d"].as_str().ok_or("no fixed d")?.parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())
+    sol["fixed"]["d"]
+        .as_str()
+        .ok_or("no fixed d")?
+        .parse()
+        .map_err(|e: rug::rational::ParseRationalError| e.to_string())
 }
 
 /// The lane's soft V from a CHAIN SPEC and a 4L sample (only its P14 rows are read):
@@ -373,15 +514,29 @@ fn d0_of(sol: &Value) -> Result<Rational, String> {
 ///            "p14_family": native P14 family JSON, "soft_solution": RustRed soft reduction of the lower class at d0},
 ///  "lane":  {"family": lane family JSON, "soft_solution": the lane's RustRed soft reduction at d0}}
 /// Paths may contain "{d0}" (replaced by NUM_DEN of the lane's d0). Returns (V map, provenance).
-pub fn lane_boundary(spec_path: &str, sample_path: &str, lane_cfg: &Value, lane_masters: &[Vec<i64>], d0: &Rational, prec: u32) -> Result<(BTreeMap<String, String>, Value), String> {
+pub fn lane_boundary(
+    spec_path: &str,
+    sample_path: &str,
+    lane_cfg: &Value,
+    lane_masters: &[Vec<i64>],
+    d0: &Rational,
+    prec: u32,
+) -> Result<(BTreeMap<String, String>, Value), String> {
     let spec = rd(spec_path)?;
     let tag = format!("{}_{}", d0.numer(), d0.denom());
     let path = |sect: &str, k: &str| -> Result<String, String> {
-        Ok(spec[sect][k].as_str().ok_or_else(|| format!("chain spec: {sect}.{k} missing"))?.replace("{d0}", &tag))
+        Ok(spec[sect][k]
+            .as_str()
+            .ok_or_else(|| format!("chain spec: {sect}.{k} missing"))?
+            .replace("{d0}", &tag))
     };
     let sample = rd(sample_path)?;
-    let eps: Rational = sample["epsilon"].as_str().ok_or("sample has no epsilon")?.parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
-    if Rational::from(4 - Rational::from(2 * &eps)) != *d0 {
+    let eps: Rational = sample["epsilon"]
+        .as_str()
+        .ok_or("sample has no epsilon")?
+        .parse()
+        .map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+    if (4 - Rational::from(2 * &eps)) != *d0 {
         return Err(format!("4L sample epsilon {eps} does not match d0 {d0}"));
     }
     let t0 = std::time::Instant::now();
@@ -389,9 +544,26 @@ pub fn lane_boundary(spec_path: &str, sample_path: &str, lane_cfg: &Value, lane_
     let fam5 = rd(&path("lower", "family")?)?;
     let cfg_lo = rd(&path("lower", "class_config")?)?;
     let e_lo = cfg_lo["e"].as_u64().ok_or("lower class config has no e")? as usize;
-    let p14t: Vec<Vec<i64>> = sample["endpoint"].as_array().ok_or("sample has no endpoints")?.iter()
-        .filter(|x| x.get("family").and_then(|f| f.as_str()).unwrap_or("") == "").map(|x| vi(&x["target"])).collect();
-    let sp = softplan::build(&fam5, &cfg_lo, &[], &rd(&path("lower", "p14_family")?)?, &p14t, None);
+    let p14t: Vec<Vec<i64>> = sample["endpoint"]
+        .as_array()
+        .ok_or("sample has no endpoints")?
+        .iter()
+        .filter(|x| {
+            x.get("family")
+                .and_then(|f| f.as_str())
+                .unwrap_or("")
+                .is_empty()
+        })
+        .map(|x| vi(&x["target"]))
+        .collect();
+    let sp = softplan::build(
+        &fam5,
+        &cfg_lo,
+        &[],
+        &rd(&path("lower", "p14_family")?)?,
+        &p14t,
+        None,
+    );
     let sol_lo = rd(&path("lower", "soft_solution")?)?;
     if d0_of(&sol_lo)? != *d0 {
         return Err("lower soft solution is at another d0".into());
@@ -429,11 +601,33 @@ mod tests {
         assert_eq!(label(&s3), "S3");
         // 3L banana and M5 = Pi(q)^2 / (q^2 + 1); the dotted banana (two lines in series, parallel momenta) has the same size and
         // rank as M5 but another matroid
-        let b4 = canonical_matroid(&[v(&[1, 0, 0]), v(&[0, 1, 0]), v(&[0, 0, 1]), v(&[1, 1, 1])]).unwrap();
+        let b4 = canonical_matroid(&[v(&[1, 0, 0]), v(&[0, 1, 0]), v(&[0, 0, 1]), v(&[1, 1, 1])])
+            .unwrap();
         assert_eq!(label(&b4), "B4");
-        let m5 = canonical_matroid(&[v(&[1, 0, 0]), v(&[0, 1, 0]), v(&[1, -1, 0]), v(&[0, 0, 1]), v(&[1, 0, -1])]).unwrap();
-        let m5b = canonical_matroid(&[v(&[0, 0, 1]), v(&[1, 0, -1]), v(&[1, 0, 0]), v(&[1, -1, 0]), v(&[0, 1, 0])]).unwrap();
-        let dotted = canonical_matroid(&[v(&[1, 0, 0]), v(&[0, 1, 0]), v(&[0, 0, 1]), v(&[0, 0, 1]), v(&[1, 1, 1])]).unwrap();
+        let m5 = canonical_matroid(&[
+            v(&[1, 0, 0]),
+            v(&[0, 1, 0]),
+            v(&[1, -1, 0]),
+            v(&[0, 0, 1]),
+            v(&[1, 0, -1]),
+        ])
+        .unwrap();
+        let m5b = canonical_matroid(&[
+            v(&[0, 0, 1]),
+            v(&[1, 0, -1]),
+            v(&[1, 0, 0]),
+            v(&[1, -1, 0]),
+            v(&[0, 1, 0]),
+        ])
+        .unwrap();
+        let dotted = canonical_matroid(&[
+            v(&[1, 0, 0]),
+            v(&[0, 1, 0]),
+            v(&[0, 0, 1]),
+            v(&[0, 0, 1]),
+            v(&[1, 1, 1]),
+        ])
+        .unwrap();
         assert_eq!(m5, m5b);
         assert_ne!(m5, dotted);
         assert_eq!(label(&m5), "M5");
@@ -455,7 +649,10 @@ mod tests {
         let allowed: BTreeSet<usize> = (1..6).collect();
         let (t, parts) = factorise(&[1, 1, 1, 1, 1, 1], 0, &mom, &allowed).unwrap();
         assert_eq!(t, 2);
-        assert_eq!(parts.iter().map(|c| label(c)).collect::<Vec<_>>(), vec!["S3"]);
+        assert_eq!(
+            parts.iter().map(|c| label(c)).collect::<Vec<_>>(),
+            vec!["S3"]
+        );
         let (t, parts) = factorise(&[1, 1, 0, 0, 1, 1], 0, &mom, &allowed).unwrap();
         assert_eq!((t, parts.len()), (3, 0));
         assert!(factorise(&[1, 2, 1, 1, 0, 0], 0, &mom, &allowed).is_err());

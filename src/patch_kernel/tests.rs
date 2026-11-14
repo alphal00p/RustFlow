@@ -23,8 +23,8 @@ fn line(a: (Rational, Rational), b: (Rational, Rational), n: u32, order: usize) 
     (0..n)
         .map(|k| PatchSpec {
             centre: (
-                Rational::from(&a.0 + Rational::from(&step.0 * k)),
-                Rational::from(&a.1 + Rational::from(&step.1 * k)),
+                (&a.0 + Rational::from(&step.0 * k)),
+                (&a.1 + Rational::from(&step.1 * k)),
             ),
             step: step.clone(),
             order,
@@ -526,13 +526,13 @@ fn nan_counts_as_zero_digits_and_bad_weights_fail() {
     let mut c = TransportConfig::generic(bits);
     c.cauchy_pole = Some(q("1"));
     let t = Transport::new(&sys, &p, c).unwrap();
-    let mut s = t.initial_state(&[one.clone()]).unwrap();
+    let mut s = t.initial_state(std::slice::from_ref(&one)).unwrap();
     let before = s.identity_hash();
     assert!(
         t.run(
             &mut s,
             usize::MAX,
-            &[one.clone()],
+            std::slice::from_ref(&one),
             &CancellationToken::default(),
             None,
             |_| {}

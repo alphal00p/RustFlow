@@ -28,13 +28,20 @@ fn main() {
     if argv.len() == 3 && argv[0] == "--system-info" {
         // DE + class config -> e-block through the harness reader, kernel system fingerprint (checks after reader changes)
         let t = std::time::Instant::now();
-        let cfg: serde_json::Value = serde_json::from_slice(&std::fs::read(&argv[2]).expect("class config")).expect("class config JSON");
+        let cfg: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(&argv[2]).expect("class config"))
+                .expect("class config JSON");
         let e = cfg["e"].as_u64().expect("e slot") as usize;
-        let sol = HarnessSolution::from_slice(&std::fs::read(&argv[1]).expect("DE")).unwrap_or_else(|err| panic!("reader: {err}"));
+        let sol = HarnessSolution::from_slice(&std::fs::read(&argv[1]).expect("DE"))
+            .unwrap_or_else(|err| panic!("reader: {err}"));
         let sys = harness::eblock(&sol, e).unwrap_or_else(|err| panic!("e-block: {err}"));
-        let k = symbolica_amflow::dispersive::kernel::PatchKernel::new(&sys, 1).expect("kernel system");
-        println!("{}", serde_json::json!({"de": argv[1], "d0": sys.d0.to_string(), "e_slot": e, "dim": sys.dim(), "terms": sys.terms.len(),
-            "kernel_system_fingerprint": k.system_fingerprint, "products_per_order": k.system.products_per_order(), "seconds": t.elapsed().as_secs_f64()}));
+        let k =
+            symbolica_amflow::dispersive::kernel::PatchKernel::new(&sys, 1).expect("kernel system");
+        println!(
+            "{}",
+            serde_json::json!({"de": argv[1], "d0": sys.d0.to_string(), "e_slot": e, "dim": sys.dim(), "terms": sys.terms.len(),
+            "kernel_system_fingerprint": k.system_fingerprint, "products_per_order": k.system.products_per_order(), "seconds": t.elapsed().as_secs_f64()})
+        );
         return;
     }
     let args = cli::Args::parse(&argv).unwrap_or_else(|e| {
@@ -56,7 +63,9 @@ fn main() {
                     // a signal outside the checkpointed transport: give a just-starting transport a moment to own it
                     std::thread::sleep(std::time::Duration::from_millis(500));
                     if !active.load(Ordering::SeqCst) {
-                        eprintln!("dispersive: signal outside the transport: exit {EXIT_RESUMABLE} (stage files are atomic; rerun the same command to resume)");
+                        eprintln!(
+                            "dispersive: signal outside the transport: exit {EXIT_RESUMABLE} (stage files are atomic; rerun the same command to resume)"
+                        );
                         std::process::exit(EXIT_RESUMABLE);
                     }
                 }
@@ -70,14 +79,16 @@ fn main() {
         let sys = harness::eblock(&sol, e_slot).map_err(|e| e.to_string())?;
         drop(sol);
         // optional lane stage: regenerate the 4L sample's PR rows from its P14 rows first (--lane)
-        let load = |de: &str, e: usize| -> Result<symbolica_amflow::dispersive::system::EBlockSystem, String> {
+        let load = |de: &str,
+                    e: usize|
+         -> Result<symbolica_amflow::dispersive::system::EBlockSystem, String> {
             let b = std::fs::read(de).map_err(|e| format!("{de}: {e}"))?;
             let s = HarnessSolution::from_slice(&b).map_err(|e| format!("{de}: {e}"))?;
             harness::eblock(&s, e).map_err(|e| e.to_string())
         };
         let (args5, _) = cli::lane_stage(&args, &sys.d0, &load, &cancel, &transport_active)?;
-        if std::env::var_os("DISPERSIVE_LANE_ONLY").is_some() {
-            // test hook: stop after the lane stage
+        if args.lane_only {
+            // hidden diagnostic flag --lane-only 1: stop after the lane stage
             return Ok(serde_json::json!({"lane_stage": args5.lane_info, "v": args5.v}));
         }
         cli::run_with(&args5, &sys, &cancel, &transport_active)

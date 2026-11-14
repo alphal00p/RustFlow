@@ -44,6 +44,9 @@
 //!   patch.
 //!
 //! Nothing here uses global mutable state; threads are scoped per patch.
+// Index loops in the numeric kernels are deliberate: the order of operations is part of the bit-identical (thread-count independent)
+// results. Negated comparisons (`!(x <= bound)`) are deliberate: they treat NaN as a failure.
+#![allow(clippy::needless_range_loop, clippy::neg_cmp_op_on_partial_ord)]
 pub mod accuracy;
 pub mod checkpoint;
 pub mod patch;

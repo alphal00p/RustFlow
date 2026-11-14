@@ -2,7 +2,7 @@
 //! I_j = int_0^inf d_j(s)/(s + 1) ds (oracle: disp3y-pt main()).
 use super::boundary::BoundaryRow;
 use super::frobenius::FamilySpec;
-use rug::{ops::Pow, Assign, Float, Rational};
+use rug::{Assign, Float, Rational, ops::Pow};
 
 /// numerical family: basis rows (n - n_lo) * E + comp for n <= k_stable, columns = dim (unit on the pivot coordinates)
 pub struct FamilyNum {
@@ -11,14 +11,20 @@ pub struct FamilyNum {
 }
 
 pub fn log10abs(x: &Float) -> f64 {
-    if x.is_zero() { -1e9 } else { x.clone().abs().log10().to_f64() }
+    if x.is_zero() {
+        -1e9
+    } else {
+        x.clone().abs().log10().to_f64()
+    }
 }
 
 /// least squares min ||A x - b|| by modified Gram-Schmidt QR with one reorthogonalisation; (x, residual norm)
 pub fn lstsq(a: &[Vec<Float>], b: &[Float], prec: u32) -> (Vec<Float>, Float) {
     let m = a.len();
     let n = a[0].len();
-    let mut q: Vec<Vec<Float>> = (0..n).map(|j| (0..m).map(|i| a[i][j].clone()).collect()).collect();
+    let mut q: Vec<Vec<Float>> = (0..n)
+        .map(|j| (0..m).map(|i| a[i][j].clone()).collect())
+        .collect();
     let mut rr = vec![vec![Float::new(prec); n]; n];
     let mut tmp = Float::new(prec);
     for j in 0..n {
@@ -44,7 +50,9 @@ pub fn lstsq(a: &[Vec<Float>], b: &[Float], prec: u32) -> (Vec<Float>, Float) {
             q[j][i] /= &nrm;
         }
     }
-    let qtb: Vec<Float> = (0..n).map(|j| Float::with_val(prec, Float::dot(q[j].iter().zip(b)))).collect();
+    let qtb: Vec<Float> = (0..n)
+        .map(|j| Float::with_val(prec, Float::dot(q[j].iter().zip(b))))
+        .collect();
     let mut x = vec![Float::new(prec); n];
     for j in (0..n).rev() {
         let mut v = qtb[j].clone();
@@ -84,8 +92,17 @@ pub fn soft_fit(fam0: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32) -> S
         }
         let sc = Float::with_val(prec, (&rho).pow(br.n as i32));
         let vs = Float::with_val(prec, &br.value * &sc);
-        let w = if vs.is_zero() { Float::with_val(prec, 1) } else { Float::with_val(prec, 1 / Float::with_val(prec, vs.clone().abs())) };
-        amat.push(fam0.basis[row].iter().map(|x| Float::with_val(prec, x * &w)).collect::<Vec<_>>());
+        let w = if vs.is_zero() {
+            Float::with_val(prec, 1)
+        } else {
+            Float::with_val(prec, 1 / Float::with_val(prec, vs.clone().abs()))
+        };
+        amat.push(
+            fam0.basis[row]
+                .iter()
+                .map(|x| Float::with_val(prec, x * &w))
+                .collect::<Vec<_>>(),
+        );
         bvec.push(Float::with_val(prec, &vs * &w));
     }
     let (x0, res0) = lstsq(&amat, &bvec, prec);
@@ -95,12 +112,28 @@ pub fn soft_fit(fam0: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32) -> S
         v -= &bvec[i];
         worst = worst.max(log10abs(&v));
     }
-    let csoft = fam0.basis.iter().map(|row| Float::with_val(prec, Float::dot(row.iter().zip(&x0)))).collect();
-    SoftFit { csoft, rows: amat.len(), residual_log10: log10abs(&res0), worst_rel_log10: worst }
+    let csoft = fam0
+        .basis
+        .iter()
+        .map(|row| Float::with_val(prec, Float::dot(row.iter().zip(&x0))))
+        .collect();
+    SoftFit {
+        csoft,
+        rows: amat.len(),
+        residual_log10: log10abs(&res0),
+        worst_rel_log10: worst,
+    }
 }
 
 /// d(s0) and the head integral int_0^s0 d(s)/(s + 1) ds termwise (d = s^lam sum_n c'_n (-s/rho)^n)
-pub fn head(fam0: &FamilyNum, csoft: &[Float], s0q: &Rational, e: usize, lterms: i64, prec: u32) -> (Vec<Float>, Vec<Float>) {
+pub fn head(
+    fam0: &FamilyNum,
+    csoft: &[Float],
+    s0q: &Rational,
+    e: usize,
+    lterms: i64,
+    prec: u32,
+) -> (Vec<Float>, Vec<Float>) {
     let s0 = Float::with_val(prec, s0q);
     let lam = Float::with_val(prec, &fam0.spec.lam);
     let rho = Float::with_val(prec, &fam0.spec.rho);
@@ -154,7 +187,13 @@ pub struct Matching {
 
 /// one family's matching columns phi_a(S) = S^(-lam) sum_n B[n, ., a] (-1/(S rho))^n and tail vectors (int_S^inf phi_a/(s+1), analytically
 /// continued in the exponents), one pair of E-vectors per basis column
-pub fn family_columns(f: &FamilyNum, sq: &Rational, e: usize, tterms: i64, prec: u32) -> (Vec<Vec<Float>>, Vec<Vec<Float>>) {
+pub fn family_columns(
+    f: &FamilyNum,
+    sq: &Rational,
+    e: usize,
+    tterms: i64,
+    prec: u32,
+) -> (Vec<Vec<Float>>, Vec<Vec<Float>>) {
     let s = Float::with_val(prec, sq);
     let nrow = f.basis.len() / e;
     let lam = Float::with_val(prec, &f.spec.lam);
@@ -177,9 +216,14 @@ pub fn family_columns(f: &FamilyNum, sq: &Rational, e: usize, tterms: i64, prec:
                 inner -= &t;
             }
         }
-        tf.push(Float::with_val(prec, Float::with_val(prec, (&mrho).pow(n as i32)) * &inner));
+        tf.push(Float::with_val(
+            prec,
+            Float::with_val(prec, (&mrho).pow(n as i32)) * &inner,
+        ));
     }
-    let sp: Vec<Float> = (0..nrow).map(|b| Float::with_val(prec, (&sig).pow((f.spec.n_lo + b as i64) as i32))).collect();
+    let sp: Vec<Float> = (0..nrow)
+        .map(|b| Float::with_val(prec, (&sig).pow((f.spec.n_lo + b as i64) as i32)))
+        .collect();
     let mut cols = Vec::with_capacity(f.spec.dim);
     let mut tails = Vec::with_capacity(f.spec.dim);
     for a in 0..f.spec.dim {
@@ -205,7 +249,13 @@ pub fn family_columns(f: &FamilyNum, sq: &Rational, e: usize, tterms: i64, prec:
 }
 
 /// row-scaled least squares of d(S) on all families' columns (rows weighted by 1/max(|d_c(S)|, max_a |phi_a,c|)), then the tail
-pub fn match_columns(cols: &[Vec<Float>], tails: &[Vec<Float>], ds: &[Float], e: usize, prec: u32) -> Matching {
+pub fn match_columns(
+    cols: &[Vec<Float>],
+    tails: &[Vec<Float>],
+    ds: &[Float],
+    e: usize,
+    prec: u32,
+) -> Matching {
     let ncol = cols.len();
     let mut amat = Vec::new();
     let mut bvec = Vec::new();
@@ -220,7 +270,11 @@ pub fn match_columns(cols: &[Vec<Float>], tails: &[Vec<Float>], ds: &[Float], e:
             continue;
         }
         let w = Float::with_val(prec, 1 / &sc);
-        amat.push((0..ncol).map(|a| Float::with_val(prec, &cols[a][c] * &w)).collect::<Vec<_>>());
+        amat.push(
+            (0..ncol)
+                .map(|a| Float::with_val(prec, &cols[a][c] * &w))
+                .collect::<Vec<_>>(),
+        );
         bvec.push(Float::with_val(prec, &ds[c] * &w));
     }
     let (coef, resm) = lstsq(&amat, &bvec, prec);
@@ -237,11 +291,26 @@ pub fn match_columns(cols: &[Vec<Float>], tails: &[Vec<Float>], ds: &[Float], e:
             tail[c] += Float::with_val(prec, &tails[a][c] * &coef[a]);
         }
     }
-    Matching { tail, coef, rows: amat.len(), cols: ncol, residual_log10: log10abs(&resm), worst_rel_log10: worst, max_log10_coef: amax }
+    Matching {
+        tail,
+        coef,
+        rows: amat.len(),
+        cols: ncol,
+        residual_log10: log10abs(&resm),
+        worst_rel_log10: worst,
+        max_log10_coef: amax,
+    }
 }
 
 /// columns of every family + least squares (as the oracle)
-pub fn match_at_infinity(fams: &[FamilyNum], ds: &[Float], sq: &Rational, e: usize, tterms: i64, prec: u32) -> Matching {
+pub fn match_at_infinity(
+    fams: &[FamilyNum],
+    ds: &[Float],
+    sq: &Rational,
+    e: usize,
+    tterms: i64,
+    prec: u32,
+) -> Matching {
     let mut cols = Vec::new();
     let mut tails = Vec::new();
     for f in fams {
@@ -255,7 +324,10 @@ pub fn match_at_infinity(fams: &[FamilyNum], ds: &[Float], sq: &Rational, e: usi
 /// J(z = 1) = -(sin(pi d0/2)/pi) I
 pub fn prefactor(d0: &Rational, prec: u32) -> Float {
     let pi = Float::with_val(prec, rug::float::Constant::Pi);
-    let x = Float::with_val(prec, Float::with_val(prec, &pi * Float::with_val(prec, d0)) / 2u32);
+    let x = Float::with_val(
+        prec,
+        Float::with_val(prec, &pi * Float::with_val(prec, d0)) / 2u32,
+    );
     let s = x.sin();
     -Float::with_val(prec, &s / &pi)
 }
@@ -263,7 +335,13 @@ pub fn prefactor(d0: &Rational, prec: u32) -> Float {
 /// residual of the Frobenius recursion (lam + m) c_m - sum_k B_k c_{m-k} = 0 on the kept rows, for up to `max_cols` basis columns
 /// (evenly spread), INCLUDING the leading equations m in [n_lo - r, n_lo) (pole constraints, c_m = 0 below n_lo): log10 of
 /// max |residual| / max |terms| over the checked orders (m + pole rank <= k_stable)
-pub fn family_residual(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usize, max_cols: usize, prec: u32) -> f64 {
+pub fn family_residual(
+    b: &super::laurent::Lmat<Float>,
+    fam: &FamilyNum,
+    e: usize,
+    max_cols: usize,
+    prec: u32,
+) -> f64 {
     let r = -*b.keys().next().unwrap();
     let lam = Float::with_val(prec, &fam.spec.lam);
     let n_lo = fam.spec.n_lo;
@@ -273,7 +351,13 @@ pub fn family_residual(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usiz
     let cols: Vec<usize> = (0..ncol).map(|k| k * dim / ncol).collect();
     let mut worst = -1e9f64;
     for &a in &cols {
-        let coef = |n: i64, j: usize| -> Option<&Float> { if n < n_lo || n - n_lo >= nrow { None } else { Some(&fam.basis[((n - n_lo) as usize) * e + j][a]) } };
+        let coef = |n: i64, j: usize| -> Option<&Float> {
+            if n < n_lo || n - n_lo >= nrow {
+                None
+            } else {
+                Some(&fam.basis[((n - n_lo) as usize) * e + j][a])
+            }
+        };
         for m in (n_lo - r)..(n_lo + nrow - r) {
             let mut res = vec![Float::new(prec); e];
             let mut mag = Float::new(prec);
@@ -322,9 +406,16 @@ pub fn family_residual(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usiz
 ///   harmless;
 /// - `per_column`: max over m of |res_m| / max over ALL checked orders of |terms| for that column (the column's own scale in the
 ///   rho-scaled variable, where the terms of all orders are comparable by construction): a real failure of the recursion shows here.
+///
 /// Also: the order m and column of each worst value, the worst over the leading (pole) equations m < n_lo, and the log10 of the
 /// largest term at the worst per-order m relative to the column scale.
-pub fn family_residual_report(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usize, max_cols: usize, prec: u32) -> serde_json::Value {
+pub fn family_residual_report(
+    b: &super::laurent::Lmat<Float>,
+    fam: &FamilyNum,
+    e: usize,
+    max_cols: usize,
+    prec: u32,
+) -> serde_json::Value {
     let r = -*b.keys().next().unwrap();
     let lam = Float::with_val(prec, &fam.spec.lam);
     let n_lo = fam.spec.n_lo;
@@ -332,11 +423,21 @@ pub fn family_residual_report(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, 
     let dim = fam.spec.dim;
     let ncol = dim.min(max_cols.max(1));
     let cols: Vec<usize> = (0..ncol).map(|k| k * dim / ncol).collect();
-    let (mut w_ord, mut w_col, mut w_lead) = ((-1e9f64, 0i64, 0usize, 0.0f64), (-1e9f64, 0i64, 0usize), -1e9f64);
+    let (mut w_ord, mut w_col, mut w_lead) = (
+        (-1e9f64, 0i64, 0usize, 0.0f64),
+        (-1e9f64, 0i64, 0usize),
+        -1e9f64,
+    );
     // per order m, over the checked columns: max log10 |res| and max log10 |terms| (for evaluation-weighted residuals)
     let mut orders: std::collections::BTreeMap<i64, (f64, f64)> = Default::default();
     for &a in &cols {
-        let coef = |n: i64, j: usize| -> Option<&Float> { if n < n_lo || n - n_lo >= nrow { None } else { Some(&fam.basis[((n - n_lo) as usize) * e + j][a]) } };
+        let coef = |n: i64, j: usize| -> Option<&Float> {
+            if n < n_lo || n - n_lo >= nrow {
+                None
+            } else {
+                Some(&fam.basis[((n - n_lo) as usize) * e + j][a])
+            }
+        };
         let mut per_m: Vec<(i64, f64, f64)> = Vec::new(); // (m, log10 max|res|, log10 max|term|)
         for m in (n_lo - r)..(n_lo + nrow - r) {
             let mut res = vec![Float::new(prec); e];
@@ -402,7 +503,9 @@ pub fn family_residual_report(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, 
 /// the residual of a report weighted for evaluation at t = x / rho (x = s for the zero family, 1/s at infinity): log10 of
 /// max_m |res_m| t^m / max_m |terms_m| t^m, i.e. how badly the truncated series violates the recursion where it is USED
 pub fn residual_at(report: &serde_json::Value, log10_t: f64) -> f64 {
-    let Some(o) = report["orders_m_res_terms_log10"].as_array() else { return f64::NAN };
+    let Some(o) = report["orders_m_res_terms_log10"].as_array() else {
+        return f64::NAN;
+    };
     let (mut r, mut t) = (-1e9f64, -1e9f64);
     for x in o {
         let m = x[0].as_f64().unwrap_or(0.0);

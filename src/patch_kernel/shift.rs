@@ -21,8 +21,8 @@ pub struct Centre {
 impl Centre {
     pub fn new(re: &Rational, im: &Rational) -> Self {
         let q = Integer::from(re.denom().lcm_ref(im.denom()));
-        let gr = Integer::from(re.numer() * Integer::from(&q / re.denom()));
-        let gi = Integer::from(im.numer() * Integer::from(&q / im.denom()));
+        let gr = re.numer() * Integer::from(&q / re.denom());
+        let gi = im.numer() * Integer::from(&q / im.denom());
         let q_log2 = q.is_power_of_two().then(|| q.significant_bits() - 1);
         Self { gr, gi, q, q_log2 }
     }

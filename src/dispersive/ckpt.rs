@@ -121,9 +121,15 @@ fn piv_code(p: Pivoting) -> (u8, i64) {
 
 /// write the state atomically (tmp + fsync + rename + dir fsync); false if the scalar type cannot be checkpointed
 pub fn save<S: Scalar>(ck: &FrobCheckpoint, st: &FrobState<S>) -> Result<bool, String> {
-    let tmp = ck.path.with_extension(format!("tmp.{}", std::process::id()));
+    let tmp = ck
+        .path
+        .with_extension(format!("tmp.{}", std::process::id()));
     let f = std::fs::File::create(&tmp).map_err(|e| format!("{}: {e}", tmp.display()))?;
-    let mut w = W { buf: Vec::with_capacity(1 << 20), f, h: blake3::Hasher::new() };
+    let mut w = W {
+        buf: Vec::with_capacity(1 << 20),
+        f,
+        h: blake3::Hasher::new(),
+    };
     w.buf.extend_from_slice(MAGIC);
     w.bytes(ck.fingerprint.as_bytes());
     w.i64(st.m_first);
@@ -149,7 +155,13 @@ pub fn save<S: Scalar>(ck: &FrobCheckpoint, st: &FrobState<S>) -> Result<bool, S
     }
     let d = &st.diag;
     w.i64(d.pole_rank);
-    for x in [d.min_rank_gap_log10, d.min_pivot_log10, d.min_structural_pivot_rel_log10, d.sum_structural_pivot_rel_log10, d.seconds] {
+    for x in [
+        d.min_rank_gap_log10,
+        d.min_pivot_log10,
+        d.min_structural_pivot_rel_log10,
+        d.sum_structural_pivot_rel_log10,
+        d.seconds,
+    ] {
         w.f64(x);
     }
     w.u64(d.t_nnz_max as u64);
@@ -173,10 +185,14 @@ pub fn save<S: Scalar>(ck: &FrobCheckpoint, st: &FrobState<S>) -> Result<bool, S
     w.f.sync_all().map_err(|e| e.to_string())?;
     drop(w);
     std::fs::rename(&tmp, &ck.path).map_err(|e| e.to_string())?;
-    if let Some(dir) = ck.path.parent() {
-        if let Ok(d) = std::fs::File::open(if dir.as_os_str().is_empty() { std::path::Path::new(".") } else { dir }) {
-            let _ = d.sync_all();
-        }
+    if let Some(dir) = ck.path.parent()
+        && let Ok(d) = std::fs::File::open(if dir.as_os_str().is_empty() {
+            std::path::Path::new(".")
+        } else {
+            dir
+        })
+    {
+        let _ = d.sync_all();
     }
     Ok(true)
 }
@@ -200,19 +216,29 @@ pub fn peek(path: &std::path::Path) -> Option<(String, i64, i64, i64)> {
 
 /// Ok(None) = no file; Err = unreadable, corrupt or of another run (never reused silently)
 pub fn load<S: Scalar>(ck: &FrobCheckpoint, prec: u32) -> Result<Option<FrobState<S>>, String> {
-    let Ok(b) = std::fs::read(&ck.path) else { return Ok(None) };
+    let Ok(b) = std::fs::read(&ck.path) else {
+        return Ok(None);
+    };
     let name = ck.path.display();
     if b.len() < MAGIC.len() + 32 || &b[..MAGIC.len()] != MAGIC {
         return Err(format!("{name}: not a Frobenius checkpoint"));
     }
     let (body, h) = b.split_at(b.len() - 32);
     if blake3::hash(body).as_bytes() != h {
-        return Err(format!("{name}: checksum mismatch (corrupt Frobenius checkpoint): remove it"));
+        return Err(format!(
+            "{name}: checksum mismatch (corrupt Frobenius checkpoint): remove it"
+        ));
     }
-    let mut r = Rd { b: body, p: MAGIC.len() };
+    let mut r = Rd {
+        b: body,
+        p: MAGIC.len(),
+    };
     let fp = String::from_utf8(r.bytes()?).map_err(|e| e.to_string())?;
     if fp != ck.fingerprint {
-        return Err(format!("{name}: Frobenius checkpoint of another run ({fp} != {}); refusing to resume: use a fresh workdir", ck.fingerprint));
+        return Err(format!(
+            "{name}: Frobenius checkpoint of another run ({fp} != {}); refusing to resume: use a fresh workdir",
+            ck.fingerprint
+        ));
     }
     let m_first = r.i64()?;
     let m_end = r.i64()?;
@@ -227,14 +253,23 @@ pub fn load<S: Scalar>(ck: &FrobCheckpoint, prec: u32) -> Result<Option<FrobStat
         x => return Err(format!("{name}: bad pivoting code {x:?}")),
     };
     let nr = r.u64()? as usize;
-    let ranks = (0..nr).map(|_| r.u64().map(|x| x as usize)).collect::<Result<Vec<_>, _>>()?;
+    let ranks = (0..nr)
+        .map(|_| r.u64().map(|x| x as usize))
+        .collect::<Result<Vec<_>, _>>()?;
     let np = r.u64()? as usize;
     let mut pivots = Vec::with_capacity(np);
     for _ in 0..np {
         let n = r.u64()? as usize;
-        pivots.push((0..n).map(|_| Ok((r.u32()?, r.u32()?))).collect::<Result<Vec<_>, String>>()?);
+        pivots.push(
+            (0..n)
+                .map(|_| Ok((r.u32()?, r.u32()?)))
+                .collect::<Result<Vec<_>, String>>()?,
+        );
     }
-    let mut diag = FrobDiag { pole_rank: r.i64()?, ..Default::default() };
+    let mut diag = FrobDiag {
+        pole_rank: r.i64()?,
+        ..Default::default()
+    };
     diag.min_rank_gap_log10 = r.f64()?;
     diag.min_pivot_log10 = r.f64()?;
     diag.min_structural_pivot_rel_log10 = r.f64()?;
@@ -252,7 +287,8 @@ pub fn load<S: Scalar>(ck: &FrobCheckpoint, prec: u32) -> Result<Option<FrobStat
         let mut row = Vec::with_capacity(n);
         for _ in 0..n {
             let c = r.u32()?;
-            let v = S::ckpt_get(r.b, &mut r.p, prec).ok_or_else(|| format!("{name}: bad scalar"))?;
+            let v =
+                S::ckpt_get(r.b, &mut r.p, prec).ok_or_else(|| format!("{name}: bad scalar"))?;
             row.push((c, v));
         }
         t.push(row);
@@ -260,5 +296,17 @@ pub fn load<S: Scalar>(ck: &FrobCheckpoint, prec: u32) -> Result<Option<FrobStat
     if r.p != body.len() {
         return Err(format!("{name}: trailing bytes"));
     }
-    Ok(Some(FrobState { m_first, m_end, m_next, t, q, top, step, ranks, pivots, diag, pivoting }))
+    Ok(Some(FrobState {
+        m_first,
+        m_end,
+        m_next,
+        t,
+        q,
+        top,
+        step,
+        ranks,
+        pivots,
+        diag,
+        pivoting,
+    }))
 }

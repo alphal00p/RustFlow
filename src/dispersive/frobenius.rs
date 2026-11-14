@@ -1,8 +1,8 @@
 //! Linear-algebra Frobenius method for formal local solutions x^lam sum_{n >= n_lo} c_n x^n of theta c = B(x) c
-//! (non-Fuchsian Laporta basis; oracle: local_solutions.local_dim / prep5.modp_family + family_spec / disp frobenius
-//! + stable_basis). The truncated solution space is an explicit parametrisation T (rows = coefficients
-//! (n - n_lo) * E + component, columns = free parameters), refined order by order by incremental null spaces of
-//!   G = (lam + m) T_m - sum_k B_k T_{m-k}.
+//! (non-Fuchsian Laporta basis; oracle: local_solutions.local_dim / prep5.modp_family, family_spec, disp frobenius and
+//! stable_basis). The truncated solution space is an explicit parametrisation T (rows = coefficients
+//! `(n - n_lo) * E + component`, columns = free parameters), refined order by order by incremental null spaces of
+//! `G = (lam + m) T_m - sum_k B_k T_{m-k}`.
 //! The SAME code runs exactly mod p (ranks are measured; the family structure: rank plateau = dimension, k_stable,
 //! pivot coordinates) and in MPFR (ranks imposed from the mod-p run, complete pivoting, cancellation noise snapped
 //! to zero as the oracle). T is stored as sparse rows.
@@ -52,33 +52,33 @@ pub enum Pivoting {
     Structural,
 }
 
-/// pivoting of one family run: plain MPFR (production) or shadowed MPFR (experimental: exact zero pattern from residues mod 2^61-1,
-/// measured ~45 digits less accurate at 5 loops, REVIEW-B MAJOR 1)
+/// pivoting of one MPFR family run. (An experimental shadowed-MPFR variant, exact zero pattern from residues mod 2^61-1, measured
+/// ~45 digits less accurate at 5 loops, lives on the side branch `w3a/shadow-experimental`; it is not part of RustFlow.)
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PivotMode {
     Float(Pivoting),
-    Shadow(Pivoting),
 }
 
 /// production default: the oracle's threshold pivoting (DISP_MARK), plain MPFR
 pub const DEFAULT_PIVOTING: &str = "threshold:30";
 
 impl PivotMode {
-    /// complete | threshold:<bits> | structural | shadow | shadow:threshold:<bits> | shadow:first
+    /// complete | threshold:<bits> | structural
     pub fn parse(s: &str) -> Result<PivotMode, String> {
         let one = |x: &str| -> Result<Pivoting, String> {
             match x {
                 "complete" => Ok(Pivoting::Complete),
                 "structural" | "first" => Ok(Pivoting::Structural),
-                t if t.starts_with("threshold:") => t[10..].parse().map(Pivoting::Threshold).map_err(|_| format!("bad pivoting {s}")),
-                _ => Err(format!("unknown pivoting {s:?}: complete | threshold:<bits> | structural | shadow[:threshold:<bits>|:first]")),
+                t if t.starts_with("threshold:") => t[10..]
+                    .parse()
+                    .map(Pivoting::Threshold)
+                    .map_err(|_| format!("bad pivoting {s}")),
+                _ => Err(format!(
+                    "unknown pivoting {s:?}: complete | threshold:<bits> | structural"
+                )),
             }
         };
-        match s.strip_prefix("shadow") {
-            Some("") => Ok(PivotMode::Shadow(Pivoting::Complete)),
-            Some(rest) => Ok(PivotMode::Shadow(one(rest.strip_prefix(':').ok_or_else(|| format!("bad pivoting {s}"))?)?)),
-            None => Ok(PivotMode::Float(one(s)?)),
-        }
+        Ok(PivotMode::Float(one(s)?))
     }
     pub fn label(&self) -> String {
         let one = |p: &Pivoting| match p {
@@ -88,34 +88,87 @@ impl PivotMode {
         };
         match self {
             PivotMode::Float(p) => one(p),
-            PivotMode::Shadow(Pivoting::Complete) => "shadow".into(),
-            PivotMode::Shadow(Pivoting::Structural) => "shadow:first".into(),
-            PivotMode::Shadow(p) => format!("shadow:{}", one(p)),
         }
     }
 }
 
 /// run the Frobenius recursion; `ranks = None` measures the ranks (exact types only)
 #[allow(clippy::too_many_arguments)]
-pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, prec: u32, nthreads: usize) -> FrobOut<S> {
-    frobenius_with(b, e, lam, n_lo, mm, ranks, None, Pivoting::Complete, prec, nthreads)
+pub fn frobenius<S: Scalar>(
+    b: &Lmat<S>,
+    e: usize,
+    lam: &S,
+    n_lo: i64,
+    mm: i64,
+    ranks: Option<&[usize]>,
+    prec: u32,
+    nthreads: usize,
+) -> FrobOut<S> {
+    frobenius_with(
+        b,
+        e,
+        lam,
+        n_lo,
+        mm,
+        ranks,
+        None,
+        Pivoting::Complete,
+        prec,
+        nthreads,
+    )
 }
 
 /// as `frobenius`; `pivots` = the exact run's pivot sequence (needed for Pivoting::Structural)
 #[allow(clippy::too_many_arguments)]
-pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, pivots: Option<&[Vec<(u32, u32)>]>, pivoting: Pivoting, prec: u32, nthreads: usize) -> FrobOut<S> {
-    frobenius_ck(b, e, lam, n_lo, mm, ranks, pivots, pivoting, prec, nthreads, None).expect("no checkpoint, no I/O error")
+pub fn frobenius_with<S: Scalar>(
+    b: &Lmat<S>,
+    e: usize,
+    lam: &S,
+    n_lo: i64,
+    mm: i64,
+    ranks: Option<&[usize]>,
+    pivots: Option<&[Vec<(u32, u32)>]>,
+    pivoting: Pivoting,
+    prec: u32,
+    nthreads: usize,
+) -> FrobOut<S> {
+    frobenius_ck(
+        b, e, lam, n_lo, mm, ranks, pivots, pivoting, prec, nthreads, None,
+    )
+    .expect("no checkpoint, no I/O error")
 }
 
 /// as `frobenius_with`, with periodic exact checkpoints of the recursion state (W3b, ckpt.rs): resumes from `ck.path` when it exists
 /// (an unreadable file or one of another run is an error), writes it every `ck.every_seconds` between two orders
 #[allow(clippy::too_many_arguments)]
-pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, pivots: Option<&[Vec<(u32, u32)>]>, pivoting: Pivoting, prec: u32, nthreads: usize, ck: Option<&super::ckpt::FrobCheckpoint>) -> Result<FrobOut<S>, String> {
-    assert!(ranks.is_some() || S::EXACT, "MPFR Frobenius needs the ranks of the exact run");
-    // ModP: first nonzero. Shadowed: the requested strategy on the float magnitudes among EXACT nonzeros (Structural = first nonzero).
-    let mut pivoting = if S::EXACT && !S::SNAP { Pivoting::Complete } else { pivoting };
-    let first_nonzero = S::EXACT && (!S::SNAP || pivoting == Pivoting::Structural);
-    assert!(pivoting != Pivoting::Structural || pivots.is_some() || S::EXACT, "structural pivoting needs the exact pivot sequence");
+pub fn frobenius_ck<S: Scalar>(
+    b: &Lmat<S>,
+    e: usize,
+    lam: &S,
+    n_lo: i64,
+    mm: i64,
+    ranks: Option<&[usize]>,
+    pivots: Option<&[Vec<(u32, u32)>]>,
+    pivoting: Pivoting,
+    prec: u32,
+    nthreads: usize,
+    ck: Option<&super::ckpt::FrobCheckpoint>,
+) -> Result<FrobOut<S>, String> {
+    assert!(
+        ranks.is_some() || S::EXACT,
+        "MPFR Frobenius needs the ranks of the exact run"
+    );
+    // exact (mod p) runs pivot on the first nonzero; MPFR runs use the requested strategy
+    let mut pivoting = if S::EXACT {
+        Pivoting::Complete
+    } else {
+        pivoting
+    };
+    let first_nonzero = S::EXACT;
+    assert!(
+        pivoting != Pivoting::Structural || pivots.is_some() || S::EXACT,
+        "structural pivoting needs the exact pivot sequence"
+    );
     let mut pivots_out: Vec<Vec<(u32, u32)>> = Vec::new();
     let clock = Instant::now();
     let r = -*b.keys().next().unwrap();
@@ -125,24 +178,36 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
     let mut top = n_lo - 1;
     let mut step = 0usize;
     let mut ranks_out = Vec::new();
-    let mut diag = FrobDiag { pole_rank: r, min_rank_gap_log10: f64::INFINITY, min_pivot_log10: f64::INFINITY, min_structural_pivot_rel_log10: f64::INFINITY, ..Default::default() };
+    let mut diag = FrobDiag {
+        pole_rank: r,
+        min_rank_gap_log10: f64::INFINITY,
+        min_pivot_log10: f64::INFINITY,
+        min_structural_pivot_rel_log10: f64::INFINITY,
+        ..Default::default()
+    };
     let nt = nthreads.max(1);
     let mut m_start = n_lo - r;
     let mut seconds_before = 0.0;
-    if let Some(c) = ck {
-        if let Some(st) = super::ckpt::load::<S>(c, prec)? {
-            eprintln!("[dispersive] frobenius: resumed {} at order m {} (step {}, T nnz {})", c.path.display(), st.m_next, st.step, st.t.iter().map(|x| x.len()).sum::<usize>());
-            m_start = st.m_next;
-            t = st.t;
-            q = st.q;
-            top = st.top;
-            step = st.step;
-            ranks_out = st.ranks;
-            pivots_out = st.pivots;
-            seconds_before = st.diag.seconds;
-            diag = st.diag;
-            pivoting = st.pivoting;
-        }
+    if let Some(c) = ck
+        && let Some(st) = super::ckpt::load::<S>(c, prec)?
+    {
+        eprintln!(
+            "[dispersive] frobenius: resumed {} at order m {} (step {}, T nnz {})",
+            c.path.display(),
+            st.m_next,
+            st.step,
+            st.t.iter().map(|x| x.len()).sum::<usize>()
+        );
+        m_start = st.m_next;
+        t = st.t;
+        q = st.q;
+        top = st.top;
+        step = st.step;
+        ranks_out = st.ranks;
+        pivots_out = st.pivots;
+        seconds_before = st.diag.seconds;
+        diag = st.diag;
+        pivoting = st.pivoting;
     }
     let mut last_ck = Instant::now();
     let mut ck_ok = true;
@@ -154,14 +219,33 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                 let tw = Instant::now();
                 let mut d = diag.clone();
                 d.seconds = seconds_before + clock.elapsed().as_secs_f64();
-                let st = super::ckpt::FrobState { m_first: n_lo - r, m_end: n_lo + mm, m_next: m, t: std::mem::take(&mut t), q, top, step, ranks: std::mem::take(&mut ranks_out), pivots: std::mem::take(&mut pivots_out), diag: d, pivoting };
+                let st = super::ckpt::FrobState {
+                    m_first: n_lo - r,
+                    m_end: n_lo + mm,
+                    m_next: m,
+                    t: std::mem::take(&mut t),
+                    q,
+                    top,
+                    step,
+                    ranks: std::mem::take(&mut ranks_out),
+                    pivots: std::mem::take(&mut pivots_out),
+                    diag: d,
+                    pivoting,
+                };
                 let r = super::ckpt::save(c, &st);
                 (t, ranks_out, pivots_out) = (st.t, st.ranks, st.pivots);
                 ck_ok = r?;
                 if !ck_ok {
-                    eprintln!("[dispersive] frobenius: this scalar type is not checkpointed ({})", c.path.display());
+                    eprintln!(
+                        "[dispersive] frobenius: this scalar type is not checkpointed ({})",
+                        c.path.display()
+                    );
                 }
-                eprintln!("[dispersive] frobenius checkpoint {} at order m {m} (step {step}): {:.1} s", c.path.display(), tw.elapsed().as_secs_f64());
+                eprintln!(
+                    "[dispersive] frobenius checkpoint {} at order m {m} (step {step}): {:.1} s",
+                    c.path.display(),
+                    tw.elapsed().as_secs_f64()
+                );
                 last_ck = Instant::now();
                 if stop_here {
                     return Err(format!("frobenius: stopped at order m {m} (test hook)"));
@@ -247,7 +331,11 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
         let mut pcol: Vec<usize> = Vec::new();
         let mut tmp = S::zero(prec);
         let mut last = f64::INFINITY;
-        let markowitz: Option<i32> = if let Pivoting::Threshold(t) = pivoting { Some(t) } else { None };
+        let markowitz: Option<i32> = if let Pivoting::Threshold(t) = pivoting {
+            Some(t)
+        } else {
+            None
+        };
         let tcol: Vec<u64> = if markowitz.is_some() {
             let mut v = vec![0u64; q];
             for row in &t {
@@ -260,10 +348,10 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
             Vec::new()
         };
         loop {
-            if let Some(rk) = target {
-                if prow.len() == rk {
-                    break;
-                }
+            if let Some(rk) = target
+                && prow.len() == rk
+            {
+                break;
             }
             let (mut bi, mut bc) = (usize::MAX, usize::MAX);
             if pivoting == Pivoting::Structural && !S::EXACT {
@@ -277,7 +365,7 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                     }
                 }
                 let rel = g[bi][bc].log10_abs() - rowmax.log10_abs();
-                if g[bi][bc].is_zero() || rel < -(prec as f64 * 0.30103) + 20.0 {
+                if g[bi][bc].is_zero() || rel < -(prec as f64 * super::DIGITS_PER_BIT) + 20.0 {
                     // unresolvable at this precision: the remaining pivots of this family are chosen by complete pivoting (the
                     // structural sequence no longer applies once a pivot differs); recorded in the diagnostics
                     diag.structural_fallback_step = Some(step);
@@ -285,7 +373,8 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                     bi = usize::MAX;
                     bc = usize::MAX;
                 } else {
-                    diag.min_structural_pivot_rel_log10 = diag.min_structural_pivot_rel_log10.min(rel);
+                    diag.min_structural_pivot_rel_log10 =
+                        diag.min_structural_pivot_rel_log10.min(rel);
                     diag.sum_structural_pivot_rel_log10 += rel.min(0.0);
                 }
             }
@@ -303,18 +392,6 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                         }
                     }
                 }
-                if S::SNAP && bi != usize::MAX {
-                    // shadowed run: the exact pivot's size relative to its row (rounding growth diagnostic)
-                    let mut rowmax = S::zero(prec);
-                    for c in 0..q {
-                        if !used_c[c] && g[bi][c].cmp_mag(&rowmax) == std::cmp::Ordering::Greater {
-                            rowmax = g[bi][c].clone();
-                        }
-                    }
-                    let rel = g[bi][bc].log10_abs() - rowmax.log10_abs();
-                    diag.min_structural_pivot_rel_log10 = diag.min_structural_pivot_rel_log10.min(rel);
-                    diag.sum_structural_pivot_rel_log10 += rel.min(0.0);
-                }
             } else {
                 // largest |G| among unused rows/columns; ties -> first in row-major order (thread-count independent)
                 let chunk = e.div_ceil(nt);
@@ -326,7 +403,12 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                             continue;
                         }
                         for c in 0..q {
-                            if !uc[c] && !gr[i][c].is_zero() && best.is_none_or(|(x, y)| gr[i][c].cmp_mag(&gr[x][y]) == std::cmp::Ordering::Greater) {
+                            if !uc[c]
+                                && !gr[i][c].is_zero()
+                                && best.is_none_or(|(x, y)| {
+                                    gr[i][c].cmp_mag(&gr[x][y]) == std::cmp::Ordering::Greater
+                                })
+                            {
                                 best = Some((i, c));
                             }
                         }
@@ -335,14 +417,19 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                 };
                 let cands: Vec<Option<(usize, usize)>> = if nt > 1 {
                     std::thread::scope(|sc| {
-                        let hs: Vec<_> = (0..e).step_by(chunk).map(|lo| sc.spawn(move || scan(lo))).collect();
+                        let hs: Vec<_> = (0..e)
+                            .step_by(chunk)
+                            .map(|lo| sc.spawn(move || scan(lo)))
+                            .collect();
                         hs.into_iter().map(|h| h.join().unwrap()).collect()
                     })
                 } else {
                     vec![scan(0)]
                 };
                 for (x, y) in cands.into_iter().flatten() {
-                    if bi == usize::MAX || g[x][y].cmp_mag(&g[bi][bc]) == std::cmp::Ordering::Greater {
+                    if bi == usize::MAX
+                        || g[x][y].cmp_mag(&g[bi][bc]) == std::cmp::Ordering::Greater
+                    {
                         bi = x;
                         bc = y;
                     }
@@ -350,7 +437,15 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                 if let (Some(tau), true) = (markowitz, bi != usize::MAX) {
                     // oracle DISP_MARK: threshold pivoting keeps T sparse (complete pivoting fills it); the basis is invariant
                     let lim = g[bi][bc].exponent().saturating_sub(tau);
-                    let rc: Vec<u64> = (0..e).map(|i| if used_r[i] { 0 } else { (0..q).filter(|&c| !used_c[c] && !g[i][c].is_zero()).count() as u64 }).collect();
+                    let rc: Vec<u64> = (0..e)
+                        .map(|i| {
+                            if used_r[i] {
+                                0
+                            } else {
+                                (0..q).filter(|&c| !used_c[c] && !g[i][c].is_zero()).count() as u64
+                            }
+                        })
+                        .collect();
                     let mut cc = vec![0u64; q];
                     for i in 0..e {
                         if !used_r[i] {
@@ -380,11 +475,19 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
                 }
             }
             if bi == usize::MAX {
-                assert!(target.is_none(), "rank deficit at step {step}: {} of {:?} pivots", prow.len(), target);
+                assert!(
+                    target.is_none(),
+                    "rank deficit at step {step}: {} of {:?} pivots",
+                    prow.len(),
+                    target
+                );
                 break;
             }
             last = g[bi][bc].log10_abs();
-            assert!(last > -1e8, "pivot ({bi}, {bc}) of step {step} is zero in floating point: raise the precision");
+            assert!(
+                last > -1e8,
+                "pivot ({bi}, {bc}) of step {step} is zero in floating point: raise the precision"
+            );
             used_r[bi] = true;
             used_c[bc] = true;
             let pv = g[bi][bc].clone();
@@ -427,7 +530,12 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
             pcol.push(bc);
         }
         ranks_out.push(prow.len());
-        pivots_out.push(prow.iter().zip(&pcol).map(|(&r, &c)| (r as u32, c as u32)).collect());
+        pivots_out.push(
+            prow.iter()
+                .zip(&pcol)
+                .map(|(&r, &c)| (r as u32, c as u32))
+                .collect(),
+        );
         if S::SNAP && !prow.is_empty() {
             diag.min_pivot_log10 = diag.min_pivot_log10.min(last);
         }
@@ -463,7 +571,12 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
         }
         let rcoef: Vec<Vec<(u32, S)>> = prow
             .iter()
-            .map(|&ri| (0..q).filter(|&c| !used_c[c] && !g[ri][c].is_zero()).map(|c| (newidx[c], g[ri][c].clone())).collect())
+            .map(|&ri| {
+                (0..q)
+                    .filter(|&c| !used_c[c] && !g[ri][c].is_zero())
+                    .map(|c| (newidx[c], g[ri][c].clone()))
+                    .collect()
+            })
             .collect();
         let nfu = nf as usize;
         {
@@ -526,26 +639,18 @@ pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i6
             });
         }
         q = nfu;
-        if S::SNAP && std::env::var_os("DISPERSIVE_VERBOSE").is_some() {
-            eprintln!("  frobenius step {step} m {m}: rank {} q {q} T nnz {} ({:.1} s)", prow.len(), t.iter().map(|x| x.len()).sum::<usize>(), clock.elapsed().as_secs_f64());
-        }
     }
     diag.steps = step;
     diag.q_final = q;
     diag.top = top;
     diag.seconds = seconds_before + clock.elapsed().as_secs_f64();
-    Ok(FrobOut { t, q, ranks: ranks_out, pivots: pivots_out, diag })
-}
-
-/// the MPFR values of a shadowed run
-pub fn shadowed_to_float(out: FrobOut<super::field::Shadowed>) -> FrobOut<Float> {
-    FrobOut {
-        t: out.t.into_iter().map(|row| row.into_iter().map(|(c, x)| (c, x.f)).collect()).collect(),
-        q: out.q,
-        ranks: out.ranks,
-        pivots: out.pivots,
-        diag: out.diag,
-    }
+    Ok(FrobOut {
+        t,
+        q,
+        ranks: ranks_out,
+        pivots: pivots_out,
+        diag,
+    })
 }
 
 /// structure of a family from the exact run (oracle prep5 family_spec + greedy)
@@ -575,7 +680,15 @@ impl FamilySpec {
 }
 
 /// greedy pivot coordinates over the rows of the exact T (lowest orders first), rank by order, plateau
-pub fn family_spec(out: &FrobOut<ModP>, e: usize, n_lo: i64, mm: i64, lam: &Rational, rho: &Rational, name: &str) -> Result<FamilySpec, String> {
+pub fn family_spec(
+    out: &FrobOut<ModP>,
+    e: usize,
+    n_lo: i64,
+    mm: i64,
+    lam: &Rational,
+    rho: &Rational,
+    name: &str,
+) -> Result<FamilySpec, String> {
     let q = out.q;
     let mut basis: Vec<(usize, Vec<u32>)> = Vec::new(); // (pivot column, fully reduced dense row)
     let mut picked: Vec<(usize, i64)> = Vec::new();
@@ -628,17 +741,27 @@ pub fn family_spec(out: &FrobOut<ModP>, e: usize, n_lo: i64, mm: i64, lam: &Rati
                     }
                 }
             }
-            if let Some(d) = dim {
-                if picked.len() > d {
-                    break;
-                }
+            if let Some(d) = dim
+                && picked.len() > d
+            {
+                break;
             }
         }
     }
     let dim = dim.ok_or_else(|| format!("{name}: no rank plateau {rbo:?}"))?;
-    let kst = rbo.iter().filter(|x| x.1 == dim).map(|x| x.0).max().unwrap();
+    let kst = rbo
+        .iter()
+        .filter(|x| x.1 == dim)
+        .map(|x| x.0)
+        .max()
+        .unwrap();
     let first = rbo.iter().filter(|x| x.1 > 0).map(|x| x.0).min().unwrap();
-    let piv: Vec<(usize, i64)> = picked.iter().filter(|x| x.1 <= kst).take(dim).cloned().collect();
+    let piv: Vec<(usize, i64)> = picked
+        .iter()
+        .filter(|x| x.1 <= kst)
+        .take(dim)
+        .cloned()
+        .collect();
     Ok(FamilySpec {
         name: name.to_string(),
         lam: lam.clone(),
@@ -656,7 +779,12 @@ pub fn family_spec(out: &FrobOut<ModP>, e: usize, n_lo: i64, mm: i64, lam: &Rati
 }
 
 /// basis rows (n - n_lo) * E + comp, n <= k_stable: unit vectors on the pivot coordinates (oracle disp stable_basis)
-pub fn stable_basis(out: &FrobOut<Float>, spec: &FamilySpec, e: usize, prec: u32) -> Result<Vec<Vec<Float>>, String> {
+pub fn stable_basis(
+    out: &FrobOut<Float>,
+    spec: &FamilySpec,
+    e: usize,
+    prec: u32,
+) -> Result<Vec<Vec<Float>>, String> {
     let q = out.q;
     let dim = spec.pivot_rows.len();
     let mut u: Vec<Vec<Float>> = spec
@@ -670,7 +798,13 @@ pub fn stable_basis(out: &FrobOut<Float>, spec: &FamilySpec, e: usize, prec: u32
             row
         })
         .collect();
-    let mut aug: Vec<Vec<Float>> = (0..dim).map(|i| (0..dim).map(|k| Float::with_val(prec, (i == k) as u32)).collect()).collect();
+    let mut aug: Vec<Vec<Float>> = (0..dim)
+        .map(|i| {
+            (0..dim)
+                .map(|k| Float::with_val(prec, (i == k) as u32))
+                .collect()
+        })
+        .collect();
     let mut used_r = vec![false; dim];
     let mut used_c = vec![false; q];
     let mut sel_col = vec![0usize; dim];
@@ -691,7 +825,10 @@ pub fn stable_basis(out: &FrobOut<Float>, spec: &FamilySpec, e: usize, prec: u32
             }
         }
         if bi == usize::MAX || best.is_zero() {
-            return Err(format!("{}: stable basis: singular pivot coordinates", spec.name));
+            return Err(format!(
+                "{}: stable basis: singular pivot coordinates",
+                spec.name
+            ));
         }
         used_r[bi] = true;
         used_c[bc] = true;
