@@ -15,6 +15,10 @@
 //! --pr-values replaces the 39 'PR'-lane endpoint values of SAMPLE.json by those of a RustFlow lane run (raw = J / e^(4 gamma eps)).
 //! lane:CHAIN.json,SAMPLE.json builds the soft V of a LANE family (e.g. the 4L prism) natively from the P14 rows of SAMPLE.json
 //! (lower.rs; chain spec documented at lower::lane_boundary).
+//! --lane LANESPEC.json: LANE STAGE. Before the sample, run the 4L prism lane (W3c chain) from the P14 rows and merge its values into a
+//! 4L sample (<workdir>/lane/merged-sample.json); the sample then reads it through `--v native:PLAN,SOFTSOL,lane` (literal `lane`).
+//! LANESPEC = {"de", "class_config", "chain", "p14_sample", "template", "m0", "minf", "w", "wf", "two_precision": "dW,dWF"} (paths may
+//! contain {d0} = NUM_DEN of the sample's d0). Resumable like the sample (its own stage files under <workdir>/lane).
 //! native: boundary GATE (hard): full-rank endpoint system, >= --boundary-checks-min N redundant equations (default 1; class 16359
 //! at grid B: 61) with worst relative residual <= 10^--boundary-consistency-bar (default -80).
 //! --merge TEMPLATE.json,P14SAMPLE.json,OUT.json (lane runs): writes OUT.json = TEMPLATE (a merged 4L sample) with its 'PR' rows
@@ -28,6 +32,7 @@ use serde_json::{json, Value};
 use std::collections::BTreeMap;
 use std::time::Instant;
 
+#[derive(Clone, Debug)]
 pub struct Args {
     pub de: String,
     pub class_config: String,
@@ -53,6 +58,10 @@ pub struct Args {
     /// boundary gate: minimum number of redundant endpoint equations checked, and the bar on their worst relative residual (log10)
     pub boundary_checks_min: u64,
     pub boundary_consistency_bar: f64,
+    /// lane stage: JSON spec of the 4L lane run that regenerates the PR rows of the 4L sample (see `lane_stage`)
+    pub lane: Option<String>,
+    /// filled by `lane_stage`: provenance of the regenerated 4L sample
+    pub lane_info: Value,
 }
 
 pub fn rd(p: &str) -> Result<Value, String> {
@@ -98,6 +107,8 @@ impl Args {
             refs: m.get("ref").cloned().unwrap_or_default(),
             merge: opt("merge"),
             boundary_checks_min: opt("boundary-checks-min").map(|x| x.parse().map_err(|_| "--boundary-checks-min: not a number".to_string())).transpose()?.unwrap_or(1),
+            lane: opt("lane"),
+            lane_info: Value::Null,
             boundary_consistency_bar: opt("boundary-consistency-bar").map(|x| x.parse().map_err(|_| "--boundary-consistency-bar: not a number".to_string())).transpose()?.unwrap_or(-80.0),
         })
     }
@@ -285,7 +296,7 @@ pub fn run_with(
         let plan = run::plan(sys, &cfg)?;
         let (bnd, src) = boundary_rows(args, sys, loops, run::bits(wf))?;
         meter.finish(&cfg.workdir, cfg.nthreads, true);
-        let prov = json!({"de": args.de, "class_config": args.class_config, "boundary": src, "transport": kernel.id()});
+        let prov = json!({"de": args.de, "class_config": args.class_config, "boundary": src, "transport": kernel.id(), "lane_stage": args.lane_info});
         outs.push(run::run_sample(sys, &cfg, &plan, &bnd, kernel.as_ref(), prov)?);
     }
     let mut out = outs[0].clone();
@@ -517,3 +528,59 @@ pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &V
         "PR_rows": npr, "PR_tool": "RustFlow dispersive mode", "PR_out": lane_out_path, "PR_boundary": lane_out["provenance"]["boundary"]["V"]});
     Ok(out)
 }
+
+/// The lane stage (see `--lane`): runs the lane sample in <workdir>/lane (resuming its stage files), writes the merged 4L sample and
+/// returns the 5L arguments with `--v native:PLAN,SOFTSOL,lane` resolved to it. `load(de, e_slot)` builds the lane e-block.
+pub fn lane_stage(
+    args: &Args,
+    d0: &rug::Rational,
+    load: &dyn Fn(&str, usize) -> Result<EBlockSystem, String>,
+    cancel: &crate::options::CancellationToken,
+    transport_active: &std::sync::Arc<std::sync::atomic::AtomicBool>,
+) -> Result<(Args, Value), String> {
+    let Some(spec_path) = &args.lane else { return Ok((args.clone(), Value::Null)) };
+    let tag = format!("{}_{}", d0.numer(), d0.denom());
+    let spec = rd(spec_path)?;
+    let s = |k: &str| -> Result<String, String> {
+        Ok(spec[k].as_str().ok_or_else(|| format!("lane spec {spec_path}: '{k}' missing"))?.replace("{d0}", &tag))
+    };
+    let n = |k: &str| -> Result<String, String> { spec[k].as_i64().map(|x| x.to_string()).ok_or_else(|| format!("lane spec: '{k}' missing")) };
+    let dir = format!("{}/lane", args.workdir);
+    std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    let merged = format!("{dir}/merged-sample.json");
+    let p14 = s("p14_sample")?;
+    let mut argv: Vec<String> = vec![
+        "--de", &s("de")?, "--class-config", &s("class_config")?, "--m0", &n("m0")?, "--minf", &n("minf")?, "--w", &n("w")?, "--wf", &n("wf")?,
+        "--threads", &args.threads.to_string(), "--workdir", &dir, "--out", &format!("{dir}/out.json"),
+        "--v", &format!("lane:{},{p14}", s("chain")?), "--merge", &format!("{},{p14},{merged}", s("template")?),
+        "--code-version", &args.code_version,
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect();
+    if let Some(tp) = spec["two_precision"].as_str() {
+        argv.extend(["--two-precision".to_string(), tp.to_string()]);
+    }
+    let la = Args::parse(&argv)?;
+    let (e_slot, _, _) = la.class_settings()?;
+    let sys = load(&la.de, e_slot)?;
+    if sys.d0 != *d0 {
+        return Err(format!("lane DE at d0 {} but the sample is at {d0}", sys.d0));
+    }
+    let t0 = std::time::Instant::now();
+    let lane_out = run_with(&la, &sys, cancel, transport_active)?;
+    let mut a = args.clone();
+    let v = args.v.strip_prefix("native:").ok_or("--lane needs --v native:PLAN,SOFTSOL,lane")?;
+    let f: Vec<&str> = v.split(',').collect();
+    if f.len() != 3 || f[2] != "lane" {
+        return Err("--lane needs --v native:PLAN,SOFTSOL,lane".into());
+    }
+    a.v = format!("native:{},{},{merged}", f[0], f[1]);
+    a.lane = None;
+    let info = json!({"lane_spec": spec_path, "lane_out": format!("{dir}/out.json"), "merged_sample": merged, "lane_fingerprint": lane_out["fingerprint"],
+        "lane_digits_summary": lane_out["digits_summary"], "lane_wall_seconds": t0.elapsed().as_secs_f64(),
+        "note": "the lane's two-precision digits overstate the 4L value accuracy (P14 input errors are amplified up to 1e37.8, W3C-PRISM 3c)"});
+    a.lane_info = info.clone();
+    Ok((a, info))
+}
+

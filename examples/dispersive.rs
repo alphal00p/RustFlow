@@ -56,9 +56,21 @@ fn main() {
         let sol = HarnessSolution::from_slice(&bytes).map_err(|e| format!("{}: {e}", args.de))?;
         let sys = harness::eblock(&sol, e_slot).map_err(|e| e.to_string())?;
         drop(sol);
-        cli::run_with(&args, &sys, &cancel, &transport_active)
+        // optional lane stage: regenerate the 4L sample's PR rows from its P14 rows first (--lane)
+        let load = |de: &str, e: usize| -> Result<symbolica_amflow::dispersive::system::EBlockSystem, String> {
+            let b = std::fs::read(de).map_err(|e| format!("{de}: {e}"))?;
+            let s = HarnessSolution::from_slice(&b).map_err(|e| format!("{de}: {e}"))?;
+            harness::eblock(&s, e).map_err(|e| e.to_string())
+        };
+        let (args5, _) = cli::lane_stage(&args, &sys.d0, &load, &cancel, &transport_active)?;
+        if std::env::var_os("DISPERSIVE_LANE_ONLY").is_some() {
+            // test hook: stop after the lane stage
+            return Ok(serde_json::json!({"lane_stage": args5.lane_info, "v": args5.v}));
+        }
+        cli::run_with(&args5, &sys, &cancel, &transport_active)
     };
     match run() {
+        Ok(out) if out.get("lane_stage").is_some() => println!("{out}"),
         Ok(out) => println!(
             "{}",
             serde_json::json!({"boundary_fit": out["boundary_fit"], "matching": out["matching"], "transport": out["transport"],
