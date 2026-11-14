@@ -8,7 +8,7 @@ license = "MIT"
 
 [features]
 default = ["native", "automatic"]
-native = ["symbolica/integer-gmp", "symbolica/float-mpfr", "dep:rug", "dep:signal-hook", "dep:libc", "rustred?/native", "feynkit-amplitude/native", "feynkit-generator/native", "feynkit-py?/native"]
+native = ["symbolica/integer-gmp", "symbolica/float-mpfr", "dep:rug", "dep:libc", "rustred?/native", "feynkit-amplitude/native", "feynkit-generator/native", "feynkit-py?/native"]
 automatic = ["dep:rustred", "dep:rayon"]
 # Let embedding workspaces select the same dispatch policy for both bridges.
 capacity-dispatch = ["rustred?/capacity-dispatch"]
@@ -30,7 +30,6 @@ symbolica = { version = "3.0.2", default-features = false, features = ["bincode"
 rustred = { git = "https://github.com/alphal00p/rustred", branch = "main", default-features = false, optional = true }
 rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational", "complex"], optional = true }
 rayon = { version = "1.11", optional = true }
-signal-hook = { version = "0.3", optional = true }
 libc = { version = "0.2", optional = true }
 thiserror = "2"
 serde = { version = "1", features = ["derive"] }
@@ -54,6 +53,10 @@ idenso = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", d
 pyo3 = { version = "0.28", optional = true, features = ["multiple-pymethods"] }
 feynkit-py = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", optional = true, default-features = false }
 pyo3-stub-gen = { version = "0.17", optional = true, default-features = false, features = ["infer_signature"] }
+
+[dev-dependencies]
+# Process signal handling of the example drivers (never in the library).
+signal-hook = "0.3"
 
 [build-dependencies]
 blake3 = "1"
