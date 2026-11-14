@@ -125,6 +125,11 @@ impl Ts for Complex {
     }
 }
 
+/// raw row pointer shared by the patch workers (disjoint writes, barrier-ordered reads)
+struct SPtr<T>(*mut T);
+unsafe impl<T: Send> Send for SPtr<T> {}
+unsafe impl<T: Send + Sync> Sync for SPtr<T> {}
+
 /// [f(0), .., f(n - 1)] by up to nt scoped threads (result in index order)
 pub fn par_map<R: Send, F: Fn(usize) -> R + Sync>(n: usize, nt: usize, f: F) -> Vec<R> {
     if nt <= 1 || n < 2 {
@@ -245,41 +250,57 @@ impl TaylorRecurrence {
                 bounds.push(self.groups.len());
             }
         }
+        // PERSISTENT workers for the whole patch (one barrier per order): scoped threads spawned per order are too short-lived for the
+        // scheduler to spread them over far-apart allotted CPUs (measured: 4 workers packed on one core). Every row is owned by one
+        // worker (rows never cross a bound) and receives its groups' contributions in group order -> identical for any thread count.
         let mut rings: Vec<Vec<T>> = self.groups.iter().zip(&dn).map(|(_, d)| vec![T::zero(prec); d.len().max(1)]).collect();
-        let mut y: Vec<Vec<T>> = vec![y0.to_vec()];
-        for n in 0..nord - 1 {
-            let mut next = vec![T::zero(prec); e];
-            let yr = &y;
-            let parts: Vec<Vec<(usize, T)>> = std::thread::scope(|sc| {
-                let mut ring_chunks: Vec<&mut [Vec<T>]> = Vec::new();
-                let mut rest: &mut [Vec<T>] = &mut rings;
-                for w in bounds.windows(2) {
-                    let (a, b) = rest.split_at_mut(w[1] - w[0]);
-                    ring_chunks.push(a);
-                    rest = b;
-                }
-                let hs: Vec<_> = bounds
-                    .windows(2)
-                    .zip(ring_chunks)
-                    .map(|(w, rg)| {
-                        let (lo, hi) = (w[0], w[1]);
-                        let (groups, nv, dn, terms) = (&self.groups, &nv, &dn, &sys.terms);
-                        sc.spawn(move || {
-                            let mut out: Vec<(usize, T)> = Vec::new();
-                            let mut a = T::zero(prec);
-                            let mut b = T::zero(prec);
-                            let mut tmp = T::zero(prec);
+        let mut y: Vec<Vec<T>> = Vec::with_capacity(nord);
+        y.push(y0.to_vec());
+        for _ in 1..nord {
+            y.push(vec![T::zero(prec); e]);
+        }
+        let rows_of: Vec<Vec<usize>> = bounds
+            .windows(2)
+            .map(|w| {
+                let mut r: Vec<usize> = self.groups[w[0]..w[1]].iter().map(|g| g.0).collect();
+                r.dedup();
+                r
+            })
+            .collect();
+        {
+            let yp: Vec<SPtr<T>> = y.iter_mut().map(|v| SPtr(v.as_mut_ptr())).collect();
+            let nchunks = bounds.len() - 1;
+            let barrier = std::sync::Barrier::new(nchunks);
+            let mut ring_chunks: Vec<&mut [Vec<T>]> = Vec::new();
+            let mut rest: &mut [Vec<T>] = &mut rings;
+            for w in bounds.windows(2) {
+                let (a, b) = rest.split_at_mut(w[1] - w[0]);
+                ring_chunks.push(a);
+                rest = b;
+            }
+            let (ypr, bar, groups, nvr, dnr, terms) = (&yp, &barrier, &self.groups, &nv, &dn, &sys.terms);
+            std::thread::scope(|sc| {
+                for ((w, rg), rows) in bounds.windows(2).zip(ring_chunks).zip(&rows_of) {
+                    let (lo, hi) = (w[0], w[1]);
+                    sc.spawn(move || {
+                        let mut a = T::zero(prec);
+                        let mut b = T::zero(prec);
+                        let mut tmp = T::zero(prec);
+                        for n in 0..nord - 1 {
+                            // SAFETY: during order n rows m <= n are complete (written before the previous barrier) and only read;
+                            // entry (n + 1, i) is written only by the owner of row i; the barrier orders the orders
+                            let yv = |m: usize, j: usize| -> &T { unsafe { &*ypr[m].0.add(j) } };
                             for g in lo..hi {
                                 let (row, _, ts) = &groups[g];
                                 a.set_zero();
                                 for &t in ts {
                                     let j = terms[t].j;
-                                    let nt_ = &nv[t];
+                                    let nt_ = &nvr[t];
                                     for k in 0..nt_.len().min(n + 1) {
-                                        a.add_prod(&nt_[k], &yr[n - k][j], &mut tmp);
+                                        a.add_prod(&nt_[k], yv(n - k, j), &mut tmp);
                                     }
                                 }
-                                let dt = &dn[g];
+                                let dt = &dnr[g];
                                 let dd = dt.len();
                                 let ring = &mut rg[g - lo];
                                 if dd > 0 && n > 0 {
@@ -289,29 +310,19 @@ impl TaylorRecurrence {
                                     }
                                     a.subr(&b);
                                 }
-                                match out.last_mut() {
-                                    Some((r, v)) if *r == *row => v.addr(&a),
-                                    _ => out.push((*row, a.clone())),
-                                }
+                                unsafe { (*ypr[n + 1].0.add(*row)).addr(&a) };
                                 if dd > 0 {
                                     ring[n % dd].clone_from(&a);
                                 }
                             }
-                            out
-                        })
-                    })
-                    .collect();
-                hs.into_iter().map(|h| h.join().unwrap()).collect()
-            });
-            for part in parts {
-                for (row, v) in part {
-                    next[row].addr(&v);
+                            for &i in rows {
+                                unsafe { (*ypr[n + 1].0.add(i)).divu((n + 1) as u32) };
+                            }
+                            bar.wait();
+                        }
+                    });
                 }
-            }
-            for v in next.iter_mut() {
-                v.divu((n + 1) as u32);
-            }
-            y.push(next);
+            });
         }
         let hh = T::from_q(&p.step.0, &p.step.1, prec);
         let u = T::from_q(&Rational::from(&one - &p.centre.0), &Rational::from(-ci), prec);

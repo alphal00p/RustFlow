@@ -185,17 +185,40 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
         };
         (rc("end"), rc("mid"))
     } else {
-        let y0: Vec<Complex> = d0v.iter().map(|x| Complex::with_val(pt, (x, 0))).collect();
-        let tr = kernel.transport(sys, &y0, &plan.patches, pt)?;
-        let mx = tr.patches.iter().map(|p| p.dropped_im_over_re_log10).fold(-1e9f64, f64::max);
-        let midim = (0..e).map(|c| log10abs(tr.weighted_integral[c].imag()) - log10abs(tr.weighted_integral[c].real())).fold(-1e9f64, f64::max);
-        out["transport"] = json!({"patches": tr.patches.len(), "seconds": tr.patches.iter().map(|p| p.seconds).sum::<f64>(),
-            "setup_seconds": tr.patches.iter().map(|p| p.setup_seconds).sum::<f64>(),
+        // chunks of patches with a partial checkpoint after each chunk (resume at the next chunk)
+        let cj = |v: &[Complex]| -> Vec<Value> { v.iter().map(|z| json!([fhex(z.real()), fhex(z.imag())])).collect() };
+        let rcj = |v: &Value| -> Vec<Complex> {
+            v.as_array().unwrap().iter().map(|x| Complex::with_val(pt, (fparse(x[0].as_str().unwrap(), pt), fparse(x[1].as_str().unwrap(), pt)))).collect()
+        };
+        let stp = format!("{}/stage-transport-partial.json", cfg.workdir);
+        let chunk: usize = std::env::var("DISPERSIVE_TRANSPORT_CHUNK").ok().and_then(|v| v.parse().ok()).unwrap_or(20);
+        let (mut k0, mut y, mut mid, mut secs, mut setup, mut mx) = match load(&stp, &fp) {
+            Some(v) => {
+                log(&format!("stage transport: resuming at patch {}", v["next"]));
+                (v["next"].as_u64().unwrap() as usize, rcj(&v["y"]), rcj(&v["mid"]), v["seconds"].as_f64().unwrap(), v["setup_seconds"].as_f64().unwrap(), v["max_dropped"].as_f64().unwrap())
+            }
+            None => (0, d0v.iter().map(|x| Complex::with_val(pt, (x, 0))).collect(), vec![Complex::new(pt); e], 0.0, 0.0, -1e9f64),
+        };
+        while k0 < plan.patches.len() {
+            let hi = (k0 + chunk).min(plan.patches.len());
+            let tr = kernel.transport(sys, &y, &plan.patches[k0..hi], pt)?;
+            y = tr.end;
+            for (m, x) in mid.iter_mut().zip(&tr.weighted_integral) {
+                *m += x;
+            }
+            secs += tr.patches.iter().map(|p| p.seconds).sum::<f64>();
+            setup += tr.patches.iter().map(|p| p.setup_seconds).sum::<f64>();
+            mx = tr.patches.iter().map(|p| p.dropped_im_over_re_log10).fold(mx, f64::max);
+            k0 = hi;
+            save(&stp, &json!({"fingerprint": fp, "next": k0, "y": cj(&y), "mid": cj(&mid), "seconds": secs, "setup_seconds": setup, "max_dropped": mx}))?;
+            log(&format!("transport: {k0} of {} patches ({secs:.0} s in patches)", plan.patches.len()));
+        }
+        let midim = (0..e).map(|c| log10abs(mid[c].imag()) - log10abs(mid[c].real())).fold(-1e9f64, f64::max);
+        out["transport"] = json!({"patches": plan.patches.len(), "seconds": secs, "setup_seconds": setup,
             "max_log10_im_over_re_after_detour": mx, "mid_integral_max_log10_im_over_re": midim});
         log(&format!("transport: {} ({:.1} s)", out["transport"], t0.elapsed().as_secs_f64()));
-        let cj = |v: &[Complex]| -> Vec<Value> { v.iter().map(|z| json!([fhex(z.real()), fhex(z.imag())])).collect() };
-        save(&stt, &json!({"fingerprint": fp, "transport": out["transport"], "end": cj(&tr.end), "mid": cj(&tr.weighted_integral)}))?;
-        (tr.end, tr.weighted_integral)
+        save(&stt, &json!({"fingerprint": fp, "transport": out["transport"], "end": cj(&y), "mid": cj(&mid)}))?;
+        (y, mid)
     };
     // ---- infinity families, matching, tail ----
     let ds: Vec<Float> = end.iter().map(|z| Float::with_val(pf, z.real())).collect();
