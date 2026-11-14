@@ -17,6 +17,8 @@ pub struct SpectralExpansion {
 
 #[derive(Clone, Debug)]
 pub struct SpectralSample {
+    /// The regulator sample of this evaluation.
+    pub epsilon: Rational,
     /// Physical endpoint values, identical to [`PreparedFlow::evaluate`].
     pub endpoint: Vec<ComplexFloat>,
     pub nodes: Vec<ComplexFloat>,
@@ -450,6 +452,7 @@ impl PreparedFlow {
         let (endpoint, arm) = self.evaluate_with(eps, options, boundary, context, Some(request))?;
         let arm = arm.ok_or_else(|| Error::Numerical("spectral arm missing".into()))?;
         Ok(SpectralSample {
+            epsilon: eps.clone(),
             endpoint,
             nodes: nodes.to_vec(),
             node_values: arm.node_values,
