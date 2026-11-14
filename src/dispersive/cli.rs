@@ -295,7 +295,8 @@ pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
 
 /// A merged 4L sample (schema of values/d5l/v9a/pr/samples: epsilon, attempt, index, lane_tag, endpoint[{family?, target, value{re}}])
 /// whose 'PR' rows are this lane run's values, raw = J / e^(4 gamma eps) = -(sin(pi d0/2)/pi) I / e^(4 gamma eps) (pr_samples.py).
-/// The P14 rows must equal those of the RustFlow P14 sample (same targets and values, same order). Every row gets 'provenance'.
+/// The P14 rows are taken from the RustFlow P14 sample (same targets and order as the template; the number of rows whose values differ
+/// from the template is recorded). Every row gets 'provenance'.
 pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &Value, lane_out_path: &str, prec: u32, budget: Option<&Value>, p14_producer: Option<&str>) -> Result<Value, String> {
     let p14_tool = match p14_producer {
         Some(p) => format!("RustFlow eta-flows + spectral gluing (P14 sample; {p})"),
@@ -332,7 +333,7 @@ pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &V
     let tool_lane = json!({"tool": "RustFlow dispersive mode (lane run)", "out": lane_out_path, "fingerprint": lane_out["fingerprint"],
         "code_version": lane_out["config"]["code_version"], "digits_source": lane_out["digits_source"]});
     let mut ep = Vec::new();
-    let (mut n14, mut npr) = (0, 0);
+    let (mut n14, mut npr, mut n14_differ) = (0, 0, 0);
     for x in template["endpoint"].as_array().ok_or("template has no endpoints")? {
         let fam = x.get("family").and_then(|f| f.as_str()).unwrap_or("");
         let t = vi(&x["target"]);
@@ -340,9 +341,14 @@ pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &V
         match fam {
             "" => {
                 let y = p14rows.get(n14).ok_or("template has more P14 rows than the P14 sample")?;
-                if y["target"] != x["target"] || y["value"]["re"] != x["value"]["re"] {
-                    return Err(format!("P14 row {n14} of the template differs from the RustFlow P14 sample"));
+                if y["target"] != x["target"] {
+                    return Err(format!("P14 row {n14}: template target {} but P14 sample target {}", x["target"], y["target"]));
                 }
+                if y["value"]["re"] != x["value"]["re"] {
+                    n14_differ += 1;
+                }
+                // the P14 values always come from the P14 sample (the template only fixes the schema and the row order)
+                row["value"] = y["value"].clone();
                 row["provenance"] = json!({"tool": p14_tool, "file": p14_path, "row": n14});
                 if budget.is_some() {
                     let lb = *bmap.get(&(String::new(), t.clone())).ok_or_else(|| format!("input budget has no P14 entry {t:?}"))?;
@@ -381,7 +387,7 @@ pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &V
     out["endpoint"] = json!(ep);
     out["lane_tag"] = json!(format!("rustflow:{lane_out_path}"));
     let bsrc = budget.map(|b| b["source"].clone()).unwrap_or(Value::Null);
-    out["provenance"] = json!({"input_budget_source": bsrc, "P14_rows": n14, "P14_tool": p14_tool, "P14_file": p14_path,
+    out["provenance"] = json!({"input_budget_source": bsrc, "P14_rows": n14, "P14_rows_differing_from_template": n14_differ, "P14_tool": p14_tool, "P14_file": p14_path,
         "PR_rows": npr, "PR_tool": "RustFlow dispersive mode", "PR_out": lane_out_path, "PR_boundary": lane_out["provenance"]["boundary"]["V"]});
     Ok(out)
 }
