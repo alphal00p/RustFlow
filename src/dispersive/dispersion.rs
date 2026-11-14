@@ -314,3 +314,105 @@ pub fn family_residual(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usiz
     }
     worst
 }
+
+/// W3b: the recursion residual of `family_residual` with two normalisations and its location, so that a real failure is visible
+/// and a normalisation artefact can be told apart:
+/// - `per_order`: max over orders m of |res_m| / max|terms of order m| (= `family_residual`): an order whose terms are all tiny
+///   compared with the column (deep cancellation among the stable-basis combination) can show a large RELATIVE residual that is
+///   harmless;
+/// - `per_column`: max over m of |res_m| / max over ALL checked orders of |terms| for that column (the column's own scale in the
+///   rho-scaled variable, where the terms of all orders are comparable by construction): a real failure of the recursion shows here.
+/// Also: the order m and column of each worst value, the worst over the leading (pole) equations m < n_lo, and the log10 of the
+/// largest term at the worst per-order m relative to the column scale.
+pub fn family_residual_report(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usize, max_cols: usize, prec: u32) -> serde_json::Value {
+    let r = -*b.keys().next().unwrap();
+    let lam = Float::with_val(prec, &fam.spec.lam);
+    let n_lo = fam.spec.n_lo;
+    let nrow = (fam.basis.len() / e) as i64;
+    let dim = fam.spec.dim;
+    let ncol = dim.min(max_cols.max(1));
+    let cols: Vec<usize> = (0..ncol).map(|k| k * dim / ncol).collect();
+    let (mut w_ord, mut w_col, mut w_lead) = ((-1e9f64, 0i64, 0usize, 0.0f64), (-1e9f64, 0i64, 0usize), -1e9f64);
+    // per order m, over the checked columns: max log10 |res| and max log10 |terms| (for evaluation-weighted residuals)
+    let mut orders: std::collections::BTreeMap<i64, (f64, f64)> = Default::default();
+    for &a in &cols {
+        let coef = |n: i64, j: usize| -> Option<&Float> { if n < n_lo || n - n_lo >= nrow { None } else { Some(&fam.basis[((n - n_lo) as usize) * e + j][a]) } };
+        let mut per_m: Vec<(i64, f64, f64)> = Vec::new(); // (m, log10 max|res|, log10 max|term|)
+        for m in (n_lo - r)..(n_lo + nrow - r) {
+            let mut res = vec![Float::new(prec); e];
+            let mut mag = Float::new(prec);
+            for i in 0..e {
+                if let Some(c) = coef(m, i) {
+                    res[i] = Float::with_val(prec, c * Float::with_val(prec, &lam + m));
+                    let t = res[i].clone().abs();
+                    if t > mag {
+                        mag = t;
+                    }
+                }
+            }
+            for (k, bk) in b {
+                let jb = m - k;
+                if jb < n_lo || jb - n_lo >= nrow {
+                    continue;
+                }
+                for (i, j, v) in bk {
+                    if let Some(c) = coef(jb, *j) {
+                        let t = Float::with_val(prec, v * c);
+                        let ta = t.clone().abs();
+                        if ta > mag {
+                            mag = ta;
+                        }
+                        res[*i] -= t;
+                    }
+                }
+            }
+            if mag.is_zero() {
+                continue;
+            }
+            let rmax = res.iter().map(log10abs).fold(-1e9f64, f64::max);
+            per_m.push((m, rmax, log10abs(&mag)));
+        }
+        let scale = per_m.iter().map(|x| x.2).fold(-1e9f64, f64::max);
+        for &(m, rm, mg) in &per_m {
+            let o = orders.entry(m).or_insert((-1e9, -1e9));
+            o.0 = o.0.max(rm);
+            o.1 = o.1.max(mg);
+            if rm > -1e8 {
+                let ro = rm - mg;
+                if ro > w_ord.0 {
+                    w_ord = (ro, m, a, mg - scale);
+                }
+                let rc = rm - scale;
+                if rc > w_col.0 {
+                    w_col = (rc, m, a);
+                }
+                if m < n_lo {
+                    w_lead = w_lead.max(ro);
+                }
+            }
+        }
+    }
+    serde_json::json!({"per_order_log10": w_ord.0, "per_order_worst_m": w_ord.1, "per_order_worst_col": w_ord.2,
+        "per_order_worst_m_scale_vs_column_log10": w_ord.3,
+        "per_column_log10": w_col.0, "per_column_worst_m": w_col.1, "per_column_worst_col": w_col.2,
+        "leading_equations_per_order_log10": w_lead, "cols_checked": cols.len(), "n_lo": n_lo, "pole_rank": r,
+        "orders_m_res_terms_log10": orders.iter().map(|(m, (a, b))| serde_json::json!([m, (a * 10.0).round() / 10.0, (b * 10.0).round() / 10.0])).collect::<Vec<_>>()})
+}
+
+/// the residual of a report weighted for evaluation at t = x / rho (x = s for the zero family, 1/s at infinity): log10 of
+/// max_m |res_m| t^m / max_m |terms_m| t^m, i.e. how badly the truncated series violates the recursion where it is USED
+pub fn residual_at(report: &serde_json::Value, log10_t: f64) -> f64 {
+    let Some(o) = report["orders_m_res_terms_log10"].as_array() else { return f64::NAN };
+    let (mut r, mut t) = (-1e9f64, -1e9f64);
+    for x in o {
+        let m = x[0].as_f64().unwrap_or(0.0);
+        let (a, b) = (x[1].as_f64().unwrap_or(-1e9), x[2].as_f64().unwrap_or(-1e9));
+        if a > -1e8 {
+            r = r.max(a + m * log10_t);
+        }
+        if b > -1e8 {
+            t = t.max(b + m * log10_t);
+        }
+    }
+    r - t
+}

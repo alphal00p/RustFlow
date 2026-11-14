@@ -170,14 +170,17 @@ pub fn family_num_ck(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &Family
     let d = &out.diag;
     let fam = FamilyNum { spec: spec.clone(), basis };
     let tr = Instant::now();
-    let res = dispersion::family_residual(&bs, &fam, sys.dim(), residual_cols, prec);
+    let rep = dispersion::family_residual_report(&bs, &fam, sys.dim(), residual_cols, prec);
+    // the reported gauge: per-column scale (a real recursion failure shows; tiny-term orders do not fake one); the per-order value
+    // (the former de_residual_log10) is kept as de_residual_per_order_log10 with its location
+    let res = rep["per_column_log10"].as_f64().unwrap_or(0.0);
     let nz = |x: f64| -> Value { if x.is_finite() { json!(x) } else { json!(null) } };
     let diag = json!({"name": spec.name, "dim": spec.dim, "pivoting": mode.label(), "pole_rank": d.pole_rank, "steps": d.steps, "q_final": d.q_final,
         "top": d.top, "T_nnz_max": d.t_nnz_max, "seconds": d.seconds, "rows_kept": fam.basis.len(),
         "min_pivot_log10": nz(d.min_pivot_log10),
         "min_rank_gap_log10": if matches!(mode, PivotMode::Shadow(_)) { json!("exact rank (shadow residues)") } else { nz(d.min_rank_gap_log10) },
         "min_structural_pivot_rel_log10": nz(d.min_structural_pivot_rel_log10), "structural_fallback_step": d.structural_fallback_step,
-        "de_residual_log10": res, "de_residual_cols": residual_cols.min(spec.dim), "de_residual_seconds": tr.elapsed().as_secs_f64()});
+        "de_residual_log10": res, "de_residual_per_order_log10": rep["per_order_log10"], "de_residual_report": rep, "de_residual_cols": residual_cols.min(spec.dim), "de_residual_seconds": tr.elapsed().as_secs_f64()});
     Ok((fam, diag))
 }
 
@@ -405,6 +408,10 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
         let hterms = ((cfg.w as f64 + 10.0) / (1.0 / plan.s0.to_f64()).log10()) as i64 + 6;
         let (dv, hd) = dispersion::head(&fam0, &fit.csoft, &plan.s0, e, hterms, pf);
         let mut zd = diag0;
+        // the recursion residual where the zero family is used: at s0 (t = s0 / rho0) and, for reference, at t = 1
+        let lt = (plan.s0.to_f64() / plan.zero.rho.to_f64()).log10();
+        zd["de_residual_at_s0_log10"] = json!(dispersion::residual_at(&zd["de_residual_report"], lt));
+        zd["de_residual_at_rho_log10"] = json!(dispersion::residual_at(&zd["de_residual_report"], 0.0));
         zd["seconds_total"] = json!(tz.elapsed().as_secs_f64());
         out["zero_diag"] = zd;
         out["boundary_fit"] = json!({"rows": fit.rows, "dim": fam0.spec.dim, "residual_log10": fit.residual_log10, "worst_rel_log10": fit.worst_rel_log10});
@@ -531,7 +538,10 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
             binf = Some(laurent::laurent::<Float>(sys, Point::Infinity, cfg.minf + 8, pf, cfg.nthreads));
         }
         let cki = frob_ck(&format!("inf-{}", k + 1), &fp_inf);
-        let (f, d) = family_num_ck(sys, binf.as_ref().unwrap(), spec, mode, cfg.residual_cols, pf, cfg.nthreads, Some(&cki))?;
+        let (f, mut d) = family_num_ck(sys, binf.as_ref().unwrap(), spec, mode, cfg.residual_cols, pf, cfg.nthreads, Some(&cki))?;
+        // where the family is used: w = 1/S (t = w / rho_inf)
+        let lt = -plan.s_end.to_f64().log10() - spec.rho.to_f64().log10();
+        d["de_residual_at_S_log10"] = json!(dispersion::residual_at(&d["de_residual_report"], lt));
         let (c, t) = dispersion::family_columns(&f, &plan.s_end, e, tterms, pf);
         log(&format!("{}: {} ({:.1} s)", spec.name, d, t0.elapsed().as_secs_f64()));
         let wv = |m: &[Vec<Float>]| -> Value { json!(m.iter().map(|c| c.iter().map(fhex).collect::<Vec<_>>()).collect::<Vec<_>>()) };
@@ -586,6 +596,9 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
     meter.finish(&cfg.workdir, cfg.nthreads, true);
     out["residuals"] = json!({"boundary_fit_worst_rel_log10": out["boundary_fit"]["worst_rel_log10"], "boundary_fit_residual_log10": out["boundary_fit"]["residual_log10"],
         "de_residual_zero_log10": out["zero_diag"]["de_residual_log10"],
+        "de_residual_zero_at_s0_log10": out["zero_diag"]["de_residual_at_s0_log10"],
+        "de_residual_zero_per_order_log10": out["zero_diag"]["de_residual_per_order_log10"],
+        "de_residual_inf_at_S_log10": out["inf_families"].as_array().map(|a| a.iter().map(|f| f["de_residual_at_S_log10"].clone()).collect::<Vec<_>>()),
         "de_residual_inf_log10": out["inf_families"].as_array().map(|a| a.iter().map(|f| f["de_residual_log10"].clone()).collect::<Vec<_>>()),
         "matching_worst_rel_log10": out["matching"]["worst_rel_log10"], "matching_residual_log10": out["matching"]["residual_log10"],
         "transport_max_overlap_log10": out["transport"]["kernel"]["max_overlap_log10"], "transport_max_tail_log10": out["transport"]["kernel"]["max_tail_log10"],

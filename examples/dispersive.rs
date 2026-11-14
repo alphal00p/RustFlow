@@ -3,6 +3,7 @@
 //!     --m0 24 --minf 50 --w 165 --wf 205 --threads 16 --workdir RUN --out RUN/out.json --two-precision -15,-15 \
 //!     --v native:SOFTPLAN.json,classes/16359/soft/solution-299999_75000.json,v9a/pr/samples/attempt-1/sample-022.json [--pr-values LANE/out.json]
 //!
+//! `dispersive --system-info DE.json CLASS_CONFIG.json` prints the e-block size and the kernel system fingerprint.
 //! `dispersive --progress WORKDIR` prints one JSON progress line (cli::progress) and exits.
 //!
 //! Everything class-specific comes from the DE file, the class config and the command line. Restarting the same command resumes
@@ -22,6 +23,18 @@ fn main() {
     if argv.len() == 2 && argv[0] == "--progress" {
         // progress from the checkpoint files of a workdir (drivers; never ahead of what a restart resumes)
         println!("{}", cli::progress(&argv[1]));
+        return;
+    }
+    if argv.len() == 3 && argv[0] == "--system-info" {
+        // DE + class config -> e-block through the harness reader, kernel system fingerprint (checks after reader changes)
+        let t = std::time::Instant::now();
+        let cfg: serde_json::Value = serde_json::from_slice(&std::fs::read(&argv[2]).expect("class config")).expect("class config JSON");
+        let e = cfg["e"].as_u64().expect("e slot") as usize;
+        let sol = HarnessSolution::from_slice(&std::fs::read(&argv[1]).expect("DE")).unwrap_or_else(|err| panic!("reader: {err}"));
+        let sys = harness::eblock(&sol, e).unwrap_or_else(|err| panic!("e-block: {err}"));
+        let k = symbolica_amflow::dispersive::kernel::PatchKernel::new(&sys, 1).expect("kernel system");
+        println!("{}", serde_json::json!({"de": argv[1], "d0": sys.d0.to_string(), "e_slot": e, "dim": sys.dim(), "terms": sys.terms.len(),
+            "kernel_system_fingerprint": k.system_fingerprint, "products_per_order": k.system.products_per_order(), "seconds": t.elapsed().as_secs_f64()}));
         return;
     }
     let args = cli::Args::parse(&argv).unwrap_or_else(|e| {
