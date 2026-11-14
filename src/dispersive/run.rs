@@ -400,6 +400,9 @@ pub fn two_precision_digits(a: &Value, b: &Value) -> Vec<f64> {
         .map(|i| {
             let x = Float::with_val(4000, Float::parse(a["I"][i]["I"].as_str().unwrap()).unwrap());
             let y = Float::with_val(4000, Float::parse(b["I"][i]["I"].as_str().unwrap()).unwrap());
+            if y.is_zero() {
+                return if x.is_zero() { 99.0 } else { -x.abs().log10().to_f64() };
+            }
             let d = Float::with_val(4000, (x - &y) / y).abs();
             if d.is_zero() { 99.0 } else { -d.log10().to_f64() }
         })

@@ -21,3 +21,4 @@ pub mod transport;
 #[cfg(test)]
 mod tests;
 pub mod softplan;
+pub mod lane;

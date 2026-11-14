@@ -152,7 +152,7 @@ pub fn boundary_rows(args: &Args, sys: &EBlockSystem, loops: u32, prec: u32) -> 
         (v, json!({"V": "native (soft_gen solve port)", "plan": f[0], "soft_solution": f[1], "sample": f[2], "endpoints": info, "diag": d}))
     } else if let Some(p) = args.v.strip_prefix("read:") {
         let (v, m) = boundary::read_v_file(p)?;
-        (v, json!({"V": "READ from a prepared V file (in-house soft_gen output)", "file": p, "meta": m}))
+        (v, json!({"V": "READ from a V file (see meta.producer; in-house soft_gen files have none)", "file": p, "meta": m}))
     } else {
         return Err("--v read:V.json | native:PLAN,SOFTSOL,SAMPLE".into());
     };
@@ -172,6 +172,9 @@ fn digits_vs(out: &Value, oracle: &Value) -> Vec<Option<f64>> {
             };
             let x = Float::with_val(4000, Float::parse(out["I"][i]["I"].as_str()?).ok()?);
             let y = Float::with_val(4000, Float::parse(oracle["I"][j]["I"].as_str()?).ok()?);
+            if y.is_zero() {
+                return Some(if x.is_zero() { 99.0 } else { -x.abs().log10().to_f64() });
+            }
             let d = Float::with_val(4000, (x - &y) / y).abs();
             Some(if d.is_zero() { 99.0 } else { -d.log10().to_f64() })
         })

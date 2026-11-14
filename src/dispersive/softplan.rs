@@ -75,14 +75,21 @@ fn det(m: &[Vec<Rational>]) -> Rational {
 }
 
 /// slot -> 5x5 symmetric G with q^2 = k^T G k
+fn n_loops(fam: &Value) -> usize {
+    fam["loop_momenta"].as_array().map(|v| v.len()).unwrap_or_else(|| {
+        1 + fam["coordinates"].as_array().unwrap().iter().map(|c| c["right"].as_u64().unwrap() as usize).max().unwrap()
+    })
+}
+
 fn quad_forms(fam: &Value) -> Vec<Vec<Vec<Rational>>> {
+    let nl = n_loops(fam);
     let co: Vec<(usize, usize)> = fam["coordinates"].as_array().unwrap().iter().map(|c| (c["left"].as_u64().unwrap() as usize, c["right"].as_u64().unwrap() as usize)).collect();
     fam["denominators"]
         .as_array()
         .unwrap()
         .iter()
         .map(|d| {
-            let mut g = vec![vec![q(0); 5]; 5];
+            let mut g = vec![vec![q(0); nl]; nl];
             for ((a, b), x) in co.iter().zip(d["coefficients"].as_array().unwrap()) {
                 let x = rat(x);
                 if a == b {
@@ -99,13 +106,14 @@ fn quad_forms(fam: &Value) -> Vec<Vec<Vec<Rational>>> {
 }
 
 fn momentum_any(g: &[Vec<Rational>]) -> Option<Vq> {
-    let lead = (0..5).find(|&a| g[a][a] != 0)?;
+    let nl = g.len();
+    let lead = (0..nl).find(|&a| g[a][a] != 0)?;
     if g[lead][lead] != 1 {
         return None;
     }
-    let v: Vq = (0..5).map(|b| g[lead][b].clone()).collect();
-    for a in 0..5 {
-        for b in 0..5 {
+    let v: Vq = (0..nl).map(|b| g[lead][b].clone()).collect();
+    for a in 0..nl {
+        for b in 0..nl {
             if Rational::from(&v[a] * &v[b]) != g[a][b] {
                 return None;
             }
@@ -143,6 +151,8 @@ fn momenta4(rows: &[(Vec<Rational>, bool)]) -> Vec<Option<Vq>> {
 }
 
 struct Cfg {
+    nl: usize,
+    ns: usize,
     e: usize,
     loops: Vec<usize>,
     sub: Vec<usize>,
@@ -160,17 +170,18 @@ impl Cfg {
         let qe = qm[e].clone();
         let cj = qe[j].clone();
         assert!(cj == 1 || cj == -1);
-        let loops: Vec<usize> = (0..5).filter(|&i| i != j).collect();
-        let sub: Vec<usize> = (0..15).filter(|&s| qm[s][j] == 0).collect();
-        assert_eq!(sub.len(), 10);
+        let (nl, ns) = (qe.len(), qm.len());
+        let loops: Vec<usize> = (0..nl).filter(|&i| i != j).collect();
+        let sub: Vec<usize> = (0..ns).filter(|&s| qm[s][j] == 0).collect();
+        assert_eq!(sub.len(), (nl - 1) * nl / 2, "SUB is not a complete (L-1)-loop family");
         let (mut pdep, mut kvec, mut bco, mut pd) = (Vec::new(), BTreeMap::new(), BTreeMap::new(), BTreeMap::new());
-        for s in 0..15 {
+        for s in 0..ns {
             if s == e || qm[s][j] == 0 {
                 continue;
             }
             let gq = &qm[s];
             let b = Rational::from(&gq[j] * &cj);
-            let mut a = vec![q(0); 5];
+            let mut a = vec![q(0); nl];
             for &i in &loops {
                 a[i] = gq[i].clone() - Rational::from(&gq[j] * &cj) * &qe[i];
             }
@@ -191,7 +202,7 @@ impl Cfg {
             let row: BTreeMap<usize, Rational> = sub.iter().enumerate().filter(|(si, _)| minv[k][*si] != 0).map(|(si, &s)| (s, minv[k][si].clone())).collect();
             inv.insert(*ab, row);
         }
-        Cfg { e, loops, sub, pdep, kvec, bco, pd, qm, inv }
+        Cfg { nl, ns, e, loops, sub, pdep, kvec, bco, pd, qm, inv }
     }
 
     /// u.v for 5-vectors supported on the loops -> linear form in Q_slot (None = constant)
@@ -232,7 +243,7 @@ impl Cfg {
     }
 
     fn soft_terms(&self, master: &[i64], n: u32) -> Poly {
-        let mut nu = vec![0i64; 15];
+        let mut nu = vec![0i64; self.ns];
         for &s in &self.sub {
             nu[s] = master[s];
         }
@@ -435,7 +446,7 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
     let nq = momenta4(&p14_rows);
     let (a14, perm14) = find_map(&nq, &sub_q);
     let lift = |a: &[Vec<Rational>], row: usize| -> Vq {
-        let mut u = vec![q(0); 5];
+        let mut u = vec![q(0); cfg.nl];
         for l in 0..4 {
             u[cfg.loops[l]] = a[row][l].clone();
         }
@@ -444,7 +455,7 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
     let pairs4: Vec<(usize, usize)> = (0..4).flat_map(|a| (a..4).map(move |b| (a, b))).collect();
     let mut ep: BTreeMap<String, Poly> = BTreeMap::new();
     for t in p14_targets {
-        let mut nu = vec![0i64; 15];
+        let mut nu = vec![0i64; cfg.ns];
         let mut isps = Vec::new();
         for (i, &ti) in t.iter().enumerate() {
             if ti == 0 {
@@ -476,7 +487,7 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
         prq[9] = None;
         let (apr, permpr) = find_map(&prq, &sub_q);
         for t in prt {
-            let mut nu = vec![0i64; 15];
+            let mut nu = vec![0i64; cfg.ns];
             for i in 0..9 {
                 if t[i] != 0 {
                     nu[w4[permpr[&i]]] += t[i];
@@ -485,7 +496,7 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
             let mut poly: Poly = BTreeMap::from([((nu, 0), q(1))]);
             if t[9] != 0 {
                 assert!(t[9] < 0);
-                let mut kk = vec![q(0); 5];
+                let mut kk = vec![q(0); cfg.nl];
                 for l in 0..4 {
                     kk[cfg.loops[l]] = (0..4).fold(q(0), |acc, a| acc + Rational::from(&q9[a] * &apr[a][l]));
                 }
@@ -533,6 +544,128 @@ pub fn build(fam: &Value, config: &Value, emast: &[Vec<i64>], p14: &Value, p14_t
     SoftPlan { plan, demand }
 }
 
+/// soft polynomials only (soft4.py demand: the soft family's masters are known lower-loop values, no endpoint map)
+pub fn build_soft_only(fam: &Value, config: &Value, emast: &[Vec<i64>]) -> Value {
+    let g = quad_forms(fam);
+    let e = config["e"].as_u64().unwrap() as usize;
+    let j = config["j"].as_u64().unwrap() as usize;
+    let cfg = Cfg::new(&g, e, j);
+    let n1 = config.get("n1").cloned().unwrap_or(json!("a2"));
+    let mut soft = serde_json::Map::new();
+    let ser = |p: &Poly| -> Value { json!(p.iter().map(|((nu, dp), c)| json!([nu, dp, c.to_string()])).collect::<Vec<_>>()) };
+    for m in emast {
+        let key = serde_json::to_string(m).unwrap().replace(',', ", ");
+        soft.insert(format!("{key}|0"), ser(&cfg.soft_terms(m, 0)));
+        let take1 = match &n1 {
+            Value::String(s) if s == "all" => true,
+            Value::String(s) if s == "a2" => m[e] >= 2,
+            _ => false,
+        };
+        if take1 {
+            soft.insert(format!("{key}|1"), ser(&cfg.soft_terms(m, 1)));
+        }
+    }
+    json!({"config": config, "derived": {"loops": cfg.loops, "sub": cfg.sub, "pdep": cfg.pdep}, "endpoint_polys": {}, "soft_polys": soft})
+}
+
+/// matroid components of a set of vectors (exact): list of (size, rank) sorted, via fundamental circuits of a greedy basis
+pub fn components(vecs: &[Vq]) -> Vec<(usize, usize)> {
+    let n = vecs.len();
+    // greedy basis with exact elimination
+    let mut basis: Vec<usize> = Vec::new();
+    let mut ech: Vec<(usize, Vq)> = Vec::new(); // (pivot column, reduced row) of the basis vectors
+    let reduce = |ech: &[(usize, Vq)], v: &Vq| -> Vq {
+        let mut v = v.clone();
+        for (c, r) in ech {
+            if v[*c] != 0 {
+                let f = Rational::from(&v[*c] / &r[*c]);
+                for (x, y) in v.iter_mut().zip(r) {
+                    *x -= Rational::from(&f * y);
+                }
+            }
+        }
+        v
+    };
+    for (i, v) in vecs.iter().enumerate() {
+        let r = reduce(&ech, v);
+        if let Some(c) = r.iter().position(|x| *x != 0) {
+            ech.push((c, r));
+            basis.push(i);
+        }
+    }
+    let rank = basis.len();
+    let mut parent: Vec<usize> = (0..n).collect();
+    fn find(p: &mut Vec<usize>, x: usize) -> usize {
+        let mut x = x;
+        while p[x] != x {
+            p[x] = p[p[x]];
+            x = p[x];
+        }
+        x
+    }
+    // fundamental circuit of a non-basis vector: the basis vectors with a nonzero coefficient in its expansion
+    for i in 0..n {
+        if basis.contains(&i) {
+            continue;
+        }
+        // solve sum_k x_k b_k = v by exact Gauss on the rank x dim system
+        let dimv = vecs[i].len();
+        let mut a: Vec<Vec<Rational>> = (0..dimv).map(|r| basis.iter().map(|&b| vecs[b][r].clone()).chain([vecs[i][r].clone()]).collect()).collect();
+        let mut row = 0;
+        let mut pivc = Vec::new();
+        for c in 0..rank {
+            let Some(p) = (row..dimv).find(|&r| a[r][c] != 0) else { continue };
+            a.swap(row, p);
+            let pv = a[row][c].clone();
+            for x in a[row].iter_mut() {
+                *x /= &pv;
+            }
+            for r in 0..dimv {
+                if r != row && a[r][c] != 0 {
+                    let f = a[r][c].clone();
+                    let rr = a[row].clone();
+                    for (x, y) in a[r].iter_mut().zip(&rr) {
+                        *x -= Rational::from(&f * y);
+                    }
+                }
+            }
+            pivc.push(c);
+            row += 1;
+        }
+        for (r, &c) in pivc.iter().enumerate() {
+            if a[r][rank] != 0 {
+                let (x, y) = (find(&mut parent, i), find(&mut parent, basis[c]));
+                parent[x] = y;
+            }
+        }
+    }
+    let mut groups: BTreeMap<usize, Vec<usize>> = BTreeMap::new();
+    for i in 0..n {
+        let r = find(&mut parent, i);
+        groups.entry(r).or_default().push(i);
+    }
+    let mut out: Vec<(usize, usize)> = groups
+        .values()
+        .map(|g| {
+            let mut e2: Vec<(usize, Vq)> = Vec::new();
+            for &i in g {
+                let r = reduce(&e2, &vecs[i]);
+                if let Some(c) = r.iter().position(|x| *x != 0) {
+                    e2.push((c, r));
+                }
+            }
+            (g.len(), e2.len())
+        })
+        .collect();
+    out.sort();
+    out
+}
+
+/// the rank-1 momentum (over the loop momenta) of every slot of a family
+pub fn slot_momenta(fam: &Value) -> Vec<Option<Vq>> {
+    quad_forms(fam).iter().map(|g| momentum_any(g)).collect()
+}
+
 /// exact comparison of two plans' polynomial maps: (number of keys compared, mismatching keys)
 pub fn compare(a: &Value, b: &Value) -> (usize, Vec<String>) {
     let norm = |v: &Value| -> BTreeMap<(Vec<i64>, i64), Rational> {
@@ -541,7 +674,8 @@ pub fn compare(a: &Value, b: &Value) -> (usize, Vec<String>) {
     let mut n = 0;
     let mut bad = Vec::new();
     for sect in ["endpoint_polys", "soft_polys"] {
-        let (ma, mb) = (a[sect].as_object().unwrap(), b[sect].as_object().unwrap());
+        let empty = serde_json::Map::new();
+        let (ma, mb) = (a[sect].as_object().unwrap_or(&empty), b[sect].as_object().unwrap_or(&empty));
         for k in ma.keys().chain(mb.keys()).collect::<BTreeSet<_>>() {
             n += 1;
             match (ma.get(k), mb.get(k)) {
