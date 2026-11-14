@@ -76,10 +76,8 @@ impl PatchKernel {
     }
 
     fn config(&self, prec: u32) -> TransportConfig {
-        let mut c = TransportConfig::new(prec);
-        // the dispersive configuration (REVIEW-A M5): real projection, Cauchy pole at z = 1
-        c.cauchy_pole = Some(Rational::from(1));
-        c.project_real_axis = true;
+        // the kernel's named dispersive configuration (REVIEW-A M5): real projection, Cauchy pole at z = 1
+        let mut c = TransportConfig::dispersive(prec);
         c.threads = self.threads;
         c.pin_threads = self.pin_threads;
         c
@@ -154,7 +152,7 @@ impl PatchKernel {
             return Ok((Checkpointed::Completed(self.output(&state)), summary));
         }
         // stopped early (signal or stop_at_patch): make sure the checkpoint holds this state
-        let _ = outcome == TransportOutcome::Completed;
+        let _ = outcome == TransportOutcome::Partial;
         if !ctl.checkpoint.exists() {
             tr.write_checkpoint(&ctl.checkpoint, &state, y0).map_err(|e| e.to_string())?;
         }
@@ -164,12 +162,16 @@ impl PatchKernel {
 
 /// the only place that builds the kernel's checkpoint policy (never `fresh`: a run resumes or refuses, REVIEW-A B1)
 fn checkpoint_policy(file: &Path, every_patches: usize, every_seconds: f64) -> CheckpointPolicy {
-    CheckpointPolicy { file: file.to_path_buf(), every_patches, every_seconds }
+    CheckpointPolicy { every_patches, every_seconds, fresh: false, ..CheckpointPolicy::new(file) }
 }
 
 impl Transport for PatchKernel {
     fn id(&self) -> String {
-        format!("{} (patch_kernel, dispersive config: real projection, Cauchy pole 1)", crate::patch_kernel::KERNEL_VERSION)
+        format!(
+            "{} algorithm {} (patch_kernel, dispersive config: real projection, Cauchy pole 1)",
+            crate::patch_kernel::KERNEL_VERSION,
+            crate::patch_kernel::KERNEL_ALGORITHM
+        )
     }
 
     /// one-shot transport (no checkpoint): segments, tests

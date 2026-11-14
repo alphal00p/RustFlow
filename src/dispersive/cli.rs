@@ -15,6 +15,8 @@
 //! --pr-values replaces the 39 'PR'-lane endpoint values of SAMPLE.json by those of a RustFlow lane run (raw = J / e^(4 gamma eps)).
 //! lane:CHAIN.json,SAMPLE.json builds the soft V of a LANE family (e.g. the 4L prism) natively from the P14 rows of SAMPLE.json
 //! (lower.rs; chain spec documented at lower::lane_boundary).
+//! native: boundary GATE (hard): full-rank endpoint system, >= --boundary-checks-min N redundant equations (default 1; class 16359
+//! at grid B: 61) with worst relative residual <= 10^--boundary-consistency-bar (default -80).
 //! --merge TEMPLATE.json,P14SAMPLE.json,OUT.json (lane runs): writes OUT.json = TEMPLATE (a merged 4L sample) with its 'PR' rows
 //! replaced by this run's values (raw = J / e^(4 gamma eps)) and a 'provenance' field on every row (merged_sample).
 use super::boundary;
@@ -48,6 +50,9 @@ pub struct Args {
     pub code_version: String,
     pub refs: Vec<String>,
     pub merge: Option<String>,
+    /// boundary gate: minimum number of redundant endpoint equations checked, and the bar on their worst relative residual (log10)
+    pub boundary_checks_min: u64,
+    pub boundary_consistency_bar: f64,
 }
 
 pub fn rd(p: &str) -> Result<Value, String> {
@@ -92,6 +97,8 @@ impl Args {
             frobenius_checkpoint_every_seconds: opt("frobenius-checkpoint-every-seconds").map(|x| x.parse().unwrap_or(900.0)).unwrap_or(900.0),
             refs: m.get("ref").cloned().unwrap_or_default(),
             merge: opt("merge"),
+            boundary_checks_min: opt("boundary-checks-min").map(|x| x.parse().map_err(|_| "--boundary-checks-min: not a number".to_string())).transpose()?.unwrap_or(1),
+            boundary_consistency_bar: opt("boundary-consistency-bar").map(|x| x.parse().map_err(|_| "--boundary-consistency-bar: not a number".to_string())).transpose()?.unwrap_or(-80.0),
         })
     }
 
@@ -168,9 +175,25 @@ pub fn boundary_rows(args: &Args, sys: &EBlockSystem, loops: u32, prec: u32) -> 
         let pl = rd(f[0])?;
         let pl = if pl.get("plan").is_some() { pl["plan"].clone() } else { pl };
         let lane = args.pr_values.as_deref().map(rd).transpose()?;
-        let (ep, info) = endpoints(&rd(f[2])?, lane.as_ref(), prec + 64)?;
+        let sample = rd(f[2])?;
+        let (ep, info) = endpoints(&sample, lane.as_ref(), prec + 64)?;
         let (v, d) = boundary::solve_v(&pl, &rd(f[1])?, &ep, sys.e_slot, prec + 64)?;
-        (v, json!({"V": "native (soft_gen solve port)", "plan": f[0], "soft_solution": f[1], "sample": f[2], "endpoints": info, "diag": d}))
+        // HARD GATE (coordinator 14 Nov): the endpoint system must have full rank and its redundant equations must be consistent
+        let worst = d["endpoint_consistency_worst_rel_log10"].as_f64().unwrap_or(f64::INFINITY);
+        let nchk = d["n_consistency_checks"].as_u64().unwrap_or(0);
+        let (rank, nmast) = (d["rank_endpoint_system"].as_u64(), d["n_engine_masters"].as_u64());
+        if rank.is_none() || rank != nmast {
+            return Err(format!("boundary gate: endpoint system rank {rank:?} != engine masters {nmast:?}"));
+        }
+        if nchk < args.boundary_checks_min || !(worst <= args.boundary_consistency_bar) {
+            return Err(format!("boundary gate: {nchk} consistency checks (required >= {}), worst relative residual 1e{worst:.1} (bar 1e{})",
+                args.boundary_checks_min, args.boundary_consistency_bar));
+        }
+        let gate = json!({"rank": rank, "engine_masters": nmast, "consistency_checks": nchk, "required_checks": args.boundary_checks_min,
+            "worst_rel_log10": worst, "bar_log10": args.boundary_consistency_bar, "pass": true});
+        (v, json!({"V": "native (soft_gen solve port)", "plan": f[0], "soft_solution": f[1], "sample": f[2], "endpoints": info, "diag": d,
+            "consistency_gate": gate, "sample_provenance": sample.get("provenance").cloned().unwrap_or(Value::Null),
+            "accuracy_note": "the 4L inputs carry no digit claim here: per-row 'digits' in merged samples are the lane's two-precision digits and OVERSTATE (the prism lane amplifies P14 input errors by up to 1e37.8, W3C-PRISM section 3c; inferred worst 4L value ~83 d at node 022). The per-entry 'digits' of this out.json come only from the 5L two-precision comparison; external agreement is in oracle_comparison."}))
     } else if let Some(spec) = args.v.strip_prefix("lane:") {
         let f: Vec<&str> = spec.split(',').collect();
         if f.len() != 2 {
@@ -432,6 +455,7 @@ fn chrono_like(secs: u64) -> String {
     let month = if mp < 10 { mp + 3 } else { mp - 9 };
     let year = yoe + era * 400 + if month <= 2 { 1 } else { 0 };
     format!("{year:04}-{month:02}-{day:02}T{:02}:{:02}:{:02}Z", s / 3600, (s / 60) % 60, s % 60)
+}
 
 /// A merged 4L sample (schema of values/d5l/v9a/pr/samples: epsilon, attempt, index, lane_tag, endpoint[{family?, target, value{re}}])
 /// whose 'PR' rows are this lane run's values, raw = J / e^(4 gamma eps) = -(sin(pi d0/2)/pi) I / e^(4 gamma eps) (pr_samples.py).
