@@ -22,6 +22,13 @@ use symbolica::prelude::*;
 use symbolica::tensors::matrix::Matrix;
 
 /// Bounds for an optional accelerator, not limits on integral evaluation.
+///
+/// The search bounds (`max_candidates`, `max_external_maps`,
+/// `max_denominators`, `max_momenta`) are enforced here. The RustRed
+/// `verification` and `expansion` count limits are diagnostic thresholds:
+/// RustRed enforces them only when their `diagnostics_enabled` flag is set
+/// (opt-in since RustRed 42bae6e0) and otherwise relies on the shared
+/// memory/time budgets.
 #[derive(Clone, Copy)]
 pub(super) struct Limits {
     pub max_candidates: usize,
@@ -631,8 +638,11 @@ mod tests {
         );
         assert!(none.statistics.search_limited);
         assert!(none.maps.is_empty());
+        // RustRed enforces count limits only when diagnostics are enabled
+        // (opt-in since RustRed 42bae6e0); request them for this check.
         let limits = Limits {
             expansion: ExpansionLimits {
+                diagnostics_enabled: true,
                 max_endpoints: 1,
                 ..Limits::default().expansion
             },
@@ -644,6 +654,7 @@ mod tests {
         assert!(bank.apply(&family, powers, &order(powers)).is_none());
         assert_eq!(bank.statistics.transport_failures, 1);
         bank.expansion = ExpansionLimits {
+            diagnostics_enabled: true,
             max_total_power: 128,
             ..Limits::default().expansion
         };
