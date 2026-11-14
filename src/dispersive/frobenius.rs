@@ -56,7 +56,8 @@ impl Pivoting {
     pub fn from_env() -> Pivoting {
         match std::env::var("DISPERSIVE_PIVOTING").as_deref() {
             Ok("complete") => Pivoting::Complete,
-            Ok("structural") | Ok("shadow") | Err(_) => Pivoting::Structural, // shadow: handled by run::family_num
+            Ok("structural") | Err(_) => Pivoting::Structural,
+            Ok(x) if x.starts_with("shadow") => Pivoting::Structural, // shadow modes: handled by run::family_num
             Ok(x) if x.starts_with("threshold:") => Pivoting::Threshold(x[10..].parse().expect("threshold:<bits>")),
             Ok(x) => panic!("DISPERSIVE_PIVOTING={x}: complete | structural | threshold:<bits>"),
         }
@@ -77,8 +78,10 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
 #[allow(clippy::too_many_arguments)]
 pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, pivots: Option<&[Vec<(u32, u32)>]>, pivoting: Pivoting, prec: u32, nthreads: usize) -> FrobOut<S> {
     assert!(ranks.is_some() || S::EXACT, "MPFR Frobenius needs the ranks of the exact run");
-    let mut pivoting = if S::EXACT { Pivoting::Complete } else { pivoting };
-    assert!(pivoting != Pivoting::Structural || pivots.is_some(), "structural pivoting needs the exact pivot sequence");
+    // ModP: first nonzero. Shadowed: the requested strategy on the float magnitudes among EXACT nonzeros (Structural = first nonzero).
+    let mut pivoting = if S::EXACT && !S::SNAP { Pivoting::Complete } else { pivoting };
+    let first_nonzero = S::EXACT && (!S::SNAP || pivoting == Pivoting::Structural);
+    assert!(pivoting != Pivoting::Structural || pivots.is_some() || S::EXACT, "structural pivoting needs the exact pivot sequence");
     let mut pivots_out: Vec<Vec<(u32, u32)>> = Vec::new();
     let clock = Instant::now();
     let r = -*b.keys().next().unwrap();
@@ -189,7 +192,7 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                 }
             }
             let (mut bi, mut bc) = (usize::MAX, usize::MAX);
-            if pivoting == Pivoting::Structural {
+            if pivoting == Pivoting::Structural && !S::EXACT {
                 let (r, c) = pivots.unwrap()[step - 1][prow.len()];
                 (bi, bc) = (r as usize, c as usize);
                 // pivot size relative to the largest entry of its G row: the rounding loss this pivot can cause
@@ -213,7 +216,7 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                 }
             }
             if bi != usize::MAX {
-            } else if S::EXACT {
+            } else if first_nonzero {
                 'outer: for i in 0..e {
                     if used_r[i] {
                         continue;
@@ -307,6 +310,7 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                 break;
             }
             last = g[bi][bc].log10_abs();
+            assert!(last > -1e8, "pivot ({bi}, {bc}) of step {step} is zero in floating point: raise the precision");
             used_r[bi] = true;
             used_c[bc] = true;
             let pv = g[bi][bc].clone();

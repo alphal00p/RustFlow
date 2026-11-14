@@ -98,14 +98,22 @@ fn point_of(spec: &FamilySpec) -> Point {
 
 pub fn family_num(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &FamilySpec, prec: u32, nthreads: usize) -> Result<(FamilyNum, Value), String> {
     let lam = Float::with_val(prec, &spec.lam);
-    let shadow = std::env::var("DISPERSIVE_PIVOTING").as_deref() == Ok("shadow");
-    let pivoting = if shadow { frobenius::Pivoting::Structural } else { frobenius::Pivoting::from_env() };
+    // DISPERSIVE_PIVOTING = shadow (complete pivoting on the exact nonzeros) | shadow:threshold:<bits> | shadow:first (exact pivots)
+    let mode = std::env::var("DISPERSIVE_PIVOTING").unwrap_or_default();
+    let shadow = mode.starts_with("shadow");
+    let pivoting = match mode.strip_prefix("shadow") {
+        Some("") => frobenius::Pivoting::Complete,
+        Some(":first") => frobenius::Pivoting::Structural,
+        Some(x) if x.starts_with(":threshold:") => frobenius::Pivoting::Threshold(x[11..].parse().map_err(|_| format!("bad {mode}"))?),
+        Some(_) => return Err(format!("DISPERSIVE_PIVOTING={mode}")),
+        None => frobenius::Pivoting::from_env(),
+    };
     let out = if shadow {
         // exact zero pattern from a 2^61 - 1 shadow (no spurious fill), exact pivots, MPFR values
         let bsh = laurent::laurent::<Shadowed>(sys, point_of(spec), spec.mm + 8, prec, nthreads);
         let bsh = laurent::scaled(&bsh, &spec.rho, prec);
         let lsh = Shadowed::from_rational(&spec.lam, prec);
-        let o = frobenius::frobenius_with::<Shadowed>(&bsh, sys.dim(), &lsh, spec.n_lo, spec.mm, None, None, frobenius::Pivoting::Complete, prec, nthreads);
+        let o = frobenius::frobenius_with::<Shadowed>(&bsh, sys.dim(), &lsh, spec.n_lo, spec.mm, None, None, pivoting, prec, nthreads);
         if o.ranks != spec.ranks {
             return Err(format!("{}: shadowed ranks differ from the structure run", spec.name));
         }
@@ -117,7 +125,7 @@ pub fn family_num(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &FamilySpe
     let _ = &lam;
     let basis = frobenius::stable_basis(&out, spec, sys.dim(), prec)?;
     let d = &out.diag;
-    let diag = json!({"name": spec.name, "dim": spec.dim, "pivoting": if shadow { "Shadowed".to_string() } else { format!("{pivoting:?}") },
+    let diag = json!({"name": spec.name, "dim": spec.dim, "pivoting": if shadow { format!("Shadowed {pivoting:?}") } else { format!("{pivoting:?}") },
         "min_structural_pivot_rel_log10": d.min_structural_pivot_rel_log10, "sum_structural_pivot_rel_log10": d.sum_structural_pivot_rel_log10, "structural_fallback_step": d.structural_fallback_step, "pole_rank": d.pole_rank, "steps": d.steps, "q_final": d.q_final, "top": d.top,
         "min_rank_gap_log10": d.min_rank_gap_log10, "min_pivot_log10": d.min_pivot_log10, "T_nnz_max": d.t_nnz_max, "seconds": d.seconds, "rows_kept": basis.len()});
     Ok((FamilyNum { spec: spec.clone(), basis }, diag))

@@ -106,6 +106,8 @@ fn modp_and_mpfr_ranks_agree_on_a_small_system() {
     // shadowed run (2^61 - 1 shadow decides the exact zeros; exact pivots) gives the same basis
     let bsh = laurent::scaled(&laurent::laurent::<super::field::Shadowed>(&sys, Point::Zero, 20, 200, 1), &spec.rho, 200);
     let osh = frobenius::frobenius_with::<super::field::Shadowed>(&bsh, 2, &super::field::Shadowed::from_rational(&lam, 200), -2, 12, None, None, frobenius::Pivoting::Complete, 200, 1);
+    let osf = frobenius::frobenius_with::<super::field::Shadowed>(&bsh, 2, &super::field::Shadowed::from_rational(&lam, 200), -2, 12, None, None, frobenius::Pivoting::Structural, 200, 1);
+    assert_eq!(osf.ranks, spec.ranks);
     assert_eq!(osh.ranks, spec.ranks);
     let bs3 = frobenius::stable_basis(&frobenius::shadowed_to_float(osh), &spec, 2, 200).unwrap();
     for (r1, r3) in basis.iter().zip(&bs3) {
