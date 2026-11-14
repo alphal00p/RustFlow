@@ -363,6 +363,109 @@ impl RationalSystem {
     }
 }
 
+impl RationalSystem {
+    /// From RustFlow's own differential system (exact rational rows).
+    pub fn from_differential_system(system: &crate::DifferentialSystem) -> Result<Self> {
+        Self::from_matrix_atoms(&system.matrix, system.variable)
+    }
+
+    /// Finite singular points of the system (roots of all denominators) in
+    /// the system variable, as f64 pairs: every distinct denominator is
+    /// reduced by the irreducible factors found so far (exact division) and
+    /// only the remaining cofactor is factored (Symbolica).
+    pub fn singular_points(&self) -> Result<Vec<(f64, f64)>> {
+        let x = symbol!("rustflow_patch_kernel::x");
+        let mut factors: Vec<Vec<Integer>> = Vec::new();
+        let mut dens: Vec<usize> = self.entries.iter().map(|e| e.den).collect();
+        dens.sort_unstable();
+        dens.dedup();
+        dens.sort_by_key(|&d| self.polys[d].len());
+        for d in dens {
+            let mut rest = self.polys[d].clone();
+            for f in &factors {
+                while rest.len() > f.len() - 1 && rest.len() > 1 {
+                    match div_exact(&rest, f) {
+                        Some(q) => rest = q,
+                        None => break,
+                    }
+                }
+            }
+            if rest.len() <= 1 {
+                continue;
+            }
+            let text = rest
+                .iter()
+                .enumerate()
+                .map(|(k, c)| format!("({c})*rustflow_patch_kernel::x^{k}"))
+                .collect::<Vec<_>>()
+                .join("+");
+            let atom = Atom::parse(&text, "rustflow_patch_kernel", Default::default())
+                .map_err(|e| Error::InvalidInput(format!("denominator polynomial: {e}")))?;
+            let r: symbolica::domains::rational_polynomial::RationalPolynomial<
+                symbolica::domains::integer::IntegerRing,
+                u16,
+            > = atom
+                .try_to_rational_polynomial(&Q, &Z, None)
+                .map_err(|e| Error::InvalidInput(e.to_string()))?;
+            for (f, _) in r.numerator.factor() {
+                let mut c = univariate(&f, x)?;
+                if c.len() <= 1 {
+                    continue;
+                }
+                if c.last().is_some_and(|v| *v < 0) {
+                    for v in c.iter_mut() {
+                        *v = -std::mem::take(v);
+                    }
+                }
+                if !factors.contains(&c) {
+                    factors.push(c);
+                }
+            }
+        }
+        let p = crate::Precision::decimal(40)?;
+        let mut out = Vec::new();
+        for f in &factors {
+            let coefficients: Vec<crate::ComplexFloat> = f
+                .iter()
+                .map(|c| {
+                    crate::ComplexFloat::new(
+                        symbolica::domains::float::Float::from(rug::Float::with_val(p.bits, c)),
+                        symbolica::domains::float::Float::from(rug::Float::new(p.bits)),
+                    )
+                })
+                .collect();
+            for root in crate::ode::polynomial_roots(p, &coefficients, x)? {
+                out.push((root.re.to_f64(), root.im.to_f64()));
+            }
+        }
+        out.sort_by(|a, b| a.0.total_cmp(&b.0).then(a.1.total_cmp(&b.1)));
+        Ok(out)
+    }
+}
+
+/// Exact quotient `d / f` of integer polynomials if `f` divides `d` over Z.
+fn div_exact(d: &[Integer], f: &[Integer]) -> Option<Vec<Integer>> {
+    let (nd, nf) = (d.len() - 1, f.len() - 1);
+    if nd < nf {
+        return None;
+    }
+    let lc = &f[nf];
+    let mut r = d.to_vec();
+    let mut q = vec![Integer::new(); nd - nf + 1];
+    for i in (0..=nd - nf).rev() {
+        let c = &r[i + nf];
+        if !c.is_divisible(lc) {
+            return None;
+        }
+        let qi = Integer::from(c / lc);
+        for (j, fj) in f.iter().enumerate() {
+            r[i + j] -= Integer::from(&qi * fj);
+        }
+        q[i] = qi;
+    }
+    r.iter().all(|c| *c == 0).then_some(q)
+}
+
 fn poly_mul(a: &[Integer], b: &[Integer]) -> Vec<Integer> {
     let mut out = vec![Integer::new(); a.len() + b.len() - 1];
     for (i, x) in a.iter().enumerate() {

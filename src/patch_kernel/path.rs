@@ -142,18 +142,64 @@ impl PlannedPath {
         h.finalize().to_hex().to_string()
     }
 
+    /// blake3 of offset, points and steps only (equal for the same path
+    /// planned at different working digits).
+    pub fn points_fingerprint(&self) -> String {
+        let mut h = blake3::Hasher::new();
+        h.update(b"rustflow.patch-kernel.path-points.v1;");
+        h.update(self.offset.to_string().as_bytes());
+        for p in &self.patches {
+            for v in [&p.centre.0, &p.centre.1, &p.step.0, &p.step.1] {
+                h.update(b";");
+                h.update(v.to_string().as_bytes());
+            }
+        }
+        h.finalize().to_hex().to_string()
+    }
+
     /// The same points with orders for `digits` working digits:
     /// `ceil((W + 8) / log10(R / |h|)) + 4` with `R` the distance from the
     /// centre to the nearest singular point (path variable).
-    pub fn with_orders(&self, singular_points: &[(f64, f64)], digits: f64) -> Self {
+    pub fn with_orders(&self, singular_points: &[(f64, f64)], digits: f64) -> Result<Self> {
         let mut out = self.clone();
         for p in &mut out.patches {
             let c = (to_f64(&p.centre.0), to_f64(&p.centre.1));
             let r = radius(singular_points, c);
             let h = to_f64(&p.step.0).hypot(to_f64(&p.step.1));
-            p.order = order_rule(digits, r, h);
+            p.order = order_rule(digits, r, h)?;
         }
-        out
+        Ok(out)
+    }
+}
+
+/// Largest number of patches the planner produces before giving up.
+pub const MAX_PATCHES: usize = 100_000;
+
+/// Every singular point `derived` from the system (path variable) must lie
+/// within `tol (1 + |p|)` of a point of the planner's list `supplied`.
+pub fn verify_singular_points(
+    supplied: &[(f64, f64)],
+    derived: &[(f64, f64)],
+    tol: f64,
+) -> Result<()> {
+    let missing: Vec<(f64, f64)> = derived
+        .iter()
+        .copied()
+        .filter(|d| {
+            let scale = tol * (1.0 + d.0.hypot(d.1));
+            !supplied
+                .iter()
+                .any(|s| (s.0 - d.0).hypot(s.1 - d.1) <= scale)
+        })
+        .collect();
+    if missing.is_empty() {
+        Ok(())
+    } else {
+        Err(Error::InvalidInput(format!(
+            "{} singular points of the system are not in the planner input, e.g. {:?}",
+            missing.len(),
+            &missing[..missing.len().min(5)]
+        )))
     }
 }
 
@@ -168,8 +214,18 @@ fn radius(pts: &[(f64, f64)], z: (f64, f64)) -> f64 {
         .fold(f64::INFINITY, f64::min)
 }
 
-fn order_rule(digits: f64, r: f64, h: f64) -> usize {
-    ((digits + 8.0) / (r / h).log10()).ceil() as usize + 4
+fn order_rule(digits: f64, r: f64, h: f64) -> Result<usize> {
+    let q = r / h;
+    if !(digits.is_finite() && digits > 0.0 && h > 0.0 && q.is_finite() && q > 1.0) {
+        return Err(Error::InvalidInput(format!(
+            "no Taylor order for radius {r:e}, step {h:e}, digits {digits}"
+        )));
+    }
+    let n = ((digits + 8.0) / q.log10()).ceil();
+    if !(n.is_finite() && n < 1e7) {
+        return Err(Error::InvalidInput(format!("Taylor order {n} too large")));
+    }
+    Ok(n as usize + 4)
 }
 
 /// `x` rounded to 24 significant bits, as an exact dyadic (zplan `rr`).
@@ -233,11 +289,63 @@ fn parse_point(text: &str) -> Result<Rational> {
 }
 
 /// Port of zplan.py (see module docs); `digits` = working digits W.
+impl PlanInput {
+    /// Consistency of the planner input (returns errors instead of the
+    /// hangs or 3-term patches inconsistent input produced before).
+    pub fn validate(&self) -> Result<(Rational, Rational)> {
+        let bad = |m: String| Err(Error::InvalidInput(format!("planner input: {m}")));
+        if !(self.ratio.is_finite() && self.ratio > 1.0) {
+            return bad(format!("ratio {} must be > 1", self.ratio));
+        }
+        let s0 = parse_point(&self.s0)?;
+        let s_end = parse_point(&self.s_end)?;
+        if !(s0 > 0 && s_end > s0) {
+            return bad(format!("need 0 < s0 < S (s0 {s0}, S {s_end})"));
+        }
+        if self.singular_points.is_empty()
+            || self
+                .singular_points
+                .iter()
+                .any(|p| !(p.0.is_finite() && p.1.is_finite()))
+        {
+            return bad("singular points empty or not finite".into());
+        }
+        if self.axis_singular.iter().any(|x| !x.is_finite())
+            || self.axis_singular.windows(2).any(|w| !(w[0] > w[1]))
+        {
+            return bad("axis_singular must be finite and strictly decreasing".into());
+        }
+        // axis_singular within (-S, -s0) == real singular points there
+        let (lo, hi) = (-to_f64(&s_end), -to_f64(&s0));
+        let near = |a: f64, b: f64| (a - b).abs() <= 1e-9 * (1.0 + a.abs());
+        let real: Vec<f64> = self
+            .singular_points
+            .iter()
+            .filter(|p| p.1.abs() <= 1e-9 * (1.0 + p.0.abs()) && lo < p.0 && p.0 < hi)
+            .map(|p| p.0)
+            .collect();
+        let axis: Vec<f64> = self
+            .axis_singular
+            .iter()
+            .copied()
+            .filter(|x| lo < *x && *x < hi)
+            .collect();
+        if let Some(x) = real.iter().find(|x| !axis.iter().any(|a| near(**x, *a))) {
+            return bad(format!(
+                "real singular point {x} on the path is missing from axis_singular"
+            ));
+        }
+        if let Some(a) = axis.iter().find(|a| !real.iter().any(|x| near(*x, **a))) {
+            return bad(format!("axis_singular {a} is not a singular point"));
+        }
+        Ok((s0, s_end))
+    }
+}
+
 pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Result<PlannedPath> {
     let pts = &input.singular_points;
     let ratio = input.ratio;
-    let s0 = parse_point(&input.s0)?;
-    let s_end = parse_point(&input.s_end)?;
+    let (s0, s_end) = input.validate()?;
     let mut patches = Vec::new();
     let zero = Rational::new();
     let push = |patches: &mut Vec<PatchSpec>,
@@ -251,8 +359,13 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
         });
     };
     let step_real =
-        |patches: &mut Vec<PatchSpec>, mut zq: Rational, target: &Rational| -> Rational {
+        |patches: &mut Vec<PatchSpec>, mut zq: Rational, target: &Rational| -> Result<Rational> {
             while zq > *target {
+                if patches.len() >= MAX_PATCHES {
+                    return Err(Error::Limit(format!(
+                        "planner exceeded {MAX_PATCHES} patches"
+                    )));
+                }
                 let zc = to_f64(&zq);
                 let r = radius(pts, (zc, 0.0));
                 let h = r / ratio;
@@ -261,7 +374,12 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
                 } else {
                     -rr(h)
                 };
-                let n = order_rule(digits, r, to_f64(&hq).abs());
+                if hq == 0 {
+                    return Err(Error::Numerical(format!(
+                        "planner: zero step at z = {zc:e}"
+                    )));
+                }
+                let n = order_rule(digits, r, to_f64(&hq).abs())?;
                 push(
                     patches,
                     (zq.clone(), Rational::new()),
@@ -270,7 +388,7 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
                 );
                 zq += &hq;
             }
-            zq
+            Ok(zq)
         };
     let mut zq = -s0;
     let neg_s = to_f64(&Rational::from(-&s_end));
@@ -288,7 +406,7 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
         let start = rr(xp + rd);
         let end = rr(xp - rd);
         if to_f64(&start) < to_f64(&zq) || start < zq {
-            zq = step_real(&mut patches, zq, &start);
+            zq = step_real(&mut patches, zq, &start)?;
         }
         let nv = 12;
         let mut verts: Vec<(Rational, Rational)> = (1..nv)
@@ -301,6 +419,11 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
         let (mut cr, mut ci) = (zq.clone(), Rational::new());
         for (vr, vi) in verts {
             while (&cr, &ci) != (&vr, &vi) {
+                if patches.len() >= MAX_PATCHES {
+                    return Err(Error::Limit(format!(
+                        "planner exceeded {MAX_PATCHES} patches"
+                    )));
+                }
                 let cur = (to_f64(&cr), to_f64(&ci));
                 let r = radius(pts, cur);
                 let dv = (
@@ -314,8 +437,13 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
                     let hh = ((dv.0 / adv) * r / ratio, (dv.1 / adv) * r / ratio);
                     (rr(hh.0), rr(hh.1))
                 };
+                if hq.0 == 0 && hq.1 == 0 {
+                    return Err(Error::Numerical(format!(
+                        "planner: zero step at z = {cur:?}"
+                    )));
+                }
                 let hn = to_f64(&hq.0).hypot(to_f64(&hq.1));
-                let n = order_rule(digits, r, hn);
+                let n = order_rule(digits, r, hn)?;
                 push(&mut patches, (cr.clone(), ci.clone()), hq.clone(), n);
                 cr += &hq.0;
                 ci += &hq.1;
@@ -329,7 +457,7 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
         zq = cr;
     }
     let target = Rational::from(-&s_end);
-    zq = step_real(&mut patches, zq, &target);
+    zq = step_real(&mut patches, zq, &target)?;
     if zq != target {
         return Err(Error::Numerical("planner overshoot".into()));
     }
@@ -350,6 +478,33 @@ mod tests {
         let r = rr(x);
         assert_eq!(r.denom().significant_bits(), 26); // 2^25
         assert!((to_f64(&r) - x).abs() < 2f64.powi(-25));
+    }
+
+    fn input(axis: Vec<f64>, ratio: f64) -> PlanInput {
+        PlanInput {
+            s0: "1".into(),
+            s_end: "4".into(),
+            singular_points: vec![(0.0, 0.0), (-2.0, 0.0), (-3.0, 0.0)],
+            axis_singular: axis,
+            ratio,
+        }
+    }
+
+    #[test]
+    fn planner_rejects_inconsistent_input() {
+        // review A, R5: unsorted axis list used to hang with growing memory
+        assert!(plan_axis_detours(&input(vec![-3.0, -2.0], 3.0), 40.0, Rational::new()).is_err());
+        // missing axis point, or a non-singular one
+        assert!(plan_axis_detours(&input(vec![-3.0], 3.0), 40.0, Rational::new()).is_err());
+        assert!(
+            plan_axis_detours(&input(vec![-2.0, -2.5, -3.0], 3.0), 40.0, Rational::new()).is_err()
+        );
+        // ratio <= 1
+        assert!(plan_axis_detours(&input(vec![-2.0, -3.0], 1.0), 40.0, Rational::new()).is_err());
+        let ok = plan_axis_detours(&input(vec![-2.0, -3.0], 3.0), 40.0, Rational::new()).unwrap();
+        assert!(ok.patches.iter().all(|p| p.order > 4));
+        assert!(verify_singular_points(&[(-2.0, 0.0)], &[(-2.0, 1e-14)], 1e-9).is_ok());
+        assert!(verify_singular_points(&[(-2.0, 0.0)], &[(-3.0, 0.0)], 1e-9).is_err());
     }
 
     #[test]

@@ -1,4 +1,4 @@
-//! Benchmark/cross-check: the SAME path segment through RustFlow's existing
+//! CAMPAIGN BENCHMARK (not for RustFlow main): the SAME path segment through RustFlow's existing
 //! adaptive certified transport (`DifferentialSystem::compile` +
 //! `CompiledSystem::transport`, Symbolica floats rounded per operation), for
 //! comparison with the fixed-precision patch kernel.
@@ -159,6 +159,9 @@ fn main() -> R<()> {
     };
     let fp = Fingerprint {
         kernel_version: "compiled-system-transport".into(),
+        kernel_algorithm: String::new(),
+        path_points: path.points_fingerprint(),
+        path_len: path.patches.len(),
         system: String::new(),
         path: path.fingerprint(),
         bits: p.bits,
@@ -167,6 +170,7 @@ fn main() -> R<()> {
         project_real_axis: false,
         overlap_check: false,
         initial: String::new(),
+        initial_64: String::new(),
         binary: String::new(),
     };
     let mut json = state.to_json(&fp);

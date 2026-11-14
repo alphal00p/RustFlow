@@ -8,16 +8,19 @@
 //!       campaign in-house dispersive input (terms, masters) -> exact system (+ basis file)
 //!   patch_transport system-diff A.json B.json
 //!       exact entry-by-entry comparison (basis files give the permutation)
-//!   patch_transport plan PLAN.json --digits W --out PATH.json [--offset 1] [--check ZPATH.json]
-//!       port of zplan.py (PLAN.json: s0, s_end, singular_points, axis_singular, ratio)
-//!   patch_transport run --system SYS.json --path PATH.json [--segment A:B] [--orders-digits W --plan PLAN.json]
-//!       (--digits W | --bits B) [--threads T] [--mode fixed|tracked] [--initial ramp|unit|FILE]
-//!       [--cauchy-pole A] [--project-real] [--no-overlap]
-//!       [--checkpoint FILE [--every-patches N] [--every-seconds S] [--resume] [--allow-other-binary]]
+//!   patch_transport plan PLAN.json --digits W --out PATH.json [--offset 1] [--check ZPATH.json] [--system SYS.json]
+//!       port of zplan.py (PLAN.json: s0, s_end, singular_points, axis_singular, ratio); --system checks that
+//!       every singular point of the system (denominator roots, z = x + offset) is in PLAN.json
+//!   patch_transport run --config dispersive|generic --system SYS.json --path PATH.json [--segment A:B]
+//!       [--orders-digits W --plan PLAN.json] (--digits W | --bits B) [--threads T] [--mode fixed|tracked]
+//!       [--initial ramp|unit|FILE] [--no-overlap] [--no-pin]
+//!       generic only: [--cauchy-pole A] [--project-real]   (dispersive = real projection + pole 1)
+//!       [--checkpoint FILE [--every-patches N] [--every-seconds S] [--fresh] [--require-same-binary]]
 //!       [--stop-after K] --out RESULT.json
-//!       SIGTERM/SIGINT -> checkpoint flushed -> exit 75 (resume with --resume, any thread count)
+//!       An existing checkpoint is RESUMED (any thread count); --fresh moves it aside first.
+//!       SIGTERM/SIGINT -> checkpoint flushed -> exit 75.
 //!   patch_transport compare RUN.json REF.json [--out REPORT.json]
-//!       per-entry digits (two working precisions), overlap and tail digits
+//!       per-entry digits (two working precisions; refuses runs that are not comparable)
 use rug::{Complex, Rational};
 use std::collections::BTreeMap;
 use std::sync::Arc;
@@ -176,7 +179,23 @@ fn plan(a: &Args) -> R<()> {
     let input: PlanInput = serde_json::from_value(read_json(&a.pos(2)?)?)?;
     let digits: f64 = a.req("--digits")?.parse()?;
     let offset: Rational = a.opt("--offset").unwrap_or("1".into()).parse()?;
-    let path = patch_kernel::path::plan_axis_detours(&input, digits, offset)?;
+    if let Some(sys) = a.opt("--system") {
+        let system = RationalSystem::from_json(read_json(&sys)?)?;
+        let t = Instant::now();
+        let off = patch_kernel::path::to_f64(&offset);
+        let derived: Vec<(f64, f64)> = system
+            .singular_points()?
+            .into_iter()
+            .map(|(re, im)| (re + off, im))
+            .collect();
+        patch_kernel::path::verify_singular_points(&input.singular_points, &derived, 1e-9)?;
+        println!(
+            "plan: the {} singular points of the system are all in the planner input ({:.1} s)",
+            derived.len(),
+            t.elapsed().as_secs_f64()
+        );
+    }
+    let path = patch_kernel::path::plan_axis_detours(&input, digits, offset.clone())?;
     let json = path.to_json();
     println!(
         "plan: {} patches, {} complex, sum of orders {}",
@@ -227,10 +246,18 @@ fn initial_vector(spec: &str, dim: usize, bits: u32) -> R<Vec<Complex>> {
     })
 }
 
+/// SIGTERM and SIGINT set `flag`: the run flushes its checkpoint and exits 75.
+fn cancel_on_signals(flag: Arc<AtomicBool>) -> R<()> {
+    for sig in [signal_hook::consts::SIGTERM, signal_hook::consts::SIGINT] {
+        signal_hook::flag::register(sig, flag.clone())?;
+    }
+    Ok(())
+}
+
 fn run(a: &Args) -> R<()> {
     let t0 = Instant::now();
     let flag = Arc::new(AtomicBool::new(false));
-    checkpoint::cancel_on_signals(flag.clone())?;
+    cancel_on_signals(flag.clone())?;
     let cancel = CancellationToken::from_flag(flag);
     let sys_path = a.req("--system")?;
     let system = RationalSystem::from_json(read_json(&sys_path)?)?;
@@ -243,24 +270,36 @@ fn run(a: &Args) -> R<()> {
     }
     if let Some(w) = a.opt("--orders-digits") {
         let input: PlanInput = serde_json::from_value(read_json(&a.req("--plan")?)?)?;
-        path = path.with_orders(&input.singular_points, w.parse()?);
+        path = path.with_orders(&input.singular_points, w.parse()?)?;
     }
     let bits = match (a.opt("--bits"), a.opt("--digits")) {
         (Some(b), _) => b.parse()?,
         (None, Some(d)) => patch_kernel::bits_for_digits(d.parse()?),
         _ => return Err("--digits or --bits".into()),
     };
-    let mut config = TransportConfig::new(bits);
+    let mut config = match a.req("--config")?.as_str() {
+        "dispersive" => {
+            if a.opt("--cauchy-pole").is_some() || a.flag("--project-real") {
+                return Err("--cauchy-pole/--project-real are fixed by --config dispersive".into());
+            }
+            TransportConfig::dispersive(bits)
+        }
+        "generic" => {
+            let mut c = TransportConfig::generic(bits);
+            c.cauchy_pole = a
+                .opt("--cauchy-pole")
+                .map(|s| s.parse::<Rational>())
+                .transpose()?;
+            c.project_real_axis = a.flag("--project-real");
+            c
+        }
+        other => return Err(format!("--config {other}: dispersive|generic").into()),
+    };
     config.threads = a.opt("--threads").unwrap_or("1".into()).parse()?;
     config.mode = a
         .opt("--mode")
         .unwrap_or("fixed".into())
         .parse::<ArithmeticMode>()?;
-    config.cauchy_pole = a
-        .opt("--cauchy-pole")
-        .map(|s| s.parse::<Rational>())
-        .transpose()?;
-    config.project_real_axis = a.flag("--project-real");
     config.overlap_check = !a.flag("--no-overlap");
     config.pin_threads = !a.flag("--no-pin");
     let initial = initial_vector(
@@ -270,20 +309,36 @@ fn run(a: &Args) -> R<()> {
     )?;
     let transport =
         Transport::new(&system, &path, config.clone())?.with_system_fingerprint(system_fp.clone());
-    let policy = a.opt("--checkpoint").map(|f| checkpoint::CheckpointPolicy {
-        file: f.into(),
-        every_patches: a
+    let policy = a.opt("--checkpoint").map(|f| {
+        let mut p = checkpoint::CheckpointPolicy::new(f);
+        p.every_patches = a
             .opt("--every-patches")
             .and_then(|v| v.parse().ok())
-            .unwrap_or(1),
-        every_seconds: a
+            .unwrap_or(1);
+        p.every_seconds = a
             .opt("--every-seconds")
             .and_then(|v| v.parse().ok())
-            .unwrap_or(0.0),
+            .unwrap_or(0.0);
+        p
     });
-    let mut state = match (&policy, a.flag("--resume")) {
-        (Some(p), true) if p.file.exists() => {
-            let s = transport.resume(&p.file, &initial, !a.flag("--allow-other-binary"))?;
+    if let Some(p) = &policy {
+        if a.flag("--fresh") && p.file.exists() {
+            let secs = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map(|d| d.as_secs())
+                .unwrap_or(0);
+            let aside = format!("{}.aside-{secs}", p.file.display());
+            std::fs::rename(&p.file, &aside)?;
+            eprintln!("--fresh: moved the old checkpoint to {aside}");
+        }
+    }
+    let mut state = match &policy {
+        Some(p) if p.file.exists() => {
+            let s = transport
+                .resume(&p.file, &initial, a.flag("--require-same-binary"))
+                .map_err(|e| {
+                    format!("{e} (use --fresh to start over; the old file is kept aside)")
+                })?;
             eprintln!(
                 "resumed at patch {} from {}",
                 s.next_patch,
@@ -335,6 +390,8 @@ fn run(a: &Args) -> R<()> {
         "peak_rss_gb": rss_gb().1,
         "identity_hash": state.identity_hash(),
         "system_fingerprint": system_fp,
+        "max_dropped_imag_log10": state.max_dropped_imag_log10(),
+        "overlap_skipped": state.records.iter().filter(|r| r.overlap_skipped).count(),
     });
     eprintln!("summary: {summary}");
     if let Some(out) = a.opt("--out") {
@@ -342,7 +399,7 @@ fn run(a: &Args) -> R<()> {
         json["summary"] = summary;
         write_json(&out, &json)?;
     }
-    if outcome == TransportOutcome::Cancelled && state.next_patch < until.min(path.patches.len()) {
+    if outcome == TransportOutcome::Cancelled {
         eprintln!(
             "stopped by signal after patch {}; checkpoint flushed; exit {}",
             state.next_patch,
@@ -354,21 +411,22 @@ fn run(a: &Args) -> R<()> {
 }
 
 fn compare(a: &Args) -> R<()> {
-    let load = |p: &str| -> R<(TransportState, f64)> {
-        let v = read_json(p)?;
-        let bits = v["fingerprint"]["bits"].as_f64().unwrap_or(0.0);
-        let (s, _) = TransportState::from_json(v)?;
-        Ok((s, bits / std::f64::consts::LOG2_10 - 10.0))
+    let load = |p: &str| -> R<(TransportState, checkpoint::Fingerprint)> {
+        Ok(TransportState::from_json(read_json(p)?)?)
     };
-    let (run, d1) = load(&a.pos(2)?)?;
-    let (reference, d2) = load(&a.pos(3)?)?;
-    let report = DigitsReport::new(&run, d1, &reference, d2);
+    let (run, f1) = load(&a.pos(2)?)?;
+    let (reference, f2) = load(&a.pos(3)?)?;
+    let report = DigitsReport::new(&run, &f1, &reference, &f2)?;
     println!(
-        "compare: run W~{d1:.0} vs reference W~{d2:.0}: agreement min {:.2} median {:.2}; integral min {:?}; overlap digits min {:.2}",
+        "compare: run W~{:.0} vs reference W~{:.0}: agreement min {:.2} median {:.2}; integral min {:?}; overlap digits min {:.2} ({} skipped); dropped imag 10^{:.1}",
+        report.digits,
+        report.reference_digits,
         report.min_agreement,
         report.median_agreement,
         report.min_integral_agreement,
-        report.min_overlap_digits
+        report.min_overlap_digits,
+        report.overlap_skipped,
+        report.dropped_imag_log10
     );
     if let Some(out) = a.opt("--out") {
         write_json(&out, &serde_json::to_value(&report)?)?;
