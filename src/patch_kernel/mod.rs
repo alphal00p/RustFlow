@@ -29,17 +29,17 @@
 //! Nothing here uses global mutable state; threads are scoped per patch.
 pub mod accuracy;
 pub mod checkpoint;
-pub mod path;
 pub mod patch;
+pub mod path;
 pub mod scalar;
 pub mod shift;
 pub mod system;
-pub mod transport;
 #[cfg(test)]
 mod tests;
+pub mod transport;
 
 pub use accuracy::{DigitsReport, compare_digits};
-pub use path::{PatchSpec, PlannedPath, PlanInput};
+pub use path::{PatchSpec, PlanInput, PlannedPath};
 pub use scalar::ArithmeticMode;
 pub use system::RationalSystem;
 pub use transport::{PatchRecord, Transport, TransportConfig, TransportOutcome, TransportState};

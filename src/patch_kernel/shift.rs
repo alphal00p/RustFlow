@@ -52,7 +52,11 @@ pub fn shift_guarded(p: &[Integer], c: &Centre, gbits: u32) -> Vec<Complex> {
         br = rev;
     }
     let real = c.is_real();
-    let mut bi: Vec<Integer> = if real { Vec::new() } else { vec![Integer::new(); n + 1] };
+    let mut bi: Vec<Integer> = if real {
+        Vec::new()
+    } else {
+        vec![Integer::new(); n + 1]
+    };
     if c.gr != 0 || c.gi != 0 {
         let mut t = Integer::new();
         for i in 0..n {
@@ -91,7 +95,11 @@ pub fn shift_guarded(p: &[Integer], c: &Centre, gbits: u32) -> Vec<Complex> {
             }
         };
         let re = conv(&br[m]);
-        let im = if real { Float::new(gbits) } else { conv(&bi[m]) };
+        let im = if real {
+            Float::new(gbits)
+        } else {
+            conv(&bi[m])
+        };
         out.push(Complex::with_val(gbits, (re, im)));
     }
     out
@@ -114,8 +122,16 @@ mod tests {
 
     #[test]
     fn shift_matches_exact_taylor_coefficients() {
-        let p: Vec<Integer> = [3, -7, 0, 11, 5, -2].iter().map(|&v| Integer::from(v)).collect();
-        for (re, im) in [("-51/36028797018963968", "0"), ("-6468430547/8589934592", "3/7"), ("5/3", "-1/9"), ("0", "0")] {
+        let p: Vec<Integer> = [3, -7, 0, 11, 5, -2]
+            .iter()
+            .map(|&v| Integer::from(v))
+            .collect();
+        for (re, im) in [
+            ("-51/36028797018963968", "0"),
+            ("-6468430547/8589934592", "3/7"),
+            ("5/3", "-1/9"),
+            ("0", "0"),
+        ] {
             let re: Rational = re.parse().unwrap();
             let im: Rational = im.parse().unwrap();
             let c = Centre::new(&re, &im);
@@ -124,7 +140,12 @@ mod tests {
             let (v_re, v_im) = eval_exact(&p, &re, &im);
             assert_eq!(Float::with_val(300, &v_re), *s[0].real());
             assert_eq!(Float::with_val(300, &v_im), *s[0].imag());
-            let dp: Vec<Integer> = p.iter().enumerate().skip(1).map(|(k, a)| Integer::from(a * k as u32)).collect();
+            let dp: Vec<Integer> = p
+                .iter()
+                .enumerate()
+                .skip(1)
+                .map(|(k, a)| Integer::from(a * k as u32))
+                .collect();
             let (d_re, d_im) = eval_exact(&dp, &re, &im);
             assert_eq!(Float::with_val(300, &d_re), *s[1].real());
             assert_eq!(Float::with_val(300, &d_im), *s[1].imag());

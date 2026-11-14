@@ -14,7 +14,13 @@ use serde::{Deserialize, Serialize};
 
 /// Decimal digits of agreement of `a` and `b` (capped at `cap`).
 pub fn agreement_digits(a: &Complex, b: &Complex, cap: f64) -> f64 {
-    let p = a.prec().0.max(b.prec().0).max(a.prec().1).max(b.prec().1).max(64);
+    let p = a
+        .prec()
+        .0
+        .max(b.prec().0)
+        .max(a.prec().1)
+        .max(b.prec().1)
+        .max(64);
     let d = Complex::with_val(p, a - b);
     let dn = Float::with_val(64, d.abs_ref());
     let an = Float::with_val(64, a.abs_ref());
@@ -31,7 +37,10 @@ pub fn agreement_digits(a: &Complex, b: &Complex, cap: f64) -> f64 {
 
 /// Per-entry agreement of two vectors.
 pub fn compare_digits(a: &[Complex], b: &[Complex], cap: f64) -> Vec<f64> {
-    a.iter().zip(b).map(|(x, y)| agreement_digits(x, y, cap)).collect()
+    a.iter()
+        .zip(b)
+        .map(|(x, y)| agreement_digits(x, y, cap))
+        .collect()
 }
 
 /// Digits Symbolica's tracking float claims for a value (its precision).
@@ -61,7 +70,11 @@ pub struct DigitsReport {
 }
 
 fn neg_log(v: f64) -> f64 {
-    if v <= LOG10_NONE + 1.0 { f64::INFINITY } else { -v }
+    if v <= LOG10_NONE + 1.0 {
+        f64::INFINITY
+    } else {
+        -v
+    }
 }
 
 fn min_of(v: &[f64]) -> f64 {
@@ -70,7 +83,12 @@ fn min_of(v: &[f64]) -> f64 {
 
 impl DigitsReport {
     /// Assess `run` (working digits `digits`) against `reference` (more digits).
-    pub fn new(run: &TransportState, digits: f64, reference: &TransportState, reference_digits: f64) -> Self {
+    pub fn new(
+        run: &TransportState,
+        digits: f64,
+        reference: &TransportState,
+        reference_digits: f64,
+    ) -> Self {
         let cap = reference_digits + 10.0;
         let agreement = compare_digits(&run.y, &reference.y, cap);
         let integral_agreement = match (&run.integral, &reference.integral) {
@@ -81,7 +99,11 @@ impl DigitsReport {
         let tail_digits: Vec<f64> = run.tail_log10.iter().map(|&v| neg_log(v)).collect();
         let mut sorted = agreement.clone();
         sorted.sort_by(f64::total_cmp);
-        let median = if sorted.is_empty() { f64::NAN } else { sorted[sorted.len() / 2] };
+        let median = if sorted.is_empty() {
+            f64::NAN
+        } else {
+            sorted[sorted.len() / 2]
+        };
         Self {
             digits,
             reference_digits,

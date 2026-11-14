@@ -33,17 +33,34 @@ fn line(a: (Rational, Rational), b: (Rational, Rational), n: u32, order: usize) 
 }
 
 fn path(segments: Vec<Vec<PatchSpec>>) -> PlannedPath {
-    PlannedPath { offset: Rational::new(), patches: segments.into_iter().flatten().collect() }
+    PlannedPath {
+        offset: Rational::new(),
+        patches: segments.into_iter().flatten().collect(),
+    }
 }
 
 fn real(v: &[f64], bits: u32) -> Vec<Complex> {
     v.iter().map(|&x| Complex::with_val(bits, (x, 0))).collect()
 }
 
-fn run_full(system: &RationalSystem, p: &PlannedPath, config: TransportConfig, y0: &[Complex]) -> TransportState {
+fn run_full(
+    system: &RationalSystem,
+    p: &PlannedPath,
+    config: TransportConfig,
+    y0: &[Complex],
+) -> TransportState {
     let t = Transport::new(system, p, config).unwrap();
     let mut s = t.initial_state(y0).unwrap();
-    let out = t.run(&mut s, usize::MAX, y0, &CancellationToken::default(), None, |_| {}).unwrap();
+    let out = t
+        .run(
+            &mut s,
+            usize::MAX,
+            y0,
+            &CancellationToken::default(),
+            None,
+            |_| {},
+        )
+        .unwrap();
     assert_eq!(out, TransportOutcome::Completed);
     s
 }
@@ -80,7 +97,10 @@ fn rotation_system_gives_cos_and_sin() {
     let sys = RationalSystem::from_entries(
         2,
         "x",
-        vec![(0, 1, ints(&[1]), ints(&[1])), (1, 0, ints(&[-1]), ints(&[1]))],
+        vec![
+            (0, 1, ints(&[1]), ints(&[1])),
+            (1, 0, ints(&[-1]), ints(&[1])),
+        ],
     )
     .unwrap();
     let bits = bits_for_digits(50);
@@ -88,7 +108,12 @@ fn rotation_system_gives_cos_and_sin() {
         line((q("0"), q("0")), (q("1/2"), q("1/3")), 3, 60),
         line((q("1/2"), q("1/3")), (q("1"), q("0")), 3, 60),
     ]);
-    let s = run_full(&sys, &p, TransportConfig::new(bits), &real(&[1.0, 0.0], bits));
+    let s = run_full(
+        &sys,
+        &p,
+        TransportConfig::new(bits),
+        &real(&[1.0, 0.0], bits),
+    );
     let one = Float::with_val(bits, 1);
     let c = Complex::with_val(bits, (one.clone().cos(), 0));
     let sn = Complex::with_val(bits, (-one.sin(), 0));
@@ -103,7 +128,12 @@ fn branch_point_detour_gives_the_monodromy_phase() {
     let sys = RationalSystem::from_entries(
         1,
         "x",
-        vec![(0, 0, vec![a.numer().clone()], vec![Integer::from(-a.denom()), a.denom().clone()])],
+        vec![(
+            0,
+            0,
+            vec![a.numer().clone()],
+            vec![Integer::from(-a.denom()), a.denom().clone()],
+        )],
     )
     .unwrap();
     let bits = bits_for_digits(40);
@@ -118,7 +148,11 @@ fn branch_point_detour_gives_the_monodromy_phase() {
     let pi = Float::with_val(bits, rug::float::Constant::Pi);
     let phase = Float::with_val(bits, &pi * Float::with_val(bits, &a));
     let expect = Complex::with_val(bits, (phase.clone().cos(), -phase.sin()));
-    assert!(digits(&s.y[0], &expect) > 38.0, "{}", digits(&s.y[0], &expect));
+    assert!(
+        digits(&s.y[0], &expect) > 38.0,
+        "{}",
+        digits(&s.y[0], &expect)
+    );
 }
 
 #[test]
@@ -132,7 +166,8 @@ fn cauchy_weight_integral_matches_closed_form() {
     c.cauchy_pole = Some(q("-1"));
     let s = run_full(&sys, &p, c, &real(&[1.0], bits));
     let x = Float::with_val(bits, 2);
-    let exact = -(Float::with_val(bits, &x * &x) / 2u32 - &x + Float::with_val(bits, 3).ln() * 2u32);
+    let exact =
+        -(Float::with_val(bits, &x * &x) / 2u32 - &x + Float::with_val(bits, 3).ln() * 2u32);
     let got = &s.integral.as_ref().unwrap()[0];
     assert!(digits(got, &Complex::with_val(bits, (exact, 0))) > 38.0);
 }
@@ -140,14 +175,24 @@ fn cauchy_weight_integral_matches_closed_form() {
 /// A dense-ish 9 x 9 system with several shared denominators and numerators
 /// of various degrees (singular points at -3, -5/2, 4 and 2 +- i).
 fn mixed() -> RationalSystem {
-    let dens = [ints(&[3, 1]), ints(&[5, 2]), ints(&[-4, 1]), ints(&[5, -4, 1]), ints(&[15, 11, 2])];
+    let dens = [
+        ints(&[3, 1]),
+        ints(&[5, 2]),
+        ints(&[-4, 1]),
+        ints(&[5, -4, 1]),
+        ints(&[15, 11, 2]),
+    ];
     let mut raw = Vec::new();
     for i in 0..9i64 {
         for j in 0..9i64 {
             if (i * 7 + j * 3) % 4 == 0 && i != j {
                 continue;
             }
-            let n = ints(&[(i - j) % 5 + 1, (i * j) % 3 - 1, if (i + j) % 3 == 0 { 2 } else { 0 }]);
+            let n = ints(&[
+                (i - j) % 5 + 1,
+                (i * j) % 3 - 1,
+                if (i + j) % 3 == 0 { 2 } else { 0 },
+            ]);
             let d = dens[((i + 2 * j) % 5) as usize].clone();
             raw.push((i as usize, j as usize, n, d));
         }
@@ -165,7 +210,9 @@ fn mixed_path(order: usize) -> PlannedPath {
 }
 
 fn ramp(n: usize, bits: u32) -> Vec<Complex> {
-    (0..n).map(|j| Complex::with_val(bits, (Rational::from((j as i64 + 3, 7)), 0))).collect()
+    (0..n)
+        .map(|j| Complex::with_val(bits, (Rational::from((j as i64 + 3, 7)), 0)))
+        .collect()
 }
 
 #[test]
@@ -198,7 +245,11 @@ fn kill_and_resume_is_identical_also_with_other_threads() {
     let dir = std::env::temp_dir().join(format!("rf-pk-{}-{}", std::process::id(), line!()));
     std::fs::create_dir_all(&dir).unwrap();
     let file = dir.join("state.json");
-    let policy = CheckpointPolicy { file: file.clone(), every_patches: 2, every_seconds: 0.0 };
+    let policy = CheckpointPolicy {
+        file: file.clone(),
+        every_patches: 2,
+        every_seconds: 0.0,
+    };
     // first run: cancelled after the third patch (cancel at a patch boundary)
     let t = Transport::new(&sys, &p, c.clone()).unwrap();
     let mut s = t.initial_state(&y0).unwrap();
@@ -221,7 +272,9 @@ fn kill_and_resume_is_identical_also_with_other_threads() {
         let mut s2 = t2.resume(&file, &y0, true).unwrap();
         assert!(s2.next_patch >= 3);
         let token = CancellationToken::default();
-        let out = t2.run(&mut s2, usize::MAX, &y0, &token, Some(&policy), |_| {}).unwrap();
+        let out = t2
+            .run(&mut s2, usize::MAX, &y0, &token, Some(&policy), |_| {})
+            .unwrap();
         assert_eq!(out, TransportOutcome::Completed);
         assert_eq!(s2.identity_hash(), reference.identity_hash());
         // reset the checkpoint to patch 3 for the next thread count
@@ -244,10 +297,20 @@ fn kill_and_resume_is_identical_also_with_other_threads() {
         std::thread::sleep(std::time::Duration::from_millis(30));
         tk.cancel();
     });
-    let _ = t3.run(&mut s4, usize::MAX, &y0, &token, Some(&policy), |_| {}).unwrap();
+    let _ = t3
+        .run(&mut s4, usize::MAX, &y0, &token, Some(&policy), |_| {})
+        .unwrap();
     killer.join().unwrap();
     let mut s5 = t3.resume(&file, &y0, true).unwrap();
-    t3.run(&mut s5, usize::MAX, &y0, &CancellationToken::default(), Some(&policy), |_| {}).unwrap();
+    t3.run(
+        &mut s5,
+        usize::MAX,
+        &y0,
+        &CancellationToken::default(),
+        Some(&policy),
+        |_| {},
+    )
+    .unwrap();
     assert_eq!(s5.identity_hash(), reference.identity_hash());
     // a different precision must refuse the checkpoint
     let mut c4 = c.clone();
@@ -263,8 +326,18 @@ fn two_precision_comparison_and_overlap_diagnostics() {
     let lo = bits_for_digits(30);
     let hi = bits_for_digits(60);
     // the low run uses the lower order (its own truncation)
-    let a = run_full(&sys, &mixed_path(45), TransportConfig::new(lo), &ramp(9, lo));
-    let b = run_full(&sys, &mixed_path(90), TransportConfig::new(hi), &ramp(9, hi));
+    let a = run_full(
+        &sys,
+        &mixed_path(45),
+        TransportConfig::new(lo),
+        &ramp(9, lo),
+    );
+    let b = run_full(
+        &sys,
+        &mixed_path(90),
+        TransportConfig::new(hi),
+        &ramp(9, hi),
+    );
     let r = DigitsReport::new(&a, 30.0, &b, 60.0);
     assert!(r.min_agreement > 20.0, "{:?}", r.agreement);
     // overlap consistency is bounded by the same accuracy
@@ -297,7 +370,10 @@ fn system_from_atoms_equals_system_from_entries() {
     let e = |s: &str| Atom::parse(s, "pk_test", Default::default()).unwrap();
     let m = vec![
         vec![e("2*pk_test_x/(1+pk_test_x^2)"), Atom::new()],
-        vec![e("(3/7)/(2*pk_test_x - 5)"), e("(pk_test_x^2-1/2)/((pk_test_x+3)*(2*pk_test_x - 5))")],
+        vec![
+            e("(3/7)/(2*pk_test_x - 5)"),
+            e("(pk_test_x^2-1/2)/((pk_test_x+3)*(2*pk_test_x - 5))"),
+        ],
     ];
     let a = RationalSystem::from_matrix_atoms(&m, x).unwrap();
     let b = RationalSystem::from_entries(
@@ -311,8 +387,14 @@ fn system_from_atoms_equals_system_from_entries() {
     )
     .unwrap();
     assert!(a.differences(&b, &[0, 1]).is_empty());
-    assert_eq!(a.fingerprint(), RationalSystem::from_json(a.to_json()).unwrap().fingerprint());
-    let wrong = RationalSystem::from_entries(2, "x", vec![(0, 0, ints(&[0, 2]), ints(&[1, 0, 1]))]).unwrap();
+    assert_eq!(
+        a.fingerprint(),
+        RationalSystem::from_json(a.to_json())
+            .unwrap()
+            .fingerprint()
+    );
+    let wrong = RationalSystem::from_entries(2, "x", vec![(0, 0, ints(&[0, 2]), ints(&[1, 0, 1]))])
+        .unwrap();
     assert_eq!(a.differences(&wrong, &[0, 1]).len(), 2);
 }
 

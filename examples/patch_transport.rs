@@ -49,7 +49,10 @@ fn rss_gb() -> (f64, f64) {
 struct Args(Vec<String>);
 impl Args {
     fn opt(&self, key: &str) -> Option<String> {
-        self.0.iter().position(|a| a == key).and_then(|i| self.0.get(i + 1).cloned())
+        self.0
+            .iter()
+            .position(|a| a == key)
+            .and_then(|i| self.0.get(i + 1).cloned())
     }
     fn flag(&self, key: &str) -> bool {
         self.0.iter().any(|a| a == key)
@@ -58,7 +61,10 @@ impl Args {
         self.opt(key).ok_or_else(|| format!("missing {key}").into())
     }
     fn pos(&self, k: usize) -> R<String> {
-        self.0.get(k).cloned().ok_or_else(|| format!("missing positional argument {k}").into())
+        self.0
+            .get(k)
+            .cloned()
+            .ok_or_else(|| format!("missing positional argument {k}").into())
     }
 }
 
@@ -67,14 +73,20 @@ fn read_json(path: &str) -> R<serde_json::Value> {
 }
 
 fn write_json(path: &str, v: &serde_json::Value) -> R<()> {
-    checkpoint::write_atomic(std::path::Path::new(path), serde_json::to_string(v)?.as_bytes())?;
+    checkpoint::write_atomic(
+        std::path::Path::new(path),
+        serde_json::to_string(v)?.as_bytes(),
+    )?;
     Ok(())
 }
 
 fn save_system(sys: &RationalSystem, basis: &[Vec<i64>], out: &str, t0: Instant) -> R<()> {
     let fp = sys.fingerprint();
     write_json(out, &sys.to_json())?;
-    write_json(&format!("{out}.basis.json"), &serde_json::json!({"basis": basis, "fingerprint": fp}))?;
+    write_json(
+        &format!("{out}.basis.json"),
+        &serde_json::json!({"basis": basis, "fingerprint": fp}),
+    )?;
     println!(
         "system: dim {} entries {} distinct polys {} products/order {} fingerprint {fp} ({:.1} s, rss/peak {:?} GB)",
         sys.dim,
@@ -94,14 +106,28 @@ fn system_harness(a: &Args) -> R<()> {
     let hash = blake3::hash(&bytes).to_hex().to_string();
     let solution = HarnessSolution::from_slice(&bytes)?;
     drop(bytes);
-    println!("read solution blake3 {hash}: {} masters, fixed {:?} ({:.1} s)", solution.masters.len(), solution.fixed, t0.elapsed().as_secs_f64());
+    println!(
+        "read solution blake3 {hash}: {} masters, fixed {:?} ({:.1} s)",
+        solution.masters.len(),
+        solution.fixed,
+        t0.elapsed().as_secs_f64()
+    );
     let epsilon = symbolica::symbol!("rflift::eps");
     let (_, mask) = rustred_harness::family_from_harness(&harness, epsilon, 4)?;
     let homogeneous = !a.flag("--full");
     let reduced = rustred_harness::reduced_system_with(&solution, &mask, &[], homogeneous)?;
-    println!("reduced (homogeneous e-block {homogeneous}): basis {} ({:.1} s, rss/peak {:?} GB)", reduced.basis.len(), t0.elapsed().as_secs_f64(), rss_gb());
+    println!(
+        "reduced (homogeneous e-block {homogeneous}): basis {} ({:.1} s, rss/peak {:?} GB)",
+        reduced.basis.len(),
+        t0.elapsed().as_secs_f64(),
+        rss_gb()
+    );
     let sys = RationalSystem::from_matrix_atoms(&reduced.matrix, rustred_harness::eta_symbol())?;
-    let basis: Vec<Vec<i64>> = reduced.basis.iter().map(|i| i.0.iter().map(|&v| v as i64).collect()).collect();
+    let basis: Vec<Vec<i64>> = reduced
+        .basis
+        .iter()
+        .map(|i| i.0.iter().map(|&v| v as i64).collect())
+        .collect();
     save_system(&sys, &basis, &a.req("--out")?, t0)
 }
 
@@ -118,10 +144,15 @@ fn system_diff(a: &Args) -> R<()> {
     let (pa, pb) = (a.pos(2)?, a.pos(3)?);
     let sa = RationalSystem::from_json(read_json(&pa)?)?;
     let sb = RationalSystem::from_json(read_json(&pb)?)?;
-    let ba: Vec<Vec<i64>> = serde_json::from_value(read_json(&format!("{pa}.basis.json"))?["basis"].clone())?;
-    let bb: Vec<Vec<i64>> = serde_json::from_value(read_json(&format!("{pb}.basis.json"))?["basis"].clone())?;
+    let ba: Vec<Vec<i64>> =
+        serde_json::from_value(read_json(&format!("{pa}.basis.json"))?["basis"].clone())?;
+    let bb: Vec<Vec<i64>> =
+        serde_json::from_value(read_json(&format!("{pb}.basis.json"))?["basis"].clone())?;
     let index: BTreeMap<&Vec<i64>, usize> = bb.iter().enumerate().map(|(i, m)| (m, i)).collect();
-    let perm = ba.iter().map(|m| index.get(m).copied().ok_or("basis differs")).collect::<Result<Vec<_>, _>>()?;
+    let perm = ba
+        .iter()
+        .map(|m| index.get(m).copied().ok_or("basis differs"))
+        .collect::<Result<Vec<_>, _>>()?;
     let diff = sa.differences(&sb, &perm);
     let identity = perm.iter().enumerate().all(|(i, &p)| i == p);
     println!(
@@ -147,15 +178,24 @@ fn plan(a: &Args) -> R<()> {
     let offset: Rational = a.opt("--offset").unwrap_or("1".into()).parse()?;
     let path = patch_kernel::path::plan_axis_detours(&input, digits, offset)?;
     let json = path.to_json();
-    println!("plan: {} patches, {} complex, sum of orders {}", json["n"], json["n_complex"], json["sum_nord"]);
+    println!(
+        "plan: {} patches, {} complex, sum of orders {}",
+        json["n"], json["n_complex"], json["sum_nord"]
+    );
     if let Some(check) = a.opt("--check") {
         let reference = read_json(&check)?;
         let same = reference["patches"] == json["patches"];
         println!("check against {check}: patches identical = {same}");
         if !same {
-            let (x, y) = (reference["patches"].as_array().unwrap(), json["patches"].as_array().unwrap());
+            let (x, y) = (
+                reference["patches"].as_array().unwrap(),
+                json["patches"].as_array().unwrap(),
+            );
             if let Some(k) = (0..x.len().min(y.len())).find(|&k| x[k] != y[k]) {
-                println!("  first difference at patch {k}: reference {} ours {}", x[k], y[k]);
+                println!(
+                    "  first difference at patch {k}: reference {} ours {}",
+                    x[k], y[k]
+                );
             }
             println!("  lengths {} / {}", x.len(), y.len());
         }
@@ -177,7 +217,10 @@ fn initial_vector(spec: &str, dim: usize, bits: u32) -> R<Vec<Complex>> {
             let v: Vec<(String, String)> = serde_json::from_value(read_json(file)?)?;
             v.iter()
                 .map(|(re, im)| {
-                    Ok(Complex::with_val(bits, (re.parse::<Rational>()?, im.parse::<Rational>()?)))
+                    Ok(Complex::with_val(
+                        bits,
+                        (re.parse::<Rational>()?, im.parse::<Rational>()?),
+                    ))
                 })
                 .collect::<R<Vec<_>>>()?
         }
@@ -209,27 +252,51 @@ fn run(a: &Args) -> R<()> {
     };
     let mut config = TransportConfig::new(bits);
     config.threads = a.opt("--threads").unwrap_or("1".into()).parse()?;
-    config.mode = a.opt("--mode").unwrap_or("fixed".into()).parse::<ArithmeticMode>()?;
-    config.cauchy_pole = a.opt("--cauchy-pole").map(|s| s.parse::<Rational>()).transpose()?;
+    config.mode = a
+        .opt("--mode")
+        .unwrap_or("fixed".into())
+        .parse::<ArithmeticMode>()?;
+    config.cauchy_pole = a
+        .opt("--cauchy-pole")
+        .map(|s| s.parse::<Rational>())
+        .transpose()?;
     config.project_real_axis = a.flag("--project-real");
     config.overlap_check = !a.flag("--no-overlap");
     config.pin_threads = !a.flag("--no-pin");
-    let initial = initial_vector(&a.opt("--initial").unwrap_or("ramp".into()), system.dim, bits)?;
-    let transport = Transport::new(&system, &path, config.clone())?.with_system_fingerprint(system_fp.clone());
+    let initial = initial_vector(
+        &a.opt("--initial").unwrap_or("ramp".into()),
+        system.dim,
+        bits,
+    )?;
+    let transport =
+        Transport::new(&system, &path, config.clone())?.with_system_fingerprint(system_fp.clone());
     let policy = a.opt("--checkpoint").map(|f| checkpoint::CheckpointPolicy {
         file: f.into(),
-        every_patches: a.opt("--every-patches").and_then(|v| v.parse().ok()).unwrap_or(1),
-        every_seconds: a.opt("--every-seconds").and_then(|v| v.parse().ok()).unwrap_or(0.0),
+        every_patches: a
+            .opt("--every-patches")
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(1),
+        every_seconds: a
+            .opt("--every-seconds")
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(0.0),
     });
     let mut state = match (&policy, a.flag("--resume")) {
         (Some(p), true) if p.file.exists() => {
             let s = transport.resume(&p.file, &initial, !a.flag("--allow-other-binary"))?;
-            eprintln!("resumed at patch {} from {}", s.next_patch, p.file.display());
+            eprintln!(
+                "resumed at patch {} from {}",
+                s.next_patch,
+                p.file.display()
+            );
             s
         }
         _ => transport.initial_state(&initial)?,
     };
-    let until = a.opt("--stop-after").and_then(|v| v.parse::<usize>().ok()).unwrap_or(usize::MAX);
+    let until = a
+        .opt("--stop-after")
+        .and_then(|v| v.parse::<usize>().ok())
+        .unwrap_or(usize::MAX);
     eprintln!(
         "run: dim {} entries {} patches {} (complex {}) bits {bits} threads {} mode {:?}; load {t_load:.1} s, rss/peak {:?} GB",
         system.dim,
@@ -276,7 +343,11 @@ fn run(a: &Args) -> R<()> {
         write_json(&out, &json)?;
     }
     if outcome == TransportOutcome::Cancelled && state.next_patch < until.min(path.patches.len()) {
-        eprintln!("stopped by signal after patch {}; checkpoint flushed; exit {}", state.next_patch, checkpoint::EXIT_RESUMABLE);
+        eprintln!(
+            "stopped by signal after patch {}; checkpoint flushed; exit {}",
+            state.next_patch,
+            checkpoint::EXIT_RESUMABLE
+        );
         std::process::exit(checkpoint::EXIT_RESUMABLE);
     }
     Ok(())
@@ -294,7 +365,10 @@ fn compare(a: &Args) -> R<()> {
     let report = DigitsReport::new(&run, d1, &reference, d2);
     println!(
         "compare: run W~{d1:.0} vs reference W~{d2:.0}: agreement min {:.2} median {:.2}; integral min {:?}; overlap digits min {:.2}",
-        report.min_agreement, report.median_agreement, report.min_integral_agreement, report.min_overlap_digits
+        report.min_agreement,
+        report.median_agreement,
+        report.min_integral_agreement,
+        report.min_overlap_digits
     );
     if let Some(out) = a.opt("--out") {
         write_json(&out, &serde_json::to_value(&report)?)?;

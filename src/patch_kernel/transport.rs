@@ -119,7 +119,10 @@ impl TransportState {
             y: vector_to_exact(&self.y),
             integral: self.integral.as_deref().map(vector_to_exact),
             probe: self.probe.as_ref().map(|p| {
-                ((p.point.0.to_string(), p.point.1.to_string()), vector_to_exact(&p.values))
+                (
+                    (p.point.0.to_string(), p.point.1.to_string()),
+                    vector_to_exact(&p.values),
+                )
             }),
             records: self.records.clone(),
             overlap_log10: self.overlap_log10.clone(),
@@ -133,13 +136,20 @@ impl TransportState {
         let f: StateFile = serde_json::from_value(value)
             .map_err(|e| Error::InvalidInput(format!("checkpoint: {e}")))?;
         if f.schema != CHECKPOINT_SCHEMA {
-            return Err(Error::InvalidInput(format!("checkpoint schema {}", f.schema)));
+            return Err(Error::InvalidInput(format!(
+                "checkpoint schema {}",
+                f.schema
+            )));
         }
         let q = |s: &str| {
-            s.parse::<Rational>().map_err(|e| Error::InvalidInput(format!("rational {s:?}: {e}")))
+            s.parse::<Rational>()
+                .map_err(|e| Error::InvalidInput(format!("rational {s:?}: {e}")))
         };
         let probe = match &f.probe {
-            Some(((a, b), v)) => Some(Probe { point: (q(a)?, q(b)?), values: vector_from_exact(v)? }),
+            Some(((a, b), v)) => Some(Probe {
+                point: (q(a)?, q(b)?),
+                values: vector_from_exact(v)?,
+            }),
             None => None,
         };
         Ok((
@@ -172,7 +182,12 @@ impl TransportState {
             h.update(
                 format!(
                     "{}:{}:{}:{:e}:{:e}:{:e}|",
-                    r.index, r.order, r.complex, r.overlap_log10, r.tail_log10, r.dropped_imag_log10
+                    r.index,
+                    r.order,
+                    r.complex,
+                    r.overlap_log10,
+                    r.tail_log10,
+                    r.dropped_imag_log10
                 )
                 .as_bytes(),
             );
@@ -204,7 +219,11 @@ pub struct Transport<'a> {
 }
 
 impl<'a> Transport<'a> {
-    pub fn new(system: &'a RationalSystem, path: &'a PlannedPath, config: TransportConfig) -> Result<Self> {
+    pub fn new(
+        system: &'a RationalSystem,
+        path: &'a PlannedPath,
+        config: TransportConfig,
+    ) -> Result<Self> {
         path.check_contiguous()?;
         if config.bits < 16 {
             return Err(Error::InvalidInput("working precision too small".into()));
@@ -262,7 +281,12 @@ impl<'a> Transport<'a> {
     }
 
     /// Load a checkpoint and check it against this transport and `initial`.
-    pub fn resume(&self, file: &std::path::Path, initial: &[Complex], check_binary: bool) -> Result<TransportState> {
+    pub fn resume(
+        &self,
+        file: &std::path::Path,
+        initial: &[Complex],
+        check_binary: bool,
+    ) -> Result<TransportState> {
         let bytes = std::fs::read(file)?;
         let value: serde_json::Value = serde_json::from_slice(&bytes)
             .map_err(|e| Error::InvalidInput(format!("checkpoint JSON: {e}")))?;
@@ -270,15 +294,24 @@ impl<'a> Transport<'a> {
         let mine = self.fingerprint(initial);
         let bad = mine.mismatches(&fp, check_binary);
         if !bad.is_empty() {
-            return Err(Error::InvalidInput(format!("checkpoint fingerprint mismatch: {bad:?}")));
+            return Err(Error::InvalidInput(format!(
+                "checkpoint fingerprint mismatch: {bad:?}"
+            )));
         }
         if state.next_patch > self.path.patches.len() || state.y.len() != self.system.dim {
-            return Err(Error::InvalidInput("checkpoint does not fit the path/system".into()));
+            return Err(Error::InvalidInput(
+                "checkpoint does not fit the path/system".into(),
+            ));
         }
         Ok(state)
     }
 
-    pub fn write_checkpoint(&self, file: &std::path::Path, state: &TransportState, initial: &[Complex]) -> Result<()> {
+    pub fn write_checkpoint(
+        &self,
+        file: &std::path::Path,
+        state: &TransportState,
+        initial: &[Complex],
+    ) -> Result<()> {
         let json = state.to_json(&self.fingerprint(initial));
         checkpoint::write_atomic(file, serde_json::to_string(&json).expect("json").as_bytes())
     }
@@ -310,7 +343,8 @@ impl<'a> Transport<'a> {
             on_patch(state);
             if let Some(p) = policy {
                 let due = (p.every_patches > 0 && since >= p.every_patches)
-                    || (p.every_seconds > 0.0 && last_write.elapsed().as_secs_f64() >= p.every_seconds)
+                    || (p.every_seconds > 0.0
+                        && last_write.elapsed().as_secs_f64() >= p.every_seconds)
                     || state.next_patch == until;
                 if due {
                     self.write_checkpoint(&p.file, state, initial)?;
@@ -334,7 +368,10 @@ impl<'a> Transport<'a> {
         let spec = &self.path.patches[k];
         let bits = self.config.bits;
         let offset = &self.path.offset;
-        let centre_x = (Rational::from(&spec.centre.0 - offset), spec.centre.1.clone());
+        let centre_x = (
+            Rational::from(&spec.centre.0 - offset),
+            spec.centre.1.clone(),
+        );
         let has_imag = state.y.iter().any(|z| !z.imag().is_zero());
         let real_patch = spec.is_real();
         let complex = !real_patch || (has_imag && !self.config.project_real_axis);
@@ -366,7 +403,10 @@ impl<'a> Transport<'a> {
                 Rational::from(&p.point.1 - &spec.centre.1),
             ));
         }
-        let half = (Rational::from(&spec.step.0 / 2u32), Rational::from(&spec.step.1 / 2u32));
+        let half = (
+            Rational::from(&spec.step.0 / 2u32),
+            Rational::from(&spec.step.1 / 2u32),
+        );
         if self.config.overlap_check {
             probes.push(half.clone());
         }
@@ -379,7 +419,10 @@ impl<'a> Transport<'a> {
             bits,
             threads: self.config.threads,
             cauchy_u: self.config.cauchy_pole.as_ref().map(|a| {
-                (Rational::from(a - &spec.centre.0), Rational::from(-&spec.centre.1))
+                (
+                    Rational::from(a - &spec.centre.0),
+                    Rational::from(-&spec.centre.1),
+                )
             }),
             probes,
             cancel,
@@ -445,7 +488,11 @@ impl<'a> Transport<'a> {
             seconds_recurrence: out.seconds_recurrence,
             seconds_finish: out.seconds_finish,
             worker_busy_max: out.worker_busy.iter().copied().fold(0.0, f64::max),
-            worker_busy_min: out.worker_busy.iter().copied().fold(f64::INFINITY, f64::min),
+            worker_busy_min: out
+                .worker_busy
+                .iter()
+                .copied()
+                .fold(f64::INFINITY, f64::min),
         });
         state.next_patch = k + 1;
         Ok(())

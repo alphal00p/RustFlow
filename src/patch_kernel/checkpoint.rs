@@ -109,7 +109,9 @@ pub fn complex_from_exact(e: &ExactComplex) -> Result<Complex> {
     let z = Complex::with_val((e.0, e.1), (re, im));
     // Exactness guard: the text must reproduce itself.
     if float_hex(z.real()) != e.2 || float_hex(z.imag()) != e.3 {
-        return Err(Error::InvalidInput("inexact hex float in checkpoint".into()));
+        return Err(Error::InvalidInput(
+            "inexact hex float in checkpoint".into(),
+        ));
     }
     Ok(z)
 }
@@ -146,7 +148,11 @@ pub fn write_atomic(path: &Path, bytes: &[u8]) -> Result<()> {
     }
     std::fs::rename(&tmp, path)?;
     if let Some(dir) = path.parent() {
-        let dir = if dir.as_os_str().is_empty() { Path::new(".") } else { dir };
+        let dir = if dir.as_os_str().is_empty() {
+            Path::new(".")
+        } else {
+            dir
+        };
         if let Ok(d) = std::fs::File::open(dir) {
             let _ = d.sync_all();
         }

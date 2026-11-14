@@ -32,7 +32,11 @@ fn rss_gb() -> f64 {
 
 fn main() -> R<()> {
     let args: Vec<String> = std::env::args().collect();
-    let opt = |k: &str| args.iter().position(|a| a == k).map(|i| args[i + 1].clone());
+    let opt = |k: &str| {
+        args.iter()
+            .position(|a| a == k)
+            .map(|i| args[i + 1].clone())
+    };
     let t0 = Instant::now();
     let harness: HarnessFamily = serde_json::from_slice(&std::fs::read(&args[1])?)?;
     let solution = HarnessSolution::from_slice(&std::fs::read(&args[2])?)?;
@@ -42,15 +46,29 @@ fn main() -> R<()> {
     let (a, b) = seg.split_once(':').ok_or("A:B")?;
     path = path.segment(a.parse()?..b.parse()?)?;
     let digits: u32 = opt("--digits").ok_or("--digits")?.parse()?;
-    let (_, mask) = rustred_harness::family_from_harness(&harness, symbolica::symbol!("rflift::eps"), 4)?;
+    let (_, mask) =
+        rustred_harness::family_from_harness(&harness, symbolica::symbol!("rflift::eps"), 4)?;
     let reduced = rustred_harness::reduced_system_with(&solution, &mask, &[], true)?;
-    eprintln!("reduced e-block {} ({:.1} s, peak {:.2} GB)", reduced.basis.len(), t0.elapsed().as_secs_f64(), rss_gb());
-    let system = DifferentialSystem { variable: rustred_harness::eta_symbol(), matrix: reduced.matrix };
+    eprintln!(
+        "reduced e-block {} ({:.1} s, peak {:.2} GB)",
+        reduced.basis.len(),
+        t0.elapsed().as_secs_f64(),
+        rss_gb()
+    );
+    let system = DifferentialSystem {
+        variable: rustred_harness::eta_symbol(),
+        matrix: reduced.matrix,
+    };
     let p = Precision::decimal(digits)?;
     let t1 = Instant::now();
     let compiled = system.compile(p, &Default::default())?;
     let t_compile = t1.elapsed().as_secs_f64();
-    eprintln!("compiled at {digits} digits ({} bits): {:.1} s, peak {:.2} GB", p.bits, t_compile, rss_gb());
+    eprintln!(
+        "compiled at {digits} digits ({} bits): {:.1} s, peak {:.2} GB",
+        p.bits,
+        t_compile,
+        rss_gb()
+    );
     let dim = compiled.dimension();
     let sf = |x: &Rational| symbolica::domains::float::Float::from(rug::Float::with_val(p.bits, x));
     let to_c = |re: &Rational, im: &Rational| ComplexFloat::new(sf(re), sf(im));
@@ -59,7 +77,12 @@ fn main() -> R<()> {
     let boundary = BoundaryData {
         point: to_c(&Rational::from(&start.0 - &one), &start.1),
         values: (0..dim)
-            .map(|j| to_c(&Rational::from((8 + (5 * j as i64) % 13, 8)), &Rational::new()))
+            .map(|j| {
+                to_c(
+                    &Rational::from((8 + (5 * j as i64) % 13, 8)),
+                    &Rational::new(),
+                )
+            })
             .collect(),
     };
     let waypoints: Vec<ComplexFloat> = path
@@ -71,9 +94,15 @@ fn main() -> R<()> {
         })
         .collect();
     let mut options = FlowOptions::default();
-    options.digits = opt("--target-digits").map(|v| v.parse()).transpose()?.unwrap_or(digits.saturating_sub(30).max(10));
+    options.digits = opt("--target-digits")
+        .map(|v| v.parse())
+        .transpose()?
+        .unwrap_or(digits.saturating_sub(30).max(10));
     options.guard_digits = 30;
-    options.series_order = opt("--order").map(|v| v.parse()).transpose()?.unwrap_or(300);
+    options.series_order = opt("--order")
+        .map(|v| v.parse())
+        .transpose()?
+        .unwrap_or(300);
     options.max_steps = 100_000;
     let cancel = CancellationToken::default();
     if let Some(s) = opt("--max-seconds") {
@@ -87,17 +116,29 @@ fn main() -> R<()> {
     let t_start = Instant::now();
     let progress: Arc<dyn Fn(Progress) + Send + Sync> = Arc::new(move |e| {
         if let Progress::Step { index } = e {
-            eprintln!("step {index} at {:.1} s, peak {:.2} GB", t_start.elapsed().as_secs_f64(), rss_gb());
+            eprintln!(
+                "step {index} at {:.1} s, peak {:.2} GB",
+                t_start.elapsed().as_secs_f64(),
+                rss_gb()
+            );
         }
     });
-    let context = RunContext { cancellation: cancel, progress: Some(progress) };
+    let context = RunContext {
+        cancellation: cancel,
+        progress: Some(progress),
+    };
     let t2 = Instant::now();
     let result = compiled.transport(&boundary, &waypoints, &options, &context);
     let t_transport = t2.elapsed().as_secs_f64();
     match &result {
         Ok(r) => eprintln!(
             "transport done: {:.1} s, steps {} rejected {} order {} bits {}, peak {:.2} GB",
-            t_transport, r.diagnostics.steps, r.diagnostics.rejected_steps, r.diagnostics.expansion_order, r.diagnostics.working_bits, rss_gb()
+            t_transport,
+            r.diagnostics.steps,
+            r.diagnostics.rejected_steps,
+            r.diagnostics.expansion_order,
+            r.diagnostics.working_bits,
+            rss_gb()
         ),
         Err(e) => eprintln!("transport stopped after {t_transport:.1} s: {e}"),
     }

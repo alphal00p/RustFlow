@@ -74,10 +74,7 @@ fn clear_denominators(
     num: &[rug::Rational],
     den: &[rug::Rational],
 ) -> (Vec<Integer>, Vec<Integer>) {
-    let lcm = |p: &[rug::Rational]| {
-        p.iter()
-            .fold(Integer::from(1), |acc, c| acc.lcm(c.denom()))
-    };
+    let lcm = |p: &[rug::Rational]| p.iter().fold(Integer::from(1), |acc, c| acc.lcm(c.denom()));
     let (ln, ld) = (lcm(num), lcm(den));
     // N/D = (ln num / ln) / (ld den / ld) = (ld * (ln num)) / (ln * (ld den))
     let scale = |p: &[rug::Rational], l: &Integer, other: &Integer| {
@@ -112,14 +109,18 @@ impl RationalSystem {
         let mut last = None;
         for (i, j, mut n, mut d) in raw {
             if i >= dim || j >= dim {
-                return Err(Error::InvalidInput(format!("entry ({i}, {j}) outside dimension {dim}")));
+                return Err(Error::InvalidInput(format!(
+                    "entry ({i}, {j}) outside dimension {dim}"
+                )));
             }
             if last == Some((i, j)) {
                 return Err(Error::InvalidInput(format!("duplicate entry ({i}, {j})")));
             }
             last = Some((i, j));
             if d.iter().all(|c| *c == 0) {
-                return Err(Error::InvalidInput(format!("zero denominator at ({i}, {j})")));
+                return Err(Error::InvalidInput(format!(
+                    "zero denominator at ({i}, {j})"
+                )));
             }
             let content = |p: &[Integer]| p.iter().fold(Integer::new(), |g, c| g.gcd(c));
             let mut cn = content(&n);
@@ -147,9 +148,20 @@ impl RationalSystem {
             };
             let num = id(n);
             let den = id(d);
-            entries.push(Entry { row: i, col: j, num, den, scale });
+            entries.push(Entry {
+                row: i,
+                col: j,
+                num,
+                den,
+                scale,
+            });
         }
-        Ok(Self { dim, variable: variable.to_string(), polys, entries })
+        Ok(Self {
+            dim,
+            variable: variable.to_string(),
+            polys,
+            entries,
+        })
     }
 
     /// From a square matrix of Symbolica rational functions in `variable`
@@ -172,7 +184,12 @@ impl RationalSystem {
                 > = a
                     .try_to_rational_polynomial(&Q, &Z, None)
                     .map_err(|e| Error::InvalidInput(format!("entry ({i}, {j}): {e}")))?;
-                raw.push((i, j, univariate(&r.numerator, variable)?, univariate(&r.denominator, variable)?));
+                raw.push((
+                    i,
+                    j,
+                    univariate(&r.numerator, variable)?,
+                    univariate(&r.denominator, variable)?,
+                ));
             }
         }
         Self::from_entries(dim, &variable.to_string(), raw)
@@ -209,7 +226,11 @@ impl RationalSystem {
             schema: SYSTEM_SCHEMA.into(),
             dim: self.dim,
             variable: self.variable.clone(),
-            polys: self.polys.iter().map(|p| p.iter().map(|c| c.to_string()).collect()).collect(),
+            polys: self
+                .polys
+                .iter()
+                .map(|p| p.iter().map(|c| c.to_string()).collect())
+                .collect(),
             entries: self
                 .entries
                 .iter()
@@ -230,7 +251,10 @@ impl RationalSystem {
             .iter()
             .map(|p| {
                 p.iter()
-                    .map(|c| c.parse::<Integer>().map_err(|e| Error::InvalidInput(e.to_string())))
+                    .map(|c| {
+                        c.parse::<Integer>()
+                            .map_err(|e| Error::InvalidInput(e.to_string()))
+                    })
                     .collect::<Result<Vec<_>>>()
             })
             .collect::<Result<Vec<_>>>()?;
@@ -239,7 +263,10 @@ impl RationalSystem {
             .iter()
             .map(|e| {
                 let get = |k: usize| {
-                    polys.get(k).cloned().ok_or_else(|| Error::InvalidInput("poly index".into()))
+                    polys
+                        .get(k)
+                        .cloned()
+                        .ok_or_else(|| Error::InvalidInput("poly index".into()))
                 };
                 let scale = parse_rational(&e.4)?;
                 // N/D = scale * N' / D'
@@ -292,7 +319,10 @@ impl RationalSystem {
     /// returns the entries (i, j) where N1 D2 != N2 D1 or presence differs.
     pub fn differences(&self, other: &Self, perm: &[usize]) -> Vec<(usize, usize)> {
         let map = |s: &Self| -> BTreeMap<(usize, usize), (usize, usize, rug::Rational)> {
-            s.entries.iter().map(|e| ((e.row, e.col), (e.num, e.den, e.scale.clone()))).collect()
+            s.entries
+                .iter()
+                .map(|e| ((e.row, e.col), (e.num, e.den, e.scale.clone())))
+                .collect()
         };
         let (a, b) = (map(self), map(other));
         let mut out = Vec::new();
@@ -305,7 +335,9 @@ impl RationalSystem {
                     // s1 N1 D2 == s2 N2 D1
                     let f1 = Integer::from(s1.numer() * s2.denom());
                     let f2 = Integer::from(s2.numer() * s1.denom());
-                    let scale = |p: Vec<Integer>, f: &Integer| p.into_iter().map(|c| c * f).collect::<Vec<_>>();
+                    let scale = |p: Vec<Integer>, f: &Integer| {
+                        p.into_iter().map(|c| c * f).collect::<Vec<_>>()
+                    };
                     let lhs = scale(poly_mul(&self.polys[*n1], &other.polys[*d2]), &f1);
                     let rhs = scale(poly_mul(&other.polys[*n2], &self.polys[*d1]), &f2);
                     if lhs != rhs {
@@ -344,7 +376,10 @@ fn poly_mul(a: &[Integer], b: &[Integer]) -> Vec<Integer> {
 
 /// Dense integer coefficients of a polynomial in (at most) `variable`.
 fn univariate(
-    p: &symbolica::poly::polynomial::MultivariatePolynomial<symbolica::domains::integer::IntegerRing, u16>,
+    p: &symbolica::poly::polynomial::MultivariatePolynomial<
+        symbolica::domains::integer::IntegerRing,
+        u16,
+    >,
     variable: Symbol,
 ) -> Result<Vec<Integer>> {
     let vars = p.get_vars_ref();
@@ -366,7 +401,9 @@ fn univariate(
     }
     let mut out: Vec<Integer> = vec![Integer::new()];
     for t in 0..p.nterms() {
-        let deg = position.map(|k| p.exponents[t * nv + k] as usize).unwrap_or(0);
+        let deg = position
+            .map(|k| p.exponents[t * nv + k] as usize)
+            .unwrap_or(0);
         if out.len() <= deg {
             out.resize(deg + 1, Integer::new());
         }

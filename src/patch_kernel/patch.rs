@@ -19,8 +19,8 @@ use super::system::RationalSystem;
 use crate::options::CancellationToken;
 use crate::{Error, Result};
 use rug::{Complex, Float, Rational};
-use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::Barrier;
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::time::Instant;
 
 /// Guard bits of the exact-shift conversion (each normalised coefficient is
@@ -62,10 +62,18 @@ impl KernelPlan {
         groups.sort_by_key(|g| g.0);
         let mut row_cost = vec![0usize; system.dim];
         for (row, den, ts) in &groups {
-            row_cost[*row] += ts.iter().map(|&t| system.polys[system.entries[t].num].len()).sum::<usize>()
+            row_cost[*row] += ts
+                .iter()
+                .map(|&t| system.polys[system.entries[t].num].len())
+                .sum::<usize>()
                 + system.polys[*den].len();
         }
-        Self { groups, dens, den_slot, row_cost }
+        Self {
+            groups,
+            dens,
+            den_slot,
+            row_cost,
+        }
     }
 
     /// Rows per worker: longest-processing-time assignment (affects speed only).
@@ -93,7 +101,9 @@ pub fn allowed_cpus() -> Vec<usize> {
             if libc::sched_getaffinity(0, std::mem::size_of::<libc::cpu_set_t>(), &mut set) != 0 {
                 return Vec::new();
             }
-            (0..libc::CPU_SETSIZE as usize).filter(|&c| libc::CPU_ISSET(c, &set)).collect()
+            (0..libc::CPU_SETSIZE as usize)
+                .filter(|&c| libc::CPU_ISSET(c, &set))
+                .collect()
         }
     }
     #[cfg(not(target_os = "linux"))]
@@ -120,7 +130,12 @@ pub fn pin_current_thread(cpu: usize) {
 /// `[f(0), .., f(n - 1)]` computed by up to `threads` scoped threads (thread k
 /// pinned to `pins[k]` if given); the result is in index order and `f(i)`
 /// itself does not depend on the threads.
-pub fn par_map<R: Send, F: Fn(usize) -> R + Sync>(n: usize, threads: usize, pins: &[usize], f: F) -> Vec<R> {
+pub fn par_map<R: Send, F: Fn(usize) -> R + Sync>(
+    n: usize,
+    threads: usize,
+    pins: &[usize],
+    f: F,
+) -> Vec<R> {
     if threads <= 1 || n < 2 {
         return (0..n).map(&f).collect();
     }
@@ -200,7 +215,11 @@ unsafe impl<T: Send + Sync> Sync for SPtr<T> {}
 /// log10 |x| (finite, -1e9 for zero).
 pub fn log10_abs(x: &Complex) -> f64 {
     let a = Float::with_val(64, x.abs_ref());
-    if a.is_zero() { -1e9 } else { a.log10().to_f64() }
+    if a.is_zero() {
+        -1e9
+    } else {
+        a.log10().to_f64()
+    }
 }
 
 /// Run one patch on scalar type `S` from the exact state `y0`.
@@ -218,11 +237,21 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
     let t_setup = Instant::now();
     let centre = Centre::new(job.centre.0, job.centre.1);
     if !S::COMPLEX && !centre.is_real() {
-        return Err(Error::InvalidInput("real arithmetic at a complex centre".into()));
+        return Err(Error::InvalidInput(
+            "real arithmetic at a complex centre".into(),
+        ));
     }
     let gbits = bits + SHIFT_GUARD_BITS;
-    let cpus = if job.pin_threads && threads > 1 { allowed_cpus() } else { Vec::new() };
-    let pins: &[usize] = if cpus.len() >= threads { &cpus[..threads] } else { &[] };
+    let cpus = if job.pin_threads && threads > 1 {
+        allowed_cpus()
+    } else {
+        Vec::new()
+    };
+    let pins: &[usize] = if cpus.len() >= threads {
+        &cpus[..threads]
+    } else {
+        &[]
+    };
     // denominators: D(0) (guarded) and dv[k] = D[k + 1] / D[0]
     let den_data: Vec<(Complex, Vec<S>)> = par_map(plan.dens.len(), threads, pins, |q| {
         let s = shift_guarded(&system.polys[plan.dens[q]], &centre, gbits);
@@ -231,7 +260,9 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
     });
     for (d0, _) in &den_data {
         if d0.real().is_zero() && d0.imag().is_zero() {
-            return Err(Error::Numerical("patch centre is a pole of the system".into()));
+            return Err(Error::Numerical(
+                "patch centre is a pole of the system".into(),
+            ));
         }
     }
     job.cancel.check()?;
@@ -301,8 +332,10 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                                 (*row, &den_data[plan.den_slot[den]].1[..], &ts[..])
                             })
                             .collect();
-                        let mut rings: Vec<Vec<S>> =
-                            gl.iter().map(|(_, dv, _)| vec![S::zero(bits); dv.len().max(1)]).collect();
+                        let mut rings: Vec<Vec<S>> = gl
+                            .iter()
+                            .map(|(_, dv, _)| vec![S::zero(bits); dv.len().max(1)])
+                            .collect();
                         let mut a = S::zero(bits);
                         let mut b = S::zero(bits);
                         let mut tmp = S::zero(bits);
@@ -360,7 +393,10 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                 .into_iter()
                 .map(|h| h.join().unwrap_or_else(|e| std::panic::resume_unwind(e)))
                 .collect();
-            (results.iter().any(|r| r.0), results.iter().map(|r| r.1).collect::<Vec<f64>>())
+            (
+                results.iter().any(|r| r.0),
+                results.iter().map(|r| r.1).collect::<Vec<f64>>(),
+            )
         })
     };
     if cancelled {
@@ -370,9 +406,19 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
     // ---- finish: per component, independent ----
     let t_fin = Instant::now();
     let h = S::from_rational(job.step.0, job.step.1, bits);
-    let u = job.cauchy_u.as_ref().map(|(r, i)| S::from_rational(r, i, bits));
-    let probes: Vec<S> = job.probes.iter().map(|(r, i)| S::from_rational(r, i, bits)).collect();
-    let habs = Float::with_val(64, Complex::with_val(64, (job.step.0, job.step.1)).abs_ref());
+    let u = job
+        .cauchy_u
+        .as_ref()
+        .map(|(r, i)| S::from_rational(r, i, bits));
+    let probes: Vec<S> = job
+        .probes
+        .iter()
+        .map(|(r, i)| S::from_rational(r, i, bits))
+        .collect();
+    let habs = Float::with_val(
+        64,
+        Complex::with_val(64, (job.step.0, job.step.1)).abs_ref(),
+    );
     let horner = |j: usize, x: &S| -> S {
         let mut acc = S::zero(bits);
         for n in (0..nord).rev() {
@@ -381,36 +427,37 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         }
         acc
     };
-    let per: Vec<(Complex, Option<Complex>, Vec<Complex>, f64)> = par_map(dim, threads, pins, |j| {
-        let val = horner(j, &h);
-        let integral = u.as_ref().map(|u| {
-            let mut p: Vec<S> = Vec::with_capacity(nord);
-            let mut cur = S::zero(bits);
-            for n in 0..nord {
-                cur.add_ref(&y[j][n]);
-                cur.div_ref(u);
-                p.push(cur.clone());
-            }
-            let mut acc = S::zero(bits);
-            for n in (0..nord).rev() {
-                let mut q = p[n].clone();
-                q.div_u32((n + 1) as u32);
-                acc.add_ref(&q);
-                acc.mul_ref(&h);
-            }
-            acc.to_state()
+    let per: Vec<(Complex, Option<Complex>, Vec<Complex>, f64)> =
+        par_map(dim, threads, pins, |j| {
+            let val = horner(j, &h);
+            let integral = u.as_ref().map(|u| {
+                let mut p: Vec<S> = Vec::with_capacity(nord);
+                let mut cur = S::zero(bits);
+                for n in 0..nord {
+                    cur.add_ref(&y[j][n]);
+                    cur.div_ref(u);
+                    p.push(cur.clone());
+                }
+                let mut acc = S::zero(bits);
+                for n in (0..nord).rev() {
+                    let mut q = p[n].clone();
+                    q.div_u32((n + 1) as u32);
+                    acc.add_ref(&q);
+                    acc.mul_ref(&h);
+                }
+                acc.to_state()
+            });
+            let pv = probes.iter().map(|x| horner(j, x).to_state()).collect();
+            let val_c = val.to_state();
+            let scale = log10_abs(&val_c).max(log10_abs(&y0[j]));
+            let last = log10_abs(&y[j][nord - 1].to_state());
+            let tail = if last < -1e8 || scale < -1e8 {
+                -1e9
+            } else {
+                last + (nord - 1) as f64 * habs.to_f64().log10() - scale
+            };
+            (val_c, integral, pv, tail)
         });
-        let pv = probes.iter().map(|x| horner(j, x).to_state()).collect();
-        let val_c = val.to_state();
-        let scale = log10_abs(&val_c).max(log10_abs(&y0[j]));
-        let last = log10_abs(&y[j][nord - 1].to_state());
-        let tail = if last < -1e8 || scale < -1e8 {
-            -1e9
-        } else {
-            last + (nord - 1) as f64 * habs.to_f64().log10() - scale
-        };
-        (val_c, integral, pv, tail)
-    });
     let seconds_finish = t_fin.elapsed().as_secs_f64();
     let mut value = Vec::with_capacity(dim);
     let mut integral = job.cauchy_u.as_ref().map(|_| Vec::with_capacity(dim));

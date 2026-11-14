@@ -69,7 +69,11 @@ impl PlannedPath {
             .patches
             .iter()
             .map(|(a, b, c, d, n)| {
-                Ok(PatchSpec { centre: (q(a)?, q(b)?), step: (q(c)?, q(d)?), order: *n })
+                Ok(PatchSpec {
+                    centre: (q(a)?, q(b)?),
+                    step: (q(c)?, q(d)?),
+                    order: *n,
+                })
             })
             .collect::<Result<Vec<_>>>()?;
         let path = Self { offset, patches };
@@ -117,7 +121,10 @@ impl PlannedPath {
         if range.end > self.patches.len() || range.start >= range.end {
             return Err(Error::InvalidInput("bad path segment".into()));
         }
-        Ok(Self { offset: self.offset.clone(), patches: self.patches[range].to_vec() })
+        Ok(Self {
+            offset: self.offset.clone(),
+            patches: self.patches[range].to_vec(),
+        })
     }
 
     /// blake3 of offset, points, steps and orders.
@@ -156,7 +163,9 @@ pub fn to_f64(x: &Rational) -> f64 {
 }
 
 fn radius(pts: &[(f64, f64)], z: (f64, f64)) -> f64 {
-    pts.iter().map(|s| (z.0 - s.0).hypot(z.1 - s.1)).fold(f64::INFINITY, f64::min)
+    pts.iter()
+        .map(|s| (z.0 - s.0).hypot(z.1 - s.1))
+        .fold(f64::INFINITY, f64::min)
 }
 
 fn order_rule(digits: f64, r: f64, h: f64) -> usize {
@@ -231,25 +240,38 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
     let s_end = parse_point(&input.s_end)?;
     let mut patches = Vec::new();
     let zero = Rational::new();
-    let push = |patches: &mut Vec<PatchSpec>, c: (Rational, Rational), h: (Rational, Rational), n: usize| {
-        patches.push(PatchSpec { centre: c, step: h, order: n });
+    let push = |patches: &mut Vec<PatchSpec>,
+                c: (Rational, Rational),
+                h: (Rational, Rational),
+                n: usize| {
+        patches.push(PatchSpec {
+            centre: c,
+            step: h,
+            order: n,
+        });
     };
-    let step_real = |patches: &mut Vec<PatchSpec>, mut zq: Rational, target: &Rational| -> Rational {
-        while zq > *target {
-            let zc = to_f64(&zq);
-            let r = radius(pts, (zc, 0.0));
-            let h = r / ratio;
-            let hq = if zc - h * 1.5 <= to_f64(target) {
-                Rational::from(target - &zq)
-            } else {
-                -rr(h)
-            };
-            let n = order_rule(digits, r, to_f64(&hq).abs());
-            push(patches, (zq.clone(), Rational::new()), (hq.clone(), Rational::new()), n);
-            zq += &hq;
-        }
-        zq
-    };
+    let step_real =
+        |patches: &mut Vec<PatchSpec>, mut zq: Rational, target: &Rational| -> Rational {
+            while zq > *target {
+                let zc = to_f64(&zq);
+                let r = radius(pts, (zc, 0.0));
+                let h = r / ratio;
+                let hq = if zc - h * 1.5 <= to_f64(target) {
+                    Rational::from(target - &zq)
+                } else {
+                    -rr(h)
+                };
+                let n = order_rule(digits, r, to_f64(&hq).abs());
+                push(
+                    patches,
+                    (zq.clone(), Rational::new()),
+                    (hq.clone(), Rational::new()),
+                    n,
+                );
+                zq += &hq;
+            }
+            zq
+        };
     let mut zq = -s0;
     let neg_s = to_f64(&Rational::from(-&s_end));
     for &xp in &input.axis_singular {
@@ -281,7 +303,10 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
             while (&cr, &ci) != (&vr, &vi) {
                 let cur = (to_f64(&cr), to_f64(&ci));
                 let r = radius(pts, cur);
-                let dv = (to_f64(&Rational::from(&vr - &cr)), to_f64(&Rational::from(&vi - &ci)));
+                let dv = (
+                    to_f64(&Rational::from(&vr - &cr)),
+                    to_f64(&Rational::from(&vi - &ci)),
+                );
                 let adv = dv.0.hypot(dv.1);
                 let hq = if adv <= 1.5 * r / ratio {
                     (Rational::from(&vr - &cr), Rational::from(&vi - &ci))
@@ -297,7 +322,9 @@ pub fn plan_axis_detours(input: &PlanInput, digits: f64, offset: Rational) -> Re
             }
         }
         if ci != zero {
-            return Err(Error::Numerical("detour does not return to the axis".into()));
+            return Err(Error::Numerical(
+                "detour does not return to the axis".into(),
+            ));
         }
         zq = cr;
     }
