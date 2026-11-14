@@ -35,6 +35,8 @@ pub struct TransportConfig {
     /// Compare the series of consecutive patches at the midpoint of the
     /// earlier one (patch-overlap consistency).
     pub overlap_check: bool,
+    /// Pin the worker threads of a patch to distinct allowed CPUs (speed only).
+    pub pin_threads: bool,
 }
 
 impl TransportConfig {
@@ -46,6 +48,7 @@ impl TransportConfig {
             cauchy_pole: None,
             project_real_axis: false,
             overlap_check: true,
+            pin_threads: true,
         }
     }
 }
@@ -380,6 +383,7 @@ impl<'a> Transport<'a> {
             }),
             probes,
             cancel,
+            pin_threads: self.config.pin_threads,
         };
         let out: PatchOutput = match (self.config.mode, complex) {
             (ArithmeticMode::Fixed, false) => run_patch::<Float>(&job, &y0)?,

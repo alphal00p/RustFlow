@@ -213,6 +213,7 @@ fn run(a: &Args) -> R<()> {
     config.cauchy_pole = a.opt("--cauchy-pole").map(|s| s.parse::<Rational>()).transpose()?;
     config.project_real_axis = a.flag("--project-real");
     config.overlap_check = !a.flag("--no-overlap");
+    config.pin_threads = !a.flag("--no-pin");
     let initial = initial_vector(&a.opt("--initial").unwrap_or("ramp".into()), system.dim, bits)?;
     let transport = Transport::new(&system, &path, config.clone())?.with_system_fingerprint(system_fp.clone());
     let policy = a.opt("--checkpoint").map(|f| checkpoint::CheckpointPolicy {

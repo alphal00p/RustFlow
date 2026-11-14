@@ -83,9 +83,44 @@ impl KernelPlan {
     }
 }
 
-/// `[f(0), .., f(n - 1)]` computed by up to `threads` scoped threads; the
-/// result is in index order and `f(i)` itself does not depend on the threads.
-pub fn par_map<R: Send, F: Fn(usize) -> R + Sync>(n: usize, threads: usize, f: F) -> Vec<R> {
+/// CPUs this process may run on (Linux; empty elsewhere), increasing.
+pub fn allowed_cpus() -> Vec<usize> {
+    #[cfg(target_os = "linux")]
+    {
+        // SAFETY: plain libc calls on a zero-initialised cpu_set_t.
+        unsafe {
+            let mut set: libc::cpu_set_t = std::mem::zeroed();
+            if libc::sched_getaffinity(0, std::mem::size_of::<libc::cpu_set_t>(), &mut set) != 0 {
+                return Vec::new();
+            }
+            (0..libc::CPU_SETSIZE as usize).filter(|&c| libc::CPU_ISSET(c, &set)).collect()
+        }
+    }
+    #[cfg(not(target_os = "linux"))]
+    {
+        Vec::new()
+    }
+}
+
+/// Pin the calling thread to `cpu` (best effort; results never depend on it).
+/// The kernel's NUMA-imbalance allowance otherwise keeps a few threads of a
+/// job whose CPUs span NUMA nodes on ONE CPU.
+pub fn pin_current_thread(cpu: usize) {
+    #[cfg(target_os = "linux")]
+    // SAFETY: plain libc calls; 0 = the calling thread.
+    unsafe {
+        let mut set: libc::cpu_set_t = std::mem::zeroed();
+        libc::CPU_SET(cpu, &mut set);
+        let _ = libc::sched_setaffinity(0, std::mem::size_of::<libc::cpu_set_t>(), &set);
+    }
+    #[cfg(not(target_os = "linux"))]
+    let _ = cpu;
+}
+
+/// `[f(0), .., f(n - 1)]` computed by up to `threads` scoped threads (thread k
+/// pinned to `pins[k]` if given); the result is in index order and `f(i)`
+/// itself does not depend on the threads.
+pub fn par_map<R: Send, F: Fn(usize) -> R + Sync>(n: usize, threads: usize, pins: &[usize], f: F) -> Vec<R> {
     if threads <= 1 || n < 2 {
         return (0..n).map(&f).collect();
     }
@@ -95,8 +130,12 @@ pub fn par_map<R: Send, F: Fn(usize) -> R + Sync>(n: usize, threads: usize, f: F
     let (fr, cr) = (&f, &counter);
     let mut parts: Vec<(usize, Vec<R>)> = std::thread::scope(|sc| {
         let handles: Vec<_> = (0..threads.min(blocks))
-            .map(|_| {
+            .map(|k| {
+                let pin = pins.get(k).copied();
                 sc.spawn(move || {
+                    if let Some(c) = pin {
+                        pin_current_thread(c);
+                    }
                     let mut out = Vec::new();
                     loop {
                         let lo = cr.fetch_add(1, Ordering::Relaxed) * chunk;
@@ -134,6 +173,8 @@ pub struct PatchJob<'a> {
     /// Extra evaluation offsets from the centre (overlap probes).
     pub probes: Vec<(Rational, Rational)>,
     pub cancel: &'a CancellationToken,
+    /// Pin worker threads to distinct allowed CPUs.
+    pub pin_threads: bool,
 }
 
 /// Result of one patch (state values exact as `rug::Complex`).
@@ -180,8 +221,10 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         return Err(Error::InvalidInput("real arithmetic at a complex centre".into()));
     }
     let gbits = bits + SHIFT_GUARD_BITS;
+    let cpus = if job.pin_threads && threads > 1 { allowed_cpus() } else { Vec::new() };
+    let pins: &[usize] = if cpus.len() >= threads { &cpus[..threads] } else { &[] };
     // denominators: D(0) (guarded) and dv[k] = D[k + 1] / D[0]
-    let den_data: Vec<(Complex, Vec<S>)> = par_map(plan.dens.len(), threads, |q| {
+    let den_data: Vec<(Complex, Vec<S>)> = par_map(plan.dens.len(), threads, pins, |q| {
         let s = shift_guarded(&system.polys[plan.dens[q]], &centre, gbits);
         let dv = s[1..].iter().map(|c| S::quotient(c, &s[0], bits)).collect();
         (s[0].clone(), dv)
@@ -192,7 +235,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         }
     }
     job.cancel.check()?;
-    let nv: Vec<Vec<S>> = par_map(system.entries.len(), threads, |t| {
+    let nv: Vec<Vec<S>> = par_map(system.entries.len(), threads, pins, |t| {
         let e = &system.entries[t];
         let s = shift_guarded(&system.polys[e.num], &centre, gbits);
         let d0 = &den_data[plan.den_slot[&e.den]].0;
@@ -242,8 +285,13 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
             let handles: Vec<_> = worker_groups
                 .iter()
                 .zip(&worker_rows)
-                .map(|(gs, rows)| {
+                .enumerate()
+                .map(|(w, (gs, rows))| {
+                    let pin = pins.get(w).copied();
                     sc.spawn(move || -> (bool, f64) {
+                        if let Some(c) = pin {
+                            pin_current_thread(c);
+                        }
                         let mut busy = 0.0f64;
                         let mut t_busy = Instant::now();
                         let gl: Vec<(usize, &[S], &[usize])> = gs
@@ -333,7 +381,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         }
         acc
     };
-    let per: Vec<(Complex, Option<Complex>, Vec<Complex>, f64)> = par_map(dim, threads, |j| {
+    let per: Vec<(Complex, Option<Complex>, Vec<Complex>, f64)> = par_map(dim, threads, pins, |j| {
         let val = horner(j, &h);
         let integral = u.as_ref().map(|u| {
             let mut p: Vec<S> = Vec::with_capacity(nord);

@@ -3682,6 +3682,7 @@ dependencies = [
  "feynkit-py",
  "feynkit-tensor",
  "idenso",
+ "libc",
  "linnet",
  "pyo3",
  "pyo3-stub-gen",
