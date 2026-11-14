@@ -24,9 +24,16 @@ pub struct SpectralSample {
     pub node_values: Vec<Vec<ComplexFloat>>,
     /// `[target]` -> exponent classes
     pub expansions: Vec<Vec<SpectralExpansion>>,
-    /// Largest `|coefficient * constant|` of the non-leading infinity series
-    /// terms: a size indicator of cancellations in the expansions.
+    /// Largest `|coefficient * constant|` of a logarithmic (log power >= 1)
+    /// term of a single infinity column. The expansions keep only the power
+    /// series, so these terms must cancel between the columns of a class; this
+    /// per-column size does not show whether they do (see `log_terms_residual`).
     pub log_terms_max: f64,
+    /// Largest dropped logarithmic coefficient of a target expansion (class sum
+    /// over the columns, projected with the reduction weights), relative to the
+    /// largest kept coefficient of the same target and class. The expansions
+    /// are complete only when this is negligible at the working precision.
+    pub log_terms_residual: f64,
     pub arm_segments: usize,
     pub arm_steps: usize,
     pub arm_rejected_steps: usize,
@@ -46,6 +53,7 @@ pub(super) struct SpectralPrepared<'a> {
     weights: Vec<TargetWeights>,
     expansions: Vec<Vec<SpectralExpansion>>,
     log_terms_max: f64,
+    log_terms_residual: f64,
     arm_start: BoundaryData,
 }
 
@@ -53,6 +61,7 @@ pub(super) struct SpectralArmValues {
     node_values: Vec<Vec<ComplexFloat>>,
     expansions: Vec<Vec<SpectralExpansion>>,
     log_terms_max: f64,
+    log_terms_residual: f64,
     arm_segments: usize,
     arm_steps: usize,
     arm_rejected_steps: usize,
@@ -157,7 +166,8 @@ fn inverse_series(
 }
 
 /// Target expansions at `eta -> infinity`, grouped by exponent class
-/// `(slope, base mod 1)`; returns them with the size indicator `log_terms_max`.
+/// `(slope, base mod 1)`. Only the power series (log power 0) is kept; also
+/// returns `log_terms_max` and `log_terms_residual` (see [`SpectralSample`]).
 fn spectral_expansions(
     p: Precision,
     infinity: &crate::frobenius::FrobeniusBasis,
@@ -166,11 +176,12 @@ fn spectral_expansions(
     parameters: &ahash::HashMap<Atom, ComplexFloat>,
     eps_atom: Atom,
     order: usize,
-) -> Result<(Vec<Vec<SpectralExpansion>>, f64)> {
+) -> Result<(Vec<Vec<SpectralExpansion>>, f64, f64)> {
     use symbolica::domains::float::RealLike;
     // exponent classes: (slope, base mod 1) -> columns with integer base offsets
     let mut classes: Vec<(f64, f64, Vec<(usize, i64)>)> = Vec::new();
     let mut log_max = 0f64;
+    let mut log_residual = 0f64;
     for (j, column) in infinity.columns.iter().enumerate() {
         if constants[j] == p.zero() {
             continue;
@@ -225,6 +236,15 @@ fn spectral_expansions(
         let bmin = cols.iter().map(|c| c.1).min().unwrap();
         // class series per master: S_i(x) = sum_j c_j x^(b_j - bmin) sum_n a_{n,i} x^n
         let mut s = vec![vec![p.zero(); order + 1]; n];
+        // The same class sums of the logarithmic rows (log power >= 1). The
+        // expansion keeps only the power series, so these must cancel.
+        let log_rows = cols
+            .iter()
+            .flat_map(|&(j, _)| infinity.columns[j].coefficients.iter().map(Vec::len))
+            .max()
+            .unwrap_or(1)
+            .saturating_sub(1);
+        let mut logs = vec![vec![vec![p.zero(); order + 1]; n]; log_rows];
         for &(j, b) in cols {
             let shift = (b - bmin) as usize;
             for (k, coeff) in infinity.columns[j].coefficients.iter().enumerate() {
@@ -234,24 +254,53 @@ fn spectral_expansions(
                 for i in 0..n {
                     s[i][k + shift] = p.add(&s[i][k + shift], &p.mul(&coeff[0][i], &constants[j]));
                 }
+                for (l, row) in coeff.iter().enumerate().skip(1) {
+                    for i in 0..n {
+                        logs[l - 1][i][k + shift] =
+                            p.add(&logs[l - 1][i][k + shift], &p.mul(&row[i], &constants[j]));
+                    }
+                }
             }
         }
         for (t, ws) in wseries.iter().enumerate() {
             let emin = ws.iter().flatten().map(|(e, _)| *e).min().unwrap_or(0);
-            let mut acc = vec![p.zero(); order + 1];
-            for (i, w) in ws.iter().enumerate() {
-                let Some((e, q)) = w else { continue };
-                let off = (e - emin) as usize;
-                for m in 0..=order {
-                    if m + off > order {
-                        break;
+            let project = |series: &[Vec<ComplexFloat>]| {
+                let mut acc = vec![p.zero(); order + 1];
+                for (i, w) in ws.iter().enumerate() {
+                    let Some((e, q)) = w else { continue };
+                    let off = (e - emin) as usize;
+                    for m in 0..=order {
+                        if m + off > order {
+                            break;
+                        }
+                        if q[m] == p.zero() {
+                            continue;
+                        }
+                        for k in 0..=(order - m - off) {
+                            acc[m + k + off] =
+                                p.add(&acc[m + k + off], &p.mul(&q[m], &series[i][k]));
+                        }
                     }
-                    if q[m] == p.zero() {
-                        continue;
-                    }
-                    for k in 0..=(order - m - off) {
-                        acc[m + k + off] = p.add(&acc[m + k + off], &p.mul(&q[m], &s[i][k]));
-                    }
+                }
+                acc
+            };
+            let largest = |series: &[ComplexFloat]| {
+                series
+                    .iter()
+                    .map(|c| p.norm(c))
+                    .fold(p.real(0), |m, v| if v > m { v } else { m })
+            };
+            let acc = project(&s);
+            let kept = largest(&acc);
+            for log_series in &logs {
+                let dropped = largest(&project(log_series));
+                if dropped > p.real(0) {
+                    let relative = if kept > p.real(0) {
+                        (dropped / &kept).to_f64()
+                    } else {
+                        f64::INFINITY
+                    };
+                    log_residual = log_residual.max(relative);
                 }
             }
             out[t].push(SpectralExpansion {
@@ -261,7 +310,7 @@ fn spectral_expansions(
             });
         }
     }
-    Ok((out, log_max))
+    Ok((out, log_max, log_residual))
 }
 
 /// Master values at a node lying on a saved segment `[center, end]`.
@@ -331,6 +380,7 @@ impl<'a> SpectralPrepared<'a> {
             node_values,
             expansions: self.expansions,
             log_terms_max: self.log_terms_max,
+            log_terms_residual: self.log_terms_residual,
             arm_segments: segments.len(),
             arm_steps: arm.diagnostics.steps,
             arm_rejected_steps: arm.diagnostics.rejected_steps,
@@ -353,7 +403,7 @@ impl PreparedFlow {
         initial: &[ComplexFloat],
     ) -> Result<SpectralPrepared<'a>> {
         let weights = spectral_weights(&self.reduced, self.system.variable, p, parameters)?;
-        let (expansions, log_terms_max) = spectral_expansions(
+        let (expansions, log_terms_max, log_terms_residual) = spectral_expansions(
             p,
             infinity,
             constants,
@@ -367,6 +417,7 @@ impl PreparedFlow {
             weights,
             expansions,
             log_terms_max,
+            log_terms_residual,
             arm_start: BoundaryData {
                 point: start.clone(),
                 values: initial.to_vec(),
@@ -404,6 +455,7 @@ impl PreparedFlow {
             node_values: arm.node_values,
             expansions: arm.expansions,
             log_terms_max: arm.log_terms_max,
+            log_terms_residual: arm.log_terms_residual,
             arm_segments: arm.arm_segments,
             arm_steps: arm.arm_steps,
             arm_rejected_steps: arm.arm_rejected_steps,

@@ -364,6 +364,7 @@ fn mode_samples(a: &Args, spectral_mode: bool) -> AnyResult<()> {
                 "eta_independent_node_vs_endpoint_digits": d.eta_independent_node_vs_endpoint_digits})).collect::<Vec<_>>());
             out["bubble_self_check_digits"] = json!(glued.bubble_self_check_digits);
             out["log_terms_max"] = json!(sample.log_terms_max);
+            out["log_terms_residual"] = json!(sample.log_terms_residual);
             out["arm_nodes"] = json!(arm.arm.z.len());
             out["arm_panels"] = json!(format!("{:?}", arm.arm.panels));
             out["arm_segments"] = json!(sample.arm_segments);

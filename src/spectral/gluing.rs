@@ -113,6 +113,15 @@ pub struct SpectralArm {
 impl SpectralArm {
     /// Panels sized for the bubble singularities at `z = 0` and `z = 4`.
     pub fn new(ctx: &Ctx, spec: ArmSpec) -> Result<Self> {
+        // Arm::new needs T0 > 1 for its geometric panel edges [0, 1, 2, ...],
+        // and quadrature digits size the panels (0 would give 12-point panels).
+        if spec.t0 <= 1 || spec.t_check <= 0 || spec.t_check > spec.t0 || spec.digits == 0 {
+            return Err(Error::InvalidInput(format!(
+                "spectral arm needs T0 > 1, 0 < t_check <= T0 and positive quadrature digits \
+                 (T0 {}, t_check {}, digits {})",
+                spec.t0, spec.t_check, spec.digits
+            )));
+        }
         let c = ctx.rational(&spec.c)?;
         let arm = Arm::new(ctx, &c, &ctx.r(spec.t0), &[0.0, 4.0], spec.digits);
         Ok(Self { spec, c, arm })
@@ -183,6 +192,16 @@ fn weight_key(w: &[i64]) -> Result<String> {
             "gluing weight must list bubble power pairs".into(),
         ));
     }
+    // Only B_{1,1} and B_{2,1} = B_{1,2} are implemented; a pair such as
+    // (0, 2) has the same sum but is not a bubble.
+    if let Some(pair) = w
+        .chunks(2)
+        .find(|c| !matches!((c[0], c[1]), (1, 1) | (1, 2) | (2, 1)))
+    {
+        return Err(Error::Unsupported(format!(
+            "gluing bubble line powers {pair:?}: only (1, 1), (1, 2) and (2, 1)"
+        )));
+    }
     Ok(w.chunks(2)
         .map(|c| (c[0] + c[1]).to_string())
         .collect::<Vec<_>>()
@@ -230,7 +249,14 @@ pub fn glue(
         .z
         .last()
         .ok_or_else(|| Error::InvalidInput("empty spectral arm".into()))?;
-    if sample.node_values.len() != arm.arm.z.len() || sample.expansions.len() != targets.len() {
+    if sample.node_values.len() != arm.arm.z.len()
+        || sample.expansions.len() != targets.len()
+        || sample.endpoint.len() != targets.len()
+        || sample
+            .node_values
+            .iter()
+            .any(|row| row.len() != targets.len())
+    {
         return Err(Error::InvalidInput(
             "spectral sample does not match the arm or the targets".into(),
         ));
@@ -385,7 +411,7 @@ pub fn glue(
                     m,
                     target,
                 } => {
-                    if weight.iter().sum::<i64>() != 2 || weight.len() != 2 {
+                    if weight_key(weight)? != "2" {
                         return Err(Error::Unsupported(
                             "gluing chain with a dotted bubble".into(),
                         ));
@@ -427,4 +453,29 @@ pub fn glue(
         diagnostics,
         bubble_self_check_digits: bubble.self_check_digits,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn bubble_weights_and_arm_specifications_are_validated() {
+        assert_eq!(weight_key(&[1, 1]).unwrap(), "2");
+        assert_eq!(weight_key(&[1, 2, 2, 1]).unwrap(), "3x3");
+        for invalid in [&[0, 2][..], &[3, -1], &[0, 3], &[1], &[]] {
+            assert!(weight_key(invalid).is_err(), "{invalid:?}");
+        }
+        let ctx = Ctx::digits(30);
+        assert!(SpectralArm::new(&ctx, ArmSpec::default()).is_err());
+        let spec = |t0, t_check| ArmSpec {
+            t0,
+            t_check,
+            digits: 30,
+            ..ArmSpec::default()
+        };
+        assert!(SpectralArm::new(&ctx, spec(120, 64)).is_ok());
+        assert!(SpectralArm::new(&ctx, spec(1, 1)).is_err());
+        assert!(SpectralArm::new(&ctx, spec(120, 121)).is_err());
+    }
 }

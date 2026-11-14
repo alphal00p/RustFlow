@@ -59,9 +59,12 @@ pub struct HarnessFamily {
     pub denominator_convention: Option<String>,
     #[serde(default)]
     pub sha256: Option<String>,
+    /// Must all be zero: the reader has no power shifts.
+    #[serde(default)]
+    pub power_shifts: Vec<String>,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct HarnessTerm {
     pub integral: Vec<i16>,
     pub coefficient: String,
@@ -178,6 +181,13 @@ pub fn family_from_harness(
             )));
         }
     }
+    for (slot, shift) in harness.power_shifts.iter().enumerate() {
+        if !rational_of(&parse(shift)?)?.is_zero() {
+            return Err(Error::Unsupported(format!(
+                "harness denominator {slot}: power shift {shift} (only unshifted families)"
+            )));
+        }
+    }
     let eta = Atom::var(eta_symbol());
     let mut propagators = Vec::new();
     let mut mask = Vec::new();
@@ -278,11 +288,19 @@ pub fn reduced_system_with(
     if index.len() != basis.len() {
         return Err(Error::InvalidInput("duplicate harness master".into()));
     }
-    let rules = solution
-        .rules
-        .iter()
-        .map(|r| (Integral(r.target.clone()), &r.terms))
-        .collect::<BTreeMap<_, _>>();
+    // Harness solutions may repeat a rule (seen for masters); repeated
+    // targets must carry the same terms.
+    let mut rules = BTreeMap::new();
+    for rule in &solution.rules {
+        if let Some(previous) = rules.insert(Integral(rule.target.clone()), &rule.terms) {
+            if previous != &rule.terms {
+                return Err(Error::InvalidInput(format!(
+                    "harness has conflicting rules for {:?}",
+                    rule.target
+                )));
+            }
+        }
+    }
     let map_of = |integral: &Integral| -> Result<LinearCombination> {
         if index.contains_key(integral) {
             return Ok(LinearCombination::from([(integral.clone(), Atom::one())]));
@@ -488,6 +506,42 @@ mod tests {
         let homogeneous = reduced_system_with(&solution, &[true], &targets, true)?;
         assert_eq!(homogeneous.basis, vec![Integral(vec![1])]);
         assert_eq!(homogeneous.matrix.len(), 1);
+        Ok(())
+    }
+
+    #[test]
+    fn power_shifts_and_conflicting_rules_are_refused() -> Result<()> {
+        let epsilon = symbol!("rustred_harness_test::eps4");
+        let shifted: HarnessFamily = serde_json::from_str(
+            &FAMILY.replace(r#""parameters":"#, r#""power_shifts":["1"],"parameters":"#),
+        )
+        .unwrap();
+        assert!(family_from_harness(&shifted, epsilon, 4).is_err());
+        let unshifted: HarnessFamily = serde_json::from_str(
+            &FAMILY.replace(r#""parameters":"#, r#""power_shifts":["0"],"parameters":"#),
+        )
+        .unwrap();
+        assert!(family_from_harness(&unshifted, epsilon, 4).is_ok());
+        let rule = r#"{"target":[2],"terms":[{"integral":[1],"coefficient":"(9/10)/(1+eta)"}]}"#;
+        let repeated = SOLUTION.replace(r#""rules":["#, &format!(r#""rules":[{rule},"#));
+        let targets = vec![Integral(vec![1])];
+        reduced_system(
+            &HarnessSolution::from_slice(repeated.as_bytes())?,
+            &[true],
+            &targets,
+        )?;
+        let conflicting = SOLUTION.replace(
+            r#""rules":["#,
+            &format!(r#""rules":[{},"#, rule.replace("(9/10)", "(8/10)")),
+        );
+        assert!(
+            reduced_system(
+                &HarnessSolution::from_slice(conflicting.as_bytes())?,
+                &[true],
+                &targets
+            )
+            .is_err()
+        );
         Ok(())
     }
 

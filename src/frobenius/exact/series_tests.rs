@@ -70,9 +70,10 @@ fn series(expression: &str) -> impl Iterator<Item = (Rational, Atom)> {
 #[test]
 fn native_nonconstant_unit_root_grid_ignores_only_exact_zero_fractional_slots() {
     let mut terms = series("(1-z)^(-1/2)").collect::<Vec<_>>();
-    // Symbolica 3.0.1 series kept exact-zero slots on the half-integer
-    // ramification grid; 3.0.2 no longer stores them. Keep one explicitly so
-    // that skipping exact-zero fractional slots stays covered.
+    // Symbolica community ed2374f kept exact-zero slots on the half-integer
+    // ramification grid; f514a7fe (also 3.0.1) and later no longer store them.
+    // Keep one explicitly so that skipping exact-zero fractional slots stays
+    // covered.
     if !terms
         .iter()
         .any(|(power, coefficient)| !power.is_integer() && coefficient.is_zero())

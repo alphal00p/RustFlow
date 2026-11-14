@@ -216,10 +216,14 @@ fn automatic_refinement_takes_precedence_over_sampled_reduction() {
         epsilon: symbol!("refined_product_eps"),
         dimension: 4,
     };
+    // The automatic epsilon fit transports at its profile's working precision
+    // (77-86 digits for a 10-digit request since 6b8033ad, 50 before). Order 48
+    // then needs more Taylor predicates than the default budget of 1000 (it
+    // passes with 4000); the library default order 80 stays within 1000.
     let options = FlowOptions {
         refine_basis: true,
         digits: 10,
-        series_order: 48,
+        series_order: 80,
         ..Default::default()
     };
     let values = solve_integrals(
