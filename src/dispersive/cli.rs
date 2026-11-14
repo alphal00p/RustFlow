@@ -18,7 +18,10 @@
 //! --lane LANESPEC.json: LANE STAGE. Before the sample, run the 4L prism lane (W3c chain) from the P14 rows and merge its values into a
 //! 4L sample (<workdir>/lane/merged-sample.json); the sample then reads it through `--v native:PLAN,SOFTSOL,lane` (literal `lane`).
 //! LANESPEC = {"de", "class_config", "chain", "p14_sample", "template", "m0", "minf", "w", "wf", "two_precision": "dW,dWF",
-//! optional "input_budget", "p14_producer"} (paths may
+//! optional "input_budget", "p14_producer", "accept_digits" (default: the threshold recorded by the producer), "require_quality"
+//! (refuse a P14 sample without a gluing quality record)}. The P14 sample's gluing quality (RustFlow main >= 444c9571) is re-checked
+//! with spectral::gluing::GluingAcceptance (Acceptance::Require semantics; a sample produced with --no-acceptance is refused) and
+//! carried into the provenance. (paths may
 //! contain {d0} = NUM_DEN of the sample's d0). Resumable like the sample (its own stage files under <workdir>/lane).
 //! native: boundary GATE (hard): full-rank endpoint system, >= --boundary-checks-min N redundant equations (default 1; class 16359
 //! at grid B: 61) with worst relative residual <= 10^--boundary-consistency-bar (default -80).
@@ -598,6 +601,8 @@ pub fn lane_stage(
     std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
     let merged = format!("{dir}/merged-sample.json");
     let p14 = s("p14_sample")?;
+    let quality = p14_quality_gate(&rd(&p14)?, spec["accept_digits"].as_f64(), spec["require_quality"].as_bool().unwrap_or(false))
+        .map_err(|e| format!("lane stage, P14 sample {p14}: {e}"))?;
     let mut argv: Vec<String> = vec![
         "--de", &s("de")?, "--class-config", &s("class_config")?, "--m0", &n("m0")?, "--minf", &n("minf")?, "--w", &n("w")?, "--wf", &n("wf")?,
         "--threads", &args.threads.to_string(), "--workdir", &dir, "--out", &format!("{dir}/out.json"),
@@ -632,10 +637,43 @@ pub fn lane_stage(
     }
     a.v = format!("native:{},{},{merged}", f[0], f[1]);
     a.lane = None;
-    let info = json!({"lane_spec": spec_path, "lane_out": format!("{dir}/out.json"), "merged_sample": merged, "lane_fingerprint": lane_out["fingerprint"],
+    let info = json!({"lane_spec": spec_path, "p14_gluing_quality": quality, "lane_out": format!("{dir}/out.json"), "merged_sample": merged, "lane_fingerprint": lane_out["fingerprint"],
         "lane_digits_summary": lane_out["digits_summary"], "lane_wall_seconds": t0.elapsed().as_secs_f64(),
         "note": "the lane's two-precision digits overstate the 4L value accuracy (P14 input errors are amplified up to 1e37.8, W3C-PRISM 3c)"});
     a.lane_info = info.clone();
     Ok((a, info))
 }
 
+
+/// Acceptance::Require on a P14 sample's recorded gluing quality (RustFlow main >= 444c9571 writes `quality`): rebuilt as
+/// spectral::gluing::GluingQuality and checked by GluingAcceptance::violations at `min_digits` (default: the producer's recorded
+/// threshold). Ok(record for the provenance) or Err(violations). A sample without a record passes only if `require` is false.
+pub fn p14_quality_gate(sample: &Value, min_digits: Option<f64>, require: bool) -> Result<Value, String> {
+    let q = &sample["quality"];
+    if q.is_null() {
+        if require {
+            return Err("no gluing quality record (produced before RustFlow main 444c9571) and require_quality is set".into());
+        }
+        return Ok(json!({"quality": null, "checked": false,
+            "note": "P14 sample predates the gluing quality record (RustFlow main before 444c9571): acceptance could not be re-checked"}));
+    }
+    if q["acceptance"] == "skipped" && min_digits.is_none() {
+        return Err("gluing acceptance was skipped by the producer (--no-acceptance); pass accept_digits to re-check".into());
+    }
+    let thr = min_digits.or(q["acceptance"]["min_digits"].as_f64()).ok_or("no acceptance threshold recorded or given")?;
+    let f = |k: &str| q[k].as_f64().unwrap_or(f64::NAN);
+    let gq = crate::spectral::gluing::GluingQuality {
+        min_master_tail_split_digits: f("min_master_tail_split_digits"),
+        min_contour_tail_split_digits: f("min_contour_tail_split_digits"),
+        min_asym_vs_node_digits: f("min_asym_vs_node_digits"),
+        min_eta_independent_digits: q["min_eta_independent_digits"].as_f64(),
+        bubble_self_check_digits: f("bubble_self_check_digits"),
+        log_terms_residual: f("log_terms_residual"),
+        endpoint_imaginary_relative: f("endpoint_imaginary_relative"),
+    };
+    let v = crate::spectral::gluing::GluingAcceptance { min_digits: thr }.violations(&gq);
+    if !v.is_empty() {
+        return Err(format!("gluing acceptance at {thr} digits violated: {v:?}"));
+    }
+    Ok(json!({"quality": q, "checked": true, "min_digits": thr, "violations": []}))
+}

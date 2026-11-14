@@ -166,6 +166,22 @@ fn pivoting_on_a_coupled_near_resonant_system() {
         worst
     };
     assert!(agree(&fc, &ft) < -60.0, "complete vs threshold 1e{:.1}", agree(&fc, &ft));
+    // W3b: the per-column recursion residual reports rounding on an intact basis and makes a real defect visible
+    {
+        let bf = laurent::scaled(&laurent::laurent::<Float>(&sys, Point::Zero, mm + 8, 300, 1), &spec.rho, 300);
+        let ok = dispersion::family_residual_report(&bf, &fc, e, 8, 300);
+        let good = ok["per_column_log10"].as_f64().unwrap();
+        assert!(good < -70.0, "intact basis: per-column residual 1e{good:.1}");
+        let mut bad = FamilyNum { spec: fc.spec.clone(), basis: fc.basis.clone() };
+        let col = 0;
+        // the largest coefficient of column 0 (a zero entry would not be corrupted by a relative change)
+        let row = (0..bad.basis.len()).max_by(|&a, &b| bad.basis[a][col].clone().abs().total_cmp(&bad.basis[b][col].clone().abs())).unwrap();
+        let v = Float::with_val(300, &bad.basis[row][col] * Float::with_val(300, 1e-20f64));
+        bad.basis[row][col] += v; // relative corruption 1e-20 of one coefficient
+        let rep = dispersion::family_residual_report(&bf, &bad, e, 8, 300);
+        let r = rep["per_column_log10"].as_f64().unwrap();
+        assert!(r > -40.0, "a 1e-20 corruption must show: per-column residual 1e{r:.1} (intact 1e{good:.1}), report {rep}");
+    }
     assert!(agree(&fc, &fh) < -60.0, "two precisions 1e{:.1}", agree(&fc, &fh));
 }
 
@@ -374,4 +390,28 @@ fn frobenius_checkpoint_resume_is_exact() {
         assert!(err.contains("refusing to resume"), "{err}");
     }
     std::fs::remove_dir_all(&dir).ok();
+}
+
+/// W3b: the lane stage's acceptance re-check of a P14 sample's gluing quality record
+#[test]
+fn p14_quality_gate_applies_the_gluing_acceptance() {
+    use super::cli::p14_quality_gate;
+    let good = serde_json::json!({"quality": {"min_master_tail_split_digits": 130.0, "min_contour_tail_split_digits": 128.0,
+        "min_asym_vs_node_digits": 120.0, "min_eta_independent_digits": null, "bubble_self_check_digits": 150.0,
+        "log_terms_residual": 1e-140, "endpoint_imaginary_relative": 0.0, "acceptance": {"min_digits": 104.0}, "violations": []}});
+    let r = p14_quality_gate(&good, None, true).unwrap();
+    assert_eq!(r["checked"], true);
+    assert_eq!(r["min_digits"], 104.0);
+    // a stricter threshold given by the spec is applied to the recorded numbers
+    assert!(p14_quality_gate(&good, Some(125.0), true).unwrap_err().contains("expansion vs arm node"));
+    let mut skipped = good.clone();
+    skipped["quality"]["acceptance"] = serde_json::json!("skipped");
+    assert!(p14_quality_gate(&skipped, None, false).is_err(), "Require: a --no-acceptance sample is refused");
+    assert!(p14_quality_gate(&skipped, Some(100.0), false).is_ok());
+    let mut nan = good.clone();
+    nan["quality"]["min_master_tail_split_digits"] = serde_json::Value::Null;
+    assert!(p14_quality_gate(&nan, None, false).is_err(), "an undefined agreement is a violation");
+    let old = serde_json::json!({"endpoint": []});
+    assert_eq!(p14_quality_gate(&old, None, false).unwrap()["checked"], false);
+    assert!(p14_quality_gate(&old, None, true).is_err());
 }
