@@ -28,6 +28,19 @@ pub trait Scalar: Clone + Send + Sync + std::fmt::Debug {
     const EXACT: bool;
     /// carries an MPFR value that `snap` cleans (Float, Shadowed)
     const SNAP: bool;
+    /// exact serialisation for the in-family checkpoints (W3b, ckpt.rs); false / None: this type is not checkpointed
+    fn ckpt_put(&self, _out: &mut Vec<u8>) -> bool {
+        false
+    }
+    fn ckpt_get(_b: &[u8], _p: &mut usize, _prec: u32) -> Option<Self> {
+        None
+    }
+}
+
+fn take<'a>(b: &'a [u8], p: &mut usize, n: usize) -> Option<&'a [u8]> {
+    let s = b.get(*p..*p + n)?;
+    *p += n;
+    Some(s)
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -145,6 +158,42 @@ impl Scalar for Float {
     }
     const EXACT: bool = false;
     const SNAP: bool = true;
+    /// tag (0 +0, 4 -0, 1 positive, 2 negative), precision, then exponent and mantissa digits: x = m 2^e exactly
+    fn ckpt_put(&self, out: &mut Vec<u8>) -> bool {
+        if !self.is_finite() {
+            return false;
+        }
+        if Float::is_zero(self) {
+            out.push(if self.is_sign_negative() { 4 } else { 0 });
+            out.extend_from_slice(&self.prec().to_le_bytes());
+            return true;
+        }
+        let (m, e) = self.to_integer_exp().expect("finite");
+        out.push(if m < 0 { 2 } else { 1 });
+        out.extend_from_slice(&self.prec().to_le_bytes());
+        out.extend_from_slice(&e.to_le_bytes());
+        let d = m.as_abs().to_digits::<u8>(rug::integer::Order::Lsf);
+        out.extend_from_slice(&(d.len() as u32).to_le_bytes());
+        out.extend_from_slice(&d);
+        true
+    }
+    fn ckpt_get(b: &[u8], p: &mut usize, _prec: u32) -> Option<Self> {
+        let tag = take(b, p, 1)?[0];
+        let pr = u32::from_le_bytes(take(b, p, 4)?.try_into().ok()?);
+        match tag {
+            0 => Some(Float::new(pr)),
+            4 => Some(-Float::new(pr)),
+            1 | 2 => {
+                let e = i32::from_le_bytes(take(b, p, 4)?.try_into().ok()?);
+                let n = u32::from_le_bytes(take(b, p, 4)?.try_into().ok()?) as usize;
+                let m = rug::Integer::from_digits(take(b, p, n)?, rug::integer::Order::Lsf);
+                let mut x = Float::with_val(pr, m);
+                x <<= e;
+                Some(if tag == 2 { -x } else { x })
+            }
+            _ => None,
+        }
+    }
 }
 
 /// MPFR value with an exact shadow residue mod 2^61 - 1: the shadow decides which entries are exactly zero (no rounding noise and no

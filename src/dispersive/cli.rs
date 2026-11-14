@@ -3,13 +3,20 @@
 //! dispersive --de DE.json --class-config CONFIG.json --m0 M0 --minf MINF --w W --wf WF --workdir DIR --out OUT.json
 //!            --v read:V.json | native:PLAN.json,SOFTSOL.json,SAMPLE.json
 //!            [--pr-values LANE_OUT.json] [--pivoting MODE] [--threads N] [--loops L] [--two-precision dW,dWF]
-//!            [--code-version STR] [--ref ORACLE_OUT.json]...
+//!            [--code-version STR] [--ref ORACLE_OUT.json]... [--kernel patch|standin] [--stop-at-patch K]
+//!            [--checkpoint-every-seconds T] [--frobenius-checkpoint-every-seconds T]
+//! The transport checkpoints after EVERY patch (exact, ~0.1-1 MB); the zero and infinity families every T seconds (default 900)
+//! between two Frobenius orders (exact binary, ~1 GB at 5 loops); a restart resumes from the last one (a shed allows 2 s: no flush).
+//! dispersive --progress WORKDIR: one JSON progress line from the checkpoint files (see `progress`).
+//! --kernel patch (default) = RustFlow's fixed-precision patch kernel (checkpointed after every patch); standin = the W3a
+//! reference recurrence (tests only, no per-patch checkpoint). --two-precision dW,dWF may be negative (a cheaper check run).
+//! --stop-at-patch K stops the transport resumably at patch K (short-segment runs; the same command without it continues).
 //! The e slot comes from the class config ("e"); the loop number from the config ("loops") or the class family file's loop momenta.
 //! --pr-values replaces the 39 'PR'-lane endpoint values of SAMPLE.json by those of a RustFlow lane run (raw = J / e^(4 gamma eps)).
 use super::boundary;
 use super::run::{self, Config};
 use super::system::EBlockSystem;
-use super::transport::TaylorRecurrence;
+use super::transport::{TaylorRecurrence, Transport};
 use rug::Float;
 use serde_json::{json, Value};
 use std::collections::BTreeMap;
@@ -29,7 +36,11 @@ pub struct Args {
     pub pivoting: String,
     pub threads: usize,
     pub loops: Option<u32>,
-    pub two_precision: Option<(u32, u32)>,
+    pub two_precision: Option<(i64, i64)>,
+    pub kernel: String,
+    pub stop_at_patch: Option<usize>,
+    pub checkpoint_every_seconds: f64,
+    pub frobenius_checkpoint_every_seconds: f64,
     pub code_version: String,
     pub refs: Vec<String>,
 }
@@ -70,6 +81,10 @@ impl Args {
                 (a.parse().unwrap(), b.parse().unwrap())
             }),
             code_version: opt("code-version").unwrap_or_else(|| "unknown".into()),
+            kernel: opt("kernel").unwrap_or_else(|| "patch".into()),
+            stop_at_patch: opt("stop-at-patch").map(|x| x.parse().map_err(|_| "--stop-at-patch: not a number".to_string())).transpose()?,
+            checkpoint_every_seconds: opt("checkpoint-every-seconds").map(|x| x.parse().unwrap_or(600.0)).unwrap_or(600.0),
+            frobenius_checkpoint_every_seconds: opt("frobenius-checkpoint-every-seconds").map(|x| x.parse().unwrap_or(900.0)).unwrap_or(900.0),
             refs: m.get("ref").cloned().unwrap_or_default(),
         })
     }
@@ -181,8 +196,17 @@ fn digits_vs(out: &Value, oracle: &Value) -> Vec<Option<f64>> {
         .collect()
 }
 
-/// run (one or two precisions), export, compare
+/// run (one or two precisions), export, compare. `cancel` / `transport_active`: see [`Config`] (the driver's signal handling)
 pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
+    run_with(args, sys, &Default::default(), &Default::default())
+}
+
+pub fn run_with(
+    args: &Args,
+    sys: &EBlockSystem,
+    cancel: &crate::options::CancellationToken,
+    transport_active: &std::sync::Arc<std::sync::atomic::AtomicBool>,
+) -> Result<Value, String> {
     let t0 = Instant::now();
     let (e_slot, loops, class_cfg) = args.class_settings()?;
     if e_slot != sys.e_slot {
@@ -194,22 +218,34 @@ pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
         c.workdir = dir;
         c.pivoting = args.pivoting.clone();
         c.code_version = args.code_version.clone();
+        c.cancel = cancel.clone();
+        c.transport_active = transport_active.clone();
+        c.stop_at_patch = args.stop_at_patch;
+        c.checkpoint_every_seconds = args.checkpoint_every_seconds;
+        c.frobenius_checkpoint_every_seconds = args.frobenius_checkpoint_every_seconds;
         c
     };
-    let kernel = TaylorRecurrence::new(sys, args.threads);
+    let kernel: Box<dyn Transport> = match args.kernel.as_str() {
+        "patch" => Box::new(super::kernel::PatchKernel::new(sys, args.threads)?),
+        "standin" => Box::new(TaylorRecurrence::new(sys, args.threads)),
+        k => return Err(format!("--kernel {k}: patch | standin")),
+    };
     let mut runs = vec![(args.w, args.wf)];
     if let Some((dw, dwf)) = args.two_precision {
-        runs.push((args.w + dw, args.wf + dwf));
+        let add = |a: u32, d: i64| -> Result<u32, String> { u32::try_from(a as i64 + d).map_err(|_| "--two-precision: negative precision".to_string()) };
+        runs.push((add(args.w, dw)?, add(args.wf, dwf)?));
     }
     let mut outs = Vec::new();
     for (k, &(w, wf)) in runs.iter().enumerate() {
         let dir = if runs.len() == 1 { args.workdir.clone() } else { format!("{}/p{}", args.workdir, k + 1) };
         std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
         let cfg = mk(w, wf, dir);
+        let meter = run::Meter::start("plan (singular points, family structure, path) + boundary rows");
         let plan = run::plan(sys, &cfg)?;
         let (bnd, src) = boundary_rows(args, sys, loops, run::bits(wf))?;
-        let prov = json!({"de": args.de, "class_config": args.class_config, "boundary": src, "transport": "TaylorRecurrence stand-in (W3a)"});
-        outs.push(run::run_sample(sys, &cfg, &plan, &bnd, &kernel, prov)?);
+        meter.finish(&cfg.workdir, cfg.nthreads, true);
+        let prov = json!({"de": args.de, "class_config": args.class_config, "boundary": src, "transport": kernel.id()});
+        outs.push(run::run_sample(sys, &cfg, &plan, &bnd, kernel.as_ref(), prov)?);
     }
     let mut out = outs[0].clone();
     if outs.len() == 2 {
@@ -218,7 +254,11 @@ pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
             out["I"][i]["digits"] = json!((d * 10.0).round() / 10.0);
         }
         out["digits_source"] = json!(format!("two-precision: (W, WF) = ({}, {}) vs ({}, {}); 'digits' = agreement of the two runs", runs[0].0, runs[0].1, runs[1].0, runs[1].1));
-        out["second_run"] = json!({"w": runs[1].0, "wf": runs[1].1, "boundary_fit": outs[1]["boundary_fit"], "matching": outs[1]["matching"], "fingerprint": outs[1]["fingerprint"]});
+        out["second_run"] = json!({"w": runs[1].0, "wf": runs[1].1, "boundary_fit": outs[1]["boundary_fit"], "matching": outs[1]["matching"],
+            "residuals": outs[1]["residuals"], "transport": outs[1]["transport"], "cost": outs[1]["cost"], "fingerprint": outs[1]["fingerprint"]});
+        let mut s: Vec<f64> = dg.clone();
+        s.sort_by(|a, b| a.total_cmp(b));
+        out["digits_summary"] = json!({"min": s.first(), "median": s.get(s.len() / 2), "named_idx_564_568": (564..569).filter_map(|i| dg.get(i).map(|d| (d * 10.0).round() / 10.0)).collect::<Vec<_>>()});
     }
     // named masters (class config "names": {name: exponent vector})
     if let Some(names) = class_cfg["names"].as_object() {
@@ -238,13 +278,14 @@ pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
         let dg = digits_vs(&out, &o);
         let all: Vec<f64> = dg.iter().flatten().cloned().collect();
         let mut s = all.clone();
-        s.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        s.sort_by(|a, b| a.total_cmp(b));
         let named: serde_json::Map<String, Value> = out
             .get("named")
             .and_then(|n| n.as_object())
             .map(|n| n.iter().map(|(k, v)| (k.clone(), json!(dg[v["idx"].as_u64().unwrap() as usize].map(|x| (x * 10.0).round() / 10.0)))).collect())
             .unwrap_or_default();
-        cmp.insert(r.clone(), json!({"entries": all.len(), "min": s.first(), "median": s.get(s.len() / 2), "named": named}));
+        let per: Vec<Value> = dg.iter().map(|d| d.map(|x| json!((x * 10.0).round() / 10.0)).unwrap_or(Value::Null)).collect();
+        cmp.insert(r.clone(), json!({"entries": all.len(), "min": s.first(), "median": s.get(s.len() / 2), "named": named, "per_entry": per}));
     }
     out["oracle_comparison"] = Value::Object(cmp);
     out["wall_seconds"] = json!(t0.elapsed().as_secs_f64());
@@ -252,4 +293,114 @@ pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
     std::fs::write(&tmp, serde_json::to_string_pretty(&out).unwrap()).map_err(|e| e.to_string())?;
     std::fs::rename(&tmp, &args.out).map_err(|e| e.to_string())?;
     Ok(out)
+}
+
+/// Progress of a sample from its CHECKPOINT FILES only (so it can never run ahead of what a restart resumes): one JSON object
+/// {"stage", "patch", "npatches", "detail", "ckpt_utc", "units_note"}. For drivers that compare (stage, patch) between attempts the
+/// stage is the constant "transport" until every run is final ("done"), and "patch" is a monotone work counter over all runs of the
+/// workdir: per run 150 units for the zero family (scaled by its Frobenius checkpoint), 1 per transport patch, 60 per infinity family
+/// (scaled likewise), 5 for matching/assembly (in-house cost ratios at W165). `{}` when nothing is checkpointed yet.
+pub fn progress(workdir: &str) -> Value {
+    use std::path::Path;
+    let dirs: Vec<String> = if Path::new(&format!("{workdir}/p1")).is_dir() {
+        (1..=9).map(|k| format!("{workdir}/p{k}")).filter(|d| Path::new(d).is_dir()).collect()
+    } else {
+        vec![workdir.to_string()]
+    };
+    let nruns = if Path::new(&format!("{workdir}/p1")).is_dir() { dirs.len().max(2) } else { 1 };
+    let mut newest = 0u64;
+    let mut seen = |p: &str| -> bool {
+        match std::fs::metadata(p) {
+            Ok(m) => {
+                if let Ok(t) = m.modified() {
+                    newest = newest.max(t.duration_since(std::time::UNIX_EPOCH).map(|d| d.as_secs()).unwrap_or(0));
+                }
+                true
+            }
+            Err(_) => false,
+        }
+    };
+    let (mut units, mut total) = (0.0f64, 0.0f64);
+    let mut details = Vec::new();
+    let mut all_final = true;
+    let mut last_total = None;
+    let mut any = false;
+    for (k, d) in dirs.iter().enumerate() {
+        let sum: Option<Value> = std::fs::read(format!("{d}/plan-summary.json")).ok().and_then(|b| serde_json::from_slice(&b).ok());
+        let (np, loops) = match &sum {
+            Some(s) => (s["npatches"].as_u64().unwrap_or(0) as f64, s["loops"].as_u64().unwrap_or(5) as f64),
+            None => (0.0, 5.0),
+        };
+        let run_total = if sum.is_some() { 150.0 + np + 60.0 * loops + 5.0 } else { last_total.unwrap_or(0.0) };
+        last_total = Some(run_total);
+        total += run_total;
+        let frac = |p: String| -> f64 {
+            match super::ckpt::peek(Path::new(&p)) {
+                Some((_, a, b, m)) if b > a => ((m - a) as f64 / (b - a) as f64).clamp(0.0, 1.0),
+                _ => 0.0,
+            }
+        };
+        let mut u = 0.0;
+        let mut what = "not started".to_string();
+        if seen(&format!("{d}/stage-zero.json")) {
+            u += 150.0;
+            what = "zero family done".into();
+        } else if seen(&format!("{d}/frob-zero.bin")) {
+            u += 142.0 * frac(format!("{d}/frob-zero.bin"));
+            what = format!("zero family {:.0} %", 100.0 * frac(format!("{d}/frob-zero.bin")));
+        }
+        if seen(&format!("{d}/stage-transport.json")) {
+            u += np;
+            what = "transport done".into();
+        } else if seen(&format!("{d}/stage-transport-kernel.json")) {
+            let nx = std::fs::read(format!("{d}/stage-transport-kernel.json")).ok().and_then(|b| serde_json::from_slice::<Value>(&b).ok()).and_then(|v| v["next_patch"].as_u64()).unwrap_or(0);
+            u += nx as f64;
+            what = format!("transport patch {nx} of {np}");
+        }
+        for kk in 1..=(loops as usize) {
+            if seen(&format!("{d}/stage-inf-{kk}.json")) {
+                u += 60.0;
+                what = format!("infinity family k={kk} done");
+            } else if seen(&format!("{d}/frob-inf-{kk}.bin")) {
+                let f = frac(format!("{d}/frob-inf-{kk}.bin"));
+                u += 57.0 * f;
+                what = format!("infinity family k={kk} {:.0} %", 100.0 * f);
+            }
+        }
+        let fin = seen(&format!("{d}/stage-final.json"));
+        if fin {
+            u += 5.0;
+            what = "final".into();
+        }
+        all_final &= fin;
+        any |= u > 0.0 || sum.is_some();
+        units += u;
+        details.push(format!("run {} of {nruns}: {what}", k + 1));
+    }
+    if dirs.len() < nruns {
+        all_final = false;
+        total += last_total.unwrap_or(0.0) * (nruns - dirs.len()) as f64;
+    }
+    if !any {
+        return json!({});
+    }
+    let utc = chrono_like(newest);
+    json!({"stage": if all_final { "done" } else { "transport" }, "patch": units.floor() as u64, "npatches": total.ceil() as u64,
+           "detail": details.join("; "), "ckpt_utc": utc,
+           "units_note": "patch/npatches = monotone work units over all runs (150 zero family, 1 per patch, 60 per infinity family, 5 matching), read from the checkpoint files"})
+}
+
+fn chrono_like(secs: u64) -> String {
+    // UTC timestamp without a date crate (civil-from-days, H. Hinnant)
+    let (d, s) = ((secs / 86400) as i64, secs % 86400);
+    let z = d + 719468;
+    let era = z.div_euclid(146097);
+    let doe = z - era * 146097;
+    let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153;
+    let day = doy - (153 * mp + 2) / 5 + 1;
+    let month = if mp < 10 { mp + 3 } else { mp - 9 };
+    let year = yoe + era * 400 + if month <= 2 { 1 } else { 0 };
+    format!("{year:04}-{month:02}-{day:02}T{:02}:{:02}:{:02}Z", s / 3600, (s / 60) % 60, s % 60)
 }

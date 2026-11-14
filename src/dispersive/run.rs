@@ -42,7 +42,21 @@ pub struct Config {
     pub residual_cols: usize,
     /// the run stops when the soft fit or the matching is worse than this (log10, relative): catches garbage families
     pub fail_residual_above_log10: f64,
+    /// cancellation (SIGTERM in the driver): the transport flushes its checkpoint and the run returns [`CANCELLED`]
+    pub cancel: crate::options::CancellationToken,
+    /// true while the checkpointed kernel transport runs (the driver may exit at once outside it: stage files are atomic)
+    pub transport_active: std::sync::Arc<std::sync::atomic::AtomicBool>,
+    /// stop the transport (resumably) once this patch index is reached (short-segment runs, kill tests)
+    pub stop_at_patch: Option<usize>,
+    /// transport checkpoint at least every this many seconds (it is also written after every patch when cheap; see kernel.rs)
+    pub checkpoint_every_seconds: f64,
+    pub checkpoint_every_patches: usize,
+    /// Frobenius (zero / infinity family) checkpoint interval in seconds (state between two orders; ~1 GB at 5 loops)
+    pub frobenius_checkpoint_every_seconds: f64,
 }
+
+/// error prefix of a run that stopped resumably (driver: exit code 75)
+pub const CANCELLED: &str = "CANCELLED (resumable)";
 
 impl Config {
     /// the class-specific choices are explicit; everything else has the oracle's defaults
@@ -62,6 +76,12 @@ impl Config {
             code_version: "unknown".into(),
             residual_cols: 16,
             fail_residual_above_log10: -10.0,
+            cancel: Default::default(),
+            transport_active: Default::default(),
+            stop_at_patch: None,
+            checkpoint_every_seconds: 600.0,
+            checkpoint_every_patches: 1,
+            frobenius_checkpoint_every_seconds: 900.0,
         }
     }
 }
@@ -127,6 +147,12 @@ fn point_of(spec: &FamilySpec) -> Point {
 
 /// MPFR family (plain MPFR or shadowed, per `mode`) + its recursion residual on `residual_cols` columns
 pub fn family_num(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &FamilySpec, mode: PivotMode, residual_cols: usize, prec: u32, nthreads: usize) -> Result<(FamilyNum, Value), String> {
+    family_num_ck(sys, b, spec, mode, residual_cols, prec, nthreads, None)
+}
+
+/// as `family_num`, the MPFR Frobenius with periodic exact checkpoints (plain MPFR modes; the shadow is not checkpointed)
+#[allow(clippy::too_many_arguments)]
+pub fn family_num_ck(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &FamilySpec, mode: PivotMode, residual_cols: usize, prec: u32, nthreads: usize, ck: Option<&super::ckpt::FrobCheckpoint>) -> Result<(FamilyNum, Value), String> {
     let lam = Float::with_val(prec, &spec.lam);
     let bs = laurent::scaled(b, &spec.rho, prec);
     let out = match mode {
@@ -138,7 +164,7 @@ pub fn family_num(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &FamilySpe
             }
             frobenius::shadowed_to_float(o)
         }
-        PivotMode::Float(p) => frobenius::frobenius_with::<Float>(&bs, sys.dim(), &lam, spec.n_lo, spec.mm, Some(&spec.ranks), Some(&spec.pivots), p, prec, nthreads),
+        PivotMode::Float(p) => frobenius::frobenius_ck::<Float>(&bs, sys.dim(), &lam, spec.n_lo, spec.mm, Some(&spec.ranks), Some(&spec.pivots), p, prec, nthreads, ck)?,
     };
     let basis = frobenius::stable_basis(&out, spec, sys.dim(), prec)?;
     let d = &out.diag;
@@ -178,8 +204,15 @@ impl Fp {
 
 /// content fingerprint of a sample: DE, plan, boundary, configuration, kernel, code
 pub fn fingerprint(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[BoundaryRow], kernel: &dyn Transport) -> String {
+    fingerprint_with(sys, cfg, plan, Some((bnd, kernel)))
+}
+
+/// `with = None`: the fingerprint of what the INFINITY families depend on (DE, plan, configuration, code; not the boundary, not
+/// the transport kernel). Their stage files can then be copied into the workdir of a rerun with another boundary (e.g. the
+/// RustFlow prism-lane values) and are checked against this fingerprint.
+pub fn fingerprint_with(sys: &EBlockSystem, cfg: &Config, plan: &Plan, with: Option<(&[BoundaryRow], &dyn Transport)>) -> String {
     let mut h = Fp::new();
-    h.s("w3a-dispersive-fingerprint-v2");
+    h.s(if with.is_some() { "w3a-dispersive-fingerprint-v2" } else { "w3b-dispersive-structure-fingerprint-v1" });
     h.s(&sys.d0.to_string());
     h.s(&sys.e_slot.to_string());
     for m in &sys.masters {
@@ -202,11 +235,14 @@ pub fn fingerprint(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundar
         h.s(&serde_json::to_string(&f.to_json()).unwrap());
         h.s(&format!("{:?}", f.pivots));
     }
-    for b in bnd {
-        h.s(&format!("{} {} {}", b.comp, b.n, fhex(&b.value)));
+    if let Some((bnd, _)) = with {
+        for b in bnd {
+            h.s(&format!("{} {} {}", b.comp, b.n, fhex(&b.value)));
+        }
     }
+    let kid = with.map(|(_, k)| k.id()).unwrap_or_else(|| "-".into());
     h.s(&format!("w {} wf {} ratio {} m0 {} minf {} nlo0 {} nlo_inf {} L {} pivoting {} kernel {} code {}", cfg.w, cfg.wf, cfg.ratio, cfg.m0, cfg.minf,
-        cfg.nlo0, cfg.nlo_inf, cfg.loops, cfg.pivoting, kernel.id(), cfg.code_version));
+        cfg.nlo0, cfg.nlo_inf, cfg.loops, cfg.pivoting, kid, cfg.code_version));
     h.hex()
 }
 
@@ -227,6 +263,95 @@ fn load(path: &str, fp: &str) -> Result<Option<Value>, String> {
     }
 }
 
+// ---------------- cost records (wall, CPU-s, peak RSS per stage; appended to <workdir>/cost.jsonl, summed in out.json) ----------------
+fn cpu_seconds() -> f64 {
+    let mut ru: libc::rusage = unsafe { std::mem::zeroed() };
+    // SAFETY: getrusage writes into the zeroed struct
+    if unsafe { libc::getrusage(libc::RUSAGE_SELF, &mut ru) } != 0 {
+        return f64::NAN;
+    }
+    let tv = |t: libc::timeval| t.tv_sec as f64 + t.tv_usec as f64 * 1e-6;
+    tv(ru.ru_utime) + tv(ru.ru_stime)
+}
+
+/// peak RSS (VmHWM) of this process in bytes since the last reset
+fn peak_rss() -> f64 {
+    std::fs::read_to_string("/proc/self/status")
+        .ok()
+        .and_then(|s| s.lines().find(|l| l.starts_with("VmHWM:")).and_then(|l| l.split_whitespace().nth(1).and_then(|v| v.parse::<f64>().ok())))
+        .map(|kb| kb * 1024.0)
+        .unwrap_or(f64::NAN)
+}
+
+/// reset the peak RSS counter (Linux >= 4.0: "5" > /proc/self/clear_refs); false if not possible
+fn reset_peak_rss() -> bool {
+    std::fs::write("/proc/self/clear_refs", "5").is_ok()
+}
+
+pub struct Meter {
+    stage: String,
+    wall: Instant,
+    cpu: f64,
+    reset: bool,
+}
+
+impl Meter {
+    pub fn start(stage: &str) -> Meter {
+        let reset = reset_peak_rss();
+        Meter { stage: stage.into(), wall: Instant::now(), cpu: cpu_seconds(), reset }
+    }
+    /// append the record of this stage segment (one process; `complete` = the stage finished in it)
+    pub fn finish(self, workdir: &str, threads: usize, complete: bool) {
+        let rec = json!({"stage": self.stage, "wall_s": self.wall.elapsed().as_secs_f64(), "cpu_s": cpu_seconds() - self.cpu,
+            "peak_rss_bytes": peak_rss(), "peak_rss_is_stage_peak": self.reset, "threads": threads, "complete": complete, "pid": std::process::id(),
+            "utc": std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_secs()).unwrap_or(0)});
+        use std::io::Write;
+        if let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(format!("{workdir}/cost.jsonl")) {
+            let _ = writeln!(f, "{rec}");
+        }
+    }
+}
+
+/// per-stage sums over every process segment of the workdir (cost.jsonl)
+pub fn cost_summary(workdir: &str) -> Value {
+    let text = std::fs::read_to_string(format!("{workdir}/cost.jsonl")).unwrap_or_default();
+    let mut st: std::collections::BTreeMap<String, (f64, f64, f64, usize, bool)> = Default::default();
+    let (mut tw, mut tc, mut tr) = (0.0, 0.0, 0.0f64);
+    for l in text.lines() {
+        let Ok(v) = serde_json::from_str::<Value>(l) else { continue };
+        let e = st.entry(v["stage"].as_str().unwrap_or("?").to_string()).or_insert((0.0, 0.0, 0.0, 0, false));
+        let (w, c, r) = (v["wall_s"].as_f64().unwrap_or(0.0), v["cpu_s"].as_f64().unwrap_or(0.0), v["peak_rss_bytes"].as_f64().unwrap_or(0.0));
+        e.0 += w;
+        e.1 += c;
+        e.2 = e.2.max(r);
+        e.3 += 1;
+        e.4 |= v["complete"].as_bool().unwrap_or(false);
+        tw += w;
+        tc += c;
+        tr = tr.max(r);
+    }
+    let stages: serde_json::Map<String, Value> = st
+        .into_iter()
+        .map(|(k, (w, c, r, n, done))| (k, json!({"wall_s": w, "cpu_s": c, "peak_rss_gb": r / 1e9, "segments": n, "complete": done})))
+        .collect();
+    json!({"stages": stages, "wall_s": tw, "cpu_s": tc, "cpu_h": tc / 3600.0, "peak_rss_gb": tr / 1e9,
+           "note": "sums over all process segments of this workdir (resumes included); work of a stage interrupted outside the transport is lost and not recorded"})
+}
+
+/// exclusive advisory lock on <workdir>/.lock for the run's lifetime (two processes never share a workdir)
+pub struct WorkdirLock(#[allow(dead_code)] std::fs::File);
+impl WorkdirLock {
+    pub fn acquire(workdir: &str) -> Result<WorkdirLock, String> {
+        let f = std::fs::OpenOptions::new().create(true).truncate(false).write(true).open(format!("{workdir}/.lock")).map_err(|e| e.to_string())?;
+        use std::os::unix::io::AsRawFd;
+        // SAFETY: flock on a descriptor owned by `f`
+        if unsafe { libc::flock(f.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) } != 0 {
+            return Err(format!("workdir {workdir} is locked by another run"));
+        }
+        Ok(WorkdirLock(f))
+    }
+}
+
 /// the full sample. `bnd` = soft boundary rows (computed at >= wf digits by the caller); `provenance` must name the V source
 pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[BoundaryRow], kernel: &dyn Transport, provenance: Value) -> Result<Value, String> {
     let t0 = Instant::now();
@@ -235,8 +360,25 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
     let pt = bits(cfg.w);
     let mode = PivotMode::parse(&cfg.pivoting)?;
     let fp = fingerprint(sys, cfg, plan, bnd, kernel);
+    let fp_inf = fingerprint_with(sys, cfg, plan, None);
+    let _lock = WorkdirLock::acquire(&cfg.workdir)?;
+    // a finished sample in this workdir: return it (two-precision drivers resume past the first run)
+    let stf = format!("{}/stage-final.json", cfg.workdir);
+    if let Some(v) = load(&stf, &fp)? {
+        log("final stage: resumed from checkpoint");
+        return Ok(v["out"].clone());
+    }
+    // plan summary for progress reports (cli::progress): patches and families of this run
+    save(&format!("{}/plan-summary.json", cfg.workdir), &json!({"fingerprint": fp, "npatches": plan.patches.len(), "loops": cfg.loops,
+        "families": std::iter::once(&plan.zero).chain(&plan.inf).map(|f| f.name.clone()).collect::<Vec<_>>()}))?;
+    let frob_ck = |name: &str, fpr: &str| super::ckpt::FrobCheckpoint {
+        path: std::path::PathBuf::from(format!("{}/frob-{name}.bin", cfg.workdir)),
+        fingerprint: format!("{fpr} {name} prec {pf} pivoting {}", mode.label()),
+        every_seconds: cfg.frobenius_checkpoint_every_seconds,
+        stop_at_m: None,
+    };
     let boundary_source = provenance.get("boundary").cloned().unwrap_or(json!("unspecified"));
-    log(&format!("fingerprint {fp} (pivoting {}, kernel {}, code {})", mode.label(), kernel.id(), cfg.code_version));
+    log(&format!("fingerprint {fp}, infinity-stage fingerprint {fp_inf} (pivoting {}, kernel {}, code {})", mode.label(), kernel.id(), cfg.code_version));
     let mut out = json!({"schema": "v6a.disp.v1", "producer": "RustFlow dispersive (W3a)", "prec_bits": pt, "prec_bits_families": pf, "E": e,
                          "config": {"w": cfg.w, "wf": cfg.wf, "ratio": cfg.ratio, "m0": cfg.m0, "minf": cfg.minf, "loops": cfg.loops, "e_slot": sys.e_slot,
                                     "pivoting": mode.label(), "threads": cfg.nthreads, "kernel": kernel.id(), "code_version": cfg.code_version},
@@ -250,9 +392,11 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
         let rd = |k: &str| -> Vec<Float> { v[k].as_array().unwrap().iter().map(|x| fparse(x.as_str().unwrap(), pf)).collect() };
         (rd("d_s0"), rd("head"))
     } else {
+        let meter = Meter::start("zero (family, soft fit, head)");
         let tz = Instant::now();
         let b0 = laurent::laurent::<Float>(sys, Point::Zero, cfg.m0 + 8, pf, cfg.nthreads);
-        let (fam0, diag0) = family_num(sys, &b0, &plan.zero, mode, cfg.residual_cols, pf, cfg.nthreads)?;
+        let ck0 = frob_ck("zero", &fp);
+        let (fam0, diag0) = family_num_ck(sys, &b0, &plan.zero, mode, cfg.residual_cols, pf, cfg.nthreads, Some(&ck0))?;
         drop(b0);
         let fit = dispersion::soft_fit(&fam0, bnd, e, pf);
         if fit.rows < fam0.spec.dim {
@@ -267,6 +411,8 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
         log(&format!("zero family + fit: {} {} ({:.1} s)", out["zero_diag"], out["boundary_fit"], t0.elapsed().as_secs_f64()));
         save(&st0, &json!({"fingerprint": fp, "boundary_source": boundary_source, "zero_diag": out["zero_diag"], "boundary_fit": out["boundary_fit"],
             "d_s0": dv.iter().map(fhex).collect::<Vec<_>>(), "head": hd.iter().map(fhex).collect::<Vec<_>>()}))?;
+        meter.finish(&cfg.workdir, cfg.nthreads, true);
+        let _ = std::fs::remove_file(&ck0.path); // superseded by stage-zero.json
         (dv, hd)
     };
     let fitw = out["boundary_fit"]["worst_rel_log10"].as_f64().unwrap_or(0.0);
@@ -283,6 +429,50 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
         log("stage transport: resumed from checkpoint");
         out["transport"] = v["transport"].clone();
         (rcj(&v["end"]), rcj(&v["mid"]))
+    } else if let Some(pk) = kernel.as_patch_kernel() {
+        // production kernel: the whole path, checkpointed after every patch in its own exact format (fingerprint of system, path,
+        // precision, projection, Cauchy pole, initial vector = d(s0), kernel version); resumed with any thread count
+        let meter = Meter::start("transport");
+        let y0: Vec<Complex> = d0v.iter().map(|x| Complex::with_val(pt, (x, 0))).collect();
+        let ctl = super::kernel::StageControl {
+            checkpoint: std::path::PathBuf::from(format!("{}/stage-transport-kernel.json", cfg.workdir)),
+            cancel: cfg.cancel.clone(),
+            every_seconds: cfg.checkpoint_every_seconds,
+            every_patches: cfg.checkpoint_every_patches,
+            stop_at_patch: cfg.stop_at_patch,
+        };
+        cfg.transport_active.store(true, std::sync::atomic::Ordering::SeqCst);
+        let r = pk.run_checkpointed(&y0, &plan.patches, pt, &ctl);
+        cfg.transport_active.store(false, std::sync::atomic::Ordering::SeqCst);
+        let (res, ksum) = match r {
+            Ok(x) => x,
+            Err(e) => {
+                meter.finish(&cfg.workdir, cfg.nthreads, false);
+                return Err(e);
+            }
+        };
+        let tr = match res {
+            super::kernel::Checkpointed::Completed(tr) => tr,
+            super::kernel::Checkpointed::Cancelled { next_patch } => {
+                meter.finish(&cfg.workdir, cfg.nthreads, false);
+                return Err(format!("{CANCELLED}: transport stopped at patch {next_patch} of {}; checkpoint {}", plan.patches.len(), ctl.checkpoint.display()));
+            }
+        };
+        if tr.end.iter().chain(&tr.weighted_integral).any(|z| !z.real().is_finite() || !z.imag().is_finite()) {
+            return Err("transport produced a non-finite value".into());
+        }
+        let secs: f64 = tr.patches.iter().map(|p| p.seconds).sum();
+        let setup: f64 = tr.patches.iter().map(|p| p.setup_seconds).sum();
+        let mx = tr.patches.iter().map(|p| p.dropped_im_over_re_log10).fold(-1e9f64, |m, x| if x.is_nan() { f64::INFINITY } else { m.max(x) });
+        let mid = tr.weighted_integral;
+        let midim = (0..e).map(|c| log10abs(mid[c].imag()) - log10abs(mid[c].real())).fold(-1e9f64, f64::max);
+        out["transport"] = json!({"patches": plan.patches.len(), "seconds": secs, "setup_seconds": setup,
+            "max_log10_im_over_re_after_detour": mx, "mid_integral_max_log10_im_over_re": midim, "kernel": ksum,
+            "detour_check": if mx < -10.0 && midim < -10.0 { "pass" } else { "FAIL: discontinuity not real after the detours" }});
+        log(&format!("transport: {} ({:.1} s)", out["transport"], t0.elapsed().as_secs_f64()));
+        save(&stt, &json!({"fingerprint": fp, "transport": out["transport"], "end": cj(&tr.end), "mid": cj(&mid)}))?;
+        meter.finish(&cfg.workdir, cfg.nthreads, true);
+        (tr.end, mid)
     } else {
         let stp = format!("{}/stage-transport-partial.json", cfg.workdir);
         let chunk: usize = std::env::var("DISPERSIVE_TRANSPORT_CHUNK").ok().and_then(|v| v.parse().ok()).unwrap_or(20);
@@ -329,27 +519,32 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
     for (k, spec) in plan.inf.iter().enumerate() {
         let sf = format!("{}/stage-inf-{}.json", cfg.workdir, k + 1);
         let rv = |v: &Value| -> Vec<Vec<Float>> { v.as_array().unwrap().iter().map(|c| c.as_array().unwrap().iter().map(|x| fparse(x.as_str().unwrap(), pf)).collect()).collect() };
-        if let Some(v) = load(&sf, &fp)? {
+        if let Some(v) = load(&sf, &fp_inf)? {
             log(&format!("{}: resumed from checkpoint", spec.name));
             cols.extend(rv(&v["cols"]));
             tails.extend(rv(&v["tails"]));
             fdiag.push(v["diag"].clone());
             continue;
         }
+        let meter = Meter::start(&format!("infinity family k={}", k + 1));
         if binf.is_none() {
             binf = Some(laurent::laurent::<Float>(sys, Point::Infinity, cfg.minf + 8, pf, cfg.nthreads));
         }
-        let (f, d) = family_num(sys, binf.as_ref().unwrap(), spec, mode, cfg.residual_cols, pf, cfg.nthreads)?;
+        let cki = frob_ck(&format!("inf-{}", k + 1), &fp_inf);
+        let (f, d) = family_num_ck(sys, binf.as_ref().unwrap(), spec, mode, cfg.residual_cols, pf, cfg.nthreads, Some(&cki))?;
         let (c, t) = dispersion::family_columns(&f, &plan.s_end, e, tterms, pf);
         log(&format!("{}: {} ({:.1} s)", spec.name, d, t0.elapsed().as_secs_f64()));
         let wv = |m: &[Vec<Float>]| -> Value { json!(m.iter().map(|c| c.iter().map(fhex).collect::<Vec<_>>()).collect::<Vec<_>>()) };
-        save(&sf, &json!({"fingerprint": fp, "diag": d, "cols": wv(&c), "tails": wv(&t)}))?;
+        save(&sf, &json!({"fingerprint": fp_inf, "diag": d, "cols": wv(&c), "tails": wv(&t)}))?;
+        meter.finish(&cfg.workdir, cfg.nthreads, true);
+        let _ = std::fs::remove_file(&cki.path);
         cols.extend(c);
         tails.extend(t);
         fdiag.push(d);
     }
     drop(binf);
     out["inf_families"] = json!(fdiag);
+    let meter = Meter::start("matching + assembly");
     let mt = dispersion::match_columns(&cols, &tails, &ds, e, pf);
     out["matching"] = json!({"S": plan.s_end.to_string(), "rows": mt.rows, "cols": mt.cols, "residual_log10": mt.residual_log10,
                              "worst_rel_log10": mt.worst_rel_log10, "max_log10_coef": mt.max_log10_coef});
@@ -388,8 +583,17 @@ pub fn run_sample(sys: &EBlockSystem, cfg: &Config, plan: &Plan, bnd: &[Boundary
     out["S_end"] = json!(plan.s_end.to_string());
     out["s0"] = json!(plan.s0.to_string());
     out["seconds"] = json!(t0.elapsed().as_secs_f64());
+    meter.finish(&cfg.workdir, cfg.nthreads, true);
+    out["residuals"] = json!({"boundary_fit_worst_rel_log10": out["boundary_fit"]["worst_rel_log10"], "boundary_fit_residual_log10": out["boundary_fit"]["residual_log10"],
+        "de_residual_zero_log10": out["zero_diag"]["de_residual_log10"],
+        "de_residual_inf_log10": out["inf_families"].as_array().map(|a| a.iter().map(|f| f["de_residual_log10"].clone()).collect::<Vec<_>>()),
+        "matching_worst_rel_log10": out["matching"]["worst_rel_log10"], "matching_residual_log10": out["matching"]["residual_log10"],
+        "transport_max_overlap_log10": out["transport"]["kernel"]["max_overlap_log10"], "transport_max_tail_log10": out["transport"]["kernel"]["max_tail_log10"],
+        "detour_max_dropped_imag_log10": out["transport"]["max_log10_im_over_re_after_detour"]});
+    out["cost"] = cost_summary(&cfg.workdir);
     // post.py reads masters and d0 from inp/<tag>.json next to the out file
     save(&format!("{}/inp.json", cfg.workdir), &json!({"d0": sys.d0.to_string(), "eps": sys.epsilon().to_string(), "E": e, "masters": sys.masters}))?;
+    save(&stf, &json!({"fingerprint": fp, "out": out}))?;
     Ok(out)
 }
 

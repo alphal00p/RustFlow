@@ -230,3 +230,148 @@ fn pivot_modes_parse() {
     assert_eq!(PivotMode::parse("shadow:first").unwrap().label(), "shadow:first");
     assert!(PivotMode::parse("bogus").is_err());
 }
+
+/// W3b: the production kernel (patch_kernel) in the stage driver: closed form, agreement with the stand-in, thread-count identity,
+/// resumable stop + resume with another thread count (identical), cancel token, refusal of a foreign kernel checkpoint, workdir lock.
+#[test]
+fn patch_kernel_in_the_stage_driver() {
+    use super::kernel::PatchKernel;
+    use super::transport::Transport;
+    let d0 = Rational::from((299999, 75000));
+    let sys = two_master(&d0);
+    let mk = |tag: &str, threads: usize| {
+        let mut c = Config::new(30, 70, 24, 50, 1);
+        c.nthreads = threads;
+        c.workdir = workdir(tag);
+        c
+    };
+    let cfg = mk("pk-a", 2);
+    let plan = run::plan(&sys, &cfg).unwrap();
+    assert!(plan.patches.len() > 6);
+    let pf = run::bits(cfg.wf);
+    let pt = run::bits(cfg.w);
+    let bnd = vec![BoundaryRow { comp: 0, n: 0, value: Float::with_val(pf, 1) }, BoundaryRow { comp: 1, n: 0, value: Float::with_val(pf, 0.5) }];
+    let prov = || serde_json::json!({"boundary": "test"});
+    let k2 = PatchKernel::new(&sys, 2).unwrap();
+    let out = run::run_sample(&sys, &cfg, &plan, &bnd, &k2, prov()).unwrap();
+    // closed form
+    let lam = Float::with_val(pf, &d0) / 2u32;
+    let b1 = beta(&Float::with_val(pf, &lam + 1u32), &Float::with_val(pf, 3u32 - &lam), pf);
+    let b2 = beta(&Float::with_val(pf, &lam + 2u32), &Float::with_val(pf, 2u32 - &lam), pf);
+    let want = [b1.clone(), Float::with_val(pf, &b1 / 2u32) - b2];
+    let val = |o: &serde_json::Value, c: usize| Float::with_val(pf, Float::parse(o["I"][c]["I"].as_str().unwrap()).unwrap());
+    for (c, w) in want.iter().enumerate() {
+        let digits = -Float::with_val(pf, (val(&out, c) - w) / w).abs().log10().to_f64();
+        assert!(digits > 25.0, "master {c}: {digits:.1} digits; out {}", out);
+    }
+    assert_eq!(out["transport"]["detour_check"], "pass", "{}", out["transport"]);
+    assert!(out["cost"]["stages"]["transport"]["complete"].as_bool().unwrap(), "{}", out["cost"]);
+    // the stand-in on the same plan: same function to (nearly) the transport precision
+    let cs = mk("pk-s", 2);
+    let st = TaylorRecurrence::new(&sys, 2);
+    let os = run::run_sample(&sys, &cs, &plan, &bnd, &st, prov()).unwrap();
+    for c in 0..2 {
+        let d = -Float::with_val(pf, (val(&out, c) - val(&os, c)) / val(&os, c)).abs().log10().to_f64();
+        assert!(d > 30.0 * 0.95, "kernel vs stand-in, master {c}: {d:.1} digits");
+    }
+    // the one-shot interface agrees with the stage driver's checkpointed path
+    let y0: Vec<rug::Complex> = (0..2).map(|c| rug::Complex::with_val(pt, (c as u32 + 1, 0))).collect();
+    let a = k2.transport(&sys, &y0, &plan.patches, pt).unwrap();
+    let b = PatchKernel::new(&sys, 1).unwrap().transport(&sys, &y0, &plan.patches, pt).unwrap();
+    assert_eq!(a.end, b.end, "one-shot thread identity");
+    assert_eq!(a.weighted_integral, b.weighted_integral);
+    // thread-count identity of the whole sample (fresh workdir, 1 thread)
+    let c1 = mk("pk-1", 1);
+    let o1 = run::run_sample(&sys, &c1, &plan, &bnd, &PatchKernel::new(&sys, 1).unwrap(), prov()).unwrap();
+    assert_eq!(o1["I"], out["I"], "thread-count identity");
+    assert_eq!(o1["transport"]["kernel"]["identity_hash"], out["transport"]["kernel"]["identity_hash"]);
+    // resumable stop at patch 3, then resume with another thread count, then the result is identical
+    let mut cr = mk("pk-r", 3);
+    cr.stop_at_patch = Some(3);
+    let err = run::run_sample(&sys, &cr, &plan, &bnd, &PatchKernel::new(&sys, 3).unwrap(), prov()).unwrap_err();
+    assert!(err.starts_with(run::CANCELLED), "{err}");
+    let ck: serde_json::Value = serde_json::from_slice(&std::fs::read(format!("{}/stage-transport-kernel.json", cr.workdir)).unwrap()).unwrap();
+    assert_eq!(ck["next_patch"], 3);
+    // a pre-set cancel token stops at once (still resumable, checkpoint not moved back)
+    let mut cc = cr.clone();
+    cc.stop_at_patch = None;
+    cc.cancel.cancel();
+    let err = run::run_sample(&sys, &cc, &plan, &bnd, &PatchKernel::new(&sys, 1).unwrap(), prov()).unwrap_err();
+    assert!(err.starts_with(run::CANCELLED), "{err}");
+    let ck: serde_json::Value = serde_json::from_slice(&std::fs::read(format!("{}/stage-transport-kernel.json", cr.workdir)).unwrap()).unwrap();
+    assert_eq!(ck["next_patch"], 3, "the cancelled run must not move the checkpoint back");
+    // no special flag: resume and finish with 1 thread
+    let mut cf = cr.clone();
+    cf.stop_at_patch = None;
+    cf.nthreads = 1;
+    cf.cancel = Default::default(); // the clones share cc's (cancelled) flag
+    let orr = run::run_sample(&sys, &cf, &plan, &bnd, &PatchKernel::new(&sys, 1).unwrap(), prov()).unwrap();
+    assert_eq!(orr["I"], out["I"], "stop + resume with another thread count");
+    assert_eq!(orr["transport"]["kernel"]["identity_hash"], out["transport"]["kernel"]["identity_hash"]);
+    // a finished workdir returns its final stage
+    let again = run::run_sample(&sys, &cf, &plan, &bnd, &PatchKernel::new(&sys, 4).unwrap(), prov()).unwrap();
+    assert_eq!(again["I"], out["I"]);
+    // a kernel checkpoint of ANOTHER run (other boundary -> other d(s0)) planted in a workdir with matching stage files is refused
+    let cx = mk("pk-x", 2);
+    let mut bnd2 = bnd.clone();
+    bnd2[1].value = Float::with_val(pf, 0.25);
+    let mut cx2 = cx.clone();
+    cx2.stop_at_patch = Some(2);
+    let _ = run::run_sample(&sys, &cx2, &plan, &bnd2, &k2, prov()).unwrap_err();
+    let foreign = std::fs::read(format!("{}/stage-transport-kernel.json", cx.workdir)).unwrap();
+    let cy = mk("pk-y", 2);
+    let mut cy2 = cy.clone();
+    cy2.stop_at_patch = Some(1);
+    let _ = run::run_sample(&sys, &cy2, &plan, &bnd, &k2, prov()).unwrap_err();
+    std::fs::write(format!("{}/stage-transport-kernel.json", cy.workdir), &foreign).unwrap();
+    let err = run::run_sample(&sys, &cy, &plan, &bnd, &k2, prov()).unwrap_err();
+    assert!(err.contains("refusing to start over it") && err.contains("initial"), "{err}");
+    // the workdir lock excludes a second process/run
+    let lock = run::WorkdirLock::acquire(&cy.workdir).unwrap();
+    assert!(run::WorkdirLock::acquire(&cy.workdir).is_err());
+    drop(lock);
+    for d in [&cfg.workdir, &cs.workdir, &c1.workdir, &cr.workdir, &cx.workdir, &cy.workdir] {
+        std::fs::remove_dir_all(d).ok();
+    }
+}
+
+/// W3b: periodic Frobenius checkpoints: stop at an intermediate order, resume (also with another thread count), identical family;
+/// a checkpoint of another run is refused; the header can be peeked for progress.
+#[test]
+fn frobenius_checkpoint_resume_is_exact() {
+    use super::ckpt::{self, FrobCheckpoint};
+    let d0 = Rational::from((299999, 75000));
+    let sys = three_master(&d0);
+    let e = sys.dim();
+    let lam = Rational::from(&d0 / 2);
+    let (n_lo, mm) = (-2i64, 16i64);
+    let b = laurent::laurent::<ModP>(&sys, Point::Zero, mm + 8, 0, 1);
+    let out = frobenius::frobenius::<ModP>(&b, e, &ModP::from_rational(&lam, 0), n_lo, mm, None, 0, 1);
+    let spec = frobenius::family_spec(&out, e, n_lo, mm, &lam, &Rational::from((1, 4)), "soft").unwrap();
+    let prec = 300;
+    let bf = laurent::scaled(&laurent::laurent::<Float>(&sys, Point::Zero, mm + 8, prec, 1), &spec.rho, prec);
+    let lamf = Float::with_val(prec, &lam);
+    let run = |nt: usize, ck: Option<&FrobCheckpoint>| {
+        frobenius::frobenius_ck::<Float>(&bf, e, &lamf, n_lo, mm, Some(&spec.ranks), Some(&spec.pivots), Pivoting::Threshold(30), prec, nt, ck)
+    };
+    let reference = run(2, None).unwrap();
+    let dir = workdir("frobck");
+    for stop in [n_lo + 1, n_lo + 7, n_lo + mm - 1] {
+        let path = std::path::PathBuf::from(format!("{dir}/f-{stop}.bin"));
+        let mut ck = FrobCheckpoint { path: path.clone(), fingerprint: "test-fp".into(), every_seconds: 1e9, stop_at_m: Some(stop) };
+        assert!(run(3, Some(&ck)).is_err(), "the test hook stops");
+        let (fp, _, _, m) = ckpt::peek(&path).unwrap();
+        assert_eq!((fp.as_str(), m), ("test-fp", stop));
+        ck.stop_at_m = None;
+        ck.every_seconds = 0.0; // and checkpoint every order on the way
+        let resumed = run(1, Some(&ck)).unwrap();
+        assert_eq!(resumed.t, reference.t, "T after resuming at m {stop}");
+        assert_eq!(resumed.ranks, reference.ranks);
+        assert_eq!(resumed.pivots, reference.pivots);
+        // another run's file is refused
+        let other = FrobCheckpoint { path: path.clone(), fingerprint: "other".into(), every_seconds: 1e9, stop_at_m: None };
+        let Err(err) = run(1, Some(&other)) else { panic!("a foreign checkpoint must be refused") };
+        assert!(err.contains("refusing to resume"), "{err}");
+    }
+    std::fs::remove_dir_all(&dir).ok();
+}

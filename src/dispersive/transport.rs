@@ -31,6 +31,10 @@ pub trait Transport {
     fn transport(&self, sys: &EBlockSystem, y0: &[Complex], patches: &[Patch], prec: u32) -> Result<TransportOutput, String>;
     /// kernel identity (algorithm + version), part of the checkpoint fingerprint
     fn id(&self) -> String;
+    /// the production kernel (checkpointed per patch); the stage driver then runs the whole path through it
+    fn as_patch_kernel(&self) -> Option<&super::kernel::PatchKernel> {
+        None
+    }
 }
 
 // ---------------- scalar for the stand-in (Float on the real axis, Complex off it) ----------------

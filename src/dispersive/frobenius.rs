@@ -104,6 +104,13 @@ pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, 
 /// as `frobenius`; `pivots` = the exact run's pivot sequence (needed for Pivoting::Structural)
 #[allow(clippy::too_many_arguments)]
 pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, pivots: Option<&[Vec<(u32, u32)>]>, pivoting: Pivoting, prec: u32, nthreads: usize) -> FrobOut<S> {
+    frobenius_ck(b, e, lam, n_lo, mm, ranks, pivots, pivoting, prec, nthreads, None).expect("no checkpoint, no I/O error")
+}
+
+/// as `frobenius_with`, with periodic exact checkpoints of the recursion state (W3b, ckpt.rs): resumes from `ck.path` when it exists
+/// (an unreadable file or one of another run is an error), writes it every `ck.every_seconds` between two orders
+#[allow(clippy::too_many_arguments)]
+pub fn frobenius_ck<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, pivots: Option<&[Vec<(u32, u32)>]>, pivoting: Pivoting, prec: u32, nthreads: usize, ck: Option<&super::ckpt::FrobCheckpoint>) -> Result<FrobOut<S>, String> {
     assert!(ranks.is_some() || S::EXACT, "MPFR Frobenius needs the ranks of the exact run");
     // ModP: first nonzero. Shadowed: the requested strategy on the float magnitudes among EXACT nonzeros (Structural = first nonzero).
     let mut pivoting = if S::EXACT && !S::SNAP { Pivoting::Complete } else { pivoting };
@@ -120,7 +127,47 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
     let mut ranks_out = Vec::new();
     let mut diag = FrobDiag { pole_rank: r, min_rank_gap_log10: f64::INFINITY, min_pivot_log10: f64::INFINITY, min_structural_pivot_rel_log10: f64::INFINITY, ..Default::default() };
     let nt = nthreads.max(1);
-    for m in (n_lo - r)..(n_lo + mm) {
+    let mut m_start = n_lo - r;
+    let mut seconds_before = 0.0;
+    if let Some(c) = ck {
+        if let Some(st) = super::ckpt::load::<S>(c, prec)? {
+            eprintln!("[dispersive] frobenius: resumed {} at order m {} (step {}, T nnz {})", c.path.display(), st.m_next, st.step, st.t.iter().map(|x| x.len()).sum::<usize>());
+            m_start = st.m_next;
+            t = st.t;
+            q = st.q;
+            top = st.top;
+            step = st.step;
+            ranks_out = st.ranks;
+            pivots_out = st.pivots;
+            seconds_before = st.diag.seconds;
+            diag = st.diag;
+            pivoting = st.pivoting;
+        }
+    }
+    let mut last_ck = Instant::now();
+    let mut ck_ok = true;
+    for m in m_start..(n_lo + mm) {
+        if let (Some(c), true) = (ck, ck_ok) {
+            // the state after all orders < m (both loop exits below lead here)
+            let stop_here = c.stop_at_m == Some(m);
+            if (m > m_start && last_ck.elapsed().as_secs_f64() >= c.every_seconds) || stop_here {
+                let tw = Instant::now();
+                let mut d = diag.clone();
+                d.seconds = seconds_before + clock.elapsed().as_secs_f64();
+                let st = super::ckpt::FrobState { m_first: n_lo - r, m_end: n_lo + mm, m_next: m, t: std::mem::take(&mut t), q, top, step, ranks: std::mem::take(&mut ranks_out), pivots: std::mem::take(&mut pivots_out), diag: d, pivoting };
+                let r = super::ckpt::save(c, &st);
+                (t, ranks_out, pivots_out) = (st.t, st.ranks, st.pivots);
+                ck_ok = r?;
+                if !ck_ok {
+                    eprintln!("[dispersive] frobenius: this scalar type is not checkpointed ({})", c.path.display());
+                }
+                eprintln!("[dispersive] frobenius checkpoint {} at order m {m} (step {step}): {:.1} s", c.path.display(), tw.elapsed().as_secs_f64());
+                last_ck = Instant::now();
+                if stop_here {
+                    return Err(format!("frobenius: stopped at order m {m} (test hook)"));
+                }
+            }
+        }
         let nb = m + r;
         if nb >= n_lo {
             for c in 0..e {
@@ -486,8 +533,8 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
     diag.steps = step;
     diag.q_final = q;
     diag.top = top;
-    diag.seconds = clock.elapsed().as_secs_f64();
-    FrobOut { t, q, ranks: ranks_out, pivots: pivots_out, diag }
+    diag.seconds = seconds_before + clock.elapsed().as_secs_f64();
+    Ok(FrobOut { t, q, ranks: ranks_out, pivots: pivots_out, diag })
 }
 
 /// the MPFR values of a shadowed run

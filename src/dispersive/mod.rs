@@ -18,6 +18,8 @@ pub mod dispersion;
 pub mod harness;
 pub mod run;
 pub mod transport;
+pub mod kernel;
+pub mod ckpt;
 #[cfg(test)]
 mod tests;
 pub mod softplan;
