@@ -182,6 +182,92 @@ pub struct GluedSample {
     pub contour_integrals: Vec<ContourIntegral>,
     pub diagnostics: Vec<TargetDiagnostic>,
     pub bubble_self_check_digits: f64,
+    pub quality: GluingQuality,
+}
+
+/// The internal consistency of one glued sample, summarized for acceptance.
+/// Digits are significant digits of agreement (999 for exact agreement).
+#[derive(Clone, Debug)]
+pub struct GluingQuality {
+    /// Smallest tail-split agreement of a glued master.
+    pub min_master_tail_split_digits: f64,
+    /// Smallest tail-split agreement of a contour integral.
+    pub min_contour_tail_split_digits: f64,
+    /// Smallest agreement of a target's large-z expansion with its value
+    /// transported to the last arm node.
+    pub min_asym_vs_node_digits: f64,
+    /// Smallest node-versus-endpoint agreement of the eta-independent
+    /// targets, if there are any.
+    pub min_eta_independent_digits: Option<f64>,
+    pub bubble_self_check_digits: f64,
+    /// [`SpectralSample::log_terms_residual`]: dropped logarithmic part of the
+    /// large-z expansions relative to the kept part.
+    pub log_terms_residual: f64,
+    /// Largest |Im| of an endpoint value that `chain_const` / `product_T1`
+    /// terms use through its real part, relative to the largest |Re| of all
+    /// endpoint values (0 when no such term occurs).
+    pub endpoint_imaginary_relative: f64,
+}
+
+/// Acceptance thresholds for [`GluingQuality`].
+#[derive(Clone, Copy, Debug)]
+pub struct GluingAcceptance {
+    /// Every agreement must reach `min_digits`; the relative log residual
+    /// and the relative imaginary part must stay below `10^-min_digits`.
+    pub min_digits: f64,
+}
+
+/// Whether [`glue`] refuses a sample whose quality misses the thresholds.
+#[derive(Clone, Copy, Debug)]
+pub enum Acceptance {
+    Require(GluingAcceptance),
+    /// Explicit opt-out: return the sample with its measured quality only.
+    Skip,
+}
+
+impl GluingAcceptance {
+    /// The violated thresholds, empty when the sample is acceptable.
+    pub fn violations(&self, quality: &GluingQuality) -> Vec<String> {
+        let mut out = Vec::new();
+        let mut digits = |name: &str, value: f64| {
+            // NaN (an undefined agreement) is a violation.
+            if !(value >= self.min_digits) {
+                out.push(format!("{name} {value:.1} < {:.1} digits", self.min_digits));
+            }
+        };
+        digits("master tail split", quality.min_master_tail_split_digits);
+        digits("contour tail split", quality.min_contour_tail_split_digits);
+        digits("expansion vs arm node", quality.min_asym_vs_node_digits);
+        if let Some(value) = quality.min_eta_independent_digits {
+            digits("eta-independent node vs endpoint", value);
+        }
+        digits("bubble self check", quality.bubble_self_check_digits);
+        let bound = 10f64.powf(-self.min_digits);
+        for (name, value) in [
+            ("log terms residual", quality.log_terms_residual),
+            (
+                "endpoint imaginary part",
+                quality.endpoint_imaginary_relative,
+            ),
+        ] {
+            if !(value <= bound) {
+                out.push(format!("{name} {value:.3e} > {bound:.1e}"));
+            }
+        }
+        out
+    }
+
+    pub fn check(&self, quality: &GluingQuality) -> Result<()> {
+        let violations = self.violations(quality);
+        if violations.is_empty() {
+            Ok(())
+        } else {
+            Err(Error::Accuracy(format!(
+                "glued sample fails acceptance: {}",
+                violations.join("; ")
+            )))
+        }
+    }
 }
 
 /// Bubble-weight key: pair sums joined by `x` (`"2"` = `B_{1,1}`, `"3"` =
@@ -228,7 +314,14 @@ pub fn glue(
     sample: &SpectralSample,
     map: &GluingMap,
     loops_norm: i64,
+    acceptance: Acceptance,
 ) -> Result<GluedSample> {
+    if exact_rational(eps)? != exact_rational(&sample.epsilon.to_string())? {
+        return Err(Error::InvalidInput(format!(
+            "gluing at epsilon {eps} but the spectral sample is at {}",
+            sample.epsilon
+        )));
+    }
     let e = ctx.rational(eps)?;
     let nmin = -(order as i64);
     let bubble = Bubble::new(*ctx, &e, &arm.c)?;
@@ -447,11 +540,57 @@ pub fn glue(
             },
         );
     }
+    let minimum = |values: &mut dyn Iterator<Item = f64>| values.fold(f64::INFINITY, f64::min);
+    let largest_real = sample
+        .endpoint
+        .iter()
+        .map(|v| to_rug(v, ctx.bits).real().clone().abs())
+        .fold(ctx.r(0), |m, v| if v > m { v } else { m });
+    let mut endpoint_imaginary = ctx.r(0);
+    for master in map.masters.values() {
+        for term in &master.terms {
+            if let GluingTerm::ChainConst { target, .. } | GluingTerm::ProductT1 { target, .. } =
+                term
+            {
+                let value = to_rug(&sample.endpoint[lookup(target)?], ctx.bits);
+                let size = value.imag().clone().abs();
+                if size > endpoint_imaginary {
+                    endpoint_imaginary = size;
+                }
+            }
+        }
+    }
+    let quality = GluingQuality {
+        min_master_tail_split_digits: minimum(&mut masters.values().map(|m| m.tail_split_digits)),
+        min_contour_tail_split_digits: minimum(
+            &mut contour_integrals.iter().map(|x| x.tail_split_digits),
+        ),
+        min_asym_vs_node_digits: minimum(
+            &mut diagnostics.iter().map(|d| d.asym_vs_node_at_t0_digits),
+        ),
+        min_eta_independent_digits: diagnostics
+            .iter()
+            .filter_map(|d| d.eta_independent_node_vs_endpoint_digits)
+            .reduce(f64::min),
+        bubble_self_check_digits: bubble.self_check_digits,
+        log_terms_residual: sample.log_terms_residual,
+        endpoint_imaginary_relative: if endpoint_imaginary.is_zero() {
+            0.0
+        } else if largest_real.is_zero() {
+            f64::INFINITY
+        } else {
+            (endpoint_imaginary / largest_real).to_f64()
+        },
+    };
+    if let Acceptance::Require(thresholds) = acceptance {
+        thresholds.check(&quality)?;
+    }
     Ok(GluedSample {
         masters,
         contour_integrals,
         diagnostics,
         bubble_self_check_digits: bubble.self_check_digits,
+        quality,
     })
 }
 
@@ -477,5 +616,37 @@ mod tests {
         assert!(SpectralArm::new(&ctx, spec(120, 64)).is_ok());
         assert!(SpectralArm::new(&ctx, spec(1, 1)).is_err());
         assert!(SpectralArm::new(&ctx, spec(120, 121)).is_err());
+    }
+
+    #[test]
+    fn acceptance_names_every_violated_threshold() {
+        // The worst production values (sgw4 prod a0-000 and its reproduction).
+        let production = GluingQuality {
+            min_master_tail_split_digits: 103.0,
+            min_contour_tail_split_digits: 102.7,
+            min_asym_vs_node_digits: 96.1,
+            min_eta_independent_digits: Some(155.4),
+            bubble_self_check_digits: 139.4,
+            log_terms_residual: 1.5e-194,
+            endpoint_imaginary_relative: 1e-120,
+        };
+        let acceptance = GluingAcceptance { min_digits: 52.0 };
+        assert!(acceptance.check(&production).is_ok());
+        let broken = GluingQuality {
+            min_asym_vs_node_digits: 12.0,
+            min_eta_independent_digits: Some(f64::NAN),
+            log_terms_residual: 1e-20,
+            endpoint_imaginary_relative: f64::INFINITY,
+            ..production
+        };
+        let violations = acceptance.violations(&broken);
+        assert_eq!(violations.len(), 4, "{violations:?}");
+        assert!(matches!(acceptance.check(&broken), Err(Error::Accuracy(_))));
+        assert!(
+            GluingAcceptance { min_digits: 104.0 }
+                .violations(&production)
+                .iter()
+                .any(|v| v.starts_with("master tail split"))
+        );
     }
 }

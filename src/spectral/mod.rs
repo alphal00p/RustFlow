@@ -60,16 +60,26 @@ impl Ctx {
     }
     /// Exact rational `NUM[/DEN]` rounded to the working precision.
     pub fn rational(&self, text: &str) -> Result<R> {
-        let parse = |s: &str| {
-            rug::Integer::from_str_radix(s.trim(), 10)
-                .map_err(|e| Error::InvalidInput(format!("rational {text:?}: {e}")))
-        };
-        let value = match text.split_once('/') {
-            Some((n, d)) => rug::Rational::from((parse(n)?, parse(d)?)),
-            None => rug::Rational::from(parse(text)?),
-        };
-        Ok(R::with_val(self.bits, value))
+        Ok(R::with_val(self.bits, exact_rational(text)?))
     }
+}
+
+/// Exact rational `NUM[/DEN]`.
+pub fn exact_rational(text: &str) -> Result<rug::Rational> {
+    let parse = |s: &str| {
+        rug::Integer::from_str_radix(s.trim(), 10)
+            .map_err(|e| Error::InvalidInput(format!("rational {text:?}: {e}")))
+    };
+    match text.split_once('/') {
+        Some((_, d)) if parse(d)?.is_zero() => Err(Error::InvalidInput(format!(
+            "rational {text:?}: zero denominator"
+        ))),
+        Some((n, d)) => Ok(rug::Rational::from((parse(n)?, parse(d)?))),
+        None => Ok(rug::Rational::from(parse(text)?)),
+    }
+}
+
+impl Ctx {
     pub fn cc(&self, re: R, im: R) -> C {
         C::with_val(self.bits, (re, im))
     }

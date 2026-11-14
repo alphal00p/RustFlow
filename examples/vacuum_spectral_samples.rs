@@ -13,9 +13,20 @@
 //! `--arithmetic-guard` [16], `--order` [176], `--deform-slot` [1],
 //! `--max-steps` [20000], `--lane-workers` [2], `--child-fallback native|none`
 //! [native], `--normalization-loops` [4; spectral: 5], `--arm-c` [5/2],
-//! `--arm-t0` [120], `--arm-tcheck` [64], `--arm-digits` [working - 10].
+//! `--arm-t0` [120], `--arm-tcheck` [64], `--arm-digits` [working - 10],
+//! `--fit-leading` [-2 * normalization loops], `--accept-digits` [digits +
+//! (0 - fit leading) * radius digits of the attempt's epsilon grid],
+//! `--no-acceptance` (record the gluing quality but accept every sample).
 //!
-//! Attempt `A` uses RustFlow's `EpsilonFitProfile` for leading power -8: its
+//! Spectral samples whose gluing quality (see `gluing::GluingQuality`) misses
+//! the acceptance digits are written as `sample-III.rejected.json` and the run
+//! fails; the measured quality is recorded under `quality` either way. The
+//! default threshold is what the Laurent extraction of the attempt consumes
+//! plus the requested digits: the radius `10^-r` of the epsilon grid costs
+//! about `r` digits per power between the leading pole and `eps^0`.
+//!
+//! Attempt `A` uses RustFlow's `EpsilonFitProfile` for leading power -8 (the
+//! four-loop flow targets; `fit` uses `--fit-leading`, recorded per attempt): its
 //! symmetric grid, guard digits raised to the profile's working digits and the
 //! series order raised by 16 per attempt. Samples are written atomically as
 //! `OUT/attempt-A/sample-III.json`; existing samples are skipped.
@@ -36,6 +47,7 @@ use symbolica_amflow::{
     *,
 };
 
+/// Leading pole of the sampled four-loop flow targets: sets the epsilon grid.
 const LEADING: i32 = -8;
 const LAST: i32 = 0;
 type AnyResult<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
@@ -201,14 +213,14 @@ fn backend(a: &Args, family: &IntegralFamily) -> AnyResult<Backend> {
         "native" => Some(RustRedBackend::default()),
         other => return Err(format!("unknown --child-fallback {other}").into()),
     };
-    Ok(FallbackBackend {
-        primary: LiteRedRustRedBackend::new(LiteRedBackendOptions {
+    Ok(FallbackBackend::new(
+        LiteRedRustRedBackend::new(LiteRedBackendOptions {
             workers: a.num("lane-workers", 2)?,
             ..Default::default()
         }),
         fallback,
-        fallback_below_loops: family.loops.len(),
-    })
+        family.loops.len(),
+    ))
 }
 
 fn basis_digest(prepared: &PreparedFlow) -> AnyResult<String> {
@@ -277,13 +289,36 @@ fn mode_samples(a: &Args, spectral_mode: bool) -> AnyResult<()> {
     };
     let normalization_loops: i64 =
         a.num("normalization-loops", if spectral_mode { 5 } else { 4 })?;
+    // Leading pole of the fitted values: the flow targets (sample mode) or
+    // the glued masters (spectral mode), 2 per loop of the normalization.
+    let fit_leading: i32 = a.num("fit-leading", -2 * normalization_loops as i32)?;
+    if fit_leading > LAST {
+        return Err(format!("--fit-leading {fit_leading} above eps^{LAST}").into());
+    }
+    let radius_digits = (-profile.radius.to_f64().log10()).round();
+    let accept_digits: f64 = a.num(
+        "accept-digits",
+        f64::from(refined.digits) + f64::from(LAST - fit_leading) * radius_digits,
+    )?;
+    let acceptance = if a.get("no-acceptance").is_some() {
+        gluing::Acceptance::Skip
+    } else {
+        gluing::Acceptance::Require(gluing::GluingAcceptance {
+            min_digits: accept_digits,
+        })
+    };
     atomic(
         &dir.join("profile.json"),
         &json!({"attempt": attempt_index, "samples": profile.samples.iter().map(ToString::to_string).collect::<Vec<_>>(),
-            "radius": profile.radius.to_string(), "working_digits": working, "options": format!("{refined:?}"),
-            "family_digest": family_digest(&family), "targets": targets.iter().map(|t| &t.0).collect::<Vec<_>>(),
-            "arm": spectral_mode.then(|| json!({"c": arm_spec.c, "t0": arm_spec.t0, "t_check": arm_spec.t_check,
-                "digits": arm_spec.digits}))}),
+        "radius": profile.radius.to_string(), "working_digits": working, "options": format!("{refined:?}"),
+        "grid_leading": LEADING, "fit_leading": fit_leading, "last": LAST,
+        "family_digest": family_digest(&family), "targets": targets.iter().map(|t| &t.0).collect::<Vec<_>>(),
+        "arm": spectral_mode.then(|| json!({"c": arm_spec.c, "t0": arm_spec.t0, "t_check": arm_spec.t_check,
+            "digits": arm_spec.digits})),
+        "acceptance": spectral_mode.then(|| match acceptance {
+            gluing::Acceptance::Require(t) => json!({"min_digits": t.min_digits}),
+            gluing::Acceptance::Skip => json!("skipped"),
+        })}),
     )?;
     let wanted: Option<Vec<usize>> = a
         .get("indices")
@@ -343,8 +378,29 @@ fn mode_samples(a: &Args, spectral_mode: bool) -> AnyResult<()> {
                 &sample,
                 map,
                 normalization_loops,
+                // Checked below, after the measured quality is recorded.
+                gluing::Acceptance::Skip,
             )?;
             out["assembly_seconds"] = json!(t2.elapsed().as_secs_f64());
+            let q = &glued.quality;
+            let violations = match acceptance {
+                gluing::Acceptance::Require(t) => t.violations(q),
+                gluing::Acceptance::Skip => vec![],
+            };
+            out["quality"] = json!({
+                "min_master_tail_split_digits": q.min_master_tail_split_digits,
+                "min_contour_tail_split_digits": q.min_contour_tail_split_digits,
+                "min_asym_vs_node_digits": q.min_asym_vs_node_digits,
+                "min_eta_independent_digits": q.min_eta_independent_digits,
+                "bubble_self_check_digits": q.bubble_self_check_digits,
+                "log_terms_residual": q.log_terms_residual,
+                "endpoint_imaginary_relative": q.endpoint_imaginary_relative,
+                "acceptance": match acceptance {
+                    gluing::Acceptance::Require(t) => json!({"min_digits": t.min_digits}),
+                    gluing::Acceptance::Skip => json!("skipped"),
+                },
+                "violations": violations,
+            });
             out["endpoint"] = json!(
                 targets
                     .iter()
@@ -383,6 +439,20 @@ fn mode_samples(a: &Args, spectral_mode: bool) -> AnyResult<()> {
                 .collect::<Vec<_>>());
         }
         out["process_peak_rss_kib"] = json!(peak_rss_kib());
+        if out["quality"]["violations"]
+            .as_array()
+            .is_some_and(|v| !v.is_empty())
+        {
+            atomic(
+                &dir.join(format!("sample-{:03}.rejected.json", job.index)),
+                &out,
+            )?;
+            return Err(format!(
+                "glued sample fails acceptance: {}",
+                out["quality"]["violations"]
+            )
+            .into());
+        }
         atomic(&dir.join(format!("sample-{:03}.json", job.index)), &out)?;
         Ok(())
     });
@@ -398,6 +468,10 @@ fn mode_fit(a: &Args) -> AnyResult<()> {
     let dir = PathBuf::from(a.get("dir").ok_or("--dir")?).join(format!("attempt-{attempt_index}"));
     let profile: Value = serde_json::from_slice(&fs::read(dir.join("profile.json"))?)?;
     let working = profile["working_digits"].as_u64().ok_or("working_digits")? as u32;
+    // Directories written before fit_leading was recorded used LEADING.
+    let fit_leading = profile["fit_leading"]
+        .as_i64()
+        .map_or(LEADING, |v| v as i32);
     let p = Precision::decimal(working)?;
     let mut eps = vec![];
     let mut values: BTreeMap<String, Vec<ComplexFloat>> = BTreeMap::new();
@@ -415,20 +489,32 @@ fn mode_fit(a: &Args) -> AnyResult<()> {
         }
         let (n, d) = text.split_once('/').unwrap_or((text, "1"));
         eps.push(Rational::from((n.parse::<i64>()?, d.parse::<i64>()?)));
+        // Sample mode: normalized endpoint targets. Spectral mode: the glued
+        // masters (its endpoints are raw flow targets without normalization).
+        let mut normalized = vec![];
         for entry in sample["endpoint"].as_array().ok_or("endpoint")? {
-            let value = &entry["normalized"];
-            values
-                .entry(entry["target"].to_string())
-                .or_default()
-                .push(p.parse(
-                    value["re"].as_str().ok_or("re")?,
-                    value["im"].as_str().ok_or("im")?,
-                )?);
+            if entry.get("normalized").is_some() {
+                normalized.push((entry["target"].to_string(), &entry["normalized"]));
+            }
+        }
+        if let Some(masters) = sample.get("masters").and_then(Value::as_object) {
+            for (name, master) in masters {
+                normalized.push((name.clone(), &master["normalized"]));
+            }
+        }
+        if normalized.is_empty() {
+            return Err(format!("sample {i}: no normalized values to fit").into());
+        }
+        for (key, value) in normalized {
+            values.entry(key).or_default().push(p.parse(
+                value["re"].as_str().ok_or("re")?,
+                value["im"].as_str().ok_or("im")?,
+            )?);
         }
     }
     let mut out = serde_json::Map::new();
     for (target, v) in values {
-        let fit = fit_epsilon(&eps, &v, LEADING, LAST, p)?;
+        let fit = fit_epsilon(&eps, &v, fit_leading, LAST, p)?;
         out.insert(
             target,
             json!(
@@ -439,7 +525,8 @@ fn mode_fit(a: &Args) -> AnyResult<()> {
             ),
         );
     }
-    let result = json!({"attempt": attempt_index, "nodes": eps.len(), "working_digits": working, "coefficients": out});
+    let result = json!({"attempt": attempt_index, "nodes": eps.len(), "working_digits": working,
+        "fit_leading": fit_leading, "coefficients": out});
     atomic(&dir.join("fit.json"), &result)?;
     println!("{}", serde_json::to_string_pretty(&result)?);
     Ok(())
