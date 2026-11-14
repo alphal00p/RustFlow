@@ -217,11 +217,19 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
     for i in 0..dim {
         worker_rows[owner[i]].push(i);
     }
-    let mut y: Vec<Vec<S>> = Vec::with_capacity(nord);
-    y.push(y0.iter().map(|v| S::from_state(v, bits)).collect());
-    for _ in 1..nord {
-        y.push(vec![S::zero(bits); dim]);
-    }
+    // Component-major storage y[j][m]: the inner loops walk the orders of one
+    // component, whose values (and limbs) are allocated contiguously.
+    let mut y: Vec<Vec<S>> = y0
+        .iter()
+        .map(|v| {
+            let mut col = Vec::with_capacity(nord);
+            col.push(S::from_state(v, bits));
+            for _ in 1..nord {
+                col.push(S::zero(bits));
+            }
+            col
+        })
+        .collect();
     let cancelled = {
         let ptrs: Vec<SPtr<S>> = y.iter_mut().map(|v| SPtr(v.as_mut_ptr())).collect();
         let barrier = Barrier::new(workers);
@@ -250,7 +258,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                             // previous barrier or before the spawn) and nobody writes
                             // them during this order; entry (n + 1, i) is written only
                             // by the owner of row i.
-                            let yv = |m: usize, j: usize| -> &S { unsafe { &*ptrs[m].0.add(j) } };
+                            let yv = |m: usize, j: usize| -> &S { unsafe { &*ptrs[j].0.add(m) } };
                             for (gi, (i, dv, ts)) in gl.iter().enumerate() {
                                 a.set_zero();
                                 for &t in ts.iter() {
@@ -268,13 +276,13 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                                     }
                                     a.sub_ref(&b);
                                 }
-                                unsafe { (*ptrs[n + 1].0.add(*i)).add_ref(&a) };
+                                unsafe { (*ptrs[*i].0.add(n + 1)).add_ref(&a) };
                                 if dd > 0 {
                                     std::mem::swap(&mut rings[gi][n % dd], &mut a);
                                 }
                             }
                             for &i in rows.iter() {
-                                unsafe { (*ptrs[n + 1].0.add(i)).div_u32((n + 1) as u32) };
+                                unsafe { (*ptrs[i].0.add(n + 1)).div_u32((n + 1) as u32) };
                             }
                             let leader = barrier.wait().is_leader();
                             if (n + 1) % 8 == 0 {
@@ -313,7 +321,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         let mut acc = S::zero(bits);
         for n in (0..nord).rev() {
             acc.mul_ref(x);
-            acc.add_ref(&y[n][j]);
+            acc.add_ref(&y[j][n]);
         }
         acc
     };
@@ -323,7 +331,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
             let mut p: Vec<S> = Vec::with_capacity(nord);
             let mut cur = S::zero(bits);
             for n in 0..nord {
-                cur.add_ref(&y[n][j]);
+                cur.add_ref(&y[j][n]);
                 cur.div_ref(u);
                 p.push(cur.clone());
             }
@@ -339,7 +347,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         let pv = probes.iter().map(|x| horner(j, x).to_state()).collect();
         let val_c = val.to_state();
         let scale = log10_abs(&val_c).max(log10_abs(&y0[j]));
-        let last = log10_abs(&y[nord - 1][j].to_state());
+        let last = log10_abs(&y[j][nord - 1].to_state());
         let tail = if last < -1e8 || scale < -1e8 {
             -1e9
         } else {
