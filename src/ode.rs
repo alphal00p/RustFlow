@@ -175,7 +175,11 @@ pub(crate) fn quotient_series(
     Ok(out)
 }
 
-pub(crate) fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Result<Vec<C>> {
+pub(crate) fn polynomial_roots(
+    p: Precision,
+    coefficients: &[C],
+    variable: Symbol,
+) -> Result<Vec<C>> {
     let degree = coefficients.len() - 1;
     if degree == 1 {
         return Ok(vec![p.neg(&p.div(&coefficients[0], &coefficients[1]))]);
@@ -370,7 +374,10 @@ impl CompiledSystem {
                 "patch kernel: rows with numerically valued parameters are not exact".into(),
             ));
         }
-        crate::patch_kernel::RationalSystem::from_matrix_atoms(&self.source.rows, self.source.variable)
+        crate::patch_kernel::RationalSystem::from_matrix_atoms(
+            &self.source.rows,
+            self.source.variable,
+        )
     }
 }
 
