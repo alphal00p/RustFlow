@@ -462,12 +462,7 @@ struct ConstraintResiduals {
     relative: Vec<Float>,
 }
 impl ConstraintResiduals {
-    fn new(
-        p: Precision,
-        a: &[Vec<ComplexFloat>],
-        b: &[ComplexFloat],
-        x: &[ComplexFloat],
-    ) -> Self {
+    fn new(p: Precision, a: &[Vec<ComplexFloat>], b: &[ComplexFloat], x: &[ComplexFloat]) -> Self {
         let one = p.real(1);
         let mut absolute = Vec::with_capacity(b.len());
         let mut relative = Vec::with_capacity(b.len());

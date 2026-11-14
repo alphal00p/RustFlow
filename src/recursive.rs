@@ -675,7 +675,10 @@ mod arithmetic_guard_tests {
                 )
                 .unwrap();
                 let grandchild = child_numerical_options(&child, grandchild_precision);
-                assert_eq!(grandchild.digits + grandchild.guard_digits, child.digits + child.guard_digits);
+                assert_eq!(
+                    grandchild.digits + grandchild.guard_digits,
+                    child.digits + child.guard_digits
+                );
                 assert_eq!(grandchild.arithmetic_guard_digits, arithmetic);
             }
         }

@@ -81,9 +81,9 @@ pub mod reduction;
 pub mod refine;
 #[cfg(feature = "automatic")]
 pub mod regions;
+mod root_path;
 #[cfg(feature = "automatic")]
 pub mod rustred_harness;
-mod root_path;
 #[cfg(feature = "automatic")]
 mod sample_checkpoint;
 mod series_limits;
@@ -104,8 +104,9 @@ pub use cut_flow::PreparedCutFlow;
 pub use cut_projection::PreparedCutProjections;
 #[cfg(feature = "automatic")]
 pub use engine::{
-    PreparedFlow, SpectralExpansion, SpectralSample, evaluate_samples, solve_integral_combinations, solve_integral_projections,
-    solve_integral_projections_normalized, solve_integrals, solve_prepared,
+    PreparedFlow, SpectralExpansion, SpectralSample, evaluate_samples, solve_integral_combinations,
+    solve_integral_projections, solve_integral_projections_normalized, solve_integrals,
+    solve_prepared,
 };
 pub use epsilon::{LaurentExpansion, fit_epsilon};
 pub use epsilon_flow::EpsilonShearedFlow;
@@ -127,8 +128,8 @@ pub use physical_transport::RustFlow;
 pub use projections::{ProjectionFactors, SampleNormalization};
 #[cfg(feature = "automatic")]
 pub use reduction::{
-    FallbackBackend, LiteRedBackendOptions, LiteRedRustRedBackend, NativeIdentityBank, NativeIdentityLimits,
-    NativeIdentityProvider, ProvidedRustRedBackend, ReductionBackend, RustRedBackend,
-    ScopedTableBackend, SeededRustRedBackend, TableBackend,
+    FallbackBackend, LiteRedBackendOptions, LiteRedRustRedBackend, NativeIdentityBank,
+    NativeIdentityLimits, NativeIdentityProvider, ProvidedRustRedBackend, ReductionBackend,
+    RustRedBackend, ScopedTableBackend, SeededRustRedBackend, TableBackend,
 };
 pub use transport_cache::RustFlowCache;
