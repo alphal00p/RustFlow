@@ -65,6 +65,11 @@ pub struct PatchRecord {
     pub seconds_setup: f64,
     pub seconds_recurrence: f64,
     pub seconds_finish: f64,
+    /// max and min busy seconds over the recurrence workers.
+    #[serde(default)]
+    pub worker_busy_max: f64,
+    #[serde(default)]
+    pub worker_busy_min: f64,
 }
 
 #[derive(Clone, Debug)]
@@ -435,6 +440,8 @@ impl<'a> Transport<'a> {
             seconds_setup: out.seconds_setup,
             seconds_recurrence: out.seconds_recurrence,
             seconds_finish: out.seconds_finish,
+            worker_busy_max: out.worker_busy.iter().copied().fold(0.0, f64::max),
+            worker_busy_min: out.worker_busy.iter().copied().fold(f64::INFINITY, f64::min),
         });
         state.next_patch = k + 1;
         Ok(())

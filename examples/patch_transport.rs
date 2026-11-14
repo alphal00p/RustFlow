@@ -243,8 +243,8 @@ fn run(a: &Args) -> R<()> {
     let outcome = transport.run(&mut state, until, &initial, &cancel, policy.as_ref(), |s| {
         let r = s.records.last().unwrap();
         eprintln!(
-            "patch {} order {} complex {} setup {:.2} s rec {:.2} s fin {:.2} s overlap {:.1} tail {:.1} imag {:.1} rss/peak {:?} GB",
-            r.index, r.order, r.complex, r.seconds_setup, r.seconds_recurrence, r.seconds_finish,
+            "patch {} order {} complex {} setup {:.2} s rec {:.2} s (busy {:.2}..{:.2}) fin {:.2} s overlap {:.1} tail {:.1} imag {:.1} rss/peak {:?} GB",
+            r.index, r.order, r.complex, r.seconds_setup, r.seconds_recurrence, r.worker_busy_min, r.worker_busy_max, r.seconds_finish,
             r.overlap_log10, r.tail_log10, r.dropped_imag_log10, rss_gb()
         );
     })?;

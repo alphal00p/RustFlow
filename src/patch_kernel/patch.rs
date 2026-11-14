@@ -146,6 +146,9 @@ pub struct PatchOutput {
     pub seconds_setup: f64,
     pub seconds_recurrence: f64,
     pub seconds_finish: f64,
+    /// Seconds each recurrence worker spent computing (outside barriers);
+    /// informational, not part of any identity.
+    pub worker_busy: Vec<f64>,
 }
 
 struct SPtr<T>(*mut T);
@@ -230,7 +233,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
             col
         })
         .collect();
-    let cancelled = {
+    let (cancelled, worker_busy) = {
         let ptrs: Vec<SPtr<S>> = y.iter_mut().map(|v| SPtr(v.as_mut_ptr())).collect();
         let barrier = Barrier::new(workers);
         let stop = AtomicBool::new(false);
@@ -240,7 +243,9 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                 .iter()
                 .zip(&worker_rows)
                 .map(|(gs, rows)| {
-                    sc.spawn(move || -> bool {
+                    sc.spawn(move || -> (bool, f64) {
+                        let mut busy = 0.0f64;
+                        let mut t_busy = Instant::now();
                         let gl: Vec<(usize, &[S], &[usize])> = gs
                             .iter()
                             .map(|&g| {
@@ -284,6 +289,7 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                             for &i in rows.iter() {
                                 unsafe { (*ptrs[i].0.add(n + 1)).div_u32((n + 1) as u32) };
                             }
+                            busy += t_busy.elapsed().as_secs_f64();
                             let leader = barrier.wait().is_leader();
                             if (n + 1) % 8 == 0 {
                                 // One consistent stop decision: written by the leader
@@ -293,18 +299,20 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                                 }
                                 barrier.wait();
                                 if stop.load(Ordering::Relaxed) {
-                                    return true;
+                                    return (true, busy);
                                 }
                             }
+                            t_busy = Instant::now();
                         }
-                        false
+                        (false, busy)
                     })
                 })
                 .collect();
-            handles
+            let results: Vec<(bool, f64)> = handles
                 .into_iter()
                 .map(|h| h.join().unwrap_or_else(|e| std::panic::resume_unwind(e)))
-                .fold(false, |acc, c| acc | c)
+                .collect();
+            (results.iter().any(|r| r.0), results.iter().map(|r| r.1).collect::<Vec<f64>>())
         })
     };
     if cancelled {
@@ -378,5 +386,6 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         seconds_setup,
         seconds_recurrence,
         seconds_finish,
+        worker_busy,
     })
 }
