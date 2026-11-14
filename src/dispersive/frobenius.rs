@@ -52,14 +52,45 @@ pub enum Pivoting {
     Structural,
 }
 
-impl Pivoting {
-    pub fn from_env() -> Pivoting {
-        match std::env::var("DISPERSIVE_PIVOTING").as_deref() {
-            Ok("complete") => Pivoting::Complete,
-            Ok("structural") | Err(_) => Pivoting::Structural,
-            Ok(x) if x.starts_with("shadow") => Pivoting::Structural, // shadow modes: handled by run::family_num
-            Ok(x) if x.starts_with("threshold:") => Pivoting::Threshold(x[10..].parse().expect("threshold:<bits>")),
-            Ok(x) => panic!("DISPERSIVE_PIVOTING={x}: complete | structural | threshold:<bits>"),
+/// pivoting of one family run: plain MPFR (production) or shadowed MPFR (experimental: exact zero pattern from residues mod 2^61-1,
+/// measured ~45 digits less accurate at 5 loops, REVIEW-B MAJOR 1)
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum PivotMode {
+    Float(Pivoting),
+    Shadow(Pivoting),
+}
+
+/// production default: the oracle's threshold pivoting (DISP_MARK), plain MPFR
+pub const DEFAULT_PIVOTING: &str = "threshold:30";
+
+impl PivotMode {
+    /// complete | threshold:<bits> | structural | shadow | shadow:threshold:<bits> | shadow:first
+    pub fn parse(s: &str) -> Result<PivotMode, String> {
+        let one = |x: &str| -> Result<Pivoting, String> {
+            match x {
+                "complete" => Ok(Pivoting::Complete),
+                "structural" | "first" => Ok(Pivoting::Structural),
+                t if t.starts_with("threshold:") => t[10..].parse().map(Pivoting::Threshold).map_err(|_| format!("bad pivoting {s}")),
+                _ => Err(format!("unknown pivoting {s:?}: complete | threshold:<bits> | structural | shadow[:threshold:<bits>|:first]")),
+            }
+        };
+        match s.strip_prefix("shadow") {
+            Some("") => Ok(PivotMode::Shadow(Pivoting::Complete)),
+            Some(rest) => Ok(PivotMode::Shadow(one(rest.strip_prefix(':').ok_or_else(|| format!("bad pivoting {s}"))?)?)),
+            None => Ok(PivotMode::Float(one(s)?)),
+        }
+    }
+    pub fn label(&self) -> String {
+        let one = |p: &Pivoting| match p {
+            Pivoting::Complete => "complete".to_string(),
+            Pivoting::Structural => "structural".to_string(),
+            Pivoting::Threshold(t) => format!("threshold:{t}"),
+        };
+        match self {
+            PivotMode::Float(p) => one(p),
+            PivotMode::Shadow(Pivoting::Complete) => "shadow".into(),
+            PivotMode::Shadow(Pivoting::Structural) => "shadow:first".into(),
+            PivotMode::Shadow(p) => format!("shadow:{}", one(p)),
         }
     }
 }
@@ -67,11 +98,7 @@ impl Pivoting {
 /// run the Frobenius recursion; `ranks = None` measures the ranks (exact types only)
 #[allow(clippy::too_many_arguments)]
 pub fn frobenius<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: i64, ranks: Option<&[usize]>, prec: u32, nthreads: usize) -> FrobOut<S> {
-    let pv = match Pivoting::from_env() {
-        Pivoting::Structural => Pivoting::Complete, // no pivot sequence given
-        x => x,
-    };
-    frobenius_with(b, e, lam, n_lo, mm, ranks, None, pv, prec, nthreads)
+    frobenius_with(b, e, lam, n_lo, mm, ranks, None, Pivoting::Complete, prec, nthreads)
 }
 
 /// as `frobenius`; `pivots` = the exact run's pivot sequence (needed for Pivoting::Structural)
@@ -354,6 +381,9 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
         }
         ranks_out.push(prow.len());
         pivots_out.push(prow.iter().zip(&pcol).map(|(&r, &c)| (r as u32, c as u32)).collect());
+        if S::SNAP && !prow.is_empty() {
+            diag.min_pivot_log10 = diag.min_pivot_log10.min(last);
+        }
         if !S::EXACT && !prow.is_empty() {
             let mut left = -1e9f64;
             for i in 0..e {
@@ -367,7 +397,6 @@ pub fn frobenius_with<S: Scalar>(b: &Lmat<S>, e: usize, lam: &S, n_lo: i64, mm: 
                 }
             }
             diag.min_rank_gap_log10 = diag.min_rank_gap_log10.min(last - left);
-            diag.min_pivot_log10 = diag.min_pivot_log10.min(last);
         }
         if prow.is_empty() {
             continue;

@@ -13,6 +13,7 @@ use super::system::{parse_coefficient, EBlockSystem};
 use rug::{Float, Rational};
 use std::collections::{BTreeMap, HashMap};
 
+#[derive(Clone, Debug)]
 pub struct BoundaryRow {
     pub comp: usize,
     pub n: i64,
@@ -28,11 +29,15 @@ pub fn rows_from_v(sys: &EBlockSystem, v: &BTreeMap<String, String>, loops: u32,
     let dh = Float::with_val(prec, &d / 2);
     let g_dh = dh.clone().gamma();
     let mut out = Vec::new();
+    let mut unmatched = Vec::new();
     for (key, val) in v {
         let (mv, np) = key.split_once('|').ok_or("bad V key")?;
         let m: Vec<i64> = serde_json::from_str(mv).map_err(|e| e.to_string())?;
         let np: i64 = np.parse().map_err(|e: std::num::ParseIntError| e.to_string())?;
-        let Some(&j) = idx.get(&m) else { continue };
+        let Some(&j) = idx.get(&m) else {
+            unmatched.push(key.clone());
+            continue;
+        };
         let a = m[sys.e_slot];
         let g1 = Float::with_val(prec, &dh + np).gamma();
         let g2 = Float::with_val(prec, Float::with_val(prec, a - np) - &dh).gamma();
@@ -44,6 +49,10 @@ pub fn rows_from_v(sys: &EBlockSystem, v: &BTreeMap<String, String>, loops: u32,
             c = -c;
         }
         out.push(BoundaryRow { comp: j, n: np - a, value: c });
+    }
+    if !unmatched.is_empty() {
+        // REVIEW-B MAJOR 4: a V key that is not an e-block master means a wrong e slot or a V file of another system
+        return Err(format!("{} V keys are not e-block masters of this system (wrong e slot or V file?), e.g. {}", unmatched.len(), unmatched[0]));
     }
     Ok(out)
 }

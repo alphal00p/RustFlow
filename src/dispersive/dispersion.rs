@@ -152,62 +152,66 @@ pub struct Matching {
     pub max_log10_coef: f64,
 }
 
-/// columns phi_a(S) = S^(-lam) sum_n B[n, ., a] (-1/(S rho))^n per family, tails, row-scaled least squares of d(S)
-pub fn match_at_infinity(fams: &[FamilyNum], ds: &[Float], sq: &Rational, e: usize, tterms: i64, prec: u32) -> Matching {
+/// one family's matching columns phi_a(S) = S^(-lam) sum_n B[n, ., a] (-1/(S rho))^n and tail vectors (int_S^inf phi_a/(s+1), analytically
+/// continued in the exponents), one pair of E-vectors per basis column
+pub fn family_columns(f: &FamilyNum, sq: &Rational, e: usize, tterms: i64, prec: u32) -> (Vec<Vec<Float>>, Vec<Vec<Float>>) {
     let s = Float::with_val(prec, sq);
-    let mut cols: Vec<Vec<Float>> = Vec::new();
-    let mut tails: Vec<Vec<Float>> = Vec::new();
-    for f in fams {
-        let nrow = f.basis.len() / e;
-        let lam = Float::with_val(prec, &f.spec.lam);
-        let rho = Float::with_val(prec, &f.spec.rho);
-        let mlam = Float::with_val(prec, -&lam);
-        let spow = Float::with_val(prec, (&s).pow(&mlam));
-        let sig = Float::with_val(prec, -1 / Float::with_val(prec, &s * &rho));
-        let mrho = Float::with_val(prec, -1 / Float::with_val(prec, &rho));
-        let mut tf = Vec::with_capacity(nrow);
-        for b in 0..nrow {
-            let n = f.spec.n_lo + b as i64;
-            let mut inner = Float::new(prec);
-            for l in 0..tterms {
-                let beta = Float::with_val(prec, &mlam - (n + l));
-                let mut t = Float::with_val(prec, (&s).pow(&beta));
-                t /= &beta;
-                if l % 2 == 1 {
-                    inner += &t;
-                } else {
-                    inner -= &t;
-                }
+    let nrow = f.basis.len() / e;
+    let lam = Float::with_val(prec, &f.spec.lam);
+    let rho = Float::with_val(prec, &f.spec.rho);
+    let mlam = Float::with_val(prec, -&lam);
+    let spow = Float::with_val(prec, (&s).pow(&mlam));
+    let sig = Float::with_val(prec, -1 / Float::with_val(prec, &s * &rho));
+    let mrho = Float::with_val(prec, -1 / Float::with_val(prec, &rho));
+    let mut tf = Vec::with_capacity(nrow);
+    for b in 0..nrow {
+        let n = f.spec.n_lo + b as i64;
+        let mut inner = Float::new(prec);
+        for l in 0..tterms {
+            let beta = Float::with_val(prec, &mlam - (n + l));
+            let mut t = Float::with_val(prec, (&s).pow(&beta));
+            t /= &beta;
+            if l % 2 == 1 {
+                inner += &t;
+            } else {
+                inner -= &t;
             }
-            tf.push(Float::with_val(prec, Float::with_val(prec, (&mrho).pow(n as i32)) * &inner));
         }
-        let sp: Vec<Float> = (0..nrow).map(|b| Float::with_val(prec, (&sig).pow((f.spec.n_lo + b as i64) as i32))).collect();
-        for a in 0..f.spec.dim {
-            let mut col = vec![Float::new(prec); e];
-            let mut tl = vec![Float::new(prec); e];
-            for b in 0..nrow {
-                for c in 0..e {
-                    let v = &f.basis[b * e + c][a];
-                    if v.is_zero() {
-                        continue;
-                    }
-                    col[c] += Float::with_val(prec, v * &sp[b]);
-                    tl[c] += Float::with_val(prec, v * &tf[b]);
-                }
-            }
-            for x in col.iter_mut() {
-                *x *= &spow;
-            }
-            cols.push(col);
-            tails.push(tl);
-        }
+        tf.push(Float::with_val(prec, Float::with_val(prec, (&mrho).pow(n as i32)) * &inner));
     }
+    let sp: Vec<Float> = (0..nrow).map(|b| Float::with_val(prec, (&sig).pow((f.spec.n_lo + b as i64) as i32))).collect();
+    let mut cols = Vec::with_capacity(f.spec.dim);
+    let mut tails = Vec::with_capacity(f.spec.dim);
+    for a in 0..f.spec.dim {
+        let mut col = vec![Float::new(prec); e];
+        let mut tl = vec![Float::new(prec); e];
+        for b in 0..nrow {
+            for c in 0..e {
+                let v = &f.basis[b * e + c][a];
+                if v.is_zero() {
+                    continue;
+                }
+                col[c] += Float::with_val(prec, v * &sp[b]);
+                tl[c] += Float::with_val(prec, v * &tf[b]);
+            }
+        }
+        for x in col.iter_mut() {
+            *x *= &spow;
+        }
+        cols.push(col);
+        tails.push(tl);
+    }
+    (cols, tails)
+}
+
+/// row-scaled least squares of d(S) on all families' columns (rows weighted by 1/max(|d_c(S)|, max_a |phi_a,c|)), then the tail
+pub fn match_columns(cols: &[Vec<Float>], tails: &[Vec<Float>], ds: &[Float], e: usize, prec: u32) -> Matching {
     let ncol = cols.len();
     let mut amat = Vec::new();
     let mut bvec = Vec::new();
     for c in 0..e {
         let mut sc = ds[c].clone().abs();
-        for col in &cols {
+        for col in cols {
             if col[c].cmp_abs(&sc) == Some(std::cmp::Ordering::Greater) {
                 sc = col[c].clone().abs();
             }
@@ -236,6 +240,18 @@ pub fn match_at_infinity(fams: &[FamilyNum], ds: &[Float], sq: &Rational, e: usi
     Matching { tail, coef, rows: amat.len(), cols: ncol, residual_log10: log10abs(&resm), worst_rel_log10: worst, max_log10_coef: amax }
 }
 
+/// columns of every family + least squares (as the oracle)
+pub fn match_at_infinity(fams: &[FamilyNum], ds: &[Float], sq: &Rational, e: usize, tterms: i64, prec: u32) -> Matching {
+    let mut cols = Vec::new();
+    let mut tails = Vec::new();
+    for f in fams {
+        let (c, t) = family_columns(f, sq, e, tterms, prec);
+        cols.extend(c);
+        tails.extend(t);
+    }
+    match_columns(&cols, &tails, ds, e, prec)
+}
+
 /// J(z = 1) = -(sin(pi d0/2)/pi) I
 pub fn prefactor(d0: &Rational, prec: u32) -> Float {
     let pi = Float::with_val(prec, rug::float::Constant::Pi);
@@ -244,38 +260,51 @@ pub fn prefactor(d0: &Rational, prec: u32) -> Float {
     -Float::with_val(prec, &s / &pi)
 }
 
-/// residual of the Frobenius recursion (lam + m) c_m - sum_k B_k c_{m-k} on the kept rows of every basis column:
-/// log10 of max |residual| / max |terms| over the checked orders (m + pole rank <= k_stable)
-pub fn family_residual(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usize, prec: u32) -> f64 {
+/// residual of the Frobenius recursion (lam + m) c_m - sum_k B_k c_{m-k} = 0 on the kept rows, for up to `max_cols` basis columns
+/// (evenly spread), INCLUDING the leading equations m in [n_lo - r, n_lo) (pole constraints, c_m = 0 below n_lo): log10 of
+/// max |residual| / max |terms| over the checked orders (m + pole rank <= k_stable)
+pub fn family_residual(b: &super::laurent::Lmat<Float>, fam: &FamilyNum, e: usize, max_cols: usize, prec: u32) -> f64 {
     let r = -*b.keys().next().unwrap();
     let lam = Float::with_val(prec, &fam.spec.lam);
     let n_lo = fam.spec.n_lo;
     let nrow = (fam.basis.len() / e) as i64;
+    let dim = fam.spec.dim;
+    let ncol = dim.min(max_cols.max(1));
+    let cols: Vec<usize> = (0..ncol).map(|k| k * dim / ncol).collect();
     let mut worst = -1e9f64;
-    for a in 0..fam.spec.dim {
+    for &a in &cols {
         let coef = |n: i64, j: usize| -> Option<&Float> { if n < n_lo || n - n_lo >= nrow { None } else { Some(&fam.basis[((n - n_lo) as usize) * e + j][a]) } };
-        for m in n_lo..(n_lo + nrow - r) {
+        for m in (n_lo - r)..(n_lo + nrow - r) {
             let mut res = vec![Float::new(prec); e];
             let mut mag = Float::new(prec);
             for i in 0..e {
                 if let Some(c) = coef(m, i) {
                     res[i] = Float::with_val(prec, c * Float::with_val(prec, &lam + m));
                     let t = res[i].clone().abs();
-                    if t > mag { mag = t; }
+                    if t > mag {
+                        mag = t;
+                    }
                 }
             }
             for (k, bk) in b {
                 let jb = m - k;
+                if jb < n_lo || jb - n_lo >= nrow {
+                    continue;
+                }
                 for (i, j, v) in bk {
                     if let Some(c) = coef(jb, *j) {
                         let t = Float::with_val(prec, v * c);
                         let ta = t.clone().abs();
-                        if ta > mag { mag = ta; }
+                        if ta > mag {
+                            mag = ta;
+                        }
                         res[*i] -= t;
                     }
                 }
             }
-            if mag.is_zero() { continue; }
+            if mag.is_zero() {
+                continue;
+            }
             for x in &res {
                 if !x.is_zero() {
                     worst = worst.max(log10abs(x) - log10abs(&mag));

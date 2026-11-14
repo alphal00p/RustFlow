@@ -1,61 +1,22 @@
-//! RustFlow DISPERSIVE MODE, one sample (W3a): native plan (singular points, mod-p family structure, path), soft boundary
-//! (V solved natively from the 4L inputs, or the prepared V file), transport (stand-in kernel behind the W2 interface),
-//! matching at infinity, dispersion integral, export in the Store schema (out.json I vector) + J = -(sin(pi d0/2)/pi) I.
-//! env: DISPERSIVE_E_SLOT (0), DISPERSIVE_M0 (24), DISPERSIVE_MINF (50), DISPERSIVE_LOOPS (5), DISPERSIVE_PIVOTING, DISPERSIVE_VERBOSE
-//! usage: cargo run --release --example dispersive -- DE.json V.json|native:PLAN.json,SOFTSOL.json,SAMPLE.json W WF NTHREADS WORKDIR OUT.json [REF.json ...]
-use rug::Float;
-use std::time::Instant;
-use symbolica_amflow::dispersive::{boundary, harness, run, transport};
+//! RustFlow DISPERSIVE MODE, one sample (W3a). Usage and options: src/dispersive/cli.rs. Example (class 16359, node a1 idx 022):
+//!   cargo run --release --example dispersive -- --de classes/16359/de/solution-299999_75000.json --class-config classes/16359/config.json \
+//!     --m0 24 --minf 50 --w 60 --wf 200 --threads 4 --workdir RUN --out RUN/out.json \
+//!     --v native:SOFTPLAN.json,classes/16359/soft/solution-299999_75000.json,v9a/pr/samples/attempt-1/sample-022.json [--pr-values LANE/out.json]
+use symbolica_amflow::dispersive::{cli, harness};
 use symbolica_amflow::rustred_harness::HarnessSolution;
 
 fn main() {
-    let a: Vec<String> = std::env::args().collect();
-    let (w, wf, nt): (u32, u32, usize) = (a[3].parse().unwrap(), a[4].parse().unwrap(), a[5].parse().unwrap());
-    let t0 = Instant::now();
-    let sol = HarnessSolution::from_slice(&std::fs::read(&a[1]).unwrap()).unwrap();
-    let sys = harness::eblock(&sol, std::env::var("DISPERSIVE_E_SLOT").ok().and_then(|v| v.parse().ok()).unwrap_or(0)).unwrap();
-    let env = |k: &str, d: i64| -> i64 { std::env::var(k).ok().and_then(|v| v.parse().ok()).unwrap_or(d) };
-    let cfg = run::Config { w, wf, nthreads: nt, workdir: a[6].clone(), m0: env("DISPERSIVE_M0", 24), minf: env("DISPERSIVE_MINF", 50),
-        loops: env("DISPERSIVE_LOOPS", 5) as u32, ..Default::default() };
-    let es = env("DISPERSIVE_E_SLOT", 0) as usize;
-    std::fs::create_dir_all(&cfg.workdir).unwrap();
-    let plan = run::plan(&sys, &cfg).unwrap();
-    let pf = run::bits(wf);
-    let (v, vsrc) = if let Some(spec) = a[2].strip_prefix("native:") {
-        let f: Vec<&str> = spec.split(',').collect();
-        let rd = |p: &str| -> serde_json::Value { serde_json::from_slice(&std::fs::read(p).unwrap()).unwrap() };
-        let smp = rd(f[2]);
-        let ep: Vec<(String, Vec<i64>, Float)> = smp["endpoint"].as_array().unwrap().iter().map(|x| {
-            let t: Vec<i64> = x["target"].as_array().unwrap().iter().map(|v| v.as_i64().unwrap()).collect();
-            let key = format!("{}{}", x.get("family").and_then(|f| f.as_str()).unwrap_or(""), serde_json::to_string(&t).unwrap().replace(',', ", "));
-            (key, t, Float::with_val(pf + 64, Float::parse(x["value"]["re"].as_str().unwrap()).unwrap()))
-        }).collect();
-        let pl = rd(f[0]);
-        let pl = if pl.get("plan").is_some() { pl["plan"].clone() } else { pl }; // softplan output {plan, demand} or a plan.json
-        let (v, d) = boundary::solve_v(&pl, &rd(f[1]), &ep, es, pf + 64).unwrap();
-        (v, serde_json::json!({"V": "native (soft_gen solve port)", "plan": f[0], "soft_solution": f[1], "sample": f[2], "diag": d}))
-    } else {
-        let (v, m) = boundary::read_v_file(&a[2]).unwrap();
-        (v, serde_json::json!({"V": "read", "file": a[2], "meta": m}))
-    };
-    let bnd = boundary::rows_from_v(&sys, &v, cfg.loops, pf).unwrap();
-    let kernel = transport::TaylorRecurrence::new(&sys, nt);
-    let prov = serde_json::json!({"de": a[1], "boundary": vsrc, "transport": "TaylorRecurrence stand-in (W3a)", "patches": plan.patches.len()});
-    let out = run::run_sample(&sys, &cfg, &plan, &bnd, &kernel, prov).unwrap();
-    std::fs::write(&a[7], serde_json::to_string_pretty(&out).unwrap()).unwrap();
-    println!("wall {:.1} s; boundary_fit {} matching {} transport {}", t0.elapsed().as_secs_f64(), out["boundary_fit"], out["matching"], out["transport"]);
-    for r in &a[8..] {
-        let o: serde_json::Value = serde_json::from_slice(&std::fs::read(r).unwrap()).unwrap();
-        let dig = |i: usize| -> f64 {
-            let x = Float::with_val(2000, Float::parse(out["I"][i]["I"].as_str().unwrap()).unwrap());
-            let y = Float::with_val(2000, Float::parse(o["I"][i]["I"].as_str().unwrap()).unwrap());
-            let d = Float::with_val(2000, (x - &y) / y).abs();
-            if d.is_zero() { 99.0 } else { -d.log10().to_f64() }
-        };
-        let all: Vec<f64> = (0..sys.dim()).map(dig).collect();
-        let mut s = all.clone();
-        s.sort_by(|x, y| x.partial_cmp(y).unwrap());
-        let five: Vec<f64> = (564..569).filter(|&i| i < all.len()).map(|i| (all[i] * 10.0).round() / 10.0).collect();
-        println!("vs {r}: idx 564..568 digits {:?}; all {} entries min {:.1} median {:.1}", five, all.len(), s[0], s[s.len() / 2]);
+    let argv: Vec<String> = std::env::args().skip(1).collect();
+    let args = cli::Args::parse(&argv).unwrap_or_else(|e| panic!("{e}"));
+    let (e_slot, _, _) = args.class_settings().unwrap_or_else(|e| panic!("{e}"));
+    let sol = HarnessSolution::from_slice(&std::fs::read(&args.de).unwrap()).unwrap();
+    let sys = harness::eblock(&sol, e_slot).unwrap();
+    match cli::run(&args, &sys) {
+        Ok(out) => println!("{}", serde_json::json!({"boundary_fit": out["boundary_fit"], "matching": out["matching"], "transport": out["transport"],
+            "named": out.get("named"), "oracle_comparison": out["oracle_comparison"], "wall_seconds": out["wall_seconds"]})),
+        Err(e) => {
+            eprintln!("dispersive: {e}");
+            std::process::exit(1);
+        }
     }
 }

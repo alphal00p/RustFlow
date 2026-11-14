@@ -12,6 +12,7 @@ pub mod field;
 pub mod frobenius;
 pub mod laurent;
 pub mod boundary;
+pub mod cli;
 pub mod dispersion;
 #[cfg(all(feature = "native", feature = "automatic"))]
 pub mod harness;

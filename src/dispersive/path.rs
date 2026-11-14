@@ -4,7 +4,6 @@
 //! bits (exact dyadic), polygon (12-gon) detour over the top of every singular point on the negative axis with
 //! radius 0.4 x (distance to the nearest other singular point or to 0), Taylor order nord = ceil((W + 8) /
 //! log10(R / |h|)) + 4. Float operations mirror the oracle so that the same dyadic path results.
-use super::poly;
 use rug::Rational;
 
 #[derive(Clone, Debug)]
@@ -174,7 +173,6 @@ pub fn plan(points: &[(f64, f64)], axis: &[f64], s0: &Rational, s_end: &Rational
     }
     let zq = step_real(zq, &mend, &mut patches);
     assert!(zq == mend);
-    let _ = poly::trim;
     patches
 }
 
