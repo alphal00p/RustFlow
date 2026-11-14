@@ -201,10 +201,15 @@ measured 6.23–20.47× faster payload serialization with byte-identical output.
 These are isolated serialization results, not a notebook speedup; the publication
 runtime remains unchanged. The review also produced a standalone
 [Symbolica export-race reproducer](../mre/symbolica-export-registry-race/README.md).
-Its validated owner fix is proposed in
-[Symbolica PR #52](https://github.com/symbolica-dev/symbolica/pull/52) and is not
-part of the tested runtime. Native import/export regressions, standalone
-reproducers, generator reentrancy checks and strict Clippy passed in isolation.
+It documents a defect of official community `c3408e4`: registering a coefficient
+domain from the writer callback during native export produced streams that native
+import could not read. The proposed owner fix
+[Symbolica PR #52](https://github.com/symbolica-dev/symbolica/pull/52) was closed
+unmerged, but the defect is fixed in the Symbolica that RustFlow now pins
+(community `4b15efef`): the unchanged reproducer imports both mutated streams
+exactly (it then stops at its own "race unexpectedly did not fail" assertion,
+which is written for the defective baseline). The directory is kept as the record
+of the defect and of its measured baseline.
 
 The integrated [native-arithmetic follow-up](https://github.com/alphal00p/RustFlow/pull/2)
 uses official Symbolica's explicit rounded scalar operations in the complex
