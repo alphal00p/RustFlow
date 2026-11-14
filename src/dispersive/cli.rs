@@ -10,6 +10,11 @@
 //! (lower.rs; chain spec documented at lower::lane_boundary).
 //! --merge TEMPLATE.json,P14SAMPLE.json,OUT.json (lane runs): writes OUT.json = TEMPLATE (a merged 4L sample) with its 'PR' rows
 //! replaced by this run's values (raw = J / e^(4 gamma eps)) and a 'provenance' field on every row (merged_sample).
+//! --input-budget BUDGET.json (with --merge): per-row relative error budget {"source": .., "entries": [{"family": "PR" | "", "target": [..],
+//! "rel_error": "1e-90"}]} (e.g. Jacobian x input accuracy). Row provenance then gets 'digits' = -log10(rel_error + 10^-two_precision)
+//! for lane rows (-log10(rel_error) for P14 rows), 'digits_input_budget' and 'digits_two_precision' separately. Without it 'digits'
+//! is the two-precision agreement only, and 'digits_kind' says so.
+//! --p14-producer STR (with --merge): names the producer of the P14 rows (e.g. the RustFlow commit) in their provenance.
 use super::boundary;
 use super::run::{self, Config};
 use super::system::EBlockSystem;
@@ -37,6 +42,8 @@ pub struct Args {
     pub code_version: String,
     pub refs: Vec<String>,
     pub merge: Option<String>,
+    pub input_budget: Option<String>,
+    pub p14_producer: Option<String>,
 }
 
 pub fn rd(p: &str) -> Result<Value, String> {
@@ -77,6 +84,8 @@ impl Args {
             code_version: opt("code-version").unwrap_or_else(|| "unknown".into()),
             refs: m.get("ref").cloned().unwrap_or_default(),
             merge: opt("merge"),
+            input_budget: opt("input-budget"),
+            p14_producer: opt("p14-producer"),
         })
     }
 
@@ -271,7 +280,8 @@ pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
         if f.len() != 3 {
             return Err("--merge TEMPLATE.json,P14SAMPLE.json,OUT.json".into());
         }
-        let merged = merged_sample(&rd(f[0])?, &rd(f[1])?, f[1], &out, &args.out, run::bits(args.w) + 64)?;
+        let budget = args.input_budget.as_deref().map(rd).transpose()?;
+        let merged = merged_sample(&rd(f[0])?, &rd(f[1])?, f[1], &out, &args.out, run::bits(args.w) + 64, budget.as_ref(), args.p14_producer.as_deref())?;
         let tmp = format!("{}.part", f[2]);
         std::fs::write(&tmp, serde_json::to_string(&merged).unwrap()).map_err(|e| e.to_string())?;
         std::fs::rename(&tmp, f[2]).map_err(|e| e.to_string())?;
@@ -286,7 +296,22 @@ pub fn run(args: &Args, sys: &EBlockSystem) -> Result<Value, String> {
 /// A merged 4L sample (schema of values/d5l/v9a/pr/samples: epsilon, attempt, index, lane_tag, endpoint[{family?, target, value{re}}])
 /// whose 'PR' rows are this lane run's values, raw = J / e^(4 gamma eps) = -(sin(pi d0/2)/pi) I / e^(4 gamma eps) (pr_samples.py).
 /// The P14 rows must equal those of the RustFlow P14 sample (same targets and values, same order). Every row gets 'provenance'.
-pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &Value, lane_out_path: &str, prec: u32) -> Result<Value, String> {
+pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &Value, lane_out_path: &str, prec: u32, budget: Option<&Value>, p14_producer: Option<&str>) -> Result<Value, String> {
+    let p14_tool = match p14_producer {
+        Some(p) => format!("RustFlow eta-flows + spectral gluing (P14 sample; {p})"),
+        None => "RustFlow eta-flows + spectral gluing (P14 sample)".to_string(),
+    };
+    // relative error budget per (family, target)
+    let mut bmap: BTreeMap<(String, Vec<i64>), f64> = BTreeMap::new();
+    if let Some(b) = budget {
+        for e in b["entries"].as_array().ok_or("input budget has no entries")? {
+            let fam = e["family"].as_str().unwrap_or("").to_string();
+            let t: Vec<i64> = e["target"].as_array().ok_or("budget entry without target")?.iter().map(|v| v.as_i64().unwrap()).collect();
+            let r = e["rel_error"].as_str().ok_or("budget entry without rel_error")?;
+            let x = Float::with_val(64, Float::parse(r).map_err(|e| e.to_string())?);
+            bmap.insert((fam, t), if x.is_zero() { -1000.0 } else { x.abs().log10().to_f64() });
+        }
+    }
     if template["epsilon"] != p14["epsilon"] || lane_out["eps"] != template["epsilon"] {
         return Err(format!("epsilon mismatch: template {}, P14 sample {}, lane run {}", template["epsilon"], p14["epsilon"], lane_out["eps"]));
     }
@@ -318,14 +343,30 @@ pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &V
                 if y["target"] != x["target"] || y["value"]["re"] != x["value"]["re"] {
                     return Err(format!("P14 row {n14} of the template differs from the RustFlow P14 sample"));
                 }
-                row["provenance"] = json!({"tool": "RustFlow eta-flows + spectral gluing (P14 sample)", "file": p14_path, "row": n14});
+                row["provenance"] = json!({"tool": p14_tool, "file": p14_path, "row": n14});
+                if budget.is_some() {
+                    let lb = *bmap.get(&(String::new(), t.clone())).ok_or_else(|| format!("input budget has no P14 entry {t:?}"))?;
+                    row["provenance"]["digits"] = json!(((-lb) * 10.0).round() / 10.0);
+                    row["provenance"]["digits_kind"] = json!("input accuracy (input budget)");
+                }
                 n14 += 1;
             }
             "PR" => {
                 let (v, dg) = lane.get(&t).ok_or_else(|| format!("lane run has no master {t:?}"))?;
                 row["value"] = json!({"re": v});
                 let mut pv = tool_lane.clone();
-                pv["digits"] = dg.clone();
+                pv["digits_two_precision"] = dg.clone();
+                if budget.is_some() {
+                    let lb = *bmap.get(&("PR".to_string(), t.clone())).ok_or_else(|| format!("input budget has no PR entry {t:?}"))?;
+                    let tp = dg.as_f64().unwrap_or(0.0);
+                    let tot = -(10f64.powf(lb) + 10f64.powf(-tp)).log10();
+                    pv["digits_input_budget"] = json!(((-lb) * 10.0).round() / 10.0);
+                    pv["digits"] = json!((tot * 10.0).round() / 10.0);
+                    pv["digits_kind"] = json!("-log10(input budget + two-precision error)");
+                } else {
+                    pv["digits"] = dg.clone();
+                    pv["digits_kind"] = json!("two-precision only (propagation of input errors NOT included)");
+                }
                 row["provenance"] = pv;
                 npr += 1;
             }
@@ -339,7 +380,8 @@ pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &V
     let mut out = template.clone();
     out["endpoint"] = json!(ep);
     out["lane_tag"] = json!(format!("rustflow:{lane_out_path}"));
-    out["provenance"] = json!({"P14_rows": n14, "P14_tool": "RustFlow eta-flows + spectral gluing", "P14_file": p14_path,
+    let bsrc = budget.map(|b| b["source"].clone()).unwrap_or(Value::Null);
+    out["provenance"] = json!({"input_budget_source": bsrc, "P14_rows": n14, "P14_tool": p14_tool, "P14_file": p14_path,
         "PR_rows": npr, "PR_tool": "RustFlow dispersive mode", "PR_out": lane_out_path, "PR_boundary": lane_out["provenance"]["boundary"]["V"]});
     Ok(out)
 }
