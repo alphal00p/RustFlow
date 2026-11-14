@@ -221,6 +221,8 @@ pub struct PatchJob<'a> {
     pub cancel: &'a CancellationToken,
     /// Pin worker threads to distinct allowed CPUs.
     pub pin_threads: bool,
+    /// Test hook: behave as cancelled at the first stop check after this order.
+    pub debug_cancel_at_order: Option<usize>,
 }
 
 /// Result of one patch (state values exact as `rug::Complex`).
@@ -267,10 +269,18 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
     // ---- setup: exact shift of every polynomial to the centre ----
     let t_setup = Instant::now();
     let centre = Centre::new(job.centre.0, job.centre.1);
-    if !S::COMPLEX && !centre.is_real() {
-        return Err(Error::InvalidInput(
-            "real arithmetic at a complex centre".into(),
-        ));
+    // Real scalars drop imaginary parts: refuse every complex input.
+    if !S::COMPLEX {
+        let complex_input = !centre.is_real()
+            || *job.step.1 != 0
+            || job.probes.iter().any(|p| p.1 != 0)
+            || job.cauchy_u.as_ref().is_some_and(|u| u.1 != 0)
+            || y0.iter().any(|z| !z.imag().is_zero());
+        if complex_input {
+            return Err(Error::InvalidInput(
+                "real arithmetic with a complex centre, step, probe, weight or state".into(),
+            ));
+        }
     }
     let gbits = bits + SHIFT_GUARD_BITS;
     let cpus = if job.pin_threads && threads > 1 {
@@ -341,15 +351,26 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         .iter()
         .map(|(_, den, _)| vec![S::zero(bits); den_data[plan.den_slot[den]].1.len().max(1)])
         .collect();
-    let (cancelled, worker_busy) = {
+    let (cancelled, worker_busy, poisoned) = {
         let ptrs: Vec<SPtr<S>> = y.iter_mut().map(|v| SPtr(v.as_mut_ptr())).collect();
         let rptrs: Vec<SPtr<S>> = rings.iter_mut().map(|v| SPtr(v.as_mut_ptr())).collect();
         let counters_a: Vec<AtomicUsize> = (0..nord).map(|_| AtomicUsize::new(0)).collect();
         let counters_b: Vec<AtomicUsize> = (0..nord).map(|_| AtomicUsize::new(0)).collect();
         let barrier = Barrier::new(workers);
         let stop = AtomicBool::new(false);
-        let (ptrs, rptrs, ca, cb, barrier, stop, nv, den_data) = (
-            &ptrs, &rptrs, &counters_a, &counters_b, &barrier, &stop, &nv, &den_data,
+        // A panicking worker keeps taking part in the barriers (so nobody
+        // blocks) and poisons the patch; the stop decision then ends it.
+        let poison = AtomicBool::new(false);
+        let (ptrs, rptrs, ca, cb, barrier, stop, poison, nv, den_data) = (
+            &ptrs,
+            &rptrs,
+            &counters_a,
+            &counters_b,
+            &barrier,
+            &stop,
+            &poison,
+            &nv,
+            &den_data,
         );
         std::thread::scope(|sc| {
             let handles: Vec<_> = (0..workers)
@@ -369,57 +390,78 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                             // written in this phase; ring g is touched only by the
                             // thread that took the chunk containing g.
                             let yv = |m: usize, j: usize| -> &S { unsafe { &*ptrs[j].0.add(m) } };
-                            loop {
-                                let c = ca[n].fetch_add(1, Ordering::Relaxed);
-                                let Some(&(g0, g1)) = plan.group_chunks.get(c) else {
-                                    break;
-                                };
-                                for g in g0..g1 {
-                                    let (_, den, ts) = &plan.groups[g];
-                                    let dv = &den_data[plan.den_slot[den]].1[..];
-                                    let dd = dv.len();
-                                    let ring = unsafe {
-                                        std::slice::from_raw_parts_mut(rptrs[g].0, dd.max(1))
-                                    };
-                                    a.set_zero();
-                                    for &t in ts.iter() {
-                                        let c = &nv[t];
-                                        let j = system.entries[t].col;
-                                        for k in 0..c.len().min(n + 1) {
-                                            a.add_prod(&c[k], yv(n - k, j), &mut tmp);
+                            let phase_a =
+                                std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                                    loop {
+                                        let c = ca[n].fetch_add(1, Ordering::Relaxed);
+                                        let Some(&(g0, g1)) = plan.group_chunks.get(c) else {
+                                            break;
+                                        };
+                                        for g in g0..g1 {
+                                            let (_, den, ts) = &plan.groups[g];
+                                            let dv = &den_data[plan.den_slot[den]].1[..];
+                                            let dd = dv.len();
+                                            let ring = unsafe {
+                                                std::slice::from_raw_parts_mut(
+                                                    rptrs[g].0,
+                                                    dd.max(1),
+                                                )
+                                            };
+                                            a.set_zero();
+                                            for &t in ts.iter() {
+                                                let c = &nv[t];
+                                                let j = system.entries[t].col;
+                                                for k in 0..c.len().min(n + 1) {
+                                                    a.add_prod(&c[k], yv(n - k, j), &mut tmp);
+                                                }
+                                            }
+                                            if dd > 0 && n > 0 {
+                                                b.set_zero();
+                                                for k in 1..=dd.min(n) {
+                                                    b.add_prod(
+                                                        &dv[k - 1],
+                                                        &ring[(n - k) % dd],
+                                                        &mut tmp,
+                                                    );
+                                                }
+                                                a.sub_ref(&b);
+                                            }
+                                            let slot = if dd > 0 { n % dd } else { 0 };
+                                            std::mem::swap(&mut ring[slot], &mut a);
                                         }
                                     }
-                                    if dd > 0 && n > 0 {
-                                        b.set_zero();
-                                        for k in 1..=dd.min(n) {
-                                            b.add_prod(&dv[k - 1], &ring[(n - k) % dd], &mut tmp);
-                                        }
-                                        a.sub_ref(&b);
-                                    }
-                                    let slot = if dd > 0 { n % dd } else { 0 };
-                                    std::mem::swap(&mut ring[slot], &mut a);
-                                }
+                                }));
+                            if phase_a.is_err() {
+                                poison.store(true, Ordering::Relaxed);
                             }
                             busy += t_busy.elapsed().as_secs_f64();
                             barrier.wait();
                             t_busy = Instant::now();
                             // SAFETY (phase B): rings are only read; y[i][n + 1] is
                             // written only by the thread that took row i's chunk.
-                            loop {
-                                let c = cb[n].fetch_add(1, Ordering::Relaxed);
-                                let Some(&(r0, r1)) = plan.row_chunks.get(c) else {
-                                    break;
-                                };
-                                for i in r0..r1 {
-                                    let target = unsafe { &mut *ptrs[i].0.add(n + 1) };
-                                    let (g0, g1) = plan.row_groups[i];
-                                    for g in g0..g1 {
-                                        let dd = den_data[plan.den_slot[&plan.groups[g].1]].1.len();
-                                        let slot = if dd > 0 { n % dd } else { 0 };
-                                        target.add_ref(unsafe { &*rptrs[g].0.add(slot) });
+                            let phase_b =
+                                std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                                    loop {
+                                        let c = cb[n].fetch_add(1, Ordering::Relaxed);
+                                        let Some(&(r0, r1)) = plan.row_chunks.get(c) else {
+                                            break;
+                                        };
+                                        for i in r0..r1 {
+                                            let target = unsafe { &mut *ptrs[i].0.add(n + 1) };
+                                            let (g0, g1) = plan.row_groups[i];
+                                            for g in g0..g1 {
+                                                let dd = den_data[plan.den_slot[&plan.groups[g].1]]
+                                                    .1
+                                                    .len();
+                                                let slot = if dd > 0 { n % dd } else { 0 };
+                                                target.add_ref(unsafe { &*rptrs[g].0.add(slot) });
+                                            }
+                                            target.div_u32((n + 1) as u32);
+                                        }
                                     }
-                                    target.div_u32((n + 1) as u32);
-                                }
+                                }));
+                            if phase_b.is_err() {
+                                poison.store(true, Ordering::Relaxed);
                             }
                             busy += t_busy.elapsed().as_secs_f64();
                             let leader = barrier.wait().is_leader();
@@ -427,7 +469,14 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
                                 // One consistent stop decision: written by the leader
                                 // between two barriers, read by all after the second.
                                 if leader {
-                                    stop.store(job.cancel.is_cancelled(), Ordering::Relaxed);
+                                    let debug =
+                                        job.debug_cancel_at_order.is_some_and(|o| n + 1 >= o);
+                                    stop.store(
+                                        job.cancel.is_cancelled()
+                                            || debug
+                                            || poison.load(Ordering::Relaxed),
+                                        Ordering::Relaxed,
+                                    );
                                 }
                                 barrier.wait();
                                 if stop.load(Ordering::Relaxed) {
@@ -447,9 +496,13 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
             (
                 results.iter().any(|r| r.0),
                 results.iter().map(|r| r.1).collect::<Vec<f64>>(),
+                poison.load(Ordering::Relaxed),
             )
         })
     };
+    if poisoned {
+        return Err(Error::Numerical("a patch worker panicked".into()));
+    }
     if cancelled {
         return Err(Error::Cancelled);
     }
@@ -501,11 +554,19 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
             let pv = probes.iter().map(|x| horner(j, x).to_state()).collect();
             let val_c = val.to_state();
             let scale = log10_abs(&val_c).max(log10_abs(&y0[j]));
-            let last = log10_abs(&y[j][nord - 1].to_state());
+            // largest of the last three terms |y_m h^m| (one vanishing term,
+            // e.g. by parity, must not look converged)
+            let lh = habs.to_f64().log10();
+            let last = (nord.saturating_sub(3)..nord)
+                .map(|m| {
+                    let l = log10_abs(&y[j][m].to_state());
+                    if l < -1e8 { -1e9 } else { l + m as f64 * lh }
+                })
+                .fold(-1e9f64, f64::max);
             let tail = if last < -1e8 || scale < -1e8 {
                 -1e9
             } else {
-                last + (nord - 1) as f64 * habs.to_f64().log10() - scale
+                last - scale
             };
             (val_c, integral, pv, tail)
         });

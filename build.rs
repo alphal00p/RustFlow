@@ -184,9 +184,16 @@ fn main() {
             rustred.update(serde_json::to_string(&node["features"]).unwrap().as_bytes());
         }
     }
+    let dependency_digest = dependencies.finalize().to_string();
+    println!("cargo:rustc-env=DEPENDENCY_SOURCE_DIGEST={dependency_digest}");
+    // Algorithm identity of the fixed-precision patch kernel: its sources and the
+    // resolved dependency graph (rug / GMP / MPFR versions fix the rounding).
+    let mut kernel = blake3::Hasher::new();
+    hash_tree(&own_root.join("src/patch_kernel"), &own_root, &mut kernel);
+    kernel.update(dependency_digest.as_bytes());
     println!(
-        "cargo:rustc-env=DEPENDENCY_SOURCE_DIGEST={}",
-        dependencies.finalize()
+        "cargo:rustc-env=PATCH_KERNEL_SOURCE_DIGEST={}",
+        kernel.finalize()
     );
     println!(
         "cargo:rustc-env=RUSTRED_SOURCE_DIGEST={}",

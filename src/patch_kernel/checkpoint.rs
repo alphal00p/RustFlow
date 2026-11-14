@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 use std::io::Write;
 use std::path::Path;
 
-pub const CHECKPOINT_SCHEMA: &str = "rustflow.patch-kernel.checkpoint.v1";
+pub const CHECKPOINT_SCHEMA: &str = "rustflow.patch-kernel.checkpoint.v2";
 /// Exit code of a run that stopped on a signal after flushing its checkpoint
 /// (`EX_TEMPFAIL`; the campaign's "retry later").
 pub const EXIT_RESUMABLE: i32 = 75;
@@ -25,16 +25,27 @@ pub const EXIT_RESUMABLE: i32 = 75;
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Fingerprint {
     pub kernel_version: String,
+    /// Automatic algorithm identity: digest of the kernel sources and the
+    /// resolved dependency graph (always checked).
+    pub kernel_algorithm: String,
     pub system: String,
     pub path: String,
+    /// Path points without orders (two-precision comparisons need equal points).
+    pub path_points: String,
+    /// Number of patches of the path (completeness of a run).
+    pub path_len: usize,
     pub bits: u32,
     pub mode: String,
     pub cauchy_pole: Option<String>,
     pub project_real_axis: bool,
     pub overlap_check: bool,
-    /// blake3 of the exact initial vector.
+    /// blake3 of the exact initial vector (at the working precision).
     pub initial: String,
-    /// blake3 of the running executable (information + optional check).
+    /// blake3 of the initial vector rounded to 64 bits: "the same initial
+    /// data" across working precisions (two-precision comparisons).
+    #[serde(default)]
+    pub initial_64: String,
+    /// blake3 of the running executable (information; checked only on request).
     pub binary: String,
 }
 
@@ -44,6 +55,9 @@ impl Fingerprint {
         let mut out = Vec::new();
         if self.kernel_version != other.kernel_version {
             out.push("kernel_version");
+        }
+        if self.kernel_algorithm != other.kernel_algorithm {
+            out.push("kernel_algorithm");
         }
         if self.system != other.system {
             out.push("system");
@@ -124,6 +138,12 @@ pub fn vector_from_exact(v: &[ExactComplex]) -> Result<Vec<Complex>> {
     v.iter().map(complex_from_exact).collect()
 }
 
+/// blake3 of a vector rounded to 64-bit components (precision independent).
+pub fn vector_hash_64(v: &[Complex]) -> String {
+    let r: Vec<Complex> = v.iter().map(|z| Complex::with_val(64, z)).collect();
+    vector_hash(&r)
+}
+
 /// blake3 of an exact vector.
 pub fn vector_hash(v: &[Complex]) -> String {
     let mut h = blake3::Hasher::new();
@@ -161,6 +181,11 @@ pub fn write_atomic(path: &Path, bytes: &[u8]) -> Result<()> {
 }
 
 /// When to write checkpoints during a run.
+///
+/// A run never overwrites a checkpoint that is not its own past: before
+/// every write the existing file must carry the same fingerprint (binary
+/// excepted) and a `next_patch` not beyond the state being written, unless
+/// `fresh` is set (then only the first write of the run may replace it).
 #[derive(Clone, Debug)]
 pub struct CheckpointPolicy {
     pub file: std::path::PathBuf,
@@ -168,16 +193,50 @@ pub struct CheckpointPolicy {
     pub every_patches: usize,
     /// ... or when `every_seconds` passed since the last write (0 = never by time).
     pub every_seconds: f64,
+    /// Allow the first write to replace an unrelated or more advanced file.
+    pub fresh: bool,
 }
 
-/// Register SIGTERM and SIGINT to set `flag` (the run then flushes its
-/// checkpoint and the binary exits with [`EXIT_RESUMABLE`]).
-#[cfg(unix)]
-pub fn cancel_on_signals(flag: std::sync::Arc<std::sync::atomic::AtomicBool>) -> Result<()> {
-    for sig in [signal_hook::consts::SIGTERM, signal_hook::consts::SIGINT] {
-        signal_hook::flag::register(sig, flag.clone())?;
+impl CheckpointPolicy {
+    pub fn new(file: impl Into<std::path::PathBuf>) -> Self {
+        Self {
+            file: file.into(),
+            every_patches: 1,
+            every_seconds: 0.0,
+            fresh: false,
+        }
     }
-    Ok(())
+}
+
+/// Advisory exclusive lock on `<checkpoint>.lock`, held for a run's lifetime
+/// so that two processes never write the same checkpoint.
+pub struct CheckpointLock {
+    _file: std::fs::File,
+}
+
+impl CheckpointLock {
+    pub fn acquire(checkpoint: &Path) -> Result<Self> {
+        let mut name = checkpoint.as_os_str().to_owned();
+        name.push(".lock");
+        let file = std::fs::OpenOptions::new()
+            .create(true)
+            .truncate(false)
+            .write(true)
+            .open(std::path::PathBuf::from(name))?;
+        #[cfg(unix)]
+        {
+            use std::os::unix::io::AsRawFd;
+            // SAFETY: flock on an open descriptor owned by `file`.
+            let rc = unsafe { libc::flock(file.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) };
+            if rc != 0 {
+                return Err(Error::InvalidInput(format!(
+                    "checkpoint {} is locked by another run",
+                    checkpoint.display()
+                )));
+            }
+        }
+        Ok(Self { _file: file })
+    }
 }
 
 #[cfg(test)]
@@ -198,5 +257,17 @@ mod tests {
         }
         let zero = Complex::new(100);
         assert_eq!(complex_from_exact(&complex_to_exact(&zero)).unwrap(), zero);
+    }
+
+    #[test]
+    fn checkpoint_lock_is_exclusive() {
+        let dir = std::env::temp_dir().join(format!("rf-pk-lock-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let file = dir.join("c.json");
+        let a = CheckpointLock::acquire(&file).unwrap();
+        assert!(CheckpointLock::acquire(&file).is_err());
+        drop(a);
+        assert!(CheckpointLock::acquire(&file).is_ok());
+        std::fs::remove_dir_all(&dir).unwrap();
     }
 }
