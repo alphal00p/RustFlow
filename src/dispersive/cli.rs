@@ -17,7 +17,8 @@
 //! (lower.rs; chain spec documented at lower::lane_boundary).
 //! --lane LANESPEC.json: LANE STAGE. Before the sample, run the 4L prism lane (W3c chain) from the P14 rows and merge its values into a
 //! 4L sample (<workdir>/lane/merged-sample.json); the sample then reads it through `--v native:PLAN,SOFTSOL,lane` (literal `lane`).
-//! LANESPEC = {"de", "class_config", "chain", "p14_sample", "template", "m0", "minf", "w", "wf", "two_precision": "dW,dWF"} (paths may
+//! LANESPEC = {"de", "class_config", "chain", "p14_sample", "template", "m0", "minf", "w", "wf", "two_precision": "dW,dWF",
+//! optional "input_budget", "p14_producer"} (paths may
 //! contain {d0} = NUM_DEN of the sample's d0). Resumable like the sample (its own stage files under <workdir>/lane).
 //! native: boundary GATE (hard): full-rank endpoint system, >= --boundary-checks-min N redundant equations (default 1; class 16359
 //! at grid B: 61) with worst relative residual <= 10^--boundary-consistency-bar (default -80).
@@ -608,6 +609,12 @@ pub fn lane_stage(
     .collect();
     if let Some(tp) = spec["two_precision"].as_str() {
         argv.extend(["--two-precision".to_string(), tp.to_string()]);
+    }
+    // optional pass-through (W3c): measured per-row input error budget and the P14 producer label, written into the merged sample
+    for (k, flag) in [("input_budget", "--input-budget"), ("p14_producer", "--p14-producer")] {
+        if spec.get(k).is_some() {
+            argv.extend([flag.to_string(), s(k)?]);
+        }
     }
     let la = Args::parse(&argv)?;
     let (e_slot, _, _) = la.class_settings()?;
