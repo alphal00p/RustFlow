@@ -62,6 +62,8 @@ pub mod normalize;
 pub mod numeric;
 pub mod ode;
 pub mod options;
+#[cfg(feature = "native")]
+pub mod patch_kernel;
 #[cfg(feature = "automatic")]
 pub mod phase_space;
 mod physical_conditions;

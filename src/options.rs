@@ -331,6 +331,17 @@ impl FlowOptions {
 #[derive(Clone, Debug, Default)]
 pub struct CancellationToken(Arc<AtomicBool>);
 impl CancellationToken {
+    /// A token sharing `flag` (e.g. one set by a SIGTERM handler).
+    pub fn from_flag(flag: Arc<AtomicBool>) -> Self {
+        Self(flag)
+    }
+    /// The shared flag of this token.
+    pub fn flag(&self) -> Arc<AtomicBool> {
+        self.0.clone()
+    }
+    pub fn is_cancelled(&self) -> bool {
+        self.0.load(Ordering::Relaxed)
+    }
     pub fn cancel(&self) {
         self.0.store(true, Ordering::Relaxed);
     }
