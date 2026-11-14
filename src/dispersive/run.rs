@@ -184,6 +184,30 @@ pub fn family_num_ck(sys: &EBlockSystem, b: &laurent::Lmat<Float>, spec: &Family
     Ok((fam, diag))
 }
 
+/// diagnostic: one MPFR family of the plan ("zero" or "inf-K") with its residual report (no stage files, no checkpoints)
+pub fn family_check(sys: &EBlockSystem, cfg: &Config, plan: &Plan, which: &str) -> Result<Value, String> {
+    let pf = bits(cfg.wf);
+    let mode = PivotMode::parse(&cfg.pivoting)?;
+    let t = Instant::now();
+    let (spec, point) = if which == "zero" {
+        (&plan.zero, Point::Zero)
+    } else {
+        let k: usize = which.strip_prefix("inf-").and_then(|x| x.parse().ok()).ok_or("DISPERSIVE_FAMILY_CHECK: zero | inf-K")?;
+        (plan.inf.get(k - 1).ok_or("no such infinity family")?, Point::Infinity)
+    };
+    let kmax = if point == Point::Zero { cfg.m0 } else { cfg.minf } + 8;
+    let b = laurent::laurent::<Float>(sys, point, kmax, pf, cfg.nthreads);
+    let (_, mut d) = family_num(sys, &b, spec, mode, cfg.residual_cols, pf, cfg.nthreads)?;
+    let lt = if point == Point::Zero {
+        (plan.s0.to_f64() / spec.rho.to_f64()).log10()
+    } else {
+        -plan.s_end.to_f64().log10() - spec.rho.to_f64().log10()
+    };
+    d["de_residual_where_used_log10"] = json!(dispersion::residual_at(&d["de_residual_report"], lt));
+    d["check_seconds"] = json!(t.elapsed().as_secs_f64());
+    Ok(json!({"family_check": which, "wf": cfg.wf, "diag": d}))
+}
+
 // ---------------- fingerprint (dependency-free 128-bit FNV-1a, two lanes) ----------------
 struct Fp(u64, u64);
 impl Fp {

@@ -307,6 +307,10 @@ pub fn run_with(
         let cfg = mk(w, wf, dir);
         let meter = run::Meter::start("plan (singular points, family structure, path) + boundary rows");
         let plan = run::plan(sys, &cfg)?;
+        if let Ok(which) = std::env::var("DISPERSIVE_FAMILY_CHECK") {
+            // diagnostic hook: compute one MPFR family of the plan (zero | inf-K) and return its diagnostics, nothing else
+            return run::family_check(sys, &cfg, &plan, &which);
+        }
         let (bnd, src) = boundary_rows(args, sys, loops, run::bits(wf))?;
         meter.finish(&cfg.workdir, cfg.nthreads, true);
         let prov = json!({"de": args.de, "class_config": args.class_config, "boundary": src, "transport": kernel.id(), "lane_stage": args.lane_info});

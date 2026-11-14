@@ -84,6 +84,7 @@ fn main() {
     };
     match run() {
         Ok(out) if out.get("lane_stage").is_some() => println!("{out}"),
+        Ok(out) if out.get("family_check").is_some() => println!("{out}"),
         Ok(out) => println!(
             "{}",
             serde_json::json!({"boundary_fit": out["boundary_fit"], "matching": out["matching"], "transport": out["transport"],
