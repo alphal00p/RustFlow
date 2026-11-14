@@ -1,7 +1,7 @@
 //! Command-line driver of one dispersive sample, shared by `examples/dispersive.rs` (RustFlow, harness reader) and the dev tools.
 //!
 //! dispersive --de DE.json --class-config CONFIG.json --m0 M0 --minf MINF --w W --wf WF --workdir DIR --out OUT.json
-//!            --v read:V.json | native:PLAN.json,SOFTSOL.json,SAMPLE.json
+//!            --v read:V.json | native:PLAN.json,SOFTSOL.json,SAMPLE.json | lane:CHAIN.json,SAMPLE.json
 //!            [--pr-values LANE_OUT.json] [--pivoting MODE] [--threads N] [--loops L] [--two-precision dW,dWF]
 //!            [--code-version STR] [--ref ORACLE_OUT.json]... [--kernel patch|standin] [--stop-at-patch K]
 //!            [--checkpoint-every-seconds T] [--frobenius-checkpoint-every-seconds T]
@@ -13,6 +13,10 @@
 //! --stop-at-patch K stops the transport resumably at patch K (short-segment runs; the same command without it continues).
 //! The e slot comes from the class config ("e"); the loop number from the config ("loops") or the class family file's loop momenta.
 //! --pr-values replaces the 39 'PR'-lane endpoint values of SAMPLE.json by those of a RustFlow lane run (raw = J / e^(4 gamma eps)).
+//! lane:CHAIN.json,SAMPLE.json builds the soft V of a LANE family (e.g. the 4L prism) natively from the P14 rows of SAMPLE.json
+//! (lower.rs; chain spec documented at lower::lane_boundary).
+//! --merge TEMPLATE.json,P14SAMPLE.json,OUT.json (lane runs): writes OUT.json = TEMPLATE (a merged 4L sample) with its 'PR' rows
+//! replaced by this run's values (raw = J / e^(4 gamma eps)) and a 'provenance' field on every row (merged_sample).
 use super::boundary;
 use super::run::{self, Config};
 use super::system::EBlockSystem;
@@ -43,6 +47,7 @@ pub struct Args {
     pub frobenius_checkpoint_every_seconds: f64,
     pub code_version: String,
     pub refs: Vec<String>,
+    pub merge: Option<String>,
 }
 
 pub fn rd(p: &str) -> Result<Value, String> {
@@ -86,6 +91,7 @@ impl Args {
             checkpoint_every_seconds: opt("checkpoint-every-seconds").map(|x| x.parse().unwrap_or(600.0)).unwrap_or(600.0),
             frobenius_checkpoint_every_seconds: opt("frobenius-checkpoint-every-seconds").map(|x| x.parse().unwrap_or(900.0)).unwrap_or(900.0),
             refs: m.get("ref").cloned().unwrap_or_default(),
+            merge: opt("merge"),
         })
     }
 
@@ -165,11 +171,23 @@ pub fn boundary_rows(args: &Args, sys: &EBlockSystem, loops: u32, prec: u32) -> 
         let (ep, info) = endpoints(&rd(f[2])?, lane.as_ref(), prec + 64)?;
         let (v, d) = boundary::solve_v(&pl, &rd(f[1])?, &ep, sys.e_slot, prec + 64)?;
         (v, json!({"V": "native (soft_gen solve port)", "plan": f[0], "soft_solution": f[1], "sample": f[2], "endpoints": info, "diag": d}))
+    } else if let Some(spec) = args.v.strip_prefix("lane:") {
+        let f: Vec<&str> = spec.split(',').collect();
+        if f.len() != 2 {
+            return Err("--v lane:CHAIN.json,SAMPLE.json".into());
+        }
+        let (_, _, cfg) = args.class_settings()?;
+        let (v, prov) = super::lower::lane_boundary(f[0], f[1], &cfg, &sys.masters, &sys.d0, prec + 64)?;
+        let worst = prov["lower_diag"]["endpoint_system"]["endpoint_consistency_worst_rel_log10"].as_f64().unwrap_or(0.0);
+        if worst > -20.0 {
+            return Err(format!("lower endpoint system inconsistent: worst relative residual 1e{worst:.1}"));
+        }
+        (v, prov)
     } else if let Some(p) = args.v.strip_prefix("read:") {
         let (v, m) = boundary::read_v_file(p)?;
         (v, json!({"V": "READ from a V file (see meta.producer; in-house soft_gen files have none)", "file": p, "meta": m}))
     } else {
-        return Err("--v read:V.json | native:PLAN,SOFTSOL,SAMPLE".into());
+        return Err("--v read:V.json | native:PLAN,SOFTSOL,SAMPLE | lane:CHAIN,SAMPLE".into());
     };
     Ok((boundary::rows_from_v(sys, &v, loops, prec)?, src))
 }
@@ -289,6 +307,17 @@ pub fn run_with(
     }
     out["oracle_comparison"] = Value::Object(cmp);
     out["wall_seconds"] = json!(t0.elapsed().as_secs_f64());
+    if let Some(m) = &args.merge {
+        let f: Vec<&str> = m.split(',').collect();
+        if f.len() != 3 {
+            return Err("--merge TEMPLATE.json,P14SAMPLE.json,OUT.json".into());
+        }
+        let merged = merged_sample(&rd(f[0])?, &rd(f[1])?, f[1], &out, &args.out, run::bits(args.w) + 64)?;
+        let tmp = format!("{}.part", f[2]);
+        std::fs::write(&tmp, serde_json::to_string(&merged).unwrap()).map_err(|e| e.to_string())?;
+        std::fs::rename(&tmp, f[2]).map_err(|e| e.to_string())?;
+        out["merged_sample"] = json!({"path": f[2], "summary": merged["provenance"]});
+    }
     let tmp = format!("{}.part", args.out);
     std::fs::write(&tmp, serde_json::to_string_pretty(&out).unwrap()).map_err(|e| e.to_string())?;
     std::fs::rename(&tmp, &args.out).map_err(|e| e.to_string())?;
@@ -403,4 +432,64 @@ fn chrono_like(secs: u64) -> String {
     let month = if mp < 10 { mp + 3 } else { mp - 9 };
     let year = yoe + era * 400 + if month <= 2 { 1 } else { 0 };
     format!("{year:04}-{month:02}-{day:02}T{:02}:{:02}:{:02}Z", s / 3600, (s / 60) % 60, s % 60)
+
+/// A merged 4L sample (schema of values/d5l/v9a/pr/samples: epsilon, attempt, index, lane_tag, endpoint[{family?, target, value{re}}])
+/// whose 'PR' rows are this lane run's values, raw = J / e^(4 gamma eps) = -(sin(pi d0/2)/pi) I / e^(4 gamma eps) (pr_samples.py).
+/// The P14 rows must equal those of the RustFlow P14 sample (same targets and values, same order). Every row gets 'provenance'.
+pub fn merged_sample(template: &Value, p14: &Value, p14_path: &str, lane_out: &Value, lane_out_path: &str, prec: u32) -> Result<Value, String> {
+    if template["epsilon"] != p14["epsilon"] || lane_out["eps"] != template["epsilon"] {
+        return Err(format!("epsilon mismatch: template {}, P14 sample {}, lane run {}", template["epsilon"], p14["epsilon"], lane_out["eps"]));
+    }
+    let d0: rug::Rational = lane_out["d0"].as_str().ok_or("lane out has no d0")?.parse().map_err(|e: rug::rational::ParseRationalError| e.to_string())?;
+    let pre = super::dispersion::prefactor(&d0, prec);
+    let eps = Float::with_val(prec, (Float::with_val(prec, 4) - Float::with_val(prec, &d0)) / 2u32);
+    let gam = Float::with_val(prec, Float::with_val(prec, rug::float::Constant::Euler) * &eps * 4u32).exp();
+    let vi = |x: &Value| -> Vec<i64> { x.as_array().unwrap().iter().map(|v| v.as_i64().unwrap()).collect() };
+    let mut lane: BTreeMap<Vec<i64>, (String, Value)> = BTreeMap::new();
+    for (m, iv) in lane_out["masters"].as_array().ok_or("lane out has no masters")?.iter().zip(lane_out["I"].as_array().ok_or("lane out has no I")?) {
+        let s = iv["I"].as_str().ok_or("I entry without I")?;
+        let i = Float::with_val(prec, Float::parse(s).map_err(|e| e.to_string())?);
+        let raw = Float::with_val(prec, &pre * &i) / &gam;
+        let nd = s.trim_start_matches('-').chars().filter(|c| c.is_ascii_digit()).count().max(20);
+        lane.insert(vi(m), (raw.to_string_radix(10, Some(nd)), iv.get("digits").cloned().unwrap_or(Value::Null)));
+    }
+    let p14rows = p14["endpoint"].as_array().ok_or("P14 sample has no endpoints")?;
+    let tool_lane = json!({"tool": "RustFlow dispersive mode (lane run)", "out": lane_out_path, "fingerprint": lane_out["fingerprint"],
+        "code_version": lane_out["config"]["code_version"], "digits_source": lane_out["digits_source"]});
+    let mut ep = Vec::new();
+    let (mut n14, mut npr) = (0, 0);
+    for x in template["endpoint"].as_array().ok_or("template has no endpoints")? {
+        let fam = x.get("family").and_then(|f| f.as_str()).unwrap_or("");
+        let t = vi(&x["target"]);
+        let mut row = x.clone();
+        match fam {
+            "" => {
+                let y = p14rows.get(n14).ok_or("template has more P14 rows than the P14 sample")?;
+                if y["target"] != x["target"] || y["value"]["re"] != x["value"]["re"] {
+                    return Err(format!("P14 row {n14} of the template differs from the RustFlow P14 sample"));
+                }
+                row["provenance"] = json!({"tool": "RustFlow eta-flows + spectral gluing (P14 sample)", "file": p14_path, "row": n14});
+                n14 += 1;
+            }
+            "PR" => {
+                let (v, dg) = lane.get(&t).ok_or_else(|| format!("lane run has no master {t:?}"))?;
+                row["value"] = json!({"re": v});
+                let mut pv = tool_lane.clone();
+                pv["digits"] = dg.clone();
+                row["provenance"] = pv;
+                npr += 1;
+            }
+            f => return Err(format!("unknown endpoint family {f}")),
+        }
+        ep.push(row);
+    }
+    if n14 != p14rows.len() || npr != lane.len() {
+        return Err(format!("row counts: P14 {n14} of {}, PR {npr} of {}", p14rows.len(), lane.len()));
+    }
+    let mut out = template.clone();
+    out["endpoint"] = json!(ep);
+    out["lane_tag"] = json!(format!("rustflow:{lane_out_path}"));
+    out["provenance"] = json!({"P14_rows": n14, "P14_tool": "RustFlow eta-flows + spectral gluing", "P14_file": p14_path,
+        "PR_rows": npr, "PR_tool": "RustFlow dispersive mode", "PR_out": lane_out_path, "PR_boundary": lane_out["provenance"]["boundary"]["V"]});
+    Ok(out)
 }
