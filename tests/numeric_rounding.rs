@@ -6,8 +6,24 @@ use symbolica_amflow::{ComplexFloat, Precision};
 // The pre-migration MPFR implementation is an independent regression oracle.
 // Keep its complex operation order: each real product is rounded before the
 // components are combined, and division multiplies by the conjugate first.
+//
+// Operands with an exact zero imaginary part are real numbers (b3a4843e):
+// a product with a real factor is taken componentwise and a quotient by a
+// real denominator divides each component, both correctly rounded. The
+// nonzero bits equal the general formulas where those round only once; the
+// sign of a zero component follows IEEE real arithmetic instead of the
+// complex sum of a signed-zero cross term (for example `(+0)(-1) + (+0)(+0)`).
+// The oracle states that contract with MPFR operations, signs included.
 mod previous {
     use super::*;
+
+    fn real(p: Precision, value: rug::Float) -> Float {
+        Float::with_val(p.bits, value)
+    }
+
+    fn finite(a: &ComplexFloat) -> bool {
+        a.re.is_finite() && a.im.is_finite()
+    }
 
     pub fn add(p: Precision, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
         Complex::new(
@@ -21,6 +37,20 @@ mod previous {
     }
 
     pub fn mul(p: Precision, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
+        let product =
+            |x: &Float, y: &Float| real(p, rug::Float::with_val(p.bits, x.as_raw() * y.as_raw()));
+        if finite(a) && finite(b) {
+            if b.im.as_raw().is_zero() {
+                return Complex::new(product(&a.re, &b.re), product(&a.im, &b.re));
+            }
+            if a.im.as_raw().is_zero() {
+                return Complex::new(product(&a.re, &b.re), product(&a.re, &b.im));
+            }
+        }
+        general_mul(p, a, b)
+    }
+
+    fn general_mul(p: Precision, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
         let ac = rug::Float::with_val(p.bits, a.re.as_raw() * b.re.as_raw());
         let bd = rug::Float::with_val(p.bits, a.im.as_raw() * b.im.as_raw());
         let ad = rug::Float::with_val(p.bits, a.re.as_raw() * b.im.as_raw());
@@ -32,6 +62,11 @@ mod previous {
     }
 
     pub fn div(p: Precision, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
+        if b.im.as_raw().is_zero() && !b.re.as_raw().is_zero() && finite(a) && finite(b) {
+            let quotient =
+                |x: &Float| real(p, rug::Float::with_val(p.bits, x.as_raw() / b.re.as_raw()));
+            return Complex::new(quotient(&a.re), quotient(&a.im));
+        }
         let conjugate = Complex::new(b.re.clone(), -b.im.clone());
         let numerator = mul(p, a, &conjugate);
         let denominator = mul(p, b, &conjugate).re;
