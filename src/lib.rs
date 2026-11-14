@@ -29,6 +29,8 @@ mod cut_regions;
 #[cfg(feature = "automatic")]
 pub mod cuts;
 pub mod diffexp;
+#[cfg(feature = "native")]
+pub mod dispersive;
 #[cfg(feature = "automatic")]
 pub mod engine;
 pub mod epsilon;
