@@ -683,8 +683,57 @@ enum Simple {
     Bubble(Float, i64, Rational, Rational),
 }
 
+/// split at a cut vertex v (v != a, b; removing v disconnects a from b): returns (edges of the part with the massive line, edges of
+/// the massless part, externals of the massive part). None if there is no such vertex, if a third (vacuum) part hangs at v, or if the
+/// massive line is not in one of the two parts.
+fn series_split(edges: &[(usize, usize, Rational, bool)], a: usize, b: usize) -> Option<(Vec<(usize, usize, Rational, bool)>, Vec<(usize, usize, Rational, bool)>, usize, usize)> {
+    let mut verts: Vec<usize> = edges.iter().flat_map(|x| [x.0, x.1]).collect();
+    verts.sort();
+    verts.dedup();
+    let reach = |from: usize, cut: usize| -> Vec<usize> {
+        let mut seen = vec![from];
+        let mut st = vec![from];
+        while let Some(x) = st.pop() {
+            for e in edges {
+                let y = if e.0 == x { e.1 } else if e.1 == x { e.0 } else { continue };
+                if y != cut && !seen.contains(&y) {
+                    seen.push(y);
+                    st.push(y);
+                }
+            }
+        }
+        seen
+    };
+    for &v in verts.iter().filter(|&&v| v != a && v != b) {
+        let ra = reach(a, v);
+        if ra.contains(&b) {
+            continue;
+        }
+        let rb = reach(b, v);
+        // every edge must belong to the a-side or the b-side (no vacuum blob hanging at v)
+        let side = |x: &(usize, usize, Rational, bool)| -> Option<bool> {
+            let w = if x.0 == v { x.1 } else { x.0 };
+            if ra.contains(&w) { Some(true) } else if rb.contains(&w) { Some(false) } else { None }
+        };
+        let mut pa = Vec::new();
+        let mut pb = Vec::new();
+        for x in edges {
+            if x.0 == v && x.1 == v {
+                return None;
+            }
+            match side(x)? {
+                true => pa.push(x.clone()),
+                false => pb.push(x.clone()),
+            }
+        }
+        let ea_side = pa.iter().any(|x| x.3);
+        return if ea_side { Some((pa, pb, a, v)) } else { Some((pb, pa, v, b)) };
+    }
+    None
+}
+
 fn simple_form(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32) -> Option<Simple> {
-    let (edges0, (ea, eb), aa, ee) = contract_zero(g, a, e).ok()?;
+    let (edges0, (mut ea, mut eb), aa, ee) = contract_zero(g, a, e).ok()?;
     if ea == eb {
         return None;
     }
@@ -750,9 +799,23 @@ fn simple_form(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32) -> Optio
                 break;
             }
         }
-        if !merged {
-            break;
+        if merged {
+            continue;
         }
+        // a cut vertex v splits the graph into two two-point parts in series (both carry p): the massless part is a factor
+        // (its value at p^2 = 1), the part with the massive line stays; hanging vacuum blobs are scaleless
+        if let Some((part_e, part_m, na, nb)) = series_split(&edges, ea, eb) {
+            let rest: Vec<E2> = part_m.iter().map(|x| E2 { u: x.0, v: x.1, a: x.2.clone() }).collect();
+            let (ma, mb) = if na == ea { (nb, eb) } else { (ea, na) };
+            match eval2pt(rest, ma, mb, h, prec, 0, &Provided::default())? {
+                Ev::Zero => return Some(Simple::Power(Float::new(prec), q(0))),
+                Ev::Val(cr, _) => c *= cr,
+            }
+            edges = part_e;
+            (ea, eb) = (na, nb);
+            continue;
+        }
+        break;
     }
     let em = edges.iter().find(|x| x.3).unwrap().clone();
     let rest: Vec<_> = edges.iter().filter(|x| !x.3).cloned().collect();

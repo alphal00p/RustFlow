@@ -194,3 +194,28 @@ fn propagator_class_config_equals_flags() {
     assert_eq!(a["values"], b["values"]);
     assert!(!a["values"].as_array().unwrap().is_empty());
 }
+
+/// simple masters through a cut vertex: (massive bubble) x (massless two-point part) in series; the all-order rows exist and their
+/// lowest rows equal the region evaluator's leading rows on both sides (four-loop NO1, sector {0,4,5,6,7,8,9})
+#[test]
+fn simple_form_through_a_cut_vertex() {
+    let g = graph_of("P4L_NO1");
+    let h = Rational::from((1990761, 1000000));
+    let prec = 200;
+    for a in [[1i64, 0, 0, 0, 1, 1, 1, 1, 2, 1, 0, 0, 0, 0], [1, 0, 0, 0, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0]] {
+        for at_zero in [true, false] {
+            let reg = graph::regions(&g, 0, &a, &h, prec, at_zero, &graph::Provided::default()).unwrap().unwrap();
+            let k = reg[0].0;
+            let mine: Vec<_> = reg.iter().filter(|x| x.0 == k).collect();
+            let nmin = mine.iter().map(|x| x.1).min().unwrap();
+            let mut lead = Float::new(prec);
+            for x in mine.iter().filter(|x| x.1 == nmin) {
+                lead += &x.2;
+            }
+            let ex = graph::exact_series(&g, 0, &a, &h, at_zero, k, 12, prec).expect("simple through the cut vertex");
+            let (n0, v0) = ex.iter().min_by_key(|x| x.0).unwrap();
+            assert_eq!(*n0, nmin, "{a:?} at_zero {at_zero}");
+            assert!(digits(v0, &lead) > 50.0, "{a:?} at_zero {at_zero}: {v0} vs {lead}");
+        }
+    }
+}
