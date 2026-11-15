@@ -247,7 +247,7 @@ fn de_blocks_merge_and_conflicts() {
     c["rules"] = serde_json::Value::Array(vec![r0]);
     let pc = tmp.join("c.json");
     std::fs::write(&pc, c.to_string()).unwrap();
-    assert!(super::cli::load_blocks(&format!("{},{}", de, pc.display())).unwrap_err().contains("differs"));
+    assert!(matches!(super::cli::load_blocks(&format!("{},{}", de, pc.display())), Err(e) if e.contains("differs")));
     let _ = std::fs::remove_dir_all(&tmp);
 }
 
