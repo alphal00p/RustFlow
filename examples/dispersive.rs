@@ -4,6 +4,8 @@
 //!     --v native:SOFTPLAN.json,classes/16359/soft/solution-299999_75000.json,v9a/pr/samples/attempt-1/sample-022.json [--pr-values LANE/out.json]
 //!
 //! `dispersive --system-info DE.json CLASS_CONFIG.json` prints the e-block size and the kernel system fingerprint.
+//! Propagator configuration: a class config with "kind": "propagator" (graph, e, w, wf, m, moments, ...; src/pflow/cli.rs) runs
+//! route (B) for massless p-integrals with the same command (`dispersive --de DE.json --class-config P.json --out OUT.json`).
 //! `dispersive --progress WORKDIR` prints one JSON progress line (cli::progress) and exits.
 //!
 //! Everything class-specific comes from the DE file, the class config and the command line. Restarting the same command resumes
@@ -43,6 +45,25 @@ fn main() {
             "kernel_system_fingerprint": k.system_fingerprint, "products_per_order": k.system.products_per_order(), "seconds": t.elapsed().as_secs_f64()})
         );
         return;
+    }
+    // propagator configuration (class config "kind": "propagator"): massless p-integrals by route (B), src/pflow/cli.rs
+    if let Some(i) = argv.iter().position(|x| x == "--class-config") {
+        if argv.get(i + 1).is_some_and(|c| symbolica_amflow::pflow::cli::is_propagator_config(c)) {
+            match symbolica_amflow::pflow::cli::run(&argv) {
+                Ok(v) => {
+                    let s = serde_json::to_string_pretty(&v).unwrap();
+                    match argv.iter().position(|x| x == "--out") {
+                        Some(j) => std::fs::write(&argv[j + 1], &s).expect("--out"),
+                        None => println!("{s}"),
+                    }
+                    return;
+                }
+                Err(e) => {
+                    eprintln!("dispersive (propagator): {e}");
+                    std::process::exit(1)
+                }
+            }
+        }
     }
     let args = cli::Args::parse(&argv).unwrap_or_else(|e| {
         eprintln!("dispersive: {e}");

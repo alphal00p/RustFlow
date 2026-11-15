@@ -6,8 +6,10 @@
 //! topology specific.
 //!  * `local`  : Laurent matrices at any point of the z-plane (finite or infinity) in the system's own variable
 //!  * `graph`  : region enumeration and leading coefficients (soft sets at 0, hard subgraphs at infinity), massless evaluator
+//!  * `cli`    : the propagator configuration of the dispersive driver (one entry point for examples/dispersive.rs and pflow.rs)
 //!  * `engine` : families per exponent class at 0 / infinity / threshold, boundary fits, two half-line transports, threshold
 //!               join, Mellin moments (FP int rho s^-m ds)
+pub mod cli;
 pub mod engine;
 pub mod graph;
 pub mod local;

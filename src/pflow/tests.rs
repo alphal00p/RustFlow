@@ -180,3 +180,17 @@ fn canonical_key_matches_python() {
         .iter().map(|x| (x[0] as usize, x[1] as usize, r(x[2]))).collect();
     assert_eq!(graph::canonical(&e, 1, 2), r#"[[0, 2, "1"], [0, 3, "1"], [1, 2, "1"], [1, 4, "2"], [2, 5, "1"], [3, 4, "1"], [3, 5, "2"], [4, 5, "1"]]"#);
 }
+
+/// one driver: the propagator class config gives the same run as the flags (two-loop kite family at fixed d0)
+#[test]
+fn propagator_class_config_equals_flags() {
+    let dir = format!("{}/fixtures/pflow", env!("CARGO_MANIFEST_DIR"));
+    let de = format!("{dir}/P2L_m0-solution-199_50.json");
+    let cfgp = format!("{dir}/config-P2L.json");
+    assert!(super::cli::is_propagator_config(&cfgp));
+    let s = |x: &str| x.to_string();
+    let a = super::cli::run(&[s("--de"), de.clone(), s("--class-config"), cfgp]).unwrap();
+    let b = super::cli::run(&[s("--de"), de, s("--graph"), format!("{dir}/graph-P2L.json"), s("--e"), s("0"), s("--w"), s("40"), s("--wf"), s("60"), s("--m"), s("80"), s("--moments"), s("1,2")]).unwrap();
+    assert_eq!(a["values"], b["values"]);
+    assert!(!a["values"].as_array().unwrap().is_empty());
+}
