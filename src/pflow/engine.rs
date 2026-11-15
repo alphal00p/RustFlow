@@ -81,6 +81,8 @@ pub struct Fam {
     pub class: i64,
     pub num: FamilyNum,
     pub coef: Option<Vec<Float>>, // fitted scaled coefficients (rows (n - n_lo) E + comp)
+    /// directions of the coefficient space not fixed by the boundary rows (fixed later by the threshold continuity)
+    pub null: Vec<Vec<Float>>,
     pub diag: Value,
 }
 
@@ -169,6 +171,12 @@ fn rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bool, k:
 /// rank-revealing least squares: Householder QR with column pivoting; columns whose remaining norm falls below
 /// 2^(-prec/2) of the largest are left free (set to 0). Returns (x, rank).
 pub fn lstsq_rr(a: &[Vec<Float>], b: &[Float], prec: u32) -> (Vec<Float>, usize) {
+    let (x, rank, _) = lstsq_rr_null(a, b, prec);
+    (x, rank)
+}
+
+/// as `lstsq_rr`, also returning a basis of the null space of `a` (free columns = unit, pivot columns from R11 w = -R12 e_j)
+pub fn lstsq_rr_null(a: &[Vec<Float>], b: &[Float], prec: u32) -> (Vec<Float>, usize, Vec<Vec<Float>>) {
     let m = a.len();
     let n = if m > 0 { a[0].len() } else { 0 };
     let mut r: Vec<Vec<Float>> = a.to_vec();
@@ -258,11 +266,28 @@ pub fn lstsq_rr(a: &[Vec<Float>], b: &[Float], prec: u32) -> (Vec<Float>, usize)
     for k in 0..n {
         x[perm[k]] = xp[k].clone();
     }
-    (x, rank)
+    let mut null = Vec::new();
+    for f in rank..n {
+        let mut w = vec![Float::new(prec); rank];
+        for k in (0..rank).rev() {
+            let mut s = Float::with_val(prec, -&r[k][f]);
+            for j in k + 1..rank {
+                s -= Float::with_val(prec, &r[k][j] * &w[j]);
+            }
+            w[k] = Float::with_val(prec, &s / &r[k][k]);
+        }
+        let mut v = vec![Float::new(prec); n];
+        v[perm[f]] = Float::with_val(prec, 1);
+        for k in 0..rank {
+            v[perm[k]] = w[k].clone();
+        }
+        null.push(v);
+    }
+    (x, rank, null)
 }
 
 /// relative-weighted fit of the boundary rows on a family basis (as dispersion::soft_fit, rank revealing)
-fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32) -> (Vec<Float>, usize, usize, f64) {
+fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32) -> (Vec<Float>, usize, usize, f64, Vec<Vec<Float>>) {
     let rho = Float::with_val(prec, &fam.spec.rho);
     let mut amat = Vec::new();
     let mut bvec = Vec::new();
@@ -277,7 +302,7 @@ fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32) -> (Vec<F
         amat.push(fam.basis[row].iter().map(|x| Float::with_val(prec, x * &w)).collect::<Vec<_>>());
         bvec.push(Float::with_val(prec, &vs * &w));
     }
-    let (x, rank) = lstsq_rr(&amat, &bvec, prec);
+    let (x, rank, null) = lstsq_rr_null(&amat, &bvec, prec);
     let mut worst = -1e9f64;
     for (i, row) in amat.iter().enumerate() {
         let mut v = Float::with_val(prec, Float::dot(row.iter().zip(&x)));
@@ -285,7 +310,8 @@ fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32) -> (Vec<F
         worst = worst.max(log10abs(&v));
     }
     let c = fam.basis.iter().map(|row| Float::with_val(prec, Float::dot(row.iter().zip(&x)))).collect();
-    (c, amat.len(), rank, worst)
+    let dirs = null.iter().map(|v| fam.basis.iter().map(|row| Float::with_val(prec, Float::dot(row.iter().zip(v)))).collect()).collect();
+    (c, amat.len(), rank, worst, dirs)
 }
 
 /// value of family `f` (fitted coefficients `c`) or one basis column at x (real; |x|^lam on x < 0)
@@ -561,11 +587,11 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let t = Instant::now();
             let Some((num, fdiag)) = family(sys, &pt, &lam, rho, cfg, mm, &format!("{side} k={k}"))? else { continue };
             let (br, nz, sk) = rows(sys, g, e_slot, &h, side == "0", k, &num, cfg, prec)?;
-            let (csoft, nrows, rank, worst) = fit_rows(&num, &br, e, prec);
+            let (csoft, nrows, rank, worst, null) = fit_rows(&num, &br, e, prec);
             diag["families"].as_array_mut().unwrap().push(json!({"side": side, "class": k, "dim": num.spec.dim, "rows": nrows, "rank": rank, "nonzero_rows": nz, "skipped_masters": sk,
                 "fit_worst_rel_log10": worst, "frobenius": fdiag, "seconds": t.elapsed().as_secs_f64()}));
             eprintln!("[pflow] family {side} k={k}: dim {} rank {rank} n_lo {} k_stable {} basis rows {} fit rows {nrows} worst {worst:.1} ({:.1} s)", num.spec.dim, num.spec.n_lo, num.spec.k_stable, num.basis.len(), t.elapsed().as_secs_f64());
-            let f = Fam { side: if side == "0" { "0" } else { "inf" }, class: k, num, coef: Some(csoft), diag: Value::Null };
+            let f = Fam { side: if side == "0" { "0" } else { "inf" }, class: k, num, coef: Some(csoft), null, diag: Value::Null };
             if side == "0" { fams0.push(f) } else { famsi.push(f) }
         }
     }
@@ -595,6 +621,63 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let pi_ = plan_segment(&Rational::from(-&cfg.s_end), &Rational::from(-(Rational::from(&one + &cfg.r))), &pts, cfg.w, cfg.ratio);
     let s0f = Float::with_val(prec, &cfg.s0);
     let sef = Float::with_val(prec, &cfg.s_end);
+    // ---- free boundary directions: fixed by the continuity of the integer-family projection at z = -1 ----
+    let ndir0: usize = fams0.iter().map(|f| f.null.len()).sum();
+    let ndiri: usize = famsi.iter().map(|f| f.null.len()).sum();
+    if ndir0 + ndiri > 0 {
+        let t = Instant::now();
+        let transport_end = |y: &[Float], patches: &[PatchSpec]| -> Result<Vec<Float>, String> {
+            let mut tc = TransportConfig::dispersive(tprec);
+            tc.cauchy_pole = None;
+            tc.threads = cfg.threads;
+            tc.pin_threads = false;
+            let path = PlannedPath { offset: Rational::new(), patches: patches.to_vec() };
+            let tr = Transport::new(&ksys, &path, tc).map_err(|x| x.to_string())?;
+            let yc: Vec<Complex> = y.iter().map(|v| Complex::with_val(tprec, v)).collect();
+            let mut st = tr.initial_state(&yc).map_err(|x| x.to_string())?;
+            tr.run(&mut st, usize::MAX, &yc, &Default::default(), None, |_| {}).map_err(|x| x.to_string())?;
+            Ok(st.y.iter().map(|c| Float::with_val(prec, c.real())).collect())
+        };
+        let proj = |y: &[Float], inf_side: bool| -> Vec<Float> { threshold_piece(&tfams, y, &cfg.r, inf_side, 1, 1, prec).2 };
+        let single = |fams: &[Fam], fi: usize, c: &[Float], s: &Float| -> Vec<Float> {
+            let f = &fams[fi];
+            let tmp = [Fam { side: f.side, class: f.class, num: FamilyNum { spec: f.num.spec.clone(), basis: f.num.basis.clone() }, coef: Some(c.to_vec()), null: vec![], diag: Value::Null }];
+            rho_at(&tmp, e, s, prec)
+        };
+        let b0 = proj(&transport_end(&rho_at(&fams0, e, &s0f, prec), &p0)?, false);
+        let bi = proj(&transport_end(&rho_at(&famsi, e, &sef, prec), &pi_)?, true);
+        let mut cols: Vec<Vec<Float>> = Vec::new();
+        let mut which: Vec<(usize, usize, usize)> = Vec::new(); // (side, family index, direction)
+        for (side, fams, s, patches) in [(0usize, &fams0, &s0f, &p0), (1, &famsi, &sef, &pi_)] {
+            for (fi, f) in fams.iter().enumerate() {
+                for (di, c) in f.null.iter().enumerate() {
+                    let pr = proj(&transport_end(&single(fams, fi, c, s), patches)?, side == 1);
+                    cols.push(if side == 0 { pr } else { pr.iter().map(|x| Float::with_val(prec, -x)).collect() });
+                    which.push((side, fi, di));
+                }
+            }
+        }
+        let neq = b0.len();
+        let a: Vec<Vec<Float>> = (0..neq).map(|i| cols.iter().map(|c| c[i].clone()).collect()).collect();
+        let rhs: Vec<Float> = (0..neq).map(|i| Float::with_val(prec, &bi[i] - &b0[i])).collect();
+        let (alpha, rank, _) = lstsq_rr_null(&a, &rhs, prec);
+        let mut worst = -1e9f64;
+        let scale = rhs.iter().chain(b0.iter()).map(log10abs).fold(-1e9f64, f64::max);
+        for i in 0..neq {
+            let v = Float::with_val(prec, Float::dot(a[i].iter().zip(&alpha))) - &rhs[i];
+            worst = worst.max(log10abs(&v) - scale);
+        }
+        for ((side, fi, di), al) in which.iter().zip(&alpha) {
+            let f = if *side == 0 { &mut fams0[*fi] } else { &mut famsi[*fi] };
+            let d = f.null[*di].clone();
+            let c = f.coef.as_mut().unwrap();
+            for (x, y) in c.iter_mut().zip(&d) {
+                *x += Float::with_val(prec, al * y);
+            }
+        }
+        diag["continuity_fit"] = json!({"free_directions": [ndir0, ndiri], "equations": neq, "rank": rank, "worst_rel_residual_log10": worst, "seconds": t.elapsed().as_secs_f64()});
+        eprintln!("[pflow] continuity fit: {} + {} free directions, {} equations, rank {rank}, worst residual {worst:.1} ({:.1} s)", ndir0, ndiri, neq, t.elapsed().as_secs_f64());
+    }
     let y0 = rho_at(&fams0, e, &s0f, prec);
     let yi = rho_at(&famsi, e, &sef, prec);
     diag["patches"] = json!([p0.len(), pi_.len()]);
@@ -638,7 +721,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             }
             diag[format!("threshold_residual_{half}_m{m}")] = json!(res);
             if m == cfg.moments[0] {
-                diag[format!("intcoef_{half}")] = json!(ic.iter().map(|x| x.to_string_radix(10, Some(30))).collect::<Vec<_>>());
+                diag[format!("intcoef_{half}")] = json!(ic.iter().map(|x| x.to_string_radix(10, None)).collect::<Vec<_>>());
             }
         }
         for i in 0..e {
