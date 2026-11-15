@@ -95,7 +95,7 @@ fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PCo
     let spec = match frobenius::family_spec(&out, e, cfg.nlo, mm, lam, rho, name) {
         Ok(s) => s,
         // ranks zero up to the truncation edge: no solution of this class (the threshold dimension check guards completeness)
-        Err(err) if err.contains("no rank plateau") && out.ranks.get(out.ranks.len() * 3 / 4).is_some_and(|&r| r == 0) => return Ok(None),
+        Err(err) if err.contains("no rank plateau") && out.t[..((((mm - cfg.nlo) / 2 + 1) as usize) * e).min(out.t.len())].iter().all(|r| r.is_empty()) => return Ok(None),
         Err(err) => return Err(format!("{name}: {err}")),
     };
     if spec.dim == 0 {
