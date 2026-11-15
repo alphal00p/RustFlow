@@ -67,7 +67,34 @@ fn main() {
                 out.push(json!({"m": m, "master": mast, "value": val.to_string_radix(10, Some((cfg.wf as usize).max(20))), "digits_two_precision": dig}));
             }
         }
-        Ok(json!({"schema": "pflow-route-b.v1", "d0": rs.d0.to_string(), "e_slot": e, "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments},
+        // non-master targets: --extra "a1,a2,...;b1,..." (pinched-master values from --efree FILE {"[..]": "value"} if needed)
+        let mut extras = Vec::new();
+        if let Some(ex) = arg(&a, "--extra") {
+            let efree: std::collections::HashMap<Vec<i64>, rug::Float> = match arg(&a, "--efree") {
+                Some(f) => {
+                    let v: Value = serde_json::from_str(&std::fs::read_to_string(f).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?;
+                    v.as_object().unwrap().iter().map(|(k, x)| (serde_json::from_str::<Vec<i64>>(k).unwrap(), rug::Float::with_val(symbolica_amflow::dispersive::run::bits(cfg.wf), rug::Float::parse(x.as_str().unwrap()).unwrap()))).collect()
+                }
+                None => Default::default(),
+            };
+            for t in ex.split(';') {
+                let xv: Vec<i64> = t.split(',').map(|y| y.trim().parse().unwrap()).collect();
+                let prec = symbolica_amflow::dispersive::run::bits(cfg.wf);
+                let r1 = symbolica_amflow::pflow::engine::extra_value(&rs.rules, &sys, &xv, &res.moments, &efree, &var, prec);
+                let dig = match (&r1, &res2) {
+                    (Ok((v, _)), Some(r2)) => symbolica_amflow::pflow::engine::extra_value(&rs.rules, &sys, &xv, &r2.moments, &efree, &var, prec).ok().map(|(w, _)| {
+                        let d = rug::Float::with_val(prec, v - &w);
+                        if d.is_zero() { 999.0 } else { -(d.abs() / rug::Float::with_val(prec, v.abs_ref())).log10().to_f64() }
+                    }),
+                    _ => None,
+                };
+                extras.push(match r1 {
+                    Ok((v, n)) => json!({"target": xv, "value": v.to_string_radix(10, Some((cfg.wf as usize).max(20))), "max_moment_n": n, "digits_two_precision": dig}),
+                    Err(e) => json!({"target": xv, "error": e}),
+                });
+            }
+        }
+        Ok(json!({"schema": "pflow-route-b.v1", "extras": extras, "d0": rs.d0.to_string(), "e_slot": e, "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments},
             "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag)}))
     })();
     match r {

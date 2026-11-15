@@ -94,6 +94,8 @@ fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PCo
     }
     let spec = match frobenius::family_spec(&out, e, cfg.nlo, mm, lam, rho, name) {
         Ok(s) => s,
+        // ranks zero up to the truncation edge: no solution of this class (the threshold dimension check guards completeness)
+        Err(err) if err.contains("no rank plateau") && out.ranks.iter().rev().skip(8).all(|&r| r == 0) => return Ok(None),
         Err(err) => return Err(format!("{name}: {err}")),
     };
     if spec.dim == 0 {
@@ -529,12 +531,29 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let h = Rational::from(&sys.d0 / 2u32);
     let pts = singular_points(sys);
     let dist = |c: (f64, f64)| pts.iter().filter(|p| (p.0 - c.0).hypot(p.1 - c.1) > 1e-12).map(|p| (p.0 - c.0).hypot(p.1 - c.1)).fold(f64::INFINITY, f64::min);
-    let rq = |x: f64| -> Rational { Rational::from(((x * 4096.0).floor() as i64, 4096i64)) };
-    let rho0 = rq(0.5 * dist((0.0, 0.0)));
+    // exact dyadic rationals with 24 significant bits (never 0)
+    let rq = |x: f64| -> Rational {
+        let ex = x.log2().floor() as i32 - 23;
+        let m = (x / 2f64.powi(ex)).floor() as i64;
+        if ex >= 0 { Rational::from(m) * Rational::from(rug::Integer::from(1) << ex as u32) } else { Rational::from((m, 1)) / Rational::from(rug::Integer::from(1) << (-ex) as u32) }
+    };
+    let d0 = dist((0.0, 0.0));
+    let dthr = dist((-1.0, 0.0));
     let rmax = pts.iter().map(|p| p.0.hypot(p.1)).fold(0.0f64, f64::max);
+    let rho0 = rq(0.5 * d0);
     let rho_inf = rq(0.5 / rmax);
-    let rho_thr = rq(0.5 * dist((-1.0, 0.0)));
-    let mut diag = json!({"singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": []});
+    let rho_thr = rq(0.5 * dthr);
+    // split points adapted to the singular points closest to 0, -1 and infinity (spurious points of the Laporta basis may sit
+    // at distance O(eps) from the physical ones): the families converge on the solutions' own radius, the transports detour
+    let mut cfg = cfg.clone();
+    let cap = |x: &Rational, lim: f64| -> Rational { if x.to_f64() > lim { rq(lim) } else { x.clone() } };
+    cfg.s0 = cap(&cfg.s0, 0.4 * d0);
+    cfg.r = cap(&cfg.r, 0.4 * dthr);
+    if cfg.s_end.to_f64() < 2.5 * rmax {
+        cfg.s_end = rq(2.5 * rmax);
+    }
+    let cfg = &cfg;
+    let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": []});
     let mut fams0 = Vec::new();
     let mut famsi = Vec::new();
     for k in 1..=cfg.loops as i64 {
@@ -642,4 +661,71 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     diag["threshold_continuity_log10"] = json!(cont);
     diag["seconds"] = json!(t0.elapsed().as_secs_f64());
     Ok(PResult { moments, diag })
+}
+
+/// massless value (E-normalisation) of a NON-master integral X of the one-mass family: X(z) = sum_j c_j(z) M_j(z) (RustRed rule,
+/// Minkowski I-normalisation), analytic part of M_j: A_j(z) = sum_n a_{j,n} z^n with a_{j,n} = (-1)^n Mom_j(n + 1)
+/// (moments m = n + 1 of the e-block masters, I-normalised). E_massless[X] = (-1)^(sum X) sum_j [c_j A_j]_{z^0}. Rule terms on
+/// e-free (pinched) masters need their massless values (`efree`, E-normalised); missing ones are an error.
+pub fn extra_value(
+    rules: &std::collections::HashMap<Vec<i64>, Vec<(Vec<i64>, String)>>,
+    sys: &EBlockSystem,
+    x: &[i64],
+    moments: &[(i32, Vec<Float>)],
+    efree: &std::collections::HashMap<Vec<i64>, Float>,
+    var: &str,
+    prec: u32,
+) -> Result<(Float, i64), String> {
+    use crate::dispersive::system::parse_coefficient;
+    let xv = x.to_vec();
+    let terms: Vec<(Vec<i64>, String)> = if sys.masters.contains(&xv) { vec![(xv.clone(), "1".into())] } else { rules.get(&xv).cloned().ok_or("no rule for the target")? };
+    let mut tot = Float::new(prec);
+    let mut maxn = 0i64;
+    let mom = |m: i32| moments.iter().find(|(k, _)| *k == m).map(|(_, v)| v);
+    for (ti, c) in &terms {
+        let (n, d) = parse_coefficient(c, var)?;
+        // exact Laurent expansion of n/d at z = 0
+        let mut nn = n.clone();
+        let mut dd = d.clone();
+        crate::dispersive::poly::trim(&mut nn);
+        crate::dispersive::poly::trim(&mut dd);
+        let Some(vn) = crate::dispersive::poly::valuation(&nn) else { continue };
+        let vd = crate::dispersive::poly::valuation(&dd).unwrap();
+        let shift = vn as i64 - vd as i64;
+        let need = (-shift).max(0) as usize + 1;
+        let ser = crate::dispersive::field::series_div::<Float>(
+            &nn[vn..].iter().map(|q| Float::with_val(prec, q)).collect::<Vec<_>>(),
+            &dd[vd..].iter().map(|q| Float::with_val(prec, q)).collect::<Vec<_>>(),
+            need,
+            prec,
+        );
+        if let Some(j) = sys.masters.iter().position(|m| m == ti) {
+            // z^0 coefficient of c(z) A_j(z): sum_k g_k a_{j,-k}, k = shift + i <= 0
+            for (i, g) in ser.iter().enumerate() {
+                let k = shift + i as i64;
+                if k > 0 {
+                    break;
+                }
+                let nidx = -k;
+                maxn = maxn.max(nidx);
+                let v = mom((nidx + 1) as i32).ok_or(format!("moment m = {} needed", nidx + 1))?;
+                let mut t = Float::with_val(prec, g * &v[j]);
+                if nidx % 2 == 1 {
+                    t = -t;
+                }
+                tot += t;
+            }
+        } else {
+            // a z-independent (pinched) master: the z^0 coefficient of c(z)
+            if shift > 0 {
+                continue;
+            }
+            let g = &ser[(-shift) as usize];
+            let sgn = if ti.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
+            let ev = efree.get(ti).ok_or(format!("value of the pinched master {ti:?} needed"))?;
+            tot += Float::with_val(prec, g * ev) * sgn; // I = (-1)^(sum) E
+        }
+    }
+    let sx = if x.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
+    Ok((Float::with_val(prec, &tot * sx), maxn))
 }
