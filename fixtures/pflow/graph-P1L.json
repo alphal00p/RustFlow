@@ -1,0 +1,1 @@
+{"name": "P1L", "loops": 1, "vertices": 2, "lines": [{"endpoints": [1, 2], "momentum": [1, 0]}, {"endpoints": [2, 1], "momentum": [1, -1]}], "isps": [], "external": {"in": 1, "out": 2}, "gram": [[-1]]}

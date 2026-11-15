@@ -642,6 +642,7 @@ fn real_scalars_refuse_complex_inputs() {
         bits,
         threads: 1,
         cauchy_u: None,
+        cauchy_power: 1,
         probes: vec![],
         cancel: &cancel,
         pin_threads: false,

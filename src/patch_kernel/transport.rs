@@ -29,6 +29,9 @@ pub struct TransportConfig {
     /// `d(s)/(s + 1) ds = -d(z)/(1 - z) dz` on `z = -s`, i.e. `a = 1` with the
     /// opposite sign.
     pub cauchy_pole: Option<Rational>,
+    /// Power m of the Cauchy weight: accumulate `int y(z) / (a - z)^m dz` (m = 1: the dispersion weight of W3; m >= 2: higher
+    /// Mellin moments; m <= 0: the polynomial weights (a - z)^|m| of PFLOW's positive moments). Part of the fingerprint when != 1.
+    pub cauchy_power: i32,
     /// On real patches keep the state real: imaginary parts left by complex
     /// detours are dropped and their largest relative size is recorded.
     pub project_real_axis: bool,
@@ -55,6 +58,7 @@ impl TransportConfig {
             mode: ArithmeticMode::Fixed,
             threads: 1,
             cauchy_pole: None,
+            cauchy_power: 1,
             project_real_axis: false,
             overlap_check: true,
             pin_threads: true,
@@ -313,7 +317,9 @@ impl<'a> Transport<'a> {
             path_len: self.path.patches.len(),
             bits: self.config.bits,
             mode: format!("{:?}", self.config.mode),
-            cauchy_pole: self.config.cauchy_pole.as_ref().map(|a| a.to_string()),
+            cauchy_pole: self.config.cauchy_pole.as_ref().map(|a| {
+                if self.config.cauchy_power == 1 { a.to_string() } else { format!("{a}|power={}", self.config.cauchy_power) }
+            }),
             project_real_axis: self.config.project_real_axis,
             overlap_check: self.config.overlap_check,
             initial: checkpoint::vector_hash(initial),
@@ -553,7 +559,7 @@ impl<'a> Transport<'a> {
                 Rational::from(-&spec.centre.1),
             )
         });
-        if let Some((ur, ui)) = &cauchy_u {
+        if let Some((ur, ui)) = cauchy_u.as_ref().filter(|_| self.config.cauchy_power > 0) {
             // the weight series 1/(u - t) converges on the patch only for |h| < |u|
             let u = path_abs(ur, ui);
             let h = path_abs(&spec.step.0, &spec.step.1);
@@ -576,6 +582,7 @@ impl<'a> Transport<'a> {
             bits,
             threads: self.config.threads,
             cauchy_u,
+            cauchy_power: self.config.cauchy_power,
             probes,
             cancel,
             pin_threads: self.config.pin_threads,

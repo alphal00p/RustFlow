@@ -216,6 +216,8 @@ pub struct PatchJob<'a> {
     pub threads: usize,
     /// Integral weight `1 / (u - t)` with `u = a - centre` (if any).
     pub cauchy_u: Option<(Rational, Rational)>,
+    /// power m of the weight (u - t)^-m (see TransportConfig::cauchy_power)
+    pub cauchy_power: i32,
     /// Extra evaluation offsets from the centre (overlap probes).
     pub probes: Vec<(Rational, Rational)>,
     pub cancel: &'a CancellationToken,
@@ -535,13 +537,37 @@ pub fn run_patch<S: KernelScalar>(job: &PatchJob, y0: &[Complex]) -> Result<Patc
         par_map(dim, threads, pins, |j| {
             let val = horner(j, &h);
             let integral = u.as_ref().map(|u| {
-                let mut p: Vec<S> = Vec::with_capacity(nord);
-                let mut cur = S::zero(bits);
-                for n in 0..nord {
-                    cur.add_ref(&y[j][n]);
-                    cur.div_ref(u);
-                    p.push(cur.clone());
+                // Taylor coefficients of y(t) (u - t)^-m: m >= 1 applies the cumulative division by (u - t) m times (m = 1: the
+                // original W2 recurrence, unchanged); m <= 0 multiplies by (u - t) |m| times (the series grows by |m| orders)
+                let mm = job.cauchy_power;
+                let mut p: Vec<S> = y[j][..nord].to_vec();
+                if mm >= 1 {
+                    for _ in 0..mm {
+                        let mut cur = S::zero(bits);
+                        for n in 0..nord {
+                            cur.add_ref(&p[n]);
+                            cur.div_ref(u);
+                            p[n] = cur.clone();
+                        }
+                    }
+                } else {
+                    for _ in 0..(-mm) {
+                        let mut q: Vec<S> = Vec::with_capacity(p.len() + 1);
+                        for n in 0..=p.len() {
+                            let mut v = S::zero(bits);
+                            if n < p.len() {
+                                v.add_ref(&p[n]);
+                                v.mul_ref(u);
+                            }
+                            if n >= 1 {
+                                v.sub_ref(&p[n - 1]);
+                            }
+                            q.push(v);
+                        }
+                        p = q;
+                    }
                 }
+                let nord = p.len();
                 let mut acc = S::zero(bits);
                 for n in (0..nord).rev() {
                     let mut q = p[n].clone();

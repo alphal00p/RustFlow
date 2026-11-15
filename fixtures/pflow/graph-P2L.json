@@ -1,0 +1,1 @@
+{"name": "P2L", "loops": 2, "vertices": 4, "lines": [{"endpoints": [2, 4], "momentum": [1, 0, 0]}, {"endpoints": [3, 4], "momentum": [0, 1, 0]}, {"endpoints": [4, 1], "momentum": [1, 1, 0]}, {"endpoints": [3, 2], "momentum": [1, 0, 1]}, {"endpoints": [1, 3], "momentum": [1, 1, 1]}], "isps": [], "external": {"in": 1, "out": 2}, "gram": [[-1]]}

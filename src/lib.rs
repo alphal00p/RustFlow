@@ -31,6 +31,8 @@ pub mod cuts;
 pub mod diffexp;
 #[cfg(feature = "native")]
 pub mod dispersive;
+#[cfg(feature = "native")]
+pub mod pflow;
 #[cfg(feature = "automatic")]
 pub mod engine;
 pub mod epsilon;

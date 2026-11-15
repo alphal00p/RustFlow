@@ -1,0 +1,21 @@
+{
+ "schema": "rustred-harness-solution.v1",
+ "family": {"arity":5,"fingerprint":"rustred-integral-family-v2;N6:P2L_m0;L2;2:k1;2:k2;E1;1:q;P2;1:d;1:z;Q2,1,5;M;RY2,1;I+1;X1,0;Y2,1;I+1;X0,0;D5;RY2,1;I-1;X0,1;Y2,1;I+1;X0,0;RY2,1;I+1;X0,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,1;I+1;X0,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,1;I+1;X0,0;Y2,1;I+1;X0,0;RY2,1;I+2;X0,0;Y2,1;I+1;X0,0;RY2,1;I+1;X0,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,1;I-1;X0,0;Y2,1;I+1;X0,0;RY2,1;I+1;X0,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,1;I+2;X0,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,1;I-1;X0,0;Y2,1;I+1;X0,0;RY2,1;I+1;X0,0;Y2,1;I+1;X0,0;RY2,1;I+2;X0,0;Y2,1;I+1;X0,0;RY2,1;I+1;X0,0;Y2,1;I+1;X0,0;RY2,1;I+2;X0,0;Y2,1;I+1;X0,0;RY2,1;I+2;X0,0;Y2,1;I+1;X0,0;G1;RY2,1;I-1;X0,0;Y2,1;I+1;X0,0;U5;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;RY2,0;Y2,1;I+1;X0,0;","name":"P2L_m0","router_fingerprint":"7ebd5be856b62855fce7e13ecd55ab4d9ca276311164e260814f26dcde98be50"},
+ "parameters": ["d","z"],
+ "fixed": {"d":"199/50"},
+ "coefficient_field": {"kind":"Q"},
+ "masters": [[1,1,1,1,0],[1,0,1,1,1],[2,1,0,0,1],[1,1,0,0,2],[0,1,1,2,0],[1,1,1,0,0],[1,0,1,0,1]],
+ "rules": [
+  {"target":[1,1,1,1,1],"terms":[{"coefficient":"(98)/(1+z)","integral":[1,1,1,1,0]},{"coefficient":"(-98)/(1+z)","integral":[1,0,1,1,1]},{"coefficient":"-100","integral":[2,1,0,0,1]},{"coefficient":"50/49","integral":[1,1,0,0,2]},{"coefficient":"(50/49)/(1+z)","integral":[0,1,1,2,0]},{"coefficient":"(99)/(1+z)","integral":[1,1,1,0,0]},{"coefficient":"(99)/(z+z^2)","integral":[1,0,1,0,1]}]},
+  {"target":[2,1,1,1,0],"terms":[{"coefficient":"(-1/100+97/100*z)/(z+z^2)","integral":[1,1,1,1,0]},{"coefficient":"(-1/98)/(z+z^2)","integral":[0,1,1,2,0]},{"coefficient":"(-99/100)/(z+z^2)","integral":[1,1,1,0,0]}]},
+  {"target":[2,0,1,1,1],"terms":[{"coefficient":"(49/50)/(1+z)","integral":[1,0,1,1,1]},{"coefficient":"(-99/100)/(z+z^2)","integral":[1,0,1,0,1]}]},
+  {"target":[3,1,0,0,1],"terms":[{"coefficient":"(-1/200)/(z)","integral":[2,1,0,0,1]},{"coefficient":"(1/200)/(z)","integral":[1,1,0,0,2]}]},
+  {"target":[2,1,0,0,2],"terms":[{"coefficient":"(49/50)/(1+z)","integral":[2,1,0,0,1]},{"coefficient":"(24/25)/(1+z)","integral":[1,1,0,0,2]}]},
+  {"target":[2,1,1,0,0],"terms":[{"coefficient":"(49/50)/(z)","integral":[1,1,1,0,0]}]},
+  {"target":[2,0,1,0,1],"terms":[{"coefficient":"(99/100)/(z)","integral":[1,0,1,0,1]}]}
+ ],
+ "content_blake3": "da1fd914f2caf9f9bb9335fdda2eaea8379ebdade55b363d738b00074623ef46",
+ "stats": {"build_seconds":0.000387,"columns":84,"entries":49,"functions":49,"known_denominators":0,"masters":7,"max_denominator_degree":2,"max_numerator_degree":1,"max_primes_per_function":2,"nonzero_entries":18,"primes":[{"accepted":0,"failures":{},"good_points":16,"interpolated":49,"misfits":0,"open":49,"points":16,"polynomial_fits":0,"prime":4611686018427387847,"replayed":0,"unfinished":0},{"accepted":49,"failures":{},"good_points":4,"interpolated":0,"misfits":0,"open":49,"points":4,"polynomial_fits":0,"prime":4611686018427387817,"replayed":0,"unfinished":0}],"probe_seconds":0.001108,"reconstruction_seconds":0.000436,"recovered":0,"resumed_probes":0,"rows":62,"seconds":0.00761,"shape_changes":0,"skipped":[],"skipped_primes":0,"targets":7,"terms":318,"unlucky":{},"verification_seconds":0.000534,"verifications":[{"failed_functions":0,"failed_points":0,"points":2,"prime":4611686018427387787}],"zero_functions":31},
+ "certificates": [{"mode":"probabilistic","prime":9223372036854775783,"rows":62,"rules":7}],
+ "provenance": {"extra":{"d_fixed":"199/50","producer":"rustred sector-box-reduce"},"free":"z","lane":"FiniteField","master_hash":"b8099948384c8423dc28cc64473fe8e96dd3fb8347f961f2495ee9f330f7ce69","selected_hash":"a6c87b604829146e83dc4e2896da3cca3b08f85c10dabad0f9c6b853870508f8","unseeded_master_sectors":[]}
+}
