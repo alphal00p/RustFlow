@@ -683,27 +683,54 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let tmp = [Fam { side: f.side, class: f.class, num: FamilyNum { spec: f.num.spec.clone(), basis: f.num.basis.clone() }, coef: Some(c.to_vec()), null: vec![], diag: Value::Null }];
             rho_at(&tmp, e, s, prec)
         };
-        let b0 = proj(&transport_end(&rho_at(&fams0, e, &s0f, prec), &p0)?, false);
-        let bi = proj(&transport_end(&rho_at(&famsi, e, &sef, prec), &pi_)?, true);
+        // noise floor of a projection: the transports carry w digits, so |noise| ~ 10^-(w-8) |transported vector|
+        let ymax = |y: &[Float]| y.iter().map(log10abs).fold(-1e9f64, f64::max);
+        let floor = |y: &[Float]| ymax(y) - (cfg.w as f64 - 8.0);
+        let y0e = transport_end(&rho_at(&fams0, e, &s0f, prec), &p0)?;
+        let yie = transport_end(&rho_at(&famsi, e, &sef, prec), &pi_)?;
+        let b0 = proj(&y0e, false);
+        let bi = proj(&yie, true);
+        let base_floor = floor(&y0e).max(floor(&yie));
         let mut cols: Vec<Vec<Float>> = Vec::new();
         let mut which: Vec<(usize, usize, usize)> = Vec::new(); // (side, family index, direction)
+        let mut dropped = 0usize;
         for (side, fams, s, patches) in [(0usize, &fams0, &s0f, &p0), (1, &famsi, &sef, &pi_)] {
             for (fi, f) in fams.iter().enumerate() {
                 for (di, c) in f.null.iter().enumerate() {
-                    let pr = proj(&transport_end(&single(fams, fi, c, s), patches)?, side == 1);
+                    let y = transport_end(&single(fams, fi, c, s), patches)?;
+                    let pr = proj(&y, side == 1);
+                    // a direction whose continuity column is at the noise floor is not constrained by continuity: leave it at 0
+                    // (minimum-norm), never divide by noise
+                    if ymax(&pr) < floor(&y) + 3.0 {
+                        dropped += 1;
+                        continue;
+                    }
                     cols.push(if side == 0 { pr } else { pr.iter().map(|x| Float::with_val(prec, -x)).collect() });
                     which.push((side, fi, di));
                 }
             }
         }
         let neq = b0.len();
-        let a: Vec<Vec<Float>> = (0..neq).map(|i| cols.iter().map(|c| c[i].clone()).collect()).collect();
         let rhs: Vec<Float> = (0..neq).map(|i| Float::with_val(prec, &bi[i] - &b0[i])).collect();
-        let (alpha, rank, _) = lstsq_rr_null(&a, &rhs, prec);
+        let base_resid = ymax(&rhs);
+        // nothing to fix if the base solution is already continuous to the noise floor
+        let active = !cols.is_empty() && base_resid > base_floor + 3.0;
+        let (alpha, rank) = if active {
+            // unit-norm columns, so that the rank decision compares like with like
+            let norms: Vec<Float> = cols.iter().map(|c| { let mut n = Float::new(prec); for x in c { n += Float::with_val(prec, x.square_ref()); } n.sqrt() }).collect();
+            let a: Vec<Vec<Float>> = (0..neq).map(|i| cols.iter().zip(&norms).map(|(c, n)| Float::with_val(prec, &c[i] / n)).collect()).collect();
+            let (al, rank, _) = lstsq_rr_null(&a, &rhs, prec);
+            (al.iter().zip(&norms).map(|(x, n)| Float::with_val(prec, x / n)).collect::<Vec<Float>>(), rank)
+        } else {
+            (vec![Float::new(prec); cols.len()], 0)
+        };
         let mut worst = -1e9f64;
         let scale = rhs.iter().chain(b0.iter()).map(log10abs).fold(-1e9f64, f64::max);
         for i in 0..neq {
-            let v = Float::with_val(prec, Float::dot(a[i].iter().zip(&alpha))) - &rhs[i];
+            let mut v = Float::with_val(prec, -&rhs[i]);
+            for (c, al) in cols.iter().zip(&alpha) {
+                v += Float::with_val(prec, &c[i] * al);
+            }
             worst = worst.max(log10abs(&v) - scale);
         }
         for ((side, fi, di), al) in which.iter().zip(&alpha) {
@@ -714,8 +741,9 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
                 *x += Float::with_val(prec, al * y);
             }
         }
+        diag["continuity_fit_detail"] = json!({"base_residual_log10": base_resid, "noise_floor_log10": base_floor, "applied": active, "dropped_noise_directions": dropped});
         diag["continuity_fit"] = json!({"free_directions": [ndir0, ndiri], "equations": neq, "rank": rank, "worst_rel_residual_log10": worst, "seconds": t.elapsed().as_secs_f64()});
-        eprintln!("[pflow] continuity fit: {} + {} free directions, {} equations, rank {rank}, worst residual {worst:.1} ({:.1} s)", ndir0, ndiri, neq, t.elapsed().as_secs_f64());
+        eprintln!("[pflow] continuity fit: {} + {} free directions ({dropped} at the noise floor), {} equations, rank {rank}, base residual {base_resid:.1} vs floor {base_floor:.1}, applied {active}, worst residual {worst:.1} ({:.1} s)", ndir0, ndiri, neq, t.elapsed().as_secs_f64());
     }
     let y0 = rho_at(&fams0, e, &s0f, prec);
     let yi = rho_at(&famsi, e, &sef, prec);
