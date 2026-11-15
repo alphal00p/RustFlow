@@ -79,6 +79,33 @@ pub struct PatchKernel {
     pub system_fingerprint: String,
     pub threads: usize,
     pub pin_threads: bool,
+    /// Override of the kernel's series-tail bound (log10, per component relative tail); `None` = the kernel default
+    /// -(working decimal digits)/2. Not part of any fingerprint: it only decides whether a patch is accepted.
+    pub max_tail_log10: Option<f64>,
+    /// Tail heal ([`TAIL_HEAL_POLICY`]): a patch that fails the tail bound is retried at higher Taylor orders (same step, same
+    /// precision) instead of failing the run. Default on.
+    pub tail_heal: bool,
+}
+
+/// Self-healing of the series-tail guard (W7-TAIL, 15 Nov 2026). In the last real stretch of the dispersive path (|z| >> the
+/// singular points, steps |z|/3) the components of the discontinuity spread over ~110 orders of magnitude; the per-component
+/// relative tail of the tiniest components is a TRUNCATION tail driven by the dominant ones (it follows the Taylor order, ~0.8
+/// digits per term at node 022, not the precision). The planned order (W + 8 digits for the nearest singular point) then
+/// leaves a relative tail above -(digits)/2 in components 1e-50..1e-80 of the vector at the lower precision of a two-precision
+/// run. Remedy: retry that ONE patch with more Taylor terms (same centre, step and precision; the weight and probe series as in
+/// the kernel) and accept the first retry whose largest per-component relative tail is within the same bound. Patches that pass
+/// at the planned order are untouched (bit-identical); a healed patch is recorded in the kernel state with its order (record
+/// order != planned order), reported in out.json (`tail_heals`) and replayed identically on resume. If no retry passes, the run
+/// fails as before (the guard stays).
+pub const TAIL_HEAL_POLICY: &str = "tail-heal-1: retry a failing patch at orders ceil(5N/4), ceil(3N/2), 2N (same step and precision); accept the first within the tail bound";
+
+/// retry orders of the tail heal for a patch of planned order `n`
+pub fn tail_heal_orders(n: usize) -> [usize; 3] {
+    [(5 * n).div_ceil(4), (3 * n).div_ceil(2), 2 * n]
+}
+
+fn is_tail_failure(e: &crate::Error) -> bool {
+    matches!(e, crate::Error::Numerical(m) if m.contains("series tail"))
 }
 
 impl PatchKernel {
@@ -90,6 +117,8 @@ impl PatchKernel {
             system_fingerprint,
             threads: threads.max(1),
             pin_threads: true,
+            max_tail_log10: None,
+            tail_heal: true,
         })
     }
 
@@ -98,7 +127,77 @@ impl PatchKernel {
         let mut c = TransportConfig::dispersive(prec);
         c.threads = self.threads;
         c.pin_threads = self.pin_threads;
+        if let Some(b) = self.max_tail_log10 {
+            c.max_tail_log10 = b;
+        }
         c
+    }
+
+    /// Tail heal of patch `state.next_patch` (see [`TAIL_HEAL_POLICY`]): Ok(true) = `state` advanced by the healed patch,
+    /// Ok(false) = no retry passed (`state` unchanged), Err(Cancelled) = cancelled (`state` unchanged).
+    fn heal_patch(
+        &self,
+        path: &PlannedPath,
+        state: &mut crate::patch_kernel::TransportState,
+        prec: u32,
+        cancel: &CancellationToken,
+    ) -> Result<bool, crate::Error> {
+        let k = state.next_patch;
+        let planned = path.patches[k].order;
+        for order in tail_heal_orders(planned) {
+            let mut spec = path.patches[k].clone();
+            spec.order = order;
+            let one = PlannedPath {
+                offset: path.offset.clone(),
+                patches: vec![spec],
+            };
+            let tr = crate::patch_kernel::Transport::new(&self.system, &one, self.config(prec))?
+                .with_system_fingerprint(self.system_fingerprint.clone());
+            // the same kernel step on the same state, with the patch as patch 0 of a one-patch path
+            let mut st = state.clone();
+            st.next_patch = 0;
+            let t = std::time::Instant::now();
+            match tr.step(&mut st, cancel) {
+                Ok(()) => {
+                    st.records.last_mut().expect("record").index = k;
+                    st.next_patch = k + 1;
+                    let r = st.records.last().unwrap();
+                    eprintln!(
+                        "[dispersive] tail heal: patch {} order {planned} -> {order}: tail {:.1} overlap {:.1} within the bound {:.1} ({:.0} s): accepted",
+                        k + 1,
+                        r.tail_log10,
+                        r.overlap_log10,
+                        tr.config.max_tail_log10,
+                        t.elapsed().as_secs_f64()
+                    );
+                    *state = st;
+                    return Ok(true);
+                }
+                Err(e) if is_tail_failure(&e) => {
+                    eprintln!(
+                        "[dispersive] tail heal: patch {} order {planned} -> {order}: {e} ({:.0} s)",
+                        k + 1,
+                        t.elapsed().as_secs_f64()
+                    );
+                }
+                Err(e) => return Err(e),
+            }
+        }
+        Ok(false)
+    }
+
+    /// healed patches of a kernel state (record order != planned order), for out.json
+    pub fn tail_heals(
+        st: &crate::patch_kernel::TransportState,
+        patches: &[Patch],
+    ) -> serde_json::Value {
+        serde_json::Value::Array(
+            st.records
+                .iter()
+                .filter(|r| patches.get(r.index).is_some_and(|p| p.order != r.order))
+                .map(|r| serde_json::json!({"patch": r.index, "planned_order": patches[r.index].order, "order": r.order, "tail_log10": r.tail_log10, "overlap_log10": r.overlap_log10}))
+                .collect(),
+        )
     }
 
     fn output(&self, st: &crate::patch_kernel::TransportState) -> TransportOutput {
@@ -191,24 +290,64 @@ impl PatchKernel {
         let policy = checkpoint_policy(&ctl.checkpoint, ctl.every_patches, ctl.every_seconds);
         let total = patches.len();
         let t0 = std::time::Instant::now();
-        let outcome = tr
-            .run(&mut state, until, y0, &ctl.cancel, Some(&policy), |s| {
-                let r = s.records.last().unwrap();
-                eprintln!(
-                    "[dispersive] patch {}/{} order {} {} setup {:.1} s rec {:.1} s tail {:.1} overlap {:.1} ({:.0} s)",
-                    r.index + 1,
-                    total,
-                    r.order,
-                    if r.complex { "C" } else { "R" },
-                    r.seconds_setup,
-                    r.seconds_recurrence,
-                    r.tail_log10,
-                    r.overlap_log10,
-                    t0.elapsed().as_secs_f64()
-                );
-            })
-            .map_err(|e| e.to_string())?;
-        let summary = Self::summary(&state);
+        let show = |s: &crate::patch_kernel::TransportState| {
+            let r = s.records.last().unwrap();
+            eprintln!(
+                "[dispersive] patch {}/{} order {} {} setup {:.1} s rec {:.1} s tail {:.1} overlap {:.1} ({:.0} s)",
+                r.index + 1,
+                total,
+                r.order,
+                if r.complex { "C" } else { "R" },
+                r.seconds_setup,
+                r.seconds_recurrence,
+                r.tail_log10,
+                r.overlap_log10,
+                t0.elapsed().as_secs_f64()
+            );
+        };
+        let outcome = loop {
+            match tr.run(&mut state, until, y0, &ctl.cancel, Some(&policy), show) {
+                Ok(o) => break o,
+                // the failed patch left `state` at the last good patch; heal it, checkpoint it, continue with the planned path
+                Err(e) if self.tail_heal && is_tail_failure(&e) && state.next_patch < until => {
+                    let k = state.next_patch;
+                    eprintln!(
+                        "[dispersive] patch {}/{total}: {e}; tail heal: retrying at orders {:?}",
+                        k + 1,
+                        tail_heal_orders(patches[k].order)
+                    );
+                    match self.heal_patch(&path, &mut state, prec, &ctl.cancel) {
+                        Ok(true) => {
+                            let _lock = crate::patch_kernel::checkpoint::CheckpointLock::acquire(
+                                &ctl.checkpoint,
+                            )
+                            .map_err(|e| e.to_string())?;
+                            tr.write_checkpoint(&ctl.checkpoint, &state, y0)
+                                .map_err(|e| e.to_string())?;
+                            show(&state);
+                        }
+                        Ok(false) => {
+                            return Err(format!(
+                                "{e}; tail heal failed at orders {:?} (TAIL_HEAL_POLICY {TAIL_HEAL_POLICY})",
+                                tail_heal_orders(patches[k].order)
+                            ));
+                        }
+                        // cancelled inside the heal: `state` unchanged; the next run() sees the token, flushes and returns Cancelled
+                        Err(crate::Error::Cancelled) => {}
+                        Err(e2) => return Err(format!("{e}; tail heal: {e2}")),
+                    }
+                }
+                Err(e) => return Err(e.to_string()),
+            }
+        };
+        let mut summary = Self::summary(&state);
+        summary["tail_bound_log10"] = serde_json::json!(tr.config.max_tail_log10);
+        summary["tail_heal"] = serde_json::json!(if self.tail_heal {
+            TAIL_HEAL_POLICY
+        } else {
+            "off"
+        });
+        summary["tail_heals"] = Self::tail_heals(&state, patches);
         if state.next_patch == patches.len() {
             return Ok((Checkpointed::Completed(self.output(&state)), summary));
         }

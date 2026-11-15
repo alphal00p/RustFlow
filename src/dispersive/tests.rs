@@ -783,3 +783,167 @@ fn p14_quality_gate_applies_the_gluing_acceptance() {
     );
     assert!(p14_quality_gate(&old, None, true).is_err());
 }
+
+/// W7-TAIL: the tail heal of the patch kernel (kernel::TAIL_HEAL_POLICY). A bound that only the worst patch misses at its planned
+/// order: (1) with the heal off the run fails there and leaves a resumable checkpoint; (2) with the heal on the run completes, the
+/// healed patch carries the first retry order, every other patch is bit-identical to the unhealed reference, and the result is
+/// bit-identical to a plain transport whose plan has that one order raised; (3) a run that FAILED at the guard resumes from its
+/// checkpoint with the heal on to the identical result (requirement: no redo, identical passed patches); (4) stop right after the
+/// healed patch and resume with another thread count: identical; (5) a bound no retry can meet still fails (the guard stays).
+#[test]
+fn patch_kernel_tail_heal() {
+    use super::kernel::{Checkpointed, PatchKernel, StageControl, tail_heal_orders};
+    let d0 = Rational::from((299999, 75000));
+    let sys = two_master(&d0);
+    let cfg = Config::new(30, 70, 24, 50, 1);
+    let plan = run::plan(&sys, &cfg).unwrap();
+    let pt = run::bits(cfg.w);
+    let y0: Vec<rug::Complex> = (0..2)
+        .map(|c| rug::Complex::with_val(pt, (c as u32 + 1, 0)))
+        .collect();
+    let ctl = |tag: &str, stop: Option<usize>| StageControl {
+        checkpoint: std::path::PathBuf::from(workdir(tag)).join("stage-transport-kernel.json"),
+        cancel: Default::default(),
+        every_seconds: 0.0,
+        every_patches: 1,
+        stop_at_patch: stop,
+    };
+    let kern = |threads: usize, bound: f64, heal: bool| {
+        let mut k = PatchKernel::new(&sys, threads).unwrap();
+        k.max_tail_log10 = Some(bound);
+        k.tail_heal = heal;
+        k
+    };
+    let ckpt = |c: &StageControl| -> serde_json::Value {
+        serde_json::from_slice(&std::fs::read(&c.checkpoint).unwrap()).unwrap()
+    };
+    let finish =
+        |k: &PatchKernel, c: &StageControl, patches: &[super::path::Patch]| -> serde_json::Value {
+            match k.run_checkpointed(&y0, patches, pt, c).unwrap() {
+                (Checkpointed::Completed(_), s) => s,
+                _ => panic!("not completed"),
+            }
+        };
+    // reference: no bound, no heal
+    let c0 = ctl("th-ref", None);
+    let s0 = finish(&kern(2, f64::INFINITY, false), &c0, &plan.patches);
+    let r0 = ckpt(&c0)["records"].as_array().unwrap().clone();
+    let tails: Vec<f64> = r0
+        .iter()
+        .map(|r| r["tail_log10"].as_f64().unwrap())
+        .collect();
+    let kstar = (0..tails.len())
+        .max_by(|&a, &b| tails[a].total_cmp(&tails[b]))
+        .unwrap();
+    let second = (0..tails.len())
+        .filter(|&i| i != kstar)
+        .map(|i| tails[i])
+        .fold(f64::NEG_INFINITY, f64::max);
+    assert!(
+        tails[kstar] - second > 0.2,
+        "need a unique worst patch: {} vs {second}",
+        tails[kstar]
+    );
+    let bound = (tails[kstar] + second) / 2.0;
+    assert_eq!(s0["tail_heals"], serde_json::json!([]));
+    // (1) heal off: fails at kstar, checkpoint before it
+    let c1 = ctl("th-off", None);
+    let err = kern(1, bound, false)
+        .run_checkpointed(&y0, &plan.patches, pt, &c1)
+        .err()
+        .expect("must fail");
+    assert!(
+        err.contains("series tail") && err.contains(&format!("patch {kstar}:")),
+        "{err}"
+    );
+    assert_eq!(ckpt(&c1)["next_patch"].as_u64().unwrap() as usize, kstar);
+    // (2) heal on
+    let c2 = ctl("th-on", None);
+    let s2 = finish(&kern(2, bound, true), &c2, &plan.patches);
+    let n1 = tail_heal_orders(plan.patches[kstar].order)[0];
+    assert_eq!(
+        s2["tail_heals"].as_array().unwrap().len(),
+        1,
+        "{}",
+        s2["tail_heals"]
+    );
+    assert_eq!(s2["tail_heals"][0]["patch"], kstar);
+    assert_eq!(s2["tail_heals"][0]["order"], n1);
+    assert!(s2["tail_heals"][0]["tail_log10"].as_f64().unwrap() <= bound);
+    assert_eq!(s2["tail_bound_log10"].as_f64().unwrap(), bound);
+    let r2 = ckpt(&c2)["records"].as_array().unwrap().clone();
+    let det = |r: &serde_json::Value| {
+        (
+            r["index"].clone(),
+            r["order"].clone(),
+            r["tail_log10"].clone(),
+            r["overlap_log10"].clone(),
+            r["dropped_imag_log10"].clone(),
+        )
+    };
+    for i in 0..r0.len() {
+        if i != kstar {
+            if i < kstar {
+                assert_eq!(
+                    det(&r0[i]),
+                    det(&r2[i]),
+                    "patch {i} before the healed one must be bit-identical"
+                );
+            } else {
+                assert_eq!(r0[i]["order"], r2[i]["order"]);
+            }
+        }
+    }
+    let ck0 = ckpt(&c0);
+    let ck2 = ckpt(&c2);
+    // (the healed patch's higher-order series may or may not move the end state at this precision: no assertion on ck0 vs ck2)
+    let _ = &ck0;
+    // equivalence: the same as a plain transport whose plan has that one order raised
+    let mut raised = plan.patches.clone();
+    raised[kstar].order = n1;
+    let c3 = ctl("th-raised", None);
+    let s3 = finish(&kern(3, f64::INFINITY, false), &c3, &raised);
+    assert_eq!(
+        s3["identity_hash"], s2["identity_hash"],
+        "heal == plain transport with the raised order"
+    );
+    let ck3 = ckpt(&c3);
+    assert_eq!(ck3["y"], ck2["y"]);
+    assert_eq!(ck3["integral"], ck2["integral"]);
+    // (3) the run that FAILED at the guard (c1) resumes with the heal on: identical, and patches 0..kstar are not redone
+    let s4 = finish(&kern(4, bound, true), &c1, &plan.patches);
+    assert_eq!(
+        s4["identity_hash"], s2["identity_hash"],
+        "failed-then-healed resume == healed run"
+    );
+    // (4) stop right after the healed patch (or right before it when it is the last patch), resume with another thread count
+    let stop = if kstar + 1 < plan.patches.len() {
+        kstar + 1
+    } else {
+        kstar
+    };
+    let c5 = ctl("th-stop", Some(stop));
+    match kern(2, bound, true)
+        .run_checkpointed(&y0, &plan.patches, pt, &c5)
+        .unwrap()
+    {
+        (Checkpointed::Cancelled { next_patch }, _) => assert_eq!(next_patch, stop),
+        _ => panic!("expected a stop"),
+    }
+    let c5b = StageControl {
+        stop_at_patch: None,
+        ..c5
+    };
+    let s5 = finish(&kern(1, bound, true), &c5b, &plan.patches);
+    assert_eq!(
+        s5["identity_hash"], s2["identity_hash"],
+        "stop after the heal + resume"
+    );
+    // (5) a bound no retry meets: still fails, with the heal named in the message
+    let c6 = ctl("th-never", None);
+    let err = kern(1, -1e6, true)
+        .run_checkpointed(&y0, &plan.patches, pt, &c6)
+        .err()
+        .expect("must fail");
+    assert!(err.contains("tail heal failed"), "{err}");
+}

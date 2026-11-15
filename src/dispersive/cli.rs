@@ -4,7 +4,10 @@
 //!            --v read:V.json | native:PLAN.json,SOFTSOL.json,SAMPLE.json | lane:CHAIN.json,SAMPLE.json
 //!            [--pr-values LANE_OUT.json] [--pivoting MODE] [--threads N] [--loops L] [--two-precision dW,dWF]
 //!            [--code-version STR] [--ref ORACLE_OUT.json]... [--kernel patch|standin] [--stop-at-patch K]
-//!            [--checkpoint-every-seconds T] [--frobenius-checkpoint-every-seconds T]
+//!            [--checkpoint-every-seconds T] [--frobenius-checkpoint-every-seconds T] [--max-tail-log10 X] [--tail-heal on|off]
+//! --max-tail-log10 X overrides the patch kernel's series-tail bound (default -(working digits)/2); --tail-heal (default on) retries
+//! a patch that fails the bound at higher Taylor orders (kernel::TAIL_HEAL_POLICY). Neither enters a fingerprint: a run that failed at
+//! the tail guard resumes from its checkpoint with them; both are recorded in out.json (transport.kernel).
 //! The transport checkpoints after EVERY patch (exact, ~0.1-1 MB); the zero and infinity families every T seconds (default 900)
 //! between two Frobenius orders (exact binary, ~1 GB at 5 loops); a restart resumes from the last one (a shed allows 2 s: no flush).
 //! dispersive --progress WORKDIR: one JSON progress line from the checkpoint files (see `progress`).
@@ -79,6 +82,9 @@ pub struct Args {
     pub family_check: Option<String>,
     pub input_budget: Option<String>,
     pub p14_producer: Option<String>,
+    /// patch kernel series-tail bound override (log10) and the tail heal switch (kernel::TAIL_HEAL_POLICY)
+    pub max_tail_log10: Option<f64>,
+    pub tail_heal: bool,
 }
 
 pub fn rd(p: &str) -> Result<Value, String> {
@@ -165,6 +171,19 @@ impl Args {
                 .unwrap_or(-80.0),
             input_budget: opt("input-budget"),
             p14_producer: opt("p14-producer"),
+            max_tail_log10: opt("max-tail-log10")
+                .map(|x| {
+                    x.parse::<f64>()
+                        .ok()
+                        .filter(|b| !b.is_nan())
+                        .ok_or_else(|| "--max-tail-log10: not a number".to_string())
+                })
+                .transpose()?,
+            tail_heal: match opt("tail-heal").as_deref() {
+                None | Some("on") => true,
+                Some("off") => false,
+                Some(x) => return Err(format!("--tail-heal {x}: on | off")),
+            },
         })
     }
 
@@ -426,7 +445,12 @@ pub fn run_with(
         c
     };
     let kernel: Box<dyn Transport> = match args.kernel.as_str() {
-        "patch" => Box::new(super::kernel::PatchKernel::new(sys, args.threads)?),
+        "patch" => {
+            let mut k = super::kernel::PatchKernel::new(sys, args.threads)?;
+            k.max_tail_log10 = args.max_tail_log10;
+            k.tail_heal = args.tail_heal;
+            Box::new(k)
+        }
         "standin" => Box::new(TaylorRecurrence::new(sys, args.threads)),
         k => return Err(format!("--kernel {k}: patch | standin")),
     };
