@@ -56,7 +56,7 @@ fn triangle_rule_kite() {
     let g = graph_of("P2L");
     let h = Rational::from(2) - Rational::from((1, 100));
     let prec = 200;
-    let k = graph::massless(&g, &[1, 1, 1, 1, 1], &h, prec).unwrap();
+    let k = graph::massless(&g, &[1, 1, 1, 1, 1], &h, prec, &graph::Provided::default()).unwrap();
     // 2 G(1,1) [G(2,1) - G(2, 3-h)] / (d - 4)
     let o = Rational::from(1);
     let t = Rational::from(2);
@@ -84,7 +84,7 @@ fn check_exact(sys: &EBlockSystem, r: &super::engine::PResult, g: &Graph, min_di
     let mut n = 0;
     for (j, a) in sys.masters.iter().enumerate() {
         let prec = r.moments[0].1[j].prec();
-        let Some(ex) = graph::massless(g, a, &h, prec) else { continue };
+        let Some(ex) = graph::massless(g, a, &h, prec, &graph::Provided::default()) else { continue };
         let sgn = if a.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
         let v = Float::with_val(prec, &r.moments[0].1[j] * sgn);
         if ex.is_zero() {
@@ -163,4 +163,20 @@ fn order_budget_from_spurious_distance() {
     assert!((loss - 4.657).abs() < 1e-3);
     assert_eq!(nmax, -2 + 32);
     assert_eq!(super::engine::order_budget(0, 80, 60, 1.0, 1.0).0, i64::MAX);
+}
+
+/// canonical keys of the provided lower-loop values agree with s1/proto/prov.py (relabelling, index-0 lines, bridges, series)
+#[test]
+fn canonical_key_matches_python() {
+    let r = |x: i64| Rational::from(x);
+    let kite = vec![(1, 3, r(1)), (1, 4, r(1)), (3, 4, r(1)), (3, 2, r(1)), (4, 2, r(2))];
+    let want = r#"[[0, 2, "1"], [0, 3, "1"], [1, 2, "1"], [1, 3, "2"], [2, 3, "1"]]"#;
+    assert_eq!(graph::canonical(&kite, 1, 2), want);
+    // relabelled, with an index-0 line and a bridge on the external vertex
+    let other = vec![(7, 5, r(1)), (9, 7, r(2)), (5, 9, r(1)), (9, 8, r(1)), (5, 8, r(1)), (8, 6, r(0)), (6, 1, r(1))];
+    assert_eq!(graph::canonical(&other, 1, 7), want);
+    // a three-loop hard part of the four-loop NO1 family (prov-1990761.json, part 0)
+    let e: Vec<(usize, usize, Rational)> = [[4, 7, 1], [5, 8, 1], [6, 8, 1], [5, 2, 1], [6, 7, 1], [8, 4, 1], [7, 3, 1], [3, 5, 1], [1, 4, 2], [3, 1, 1]]
+        .iter().map(|x| (x[0] as usize, x[1] as usize, r(x[2]))).collect();
+    assert_eq!(graph::canonical(&e, 1, 2), r#"[[0, 2, "1"], [0, 3, "1"], [1, 2, "1"], [1, 4, "2"], [2, 5, "1"], [3, 4, "1"], [3, 5, "2"], [4, 5, "1"]]"#);
 }

@@ -1,6 +1,6 @@
 //! PFLOW route (B), one d0: massless propagator masters from a one-mass RustRed DE.
 //!   cargo run --release --example pflow -- --de solution-<d0>.json --graph family.json --e 0 --loops 3 --w 80 --wf 100 --m 120 \
-//!       [--moments 1,2] [--s0 1/4] [--S 4] [--r 1/4] [--threads 1] [--two-precision 15] --out out.json
+//!       [--moments 1,2] [--s0 1/4] [--S 4] [--r 1/4] [--threads 1] [--two-precision 15] [--provided LOWER.json] --out out.json
 //! family.json = one family of RustRed's p catalogue schema (lines[].endpoints, external.in/out, loops) or {"catalogue": PATH,
 //! "name": NAME}. Output: for every e-block master and moment m, FP int rho s^-m ds in the Euclidean E-normalisation (m = 1:
 //! the massless value), with two-precision digits when requested.
@@ -41,6 +41,11 @@ fn main() {
         cfg.threads = num("--threads", "1").parse().unwrap();
         cfg.moments = num("--moments", "1").split(',').map(|x| x.parse().unwrap()).collect();
         cfg.nlo = num("--nlo", "-10").parse().unwrap();
+        if let Some(f) = arg(&a, "--provided") {
+            // lower-loop massless values (E-normalisation, P^2 = 1) for graphs the evaluator cannot reduce
+            let v: Value = serde_json::from_str(&std::fs::read_to_string(&f).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?;
+            cfg.provided = symbolica_amflow::pflow::graph::Provided::from_json(&v, symbolica_amflow::dispersive::run::bits(cfg.wf))?;
+        }
         let res = run_b(&sys, &g, e, &cfg)?;
         let tp: i64 = num("--two-precision", "0").parse().unwrap();
         let res2 = if tp > 0 {

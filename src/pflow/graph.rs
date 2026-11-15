@@ -11,8 +11,137 @@
 //! Only the LOWEST order of each class is a clean boundary row (higher orders mix in subleading terms of other regions);
 //! `exact_series` gives all orders for the simple masters (pure power; one-loop massive bubble after massless reductions).
 //! The massless two-point evaluator uses series / parallel (G functions) / p-carrying bridges and the IBP triangle rule
-//! (integer indices); a graph it cannot reduce is reported (`None`), never guessed.
+//! (integer indices); a graph it cannot reduce is looked up in the `Provided` table (values from a lower-loop run of the same
+//! mode, keyed by `canonical`), otherwise reported (`None`), never guessed.
 use rug::{Float, Rational};
+use std::collections::HashMap;
+
+/// massless two-point values supplied from outside (E-normalisation, P^2 = 1), keyed by `canonical`
+#[derive(Debug, Default)]
+pub struct Provided {
+    pub values: HashMap<String, Float>,
+    /// canonical keys of irreducible graphs that were not in the table (diagnostic)
+    pub missing: std::sync::Mutex<Vec<String>>,
+}
+
+impl Clone for Provided {
+    fn clone(&self) -> Provided {
+        Provided { values: self.values.clone(), missing: std::sync::Mutex::new(self.missing.lock().unwrap().clone()) }
+    }
+}
+
+impl Provided {
+    /// JSON list of {"edges": [[u, v, a], ...], "ext": [s, t], "value": "..."} (a integer or "p/q")
+    pub fn from_json(v: &serde_json::Value, prec: u32) -> Result<Provided, String> {
+        let mut values = HashMap::new();
+        for x in v.as_array().ok_or("provided: a list")? {
+            let edges: Vec<(usize, usize, Rational)> = x["edges"].as_array().ok_or("provided: edges")?.iter().map(|e| {
+                let a = match &e[2] { serde_json::Value::String(s) => s.parse::<Rational>().map_err(|e| e.to_string()), n => Ok(Rational::from(n.as_i64().unwrap_or(0))) };
+                Ok((e[0].as_u64().ok_or("u")? as usize, e[1].as_u64().ok_or("v")? as usize, a?))
+            }).collect::<Result<_, String>>()?;
+            let ext = (x["ext"][0].as_u64().ok_or("ext")? as usize, x["ext"][1].as_u64().ok_or("ext")? as usize);
+            let val = Float::with_val(prec, Float::parse(x["value"].as_str().ok_or("provided: value string")?).map_err(|e| e.to_string())?);
+            values.insert(canonical(&edges, ext.0, ext.1), val);
+        }
+        Ok(Provided { values, missing: Default::default() })
+    }
+}
+
+fn connected_plain(edges: &[(usize, usize, Rational)], a: usize, b: usize, skip: usize) -> bool {
+    let mut seen = vec![a];
+    let mut st = vec![a];
+    while let Some(x) = st.pop() {
+        for (i, e) in edges.iter().enumerate() {
+            if i == skip {
+                continue;
+            }
+            let y = if e.0 == x { e.1 } else if e.1 == x { e.0 } else { continue };
+            if !seen.contains(&y) {
+                seen.push(y);
+                st.push(y);
+            }
+        }
+    }
+    seen.contains(&b)
+}
+
+/// canonical key of a massless two-point graph (same as s1/proto/prov.py): contract index-0 lines; repeat {contract a bridge
+/// (it carries the full external momentum: factor 1 at P^2 = 1); merge two lines in series at an internal degree-2 vertex}; then
+/// the lexicographic minimum over relabellings (externals -> 0, 1 in both orders, internal vertices -> 2..) of the sorted list
+/// (min(u,v), max(u,v), index), printed as JSON
+pub fn canonical(edges: &[(usize, usize, Rational)], s: usize, t: usize) -> String {
+    let (mut s, mut t) = (s, t);
+    let mut e: Vec<(usize, usize, Rational)> = edges.to_vec();
+    let relabel = |e: &mut Vec<(usize, usize, Rational)>, from: usize, to: usize| {
+        for x in e.iter_mut() {
+            if x.0 == from { x.0 = to; }
+            if x.1 == from { x.1 = to; }
+        }
+    };
+    while let Some(i) = e.iter().position(|x| x.2 == 0) {
+        let (u, v, _) = e.remove(i);
+        if u != v {
+            relabel(&mut e, v, u);
+            if s == v { s = u; }
+            if t == v { t = u; }
+        }
+    }
+    loop {
+        if let Some(i) = (0..e.len()).find(|&i| !connected_plain(&e, e[i].0, e[i].1, i)) {
+            let (u, v, _) = e.remove(i);
+            relabel(&mut e, v, u);
+            if s == v { s = u; }
+            if t == v { t = u; }
+            continue;
+        }
+        let mut deg: Vec<(usize, usize)> = Vec::new();
+        for x in &e {
+            for y in [x.0, x.1] {
+                match deg.iter_mut().find(|d| d.0 == y) { Some(d) => d.1 += 1, None => deg.push((y, 1)) }
+            }
+        }
+        // python iterates a Counter in insertion order; the merge order does not change the result
+        let Some(&(v, _)) = deg.iter().find(|d| d.1 == 2 && d.0 != s && d.0 != t && !e.iter().any(|x| x.0 == d.0 && x.1 == d.0)) else { break };
+        let idx: Vec<usize> = (0..e.len()).filter(|&i| e[i].0 == v || e[i].1 == v).collect();
+        let (e1, e2) = (e[idx[0]].clone(), e[idx[1]].clone());
+        let u = if e1.1 == v { e1.0 } else { e1.1 };
+        let w = if e2.1 == v { e2.0 } else { e2.1 };
+        e.remove(idx[1]);
+        e.remove(idx[0]);
+        e.push((u, w, Rational::from(&e1.2 + &e2.2)));
+    }
+    let mut verts: Vec<usize> = e.iter().flat_map(|x| [x.0, x.1]).filter(|&x| x != s && x != t).collect();
+    verts.sort();
+    verts.dedup();
+    let n = verts.len();
+    let mut best: Option<Vec<(usize, usize, String)>> = None;
+    let mut perm: Vec<usize> = (0..n).collect();
+    let mut go = |perm: &[usize], best: &mut Option<Vec<(usize, usize, String)>>| {
+        for (a, b) in [(s, t), (t, s)] {
+            let map = |x: usize| if x == a { 0 } else if x == b { 1 } else { 2 + perm[verts.iter().position(|&y| y == x).unwrap()] };
+            let mut key: Vec<(usize, usize, String)> = e.iter().map(|x| { let (p, q) = (map(x.0), map(x.1)); (p.min(q), p.max(q), x.2.to_string()) }).collect();
+            key.sort();
+            if best.as_ref().map_or(true, |b| key < *b) { *best = Some(key); }
+        }
+    };
+    // Heap's algorithm over all relabellings of the internal vertices
+    let mut c = vec![0usize; n];
+    go(&perm, &mut best);
+    let mut i = 0;
+    while i < n {
+        if c[i] < i {
+            if i % 2 == 0 { perm.swap(0, i) } else { perm.swap(c[i], i) }
+            go(&perm, &mut best);
+            c[i] += 1;
+            i = 0;
+        } else {
+            c[i] = 0;
+            i += 1;
+        }
+    }
+    let best = best.unwrap_or_default();
+    format!("[{}]", best.iter().map(|(u, v, a)| format!("[{u}, {v}, \"{a}\"]")).collect::<Vec<_>>().join(", "))
+}
 
 pub type Edge = (usize, usize);
 
@@ -110,7 +239,7 @@ fn connected(edges: &[E2], a: usize, b: usize, skip: Option<usize>) -> bool {
 }
 
 /// massless two-point function between s and t: value = C (P^2)^-alpha. None = not reducible by the implemented rules.
-fn eval2pt(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u32, depth: usize) -> Option<Ev> {
+fn eval2pt(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u32, depth: usize, pv: &Provided) -> Option<Ev> {
     if depth > 400 {
         return None;
     }
@@ -136,6 +265,24 @@ fn eval2pt(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u
     }
     if s == t {
         return Some(if edges.is_empty() { Ev::Val(Float::with_val(prec, 1), q(0)) } else { Ev::Zero });
+    }
+    if !pv.values.is_empty() && edges.iter().all(|e| e.a.denom() == &1) {
+        let ce: Vec<(usize, usize, Rational)> = edges.iter().map(|e| (e.u, e.v, e.a.clone())).collect();
+        if let Some(v) = pv.values.get(&canonical(&ce, s, t)) {
+            // C (P^2)^-alpha with alpha = sum a - L h
+            let mut vs: Vec<usize> = edges.iter().flat_map(|e| [e.u, e.v]).collect();
+            vs.push(s);
+            vs.push(t);
+            vs.sort();
+            vs.dedup();
+            let l = edges.len() as i64 - vs.len() as i64 + 1;
+            let mut alpha = q(0);
+            for e in &edges {
+                alpha += &e.a;
+            }
+            alpha -= Rational::from(h * l);
+            return Some(Ev::Val(Float::with_val(prec, v), alpha));
+        }
     }
     let mut c = Float::with_val(prec, 1);
     let mut alpha = q(0);
@@ -221,7 +368,16 @@ fn eval2pt(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u
         alpha += &edges[0].a;
         return Some(Ev::Val(c, alpha));
     }
-    match triangle(&edges, s, t, h, prec, depth)? {
+    let tr = triangle(&edges, s, t, h, prec, depth, pv);
+    if tr.is_none() && depth == 0 {
+        let ce: Vec<(usize, usize, Rational)> = edges.iter().map(|e| (e.u, e.v, e.a.clone())).collect();
+        let k = canonical(&ce, s, t);
+        let mut m = pv.missing.lock().unwrap();
+        if !m.contains(&k) {
+            m.push(k);
+        }
+    }
+    match tr? {
         Ev::Zero => Some(Ev::Zero),
         Ev::Val(c2, a2) => {
             c *= c2;
@@ -236,7 +392,7 @@ fn is_pos_int(a: &Rational) -> bool {
 }
 
 /// IBP triangle rule: (d - 2 a1 - a2 - a3) I = a2 [I(2+,1-) - I(2+,fY-)] + a3 [I(3+,1-) - I(3+,fX-)]
-fn triangle(edges: &[E2], s: usize, t: usize, h: &Rational, prec: u32, depth: usize) -> Option<Ev> {
+fn triangle(edges: &[E2], s: usize, t: usize, h: &Rational, prec: u32, depth: usize, pv: &Provided) -> Option<Ev> {
     let inc = |x: usize| -> Vec<usize> { (0..edges.len()).filter(|&i| edges[i].u == x || edges[i].v == x).collect() };
     for i1 in 0..edges.len() {
         if !is_pos_int(&edges[i1].a) {
@@ -285,7 +441,7 @@ fn triangle(edges: &[E2], s: usize, t: usize, h: &Rational, prec: u32, depth: us
                     let mut tot = Float::new(prec);
                     let mut al = None;
                     for (cf, g) in terms {
-                        match eval2pt(g, s, t, h, prec, depth + 1)? {
+                        match eval2pt(g, s, t, h, prec, depth + 1, pv)? {
                             Ev::Zero => {}
                             Ev::Val(cg, ag) => {
                                 tot += Float::with_val(prec, &cg * &cf);
@@ -347,7 +503,7 @@ fn bridgeless(edges: &[Edge]) -> bool {
 }
 
 /// massless value of the family integral at indices a (no numerators), None if not reducible here
-pub fn massless(g: &Graph, a: &[i64], h: &Rational, prec: u32) -> Option<Float> {
+pub fn massless(g: &Graph, a: &[i64], h: &Rational, prec: u32, pv: &Provided) -> Option<Float> {
     let nl = g.edges.len();
     if a[..nl].iter().any(|&x| x < 0) || a[nl..].iter().any(|&x| x != 0) {
         return None;
@@ -375,7 +531,7 @@ pub fn massless(g: &Graph, a: &[i64], h: &Rational, prec: u32) -> Option<Float> 
     if (edges.len() as i64) - (vs.len() as i64) + 1 < g.loops as i64 {
         return Some(Float::new(prec)); // an empty loop: scaleless
     }
-    match eval2pt(edges, s, t, h, prec, 0)? {
+    match eval2pt(edges, s, t, h, prec, 0, pv)? {
         Ev::Zero => Some(Float::new(prec)),
         Ev::Val(c, _) => Some(c),
     }
@@ -383,7 +539,7 @@ pub fn massless(g: &Graph, a: &[i64], h: &Rational, prec: u32) -> Option<Float> 
 
 /// leading coefficient of every region class: side 0 -> {class k: [(n, value)]} with exponent z^(k h + n) (n = -sum_S a);
 /// side infinity -> x = 1/z exponent x^(n - k h) (n = sum_gamma a). None if a needed evaluation is not reducible.
-pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero: bool) -> Result<Option<Vec<(i64, i64, Float)>>, String> {
+pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero: bool, pv: &Provided) -> Result<Option<Vec<(i64, i64, Float)>>, String> {
     let (edges, (ea, eb), aa, ee) = contract_zero(g, a, e)?;
     let nl = edges.len();
     let mut nv = edges.iter().map(|&(u, v)| u.max(v)).max().unwrap_or(0).max(ea).max(eb) + 1;
@@ -428,7 +584,7 @@ pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero:
             sv.sort();
             sv.dedup();
             let ls = sedges.len() as i64 - sv.len() as i64 + 1;
-            let ch = match eval2pt(hedges, ea, eb, h, prec, 0) {
+            let ch = match eval2pt(hedges, ea, eb, h, prec, 0, pv) {
                 None => return Ok(None),
                 Some(Ev::Zero) => continue,
                 Some(Ev::Val(c, _)) => c,
@@ -441,7 +597,7 @@ pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero:
                 }
                 (Float::with_val(prec, 1), q(0))
             } else {
-                match eval2pt(x, u, v, h, prec, 0) {
+                match eval2pt(x, u, v, h, prec, 0, pv) {
                     None => return Ok(None),
                     Some(Ev::Zero) => continue,
                     Some(Ev::Val(c, a)) => (c, a),
@@ -471,7 +627,7 @@ pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero:
             let co: Vec<E2> = (0..nl).filter(|&i| !inset(i)).map(|i| E2 { u: find(&mut par, edges[i].0), v: find(&mut par, edges[i].1), a: q(aa[i]) }).collect();
             let (u, v) = edges[ee];
             let x: Vec<E2> = sset[1..].iter().map(|&i| E2 { u: edges[i].0, v: edges[i].1, a: q(aa[i]) }).collect();
-            let (cx, alx) = match eval2pt(x, u, v, h, prec, 0) {
+            let (cx, alx) = match eval2pt(x, u, v, h, prec, 0, pv) {
                 None => return Ok(None),
                 Some(Ev::Zero) => continue,
                 Some(Ev::Val(c, a)) => (c, a),
@@ -483,7 +639,7 @@ pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero:
                 }
                 Float::with_val(prec, 1)
             } else {
-                match eval2pt(co, fa, fb, h, prec, 0) {
+                match eval2pt(co, fa, fb, h, prec, 0, pv) {
                     None => return Ok(None),
                     Some(Ev::Zero) => continue,
                     Some(Ev::Val(c, _)) => c,
@@ -539,7 +695,7 @@ fn simple_form(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32) -> Optio
         let em = edges.iter().find(|x| x.3).unwrap().clone();
         if em.0 == em.1 {
             let rest: Vec<E2> = edges.iter().filter(|x| !x.3).map(|x| E2 { u: x.0, v: x.1, a: x.2.clone() }).collect();
-            return match eval2pt(rest, ea, eb, h, prec, 0)? {
+            return match eval2pt(rest, ea, eb, h, prec, 0, &Provided::default())? {
                 Ev::Zero => Some(Simple::Power(Float::new(prec), q(0))),
                 Ev::Val(cr, _) => {
                     let t = tad(&em.2, h, prec)?;

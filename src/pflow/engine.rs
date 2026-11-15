@@ -48,6 +48,8 @@ pub struct PConfig {
     /// radius of convergence of the masters' expansions at 0 and (in 1/z) at infinity: distance to the nearest PHYSICAL singular
     /// point (1 for one mass, p^2 = 1: the threshold z = -1); closer DE singular points are spurious (row precision budget)
     pub radius: f64,
+    /// lower-loop massless values the graph evaluator cannot reduce (from a lower-loop run of this mode)
+    pub provided: graph::Provided,
 }
 
 impl PConfig {
@@ -68,6 +70,7 @@ impl PConfig {
             moments: vec![1],
             exact_rows: 40,
             radius: 1.0,
+            provided: graph::Provided::default(),
         }
     }
 }
@@ -145,7 +148,7 @@ fn rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bool, k:
             }
             continue;
         }
-        match graph::regions(g, e, a, h, prec, at_zero) {
+        match graph::regions(g, e, a, h, prec, at_zero, &cfg.provided) {
             Err(_) | Ok(None) => skipped += 1,
             Ok(Some(rs)) => {
                 let mine: Vec<&(i64, i64, Float)> = rs.iter().filter(|x| x.0 == k).collect();
@@ -779,6 +782,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     }
     diag["threshold_continuity_log10"] = json!(cont);
     diag["seconds"] = json!(t0.elapsed().as_secs_f64());
+    diag["provided_values"] = json!(cfg.provided.values.len());
+    diag["irreducible_not_provided"] = json!(*cfg.provided.missing.lock().unwrap());
     Ok(PResult { moments, diag })
 }
 
