@@ -219,3 +219,53 @@ fn simple_form_through_a_cut_vertex() {
         }
     }
 }
+
+/// per-cut DE blocks: the two-loop kite DE split into two blocks gives the same run; a block with a different rule is refused
+#[test]
+fn de_blocks_merge_and_conflicts() {
+    let dir = format!("{}/fixtures/pflow", env!("CARGO_MANIFEST_DIR"));
+    let de = format!("{dir}/P2L_m0-solution-199_50.json");
+    let v: serde_json::Value = serde_json::from_str(&std::fs::read_to_string(&de).unwrap()).unwrap();
+    let rules = v["rules"].as_array().unwrap().clone();
+    let tmp = std::env::temp_dir().join(format!("pflow-blocks-{}", std::process::id()));
+    std::fs::create_dir_all(&tmp).unwrap();
+    let mut a = v.clone();
+    let mut b = v.clone();
+    a["rules"] = serde_json::Value::Array(rules.iter().step_by(2).cloned().collect());
+    b["rules"] = serde_json::Value::Array(rules.iter().skip(1).step_by(2).cloned().collect());
+    let (pa, pb) = (tmp.join("a.json"), tmp.join("b.json"));
+    std::fs::write(&pa, a.to_string()).unwrap();
+    std::fs::write(&pb, b.to_string()).unwrap();
+    let s = |x: &str| x.to_string();
+    let whole = super::cli::run(&[s("--de"), de.clone(), s("--graph"), format!("{dir}/graph-P2L.json"), s("--e"), s("0"), s("--w"), s("30"), s("--wf"), s("45"), s("--m"), s("60")]).unwrap();
+    let split = super::cli::run(&[s("--de"), format!("{},{}", pa.display(), pb.display()), s("--graph"), format!("{dir}/graph-P2L.json"), s("--e"), s("0"), s("--w"), s("30"), s("--wf"), s("45"), s("--m"), s("60")]).unwrap();
+    assert_eq!(whole["values"], split["values"]);
+    // a conflicting rule for the same target
+    let mut c = v.clone();
+    let mut r0 = rules[0].clone();
+    r0["terms"][0]["coefficient"] = serde_json::Value::String("(1)/(1+z)".into());
+    c["rules"] = serde_json::Value::Array(vec![r0]);
+    let pc = tmp.join("c.json");
+    std::fs::write(&pc, c.to_string()).unwrap();
+    assert!(super::cli::load_blocks(&format!("{},{}", de, pc.display())).unwrap_err().contains("differs"));
+    let _ = std::fs::remove_dir_all(&tmp);
+}
+
+/// checkpoints: a second run in the same work directory resumes every transport and reproduces the values exactly
+#[test]
+fn workdir_resume_reproduces() {
+    let sys = one_loop_system(Rational::from((1, 100)));
+    let g = graph_of("P1L");
+    let tmp = std::env::temp_dir().join(format!("pflow-wd-{}", std::process::id()));
+    let mut cfg = PConfig::new(30, 40, 50, 1);
+    cfg.moments = vec![1, 2];
+    cfg.workdir = Some(tmp.to_string_lossy().into_owned());
+    std::fs::create_dir_all(&tmp).unwrap();
+    let r1 = run_b(&sys, &g, 0, &cfg).unwrap();
+    assert!(std::fs::read_dir(&tmp).unwrap().any(|f| f.unwrap().file_name().to_string_lossy().starts_with("tr-")));
+    let r2 = run_b(&sys, &g, 0, &cfg).unwrap();
+    for (a, b) in r1.moments.iter().zip(&r2.moments) {
+        assert_eq!(a.1, b.1);
+    }
+    let _ = std::fs::remove_dir_all(&tmp);
+}

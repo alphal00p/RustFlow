@@ -4,7 +4,9 @@
 //! Options (flag, or the same key without dashes in the class config; flags win):
 //!   --de solution-<d0>.json  --graph family.json (or config "graph": path relative to the config, or an inline family)
 //!   --e SLOT  --w W --wf WF --m M  [--loops L] [--moments 1,2] [--s0 1/4] [--S 4] [--r 1/4] [--threads 1] [--nlo -10]
-//!   [--two-precision dW] [--provided LOWER.json] [--extra "a1,..;b1,.."] [--efree EFREE.json] [--out OUT.json]
+//!   [--two-precision dW] [--provided LOWER.json] [--extra "a1,..;b1,.."] [--efree EFREE.json] [--workdir DIR] [--out OUT.json]
+//! --de may list several per-cut DE BLOCKS on one common basis (comma list, or a manifest {"blocks": [...]}): see `load_blocks`.
+//! --workdir: checkpoints (Frobenius families, every transport after every patch); rerunning the same command resumes.
 //! family.json = one family of RustRed's p catalogue schema (lines[].endpoints, external.in/out, loops) or {"catalogue": PATH,
 //! "name": NAME}. Output: for every e-block master and moment m, FP int rho s^-m ds in the Euclidean E-normalisation (m = 1:
 //! the massless value), with two-precision digits when requested.
@@ -63,6 +65,68 @@ pub fn is_propagator_config(class_config: &str) -> bool {
     read_json(class_config).map(|v| v["kind"] == "propagator").unwrap_or(false)
 }
 
+/// the DE of one d0: one RustRed harness solution, or several BLOCKS (per-cut reductions on one common master basis) given as a
+/// comma list or as a manifest JSON {"blocks": [paths relative to it]}. Blocks are united: masters and rules; the same target in two
+/// blocks must have the identical rule (else an error names it); all blocks must share d0 and the free variable.
+pub fn load_blocks(spec: &str) -> Result<(RuleSet, String), String> {
+    let paths: Vec<String> = if spec.ends_with(".json") && !spec.contains(',') {
+        let v = read_json(spec)?;
+        match v.get("blocks").and_then(|b| b.as_array()) {
+            Some(b) => {
+                let dir = Path::new(spec).parent().map(|d| d.to_path_buf()).unwrap_or_default();
+                b.iter().map(|x| { let p = x.as_str().unwrap_or(""); if Path::new(p).is_absolute() { p.to_string() } else { dir.join(p).to_string_lossy().into_owned() } }).collect()
+            }
+            None => vec![spec.to_string()],
+        }
+    } else {
+        spec.split(',').map(|x| x.to_string()).collect()
+    };
+    let mut out: Option<(RuleSet, String)> = None;
+    for p in &paths {
+        let de = read_json(p)?;
+        let var = de["provenance"]["free"].as_str().unwrap_or("z").to_string();
+        let rs = RuleSet::from_json(&de)?;
+        match &mut out {
+            None => out = Some((rs, var)),
+            Some((acc, v0)) => {
+                if acc.d0 != rs.d0 || *v0 != var {
+                    return Err(format!("{p}: d0 {} / variable {var} differ from the first block ({} / {v0})", rs.d0, acc.d0));
+                }
+                for m in rs.masters {
+                    if !acc.masters.contains(&m) {
+                        acc.masters.push(m);
+                    }
+                }
+                for (t, r) in rs.rules {
+                    match acc.rules.get(&t) {
+                        Some(r0) if *r0 != r => {
+                            // same rule up to term order?
+                            let mut a = r0.clone();
+                            let mut b = r.clone();
+                            a.sort();
+                            b.sort();
+                            if a != b {
+                                return Err(format!("{p}: the rule for {t:?} differs from an earlier block (not one common basis?)"));
+                            }
+                        }
+                        Some(_) => {}
+                        None => {
+                            acc.rules.insert(t, r);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    let (rs, var) = out.ok_or("no DE block")?;
+    // one common basis: no master of one block may be reduced by a rule of another
+    if let Some(m) = rs.masters.iter().find(|m| rs.rules.contains_key(*m)) {
+        return Err(format!("master {m:?} of one block is reduced by a rule of another block: the blocks are not on one common basis"));
+    }
+    eprintln!("[pflow] DE from {} block(s): {} masters, {} rules", paths.len(), rs.masters.len(), rs.rules.len());
+    Ok((rs, var))
+}
+
 /// run one d0 of the propagator configuration; `argv` without the program name
 pub fn run(argv: &[String]) -> Result<Value, String> {
     let (cfgv, dir) = match argv.iter().position(|x| x == "--class-config") {
@@ -75,9 +139,7 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     let o = Opts { argv, cfg: cfgv, dir };
     let arg = |k: &str| o.get(k);
 
-        let de: Value = read_json(&o.path("--de").ok_or("--de")?)?;
-        let var = de["provenance"]["free"].as_str().unwrap_or("z").to_string();
-        let rs = RuleSet::from_json(&de)?;
+        let (rs, var) = load_blocks(&o.path("--de").ok_or("--de")?)?;
         let e: usize = arg("--e").ok_or("--e")?.parse().map_err(|_| "--e")?;
         let sys = EBlockSystem::from_rules_with(&rs, e, &|c: &str| parse_coefficient(c, &var))?;
         let g = match o.cfg.get("graph") { Some(v) if v.is_object() && !argv.iter().any(|x| x == "--graph") => graph_from(v)?, _ => graph_from(&read_json(&o.path("--graph").ok_or("--graph")?)?)? };
@@ -89,6 +151,10 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
         cfg.threads = num("--threads", "1").parse().unwrap();
         cfg.moments = num("--moments", "1").split(',').map(|x| x.parse().unwrap()).collect();
         cfg.nlo = num("--nlo", "-10").parse().unwrap();
+        if let Some(w) = o.path("--workdir") {
+            std::fs::create_dir_all(&w).map_err(|e| format!("{w}: {e}"))?;
+            cfg.workdir = Some(w);
+        }
         if let Some(f) = o.path("--provided") {
             // lower-loop massless values (E-normalisation, P^2 = 1) for graphs the evaluator cannot reduce
             let v = read_json(&f)?;

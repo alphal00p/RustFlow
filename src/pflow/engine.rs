@@ -50,6 +50,10 @@ pub struct PConfig {
     pub radius: f64,
     /// lower-loop massless values the graph evaluator cannot reduce (from a lower-loop run of this mode)
     pub provided: graph::Provided,
+    /// work directory for checkpoints (Frobenius families every `frobenius_every_seconds`, every transport after every patch,
+    /// finished moments as stage files); a rerun of the same command resumes. None: no checkpoints.
+    pub workdir: Option<String>,
+    pub frobenius_every_seconds: f64,
 }
 
 impl PConfig {
@@ -71,6 +75,8 @@ impl PConfig {
             exact_rows: 40,
             radius: 1.0,
             provided: graph::Provided::default(),
+            workdir: None,
+            frobenius_every_seconds: 900.0,
         }
     }
 }
@@ -113,7 +119,13 @@ fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PCo
     let prec = run::bits(cfg.wf);
     let bf = local::lmat::<Float>(sys, &off, pt, mm + 8, prec);
     let mode = PivotMode::parse(frobenius::DEFAULT_PIVOTING)?;
-    let (num, diag) = run::family_num(sys, &bf, &spec, mode, 8, prec, cfg.threads)?;
+    let ck = cfg.workdir.as_ref().map(|w| crate::dispersive::ckpt::FrobCheckpoint {
+        path: std::path::PathBuf::from(format!("{w}/frob-{}.bin", name.replace(' ', "_").replace('=', ""))),
+        fingerprint: format!("{} {name} prec {prec} pivoting {}", run_fingerprint(sys, cfg), mode.label()),
+        every_seconds: cfg.frobenius_every_seconds,
+        stop_at_m: None,
+    });
+    let (num, diag) = run::family_num_ck(sys, &bf, &spec, mode, 8, prec, cfg.threads, ck.as_ref())?;
     Ok(Some((num, diag)))
 }
 
@@ -600,6 +612,49 @@ pub fn split_points(cfg: &PConfig, pts: &[(f64, f64)]) -> Splits {
     Splits { d0, dthr, rmax, s0: cap(&cfg.s0, 0.4 * d0), r: cap(&cfg.r, 0.4 * dthr), s_end }
 }
 
+/// identity of a run for its checkpoints: the e-block system, the precisions and the split configuration
+pub fn run_fingerprint(sys: &EBlockSystem, cfg: &PConfig) -> String {
+    let mut h = blake3::Hasher::new();
+    h.update(format!("pflow-route-b d0 {} dim {} w {} wf {} m {} {} {} nlo {} loops {} s0 {} S {} r {} ratio {} radius {} provided {}",
+        sys.d0, sys.dim(), cfg.w, cfg.wf, cfg.m0, cfg.minf, cfg.mthr, cfg.nlo, cfg.loops, cfg.s0, cfg.s_end, cfg.r, cfg.ratio, cfg.radius,
+        cfg.provided.values.len()).as_bytes());
+    for m in &sys.masters {
+        h.update(format!("{m:?};").as_bytes());
+    }
+    h.update(format!("{:?}", sys.terms.len()).as_bytes());
+    let mut keys: Vec<(&String, String)> = cfg.provided.values.iter().map(|(k, v)| (k, v.to_string_radix(16, Some(40)))).collect();
+    keys.sort();
+    for (k, v) in keys {
+        h.update(k.as_bytes());
+        h.update(v.as_bytes());
+    }
+    h.finalize().to_hex()[..24].to_string()
+}
+
+/// one patch-kernel transport; with a work directory it checkpoints after every patch and resumes from `<workdir>/<tag>.json`
+fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &str) -> Result<crate::patch_kernel::transport::TransportState, String> {
+    match &cfg.workdir {
+        None => {
+            let mut st = tr.initial_state(y0).map_err(|x| x.to_string())?;
+            tr.run(&mut st, usize::MAX, y0, &Default::default(), None, |_| {}).map_err(|x| x.to_string())?;
+            Ok(st)
+        }
+        Some(w) => {
+            let file = std::path::PathBuf::from(format!("{w}/tr-{tag}.json"));
+            let mut st = if file.exists() {
+                let st = tr.resume(&file, y0, false).map_err(|e| format!("{}: {e} (use a fresh workdir)", file.display()))?;
+                eprintln!("[pflow] transport {tag}: resumed at patch {}", st.next_patch);
+                st
+            } else {
+                tr.initial_state(y0).map_err(|x| x.to_string())?
+            };
+            let policy = crate::patch_kernel::checkpoint::CheckpointPolicy { every_patches: 1, every_seconds: 300.0, fresh: false, ..crate::patch_kernel::checkpoint::CheckpointPolicy::new(&file) };
+            tr.run(&mut st, usize::MAX, y0, &Default::default(), Some(&policy), |_| {}).map_err(|x| x.to_string())?;
+            Ok(st)
+        }
+    }
+}
+
 /// route (B) at one d0
 pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Result<PResult, String> {
     let t0 = Instant::now();
@@ -665,7 +720,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let ndiri: usize = famsi.iter().map(|f| f.null.len()).sum();
     if ndir0 + ndiri > 0 {
         let t = Instant::now();
-        let transport_end = |y: &[Float], patches: &[PatchSpec]| -> Result<Vec<Float>, String> {
+        let transport_end = |y: &[Float], patches: &[PatchSpec], tag: String| -> Result<Vec<Float>, String> {
             let mut tc = TransportConfig::dispersive(tprec);
             tc.cauchy_pole = None;
             tc.threads = cfg.threads;
@@ -673,8 +728,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let path = PlannedPath { offset: Rational::new(), patches: patches.to_vec() };
             let tr = Transport::new(&ksys, &path, tc).map_err(|x| x.to_string())?;
             let yc: Vec<Complex> = y.iter().map(|v| Complex::with_val(tprec, v)).collect();
-            let mut st = tr.initial_state(&yc).map_err(|x| x.to_string())?;
-            tr.run(&mut st, usize::MAX, &yc, &Default::default(), None, |_| {}).map_err(|x| x.to_string())?;
+            let st = transport_ck(&tr, &yc, cfg, &format!("cont-{tag}"))?;
             Ok(st.y.iter().map(|c| Float::with_val(prec, c.real())).collect())
         };
         let proj = |y: &[Float], inf_side: bool| -> Vec<Float> { threshold_piece(&tfams, y, &cfg.r, inf_side, 1, 1, prec).2 };
@@ -686,8 +740,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         // noise floor of a projection: the transports carry w digits, so |noise| ~ 10^-(w-8) |transported vector|
         let ymax = |y: &[Float]| y.iter().map(log10abs).fold(-1e9f64, f64::max);
         let floor = |y: &[Float]| ymax(y) - (cfg.w as f64 - 8.0);
-        let y0e = transport_end(&rho_at(&fams0, e, &s0f, prec), &p0)?;
-        let yie = transport_end(&rho_at(&famsi, e, &sef, prec), &pi_)?;
+        let y0e = transport_end(&rho_at(&fams0, e, &s0f, prec), &p0, "base0".into())?;
+        let yie = transport_end(&rho_at(&famsi, e, &sef, prec), &pi_, "basei".into())?;
         let b0 = proj(&y0e, false);
         let bi = proj(&yie, true);
         let base_floor = floor(&y0e).max(floor(&yie));
@@ -697,7 +751,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         for (side, fams, s, patches) in [(0usize, &fams0, &s0f, &p0), (1, &famsi, &sef, &pi_)] {
             for (fi, f) in fams.iter().enumerate() {
                 for (di, c) in f.null.iter().enumerate() {
-                    let y = transport_end(&single(fams, fi, c, s), patches)?;
+                    let y = transport_end(&single(fams, fi, c, s), patches, format!("dir{side}-{fi}-{di}"))?;
                     let pr = proj(&y, side == 1);
                     // a direction whose continuity column is at the noise floor is not constrained by continuity: leave it at 0
                     // (minimum-norm), never divide by noise
@@ -765,8 +819,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let path = PlannedPath { offset: Rational::new(), patches: patches.clone() };
             let tr = Transport::new(&ksys, &path, tc).map_err(|x| x.to_string())?;
             let yc: Vec<Complex> = y.iter().map(|v| Complex::with_val(tprec, v)).collect();
-            let mut st = tr.initial_state(&yc).map_err(|x| x.to_string())?;
-            tr.run(&mut st, usize::MAX, &yc, &Default::default(), None, |_| {}).map_err(|x| x.to_string())?;
+            let st = transport_ck(&tr, &yc, cfg, &format!("m{m}-h{half}"))?;
             let yend: Vec<Float> = st.y.iter().map(|c| Float::with_val(prec, c.real())).collect();
             let integ = st.integral.as_ref().unwrap();
             // kernel: int y (0 - z)^-m dz ; on z = -s: = -int rho s^-m ds (0-side, s0 -> 1-r) and = +int_{1+r}^{S} (inf-side)
