@@ -11,7 +11,7 @@
 use super::graph::{self, Graph};
 use super::local::{self, Pt};
 use crate::dispersive::boundary::BoundaryRow;
-use crate::dispersive::dispersion::{self, FamilyNum, log10abs};
+use crate::dispersive::dispersion::{FamilyNum, log10abs};
 use crate::dispersive::field::{ModP, Scalar};
 use crate::dispersive::frobenius::{self, PivotMode};
 use crate::dispersive::run;

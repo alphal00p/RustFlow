@@ -116,7 +116,7 @@ pub fn canonical(edges: &[(usize, usize, Rational)], s: usize, t: usize) -> Stri
     let n = verts.len();
     let mut best: Option<Vec<(usize, usize, String)>> = None;
     let mut perm: Vec<usize> = (0..n).collect();
-    let mut go = |perm: &[usize], best: &mut Option<Vec<(usize, usize, String)>>| {
+    let go = |perm: &[usize], best: &mut Option<Vec<(usize, usize, String)>>| {
         for (a, b) in [(s, t), (t, s)] {
             let map = |x: usize| if x == a { 0 } else if x == b { 1 } else { 2 + perm[verts.iter().position(|&y| y == x).unwrap()] };
             let mut key: Vec<(usize, usize, String)> = e.iter().map(|x| { let (p, q) = (map(x.0), map(x.1)); (p.min(q), p.max(q), x.2.to_string()) }).collect();
