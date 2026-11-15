@@ -111,3 +111,56 @@ fn no_family_80_digits() {
     let (sys, r, g) = run_fixture("P3L_NO_m0-solution-62811_15625.json", "P3L_NO", 100, 170);
     assert!(check_exact(&sys, &r, &g, 80.0) >= 14);
 }
+
+/// bug 1 (source fix): the singular-point finder works in eta = z - 1 and deflates eta = -1, i.e. z = 0 ... the threshold z = -1
+/// must survive (it was dropped when the denominators were handed over in z)
+#[test]
+fn singular_points_keep_the_threshold() {
+    let sys = one_loop_system(Rational::from((1, 100)));
+    let pts = super::engine::singular_points(&sys);
+    assert!(pts.iter().any(|p| (p.0 + 1.0).abs() < 1e-12 && p.1.abs() < 1e-12), "z = -1 missing: {pts:?}");
+    assert!(pts.iter().any(|p| p.0.abs() < 1e-12 && p.1.abs() < 1e-12), "z = 0 missing: {pts:?}");
+}
+
+/// bug 2 (source fix): rank-deficient least squares returns the minimum-pivot solution, its rank and the null directions, no NaN
+#[test]
+fn lstsq_rank_deficient_is_finite() {
+    let prec = 200;
+    let f = |x: f64| Float::with_val(prec, x);
+    let a = vec![vec![f(1.0), f(1.0), f(0.0)], vec![f(2.0), f(2.0), f(0.0)], vec![f(0.0), f(0.0), f(3.0)]];
+    let b = vec![f(1.0), f(2.0), f(6.0)];
+    let (x, rank, null) = super::engine::lstsq_rr_null(&a, &b, prec);
+    assert_eq!(rank, 2);
+    assert_eq!(null.len(), 1);
+    assert!(x.iter().all(|v| v.is_finite()), "{x:?}");
+    for (row, bi) in a.iter().zip(&b) {
+        let v = Float::with_val(prec, Float::dot(row.iter().zip(&x))) - bi;
+        assert!(v.abs() < 1e-50, "residual");
+    }
+    // the null direction is (1, -1, 0) up to scale
+    let n = &null[0];
+    assert!(Float::with_val(prec, &n[0] + &n[1]).abs() < 1e-50 && n[2].clone().abs() < 1e-50 && n[0].clone().abs() > 1e-10);
+}
+
+/// bug 3 (source fix): split points follow spurious singular points at O(eps) from 0 and -1 and at O(1/eps^2)
+#[test]
+fn split_points_follow_spurious_points() {
+    let cfg = PConfig::new(60, 80, 100, 4);
+    let pts = [(0.0, 0.0), (-1.0, 0.0), (-4e-5, 0.0), (-1.0 - 2e-5, 0.0), (-5.1e10, 0.0), (1.0, 0.0)];
+    let sp = super::engine::split_points(&cfg, &pts);
+    assert!(sp.s0.to_f64() <= 0.4 * 4e-5 * (1.0 + 1e-6) && sp.s0.to_f64() > 0.0);
+    assert!(sp.r.to_f64() <= 0.4 * 2e-5 * (1.0 + 1e-6) && sp.r.to_f64() > 0.0);
+    assert!(sp.s_end.to_f64() >= 2.5 * 5.1e10 * (1.0 - 1e-6));
+    // no spurious points: the configured splits stay
+    let sp = super::engine::split_points(&cfg, &[(0.0, 0.0), (-1.0, 0.0)]);
+    assert_eq!((sp.s0, sp.r, sp.s_end), (cfg.s0.clone(), cfg.r.clone(), cfg.s_end.clone()));
+}
+
+/// row precision budget: a spurious point at distance delta costs log10(radius/delta) digits per order
+#[test]
+fn order_budget_from_spurious_distance() {
+    let (nmax, loss) = super::engine::order_budget(-2, 220, 60, 1.0, 2.2e-5);
+    assert!((loss - 4.657).abs() < 1e-3);
+    assert_eq!(nmax, -2 + 32);
+    assert_eq!(super::engine::order_budget(0, 80, 60, 1.0, 1.0).0, i64::MAX);
+}

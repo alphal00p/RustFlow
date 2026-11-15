@@ -45,6 +45,9 @@ pub struct PConfig {
     pub moments: Vec<i32>,
     /// all-order rows of the simple masters up to this order
     pub exact_rows: usize,
+    /// radius of convergence of the masters' expansions at 0 and (in 1/z) at infinity: distance to the nearest PHYSICAL singular
+    /// point (1 for one mass, p^2 = 1: the threshold z = -1); closer DE singular points are spurious (row precision budget)
+    pub radius: f64,
 }
 
 impl PConfig {
@@ -64,6 +67,7 @@ impl PConfig {
             threads: 1,
             moments: vec![1],
             exact_rows: 40,
+            radius: 1.0,
         }
     }
 }
@@ -287,13 +291,27 @@ pub fn lstsq_rr_null(a: &[Vec<Float>], b: &[Float], prec: u32) -> (Vec<Float>, u
 }
 
 /// relative-weighted fit of the boundary rows on a family basis (as dispersion::soft_fit, rank revealing)
-fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32) -> (Vec<Float>, usize, usize, f64, Vec<Vec<Float>>) {
+/// Highest row order a boundary fit can use. A singular point of the DE at distance `delta` from the expansion point, closer than
+/// the solutions' own radius `radius` (a spurious point of the master basis: the masters are holomorphic there), makes the local
+/// basis columns grow like delta^-n while the physical rows grow like radius^-n: an order-n row needs n log10(radius/delta) digits
+/// of cancellation in the family rows. Rows beyond the budget wf - w - margin would make a consistent fit look inconsistent.
+pub fn order_budget(nmin: i64, wf: u32, w: u32, radius: f64, delta: f64) -> (i64, f64) {
+    let loss = (radius / delta).log10().max(0.0);
+    let budget = wf as f64 - w as f64 - 10.0;
+    if loss < 1e-9 {
+        return (i64::MAX, loss);
+    }
+    (nmin + (budget / loss).floor().max(1.0) as i64, loss)
+}
+
+/// `nmax`: rows of higher order are left out (precision budget, see `order_budget`)
+fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32, nmax: i64) -> (Vec<Float>, usize, usize, f64, Vec<Vec<Float>>) {
     let rho = Float::with_val(prec, &fam.spec.rho);
     let mut amat = Vec::new();
     let mut bvec = Vec::new();
     for br in bnd {
         let row = ((br.n - fam.spec.n_lo) as usize) * e + br.comp;
-        if br.n < fam.spec.n_lo || row >= fam.basis.len() {
+        if br.n < fam.spec.n_lo || br.n > nmax || row >= fam.basis.len() {
             continue;
         }
         let sc = Float::with_val(prec, (&rho).pow(br.n as i32));
@@ -549,6 +567,36 @@ pub fn singular_points(sys: &EBlockSystem) -> Vec<(f64, f64)> {
     crate::dispersive::singular::singular_points(&ints, 256).points
 }
 
+/// exact dyadic rational with 24 significant bits (never 0)
+fn rq(x: f64) -> Rational {
+    let ex = x.log2().floor() as i32 - 23;
+    let m = (x / 2f64.powi(ex)).floor() as i64;
+    if ex >= 0 { Rational::from(m) * Rational::from(rug::Integer::from(1) << ex as u32) } else { Rational::from((m, 1)) / Rational::from(rug::Integer::from(1) << (-ex) as u32) }
+}
+
+pub struct Splits {
+    /// distances of the nearest other singular point to 0 and to -1, largest |singular point|
+    pub d0: f64,
+    pub dthr: f64,
+    pub rmax: f64,
+    pub s0: Rational,
+    pub r: Rational,
+    pub s_end: Rational,
+}
+
+/// split points adapted to the singular points closest to 0, -1 and infinity (spurious points of the Laporta basis may sit at
+/// distance O(eps) from the physical ones): head [0, s0] with s0 <= 0.4 d0, threshold neighbourhoods r <= 0.4 dthr, tail from
+/// S >= 2.5 rmax; the families converge on the solutions' own radius, the transports detour
+pub fn split_points(cfg: &PConfig, pts: &[(f64, f64)]) -> Splits {
+    let dist = |c: (f64, f64)| pts.iter().filter(|p| (p.0 - c.0).hypot(p.1 - c.1) > 1e-12).map(|p| (p.0 - c.0).hypot(p.1 - c.1)).fold(f64::INFINITY, f64::min);
+    let d0 = dist((0.0, 0.0));
+    let dthr = dist((-1.0, 0.0));
+    let rmax = pts.iter().map(|p| p.0.hypot(p.1)).fold(0.0f64, f64::max);
+    let cap = |x: &Rational, lim: f64| -> Rational { if x.to_f64() > lim { rq(lim) } else { x.clone() } };
+    let s_end = if cfg.s_end.to_f64() < 2.5 * rmax { rq(2.5 * rmax) } else { cfg.s_end.clone() };
+    Splits { d0, dthr, rmax, s0: cap(&cfg.s0, 0.4 * d0), r: cap(&cfg.r, 0.4 * dthr), s_end }
+}
+
 /// route (B) at one d0
 pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Result<PResult, String> {
     let t0 = Instant::now();
@@ -556,28 +604,13 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let prec = run::bits(cfg.wf);
     let h = Rational::from(&sys.d0 / 2u32);
     let pts = singular_points(sys);
-    let dist = |c: (f64, f64)| pts.iter().filter(|p| (p.0 - c.0).hypot(p.1 - c.1) > 1e-12).map(|p| (p.0 - c.0).hypot(p.1 - c.1)).fold(f64::INFINITY, f64::min);
-    // exact dyadic rationals with 24 significant bits (never 0)
-    let rq = |x: f64| -> Rational {
-        let ex = x.log2().floor() as i32 - 23;
-        let m = (x / 2f64.powi(ex)).floor() as i64;
-        if ex >= 0 { Rational::from(m) * Rational::from(rug::Integer::from(1) << ex as u32) } else { Rational::from((m, 1)) / Rational::from(rug::Integer::from(1) << (-ex) as u32) }
-    };
-    let d0 = dist((0.0, 0.0));
-    let dthr = dist((-1.0, 0.0));
-    let rmax = pts.iter().map(|p| p.0.hypot(p.1)).fold(0.0f64, f64::max);
+    let sp = split_points(cfg, &pts);
+    let (d0, dthr, rmax) = (sp.d0, sp.dthr, sp.rmax);
     let rho0 = rq(0.5 * d0);
     let rho_inf = rq(0.5 / rmax);
     let rho_thr = rq(0.5 * dthr);
-    // split points adapted to the singular points closest to 0, -1 and infinity (spurious points of the Laporta basis may sit
-    // at distance O(eps) from the physical ones): the families converge on the solutions' own radius, the transports detour
     let mut cfg = cfg.clone();
-    let cap = |x: &Rational, lim: f64| -> Rational { if x.to_f64() > lim { rq(lim) } else { x.clone() } };
-    cfg.s0 = cap(&cfg.s0, 0.4 * d0);
-    cfg.r = cap(&cfg.r, 0.4 * dthr);
-    if cfg.s_end.to_f64() < 2.5 * rmax {
-        cfg.s_end = rq(2.5 * rmax);
-    }
+    (cfg.s0, cfg.r, cfg.s_end) = (sp.s0, sp.r, sp.s_end);
     let cfg = &cfg;
     let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": []});
     let mut fams0 = Vec::new();
@@ -587,10 +620,13 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let t = Instant::now();
             let Some((num, fdiag)) = family(sys, &pt, &lam, rho, cfg, mm, &format!("{side} k={k}"))? else { continue };
             let (br, nz, sk) = rows(sys, g, e_slot, &h, side == "0", k, &num, cfg, prec)?;
-            let (csoft, nrows, rank, worst, null) = fit_rows(&num, &br, e, prec);
-            diag["families"].as_array_mut().unwrap().push(json!({"side": side, "class": k, "dim": num.spec.dim, "rows": nrows, "rank": rank, "nonzero_rows": nz, "skipped_masters": sk,
+            let nmin = br.iter().map(|b| b.n).min().unwrap_or(0);
+            let delta = if side == "0" { d0 } else { 1.0 / rmax };
+            let (nmax, loss) = order_budget(nmin, cfg.wf, cfg.w, cfg.radius, delta);
+            let (csoft, nrows, rank, worst, null) = fit_rows(&num, &br, e, prec, nmax);
+            diag["families"].as_array_mut().unwrap().push(json!({"side": side, "class": k, "dim": num.spec.dim, "rows": nrows, "rows_offered": br.len(), "row_order_max": if nmax == i64::MAX { Value::Null } else { json!(nmax) }, "digits_lost_per_order": loss, "rank": rank, "nonzero_rows": nz, "skipped_masters": sk,
                 "fit_worst_rel_log10": worst, "frobenius": fdiag, "seconds": t.elapsed().as_secs_f64()}));
-            eprintln!("[pflow] family {side} k={k}: dim {} rank {rank} n_lo {} k_stable {} basis rows {} fit rows {nrows} worst {worst:.1} ({:.1} s)", num.spec.dim, num.spec.n_lo, num.spec.k_stable, num.basis.len(), t.elapsed().as_secs_f64());
+            eprintln!("[pflow] family {side} k={k}: dim {} rank {rank} n_lo {} k_stable {} basis rows {} fit rows {nrows} of {} (n <= {nmax}, {loss:.2} digits/order) worst {worst:.1} ({:.1} s)", num.spec.dim, num.spec.n_lo, num.spec.k_stable, num.basis.len(), br.len(), t.elapsed().as_secs_f64());
             let f = Fam { side: if side == "0" { "0" } else { "inf" }, class: k, num, coef: Some(csoft), null, diag: Value::Null };
             if side == "0" { fams0.push(f) } else { famsi.push(f) }
         }
