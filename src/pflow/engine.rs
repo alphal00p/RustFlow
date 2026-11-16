@@ -206,15 +206,17 @@ fn class_rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bo
     out
 }
 
-/// the fit rows of one family: the nonzero rows, zero rows below each master's first row (from n_lo), 12 zero orders for the
-/// masters without a row in this class; errors for nonzero rows the family cannot represent
-fn boundary_rows(cr: &ClassRows, fam: &FamilyNum, e: usize, prec: u32) -> (Vec<BoundaryRow>, Vec<String>) {
+/// the fit rows of one family: the nonzero rows, zero rows below each master's first row (from n_lo), zero rows at every order
+/// for the masters without a region in this class; errors for nonzero rows the family cannot represent
+fn boundary_rows(cr: &ClassRows, fam: &FamilyNum, e: usize, prec: u32) -> (Vec<BoundaryRow>, Vec<String>, usize) {
     let n_lo = fam.spec.n_lo;
     let nrow = (fam.basis.len() / e) as i64;
     let mut out = Vec::new();
     let mut errs = Vec::new();
+    // a master without a region of this class has an identically vanishing component in it: zero rows at EVERY order of the
+    // family (the precision budget cuts the top); padding only the lowest orders left higher-order solutions unconstrained
     for j in &cr.zero {
-        for n in n_lo..(n_lo + 12).min(n_lo + nrow) {
+        for n in n_lo..n_lo + nrow {
             out.push(BoundaryRow { comp: *j, n, value: Float::new(prec) });
         }
     }
@@ -228,18 +230,24 @@ fn boundary_rows(cr: &ClassRows, fam: &FamilyNum, e: usize, prec: u32) -> (Vec<B
             out.push(BoundaryRow { comp: *j, n, value: Float::new(prec) });
         }
     }
+    let mut beyond = 0usize;
     for (j, n, v) in &cr.nonzero {
         if *n < n_lo {
             errs.push(format!("{}: nonzero row of master {j} at n = {n} below n_lo = {n_lo}", fam.spec.name));
             continue;
         }
         if *n >= n_lo + nrow {
-            errs.push(format!("{}: nonzero row of master {j} at n = {n} beyond the family's {nrow} orders", fam.spec.name));
+            // higher orders of an all-order (exact) series than the family carries: not usable, counted; losing a master's
+            // LEADING row is an error
+            if first.get(j) == Some(n) {
+                errs.push(format!("{}: the leading row of master {j} (n = {n}) lies beyond the family's {nrow} orders", fam.spec.name));
+            }
+            beyond += 1;
             continue;
         }
         out.push(BoundaryRow { comp: *j, n: *n, value: v.clone() });
     }
-    (out, errs)
+    (out, errs, beyond)
 }
 
 /// rank-revealing least squares: Householder QR with column pivoting; columns whose remaining norm falls below
@@ -775,7 +783,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
                 acc.check(&format!("family {side} k={k}"), cr.nonzero.is_empty(), format!("empty class but {} nonzero boundary rows", cr.nonzero.len()));
                 continue;
             };
-            let (br, errs) = boundary_rows(&cr, &num, e, prec);
+            let (br, errs, beyond) = boundary_rows(&cr, &num, e, prec);
             acc.check(&format!("rows representable {side} k={k}"), errs.is_empty(), errs.join("; "));
             // precision budget counted from the first PHYSICAL (nonzero) row
             let delta = if side == "0" { d0 } else { 1.0 / rmax };
@@ -798,7 +806,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
                 }
             }
             diag["families"].as_array_mut().unwrap().push(json!({"side": side, "class": k, "dim": num.spec.dim, "n_lo": num.spec.n_lo, "rows": fit.rows,
-                "rows_offered": br.len(), "rows_dropped_budget": fit.dropped_budget, "row_order_max": if nmax == i64::MAX { Value::Null } else { json!(nmax) },
+                "rows_offered": br.len(), "rows_beyond_family_orders": beyond, "rows_dropped_budget": fit.dropped_budget, "row_order_max": if nmax == i64::MAX { Value::Null } else { json!(nmax) },
                 "digits_lost_per_order": loss, "rank": fit.rank, "rank_deficit": num.spec.dim - fit.rank, "nonzero_rows": cr.nonzero.len(),
                 "fit_worst_rel_log10": fit.worst, "frobenius": fdiag, "seconds": t.elapsed().as_secs_f64()}));
             eprintln!("[pflow] family {side} k={k}: dim {} rank {} n_lo {} fit rows {} of {} ({} dropped by the budget n <= {nmax}, {loss:.2} digits/order) worst {:?} ({:.1} s)",
