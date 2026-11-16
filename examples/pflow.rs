@@ -15,6 +15,7 @@ fn main() {
                 None => println!("{s}"),
             }
             let code = symbolica_amflow::pflow::cli::exit_code(&v);
+            eprintln!("pflow: {}", symbolica_amflow::pflow::cli::summary_line(&v));
             if code != 0 {
                 eprintln!("pflow: NOT ACCEPTED (output written; failures in diag.acceptance; --accept-diagnostics to override)");
                 std::process::exit(code)

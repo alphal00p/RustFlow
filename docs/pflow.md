@@ -41,12 +41,21 @@ All checks are gates with threshold 10^-T, T = `--target-digits` or by default m
 - the continuity-fit residual. Directions that continuity cannot see are UNDETERMINED: their effect on every requested output
   must be below the gate, else the run is not accepted;
 - every master has boundary rows (`--allow-skipped` to override). Every irreducible lower-loop graph is provided;
-- entries of the provided table agree with the exact evaluator wherever it can reduce them;
+- every boundary row is computable: a Gamma pole in a region or exact-series value (a log region at a non-generic d0) or a NaN
+  row fails the run; it is never read as "no region" (`--allow-skipped` does not override this);
+- entries of the provided table agree with the exact evaluator wherever it can reduce them (each bad entry is reported once, with
+  its number of uses);
 - independent checks: exactly vanishing masters are numerical zeros; masters with a closed form (graph evaluator) agree with it.
 
 A run that fails a gate still writes its output (`"accepted": false`, failures in `diag.acceptance`), and the front ends exit
 with code 3. `--accept-diagnostics` makes the exit code 0. `digits_cap` = min(w, provided digits) bounds the digits a run may
-claim; `digits_estimate` = min(digits_cap, -log10 continuity); `--two-precision K` estimates them independently.
+claim. `digits_estimate` is the minimum of `digits_cap` and of -log10 of every gate quantity that measures an error (boundary
+fits, continuity-fit residual, threshold decompositions, threshold continuity, undetermined directions, vanishing and closed-form
+masters). `digits_by_check` lists each of them, and the front ends print `accepted`, `digits_estimate` and the limiting check on
+one line. `--two-precision K` estimates the digits independently.
+
+Transport diagnostics (information): `transport_m<m>_h<half>` per final transport and `transports_worst` (largest overlap
+discrepancy, series tail and dropped imaginary part, log10 relative); `tail_heals` counts the healed patches of the run.
 
 ## Lower-loop boundary values (`--provided FILE`)
 ```

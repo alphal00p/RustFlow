@@ -227,7 +227,7 @@ fn simple_form_through_a_cut_vertex() {
             for x in mine.iter().filter(|x| x.1 == nmin) {
                 lead += &x.2;
             }
-            let ex = graph::exact_series(&g, 0, &a, &h, at_zero, k, 12, prec).expect("simple through the cut vertex");
+            let ex = graph::exact_series(&g, 0, &a, &h, at_zero, k, 12, prec).unwrap().expect("simple through the cut vertex");
             let (n0, v0) = ex.iter().min_by_key(|x| x.0).unwrap();
             assert_eq!(*n0, nmin, "{a:?} at_zero {at_zero}");
             assert!(digits(v0, &lead) > 50.0, "{a:?} at_zero {at_zero}: {v0} vs {lead}");
@@ -394,7 +394,10 @@ fn provided_table_checks() {
     cfg.provided = graph::Provided::from_json(&bad, prec, &sys.d0).unwrap();
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
     assert!(!r.accepted, "a wrong provided value must fail the acceptance");
-    assert!(r.diag["acceptance"]["failures"].to_string().contains("provided values = evaluator"));
+    let fails = r.diag["acceptance"]["failures"].to_string();
+    assert!(fails.contains("provided values = evaluator"));
+    // one bad entry is reported once, with its number of uses
+    assert!(fails.contains("1 mismatching entries") && fails.contains(" uses)"), "{fails}");
     assert!(graph::Provided::from_json(&tab("1.0", serde_json::json!(1.0), sys.d0.to_string()), prec, &sys.d0).is_err(), "float index");
     assert!(graph::Provided::from_json(&tab("1.0", serde_json::json!(1), "3".into()), prec, &sys.d0).is_err(), "wrong d0");
     let mut dup = good.clone();
@@ -488,6 +491,14 @@ fn target_digits_sets_the_gates() {
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
     assert!(r.accepted);
     assert!(r.diag["digits_estimate"].as_f64().unwrap() <= r.diag["digits_cap"].as_f64().unwrap());
+    // digits_estimate is the minimum over the cap and every gate quantity that measures an error
+    let by = r.diag["digits_by_check"].as_object().unwrap();
+    for k in ["digits_cap", "threshold_decomposition", "threshold_continuity"] {
+        assert!(by.contains_key(k), "{k} missing in {by:?}");
+    }
+    let min = by.values().map(|x| x.as_f64().unwrap()).fold(f64::INFINITY, f64::min);
+    assert_eq!(r.diag["digits_estimate"].as_f64().unwrap(), min);
+    assert!(r.diag["transports_worst"]["max_tail_log10"].as_f64().is_some(), "{}", r.diag["transports_worst"]);
     cfg.target_digits = Some(200.0);
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
     assert!(!r.accepted, "a 200-digit target at w30 must fail");
@@ -515,18 +526,33 @@ fn tail_heal_in_pflow_transports() {
     let y0: Vec<rug::Complex> = vec![rug::Complex::with_val(prec, 1), rug::Complex::with_val(prec, (1, 2))];
     let full = PlannedPath { offset: Rational::new(), patches: patches.clone() };
     let tr = Transport::new(&ksys, &full, tc.clone()).unwrap();
-    let a = super::engine::transport_ck(&tr, &y0, &cfg, "full").unwrap();
+    let (hf, hh) = (std::sync::atomic::AtomicUsize::new(0), std::sync::atomic::AtomicUsize::new(0));
+    let a = super::engine::transport_ck(&tr, &y0, &cfg, "full", &hf).unwrap();
+    assert_eq!(hf.load(std::sync::atomic::Ordering::SeqCst), 0, "the planned orders need no heal");
     let mut half = patches.clone();
     for p in half.iter_mut() {
         p.order = (p.order / 2).max(4);
     }
     let hp = PlannedPath { offset: Rational::new(), patches: half };
     let tr2 = Transport::new(&ksys, &hp, tc).unwrap();
-    let before = super::engine::TAIL_HEALS.load(std::sync::atomic::Ordering::SeqCst);
-    let b = super::engine::transport_ck(&tr2, &y0, &cfg, "half").unwrap();
-    assert!(super::engine::TAIL_HEALS.load(std::sync::atomic::Ordering::SeqCst) > before, "no patch was healed");
+    let b = super::engine::transport_ck(&tr2, &y0, &cfg, "half", &hh).unwrap();
+    assert!(hh.load(std::sync::atomic::Ordering::SeqCst) > 0, "no patch was healed");
     for (x, y) in a.y.iter().zip(&b.y) {
         let d = Float::with_val(prec, Float::with_val(prec, x.real() - y.real()).abs() / Float::with_val(prec, x.real().clone().abs()));
-        assert!(d < Float::with_val(prec, 1e-12), "healed transport differs: {d}");
+        // healed and full-order transports agree to about the working precision (w = 30)
+        assert!(d < Float::with_val(prec, 1e-25), "healed transport differs: {d}");
     }
+}
+
+/// a Gamma pole in a region value (non-generic d0: here d0 = 4 for the one-loop bubble, whose soft region has Gamma(1 - h)) is an
+/// error, never "no region"
+#[test]
+fn gamma_pole_is_an_error() {
+    let g = graph_of("P1L");
+    let h = Rational::from(2);
+    let r = graph::regions(&g, 0, &[1, 1], &h, 100, true, &graph::Provided::default());
+    assert!(matches!(&r, Err(e) if e.starts_with(graph::GAMMA_POLE)), "{:?}", r.as_ref().map(|x| x.as_ref().map(|v| v.len())));
+    // the generic d0 still gives the region rows
+    let r = graph::regions(&g, 0, &[1, 1], &Rational::from((199, 100)), 100, true, &graph::Provided::default()).unwrap().unwrap();
+    assert!(!r.is_empty());
 }

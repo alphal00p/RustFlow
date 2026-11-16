@@ -57,6 +57,7 @@ fn main() {
                         None => println!("{s}"),
                     }
                     let code = symbolica_amflow::pflow::cli::exit_code(&v);
+                    eprintln!("dispersive (propagator): {}", symbolica_amflow::pflow::cli::summary_line(&v));
                     if code != 0 {
                         eprintln!("dispersive (propagator): NOT ACCEPTED (output written; failures in diag.acceptance)");
                         std::process::exit(code)

@@ -29,8 +29,8 @@ pub struct Provided {
     pub d0: Option<Rational>,
     /// canonical keys of irreducible graphs that were not in the table
     pub missing: std::sync::Mutex<Vec<String>>,
-    /// entries that disagree with the exact evaluator
-    pub mismatch: std::sync::Mutex<Vec<String>>,
+    /// entries that disagree with the exact evaluator: (canonical key, values, number of uses), each key once
+    pub mismatch: std::sync::Mutex<Vec<(String, String, usize)>>,
 }
 
 impl Clone for Provided {
@@ -46,6 +46,9 @@ impl Clone for Provided {
 }
 
 pub const PROVIDED_SCHEMA: &str = "pflow-provided.v1";
+
+/// prefix of the errors for a Gamma pole in a region or exact-series value (non-generic d0): never read as "no region"
+pub const GAMMA_POLE: &str = "Gamma pole";
 
 impl Provided {
     /// parse and check a table (schema, normalisation, d0 of the run, digits, integer or "p/q" indices, no conflicting duplicates)
@@ -307,7 +310,10 @@ fn eval2pt(edges: Vec<E2>, s: usize, t: usize, h: &Rational, prec: u32, depth: u
             let sc = Float::with_val(prec, c.clone().abs()).max(&Float::with_val(prec, v.clone().abs()));
             if d > Float::with_val(prec, &sc * &tol) {
                 let mut m = pv.mismatch.lock().unwrap();
-                m.push(format!("{k}: evaluator {} vs provided {}", c.to_string_radix(10, Some(20)), v.to_string_radix(10, Some(20))));
+                match m.iter_mut().find(|x| x.0 == k) {
+                    Some(x) => x.2 += 1,
+                    None => m.push((k.clone(), format!("evaluator {} vs provided {}", c.to_string_radix(10, Some(20)), v.to_string_radix(10, Some(20))), 1)),
+                }
             }
             Some(ev)
         }
@@ -675,7 +681,7 @@ pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero:
                     Some(Ev::Val(c, a)) => (c, a),
                 }
             };
-            let Some(vmv) = vm(&q(aa[ee]), &alx, h, prec) else { continue };
+            let vmv = vm(&q(aa[ee]), &alx, h, prec).ok_or_else(|| format!("{GAMMA_POLE} in the vacuum factor of a soft region of {a:?}: a log region at this d0, not a zero"))?;
             val = Float::with_val(prec, &ch * &cx) * vmv;
             class = ls;
             nexp = -sset.iter().map(|&i| aa[i]).sum::<i64>();
@@ -717,7 +723,7 @@ pub fn regions(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32, at_zero:
                     Some(Ev::Val(c, _)) => c,
                 }
             };
-            let Some(vmv) = vm(&q(aa[ee]), &alx, h, prec) else { continue };
+            let vmv = vm(&q(aa[ee]), &alx, h, prec).ok_or_else(|| format!("{GAMMA_POLE} in the vacuum factor of a hard region of {a:?}: a log region at this d0, not a zero"))?;
             val = Float::with_val(prec, &cx * &vmv) * cc;
             class = lg;
             nexp = sset.iter().map(|&i| aa[i]).sum::<i64>();
@@ -917,17 +923,19 @@ fn simple_form(g: &Graph, e: usize, a: &[i64], h: &Rational, prec: u32) -> Optio
 }
 
 /// all-order rows [(n, value)] of class k for simple masters (None = not simple); same n convention as `regions`
-pub fn exact_series(g: &Graph, e: usize, a: &[i64], h: &Rational, at_zero: bool, k: i64, nmax: usize, prec: u32) -> Option<Vec<(i64, Float)>> {
-    match simple_form(g, e, a, h, prec)? {
+pub fn exact_series(g: &Graph, e: usize, a: &[i64], h: &Rational, at_zero: bool, k: i64, nmax: usize, prec: u32) -> Result<Option<Vec<(i64, Float)>>, String> {
+    let Some(sf) = simple_form(g, e, a, h, prec) else { return Ok(None) };
+    let pole = |what: &str| format!("{GAMMA_POLE} in the exact series of {a:?} ({what}): a log region at this d0, not a zero");
+    match sf {
         Simple::Power(c, expo) => {
             if c.is_zero() {
-                return Some(vec![]);
+                return Ok(Some(vec![]));
             }
-            let (kp, m) = classify(&expo, h)?;
+            let Some((kp, m)) = classify(&expo, h) else { return Ok(None) };
             if kp != k {
-                return Some(vec![]);
+                return Ok(Some(vec![]));
             }
-            Some(vec![(if at_zero { -m } else { m }, c)])
+            Ok(Some(vec![(if at_zero { -m } else { m }, c)]))
         }
         Simple::Bubble(c, ae, beta, b) => {
             let aeq = q(ae);
@@ -939,16 +947,13 @@ pub fn exact_series(g: &Graph, e: usize, a: &[i64], h: &Rational, at_zero: bool,
                 num / den
             };
             if at_zero {
-                let (kp, m) = classify(&(Rational::from(h - &aeq) - beta.clone()), h)?;
+                let Some((kp, m)) = classify(&(Rational::from(h - &aeq) - beta.clone()), h) else { return Ok(None) };
                 if kp != k {
-                    return Some(vec![]);
+                    return Ok(Some(vec![]));
                 }
                 for n in 0..nmax {
-                    let g1 = gamma(&(Rational::from(h + n as u32) - beta.clone()), prec)?;
-                    let g2 = match gamma(&(Rational::from(&aeq + &beta) - h.clone() - n as u32), prec) {
-                        Some(x) => x,
-                        None => continue,
-                    };
+                    let g1 = gamma(&(Rational::from(h + n as u32) - beta.clone()), prec).ok_or_else(|| pole("soft Gamma(h + n - beta)"))?;
+                    let g2 = gamma(&(Rational::from(&aeq + &beta) - h.clone() - n as u32), prec).ok_or_else(|| pole("Gamma(a_e + beta - h - n)"))?;
                     let mut v = Float::with_val(prec, &c * &ang(n));
                     v *= g1;
                     v *= g2;
@@ -957,16 +962,16 @@ pub fn exact_series(g: &Graph, e: usize, a: &[i64], h: &Rational, at_zero: bool,
                     out.push((-m + n as i64, v));
                 }
             } else {
-                let (kp, m) = classify(&(Rational::from(h - &aeq) - beta.clone() - b.clone()), h)?;
+                let Some((kp, m)) = classify(&(Rational::from(h - &aeq) - beta.clone() - b.clone()), h) else { return Ok(None) };
                 if kp != k {
-                    return Some(vec![]);
+                    return Ok(Some(vec![]));
                 }
                 for n in 0..nmax {
-                    let Some(vmv) = vm(&aeq, &(Rational::from(&beta + &b) + n as u32), h, prec) else { continue };
+                    let vmv = vm(&aeq, &(Rational::from(&beta + &b) + n as u32), h, prec).ok_or_else(|| pole("vacuum factor"))?;
                     out.push((m + n as i64, Float::with_val(prec, &c * &ang(n)) * vmv));
                 }
             }
-            Some(out)
+            Ok(Some(out))
         }
     }
 }

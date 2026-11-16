@@ -60,6 +60,13 @@ pub fn graph_from(v: &Value) -> Result<Graph, String> {
     Ok(Graph { edges, ext: (fam["external"]["in"].as_u64().ok_or("external.in")? as usize, fam["external"]["out"].as_u64().ok_or("external.out")? as usize), loops: fam["loops"].as_u64().ok_or("loops")? as usize })
 }
 
+/// one summary line of a finished run: accepted, digits_estimate and the check that limits it
+pub fn summary_line(v: &Value) -> String {
+    let est = v["digits_estimate"].as_f64().map_or("-".to_string(), |x| format!("{x:.1}"));
+    let weakest = v["digits_by_check"].as_object().and_then(|m| m.iter().filter_map(|(k, x)| x.as_f64().map(|x| (k.clone(), x))).min_by(|a, b| a.1.total_cmp(&b.1)));
+    format!("accepted {}, digits_estimate {est}{}", v["accepted"], weakest.map_or(String::new(), |(k, x)| format!(" (limited by {k}: {x:.1})")))
+}
+
 /// process exit code for a finished run: 0 if accepted (or --accept-diagnostics), 3 if an acceptance gate failed
 pub fn exit_code(v: &Value) -> i32 {
     if v["accepted"] == true || v["accept_diagnostics"] == true { 0 } else { 3 }
@@ -281,6 +288,6 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
             });
         }
     }
-    Ok(json!({"schema": "pflow-route-b.v1", "accepted": accepted, "accept_diagnostics": accept_diag, "digits_cap": res.diag["digits_cap"], "digits_estimate": res.diag["digits_estimate"], "extras": extras, "d0": rs.d0.to_string(), "e_slot": e, "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits},
+    Ok(json!({"schema": "pflow-route-b.v1", "accepted": accepted, "accept_diagnostics": accept_diag, "digits_cap": res.diag["digits_cap"], "digits_estimate": res.diag["digits_estimate"], "digits_by_check": res.diag["digits_by_check"], "extras": extras, "d0": rs.d0.to_string(), "e_slot": e, "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits},
             "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag)}))
 }

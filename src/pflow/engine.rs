@@ -153,17 +153,23 @@ fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PCo
 
 /// boundary data of one master on one side: all-order exact rows (simple masters), the leading row of every region class, or the
 /// reason it has none
+/// reason it has none (`Skipped`: not computable here, gated unless --allow-skipped; `Failed`: a value that cannot be a zero, e.g. a
+/// Gamma pole at a non-generic d0; always a failed gate)
 enum MasterRows {
     Exact,
     Regions(Vec<(i64, i64, Float)>),
     Skipped(String),
+    Failed(String),
 }
 
 fn master_rows(g: &Graph, e: usize, a: &[i64], h: &Rational, at_zero: bool, cfg: &PConfig, prec: u32) -> MasterRows {
-    if graph::exact_series(g, e, a, h, at_zero, 1, 1, prec).is_some() {
-        return MasterRows::Exact;
+    match graph::exact_series(g, e, a, h, at_zero, 1, 1, prec) {
+        Ok(Some(_)) => return MasterRows::Exact,
+        Err(err) => return MasterRows::Failed(err),
+        Ok(None) => {}
     }
     match graph::regions(g, e, a, h, prec, at_zero, &cfg.provided) {
+        Err(err) if err.starts_with(graph::GAMMA_POLE) => MasterRows::Failed(err),
         Err(err) => MasterRows::Skipped(err),
         Ok(None) => MasterRows::Skipped("a lower-loop part is neither reducible nor provided".into()),
         Ok(Some(rs)) => MasterRows::Regions(rs),
@@ -174,17 +180,32 @@ fn master_rows(g: &Graph, e: usize, a: &[i64], h: &Rational, at_zero: bool, cfg:
 struct ClassRows {
     nonzero: Vec<(usize, i64, Float)>,
     zero: Vec<usize>,
+    /// rows that could not be computed (an exact series that fails at this class, NaN values): never read as zero
+    errors: Vec<String>,
 }
 
 fn class_rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bool, k: i64, data: &[MasterRows], cfg: &PConfig, prec: u32) -> ClassRows {
-    let mut out = ClassRows { nonzero: vec![], zero: vec![] };
+    let mut out = ClassRows { nonzero: vec![], zero: vec![], errors: vec![] };
     for (j, (a, d)) in sys.masters.iter().zip(data).enumerate() {
         let sgn = if a.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
         let mut push = |n: i64, v: Float| out.nonzero.push((j, n, Float::with_val(prec, &v * sgn)));
         match d {
             MasterRows::Exact => {
-                let ex = graph::exact_series(g, e, a, h, at_zero, k, cfg.exact_rows, prec).unwrap_or_default();
-                let ex: Vec<(i64, Float)> = ex.into_iter().filter(|x| !x.1.is_nan()).collect();
+                let ex = match graph::exact_series(g, e, a, h, at_zero, k, cfg.exact_rows, prec) {
+                    Ok(Some(ex)) => ex,
+                    Ok(None) => {
+                        out.errors.push(format!("{a:?}: exact series not available at class {k}"));
+                        continue;
+                    }
+                    Err(err) => {
+                        out.errors.push(err);
+                        continue;
+                    }
+                };
+                if ex.iter().any(|x| x.1.is_nan()) {
+                    out.errors.push(format!("{a:?}: NaN in the exact series at class {k}"));
+                    continue;
+                }
                 if ex.iter().all(|x| x.1.is_zero()) {
                     out.zero.push(j);
                 } else {
@@ -207,7 +228,7 @@ fn class_rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bo
                     push(nmin, v);
                 }
             }
-            MasterRows::Skipped(_) => {}
+            MasterRows::Skipped(_) | MasterRows::Failed(_) => {}
         }
     }
     out
@@ -770,9 +791,6 @@ pub fn system_fingerprint(sys: &EBlockSystem) -> String {
     h.finalize().to_hex()[..24].to_string()
 }
 
-/// healed patches of all transports of the current run (diag "tail_heals")
-pub(crate) static TAIL_HEALS: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
-
 fn is_tail_failure(e: &crate::Error) -> bool {
     matches!(e, crate::Error::Numerical(m) if m.contains("series tail"))
 }
@@ -796,7 +814,6 @@ fn heal_patch(tr: &Transport, state: &mut crate::patch_kernel::transport::Transp
                 st.next_patch = k + 1;
                 eprintln!("[pflow] tail heal: patch {} order {planned} -> {order}: accepted", k + 1);
                 *state = st;
-                TAIL_HEALS.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
                 return Ok(true);
             }
             Err(e) if is_tail_failure(&e) => eprintln!("[pflow] tail heal: patch {} order {planned} -> {order}: {e}", k + 1),
@@ -807,8 +824,9 @@ fn heal_patch(tr: &Transport, state: &mut crate::patch_kernel::transport::Transp
 }
 
 /// one patch-kernel transport, with the tail heal; with a work directory it checkpoints after every patch (and after a healed
-/// patch) and resumes from `<workdir>/tr-<tag>.json`
-pub(crate) fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &str) -> Result<crate::patch_kernel::transport::TransportState, String> {
+/// patch) and resumes from `<workdir>/tr-<tag>.json`. `heals` counts the healed patches (one counter per run, so concurrent runs in
+/// one process do not mix)
+pub(crate) fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &str, heals: &std::sync::atomic::AtomicUsize) -> Result<crate::patch_kernel::transport::TransportState, String> {
     let file = cfg.workdir.as_ref().map(|w| std::path::PathBuf::from(format!("{w}/tr-{tag}.json")));
     let mut st = match &file {
         Some(f) if f.exists() => {
@@ -828,6 +846,7 @@ pub(crate) fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &
                 if !heal_patch(tr, &mut st)? {
                     return Err(format!("transport {tag}: {e}; tail heal failed ({})", crate::dispersive::kernel::TAIL_HEAL_POLICY));
                 }
+                heals.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
                 if let Some(f) = &file {
                     let _lock = crate::patch_kernel::checkpoint::CheckpointLock::acquire(f).map_err(|e| e.to_string())?;
                     tr.write_checkpoint(f, &st, y0).map_err(|e| e.to_string())?;
@@ -836,6 +855,27 @@ pub(crate) fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &
             Err(e) => return Err(e.to_string()),
         }
     }
+}
+
+/// diagnostics of one final transport (M3): the largest overlap discrepancy, series tail and dropped imaginary part over its patches
+/// (log10, relative), the patches whose overlap probe was skipped, and the healed patches (order above the planned one)
+fn transport_summary(st: &crate::patch_kernel::transport::TransportState) -> Value {
+    let worst = |f: &dyn Fn(&crate::patch_kernel::transport::PatchRecord) -> f64| {
+        st.records.iter().map(f).fold(None, |m: Option<f64>, x| if x.is_nan() { Some(f64::NAN) } else { Some(m.map_or(x, |m| if m.is_nan() { m } else { m.max(x) })) })
+    };
+    let nz = |x: Option<f64>| match x { Some(v) if v.is_finite() => json!(v), Some(v) => json!(v.to_string()), None => Value::Null };
+    json!({"patches": st.records.len(), "max_overlap_log10": nz(worst(&|r| r.overlap_log10)), "max_tail_log10": nz(worst(&|r| r.tail_log10)),
+        "max_dropped_imag_log10": nz(worst(&|r| r.dropped_imag_log10)), "overlap_skipped": st.records.iter().filter(|r| r.overlap_skipped).count()})
+}
+
+/// records the largest error (log10) of one kind of gate quantity
+fn note_err(m: &mut std::collections::BTreeMap<&'static str, f64>, kind: &'static str, x: f64) {
+    if x.is_nan() {
+        m.insert(kind, 1e300); // a NaN gate quantity: no digits
+        return;
+    }
+    let e = m.entry(kind).or_insert(f64::NEG_INFINITY);
+    *e = e.max(x);
 }
 
 /// acceptance record: every gate with its verdict
@@ -857,7 +897,7 @@ impl Acceptance {
 /// route (B) at one d0. The result carries `accepted` (all gates passed) and the gate record in diag["acceptance"].
 pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Result<PResult, String> {
     let t0 = Instant::now();
-    TAIL_HEALS.store(0, std::sync::atomic::Ordering::SeqCst);
+    let heals = std::sync::atomic::AtomicUsize::new(0);
     let e = sys.dim();
     let prec = run::bits(cfg.wf);
     let h = Rational::from(&sys.d0 / 2u32);
@@ -874,6 +914,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let digits_cap = (cfg.w as f64).min(cfg.provided.digits.unwrap_or(f64::INFINITY));
     let gate = -cfg.target_digits.unwrap_or(digits_cap - cfg.gate_margin as f64);
     let mut acc = Acceptance::default();
+    // every gate quantity that measures an error (log10, relative); digits_estimate is the minimum over them
+    let mut errq: std::collections::BTreeMap<&'static str, f64> = std::collections::BTreeMap::new();
     let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": [], "gate_log10": gate, "digits_cap": digits_cap});
     // ---- boundary data of every master, both sides (once) ----
     let mut data = Vec::new();
@@ -881,6 +923,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         let d: Vec<MasterRows> = sys.masters.iter().map(|a| master_rows(g, e_slot, a, &h, at_zero, cfg, prec)).collect();
         let skipped: Vec<String> = d.iter().zip(&sys.masters).filter_map(|(x, a)| if let MasterRows::Skipped(why) = x { Some(format!("{a:?}: {why}")) } else { None }).collect();
         acc.check(&format!("masters with boundary rows ({})", if at_zero { "0" } else { "inf" }), skipped.is_empty() || cfg.allow_skipped, format!("{} skipped: {:?}", skipped.len(), skipped));
+        let failed: Vec<String> = d.iter().zip(&sys.masters).filter_map(|(x, a)| if let MasterRows::Failed(why) = x { Some(format!("{a:?}: {why}")) } else { None }).collect();
+        acc.check(&format!("boundary rows computable ({})", if at_zero { "0" } else { "inf" }), failed.is_empty(), format!("{} failed: {:?}", failed.len(), failed));
         data.push(d);
     }
     let mut fams0 = Vec::new();
@@ -890,6 +934,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let t = Instant::now();
             let cr = class_rows(sys, g, e_slot, &h, side == "0", k, &data[if side == "0" { 0 } else { 1 }], cfg, prec);
             // n_lo from the rows: the family must contain the solution that starts at the lowest nonzero row
+            acc.check(&format!("class rows computable {side} k={k}"), cr.errors.is_empty(), cr.errors.join("; "));
             let nmin_nz = cr.nonzero.iter().map(|x| x.1).min();
             let nlo = cfg.nlo.min(nmin_nz.map_or(cfg.nlo, |n| n - 2));
             let mm_c = mm; // absolute top order: a lower n_lo adds orders below
@@ -917,6 +962,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             if let Some(wst) = fit.worst {
                 if fit.rows > fit.rank {
                     acc.check(&format!("boundary fit {side} k={k}"), wst < gate, format!("worst relative residual 10^{wst:.1}"));
+                    note_err(&mut errq, "boundary_fits", wst);
                 }
             }
             diag["families"].as_array_mut().unwrap().push(json!({"side": side, "class": k, "dim": num.spec.dim, "n_lo": num.spec.n_lo, "rows": fit.rows,
@@ -982,7 +1028,10 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
                 let path = PlannedPath { offset: Rational::new(), patches: patches.clone() };
                 let tr = Transport::new(&ksys, &path, tc).map_err(|x| x.to_string())?;
                 let yc: Vec<Complex> = y.iter().map(|v| Complex::with_val(tprec, v)).collect();
-                let st = transport_ck(&tr, &yc, cfg, &format!("{tag}m{m}-h{half}"))?;
+                let st = transport_ck(&tr, &yc, cfg, &format!("{tag}m{m}-h{half}"), &heals)?;
+                if pieces {
+                    d[format!("transport_m{m}_h{half}")] = transport_summary(&st);
+                }
                 let yend: Vec<Float> = st.y.iter().map(|c| Float::with_val(prec, c.real())).collect();
                 let integ = st.integral.as_ref().unwrap();
                 // kernel: int y (0 - z)^-m dz ; on z = -s: = -int rho s^-m ds (0-side, s0 -> 1-r) and = +int_{1+r}^{S} (inf-side)
@@ -1037,7 +1086,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let path = PlannedPath { offset: Rational::new(), patches: patches.to_vec() };
             let tr = Transport::new(&ksys, &path, tc).map_err(|x| x.to_string())?;
             let yc: Vec<Complex> = y.iter().map(|v| Complex::with_val(tprec, v)).collect();
-            let st = transport_ck(&tr, &yc, cfg, &format!("cont-{tag}"))?;
+            let st = transport_ck(&tr, &yc, cfg, &format!("cont-{tag}"), &heals)?;
             Ok(st.y.iter().map(|c| Float::with_val(prec, c.real())).collect())
         };
         // integer-family projection and the decomposition residual (log10, relative)
@@ -1119,6 +1168,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         }
         if active {
             acc.check("continuity fit residual", worst < gate, format!("10^{worst:.1}"));
+            note_err(&mut errq, "continuity_fit_residual", worst);
         }
         for ((side, fi, di), al) in which.iter().zip(&alpha) {
             let f = if *side == 0 { &mut fams0[*fi] } else { &mut famsi[*fi] };
@@ -1144,6 +1194,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         for half in 0..2 {
             if let Some(r) = diag[format!("threshold_residual_{half}_m{m}")].as_f64() {
                 acc.check(&format!("threshold decomposition half {half} m {m}"), r < gate, format!("10^{r:.1}"));
+                note_err(&mut errq, "threshold_decomposition", r);
             }
         }
     }
@@ -1159,14 +1210,9 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         // decomposition's condition number, reported for information, is a far too pessimistic bound)
         let cond = diag["threshold_condition_0_log10"].as_f64().unwrap_or(0.0).max(diag["threshold_condition_1_log10"].as_f64().unwrap_or(0.0));
         acc.check("threshold continuity", cont < gate, format!("10^{cont:.1} (gate 10^{gate:.1}; decomposition condition 10^{cond:.1})"));
+        note_err(&mut errq, "threshold_continuity", cont);
     }
     diag["threshold_continuity_log10"] = json!(cont);
-    // the digits a run can claim: the precision cap, the threshold join (continuity) and the boundary fits
-    let mut est = digits_cap;
-    if cont > -1e8 {
-        est = est.min(-cont);
-    }
-    diag["digits_estimate"] = json!(est);
     // ---- undetermined directions: their effect on every requested output must be below the gate ----
     let scale_of = |v: &[Float]| v.iter().map(log10abs).fold(-1e9f64, f64::max);
     let mut und_detail = Vec::new();
@@ -1195,6 +1241,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             }
         }
         acc.check(&format!("undetermined direction {u}"), affected.is_empty(), format!("largest relative effect 10^{worst:.1} on {} outputs", affected.len()));
+        note_err(&mut errq, "undetermined_directions", worst);
         und_detail.push(json!({"direction": u, "largest_relative_effect_log10": worst, "affected": affected}));
     }
     diag["undetermined_directions"] = json!(und_detail);
@@ -1227,16 +1274,39 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         }
         acc.check("vanishing and closed-form masters", bad.is_empty(), format!("{nz} vanishing (worst 10^{worst_zero:.1}), {nc} closed forms (worst 10^{worst_cf:.1}); {}", bad.join("; ")));
         diag["independent_checks"] = json!({"vanishing": nz, "closed_forms": nc, "worst_vanishing_log10": worst_zero, "worst_closed_form_log10": worst_cf});
+        if nz > 0 {
+            note_err(&mut errq, "vanishing_masters", worst_zero);
+        }
+        if nc > 0 {
+            note_err(&mut errq, "closed_form_masters", worst_cf);
+        }
     }
     // ---- the provided table: every entry the evaluator can reduce itself agrees; every irreducible graph is provided ----
     let missing = cfg.provided.missing.lock().unwrap().clone();
     acc.check("irreducible lower-loop parts provided", missing.is_empty(), format!("{} missing: {:?}", missing.len(), missing));
     let mism = cfg.provided.mismatch.lock().unwrap().clone();
-    acc.check("provided values = evaluator where it can reduce", mism.is_empty(), format!("{} mismatches: {:?}", mism.len(), mism));
+    let mlist: Vec<String> = mism.iter().map(|(k, d, n)| format!("{k}: {d} ({n} uses)")).collect();
+    acc.check("provided values = evaluator where it can reduce", mism.is_empty(), format!("{} mismatching entries: {:?}", mism.len(), mlist));
     diag["provided_values"] = json!(cfg.provided.values.len());
     diag["provided_digits"] = json!(cfg.provided.digits);
-    diag["tail_heals"] = json!(TAIL_HEALS.load(std::sync::atomic::Ordering::SeqCst));
+    diag["tail_heals"] = json!(heals.load(std::sync::atomic::Ordering::SeqCst));
     diag["tail_heal_policy"] = json!(crate::dispersive::kernel::TAIL_HEAL_POLICY);
+    // M3: the worst transport diagnostics over the final transports (information; the tail is gated by the kernel and healed)
+    let mut tmax = json!({});
+    for key in ["max_overlap_log10", "max_tail_log10", "max_dropped_imag_log10"] {
+        let w = diag.as_object().unwrap().iter().filter(|(k, _)| k.starts_with("transport_m")).filter_map(|(_, v)| v[key].as_f64()).fold(None, |m: Option<f64>, x| Some(m.map_or(x, |m| m.max(x))));
+        tmax[key] = json!(w);
+    }
+    diag["transports_worst"] = tmax;
+    // the digits a run can claim: the precision cap and the minimum over every gate quantity that measures an error
+    let mut est = digits_cap;
+    let mut by = json!({"digits_cap": digits_cap});
+    for (k, x) in &errq {
+        by[*k] = json!(-x);
+        est = est.min(-x);
+    }
+    diag["digits_estimate"] = json!(est);
+    diag["digits_by_check"] = by;
     diag["seconds"] = json!(t0.elapsed().as_secs_f64());
     let accepted = acc.failures.is_empty();
     diag["acceptance"] = json!({"accepted": accepted, "failures": acc.failures, "checks": acc.checks});
