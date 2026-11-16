@@ -494,8 +494,8 @@ fn target_digits_sets_the_gates() {
 }
 
 
-/// the tail heal of main (e19645f2) in the pflow transports: a path whose planned Taylor orders are halved misses the series-tail
-/// bound; the heal retries those patches at higher orders and the transported vector equals the one of the full-order path
+/// the tail heal of main (e19645f2) in the pflow transports: a path whose planned Taylor orders are halved misses a series-tail
+/// bound of -w that the planned orders meet; the heal retries those patches at higher orders and the transported vector equals the one of the full-order path
 #[test]
 fn tail_heal_in_pflow_transports() {
     use crate::patch_kernel::transport::{Transport, TransportConfig};
@@ -509,6 +509,9 @@ fn tail_heal_in_pflow_transports() {
     let mut tc = TransportConfig::dispersive(prec);
     tc.cauchy_pole = None;
     tc.pin_threads = false;
+    // a tail bound the full planned orders meet (tail ~ 10^-(w+8)) but halved orders miss (~10^-(w+8)/2), above the rounding
+    // floor 10^-(w+10)
+    tc.max_tail_log10 = -(cfg.w as f64);
     let y0: Vec<rug::Complex> = vec![rug::Complex::with_val(prec, 1), rug::Complex::with_val(prec, (1, 2))];
     let full = PlannedPath { offset: Rational::new(), patches: patches.clone() };
     let tr = Transport::new(&ksys, &full, tc.clone()).unwrap();
