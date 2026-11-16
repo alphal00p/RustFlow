@@ -31,7 +31,8 @@ All checks are gates with threshold 10^-(min(w, provided digits) - gate_margin),
 - boundary fits: residual of every over-determined fit;
 - order budget: wf - w - 10 must cover the digits lost per order at a spurious point, and the budget must not cost rank (counted
   from the first nonzero row);
-- every nonzero row representable (n >= n_lo, within the family's orders). n_lo = min(--nlo, lowest nonzero row - 2) per class;
+- every nonzero row representable (n >= n_lo; a leading row within the family's orders). n_lo = min(--nlo, lowest nonzero
+  row - 2) per class; the threshold families use min(--nlo, -10);
 - threshold families span the e-block; the threshold decompositions and the integer-class continuity at z = -1;
 - the continuity-fit residual. Directions that continuity cannot see are UNDETERMINED: their effect on every requested output
   must be below the gate, else the run is not accepted;

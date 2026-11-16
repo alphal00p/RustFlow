@@ -38,7 +38,8 @@ pub struct PConfig {
     pub m0: i64,
     pub minf: i64,
     pub mthr: i64,
-    /// highest allowed lowest Frobenius order; the actual n_lo of a class is min(nlo, lowest nonzero boundary row - 2)
+    /// highest allowed lowest Frobenius order of the region families: the n_lo of a class is min(nlo, lowest nonzero boundary row - 2);
+    /// the threshold families (no rows) use min(nlo, -10)
     pub nlo: i64,
     pub loops: u32,
     /// split points: head [0, s0], threshold neighbourhoods |s - 1| < r, tail [S, inf)
@@ -825,7 +826,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             continue;
         }
         seen.push(lam.clone());
-        if let Some((num, _)) = family(sys, &Pt::Finite(Rational::from(-1)), &lam, &rho_thr, cfg, cfg.nlo, cfg.mthr, &format!("thr {j}"))? {
+        // no rows set n_lo at the threshold: at most -10 (the span gate below checks completeness)
+        if let Some((num, _)) = family(sys, &Pt::Finite(Rational::from(-1)), &lam, &rho_thr, cfg, cfg.nlo.min(-10), cfg.mthr, &format!("thr {j}"))? {
             tfams.push(num);
         }
     }
