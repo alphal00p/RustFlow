@@ -27,14 +27,17 @@ a_e = index of the massive line, `value(m)` = FP int rho s^-m ds:
   `--efree FILE`.
 
 ## Acceptance (every run)
-All checks are gates with threshold 10^-(min(w, provided digits) - gate_margin), gate_margin = 20 by default (`--gate-margin`):
+All checks are gates with threshold 10^-T, T = `--target-digits` or by default min(w, provided digits) - gate_margin
+(gate_margin = 20, `--gate-margin`):
 - boundary fits: residual of every over-determined fit;
 - order budget: wf - w - 10 must cover the digits lost per order at a spurious point, and the budget must not cost rank (counted
   from the first nonzero row);
 - every nonzero row representable (n >= n_lo; a leading row within the family's orders). n_lo = min(--nlo, lowest nonzero
   row - 2) per class; the threshold families use min(--nlo, -10);
-- threshold families span the e-block; the threshold decompositions; the integer-class continuity at z = -1, against the gate
-  raised by the condition number of the threshold decomposition (near-degenerate classes frac(j h) at small eps);
+- threshold families span the e-block; the threshold decompositions; the integer-class continuity at z = -1. This is an
+  accuracy estimate of the threshold join: measured at four loops it tracks the precision of the outputs that depend on the
+  join (no1 at w45 vs w55). At small eps the near-degenerate classes frac(j h) cost digits (~25 at |eps| = 1.3e-3 at four
+  loops with a census-top basis); the decomposition's condition number is reported but is a far too pessimistic bound;
 - the continuity-fit residual. Directions that continuity cannot see are UNDETERMINED: their effect on every requested output
   must be below the gate, else the run is not accepted;
 - every master has boundary rows (`--allow-skipped` to override). Every irreducible lower-loop graph is provided;
@@ -43,7 +46,7 @@ All checks are gates with threshold 10^-(min(w, provided digits) - gate_margin),
 
 A run that fails a gate still writes its output (`"accepted": false`, failures in `diag.acceptance`), and the front ends exit
 with code 3. `--accept-diagnostics` makes the exit code 0. `digits_cap` = min(w, provided digits) bounds the digits a run may
-claim; `--two-precision K` estimates them.
+claim; `digits_estimate` = min(digits_cap, -log10 continuity); `--two-precision K` estimates them independently.
 
 ## Lower-loop boundary values (`--provided FILE`)
 ```

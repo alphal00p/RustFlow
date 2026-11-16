@@ -479,3 +479,16 @@ fn condition_of_nearly_dependent_columns() {
     let b = vec![vec![f(1.0), f(0.0)], vec![f(0.0), f(1.0)]];
     assert!(super::engine::cond_log10(&b, prec).abs() < 1e-6);
 }
+
+/// --target-digits sets every gate; digits_estimate never exceeds digits_cap
+#[test]
+fn target_digits_sets_the_gates() {
+    let (sys, g, mut cfg, _) = kite_cfg(30, vec![1]);
+    cfg.target_digits = Some(5.0);
+    let r = run_b(&sys, &g, 0, &cfg).unwrap();
+    assert!(r.accepted);
+    assert!(r.diag["digits_estimate"].as_f64().unwrap() <= r.diag["digits_cap"].as_f64().unwrap());
+    cfg.target_digits = Some(200.0);
+    let r = run_b(&sys, &g, 0, &cfg).unwrap();
+    assert!(!r.accepted, "a 200-digit target at w30 must fail");
+}

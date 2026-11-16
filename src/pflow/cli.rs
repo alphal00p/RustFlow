@@ -169,6 +169,7 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     cfg.moments = arg("--moments").unwrap_or("1".into()).split(',').map(|x| x.trim().parse::<i32>().map_err(|_| format!("--moments: {x}"))).collect::<Result<_, _>>()?;
     cfg.nlo = pnum("--nlo", "-10")?;
     cfg.gate_margin = pnum("--gate-margin", "20")? as u32;
+    cfg.target_digits = match arg("--target-digits") { Some(t) => Some(t.parse::<f64>().map_err(|_| "--target-digits: a number")?), None => None };
     cfg.allow_skipped = argv.iter().any(|x| x == "--allow-skipped") || o.cfg["allow_skipped"] == true;
     let accept_diag = argv.iter().any(|x| x == "--accept-diagnostics") || o.cfg["accept_diagnostics"] == true;
     let workdir = o.path("--workdir");
@@ -280,6 +281,6 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
             });
         }
     }
-    Ok(json!({"schema": "pflow-route-b.v1", "accepted": accepted, "accept_diagnostics": accept_diag, "digits_cap": res.diag["digits_cap"], "extras": extras, "d0": rs.d0.to_string(), "e_slot": e, "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin},
+    Ok(json!({"schema": "pflow-route-b.v1", "accepted": accepted, "accept_diagnostics": accept_diag, "digits_cap": res.diag["digits_cap"], "digits_estimate": res.diag["digits_estimate"], "extras": extras, "d0": rs.d0.to_string(), "e_slot": e, "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits},
             "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag)}))
 }

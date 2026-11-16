@@ -65,6 +65,8 @@ pub struct PConfig {
     /// acceptance: gates hold to 10^-(w - gate_margin) relative (fits, threshold decomposition, continuity, undetermined
     /// directions, exactly-vanishing integrals, closed-form masters); a failed gate makes the result "not accepted"
     pub gate_margin: u32,
+    /// digits the caller needs: every gate asks for 10^-target (default: min(w, provided digits) - gate_margin)
+    pub target_digits: Option<f64>,
     /// masters without boundary rows (numerators, irreducible lower-loop parts) fail the acceptance unless allowed
     pub allow_skipped: bool,
 }
@@ -91,6 +93,7 @@ impl PConfig {
             workdir: None,
             frobenius_every_seconds: 900.0,
             gate_margin: 20,
+            target_digits: None,
             allow_skipped: false,
         }
     }
@@ -821,7 +824,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let cfg = &cfg;
     // the accuracy the gates ask for (relative, log10): the transports carry w digits, the provided values their own
     let digits_cap = (cfg.w as f64).min(cfg.provided.digits.unwrap_or(f64::INFINITY));
-    let gate = -(digits_cap - cfg.gate_margin as f64);
+    let gate = -cfg.target_digits.unwrap_or(digits_cap - cfg.gate_margin as f64);
     let mut acc = Acceptance::default();
     let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": [], "gate_log10": gate, "digits_cap": digits_cap});
     // ---- boundary data of every master, both sides (once) ----
@@ -1098,12 +1101,18 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let d = log10abs(&Float::with_val(prec, &x - &y)) - log10abs(&x).max(log10abs(&y));
             cont = cont.max(d);
         }
-        // the integer-class coefficients come out of the threshold decomposition: its condition (near-degenerate classes
-        // frac(j h) at small eps) raises their noise floor
+        // an ACCURACY ESTIMATE of the threshold join (measured at 4L: no1 at w45 vs w55 agrees to the continuity level, while the
+        // decomposition's condition number, reported for information, is a far too pessimistic bound)
         let cond = diag["threshold_condition_0_log10"].as_f64().unwrap_or(0.0).max(diag["threshold_condition_1_log10"].as_f64().unwrap_or(0.0));
-        acc.check("threshold continuity", cont < gate + cond, format!("10^{cont:.1} (gate 10^{gate:.1} x condition 10^{cond:.1})"));
+        acc.check("threshold continuity", cont < gate, format!("10^{cont:.1} (gate 10^{gate:.1}; decomposition condition 10^{cond:.1})"));
     }
     diag["threshold_continuity_log10"] = json!(cont);
+    // the digits a run can claim: the precision cap, the threshold join (continuity) and the boundary fits
+    let mut est = digits_cap;
+    if cont > -1e8 {
+        est = est.min(-cont);
+    }
+    diag["digits_estimate"] = json!(est);
     // ---- undetermined directions: their effect on every requested output must be below the gate ----
     let scale_of = |v: &[Float]| v.iter().map(log10abs).fold(-1e9f64, f64::max);
     let mut und_detail = Vec::new();
