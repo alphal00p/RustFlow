@@ -492,3 +492,38 @@ fn target_digits_sets_the_gates() {
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
     assert!(!r.accepted, "a 200-digit target at w30 must fail");
 }
+
+
+/// the tail heal of main (e19645f2) in the pflow transports: a path whose planned Taylor orders are halved misses the series-tail
+/// bound; the heal retries those patches at higher orders and the transported vector equals the one of the full-order path
+#[test]
+fn tail_heal_in_pflow_transports() {
+    use crate::patch_kernel::transport::{Transport, TransportConfig};
+    use crate::patch_kernel::PlannedPath;
+    let sys = one_loop_system(Rational::from((1, 100)));
+    let ksys = crate::dispersive::kernel::rational_system(&sys).unwrap();
+    let cfg = PConfig::new(30, 40, 50, 1);
+    let prec = run::bits(cfg.w);
+    let pts = super::engine::singular_points(&sys);
+    let patches = super::engine::plan_segment(&Rational::from((-1, 10)), &Rational::from((-1, 2)), &pts, cfg.w, cfg.ratio);
+    let mut tc = TransportConfig::dispersive(prec);
+    tc.cauchy_pole = None;
+    tc.pin_threads = false;
+    let y0: Vec<rug::Complex> = vec![rug::Complex::with_val(prec, 1), rug::Complex::with_val(prec, (1, 2))];
+    let full = PlannedPath { offset: Rational::new(), patches: patches.clone() };
+    let tr = Transport::new(&ksys, &full, tc.clone()).unwrap();
+    let a = super::engine::transport_ck(&tr, &y0, &cfg, "full").unwrap();
+    let mut half = patches.clone();
+    for p in half.iter_mut() {
+        p.order = (p.order / 2).max(4);
+    }
+    let hp = PlannedPath { offset: Rational::new(), patches: half };
+    let tr2 = Transport::new(&ksys, &hp, tc).unwrap();
+    let before = super::engine::TAIL_HEALS.load(std::sync::atomic::Ordering::SeqCst);
+    let b = super::engine::transport_ck(&tr2, &y0, &cfg, "half").unwrap();
+    assert!(super::engine::TAIL_HEALS.load(std::sync::atomic::Ordering::SeqCst) > before, "no patch was healed");
+    for (x, y) in a.y.iter().zip(&b.y) {
+        let d = Float::with_val(prec, Float::with_val(prec, x.real() - y.real()).abs() / Float::with_val(prec, x.real().clone().abs()));
+        assert!(d < Float::with_val(prec, 1e-12), "healed transport differs: {d}");
+    }
+}

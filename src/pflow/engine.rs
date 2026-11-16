@@ -65,6 +65,8 @@ pub struct PConfig {
     /// acceptance: gates hold to 10^-(w - gate_margin) relative (fits, threshold decomposition, continuity, undetermined
     /// directions, exactly-vanishing integrals, closed-form masters); a failed gate makes the result "not accepted"
     pub gate_margin: u32,
+    /// series-tail bound of the transports (log10); None = the kernel default -(working digits)/2
+    pub max_tail_log10: Option<f64>,
     /// digits the caller needs: every gate asks for 10^-target (default: min(w, provided digits) - gate_margin)
     pub target_digits: Option<f64>,
     /// masters without boundary rows (numerators, irreducible lower-loop parts) fail the acceptance unless allowed
@@ -94,6 +96,7 @@ impl PConfig {
             frobenius_every_seconds: 900.0,
             gate_margin: 20,
             target_digits: None,
+            max_tail_log10: None,
             allow_skipped: false,
         }
     }
@@ -651,7 +654,7 @@ fn threshold_piece(tf: &[FamilyNum], y: &[Float], r: &Rational, inf_side: bool, 
 
 /// real segment a -> b (rationals), steps r/ratio with r the distance to the nearest singular point; detours (half 12-gons,
 /// radius 0.4 x gap) above axis points strictly inside
-fn plan_segment(a: &Rational, b: &Rational, points: &[(f64, f64)], w: u32, ratio: f64) -> Vec<PatchSpec> {
+pub(crate) fn plan_segment(a: &Rational, b: &Rational, points: &[(f64, f64)], w: u32, ratio: f64) -> Vec<PatchSpec> {
     let qf = |x: &Rational| x.to_f64();
     let rr = |x: f64| -> Rational {
         let s = (1i64 << 24) as f64;
@@ -767,26 +770,70 @@ pub fn system_fingerprint(sys: &EBlockSystem) -> String {
     h.finalize().to_hex()[..24].to_string()
 }
 
-/// one patch-kernel transport; with a work directory it checkpoints after every patch and resumes from `<workdir>/<tag>.json`
-fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &str) -> Result<crate::patch_kernel::transport::TransportState, String> {
-    match &cfg.workdir {
-        None => {
-            let mut st = tr.initial_state(y0).map_err(|x| x.to_string())?;
-            tr.run(&mut st, usize::MAX, y0, &Default::default(), None, |_| {}).map_err(|x| x.to_string())?;
-            Ok(st)
+/// healed patches of all transports of the current run (diag "tail_heals")
+pub(crate) static TAIL_HEALS: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+
+fn is_tail_failure(e: &crate::Error) -> bool {
+    matches!(e, crate::Error::Numerical(m) if m.contains("series tail"))
+}
+
+/// the tail heal of the dispersive kernel (main e19645f2, `dispersive::kernel::TAIL_HEAL_POLICY`) for one pflow transport: the
+/// patch `state.next_patch` that failed the series-tail bound is retried at the policy's higher Taylor orders (same centre, step,
+/// precision and bound) with the kernel's own step on a one-patch path; Ok(true) = `state` advanced by the healed patch
+fn heal_patch(tr: &Transport, state: &mut crate::patch_kernel::transport::TransportState) -> Result<bool, String> {
+    let k = state.next_patch;
+    let planned = tr.path.patches[k].order;
+    for order in crate::dispersive::kernel::tail_heal_orders(planned) {
+        let mut spec = tr.path.patches[k].clone();
+        spec.order = order;
+        let one = PlannedPath { offset: tr.path.offset.clone(), patches: vec![spec] };
+        let t1 = Transport::new(tr.system, &one, tr.config.clone()).map_err(|x| x.to_string())?;
+        let mut st = state.clone();
+        st.next_patch = 0;
+        match t1.step(&mut st, &Default::default()) {
+            Ok(()) => {
+                st.records.last_mut().expect("record").index = k;
+                st.next_patch = k + 1;
+                eprintln!("[pflow] tail heal: patch {} order {planned} -> {order}: accepted", k + 1);
+                *state = st;
+                TAIL_HEALS.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                return Ok(true);
+            }
+            Err(e) if is_tail_failure(&e) => eprintln!("[pflow] tail heal: patch {} order {planned} -> {order}: {e}", k + 1),
+            Err(e) => return Err(e.to_string()),
         }
-        Some(w) => {
-            let file = std::path::PathBuf::from(format!("{w}/tr-{tag}.json"));
-            let mut st = if file.exists() {
-                let st = tr.resume(&file, y0, false).map_err(|e| format!("{}: {e} (use a fresh workdir)", file.display()))?;
-                eprintln!("[pflow] transport {tag}: resumed at patch {}", st.next_patch);
-                st
-            } else {
-                tr.initial_state(y0).map_err(|x| x.to_string())?
-            };
-            let policy = crate::patch_kernel::checkpoint::CheckpointPolicy { every_patches: 1, every_seconds: 300.0, fresh: false, ..crate::patch_kernel::checkpoint::CheckpointPolicy::new(&file) };
-            tr.run(&mut st, usize::MAX, y0, &Default::default(), Some(&policy), |_| {}).map_err(|x| x.to_string())?;
-            Ok(st)
+    }
+    Ok(false)
+}
+
+/// one patch-kernel transport, with the tail heal; with a work directory it checkpoints after every patch (and after a healed
+/// patch) and resumes from `<workdir>/tr-<tag>.json`
+pub(crate) fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &str) -> Result<crate::patch_kernel::transport::TransportState, String> {
+    let file = cfg.workdir.as_ref().map(|w| std::path::PathBuf::from(format!("{w}/tr-{tag}.json")));
+    let mut st = match &file {
+        Some(f) if f.exists() => {
+            let st = tr.resume(f, y0, false).map_err(|e| format!("{}: {e} (use a fresh workdir)", f.display()))?;
+            eprintln!("[pflow] transport {tag}: resumed at patch {}", st.next_patch);
+            st
+        }
+        _ => tr.initial_state(y0).map_err(|x| x.to_string())?,
+    };
+    let policy = file.as_ref().map(|f| crate::patch_kernel::checkpoint::CheckpointPolicy { every_patches: 1, every_seconds: 300.0, fresh: false, ..crate::patch_kernel::checkpoint::CheckpointPolicy::new(f) });
+    loop {
+        match tr.run(&mut st, usize::MAX, y0, &Default::default(), policy.as_ref(), |_| {}) {
+            Ok(_) => return Ok(st),
+            Err(e) if is_tail_failure(&e) && st.next_patch < tr.path.patches.len() => {
+                let k = st.next_patch;
+                eprintln!("[pflow] transport {tag}: patch {}: {e}; tail heal at orders {:?}", k + 1, crate::dispersive::kernel::tail_heal_orders(tr.path.patches[k].order));
+                if !heal_patch(tr, &mut st)? {
+                    return Err(format!("transport {tag}: {e}; tail heal failed ({})", crate::dispersive::kernel::TAIL_HEAL_POLICY));
+                }
+                if let Some(f) = &file {
+                    let _lock = crate::patch_kernel::checkpoint::CheckpointLock::acquire(f).map_err(|e| e.to_string())?;
+                    tr.write_checkpoint(f, &st, y0).map_err(|e| e.to_string())?;
+                }
+            }
+            Err(e) => return Err(e.to_string()),
         }
     }
 }
@@ -810,6 +857,7 @@ impl Acceptance {
 /// route (B) at one d0. The result carries `accepted` (all gates passed) and the gate record in diag["acceptance"].
 pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Result<PResult, String> {
     let t0 = Instant::now();
+    TAIL_HEALS.store(0, std::sync::atomic::Ordering::SeqCst);
     let e = sys.dim();
     let prec = run::bits(cfg.wf);
     let h = Rational::from(&sys.d0 / 2u32);
@@ -926,6 +974,9 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
                 let mut tc = TransportConfig::dispersive(tprec);
                 tc.cauchy_pole = Some(Rational::new());
                 tc.cauchy_power = m;
+                if let Some(b) = cfg.max_tail_log10 {
+                    tc.max_tail_log10 = b;
+                }
                 tc.threads = cfg.threads;
                 tc.pin_threads = false;
                 let path = PlannedPath { offset: Rational::new(), patches: patches.clone() };
@@ -978,6 +1029,9 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         let transport_end = |y: &[Float], patches: &[PatchSpec], tag: String| -> Result<Vec<Float>, String> {
             let mut tc = TransportConfig::dispersive(tprec);
             tc.cauchy_pole = None;
+            if let Some(b) = cfg.max_tail_log10 {
+                tc.max_tail_log10 = b;
+            }
             tc.threads = cfg.threads;
             tc.pin_threads = false;
             let path = PlannedPath { offset: Rational::new(), patches: patches.to_vec() };
@@ -1181,6 +1235,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     acc.check("provided values = evaluator where it can reduce", mism.is_empty(), format!("{} mismatches: {:?}", mism.len(), mism));
     diag["provided_values"] = json!(cfg.provided.values.len());
     diag["provided_digits"] = json!(cfg.provided.digits);
+    diag["tail_heals"] = json!(TAIL_HEALS.load(std::sync::atomic::Ordering::SeqCst));
+    diag["tail_heal_policy"] = json!(crate::dispersive::kernel::TAIL_HEAL_POLICY);
     diag["seconds"] = json!(t0.elapsed().as_secs_f64());
     let accepted = acc.failures.is_empty();
     diag["acceptance"] = json!({"accepted": accepted, "failures": acc.failures, "checks": acc.checks});
