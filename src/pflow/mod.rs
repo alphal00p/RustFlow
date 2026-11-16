@@ -1,5 +1,5 @@
 //! PFLOW: massless propagator integrals (p-integrals) at a fixed rational d0 from a ONE-MASS flow, dispersive route (B)
-//! (PFLOW-S1.md / PFLOW-S1B.md). The engine reuses the dispersive mode's exact machinery (`dispersive::{system, frobenius,
+//! (method, conventions, CLI and class-config keys: docs/pflow.md). The engine reuses the dispersive mode's exact machinery (`dispersive::{system, frobenius,
 //! field, dispersion}`: e-block of a RustRed harness DE, Frobenius families with exact rank decisions over a prime field and
 //! MPFR values, relative least squares) and the fixed-precision patch kernel (`patch_kernel`, Cauchy weight (a - z)^-m).
 //! Configuration-driven: the family graph (lines, external vertices) and the massive line come from the input; nothing is

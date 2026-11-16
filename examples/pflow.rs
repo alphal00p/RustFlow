@@ -14,6 +14,11 @@ fn main() {
                 Some(i) => std::fs::write(&a[i + 1], &s).unwrap(),
                 None => println!("{s}"),
             }
+            let code = symbolica_amflow::pflow::cli::exit_code(&v);
+            if code != 0 {
+                eprintln!("pflow: NOT ACCEPTED (output written; failures in diag.acceptance; --accept-diagnostics to override)");
+                std::process::exit(code)
+            }
         }
         Err(e) => {
             eprintln!("pflow: {e}");

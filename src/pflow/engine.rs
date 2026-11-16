@@ -1,11 +1,17 @@
-//! Route (B) for a one-mass massless propagator family at a fixed rational d0 (PFLOW-S1.md sections 1.4-1.7):
-//!   rho(s) = -(1/pi) Im J(-s + i0),  moments  M_m = FP int_0^inf rho(s) s^-m ds  (m = 1: the massless value; m = n + 1: the
-//!   z^n analytic coefficient times (-1)^n; m <= 0: the e-pinched massless integrals E[a_e -> m - 1]).
+//! Route (B) for a one-mass massless propagator family at a fixed rational d0 (method: docs/pflow.md):
+//!   rho(s) = -(1/pi) Im J(-s + i0),  moments  M_m = FP int_0^inf rho(s) s^-m ds.
+//! What the moments are (E-normalisation, D_e = k^2 + z Euclidean, a = a_e the index of the massive line, J = E[a](z)):
+//!   * m = 1: the massless value E[a](z = 0);
+//!   * m = n + 1 >= 2: the z^n Taylor coefficient of the analytic part times (-1)^n, i.e. (a)_n / n! E[a + n 1_e] (NOT the dotted
+//!     integral itself unless a = 1);
+//!   * m = -k <= 0: the z^(-k-1) coefficient of the integer part at infinity times (-1)^k, i.e. (-1)^(a-1) (a)_n / n! E[a_e -> -n]
+//!     with n = k + 1 - a (the e-pinched integral with the massive line as a numerator of power n); zero when n < 0.
 //! rho on (0, 1) = disc of the non-integer families at z = 0 (classes k h, k = 1..L), on (1, inf) = disc of the non-integer
 //! families at infinity (classes -k h); both obey the homogeneous e-block. Two half-line transports (patch kernel, real
 //! projection, weight (0 - z)^-m), local families at the threshold z = -1 (all classes j h mod 1, j = 0..2L), termwise end
-//! pieces; head [0, s0] and tail [S, inf) termwise. The integer-family projections at z = -1 from both sides must agree
-//! (continuity of Im R): reported as a check.
+//! pieces; head [0, s0] and tail [S, inf) termwise. Boundary directions not fixed by the region rows are fixed by the continuity
+//! of the integer-family projection at z = -1; directions that continuity cannot see are tested for their effect on the outputs.
+//! Every consistency check is an acceptance GATE (see `Acceptance`): a failed gate makes the run "not accepted".
 //! Normalisation: the DE is RustRed's (Minkowski, D_e = k^2 - z); its solution vector is I = (-1)^(sum a) E with E the Euclidean
 //! value (measure d^dk/pi^(d/2), p^2 = 1). Boundary rows are converted with that sign; outputs are given in E.
 use super::graph::{self, Graph};
@@ -32,6 +38,7 @@ pub struct PConfig {
     pub m0: i64,
     pub minf: i64,
     pub mthr: i64,
+    /// highest allowed lowest Frobenius order; the actual n_lo of a class is min(nlo, lowest nonzero boundary row - 2)
     pub nlo: i64,
     pub loops: u32,
     /// split points: head [0, s0], threshold neighbourhoods |s - 1| < r, tail [S, inf)
@@ -54,6 +61,11 @@ pub struct PConfig {
     /// finished moments as stage files); a rerun of the same command resumes. None: no checkpoints.
     pub workdir: Option<String>,
     pub frobenius_every_seconds: f64,
+    /// acceptance: gates hold to 10^-(w - gate_margin) relative (fits, threshold decomposition, continuity, undetermined
+    /// directions, exactly-vanishing integrals, closed-form masters); a failed gate makes the result "not accepted"
+    pub gate_margin: u32,
+    /// masters without boundary rows (numerators, irreducible lower-loop parts) fail the acceptance unless allowed
+    pub allow_skipped: bool,
 }
 
 impl PConfig {
@@ -77,6 +89,8 @@ impl PConfig {
             provided: graph::Provided::default(),
             workdir: None,
             frobenius_every_seconds: 900.0,
+            gate_margin: 20,
+            allow_skipped: false,
         }
     }
 }
@@ -89,28 +103,29 @@ fn frac(x: &Rational) -> Rational {
     Rational::from(x - &f)
 }
 
+#[derive(Clone)]
 pub struct Fam {
     pub side: &'static str,
     pub class: i64,
-    pub num: FamilyNum,
+    pub num: std::sync::Arc<FamilyNum>,
     pub coef: Option<Vec<Float>>, // fitted scaled coefficients (rows (n - n_lo) E + comp)
     /// directions of the coefficient space not fixed by the boundary rows (fixed later by the threshold continuity)
     pub null: Vec<Vec<Float>>,
     pub diag: Value,
 }
 
-fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PConfig, mm: i64, name: &str) -> Result<Option<(FamilyNum, Value)>, String> {
+fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PConfig, nlo: i64, mm: i64, name: &str) -> Result<Option<(FamilyNum, Value)>, String> {
     let e = sys.dim();
     let off = Rational::new();
     let bp = local::lmat::<ModP>(sys, &off, pt, mm + 8, 0);
-    let out = frobenius::frobenius::<ModP>(&bp, e, &ModP::from_rational(lam, 0), cfg.nlo, mm, None, 0, cfg.threads);
+    let out = frobenius::frobenius::<ModP>(&bp, e, &ModP::from_rational(lam, 0), nlo, mm, None, 0, cfg.threads);
     if out.ranks.iter().all(|&r| r == 0) || out.q == 0 {
         return Ok(None);
     }
-    let spec = match frobenius::family_spec(&out, e, cfg.nlo, mm, lam, rho, name) {
+    let spec = match frobenius::family_spec(&out, e, nlo, mm, lam, rho, name) {
         Ok(s) => s,
         // ranks zero up to the truncation edge: no solution of this class (the threshold dimension check guards completeness)
-        Err(err) if err.contains("no rank plateau") && out.t[..((((mm - cfg.nlo) / 2 + 1) as usize) * e).min(out.t.len())].iter().all(|r| r.is_empty()) => return Ok(None),
+        Err(err) if err.contains("no rank plateau") && out.t[..((((mm - nlo) / 2 + 1) as usize) * e).min(out.t.len())].iter().all(|r| r.is_empty()) => return Ok(None),
         Err(err) => return Err(format!("{name}: {err}")),
     };
     if spec.dim == 0 {
@@ -121,7 +136,7 @@ fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PCo
     let mode = PivotMode::parse(frobenius::DEFAULT_PIVOTING)?;
     let ck = cfg.workdir.as_ref().map(|w| crate::dispersive::ckpt::FrobCheckpoint {
         path: std::path::PathBuf::from(format!("{w}/frob-{}.bin", name.replace(' ', "_").replace('=', ""))),
-        fingerprint: format!("{} {name} prec {prec} pivoting {}", run_fingerprint(sys, cfg), mode.label()),
+        fingerprint: format!("{} {name} nlo {nlo} mm {mm} rho {rho} prec {prec} pivoting {}", system_fingerprint(sys), mode.label()),
         every_seconds: cfg.frobenius_every_seconds,
         stop_at_m: None,
     });
@@ -129,45 +144,52 @@ fn family(sys: &EBlockSystem, pt: &Pt, lam: &Rational, rho: &Rational, cfg: &PCo
     Ok(Some((num, diag)))
 }
 
-/// boundary rows of one class from the graph regions (I-normalised)
-fn rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bool, k: i64, fam: &FamilyNum, cfg: &PConfig, prec: u32) -> Result<(Vec<BoundaryRow>, usize, usize), String> {
-    let n_lo = fam.spec.n_lo;
-    let mut out = Vec::new();
-    let (mut nonzero, mut skipped) = (0usize, 0usize);
-    for (j, a) in sys.masters.iter().enumerate() {
+/// boundary data of one master on one side: all-order exact rows (simple masters), the leading row of every region class, or the
+/// reason it has none
+enum MasterRows {
+    Exact,
+    Regions(Vec<(i64, i64, Float)>),
+    Skipped(String),
+}
+
+fn master_rows(g: &Graph, e: usize, a: &[i64], h: &Rational, at_zero: bool, cfg: &PConfig, prec: u32) -> MasterRows {
+    if graph::exact_series(g, e, a, h, at_zero, 1, 1, prec).is_some() {
+        return MasterRows::Exact;
+    }
+    match graph::regions(g, e, a, h, prec, at_zero, &cfg.provided) {
+        Err(err) => MasterRows::Skipped(err),
+        Ok(None) => MasterRows::Skipped("a lower-loop part is neither reducible nor provided".into()),
+        Ok(Some(rs)) => MasterRows::Regions(rs),
+    }
+}
+
+/// nonzero rows (component, n, value; I-normalised) and all-zero masters of one class
+struct ClassRows {
+    nonzero: Vec<(usize, i64, Float)>,
+    zero: Vec<usize>,
+}
+
+fn class_rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bool, k: i64, data: &[MasterRows], cfg: &PConfig, prec: u32) -> ClassRows {
+    let mut out = ClassRows { nonzero: vec![], zero: vec![] };
+    for (j, (a, d)) in sys.masters.iter().zip(data).enumerate() {
         let sgn = if a.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
-        let push = |out: &mut Vec<BoundaryRow>, n: i64, v: Float| {
-            if v.is_nan() {
-                eprintln!("[pflow] NaN boundary row: master {a:?} class {k} at_zero {at_zero} n {n}");
-                return;
-            }
-            out.push(BoundaryRow { comp: j, n, value: Float::with_val(prec, &v * sgn) })
-        };
-        if let Some(ex) = graph::exact_series(g, e, a, h, at_zero, k, cfg.exact_rows, prec) {
-            if ex.is_empty() {
-                for m in n_lo..n_lo + 12 {
-                    push(&mut out, m, Float::new(prec));
-                }
-            } else {
-                let nmin = ex.iter().map(|x| x.0).min().unwrap();
-                for m in n_lo..nmin {
-                    push(&mut out, m, Float::new(prec));
-                }
-                for (n, v) in ex {
-                    push(&mut out, n, v);
-                    nonzero += 1;
+        let mut push = |n: i64, v: Float| out.nonzero.push((j, n, Float::with_val(prec, &v * sgn)));
+        match d {
+            MasterRows::Exact => {
+                let ex = graph::exact_series(g, e, a, h, at_zero, k, cfg.exact_rows, prec).unwrap_or_default();
+                let ex: Vec<(i64, Float)> = ex.into_iter().filter(|x| !x.1.is_nan()).collect();
+                if ex.iter().all(|x| x.1.is_zero()) {
+                    out.zero.push(j);
+                } else {
+                    for (n, v) in ex {
+                        push(n, v);
+                    }
                 }
             }
-            continue;
-        }
-        match graph::regions(g, e, a, h, prec, at_zero, &cfg.provided) {
-            Err(_) | Ok(None) => skipped += 1,
-            Ok(Some(rs)) => {
+            MasterRows::Regions(rs) => {
                 let mine: Vec<&(i64, i64, Float)> = rs.iter().filter(|x| x.0 == k).collect();
                 if mine.is_empty() {
-                    for m in n_lo..n_lo + 12 {
-                        push(&mut out, m, Float::new(prec));
-                    }
+                    out.zero.push(j);
                 } else {
                     // only the LOWEST order is clean
                     let nmin = mine.iter().map(|x| x.1).min().unwrap();
@@ -175,16 +197,49 @@ fn rows(sys: &EBlockSystem, g: &Graph, e: usize, h: &Rational, at_zero: bool, k:
                     for x in mine.iter().filter(|x| x.1 == nmin) {
                         v += &x.2;
                     }
-                    for m in n_lo..nmin {
-                        push(&mut out, m, Float::new(prec));
-                    }
-                    push(&mut out, nmin, v);
-                    nonzero += 1;
+                    push(nmin, v);
                 }
             }
+            MasterRows::Skipped(_) => {}
         }
     }
-    Ok((out, nonzero, skipped))
+    out
+}
+
+/// the fit rows of one family: the nonzero rows, zero rows below each master's first row (from n_lo), 12 zero orders for the
+/// masters without a row in this class; errors for nonzero rows the family cannot represent
+fn boundary_rows(cr: &ClassRows, fam: &FamilyNum, e: usize, prec: u32) -> (Vec<BoundaryRow>, Vec<String>) {
+    let n_lo = fam.spec.n_lo;
+    let nrow = (fam.basis.len() / e) as i64;
+    let mut out = Vec::new();
+    let mut errs = Vec::new();
+    for j in &cr.zero {
+        for n in n_lo..(n_lo + 12).min(n_lo + nrow) {
+            out.push(BoundaryRow { comp: *j, n, value: Float::new(prec) });
+        }
+    }
+    let mut first: std::collections::BTreeMap<usize, i64> = Default::default();
+    for (j, n, _) in &cr.nonzero {
+        let f = first.entry(*j).or_insert(*n);
+        *f = (*f).min(*n);
+    }
+    for (j, f) in &first {
+        for n in n_lo..(*f).min(n_lo + nrow) {
+            out.push(BoundaryRow { comp: *j, n, value: Float::new(prec) });
+        }
+    }
+    for (j, n, v) in &cr.nonzero {
+        if *n < n_lo {
+            errs.push(format!("{}: nonzero row of master {j} at n = {n} below n_lo = {n_lo}", fam.spec.name));
+            continue;
+        }
+        if *n >= n_lo + nrow {
+            errs.push(format!("{}: nonzero row of master {j} at n = {n} beyond the family's {nrow} orders", fam.spec.name));
+            continue;
+        }
+        out.push(BoundaryRow { comp: *j, n: *n, value: v.clone() });
+    }
+    (out, errs)
 }
 
 /// rank-revealing least squares: Householder QR with column pivoting; columns whose remaining norm falls below
@@ -319,16 +374,29 @@ pub fn order_budget(nmin: i64, wf: u32, w: u32, radius: f64, delta: f64) -> (i64
     (nmin + (budget / loss).floor().max(1.0) as i64, loss)
 }
 
+/// result of one boundary fit
+struct Fit {
+    coef: Vec<Float>,
+    rows: usize,
+    dropped_budget: usize,
+    rank: usize,
+    /// worst relative residual (log10) of an over-determined fit; None without rows
+    worst: Option<f64>,
+    null: Vec<Vec<Float>>,
+}
+
 /// `nmax`: rows of higher order are left out (precision budget, see `order_budget`)
-fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32, nmax: i64) -> (Vec<Float>, usize, usize, f64, Vec<Vec<Float>>) {
+fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32, nmax: i64) -> Fit {
     let rho = Float::with_val(prec, &fam.spec.rho);
     let mut amat = Vec::new();
     let mut bvec = Vec::new();
+    let mut dropped = 0usize;
     for br in bnd {
-        let row = ((br.n - fam.spec.n_lo) as usize) * e + br.comp;
-        if br.n < fam.spec.n_lo || br.n > nmax || row >= fam.basis.len() {
+        if br.n > nmax {
+            dropped += 1;
             continue;
         }
+        let row = ((br.n - fam.spec.n_lo) as usize) * e + br.comp;
         let sc = Float::with_val(prec, (&rho).pow(br.n as i32));
         let vs = Float::with_val(prec, &br.value * &sc);
         let w = if vs.is_zero() { Float::with_val(prec, 1) } else { Float::with_val(prec, 1 / Float::with_val(prec, vs.clone().abs())) };
@@ -336,15 +404,15 @@ fn fit_rows(fam: &FamilyNum, bnd: &[BoundaryRow], e: usize, prec: u32, nmax: i64
         bvec.push(Float::with_val(prec, &vs * &w));
     }
     let (x, rank, null) = lstsq_rr_null(&amat, &bvec, prec);
-    let mut worst = -1e9f64;
+    let mut worst: Option<f64> = None;
     for (i, row) in amat.iter().enumerate() {
         let mut v = Float::with_val(prec, Float::dot(row.iter().zip(&x)));
         v -= &bvec[i];
-        worst = worst.max(log10abs(&v));
+        worst = Some(worst.unwrap_or(-1e9).max(log10abs(&v)));
     }
-    let c = fam.basis.iter().map(|row| Float::with_val(prec, Float::dot(row.iter().zip(&x)))).collect();
-    let dirs = null.iter().map(|v| fam.basis.iter().map(|row| Float::with_val(prec, Float::dot(row.iter().zip(v)))).collect()).collect();
-    (c, amat.len(), rank, worst, dirs)
+    let coef = fam.basis.iter().map(|row| Float::with_val(prec, Float::dot(row.iter().zip(&x)))).collect();
+    let null = null.iter().map(|v| fam.basis.iter().map(|row| Float::with_val(prec, Float::dot(row.iter().zip(v)))).collect()).collect();
+    Fit { coef, rows: amat.len(), dropped_budget: dropped, rank, worst, null }
 }
 
 /// value of family `f` (fitted coefficients `c`) or one basis column at x (real; |x|^lam on x < 0)
@@ -497,9 +565,6 @@ fn threshold_piece(tf: &[FamilyNum], y: &[Float], r: &Rational, inf_side: bool, 
                 }
                 term *= Float::with_val(prec, (&rf).pow(&ex)) / &ex;
                 acc += term;
-                if m >= 1 && j > 8 && log10abs(&acc) > -1e8 {
-                    // geometric convergence ~ r^j
-                }
             }
             let w = Float::with_val(prec, &base * &acc) * sgn_n;
             for i in 0..e {
@@ -564,6 +629,8 @@ fn plan_segment(a: &Rational, b: &Rational, points: &[(f64, f64)], w: u32, ratio
 pub struct PResult {
     pub moments: Vec<(i32, Vec<Float>)>,
     pub diag: Value,
+    /// every acceptance gate passed (diag["acceptance"])
+    pub accepted: bool,
 }
 
 /// singular points of the system (z-plane, f64) from the exact denominators (dispersive::singular works in eta = z - 1 and
@@ -612,21 +679,16 @@ pub fn split_points(cfg: &PConfig, pts: &[(f64, f64)]) -> Splits {
     Splits { d0, dthr, rmax, s0: cap(&cfg.s0, 0.4 * d0), r: cap(&cfg.r, 0.4 * dthr), s_end }
 }
 
-/// identity of a run for its checkpoints: the e-block system, the precisions and the split configuration
-pub fn run_fingerprint(sys: &EBlockSystem, cfg: &PConfig) -> String {
+/// identity of the DE for the family checkpoints: d0, masters and the CONTENT of every term (a corrected DE with the same shape
+/// never reuses stale state); the boundary data are not part of it (the families do not depend on them)
+pub fn system_fingerprint(sys: &EBlockSystem) -> String {
     let mut h = blake3::Hasher::new();
-    h.update(format!("pflow-route-b d0 {} dim {} w {} wf {} m {} {} {} nlo {} loops {} s0 {} S {} r {} ratio {} radius {} provided {}",
-        sys.d0, sys.dim(), cfg.w, cfg.wf, cfg.m0, cfg.minf, cfg.mthr, cfg.nlo, cfg.loops, cfg.s0, cfg.s_end, cfg.r, cfg.ratio, cfg.radius,
-        cfg.provided.values.len()).as_bytes());
+    h.update(format!("pflow e-block d0 {} e {} dim {}", sys.d0, sys.e_slot, sys.dim()).as_bytes());
     for m in &sys.masters {
         h.update(format!("{m:?};").as_bytes());
     }
-    h.update(format!("{:?}", sys.terms.len()).as_bytes());
-    let mut keys: Vec<(&String, String)> = cfg.provided.values.iter().map(|(k, v)| (k, v.to_string_radix(16, Some(40)))).collect();
-    keys.sort();
-    for (k, v) in keys {
-        h.update(k.as_bytes());
-        h.update(v.as_bytes());
+    for t in &sys.terms {
+        h.update(format!("{t:?};").as_bytes());
     }
     h.finalize().to_hex()[..24].to_string()
 }
@@ -655,7 +717,23 @@ fn transport_ck(tr: &Transport, y0: &[Complex], cfg: &PConfig, tag: &str) -> Res
     }
 }
 
-/// route (B) at one d0
+/// acceptance record: every gate with its verdict
+#[derive(Default)]
+struct Acceptance {
+    failures: Vec<String>,
+    checks: Vec<Value>,
+}
+
+impl Acceptance {
+    fn check(&mut self, name: &str, ok: bool, detail: String) {
+        self.checks.push(json!({"gate": name, "passed": ok, "detail": detail}));
+        if !ok {
+            self.failures.push(format!("{name}: {detail}"));
+        }
+    }
+}
+
+/// route (B) at one d0. The result carries `accepted` (all gates passed) and the gate record in diag["acceptance"].
 pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Result<PResult, String> {
     let t0 = Instant::now();
     let e = sys.dim();
@@ -670,22 +748,63 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let mut cfg = cfg.clone();
     (cfg.s0, cfg.r, cfg.s_end) = (sp.s0, sp.r, sp.s_end);
     let cfg = &cfg;
-    let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": []});
+    // the accuracy the gates ask for (relative, log10): the transports carry w digits, the provided values their own
+    let digits_cap = (cfg.w as f64).min(cfg.provided.digits.unwrap_or(f64::INFINITY));
+    let gate = -(digits_cap - cfg.gate_margin as f64);
+    let mut acc = Acceptance::default();
+    let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": [], "gate_log10": gate, "digits_cap": digits_cap});
+    // ---- boundary data of every master, both sides (once) ----
+    let mut data = Vec::new();
+    for at_zero in [true, false] {
+        let d: Vec<MasterRows> = sys.masters.iter().map(|a| master_rows(g, e_slot, a, &h, at_zero, cfg, prec)).collect();
+        let skipped: Vec<String> = d.iter().zip(&sys.masters).filter_map(|(x, a)| if let MasterRows::Skipped(why) = x { Some(format!("{a:?}: {why}")) } else { None }).collect();
+        acc.check(&format!("masters with boundary rows ({})", if at_zero { "0" } else { "inf" }), skipped.is_empty() || cfg.allow_skipped, format!("{} skipped: {:?}", skipped.len(), skipped));
+        data.push(d);
+    }
     let mut fams0 = Vec::new();
     let mut famsi = Vec::new();
     for k in 1..=cfg.loops as i64 {
         for (side, pt, lam, rho, mm) in [("0", Pt::Finite(Rational::new()), Rational::from(&h * k), &rho0, cfg.m0), ("inf", Pt::Infinity, -Rational::from(&h * k), &rho_inf, cfg.minf)] {
             let t = Instant::now();
-            let Some((num, fdiag)) = family(sys, &pt, &lam, rho, cfg, mm, &format!("{side} k={k}"))? else { continue };
-            let (br, nz, sk) = rows(sys, g, e_slot, &h, side == "0", k, &num, cfg, prec)?;
-            let nmin = br.iter().map(|b| b.n).min().unwrap_or(0);
+            let cr = class_rows(sys, g, e_slot, &h, side == "0", k, &data[if side == "0" { 0 } else { 1 }], cfg, prec);
+            // n_lo from the rows: the family must contain the solution that starts at the lowest nonzero row
+            let nmin_nz = cr.nonzero.iter().map(|x| x.1).min();
+            let nlo = cfg.nlo.min(nmin_nz.map_or(cfg.nlo, |n| n - 2));
+            let mm_c = mm; // absolute top order: a lower n_lo adds orders below
+            let Some((num, fdiag)) = family(sys, &pt, &lam, rho, cfg, nlo, mm_c, &format!("{side} k={k}"))? else {
+                acc.check(&format!("family {side} k={k}"), cr.nonzero.is_empty(), format!("empty class but {} nonzero boundary rows", cr.nonzero.len()));
+                continue;
+            };
+            let (br, errs) = boundary_rows(&cr, &num, e, prec);
+            acc.check(&format!("rows representable {side} k={k}"), errs.is_empty(), errs.join("; "));
+            // precision budget counted from the first PHYSICAL (nonzero) row
             let delta = if side == "0" { d0 } else { 1.0 / rmax };
-            let (nmax, loss) = order_budget(nmin, cfg.wf, cfg.w, cfg.radius, delta);
-            let (csoft, nrows, rank, worst, null) = fit_rows(&num, &br, e, prec, nmax);
-            diag["families"].as_array_mut().unwrap().push(json!({"side": side, "class": k, "dim": num.spec.dim, "rows": nrows, "rows_offered": br.len(), "row_order_max": if nmax == i64::MAX { Value::Null } else { json!(nmax) }, "digits_lost_per_order": loss, "rank": rank, "nonzero_rows": nz, "skipped_masters": sk,
-                "fit_worst_rel_log10": worst, "frobenius": fdiag, "seconds": t.elapsed().as_secs_f64()}));
-            eprintln!("[pflow] family {side} k={k}: dim {} rank {rank} n_lo {} k_stable {} basis rows {} fit rows {nrows} of {} (n <= {nmax}, {loss:.2} digits/order) worst {worst:.1} ({:.1} s)", num.spec.dim, num.spec.n_lo, num.spec.k_stable, num.basis.len(), br.len(), t.elapsed().as_secs_f64());
-            let f = Fam { side: if side == "0" { "0" } else { "inf" }, class: k, num, coef: Some(csoft), null, diag: Value::Null };
+            let (nmax, loss) = match nmin_nz {
+                Some(n) => order_budget(n, cfg.wf, cfg.w, cfg.radius, delta),
+                None => (i64::MAX, 0.0),
+            };
+            if loss > 1e-9 {
+                acc.check(&format!("order budget {side} k={k}"), cfg.wf as f64 - cfg.w as f64 - 10.0 > loss, format!("wf - w - 10 = {} for {loss:.2} digits/order", cfg.wf as i64 - cfg.w as i64 - 10));
+            }
+            let mut fit = fit_rows(&num, &br, e, prec, nmax);
+            if fit.rank < num.spec.dim && fit.dropped_budget > 0 {
+                let all = fit_rows(&num, &br, e, prec, i64::MAX);
+                acc.check(&format!("order budget keeps the rank {side} k={k}"), all.rank <= fit.rank,
+                    format!("rank {} with the budget (n <= {nmax}), {} with all rows: raise wf", fit.rank, all.rank));
+            }
+            if let Some(wst) = fit.worst {
+                if fit.rows > fit.rank {
+                    acc.check(&format!("boundary fit {side} k={k}"), wst < gate, format!("worst relative residual 10^{wst:.1}"));
+                }
+            }
+            diag["families"].as_array_mut().unwrap().push(json!({"side": side, "class": k, "dim": num.spec.dim, "n_lo": num.spec.n_lo, "rows": fit.rows,
+                "rows_offered": br.len(), "rows_dropped_budget": fit.dropped_budget, "row_order_max": if nmax == i64::MAX { Value::Null } else { json!(nmax) },
+                "digits_lost_per_order": loss, "rank": fit.rank, "rank_deficit": num.spec.dim - fit.rank, "nonzero_rows": cr.nonzero.len(),
+                "fit_worst_rel_log10": fit.worst, "frobenius": fdiag, "seconds": t.elapsed().as_secs_f64()}));
+            eprintln!("[pflow] family {side} k={k}: dim {} rank {} n_lo {} fit rows {} of {} ({} dropped by the budget n <= {nmax}, {loss:.2} digits/order) worst {:?} ({:.1} s)",
+                num.spec.dim, fit.rank, num.spec.n_lo, fit.rows, br.len(), fit.dropped_budget, fit.worst.map(|x| (x * 10.0).round() / 10.0), t.elapsed().as_secs_f64());
+            let null = std::mem::take(&mut fit.null);
+            let f = Fam { side: if side == "0" { "0" } else { "inf" }, class: k, num: std::sync::Arc::new(num), coef: Some(fit.coef), null, diag: Value::Null };
             if side == "0" { fams0.push(f) } else { famsi.push(f) }
         }
     }
@@ -698,15 +817,15 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             continue;
         }
         seen.push(lam.clone());
-        if let Some((num, _)) = family(sys, &Pt::Finite(Rational::from(-1)), &lam, &rho_thr, cfg, cfg.mthr, &format!("thr {j}"))? {
+        if let Some((num, _)) = family(sys, &Pt::Finite(Rational::from(-1)), &lam, &rho_thr, cfg, cfg.nlo, cfg.mthr, &format!("thr {j}"))? {
             tfams.push(num);
         }
     }
     let tdim: usize = tfams.iter().map(|f| f.spec.dim).sum();
     diag["threshold_dims"] = json!(tfams.iter().map(|f| (f.spec.lam.to_string(), f.spec.dim)).collect::<Vec<_>>());
-    if tdim != e {
-        diag["warning"] = json!(format!("threshold families span {tdim} of {e}"));
-    }
+    acc.check("threshold families span the e-block", tdim == e, format!("{tdim} of {e}"));
+    // binomial terms of the threshold pieces: (w + 10) / log10(1/r) + |m| + 10
+    let jmax = |m: i32| -> u32 { ((cfg.w as f64 + 10.0) / (1.0 / cfg.r.to_f64()).log10()).ceil() as u32 + m.unsigned_abs() + 10 };
     // transports
     let ksys = crate::dispersive::kernel::rational_system(sys)?;
     let tprec = run::bits(cfg.w);
@@ -715,9 +834,69 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let pi_ = plan_segment(&Rational::from(-&cfg.s_end), &Rational::from(-(Rational::from(&one + &cfg.r))), &pts, cfg.w, cfg.ratio);
     let s0f = Float::with_val(prec, &cfg.s0);
     let sef = Float::with_val(prec, &cfg.s_end);
+    let allzero = |y: &[Float]| y.iter().all(|x| x.is_zero());
+    // ---- the moments of a given set of family coefficients (also used for the undetermined directions) ----
+    let moments_of = |f0: &[Fam], fi: &[Fam], tag: &str, pieces: bool| -> Result<(Vec<(i32, Vec<Float>)>, Value), String> {
+        let mut out = Vec::new();
+        let mut d = json!({});
+        let y0 = rho_at(f0, e, &s0f, prec);
+        let yi = rho_at(fi, e, &sef, prec);
+        for &m in &cfg.moments {
+            let mut tot = end_piece(f0, e, &cfg.s0, m, prec);
+            let tl = end_piece(fi, e, &cfg.s_end, m, prec);
+            for (half, y, patches) in [(0, &y0, &p0), (1, &yi, &pi_)] {
+                if allzero(y) {
+                    continue;
+                }
+                let mut tc = TransportConfig::dispersive(tprec);
+                tc.cauchy_pole = Some(Rational::new());
+                tc.cauchy_power = m;
+                tc.threads = cfg.threads;
+                tc.pin_threads = false;
+                let path = PlannedPath { offset: Rational::new(), patches: patches.clone() };
+                let tr = Transport::new(&ksys, &path, tc).map_err(|x| x.to_string())?;
+                let yc: Vec<Complex> = y.iter().map(|v| Complex::with_val(tprec, v)).collect();
+                let st = transport_ck(&tr, &yc, cfg, &format!("{tag}m{m}-h{half}"))?;
+                let yend: Vec<Float> = st.y.iter().map(|c| Float::with_val(prec, c.real())).collect();
+                let integ = st.integral.as_ref().unwrap();
+                // kernel: int y (0 - z)^-m dz ; on z = -s: = -int rho s^-m ds (0-side, s0 -> 1-r) and = +int_{1+r}^{S} (inf-side)
+                let mut mid = Vec::new();
+                for i in 0..e {
+                    let v = Float::with_val(prec, integ[i].real());
+                    mid.push(if half == 0 { Float::with_val(prec, -&v) } else { v.clone() });
+                    if half == 0 { tot[i] -= v } else { tot[i] += v }
+                }
+                let (th, res, ic) = threshold_piece(&tfams, &yend, &cfg.r, half == 1, m, jmax(m), prec);
+                for i in 0..e {
+                    tot[i] += &th[i];
+                }
+                if pieces {
+                    d[format!("threshold_residual_{half}_m{m}")] = json!(res);
+                    if m == cfg.moments[0] {
+                        let f = |v: &Vec<Float>| v.iter().map(|x| x.to_string_radix(10, Some(20))).collect::<Vec<_>>();
+                        d[format!("pieces_mid{half}")] = json!(f(&mid));
+                        d[format!("pieces_thr{half}")] = json!(f(&th));
+                        d[format!("pieces_yend{half}")] = json!(f(&yend));
+                        d[format!("intcoef_{half}")] = json!(ic.iter().map(|x| x.to_string_radix(10, None)).collect::<Vec<_>>());
+                    }
+                }
+            }
+            for i in 0..e {
+                tot[i] += &tl[i];
+            }
+            if pieces && m == cfg.moments[0] {
+                let f = |v: &Vec<Float>| v.iter().map(|x| x.to_string_radix(10, Some(20))).collect::<Vec<_>>();
+                d["pieces_m1"] = json!({"head": f(&end_piece(f0, e, &cfg.s0, m, prec)), "tail": f(&tl), "total": f(&tot)});
+            }
+            out.push((m, tot));
+        }
+        Ok((out, d))
+    };
     // ---- free boundary directions: fixed by the continuity of the integer-family projection at z = -1 ----
     let ndir0: usize = fams0.iter().map(|f| f.null.len()).sum();
     let ndiri: usize = famsi.iter().map(|f| f.null.len()).sum();
+    // directions (combinations of family null vectors) that nothing determines: (side, family index, coefficient vector)
+    let mut undetermined: Vec<Vec<(usize, usize, Vec<Float>)>> = Vec::new();
     if ndir0 + ndiri > 0 {
         let t = Instant::now();
         let transport_end = |y: &[Float], patches: &[PatchSpec], tag: String| -> Result<Vec<Float>, String> {
@@ -731,32 +910,40 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let st = transport_ck(&tr, &yc, cfg, &format!("cont-{tag}"))?;
             Ok(st.y.iter().map(|c| Float::with_val(prec, c.real())).collect())
         };
-        let proj = |y: &[Float], inf_side: bool| -> Vec<Float> { threshold_piece(&tfams, y, &cfg.r, inf_side, 1, 1, prec).2 };
+        // integer-family projection and the decomposition residual (log10, relative)
+        let proj = |y: &[Float], inf_side: bool| -> (Vec<Float>, f64) {
+            let (_, res, ic) = threshold_piece(&tfams, y, &cfg.r, inf_side, 1, 1, prec);
+            (ic, res)
+        };
         let single = |fams: &[Fam], fi: usize, c: &[Float], s: &Float| -> Vec<Float> {
             let f = &fams[fi];
-            let tmp = [Fam { side: f.side, class: f.class, num: FamilyNum { spec: f.num.spec.clone(), basis: f.num.basis.clone() }, coef: Some(c.to_vec()), null: vec![], diag: Value::Null }];
+            let tmp = [Fam { side: f.side, class: f.class, num: f.num.clone(), coef: Some(c.to_vec()), null: vec![], diag: Value::Null }];
             rho_at(&tmp, e, s, prec)
         };
-        // noise floor of a projection: the transports carry w digits, so |noise| ~ 10^-(w-8) |transported vector|
+        // noise floor of a projection: the transports carry w digits (|noise| ~ 10^-(w-8) |transported vector|), and the
+        // decomposition at the threshold adds its own residual
         let ymax = |y: &[Float]| y.iter().map(log10abs).fold(-1e9f64, f64::max);
-        let floor = |y: &[Float]| ymax(y) - (cfg.w as f64 - 8.0);
+        let floor = |y: &[Float], res: f64| (ymax(y) - (cfg.w as f64 - 8.0)).max(ymax(y) + res);
         let y0e = transport_end(&rho_at(&fams0, e, &s0f, prec), &p0, "base0".into())?;
         let yie = transport_end(&rho_at(&famsi, e, &sef, prec), &pi_, "basei".into())?;
-        let b0 = proj(&y0e, false);
-        let bi = proj(&yie, true);
-        let base_floor = floor(&y0e).max(floor(&yie));
+        let (b0, r0) = proj(&y0e, false);
+        let (bi, ri) = proj(&yie, true);
+        let base_floor = floor(&y0e, r0).max(floor(&yie, ri));
         let mut cols: Vec<Vec<Float>> = Vec::new();
         let mut which: Vec<(usize, usize, usize)> = Vec::new(); // (side, family index, direction)
         let mut dropped = 0usize;
+        let mut cols_detail = Vec::new();
         for (side, fams, s, patches) in [(0usize, &fams0, &s0f, &p0), (1, &famsi, &sef, &pi_)] {
             for (fi, f) in fams.iter().enumerate() {
                 for (di, c) in f.null.iter().enumerate() {
                     let y = transport_end(&single(fams, fi, c, s), patches, format!("dir{side}-{fi}-{di}"))?;
-                    let pr = proj(&y, side == 1);
-                    // a direction whose continuity column is at the noise floor is not constrained by continuity: leave it at 0
-                    // (minimum-norm), never divide by noise
-                    if ymax(&pr) < floor(&y) + 3.0 {
+                    let (pr, res) = proj(&y, side == 1);
+                    let (col, fl) = (ymax(&pr), floor(&y, res));
+                    cols_detail.push(json!({"side": side, "family": fi, "direction": di, "column_log10": col, "floor_log10": fl}));
+                    // a direction whose continuity column is at the noise floor is not seen by continuity: undetermined (tested below)
+                    if col < fl + 3.0 {
                         dropped += 1;
+                        undetermined.push(vec![(side, fi, c.clone())]);
                         continue;
                     }
                     cols.push(if side == 0 { pr } else { pr.iter().map(|x| Float::with_val(prec, -x)).collect() });
@@ -767,16 +954,29 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         let neq = b0.len();
         let rhs: Vec<Float> = (0..neq).map(|i| Float::with_val(prec, &bi[i] - &b0[i])).collect();
         let base_resid = ymax(&rhs);
-        // nothing to fix if the base solution is already continuous to the noise floor
+        // nothing to fix if the base solution is already continuous to the noise floor (the visible directions are then 0)
         let active = !cols.is_empty() && base_resid > base_floor + 3.0;
         let (alpha, rank) = if active {
             // unit-norm columns, so that the rank decision compares like with like
             let norms: Vec<Float> = cols.iter().map(|c| { let mut n = Float::new(prec); for x in c { n += Float::with_val(prec, x.square_ref()); } n.sqrt() }).collect();
             let a: Vec<Vec<Float>> = (0..neq).map(|i| cols.iter().zip(&norms).map(|(c, n)| Float::with_val(prec, &c[i] / n)).collect()).collect();
-            let (al, rank, _) = lstsq_rr_null(&a, &rhs, prec);
+            let (al, rank, nullc) = lstsq_rr_null(&a, &rhs, prec);
+            // combinations of visible directions that continuity does not fix: undetermined as well
+            for v in &nullc {
+                let mut comb = Vec::new();
+                for (k, ((side, fi, di), n)) in which.iter().zip(&norms).enumerate() {
+                    if v[k].is_zero() {
+                        continue;
+                    }
+                    let f = if *side == 0 { &fams0[*fi] } else { &famsi[*fi] };
+                    let sc = Float::with_val(prec, &v[k] / n);
+                    comb.push((*side, *fi, f.null[*di].iter().map(|x| Float::with_val(prec, x * &sc)).collect::<Vec<_>>()));
+                }
+                undetermined.push(comb);
+            }
             (al.iter().zip(&norms).map(|(x, n)| Float::with_val(prec, x / n)).collect::<Vec<Float>>(), rank)
         } else {
-            (vec![Float::new(prec); cols.len()], 0)
+            (vec![Float::new(prec); cols.len()], cols.len())
         };
         let mut worst = -1e9f64;
         let scale = rhs.iter().chain(b0.iter()).map(log10abs).fold(-1e9f64, f64::max);
@@ -787,6 +987,9 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             }
             worst = worst.max(log10abs(&v) - scale);
         }
+        if active {
+            acc.check("continuity fit residual", worst < gate, format!("10^{worst:.1}"));
+        }
         for ((side, fi, di), al) in which.iter().zip(&alpha) {
             let f = if *side == 0 { &mut fams0[*fi] } else { &mut famsi[*fi] };
             let d = f.null[*di].clone();
@@ -795,77 +998,111 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
                 *x += Float::with_val(prec, al * y);
             }
         }
-        diag["continuity_fit_detail"] = json!({"base_residual_log10": base_resid, "noise_floor_log10": base_floor, "applied": active, "dropped_noise_directions": dropped});
-        diag["continuity_fit"] = json!({"free_directions": [ndir0, ndiri], "equations": neq, "rank": rank, "worst_rel_residual_log10": worst, "seconds": t.elapsed().as_secs_f64()});
-        eprintln!("[pflow] continuity fit: {} + {} free directions ({dropped} at the noise floor), {} equations, rank {rank}, base residual {base_resid:.1} vs floor {base_floor:.1}, applied {active}, worst residual {worst:.1} ({:.1} s)", ndir0, ndiri, neq, t.elapsed().as_secs_f64());
+        diag["continuity_fit_detail"] = json!({"base_residual_log10": base_resid, "noise_floor_log10": base_floor, "applied": active, "dropped_noise_directions": dropped, "columns": cols_detail});
+        diag["continuity_fit"] = json!({"free_directions": [ndir0, ndiri], "equations": neq, "active_columns": cols.len(), "rank": rank, "worst_rel_residual_log10": worst, "seconds": t.elapsed().as_secs_f64()});
+        eprintln!("[pflow] continuity fit: {} + {} free directions ({dropped} at the noise floor), {} equations, rank {rank} of {} columns, base residual {base_resid:.1} vs floor {base_floor:.1}, applied {active}, worst residual {worst:.1} ({:.1} s)", ndir0, ndiri, neq, cols.len(), t.elapsed().as_secs_f64());
     }
-    let y0 = rho_at(&fams0, e, &s0f, prec);
-    let yi = rho_at(&famsi, e, &sef, prec);
     diag["patches"] = json!([p0.len(), pi_.len()]);
-    eprintln!("[pflow] rho(s0) = {:?}", y0.iter().map(|x| x.to_f64()).collect::<Vec<_>>());
-    eprintln!("[pflow] rho(S)  = {:?}", yi.iter().map(|x| x.to_f64()).collect::<Vec<_>>());
     eprintln!("[pflow] singular points {:?}; patches {} / {}", pts, p0.len(), pi_.len());
-    let mut moments = Vec::new();
-    let mut cont = -1e9f64;
+    let (moments, pd) = moments_of(&fams0, &famsi, "", true)?;
+    if let Value::Object(m) = pd {
+        for (k, v) in m {
+            diag[k] = v;
+        }
+    }
     for &m in &cfg.moments {
-        let mut tot = end_piece(&fams0, e, &cfg.s0, m, prec);
-        let tl = end_piece(&famsi, e, &cfg.s_end, m, prec);
-        for (half, y, patches) in [(0, &y0, &p0), (1, &yi, &pi_)] {
-            let mut tc = TransportConfig::dispersive(tprec);
-            tc.cauchy_pole = Some(Rational::new());
-            tc.cauchy_power = m;
-            tc.threads = cfg.threads;
-            tc.pin_threads = false;
-            let path = PlannedPath { offset: Rational::new(), patches: patches.clone() };
-            let tr = Transport::new(&ksys, &path, tc).map_err(|x| x.to_string())?;
-            let yc: Vec<Complex> = y.iter().map(|v| Complex::with_val(tprec, v)).collect();
-            let st = transport_ck(&tr, &yc, cfg, &format!("m{m}-h{half}"))?;
-            let yend: Vec<Float> = st.y.iter().map(|c| Float::with_val(prec, c.real())).collect();
-            let integ = st.integral.as_ref().unwrap();
-            // kernel: int y (0 - z)^-m dz ; on z = -s: = -int rho s^-m ds (0-side, s0 -> 1-r) and = +int_{1+r}^{S} (inf-side)
-            let mut mid = Vec::new();
-            for i in 0..e {
-                let v = Float::with_val(prec, integ[i].real());
-                mid.push(if half == 0 { Float::with_val(prec, -&v) } else { v.clone() });
-                if half == 0 { tot[i] -= v } else { tot[i] += v }
-            }
-            let (th, res, ic) = threshold_piece(&tfams, &yend, &cfg.r, half == 1, m, 400, prec);
-            if m == cfg.moments[0] {
-                let f = |v: &Vec<Float>| v.iter().map(|x| x.to_string_radix(10, Some(20))).collect::<Vec<_>>();
-                diag[format!("pieces_mid{half}")] = json!(f(&mid));
-                diag[format!("pieces_thr{half}")] = json!(f(&th));
-                diag[format!("pieces_yend{half}")] = json!(f(&yend));
-            }
-            for i in 0..e {
-                tot[i] += &th[i];
-            }
-            diag[format!("threshold_residual_{half}_m{m}")] = json!(res);
-            if m == cfg.moments[0] {
-                diag[format!("intcoef_{half}")] = json!(ic.iter().map(|x| x.to_string_radix(10, None)).collect::<Vec<_>>());
+        for half in 0..2 {
+            if let Some(r) = diag[format!("threshold_residual_{half}_m{m}")].as_f64() {
+                acc.check(&format!("threshold decomposition half {half} m {m}"), r < gate, format!("10^{r:.1}"));
             }
         }
-        for i in 0..e {
-            tot[i] += &tl[i];
-        }
-        if m == cfg.moments[0] {
-            let f = |v: &Vec<Float>| v.iter().map(|x| x.to_string_radix(10, Some(20))).collect::<Vec<_>>();
-            diag["pieces_m1"] = json!({"head": f(&end_piece(&fams0, e, &cfg.s0, m, prec)), "tail": f(&tl), "total": f(&tot)});
-        }
-        moments.push((m, tot));
     }
     // continuity of the integer-family projection at z = -1
+    let mut cont = -1e9f64;
     if let (Some(a), Some(b)) = (diag["intcoef_0"].as_array(), diag["intcoef_1"].as_array()) {
         for (x, y) in a.iter().zip(b) {
             let (x, y) = (Float::with_val(prec, Float::parse(x.as_str().unwrap()).unwrap()), Float::with_val(prec, Float::parse(y.as_str().unwrap()).unwrap()));
             let d = log10abs(&Float::with_val(prec, &x - &y)) - log10abs(&x).max(log10abs(&y));
             cont = cont.max(d);
         }
+        acc.check("threshold continuity", cont < gate, format!("10^{cont:.1}"));
     }
     diag["threshold_continuity_log10"] = json!(cont);
-    diag["seconds"] = json!(t0.elapsed().as_secs_f64());
+    // ---- undetermined directions: their effect on every requested output must be below the gate ----
+    let scale_of = |v: &[Float]| v.iter().map(log10abs).fold(-1e9f64, f64::max);
+    let mut und_detail = Vec::new();
+    for (u, comb) in undetermined.iter().enumerate() {
+        let mut f0: Vec<Fam> = fams0.iter().map(|f| Fam { coef: Some(vec![Float::new(prec); f.num.basis.len()]), null: vec![], ..f.clone() }).collect();
+        let mut fi: Vec<Fam> = famsi.iter().map(|f| Fam { coef: Some(vec![Float::new(prec); f.num.basis.len()]), null: vec![], ..f.clone() }).collect();
+        for (side, k, c) in comb {
+            let f = if *side == 0 { &mut f0[*k] } else { &mut fi[*k] };
+            let cf = f.coef.as_mut().unwrap();
+            for (x, y) in cf.iter_mut().zip(c) {
+                *x += y;
+            }
+        }
+        let (mu, _) = moments_of(&f0, &fi, &format!("und{u}-"), false)?;
+        // contribution relative to the output scale of each moment (per master: relative to max(|value|, 10^-30 scale))
+        let mut worst = -1e9f64;
+        let mut affected = Vec::new();
+        for ((m, cu), (_, v)) in mu.iter().zip(&moments) {
+            let sc = scale_of(v);
+            for (j, (x, y)) in cu.iter().zip(v).enumerate() {
+                let r = log10abs(x) - log10abs(y).max(sc - 30.0);
+                worst = worst.max(r);
+                if r > gate {
+                    affected.push(json!({"m": m, "master": sys.masters[j], "relative_log10": r}));
+                }
+            }
+        }
+        acc.check(&format!("undetermined direction {u}"), affected.is_empty(), format!("largest relative effect 10^{worst:.1} on {} outputs", affected.len()));
+        und_detail.push(json!({"direction": u, "largest_relative_effect_log10": worst, "affected": affected}));
+    }
+    diag["undetermined_directions"] = json!(und_detail);
+    // ---- independent checks: exactly vanishing integrals and closed-form masters (the graph evaluator, no provided values) ----
+    if let Some(k1) = moments.iter().position(|(m, _)| *m == 1) {
+        let v = &moments[k1].1;
+        let sc = scale_of(v);
+        let none = graph::Provided::default();
+        let (mut nz, mut nc, mut worst_zero, mut worst_cf) = (0usize, 0usize, -1e9f64, -1e9f64);
+        let mut bad = Vec::new();
+        for (j, a) in sys.masters.iter().enumerate() {
+            let Some(ex) = graph::massless(g, a, &h, prec, &none) else { continue };
+            let sgn = if a.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
+            let x = Float::with_val(prec, &v[j] * sgn);
+            if ex.is_zero() {
+                nz += 1;
+                let r = log10abs(&x) - sc;
+                worst_zero = worst_zero.max(r);
+                if r > gate {
+                    bad.push(format!("{a:?} should vanish: 10^{r:.1} of the scale"));
+                }
+            } else {
+                nc += 1;
+                let r = log10abs(&Float::with_val(prec, &x - &ex)) - log10abs(&ex);
+                worst_cf = worst_cf.max(r);
+                if r > gate {
+                    bad.push(format!("{a:?}: 10^{r:.1} from its closed form"));
+                }
+            }
+        }
+        acc.check("vanishing and closed-form masters", bad.is_empty(), format!("{nz} vanishing (worst 10^{worst_zero:.1}), {nc} closed forms (worst 10^{worst_cf:.1}); {}", bad.join("; ")));
+        diag["independent_checks"] = json!({"vanishing": nz, "closed_forms": nc, "worst_vanishing_log10": worst_zero, "worst_closed_form_log10": worst_cf});
+    }
+    // ---- the provided table: every entry the evaluator can reduce itself agrees; every irreducible graph is provided ----
+    let missing = cfg.provided.missing.lock().unwrap().clone();
+    acc.check("irreducible lower-loop parts provided", missing.is_empty(), format!("{} missing: {:?}", missing.len(), missing));
+    let mism = cfg.provided.mismatch.lock().unwrap().clone();
+    acc.check("provided values = evaluator where it can reduce", mism.is_empty(), format!("{} mismatches: {:?}", mism.len(), mism));
     diag["provided_values"] = json!(cfg.provided.values.len());
-    diag["irreducible_not_provided"] = json!(*cfg.provided.missing.lock().unwrap());
-    Ok(PResult { moments, diag })
+    diag["provided_digits"] = json!(cfg.provided.digits);
+    diag["seconds"] = json!(t0.elapsed().as_secs_f64());
+    let accepted = acc.failures.is_empty();
+    diag["acceptance"] = json!({"accepted": accepted, "failures": acc.failures, "checks": acc.checks});
+    if !accepted {
+        eprintln!("[pflow] NOT ACCEPTED: {}", diag["acceptance"]["failures"]);
+    }
+    Ok(PResult { moments, diag, accepted })
 }
 
 /// massless value (E-normalisation) of a NON-master integral X of the one-mass family: X(z) = sum_j c_j(z) M_j(z) (RustRed rule,

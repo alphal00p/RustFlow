@@ -13,37 +13,77 @@
 //! The massless two-point evaluator uses series / parallel (G functions) / p-carrying bridges and the IBP triangle rule
 //! (integer indices); a graph it cannot reduce is looked up in the `Provided` table (values from a lower-loop run of the same
 //! mode, keyed by `canonical`), otherwise reported (`None`), never guessed.
+use rug::ops::Pow;
 use rug::{Float, Rational};
 use std::collections::HashMap;
 
-/// massless two-point values supplied from outside (E-normalisation, P^2 = 1), keyed by `canonical`
+/// massless two-point values supplied from outside, keyed by `canonical`. File format (schema "pflow-provided.v1"):
+/// {"schema": "pflow-provided.v1", "normalisation": "E, P^2=1", "d0": "p/q", "digits": D, "values": [{"edges": [[u, v, a], ...],
+///  "ext": [s, t], "value": "..."}]}: E-normalisation (Euclidean, measure d^dk/pi^(d/2), P^2 = 1), indices integers or "p/q".
+/// The exact evaluator always runs first: an entry is used only for a graph the evaluator cannot reduce; entries the evaluator
+/// can reduce are cross-checked (`mismatch`). `digits` caps the accuracy claimed for results that use the table.
 #[derive(Debug, Default)]
 pub struct Provided {
     pub values: HashMap<String, Float>,
-    /// canonical keys of irreducible graphs that were not in the table (diagnostic)
+    pub digits: Option<f64>,
+    pub d0: Option<Rational>,
+    /// canonical keys of irreducible graphs that were not in the table
     pub missing: std::sync::Mutex<Vec<String>>,
+    /// entries that disagree with the exact evaluator
+    pub mismatch: std::sync::Mutex<Vec<String>>,
 }
 
 impl Clone for Provided {
     fn clone(&self) -> Provided {
-        Provided { values: self.values.clone(), missing: std::sync::Mutex::new(self.missing.lock().unwrap().clone()) }
+        Provided {
+            values: self.values.clone(),
+            digits: self.digits,
+            d0: self.d0.clone(),
+            missing: std::sync::Mutex::new(self.missing.lock().unwrap().clone()),
+            mismatch: std::sync::Mutex::new(self.mismatch.lock().unwrap().clone()),
+        }
     }
 }
 
+pub const PROVIDED_SCHEMA: &str = "pflow-provided.v1";
+
 impl Provided {
-    /// JSON list of {"edges": [[u, v, a], ...], "ext": [s, t], "value": "..."} (a integer or "p/q")
-    pub fn from_json(v: &serde_json::Value, prec: u32) -> Result<Provided, String> {
-        let mut values = HashMap::new();
-        for x in v.as_array().ok_or("provided: a list")? {
-            let edges: Vec<(usize, usize, Rational)> = x["edges"].as_array().ok_or("provided: edges")?.iter().map(|e| {
-                let a = match &e[2] { serde_json::Value::String(s) => s.parse::<Rational>().map_err(|e| e.to_string()), n => Ok(Rational::from(n.as_i64().unwrap_or(0))) };
-                Ok((e[0].as_u64().ok_or("u")? as usize, e[1].as_u64().ok_or("v")? as usize, a?))
-            }).collect::<Result<_, String>>()?;
-            let ext = (x["ext"][0].as_u64().ok_or("ext")? as usize, x["ext"][1].as_u64().ok_or("ext")? as usize);
-            let val = Float::with_val(prec, Float::parse(x["value"].as_str().ok_or("provided: value string")?).map_err(|e| e.to_string())?);
-            values.insert(canonical(&edges, ext.0, ext.1), val);
+    /// parse and check a table (schema, normalisation, d0 of the run, digits, integer or "p/q" indices, no conflicting duplicates)
+    pub fn from_json(v: &serde_json::Value, prec: u32, d0: &Rational) -> Result<Provided, String> {
+        if v["schema"] != PROVIDED_SCHEMA {
+            return Err(format!("provided: schema must be \"{PROVIDED_SCHEMA}\" (got {})", v["schema"]));
         }
-        Ok(Provided { values, missing: Default::default() })
+        if v["normalisation"] != "E, P^2=1" {
+            return Err(format!("provided: normalisation must be \"E, P^2=1\" (got {})", v["normalisation"]));
+        }
+        let td0: Rational = v["d0"].as_str().ok_or("provided: d0 (\"p/q\") missing")?.parse().map_err(|e| format!("provided: d0: {e}"))?;
+        if &td0 != d0 {
+            return Err(format!("provided: table for d0 = {td0}, run at d0 = {d0}"));
+        }
+        let digits = v["digits"].as_f64().ok_or("provided: digits missing")?;
+        let tol = Float::with_val(prec, 10f64).pow(-(digits - 5.0).max(1.0));
+        let mut values: HashMap<String, Float> = HashMap::new();
+        for x in v["values"].as_array().ok_or("provided: values (a list)")? {
+            let edges: Vec<(usize, usize, Rational)> = x["edges"].as_array().ok_or("provided: edges")?.iter().map(|e| {
+                let a = match &e[2] {
+                    serde_json::Value::String(s) => s.parse::<Rational>().map_err(|e| format!("provided: index {s}: {e}")),
+                    serde_json::Value::Number(n) if n.is_i64() => Ok(Rational::from(n.as_i64().unwrap())),
+                    other => Err(format!("provided: index {other} is not an integer or a \"p/q\" string")),
+                };
+                Ok((e[0].as_u64().ok_or("provided: vertex")? as usize, e[1].as_u64().ok_or("provided: vertex")? as usize, a?))
+            }).collect::<Result<_, String>>()?;
+            let ext = (x["ext"][0].as_u64().ok_or("provided: ext")? as usize, x["ext"][1].as_u64().ok_or("provided: ext")? as usize);
+            let val = Float::with_val(prec, Float::parse(x["value"].as_str().ok_or("provided: value (a string)")?).map_err(|e| format!("provided: value: {e}"))?);
+            let key = canonical(&edges, ext.0, ext.1);
+            if let Some(old) = values.get(&key) {
+                let d = Float::with_val(prec, old - &val).abs();
+                if d > Float::with_val(prec, old.clone().abs() * &tol) {
+                    return Err(format!("provided: two different values for the graph {key}"));
+                }
+            }
+            values.insert(key, val);
+        }
+        Ok(Provided { values, digits: Some(digits), d0: Some(td0), ..Default::default() })
     }
 }
 
@@ -65,7 +105,7 @@ fn connected_plain(edges: &[(usize, usize, Rational)], a: usize, b: usize, skip:
     seen.contains(&b)
 }
 
-/// canonical key of a massless two-point graph (same as s1/proto/prov.py): contract index-0 lines; repeat {contract a bridge
+/// canonical key of a massless two-point graph (the boundary request tools compute the same key): contract index-0 lines; repeat {contract a bridge
 /// (it carries the full external momentum: factor 1 at P^2 = 1); merge two lines in series at an internal degree-2 vertex}; then
 /// the lexicographic minimum over relabellings (externals -> 0, 1 in both orders, internal vertices -> 2..) of the sorted list
 /// (min(u,v), max(u,v), index), printed as JSON
@@ -239,7 +279,66 @@ fn connected(edges: &[E2], a: usize, b: usize, skip: Option<usize>) -> bool {
 }
 
 /// massless two-point function between s and t: value = C (P^2)^-alpha. None = not reducible by the implemented rules.
-fn eval2pt(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u32, depth: usize, pv: &Provided) -> Option<Ev> {
+/// massless two-point function between s and t with the provided table: the exact evaluator first; the table only for a graph
+/// it cannot reduce (top level); entries for graphs it reduces are cross-checked against it
+fn eval2pt(edges: Vec<E2>, s: usize, t: usize, h: &Rational, prec: u32, depth: usize, pv: &Provided) -> Option<Ev> {
+    let integer = edges.iter().all(|e| e.a.denom() == &1);
+    let key = |edges: &[E2]| canonical(&edges.iter().map(|e| (e.u, e.v, e.a.clone())).collect::<Vec<_>>(), s, t);
+    let r = eval2pt_core(edges.clone(), s, t, h, prec, depth);
+    if depth > 0 || !integer {
+        return r;
+    }
+    if pv.values.is_empty() {
+        if r.is_none() {
+            let k = key(&edges);
+            let mut m = pv.missing.lock().unwrap();
+            if !m.contains(&k) {
+                m.push(k);
+            }
+        }
+        return r;
+    }
+    let k = key(&edges);
+    match (r, pv.values.get(&k)) {
+        (Some(ev), Some(v)) => {
+            let c = match &ev { Ev::Zero => Float::new(prec), Ev::Val(c, _) => c.clone() };
+            let tol = Float::with_val(prec, 10f64).pow(-(pv.digits.unwrap_or(30.0) - 5.0).max(1.0));
+            let d = Float::with_val(prec, &c - v).abs();
+            let sc = Float::with_val(prec, c.clone().abs()).max(&Float::with_val(prec, v.clone().abs()));
+            if d > Float::with_val(prec, &sc * &tol) {
+                let mut m = pv.mismatch.lock().unwrap();
+                m.push(format!("{k}: evaluator {} vs provided {}", c.to_string_radix(10, Some(20)), v.to_string_radix(10, Some(20))));
+            }
+            Some(ev)
+        }
+        (Some(ev), None) => Some(ev),
+        (None, Some(v)) => {
+            // C (P^2)^-alpha with alpha = sum a - L h
+            let mut vs: Vec<usize> = edges.iter().flat_map(|e| [e.u, e.v]).collect();
+            vs.push(s);
+            vs.push(t);
+            vs.sort();
+            vs.dedup();
+            let l = edges.len() as i64 - vs.len() as i64 + 1;
+            let mut alpha = q(0);
+            for e in &edges {
+                alpha += &e.a;
+            }
+            alpha -= Rational::from(h * l);
+            Some(Ev::Val(Float::with_val(prec, v), alpha))
+        }
+        (None, None) => {
+            let mut m = pv.missing.lock().unwrap();
+            if !m.contains(&k) {
+                m.push(k);
+            }
+            None
+        }
+    }
+}
+
+/// the exact evaluator: series / parallel (G functions) / p-carrying bridges / IBP triangle rule; None = not reducible here
+fn eval2pt_core(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u32, depth: usize) -> Option<Ev> {
     if depth > 400 {
         return None;
     }
@@ -265,24 +364,6 @@ fn eval2pt(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u
     }
     if s == t {
         return Some(if edges.is_empty() { Ev::Val(Float::with_val(prec, 1), q(0)) } else { Ev::Zero });
-    }
-    if !pv.values.is_empty() && edges.iter().all(|e| e.a.denom() == &1) {
-        let ce: Vec<(usize, usize, Rational)> = edges.iter().map(|e| (e.u, e.v, e.a.clone())).collect();
-        if let Some(v) = pv.values.get(&canonical(&ce, s, t)) {
-            // C (P^2)^-alpha with alpha = sum a - L h
-            let mut vs: Vec<usize> = edges.iter().flat_map(|e| [e.u, e.v]).collect();
-            vs.push(s);
-            vs.push(t);
-            vs.sort();
-            vs.dedup();
-            let l = edges.len() as i64 - vs.len() as i64 + 1;
-            let mut alpha = q(0);
-            for e in &edges {
-                alpha += &e.a;
-            }
-            alpha -= Rational::from(h * l);
-            return Some(Ev::Val(Float::with_val(prec, v), alpha));
-        }
     }
     let mut c = Float::with_val(prec, 1);
     let mut alpha = q(0);
@@ -368,16 +449,7 @@ fn eval2pt(mut edges: Vec<E2>, mut s: usize, mut t: usize, h: &Rational, prec: u
         alpha += &edges[0].a;
         return Some(Ev::Val(c, alpha));
     }
-    let tr = triangle(&edges, s, t, h, prec, depth, pv);
-    if tr.is_none() && depth == 0 {
-        let ce: Vec<(usize, usize, Rational)> = edges.iter().map(|e| (e.u, e.v, e.a.clone())).collect();
-        let k = canonical(&ce, s, t);
-        let mut m = pv.missing.lock().unwrap();
-        if !m.contains(&k) {
-            m.push(k);
-        }
-    }
-    match tr? {
+    match triangle(&edges, s, t, h, prec, depth)? {
         Ev::Zero => Some(Ev::Zero),
         Ev::Val(c2, a2) => {
             c *= c2;
@@ -392,7 +464,7 @@ fn is_pos_int(a: &Rational) -> bool {
 }
 
 /// IBP triangle rule: (d - 2 a1 - a2 - a3) I = a2 [I(2+,1-) - I(2+,fY-)] + a3 [I(3+,1-) - I(3+,fX-)]
-fn triangle(edges: &[E2], s: usize, t: usize, h: &Rational, prec: u32, depth: usize, pv: &Provided) -> Option<Ev> {
+fn triangle(edges: &[E2], s: usize, t: usize, h: &Rational, prec: u32, depth: usize) -> Option<Ev> {
     let inc = |x: usize| -> Vec<usize> { (0..edges.len()).filter(|&i| edges[i].u == x || edges[i].v == x).collect() };
     for i1 in 0..edges.len() {
         if !is_pos_int(&edges[i1].a) {
@@ -441,7 +513,7 @@ fn triangle(edges: &[E2], s: usize, t: usize, h: &Rational, prec: u32, depth: us
                     let mut tot = Float::new(prec);
                     let mut al = None;
                     for (cf, g) in terms {
-                        match eval2pt(g, s, t, h, prec, depth + 1, pv)? {
+                        match eval2pt_core(g, s, t, h, prec, depth + 1)? {
                             Ev::Zero => {}
                             Ev::Val(cg, ag) => {
                                 tot += Float::with_val(prec, &cg * &cf);
@@ -677,7 +749,7 @@ fn classify(expo: &Rational, h: &Rational) -> Option<(i64, i64)> {
     None
 }
 
-/// simple masters: ('power', C, expo) or ('bubble', C, ae, beta, b) after massless series/parallel reductions; see graph.py
+/// simple masters: ('power', C, expo) or ('bubble', C, ae, beta, b) after massless series/parallel reductions; see the reference implementation
 enum Simple {
     Power(Float, Rational),
     Bubble(Float, i64, Rational, Rational),
