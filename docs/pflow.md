@@ -33,7 +33,8 @@ All checks are gates with threshold 10^-(min(w, provided digits) - gate_margin),
   from the first nonzero row);
 - every nonzero row representable (n >= n_lo; a leading row within the family's orders). n_lo = min(--nlo, lowest nonzero
   row - 2) per class; the threshold families use min(--nlo, -10);
-- threshold families span the e-block; the threshold decompositions and the integer-class continuity at z = -1;
+- threshold families span the e-block; the threshold decompositions; the integer-class continuity at z = -1, against the gate
+  raised by the condition number of the threshold decomposition (near-degenerate classes frac(j h) at small eps);
 - the continuity-fit residual. Directions that continuity cannot see are UNDETERMINED: their effect on every requested output
   must be below the gate, else the run is not accepted;
 - every master has boundary rows (`--allow-skipped` to override). Every irreducible lower-loop graph is provided;

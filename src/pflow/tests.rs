@@ -467,3 +467,15 @@ fn four_loop_no1_regression() {
     assert!(ic["closed_forms"].as_u64().unwrap() >= 73, "{ic}");
     assert!(ic["worst_closed_form_log10"].as_f64().unwrap() < -40.0, "{ic}");
 }
+
+/// the condition estimate of the threshold decomposition: near-dependent unit columns give a large condition
+#[test]
+fn condition_of_nearly_dependent_columns() {
+    let prec = 200;
+    let f = |x: f64| Float::with_val(prec, x);
+    let a = vec![vec![f(1.0), f(1.0)], vec![f(0.0), f(1e-12)]];
+    let c = super::engine::cond_log10(&a, prec);
+    assert!((c - 12.15).abs() < 0.2, "{c}");
+    let b = vec![vec![f(1.0), f(0.0)], vec![f(0.0), f(1.0)]];
+    assert!(super::engine::cond_log10(&b, prec).abs() < 1e-6);
+}

@@ -520,9 +520,70 @@ impl Fam {
     }
 }
 
+/// log10 of the condition number of `a` with unit-norm columns: |R_00| / |R_rr| of a column-pivoted QR (rank r)
+pub fn cond_log10(a: &[Vec<Float>], prec: u32) -> f64 {
+    let m = a.len();
+    if m == 0 {
+        return 0.0;
+    }
+    let n = a[0].len();
+    let norms: Vec<Float> = (0..n).map(|k| { let mut s = Float::new(prec); for row in a { s += Float::with_val(prec, row[k].square_ref()); } s.sqrt() }).collect();
+    let mut r: Vec<Vec<Float>> = a.iter().map(|row| row.iter().zip(&norms).map(|(x, c)| if c.is_zero() { Float::new(prec) } else { Float::with_val(prec, x / c) }).collect()).collect();
+    let tol_exp = -(prec as i32) / 2;
+    let (mut first, mut last) = (None::<f64>, None::<f64>);
+    for k in 0..n.min(m) {
+        let (mut best, mut bv) = (k, Float::new(prec));
+        for j in k..n {
+            let mut c = Float::new(prec);
+            for i in k..m {
+                c += Float::with_val(prec, r[i][j].square_ref());
+            }
+            let c = c.sqrt();
+            if c > bv {
+                bv = c;
+                best = j;
+            }
+        }
+        if bv.is_zero() || bv.get_exp().unwrap_or(i32::MIN) < tol_exp {
+            break;
+        }
+        let lv = log10abs(&bv);
+        first.get_or_insert(lv);
+        last = Some(lv);
+        for row in r.iter_mut() {
+            row.swap(k, best);
+        }
+        let mut alpha = bv.clone();
+        if r[k][k] > 0 {
+            alpha = -alpha;
+        }
+        let mut v: Vec<Float> = (k..m).map(|i| r[i][k].clone()).collect();
+        v[0] -= &alpha;
+        let mut vn = Float::new(prec);
+        for x in &v {
+            vn += Float::with_val(prec, x.square_ref());
+        }
+        if vn.is_zero() {
+            continue;
+        }
+        for j in k..n {
+            let mut s = Float::new(prec);
+            for (t, i) in (k..m).enumerate() {
+                s += Float::with_val(prec, &v[t] * &r[i][j]);
+            }
+            let f = Float::with_val(prec, &s * 2u32) / &vn;
+            for (t, i) in (k..m).enumerate() {
+                let d = Float::with_val(prec, &f * &v[t]);
+                r[i][j] -= d;
+            }
+        }
+    }
+    match (first, last) { (Some(a), Some(b)) => a - b, _ => 0.0 }
+}
+
 /// threshold neighbourhood: decompose rho at s = 1 - r (side 0) / 1 + r (side inf) in the local families at z = -1, integrate
 /// FP int rho s^-m ds to s = 1 termwise. Returns (integral, decomposition residual log10, integer-family coefficients)
-fn threshold_piece(tf: &[FamilyNum], y: &[Float], r: &Rational, inf_side: bool, m: i32, jmax: u32, prec: u32) -> (Vec<Float>, f64, Vec<Float>) {
+fn threshold_piece(tf: &[FamilyNum], y: &[Float], r: &Rational, inf_side: bool, m: i32, jmax: u32, prec: u32) -> (Vec<Float>, f64, Vec<Float>, f64) {
     let e = y.len();
     let rf = Float::with_val(prec, r);
     let x = if inf_side { Float::with_val(prec, -&rf) } else { rf.clone() };
@@ -536,6 +597,7 @@ fn threshold_piece(tf: &[FamilyNum], y: &[Float], r: &Rational, inf_side: bool, 
     }
     let a: Vec<Vec<Float>> = (0..e).map(|i| cols.iter().map(|c| c[i].clone()).collect()).collect();
     let (p, _rank) = lstsq_rr(&a, y, prec);
+    let cond = cond_log10(&a, prec);
     let mut res = Float::new(prec);
     for (i, row) in a.iter().enumerate() {
         let v = Float::with_val(prec, Float::dot(row.iter().zip(&p))) - &y[i];
@@ -581,7 +643,7 @@ fn threshold_piece(tf: &[FamilyNum], y: &[Float], r: &Rational, inf_side: bool, 
             }
         }
     }
-    (out, log10abs(&res) - ynorm, intc)
+    (out, log10abs(&res) - ynorm, intc, cond)
 }
 
 /// real segment a -> b (rationals), steps r/ratio with r the distance to the nearest singular point; detours (half 12-gons,
@@ -876,12 +938,13 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
                     mid.push(if half == 0 { Float::with_val(prec, -&v) } else { v.clone() });
                     if half == 0 { tot[i] -= v } else { tot[i] += v }
                 }
-                let (th, res, ic) = threshold_piece(&tfams, &yend, &cfg.r, half == 1, m, jmax(m), prec);
+                let (th, res, ic, cond) = threshold_piece(&tfams, &yend, &cfg.r, half == 1, m, jmax(m), prec);
                 for i in 0..e {
                     tot[i] += &th[i];
                 }
                 if pieces {
                     d[format!("threshold_residual_{half}_m{m}")] = json!(res);
+                    d[format!("threshold_condition_{half}_log10")] = json!(cond);
                     if m == cfg.moments[0] {
                         let f = |v: &Vec<Float>| v.iter().map(|x| x.to_string_radix(10, Some(20))).collect::<Vec<_>>();
                         d[format!("pieces_mid{half}")] = json!(f(&mid));
@@ -922,7 +985,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         };
         // integer-family projection and the decomposition residual (log10, relative)
         let proj = |y: &[Float], inf_side: bool| -> (Vec<Float>, f64) {
-            let (_, res, ic) = threshold_piece(&tfams, y, &cfg.r, inf_side, 1, 1, prec);
+            let (_, res, ic, _) = threshold_piece(&tfams, y, &cfg.r, inf_side, 1, 1, prec);
             (ic, res)
         };
         let single = |fams: &[Fam], fi: usize, c: &[Float], s: &Float| -> Vec<Float> {
@@ -1035,7 +1098,10 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
             let d = log10abs(&Float::with_val(prec, &x - &y)) - log10abs(&x).max(log10abs(&y));
             cont = cont.max(d);
         }
-        acc.check("threshold continuity", cont < gate, format!("10^{cont:.1}"));
+        // the integer-class coefficients come out of the threshold decomposition: its condition (near-degenerate classes
+        // frac(j h) at small eps) raises their noise floor
+        let cond = diag["threshold_condition_0_log10"].as_f64().unwrap_or(0.0).max(diag["threshold_condition_1_log10"].as_f64().unwrap_or(0.0));
+        acc.check("threshold continuity", cont < gate + cond, format!("10^{cont:.1} (gate 10^{gate:.1} x condition 10^{cond:.1})"));
     }
     diag["threshold_continuity_log10"] = json!(cont);
     // ---- undetermined directions: their effect on every requested output must be below the gate ----
