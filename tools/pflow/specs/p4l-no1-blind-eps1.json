@@ -1,0 +1,45 @@
+{
+ "schema": "pflow-fit-spec.v1",
+ "comment": "4L blind eps^1 test (P4L_NO1 family, mass on line 0): the 12-node production contract of runs/rf4/grid-r; archived v1 samples (legacy: frame unverified, uncertainty = the bound of the passed gates)",
+ "nodes": [
+  "995043/250000",
+  "1990761/500000",
+  "996033/250000",
+  "249239/62500",
+  "1996173/500000",
+  "399739/100000",
+  "400261/100000",
+  "2003827/500000",
+  "250761/62500",
+  "1003967/250000",
+  "2009239/500000",
+  "1004957/250000"
+ ],
+ "frame_sha256": null,
+ "allow_legacy": true,
+ "need_target_digits": 18,
+ "need_abs_err": "1e-14",
+ "target": {
+  "name": "no1",
+  "master": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   0,
+   0,
+   0
+  ],
+  "m": 1
+ },
+ "loops": 4,
+ "scheme": "G",
+ "pole_order": 1
+}

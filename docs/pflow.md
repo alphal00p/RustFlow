@@ -27,7 +27,7 @@ a_e = index of the massive line, `value(m)` = FP int rho s^-m ds:
   `--efree FILE`.
 
 ## Acceptance (every run)
-All checks are gates with threshold 10^-T, T = `--target-digits` or by default min(w, provided digits) - gate_margin
+All checks are gates with threshold 10^-T, T = `--target-digits` or by default min(w, digits of the used provided entries) - gate_margin
 (gate_margin = 20, `--gate-margin`):
 - boundary fits: residual of every over-determined fit;
 - order budget: wf - w - 10 must cover the digits lost per order at a spurious point, and the budget must not cost rank (counted
@@ -48,7 +48,7 @@ All checks are gates with threshold 10^-T, T = `--target-digits` or by default m
 - independent checks: exactly vanishing masters are numerical zeros; masters with a closed form (graph evaluator) agree with it.
 
 A run that fails a gate still writes its output (`"accepted": false`, failures in `diag.acceptance`), and the front ends exit
-with code 3. `--accept-diagnostics` makes the exit code 0. `digits_cap` = min(w, provided digits) bounds the digits a run may
+with code 3. `--accept-diagnostics` makes the exit code 0. `digits_cap` = min(w, digits of the used provided entries) bounds the digits a run may
 claim. `digits_estimate` is the minimum of `digits_cap` and of -log10 of every gate quantity that measures an error (boundary
 fits, continuity-fit residual, threshold decompositions, threshold continuity, undetermined directions, vanishing and closed-form
 masters). `digits_by_check` lists each of them, and the front ends print `accepted`, `digits_estimate` and the limiting check on
@@ -59,13 +59,37 @@ discrepancy, series tail and dropped imaginary part, log10 relative); `tail_heal
 
 ## Lower-loop boundary values (`--provided FILE`)
 ```
-{"schema": "pflow-provided.v1", "normalisation": "E, P^2=1", "d0": "p/q", "digits": D,
- "values": [{"edges": [[u, v, a], ...], "ext": [s, t], "value": "..."}]}
+{"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": "p/q", "master_definitions_sha256": HEX,
+ "sources": [{"file", "sha256", "role"}, ...], "unverified": [ids],
+ "values": [{"edges": [[u, v, a], ...], "ext": [s, t], "value": "...", "abs_err": "...", "id": ...}]}
 ```
-- Indices are integers or "p/q" strings; d0 must be the run's.
+- Written by `tools/pflow/answer2prov.py` from p-integral's d-exact reductions. v1 tables (a nominal `digits` stamp, no
+  provenance) are refused.
+- Indices are integers or "p/q" strings; d0 must be the run's, exactly.
+- Every value carries its ACHIEVED absolute uncertainty `abs_err`, propagated by the producer through the reduction
+  (sum |c_i| |B_i| err_i plus rounding). Rows built from a source without a measured uncertainty are listed in `unverified`; a run
+  that USES one fails the gate "provided values verified" unless `--allow-unverified-provided` (recorded in the output).
 - Graphs are keyed by `graph::canonical`: index-0 lines and p-carrying bridges contracted, series lines merged, the minimum over
   relabellings.
-- The exact evaluator runs first. An entry is used only for a graph it cannot reduce, and entries it can reduce are cross-checked.
+- The exact evaluator runs first. An entry is used only for a graph it cannot reduce; `digits_cap` is min(w, the relative digits of
+  the USED entries), and the gate "provided values meet the target" requires them to reach the target. Entries it can reduce are
+  cross-checked within their own `abs_err`.
+
+## Samples (the output, schema `pflow-route-b.v2`)
+A sample authenticates itself for every consumer:
+- `d0` (exact), `frame` and `frame_sha256`: the normalisation, the graph, the massive line and the master list (d0-independent: all
+  samples of one grid share it);
+- `inputs`: every file read (DE blocks, manifest, graph, provided table with its sources and definitions digest, efree, class
+  config) with its sha256;
+- `target_digits` (the effective gate), `accepted` and `acceptance.failures` (both precision passes; a requested `--extra` that
+  cannot be computed is a failure), `accept_diagnostics`, `allow_unverified_provided`, `allow_skipped`;
+- every value with `abs_err` = max(10^-digits_estimate max(|v|, 10^-30 x the moment's scale), the two-precision difference), and
+  `integral_abs_err`; every extra with its propagated `abs_err` (`--efree` files: schema `pflow-efree.v1` with d0 and abs_err).
+
+Consumers (`tools/pflow`): `masters_from_sample.py` (lower-loop masters for the next table), `fitgrid.py` (Laurent fit of a spec's
+node set), `recon4l.py` (the four-loop blind test). They refuse a d0 or frame mismatch, a rejected or verdict-less sample, a target
+below the need, an uncertainty above the need, and missing, duplicate or extra nodes; a fit records the digests of the samples it
+used. Tests: `python3 -I -m unittest discover -s tools/pflow -p 'test_*.py'` (mpmath).
 
 ## Checkpoints (`--workdir DIR`)
 - Frobenius families write their exact state every 900 s. Every transport writes after every patch.
