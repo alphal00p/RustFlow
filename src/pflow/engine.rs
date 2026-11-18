@@ -71,6 +71,8 @@ pub struct PConfig {
     pub target_digits: Option<f64>,
     /// masters without boundary rows (numerators, irreducible lower-loop parts) fail the acceptance unless allowed
     pub allow_skipped: bool,
+    /// accept provided rows the producer marked unverified (no measured uncertainty); recorded in the output
+    pub allow_unverified_provided: bool,
 }
 
 impl PConfig {
@@ -98,6 +100,7 @@ impl PConfig {
             target_digits: None,
             max_tail_log10: None,
             allow_skipped: false,
+            allow_unverified_provided: false,
         }
     }
 }
@@ -910,14 +913,10 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let mut cfg = cfg.clone();
     (cfg.s0, cfg.r, cfg.s_end) = (sp.s0, sp.r, sp.s_end);
     let cfg = &cfg;
-    // the accuracy the gates ask for (relative, log10): the transports carry w digits, the provided values their own
-    let digits_cap = (cfg.w as f64).min(cfg.provided.digits.unwrap_or(f64::INFINITY));
-    let gate = -cfg.target_digits.unwrap_or(digits_cap - cfg.gate_margin as f64);
     let mut acc = Acceptance::default();
     // every gate quantity that measures an error (log10, relative); digits_estimate is the minimum over them
     let mut errq: std::collections::BTreeMap<&'static str, f64> = std::collections::BTreeMap::new();
-    let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": [], "gate_log10": gate, "digits_cap": digits_cap});
-    // ---- boundary data of every master, both sides (once) ----
+    // ---- boundary data of every master, both sides (once); this also records which provided entries are used ----
     let mut data = Vec::new();
     for at_zero in [true, false] {
         let d: Vec<MasterRows> = sys.masters.iter().map(|a| master_rows(g, e_slot, a, &h, at_zero, cfg, prec)).collect();
@@ -926,6 +925,21 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         let failed: Vec<String> = d.iter().zip(&sys.masters).filter_map(|(x, a)| if let MasterRows::Failed(why) = x { Some(format!("{a:?}: {why}")) } else { None }).collect();
         acc.check(&format!("boundary rows computable ({})", if at_zero { "0" } else { "inf" }), failed.is_empty(), format!("{} failed: {:?}", failed.len(), failed));
         data.push(d);
+    }
+    // the accuracy the gates ask for (relative, log10): the transports carry w digits, the provided values that were USED their
+    // own achieved relative uncertainty
+    let used_digits = cfg.provided.used_digits();
+    let digits_cap = (cfg.w as f64).min(used_digits.unwrap_or(f64::INFINITY));
+    let gate = -cfg.target_digits.unwrap_or(digits_cap - cfg.gate_margin as f64);
+    let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": [], "gate_log10": gate, "digits_cap": digits_cap});
+    {
+        let used = cfg.provided.used.lock().unwrap().clone();
+        if let Some(ud) = used_digits {
+            acc.check("provided values meet the target", ud >= -gate, format!("the {} used entries have >= {ud:.1} relative digits (target {:.1})", used.len(), -gate));
+        }
+        let unv: Vec<&String> = used.iter().filter(|k| cfg.provided.unverified.contains(k)).collect();
+        acc.check("provided values verified", unv.is_empty() || cfg.allow_unverified_provided, format!("{} used entries without a measured uncertainty: {:?}", unv.len(), unv));
+        diag["provided"] = json!({"used": used.len(), "used_relative_digits": used_digits, "unverified_used": unv.len(), "header": cfg.provided.header});
     }
     let mut fams0 = Vec::new();
     let mut famsi = Vec::new();
@@ -1288,7 +1302,6 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     let mlist: Vec<String> = mism.iter().map(|(k, d, n)| format!("{k}: {d} ({n} uses)")).collect();
     acc.check("provided values = evaluator where it can reduce", mism.is_empty(), format!("{} mismatching entries: {:?}", mism.len(), mlist));
     diag["provided_values"] = json!(cfg.provided.values.len());
-    diag["provided_digits"] = json!(cfg.provided.digits);
     diag["tail_heals"] = json!(heals.load(std::sync::atomic::Ordering::SeqCst));
     diag["tail_heal_policy"] = json!(crate::dispersive::kernel::TAIL_HEAL_POLICY);
     // M3: the worst transport diagnostics over the final transports (information; the tail is gated by the kernel and healed)
@@ -1329,6 +1342,25 @@ pub fn extra_value(
     var: &str,
     prec: u32,
 ) -> Result<(Float, i64), String> {
+    extra_value_err(rules, sys, x, moments, None, efree, None, var, prec).map(|(v, n, _)| (v, n))
+}
+
+/// `extra_value` with its propagated absolute uncertainty: sum over the rule terms of |coefficient| x (abs error of the moment, or
+/// of the pinched master's value). `moment_errs` has the same layout as `moments`; a pinched master without an error is an error.
+#[allow(clippy::too_many_arguments)]
+pub fn extra_value_err(
+    rules: &std::collections::HashMap<Vec<i64>, Vec<(Vec<i64>, String)>>,
+    sys: &EBlockSystem,
+    x: &[i64],
+    moments: &[(i32, Vec<Float>)],
+    moment_errs: Option<&[(i32, Vec<Float>)]>,
+    efree: &std::collections::HashMap<Vec<i64>, Float>,
+    efree_errs: Option<&std::collections::HashMap<Vec<i64>, Float>>,
+    var: &str,
+    prec: u32,
+) -> Result<(Float, i64, Float), String> {
+    let mut err = Float::new(prec);
+    let merr = |m: i32| moment_errs.and_then(|e| e.iter().find(|(k, _)| *k == m).map(|(_, v)| v));
     use crate::dispersive::system::parse_coefficient;
     let xv = x.to_vec();
     let terms: Vec<(Vec<i64>, String)> = if sys.masters.contains(&xv) { vec![(xv.clone(), "1".into())] } else { rules.get(&xv).cloned().ok_or("no rule for the target")? };
@@ -1367,6 +1399,10 @@ pub fn extra_value(
                     t = -t;
                 }
                 tot += t;
+                if moment_errs.is_some() {
+                    let e = merr((nidx + 1) as i32).ok_or(format!("abs error of moment m = {} needed", nidx + 1))?;
+                    err += Float::with_val(prec, g.clone().abs() * &e[j]);
+                }
             }
         } else {
             // a z-independent (pinched) master: the z^0 coefficient of c(z)
@@ -1377,8 +1413,12 @@ pub fn extra_value(
             let sgn = if ti.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
             let ev = efree.get(ti).ok_or(format!("value of the pinched master {ti:?} needed"))?;
             tot += Float::with_val(prec, g * ev) * sgn; // I = (-1)^(sum) E
+            if let Some(ee) = efree_errs {
+                let e = ee.get(ti).ok_or(format!("abs error of the pinched master {ti:?} needed"))?;
+                err += Float::with_val(prec, g.clone().abs() * e);
+            }
         }
     }
     let sx = if x.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
-    Ok((Float::with_val(prec, &tot * sx), maxn))
+    Ok((Float::with_val(prec, &tot * sx), maxn, err))
 }

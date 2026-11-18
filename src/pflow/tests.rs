@@ -384,8 +384,9 @@ fn provided_table_checks() {
     let h = Rational::from(&sys.d0 / 2u32);
     let one = Rational::from(1);
     let bubble = graph::g_bubble(&one, &one, &h, prec).unwrap();
-    let tab = |val: &str, idx: serde_json::Value, d0: String| serde_json::json!({"schema": "pflow-provided.v1", "normalisation": "E, P^2=1", "d0": d0, "digits": 60,
-        "values": [{"edges": [[0, 1, idx.clone()], [0, 1, 1]], "ext": [0, 1], "value": val}]});
+    let tab = |val: &str, idx: serde_json::Value, d0: String| serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": d0,
+        "master_definitions_sha256": "0".repeat(64), "sources": [{"file": "test", "sha256": "1".repeat(64), "role": "answer"}],
+        "values": [{"edges": [[0, 1, idx.clone()], [0, 1, 1]], "ext": [0, 1], "value": val, "abs_err": "1e-70", "id": "b"}]});
     let good = tab(&bubble.to_string_radix(10, Some(80)), serde_json::json!(1), sys.d0.to_string());
     cfg.provided = graph::Provided::from_json(&good, prec, &sys.d0).unwrap();
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
@@ -401,8 +402,53 @@ fn provided_table_checks() {
     assert!(graph::Provided::from_json(&tab("1.0", serde_json::json!(1.0), sys.d0.to_string()), prec, &sys.d0).is_err(), "float index");
     assert!(graph::Provided::from_json(&tab("1.0", serde_json::json!(1), "3".into()), prec, &sys.d0).is_err(), "wrong d0");
     let mut dup = good.clone();
-    dup["values"] = serde_json::json!([good["values"][0], {"edges": [[0, 1, 1], [0, 1, 1]], "ext": [0, 1], "value": "2.0"}]);
+    dup["values"] = serde_json::json!([good["values"][0], {"edges": [[0, 1, 1], [0, 1, 1]], "ext": [0, 1], "value": "2.0", "abs_err": "1e-70"}]);
     assert!(graph::Provided::from_json(&dup, prec, &sys.d0).is_err(), "conflicting duplicate");
+    // authentication of the table itself: no v1, every value with abs_err, sources with sha256, the definitions digest
+    let mut v1 = good.clone();
+    v1["schema"] = serde_json::json!("pflow-provided.v1");
+    assert!(graph::Provided::from_json(&v1, prec, &sys.d0).unwrap_err().contains("regenerate"));
+    let mut noerr = good.clone();
+    noerr["values"][0].as_object_mut().unwrap().remove("abs_err");
+    assert!(graph::Provided::from_json(&noerr, prec, &sys.d0).is_err(), "value without abs_err");
+    let mut nosrc = good.clone();
+    nosrc["sources"] = serde_json::json!([{"file": "x"}]);
+    assert!(graph::Provided::from_json(&nosrc, prec, &sys.d0).is_err(), "source without sha256");
+    let mut nodef = good.clone();
+    nodef.as_object_mut().unwrap().remove("master_definitions_sha256");
+    assert!(graph::Provided::from_json(&nodef, prec, &sys.d0).is_err(), "no definitions digest");
+    // a value off by 1e-35 (relative) is consistent with a declared uncertainty of 1e-30 x |value|, a mismatch with 1e-40 x |value|
+    let near = Float::with_val(prec, &bubble * (1 + Float::with_val(prec, 1e-35)));
+    for (e, ok) in [(1e-30, true), (1e-40, false)] {
+        let mut t = tab(&near.to_string_radix(10, Some(60)), serde_json::json!(1), sys.d0.to_string());
+        t["values"][0]["abs_err"] = serde_json::json!(Float::with_val(prec, Float::with_val(prec, bubble.abs_ref()) * Float::with_val(prec, e)).to_string_radix(10, Some(3)));
+        let mut c = cfg.clone();
+        c.provided = graph::Provided::from_json(&t, prec, &sys.d0).unwrap();
+        let r = run_b(&sys, &g, 0, &c).unwrap();
+        assert_eq!(r.accepted, ok, "abs_err {e}: {}", r.diag["acceptance"]["failures"]);
+    }
+}
+
+/// provided entries that the evaluator cannot reduce are USED: their relative uncertainty caps the claimed digits, and a row the
+/// producer marked unverified is refused unless allowed (three-loop NO top graph: irreducible for the exact evaluator)
+#[test]
+fn provided_used_entries_and_unverified_rows() {
+    let g = graph_of("P3L_NO");
+    let h = Rational::from((62811, 31250));
+    let prec = 300;
+    let a = [1i64, 1, 1, 1, 1, 1, 1, 1, 0];
+    assert!(graph::massless(&g, &a, &h, prec, &graph::Provided::default()).is_none(), "the NO top graph must be irreducible here");
+    let edges: Vec<serde_json::Value> = g.edges.iter().zip(&a).map(|((u, v), x)| serde_json::json!([u, v, x])).collect();
+    let tab = |unv: bool| serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": "62811/15625",
+        "master_definitions_sha256": "0".repeat(64), "sources": [{"file": "test", "sha256": "1".repeat(64)}], "unverified": if unv { serde_json::json!(["no"]) } else { serde_json::json!([]) },
+        "values": [{"edges": edges, "ext": [g.ext.0, g.ext.1], "value": "1.2345", "abs_err": "1.2345e-40", "id": "no"}]});
+    let pv = graph::Provided::from_json(&tab(false), prec, &Rational::from((62811, 15625))).unwrap();
+    let v = graph::massless(&g, &a, &h, prec, &pv).expect("supplied by the table");
+    assert!((v - Float::with_val(prec, Float::parse("1.2345").unwrap())).abs() < 1e-80);
+    assert_eq!(pv.used.lock().unwrap().len(), 1);
+    assert!((pv.used_digits().unwrap() - 40.0).abs() < 1e-9, "{:?}", pv.used_digits());
+    let pu = graph::Provided::from_json(&tab(true), prec, &Rational::from((62811, 15625))).unwrap();
+    assert_eq!(pu.unverified.len(), 1);
 }
 
 /// n_lo follows the rows: a configured nlo above the lowest row is lowered, the result is unchanged
@@ -442,6 +488,33 @@ fn cli_on_the_3l_fixture_and_two_precision_workdir() {
     let v = super::cli::run(&[s("--de"), format!("{dir}/P3L_NO_m0-solution-62811_15625.json"), s("--graph"), format!("{dir}/graph-P3L_NO.json"),
         s("--e"), s("0"), s("--w"), s("30"), s("--wf"), s("50"), s("--m"), s("60")]).unwrap();
     assert_eq!(v["accepted"], true, "{}", v["diag"]["acceptance"]["failures"]);
+    // the sample authenticates itself: schema v2, exact d0, frame digest (d0-independent), input digests, effective target, verdict,
+    // per-value achieved uncertainty
+    assert_eq!(v["schema"], "pflow-route-b.v2");
+    assert_eq!(v["d0"], "62811/15625");
+    let gr = graph_of("P3L_NO");
+    let masters: Vec<Vec<i64>> = serde_json::from_value(v["frame"]["masters"].clone()).unwrap();
+    assert_eq!(v["frame_sha256"], super::cli::sha256_json(&super::cli::frame_of(&gr, 0, &masters)));
+    assert_eq!(v["inputs"]["de"][0]["sha256"], super::cli::sha256_file(&format!("{dir}/P3L_NO_m0-solution-62811_15625.json")).unwrap());
+    assert_eq!(v["inputs"]["graph"]["sha256"], super::cli::sha256_file(&format!("{dir}/graph-P3L_NO.json")).unwrap());
+    assert_eq!(v["target_digits"].as_f64().unwrap(), 10.0);
+    assert_eq!(v["acceptance"]["accepted"], true);
+    // abs_err = 10^-digits_estimate max(|v|, 10^-30 x the largest value of the moment) (one moment here)
+    let rows = v["values"].as_array().unwrap();
+    let num = |r: &serde_json::Value, k: &str| r[k].as_str().unwrap().parse::<f64>().unwrap();
+    let scale = rows.iter().map(|r| num(r, "value").abs()).fold(0.0, f64::max);
+    let rel = 10f64.powf(-v["digits_estimate"].as_f64().unwrap());
+    for row in rows {
+        let (x, e) = (num(row, "value"), num(row, "abs_err"));
+        let want = x.abs().max(1e-30 * scale) * rel;
+        assert!(e >= want * 0.99 && e <= want * 1.01, "{row}: want {want:e}");
+    }
+    // a requested target that cannot be delivered makes the sample NOT accepted
+    let bad = super::cli::run(&[s("--de"), format!("{dir}/P3L_NO_m0-solution-62811_15625.json"), s("--graph"), format!("{dir}/graph-P3L_NO.json"),
+        s("--e"), s("0"), s("--w"), s("30"), s("--wf"), s("50"), s("--m"), s("60"), s("--extra"), s("9,9,9,9,9,9,9,9,0")]).unwrap();
+    assert_eq!(bad["accepted"], false);
+    assert!(bad["acceptance"]["failures"].to_string().contains("extra [9, 9, 9, 9, 9, 9, 9, 9, 0]"), "{}", bad["acceptance"]);
+    assert_eq!(super::cli::exit_code(&bad), 3);
     let tmp = std::env::temp_dir().join(format!("pflow-tp-{}", std::process::id()));
     let v = super::cli::run(&[s("--de"), format!("{dir}/P2L_m0-solution-199_50.json"), s("--graph"), format!("{dir}/graph-P2L.json"),
         s("--e"), s("0"), s("--w"), s("30"), s("--wf"), s("45"), s("--m"), s("60"), s("--two-precision"), s("5"), s("--workdir"), tmp.to_string_lossy().into_owned()]).unwrap();
@@ -464,7 +537,12 @@ fn four_loop_no1_regression() {
     cfg.threads = 2;
     let pv: serde_json::Value = serde_json::from_str(&std::fs::read_to_string(format!("{dir}/provided-P4L_NO1-1990761_500000.json")).unwrap()).unwrap();
     cfg.provided = graph::Provided::from_json(&pv, run::bits(cfg.wf), &sys.d0).unwrap();
+    // the fixture's 18 t105 rows come from a legacy master file (no measured uncertainty): refused unless allowed
+    cfg.allow_unverified_provided = true;
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
+    assert!(r.accepted, "{}", r.diag["acceptance"]["failures"]);
+    assert_eq!(r.diag["provided"]["used"], 18, "{}", r.diag["provided"]);
+    assert!(r.diag["provided"]["used_relative_digits"].as_f64().unwrap() > 70.0);
     check_ranks(&r);
     let ic = &r.diag["independent_checks"];
     assert!(ic["closed_forms"].as_u64().unwrap() >= 73, "{ic}");

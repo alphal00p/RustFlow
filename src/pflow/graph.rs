@@ -17,42 +17,65 @@ use rug::ops::Pow;
 use rug::{Float, Rational};
 use std::collections::HashMap;
 
-/// massless two-point values supplied from outside, keyed by `canonical`. File format (schema "pflow-provided.v1"):
-/// {"schema": "pflow-provided.v1", "normalisation": "E, P^2=1", "d0": "p/q", "digits": D, "values": [{"edges": [[u, v, a], ...],
-///  "ext": [s, t], "value": "..."}]}: E-normalisation (Euclidean, measure d^dk/pi^(d/2), P^2 = 1), indices integers or "p/q".
-/// The exact evaluator always runs first: an entry is used only for a graph the evaluator cannot reduce; entries the evaluator
-/// can reduce are cross-checked (`mismatch`). `digits` caps the accuracy claimed for results that use the table.
+/// massless two-point values supplied from outside, keyed by `canonical`. File format (schema "pflow-provided.v2", written by
+/// tools/pflow/answer2prov.py):
+/// {"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": "p/q", "master_definitions_sha256": HEX,
+///  "sources": [{"file", "sha256", "role"}, ...], "unverified": [ids], "values": [{"edges": [[u, v, a], ...], "ext": [s, t],
+///  "value": "...", "abs_err": "...", "id": ...}]}
+/// E-normalisation (Euclidean, measure d^dk/pi^(d/2), P^2 = 1), indices integers or "p/q". Every value carries its ACHIEVED
+/// absolute uncertainty. The exact evaluator always runs first: an entry is used only for a graph the evaluator cannot reduce
+/// (`used`), and entries the evaluator can reduce are cross-checked within their uncertainty (`mismatch`). The accuracy a run may
+/// claim is capped by the relative uncertainty of the entries it USED. Rows marked unverified (built from a source without a
+/// measured uncertainty) fail the run's gate unless it explicitly allows them.
 #[derive(Debug, Default)]
 pub struct Provided {
     pub values: HashMap<String, Float>,
-    pub digits: Option<f64>,
+    /// achieved absolute uncertainty of every value
+    pub errors: HashMap<String, Float>,
     pub d0: Option<Rational>,
+    /// canonical keys of the rows marked unverified by the producer
+    pub unverified: Vec<String>,
+    /// the table's header (everything but the values): definitions digest, sources, producer
+    pub header: serde_json::Value,
     /// canonical keys of irreducible graphs that were not in the table
     pub missing: std::sync::Mutex<Vec<String>>,
     /// entries that disagree with the exact evaluator: (canonical key, values, number of uses), each key once
     pub mismatch: std::sync::Mutex<Vec<(String, String, usize)>>,
+    /// canonical keys of the entries used as boundary values (the evaluator could not reduce them)
+    pub used: std::sync::Mutex<Vec<String>>,
 }
 
 impl Clone for Provided {
     fn clone(&self) -> Provided {
         Provided {
             values: self.values.clone(),
-            digits: self.digits,
+            errors: self.errors.clone(),
             d0: self.d0.clone(),
+            unverified: self.unverified.clone(),
+            header: self.header.clone(),
             missing: std::sync::Mutex::new(self.missing.lock().unwrap().clone()),
             mismatch: std::sync::Mutex::new(self.mismatch.lock().unwrap().clone()),
+            used: std::sync::Mutex::new(self.used.lock().unwrap().clone()),
         }
     }
 }
 
-pub const PROVIDED_SCHEMA: &str = "pflow-provided.v1";
+pub const PROVIDED_SCHEMA: &str = "pflow-provided.v2";
 
 /// prefix of the errors for a Gamma pole in a region or exact-series value (non-generic d0): never read as "no region"
 pub const GAMMA_POLE: &str = "Gamma pole";
 
+fn is_sha256(v: &serde_json::Value) -> bool {
+    v.as_str().is_some_and(|s| s.len() == 64 && s.bytes().all(|b| b.is_ascii_hexdigit()))
+}
+
 impl Provided {
-    /// parse and check a table (schema, normalisation, d0 of the run, digits, integer or "p/q" indices, no conflicting duplicates)
+    /// parse and authenticate a table: schema v2, normalisation, the run's exact d0, definitions digest, sources with sha256, a
+    /// non-negative abs_err for every value, integer or "p/q" indices, no duplicates that disagree beyond their uncertainties
     pub fn from_json(v: &serde_json::Value, prec: u32, d0: &Rational) -> Result<Provided, String> {
+        if v["schema"] == "pflow-provided.v1" {
+            return Err("provided: schema pflow-provided.v1 has no provenance and no per-value uncertainty; regenerate it with tools/pflow/answer2prov.py (pflow-provided.v2)".into());
+        }
         if v["schema"] != PROVIDED_SCHEMA {
             return Err(format!("provided: schema must be \"{PROVIDED_SCHEMA}\" (got {})", v["schema"]));
         }
@@ -63,9 +86,17 @@ impl Provided {
         if &td0 != d0 {
             return Err(format!("provided: table for d0 = {td0}, run at d0 = {d0}"));
         }
-        let digits = v["digits"].as_f64().ok_or("provided: digits missing")?;
-        let tol = Float::with_val(prec, 10f64).pow(-(digits - 5.0).max(1.0));
+        if !is_sha256(&v["master_definitions_sha256"]) {
+            return Err("provided: master_definitions_sha256 (64 hex digits) missing".into());
+        }
+        let src = v["sources"].as_array().ok_or("provided: sources (a list) missing")?;
+        if src.is_empty() || !src.iter().all(|x| x["file"].is_string() && is_sha256(&x["sha256"])) {
+            return Err("provided: every source needs a file and its sha256".into());
+        }
+        let unv_ids: Vec<&serde_json::Value> = v["unverified"].as_array().map(|a| a.iter().collect()).unwrap_or_default();
         let mut values: HashMap<String, Float> = HashMap::new();
+        let mut errors: HashMap<String, Float> = HashMap::new();
+        let mut unverified = Vec::new();
         for x in v["values"].as_array().ok_or("provided: values (a list)")? {
             let edges: Vec<(usize, usize, Rational)> = x["edges"].as_array().ok_or("provided: edges")?.iter().map(|e| {
                 let a = match &e[2] {
@@ -77,16 +108,35 @@ impl Provided {
             }).collect::<Result<_, String>>()?;
             let ext = (x["ext"][0].as_u64().ok_or("provided: ext")? as usize, x["ext"][1].as_u64().ok_or("provided: ext")? as usize);
             let val = Float::with_val(prec, Float::parse(x["value"].as_str().ok_or("provided: value (a string)")?).map_err(|e| format!("provided: value: {e}"))?);
+            let err = Float::with_val(prec, Float::parse(x["abs_err"].as_str().ok_or("provided: every value needs abs_err (a string)")?).map_err(|e| format!("provided: abs_err: {e}"))?);
+            if err.is_sign_negative() || !err.is_finite() {
+                return Err(format!("provided: abs_err {err} is not a finite non-negative number"));
+            }
             let key = canonical(&edges, ext.0, ext.1);
             if let Some(old) = values.get(&key) {
                 let d = Float::with_val(prec, old - &val).abs();
-                if d > Float::with_val(prec, old.clone().abs() * &tol) {
+                if d > Float::with_val(prec, &errors[&key] + &err) {
                     return Err(format!("provided: two different values for the graph {key}"));
                 }
             }
-            values.insert(key, val);
+            if unv_ids.contains(&&x["id"]) && !unverified.contains(&key) {
+                unverified.push(key.clone());
+            }
+            values.insert(key.clone(), val);
+            errors.insert(key, err);
         }
-        Ok(Provided { values, digits: Some(digits), d0: Some(td0), ..Default::default() })
+        let mut header = v.clone();
+        header.as_object_mut().unwrap().remove("values");
+        Ok(Provided { values, errors, d0: Some(td0), unverified, header, ..Default::default() })
+    }
+
+    /// relative digits of the entries the run used (min over them; None if none was used)
+    pub fn used_digits(&self) -> Option<f64> {
+        let used = self.used.lock().unwrap();
+        used.iter().map(|k| {
+            let (v, e) = (&self.values[k], &self.errors[k]);
+            if e.is_zero() { f64::INFINITY } else if v.is_zero() { 0.0 } else { -(Float::with_val(v.prec(), e / v.clone().abs())).log10().to_f64() }
+        }).reduce(f64::min)
     }
 }
 
@@ -304,11 +354,11 @@ fn eval2pt(edges: Vec<E2>, s: usize, t: usize, h: &Rational, prec: u32, depth: u
     let k = key(&edges);
     match (r, pv.values.get(&k)) {
         (Some(ev), Some(v)) => {
+            // agreement within the entry's own achieved uncertainty (plus the evaluator's rounding at this precision)
             let c = match &ev { Ev::Zero => Float::new(prec), Ev::Val(c, _) => c.clone() };
-            let tol = Float::with_val(prec, 10f64).pow(-(pv.digits.unwrap_or(30.0) - 5.0).max(1.0));
             let d = Float::with_val(prec, &c - v).abs();
-            let sc = Float::with_val(prec, c.clone().abs()).max(&Float::with_val(prec, v.clone().abs()));
-            if d > Float::with_val(prec, &sc * &tol) {
+            let round = Float::with_val(prec, c.clone().abs()) * Float::with_val(prec, 2f64).pow(-(prec as i32) + 40);
+            if d > Float::with_val(prec, &pv.errors[&k] + &round) {
                 let mut m = pv.mismatch.lock().unwrap();
                 match m.iter_mut().find(|x| x.0 == k) {
                     Some(x) => x.2 += 1,
@@ -319,6 +369,12 @@ fn eval2pt(edges: Vec<E2>, s: usize, t: usize, h: &Rational, prec: u32, depth: u
         }
         (Some(ev), None) => Some(ev),
         (None, Some(v)) => {
+            {
+                let mut u = pv.used.lock().unwrap();
+                if !u.contains(&k) {
+                    u.push(k.clone());
+                }
+            }
             // C (P^2)^-alpha with alpha = sum a - L h
             let mut vs: Vec<usize> = edges.iter().flat_map(|e| [e.u, e.v]).collect();
             vs.push(s);

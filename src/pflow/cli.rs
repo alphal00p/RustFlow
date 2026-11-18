@@ -14,6 +14,7 @@ use super::engine::{PConfig, run_b};
 use super::graph::{Graph, Provided};
 use crate::dispersive::system::{EBlockSystem, RuleSet, parse_coefficient};
 use rug::Rational;
+use rug::ops::Pow;
 use serde_json::{Value, json};
 use std::path::Path;
 
@@ -80,8 +81,41 @@ pub fn is_propagator_config(class_config: &str) -> bool {
 /// the DE of one d0: one RustRed harness solution, or several BLOCKS (per-cut reductions on one common master basis) given as a
 /// comma list or as a manifest JSON {"blocks": [paths relative to it]}. Blocks are united: masters and rules; the same target in two
 /// blocks must have the identical rule (else an error names it); all blocks must share d0 and the free variable.
-pub fn load_blocks(spec: &str) -> Result<(RuleSet, String), String> {
-    let paths: Vec<String> = if spec.ends_with(".json") && !spec.contains(',') {
+/// sha256 (hex) of a file's bytes
+pub fn sha256_file(p: &str) -> Result<String, String> {
+    use sha2::Digest;
+    let b = std::fs::read(p).map_err(|e| format!("{p}: {e}"))?;
+    Ok(format!("{:x}", sha2::Sha256::digest(&b)))
+}
+
+/// canonical JSON (object keys sorted at every level, no spaces): the input of `sha256_json`
+pub fn canonical_json(v: &Value) -> String {
+    match v {
+        Value::Object(m) => {
+            let mut ks: Vec<&String> = m.keys().collect();
+            ks.sort();
+            format!("{{{}}}", ks.iter().map(|k| format!("{}:{}", Value::String((*k).clone()), canonical_json(&m[*k]))).collect::<Vec<_>>().join(","))
+        }
+        Value::Array(a) => format!("[{}]", a.iter().map(canonical_json).collect::<Vec<_>>().join(",")),
+        other => other.to_string(),
+    }
+}
+
+/// sha256 (hex) of the canonical JSON of v
+pub fn sha256_json(v: &Value) -> String {
+    use sha2::Digest;
+    format!("{:x}", sha2::Sha256::digest(canonical_json(v).as_bytes()))
+}
+
+/// the frame of a sample: everything that defines WHAT is computed, independent of d0 and of the numerics (normalisation, the
+/// graph, the massive line, the master list). Samples of one grid must share its digest.
+pub fn frame_of(g: &Graph, e: usize, masters: &[Vec<i64>]) -> Value {
+    json!({"normalisation": "E, P^2=1", "graph": {"edges": g.edges.iter().map(|x| [x.0, x.1]).collect::<Vec<_>>(), "ext": [g.ext.0, g.ext.1], "loops": g.loops}, "e_slot": e, "masters": masters})
+}
+
+/// the DE files of a --de specification (one file, a comma list, or a manifest {"blocks": [...]})
+pub fn block_paths(spec: &str) -> Result<Vec<String>, String> {
+    Ok(if spec.ends_with(".json") && !spec.contains(',') {
         let v = read_json(spec)?;
         match v.get("blocks").and_then(|b| b.as_array()) {
             Some(b) => {
@@ -92,7 +126,11 @@ pub fn load_blocks(spec: &str) -> Result<(RuleSet, String), String> {
         }
     } else {
         spec.split(',').map(|x| x.to_string()).collect()
-    };
+    })
+}
+
+pub fn load_blocks(spec: &str) -> Result<(RuleSet, String), String> {
+    let paths = block_paths(spec)?;
     let mut out: Option<(RuleSet, String)> = None;
     for p in &paths {
         let de = read_json(p)?;
@@ -154,7 +192,16 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     let o = Opts { argv, cfg: cfgv, dir };
     let arg = |k: &str| o.get(k);
 
-    let (rs, var) = load_blocks(&o.path("--de").ok_or("--de")?)?;
+    let de_spec = o.path("--de").ok_or("--de")?;
+    let (rs, var) = load_blocks(&de_spec)?;
+    // provenance of every input (sha256 of the bytes read)
+    let mut inputs = json!({"de": block_paths(&de_spec)?.iter().map(|p| Ok(json!({"file": p, "sha256": sha256_file(p)?}))).collect::<Result<Vec<_>, String>>()?});
+    if de_spec.ends_with(".json") && !de_spec.contains(',') && block_paths(&de_spec)?.first() != Some(&de_spec) {
+        inputs["de_manifest"] = json!({"file": de_spec, "sha256": sha256_file(&de_spec)?});
+    }
+    if let Some(i) = argv.iter().position(|x| x == "--class-config") {
+        inputs["class_config"] = json!({"file": argv[i + 1], "sha256": sha256_file(&argv[i + 1])?});
+    }
     let pnum = |k: &str, d: &str| -> Result<i64, String> { arg(k).unwrap_or(d.into()).parse::<i64>().map_err(|_| format!("{k}: not an integer")) };
     let prat = |k: &str, d: &str| -> Result<Rational, String> { arg(k).unwrap_or(d.into()).parse::<Rational>().map_err(|_| format!("{k}: not a rational")) };
     let e = pnum("--e", "-1")?;
@@ -163,7 +210,17 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     }
     let e = e as usize;
     let sys = EBlockSystem::from_rules_with(&rs, e, &|c: &str| parse_coefficient(c, &var))?;
-    let g = match o.cfg.get("graph") { Some(v) if v.is_object() && !argv.iter().any(|x| x == "--graph") => graph_from(v)?, _ => graph_from(&read_json(&o.path("--graph").ok_or("--graph")?)?)? };
+    let g = match o.cfg.get("graph") {
+        Some(v) if v.is_object() && !argv.iter().any(|x| x == "--graph") => {
+            inputs["graph"] = json!({"inline_sha256": sha256_json(v)});
+            graph_from(v)?
+        }
+        _ => {
+            let gp = o.path("--graph").ok_or("--graph")?;
+            inputs["graph"] = json!({"file": gp, "sha256": sha256_file(&gp)?});
+            graph_from(&read_json(&gp)?)?
+        }
+    };
     let (w, wf, m) = (pnum("--w", "60")?, pnum("--wf", "80")?, pnum("--m", "80")?);
     if w < 10 || wf < w || m < 10 {
         return Err(format!("need w >= 10, wf >= w, m >= 10 (w {w}, wf {wf}, m {m})"));
@@ -178,11 +235,13 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     cfg.gate_margin = pnum("--gate-margin", "20")? as u32;
     cfg.target_digits = match arg("--target-digits") { Some(t) => Some(t.parse::<f64>().map_err(|_| "--target-digits: a number")?), None => None };
     cfg.allow_skipped = argv.iter().any(|x| x == "--allow-skipped") || o.cfg["allow_skipped"] == true;
+    cfg.allow_unverified_provided = argv.iter().any(|x| x == "--allow-unverified-provided") || o.cfg["allow_unverified_provided"] == true;
     let accept_diag = argv.iter().any(|x| x == "--accept-diagnostics") || o.cfg["accept_diagnostics"] == true;
     let workdir = o.path("--workdir");
     if let Some(f) = o.path("--provided") {
         let v = read_json(&f)?;
         cfg.provided = Provided::from_json(&v, crate::dispersive::run::bits(cfg.wf), &rs.d0).map_err(|e| format!("{f}: {e}"))?;
+        inputs["provided"] = json!({"file": f, "sha256": sha256_file(&f)?, "master_definitions_sha256": v["master_definitions_sha256"], "sources": v["sources"]});
     }
     // one checkpoint subdirectory per precision pass (the passes have different fingerprints)
     let pass_dir = |c: &PConfig| -> Result<Option<String>, String> {
@@ -213,7 +272,33 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     } else {
         None
     };
-    let accepted = res.accepted && res2.as_ref().map_or(true, |r| r.accepted);
+    // the achieved absolute uncertainty of every output: 10^-digits_estimate max(|v|, 10^-30 scale of the moment) (digits_estimate =
+    // min over every gate quantity), or the two-precision difference if larger
+    let est = res.diag["digits_estimate"].as_f64().ok_or("digits_estimate missing")?;
+    let rel = |prec: u32| rug::Float::with_val(prec, 10f64).pow(-est);
+    let mut merrs: Vec<(i32, Vec<rug::Float>)> = Vec::new();
+    for (k, (m, v)) in res.moments.iter().enumerate() {
+        let prec = v[0].prec();
+        let sc = v.iter().map(|x| rug::Float::with_val(prec, x.abs_ref())).fold(rug::Float::new(prec), |a, b| if b > a { b } else { a });
+        let floor = rug::Float::with_val(prec, &sc * rug::Float::with_val(prec, 10f64).pow(-30));
+        let errs = v.iter().enumerate().map(|(j, x)| {
+            let a = rug::Float::with_val(prec, x.abs_ref());
+            let mut e = rug::Float::with_val(prec, if a > floor { a } else { floor.clone() } * rel(prec));
+            if let Some(r2) = &res2 {
+                let d = rug::Float::with_val(prec, x - &r2.moments[k].1[j]).abs();
+                if d > e {
+                    e = d;
+                }
+            }
+            e
+        }).collect();
+        merrs.push((*m, errs));
+    }
+    let fe = |x: &rug::Float| x.to_string_radix(10, Some(3));
+    let mut failures: Vec<Value> = res.diag["acceptance"]["failures"].as_array().cloned().unwrap_or_default();
+    if let Some(r2) = &res2 {
+        failures.extend(r2.diag["acceptance"]["failures"].as_array().cloned().unwrap_or_default().into_iter().map(|f| json!(format!("second pass: {}", f.as_str().unwrap_or("")))));
+    }
     // what each moment is (module docs of engine.rs): m = 1 massless value; m = n + 1 >= 2: (a_e)_n / n! E[a + n 1_e];
     // m = -k <= 0: (-1)^(a_e - 1) (a_e)_n / n! E[a_e -> -n], n = k + 1 - a_e (zero if n < 0)
     let poch = |a: i64, n: i64| -> Rational { let mut r = Rational::from(1); for i in 0..n { r *= Rational::from(a + i); r /= Rational::from(i + 1); } r };
@@ -223,31 +308,34 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
             let sgn = if mast.iter().sum::<i64>() % 2 != 0 { -1 } else { 1 };
             let prec = v[j].prec();
             let val = rug::Float::with_val(prec, &v[j] * sgn);
+            let ae = &merrs[k].1[j];
             let dig = res2.as_ref().map(|r2| {
                 let w = &r2.moments[k].1[j];
                 let d = rug::Float::with_val(prec, &v[j] - w);
                 if d.is_zero() { 999.0 } else { -(d.abs() / rug::Float::with_val(prec, v[j].abs_ref())).log10().to_f64() }
             });
             let ndig = (cfg.wf as usize).max(20);
-            let mut row = json!({"m": m, "master": mast, "value": val.to_string_radix(10, Some(ndig)), "digits_two_precision": dig});
-            let ae = mast[e];
+            let mut row = json!({"m": m, "master": mast, "value": val.to_string_radix(10, Some(ndig)), "abs_err": fe(ae), "digits_two_precision": dig});
+            let a_e = mast[e];
             if *m >= 2 {
                 let n = (*m - 1) as i64;
                 let mut idx = mast.clone();
                 idx[e] += n;
-                let f = poch(ae, n);
+                let f = poch(a_e, n);
                 row["integral"] = json!(idx);
                 row["integral_value"] = json!(rug::Float::with_val(prec, &val / &f).to_string_radix(10, Some(ndig)));
-                row["quantity"] = json!(format!("value = (a_e)_n/n! E[integral], a_e = {ae}, n = {n}"));
+                row["integral_abs_err"] = json!(fe(&rug::Float::with_val(prec, ae / rug::Float::with_val(prec, &f).abs())));
+                row["quantity"] = json!(format!("value = (a_e)_n/n! E[integral], a_e = {a_e}, n = {n}"));
             } else if *m <= 0 {
-                let n = (1 - *m) as i64 - ae;
+                let n = (1 - *m) as i64 - a_e;
                 if n >= 0 {
                     let mut idx = mast.clone();
                     idx[e] = -n;
-                    let f = Rational::from(&poch(ae, n) * if (ae - 1) % 2 != 0 { -1 } else { 1 });
+                    let f = Rational::from(&poch(a_e, n) * if (a_e - 1) % 2 != 0 { -1 } else { 1 });
                     row["integral"] = json!(idx);
                     row["integral_value"] = json!(rug::Float::with_val(prec, &val / &f).to_string_radix(10, Some(ndig)));
-                    row["quantity"] = json!(format!("value = (-1)^(a_e-1) (a_e)_n/n! E[integral] (line e as a numerator of power n), a_e = {ae}, n = {n}"));
+                    row["integral_abs_err"] = json!(fe(&rug::Float::with_val(prec, ae / rug::Float::with_val(prec, &f).abs())));
+                    row["quantity"] = json!(format!("value = (-1)^(a_e-1) (a_e)_n/n! E[integral] (line e as a numerator of power n), a_e = {a_e}, n = {n}"));
                 } else {
                     row["quantity"] = json!("no integer term at this order: the value should vanish");
                 }
@@ -255,39 +343,58 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
             out.push(row);
         }
     }
-    // non-master targets: --extra "a1,a2,...;b1,..." (pinched-master values from --efree FILE {"[..]": "value"} if needed)
+    // non-master targets: --extra "a1,a2,...;b1,..." (pinched-master values from --efree FILE, schema pflow-efree.v1:
+    // {"schema", "d0", "values": {"[..]": {"value", "abs_err"}}, "sources": [...]}, if needed)
     let mut extras = Vec::new();
     if let Some(ex) = arg("--extra") {
         let prec = crate::dispersive::run::bits(cfg.wf);
-        let efree: std::collections::HashMap<Vec<i64>, rug::Float> = match o.path("--efree") {
-            Some(f) => {
-                let v = read_json(&f)?;
-                let mut m = std::collections::HashMap::new();
-                for (k, x) in v.as_object().ok_or("--efree: an object {\"[indices]\": \"value\"}")? {
-                    let idx: Vec<i64> = serde_json::from_str(k).map_err(|e| format!("--efree key {k}: {e}"))?;
-                    let val = rug::Float::parse(x.as_str().ok_or("--efree: values are strings")?).map_err(|e| format!("--efree {k}: {e}"))?;
-                    m.insert(idx, rug::Float::with_val(prec, val));
-                }
-                m
+        let mut efree: std::collections::HashMap<Vec<i64>, rug::Float> = Default::default();
+        let mut eferr: std::collections::HashMap<Vec<i64>, rug::Float> = Default::default();
+        if let Some(f) = o.path("--efree") {
+            let v = read_json(&f)?;
+            if v["schema"] != "pflow-efree.v1" {
+                return Err(format!("--efree {f}: schema must be \"pflow-efree.v1\" (values with abs_err, d0, sources)"));
             }
-            None => Default::default(),
-        };
+            let fd0: Rational = v["d0"].as_str().ok_or("--efree: d0 missing")?.parse().map_err(|_| "--efree: d0")?;
+            if fd0 != rs.d0 {
+                return Err(format!("--efree {f}: values for d0 = {fd0}, run at d0 = {}", rs.d0));
+            }
+            for (k, x) in v["values"].as_object().ok_or("--efree: values {\"[indices]\": {\"value\", \"abs_err\"}}")? {
+                let idx: Vec<i64> = serde_json::from_str(k).map_err(|e| format!("--efree key {k}: {e}"))?;
+                let val = rug::Float::parse(x["value"].as_str().ok_or("--efree: value strings")?).map_err(|e| format!("--efree {k}: {e}"))?;
+                let er = rug::Float::parse(x["abs_err"].as_str().ok_or("--efree: every value needs abs_err")?).map_err(|e| format!("--efree {k}: {e}"))?;
+                efree.insert(idx.clone(), rug::Float::with_val(prec, val));
+                eferr.insert(idx, rug::Float::with_val(prec, er));
+            }
+            inputs["efree"] = json!({"file": f, "sha256": sha256_file(&f)?, "sources": v["sources"]});
+        }
         for t in ex.split(';') {
             let xv: Vec<i64> = t.split(',').map(|y| y.trim().parse::<i64>().map_err(|_| format!("--extra: {t}"))).collect::<Result<_, _>>()?;
-            let r1 = super::engine::extra_value(&rs.rules, &sys, &xv, &res.moments, &efree, &var, prec);
+            let r1 = super::engine::extra_value_err(&rs.rules, &sys, &xv, &res.moments, Some(&merrs), &efree, Some(&eferr), &var, prec);
             let dig = match (&r1, &res2) {
-                (Ok((v, _)), Some(r2)) => super::engine::extra_value(&rs.rules, &sys, &xv, &r2.moments, &efree, &var, prec).ok().map(|(w, _)| {
+                (Ok((v, _, _)), Some(r2)) => super::engine::extra_value(&rs.rules, &sys, &xv, &r2.moments, &efree, &var, prec).ok().map(|(w, _)| {
                     let d = rug::Float::with_val(prec, v - &w);
                     if d.is_zero() { 999.0 } else { -(d.abs() / rug::Float::with_val(prec, v.abs_ref())).log10().to_f64() }
                 }),
                 _ => None,
             };
             extras.push(match r1 {
-                Ok((v, n)) => json!({"target": xv, "value": v.to_string_radix(10, Some((cfg.wf as usize).max(20))), "max_moment_n": n, "digits_two_precision": dig}),
-                Err(e) => json!({"target": xv, "error": e}),
+                Ok((v, n, er)) => json!({"target": xv, "value": v.to_string_radix(10, Some((cfg.wf as usize).max(20))), "abs_err": fe(&er), "max_moment_n": n, "digits_two_precision": dig}),
+                Err(err) => {
+                    // a requested target that cannot be delivered: the sample is not accepted
+                    failures.push(json!(format!("extra {xv:?}: {err}")));
+                    json!({"target": xv, "error": err})
+                }
             });
         }
     }
-    Ok(json!({"schema": "pflow-route-b.v1", "accepted": accepted, "accept_diagnostics": accept_diag, "digits_cap": res.diag["digits_cap"], "digits_estimate": res.diag["digits_estimate"], "digits_by_check": res.diag["digits_by_check"], "extras": extras, "d0": rs.d0.to_string(), "e_slot": e, "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits},
+    let accepted = failures.is_empty();
+    let frame = frame_of(&g, e, &sys.masters);
+    let target_digits = -res.diag["gate_log10"].as_f64().unwrap_or(f64::NAN);
+    Ok(json!({"schema": "pflow-route-b.v2", "accepted": accepted, "acceptance": {"accepted": accepted, "failures": failures}, "accept_diagnostics": accept_diag,
+            "d0": rs.d0.to_string(), "frame_sha256": sha256_json(&frame), "frame": frame, "inputs": inputs, "target_digits": target_digits,
+            "allow_unverified_provided": cfg.allow_unverified_provided, "allow_skipped": cfg.allow_skipped,
+            "digits_cap": res.diag["digits_cap"], "digits_estimate": res.diag["digits_estimate"], "digits_by_check": res.diag["digits_by_check"], "extras": extras, "e_slot": e,
+            "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits, "two_precision": tp},
             "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag)}))
 }
