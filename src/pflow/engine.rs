@@ -867,8 +867,12 @@ fn transport_summary(st: &crate::patch_kernel::transport::TransportState) -> Val
         st.records.iter().map(f).fold(None, |m: Option<f64>, x| if x.is_nan() { Some(f64::NAN) } else { Some(m.map_or(x, |m| if m.is_nan() { m } else { m.max(x) })) })
     };
     let nz = |x: Option<f64>| match x { Some(v) if v.is_finite() => json!(v), Some(v) => json!(v.to_string()), None => Value::Null };
+    let orders: Vec<usize> = st.records.iter().map(|r| r.order).collect();
+    let secs: f64 = st.records.iter().map(|r| r.seconds_setup + r.seconds_recurrence + r.seconds_finish).sum();
     json!({"patches": st.records.len(), "max_overlap_log10": nz(worst(&|r| r.overlap_log10)), "max_tail_log10": nz(worst(&|r| r.tail_log10)),
-        "max_dropped_imag_log10": nz(worst(&|r| r.dropped_imag_log10)), "overlap_skipped": st.records.iter().filter(|r| r.overlap_skipped).count()})
+        "max_dropped_imag_log10": nz(worst(&|r| r.dropped_imag_log10)), "overlap_skipped": st.records.iter().filter(|r| r.overlap_skipped).count(),
+        "orders": orders, "order_max": orders.iter().max(), "order_sum": orders.iter().sum::<usize>(), "seconds": secs,
+        "seconds_recurrence": st.records.iter().map(|r| r.seconds_recurrence).sum::<f64>()})
 }
 
 /// records the largest error (log10) of one kind of gate quantity
@@ -991,6 +995,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         }
     }
     // threshold families
+    let t_thr = Instant::now();
+    let t_families0 = t0.elapsed().as_secs_f64();
     let mut tfams: Vec<FamilyNum> = Vec::new();
     let mut seen: Vec<Rational> = Vec::new();
     for j in 0..=(2 * cfg.loops as i64) {
@@ -1005,6 +1011,7 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         }
     }
     let tdim: usize = tfams.iter().map(|f| f.spec.dim).sum();
+    let s_thr = t_thr.elapsed().as_secs_f64();
     diag["threshold_dims"] = json!(tfams.iter().map(|f| (f.spec.lam.to_string(), f.spec.dim)).collect::<Vec<_>>());
     acc.check("threshold families span the e-block", tdim == e, format!("{tdim} of {e}"));
     // binomial terms of the threshold pieces: (w + 10) / log10(1/r) + |m| + 10
@@ -1198,7 +1205,9 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     }
     diag["patches"] = json!([p0.len(), pi_.len()]);
     eprintln!("[pflow] singular points {:?}; patches {} / {}", pts, p0.len(), pi_.len());
+    let t_mom = Instant::now();
     let (moments, pd) = moments_of(&fams0, &famsi, "", true)?;
+    diag["phase_seconds"] = json!({"boundary_rows_and_families_0_inf": t_families0, "threshold_families": s_thr, "transports_and_threshold_join": t_mom.elapsed().as_secs_f64()});
     if let Value::Object(m) = pd {
         for (k, v) in m {
             diag[k] = v;
