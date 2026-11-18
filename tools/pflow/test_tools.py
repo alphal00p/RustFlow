@@ -174,6 +174,11 @@ class Samples(unittest.TestCase):
             with self.assertRaises(Refused) as c:
                 read_sample(write(self.d, name + ".json", s), **kw)
             self.assertIn(msg, str(c.exception), name)
+        # the legacy flag admits ONLY the 12 archived four-loop nodes (by sha256): any other v1 file is refused with it
+        v1 = write(self.d, "v1-new.json", {"schema": "pflow-route-b.v1", "accepted": True, "d0": "7/2", "values": [], "config": {"w": 40}})
+        with self.assertRaises(Refused) as c:
+            read_sample(v1, allow_legacy=True)
+        self.assertIn("only for the 12 archived four-loop nodes", str(c.exception))
         s = sample("7/2", "1.5")
         del s["values"][0]["abs_err"]
         with self.assertRaises(Refused):

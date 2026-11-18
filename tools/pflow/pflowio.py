@@ -22,6 +22,24 @@ ANSWER_SCHEMA = "num-support.req-answer.v1"
 NORMALISATION = "E, P^2=1"
 
 
+# the ONLY route-B v1 samples a fit may ever accept (allow_legacy): the 12 archived four-loop nodes of the blind eps^1 test
+# (s1/runs/rf4/grid-r, sha256 of the files). Any other v1 file - in particular any five-loop sample - is refused.
+LEGACY_4L_NODES = {
+    "c9a17c5627ddb3f2a4ce7bef5b8ac4f910cec875acf51c035446af588ce3f90c": "node-1003967_250000.json",
+    "205d5f33181240745a3add3640dbac6cc6f049edd581e7d4923febb149e669e2": "node-1004957_250000.json",
+    "b07cbb798ca34f0b65d04cf2e9bcd47389dcb1fefaf3a88b7a4c624f36e64e0e": "node-1990761_500000.json",
+    "fb8c3251b688be552e397b1b4bb1e931138c4c18758cf5e3e88265744bc46611": "node-1996173_500000.json",
+    "a5cebf6ee02660ef0c502ada8e7a6edc1bc7fcc780005839b16779bcea1af968": "node-2003827_500000.json",
+    "0fc3f6de6f87f4eb0d9ccde3020eb64570cff1fa8a93820688784050512327a9": "node-2009239_500000.json",
+    "1a377ba8413f91c3c198dddfa6c8e97af2e3fbb4a5be0642e5c080d8cfbd3926": "node-249239_62500.json",
+    "38c3d767186396c378b00b4e3e585eb1fb551097e11fc09beb259325f2ae42ac": "node-250761_62500.json",
+    "0e4895401b0c17243ff5ad7be81720431df2356cb23306a092ad27a2af558c8d": "node-399739_100000.json",
+    "7bcd5b6b5cf4b77b14f0e9054c8293a02843cc6335ac6c3c4344753ee5cd9377": "node-400261_100000.json",
+    "485d2a01aa1261485bc0eb3a28203210de822fc982202102e7736657ce2ede4f": "node-995043_250000.json",
+    "0225aff5c46a4690e3cd7c83724d81f69812d992136faa92392262da932ac162": "node-996033_250000.json",
+}
+
+
 class Refused(Exception):
     """an input failed authentication; the message names the file and the check"""
 
@@ -189,7 +207,8 @@ def read_sample(path, d0=None, frame_sha=None, need_target=None, allow_legacy=Fa
     """a route-B sample, authenticated: schema, exact d0 (if given), frame digest (if given), ACCEPTED with a verdict, the
     effective target >= need_target. Returns dict(d0, frame_sha256, target_digits, values: {(m, tuple(master)): (value, abs_err)},
     extras: {tuple(target): (value, abs_err)}, sha256, legacy).
-    allow_legacy: a pflow-route-b.v1 sample (no frame, no abs_err) is accepted only if it has accepted == true; its uncertainty is
+    allow_legacy: a pflow-route-b.v1 sample (no frame, no abs_err) is accepted only if it is one of LEGACY_4L_NODES (by sha256) and
+    has accepted == true; its uncertainty is
     the bound its passed gates certify, |v| 10^-T (T = min(target or w - gate_margin, digits_estimate if present)), and its frame
     is unverified (legacy = True)."""
     s = load_json(path)
@@ -218,6 +237,8 @@ def read_sample(path, d0=None, frame_sha=None, need_target=None, allow_legacy=Fa
             out["extras"][tuple(x["target"])] = (x["value"], x["abs_err"])
     elif sch == "pflow-route-b.v1" and allow_legacy:
         from mpmath import mpf, fabs
+        if out["sha256"] not in LEGACY_4L_NODES:
+            raise Refused(f"{path}: a legacy v1 sample is accepted only for the 12 archived four-loop nodes (s1/runs/rf4/grid-r); this file is not one of them")
         c = s.get("config", {})
         t = c.get("target_digits")
         T = float(t) if t is not None else float(c["w"]) - float(c.get("gate_margin", 20))
