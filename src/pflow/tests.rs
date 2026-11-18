@@ -13,6 +13,19 @@ fn graph_of(name: &str) -> Graph {
     Graph { edges, ext: (f["external"]["in"].as_u64().unwrap() as usize, f["external"]["out"].as_u64().unwrap() as usize), loops: f["loops"].as_u64().unwrap() as usize }
 }
 
+/// the canonical serialisation is language-independent: tools/pflow/test_tools.py checks the same string
+#[test]
+fn canonical_serialisation_is_exact() {
+    let v = serde_json::json!({"b": 0.5, "a": [1, 2.0, 0.25, -3], "s": "x\"y", "n": null, "t": true});
+    assert_eq!(super::cli::canonical_json(&v), r#"{"a":[1,2,1/4,-3],"b":1/2,"n":null,"s":"x\"y","t":true}"#);
+}
+
+/// a test table or file with its producer seal (content_sha256)
+fn seal(mut v: serde_json::Value) -> serde_json::Value {
+    v["content_sha256"] = serde_json::json!(super::cli::content_sha256(&v));
+    v
+}
+
 fn digits(a: &Float, b: &Float) -> f64 {
     let d = Float::with_val(a.prec(), a - b);
     if d.is_zero() { 999.0 } else { -(d.abs() / Float::with_val(a.prec(), b.abs_ref())).log10().to_f64() }
@@ -384,9 +397,9 @@ fn provided_table_checks() {
     let h = Rational::from(&sys.d0 / 2u32);
     let one = Rational::from(1);
     let bubble = graph::g_bubble(&one, &one, &h, prec).unwrap();
-    let tab = |val: &str, idx: serde_json::Value, d0: String| serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": d0,
+    let tab = |val: &str, idx: serde_json::Value, d0: String| seal(serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": d0,
         "master_definitions_sha256": "0".repeat(64), "sources": [{"file": "test", "sha256": "1".repeat(64), "role": "answer"}],
-        "values": [{"edges": [[0, 1, idx.clone()], [0, 1, 1]], "ext": [0, 1], "value": val, "abs_err": "1e-70", "id": "b"}]});
+        "values": [{"edges": [[0, 1, idx.clone()], [0, 1, 1]], "ext": [0, 1], "value": val, "abs_err": "1e-70", "id": "b"}]}));
     let good = tab(&bubble.to_string_radix(10, Some(80)), serde_json::json!(1), sys.d0.to_string());
     cfg.provided = graph::Provided::from_json(&good, prec, &sys.d0).unwrap();
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
@@ -403,27 +416,46 @@ fn provided_table_checks() {
     assert!(graph::Provided::from_json(&tab("1.0", serde_json::json!(1), "3".into()), prec, &sys.d0).is_err(), "wrong d0");
     let mut dup = good.clone();
     dup["values"] = serde_json::json!([good["values"][0], {"edges": [[0, 1, 1], [0, 1, 1]], "ext": [0, 1], "value": "2.0", "abs_err": "1e-70"}]);
-    assert!(graph::Provided::from_json(&dup, prec, &sys.d0).is_err(), "conflicting duplicate");
+    assert!(graph::Provided::from_json(&seal(dup), prec, &sys.d0).is_err(), "conflicting duplicate");
+    // content seal: an edited value, an edited abs_err or a missing seal is refused (review GATE 1, A1)
+    let mut ed = good.clone();
+    ed["values"][0]["value"] = serde_json::json!("1.5");
+    assert!(graph::Provided::from_json(&ed, prec, &sys.d0).unwrap_err().contains("edited"), "edited value");
+    let mut ed = good.clone();
+    ed["values"][0]["abs_err"] = serde_json::json!("1e-90");
+    assert!(graph::Provided::from_json(&ed, prec, &sys.d0).unwrap_err().contains("edited"), "edited abs_err");
+    let mut ed = good.clone();
+    ed.as_object_mut().unwrap().remove("content_sha256");
+    assert!(graph::Provided::from_json(&ed, prec, &sys.d0).unwrap_err().contains("unsealed"), "unsealed table");
+    // sources: a reachable file with a wrong digest is refused; an unreachable one is a recorded downgrade
+    let dir = format!("{}/fixtures/pflow", env!("CARGO_MANIFEST_DIR"));
+    let mut st = good.clone();
+    st["sources"] = serde_json::json!([{"file": format!("{dir}/graph-P3L_NO.json"), "sha256": "2".repeat(64)}]);
+    assert!(graph::Provided::from_json(&seal(st), prec, &sys.d0).unwrap_err().contains("stale"), "stale source digest");
+    let mut st = good.clone();
+    st["sources"] = serde_json::json!([{"file": format!("{dir}/graph-P3L_NO.json"), "sha256": super::cli::sha256_file(&format!("{dir}/graph-P3L_NO.json")).unwrap()}]);
+    assert!(graph::Provided::from_json(&seal(st), prec, &sys.d0).unwrap().downgrades.is_empty(), "verified source");
+    assert!(graph::Provided::from_json(&good, prec, &sys.d0).unwrap().downgrades[0].contains("not reachable"), "unreachable source");
     // authentication of the table itself: no v1, every value with abs_err, sources with sha256, the definitions digest
     let mut v1 = good.clone();
     v1["schema"] = serde_json::json!("pflow-provided.v1");
-    assert!(graph::Provided::from_json(&v1, prec, &sys.d0).unwrap_err().contains("regenerate"));
+    assert!(graph::Provided::from_json(&seal(v1), prec, &sys.d0).unwrap_err().contains("regenerate"));
     let mut noerr = good.clone();
     noerr["values"][0].as_object_mut().unwrap().remove("abs_err");
-    assert!(graph::Provided::from_json(&noerr, prec, &sys.d0).is_err(), "value without abs_err");
+    assert!(graph::Provided::from_json(&seal(noerr), prec, &sys.d0).is_err(), "value without abs_err");
     let mut nosrc = good.clone();
     nosrc["sources"] = serde_json::json!([{"file": "x"}]);
-    assert!(graph::Provided::from_json(&nosrc, prec, &sys.d0).is_err(), "source without sha256");
+    assert!(graph::Provided::from_json(&seal(nosrc), prec, &sys.d0).is_err(), "source without sha256");
     let mut nodef = good.clone();
     nodef.as_object_mut().unwrap().remove("master_definitions_sha256");
-    assert!(graph::Provided::from_json(&nodef, prec, &sys.d0).is_err(), "no definitions digest");
+    assert!(graph::Provided::from_json(&seal(nodef), prec, &sys.d0).is_err(), "no definitions digest");
     // a value off by 1e-35 (relative) is consistent with a declared uncertainty of 1e-30 x |value|, a mismatch with 1e-40 x |value|
     let near = Float::with_val(prec, &bubble * (1 + Float::with_val(prec, 1e-35)));
     for (e, ok) in [(1e-30, true), (1e-40, false)] {
         let mut t = tab(&near.to_string_radix(10, Some(60)), serde_json::json!(1), sys.d0.to_string());
         t["values"][0]["abs_err"] = serde_json::json!(Float::with_val(prec, Float::with_val(prec, bubble.abs_ref()) * Float::with_val(prec, e)).to_string_radix(10, Some(3)));
         let mut c = cfg.clone();
-        c.provided = graph::Provided::from_json(&t, prec, &sys.d0).unwrap();
+        c.provided = graph::Provided::from_json(&seal(t), prec, &sys.d0).unwrap();
         let r = run_b(&sys, &g, 0, &c).unwrap();
         assert_eq!(r.accepted, ok, "abs_err {e}: {}", r.diag["acceptance"]["failures"]);
     }
@@ -439,9 +471,9 @@ fn provided_used_entries_and_unverified_rows() {
     let a = [1i64, 1, 1, 1, 1, 1, 1, 1, 0];
     assert!(graph::massless(&g, &a, &h, prec, &graph::Provided::default()).is_none(), "the NO top graph must be irreducible here");
     let edges: Vec<serde_json::Value> = g.edges.iter().zip(&a).map(|((u, v), x)| serde_json::json!([u, v, x])).collect();
-    let tab = |unv: bool| serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": "62811/15625",
+    let tab = |unv: bool| seal(serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": "62811/15625",
         "master_definitions_sha256": "0".repeat(64), "sources": [{"file": "test", "sha256": "1".repeat(64)}], "unverified": if unv { serde_json::json!(["no"]) } else { serde_json::json!([]) },
-        "values": [{"edges": edges, "ext": [g.ext.0, g.ext.1], "value": "1.2345", "abs_err": "1.2345e-40", "id": "no"}]});
+        "values": [{"edges": edges, "ext": [g.ext.0, g.ext.1], "value": "1.2345", "abs_err": "1.2345e-40", "id": "no"}]}));
     let pv = graph::Provided::from_json(&tab(false), prec, &Rational::from((62811, 15625))).unwrap();
     let v = graph::massless(&g, &a, &h, prec, &pv).expect("supplied by the table");
     assert!((v - Float::with_val(prec, Float::parse("1.2345").unwrap())).abs() < 1e-80);
@@ -494,7 +526,17 @@ fn cli_on_the_3l_fixture_and_two_precision_workdir() {
     assert_eq!(v["d0"], "62811/15625");
     let gr = graph_of("P3L_NO");
     let masters: Vec<Vec<i64>> = serde_json::from_value(v["frame"]["masters"].clone()).unwrap();
-    assert_eq!(v["frame_sha256"], super::cli::sha256_json(&super::cli::frame_of(&gr, 0, &masters)));
+    assert_eq!(v["frame_sha256"], super::cli::sha256_json(&super::cli::frame_of(&gr, 0, &masters, serde_json::Value::Null)));
+    // the producer seal covers the whole sample; any edit changes it
+    assert_eq!(v["content_sha256"], super::cli::content_sha256(&v));
+    let mut ed = v.clone();
+    ed["values"][0]["abs_err"] = serde_json::json!("1e-60");
+    assert!(super::cli::check_seal("sample", &ed).is_err());
+    assert!(v["downgrades"].to_string().contains("no two-precision pass"), "{}", v["downgrades"]);
+    // the frame includes the boundary definitions: another definitions digest gives another frame digest (review GATE 1, A2)
+    let f1 = super::cli::sha256_json(&super::cli::frame_of(&gr, 0, &masters, serde_json::json!({"master_definitions_sha256": "a"})));
+    let f2 = super::cli::sha256_json(&super::cli::frame_of(&gr, 0, &masters, serde_json::json!({"master_definitions_sha256": "b"})));
+    assert_ne!(f1, f2);
     assert_eq!(v["inputs"]["de"][0]["sha256"], super::cli::sha256_file(&format!("{dir}/P3L_NO_m0-solution-62811_15625.json")).unwrap());
     assert_eq!(v["inputs"]["graph"]["sha256"], super::cli::sha256_file(&format!("{dir}/graph-P3L_NO.json")).unwrap());
     assert_eq!(v["target_digits"].as_f64().unwrap(), 10.0);

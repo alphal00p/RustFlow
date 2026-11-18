@@ -88,7 +88,9 @@ pub fn sha256_file(p: &str) -> Result<String, String> {
     Ok(format!("{:x}", sha2::Sha256::digest(&b)))
 }
 
-/// canonical JSON (object keys sorted at every level, no spaces): the input of `sha256_json`
+/// canonical serialisation (tools/pflow/pflowio.py `canonical` writes the same bytes): object keys sorted at every level, no
+/// spaces, strings JSON-escaped (UTF-8 kept), every NUMBER as its exact rational ("p/q" or "p"), so that the float formatting of
+/// the writer does not matter. The input of `sha256_json`.
 pub fn canonical_json(v: &Value) -> String {
     match v {
         Value::Object(m) => {
@@ -97,8 +99,70 @@ pub fn canonical_json(v: &Value) -> String {
             format!("{{{}}}", ks.iter().map(|k| format!("{}:{}", Value::String((*k).clone()), canonical_json(&m[*k]))).collect::<Vec<_>>().join(","))
         }
         Value::Array(a) => format!("[{}]", a.iter().map(canonical_json).collect::<Vec<_>>().join(",")),
+        Value::Number(n) => {
+            if let Some(i) = n.as_i64() {
+                i.to_string()
+            } else if let Some(u) = n.as_u64() {
+                u.to_string()
+            } else {
+                Rational::from_f64(n.as_f64().unwrap_or(f64::NAN)).map_or("null".to_string(), |r| r.to_string())
+            }
+        }
         other => other.to_string(),
     }
+}
+
+/// sha256 of the canonical serialisation of a document without its `content_sha256` field
+pub fn content_sha256(doc: &Value) -> String {
+    let mut d = doc.clone();
+    if let Some(m) = d.as_object_mut() {
+        m.remove("content_sha256");
+    }
+    sha256_json(&d)
+}
+
+/// refuse a document whose `content_sha256` is missing or does not match its content
+pub fn check_seal(what: &str, doc: &Value) -> Result<(), String> {
+    let got = doc["content_sha256"].as_str().ok_or(format!("{what}: no content_sha256 (unsealed file)"))?;
+    if got != content_sha256(doc) {
+        return Err(format!("{what}: content_sha256 does not match the content (the file was edited)"));
+    }
+    Ok(())
+}
+
+/// every {"file": F, "sha256": H} record inside v
+pub fn file_refs(v: &Value, out: &mut Vec<(String, String)>) {
+    match v {
+        Value::Object(m) => {
+            if let (Some(f), Some(h)) = (m.get("file").and_then(|x| x.as_str()), m.get("sha256").and_then(|x| x.as_str())) {
+                out.push((f.to_string(), h.to_string()));
+            }
+            for x in m.values() {
+                file_refs(x, out);
+            }
+        }
+        Value::Array(a) => a.iter().for_each(|x| file_refs(x, out)),
+        _ => {}
+    }
+}
+
+/// recompute the sha256 of every referenced source that is reachable (a mismatch is an error: stale or edited source); an
+/// unreachable source is returned as an explicit downgrade
+pub fn verify_sources(what: &str, v: &Value) -> Result<Vec<String>, String> {
+    let mut refs = Vec::new();
+    file_refs(v, &mut refs);
+    let mut downs = Vec::new();
+    for (f, h) in refs {
+        if Path::new(&f).is_file() {
+            let got = sha256_file(&f)?;
+            if got != h {
+                return Err(format!("{what}: source {f} has sha256 {}..., the file records {}... (stale or edited)", &got[..16], &h[..h.len().min(16)]));
+            }
+        } else {
+            downs.push(format!("source not reachable, digest unverified: {f}"));
+        }
+    }
+    Ok(downs)
 }
 
 /// sha256 (hex) of the canonical JSON of v
@@ -109,8 +173,10 @@ pub fn sha256_json(v: &Value) -> String {
 
 /// the frame of a sample: everything that defines WHAT is computed, independent of d0 and of the numerics (normalisation, the
 /// graph, the massive line, the master list). Samples of one grid must share its digest.
-pub fn frame_of(g: &Graph, e: usize, masters: &[Vec<i64>]) -> Value {
-    json!({"normalisation": "E, P^2=1", "graph": {"edges": g.edges.iter().map(|x| [x.0, x.1]).collect::<Vec<_>>(), "ext": [g.ext.0, g.ext.1], "loops": g.loops}, "e_slot": e, "masters": masters})
+/// `boundary` = the d0-independent identity of the provided table (its master definitions and answer meaning digests and its
+/// normalisation), or null without a table: samples built from different master definitions never share a frame digest.
+pub fn frame_of(g: &Graph, e: usize, masters: &[Vec<i64>], boundary: Value) -> Value {
+    json!({"normalisation": "E, P^2=1", "graph": {"edges": g.edges.iter().map(|x| [x.0, x.1]).collect::<Vec<_>>(), "ext": [g.ext.0, g.ext.1], "loops": g.loops}, "e_slot": e, "masters": masters, "boundary": boundary})
 }
 
 /// the DE files of a --de specification (one file, a comma list, or a manifest {"blocks": [...]})
@@ -343,18 +409,35 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
             out.push(row);
         }
     }
+    // explicit downgrades of this sample (a production contract refuses them)
+    let mut downgrades: Vec<String> = cfg.provided.downgrades.iter().map(|d| format!("provided: {d}")).collect();
+    if tp == 0 {
+        downgrades.push("no two-precision pass: abs_err is a run-wide estimate".into());
+    }
+    if cfg.allow_unverified_provided {
+        downgrades.push("--allow-unverified-provided".into());
+    }
+    if cfg.allow_skipped {
+        downgrades.push("--allow-skipped".into());
+    }
+    if accept_diag {
+        downgrades.push("--accept-diagnostics".into());
+    }
     // non-master targets: --extra "a1,a2,...;b1,..." (pinched-master values from --efree FILE, schema pflow-efree.v1:
     // {"schema", "d0", "values": {"[..]": {"value", "abs_err"}}, "sources": [...]}, if needed)
     let mut extras = Vec::new();
     if let Some(ex) = arg("--extra") {
         let prec = crate::dispersive::run::bits(cfg.wf);
         let mut efree: std::collections::HashMap<Vec<i64>, rug::Float> = Default::default();
+        let mut efree_downgrades: Vec<String> = Vec::new();
         let mut eferr: std::collections::HashMap<Vec<i64>, rug::Float> = Default::default();
         if let Some(f) = o.path("--efree") {
             let v = read_json(&f)?;
             if v["schema"] != "pflow-efree.v1" {
                 return Err(format!("--efree {f}: schema must be \"pflow-efree.v1\" (values with abs_err, d0, sources)"));
             }
+            check_seal(&format!("--efree {f}"), &v)?;
+            efree_downgrades = verify_sources(&format!("--efree {f}"), &v["sources"])?;
             let fd0: Rational = v["d0"].as_str().ok_or("--efree: d0 missing")?.parse().map_err(|_| "--efree: d0")?;
             if fd0 != rs.d0 {
                 return Err(format!("--efree {f}: values for d0 = {fd0}, run at d0 = {}", rs.d0));
@@ -378,6 +461,7 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
                 }),
                 _ => None,
             };
+            downgrades.extend(efree_downgrades.drain(..).map(|d| format!("efree: {d}")));
             extras.push(match r1 {
                 Ok((v, n, er)) => json!({"target": xv, "value": v.to_string_radix(10, Some((cfg.wf as usize).max(20))), "abs_err": fe(&er), "max_moment_n": n, "digits_two_precision": dig}),
                 Err(err) => {
@@ -389,12 +473,21 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
         }
     }
     let accepted = failures.is_empty();
-    let frame = frame_of(&g, e, &sys.masters);
+    let boundary = if cfg.provided.values.is_empty() && cfg.provided.header.is_null() {
+        Value::Null
+    } else {
+        json!({"master_definitions_sha256": cfg.provided.header["master_definitions_sha256"], "answer_meaning_sha256": cfg.provided.header["answer_meaning_sha256"], "normalisation": cfg.provided.header["normalisation"]})
+    };
+    let frame = frame_of(&g, e, &sys.masters, boundary);
+    downgrades.dedup();
     let target_digits = -res.diag["gate_log10"].as_f64().unwrap_or(f64::NAN);
-    Ok(json!({"schema": "pflow-route-b.v2", "accepted": accepted, "acceptance": {"accepted": accepted, "failures": failures}, "accept_diagnostics": accept_diag,
+    let mut doc = json!({"schema": "pflow-route-b.v2", "accepted": accepted, "downgrades": downgrades, "acceptance": {"accepted": accepted, "failures": failures}, "accept_diagnostics": accept_diag,
             "d0": rs.d0.to_string(), "frame_sha256": sha256_json(&frame), "frame": frame, "inputs": inputs, "target_digits": target_digits,
             "allow_unverified_provided": cfg.allow_unverified_provided, "allow_skipped": cfg.allow_skipped,
             "digits_cap": res.diag["digits_cap"], "digits_estimate": res.diag["digits_estimate"], "digits_by_check": res.diag["digits_by_check"], "extras": extras, "e_slot": e,
             "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits, "two_precision": tp},
-            "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag)}))
+            "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag)});
+    // the producer's content seal over everything (values, uncertainties, d0, frame, inputs, verdict)
+    doc["content_sha256"] = json!(content_sha256(&doc));
+    Ok(doc)
 }

@@ -63,8 +63,9 @@ discrepancy, series tail and dropped imaginary part, log10 relative); `tail_heal
  "sources": [{"file", "sha256", "role"}, ...], "unverified": [ids],
  "values": [{"edges": [[u, v, a], ...], "ext": [s, t], "value": "...", "abs_err": "...", "id": ...}]}
 ```
-- Written by `tools/pflow/answer2prov.py` from p-integral's d-exact reductions. v1 tables (a nominal `digits` stamp, no
-  provenance) are refused.
+- Written by `tools/pflow/answer2prov.py` from p-integral's d-exact reductions (rows from accepted lower-loop samples:
+  `sample2prov.py`). v1 tables (a nominal `digits` stamp, no provenance) are refused. The table is sealed (`content_sha256`); its
+  source digests are recomputed where the files are reachable (see "Content seals" below).
 - Indices are integers or "p/q" strings; d0 must be the run's, exactly.
 - Every value carries its ACHIEVED absolute uncertainty `abs_err`, propagated by the producer through the reduction
   (sum |c_i| |B_i| err_i plus rounding). Rows built from a source without a measured uncertainty are listed in `unverified`; a run
@@ -77,19 +78,42 @@ discrepancy, series tail and dropped imaginary part, log10 relative); `tail_heal
 
 ## Samples (the output, schema `pflow-route-b.v2`)
 A sample authenticates itself for every consumer:
-- `d0` (exact), `frame` and `frame_sha256`: the normalisation, the graph, the massive line and the master list (d0-independent: all
-  samples of one grid share it);
+- `d0` (exact), `frame` and `frame_sha256`: the normalisation, the graph, the massive line, the master list and the boundary
+  identity (`boundary`: the provided table's `master_definitions_sha256`, `answer_meaning_sha256` and normalisation, or null).
+  d0-independent: all samples of one grid share it; samples built from different master definitions never do;
 - `inputs`: every file read (DE blocks, manifest, graph, provided table with its sources and definitions digest, efree, class
   config) with its sha256;
 - `target_digits` (the effective gate), `accepted` and `acceptance.failures` (both precision passes; a requested `--extra` that
   cannot be computed is a failure), `accept_diagnostics`, `allow_unverified_provided`, `allow_skipped`;
 - every value with `abs_err` = max(10^-digits_estimate max(|v|, 10^-30 x the moment's scale), the two-precision difference), and
-  `integral_abs_err`; every extra with its propagated `abs_err` (`--efree` files: schema `pflow-efree.v1` with d0 and abs_err).
+  `integral_abs_err`; every extra with its propagated `abs_err` (`--efree` files: schema `pflow-efree.v1` with d0, abs_err and a
+  content seal);
+- `downgrades`: explicit reasons why the sample is weaker than production quality (no two-precision pass: abs_err is then one
+  run-wide estimate; provided sources whose digest could not be verified; `--allow-unverified-provided`, `--allow-skipped`,
+  `--accept-diagnostics`);
+- `content_sha256`: the producer's seal over the whole document.
 
-Consumers (`tools/pflow`): `masters_from_sample.py` (lower-loop masters for the next table), `fitgrid.py` (Laurent fit of a spec's
-node set), `recon4l.py` (the four-loop blind test). They refuse a d0 or frame mismatch, a rejected or verdict-less sample, a target
-below the need, an uncertainty above the need, and missing, duplicate or extra nodes; a fit records the digests of the samples it
-used. Tests: `python3 -I -m unittest discover -s tools/pflow -p 'test_*.py'` (mpmath).
+## Content seals and source digests (every producer, every reader)
+- Canonical serialisation (`pflow::cli::canonical_json` = `tools/pflow/pflowio.py canonical`, the same bytes): object keys sorted,
+  no spaces, strings JSON-escaped with UTF-8 kept, every number as its exact rational `p/q`. So the float formatting of the writer
+  does not matter.
+- `content_sha256` = sha256 of the canonical serialisation of the document without that field. Written by every producer
+  (RustFlow samples, answer2prov / sample2prov tables, masters_from_sample, mkefree) and recomputed by every reader. Any edit of a
+  value, an uncertainty, the frame or a header is refused. The frame digest is recomputed from the frame body.
+- Recorded source digests (`{"file", "sha256"}` records anywhere in a header or in `inputs`) are recomputed whenever the file is
+  reachable. A mismatch is refused (a stale or edited source). An unreachable source is an explicit downgrade, never silent.
+- Python producers write no floats into sealed documents (strings instead), so that no reader depends on float parsing.
+
+## Fit contracts (`tools/pflow/fitgrid.py`, schema `pflow-fit-spec.v1`)
+- `nodes`: `{"p/q": sha256}` pins every node's ACCEPTED sample file. A different file for a node is refused, and so are missing,
+  duplicate and extra nodes (never a smaller fit).
+- `frame_sha256` is required; every v2 sample's recomputed frame digest must equal it.
+- `production` (default true) refuses every downgraded sample. In particular a production sample needs a two-precision pass.
+- `legacy_samples: {"p/q": sha256}`: the ONLY legacy path, for the 12 archived four-loop nodes of the blind eps^1 test, which are
+  pinned in the code (`pflowio.LEGACY_4L_NODES`). Refused at loops >= 5 and in production. Every printed coefficient line of such a
+  fit says `LEGACY (frame unverified)`.
+- `masters_from_sample.py` needs `--frame-sha256 NAME=HEX` for every master, and refuses downgraded samples unless
+  `--measurement`, which records the downgrade.
 
 ## Checkpoints (`--workdir DIR`)
 - Frobenius families write their exact state every 900 s. Every transport writes after every patch.
@@ -108,3 +132,5 @@ used. Tests: `python3 -I -m unittest discover -s tools/pflow -p 'test_*.py'` (mp
 ## Tests
 `cargo test --release --lib pflow:: -- --include-ignored` (about 10 minutes at 2 threads without the four-loop regression; that
 one takes 30-60 minutes).
+Tools: `python3 -I -B -m unittest discover -s tools/pflow -p 'test_*.py'` (mpmath; seconds). They include the attacks of the
+GATE 1 review: edited values, uncertainties and frames, stale sources, unpinned or foreign samples, legacy at five loops.

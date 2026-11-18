@@ -37,6 +37,8 @@ pub struct Provided {
     pub unverified: Vec<String>,
     /// the table's header (everything but the values): definitions digest, sources, producer
     pub header: serde_json::Value,
+    /// explicit downgrades: sources whose digest could not be verified (not reachable), the producer's own downgrades
+    pub downgrades: Vec<String>,
     /// canonical keys of irreducible graphs that were not in the table
     pub missing: std::sync::Mutex<Vec<String>>,
     /// entries that disagree with the exact evaluator: (canonical key, values, number of uses), each key once
@@ -53,6 +55,7 @@ impl Clone for Provided {
             d0: self.d0.clone(),
             unverified: self.unverified.clone(),
             header: self.header.clone(),
+            downgrades: self.downgrades.clone(),
             missing: std::sync::Mutex::new(self.missing.lock().unwrap().clone()),
             mismatch: std::sync::Mutex::new(self.mismatch.lock().unwrap().clone()),
             used: std::sync::Mutex::new(self.used.lock().unwrap().clone()),
@@ -70,8 +73,10 @@ fn is_sha256(v: &serde_json::Value) -> bool {
 }
 
 impl Provided {
-    /// parse and authenticate a table: schema v2, normalisation, the run's exact d0, definitions digest, sources with sha256, a
-    /// non-negative abs_err for every value, integer or "p/q" indices, no duplicates that disagree beyond their uncertainties
+    /// parse and authenticate a table: content seal (any edit of a value, an uncertainty or the header is refused), schema v2,
+    /// normalisation, the run's exact d0, definitions digest, sources with sha256 (recomputed where the file is reachable: a
+    /// mismatch is refused, an unreachable source is a recorded downgrade), a non-negative abs_err for every value, integer or "p/q"
+    /// indices, no duplicates that disagree beyond their uncertainties
     pub fn from_json(v: &serde_json::Value, prec: u32, d0: &Rational) -> Result<Provided, String> {
         if v["schema"] == "pflow-provided.v1" {
             return Err("provided: schema pflow-provided.v1 has no provenance and no per-value uncertainty; regenerate it with tools/pflow/answer2prov.py (pflow-provided.v2)".into());
@@ -93,6 +98,11 @@ impl Provided {
         if src.is_empty() || !src.iter().all(|x| x["file"].is_string() && is_sha256(&x["sha256"])) {
             return Err("provided: every source needs a file and its sha256".into());
         }
+        super::cli::check_seal("provided", v)?;
+        let mut header = v.clone();
+        header.as_object_mut().unwrap().remove("values");
+        let mut downgrades = super::cli::verify_sources("provided", &header)?;
+        downgrades.extend(v["downgrades"].as_array().map(|a| a.iter().filter_map(|x| x.as_str().map(|s| s.to_string())).collect::<Vec<_>>()).unwrap_or_default());
         let unv_ids: Vec<&serde_json::Value> = v["unverified"].as_array().map(|a| a.iter().collect()).unwrap_or_default();
         let mut values: HashMap<String, Float> = HashMap::new();
         let mut errors: HashMap<String, Float> = HashMap::new();
@@ -125,9 +135,7 @@ impl Provided {
             values.insert(key.clone(), val);
             errors.insert(key, err);
         }
-        let mut header = v.clone();
-        header.as_object_mut().unwrap().remove("values");
-        Ok(Provided { values, errors, d0: Some(td0), unverified, header, ..Default::default() })
+        Ok(Provided { values, errors, d0: Some(td0), unverified, header, downgrades, ..Default::default() })
     }
 
     /// relative digits of the entries the run used (min over them; None if none was used)
