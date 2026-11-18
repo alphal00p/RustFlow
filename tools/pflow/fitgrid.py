@@ -1,13 +1,16 @@
 """Laurent coefficients of one target from a grid of AUTHENTICATED route-B samples (pflow-fit.v1).
 usage: fitgrid.py SPEC.json SAMPLE.json ... [--out FIT.json]
 SPEC (pflow-fit-spec.v1):
-  {"schema": "pflow-fit-spec.v1", "nodes": ["p/q", ...]   (the d0 of every node; ALL required, each exactly once),
-   "frame_sha256": HEX | null, "allow_legacy": false, "need_target_digits": T, "need_abs_err": X,
-   "target": {"name": N, "master": [a...], "m": 1} | {"name": N, "extra": [a...]},
-   "loops": L, "scheme": "G" | "E", "pole_order": p}
-Every sample is authenticated (pflowio.read_sample): exact d0 in the node list, frame digest, ACCEPTED with a verdict, effective
-target >= need_target_digits, the target's achieved abs_err (after the normalisation to the scheme, times |eps|^p) <= need_abs_err.
-Missing, duplicate or extra nodes refuse the fit (exit 2, "REFUSED: ..."), never a smaller fit.
+  {"schema": "pflow-fit-spec.v1", "nodes": {"p/q": SHA256, ...}   (every node with the sha256 of its ACCEPTED sample file; ALL
+   required, each exactly once), "frame_sha256": HEX (required), "need_target_digits": T, "need_abs_err": X,
+   "target": {"name": N, "master": [a...], "m": 1} | {"name": N, "extra": [a...]}, "loops": L, "scheme": "G" | "E",
+   "pole_order": p, "production": true (default), "legacy_samples": {"p/q": SHA256} (only the 12 archived 4L nodes; loops = 4)}
+Every sample is authenticated (pflowio.read_sample): content seal, the file's sha256 equal to the pinned one, exact d0 in the node
+list, the frame digest recomputed and equal to frame_sha256, ACCEPTED with a verdict, effective target >= need_target_digits, the
+target's achieved abs_err (after the normalisation to the scheme, times |eps|^p) <= need_abs_err. A production contract refuses
+every downgraded sample (no two-precision pass, unreachable inputs, legacy). Missing, duplicate, extra or unpinned nodes refuse
+the fit (exit 2, "REFUSED: ..."), never a smaller fit. legacy_samples is refused at loops >= 5 and for any file that is not one of
+the 12 archived four-loop nodes; every printed line of a fit that used one says LEGACY.
 The fit: y_i = eps_i^p V(eps_i) is interpolated by the degree n-1 polynomial through all n nodes, c_k = sum_i w_ik y_i with the
 EXACT rational cardinal weights; abs_err(c_k) = sum_i |w_ik| err(y_i) (worst case, correlations not assumed) and
 amplification_log10 = log10 sum_i |w_ik| (from the node set and p alone). The output records the digests of the samples used."""
@@ -17,7 +20,7 @@ from fractions import Fraction as Fr
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pflowio import Refused, rat, read_sample, digest, sha256_file, fmt_err, load_json
+from pflowio import Refused, rat, read_sample, digest, sha256_file, fmt_err, load_json, LEGACY_4L_NODES
 
 FIT_SPEC_SCHEMA = "pflow-fit-spec.v1"
 
@@ -47,9 +50,26 @@ def fit(spec, files, mp_dps=None):
     from mpmath import mp, mpf, fabs, log10, nstr
     if spec.get("schema") != FIT_SPEC_SCHEMA:
         raise Refused(f"fit spec schema {spec.get('schema')!r}, expected {FIT_SPEC_SCHEMA!r}")
-    nodes = [rat(x) for x in spec["nodes"]]
-    if len(set(nodes)) != len(nodes):
+    if "allow_legacy" in spec:
+        raise Refused("fit spec: allow_legacy was replaced by legacy_samples {d0: sha256} (the 12 archived four-loop nodes only)")
+    if not isinstance(spec.get("nodes"), dict):
+        raise Refused("fit spec: nodes must pin every node's sample: {\"p/q\": sha256, ...}")
+    pins = {rat(k): v for k, v in spec["nodes"].items()}
+    if len(pins) != len(spec["nodes"]):
         raise Refused("fit spec: duplicate node")
+    nodes = list(pins)
+    if not isinstance(spec.get("frame_sha256"), str):
+        raise Refused("fit spec: frame_sha256 is required")
+    production = spec.get("production", True)
+    legacy = {rat(k): v for k, v in (spec.get("legacy_samples") or {}).items()}
+    if legacy:
+        if int(spec["loops"]) != 4:
+            raise Refused(f"fit spec: legacy_samples at loops = {spec['loops']}: the legacy path exists only for the 12 archived four-loop nodes")
+        for k, v in legacy.items():
+            if v not in LEGACY_4L_NODES or pins.get(k) != v:
+                raise Refused(f"fit spec: legacy sample {k} ({v[:16]}...) is not one of the 12 archived four-loop nodes pinned in nodes")
+        if production:
+            raise Refused("fit spec: a production contract cannot use legacy_samples")
     tgt = spec["target"]
     key = ("extra", tuple(tgt["extra"])) if "extra" in tgt else ("value", (tgt.get("m", 1), tuple(tgt["master"])))
     p, L, scheme = int(spec["pole_order"]), int(spec["loops"]), spec.get("scheme", "G")
@@ -58,17 +78,19 @@ def fit(spec, files, mp_dps=None):
         raise Refused("fit spec: need_target_digits and need_abs_err are required")
     got = {}
     for f in files:
-        s = read_sample(f, frame_sha=spec.get("frame_sha256"), need_target=float(need_t), allow_legacy=bool(spec.get("allow_legacy")))
+        s = read_sample(f, frame_sha=spec["frame_sha256"], need_target=float(need_t), legacy_pins=set(legacy.values()))
         if s["d0"] not in nodes:
             raise Refused(f"{f}: d0 = {s['d0']} is not a node of the fit spec")
+        if s["sha256"] != pins[s["d0"]]:
+            raise Refused(f"{f}: sha256 {s['sha256'][:16]}... is not the sample pinned for d0 = {s['d0']} ({pins[s['d0']][:16]}...)")
+        if production and s["downgrades"]:
+            raise Refused(f"{f}: downgraded sample refused by a production contract: {'; '.join(s['downgrades'])}")
         if s["d0"] in got:
             raise Refused(f"{f}: a second sample for d0 = {s['d0']} ({got[s['d0']]['file']})")
         got[s["d0"]] = s
     missing = [str(n) for n in nodes if n not in got]
     if missing:
         raise Refused(f"missing nodes {missing}: the spec requires all {len(nodes)} (no smaller fit)")
-    if spec.get("frame_sha256") is None and not spec.get("allow_legacy"):
-        raise Refused("fit spec: frame_sha256 is required (null only with allow_legacy)")
     mp.dps = mp_dps or 60 + int(max(float(need_t), 40)) * 2
     eps_q = [(4 - n) / 2 for n in nodes]
     ys, es, used = [], [], []
@@ -87,7 +109,7 @@ def fit(spec, files, mp_dps=None):
         ys.append(y)
         es.append(ey)
         used.append({"file": s["file"], "sha256": s["sha256"], "d0": f"{n.numerator}/{n.denominator}", "legacy": s["legacy"],
-                     "target_digits": s["target_digits"]})
+                     "target_digits": s["target_digits"], "downgrades": s["downgrades"]})
     out = {}
     for k in range(-p, len(nodes) - p):
         w = cardinal_weights(eps_q, k + p)
@@ -105,8 +127,10 @@ def main(argv):
     pos = [a for i, a in enumerate(argv) if not a.startswith("--") and (i == 0 or argv[i - 1] != "--out")]
     spec = load_json(pos[0])
     cs, used = fit(spec, pos[1:])
+    flag = "  LEGACY (frame unverified)" if any(u["legacy"] for u in used) else ""
+    flag += "  DOWNGRADED" if any(u["downgrades"] for u in used) and not flag else ""
     for k, c in cs.items():
-        print(f"c_{k:+d} = {nstr(c['c'], 30)}  +- {c['abs_err']}  (amplification 10^{c['amplification_log10']:.3f})")
+        print(f"c_{k:+d} = {nstr(c['c'], 30)}  +- {c['abs_err']}  (amplification 10^{c['amplification_log10']:.3f}){flag}")
     if opt("--out"):
         doc = {"schema": "pflow-fit.v1", "spec": spec, "spec_sha256": digest(spec), "used_samples": used,
                "coefficients": {str(k): {x: c[x] for x in ("value", "abs_err", "amplification_log10")} for k, c in cs.items()}}

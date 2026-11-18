@@ -1,22 +1,21 @@
 {
  "schema": "pflow-fit-spec.v1",
- "comment": "4L blind eps^1 test (P4L_NO1 family, mass on line 0): the 12-node production contract of runs/rf4/grid-r; archived v1 samples (legacy: frame unverified, uncertainty = the bound of the passed gates)",
- "nodes": [
-  "995043/250000",
-  "1990761/500000",
-  "996033/250000",
-  "249239/62500",
-  "1996173/500000",
-  "399739/100000",
-  "400261/100000",
-  "2003827/500000",
-  "250761/62500",
-  "1003967/250000",
-  "2009239/500000",
-  "1004957/250000"
- ],
- "frame_sha256": null,
- "allow_legacy": true,
+ "comment": "4L blind eps^1 test (P4L_NO1 family, mass on line 0): the 12-node contract of runs/rf4/grid-r, every node pinned by sha256; these archived v1 samples are the ONLY legacy samples the tools admit (frame unverified, uncertainty = the bound of the passed gates); not a production contract",
+ "nodes": {
+  "995043/250000": "485d2a01aa1261485bc0eb3a28203210de822fc982202102e7736657ce2ede4f",
+  "1990761/500000": "b07cbb798ca34f0b65d04cf2e9bcd47389dcb1fefaf3a88b7a4c624f36e64e0e",
+  "996033/250000": "0225aff5c46a4690e3cd7c83724d81f69812d992136faa92392262da932ac162",
+  "249239/62500": "1a377ba8413f91c3c198dddfa6c8e97af2e3fbb4a5be0642e5c080d8cfbd3926",
+  "1996173/500000": "fb8c3251b688be552e397b1b4bb1e931138c4c18758cf5e3e88265744bc46611",
+  "399739/100000": "0e4895401b0c17243ff5ad7be81720431df2356cb23306a092ad27a2af558c8d",
+  "400261/100000": "7bcd5b6b5cf4b77b14f0e9054c8293a02843cc6335ac6c3c4344753ee5cd9377",
+  "2003827/500000": "a5cebf6ee02660ef0c502ada8e7a6edc1bc7fcc780005839b16779bcea1af968",
+  "250761/62500": "38c3d767186396c378b00b4e3e585eb1fb551097e11fc09beb259325f2ae42ac",
+  "1003967/250000": "c9a17c5627ddb3f2a4ce7bef5b8ac4f910cec875acf51c035446af588ce3f90c",
+  "2009239/500000": "0fc3f6de6f87f4eb0d9ccde3020eb64570cff1fa8a93820688784050512327a9",
+  "1004957/250000": "205d5f33181240745a3add3640dbac6cc6f049edd581e7d4923febb149e669e2"
+ },
+ "frame_sha256": "2bf4cd9803b50319f59ade7545184804a7ba7dacc24e06924375587919e3e5bb",
  "need_target_digits": 18,
  "need_abs_err": "1e-14",
  "target": {
@@ -41,5 +40,20 @@
  },
  "loops": 4,
  "scheme": "G",
- "pole_order": 1
+ "pole_order": 1,
+ "legacy_samples": {
+  "995043/250000": "485d2a01aa1261485bc0eb3a28203210de822fc982202102e7736657ce2ede4f",
+  "1990761/500000": "b07cbb798ca34f0b65d04cf2e9bcd47389dcb1fefaf3a88b7a4c624f36e64e0e",
+  "996033/250000": "0225aff5c46a4690e3cd7c83724d81f69812d992136faa92392262da932ac162",
+  "249239/62500": "1a377ba8413f91c3c198dddfa6c8e97af2e3fbb4a5be0642e5c080d8cfbd3926",
+  "1996173/500000": "fb8c3251b688be552e397b1b4bb1e931138c4c18758cf5e3e88265744bc46611",
+  "399739/100000": "0e4895401b0c17243ff5ad7be81720431df2356cb23306a092ad27a2af558c8d",
+  "400261/100000": "7bcd5b6b5cf4b77b14f0e9054c8293a02843cc6335ac6c3c4344753ee5cd9377",
+  "2003827/500000": "a5cebf6ee02660ef0c502ada8e7a6edc1bc7fcc780005839b16779bcea1af968",
+  "250761/62500": "38c3d767186396c378b00b4e3e585eb1fb551097e11fc09beb259325f2ae42ac",
+  "1003967/250000": "c9a17c5627ddb3f2a4ce7bef5b8ac4f910cec875acf51c035446af588ce3f90c",
+  "2009239/500000": "0fc3f6de6f87f4eb0d9ccde3020eb64570cff1fa8a93820688784050512327a9",
+  "1004957/250000": "205d5f33181240745a3add3640dbac6cc6f049edd581e7d4923febb149e669e2"
+ },
+ "production": false
 }

@@ -57,6 +57,78 @@ def digest(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
+def canonical(v):
+    """language-independent canonical serialisation (RustFlow pflow::cli::canonical_json writes the same bytes): object keys sorted,
+    no spaces, strings JSON-escaped (UTF-8 kept), every NUMBER as its exact rational ("p/q" or "p"), so that the float formatting
+    of the writer does not matter"""
+    if v is None:
+        return "null"
+    if v is True:
+        return "true"
+    if v is False:
+        return "false"
+    if isinstance(v, int):
+        return str(v)
+    if isinstance(v, float):
+        return str(Fr(v))
+    if isinstance(v, str):
+        return json.dumps(v, ensure_ascii=False)
+    if isinstance(v, list):
+        return "[" + ",".join(canonical(x) for x in v) + "]"
+    if isinstance(v, dict):
+        return "{" + ",".join(json.dumps(k, ensure_ascii=False) + ":" + canonical(v[k]) for k in sorted(v)) + "}"
+    raise Refused(f"not serialisable: {type(v)}")
+
+
+def sha256_canonical(v):
+    return hashlib.sha256(canonical(v).encode()).hexdigest()
+
+
+def content_sha256(doc):
+    """sha256 of the canonical serialisation of the whole document except its `content_sha256` field"""
+    return sha256_canonical({k: v for k, v in doc.items() if k != "content_sha256"})
+
+
+def seal(doc):
+    """the producer's content hash (written last)"""
+    doc["content_sha256"] = content_sha256(doc)
+    return doc
+
+
+def check_seal(path, doc):
+    if "content_sha256" not in doc:
+        raise Refused(f"{path}: no content_sha256 (unsealed file)")
+    got = content_sha256(doc)
+    if got != doc["content_sha256"]:
+        raise Refused(f"{path}: content_sha256 {doc['content_sha256'][:16]}... does not match the content ({got[:16]}...): the file was edited")
+
+
+def file_refs(v):
+    """every {"file": F, "sha256": H} record inside v"""
+    if isinstance(v, dict):
+        if isinstance(v.get("file"), str) and isinstance(v.get("sha256"), str):
+            yield v
+        for x in v.values():
+            yield from file_refs(x)
+    elif isinstance(v, list):
+        for x in v:
+            yield from file_refs(x)
+
+
+def verify_sources(path, refs):
+    """recompute the sha256 of every referenced source that is reachable (a mismatch = a stale or edited source: refused); an
+    unreachable source is returned as an explicit DOWNGRADE (production contracts refuse downgrades)"""
+    downs = []
+    for r in refs:
+        f = Path(r["file"])
+        if f.is_file():
+            if sha256_file(f) != r["sha256"]:
+                raise Refused(f"{path}: source {f} has sha256 {sha256_file(f)[:16]}..., the file records {r['sha256'][:16]}... (stale or edited)")
+        else:
+            downs.append(f"source not reachable, digest unverified: {f}")
+    return downs
+
+
 def rat(s):
     """exact rational from "p/q", an int, or a Fraction; floats are refused"""
     if isinstance(s, Fr):
@@ -164,23 +236,26 @@ def read_answers(paths):
 
 # ---------------- master values ----------------
 def read_masters(path, d0, defs_sha=None):
-    """{name: (value str, abs_err str, verified bool)} from a pflow-masters.v1 file (d0, definitions digest and sources checked)
-    or from a LEGACY file {name: value, "d0", "from"}: its d0 must match; its values have no measured uncertainty and are marked
-    unverified (abs_err = |v| 10^-(w - 20) of the source run, if the source exists; refused otherwise)."""
+    """{name: (value str, abs_err str, verified bool)}, sources, downgrades from a pflow-masters.v1 file (content seal, d0,
+    definitions digest, every source digest recomputed where reachable) or from a LEGACY file {name: value, "d0", "from"}: its d0
+    must match; its values have no measured uncertainty and are marked unverified (abs_err = |v| 10^-(w - 20) of the source run,
+    if the source exists; refused otherwise)."""
     m = load_json(path)
     if "d0" not in m:
         raise Refused(f"{path}: no d0: a master file must name its dimension")
     check_d0(path, m["d0"], d0)
     src = [{"file": str(path), "sha256": sha256_file(path), "role": "masters"}]
     if m.get("schema") == MASTERS_SCHEMA:
+        check_seal(path, m)
         if defs_sha is not None and m.get("master_definitions_sha256") != defs_sha:
             raise Refused(f"{path}: master_definitions_sha256 {m.get('master_definitions_sha256')} != the answers' {defs_sha}")
+        downs = verify_sources(path, list(file_refs(m.get("sources", [])))) + list(m.get("downgrades", []))
         vals = {}
         for k, x in m["values"].items():
             if "abs_err" not in x:
                 raise Refused(f"{path}: master {k} has no abs_err")
             vals[k] = (x["value"], x["abs_err"], True)
-        return vals, src + m.get("sources", [])
+        return vals, src + m.get("sources", []), downs
     if m.get("schema") is not None:
         raise Refused(f"{path}: unknown schema {m.get('schema')!r}")
     # legacy file
@@ -199,20 +274,24 @@ def read_masters(path, d0, defs_sha=None):
         if k in ("d0", "from"):
             continue
         vals[k] = (v, fmt_err(fabs(mpf(v)) * mpf(10) ** -(int(w) - 20)), False)
-    return vals, src
+    return vals, src, [f"legacy master file {path}: no measured uncertainty"]
 
 
 # ---------------- route-B samples ----------------
-def read_sample(path, d0=None, frame_sha=None, need_target=None, allow_legacy=False):
-    """a route-B sample, authenticated: schema, exact d0 (if given), frame digest (if given), ACCEPTED with a verdict, the
-    effective target >= need_target. Returns dict(d0, frame_sha256, target_digits, values: {(m, tuple(master)): (value, abs_err)},
-    extras: {tuple(target): (value, abs_err)}, sha256, legacy).
-    allow_legacy: a pflow-route-b.v1 sample (no frame, no abs_err) is accepted only if it is one of LEGACY_4L_NODES (by sha256) and
-    has accepted == true; its uncertainty is
-    the bound its passed gates certify, |v| 10^-T (T = min(target or w - gate_margin, digits_estimate if present)), and its frame
-    is unverified (legacy = True)."""
+def read_sample(path, d0=None, frame_sha=None, need_target=None, legacy_pins=None):
+    """a route-B sample, authenticated: content seal (any edit of a value, an uncertainty or the frame is refused), schema, exact d0
+    (if given), the frame digest RECOMPUTED from the frame body and compared with frame_sha (if given), ACCEPTED with a verdict,
+    the effective target >= need_target, every input digest recomputed where the input is reachable.
+    Returns dict(d0, frame_sha256, target_digits, values: {(m, tuple(master)): (value, abs_err)}, extras: {tuple(target):
+    (value, abs_err)}, sha256, legacy, downgrades). Downgrades (explicit, refused by production contracts): unreachable inputs,
+    no two-precision pass (abs_err is then one run-wide estimate, not a per-value measurement), the run's own downgrades.
+    legacy_pins: a set of sha256; a pflow-route-b.v1 sample (no frame, no abs_err, no seal) is accepted only if its sha256 is in
+    legacy_pins AND in LEGACY_4L_NODES (the 12 archived four-loop nodes); its uncertainty is the bound its passed gates certify,
+    |v| 10^-T (T = min(target or w - gate_margin, digits_estimate if present)), and its frame is unverified (legacy = True)."""
     s = load_json(path)
     sch = s.get("schema")
+    if sch == SAMPLE_SCHEMA:
+        check_seal(path, s)
     if d0 is not None:
         check_d0(path, s.get("d0"), d0)
     if "accepted" not in s:
@@ -220,13 +299,18 @@ def read_sample(path, d0=None, frame_sha=None, need_target=None, allow_legacy=Fa
     if s["accepted"] is not True:
         fails = (s.get("acceptance") or s.get("diag", {}).get("acceptance", {})).get("failures")
         raise Refused(f"{path}: REJECTED sample (accepted = {s['accepted']}; failures {fails})")
-    out = {"file": str(path), "sha256": sha256_file(path), "d0": rat(s["d0"]), "values": {}, "extras": {}}
+    out = {"file": str(path), "sha256": sha256_file(path), "d0": rat(s["d0"]), "values": {}, "extras": {}, "downgrades": []}
     if sch == SAMPLE_SCHEMA:
         if s.get("accept_diagnostics"):
             raise Refused(f"{path}: accepted only through --accept-diagnostics")
+        if sha256_canonical(s["frame"]) != s["frame_sha256"]:
+            raise Refused(f"{path}: frame_sha256 does not match the stored frame (the frame was edited)")
         out["frame_sha256"] = s["frame_sha256"]
         out["target_digits"] = float(s["target_digits"])
         out["legacy"] = False
+        out["downgrades"] = list(s.get("downgrades", [])) + verify_sources(path, list(file_refs(s.get("inputs", {}))))
+        if not (s.get("config", {}).get("two_precision") or 0) > 0:
+            out["downgrades"].append("no two-precision pass: abs_err is a run-wide estimate")
         for v in s["values"]:
             if "abs_err" not in v:
                 raise Refused(f"{path}: value without abs_err")
@@ -235,10 +319,10 @@ def read_sample(path, d0=None, frame_sha=None, need_target=None, allow_legacy=Fa
             if "error" in x:
                 continue
             out["extras"][tuple(x["target"])] = (x["value"], x["abs_err"])
-    elif sch == "pflow-route-b.v1" and allow_legacy:
+    elif sch == "pflow-route-b.v1" and legacy_pins:
         from mpmath import mpf, fabs
-        if out["sha256"] not in LEGACY_4L_NODES:
-            raise Refused(f"{path}: a legacy v1 sample is accepted only for the 12 archived four-loop nodes (s1/runs/rf4/grid-r); this file is not one of them")
+        if out["sha256"] not in LEGACY_4L_NODES or out["sha256"] not in legacy_pins:
+            raise Refused(f"{path}: a legacy v1 sample is accepted only for the 12 archived four-loop nodes (s1/runs/rf4/grid-r), pinned by sha256; this file is not one of them")
         c = s.get("config", {})
         t = c.get("target_digits")
         T = float(t) if t is not None else float(c["w"]) - float(c.get("gate_margin", 20))
@@ -247,11 +331,12 @@ def read_sample(path, d0=None, frame_sha=None, need_target=None, allow_legacy=Fa
         out["frame_sha256"] = None
         out["target_digits"] = T
         out["legacy"] = True
+        out["downgrades"] = ["LEGACY v1 sample (frame unverified, uncertainty = the bound of its passed gates)"]
         for v in s["values"]:
             out["values"][(v["m"], tuple(v["master"]))] = (v["value"], fmt_err(fabs(mpf(v["value"])) * mpf(10) ** -T))
     else:
-        raise Refused(f"{path}: schema {sch!r} (expected {SAMPLE_SCHEMA!r}{' or a legacy v1' if allow_legacy else ''})")
-    if frame_sha is not None and out["frame_sha256"] != frame_sha:
+        raise Refused(f"{path}: schema {sch!r} (expected {SAMPLE_SCHEMA!r}{' or a pinned legacy v1' if legacy_pins else ''})")
+    if frame_sha is not None and out["frame_sha256"] != frame_sha and not out["legacy"]:
         raise Refused(f"{path}: frame_sha256 {out['frame_sha256']} != required {frame_sha}")
     if need_target is not None and out["target_digits"] < need_target:
         raise Refused(f"{path}: accepted at target {out['target_digits']:.1f} digits < the {need_target} needed")

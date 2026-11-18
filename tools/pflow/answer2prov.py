@@ -12,7 +12,8 @@ Authentication (every failure exits 2 with "REFUSED: ..." and writes nothing):
 - every row carries its ACHIEVED absolute uncertainty: |G11^L| (sum |c_t| |G_t| err(M_t) + evaluation rounding) + printing
   rounding; --need-digits N refuses a table whose worst row has fewer than N relative digits.
 Rows built from a legacy master file (no measured uncertainty) are listed in "unverified"; RustFlow refuses such a table unless
-the run explicitly allows unverified provided values."""
+the run explicitly allows unverified provided values. The master file's content seal and every source digest it records are
+verified (a source that is not reachable is a recorded downgrade). The table is sealed (content_sha256) and holds no floats."""
 import json
 import re
 import sys
@@ -20,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pflowio import (Refused, PROVIDED_SCHEMA, NORMALISATION, rat, eval_exact, read_answers, read_masters, fmt_err, rel_digits,
-                     sha256_file)
+                     sha256_file, seal)
 
 
 def main(argv):
@@ -41,9 +42,9 @@ def main(argv):
     eps_q = (4 - d0) / 2
     eps = mpf(eps_q.numerator) / eps_q.denominator
     ans, defs, defs_sha, meaning_sha, sources = read_answers(answers)
-    masters, verified = {}, {}
+    masters, verified, downgrades = {}, {}, []
     if mfile:
-        mv, msrc = read_masters(mfile, d0, defs_sha)
+        mv, msrc, downgrades = read_masters(mfile, d0, defs_sha)
         sources += msrc
         for k, (v, e, ok) in mv.items():
             if k not in defs:
@@ -104,10 +105,12 @@ def main(argv):
         raise Refused(f"the worst row has {worst:.1f} relative digits < --need-digits {need}")
     doc = {"schema": PROVIDED_SCHEMA, "normalisation": NORMALISATION, "d0": f"{d0.numerator}/{d0.denominator}",
            "master_definitions_sha256": defs_sha, "answer_meaning_sha256": meaning_sha, "sources": sources,
-           "keys": {"file": str(keys), "sha256": sha256_file(keys)}, "unverified": unverified,
-           "worst_relative_digits": worst, "producer": "RustFlow tools/pflow/answer2prov.py", "values": table}
+           "keys": {"file": str(keys), "sha256": sha256_file(keys)}, "unverified": unverified, "downgrades": downgrades,
+           "worst_relative_digits": None if worst is None else f"{worst:.2f}", "producer": "RustFlow tools/pflow/answer2prov.py",
+           "values": table}
+    seal(doc)
     with open(out, "w") as fo:
-        json.dump(doc, fo, indent=1)
+        json.dump(doc, fo, indent=1, ensure_ascii=False)
     print(len(table), "provided values at d0", d0, f"({n_m} master terms; worst {worst:.1f} relative digits; {len(unverified)} unverified rows)")
 
 

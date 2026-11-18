@@ -1,6 +1,7 @@
 """four-loop eps^1 blind test (no1 / no6, G-scheme) from the 12-node grid, through the authenticated fit (fitgrid.py) and the
-contracts specs/p4l-<name>-blind-eps1.json: every node must be present once, accepted, at target >= 18 digits; a missing,
-duplicate, extra or REJECTED sample refuses the fit (exit 2). c_-1 and c_0 are compared with the exact expansions; c_1 is BLIND.
+contracts specs/p4l-<name>-blind-eps1.json: every node must be present once, pinned by sha256, accepted, at target >= 18 digits; a
+missing, duplicate, extra, unpinned or REJECTED sample refuses the fit (exit 2). These 12 archived nodes are LEGACY v1 samples (the
+only ones the legacy path admits); every printed line says so. c_-1 and c_0 are compared with the exact expansions; c_1 is BLIND.
 The sub-grid value (the two outermost nodes dropped) is printed as a self-consistency diagnostic only.
 usage: recon4l.py GRIDDIR [--out PREFIX]"""
 import glob
@@ -26,10 +27,13 @@ def main(argv):
         # sub-grid diagnostic: the two outermost |eps| nodes dropped
         sub = dict(spec)
         order = sorted(spec["nodes"], key=lambda d: abs(4 - eval(d)))
-        sub["nodes"] = order[:-2]
+        sub["nodes"] = {k: spec["nodes"][k] for k in order[:-2]}
+        if spec.get("legacy_samples"):
+            sub["legacy_samples"] = {k: v for k, v in spec["legacy_samples"].items() if k in sub["nodes"]}
         keep = {u["d0"] for u in used if u["d0"] in sub["nodes"]}
         cs2, _ = fit(sub, [u["file"] for u in used if u["d0"] in keep], mp_dps=120)
-        print(f"{name}: {len(used)} nodes")
+        flag = "  LEGACY (frame unverified)" if any(u["legacy"] for u in used) else ""
+        print(f"{name}: {len(used)} nodes{flag}")
         for k in range(-1, min(4, len(used) - 1)):
             c = cs[k]["c"]
             se = float(-log10(fabs(c - cs2[k]["c"]) / fabs(c))) if k in cs2 else None
@@ -39,7 +43,7 @@ def main(argv):
                 line += f"  vs exact {float(-log10(fabs(c / ex() - 1))):.1f} d"
             elif k == 1:
                 line += "  <- BLIND eps^1"
-            line += f"  [+- {cs[k]['abs_err']}, amplification 10^{cs[k]['amplification_log10']:.2f}]"
+            line += f"  [+- {cs[k]['abs_err']}, amplification 10^{cs[k]['amplification_log10']:.2f}]{flag}"
             print(line)
         if "--out" in argv:
             out = argv[argv.index("--out") + 1] + f"-{name}.json"
