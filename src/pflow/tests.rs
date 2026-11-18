@@ -523,7 +523,7 @@ fn cli_on_the_3l_fixture_and_two_precision_workdir() {
     let _ = std::fs::remove_dir_all(&tmp);
 }
 
-/// four-loop regression (NO1 family, eps = 0.009239, boundary = p-integral's exact reductions with t105 from the 3L mode):
+/// four-loop regression (NO1 family, eps = 0.009239, boundary = p-integral's exact reductions with t105 from an accepted 3L sample):
 /// accepted, and all 73 masters with a closed form agree to >= 40 digits at w45
 #[test]
 #[ignore = "four-loop NO1 family (about 30-60 minutes at 2 threads, 2 GB)"]
@@ -537,11 +537,11 @@ fn four_loop_no1_regression() {
     cfg.threads = 2;
     let pv: serde_json::Value = serde_json::from_str(&std::fs::read_to_string(format!("{dir}/provided-P4L_NO1-1990761_500000.json")).unwrap()).unwrap();
     cfg.provided = graph::Provided::from_json(&pv, run::bits(cfg.wf), &sys.d0).unwrap();
-    // the fixture's 18 t105 rows come from a legacy master file (no measured uncertainty): refused unless allowed
-    cfg.allow_unverified_provided = true;
+    // the fixture is fully verified (s1 GATE 1 end-to-end chain: t105 from an accepted v2 3L sample of the same d0)
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
     assert!(r.accepted, "{}", r.diag["acceptance"]["failures"]);
     assert_eq!(r.diag["provided"]["used"], 18, "{}", r.diag["provided"]);
+    assert_eq!(r.diag["provided"]["unverified_used"], 0);
     assert!(r.diag["provided"]["used_relative_digits"].as_f64().unwrap() > 70.0);
     check_ranks(&r);
     let ic = &r.diag["independent_checks"];
