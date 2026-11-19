@@ -362,11 +362,22 @@ fn eval2pt(edges: Vec<E2>, s: usize, t: usize, h: &Rational, prec: u32, depth: u
     let k = key(&edges);
     match (r, pv.values.get(&k)) {
         (Some(ev), Some(v)) => {
-            // agreement within the entry's own achieved uncertainty (plus the evaluator's rounding at this precision)
+            // agreement within the entry's own achieved uncertainty plus the evaluator's error. The evaluator loses digits to
+            // cancellations (Gamma poles at small eps), so a seeming disagreement is re-evaluated at twice the precision: the
+            // entry is a mismatch only if it disagrees with that value by more than abs_err + 2 x the measured evaluator error +
+            // rounding (measured 19 Nov: without this, correct 520-digit entries were flagged at eps = 1.3e-3 and 6.25e-6)
             let c = match &ev { Ev::Zero => Float::new(prec), Ev::Val(c, _) => c.clone() };
             let d = Float::with_val(prec, &c - v).abs();
             let round = Float::with_val(prec, c.clone().abs()) * Float::with_val(prec, 2f64).pow(-(prec as i32) + 40);
-            if d > Float::with_val(prec, &pv.errors[&k] + &round) {
+            let mismatch = d > Float::with_val(prec, &pv.errors[&k] + &round) && {
+                let p2 = 2 * prec;
+                let c2 = match eval2pt_core(edges.clone(), s, t, h, p2, depth) { Some(Ev::Val(c2, _)) => c2, _ => Float::new(p2) };
+                let ev_err = Float::with_val(p2, &c2 - &c).abs();
+                let d2 = Float::with_val(p2, &c2 - v).abs();
+                let tol = Float::with_val(p2, &pv.errors[&k] + Float::with_val(p2, &ev_err * 2u32)) + Float::with_val(p2, &round * 2u32);
+                d2 > tol
+            };
+            if mismatch {
                 let mut m = pv.mismatch.lock().unwrap();
                 match m.iter_mut().find(|x| x.0 == k) {
                     Some(x) => x.2 += 1,

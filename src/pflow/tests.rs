@@ -472,6 +472,33 @@ fn provided_table_checks() {
     }
 }
 
+/// the cross-check of a provided entry against the exact evaluator accounts for the evaluator's own error: at eps = 6.25e-6 a
+/// three-loop graph loses digits to cancellations; a correct entry is consistent, a wrong one is still a mismatch
+#[test]
+fn cross_check_allows_for_the_evaluator_error() {
+    // the graph and precision of a false rejection measured on 19 Nov (4L boundary at eps = 6.25e-6, wf = 355 digits)
+    let g = Graph { edges: vec![(0, 2), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)], ext: (0, 1), loops: 3 };
+    let d0 = Rational::from((319999, 80000));
+    let h = Rational::from(&d0 / 2u32);
+    let a = [1i64, 2, 1, 1, 1, 1];
+    let exact = graph::massless(&g, &a, &h, 3000, &graph::Provided::default()).unwrap();
+    let edges: Vec<serde_json::Value> = g.edges.iter().zip(&a).map(|((u, v), x)| serde_json::json!([u, v, x])).collect();
+    let tab = |val: String| seal(serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": "319999/80000",
+        "master_definitions_sha256": "0".repeat(64), "sources": [{"file": "test", "sha256": "1".repeat(64)}],
+        "values": [{"edges": edges, "ext": [g.ext.0, g.ext.1], "value": val, "abs_err": "1e-400", "id": "kite"}]}));
+    let prec = 1180;
+    let low = graph::massless(&g, &a, &h, prec, &graph::Provided::default()).unwrap();
+    assert!(Float::with_val(3000, &low - &exact).abs() > Float::with_val(3000, exact.abs_ref()) * Float::with_val(3000, 2f64).pow(-(prec as i32) + 40),
+        "the low-precision evaluation must lose digits here, else the test proves nothing");
+    let pv = graph::Provided::from_json(&tab(exact.to_string_radix(10, Some(500))), prec, &d0).unwrap();
+    graph::massless(&g, &a, &h, prec, &pv).unwrap();
+    assert!(pv.mismatch.lock().unwrap().is_empty(), "{:?}", pv.mismatch.lock().unwrap());
+    let wrong = Float::with_val(3000, &exact * (1 + Float::with_val(3000, 1e-20)));
+    let pw = graph::Provided::from_json(&tab(wrong.to_string_radix(10, Some(500))), prec, &d0).unwrap();
+    graph::massless(&g, &a, &h, prec, &pw).unwrap();
+    assert_eq!(pw.mismatch.lock().unwrap().len(), 1);
+}
+
 /// provided entries that the evaluator cannot reduce are USED: their relative uncertainty caps the claimed digits, and a row the
 /// producer marked unverified is refused unless allowed (three-loop NO top graph: irreducible for the exact evaluator)
 #[test]
