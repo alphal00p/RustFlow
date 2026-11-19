@@ -145,6 +145,54 @@ pessimistic.
 - `masters_from_sample.py` needs `--frame-sha256 NAME=HEX` for every master, and refuses downgraded samples unless
   `--measurement`, which records the downgrade.
 
+## Recognition of a coefficient (`tools/pflow/recognize.py`, GATE 3)
+- The dictionary is frozen before any value is looked at: a pflow-pslq-dict.v1 file, or generated. `--standard W` is the products
+  of zeta(2), the odd zetas, zeta(5,3), zeta(7,3) and zeta(3,5,3): 20 / 27 / 36 elements through weight 9 / 10 / 11. `--hoffman W`
+  is the Hoffman words. The dictionary's sha256 is in the result.
+- The constants are evaluated twice: the iterated integral split at 1/2 and at 1/3. The two evaluations must agree.
+- Search: PSLQ on the target and the dictionary, all rounded to the search digits p1, with 20 guard digits.
+  - The tolerance is n H 10^(1-p1), where H is the frozen height cap. A fixed 10^(3-p1), as in the Astra review's controls, rejects
+    every true relation of height above about 10^3, whatever the precision.
+  - In the blind regime p1 > (n+1) log10 H, no relation below the cap exists by chance.
+- Confirmation on an INDEPENDENT value: the same coefficient from a fit of disjoint nodes (`--fit-a`, `--fit-b`; shared samples are
+  refused) or from a higher-precision rerun.
+  - ACCEPTED only if the residual is below the propagated uncertainty (abs_err_B + sum |r| delta) and the independent value has
+    >= 40 informative digits beyond p1.
+  - A candidate that changes at p1 + 10 or p1 + 20 is AMBIGUOUS. Search digits are never used for the acceptance.
+- Measured search digits (published controls, H = 10^12, s1 campaign 18-19 Nov):
+
+  | control | true support | blind, standard products | blind, Hoffman words |
+  |---|---|---|---|
+  | weight 9 (GGPPSS int200, hatted zeta(3,5)) | 70 | 180 (blind bound 252) | not found <= 460 |
+  | weight 10 (LSS M6,2 eps^3) | 150 | 320 (bound 336) | not found <= 460 |
+  | weight 11 (LSS M6,2 eps^4) | 230 | not found <= 700 | not found <= 460 |
+
+  - At weight 11 the true relation in the standard basis has height 10^12.4, above the cap. A blind weight-11 search needs
+    H >= 10^13 and about 37 x 12.4 ~ 460-480 search digits, plus 40 for the confirmation.
+  - A Hoffman-word dictionary is impractical: the coefficients of physical quantities in it are far larger.
+
+## Status and limits (19 Nov 2026)
+- Validated through FOUR loops:
+  - the P4L_NO1 family end to end: boundary from p-integral's d-exact reductions and our own 3L samples, route B, fit;
+  - the blind eps^1 test of no1 and no6, about 15 digits, with the exact c_-1 and c_0 reproduced;
+  - every acceptance gate, the provenance chain and the uncertainty propagation.
+- FIVE loops: NOT run end to end. No T266 master list, no five-loop DE block and no T266 boundary request exist yet. The T266
+  reconstruction was paused on 19 Nov (it needs a dedicated machine and engine changes).
+- Gates:
+  - GATE 1 (input authentication): done, on main. Seals, pins, frame digests, confined legacy path, typed refusals, production
+    contracts with two-precision samples.
+  - GATE 2 (digit budget of the coefficient): partly done.
+    - Done: the exact amplification and the propagated abs_err per coefficient (fitgrid), the third-pass bound of the highest pass.
+    - Design only, not implemented: the truncation bound from the fitted orders, hold-out prediction nodes and the disjoint fit B
+      in the driver.
+  - GATE 3 (blind recognition): the tool and its measured requirements (above). Not yet applied to a five-loop coefficient.
+- Known limits:
+  - The threshold continuity is a conservative accuracy estimate. On the 4L default basis it is 15-50 digits below the
+    closed-form masters.
+  - At small |eps| the cost of the Frobenius families grows, strongly on the minimal (spurious-free) basis: no family finished in
+    23 h at eps = 6.25e-6, w = 200.
+  - The cross-check of provided values re-evaluates the exact evaluator at twice the precision before it calls a mismatch.
+
 ## Checkpoints (`--workdir DIR`)
 - Frobenius families write their exact state every 900 s. Every transport writes after every patch.
 - Each precision pass uses its own subdirectory `p<w>-<wf>-<m>`. The family fingerprint is the DE content (d0, masters, every
