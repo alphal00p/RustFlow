@@ -30,6 +30,21 @@ class Exact(unittest.TestCase):
         v = {"b": 0.5, "a": [1, 2.0, 0.25, -3], "s": "x\"y", "n": None, "t": True}
         self.assertEqual(canonical(v), '{"a":[1,2,1/4,-3],"b":1/2,"n":null,"s":"x\\"y","t":true}')
 
+    def test_typed_refusals_of_the_canonicaliser(self):
+        """GATE 1 re-check 2 (c, d): wide integers, NaN / Infinity and lone surrogates are typed refusals, never a traceback"""
+        for v, msg in [({"a": 1 << 70}, "beyond 64 bits"), ({"a": float("nan")}, "non-finite"), ({"a": float("inf")}, "non-finite"),
+                       ({"a": "x\ud800y"}, "lone surrogate")]:
+            with self.assertRaises(Refused) as c:
+                canonical(v)
+            self.assertIn(msg, str(c.exception))
+        from pflowio import load_json
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "nan.json"
+            p.write_text('{"a": NaN}')
+            with self.assertRaises(Refused) as c:
+                load_json(p)
+            self.assertIn("non-finite", str(c.exception))
+
     def test_rational_arithmetic(self):
         d = Fr(4)
         self.assertEqual(eval_exact("(d+1)/3", {"d": d}), Fr(5, 3))
@@ -279,7 +294,7 @@ class Fit(unittest.TestCase):
     def spec(self, files, **kw):
         sp = {"schema": "pflow-fit-spec.v1", "nodes": {n: sha256_file(f) for n, f in zip(self.nodes, files)}, "frame_sha256": FSHA,
               "need_target_digits": 18, "need_abs_err": "1e-30", "target": {"name": "t", "master": [1, 1], "m": 1}, "loops": 2,
-              "scheme": "E", "pole_order": 1}
+              "scheme": "E", "pole_order": 1, "production": True}
         sp.update(kw)
         return sp
 
@@ -328,6 +343,8 @@ class Fit(unittest.TestCase):
             fitgrid.fit(self.spec(big), big)
         self.assertIn("above the need", str(c.exception))
         for bad, msg in [(dict(sp, frame_sha256=None), "frame_sha256 is required"), (dict(sp, nodes=self.nodes), "pin"),
+                         (dict(sp, production=None), "true or false"), (dict(sp, production=0), "true or false"),
+                         ({k: v for k, v in sp.items() if k != "production"}, "true or false"),
                          (dict(sp, allow_legacy=True), "replaced by legacy_samples")]:
             with self.assertRaises(Refused) as c:
                 fitgrid.fit(bad, f)

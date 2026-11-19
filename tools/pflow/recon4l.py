@@ -32,7 +32,7 @@ def main(argv):
             sub["legacy_samples"] = {k: v for k, v in spec["legacy_samples"].items() if k in sub["nodes"]}
         keep = {u["d0"] for u in used if u["d0"] in sub["nodes"]}
         cs2, _ = fit(sub, [u["file"] for u in used if u["d0"] in keep], mp_dps=120)
-        flag = "  LEGACY (frame unverified)" if any(u["legacy"] for u in used) else ""
+        flag = ("  [PRODUCTION contract]" if spec["production"] else "  [NOT a production contract]") + ("  LEGACY (frame unverified)" if any(u["legacy"] for u in used) else "")
         print(f"{name}: {len(used)} nodes{flag}")
         for k in range(-1, min(4, len(used) - 1)):
             c = cs[k]["c"]

@@ -68,10 +68,18 @@ def canonical(v):
     if v is False:
         return "false"
     if isinstance(v, int):
+        if not -(1 << 63) <= v < (1 << 64):
+            raise Refused(f"integer {v} beyond 64 bits: not exactly representable by every reader (write it as a string)")
         return str(v)
     if isinstance(v, float):
+        if v != v or v in (float("inf"), float("-inf")):
+            raise Refused(f"non-finite number {v!r}: not JSON, refused")
         return str(Fr(v))
     if isinstance(v, str):
+        try:
+            v.encode("utf-8")
+        except UnicodeEncodeError:
+            raise Refused(f"string with a lone surrogate {v[:20]!r}...: not valid UTF-8, refused")
         return json.dumps(v, ensure_ascii=False)
     if isinstance(v, list):
         return "[" + ",".join(canonical(x) for x in v) + "]"
@@ -200,10 +208,14 @@ def fmt_err(x):
     return nstr(m * mpf(10) ** k, 3)
 
 
+def _no_constant(c):
+    raise Refused(f"non-finite number {c}: not JSON, refused")
+
+
 def load_json(path):
     try:
         with open(path) as f:
-            return json.load(f)
+            return json.load(f, parse_constant=_no_constant)
     except (OSError, ValueError) as e:
         raise Refused(f"{path}: {e}")
 

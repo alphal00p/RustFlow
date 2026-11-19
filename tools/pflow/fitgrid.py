@@ -4,7 +4,9 @@ SPEC (pflow-fit-spec.v1):
   {"schema": "pflow-fit-spec.v1", "nodes": {"p/q": SHA256, ...}   (every node with the sha256 of its ACCEPTED sample file; ALL
    required, each exactly once), "frame_sha256": HEX (required), "need_target_digits": T, "need_abs_err": X,
    "target": {"name": N, "master": [a...], "m": 1} | {"name": N, "extra": [a...]}, "loops": L, "scheme": "G" | "E",
-   "pole_order": p, "production": true (default), "legacy_samples": {"p/q": SHA256} (only the 12 archived 4L nodes; loops = 4)}
+   "pole_order": p, "production": true | false (REQUIRED; nothing else is accepted), "legacy_samples": {"p/q": SHA256} (only the 12
+   archived 4L nodes; loops = 4)}
+The contract class (production or not) is printed on every result line.
 Every sample is authenticated (pflowio.read_sample): content seal, the file's sha256 equal to the pinned one, exact d0 in the node
 list, the frame digest recomputed and equal to frame_sha256, ACCEPTED with a verdict, effective target >= need_target_digits, the
 target's achieved abs_err (after the normalisation to the scheme, times |eps|^p) <= need_abs_err. A production contract refuses
@@ -60,7 +62,9 @@ def fit(spec, files, mp_dps=None):
     nodes = list(pins)
     if not isinstance(spec.get("frame_sha256"), str):
         raise Refused("fit spec: frame_sha256 is required")
-    production = spec.get("production", True)
+    production = spec.get("production")
+    if not isinstance(production, bool):
+        raise Refused(f"fit spec: production must be true or false (got {production!r}): the contract class is never implicit")
     legacy = {rat(k): v for k, v in (spec.get("legacy_samples") or {}).items()}
     if legacy:
         if int(spec["loops"]) != 4:
@@ -127,8 +131,9 @@ def main(argv):
     pos = [a for i, a in enumerate(argv) if not a.startswith("--") and (i == 0 or argv[i - 1] != "--out")]
     spec = load_json(pos[0])
     cs, used = fit(spec, pos[1:])
-    flag = "  LEGACY (frame unverified)" if any(u["legacy"] for u in used) else ""
-    flag += "  DOWNGRADED" if any(u["downgrades"] for u in used) and not flag else ""
+    flag = "  [PRODUCTION contract]" if spec["production"] else "  [NOT a production contract]"
+    flag += "  LEGACY (frame unverified)" if any(u["legacy"] for u in used) else ""
+    flag += "  DOWNGRADED inputs" if any(u["downgrades"] for u in used) and "LEGACY" not in flag else ""
     for k, c in cs.items():
         print(f"c_{k:+d} = {nstr(c['c'], 30)}  +- {c['abs_err']}  (amplification 10^{c['amplification_log10']:.3f}){flag}")
     if opt("--out"):
