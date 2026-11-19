@@ -670,6 +670,10 @@ fn target_digits_sets_the_gates() {
     let min = by.values().map(|x| x.as_f64().unwrap()).fold(f64::INFINITY, f64::min);
     assert_eq!(r.diag["digits_estimate"].as_f64().unwrap(), min);
     assert!(r.diag["transports_worst"]["max_tail_log10"].as_f64().is_some(), "{}", r.diag["transports_worst"]);
+    // measurement diagnostics: per-phase seconds, the patch orders of every final transport
+    assert!(r.diag["phase_seconds"]["threshold_families"].as_f64().is_some(), "{}", r.diag["phase_seconds"]);
+    let t = &r.diag["transport_m1_h0"];
+    assert_eq!(t["orders"].as_array().map(|o| o.len()), t["patches"].as_u64().map(|n| n as usize), "{t}");
     cfg.target_digits = Some(200.0);
     let r = run_b(&sys, &g, 0, &cfg).unwrap();
     assert!(!r.accepted, "a 200-digit target at w30 must fail");
