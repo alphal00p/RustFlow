@@ -9,8 +9,11 @@ A dictionary (pflow-pslq-dict.v1) is FROZEN before any value is looked at:
 or generated: hoffman_dictionary(W) = 1 and the Hoffman MZVs zeta(s1..sk), s_i in {2, 3}, of weight <= W (a spanning set of the
 MZVs of weight <= W: 20 / 27 / 36 elements through weight 9 / 10 / 11).
 
-Constants are evaluated by TWO methods (Hoelder convolution of the iterated integral split at 1/2 and at 1/3, nested power sums)
-and must agree beyond the working precision.
+Constants: the iterated integral by Hoelder convolution with nested power sums. The two split points 1/2 and 1/3 are ONE algorithm
+(they catch truncation errors at the full working precision, not a convention or algebra error). INDEPENDENTLY, every depth-1
+factor is compared with mpmath's own zeta and every depth-2 factor with a one-dimensional quadrature
+zeta(a,b) = 1/Gamma(a) int_0^1 (-log t)^(a-1) Li_b(t) / (1 - t) dt (mpmath polylog), to INDEPENDENT_DIGITS digits. Depth-3 factors
+have no independent evaluation here; the tests check them through stuffle and duality identities.
 
 search(x_A, p1): PSLQ on (x_A, B_1..B_n) ALL rounded to p1 significant digits (20 guard digits), tolerance n H 10^(1 - p1) with H =
 max_height (a fixed 10^(3 - p1) rejects every true relation of height above ~10^3); a relation with a nonzero target coefficient
@@ -70,6 +73,24 @@ def mzv(ss, dps, split=(1, 2)):
         return +sum(_li_at(w[:i][::-1].translate(tr), 1 - p, dps + 20) * _li_at(w[i:], p, dps + 20) for i in range(len(w) + 1))
 
 
+INDEPENDENT_DIGITS = 200
+
+
+@lru_cache(None)
+def mzv_independent(ss, dps):
+    """zeta(ss) by an algorithm that shares nothing with `mzv`: depth 1 mpmath zeta; depth 2 the polylog quadrature; None for
+    depth >= 3"""
+    from mpmath import zeta, quad, polylog, log, gamma
+    with mp.workdps(dps + 15):
+        if len(ss) == 1:
+            return +zeta(ss[0])
+        if len(ss) == 2:
+            a, b = ss
+            q = quad(lambda t: (-log(t)) ** (a - 1) * polylog(b, t) / (1 - t), [0, mpf(1) / 4, mpf(1) / 2, mpf(3) / 4, 1])
+            return +(q / gamma(a))
+    return None
+
+
 def element_value(el, dps, split=(1, 2)):
     with mp.workdps(dps + 10):
         v = mpf(0)
@@ -82,8 +103,14 @@ def element_value(el, dps, split=(1, 2)):
 
 
 def constants(dic, dps):
-    """values of every element by both methods; refuses a disagreement beyond 10^-(dps-5)"""
+    """values of every element (split point 1/2), checked against split point 1/3 at the full precision (truncation) and every
+    depth <= 2 factor against `mzv_independent` to min(dps, INDEPENDENT_DIGITS) digits; refuses a disagreement"""
     vals = []
+    ind = min(dps, INDEPENDENT_DIGITS)
+    for ss in sorted({tuple(f) for el in dic["elements"] for _, prod in el["terms"] for f in prod if len(f) <= 2}):
+        a, b = mzv(ss, ind), mzv_independent(ss, ind)
+        if fabs(a - b) > fabs(a) * mpf(10) ** -(ind - 5):
+            raise ValueError(f"constant zeta{ss}: the independent evaluation differs by {nstr(fabs(a - b), 3)}")
     for el in dic["elements"]:
         a = element_value(el, dps, (1, 2))
         b = element_value(el, dps, (1, 3))
@@ -217,10 +244,12 @@ def scan(x, dic, digits, truth=None, const_dps=None):
     return rows
 
 
-USAGE = """usage: recognize.py (--dict DICT.json | --standard W | --hoffman W) [--max-height H] --p1 P [--excess 40]
+USAGE = """usage: recognize.py (--dict DICT.json --dict-sha256 HEX | --standard W | --hoffman W) [--dict-sha256 HEX] [--max-height H]
+         --p1 P [--excess 40]
          (--fit-a FIT_A.json --fit-b FIT_B.json --coef K | --x-a VALUE --x-b VALUE --err-b ABS_ERR) [--out RESULT.json]
-FIT_A / FIT_B: pflow-fit.v1 outputs of DISJOINT node sets (fitgrid.py --out); the search uses fit A's coefficient c_K rounded to
-P digits, the confirmation fit B's c_K with its propagated abs_err. Prints the verdict (ACCEPTED / REJECTED / AMBIGUOUS /
+FIT_A / FIT_B: SEALED pflow-fit.v1 outputs (fitgrid.py --out) of the same coefficient (same target, frame, scheme, loops, pole
+order) on DISJOINT node sets (no d0 and no sample in common); fit A must carry >= P informative digits. The search uses fit A's
+coefficient c_K rounded to P digits, the confirmation fit B's c_K with its propagated abs_err. Prints the verdict (ACCEPTED / REJECTED / AMBIGUOUS /
 NO CANDIDATE) and writes the full record (dictionary sha256, candidate, residual, tolerance, excess digits)."""
 
 
@@ -237,18 +266,40 @@ def main(argv):
         dic = hoffman_dictionary(int(opt("--hoffman")), H)
     else:
         raise SystemExit(USAGE)
+    # the dictionary must be pinned: committed with its sha256 before any value is looked at (required for a dictionary file)
+    pin = opt("--dict-sha256")
+    if opt("--dict") and not pin:
+        raise SystemExit("REFUSED: --dict needs --dict-sha256 (the pinned digest of the frozen dictionary)")
+    if pin and pin != dict_sha(dic):
+        raise SystemExit(f"REFUSED: dictionary sha256 {dict_sha(dic)[:16]}... is not the pinned {pin[:16]}...")
     p1 = int(opt("--p1") or 0)
     if p1 <= 0:
         raise SystemExit(USAGE)
     mp.dps = 2 * p1 + 100
     if opt("--fit-a"):
+        sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
+        from pflowio import check_seal, Refused
         fa, fb = json.load(open(opt("--fit-a"))), json.load(open(opt("--fit-b")))
+        try:
+            check_seal(opt("--fit-a"), fa)
+            check_seal(opt("--fit-b"), fb)
+        except Refused as e:
+            raise SystemExit(f"REFUSED: {e}")
         k = opt("--coef")
+        sa, sb = fa.get("spec", {}), fb.get("spec", {})
+        for f in ("target", "frame_sha256", "scheme", "loops", "pole_order"):
+            if sa.get(f) != sb.get(f):
+                raise SystemExit(f"REFUSED: fits A and B differ in {f} ({sa.get(f)!r} vs {sb.get(f)!r}): not the same coefficient")
+        if set(sa.get("nodes", {})) & set(sb.get("nodes", {})):
+            raise SystemExit("REFUSED: fits A and B share nodes (d0): the confirmation would not be independent")
         used_a = {u["sha256"] for u in fa.get("used_samples", [])}
         used_b = {u["sha256"] for u in fb.get("used_samples", [])}
         if used_a & used_b:
             raise SystemExit("REFUSED: fit A and fit B share samples: the confirmation would not be independent")
         x_a, x_b, err_b = mpf(fa["coefficients"][k]["value"]), mpf(fb["coefficients"][k]["value"]), mpf(fb["coefficients"][k]["abs_err"])
+        err_a = mpf(fa["coefficients"][k]["abs_err"])
+        if err_a > 0 and x_a != 0 and float(-log10(err_a / fabs(x_a))) < p1:
+            raise SystemExit(f"REFUSED: fit A carries {float(-log10(err_a / fabs(x_a))):.1f} informative digits < the search digits {p1}")
     elif opt("--x-a"):
         x_a, x_b, err_b = mpf(opt("--x-a")), mpf(opt("--x-b")), mpf(opt("--err-b"))
     else:

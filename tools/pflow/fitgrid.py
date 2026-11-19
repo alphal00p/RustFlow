@@ -22,7 +22,7 @@ from fractions import Fraction as Fr
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pflowio import Refused, rat, read_sample, digest, sha256_file, fmt_err, load_json, LEGACY_4L_NODES
+from pflowio import Refused, rat, read_sample, digest, sha256_file, fmt_err, load_json, LEGACY_4L_NODES, seal
 
 FIT_SPEC_SCHEMA = "pflow-fit-spec.v1"
 
@@ -139,7 +139,7 @@ def main(argv):
     if opt("--out"):
         doc = {"schema": "pflow-fit.v1", "spec": spec, "spec_sha256": digest(spec), "used_samples": used,
                "coefficients": {str(k): {x: c[x] for x in ("value", "abs_err", "amplification_log10")} for k, c in cs.items()}}
-        json.dump(doc, open(opt("--out"), "w"), indent=1)
+        json.dump(seal(doc), open(opt("--out"), "w"), indent=1, ensure_ascii=False)
 
 
 if __name__ == "__main__":

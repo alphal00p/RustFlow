@@ -11,7 +11,7 @@ from pathlib import Path
 
 H = Path(__file__).resolve().parent
 sys.path.insert(0, str(H))
-from pflowio import Refused, load_json
+from pflowio import Refused, load_json, seal
 from fitgrid import fit
 
 
@@ -47,9 +47,9 @@ def main(argv):
             print(line)
         if "--out" in argv:
             out = argv[argv.index("--out") + 1] + f"-{name}.json"
-            json.dump({"schema": "pflow-fit.v1", "spec": spec, "used_samples": used,
-                       "coefficients": {str(k): {x: c[x] for x in ("value", "abs_err", "amplification_log10")} for k, c in cs.items()}},
-                      open(out, "w"), indent=1)
+            json.dump(seal({"schema": "pflow-fit.v1", "spec": spec, "used_samples": used,
+                            "coefficients": {str(k): {x: c[x] for x in ("value", "abs_err", "amplification_log10")} for k, c in cs.items()}}),
+                      open(out, "w"), indent=1, ensure_ascii=False)
 
 
 if __name__ == "__main__":
