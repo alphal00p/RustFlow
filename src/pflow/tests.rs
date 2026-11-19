@@ -20,6 +20,17 @@ fn canonical_serialisation_is_exact() {
     assert_eq!(super::cli::canonical_json(&v), r#"{"a":[1,2,1/4,-3],"b":1/2,"n":null,"s":"x\"y","t":true}"#);
 }
 
+/// an integer beyond 64 bits in a sealed file is refused with its own message, not as an edit (GATE 1 re-check 2, item c)
+#[test]
+fn wide_integers_are_refused_by_name() {
+    let text = r#"{"a": 123456789012345678901234567890, "content_sha256": "x"}"#;
+    let mut v: serde_json::Value = serde_json::from_str(text).unwrap();
+    // the python sealer would refuse to write it; a hand-made file with a matching-looking seal still gets the right message
+    v["content_sha256"] = serde_json::json!("0".repeat(64));
+    let e = super::cli::check_seal("t", &v).unwrap_err();
+    assert!(e.contains("beyond 64 bits"), "{e}");
+}
+
 /// a test table or file with its producer seal (content_sha256)
 fn seal(mut v: serde_json::Value) -> serde_json::Value {
     v["content_sha256"] = serde_json::json!(super::cli::content_sha256(&v));
@@ -562,6 +573,19 @@ fn cli_on_the_3l_fixture_and_two_precision_workdir() {
         s("--e"), s("0"), s("--w"), s("30"), s("--wf"), s("45"), s("--m"), s("60"), s("--two-precision"), s("5"), s("--workdir"), tmp.to_string_lossy().into_owned()]).unwrap();
     assert_eq!(v["accepted"], true);
     assert!(v["values"][0]["digits_two_precision"].as_f64().unwrap() > 15.0);
+    // the two-precision difference bounds the LOWER pass; a third pass measures the convergence rate and gives the higher pass its
+    // own (extrapolated, safety 10) bound, never above the lower-pass bound (GATE 1 re-check 2, item e)
+    let v3 = super::cli::run(&[s("--de"), format!("{dir}/P2L_m0-solution-199_50.json"), s("--graph"), format!("{dir}/graph-P2L.json"),
+        s("--e"), s("0"), s("--w"), s("40"), s("--wf"), s("55"), s("--m"), s("70"), s("--two-precision"), s("8"), s("--third-pass")]).unwrap();
+    assert_eq!(v3["accepted"], true, "{}", v3["acceptance"]);
+    let mut extrapolated = 0;
+    for row in v3["values"].as_array().unwrap() {
+        let (e, lo) = (row["abs_err"].as_str().unwrap().parse::<f64>().unwrap(), row["abs_err_lower_pass"].as_str().unwrap().parse::<f64>().unwrap());
+        let kind = row["abs_err_kind"].as_str().unwrap();
+        assert!(e > 0.0 && (e <= lo * 1.001 || kind.starts_with("run-wide") || kind.contains("higher passes agree")), "{row}");
+        extrapolated += kind.contains("three-pass geometric") as usize;
+    }
+    assert!(extrapolated > 0 || v3["values"].as_array().unwrap().iter().all(|r| r["abs_err_kind"].as_str().unwrap().starts_with("run-wide")), "{}", v3["values"]);
     let _ = std::fs::remove_dir_all(&tmp);
 }
 

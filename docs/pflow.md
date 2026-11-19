@@ -93,6 +93,33 @@ A sample authenticates itself for every consumer:
   `--accept-diagnostics`);
 - `content_sha256`: the producer's seal over the whole document.
 
+## Root of trust
+- The content hash (`content_sha256`) catches ACCIDENTAL changes only: a stale, mis-copied or hand-edited file. Anyone who edits a
+  file can re-seal it, so a seal does not bind a result to its inputs.
+- What binds a result to its inputs is the CONTRACT:
+  - the fit contract pins every node's sample file by sha256, requires the frame digest (graph, massive line, masters, boundary
+    definitions) and is itself identified by its `spec_sha256` in the fit output;
+  - the code's legacy list (`pflowio.LEGACY_4L_NODES`) is the only route for the 12 archived four-loop v1 samples;
+  - re-sealed edits fail the pin; re-sealed inputs with unverifiable sources carry downgrades, which production contracts refuse.
+- Five-loop contracts (and any production contract) must be COMMITTED before their samples are used: in the campaign directory,
+  with the contract file's sha256 recorded in the progress log at commit time. A fit is valid only with a contract whose recorded
+  sha256 predates the fit.
+
+## Uncertainty of a sample value (`abs_err`, `abs_err_kind`)
+`abs_err` bounds the value that is WRITTEN, the one of the highest working precision w. It is the larger of:
+- the run-wide estimate 10^-digits_estimate max(|v|, 10^-30 x the moment's scale);
+- with `--two-precision K`: d1 = |v(w) - v(w - K)|. This difference measures the error of the LOWER pass. As a bound for v(w) it is
+  safe but pessimistic, by about K digits when the error falls with w. It is also written as `abs_err_lower_pass`;
+- with `--two-precision K --third-pass` (a third pass at w - 2K): d2 = |v(w - K) - v(w - 2K)|, q = d1/d2. The passes lower w,
+  wf and the series orders together, so the error falls geometrically but not one digit per digit of w: measured 5 digits per
+  step of K = 8 on the 2L fixture. If the measured rate log10(1/q) is at least 2 digits per step, v(w) is bounded by the
+  geometric tail d1 q/(1 - q) with a safety factor 10. Otherwise, for example when an error floor that does not depend on w
+  dominates (boundary digits), d1 is kept.
+
+`abs_err_kind` names the rule used for each value. Contracts check `abs_err` against the need: the bound of the value they consume.
+Production samples need at least two passes; a third pass makes the bound of the highest pass sharp instead of K digits too
+pessimistic.
+
 ## Content seals and source digests (every producer, every reader)
 - Canonical serialisation (`pflow::cli::canonical_json` = `tools/pflow/pflowio.py canonical`, the same bytes): object keys sorted,
   no spaces, strings JSON-escaped with UTF-8 kept, every number as its exact rational `p/q`. So the float formatting of the writer
@@ -103,12 +130,15 @@ A sample authenticates itself for every consumer:
 - Recorded source digests (`{"file", "sha256"}` records anywhere in a header or in `inputs`) are recomputed whenever the file is
   reachable. A mismatch is refused (a stale or edited source). An unreachable source is an explicit downgrade, never silent.
 - Python producers write no floats into sealed documents (strings instead), so that no reader depends on float parsing.
+- Typed refusals: integers beyond 64 bits (RustFlow cannot represent them exactly: write them as strings), NaN / Infinity,
+  strings with lone surrogates.
 
 ## Fit contracts (`tools/pflow/fitgrid.py`, schema `pflow-fit-spec.v1`)
 - `nodes`: `{"p/q": sha256}` pins every node's ACCEPTED sample file. A different file for a node is refused, and so are missing,
   duplicate and extra nodes (never a smaller fit).
 - `frame_sha256` is required; every v2 sample's recomputed frame digest must equal it.
-- `production` (default true) refuses every downgraded sample. In particular a production sample needs a two-precision pass.
+- `production` must be `true` or `false` (null, 0 or a missing field are refused). A production contract refuses every downgraded
+  sample; in particular a production sample needs a two-precision pass. The contract class is printed on every result line.
 - `legacy_samples: {"p/q": sha256}`: the ONLY legacy path, for the 12 archived four-loop nodes of the blind eps^1 test, which are
   pinned in the code (`pflowio.LEGACY_4L_NODES`). Refused at loops >= 5 and in production. Every printed coefficient line of such a
   fit says `LEGACY (frame unverified)`.

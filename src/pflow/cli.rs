@@ -121,10 +121,23 @@ pub fn content_sha256(doc: &Value) -> String {
     sha256_json(&d)
 }
 
+/// an integer that does not fit 64 bits: serde_json reads it as a float, so it is not exactly representable here
+fn has_wide_integer(v: &Value) -> bool {
+    match v {
+        Value::Object(m) => m.values().any(has_wide_integer),
+        Value::Array(a) => a.iter().any(has_wide_integer),
+        Value::Number(n) => n.as_i64().is_none() && n.as_u64().is_none() && n.as_f64().is_some_and(|x| x.is_finite() && x.fract() == 0.0 && x.abs() >= 9.2e18),
+        _ => false,
+    }
+}
+
 /// refuse a document whose `content_sha256` is missing or does not match its content
 pub fn check_seal(what: &str, doc: &Value) -> Result<(), String> {
     let got = doc["content_sha256"].as_str().ok_or(format!("{what}: no content_sha256 (unsealed file)"))?;
     if got != content_sha256(doc) {
+        if has_wide_integer(doc) {
+            return Err(format!("{what}: contains an integer beyond 64 bits, which RustFlow cannot represent exactly (write such numbers as strings); refused"));
+        }
         return Err(format!("{what}: content_sha256 does not match the content (the file was edited)"));
     }
     Ok(())
@@ -325,6 +338,11 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     if tp < 0 || tp as u32 + 10 > cfg.w || tp > cfg.m0 - 10 {
         return Err(format!("--two-precision {tp}: must be >= 0 and leave w >= 10 and m >= 10"));
     }
+    // --third-pass: a third pass at w - 2K measures the convergence rate, so that the higher pass gets its own bound
+    let third = argv.iter().any(|x| x == "--third-pass") || o.cfg["third_pass"] == true;
+    if third && (tp == 0 || 2 * tp as u32 + 10 > cfg.w || 2 * tp > cfg.m0 - 10) {
+        return Err(format!("--third-pass needs --two-precision K > 0 with w - 2K >= 10 and m - 2K >= 10"));
+    }
     let res = run_b(&sys, &g, e, &cfg)?;
     let res2 = if tp > 0 {
         let mut c2 = cfg.clone();
@@ -338,32 +356,86 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
     } else {
         None
     };
-    // the achieved absolute uncertainty of every output: 10^-digits_estimate max(|v|, 10^-30 scale of the moment) (digits_estimate =
-    // min over every gate quantity), or the two-precision difference if larger
+    let res3 = if third {
+        let mut c3 = cfg.clone();
+        c3.w -= 2 * tp as u32;
+        c3.wf -= 2 * tp as u32;
+        c3.m0 -= 2 * tp;
+        c3.minf -= 2 * tp;
+        c3.mthr -= 2 * tp;
+        c3.workdir = pass_dir(&c3)?;
+        Some(run_b(&sys, &g, e, &c3)?)
+    } else {
+        None
+    };
+    // the achieved absolute uncertainty of every output (of the HIGHEST pass, the one whose values are written), the larger of
+    // - 10^-digits_estimate max(|v|, 10^-30 scale of the moment) (digits_estimate = min over every gate quantity), and
+    // - with two passes: d1 = |v(w) - v(w-K)|. It measures the error of the LOWER pass, so it is a conservative bound for v(w);
+    //   it is also written as abs_err_lower_pass;
+    // - with a third pass (w - 2K): d2 = |v(w-K) - v(w-2K)|, q = d1/d2. If the measured rate log10(1/q) is at least 2 digits per
+    //   step (fast geometric convergence; measured 5 per K = 8 at 2L, since w, wf and the series orders all drop together), the
+    //   higher pass is bounded by the geometric tail d1 q/(1-q) with a safety factor 10; otherwise d1 is kept.
+    // abs_err_kind names the rule used.
     let est = res.diag["digits_estimate"].as_f64().ok_or("digits_estimate missing")?;
     let rel = |prec: u32| rug::Float::with_val(prec, 10f64).pow(-est);
     let mut merrs: Vec<(i32, Vec<rug::Float>)> = Vec::new();
+    let mut lower: Vec<Vec<Option<rug::Float>>> = Vec::new();
+    let mut kinds: Vec<Vec<String>> = Vec::new();
     for (k, (m, v)) in res.moments.iter().enumerate() {
         let prec = v[0].prec();
         let sc = v.iter().map(|x| rug::Float::with_val(prec, x.abs_ref())).fold(rug::Float::new(prec), |a, b| if b > a { b } else { a });
         let floor = rug::Float::with_val(prec, &sc * rug::Float::with_val(prec, 10f64).pow(-30));
-        let errs = v.iter().enumerate().map(|(j, x)| {
+        let mut errs = Vec::new();
+        let mut low = Vec::new();
+        let mut kind = Vec::new();
+        for (j, x) in v.iter().enumerate() {
             let a = rug::Float::with_val(prec, x.abs_ref());
             let mut e = rug::Float::with_val(prec, if a > floor { a } else { floor.clone() } * rel(prec));
+            let mut kd = "run-wide digits_estimate".to_string();
+            let mut lo = None;
             if let Some(r2) = &res2 {
-                let d = rug::Float::with_val(prec, x - &r2.moments[k].1[j]).abs();
-                if d > e {
-                    e = d;
+                let d1 = rug::Float::with_val(prec, x - &r2.moments[k].1[j]).abs();
+                lo = Some(d1.clone());
+                let mut bound = d1.clone();
+                kd = "two-precision difference (bound of the lower pass; conservative for this value)".into();
+                if let Some(r3) = &res3 {
+                    let d2 = rug::Float::with_val(prec, &r2.moments[k].1[j] - &r3.moments[k].1[j]).abs();
+                    if !d1.is_zero() && !d2.is_zero() {
+                        let rate = (rug::Float::with_val(prec, &d2 / &d1)).log10().to_f64();
+                        if rate >= 2.0 {
+                            let q = rug::Float::with_val(prec, &d1 / &d2);
+                            let one_minus = rug::Float::with_val(prec, 1u32 - &q);
+                            bound = rug::Float::with_val(prec, &d1 * &q) / one_minus * 10u32;
+                            kd = format!("three-pass geometric tail (measured rate {rate:.1} digits per step of {tp}, safety 10)");
+                        } else {
+                            kd = format!("two-precision difference (third pass: rate {rate:.1} < 2 digits per step, not extrapolated)");
+                        }
+                    } else if d1.is_zero() && !d2.is_zero() {
+                        bound = rug::Float::with_val(prec, &d2 * rug::Float::with_val(prec, 10f64).pow(-(tp as i32))) * 10u32;
+                        kd = "three-pass: higher passes agree; d2 10^-K x 10".into();
+                    }
+                }
+                if bound > e {
+                    e = bound;
+                } else {
+                    kd = format!("run-wide digits_estimate (larger than the {kd})");
                 }
             }
-            e
-        }).collect();
+            errs.push(e);
+            low.push(lo);
+            kind.push(kd);
+        }
         merrs.push((*m, errs));
+        lower.push(low);
+        kinds.push(kind);
     }
     let fe = |x: &rug::Float| x.to_string_radix(10, Some(3));
     let mut failures: Vec<Value> = res.diag["acceptance"]["failures"].as_array().cloned().unwrap_or_default();
     if let Some(r2) = &res2 {
         failures.extend(r2.diag["acceptance"]["failures"].as_array().cloned().unwrap_or_default().into_iter().map(|f| json!(format!("second pass: {}", f.as_str().unwrap_or("")))));
+    }
+    if let Some(r3) = &res3 {
+        failures.extend(r3.diag["acceptance"]["failures"].as_array().cloned().unwrap_or_default().into_iter().map(|f| json!(format!("third pass: {}", f.as_str().unwrap_or("")))));
     }
     // what each moment is (module docs of engine.rs): m = 1 massless value; m = n + 1 >= 2: (a_e)_n / n! E[a + n 1_e];
     // m = -k <= 0: (-1)^(a_e - 1) (a_e)_n / n! E[a_e -> -n], n = k + 1 - a_e (zero if n < 0)
@@ -381,7 +453,10 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
                 if d.is_zero() { 999.0 } else { -(d.abs() / rug::Float::with_val(prec, v[j].abs_ref())).log10().to_f64() }
             });
             let ndig = (cfg.wf as usize).max(20);
-            let mut row = json!({"m": m, "master": mast, "value": val.to_string_radix(10, Some(ndig)), "abs_err": fe(ae), "digits_two_precision": dig});
+            let mut row = json!({"m": m, "master": mast, "value": val.to_string_radix(10, Some(ndig)), "abs_err": fe(ae), "abs_err_kind": kinds[k][j], "digits_two_precision": dig});
+            if let Some(lo) = &lower[k][j] {
+                row["abs_err_lower_pass"] = json!(fe(lo));
+            }
             let a_e = mast[e];
             if *m >= 2 {
                 let n = (*m - 1) as i64;
@@ -485,8 +560,8 @@ pub fn run(argv: &[String]) -> Result<Value, String> {
             "d0": rs.d0.to_string(), "frame_sha256": sha256_json(&frame), "frame": frame, "inputs": inputs, "target_digits": target_digits,
             "allow_unverified_provided": cfg.allow_unverified_provided, "allow_skipped": cfg.allow_skipped,
             "digits_cap": res.diag["digits_cap"], "digits_estimate": res.diag["digits_estimate"], "digits_by_check": res.diag["digits_by_check"], "extras": extras, "e_slot": e,
-            "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits, "two_precision": tp},
-            "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag)});
+            "config": {"w": cfg.w, "wf": cfg.wf, "m": cfg.m0, "s0": cfg.s0.to_string(), "S": cfg.s_end.to_string(), "r": cfg.r.to_string(), "moments": cfg.moments, "nlo": cfg.nlo, "gate_margin": cfg.gate_margin, "target_digits": cfg.target_digits, "two_precision": tp, "third_pass": third},
+            "values": out, "diag": res.diag, "diag_second": res2.map(|r| r.diag), "diag_third": res3.map(|r| r.diag)});
     // the producer's content seal over everything (values, uncertainties, d0, frame, inputs, verdict)
     doc["content_sha256"] = json!(content_sha256(&doc));
     Ok(doc)
