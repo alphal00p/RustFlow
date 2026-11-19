@@ -407,7 +407,8 @@ fn provided_table_checks() {
     let prec = run::bits(cfg.wf);
     let h = Rational::from(&sys.d0 / 2u32);
     let one = Rational::from(1);
-    let bubble = graph::g_bubble(&one, &one, &h, prec).unwrap();
+    // the table value at a precision well above its claimed uncertainty (the cross-check compares at 2-4 x the run precision)
+    let bubble = graph::g_bubble(&one, &one, &h, 800).unwrap();
     let tab = |val: &str, idx: serde_json::Value, d0: String| seal(serde_json::json!({"schema": "pflow-provided.v2", "normalisation": "E, P^2=1", "d0": d0,
         "master_definitions_sha256": "0".repeat(64), "sources": [{"file": "test", "sha256": "1".repeat(64), "role": "answer"}],
         "values": [{"edges": [[0, 1, idx.clone()], [0, 1, 1]], "ext": [0, 1], "value": val, "abs_err": "1e-70", "id": "b"}]}));
@@ -461,7 +462,7 @@ fn provided_table_checks() {
     nodef.as_object_mut().unwrap().remove("master_definitions_sha256");
     assert!(graph::Provided::from_json(&seal(nodef), prec, &sys.d0).is_err(), "no definitions digest");
     // a value off by 1e-35 (relative) is consistent with a declared uncertainty of 1e-30 x |value|, a mismatch with 1e-40 x |value|
-    let near = Float::with_val(prec, &bubble * (1 + Float::with_val(prec, 1e-35)));
+    let near = Float::with_val(800, &bubble * (1 + Float::with_val(800, 1e-35)));
     for (e, ok) in [(1e-30, true), (1e-40, false)] {
         let mut t = tab(&near.to_string_radix(10, Some(60)), serde_json::json!(1), sys.d0.to_string());
         t["values"][0]["abs_err"] = serde_json::json!(Float::with_val(prec, Float::with_val(prec, bubble.abs_ref()) * Float::with_val(prec, e)).to_string_radix(10, Some(3)));
@@ -497,6 +498,19 @@ fn cross_check_allows_for_the_evaluator_error() {
     let pw = graph::Provided::from_json(&tab(wrong.to_string_radix(10, Some(500))), prec, &d0).unwrap();
     graph::massless(&g, &a, &h, prec, &pw).unwrap();
     assert_eq!(pw.mismatch.lock().unwrap().len(), 1);
+    // the evaluator's cancellation loss is measured and bounds the run's digits (review X2): 11-15 digits here
+    assert!(*pv.eval_lost.lock().unwrap() > 5.0, "{}", pv.eval_lost.lock().unwrap());
+    assert!(pv.evaluator_digits(prec) < prec as f64 * std::f64::consts::LOG10_2 - 5.0);
+    // at 600 bits (181 digits): the correct entry still passes, an entry wrong by 1e-250 (far below the run precision, above the
+    // doubled-precision resolution) is refused: the comparison is made with c2 within c2's own error (review X1)
+    let p6 = 600;
+    let ok = graph::Provided::from_json(&tab(exact.to_string_radix(10, Some(500))), p6, &d0).unwrap();
+    graph::massless(&g, &a, &h, p6, &ok).unwrap();
+    assert!(ok.mismatch.lock().unwrap().is_empty(), "{:?}", ok.mismatch.lock().unwrap());
+    let w250 = Float::with_val(3000, &exact * (1 + Float::with_val(3000, Float::parse("1e-250").unwrap())));
+    let bad = graph::Provided::from_json(&tab(w250.to_string_radix(10, Some(500))), p6, &d0).unwrap();
+    graph::massless(&g, &a, &h, p6, &bad).unwrap();
+    assert_eq!(bad.mismatch.lock().unwrap().len(), 1, "an entry wrong by 1e-250 must be refused at 181 digits");
 }
 
 /// provided entries that the evaluator cannot reduce are USED: their relative uncertainty caps the claimed digits, and a row the

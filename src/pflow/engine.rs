@@ -933,7 +933,9 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
     // the accuracy the gates ask for (relative, log10): the transports carry w digits, the provided values that were USED their
     // own achieved relative uncertainty
     let used_digits = cfg.provided.used_digits();
-    let digits_cap = (cfg.w as f64).min(used_digits.unwrap_or(f64::INFINITY));
+    // the exact evaluator's measured cancellation loss bounds the boundary rows built from its values (review 19 Nov: X2)
+    let evaluator_digits = cfg.provided.evaluator_digits(prec);
+    let digits_cap = (cfg.w as f64).min(used_digits.unwrap_or(f64::INFINITY)).min(evaluator_digits);
     let gate = -cfg.target_digits.unwrap_or(digits_cap - cfg.gate_margin as f64);
     let mut diag = json!({"s0": cfg.s0.to_string(), "r": cfg.r.to_string(), "S": cfg.s_end.to_string(), "singular_points": pts.iter().map(|p| vec![p.0, p.1]).collect::<Vec<_>>(), "rho0": rho0.to_string(), "rho_inf": rho_inf.to_string(), "rho_thr": rho_thr.to_string(), "families": [], "gate_log10": gate, "digits_cap": digits_cap});
     {
@@ -943,7 +945,8 @@ pub fn run_b(sys: &EBlockSystem, g: &Graph, e_slot: usize, cfg: &PConfig) -> Res
         }
         let unv: Vec<&String> = used.iter().filter(|k| cfg.provided.unverified.contains(k)).collect();
         acc.check("provided values verified", unv.is_empty() || cfg.allow_unverified_provided, format!("{} used entries without a measured uncertainty: {:?}", unv.len(), unv));
-        diag["provided"] = json!({"used": used.len(), "used_relative_digits": used_digits, "unverified_used": unv.len(), "header": cfg.provided.header});
+        diag["provided"] = json!({"used": used.len(), "used_relative_digits": used_digits, "unverified_used": unv.len(), "header": cfg.provided.header,
+            "evaluator_lost_digits": *cfg.provided.eval_lost.lock().unwrap(), "evaluator_digits": evaluator_digits});
     }
     let mut fams0 = Vec::new();
     let mut famsi = Vec::new();

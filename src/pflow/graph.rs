@@ -45,6 +45,13 @@ pub struct Provided {
     pub mismatch: std::sync::Mutex<Vec<(String, String, usize)>>,
     /// canonical keys of the entries used as boundary values (the evaluator could not reduce them)
     pub used: std::sync::Mutex<Vec<String>>,
+    /// the values as written in the table (re-read at higher precision for the cross-check)
+    pub texts: HashMap<String, String>,
+    /// largest number of digits the exact evaluator lost to cancellations in this run (measured against twice the precision)
+    pub eval_lost: std::sync::Mutex<f64>,
+    /// graphs (and precisions) whose evaluator loss was measured; cross-check verdicts per key and precision
+    pub ev_seen: std::sync::Mutex<std::collections::HashSet<String>>,
+    pub checked: std::sync::Mutex<HashMap<String, bool>>,
 }
 
 impl Clone for Provided {
@@ -56,6 +63,10 @@ impl Clone for Provided {
             unverified: self.unverified.clone(),
             header: self.header.clone(),
             downgrades: self.downgrades.clone(),
+            texts: self.texts.clone(),
+            eval_lost: std::sync::Mutex::new(*self.eval_lost.lock().unwrap()),
+            ev_seen: std::sync::Mutex::new(self.ev_seen.lock().unwrap().clone()),
+            checked: std::sync::Mutex::new(self.checked.lock().unwrap().clone()),
             missing: std::sync::Mutex::new(self.missing.lock().unwrap().clone()),
             mismatch: std::sync::Mutex::new(self.mismatch.lock().unwrap().clone()),
             used: std::sync::Mutex::new(self.used.lock().unwrap().clone()),
@@ -106,6 +117,7 @@ impl Provided {
         let unv_ids: Vec<&serde_json::Value> = v["unverified"].as_array().map(|a| a.iter().collect()).unwrap_or_default();
         let mut values: HashMap<String, Float> = HashMap::new();
         let mut errors: HashMap<String, Float> = HashMap::new();
+        let mut texts: HashMap<String, String> = HashMap::new();
         let mut unverified = Vec::new();
         for x in v["values"].as_array().ok_or("provided: values (a list)")? {
             let edges: Vec<(usize, usize, Rational)> = x["edges"].as_array().ok_or("provided: edges")?.iter().map(|e| {
@@ -132,10 +144,16 @@ impl Provided {
             if unv_ids.contains(&&x["id"]) && !unverified.contains(&key) {
                 unverified.push(key.clone());
             }
+            texts.insert(key.clone(), x["value"].as_str().unwrap_or_default().to_string());
             values.insert(key.clone(), val);
             errors.insert(key, err);
         }
-        Ok(Provided { values, errors, d0: Some(td0), unverified, header, downgrades, ..Default::default() })
+        Ok(Provided { values, errors, texts, d0: Some(td0), unverified, header, downgrades, ..Default::default() })
+    }
+
+    /// digits the exact evaluator delivers at `prec` bits: the precision minus the largest measured cancellation loss
+    pub fn evaluator_digits(&self, prec: u32) -> f64 {
+        prec as f64 * std::f64::consts::LOG10_2 - *self.eval_lost.lock().unwrap()
     }
 
     /// relative digits of the entries the run used (min over them; None if none was used)
@@ -349,6 +367,24 @@ fn eval2pt(edges: Vec<E2>, s: usize, t: usize, h: &Rational, prec: u32, depth: u
     if depth > 0 || !integer {
         return r;
     }
+    // the evaluator's own cancellation loss, measured once per graph and precision against twice the precision (it bounds the
+    // digits of every boundary row built from evaluator values: digits_cap)
+    if let Some(Ev::Val(c, _)) = &r {
+        let raw = format!("{prec}|{s},{t}|{:?}", edges.iter().map(|e| (e.u, e.v, e.a.to_string())).collect::<Vec<_>>());
+        if pv.ev_seen.lock().unwrap().insert(raw) {
+            if let Some(Ev::Val(c2, _)) = eval2pt_core(edges.clone(), s, t, h, 2 * prec, depth) {
+                let d = Float::with_val(2 * prec, &c2 - c).abs();
+                if !d.is_zero() && !c2.is_zero() {
+                    let good = -(Float::with_val(2 * prec, &d / c2.clone().abs())).log10().to_f64();
+                    let lost = prec as f64 * std::f64::consts::LOG10_2 - good;
+                    let mut l = pv.eval_lost.lock().unwrap();
+                    if lost > *l {
+                        *l = lost;
+                    }
+                }
+            }
+        }
+    }
     if pv.values.is_empty() {
         if r.is_none() {
             let k = key(&edges);
@@ -362,21 +398,29 @@ fn eval2pt(edges: Vec<E2>, s: usize, t: usize, h: &Rational, prec: u32, depth: u
     let k = key(&edges);
     match (r, pv.values.get(&k)) {
         (Some(ev), Some(v)) => {
-            // agreement within the entry's own achieved uncertainty plus the evaluator's error. The evaluator loses digits to
-            // cancellations (Gamma poles at small eps), so a seeming disagreement is re-evaluated at twice the precision: the
-            // entry is a mismatch only if it disagrees with that value by more than abs_err + 2 x the measured evaluator error +
-            // rounding (measured 19 Nov: without this, correct 520-digit entries were flagged at eps = 1.3e-3 and 6.25e-6)
-            let c = match &ev { Ev::Zero => Float::new(prec), Ev::Val(c, _) => c.clone() };
-            let d = Float::with_val(prec, &c - v).abs();
-            let round = Float::with_val(prec, c.clone().abs()) * Float::with_val(prec, 2f64).pow(-(prec as i32) + 40);
-            let mismatch = d > Float::with_val(prec, &pv.errors[&k] + &round) && {
-                let p2 = 2 * prec;
-                let c2 = match eval2pt_core(edges.clone(), s, t, h, p2, depth) { Some(Ev::Val(c2, _)) => c2, _ => Float::new(p2) };
-                let ev_err = Float::with_val(p2, &c2 - &c).abs();
-                let d2 = Float::with_val(p2, &c2 - v).abs();
-                let tol = Float::with_val(p2, &pv.errors[&k] + Float::with_val(p2, &ev_err * 2u32)) + Float::with_val(p2, &round * 2u32);
-                d2 > tol
+            // the entry is compared with the evaluator at TWICE the run precision c2, the entry itself re-read from its text at four
+            // times the precision, within abs_err + 2 x c2's own error (|c4 - c2|, c4 at four times the precision) + rounding.
+            // So entries wrong far below the run precision are still caught (review 19 Nov: X1), while the evaluator's
+            // cancellations at small eps (11-15 digits measured) do not flag a correct entry. One verdict per key and precision.
+            let ck = format!("{prec}|{k}");
+            let cached = pv.checked.lock().unwrap().get(&ck).copied();
+            let mismatch = match cached {
+                Some(m) => m,
+                None => {
+                    let (p2, p4) = (2 * prec, 4 * prec);
+                    let val = |p: u32| match eval2pt_core(edges.clone(), s, t, h, p, depth) { Some(Ev::Val(c, _)) => c, _ => Float::new(p) };
+                    let (c2, c4) = (val(p2), val(p4));
+                    let vt = Float::with_val(p4, Float::parse(pv.texts.get(&k).map(|x| x.as_str()).unwrap_or("0")).unwrap_or_else(|_| Float::parse("0").unwrap()));
+                    let err2 = Float::with_val(p4, &c4 - &c2).abs();
+                    let d2 = Float::with_val(p4, &c2 - &vt).abs();
+                    let round = Float::with_val(p4, c2.clone().abs()) * Float::with_val(p4, 2f64).pow(-(p2 as i32) + 20);
+                    let tol = Float::with_val(p4, &pv.errors[&k] + Float::with_val(p4, &err2 * 2u32)) + round;
+                    let m = d2 > tol;
+                    pv.checked.lock().unwrap().insert(ck, m);
+                    m
+                }
             };
+            let c = match &ev { Ev::Zero => Float::new(prec), Ev::Val(c, _) => c.clone() };
             if mismatch {
                 let mut m = pv.mismatch.lock().unwrap();
                 match m.iter_mut().find(|x| x.0 == k) {
