@@ -146,16 +146,25 @@ pessimistic.
   `--measurement`, which records the downgrade.
 
 ## Recognition of a coefficient (`tools/pflow/recognize.py`, GATE 3)
-- The dictionary is frozen before any value is looked at: a pflow-pslq-dict.v1 file, or generated. `--standard W` is the products
-  of zeta(2), the odd zetas, zeta(5,3), zeta(7,3) and zeta(3,5,3): 20 / 27 / 36 elements through weight 9 / 10 / 11. `--hoffman W`
-  is the Hoffman words. The dictionary's sha256 is in the result.
-- The constants are evaluated twice: the iterated integral split at 1/2 and at 1/3. The two evaluations must agree.
+- The dictionary must be fixed before any value is looked at: a pflow-pslq-dict.v1 file, or generated. `--standard W` is the
+  products of zeta(2), the odd zetas, zeta(5,3), zeta(7,3) and zeta(3,5,3): 20 / 27 / 36 elements through weight 9 / 10 / 11.
+  `--hoffman W` is the Hoffman words.
+  - A dictionary file is accepted only with `--dict-sha256`, its pinned digest: commit the dictionary and log its sha256 before
+    the search; a changed file is refused. The sha256 is in the result.
+- The constants come from one algorithm: Hoelder convolution of the iterated integral, with nested power sums.
+  - Its two split points, 1/2 and 1/3, catch truncation errors at the full precision, but not a convention or algebra error.
+  - Independently, every depth-1 factor is compared with mpmath's zeta and every depth-2 factor with a polylog quadrature, to 200
+    digits.
+  - Depth-3 factors have no independent evaluation; the tests check them through stuffle and duality identities and
+    zeta(2,2,2) = pi^6/7!.
 - Search: PSLQ on the target and the dictionary, all rounded to the search digits p1, with 20 guard digits.
   - The tolerance is n H 10^(1-p1), where H is the frozen height cap. A fixed 10^(3-p1), as in the Astra review's controls, rejects
     every true relation of height above about 10^3, whatever the precision.
   - In the blind regime p1 > (n+1) log10 H, no relation below the cap exists by chance.
-- Confirmation on an INDEPENDENT value: the same coefficient from a fit of disjoint nodes (`--fit-a`, `--fit-b`; shared samples are
-  refused) or from a higher-precision rerun.
+- Confirmation on an INDEPENDENT value: the same coefficient from a fit of disjoint nodes (`--fit-a`, `--fit-b`), or from a
+  higher-precision rerun.
+  - The fit files must be sealed, have the same target, frame, scheme, loops and pole order, and share no node (d0) and no sample.
+  - Fit A must carry at least p1 informative digits.
   - ACCEPTED only if the residual is below the propagated uncertainty (abs_err_B + sum |r| delta) and the independent value has
     >= 40 informative digits beyond p1.
   - A candidate that changes at p1 + 10 or p1 + 20 is AMBIGUOUS. Search digits are never used for the acceptance.
@@ -186,12 +195,21 @@ pessimistic.
     - Design only, not implemented: the truncation bound from the fitted orders, hold-out prediction nodes and the disjoint fit B
       in the driver.
   - GATE 3 (blind recognition): the tool and its measured requirements (above). Not yet applied to a five-loop coefficient.
+    - The reviewer's items to fix before its first production use are done (19-20 Nov): sealed and matched fit files, disjoint
+      nodes, digits of fit A, the dictionary pin, the independent depth <= 2 constants.
+    - Left: no independent evaluation of depth >= 3 constants (identity tests only). The weight-11 test target uses the tool's own
+      zeta(2,1,8).
 - Known limits:
   - The threshold continuity is a conservative accuracy estimate. On the 4L default basis it is 15-50 digits below the
     closed-form masters.
   - At small |eps| the cost of the Frobenius families grows, strongly on the minimal (spurious-free) basis: no family finished in
     23 h at eps = 6.25e-6, w = 200.
-  - The cross-check of provided values re-evaluates the exact evaluator at twice the precision before it calls a mismatch.
+  - Provided values the evaluator can reduce are cross-checked against the evaluator at TWICE the run precision.
+    - The entry is re-read at four times the precision.
+    - The tolerance is the entry's abs_err plus 2 x that evaluation's own error (measured against four times the precision).
+    - Entries wrong far below the run precision are caught (1e-250 at 181 digits), while the evaluator's cancellations at small
+      eps (11-15 digits) do not flag correct entries.
+  - The evaluator's measured cancellation loss enters `digits_cap` (diag `provided.evaluator_lost_digits`).
 
 ## Checkpoints (`--workdir DIR`)
 - Frobenius families write their exact state every 900 s. Every transport writes after every patch.
